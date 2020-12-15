@@ -1,10 +1,13 @@
 {
   "name": "unnic-system",
-  "version": "0.1.0",
+  "version": "0.0.1",
+  "main": "./dist/unnic.common.js",
+  "files": [  "dist/*",  "src/*",  "public/*",  "*.json",  "*.js"],
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build-bundle": "vue-cli-service build --target lib --name unnic ./src/components/index.js",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook -p 6006",
