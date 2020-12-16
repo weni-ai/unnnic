@@ -41,6 +41,8 @@ export default {
     font-weight: $unnic-font-weight-regular;
     font-size: $unnic-font-size-body-lg;
     font-family: $unnic-font-family-primary;
+    box-sizing: border-box;
+    width: 100%;
 
     &--error {
       border: $unnic-border-width-thinner solid $unnic-color-feedback-red;

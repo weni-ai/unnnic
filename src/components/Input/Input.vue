@@ -6,7 +6,11 @@
       <p class="unnic-form__label"> {{ label }}  </p>
       <UIcon class="icon-left"/>
       <UIcon class="icon-right"/>
-      <component :is="currentComponent" :v-bind="$attrs" :type="type" />
+      <component
+        class="unnic-form-input"
+        :is="currentComponent"
+        :v-bind="$attrs"
+        :type="type" />
     <p class="unnic-form__message"> {{ message }} </p>
   </div>
 </template>
@@ -55,15 +59,9 @@ export default {
 .unnic-form {
   font-family: $unnic-font-family-primary;
   position: relative;
+
   &__input {
-    background: $unnic-color-neutral-snow;
-    border: $unnic-border-width-thinner solid $unnic-color-neutral-soft;
-    border-radius: $unnic-border-radius-sm;
-    padding: $unnic-squish-xs;
-    color: inherit;
-    font-weight: $unnic-font-weight-regular;
-    font-size: $unnic-font-size-body-lg;
-    font-family: $unnic-font-family-primary;
+    width: 100%;
 
     &--error {
       border: $unnic-border-width-thinner solid $unnic-color-feedback-red;

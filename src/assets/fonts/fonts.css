@@ -1,0 +1,79 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?y8z21i');
+  src:  url('fonts/icomoon.eot?y8z21i#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?y8z21i') format('truetype'),
+    url('fonts/icomoon.woff?y8z21i') format('woff'),
+    url('fonts/icomoon.svg?y8z21i#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-alert-circle:before {
+  content: "\e900";
+}
+.icon-check-circle:before {
+  content: "\e901";
+}
+.icon-close:before {
+  content: "\e902";
+}
+.icon-github:before {
+  content: "\e903";
+}
+.icon-email-unread:before {
+  content: "\e904";
+}
+.icon-loading-circle:before {
+  content: "\e905";
+}
+.icon-lock:before {
+  content: "\e906";
+}
+.icon-read-email-at:before {
+  content: "\e907";
+}
+.icon-single-neutral-actions:before {
+  content: "\e908";
+}
+.icon-google-1 .path1:before {
+  content: "\e909";
+  color: rgb(235, 67, 53);
+}
+.icon-google-1 .path2:before {
+  content: "\e90a";
+  margin-left: -1em;
+  color: rgb(251, 188, 5);
+}
+.icon-google-1 .path3:before {
+  content: "\e90b";
+  margin-left: -1em;
+  color: rgb(66, 133, 244);
+}
+.icon-google-1 .path4:before {
+  content: "\e90c";
+  margin-left: -1em;
+  color: rgb(52, 168, 83);
+}
+.icon-view:before {
+  content: "\e90d";
+}
+.icon-view-off:before {
+  content: "\e90e";
+}
