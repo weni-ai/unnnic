@@ -12,7 +12,7 @@
         }"
         :type="showPassword ? 'text' : 'password'"/>
         <UICon
-          :icon="showPassword ? 'view' : 'view-off'"
+          :icon="showPassword ? 'view-1-1' : 'view-off-1'"
           class="icon-right"
           size="lg"
           clickable
