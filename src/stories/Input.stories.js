@@ -1,8 +1,8 @@
-import testInput from '../components/Input/Input.vue';
+import textInput from '../components/Input/Input.vue';
 
 export default {
   title: 'Example/Input',
-  component: testInput,
+  component: textInput,
   argTypes: {
     type: { control: { type: 'select', options: ['normal', 'error'] } },
     nativeType: { control: { type: 'select', options: ['input', 'password'] } },
@@ -12,8 +12,8 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { testInput },
-  template: '<testInput v-bind="$props" />',
+  components: { textInput },
+  template: '<textInput v-bind="$props" />',
 });
 
 export const Normal = Template.bind({});

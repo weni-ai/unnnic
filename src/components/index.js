@@ -1,10 +1,8 @@
 import Vue from 'vue';
-import UnnicTextInput from './Input/Input.vue';
-import UnnicPasswordInput from './Input/PasswordInput.vue';
+import UnnicInput from './Input/Input.vue';
 
 const components = {
-  UnnicTextInput,
-  UnnicPasswordInput,
+  UnnicInput,
 };
 
 Object.keys(components).forEach((name) => {

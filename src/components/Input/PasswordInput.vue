@@ -8,10 +8,13 @@
         :class="{
           'unnic-form__input': true,
           'unnic-form__input--error': type === 'error',
+          'has-icon-right': true,
         }"
         :type="showPassword ? 'text' : 'password'"/>
         <UICon
+          :icon="showPassword ? 'view' : 'view-off'"
           class="icon-right"
+          size="lg"
           clickable
           @click="togglePassword" />
   </div>
@@ -48,7 +51,8 @@ export default {
 
 .icon-right {
   position: absolute;
-  right: 0;
+  right: 7px;
+  top: 7px;
 }
 
 .unnic-form {
@@ -62,6 +66,8 @@ export default {
     font-weight: $unnic-font-weight-regular;
     font-size: $unnic-font-size-body-lg;
     font-family: $unnic-font-family-primary;
+    width: 100%;
+    box-sizing: border-box;
 
     &--error {
       border: $unnic-border-width-thinner solid $unnic-color-feedback-red;
@@ -71,6 +77,10 @@ export default {
   &--error {
     color: $unnic-color-feedback-red;
   }
+}
+
+.has-icon-right {
+  padding-right: $unnic-inline-giant;
 }
 
 </style>

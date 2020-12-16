@@ -1,7 +1,7 @@
 <template>
     <span
       @click="onClick"
-      :class="`icon-${size}`"> </span>
+      :class="`icon-${icon} icon-${size}`"> </span>
 </template>
 
 <script>
@@ -35,13 +35,28 @@ export default {
 
 <style lang="scss" scoped>
 @import '../assets/scss/unnic.scss';
+@import '../assets/fonts/fonts.css';
 
-$sizes: 'nano', 'xs', 'sm', 'md', 'lg';
+.icon {
 
-@each $size in $sizes {
-  .icon-#{$size} {
-    height: $unnic-avatar-size-xs;
-    width: $unnic-avatar-size-xs;
+  &-xs {
+    font-size: $unnic-icon-size-xs;
+  }
+
+  &-sm {
+    font-size: $unnic-icon-size-sm;
+  }
+
+  &-md {
+    font-size: $unnic-icon-size-md;
+  }
+
+  &-lg {
+    font-size: $unnic-icon-size-lg;
+  }
+
+  &-xl {
+    font-size: $unnic-icon-size-xl;
   }
 }
 

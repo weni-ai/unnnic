@@ -1,9 +1,15 @@
 {
-  "name": "unnic-system",
-  "version": "0.0.1",
+  "name": "unnic-system-beta",
+  "version": "0.0.2",
   "main": "./dist/unnic.common.js",
-  "files": [  "dist/*",  "src/*",  "public/*",  "*.json",  "*.js"],
-  "private": true,
+  "files": [
+    "dist/*",
+    "src/*",
+    "public/*",
+    "*.json",
+    "*.js"
+  ],
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
