@@ -109,7 +109,7 @@ export default {
     border: $unnic-border-width-thinner solid $unnic-color-neutral-soft;
     border-radius: $unnic-border-radius-sm;
     padding: $unnic-squish-xs;
-    color: inherit;
+    color: $unnic-color-neutral-dark;
     font-weight: $unnic-font-weight-regular;
     font-size: $unnic-font-size-body-lg;
     font-family: $unnic-font-family-primary;

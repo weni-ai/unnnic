@@ -30,3 +30,9 @@ Error.args = {
   type: 'error',
   placeholder: 'Placeholder',
 };
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  disabled: true,
+  placeholder: 'Placeholder',
+};

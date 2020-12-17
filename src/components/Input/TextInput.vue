@@ -90,17 +90,27 @@ export default {
     width: 100%;
 
     &:focus {
-      color: $unnic-color-brand-ilha;
+      color: $unnic-color-brand-ilha-soft;
       border-color: $unnic-color-brand-ilha;
       outline: none;
     }
 
     &--error {
       border: $unnic-border-width-thinner solid $unnic-color-feedback-red;
+    }
 
-      &:focus-within .icon{
-        color: $unnic-color-feedback-red;
-      }
+    ::placeholder {
+      color: $unnic-color-brand-sec;
+      opacity: 1; /* Firefox */
+    }
+
+    &:-ms-input-placeholder, &::-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: $unnic-color-brand-sec;
+    }
+
+    &:disabled {
+      border: 1px dashed $unnic-color-neutral-clean;
+      background-color: $unnic-color-neutral-light;
     }
   }
 
