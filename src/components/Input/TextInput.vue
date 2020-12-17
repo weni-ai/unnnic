@@ -4,34 +4,42 @@
     'unnic-form--error': type === 'error',
     'has-icon': iconLeft || iconRight,
     }">
-      <input
+      <base-input
+        v-model="val"
         v-bind="attributes"
-        :class="{
-          'unnic-form__input': true,
-          'unnic-form__input--error': type === 'error',
-          'has-icon-left': iconLeft,
-          'has-icon-right': iconRight,
-        }"
-        type="text"/>
-        <UIcon
-          v-if="iconLeft"
-          :icon="iconLeft"
-          class="icon-left"
-          size="md" />
-        <UIcon
-          v-if="iconRight"
-          :icon="iconRight"
-          class="icon-right"
-          size="md" />
+        :hasIconLeft="iconLeft != null"
+        :hasIconRight="iconRight != null"
+        :type="type"
+        v-on="inputListeners"
+      />
+      <u-icon
+        v-if="iconLeft"
+        :icon="iconLeft"
+        class="icon-left"
+        size="md" />
+      <u-icon
+        v-if="iconRight"
+        :icon="iconRight"
+        class="icon-right"
+        size="md" />
   </div>
 </template>
 
 <script>
 import UIcon from '../Icon.vue';
+import BaseInput from './BaseInput.vue';
 
 export default {
   name: 'unnic-input',
-  components: { UIcon },
+  components: {
+    UIcon,
+    BaseInput,
+  },
+  data() {
+    return {
+      val: null,
+    };
+  },
   props: {
     type: {
       type: String,
@@ -40,6 +48,10 @@ export default {
         return ['normal', 'error'].indexOf(value) !== -1;
       },
     },
+    value: {
+      type: String,
+      default: '',
+    },
     iconLeft: {
       type: String,
       default: null,
@@ -47,6 +59,11 @@ export default {
     iconRight: {
       type: String,
       default: null,
+    },
+  },
+  methods: {
+    onFocus() {
+      console.log('focus');
     },
   },
   computed: {
@@ -60,58 +77,22 @@ export default {
       return { ...this.$attrs, ...this.$attrs['v-bind'] };
     },
   },
+  watch: {
+    val() {
+      this.$emit('input', this.val);
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import '../../assets/scss/unnic.scss';
 
-.icon {
-  color: $unnic-color-neutral-clean;
-}
-
 .unnic-form {
   font-family: $unnic-font-family-primary;
 
-  &:focus-within .icon{
+  &:focus-within .icon {
     color: $unnic-color-brand-ilha;
-  }
-
-  &__input {
-    background: $unnic-color-neutral-snow;
-    border: $unnic-border-width-thinner solid $unnic-color-neutral-soft;
-    border-radius: $unnic-border-radius-sm;
-    padding: $unnic-squish-xs;
-    color: inherit;
-    font-weight: $unnic-font-weight-regular;
-    font-size: $unnic-font-size-body-lg;
-    font-family: $unnic-font-family-primary;
-    box-sizing: border-box;
-    width: 100%;
-
-    &:focus {
-      color: $unnic-color-brand-ilha-soft;
-      border-color: $unnic-color-brand-ilha;
-      outline: none;
-    }
-
-    &--error {
-      border: $unnic-border-width-thinner solid $unnic-color-feedback-red;
-    }
-
-    ::placeholder {
-      color: $unnic-color-brand-sec;
-      opacity: 1; /* Firefox */
-    }
-
-    &:-ms-input-placeholder, &::-ms-input-placeholder { /* Internet Explorer 10-11 */
-      color: $unnic-color-brand-sec;
-    }
-
-    &:disabled {
-      border: 1px dashed $unnic-color-neutral-clean;
-      background-color: $unnic-color-neutral-light;
-    }
   }
 
   &--error {
@@ -132,6 +113,8 @@ export default {
 }
 
 .icon {
+  color: $unnic-color-neutral-clean;
+
   &-left {
     position: absolute;
     top: 25%;

@@ -5,7 +5,7 @@
     }">
       <p class="unnic-form__label"> {{ label }}  </p>
       <component
-        v-model="text"
+        v-model="val"
         v-on="inputListeners"
         class="unnic-form-input"
         :is="currentComponent"
@@ -61,12 +61,12 @@ export default {
   },
   data() {
     return {
-      text: null,
+      val: null,
     };
   },
   watch: {
-    text() {
-      this.$emit('update:value', this.text);
+    val() {
+      this.$emit('input', this.val);
     },
   },
   computed: {

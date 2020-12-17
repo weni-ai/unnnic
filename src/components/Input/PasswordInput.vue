@@ -3,40 +3,43 @@
     'unnic-form': true,
     'unnic-form--error': type === 'error'
     }">
-      <input
+    <base-input
         v-bind="attributes"
-        v-on="inputListeners"
-        :class="{
-          'unnic-form__input': true,
-          'unnic-form__input--error': type === 'error',
-          'has-icon-right': hasIconRight,
-          'has-icon-left': iconLeft,
-        }"
-        :type="showPassword ? 'text' : 'password'"/>
-        <UIcon
-          v-if="iconLeft"
-          :icon="iconLeft"
-          class="icon-left"
-          size="md"
-          @click="onIconRightClick" />
-        <UIcon
-          v-if="hasIconRight"
-          :icon="iconToShowRight"
-          class="icon-right"
-          size="md"
-          :clickable="allowTogglePassword"
-          @click="onIconRightClick" />
+        :key="true"
+        :hasIconLeft="iconLeft != null"
+        :hasIconRight="hasIconRight"
+        :type="type"
+        :nativeType="showPassword ? 'text' : 'password'"
+        v-model="text"
+      />
+      <UIcon
+        v-if="iconLeft"
+        :icon="iconLeft"
+        class="icon-left"
+        size="md"
+        @click="onIconRightClick" />
+      <UIcon
+        v-if="hasIconRight"
+        :icon="iconToShowRight"
+        class="icon-right"
+        size="md"
+        :clickable="allowTogglePassword"
+        @click="onIconRightClick" />
   </div>
 </template>
 
 <script>
 import UIcon from '../Icon.vue';
+import BaseInput from './BaseInput.vue';
 
 export default {
   name: 'unnic-input',
-  components: { UIcon },
+  components: { UIcon, BaseInput },
   data() {
-    return { showPassword: false };
+    return {
+      showPassword: false,
+      text: null,
+    };
   },
   props: {
     type: {
@@ -67,11 +70,11 @@ export default {
   },
   computed: {
     hasIconRight() {
-      return this.allowTogglePassword || this.iconRight;
+      return this.allowTogglePassword || this.iconRight != null;
     },
     iconToShowRight() {
       if (this.allowTogglePassword) {
-        return this.showPassword ? 'view-1-1' : 'view-off-1';
+        return this.showPassword ? 'view-off-1' : 'view-1-1';
       }
 
       return this.iconRight;
@@ -104,26 +107,14 @@ export default {
 
 .unnic-form {
   font-family: $unnic-font-family-primary;
-  &__input {
-    background: $unnic-color-neutral-snow;
-    border: $unnic-border-width-thinner solid $unnic-color-neutral-soft;
-    border-radius: $unnic-border-radius-sm;
-    padding: $unnic-squish-xs;
-    color: $unnic-color-neutral-dark;
-    font-weight: $unnic-font-weight-regular;
-    font-size: $unnic-font-size-body-lg;
-    font-family: $unnic-font-family-primary;
-    width: 100%;
-    box-sizing: border-box;
+
+    &:focus-within .icon{
+    color: $unnic-color-brand-ilha;
+  }
 
     &--error {
-      border: $unnic-border-width-thinner solid $unnic-color-feedback-red;
+      color: $unnic-color-feedback-red;
     }
-  }
-
-  &--error {
-    color: $unnic-color-feedback-red;
-  }
 }
 
 .has-icon {
@@ -139,6 +130,8 @@ export default {
 }
 
 .icon {
+  color: $unnic-color-neutral-clean;
+
   &-left {
     position: absolute;
     top: 25%;
