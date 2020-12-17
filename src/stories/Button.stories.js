@@ -1,43 +1,39 @@
-import Button from '../components/Button/Button.vue';
+import unnicButton from '../components/Button/Button.vue';
 
 export default {
   title: 'Example/Button',
-  component: Button,
+  component: unnicButton,
   argTypes: {
-    type: { control: { type: 'select', options: ['normal', 'hover', 'disable'] } },
-    nativeType: {
-      control: {
-        type: 'select',
-        options: [
-          'ButtonNormal',
-          'ButtonWithIconLeft',
-          'ButtonWithIconRight',
-          'ButtonWithIconCenter',
-          'ButtonNormalTertiary',
-          'ButtonTertiaryWithIconLeft',
-          'ButtonTertiaryWithIconRight',
-          'ButtonTertiaryWithIconCenter',
-          'ButtonNormalSmall',
-          'ButtonTertiaryWithIconLeftSmall',
-          'ButtonTertiaryWithIconRightSmall',
-          'ButtonNormalTertiarySmall',
-          'ButtonTertiaryWithIconCenterSmall',
-          'ButtonWithIconCenterSmall',
-          'ButtonWithIconLeftSmall',
-          'ButtonWithIconRightSmall',
-        ],
-      },
-    },
+    type: { control: { type: 'select', options: ['primary', 'secondary', 'terciary'] } },
+    size: { control: { type: 'select', options: ['large', 'small'] } },
+    text: { control: { type: 'text' } },
+    iconLeft: { control: { type: 'select', options: [null, 'developer-community-github-1-1', 'alarm-bell-2', 'read-email-at-1'] } },
+    iconRight: { control: { type: 'select', options: [null, 'developer-community-github-1-1', 'alarm-bell-2', 'read-email-at-1'] } },
+    disabled: { control: { type: 'select', options: [true, false] } },
   },
 };
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { Button },
-  template: '<Button v-bind="$props" />',
+  components: { unnicButton },
+  template: '<unnicButton v-bind="$props" />',
 });
 
 export const Normal = Template.bind({});
 Normal.args = {
-  type: 'ButtonNormal',
+  text: 'Button text',
+  disabled: false,
+};
+
+export const Terciary = Template.bind({});
+Terciary.args = {
+  type: 'terciary',
+  text: 'Button Text',
+  disabled: false,
+};
+
+export const withIcon = Template.bind({});
+withIcon.args = {
+  text: 'Button Text',
+  iconLeft: 'developer-community-github-1-1',
 };
