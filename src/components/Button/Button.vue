@@ -27,7 +27,7 @@ import ButtonWithIconLeftSmall from './ButtonWithIconLeftSmall.vue';
 import ButtonWithIconRightSmall from './ButtonWithIconRightSmall.vue';
 
 export default {
-  name: 'unnic-input',
+  name: 'unnic-button',
   components: {
     ButtonWithIconLeft,
     ButtonNormal,
@@ -50,9 +50,9 @@ export default {
     type: {
       type: String,
       default: 'normal',
-      validator(value) {
-        return ['normal', 'disabled', 'hover'].indexOf(value) !== -1;
-      },
+      // validator(value) {
+      //   return ['normal', 'disabled', 'hover'].indexOf(value) !== -1;
+      // },
     },
     nativeType: {
       type: String,

@@ -88,7 +88,7 @@ export default {
 @import '../../assets/scss/unnic.scss';
 
 .unnic-form {
-  font-family: $unnic-font-family-primary;
+  font-family: $unnic-font-family-secondary;
   position: relative;
 
   &__input {
