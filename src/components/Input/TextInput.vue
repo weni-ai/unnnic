@@ -100,18 +100,6 @@ export default {
   }
 }
 
-.has-icon {
-  position: relative;
-
-  &-left {
-    padding-left: calc(#{$unnic-inline-sm} + #{$unnic-icon-size-md} + #{$unnic-inline-xs});
-  }
-
-  &-right {
-    padding-right: calc(#{$unnic-inline-sm} + #{$unnic-icon-size-md} + #{$unnic-inline-xs});
-  }
-}
-
 .icon {
   color: $unnic-color-neutral-clean;
 

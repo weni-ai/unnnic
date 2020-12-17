@@ -114,14 +114,4 @@ export default {
   }
 }
 
-.icon-left {
-  position: absolute;
-  left: 0;
-}
-
-.icon-right {
-  position: absolute;
-  right: 0;
-}
-
 </style>

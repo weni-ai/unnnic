@@ -112,7 +112,6 @@ export default {
 }
 
 .has-icon {
-  position: relative;
 
   &-left {
     padding-left: calc(#{$unnic-inline-sm} + #{$unnic-icon-size-md} + #{$unnic-inline-xs});

@@ -64,7 +64,7 @@ export default {
   },
   methods: {
     onIconRightClick() {
-      if (!this.allowTogglePassword) return;
+      if (this.attributes.disabled || !this.allowTogglePassword) return;
       this.showPassword = !this.showPassword;
     },
   },
@@ -115,18 +115,6 @@ export default {
     &--error {
       color: $unnic-color-feedback-red;
     }
-}
-
-.has-icon {
-  position: relative;
-
-  &-left {
-    padding-left: calc(#{$unnic-inline-sm} + #{$unnic-icon-size-md} + #{$unnic-inline-xs});
-  }
-
-  &-right {
-    padding-right: calc(#{$unnic-inline-sm} + #{$unnic-icon-size-md} + #{$unnic-inline-xs});
-  }
 }
 
 .icon {
