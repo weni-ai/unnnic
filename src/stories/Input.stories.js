@@ -7,6 +7,9 @@ export default {
     type: { control: { type: 'select', options: ['normal', 'error'] } },
     nativeType: { control: { type: 'select', options: ['input', 'password'] } },
     placeholder: { control: { type: 'text' } },
+    iconLeft: { control: { type: 'select', options: ['alarm-bell-2', 'read-email-at-1'] } },
+    iconRight: { control: { type: 'select', options: ['alarm-bell-2', 'read-email-at-1'] } },
+    allowTogglePassword: { control: { type: 'select', options: [true, false] } },
   },
 };
 

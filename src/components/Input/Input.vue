@@ -4,12 +4,15 @@
     'unnic-form--error': type === 'error'
     }">
       <p class="unnic-form__label"> {{ label }}  </p>
-      <UIcon class="icon-left"/>
-      <UIcon class="icon-right"/>
       <component
+        v-model="text"
+        v-on="inputListeners"
         class="unnic-form-input"
         :is="currentComponent"
         :v-bind="$attrs"
+        :icon-left="iconLeft"
+        :icon-right="iconRight"
+        :allow-toggle-password="togglePassword"
         :type="type" />
     <p class="unnic-form__message"> {{ message }} </p>
   </div>
@@ -43,11 +46,39 @@ export default {
       type: String,
       default: null,
     },
+    iconLeft: {
+      type: String,
+      default: null,
+    },
+    iconRight: {
+      type: String,
+      default: null,
+    },
+    togglePassword: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      text: null,
+    };
+  },
+  watch: {
+    text() {
+      this.$emit('update:value', this.text);
+    },
   },
   computed: {
     currentComponent() {
       if (this.nativeType === 'password') return PasswordInput;
       return TextInput;
+    },
+    inputListeners() {
+      return {
+        ...this.$listeners,
+        input: () => {},
+      };
     },
   },
 };
