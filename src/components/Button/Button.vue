@@ -6,7 +6,8 @@
             'unnic-button',
             `unnic-button--size-${size}`,
             `unnic-button--${type}`
-            ]">
+            ]"
+            v-on="$listeners">
             <u-icon
               v-if="iconLeft" :icon="iconLeft"
               :class="{ 'unnic-button__icon-left': hasText }"
