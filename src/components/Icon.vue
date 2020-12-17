@@ -1,7 +1,7 @@
 <template>
     <span
       @click="onClick"
-      :class="`icon-${icon} icon-${size}`"> </span>
+      :class="`icon icon-${icon} icon-${size}`"> </span>
 </template>
 
 <script>

@@ -1,20 +1,45 @@
 <template>
   <div :class="{
-    'unnic-form--error': type === 'error'
+    'unnic-form': true,
+    'unnic-form--error': type === 'error',
+    'has-icon': iconLeft || iconRight,
     }">
-      <input
-        v-bind="$attrs"
-        :class="{
-          'unnic-form__input': true,
-          'unnic-form__input--error': type === 'error',
-        }"
-        type="text"/>
+      <base-input
+        v-model="val"
+        v-bind="attributes"
+        :hasIconLeft="iconLeft != null"
+        :hasIconRight="iconRight != null"
+        :type="type"
+        v-on="inputListeners"
+      />
+      <u-icon
+        v-if="iconLeft"
+        :icon="iconLeft"
+        class="icon-left"
+        size="md" />
+      <u-icon
+        v-if="iconRight"
+        :icon="iconRight"
+        class="icon-right"
+        size="md" />
   </div>
 </template>
 
 <script>
+import UIcon from '../Icon.vue';
+import BaseInput from './BaseInput.vue';
+
 export default {
   name: 'unnic-input',
+  components: {
+    UIcon,
+    BaseInput,
+  },
+  data() {
+    return {
+      val: null,
+    };
+  },
   props: {
     type: {
       type: String,
@@ -22,6 +47,39 @@ export default {
       validator(value) {
         return ['normal', 'error'].indexOf(value) !== -1;
       },
+    },
+    value: {
+      type: String,
+      default: '',
+    },
+    iconLeft: {
+      type: String,
+      default: null,
+    },
+    iconRight: {
+      type: String,
+      default: null,
+    },
+  },
+  methods: {
+    onFocus() {
+      console.log('focus');
+    },
+  },
+  computed: {
+    inputListeners() {
+      return {
+        ...this.$listeners,
+        input: () => {},
+      };
+    },
+    attributes() {
+      return { ...this.$attrs, ...this.$attrs['v-bind'] };
+    },
+  },
+  watch: {
+    val() {
+      this.$emit('input', this.val);
     },
   },
 };
@@ -32,21 +90,9 @@ export default {
 
 .unnic-form {
   font-family: $unnic-font-family-primary;
-  &__input {
-    background: $unnic-color-neutral-snow;
-    border: $unnic-border-width-thinner solid $unnic-color-neutral-soft;
-    border-radius: $unnic-border-radius-sm;
-    padding: $unnic-squish-xs;
-    color: inherit;
-    font-weight: $unnic-font-weight-regular;
-    font-size: $unnic-font-size-body-lg;
-    font-family: $unnic-font-family-primary;
-    box-sizing: border-box;
-    width: 100%;
 
-    &--error {
-      border: $unnic-border-width-thinner solid $unnic-color-feedback-red;
-    }
+  &:focus-within .icon {
+    color: $unnic-color-brand-ilha;
   }
 
   &--error {
@@ -54,20 +100,20 @@ export default {
   }
 }
 
-.input-icons i {
-            position: absolute;
-        }
+.icon {
+  color: $unnic-color-neutral-clean;
 
-        .input-icons {
-            width: 100%;
-            margin-bottom: 10px;
-        }
+  &-left {
+    position: absolute;
+    top: 25%;
+    left: $unnic-inline-sm;
+  }
 
-        .icon {
-            padding: 10px;
-            color: green;
-            min-width: 50px;
-            text-align: center;
-        }
+  &-right {
+    position: absolute;
+    top: 25%;
+    right: $unnic-inline-sm;
+  }
+}
 
 </style>
