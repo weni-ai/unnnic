@@ -58,8 +58,7 @@ export default {
     border-radius: $unnic-border-radius-sm;
     border: 0;
     outline:none;
-    min-width: 56px;
-    padding: $unnic-squish-xs;
+    padding: $unnic-inset-xs;
     line-height: ($unnic-font-size-body-lg + $unnic-line-height-medium);
     font-family: $unnic-font-family-secondary;
     cursor: pointer;
@@ -74,8 +73,7 @@ export default {
     border-radius: $unnic-border-radius-sm;
     border: $unnic-border-width-thinner solid $unnic-color-neutral-soft;
     outline:none;
-    min-width: 56px;
-    padding: $unnic-squish-xs;
+    padding: $unnic-inset-xs;
     line-height: ($unnic-font-size-body-lg + $unnic-line-height-medium);
     font-family: $unnic-font-family-secondary;
     cursor: pointer;
@@ -92,8 +90,7 @@ export default {
     color: $unnic-color-neutral-clean;
     border: 0;
     outline:none;
-    min-width: 56px;
-    padding: $unnic-squish-xs;
+    padding: $unnic-inset-xs;
     line-height: ($unnic-font-size-body-lg + $unnic-line-height-medium);
     font-family: $unnic-font-family-secondary;
     cursor: pointer;
