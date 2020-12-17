@@ -106,7 +106,6 @@ export default {
 }
 
 .unnic-form {
-  font-family: $unnic-font-family-primary;
 
     &:focus-within .icon{
     color: $unnic-color-brand-ilha;

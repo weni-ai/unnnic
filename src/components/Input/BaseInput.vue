@@ -77,7 +77,7 @@ export default {
     color: inherit;
     font-weight: $unnic-font-weight-regular;
     font-size: $unnic-font-size-body-lg;
-    font-family: $unnic-font-family-primary;
+    font-family: $unnic-font-family-secondary;
     box-sizing: border-box;
     width: 100%;
 

@@ -89,7 +89,6 @@ export default {
 @import '../../assets/scss/unnic.scss';
 
 .unnic-form {
-  font-family: $unnic-font-family-primary;
 
   &:focus-within .icon {
     color: $unnic-color-brand-ilha;
