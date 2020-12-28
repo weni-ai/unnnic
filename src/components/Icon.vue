@@ -33,7 +33,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../assets/scss/unnic.scss';
 @import '../assets/fonts/fonts.css';
 
