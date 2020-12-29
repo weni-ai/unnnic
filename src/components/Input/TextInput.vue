@@ -61,11 +61,6 @@ export default {
       default: null,
     },
   },
-  methods: {
-    onFocus() {
-      console.log('focus');
-    },
-  },
   computed: {
     inputListeners() {
       return {
