@@ -19,6 +19,9 @@ export default {
     position: {
       type: String,
       default: 'bottom',
+      validator(value) {
+        return ['top', 'left', 'right', 'bottom'].indexOf(value) !== -1;
+      },
     },
   },
   data() {
