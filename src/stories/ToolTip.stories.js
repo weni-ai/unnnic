@@ -12,7 +12,7 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnicToolTip },
-  template: '<unnicToolTip v-bind="$props" />',
+  template: '<unnicToolTip v-bind="$props"> Hover over text </unnicToolTip>',
 });
 
 export const Normal = Template.bind({});

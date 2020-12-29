@@ -1,6 +1,6 @@
 <template>
-<div v-bind="$attrs" v-on="$listeners" class="unnic-tooltip">
-  Hover over text
+<div class="unnic-tooltip">
+  <slot />
   <span :class="[
             'unnic-tooltip-label',
             `unnic-tooltip-label-${side}`,
