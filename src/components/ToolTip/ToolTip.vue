@@ -55,19 +55,21 @@ export default {
   font-weight: $unnic-font-weight-regular;
   line-height: ($unnic-font-size-body-md + $unnic-line-height-medium);
 
+  &::after {
+    content: "";
+    position: absolute;
+    border-width: 5px;
+    border-style: solid;
+  }
+
     &-top{
       bottom: 150%;
       left: 50%;
       margin-left: -60px;
 
       &::after {
-        content: "";
-        position: absolute;
         top: 100%;
         left: 50%;
-        margin-left: -5px;
-        border-width: 5px;
-        border-style: solid;
         border-color: $unnic-color-neutral-black transparent transparent transparent;
       }
     }
@@ -78,13 +80,8 @@ export default {
       margin-left: -60px;
 
       &::after {
-          content: "";
-          position: absolute;
           bottom: 100%;
           left: 50%;
-          margin-left: -5px;
-          border-width: 5px;
-          border-style: solid;
           border-color: transparent transparent $unnic-color-neutral-black transparent;
       }
     }
@@ -93,13 +90,8 @@ export default {
       left: 110%;
 
       &::after {
-        content: "";
-        position: absolute;
         top: 50%;
         right: 100%;
-        margin-top: -5px;
-        border-width: 5px;
-        border-style: solid;
         border-color: transparent $unnic-color-neutral-black transparent transparent;
       }
     }
@@ -108,13 +100,8 @@ export default {
       right: 110%;
 
       &::after {
-        content: "";
-        position: absolute;
         top: 50%;
         left: 100%;
-        margin-top: -5px;
-        border-width: 5px;
-        border-style: solid;
         border-color: transparent transparent transparent $unnic-color-neutral-black;
       }
     }
