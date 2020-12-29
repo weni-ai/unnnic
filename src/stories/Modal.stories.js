@@ -1,4 +1,5 @@
 import unnicModal from '../components/Modal/Modal.vue';
+import unnicButton from '../components/Button/Button.vue';
 
 export default {
   title: 'Example/Modal',
@@ -12,7 +13,7 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { unnicModal },
+  components: { unnicModal, unnicButton },
   template: '<unnicModal v-bind="$props" />',
 });
 
@@ -23,4 +24,5 @@ Normal.args = {
   alertMessage: 'Message alert',
   closeIcon: true,
   hasAlertMessage: true,
+  hasButton: false,
 };

@@ -30,15 +30,20 @@
             {{ alertMessage }}
           </span>
       </div>
+      <div v-else-if="hasButton" class="unnic-modal-button">
+          <u-button :type="'terciary'">Tertiary</u-button>
+          <u-button :size="'large'">Primary</u-button>
+      </div>
     </div>
 </template>
 
 <script>
 import UIcon from '../Icon.vue';
+import UButton from '../Button/Button.vue';
 
 export default {
   name: 'unnic-modal',
-  components: { UIcon },
+  components: { UIcon, UButton },
   props: {
     text: {
       type: String,
@@ -63,6 +68,10 @@ export default {
     alertMessage: {
       type: String,
       default: null,
+    },
+    hasButton: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
@@ -155,6 +164,14 @@ export default {
       font-size: $unnic-font-size-body-md;
       line-height: ($unnic-font-size-body-md + $unnic-line-height-medium);
     }
+  }
+
+  &-button {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    padding-bottom: $unnic-inline-giant;
+    background-color: $unnic-color-background-carpet;
   }
 }
 </style>
