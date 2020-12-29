@@ -70,6 +70,7 @@ export default {
       &::after {
         top: 100%;
         left: 50%;
+        margin-left: -5px;
         border-color: $unnic-color-neutral-black transparent transparent transparent;
       }
     }
@@ -82,6 +83,7 @@ export default {
       &::after {
           bottom: 100%;
           left: 50%;
+          margin-left: -5px;
           border-color: transparent transparent $unnic-color-neutral-black transparent;
       }
     }
@@ -92,6 +94,7 @@ export default {
       &::after {
         top: 50%;
         right: 100%;
+        margin-top: -5px;
         border-color: transparent $unnic-color-neutral-black transparent transparent;
       }
     }
@@ -102,6 +105,7 @@ export default {
       &::after {
         top: 50%;
         left: 100%;
+        margin-top: -5px;
         border-color: transparent transparent transparent $unnic-color-neutral-black;
       }
     }
