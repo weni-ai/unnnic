@@ -53,7 +53,7 @@ export default {
     },
     status: {
       type: String,
-      default: 0,
+      default: null,
     },
   },
 };
