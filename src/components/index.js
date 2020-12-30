@@ -8,6 +8,7 @@ import UnnicDropdown from './Dropdown/Dropdown.vue';
 import UnnicDropdownItem from './Dropdown/DropdownItem.vue';
 import UnnicIcon from './Icon.vue';
 import UnnicToolTip from './ToolTip/ToolTip.vue';
+import UnnicCard from './Card/Card.vue';
 
 const components = {
   UnnicInput,
@@ -19,6 +20,7 @@ const components = {
   UnnicDropdown,
   UnnicDropdownItem,
   UnnicToolTip,
+  UnnicCard,
 };
 
 Object.keys(components).forEach((name) => {

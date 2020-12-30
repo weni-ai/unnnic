@@ -2,29 +2,27 @@
   <div class="unnic-card-title">
     <UICon
       :icon="icon"
-      :class="{
-        'unnic-card-title__icon': true,
-      }"
-      size="md"
-    />
+      class="unnic-card-title__icon"
+      size="md" />
     <div class="unnic-card-title__content">
       <div class="unnic-card-title__content_title">{{ title }}</div>
-      <!-- TODO: Use the future Tooltip component instead of just icon -->
-      <UICon
+      <tool-tip :text="info">
+        <UICon
         icon="information-circle-4"
         class="unnic-card-title__content_info"
-        size="sm"
-      />
+        size="sm" />
+      </tool-tip>
     </div>
   </div>
 </template>
 
 <script>
-import UICon from "../Icon.vue";
+import UICon from '../Icon.vue';
+import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
-  name: "unnic-card",
-  components: { UICon },
+  name: 'unnic-card',
+  components: { UICon, ToolTip },
   props: {
     title: {
       type: String,

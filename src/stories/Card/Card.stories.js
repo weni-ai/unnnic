@@ -1,9 +1,9 @@
-import Card from '../../components/Card/Card.vue'
+import Card from '../../components/Card/Card.vue';
 
 export default {
   title: 'Example/Card',
   component: Card,
-}
+};
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
@@ -41,4 +41,3 @@ Account.args = {
   description: 'This is the description',
   enabled: { control: { type: 'select', options: [true, false] } },
 };
-
