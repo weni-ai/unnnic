@@ -4,7 +4,9 @@
             <slot name="header" />
         </div>
         <slot />
-        <slot name="footer"/>
+        <div class="unnic-side-bar__footer">
+            <slot name="footer"/>
+        </div>
     </div>
 </template>
 
@@ -31,6 +33,8 @@ export default {
     flex-direction: column;
     height: 100%;
     width: 250px;
+    font-family: $unnic-font-family-secondary;
+    box-sizing: border-box;
 
     &--contracted {
         width: 90px;
@@ -39,6 +43,14 @@ export default {
             &-menu {
                 &__title {
                     visibility: hidden;
+                }
+
+                + .unnic-side-bar-menu::before {
+                    width: 100%;
+                    height: 0px;
+                    border: 1px $unnic-color-neutral-soft solid;
+                    content: '';
+                    display: block;
                 }
             }
 
@@ -55,6 +67,13 @@ export default {
 
     &__header {
         margin-bottom: $unnic-spacing-stack-md;
+    }
+
+    &__footer {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
     }
 }
 
