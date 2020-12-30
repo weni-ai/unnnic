@@ -1,4 +1,3 @@
-
 <template>
   <div :class="{ 'unnic-card': true, 'unnic-card--small': type === 'title' }">
     <component
@@ -18,22 +17,22 @@
 </template>
 
 <script>
-import UICon from "../Icon.vue";
-import DashCard from "./DashCard.vue";
-import TitleCard from "./TitleCard.vue";
-import StatusCard from "./StatusCard.vue";
-import AccountCard from "./AccountCard.vue";
+import UICon from '../Icon.vue';
+import DashCard from './DashCard.vue';
+import TitleCard from './TitleCard.vue';
+import StatusCard from './StatusCard.vue';
+import AccountCard from './AccountCard.vue';
 
 export default {
-  name: "unnic-card",
+  name: 'unnic-card',
   components: { UICon },
   props: {
     type: {
       type: String,
-      default: "title",
+      default: 'title',
       validator(value) {
         return (
-          ["title", "status", "dash", "account-option"].indexOf(value) !== -1
+          ['title', 'status', 'dash', 'account-option'].indexOf(value) !== -1
         );
       },
     },
@@ -65,21 +64,26 @@ export default {
       type: Boolean,
       default: true,
     },
+    icon: {
+      type: String,
+      default: null,
+    },
   },
   computed: {
     currentTypeIcon() {
-      if (this.type === "title") return "graph-stats-1";
-      if (this.type === "dash") return "messages-bubble-1";
-      if (this.type === "status") return "science-fiction-robot-2";
-      if (this.type === "account") return "single-neutral-2";
-      return "view-1-1";
+      if (this.icon) return this.icon;
+      if (this.type === 'title') return 'graph-stats-1';
+      if (this.type === 'dash') return 'messages-bubble-1';
+      if (this.type === 'status') return 'science-fiction-robot-2';
+      if (this.type === 'account') return 'single-neutral-2';
+      return null;
     },
     currentComponent() {
-      if (this.type === "title") return TitleCard;
-      if (this.type === "dash") return DashCard;
-      if (this.type === "status") return StatusCard;
-      if (this.type === "account") return AccountCard;
-      return "view-1-1";
+      if (this.type === 'title') return TitleCard;
+      if (this.type === 'dash') return DashCard;
+      if (this.type === 'status') return StatusCard;
+      if (this.type === 'account') return AccountCard;
+      return TitleCard;
     },
   },
 };

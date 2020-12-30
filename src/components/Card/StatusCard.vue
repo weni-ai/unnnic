@@ -4,9 +4,7 @@
       <div class="unnic-card-status__icon">
         <UICon
           :icon="icon"
-          :class="{
-            'icon-left': true,
-          }"
+          class="icon-left"
           size="sm"
         />
       </div>
@@ -35,10 +33,10 @@
 </template>
 
 <script>
-import UICon from "../Icon.vue";
+import UICon from '../Icon.vue';
 
 export default {
-  name: "unnic-card",
+  name: 'unnic-card',
   components: { UICon },
   props: {
     title: {
@@ -93,7 +91,7 @@ export default {
     font-family: $unnic-font-family-secondary;
     font-size: $unnic-font-size-body-md;
     font-weight: $unnic-font-weight-regular;
-    line-height: $unnic-line-height-medium;
+    line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
     color: $unnic-color-neutral-darkest;
   }
 
@@ -102,7 +100,7 @@ export default {
     font-size: $unnic-font-size-body-sm;
     font-weight: $unnic-font-weight-regular;
     color: $unnic-color-neutral-dark;
-    line-height: $unnic-line-height-medium;
+    line-height: $unnic-font-size-body-sm + $unnic-line-height-medium;
   }
 
   &__icon {
@@ -113,7 +111,7 @@ export default {
     font-family: $unnic-font-family-secondary;
     font-size: $unnic-font-size-body-md;
     font-weight: $unnic-font-weight-regular;
-    line-height: $unnic-line-height-medium;
+    line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
     color: $unnic-color-neutral-dark;
     margin-left: $unnic-inline-nano;
   }

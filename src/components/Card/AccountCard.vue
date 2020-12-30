@@ -1,23 +1,16 @@
 <template>
-  <div
-    :class="{
+  <div :class="{
       'unnic-card-dash': true,
-      'unnic-card-dash__disabled': enabled ? false : true,
-    }"
-  >
-    <div
-      :class="{
+      'unnic-card-dash__disabled': !enabled,
+    }">
+    <div :class="{
         'unnic-card-dash__icon': true,
-        'unnic-card-dash__icon__disabled': enabled ? false : true,
-      }"
-    >
+        'unnic-card-dash__icon__disabled': !enabled,
+      }">
       <UICon
         :icon="icon"
-        :class="{
-          'icon-left': true,
-        }"
-        size="xs"
-      />
+        class="icon-left"
+        size="xs"/>
     </div>
     <div class="unnic-card-dash__content">
       <div class="unnic-card-dash__title">{{ title }}</div>
@@ -27,10 +20,10 @@
 </template>
 
 <script>
-import UICon from "../Icon.vue";
+import UICon from '../Icon.vue';
 
 export default {
-  name: "unnic-card",
+  name: 'unnic-card',
   components: { UICon },
   props: {
     title: {
@@ -98,7 +91,7 @@ export default {
     font-size: $unnic-font-size-body-lg;
     font-weight: $unnic-font-weight-regular;
     color: $unnic-color-neutral-darkest;
-    line-height: $unnic-line-height-medium;
+    line-height: $unnic-font-size-body-lg + $unnic-line-height-medium;
   }
 
   &__description {
@@ -106,7 +99,7 @@ export default {
     font-size: $unnic-font-size-body-md;
     font-weight: $unnic-font-weight-regular;
     color: $unnic-color-neutral-cloudy;
-    line-height: $unnic-line-height-medium;
+    line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
   }
 
   &__percent_value {
@@ -115,7 +108,7 @@ export default {
     font-family: $unnic-font-family-secondary;
     font-size: $unnic-font-size-body-md;
     font-weight: $unnic-font-weight-bold;
-    line-height: $unnic-line-height-medium;
+    // line-height: $unnic-line-height-medium;
   }
 
   &__percent_icon {
