@@ -3,6 +3,16 @@ import Card from '../../components/Card/Card.vue';
 export default {
   title: 'Example/Card',
   component: Card,
+  argTypes: {
+    enabled: { control: { type: 'select', options: [true, false] } },
+    scheme: {
+      control: {
+        type: 'select',
+        options: ['feedback-red', 'feedback-green', 'feedback-yellow', 'feedback-blue', 'feedback-grey',
+          'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink'],
+      },
+    },
+  },
 };
 
 const Template = (args, { argTypes }) => ({
@@ -39,5 +49,4 @@ Account.args = {
   type: 'account',
   title: 'This is the title',
   description: 'This is the description',
-  enabled: { control: { type: 'select', options: [true, false] } },
 };

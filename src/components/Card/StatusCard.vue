@@ -1,5 +1,5 @@
 <template>
-  <div class="unnic-card-status">
+  <div :class="['unnic-card-status', `unnic-card-scheme--${scheme}--border`]">
     <div class="unnic-card-status__header">
       <div class="unnic-card-status__icon">
         <UICon
@@ -14,10 +14,11 @@
       <!-- TODO: Modify icon to status one -->
       <UICon
         icon="information-circle-4"
-        :class="{
-          'icon-left': true,
-          'unnic-card-status__icon_indicator': true,
-        }"
+        :class="[
+          'icon-left',
+          `unnic-card-scheme--${scheme}--icon`,
+          'unnic-card-status__icon_indicator',
+        ]"
         size="xs"
       />
       <div class="unnic-card-status__data_content">
@@ -55,11 +56,15 @@ export default {
       type: String,
       default: null,
     },
+    scheme: {
+      type: String,
+      default: null,
+    },
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../../assets/scss/unnic.scss";
 
 .unnic-card-status {
@@ -131,8 +136,6 @@ export default {
   }
 
   &__icon_indicator {
-    // TODO: MAKE COLORS VARIABLE FROM STATUS
-    color: $unnic-color-feedback-green;
     line-height: $unnic-line-height-medium;
   }
 }

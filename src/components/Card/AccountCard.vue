@@ -3,10 +3,11 @@
       'unnic-card-dash': true,
       'unnic-card-dash__disabled': !enabled,
     }">
-    <div :class="{
-        'unnic-card-dash__icon': true,
-        'unnic-card-dash__icon__disabled': !enabled,
-      }">
+    <div :class="[
+        'unnic-card-dash__icon',
+        `unnic-card-scheme--${scheme}`,
+        enabled ? '' : 'unnic-card-dash__icon__disabled',
+      ]">
       <UICon
         :icon="icon"
         class="icon-left"
@@ -42,11 +43,15 @@ export default {
       type: Boolean,
       default: true,
     },
+    scheme: {
+      type: String,
+      default: null,
+    },
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../../assets/scss/unnic.scss";
 
 .unnic-card-dash {
@@ -76,10 +81,6 @@ export default {
     margin-right: $unnic-inline-xs;
     align-self: flex-start;
 
-    // TODO: MAKE COLORS VARIABLE FOR ICONS
-    color: $unnic-color-aux-blue;
-    background-color: rgba($unnic-color-aux-blue, 0.08);
-
     &__disabled {
       color: $unnic-color-neutral-cloudy !important;
       background-color: $unnic-color-background-grass !important;
@@ -100,21 +101,6 @@ export default {
     font-weight: $unnic-font-weight-regular;
     color: $unnic-color-neutral-cloudy;
     line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
-  }
-
-  &__percent_value {
-    color: $unnic-color-feedback-green;
-    border-radius: $unnic-border-radius-sm;
-    font-family: $unnic-font-family-secondary;
-    font-size: $unnic-font-size-body-md;
-    font-weight: $unnic-font-weight-bold;
-    // line-height: $unnic-line-height-medium;
-  }
-
-  &__percent_icon {
-    // TODO: MAKE COLORS VARIABLE FOR POSITIVE AND NEGATIVE
-    color: $unnic-color-feedback-green;
-    border-radius: $unnic-border-radius-sm;
   }
 }
 

@@ -1,6 +1,6 @@
 <template>
   <div class="unnic-card-dash">
-    <div class="unnic-card-dash__icon">
+    <div :class="['unnic-card-dash__icon', `unnic-card-scheme--${scheme}` ]">
       <UICon
         :icon="icon"
         class="icon-left"
@@ -12,7 +12,8 @@
       <div class="unnic-card-dash__data">
         <div class="unnic-card-dash__value">{{ value }}</div>
 
-        <div class="unnic-card-dash__percent">
+        <div :class="['unnic-card-dash__percent',
+        `unnic-card-scheme--feedback-${percent < 0 ? 'red' : 'green'}`]">
           <UICon
             icon="graph-stats-ascend-2"
             class="icon-left' 'unnic-card-dash__percent_icon'"
@@ -50,11 +51,15 @@ export default {
       type: Number,
       default: 0,
     },
+    scheme: {
+      type: String,
+      default: null,
+    },
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import "../../assets/scss/unnic.scss";
 
 .unnic-card-dash {
@@ -81,8 +86,6 @@ export default {
     flex-direction: row;
     margin-left: auto;
 
-    color: $unnic-color-feedback-green;
-    background-color: rgba($unnic-color-feedback-green, 0.08);
     border-radius: $unnic-border-radius-sm;
     padding: 8px 4px;
   }
@@ -91,10 +94,6 @@ export default {
     border-radius: $unnic-border-radius-sm;
     padding: 2px 4px;
     align-self: flex-start;
-
-    // TODO: MAKE COLORS VARIABLE FOR ICONS
-    color: $unnic-color-aux-blue;
-    background-color: rgba($unnic-color-aux-blue, 0.2);
   }
 
   &__title {
@@ -116,7 +115,6 @@ export default {
   }
 
   &__percent_value {
-    color: $unnic-color-feedback-green;
     border-radius: $unnic-border-radius-sm;
     font-family: $unnic-font-family-secondary;
     font-size: $unnic-font-size-body-md;
@@ -125,8 +123,6 @@ export default {
   }
 
   &__percent_icon {
-    // TODO: MAKE COLORS VARIABLE FOR POSITIVE AND NEGATIVE
-    color: $unnic-color-feedback-green;
     border-radius: $unnic-border-radius-sm;
   }
 }

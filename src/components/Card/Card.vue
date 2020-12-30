@@ -12,6 +12,7 @@
       :status="status"
       :description="description"
       :enabled="enabled"
+      :scheme="scheme"
     />
   </div>
 </template>
@@ -68,6 +69,14 @@ export default {
       type: String,
       default: null,
     },
+    scheme: {
+      type: String,
+      default: 'aux-blue',
+      validator(value) {
+        return ['feedback-red', 'feedback-green', 'feedback-yellow', 'feedback-blue', 'feedback-grey',
+          'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink'].indexOf(value) !== -1;
+      },
+    },
   },
   computed: {
     currentTypeIcon() {
@@ -88,3 +97,34 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+@import '../../assets/scss/unnic.scss';
+
+$scheme-colors:
+  'feedback-red' $unnic-color-feedback-red,
+  'feedback-green' $unnic-color-feedback-green,
+  'feedback-yellow' $unnic-color-feedback-yellow,
+  'feedback-blue' $unnic-color-feedback-blue,
+  'feedback-grey' $unnic-color-feedback-grey,
+   'aux-blue' $unnic-color-aux-blue,
+   'aux-purple' $unnic-color-aux-purple,
+   'aux-orange' $unnic-color-aux-orange,
+   'aux-lemon' $unnic-color-aux-lemon,
+   'aux-pink' $unnic-color-aux-pink;
+
+@each $name, $color in $scheme-colors {
+  .unnic-card-scheme {
+    &--#{$name} {
+      background-color: rgba($color, $unnic-opacity-level-light);
+      color: $color;
+      &--icon {
+        color: $color;
+      }
+      &--border {
+        border-left: 4px solid $color;
+      }
+    }
+  }
+}
+</style>

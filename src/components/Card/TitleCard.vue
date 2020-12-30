@@ -2,7 +2,7 @@
   <div class="unnic-card-title">
     <UICon
       :icon="icon"
-      class="unnic-card-title__icon"
+      :class="['unnic-card-title__icon', `unnic-card-scheme--${scheme}`]"
       size="md" />
     <div class="unnic-card-title__content">
       <div class="unnic-card-title__content_title">{{ title }}</div>
@@ -36,6 +36,10 @@ export default {
       type: String,
       default: null,
     },
+    scheme: {
+      type: String,
+      default: null,
+    },
   },
 };
 </script>
@@ -61,6 +65,7 @@ export default {
     font-weight: $unnic-font-weight-regular;
     color: $unnic-color-neutral-darkest;
     line-height: $unnic-line-height-medium;
+    flex: 1;
   }
 
   &__icon {
@@ -70,10 +75,6 @@ export default {
     border-radius: $unnic-border-radius-sm;
     padding: $unnic-inset-nano;
     margin-right: $unnic-inline-sm;
-
-    // TODO: MAKE COLORS VARIABLE FOR ICONS
-    color: $unnic-color-aux-purple;
-    background-color: rgba($unnic-color-aux-purple, 0.2);
   }
 
   &__content_info {
