@@ -1,16 +1,17 @@
 <template>
-    <div
-      :class="{ 'unnic-side-bar-item': true,
-                'unnic-side-bar-item--active': active,
+  <div
+    :class="{ 'unnic-side-bar-item': true,
+              'unnic-side-bar-item--active': active,
+              'unnic--clickable': true,
+            }"
+    @click="onClick">
+    <u-icon
+      :class="{'unnic-side-bar-item__icon': true,
+               'unnic-side-bar-item__icon--active': active,
               }"
-      @click="onClick">
-        <u-icon
-          :class="{'unnic-side-bar-item__icon': true,
-                   'unnic-side-bar-item__icon--active': active,
-                  }"
-          size="sm"
-          :icon="icon"/>
-        <span class="unnic-side-bar-item__label"> {{ text }} </span>
+      size="sm"
+      :icon="icon"/>
+    <span class="unnic-side-bar-item__label"> {{ text }} <slot /> </span>
     </div>
 </template>
 
@@ -51,6 +52,8 @@ export default {
         color: $unnic-color-neutral-dark;
         margin-bottom: $unnic-spacing-stack-xs;
         padding: $unnic-spacing-stack-nano;
+        font-size: $unnic-font-size-body-sm;
+        font-family: $unnic-font-family-secondary;
 
         &--active {
             background-color: rgba($unnic-color-brand-ilha, $unnic-opacity-level-light);
