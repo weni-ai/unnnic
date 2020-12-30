@@ -4,12 +4,15 @@
     'unnic-form--error': type === 'error'
     }">
       <p class="unnic-form__label"> {{ label }}  </p>
-      <UIcon class="icon-left"/>
-      <UIcon class="icon-right"/>
       <component
+        v-model="val"
+        v-on="inputListeners"
         class="unnic-form-input"
         :is="currentComponent"
         :v-bind="$attrs"
+        :icon-left="iconLeft"
+        :icon-right="iconRight"
+        :allow-toggle-password="togglePassword"
         :type="type" />
     <p class="unnic-form__message"> {{ message }} </p>
   </div>
@@ -43,21 +46,49 @@ export default {
       type: String,
       default: null,
     },
+    iconLeft: {
+      type: String,
+      default: null,
+    },
+    iconRight: {
+      type: String,
+      default: null,
+    },
+    togglePassword: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      val: null,
+    };
+  },
+  watch: {
+    val() {
+      this.$emit('input', this.val);
+    },
   },
   computed: {
     currentComponent() {
       if (this.nativeType === 'password') return PasswordInput;
       return TextInput;
     },
+    inputListeners() {
+      return {
+        ...this.$listeners,
+        input: () => {},
+      };
+    },
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 @import '../../assets/scss/unnic.scss';
 
 .unnic-form {
-  font-family: $unnic-font-family-primary;
+  font-family: $unnic-font-family-secondary;
   position: relative;
 
   &__input {
@@ -81,16 +112,6 @@ export default {
   &--error {
     color: $unnic-color-feedback-red;
   }
-}
-
-.icon-left {
-  position: absolute;
-  left: 0;
-}
-
-.icon-right {
-  position: absolute;
-  right: 0;
 }
 
 </style>

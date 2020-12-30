@@ -1,7 +1,7 @@
 <template>
     <span
       @click="onClick"
-      :class="`icon-${icon} icon-${size}`"> </span>
+      :class="`icon icon-${icon} icon-${size}`"> </span>
 </template>
 
 <script>
@@ -33,7 +33,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../assets/scss/unnic.scss';
 @import '../assets/fonts/fonts.css';
 
