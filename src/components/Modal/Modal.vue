@@ -1,40 +1,46 @@
 <template>
-    <div
+<transition name="modal" v-if="showModal">
+  <div
     v-bind="$attrs"
     :class="['unnic-modal']" v-on="$listeners">
-      <div class="unnic-modal-body">
-            <div
+    <div class="unnic-modal-container">
+      <div class="unnic-modal-container-background">
+        <div class="unnic-modal-container-background-body">
+          <div
               v-if="closeIcon"
-              :class="{ 'unnic-modal-body-close_icon': closeIcon }">
+              :class="{ 'unnic-modal-container-background-body-close_icon': closeIcon }">
               <u-icon
               icon="close-1"
               size="sm"/>
             </div>
             <div :class="{
-              'unnic-modal-body-alert_icon': true,
-              'unnic-modal-body-spacing_header': !closeIcon,
+              'unnic-modal-container-background-body-alert_icon': true,
+              'unnic-modal-container-background-body-spacing_header': !closeIcon,
               }">
               <u-icon
-              :icon="modalIcon"
-              size="xl"/>
-            </div>
-            <div class="unnic-modal-body-title">
-                <span>{{ text }}</span>
-            </div>
-             <div class="unnic-modal-body-description">
-                <span>{{ description }}</span>
-            </div>
-      </div>
-      <div class="unnic-modal-report" v-if="hasAlertMessage">
-          <span>
-            {{ alertMessage }}
-          </span>
-      </div>
-      <div v-else-if="hasButton" class="unnic-modal-button">
-          <u-button :type="'terciary'">Tertiary</u-button>
-          <u-button :size="'large'">Primary</u-button>
+               :icon="modalIcon"
+                size="xl"/>
+              </div>
+              <div class="unnic-modal-container-background-body-title">
+                  <span>{{ text }}</span>
+              </div>
+              <div class="unnic-modal-container-background-body-description">
+                  <span>{{ description }}</span>
+              </div>
+        </div>
+        <div class="unnic-modal-container-background-report" v-if="hasAlertMessage">
+            <span>
+              {{ alertMessage }}
+            </span>
+        </div>
+        <div v-else-if="hasButton" class="unnic-modal-container-background-button">
+            <u-button :type="'terciary'">Tertiary</u-button>
+            <u-button :size="'large'">Primary</u-button>
+        </div>
       </div>
     </div>
+  </div>
+</transition>
 </template>
 
 <script>
@@ -73,6 +79,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    showModal: {
+      type: Boolean,
+      default: true,
+    },
   },
   computed: {
   },
@@ -83,17 +93,35 @@ export default {
 @import '../../assets/scss/unnic.scss';
 
 .unnic-modal {
-  display: flex;
-  flex-direction: column;
-  width: 31.125rem;
-  box-shadow: $unnic-shadow-level-separated;
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: table;
+    transition: opacity 0.3s ease;
+
+  &-container{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+
+  &-background {
+    width: 31.125rem;
+    box-shadow: $unnic-shadow-level-separated;
+    transition: all 0.3s ease;
 
   &-body{
-    min-height: 13.75rem;
-    border-radius: $unnic-border-radius-sm;
-    background-color: $unnic-color-background-carpet;
-    padding: 0 $unnic-inline-md;
-    word-break: break-all;
+      min-height: 13.75rem;
+      border-top-left-radius: $unnic-border-radius-sm;
+      border-top-right-radius: $unnic-border-radius-sm;
+      background-color: $unnic-color-background-carpet;
+      padding: 0 $unnic-inline-md;
+      word-break: break-all;
 
     &-title{
       display: flex;
@@ -166,12 +194,16 @@ export default {
     }
   }
 
-  &-button {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-    padding-bottom: $unnic-inline-giant;
-    background-color: $unnic-color-background-carpet;
+      &-button {
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        padding-bottom: $unnic-inline-giant;
+        background-color: $unnic-color-background-carpet;
+        border-bottom-left-radius: $unnic-border-radius-sm;
+        border-bottom-right-radius: $unnic-border-radius-sm;
+      }
+    }
   }
 }
 </style>

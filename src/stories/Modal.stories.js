@@ -25,4 +25,5 @@ Normal.args = {
   closeIcon: true,
   hasAlertMessage: true,
   hasButton: false,
+  showModal: true,
 };
