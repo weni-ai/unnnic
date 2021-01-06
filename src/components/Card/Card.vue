@@ -1,5 +1,4 @@
 <template>
-  <div :class="{ 'unnic-card': true, 'unnic-card--small': type === 'title' }">
     <component
       class="unnic-card-content"
       :is="currentComponent"
@@ -14,7 +13,6 @@
       :enabled="enabled"
       :scheme="scheme"
     />
-  </div>
 </template>
 
 <script>
