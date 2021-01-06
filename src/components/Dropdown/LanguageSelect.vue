@@ -1,27 +1,43 @@
 <template>
-    <unnic-dropdown>
-        <div slot="trigger">
-            {{ languages[val] }}
-        </div>
-        <unnic-dropdown-item
-          v-for="language in languages"
-          :key="language.id"
-          @click="val = language.id">
-            {{ language.name }}
-        </unnic-dropdown-item>
-    </unnic-dropdown>
+  <unnic-dropdown :position="position">
+    <div
+      class="weni-language-select"
+      slot="trigger">
+        <div class="weni-language-select__title">{{ languages[val] }}</div>
+        <UIcon
+          class="weni-language-select__icon"
+          icon="arrow-button-up-1"
+          size="xs" />
+      </div>
+      <unnic-dropdown-item
+        v-for="language in languageList"
+        :key="language.id"
+        @click="val = language.id">
+          {{ language.name }}
+      </unnic-dropdown-item>
+  </unnic-dropdown>
 </template>
 
 <script>
 import UnnicDropdown from './Dropdown.vue';
 import UnnicDropdownItem from './DropdownItem.vue';
+import UIcon from '../Icon.vue';
 
 export default {
-  name: 'Sidebar',
+  name: 'LanguageSelect',
+  components: {
+    UnnicDropdown,
+    UnnicDropdownItem,
+    UIcon,
+  },
   props: {
     value: {
       type: String,
       default: '',
+    },
+    position: {
+      type: String,
+      default: 'top',
     },
   },
   data() {
@@ -33,18 +49,17 @@ export default {
       },
     };
   },
-  components: {
-    UnnicDropdown,
-    UnnicDropdownItem,
-  },
   watch: {
     val() {
       this.$emit('input', this.val);
     },
+    value() {
+      this.val = this.value;
+    },
   },
   computed: {
     languageList() {
-      return Object.entries.map((id, name) => ({ id, name }));
+      return Object.entries(this.languages).map(([id, name]) => ({ id, name }));
     },
     currentLanguage() {
       if (this.languages[this.val]) return this.languages[this.val].name;
@@ -53,3 +68,31 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+@import "../../assets/scss/unnic.scss";
+
+  .weni-language-select {
+    background-color: $unnic-color-background-snow;
+    padding: $unnic-squish-nano;
+    border-radius: $unnic-border-radius-pill;
+
+    font-family: $unnic-font-family-secondary;
+    font-size: $unnic-font-size-body-md;
+    font-size: $unnic-font-weight-regular;
+    line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
+    color: $unnic-color-neutral-dark;
+
+    display: flex;
+    align-items: center;
+
+    &__title {
+      flex: 1;
+    }
+
+    &__icon {
+      color: $unnic-color-neutral-clean;
+      margin-left: $unnic-inline-nano;
+    }
+  }
+</style>
