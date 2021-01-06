@@ -11,16 +11,10 @@
       <div class="unnic-card-status__title">{{ title }}</div>
     </div>
     <div class="unnic-card-status__data">
-      <!-- TODO: Modify icon to status one -->
-      <UICon
-        icon="information-circle-4"
-        :class="[
-          'icon-left',
+        <span :class="[
           `unnic-card-scheme--${scheme}--icon`,
           'unnic-card-status__icon_indicator',
-        ]"
-        size="xs"
-      />
+        ]"> &#11044; </span>
       <div class="unnic-card-status__data_content">
         <div class="unnic-card-status__data_content_status">
           {{ status }}
@@ -137,6 +131,9 @@ export default {
 
   &__icon_indicator {
     line-height: $unnic-line-height-medium;
+    font-size: 0.25rem;
+    border-radius: 50%;
+    line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
   }
 }
 

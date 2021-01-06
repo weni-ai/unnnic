@@ -50,6 +50,7 @@ export default {
 .unnic-card-title {
   display: flex;
   flex-direction: row;
+  align-items: center;
 
   &__content {
     width: 100%;
@@ -57,7 +58,6 @@ export default {
     flex-direction: row;
     padding-top: $unnic-spacing-stack-xs;
     padding-bottom: $unnic-spacing-stack-xs;
-    text-overflow: ellipsis;
   }
 
   &__content_title {
@@ -65,7 +65,7 @@ export default {
     font-size: $unnic-font-size-body-lg;
     font-weight: $unnic-font-weight-regular;
     color: $unnic-color-neutral-darkest;
-    line-height: $unnic-line-height-medium;
+    line-height: $unnic-font-size-body-lg + $unnic-line-height-medium;
     flex: 1;
   }
 
