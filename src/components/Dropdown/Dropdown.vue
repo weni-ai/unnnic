@@ -54,15 +54,19 @@ export default {
       &__position {
           &-top {
             bottom: 100%;
+            margin-bottom: $unnic-spacing-stack-xs;
           }
           &-left {
             right: 100%;
             top: 0;
+            margin-right: $unnic-inline-xs;
           }
           &-bottom {
+            margin-top: $unnic-spacing-stack-xs;
             top: 100%;
           }
           &-right {
+            margin-left: $unnic-inline-xs;
             left: 100%;
             top: 0;
           }

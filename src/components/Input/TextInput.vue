@@ -86,7 +86,7 @@ export default {
 .unnic-form {
 
   &:focus-within .icon {
-    color: $unnic-color-brand-ilha;
+    color: $unnic-color-brand-weni;
   }
 
   &--error {

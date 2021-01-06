@@ -57,6 +57,7 @@ export default {
     flex-direction: row;
     padding-top: $unnic-spacing-stack-xs;
     padding-bottom: $unnic-spacing-stack-xs;
+    text-overflow: ellipsis;
   }
 
   &__content_title {

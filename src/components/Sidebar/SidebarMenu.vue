@@ -29,6 +29,7 @@ export default {
         &__title {
             margin: 0 0 $unnic-spacing-stack-xs 0;
             font-size: $unnic-font-size-body-md;
+            line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
         }
     }
 </style>

@@ -76,14 +76,15 @@ export default {
     padding: $unnic-squish-xs;
     color: inherit;
     font-weight: $unnic-font-weight-regular;
-    font-size: $unnic-font-size-body-lg;
+    font-size: $unnic-font-size-body-gt;
+    line-height: $unnic-font-size-body-gt + $unnic-line-height-medium;
     font-family: $unnic-font-family-secondary;
     box-sizing: border-box;
     width: 100%;
 
     &:focus {
-      color: $unnic-color-brand-ilha-soft;
-      border-color: $unnic-color-brand-ilha;
+      color: $unnic-color-brand-weni-soft;
+      border-color: $unnic-color-brand-weni;
       outline: none;
     }
 

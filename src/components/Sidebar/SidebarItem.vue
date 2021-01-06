@@ -49,14 +49,16 @@ export default {
     .unnic-side-bar-item {
         display: flex;
         align-items: center;
-        color: $unnic-color-neutral-dark;
+        color: $unnic-color-neutral-darkest;
         margin-bottom: $unnic-spacing-stack-xs;
-        padding: $unnic-spacing-stack-nano;
-        font-size: $unnic-font-size-body-sm;
+        padding: $unnic-inset-nano;
+        font-size: $unnic-font-size-body-md;
         font-family: $unnic-font-family-secondary;
+        border-radius: $unnic-border-radius-sm;
+        line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
 
         &--active {
-            background-color: rgba($unnic-color-brand-ilha, $unnic-opacity-level-light);
+            background-color: rgba($unnic-color-brand-weni, $unnic-opacity-level-light);
             font-weight: $unnic-font-weight-bold;
         }
 
@@ -65,7 +67,7 @@ export default {
            color: $unnic-color-neutral-cloudy;
 
            &--active {
-               color: $unnic-color-brand-ilha;
+               color: $unnic-color-brand-weni;
            }
         }
     }

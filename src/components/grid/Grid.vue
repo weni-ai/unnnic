@@ -34,7 +34,7 @@ export default {
   @import '../../assets/scss/unnic.scss';
 
   .grid-example {
-    background-color: $unnic-color-brand-ilha;
+    background-color: $unnic-color-brand-weni;
 
     &-container {
       background-color: $unnic-color-neutral-dark ;

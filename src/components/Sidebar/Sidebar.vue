@@ -32,7 +32,7 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 250px;
+    width: 15.375rem;
     font-family: $unnic-font-family-secondary;
     box-sizing: border-box;
 
@@ -43,6 +43,7 @@ export default {
             &-menu {
                 &__title {
                     visibility: hidden;
+                    margin: 0;
                 }
 
                 + .unnic-side-bar-menu::before {
@@ -57,6 +58,10 @@ export default {
             &-item {
                 display: flex;
                 justify-content: center;
+
+                &__icon {
+                    margin: 0;
+                }
 
                 &__label {
                     display: none;
