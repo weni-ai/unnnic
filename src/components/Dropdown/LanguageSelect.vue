@@ -1,11 +1,15 @@
 <template>
   <unnic-dropdown :position="position">
     <div
-      class="weni-language-select"
+      class="unnic-language-select"
       slot="trigger">
-        <div class="weni-language-select__title">{{ languages[val] }}</div>
+        <unnic-flag
+          class="unnic-language-select__flag"
+          size="sm"
+          :code="val" />
+        <div v-show="!contracted" class="unnic-language-select__title">{{ languages[val] }}</div>
         <UIcon
-          class="weni-language-select__icon"
+          class="unnic-language-select__icon"
           icon="arrow-button-up-1"
           size="xs" />
       </div>
@@ -22,6 +26,7 @@
 import UnnicDropdown from './Dropdown.vue';
 import UnnicDropdownItem from './DropdownItem.vue';
 import UIcon from '../Icon.vue';
+import UnnicFlag from '../Flag.vue';
 
 export default {
   name: 'LanguageSelect',
@@ -29,6 +34,7 @@ export default {
     UnnicDropdown,
     UnnicDropdownItem,
     UIcon,
+    UnnicFlag,
   },
   props: {
     value: {
@@ -38,6 +44,10 @@ export default {
     position: {
       type: String,
       default: 'top',
+    },
+    contracted: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -72,7 +82,7 @@ export default {
 <style lang="scss">
 @import "../../assets/scss/unnic.scss";
 
-  .weni-language-select {
+  .unnic-language-select {
     background-color: $unnic-color-background-snow;
     padding: $unnic-squish-nano;
     border-radius: $unnic-border-radius-pill;
@@ -82,12 +92,13 @@ export default {
     font-size: $unnic-font-weight-regular;
     line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
     color: $unnic-color-neutral-dark;
+    width: 100%;
 
     display: flex;
     align-items: center;
 
-    &__title {
-      flex: 1;
+    &__flag {
+      margin-right: $unnic-inline-xs;
     }
 
     &__icon {

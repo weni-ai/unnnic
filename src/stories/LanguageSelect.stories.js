@@ -19,3 +19,9 @@ export const Normal = Template.bind({});
 Normal.args = {
   value: 'pt-br',
 };
+
+export const Contracted = Template.bind({});
+Contracted.args = {
+  value: 'pt-br',
+  contracted: true,
+};
