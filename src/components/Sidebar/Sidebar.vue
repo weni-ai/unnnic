@@ -33,11 +33,13 @@ export default {
     flex-direction: column;
     height: 100%;
     width: 15.375rem;
+    transition: width .1s;
     font-family: $unnic-font-family-secondary;
     box-sizing: border-box;
 
     &--contracted {
-        width: 90px;
+        width: 5.625rem;
+        transition: width .1s;
 
         .unnic-side-bar {
             &-menu {
