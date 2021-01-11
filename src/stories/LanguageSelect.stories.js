@@ -4,7 +4,7 @@ export default {
   title: 'example/LanguageSelect',
   component: unnicLanguageSelect,
   argTypes: {
-    value: { control: { type: 'select', options: ['pt-br', 'en-us'] } },
+    value: { control: { type: 'select', options: ['pt-br', 'en'] } },
     position: { control: { type: 'select', options: ['top', 'bottom', 'right', 'left'] } },
   },
 };

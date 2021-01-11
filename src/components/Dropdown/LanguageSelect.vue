@@ -55,7 +55,7 @@ export default {
       val: this.value,
       languages: {
         'pt-br': 'Português do Brasil',
-        'en-us': 'English',
+        en: 'English',
       },
     };
   },
@@ -89,13 +89,17 @@ export default {
 
     font-family: $unnic-font-family-secondary;
     font-size: $unnic-font-size-body-md;
-    font-size: $unnic-font-weight-regular;
+    font-weight: $unnic-font-weight-regular;
     line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
     color: $unnic-color-neutral-dark;
     width: 100%;
 
     display: flex;
     align-items: center;
+
+    &__title {
+      flex: 1;
+    }
 
     &__flag {
       margin-right: $unnic-inline-xs;
