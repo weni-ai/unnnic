@@ -8,15 +8,16 @@
         <div class="unnic-modal-container-background-body">
           <div
               v-if="closeIcon"
-              :class="{ 'unnic-modal-container-background-body-close_icon': closeIcon }">
+              :class="[ 'unnic-modal-container-background-body-close_icon', 'unnic--clickable' ]">
               <u-icon
               icon="close-1"
-              size="sm"/>
+              size="sm"
+              @click="onCloseClick"/>
             </div>
-            <div :class="{
-              'unnic-modal-container-background-body-alert_icon': true,
-              'unnic-modal-container-background-body-spacing_header': !closeIcon,
-              }">
+            <div :class="[
+            'unnic-modal-container-background-body-alert_icon',
+            `unnic-card-scheme--${scheme}--icon`,
+            closeIcon ? '' : 'unnic-modal-container-background-body-spacing_header']">
               <u-icon
                :icon="modalIcon"
                 size="xl"/>
@@ -81,16 +82,15 @@ export default {
       type: Boolean,
       default: true,
     },
-    buttonLeftText: {
-      type: String,
-      default: null,
-    },
-    buttonRightText: {
+    scheme: {
       type: String,
       default: null,
     },
   },
-  computed: {
+  methods: {
+    onCloseClick() {
+      this.$emit('close');
+    },
   },
 };
 </script>
@@ -156,7 +156,6 @@ export default {
         width: 100%;
         display: flex;
         justify-content: center;
-        color: $unnic-color-feedback-yellow;
         padding-bottom: $unnic-spacing-stack-sm;
     }
 

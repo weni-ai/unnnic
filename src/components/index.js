@@ -4,7 +4,12 @@ import UnnicButton from './Button/Button.vue';
 import UnnicSidebar from './Sidebar/Sidebar.vue';
 import UnnicSidebarItem from './Sidebar/SidebarItem.vue';
 import UnnicSidebarMenu from './Sidebar/SidebarMenu.vue';
+import UnnicDropdown from './Dropdown/Dropdown.vue';
+import UnnicDropdownItem from './Dropdown/DropdownItem.vue';
 import UnnicIcon from './Icon.vue';
+import UnnicToolTip from './ToolTip/ToolTip.vue';
+import UnnicCard from './Card/Card.vue';
+import UnnicLanguageSelect from './Dropdown/LanguageSelect.vue';
 
 const components = {
   UnnicInput,
@@ -13,6 +18,11 @@ const components = {
   UnnicSidebarItem,
   UnnicSidebarMenu,
   UnnicIcon,
+  UnnicDropdown,
+  UnnicDropdownItem,
+  UnnicToolTip,
+  UnnicCard,
+  UnnicLanguageSelect,
 };
 
 Object.keys(components).forEach((name) => {

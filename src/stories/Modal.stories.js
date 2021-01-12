@@ -8,6 +8,13 @@ export default {
     modalIcon: { control: { type: 'select', options: ['check-circle-1-1', 'alert-circle-1', 'delete-1'] } },
     text: { control: { type: 'text' } },
     description: { control: { type: 'text' } },
+    scheme: {
+      control: {
+        type: 'select',
+        options: ['feedback-red', 'feedback-green', 'feedback-yellow', 'feedback-blue', 'feedback-grey',
+          'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink'],
+      },
+    },
   },
 };
 

@@ -61,11 +61,6 @@ export default {
       default: null,
     },
   },
-  methods: {
-    onFocus() {
-      console.log('focus');
-    },
-  },
   computed: {
     inputListeners() {
       return {
@@ -91,7 +86,7 @@ export default {
 .unnic-form {
 
   &:focus-within .icon {
-    color: $unnic-color-brand-ilha;
+    color: $unnic-color-brand-weni;
   }
 
   &--error {

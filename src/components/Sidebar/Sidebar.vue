@@ -4,7 +4,9 @@
             <slot name="header" />
         </div>
         <slot />
-        <slot name="footer"/>
+        <div class="unnic-side-bar__footer">
+            <slot name="footer"/>
+        </div>
     </div>
 </template>
 
@@ -30,21 +32,38 @@ export default {
     display: flex;
     flex-direction: column;
     height: 100%;
-    width: 250px;
+    width: 15.375rem;
+    transition: width .1s;
+    font-family: $unnic-font-family-secondary;
+    box-sizing: border-box;
 
     &--contracted {
-        width: 90px;
+        width: 5.625rem;
+        transition: width .1s;
 
         .unnic-side-bar {
             &-menu {
                 &__title {
                     visibility: hidden;
+                    margin: 0;
+                }
+
+                + .unnic-side-bar-menu::before {
+                    width: 100%;
+                    height: 0px;
+                    border: 1px $unnic-color-neutral-soft solid;
+                    content: '';
+                    display: block;
                 }
             }
 
             &-item {
                 display: flex;
                 justify-content: center;
+
+                &__icon {
+                    margin: 0;
+                }
 
                 &__label {
                     display: none;
@@ -55,6 +74,13 @@ export default {
 
     &__header {
         margin-bottom: $unnic-spacing-stack-md;
+    }
+
+    &__footer {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
     }
 }
 

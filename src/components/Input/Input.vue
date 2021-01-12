@@ -105,7 +105,10 @@ export default {
   }
 
   &__label {
+    font-weight: $unnic-font-weight-regular;
+    line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
     font-size: $unnic-font-size-body-md;
+    color: $unnic-color-neutral-darkest;
     margin: $unnic-spacing-stack-xs 0;
   }
 
