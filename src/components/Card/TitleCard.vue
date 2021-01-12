@@ -6,7 +6,7 @@
       size="md" />
     <div class="unnic-card-title__content">
       <div class="unnic-card-title__content_title">{{ title }}</div>
-      <tool-tip :text="info">
+      <tool-tip :side="infoPosition" :text="info">
         <UICon
         icon="information-circle-4"
         class="unnic-card-title__content_info"
@@ -35,6 +35,10 @@ export default {
     icon: {
       type: String,
       default: null,
+    },
+    infoPosition: {
+      type: String,
+      default: 'right',
     },
     scheme: {
       type: String,

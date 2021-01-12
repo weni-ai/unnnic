@@ -10,6 +10,7 @@
       :percent="percent"
       :status="status"
       :description="description"
+      :info-position="infoPosition"
       :enabled="enabled"
       :scheme="scheme"
     />
@@ -66,6 +67,10 @@ export default {
     icon: {
       type: String,
       default: null,
+    },
+    infoPosition: {
+      type: String,
+      default: 'right',
     },
     scheme: {
       type: String,

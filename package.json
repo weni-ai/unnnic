@@ -1,6 +1,6 @@
 {
   "name": "unnic-system-beta",
-  "version": "0.0.28",
+  "version": "0.0.30",
   "main": "./dist/unnic.common.js",
   "files": [
     "dist/*",
@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "unnic-system-beta": "^0.0.17",
     "vue": "^2.6.11"
   },
   "devDependencies": {

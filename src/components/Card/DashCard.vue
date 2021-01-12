@@ -12,8 +12,11 @@
       <div class="unnic-card-dash__data">
         <div class="unnic-card-dash__value">{{ value }}</div>
 
-        <div :class="['unnic-card-dash__percent',
-        `unnic-card-scheme--feedback-${percent < 0 ? 'red' : 'green'}`]">
+        <div
+          v-if="percent"
+          :class="[
+            'unnic-card-dash__percent',
+            `unnic-card-scheme--feedback-${percent < 0 ? 'red' : 'green'}`]">
           <UICon
             icon="graph-stats-ascend-2"
             class="icon-left' 'unnic-card-dash__percent_icon'"

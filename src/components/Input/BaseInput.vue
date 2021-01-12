@@ -49,7 +49,7 @@ export default {
     inputListeners() {
       return {
         ...this.$listeners,
-        input: () => {},
+        input: (value) => { this.val = value; },
       };
     },
     attributes() {
