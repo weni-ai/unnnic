@@ -1,6 +1,7 @@
 <template>
       <input
         v-bind="attributes"
+        v-model="val"
         :class="{
           'unnic-form__input': true,
           'unnic-form__input--error': type === 'error',
@@ -49,16 +50,22 @@ export default {
     inputListeners() {
       return {
         ...this.$listeners,
-        input: (value) => { this.val = value; },
+        input: () => {},
       };
     },
     attributes() {
       return { ...this.$attrs, ...this.$attrs['v-bind'] };
     },
   },
+  mounted() {
+    this.val = this.value;
+  },
   watch: {
     val() {
       this.$emit('input', this.val);
+    },
+    value() {
+      this.val = this.value;
     },
   },
 };

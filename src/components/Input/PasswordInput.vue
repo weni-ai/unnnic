@@ -10,7 +10,7 @@
         :hasIconRight="hasIconRight"
         :type="type"
         :nativeType="showPassword ? 'text' : 'password'"
-        v-model="text"
+        v-model="val"
       />
       <UIcon
         v-if="iconLeft"
@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       showPassword: false,
-      text: null,
+      val: null,
     };
   },
   props: {
@@ -48,6 +48,10 @@ export default {
       validator(value) {
         return ['normal', 'error'].indexOf(value) !== -1;
       },
+    },
+    value: {
+      type: String,
+      default: null,
     },
     iconLeft: {
       type: String,
@@ -61,6 +65,18 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  watch: {
+    val() {
+      this.$emit('input', this.val);
+    },
+    value() {
+      this.val = this.value;
+      this.$emit('input', this.val);
+    },
+  },
+  mounted() {
+    this.val = this.value;
   },
   methods: {
     onIconRightClick() {

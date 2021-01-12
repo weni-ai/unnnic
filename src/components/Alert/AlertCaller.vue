@@ -1,0 +1,41 @@
+<template>
+    <button @click="callAlert"> Launch alert </button>
+</template>
+
+<script>
+import alert from '../../utils/alert';
+
+export default {
+  props: {
+    title: {
+      type: String,
+      default: null,
+    },
+    text: {
+      type: String,
+      default: null,
+    },
+    icon: {
+      type: String,
+      default: null,
+    },
+    enabled: {
+      type: Boolean,
+      default: true,
+    },
+    scheme: {
+      type: String,
+      default: null,
+    },
+    seconds: {
+      type: Number,
+      default: 3,
+    },
+  },
+  methods: {
+    callAlert() {
+      alert.callAlert({ props: this.$props, seconds: this.seconds });
+    },
+  },
+};
+</script>

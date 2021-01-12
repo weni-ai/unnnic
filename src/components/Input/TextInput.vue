@@ -61,6 +61,9 @@ export default {
       default: null,
     },
   },
+  mounted() {
+    this.val = this.value;
+  },
   computed: {
     inputListeners() {
       return {
@@ -75,6 +78,9 @@ export default {
   watch: {
     val() {
       this.$emit('input', this.val);
+    },
+    value() {
+      this.val = this.value;
     },
   },
 };

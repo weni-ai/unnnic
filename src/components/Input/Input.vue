@@ -34,6 +34,10 @@ export default {
         return ['normal', 'error'].indexOf(value) !== -1;
       },
     },
+    value: {
+      type: String,
+      default: null,
+    },
     nativeType: {
       type: String,
       default: null,
@@ -68,6 +72,9 @@ export default {
     val() {
       this.$emit('input', this.val);
     },
+  },
+  mounted() {
+    this.val = this.value;
   },
   computed: {
     currentComponent() {
