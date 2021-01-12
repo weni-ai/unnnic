@@ -34,8 +34,7 @@
             </span>
         </div>
         <div v-else-if="hasButton" class="unnic-modal-container-background-button">
-            <u-button :type="'terciary'">Tertiary</u-button>
-            <u-button :size="'large'">Primary</u-button>
+            <slot name="options" />
         </div>
       </div>
     </div>
@@ -45,11 +44,10 @@
 
 <script>
 import UIcon from '../Icon.vue';
-import UButton from '../Button/Button.vue';
 
 export default {
   name: 'unnic-modal',
-  components: { UIcon, UButton },
+  components: { UIcon },
   props: {
     text: {
       type: String,
@@ -82,6 +80,14 @@ export default {
     showModal: {
       type: Boolean,
       default: true,
+    },
+    buttonLeftText: {
+      type: String,
+      default: null,
+    },
+    buttonRightText: {
+      type: String,
+      default: null,
     },
   },
   computed: {
