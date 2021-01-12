@@ -1,28 +1,26 @@
 <template>
-    <div>
-        <button
-          v-bind="$attrs"
-          :class="[
-            'unnic-button',
-            `unnic-button--size-${size}`,
-            `unnic-button--${type}`
-            ]"
-            v-on="$listeners">
-            <u-icon
-              v-if="iconLeft" :icon="iconLeft"
-              :class="{ 'unnic-button__icon-left': hasText }"
-              :size="iconSize"
-               />
-            <span class="unnic-button__label">
-                <slot /> {{ text }}
-            </span>
-            <u-icon
-              v-if="iconRight"
-              :class="{ 'unnic-button__icon-right': hasText }"
-              :icon="iconRight"
-              :size="iconSize" />
-        </button>
-    </div>
+  <button
+    v-bind="$attrs"
+    :class="[
+      'unnic-button',
+      `unnic-button--size-${size}`,
+      `unnic-button--${type}`
+    ]"
+    v-on="$listeners">
+    <u-icon
+      v-if="iconLeft" :icon="iconLeft"
+      :class="{ 'unnic-button__icon-left': hasText }"
+      :size="iconSize"
+    />
+    <span class="unnic-button__label">
+      <slot /> {{ text }}
+    </span>
+    <u-icon
+      v-if="iconRight"
+      :class="{ 'unnic-button__icon-right': hasText }"
+      :icon="iconRight"
+      :size="iconSize" />
+  </button>
 </template>
 
 <script>
@@ -76,7 +74,7 @@ export default {
 @import '../../assets/scss/unnic.scss';
 
 .unnic-button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: $unnic-border-radius-sm;

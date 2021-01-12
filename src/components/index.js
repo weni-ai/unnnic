@@ -10,6 +10,7 @@ import UnnicIcon from './Icon.vue';
 import UnnicToolTip from './ToolTip/ToolTip.vue';
 import UnnicCard from './Card/Card.vue';
 import UnnicLanguageSelect from './Dropdown/LanguageSelect.vue';
+import UnnicModal from './Modal/Modal.vue';
 
 const components = {
   UnnicInput,
@@ -23,6 +24,7 @@ const components = {
   UnnicToolTip,
   UnnicCard,
   UnnicLanguageSelect,
+  UnnicModal,
 };
 
 Object.keys(components).forEach((name) => {

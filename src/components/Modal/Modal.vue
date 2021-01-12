@@ -8,10 +8,11 @@
         <div class="unnic-modal-container-background-body">
           <div
               v-if="closeIcon"
-              :class="[ 'unnic-modal-container-background-body-close_icon', 'unnic--clickable' ]">
+              class="unnic-modal-container-background-body-close_icon">
               <u-icon
               icon="close-1"
               size="sm"
+              clickable
               @click="onCloseClick"/>
             </div>
             <div :class="[
@@ -106,7 +107,6 @@ export default {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    display: table;
     transition: opacity 0.3s ease;
 
   &-container{
@@ -127,7 +127,7 @@ export default {
       border-top-right-radius: $unnic-border-radius-sm;
       background-color: $unnic-color-background-carpet;
       padding: 0 $unnic-inline-md;
-      word-break: break-all;
+      text-align: center;
 
     &-title{
       display: flex;
