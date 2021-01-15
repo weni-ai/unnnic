@@ -72,6 +72,9 @@ export default {
     val() {
       this.$emit('input', this.val);
     },
+    value() {
+      this.val = this.value;
+    },
   },
   mounted() {
     this.val = this.value;

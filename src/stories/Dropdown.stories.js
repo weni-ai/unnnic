@@ -6,7 +6,7 @@ export default {
   title: 'example/UnnicDropdown',
   component: unnicDropdown,
   argTypes: {
-    position: { control: { type: 'select', options: ['top', 'bottom', 'right', 'left'] } },
+    position: { control: { type: 'select', options: ['top-left', 'top-right', 'bottom-left', 'bottom-right'] } },
   },
 };
 

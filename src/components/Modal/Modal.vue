@@ -7,37 +7,36 @@
       <div class="unnic-modal-container-background">
         <div class="unnic-modal-container-background-body">
           <div
-              v-if="closeIcon"
-              class="unnic-modal-container-background-body-close_icon">
+            v-if="closeIcon"
+            class="unnic-modal-container-background-body-close_icon">
               <u-icon
               icon="close-1"
               size="sm"
               clickable
               @click="onCloseClick"/>
             </div>
-            <div :class="[
-            'unnic-modal-container-background-body-alert_icon',
-            `unnic-card-scheme--${scheme}--icon`,
-            closeIcon ? '' : 'unnic-modal-container-background-body-spacing_header']">
+            <div
+              :class="[
+                'unnic-modal-container-background-body-alert_icon',
+                `unnic-card-scheme--${scheme}--icon`,
+                 closeIcon ? '' : 'unnic-modal-container-background-body-spacing_header']">
               <u-icon
                :icon="modalIcon"
                 size="xl"/>
-              </div>
-              <div class="unnic-modal-container-background-body-title">
-                  <span>{{ text }}</span>
-              </div>
-              <div class="unnic-modal-container-background-body-description">
-                  <span>{{ description }}</span>
-              </div>
-        </div>
-        <div class="unnic-modal-container-background-report" v-if="hasAlertMessage">
-            <span>
-              {{ alertMessage }}
-            </span>
-        </div>
-        <div v-else-if="hasButton" class="unnic-modal-container-background-button">
+            </div>
+            <div class="unnic-modal-container-background-body-title">
+             {{ text }}
+            </div>
+            <div class="unnic-modal-container-background-body-description">
+              {{ description }} <slot name="message" />
+            </div>
+          </div>
+          <div class="unnic-modal-container-background-report" v-if="hasAlertMessage">
+            {{ alertMessage }}
+          </div>
+          <div v-if="hasButton" class="unnic-modal-container-background-button">
             <slot name="options" />
-        </div>
+          </div>
       </div>
     </div>
   </div>
@@ -63,10 +62,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    hasAlertMessage: {
-      type: Boolean,
-      default: false,
-    },
     description: {
       type: String,
       default: null,
@@ -74,10 +69,6 @@ export default {
     alertMessage: {
       type: String,
       default: null,
-    },
-    hasButton: {
-      type: Boolean,
-      default: false,
     },
     showModal: {
       type: Boolean,
@@ -91,6 +82,14 @@ export default {
   methods: {
     onCloseClick() {
       this.$emit('close');
+    },
+  },
+  computed: {
+    hasAlertMessage() {
+      return !(this.alertMessage === null || this.alertMessage.length === 0);
+    },
+    hasButton() {
+      return !!this.$slots.options;
     },
   },
 };
@@ -120,28 +119,23 @@ export default {
     width: 31.125rem;
     box-shadow: $unnic-shadow-level-separated;
     transition: all 0.3s ease;
+    border-radius: $unnic-border-radius-sm;
+    overflow: hidden;
 
-  &-body{
+    &-body{
       min-height: 13.75rem;
-      border-top-left-radius: $unnic-border-radius-sm;
-      border-top-right-radius: $unnic-border-radius-sm;
       background-color: $unnic-color-background-carpet;
       padding: 0 $unnic-inline-md;
       text-align: center;
 
     &-title{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      span {
+      text-align: center;
       font-family: $unnic-font-family-secondary;
       color: $unnic-color-neutral-darkest;
       font-weight: $unnic-font-weight-black;
       font-size: $unnic-font-size-title-sm;
       line-height: ($unnic-font-size-title-sm + $unnic-line-height-medium);
       padding-bottom: $unnic-spacing-stack-md;
-      }
     }
 
     &-close_icon{
@@ -165,18 +159,14 @@ export default {
 
     &-description{
       width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      text-align: center;
 
-        span {
-          font-family: $unnic-font-family-secondary;
-          color: $unnic-color-neutral-cloudy;
-          font-weight: $unnic-font-weight-regular;
-          font-size: $unnic-font-size-body-lg;
-          line-height: ($unnic-font-size-body-lg + $unnic-line-height-medium);
-          padding-bottom: $unnic-spacing-stack-giant;
-        }
+      font-family: $unnic-font-family-secondary;
+      color: $unnic-color-neutral-cloudy;
+      font-weight: $unnic-font-weight-regular;
+      font-size: $unnic-font-size-body-lg;
+      line-height: ($unnic-font-size-body-lg + $unnic-line-height-medium);
+      padding-bottom: $unnic-spacing-stack-giant;
     }
   }
 
@@ -184,19 +174,15 @@ export default {
     width: 100%;
     min-height: 4.25rem;
     background-color: $unnic-color-neutral-soft;
-    border-bottom-left-radius: $unnic-border-radius-sm;
-    border-bottom-right-radius: $unnic-border-radius-sm;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    span {
-      font-family: $unnic-font-family-secondary;
-      color: $unnic-color-neutral-dark;
-      font-weight: $unnic-font-weight-regular;
-      font-size: $unnic-font-size-body-md;
-      line-height: ($unnic-font-size-body-md + $unnic-line-height-medium);
-    }
+    font-family: $unnic-font-family-secondary;
+    color: $unnic-color-neutral-dark;
+    font-weight: $unnic-font-weight-regular;
+    font-size: $unnic-font-size-body-md;
+    line-height: ($unnic-font-size-body-md + $unnic-line-height-medium);
   }
 
       &-button {

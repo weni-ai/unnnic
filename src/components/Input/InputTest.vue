@@ -12,8 +12,14 @@ export default {
   components: { unnicInput },
   data() {
     return {
-      text: 'valor',
+      text: '',
     };
+  },
+  mounted() {
+    setTimeout(() => {
+      this.text = 'valor';
+      console.log(this.text);
+    }, 1000);
   },
 };
 </script>

@@ -1,13 +1,20 @@
 <template>
   <unnic-dropdown :position="position">
     <div
-      class="unnic-language-select"
+      :class="{
+        'unnic-language-select': true,
+        'unnic-language-select--expanded': !contracted
+      }"
       slot="trigger">
         <unnic-flag
           class="unnic-language-select__flag"
           size="sm"
           :code="val" />
-        <div v-show="!contracted" class="unnic-language-select__title">{{ languages[val] }}</div>
+        <div
+          v-show="!contracted"
+          class="unnic-language-select__title">
+            {{ languages[val] }}
+        </div>
         <UIcon
           class="unnic-language-select__icon"
           icon="arrow-button-up-1"
@@ -92,7 +99,10 @@ export default {
     font-weight: $unnic-font-weight-regular;
     line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
     color: $unnic-color-neutral-dark;
-    width: 100%;
+
+    &--expanded {
+      width: 100%;
+    }
 
     display: flex;
     align-items: center;

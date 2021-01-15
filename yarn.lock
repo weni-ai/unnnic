@@ -14135,14 +14135,6 @@ universalify@^2.0.0:
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-2.0.0.tgz#75a4984efedc4b08975c5aeb73f530d02df25717"
   integrity sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==
 
-unnic-system-beta@^0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/unnic-system-beta/-/unnic-system-beta-0.0.17.tgz#f614c20e320fb74b522238354fd2a6c6503b43ac"
-  integrity sha512-vHe4uzuVUDPSw/A+VqxuZnPbTVyorV59HCP9soR4xUJgfqI4WAgWF5T1+s+9EBLWgKo+vnrSqIUaQKFlfVSqjQ==
-  dependencies:
-    core-js "^3.6.5"
-    vue "^2.6.11"
-
 unpipe@1.0.0, unpipe@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/unpipe/-/unpipe-1.0.0.tgz#b2bf4ee8514aae6165b4817829d21b2ef49904ec"

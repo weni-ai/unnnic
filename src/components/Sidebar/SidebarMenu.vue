@@ -23,7 +23,6 @@ export default {
         color: $unnic-color-neutral-cloudy;
         font-family: $unnic-font-family-secondary;
         font-weight: $unnic-font-weight-regular;
-        font-size: $unnic-font-size-body-sm;
         margin-bottom: $unnic-spacing-stack-md;
 
         &__title {
