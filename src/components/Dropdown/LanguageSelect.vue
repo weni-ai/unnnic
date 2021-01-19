@@ -50,7 +50,7 @@ export default {
     },
     position: {
       type: String,
-      default: 'top',
+      default: 'top-right',
     },
     contracted: {
       type: Boolean,
