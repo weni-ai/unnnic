@@ -65,7 +65,7 @@ export default {
           &-bottom-left {
             margin-top: $unnic-spacing-stack-xs;
             top: 100%;
-            right: 1rem;
+            right: 0;
           }
           &-bottom-right {
             margin-top: $unnic-inline-xs;

@@ -24,8 +24,25 @@ const Template = (args, { argTypes }) => ({
   template: '<unnicModal v-bind="$props" />',
 });
 
+const ButtonTemplate = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { unnicModal, unnicButton },
+  template: '<unnicModal v-bind="$props"><unnic-button slot="options"> Button 1 </unnic-button> <unnic-button slot="options"> Button 2 </unnic-button> </div> </unnic-modal>',
+});
+
 export const Normal = Template.bind({});
 Normal.args = {
+  text: 'Title text',
+  description: 'Message body',
+  alertMessage: 'Message alert',
+  closeIcon: true,
+  hasAlertMessage: true,
+  hasButton: false,
+  showModal: true,
+};
+
+export const Buttons = ButtonTemplate.bind({});
+Buttons.args = {
   text: 'Title text',
   description: 'Message body',
   alertMessage: 'Message alert',

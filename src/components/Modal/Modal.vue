@@ -185,14 +185,22 @@ export default {
     line-height: ($unnic-font-size-body-md + $unnic-line-height-medium);
   }
 
-      &-button {
+      &-button /deep/ {
         display: flex;
-        justify-content: space-evenly;
         width: 100%;
-        padding-bottom: $unnic-inline-giant;
+        padding: $unnic-inset-md;
+        box-sizing: border-box;
         background-color: $unnic-color-background-carpet;
         border-bottom-left-radius: $unnic-border-radius-sm;
         border-bottom-right-radius: $unnic-border-radius-sm;
+
+        >  * {
+          flex: 1;
+        }
+
+        > :not(:last-child) {
+          margin-right: $unnic-spacing-stack-lg;
+        }
       }
     }
   }

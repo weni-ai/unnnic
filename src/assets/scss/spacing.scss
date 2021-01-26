@@ -6,11 +6,11 @@ $unnic-icon-size-sm: 1rem;
 $unnic-icon-size-xs: 0.75rem;
 
 // Avatar size
-$unnic-avatar-size-lg: 6.5rem;
-$unnic-avatar-size-md: 4.5rem;
-$unnic-avatar-size-sm: 2.5rem;
-$unnic-avatar-size-xs: 2rem;
-$unnic-avatar-size-nano: 1.25rem;
+$unnic-avatar-size-lg: 104px;
+$unnic-avatar-size-md: 72px;
+$unnic-avatar-size-sm: 40px;
+$unnic-avatar-size-xs: 32px;
+$unnic-avatar-size-nano: 20px;
 
 // Border radius
 $unnic-border-radius-none: 0rem;
@@ -26,10 +26,10 @@ $unnic-border-width-thin: 0.125rem;
 $unnic-border-width-thick: 0.25rem;
 
 // Shadow levels
-$unnic-shadow-level-near: 0rem 0.25rem 0.5rem rgba(0, 0, 0, .12);
-$unnic-shadow-level-separated: 0rem 0.5rem 1rem rgba(0, 0, 0, .08);
-$unnic-shadow-level-far: 0rem 0.75rem 2rem rgba(0, 0, 0, .08);
-$unnic-shadow-level-far: 0rem 1.25rem 2.5rem rgba(0, 0, 0, .06);
+$unnic-shadow-level-near: 0rem 0.25rem 8px rgba(0, 0, 0, .12);
+$unnic-shadow-level-separated: 0px 8px 16px rgba(0, 0, 0, .08);
+$unnic-shadow-level-far: 0px 12px 32px rgba(0, 0, 0, .08);
+$unnic-shadow-level-distant: 0px 20px 40px rgba(0, 0, 0, .06);
 
 // Opacity levels
 $unnic-opacity-level-darkest: 0.8;
@@ -37,6 +37,7 @@ $unnic-opacity-level-dark: 0.64;
 $unnic-opacity-level-clarifying: 0.48;
 $unnic-opacity-level-clear: 0.32;
 $unnic-opacity-level-light: 0.16;
+$unnic-opacity-level-lighter: 0.08;
 
 // Spacing
 $unnic-inset-nano: 0.5rem;

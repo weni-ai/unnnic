@@ -19,7 +19,7 @@
             `unnic-card-scheme--feedback-${percent < 0 ? 'red' : 'green'}`]">
           <UICon
             icon="graph-stats-ascend-2"
-            class="icon-left' 'unnic-card-dash__percent_icon'"
+            class="icon-left unnic-card-dash__percent__icon"
             size="sm"
           />
           <div class="unnic-card-dash__percent_value">
@@ -82,6 +82,7 @@ export default {
   &__data {
     display: flex;
     flex-direction: row;
+    align-items: center;
   }
 
   &__percent {
@@ -90,7 +91,11 @@ export default {
     margin-left: auto;
 
     border-radius: $unnic-border-radius-sm;
-    padding: 8px 4px;
+    padding: 4px 8px;
+
+    &__icon {
+      margin-right: $unnic-inline-nano;
+    }
   }
 
   &__icon {

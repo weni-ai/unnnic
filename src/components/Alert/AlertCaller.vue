@@ -31,6 +31,10 @@ export default {
       type: Number,
       default: 3,
     },
+    closeText: {
+      type: String,
+      default: null,
+    },
   },
   methods: {
     callAlert() {

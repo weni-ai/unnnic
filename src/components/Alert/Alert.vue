@@ -13,8 +13,15 @@
         {{ text }}
       </div>
     </div>
+    <div
+      v-if="closeText"
+      class="unnic-alert__close-text unnic--clickable"
+      @click="onClose()">
+      {{ closeText.toUpperCase() }}
+    </div>
     <unnic-icon
-      :class="`unnic-alert__close-icon`"
+      v-else
+      class="unnic-alert__close-icon"
       clickable
       icon="close-1"
       size="xs"
@@ -49,6 +56,10 @@ export default {
     onClose: {
       type: Function,
       default: () => {},
+    },
+    closeText: {
+      type: String,
+      default: null,
     },
   },
 };
@@ -92,8 +103,14 @@ export default {
       color: $unnic-color-neutral-dark;
     }
 
-    &__close-icon {
-      color: $unnic-color-brand-sec;
+    &__close {
+      &-icon {
+        color: $unnic-color-brand-sec;
+      }
+      &-text {
+        color: $unnic-color-brand-sec;
+        font-size: $unnic-font-size-body-md;
+      }
     }
   }
 </style>

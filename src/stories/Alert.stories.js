@@ -6,6 +6,7 @@ export default {
   argTypes: {
     text: { control: { type: 'text' } },
     title: { control: { type: 'text' } },
+    closeText: { control: { type: 'text' } },
     scheme: {
       control: {
         type: 'select',
