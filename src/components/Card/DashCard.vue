@@ -95,6 +95,7 @@ export default {
 
     &__icon {
       margin-right: $unnic-inline-nano;
+      line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
     }
   }
 
