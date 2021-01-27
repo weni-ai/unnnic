@@ -35,6 +35,10 @@ export default {
       type: String,
       default: null,
     },
+    position: {
+      type: String,
+      default: 'top-right',
+    },
   },
   methods: {
     callAlert() {

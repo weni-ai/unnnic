@@ -1,5 +1,5 @@
 <template>
-  <div class="unnic-alert">
+  <div :class="['unnic-alert', `unnic-alert-position--${position}`]">
     <unnic-icon
       :class="`unnic-card-scheme--${scheme}--icon`"
       :icon="icon"
@@ -61,6 +61,10 @@ export default {
       type: String,
       default: null,
     },
+    position: {
+      type: String,
+      default: 'top-right',
+    },
   },
 };
 </script>
@@ -72,8 +76,6 @@ export default {
     position: fixed;
     padding: $unnic-inset-xs;
     min-width: 12.5rem;
-    top: 1rem;
-    right: 1rem;
 
     display: inline-flex;
     align-items: center;
@@ -83,8 +85,28 @@ export default {
 
     background-color: $unnic-color-background-snow;
     box-shadow: $unnic-shadow-level-near;
+    position: fixed;
 
     z-index: 9999;
+
+    &-position {
+      &--top-right {
+        top: 1rem;
+        right: 1rem;
+      }
+      &--top-left {
+        top: 1rem;
+        left: 1rem;
+      }
+      &--bottom-right {
+        bottom: 1rem;
+        right: 1rem;
+      }
+      &--bottom-left {
+        bottom: 1rem;
+        left: 1rem;
+      }
+    }
 
     &__content {
       flex: 1;

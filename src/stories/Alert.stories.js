@@ -14,6 +14,12 @@ export default {
           'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink'],
       },
     },
+    position: {
+      control: {
+        type: 'select',
+        options: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
+      },
+    },
     icon: {
       control: {
         type: 'select',
