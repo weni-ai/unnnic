@@ -1,7 +1,13 @@
 <template>
-  <div :class="{ 
+  <div :class="{
     'unnic-language-select__container': true,
     'unnic-language-select--contracted': contracted }">
+    <div
+      v-show="open"
+      :class="{
+        'unnic-language-select__seam': true,
+        'unnic-language-select__seam--vertical': contracted,
+        'unnic-language-select__seam--horizontal': !contracted}" />
     <div
       :class="{
         'unnic--clickable': true,
@@ -134,6 +140,8 @@ export default {
     &--open {
       border-radius: 0 0 $unnic-border-radius-sm $unnic-border-radius-sm;
       box-shadow: $unnic-shadow-level-near;
+      position: relative;
+      z-index: 2;
 
       &--contracted {
         border-radius: $unnic-border-radius-pill 0 0 $unnic-border-radius-pill;
@@ -172,11 +180,11 @@ export default {
       position: absolute;
       display: flex;
       flex-direction: column;
-      padding-right: 1px;
+      box-shadow: $unnic-shadow-level-near;
+      z-index: 1;
 
       &--contracted {
         top: 0;
-        left: 0;
         transform: translateX(100%);
         flex-direction: row;
         border-radius: 0 $unnic-border-radius-pill $unnic-border-radius-pill 0 ;
@@ -194,6 +202,27 @@ export default {
           margin: $unnic-spacing-stack-xs $unnic-inline-sm;
           border: $unnic-border-width-thinner solid $unnic-color-background-sky;
         }
+      }
+    }
+
+    &__seam {
+      position: absolute;
+      z-index: 4;
+      background-color: white;
+
+      &--horizontal {
+        left: 0;
+        right: 0;
+        top: 0;
+        transform: translateY(-100%);
+        height: 3px;
+      }
+
+      &--vertical {
+        top: 0;
+        bottom: 0;
+        right: -5px;
+        width: 5px;
       }
     }
   }
