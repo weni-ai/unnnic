@@ -35,7 +35,7 @@ export default {
 
 <style lang="scss">
 @import '../assets/scss/unnic.scss';
-@import '../assets/fonts/fonts.css';
+@import '../assets/fonts/icons.css';
 
 .icon {
 

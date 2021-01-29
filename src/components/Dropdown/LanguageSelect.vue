@@ -120,7 +120,7 @@ export default {
 
   .unnic-language-select {
     background-color: $unnic-color-background-snow;
-    padding: $unnic-squish-nano;
+    padding: $unnic-squish-xs;
     border-radius: $unnic-border-radius-pill;
     box-sizing: border-box;
 
@@ -145,10 +145,13 @@ export default {
 
       &--contracted {
         border-radius: $unnic-border-radius-pill 0 0 $unnic-border-radius-pill;
+        padding: $unnic-squish-xs;
+        padding-right: .5rem;
       }
     }
 
     &--expanded {
+      padding: $unnic-squish-nano;
       width: 100%;
     }
 
@@ -193,7 +196,8 @@ export default {
       &__item {
         display: flex;
         align-items: center;
-        padding: $unnic-squish-nano;
+        padding: $unnic-squish-xs;
+        padding-left: .5rem;
         position: relative;
 
         &__separator {
@@ -208,7 +212,7 @@ export default {
     &__seam {
       position: absolute;
       z-index: 4;
-      background-color: white;
+      background-color: $unnic-color-background-snow;
 
       &--horizontal {
         left: 0;

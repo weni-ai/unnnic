@@ -5,22 +5,26 @@
               'unnic--clickable': true,
             }"
     @click="onClick">
+    <component :is="enableTooltip ? ToolTip : 'div'" :text="text" side="right">
     <u-icon
       :class="{'unnic-side-bar-item__icon': true,
                'unnic-side-bar-item__icon--active': active,
               }"
       size="sm"
+      line-height="md"
       :icon="icon"/>
     <span class="unnic-side-bar-item__label"> {{ text }} <slot /> </span>
-    </div>
+    </component>
+  </div>
 </template>
 
 <script>
 import UIcon from '../Icon.vue';
+import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
   name: 'SidebarItem',
-  components: { UIcon },
+  components: { UIcon, ToolTip },
   props: {
     active: {
       type: Boolean,
@@ -34,10 +38,16 @@ export default {
       type: String,
       default: null,
     },
+    enableTooltip: {
+      default: null,
+    },
   },
   methods: {
     onClick() {
       this.$emit('click');
+    },
+    test() {
+      console.log('testing');
     },
   },
 };
