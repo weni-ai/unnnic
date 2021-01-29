@@ -1,21 +1,21 @@
 <template>
   <div :class="{
-      'unnic-card-dash': true,
-      'unnic-card-dash__disabled': !enabled,
+      'unnic-card-account': true,
+      'unnic-card-account__disabled': !enabled,
     }">
     <div :class="[
-        'unnic-card-dash__icon',
+        'unnic-card-account__icon',
         `unnic-card-scheme--${scheme}`,
-        enabled ? '' : 'unnic-card-dash__icon__disabled',
+        enabled ? '' : 'unnic-card-account__icon__disabled',
       ]">
       <UICon
         :icon="icon"
-        class="icon-left"
+        line-height="md"
         size="xs"/>
     </div>
-    <div class="unnic-card-dash__content">
-      <div class="unnic-card-dash__title">{{ title }}</div>
-      <div class="unnic-card-dash__description">{{ description }}</div>
+    <div class="unnic-card-account__content">
+      <div class="unnic-card-account__title">{{ title }}</div>
+      <div class="unnic-card-account__description">{{ description }}</div>
     </div>
   </div>
 </template>
@@ -54,7 +54,7 @@ export default {
 <style lang="scss">
 @import "../../assets/scss/unnic.scss";
 
-.unnic-card-dash {
+.unnic-card-account {
   display: flex;
   background-color: $unnic-color-background-sky;
   border-radius: $unnic-border-radius-sm;
@@ -102,16 +102,5 @@ export default {
     color: $unnic-color-neutral-cloudy;
     line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
   }
-}
-
-.icon-right {
-  position: relative;
-  right: 0;
-  color: $unnic-color-neutral-soft;
-}
-
-.icon-left {
-  position: relative;
-  left: 0;
 }
 </style>

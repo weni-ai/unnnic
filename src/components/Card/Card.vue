@@ -10,6 +10,7 @@
       :percent="percent"
       :status="status"
       :description="description"
+      :info-position="infoPosition"
       :enabled="enabled"
       :scheme="scheme"
     />
@@ -31,7 +32,7 @@ export default {
       default: 'title',
       validator(value) {
         return (
-          ['title', 'status', 'dash', 'account-option'].indexOf(value) !== -1
+          ['title', 'status', 'dash', 'account'].indexOf(value) !== -1
         );
       },
     },
@@ -66,6 +67,10 @@ export default {
     icon: {
       type: String,
       default: null,
+    },
+    infoPosition: {
+      type: String,
+      default: 'right',
     },
     scheme: {
       type: String,
@@ -114,7 +119,7 @@ $scheme-colors:
 @each $name, $color in $scheme-colors {
   .unnic-card-scheme {
     &--#{$name} {
-      background-color: rgba($color, $unnic-opacity-level-light);
+      background-color: rgba($color, $unnic-opacity-level-lighter);
       color: $color;
       &--icon {
         color: $color;

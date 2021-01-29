@@ -1,6 +1,7 @@
 <template>
       <input
         v-bind="attributes"
+        v-model="val"
         :class="{
           'unnic-form__input': true,
           'unnic-form__input--error': type === 'error',
@@ -56,9 +57,15 @@ export default {
       return { ...this.$attrs, ...this.$attrs['v-bind'] };
     },
   },
+  mounted() {
+    this.val = this.value;
+  },
   watch: {
     val() {
       this.$emit('input', this.val);
+    },
+    value() {
+      this.val = this.value;
     },
   },
 };

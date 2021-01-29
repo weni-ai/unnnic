@@ -17,7 +17,7 @@ const Template = (args, { argTypes }) => ({
                 <h1 slot="header"> Title </h1> \
                 <unnic-sidebar-item icon="expand-8-1" text="footer" slot="footer" /> \
                 <unnic-sidebar-menu text="Submenu"> \
-                  <unnic-sidebar-item text="Item1" icon="developer-community-github-1-1" :active="true" /> \
+                  <unnic-sidebar-item enable-tooltip text="Item1" icon="developer-community-github-1-1" :active="true" /> \
                   <unnic-sidebar-item text="Item2" icon="alarm-bell-2" /> \
                 </unnic-sidebar-menu> \
                 <unnic-sidebar-menu text="Submenu 2"> \

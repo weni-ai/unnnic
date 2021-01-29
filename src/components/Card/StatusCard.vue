@@ -4,7 +4,7 @@
       <div class="unnic-card-status__icon">
         <UICon
           :icon="icon"
-          class="icon-left"
+          line-height="md"
           size="sm"
         />
       </div>
@@ -131,20 +131,9 @@ export default {
 
   &__icon_indicator {
     line-height: $unnic-line-height-medium;
-    font-size: 0.25rem;
+    font-size: 4px;
     border-radius: 50%;
     line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
   }
-}
-
-.icon-right {
-  position: relative;
-  right: 0;
-  color: $unnic-color-neutral-soft;
-}
-
-.icon-left {
-  position: relative;
-  left: 0;
 }
 </style>

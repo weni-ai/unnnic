@@ -1,38 +1,70 @@
 <template>
-  <unnic-dropdown :position="position">
+  <div :class="{
+    'unnic-language-select__container': true,
+    'unnic-language-select--contracted': contracted }">
     <div
-      class="unnic-language-select"
-      slot="trigger">
+      v-show="open"
+      :class="{
+        'unnic-language-select__seam': true,
+        'unnic-language-select__seam--vertical': contracted,
+        'unnic-language-select__seam--horizontal': !contracted}" />
+    <div
+      :class="{
+        'unnic--clickable': true,
+        'unnic-language-select': true,
+        'unnic-language-select--open': open,
+        'unnic-language-select--open--contracted': open && contracted,
+        'unnic-language-select--expanded': !contracted
+      }"
+      @click="open=!open">
         <unnic-flag
-          class="unnic-language-select__flag"
+          :class="{ 'unnic-language-select__flag': !contracted }"
           size="sm"
           :code="val" />
-        <div v-show="!contracted" class="unnic-language-select__title">{{ languages[val] }}</div>
+        <div
+          v-show="!contracted"
+          class="unnic-language-select__title">
+            {{ languages[val] }}
+        </div>
         <UIcon
+          v-show="!contracted"
           class="unnic-language-select__icon"
-          icon="arrow-button-up-1"
+          :icon="open ? 'arrow-button-down-1' : 'arrow-button-up-1'"
           size="xs" />
       </div>
-      <unnic-dropdown-item
-        v-for="language in languageList"
-        :key="language.id"
-        @click="val = language.id">
-          {{ language.name }}
-      </unnic-dropdown-item>
-  </unnic-dropdown>
+      <div
+        v-show="open"
+        :class="{
+          'unnic-language-select__list': true,
+           'unnic-language-select__list--contracted': contracted }">
+        <div
+          v-for="language in otherLanguages"
+          :key="language.id">
+          <div
+            class="unnic-language-select__list__item unnic--clickable"
+            @click=" open=false; val=language.id ">
+            <unnic-flag
+              :class="{ 'unnic-language-select__flag': !contracted }"
+              size="sm"
+              :code="language.id" />
+            <div
+              v-show="!contracted"
+              class="unnic-language-select__title">
+              {{ language.name }}
+            </div>
+          </div>
+          <div v-show="!contracted" class="unnic-language-select__list__item__separator" />
+        </div>
+      </div>
+  </div>
 </template>
-
 <script>
-import UnnicDropdown from './Dropdown.vue';
-import UnnicDropdownItem from './DropdownItem.vue';
 import UIcon from '../Icon.vue';
 import UnnicFlag from '../Flag.vue';
 
 export default {
   name: 'LanguageSelect',
   components: {
-    UnnicDropdown,
-    UnnicDropdownItem,
     UIcon,
     UnnicFlag,
   },
@@ -43,7 +75,7 @@ export default {
     },
     position: {
       type: String,
-      default: 'top',
+      default: 'top-right',
     },
     contracted: {
       type: Boolean,
@@ -52,9 +84,10 @@ export default {
   },
   data() {
     return {
+      open: false,
       val: this.value,
       languages: {
-        'pt-br': 'Português do Brasil',
+        'pt-br': 'Português - Brasil',
         en: 'English',
       },
     };
@@ -68,6 +101,9 @@ export default {
     },
   },
   computed: {
+    otherLanguages() {
+      return this.languageList.filter(({ id }) => id !== this.val);
+    },
     languageList() {
       return Object.entries(this.languages).map(([id, name]) => ({ id, name }));
     },
@@ -84,15 +120,40 @@ export default {
 
   .unnic-language-select {
     background-color: $unnic-color-background-snow;
-    padding: $unnic-squish-nano;
+    padding: $unnic-squish-xs;
     border-radius: $unnic-border-radius-pill;
+    box-sizing: border-box;
 
-    font-family: $unnic-font-family-secondary;
-    font-size: $unnic-font-size-body-md;
-    font-weight: $unnic-font-weight-regular;
-    line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
-    color: $unnic-color-neutral-dark;
-    width: 100%;
+    &--contracted {
+      display: inline-block;
+    }
+
+    &__container {
+      font-family: $unnic-font-family-secondary;
+      font-size: $unnic-font-size-body-md;
+      font-weight: $unnic-font-weight-regular;
+      line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
+      color: $unnic-color-neutral-dark;
+      position: relative;
+    }
+
+    &--open {
+      border-radius: 0 0 $unnic-border-radius-sm $unnic-border-radius-sm;
+      box-shadow: $unnic-shadow-level-near;
+      position: relative;
+      z-index: 2;
+
+      &--contracted {
+        border-radius: $unnic-border-radius-pill 0 0 $unnic-border-radius-pill;
+        padding: $unnic-squish-xs;
+        padding-right: .5rem;
+      }
+    }
+
+    &--expanded {
+      padding: $unnic-squish-nano;
+      width: 100%;
+    }
 
     display: flex;
     align-items: center;
@@ -108,6 +169,65 @@ export default {
     &__icon {
       color: $unnic-color-neutral-clean;
       margin-left: $unnic-inline-nano;
+    }
+
+    &__list {
+      position: absolute;
+      top: 0;
+      transform: translateY(-100%);
+      left: 0;
+      right: 0;
+      width: 100%;
+      border-radius: $unnic-border-radius-sm $unnic-border-radius-sm 0 0;
+      background-color: $unnic-color-background-snow;
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      box-shadow: $unnic-shadow-level-near;
+      z-index: 1;
+
+      &--contracted {
+        top: 0;
+        transform: translateX(100%);
+        flex-direction: row;
+        border-radius: 0 $unnic-border-radius-pill $unnic-border-radius-pill 0 ;
+      }
+
+      &__item {
+        display: flex;
+        align-items: center;
+        padding: $unnic-squish-xs;
+        padding-left: .5rem;
+        position: relative;
+
+        &__separator {
+          height: 0;
+          content: '';
+          margin: $unnic-spacing-stack-xs $unnic-inline-sm;
+          border: $unnic-border-width-thinner solid $unnic-color-background-sky;
+        }
+      }
+    }
+
+    &__seam {
+      position: absolute;
+      z-index: 4;
+      background-color: $unnic-color-background-snow;
+
+      &--horizontal {
+        left: 0;
+        right: 0;
+        top: 0;
+        transform: translateY(-100%);
+        height: 3px;
+      }
+
+      &--vertical {
+        top: 0;
+        bottom: 0;
+        right: -5px;
+        width: 5px;
+      }
     }
   }
 </style>

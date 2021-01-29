@@ -39,8 +39,7 @@ export default {
 
 .unnic-tooltip-label{
   z-index: 1;
-  min-width: 31px;
-  max-width: 240px;
+  white-space: nowrap;
   visibility: hidden;
   text-align: center;
   position: absolute;
@@ -48,7 +47,7 @@ export default {
   background-color: $unnic-color-neutral-black;
   color: $unnic-color-neutral-snow;
   border-radius: $unnic-border-radius-sm;
-  padding: $unnic-spacing-stack-nano $unnic-inline-nano;
+  padding: $unnic-inset-nano;
   box-shadow: $unnic-shadow-level-near;
   font-size: $unnic-font-size-body-md;
   font-family: $unnic-font-family-secondary;
@@ -63,9 +62,11 @@ export default {
   }
 
     &-top{
-      bottom: 150%;
+      top: auto;
+      right: auto;
+      bottom: calc(100% + 8px);
       left: 50%;
-      margin-left: -60px;
+      transform: translateX(-50%);
 
       &::after {
         top: 100%;
@@ -76,9 +77,11 @@ export default {
     }
 
     &-bottom{
-      top: 150%;
+      top: calc(100% + 8px);
+      right: auto;
+      bottom: auto;
       left: 50%;
-      margin-left: -60px;
+      transform: translateX(-50%);
 
       &::after {
           bottom: 100%;
@@ -88,8 +91,11 @@ export default {
       }
     }
     &-right{
-      top: -5px;
-      left: 110%;
+      top: 50%;
+      right: auto;
+      bottom: auto;
+      left: calc(100% + 8px);
+      transform: translateY(-50%);
 
       &::after {
         top: 50%;
@@ -99,8 +105,11 @@ export default {
       }
     }
     &-left{
-      top: -5px;
-      right: 110%;
+      top: 50%;
+      right: calc(100% + 8px);
+      bottom: auto;
+      left: auto;
+      transform: translateY(-50%);
 
       &::after {
         top: 50%;

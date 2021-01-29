@@ -1,4 +1,5 @@
 import textInput from '../components/Input/Input.vue';
+import inputTest from '../components/Input/InputTest.vue';
 
 export default {
   title: 'Example/Input',
@@ -36,3 +37,9 @@ Disabled.args = {
   disabled: true,
   placeholder: 'Placeholder',
 };
+
+const Template2 = (args, { argTypes }) => ({
+  components: { inputTest },
+  template: '<inputTest />',
+});
+export const Test = Template2.bind({});

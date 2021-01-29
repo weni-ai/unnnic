@@ -5,6 +5,7 @@ export default {
   component: Card,
   argTypes: {
     enabled: { control: { type: 'select', options: [true, false] } },
+    infoPosition: { control: { type: 'select', options: ['top', 'right', 'bottom', 'left'] } },
     scheme: {
       control: {
         type: 'select',

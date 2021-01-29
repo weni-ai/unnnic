@@ -20,6 +20,9 @@ export default {
       default: true,
     },
   },
+  mounted() {
+    // this.$scopedSlots.default();
+  },
 };
 </script>
 
@@ -63,6 +66,9 @@ export default {
 
                 &__icon {
                     margin: 0;
+                    font-size: $unnic-icon-size-md !important;
+                    width: $unnic-icon-size-md !important;
+                    height: $unnic-icon-size-md !important;
                 }
 
                 &__label {

@@ -23,7 +23,11 @@ export default {
   computed: {
     source() {
       if (!this.code) return '';
-      return require(`../assets/img/flag/${this.code}.svg`);
+      try {
+        return require(`../assets/img/flag/${this.code}.svg`);
+      } catch (e) {
+        return null;
+      }
     },
   },
 };
@@ -35,22 +39,27 @@ export default {
 .flag {
 
   &-xs {
+    width: $unnic-icon-size-xs;
     height: $unnic-icon-size-xs;
   }
 
   &-sm {
+    width: $unnic-icon-size-sm;
     height: $unnic-icon-size-sm;
   }
 
   &-md {
+    width: $unnic-icon-size-md;
     height: $unnic-icon-size-md;
   }
 
   &-lg {
+    width: $unnic-icon-size-lg;
     height: $unnic-icon-size-lg;
   }
 
   &-xl {
+    width: $unnic-icon-size-xl;
     height: $unnic-icon-size-xl;
   }
 }

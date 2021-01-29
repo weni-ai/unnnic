@@ -3,8 +3,8 @@
     <div :class="['unnic-card-dash__icon', `unnic-card-scheme--${scheme}` ]">
       <UICon
         :icon="icon"
-        class="icon-left"
         size="xs"
+        line-height="md"
       />
     </div>
     <div class="unnic-card-dash__content">
@@ -12,11 +12,14 @@
       <div class="unnic-card-dash__data">
         <div class="unnic-card-dash__value">{{ value }}</div>
 
-        <div :class="['unnic-card-dash__percent',
-        `unnic-card-scheme--feedback-${percent < 0 ? 'red' : 'green'}`]">
+        <div
+          v-if="percent"
+          :class="[
+            'unnic-card-dash__percent',
+            `unnic-card-scheme--feedback-${percent < 0 ? 'red' : 'green'}`]">
           <UICon
             icon="graph-stats-ascend-2"
-            class="icon-left' 'unnic-card-dash__percent_icon'"
+            class="unnic-card-dash__percent__icon"
             size="sm"
           />
           <div class="unnic-card-dash__percent_value">
@@ -79,6 +82,7 @@ export default {
   &__data {
     display: flex;
     flex-direction: row;
+    align-items: center;
   }
 
   &__percent {
@@ -87,7 +91,12 @@ export default {
     margin-left: auto;
 
     border-radius: $unnic-border-radius-sm;
-    padding: 8px 4px;
+    padding: 4px 8px;
+
+    &__icon {
+      margin-right: $unnic-inline-nano;
+      line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
+    }
   }
 
   &__icon {
@@ -125,16 +134,5 @@ export default {
   &__percent_icon {
     border-radius: $unnic-border-radius-sm;
   }
-}
-
-.icon-right {
-  position: relative;
-  right: 0;
-  color: $unnic-color-neutral-soft;
-}
-
-.icon-left {
-  position: relative;
-  left: 0;
 }
 </style>

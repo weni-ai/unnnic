@@ -10,6 +10,8 @@ import UnnicIcon from './Icon.vue';
 import UnnicToolTip from './ToolTip/ToolTip.vue';
 import UnnicCard from './Card/Card.vue';
 import UnnicLanguageSelect from './Dropdown/LanguageSelect.vue';
+import UnnicModal from './Modal/Modal.vue';
+import alert from '../utils/alert';
 
 const components = {
   UnnicInput,
@@ -23,10 +25,11 @@ const components = {
   UnnicToolTip,
   UnnicCard,
   UnnicLanguageSelect,
+  UnnicModal,
 };
 
 Object.keys(components).forEach((name) => {
   Vue.component(name, components[name]);
 });
 
-export default components;
+export default { ...components, callAlert: alert.callAlert };

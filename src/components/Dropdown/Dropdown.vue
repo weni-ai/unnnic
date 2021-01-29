@@ -18,9 +18,9 @@ export default {
   props: {
     position: {
       type: String,
-      default: 'bottom',
+      default: 'bottom-left',
       validator(value) {
-        return ['top', 'left', 'right', 'bottom'].indexOf(value) !== -1;
+        return ['top-left', 'bottom-left', 'bottom-left', 'bottom-right'].indexOf(value) !== -1;
       },
     },
   },
@@ -52,23 +52,25 @@ export default {
         display: none !important;
       }
       &__position {
-          &-top {
+          &-top-left {
             bottom: 100%;
+            right: 1rem;
             margin-bottom: $unnic-spacing-stack-xs;
           }
-          &-left {
-            right: 100%;
-            top: 0;
-            margin-right: $unnic-inline-xs;
+          &-top-right {
+            bottom: 100%;
+            left: 1rem;
+            margin-bottom: $unnic-inline-xs;
           }
-          &-bottom {
+          &-bottom-left {
             margin-top: $unnic-spacing-stack-xs;
             top: 100%;
+            right: 0;
           }
-          &-right {
-            margin-left: $unnic-inline-xs;
-            left: 100%;
-            top: 0;
+          &-bottom-right {
+            margin-top: $unnic-inline-xs;
+            top: 100%;
+            left: 1rem;
           }
       }
     }

@@ -1,28 +1,27 @@
 <template>
-    <div>
-        <button
-          v-bind="$attrs"
-          :class="[
-            'unnic-button',
-            `unnic-button--size-${size}`,
-            `unnic-button--${type}`
-            ]"
-            v-on="$listeners">
-            <u-icon
-              v-if="iconLeft" :icon="iconLeft"
-              :class="{ 'unnic-button__icon-left': hasText }"
-              :size="iconSize"
-               />
-            <span class="unnic-button__label">
-                <slot /> {{ text }}
-            </span>
-            <u-icon
-              v-if="iconRight"
-              :class="{ 'unnic-button__icon-right': hasText }"
-              :icon="iconRight"
-              :size="iconSize" />
-        </button>
-    </div>
+  <button
+    v-bind="$attrs"
+    :class="[
+      'unnic-button',
+      `unnic-button--size-${size}`,
+      `unnic-button--${type}`
+    ]"
+    v-on="$listeners">
+    <u-icon
+      v-if="iconLeft" :icon="iconLeft"
+      :class="{ 'unnic-button__icon-left': hasText }"
+      :size="iconSize"
+      line-height="md"
+    />
+    <span class="unnic-button__label">
+      <slot /> {{ text }}
+    </span>
+    <u-icon
+      v-if="iconRight"
+      :class="{ 'unnic-button__icon-right': hasText }"
+      :icon="iconRight"
+      :size="iconSize" />
+  </button>
 </template>
 
 <script>
@@ -76,13 +75,14 @@ export default {
 @import '../../assets/scss/unnic.scss';
 
 .unnic-button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   border-radius: $unnic-border-radius-sm;
   border: 0;
   outline: none;
-  line-height: ($unnic-font-size-body-lg + $unnic-line-height-medium);
+  overflow: hidden;
+  white-space: nowrap;
   font-weight: $unnic-font-weight-regular;
   font-family: $unnic-font-family-secondary;
   min-width: 56px;
@@ -130,11 +130,13 @@ export default {
     &-large {
       padding: $unnic-squish-xs;
       font-size: $unnic-font-size-body-lg;
+      line-height: ($unnic-font-size-body-lg + $unnic-line-height-medium);
     }
 
     &-small {
       padding: $unnic-squish-nano;
       font-size: $unnic-font-size-body-md;
+      line-height: ($unnic-font-size-body-md + $unnic-line-height-medium);
     }
   }
 }
