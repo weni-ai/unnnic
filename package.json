@@ -1,11 +1,7 @@
 {
   "name": "unnic-system-beta",
   "version": "0.0.53",
-<<<<<<< HEAD
   "main": "./dist/unnnic.common.js",
-=======
-  "main": "./dist/unnic.common.js",
->>>>>>> 5c5f2718cdbe23bde24a2ffa7a717de1e08d5bf9
   "files": [
     "dist/*",
     "src/*",
