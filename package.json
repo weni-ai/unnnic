@@ -1,7 +1,7 @@
 {
   "name": "unnic-system-beta",
-  "version": "0.0.52",
-  "main": "./dist/unnic.common.js",
+  "version": "0.0.53",
+  "main": "./dist/unnnic.common.js",
   "files": [
     "dist/*",
     "src/*",
@@ -13,7 +13,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build-bundle": "vue-cli-service build --target lib --name unnic ./src/components/index.js",
+    "build-bundle": "vue-cli-service build --target lib --name unnnic ./src/components/index.js",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook -p 6006",
@@ -28,7 +28,7 @@
     "@storybook/addon-actions": "^6.1.9",
     "@storybook/addon-controls": "^6.1.9",
     "@storybook/addon-docs": "^6.1.9",
-    "@storybook/addon-essentials": "^6.1.9",
+    "@storybook/addon-essentials": "^6.1.17",
     "@storybook/addon-links": "^6.1.9",
     "@storybook/vue": "^6.1.9",
     "@vue/cli-plugin-babel": "~4.5.0",

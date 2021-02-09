@@ -1,9 +1,9 @@
-import unnicModal from '../components/Modal/Modal.vue';
-import unnicButton from '../components/Button/Button.vue';
+import unnnicModal from '../components/Modal/Modal.vue';
+import unnnicButton from '../components/Button/Button.vue';
 
 export default {
   title: 'Example/Modal',
-  component: unnicModal,
+  component: unnnicModal,
   argTypes: {
     modalIcon: { control: { type: 'select', options: ['check-circle-1-1', 'alert-circle-1', 'delete-1'] } },
     text: { control: { type: 'text' } },
@@ -20,14 +20,14 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { unnicModal, unnicButton },
-  template: '<unnicModal v-bind="$props" />',
+  components: { unnnicModal, unnnicButton },
+  template: '<unnnicModal v-bind="$props" />',
 });
 
 const ButtonTemplate = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { unnicModal, unnicButton },
-  template: '<unnicModal v-bind="$props"><unnic-button slot="options"> Button 1 </unnic-button> <unnic-button slot="options"> Button 2 </unnic-button> </div> </unnic-modal>',
+  components: { unnnicModal, unnnicButton },
+  template: '<unnnicModal v-bind="$props"><unnnic-button slot="options"> Button 1 </unnnic-button> <unnnic-button slot="options"> Button 2 </unnnic-button> </div> </unnnic-modal>',
 });
 
 export const Normal = Template.bind({});

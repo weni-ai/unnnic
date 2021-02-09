@@ -1,11 +1,11 @@
-.unnic-grid-xs {
+.unnnic-grid-xs {
     display: grid;
     grid-gap: 16px;
     grid-template-columns: repeat(auto-fill, calc((1/4)*100% - (16px * 3/4)));
     padding: 0 16px;
 }
 
-.unnic-grid-sm {
+.unnnic-grid-sm {
     display: grid;
     grid-gap: 16px;
     grid-template-columns: repeat(auto-fill, calc((1/4)*100% - (16px * 3/4)));
@@ -13,7 +13,7 @@
     box-sizing: border-box;
 }
 
-.unnic-grid-md {
+.unnnic-grid-md {
     display: grid;
     grid-gap: 16px;
     grid-template-columns: repeat(auto-fill, calc((1/6)*100% - (16px * 5/6)));
@@ -21,7 +21,7 @@
     box-sizing: border-box;
 }
 
-.unnic-grid-lg {
+.unnnic-grid-lg {
     display: grid;
     grid-gap: 16px;
     grid-template-columns: repeat(auto-fill, calc((1/12)*100% - (16px * 11/12)));
@@ -29,7 +29,7 @@
     box-sizing: border-box;
 }
 
-.unnic-grid-xl {
+.unnnic-grid-xl {
     display: grid;
     grid-gap: 16px;
     grid-template-columns: repeat(auto-fill, calc((1/12)*100% - (16px * 11/12)));
@@ -37,7 +37,7 @@
     box-sizing: border-box;
 }
 
-.unnic-grid-giant {
+.unnnic-grid-giant {
     display: grid;
     grid-gap: 16px;
     grid-template-columns: repeat(auto-fill, calc((1/12)*100% - (16px * 11/12)));
@@ -46,7 +46,7 @@
 }
 
 @for $i from 1 to 12 {
-    .unnic-grid-span-#{$i} {
+    .unnnic-grid-span-#{$i} {
         grid-column: span #{$i};
     }
 }

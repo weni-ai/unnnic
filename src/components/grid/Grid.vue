@@ -15,10 +15,10 @@ export default {
   },
   computed: {
     gridClass() {
-      return `unnic-grid-${this.size}`;
+      return `unnnic-grid-${this.size}`;
     },
     gridItemClass() {
-      return 'unnic-grid-span-1';
+      return 'unnnic-grid-span-1';
     },
     gridNumber() {
       if (this.size === 'xs' || this.size === 'sm') return 4;
@@ -31,13 +31,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../../assets/scss/unnic.scss';
+  @import '../../assets/scss/unnnic.scss';
 
   .grid-example {
-    background-color: $unnic-color-brand-weni;
+    background-color: $unnnic-color-brand-weni;
 
     &-container {
-      background-color: $unnic-color-neutral-dark ;
+      background-color: $unnnic-color-neutral-dark ;
       width: 100%;
       height: 100vh;
     }

@@ -2,10 +2,10 @@
 <span
     @click="onClick"
     :class="[
-      'unnic-icon',
-      `unnic-icon__size--${size}`,
-      clickable ? 'unnic--clickable' : '',
-      lineHeight ? `unnic-icon__line-height--${lineHeight}` : '']"
+      'unnnic-icon',
+      `unnnic-icon__size--${size}`,
+      clickable ? 'unnnic--clickable' : '',
+      lineHeight ? `unnnic-icon__line-height--${lineHeight}` : '']"
     v-html="svg" />
 </template>
 
@@ -56,21 +56,21 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/scss/unnic.scss';
+@import '../assets/scss/unnnic.scss';
 
 $icon-sizes:
-    'xl' $unnic-icon-size-xl,
-    'lg' $unnic-icon-size-lg,
-    'md' $unnic-icon-size-md,
-    'sm' $unnic-icon-size-sm,
-    'xs' $unnic-icon-size-xs;
+    'xl' $unnnic-icon-size-xl,
+    'lg' $unnnic-icon-size-lg,
+    'md' $unnnic-icon-size-md,
+    'sm' $unnnic-icon-size-sm,
+    'xs' $unnnic-icon-size-xs;
 
 $line-heights:
-  'sm' $unnic-line-height-small,
-  'md' $unnic-line-height-medium,
-  'lg' $unnic-line-height-large;
+  'sm' $unnnic-line-height-small,
+  'md' $unnnic-line-height-medium,
+  'lg' $unnnic-line-height-large;
 
-    .unnic-icon {
+    .unnnic-icon {
       position: relative;
       display: inline-block;
         @each $name, $size in $icon-sizes {
@@ -79,7 +79,7 @@ $line-heights:
                 height: $size;
 
                 @each $line-name, $line-size in $line-heights {
-                  &.unnic-icon__line-height--#{$line-name} svg {
+                  &.unnnic-icon__line-height--#{$line-name} svg {
                     position: relative;
                     top: (($size + $line-size) - ($size*1.2))/1.2;
                   }

@@ -1,7 +1,7 @@
 <template>
     <span
       @click="onClick"
-      :class="`icon icon-${icon} icon-${size} ${ clickable ? 'unnic--clickable' : '' }`"> </span>
+      :class="`icon icon-${icon} icon-${size} ${ clickable ? 'unnnic--clickable' : '' }`"> </span>
 </template>
 
 <script>
@@ -34,29 +34,29 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/scss/unnic.scss';
+@import '../assets/scss/unnnic.scss';
 @import '../assets/fonts/icons.css';
 
 .icon {
 
   &-xs {
-    font-size: $unnic-icon-size-xs;
+    font-size: $unnnic-icon-size-xs;
   }
 
   &-sm {
-    font-size: $unnic-icon-size-sm;
+    font-size: $unnnic-icon-size-sm;
   }
 
   &-md {
-    font-size: $unnic-icon-size-md;
+    font-size: $unnnic-icon-size-md;
   }
 
   &-lg {
-    font-size: $unnic-icon-size-lg;
+    font-size: $unnnic-icon-size-lg;
   }
 
   &-xl {
-    font-size: $unnic-icon-size-xl;
+    font-size: $unnnic-icon-size-xl;
   }
 }
 

@@ -1,15 +1,15 @@
 <template>
   <div>
-    <unnic-input v-model="text" />
+    <unnnic-input v-model="text" />
     {{ text }}
   </div>
 </template>
 
 <script>
-import unnicInput from './Input.vue';
+import unnnicInput from './Input.vue';
 
 export default {
-  components: { unnicInput },
+  components: { unnnicInput },
   data() {
     return {
       text: '',
