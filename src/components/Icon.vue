@@ -49,28 +49,28 @@ export default {
 @import '../assets/fonts/icons.css';
 
 $scheme-colors:
-  'feedback-red' $unnic-color-feedback-red,
-  'feedback-green' $unnic-color-feedback-green,
-  'feedback-yellow' $unnic-color-feedback-yellow,
-  'feedback-blue' $unnic-color-feedback-blue,
-  'feedback-grey' $unnic-color-feedback-grey,
-   'aux-blue' $unnic-color-aux-blue,
-   'aux-purple' $unnic-color-aux-purple,
-   'aux-orange' $unnic-color-aux-orange,
-   'aux-lemon' $unnic-color-aux-lemon,
-   'aux-pink' $unnic-color-aux-pink;
+  'feedback-red' $unnnic-color-feedback-red,
+  'feedback-green' $unnnic-color-feedback-green,
+  'feedback-yellow' $unnnic-color-feedback-yellow,
+  'feedback-blue' $unnnic-color-feedback-blue,
+  'feedback-grey' $unnnic-color-feedback-grey,
+   'aux-blue' $unnnic-color-aux-blue,
+   'aux-purple' $unnnic-color-aux-purple,
+   'aux-orange' $unnnic-color-aux-orange,
+   'aux-lemon' $unnnic-color-aux-lemon,
+   'aux-pink' $unnnic-color-aux-pink;
 
 @each $name, $color in $scheme-colors {
   .background-scheme {
     &--#{$name} {
-      background-color: rgba($color, $unnic-opacity-level-lighter);
+      background-color: rgba($color, $unnnic-opacity-level-lighter);
       color: $color;
       position: relative;
       left: 0;
 
-      border-radius: $unnic-border-radius-sm;
-      padding: $unnic-inset-nano;
-      margin-right: $unnic-inline-sm;
+      border-radius: $unnnic-border-radius-sm;
+      padding: $unnnic-inset-nano;
+      margin-right: $unnnic-inline-sm;
       &--icon {
         color: $color;
       }

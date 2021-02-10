@@ -1,0 +1,36 @@
+<template>
+    <div
+      @click="$emit('click')"
+      class="unnnic-select-item unnnic--clickable">
+      <span class="unnnic-select-item__label">
+        <slot/>
+        </span>
+    </div>
+</template>
+
+<script>
+export default {
+  name: 'UnnicSelectItem',
+};
+</script>
+
+<style lang="scss">
+@import '../../assets/scss/unnnic.scss';
+  .unnnic-select-item {
+    background-color: $unnnic-color-background-snow;
+    padding: $unnnic-inset-xs;
+    font-size: $unnnic-font-size-body-gt;
+
+    &:hover{
+      background-color: $unnnic-color-neutral-lightest;
+    }
+
+    &__label{
+      font-family: $unnnic-font-family-secondary;
+      color: $unnnic-color-neutral-dark;
+      font-weight: $unnnic-font-weight-regular;
+      line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+    }
+
+  }
+</style>
