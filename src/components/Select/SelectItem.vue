@@ -2,7 +2,7 @@
     <div
       @click="$emit('click')"
       class="unnnic-select-item unnnic--clickable">
-      <span class="unnnic-select-item__label">
+      <span :class="['unnnic-select-item__label', `unnnic-select-item__label--${size}`]">
         <slot/>
         </span>
     </div>
@@ -11,6 +11,12 @@
 <script>
 export default {
   name: 'UnnicSelectItem',
+  props: {
+    size: {
+      type: String,
+      default: '',
+    },
+  },
 };
 </script>
 
@@ -18,9 +24,8 @@ export default {
 @import '../../assets/scss/unnnic.scss';
   .unnnic-select-item {
     background-color: $unnnic-color-background-snow;
-    padding: $unnnic-inset-nano;
-    font-size: $unnnic-font-size-body-gt;
-    margin: 0 $unnnic-inline-xs;
+    padding: $unnnic-spacing-stack-nano $unnnic-inline-xs;
+    margin: $unnnic-inline-xs;
 
     text-overflow: ellipsis;
     overflow: hidden;
@@ -29,13 +34,22 @@ export default {
 
     &:hover{
       background-color: $unnnic-color-neutral-lightest;
+      border-radius: $unnnic-border-radius-sm;
     }
 
     &__label{
       font-family: $unnnic-font-family-secondary;
       color: $unnnic-color-neutral-dark;
       font-weight: $unnnic-font-weight-regular;
-      line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+
+      &--md{
+        font-size: $unnnic-font-size-body-gt;
+        line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+      }
+      &--sm{
+        font-size: $unnnic-font-size-body-md;
+        line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+      }
     }
 
   }
