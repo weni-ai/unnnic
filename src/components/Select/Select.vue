@@ -70,14 +70,10 @@ export default {
 }
 
   .unnnic-select {
-    position: relative;
-    display: inline-block;
 
   &__field {
     display: flex;
     justify-content: space-between;
-    min-width: 169px;
-    min-height: 36px;
     border: 1px solid $unnnic-color-neutral-soft;
     border-radius: $unnnic-border-radius-sm;
     background-color: $unnnic-color-background-snow;
