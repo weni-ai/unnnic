@@ -4,8 +4,8 @@
           'unnnic-select__field--active': active,
           'unnnic-select__field--inactive': !active,
           }" @click="handleClickSelect()">
-          <span>
-            texto
+          <span class="unnnic-select__field__selected">
+            {{selected}}
           </span>
             <UICon
             v-if="active"
@@ -77,15 +77,18 @@ export default {
     border: 1px solid $unnnic-color-neutral-soft;
     border-radius: $unnnic-border-radius-sm;
     background-color: $unnnic-color-background-snow;
-    font-family: $unnnic-font-family-secondary;
-    font-weight: $unnnic-font-weight-regular;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
-    padding: $unnnic-inset-xs;
-    font-size: $unnnic-font-size-body-gt;
+    padding: $unnnic-squish-xs;
 
     display: flex;
     align-items: center;
     cursor: pointer;
+
+    &__selected{
+      font-family: $unnnic-font-family-secondary;
+      font-size: $unnnic-font-size-body-gt;
+      font-weight: $unnnic-font-weight-regular;
+      line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+    }
 
      &--inactive{
       border: 1px solid $unnnic-color-neutral-soft;

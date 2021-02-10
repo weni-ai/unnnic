@@ -18,9 +18,14 @@ export default {
 @import '../../assets/scss/unnnic.scss';
   .unnnic-select-item {
     background-color: $unnnic-color-background-snow;
-    padding: $unnnic-inset-xs;
+    padding: $unnnic-inset-nano;
     font-size: $unnnic-font-size-body-gt;
-    margin: 0 $unnnic-inline-xs;
+    margin-left:$unnnic-inline-xs;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 100%;
+    -webkit-line-clamp: 1;
 
     &:hover{
       background-color: $unnnic-color-neutral-lightest;
