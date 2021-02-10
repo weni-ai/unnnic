@@ -19,7 +19,7 @@
           <div :class="{'unnnic-select__options': true,
           'unnnic-select__options--active': active,
           'unnnic-select__options--inactive': !active }">
-             <slot/>
+             <slot @emit-click="handleClickSelect()"/>
       </div>
     </div>
 </template>
@@ -88,6 +88,11 @@ export default {
       font-size: $unnnic-font-size-body-gt;
       font-weight: $unnnic-font-weight-regular;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 100%;
+      -webkit-line-clamp: 1;
     }
 
      &--inactive{
