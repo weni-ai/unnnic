@@ -1,25 +1,23 @@
 <template>
-  <div :class="['unnic-card-status', `unnic-card-scheme--${scheme}--border`]">
-    <div class="unnic-card-status__header">
-      <div class="unnic-card-status__icon">
+  <div :class="['unnnic-card-status', `unnnic-card-scheme--${scheme}--border`]">
+    <div class="unnnic-card-status__header">
         <UICon
+          class="unnnic-card-status__icon"
           :icon="icon"
-          line-height="md"
           size="sm"
         />
-      </div>
-      <div class="unnic-card-status__title">{{ title }}</div>
+      <div class="unnnic-card-status__title">{{ title }}</div>
     </div>
-    <div class="unnic-card-status__data">
+    <div class="unnnic-card-status__data">
         <span :class="[
-          `unnic-card-scheme--${scheme}--icon`,
-          'unnic-card-status__icon_indicator',
+          `unnnic-card-scheme--${scheme}--icon`,
+          'unnnic-card-status__icon_indicator',
         ]"> &#11044; </span>
-      <div class="unnic-card-status__data_content">
-        <div class="unnic-card-status__data_content_status">
+      <div class="unnnic-card-status__data_content">
+        <div class="unnnic-card-status__data_content_status">
           {{ status }}
         </div>
-        <div class="unnic-card-status__data_content_description">
+        <div class="unnnic-card-status__data_content_description">
           {{ description }}
         </div>
       </div>
@@ -31,7 +29,7 @@
 import UICon from '../Icon.vue';
 
 export default {
-  name: 'unnic-card',
+  name: 'unnnic-card',
   components: { UICon },
   props: {
     title: {
@@ -59,17 +57,17 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../assets/scss/unnic.scss";
+@import "../../assets/scss/unnnic.scss";
 
-.unnic-card-status {
+.unnnic-card-status {
   display: flex;
   flex-direction: column;
-  background-color: $unnic-color-background-sky;
-  border-radius: $unnic-border-radius-sm;
-  padding: $unnic-inset-sm;
+  background-color: $unnnic-color-background-sky;
+  border-radius: $unnnic-border-radius-sm;
+  padding: $unnnic-inset-sm;
 
   // TODO: MAKE COLORS VARIABLE FROM STATUS
-  border-left: 4px solid $unnic-color-feedback-green;
+  border-left: 4px solid $unnnic-color-feedback-green;
 
   &__header {
     display: flex;
@@ -79,7 +77,7 @@ export default {
   &__data {
     display: flex;
     flex-direction: row;
-    padding-top: $unnic-spacing-stack-xs;
+    padding-top: $unnnic-spacing-stack-xs;
   }
 
   &__data_content {
@@ -87,53 +85,54 @@ export default {
   }
 
   &__data_content_status {
-    font-family: $unnic-font-family-secondary;
-    font-size: $unnic-font-size-body-md;
-    font-weight: $unnic-font-weight-regular;
-    line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
-    color: $unnic-color-neutral-darkest;
+    font-family: $unnnic-font-family-secondary;
+    font-size: $unnnic-font-size-body-gt;
+    font-weight: $unnnic-font-weight-regular;
+    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+    color: $unnnic-color-neutral-darkest;
   }
 
   &__data_content_description {
-    font-family: $unnic-font-family-secondary;
-    font-size: $unnic-font-size-body-sm;
-    font-weight: $unnic-font-weight-regular;
-    color: $unnic-color-neutral-dark;
-    line-height: $unnic-font-size-body-sm + $unnic-line-height-medium;
+    font-family: $unnnic-font-family-secondary;
+    font-size: $unnnic-font-size-body-md;
+    font-weight: $unnnic-font-weight-regular;
+    color: $unnnic-color-neutral-dark;
+    line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
   }
 
   &__icon {
-    color: $unnic-color-neutral-dark;
+    color: $unnnic-color-neutral-dark;
+    line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
   }
 
   &__title {
-    font-family: $unnic-font-family-secondary;
-    font-size: $unnic-font-size-body-md;
-    font-weight: $unnic-font-weight-regular;
-    line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
-    color: $unnic-color-neutral-dark;
-    margin-left: $unnic-inline-nano;
+    font-family: $unnnic-font-family-secondary;
+    font-size: $unnnic-font-size-body-lg;
+    font-weight: $unnnic-font-weight-regular;
+    line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
+    color: $unnnic-color-neutral-dark;
+    margin-left: $unnnic-inline-nano;
   }
 
   &__value {
-    font-family: $unnic-font-family-secondary;
-    font-size: $unnic-font-size-title-md;
-    font-weight: $unnic-font-weight-bold;
-    color: $unnic-color-neutral-darkest;
-    padding-top: $unnic-spacing-stack-nano;
-    padding-right: $unnic-inline-nano;
+    font-family: $unnnic-font-family-secondary;
+    font-size: $unnnic-font-size-title-md;
+    font-weight: $unnnic-font-weight-bold;
+    color: $unnnic-color-neutral-darkest;
+    padding-top: $unnnic-spacing-stack-nano;
+    padding-right: $unnnic-inline-nano;
   }
 
   &__percent_value {
-    color: $unnic-color-feedback-green;
-    border-radius: $unnic-border-radius-sm;
+    color: $unnnic-color-feedback-green;
+    border-radius: $unnnic-border-radius-sm;
   }
 
   &__icon_indicator {
-    line-height: $unnic-line-height-medium;
+    line-height: $unnnic-line-height-medium;
     font-size: 4px;
     border-radius: 50%;
-    line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
+    line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
   }
 }
 </style>

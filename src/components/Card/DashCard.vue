@@ -1,28 +1,27 @@
 <template>
-  <div class="unnic-card-dash">
-    <div :class="['unnic-card-dash__icon', `unnic-card-scheme--${scheme}` ]">
+  <div class="unnnic-card-dash">
+    <div :class="['unnnic-card-dash__icon', `unnnic-card-scheme--${scheme}` ]">
       <UICon
         :icon="icon"
         size="xs"
-        line-height="md"
       />
     </div>
-    <div class="unnic-card-dash__content">
-      <div class="unnic-card-dash__title">{{ title }}</div>
-      <div class="unnic-card-dash__data">
-        <div class="unnic-card-dash__value">{{ value }}</div>
+    <div class="unnnic-card-dash__content">
+      <div class="unnnic-card-dash__title">{{ title }}</div>
+      <div class="unnnic-card-dash__data">
+        <div class="unnnic-card-dash__value">{{ value }}</div>
 
         <div
           v-if="percent"
           :class="[
-            'unnic-card-dash__percent',
-            `unnic-card-scheme--feedback-${percent < 0 ? 'red' : 'green'}`]">
+            'unnnic-card-dash__percent',
+            `unnnic-card-scheme--feedback-${percent < 0 ? 'red' : 'green'}`]">
           <UICon
             icon="graph-stats-ascend-2"
-            class="unnic-card-dash__percent__icon"
+            class="unnnic-card-dash__percent__icon"
             size="sm"
           />
-          <div class="unnic-card-dash__percent_value">
+          <div class="unnnic-card-dash__percent_value">
             {{ percent >= 0 ? `+${percent}%` : `${percent}%` }}
           </div>
         </div>
@@ -35,7 +34,7 @@
 import UICon from '../Icon.vue';
 
 export default {
-  name: 'unnic-card',
+  name: 'unnnic-card',
   components: { UICon },
   props: {
     title: {
@@ -63,20 +62,20 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../assets/scss/unnic.scss";
+@import "../../assets/scss/unnnic.scss";
 
-.unnic-card-dash {
+.unnnic-card-dash {
   display: flex;
-  background-color: $unnic-color-background-snow;
-  border-radius: $unnic-border-radius-sm;
-  padding: $unnic-inset-sm;
-  box-shadow: $unnic-shadow-level-far;
+  background-color: $unnnic-color-background-snow;
+  border-radius: $unnnic-border-radius-sm;
+  padding: $unnnic-inset-sm;
+  box-shadow: $unnnic-shadow-level-far;
 
   &__content {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin-left: $unnic-inline-xs;
+    margin-left: $unnnic-inline-xs;
   }
 
   &__data {
@@ -90,49 +89,49 @@ export default {
     flex-direction: row;
     margin-left: auto;
 
-    border-radius: $unnic-border-radius-sm;
+    border-radius: $unnnic-border-radius-sm;
     padding: 4px 8px;
 
     &__icon {
-      margin-right: $unnic-inline-nano;
-      line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
+      margin-right: $unnnic-inline-nano;
+      line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
     }
   }
 
   &__icon {
-    border-radius: $unnic-border-radius-sm;
+    border-radius: $unnnic-border-radius-sm;
     padding: 2px 4px;
     align-self: flex-start;
   }
 
   &__title {
-    font-family: $unnic-font-family-secondary;
-    font-size: $unnic-font-size-body-md;
-    font-weight: $unnic-font-weight-regular;
-    color: $unnic-color-neutral-dark;
-    line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
+    font-family: $unnnic-font-family-secondary;
+    font-size: $unnnic-font-size-body-lg;
+    font-weight: $unnnic-font-weight-regular;
+    color: $unnnic-color-neutral-dark;
+    line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
   }
 
   &__value {
-    font-family: $unnic-font-family-secondary;
-    font-size: $unnic-font-size-title-md;
-    font-weight: $unnic-font-weight-bold;
-    color: $unnic-color-neutral-darkest;
-    padding-top: $unnic-spacing-stack-nano;
-    padding-right: $unnic-inline-nano;
-    line-height: $unnic-font-size-title-md + $unnic-line-height-medium;
+    font-family: $unnnic-font-family-secondary;
+    font-size: $unnnic-font-size-title-md;
+    font-weight: $unnnic-font-weight-bold;
+    color: $unnnic-color-neutral-darkest;
+    padding-top: $unnnic-spacing-stack-nano;
+    padding-right: $unnnic-inline-nano;
+    line-height: $unnnic-font-size-title-md + $unnnic-line-height-medium;
   }
 
   &__percent_value {
-    border-radius: $unnic-border-radius-sm;
-    font-family: $unnic-font-family-secondary;
-    font-size: $unnic-font-size-body-md;
-    font-weight: $unnic-font-weight-bold;
-    line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
+    border-radius: $unnnic-border-radius-sm;
+    font-family: $unnnic-font-family-secondary;
+    font-size: $unnnic-font-size-body-md;
+    font-weight: $unnnic-font-weight-bold;
+    line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
   }
 
   &__percent_icon {
-    border-radius: $unnic-border-radius-sm;
+    border-radius: $unnnic-border-radius-sm;
   }
 }
 </style>

@@ -1,9 +1,11 @@
 <template>
-<div class="unnic-tooltip">
+<div :class="{ 'unnnic-tooltip': enabled }">
   <slot />
-  <span :class="[
-            'unnic-tooltip-label',
-            `unnic-tooltip-label-${side}`,
+  <span
+    v-if="enabled"
+    :class="[
+            'unnnic-tooltip-label',
+            `unnnic-tooltip-label-${side}`,
             ]">{{text}}</span>
 </div>
 </template>
@@ -11,11 +13,15 @@
 <script>
 
 export default {
-  name: 'unnic-tooltip',
+  name: 'unnnic-tooltip',
   props: {
     text: {
       type: String,
       default: null,
+    },
+    enabled: {
+      type: Boolean,
+      default: false,
     },
     side: {
       type: String,
@@ -29,30 +35,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
- @import '../../assets/scss/unnic.scss';
+ @import '../../assets/scss/unnnic.scss';
 
-.unnic-tooltip {
+.unnnic-tooltip {
   position: relative;
   display: inline-block;
   overflow-wrap: break-word;
 }
 
-.unnic-tooltip-label{
+.unnnic-tooltip-label{
   z-index: 1;
   white-space: nowrap;
   visibility: hidden;
   text-align: center;
   position: absolute;
 
-  background-color: $unnic-color-neutral-black;
-  color: $unnic-color-neutral-snow;
-  border-radius: $unnic-border-radius-sm;
-  padding: $unnic-inset-nano;
-  box-shadow: $unnic-shadow-level-near;
-  font-size: $unnic-font-size-body-md;
-  font-family: $unnic-font-family-secondary;
-  font-weight: $unnic-font-weight-regular;
-  line-height: ($unnic-font-size-body-md + $unnic-line-height-medium);
+  background-color: $unnnic-color-neutral-black;
+  color: $unnnic-color-neutral-snow;
+  border-radius: $unnnic-border-radius-sm;
+  padding: $unnnic-inset-nano;
+  box-shadow: $unnnic-shadow-level-near;
+  font-size: $unnnic-font-size-body-md;
+  font-family: $unnnic-font-family-secondary;
+  font-weight: $unnnic-font-weight-regular;
+  line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
 
   &::after {
     content: "";
@@ -72,7 +78,7 @@ export default {
         top: 100%;
         left: 50%;
         margin-left: -5px;
-        border-color: $unnic-color-neutral-black transparent transparent transparent;
+        border-color: $unnnic-color-neutral-black transparent transparent transparent;
       }
     }
 
@@ -87,7 +93,7 @@ export default {
           bottom: 100%;
           left: 50%;
           margin-left: -5px;
-          border-color: transparent transparent $unnic-color-neutral-black transparent;
+          border-color: transparent transparent $unnnic-color-neutral-black transparent;
       }
     }
     &-right{
@@ -101,7 +107,7 @@ export default {
         top: 50%;
         right: 100%;
         margin-top: -5px;
-        border-color: transparent $unnic-color-neutral-black transparent transparent;
+        border-color: transparent $unnnic-color-neutral-black transparent transparent;
       }
     }
     &-left{
@@ -115,13 +121,13 @@ export default {
         top: 50%;
         left: 100%;
         margin-top: -5px;
-        border-color: transparent transparent transparent $unnic-color-neutral-black;
+        border-color: transparent transparent transparent $unnnic-color-neutral-black;
       }
     }
 }
 
-.unnic-tooltip:hover {
-  .unnic-tooltip-label{
+.unnnic-tooltip:hover {
+  .unnnic-tooltip-label{
       visibility: visible;
     }
 }

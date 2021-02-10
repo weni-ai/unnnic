@@ -1,8 +1,8 @@
 <template>
-    <div class='unnic-select'>
-          <div :class="{'unnic-select__field': true,
-          'unnic-select__field--active': active,
-          'unnic-select__field--inactive': !active,
+    <div class='unnnic-select'>
+          <div :class="{'unnnic-select__field': true,
+          'unnnic-select__field--active': active,
+          'unnnic-select__field--inactive': !active,
           }" @click="handleClickSelect()">
           <span>
             {{selected}}
@@ -16,9 +16,9 @@
               icon="arrow-button-down-1"
               size="sm"/>
           </div>
-          <div :class="{'unnic-select__options': true,
-          'unnic-select__options--active': active,
-          'unnic-select__options--inactive': !active }">
+          <div :class="{'unnnic-select__options': true,
+          'unnnic-select__options--active': active,
+          'unnnic-select__options--inactive': !active }">
              <slot/>
       </div>
     </div>
@@ -54,22 +54,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnic.scss';
+@import '../../assets/scss/unnnic.scss';
 
  ::-webkit-scrollbar {
   width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: $unnic-color-neutral-soft;
+  background: $unnnic-color-neutral-soft;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $unnic-color-neutral-clean;
-  border-radius: $unnic-border-radius-pill;
+  background: $unnnic-color-neutral-clean;
+  border-radius: $unnnic-border-radius-pill;
 }
 
-  .unnic-select {
+  .unnnic-select {
     position: relative;
     display: inline-block;
 
@@ -78,27 +78,27 @@ export default {
     justify-content: space-between;
     min-width: 169px;
     min-height: 36px;
-    border: 1px solid $unnic-color-neutral-soft;
-    border-radius: $unnic-border-radius-sm;
-    background-color: $unnic-color-background-snow;
-    font-family: $unnic-font-family-secondary;
-    font-weight: $unnic-font-weight-regular;
-    line-height: $unnic-font-size-body-gt + $unnic-line-height-medium;
-    padding: 0 $unnic-inset-xs;
-    font-size: $unnic-font-size-body-gt;
+    border: 1px solid $unnnic-color-neutral-soft;
+    border-radius: $unnnic-border-radius-sm;
+    background-color: $unnnic-color-background-snow;
+    font-family: $unnnic-font-family-secondary;
+    font-weight: $unnnic-font-weight-regular;
+    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+    padding: 0 $unnnic-inset-xs;
+    font-size: $unnnic-font-size-body-gt;
 
     display: flex;
     align-items: center;
     cursor: pointer;
 
      &--inactive{
-      border: 1px solid $unnic-color-neutral-soft;
-      color: $unnic-color-neutral-clean;
+      border: 1px solid $unnnic-color-neutral-soft;
+      color: $unnnic-color-neutral-clean;
     }
 
     &--active{
-      border: 1px solid $unnic-color-brand-weni;
-      color: $unnic-color-brand-weni;
+      border: 1px solid $unnnic-color-brand-weni;
+      color: $unnnic-color-brand-weni;
     }
 
   }
@@ -107,7 +107,7 @@ export default {
     max-height: 12.5rem;
     overflow-y: auto;
     margin-top: 4px;
-    box-shadow: $unnic-shadow-level-near;
+    box-shadow: $unnnic-shadow-level-near;
 
     &--inactive{
       display: none;

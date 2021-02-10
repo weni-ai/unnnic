@@ -1,21 +1,20 @@
 <template>
   <div :class="{
-      'unnic-card-account': true,
-      'unnic-card-account__disabled': !enabled,
+      'unnnic-card-account': true,
+      'unnnic-card-account__disabled': !enabled,
     }">
     <div :class="[
-        'unnic-card-account__icon',
-        `unnic-card-scheme--${scheme}`,
-        enabled ? '' : 'unnic-card-account__icon__disabled',
+        'unnnic-card-account__icon',
+        `unnnic-card-scheme--${scheme}`,
+        enabled ? '' : 'unnnic-card-account__icon__disabled',
       ]">
       <UICon
         :icon="icon"
-        line-height="md"
         size="xs"/>
     </div>
-    <div class="unnic-card-account__content">
-      <div class="unnic-card-account__title">{{ title }}</div>
-      <div class="unnic-card-account__description">{{ description }}</div>
+    <div class="unnnic-card-account__content">
+      <div class="unnnic-card-account__title">{{ title }}</div>
+      <div class="unnnic-card-account__description">{{ description }}</div>
     </div>
   </div>
 </template>
@@ -24,7 +23,7 @@
 import UICon from '../Icon.vue';
 
 export default {
-  name: 'unnic-card',
+  name: 'unnnic-card',
   components: { UICon },
   props: {
     title: {
@@ -52,13 +51,13 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../assets/scss/unnic.scss";
+@import "../../assets/scss/unnnic.scss";
 
-.unnic-card-account {
+.unnnic-card-account {
   display: flex;
-  background-color: $unnic-color-background-sky;
-  border-radius: $unnic-border-radius-sm;
-  padding: $unnic-squish-xs;
+  background-color: $unnnic-color-background-sky;
+  border-radius: $unnnic-border-radius-sm;
+  padding: $unnnic-squish-xs;
 
   &__disabled {
     background-color: inherit;
@@ -76,31 +75,31 @@ export default {
   }
 
   &__icon {
-    border-radius: $unnic-border-radius-sm;
+    border-radius: $unnnic-border-radius-sm;
     padding: 2px 4px;
-    margin-right: $unnic-inline-xs;
+    margin-right: $unnnic-inline-xs;
     align-self: flex-start;
 
     &__disabled {
-      color: $unnic-color-neutral-cloudy !important;
-      background-color: $unnic-color-background-grass !important;
+      color: $unnnic-color-neutral-cloudy !important;
+      background-color: $unnnic-color-background-grass !important;
     }
   }
 
   &__title {
-    font-family: $unnic-font-family-primary;
-    font-size: $unnic-font-size-body-lg;
-    font-weight: $unnic-font-weight-regular;
-    color: $unnic-color-neutral-darkest;
-    line-height: $unnic-font-size-body-lg + $unnic-line-height-medium;
+    font-family: $unnnic-font-family-primary;
+    font-size: $unnnic-font-size-body-lg;
+    font-weight: $unnnic-font-weight-regular;
+    color: $unnnic-color-neutral-darkest;
+    line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
   }
 
   &__description {
-    font-family: $unnic-font-family-secondary;
-    font-size: $unnic-font-size-body-md;
-    font-weight: $unnic-font-weight-regular;
-    color: $unnic-color-neutral-cloudy;
-    line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
+    font-family: $unnnic-font-family-secondary;
+    font-size: $unnnic-font-size-body-md;
+    font-weight: $unnnic-font-weight-regular;
+    color: $unnnic-color-neutral-cloudy;
+    line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
   }
 }
 </style>

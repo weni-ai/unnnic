@@ -1,11 +1,11 @@
 <template>
-    <div class="unnic-dropdown" @click="active = !active">
-        <div class="unnic-dropdown__trigger">
+    <div class="unnnic-dropdown" @click="active = !active">
+        <div class="unnnic-dropdown__trigger">
             <slot name="trigger" />
             <div :class="[
-            'unnic-dropdown__content',
-            active ? '' : 'unnic-dropdown__content--hidden',
-            `unnic-dropdown__content__position-${position}` ]">
+            'unnnic-dropdown__content',
+            active ? '' : 'unnnic-dropdown__content--hidden',
+            `unnnic-dropdown__content__position-${position}` ]">
             <slot />
         </div>
         </div>
@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: 'UnnicDropdown',
+  name: 'unnnicDropdown',
   props: {
     position: {
       type: String,
@@ -33,21 +33,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnic.scss';
-  .unnic-dropdown {
+@import '../../assets/scss/unnnic.scss';
+  .unnnic-dropdown {
     &__trigger {
       position: relative;
       display: inline-block;
     }
 
     &__content {
-        background-color: $unnic-color-neutral-snow;
-        box-shadow: $unnic-shadow-level-near;
-        border-radius: $unnic-border-radius-sm;
+        background-color: $unnnic-color-neutral-snow;
+        box-shadow: $unnnic-shadow-level-near;
+        border-radius: $unnnic-border-radius-sm;
         position: absolute;
         display: flex;
         flex-direction: column;
-        padding: $unnic-squish-xs;
+        padding: $unnnic-squish-xs;
       &--hidden {
         display: none !important;
       }
@@ -55,20 +55,20 @@ export default {
           &-top-left {
             bottom: 100%;
             right: 1rem;
-            margin-bottom: $unnic-spacing-stack-xs;
+            margin-bottom: $unnnic-spacing-stack-xs;
           }
           &-top-right {
             bottom: 100%;
             left: 1rem;
-            margin-bottom: $unnic-inline-xs;
+            margin-bottom: $unnnic-inline-xs;
           }
           &-bottom-left {
-            margin-top: $unnic-spacing-stack-xs;
+            margin-top: $unnnic-spacing-stack-xs;
             top: 100%;
             right: 0;
           }
           &-bottom-right {
-            margin-top: $unnic-inline-xs;
+            margin-top: $unnnic-inline-xs;
             top: 100%;
             left: 1rem;
           }

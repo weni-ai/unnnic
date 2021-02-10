@@ -8,16 +8,14 @@ module.exports = {
       splitChunks: false,
     },
     plugins: [
-      new CopyWebpackPlugin({
-        patterns: [
-          {
-            to: 'scss',
-            from: '**',
-            context: 'src/assets/scss',
-            globOptions: { ignore: ['.gitkeep', '**/.DS_Store', '**/Thumbs.db'], debug: 'warning' },
-          },
-        ],
-      }),
+      new CopyWebpackPlugin([
+        {
+          to: 'scss',
+          from: '**',
+          context: 'src/assets/scss',
+          globOptions: { ignore: ['.gitkeep', '**/.DS_Store', '**/Thumbs.db'], debug: 'warning' },
+        },
+      ]),
     ],
   },
   css: {

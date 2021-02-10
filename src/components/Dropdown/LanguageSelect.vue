@@ -1,72 +1,72 @@
 <template>
   <div :class="{
-    'unnic-language-select__container': true,
-    'unnic-language-select--contracted': contracted }">
+    'unnnic-language-select__container': true,
+    'unnnic-language-select--contracted': contracted }">
     <div
       v-show="open"
       :class="{
-        'unnic-language-select__seam': true,
-        'unnic-language-select__seam--vertical': contracted,
-        'unnic-language-select__seam--horizontal': !contracted}" />
+        'unnnic-language-select__seam': true,
+        'unnnic-language-select__seam--vertical': contracted,
+        'unnnic-language-select__seam--horizontal': !contracted}" />
     <div
       :class="{
-        'unnic--clickable': true,
-        'unnic-language-select': true,
-        'unnic-language-select--open': open,
-        'unnic-language-select--open--contracted': open && contracted,
-        'unnic-language-select--expanded': !contracted
+        'unnnic--clickable': true,
+        'unnnic-language-select': true,
+        'unnnic-language-select--open': open,
+        'unnnic-language-select--open--contracted': open && contracted,
+        'unnnic-language-select--expanded': !contracted
       }"
       @click="open=!open">
-        <unnic-flag
-          :class="{ 'unnic-language-select__flag': !contracted }"
+        <unnnic-flag
+          :class="{ 'unnnic-language-select__flag': !contracted }"
           size="sm"
           :code="val" />
         <div
           v-show="!contracted"
-          class="unnic-language-select__title">
+          class="unnnic-language-select__title">
             {{ languages[val] }}
         </div>
         <UIcon
           v-show="!contracted"
-          class="unnic-language-select__icon"
+          class="unnnic-language-select__icon"
           :icon="open ? 'arrow-button-down-1' : 'arrow-button-up-1'"
           size="xs" />
       </div>
       <div
         v-show="open"
         :class="{
-          'unnic-language-select__list': true,
-           'unnic-language-select__list--contracted': contracted }">
+          'unnnic-language-select__list': true,
+           'unnnic-language-select__list--contracted': contracted }">
         <div
           v-for="language in otherLanguages"
           :key="language.id">
           <div
-            class="unnic-language-select__list__item unnic--clickable"
+            class="unnnic-language-select__list__item unnnic--clickable"
             @click=" open=false; val=language.id ">
-            <unnic-flag
-              :class="{ 'unnic-language-select__flag': !contracted }"
+            <unnnic-flag
+              :class="{ 'unnnic-language-select__flag': !contracted }"
               size="sm"
               :code="language.id" />
             <div
               v-show="!contracted"
-              class="unnic-language-select__title">
+              class="unnnic-language-select__title">
               {{ language.name }}
             </div>
           </div>
-          <div v-show="!contracted" class="unnic-language-select__list__item__separator" />
+          <div v-show="!contracted" class="unnnic-language-select__list__item__separator" />
         </div>
       </div>
   </div>
 </template>
 <script>
 import UIcon from '../Icon.vue';
-import UnnicFlag from '../Flag.vue';
+import unnnicFlag from '../Flag.vue';
 
 export default {
   name: 'LanguageSelect',
   components: {
     UIcon,
-    UnnicFlag,
+    unnnicFlag,
   },
   props: {
     value: {
@@ -116,12 +116,12 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../assets/scss/unnic.scss";
+@import "../../assets/scss/unnnic.scss";
 
-  .unnic-language-select {
-    background-color: $unnic-color-background-snow;
-    padding: $unnic-squish-xs;
-    border-radius: $unnic-border-radius-pill;
+  .unnnic-language-select {
+    background-color: $unnnic-color-background-snow;
+    padding: $unnnic-squish-xs;
+    border-radius: $unnnic-border-radius-pill;
     box-sizing: border-box;
 
     &--contracted {
@@ -129,29 +129,29 @@ export default {
     }
 
     &__container {
-      font-family: $unnic-font-family-secondary;
-      font-size: $unnic-font-size-body-md;
-      font-weight: $unnic-font-weight-regular;
-      line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
-      color: $unnic-color-neutral-dark;
+      font-family: $unnnic-font-family-secondary;
+      font-size: $unnnic-font-size-body-md;
+      font-weight: $unnnic-font-weight-regular;
+      line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+      color: $unnnic-color-neutral-dark;
       position: relative;
     }
 
     &--open {
-      border-radius: 0 0 $unnic-border-radius-sm $unnic-border-radius-sm;
-      box-shadow: $unnic-shadow-level-near;
+      border-radius: 0 0 $unnnic-border-radius-sm $unnnic-border-radius-sm;
+      box-shadow: $unnnic-shadow-level-near;
       position: relative;
       z-index: 2;
 
       &--contracted {
-        border-radius: $unnic-border-radius-pill 0 0 $unnic-border-radius-pill;
-        padding: $unnic-squish-xs;
+        border-radius: $unnnic-border-radius-pill 0 0 $unnnic-border-radius-pill;
+        padding: $unnnic-squish-xs;
         padding-right: .5rem;
       }
     }
 
     &--expanded {
-      padding: $unnic-squish-nano;
+      padding: $unnnic-squish-nano;
       width: 100%;
     }
 
@@ -163,12 +163,12 @@ export default {
     }
 
     &__flag {
-      margin-right: $unnic-inline-xs;
+      margin-right: $unnnic-inline-xs;
     }
 
     &__icon {
-      color: $unnic-color-neutral-clean;
-      margin-left: $unnic-inline-nano;
+      color: $unnnic-color-neutral-clean;
+      margin-left: $unnnic-inline-nano;
     }
 
     &__list {
@@ -178,33 +178,33 @@ export default {
       left: 0;
       right: 0;
       width: 100%;
-      border-radius: $unnic-border-radius-sm $unnic-border-radius-sm 0 0;
-      background-color: $unnic-color-background-snow;
+      border-radius: $unnnic-border-radius-sm $unnnic-border-radius-sm 0 0;
+      background-color: $unnnic-color-background-snow;
       position: absolute;
       display: flex;
       flex-direction: column;
-      box-shadow: $unnic-shadow-level-near;
+      box-shadow: $unnnic-shadow-level-near;
       z-index: 1;
 
       &--contracted {
         top: 0;
         transform: translateX(100%);
         flex-direction: row;
-        border-radius: 0 $unnic-border-radius-pill $unnic-border-radius-pill 0 ;
+        border-radius: 0 $unnnic-border-radius-pill $unnnic-border-radius-pill 0 ;
       }
 
       &__item {
         display: flex;
         align-items: center;
-        padding: $unnic-squish-xs;
+        padding: $unnnic-squish-xs;
         padding-left: .5rem;
         position: relative;
 
         &__separator {
           height: 0;
           content: '';
-          margin: $unnic-spacing-stack-xs $unnic-inline-sm;
-          border: $unnic-border-width-thinner solid $unnic-color-background-sky;
+          margin: $unnnic-spacing-stack-xs $unnnic-inline-sm;
+          border: $unnnic-border-width-thinner solid $unnnic-color-background-sky;
         }
       }
     }
@@ -212,7 +212,7 @@ export default {
     &__seam {
       position: absolute;
       z-index: 4;
-      background-color: $unnic-color-background-snow;
+      background-color: $unnnic-color-background-snow;
 
       &--horizontal {
         left: 0;

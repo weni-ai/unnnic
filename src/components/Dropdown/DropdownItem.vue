@@ -1,31 +1,31 @@
 <template>
     <a
       @click="$emit('click')"
-      class="unnic-dropdown-item unnic--clickable">
+      class="unnnic-dropdown-item unnnic--clickable">
       <slot />
     </a>
 </template>
 
 <script>
 export default {
-  name: 'UnnicDropdownItem',
+  name: 'unnnicDropdownItem',
 };
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnic.scss';
-  .unnic-dropdown-item {
-    color: $unnic-color-neutral-dark;
+@import '../../assets/scss/unnnic.scss';
+  .unnnic-dropdown-item {
+    color: $unnnic-color-neutral-dark;
     text-decoration: none;
-    font-family: $unnic-font-family-secondary;
-    font-size: $unnic-font-size-body-md;
+    font-family: $unnnic-font-family-secondary;
+    font-size: $unnnic-font-size-body-md;
 
-    + .unnic-dropdown-item::before {
+    + .unnnic-dropdown-item::before {
         height: 0;
         content: '';
         display: block;
-        border: 1px solid $unnic-color-neutral-lightest;
-        margin: $unnic-spacing-stack-xs 0;
+        border: 1px solid $unnnic-color-neutral-lightest;
+        margin: $unnnic-spacing-stack-xs 0;
     }
   }
 </style>

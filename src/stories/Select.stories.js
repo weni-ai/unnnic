@@ -1,16 +1,16 @@
-import unnicSelect from '../components/Select/Select.vue';
-import unnicSelectItem from '../components/Select/SelectItem.vue';
+import unnnicSelect from '../components/Select/Select.vue';
+import unnnicSelectItem from '../components/Select/SelectItem.vue';
 
 export default {
-  title: 'example/UnnicSelect',
-  component: unnicSelect,
+  title: 'example/Select',
+  component: unnnicSelect,
   argTypes: {},
 };
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { unnicSelect, unnicSelectItem },
-  template: '<unnicSelect v-bind="$props"> <unnicButton slot="trigger" /> <unnicSelectItem> Item1 </unnicSelectItem> <unnicSelectItem> Item2 </unnicSelectItem> </unnicSelect>',
+  components: { unnnicSelect, unnnicSelectItem },
+  template: '<unnnicSelect v-bind="$props"> <unnnicButton slot="trigger" /> <unnnicSelectItem> Item1 </unnnicSelectItem> <unnnicSelectItem> Item2 </unnnicSelectItem> </unnnicSelect>',
 });
 
 export const Medium = Template.bind({});

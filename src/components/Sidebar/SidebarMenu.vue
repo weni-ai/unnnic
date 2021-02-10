@@ -1,13 +1,13 @@
 <template>
-    <div class="unnic-side-bar-menu">
-        <p class="unnic-side-bar-menu__title"> {{ text }} </p>
+    <div class="unnnic-side-bar-menu">
+        <p class="unnnic-side-bar-menu__title"> {{ text }} </p>
         <slot />
     </div>
 </template>
 
 <script>
 export default {
-  name: 'UnnicSidebarMenu',
+  name: 'unnnicSidebarMenu',
   props: {
     text: {
       type: String,
@@ -18,17 +18,17 @@ export default {
 </script>
 
 <style lang="scss" >
-@import '../../assets/scss/unnic.scss';
-    .unnic-side-bar-menu {
-        color: $unnic-color-neutral-cloudy;
-        font-family: $unnic-font-family-secondary;
-        font-weight: $unnic-font-weight-regular;
-        margin-bottom: $unnic-spacing-stack-md;
+@import '../../assets/scss/unnnic.scss';
+    .unnnic-side-bar-menu {
+        color: $unnnic-color-neutral-cloudy;
+        font-family: $unnnic-font-family-secondary;
+        font-weight: $unnnic-font-weight-regular;
+        margin-bottom: $unnnic-spacing-stack-md;
 
         &__title {
-            margin: 0 0 $unnic-spacing-stack-xs 0;
-            font-size: $unnic-font-size-body-md;
-            line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
+            margin: 0 0 $unnnic-spacing-stack-xs 0;
+            font-size: $unnnic-font-size-body-md;
+            line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
         }
     }
 </style>

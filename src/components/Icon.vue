@@ -3,7 +3,7 @@
       @click="onClick"
       :class="`icon icon-${icon}
         ${scheme ? `background-scheme--${scheme}` : ''}
-        icon-${size} ${ clickable ? 'unnic--clickable' : '' }`">
+        icon-${size} ${ clickable ? 'unnnic--clickable' : '' }`">
     </span>
 </template>
 
@@ -45,32 +45,32 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/scss/unnic.scss';
+@import '../assets/scss/unnnic.scss';
 @import '../assets/fonts/icons.css';
 
 $scheme-colors:
-  'feedback-red' $unnic-color-feedback-red,
-  'feedback-green' $unnic-color-feedback-green,
-  'feedback-yellow' $unnic-color-feedback-yellow,
-  'feedback-blue' $unnic-color-feedback-blue,
-  'feedback-grey' $unnic-color-feedback-grey,
-   'aux-blue' $unnic-color-aux-blue,
-   'aux-purple' $unnic-color-aux-purple,
-   'aux-orange' $unnic-color-aux-orange,
-   'aux-lemon' $unnic-color-aux-lemon,
-   'aux-pink' $unnic-color-aux-pink;
+  'feedback-red' $unnnic-color-feedback-red,
+  'feedback-green' $unnnic-color-feedback-green,
+  'feedback-yellow' $unnnic-color-feedback-yellow,
+  'feedback-blue' $unnnic-color-feedback-blue,
+  'feedback-grey' $unnnic-color-feedback-grey,
+   'aux-blue' $unnnic-color-aux-blue,
+   'aux-purple' $unnnic-color-aux-purple,
+   'aux-orange' $unnnic-color-aux-orange,
+   'aux-lemon' $unnnic-color-aux-lemon,
+   'aux-pink' $unnnic-color-aux-pink;
 
 @each $name, $color in $scheme-colors {
   .background-scheme {
     &--#{$name} {
-      background-color: rgba($color, $unnic-opacity-level-lighter);
+      background-color: rgba($color, $unnnic-opacity-level-lighter);
       color: $color;
       position: relative;
       left: 0;
 
-      border-radius: $unnic-border-radius-sm;
-      padding: $unnic-inset-nano;
-      margin-right: $unnic-inline-sm;
+      border-radius: $unnnic-border-radius-sm;
+      padding: $unnnic-inset-nano;
+      margin-right: $unnnic-inline-sm;
       &--icon {
         color: $color;
       }
@@ -83,23 +83,23 @@ $scheme-colors:
 
 .icon {
   &-xs {
-    font-size: $unnic-icon-size-xs;
+    font-size: $unnnic-icon-size-xs;
   }
 
   &-sm {
-    font-size: $unnic-icon-size-sm;
+    font-size: $unnnic-icon-size-sm;
   }
 
   &-md {
-    font-size: $unnic-icon-size-md;
+    font-size: $unnnic-icon-size-md;
   }
 
   &-lg {
-    font-size: $unnic-icon-size-lg;
+    font-size: $unnnic-icon-size-lg;
   }
 
   &-xl {
-    font-size: $unnic-icon-size-xl;
+    font-size: $unnnic-icon-size-xl;
   }
 }
 

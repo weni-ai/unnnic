@@ -1,4 +1,5 @@
-import Card from '../../components/Card/Card.vue';
+import Card from '../components/Card/Card.vue';
+import iconList from '../utils/iconList';
 
 export default {
   title: 'Example/Card',
@@ -6,6 +7,8 @@ export default {
   argTypes: {
     enabled: { control: { type: 'select', options: [true, false] } },
     infoPosition: { control: { type: 'select', options: ['top', 'right', 'bottom', 'left'] } },
+    type: { control: { type: 'select', options: ['title', 'dash', 'account', 'status'] } },
+    icon: { control: { type: 'select', options: iconList } },
     scheme: {
       control: {
         type: 'select',
