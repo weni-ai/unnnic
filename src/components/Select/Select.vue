@@ -4,7 +4,10 @@
           'unnnic-select__field--active': active,
           'unnnic-select__field--inactive': !active,
           }" @click="handleClickSelect()">
-          <span>
+          <span :class="[
+          'unnnic-select__field__selected',
+          `unnnic-select__field__selected--${size}`
+          ]">
             {{selected}}
           </span>
             <UICon
@@ -19,7 +22,7 @@
           <div :class="{'unnnic-select__options': true,
           'unnnic-select__options--active': active,
           'unnnic-select__options--inactive': !active }">
-             <slot/>
+             <slot @click="handleClickSelect()"/>
       </div>
     </div>
 </template>
@@ -35,6 +38,10 @@ export default {
       type: String,
       default: '',
     },
+    size: {
+      type: String,
+      default: '',
+    },
   },
   data() {
     return {
@@ -44,10 +51,6 @@ export default {
   methods: {
     handleClickSelect() {
       this.active = !this.active;
-    },
-    handleSelectItem(value) {
-      this.active = !this.active;
-      this.val = value;
     },
   },
 };
@@ -77,15 +80,30 @@ export default {
     border: 1px solid $unnnic-color-neutral-soft;
     border-radius: $unnnic-border-radius-sm;
     background-color: $unnnic-color-background-snow;
-    font-family: $unnnic-font-family-secondary;
-    font-weight: $unnnic-font-weight-regular;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
-    padding: 0 $unnnic-inset-xs;
-    font-size: $unnnic-font-size-body-gt;
+    padding: $unnnic-squish-nano;
 
     display: flex;
     align-items: center;
     cursor: pointer;
+
+    &__selected{
+      font-family: $unnnic-font-family-secondary;
+      font-weight: $unnnic-font-weight-regular;
+
+      text-overflow: ellipsis;
+      overflow: hidden;
+      max-width: 100%;
+      -webkit-line-clamp: 1;
+
+      &--md{
+        font-size: $unnnic-font-size-body-gt;
+        line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+      }
+      &--sm{
+        font-size: $unnnic-font-size-body-md;
+        line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+      }
+    }
 
      &--inactive{
       border: 1px solid $unnnic-color-neutral-soft;
