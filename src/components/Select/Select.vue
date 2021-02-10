@@ -19,7 +19,7 @@
           <div :class="{'unnnic-select__options': true,
           'unnnic-select__options--active': active,
           'unnnic-select__options--inactive': !active }">
-             <slot @emit-click="handleClickSelect()"/>
+             <slot />
       </div>
     </div>
 </template>

@@ -1,6 +1,6 @@
 <template>
     <div
-      @click="$emit('emit-click')"
+      @click="$emit('click')"
       class="unnnic-select-item unnnic--clickable">
       <span class="unnnic-select-item__label">
         <slot/>
@@ -20,7 +20,7 @@ export default {
     background-color: $unnnic-color-background-snow;
     padding: $unnnic-inset-nano;
     font-size: $unnnic-font-size-body-gt;
-    margin:$unnnic-inline-xs;
+    margin: 0 $unnnic-inline-xs;
 
     text-overflow: ellipsis;
     overflow: hidden;
