@@ -5,7 +5,7 @@
           'unnnic-select__field--inactive': !active,
           }" @click="handleClickSelect()">
           <span>
-            {{selected}}
+            texto
           </span>
             <UICon
             v-if="active"
@@ -80,7 +80,7 @@ export default {
     font-family: $unnnic-font-family-secondary;
     font-weight: $unnnic-font-weight-regular;
     line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
-    padding: 0 $unnnic-inset-xs;
+    padding: $unnnic-inset-xs;
     font-size: $unnnic-font-size-body-gt;
 
     display: flex;

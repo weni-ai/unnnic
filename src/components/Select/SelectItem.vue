@@ -20,6 +20,7 @@ export default {
     background-color: $unnnic-color-background-snow;
     padding: $unnnic-inset-xs;
     font-size: $unnnic-font-size-body-gt;
+    margin: 0 $unnnic-inline-xs;
 
     &:hover{
       background-color: $unnnic-color-neutral-lightest;
