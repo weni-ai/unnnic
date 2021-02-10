@@ -1,20 +1,19 @@
 <template>
   <div
-    :class="{ 'unnic-side-bar-item': true,
-              'unnic-side-bar-item--active': active,
-              'unnic--clickable': true,
+    :class="{ 'unnnic-side-bar-item': true,
+              'unnnic-side-bar-item--active': active,
+              'unnnic--clickable': true,
             }"
     @click="onClick">
-    <component :is="enableTooltip ? ToolTip : 'div'" :text="text" side="right">
+    <tool-tip :enabled="enableTooltip" :text="text" side="right">
     <u-icon
-      :class="{'unnic-side-bar-item__icon': true,
-               'unnic-side-bar-item__icon--active': active,
+      :class="{'unnnic-side-bar-item__icon': true,
+               'unnnic-side-bar-item__icon--active': active,
               }"
       size="sm"
-      line-height="md"
       :icon="icon"/>
-    <span class="unnic-side-bar-item__label"> {{ text }} <slot /> </span>
-    </component>
+    <span class="unnnic-side-bar-item__label"> {{ text }} <slot /> </span>
+    </tool-tip>
   </div>
 </template>
 
@@ -25,6 +24,11 @@ import ToolTip from '../ToolTip/ToolTip.vue';
 export default {
   name: 'SidebarItem',
   components: { UIcon, ToolTip },
+  data() {
+    return {
+      ToolTip,
+    };
+  },
   props: {
     active: {
       type: Boolean,
@@ -39,45 +43,42 @@ export default {
       default: null,
     },
     enableTooltip: {
-      default: null,
+      default: false,
     },
   },
   methods: {
     onClick() {
       this.$emit('click');
     },
-    test() {
-      console.log('testing');
-    },
   },
 };
 </script>
 
 <style lang="scss" >
-@import '../../assets/scss/unnic.scss';
+@import '../../assets/scss/unnnic.scss';
 
-    .unnic-side-bar-item {
+    .unnnic-side-bar-item {
         display: flex;
         align-items: center;
-        color: $unnic-color-neutral-darkest;
-        margin-bottom: $unnic-spacing-stack-xs;
-        padding: $unnic-inset-nano;
-        font-size: $unnic-font-size-body-md;
-        font-family: $unnic-font-family-secondary;
-        border-radius: $unnic-border-radius-sm;
-        line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
+        color: $unnnic-color-neutral-darkest;
+        margin-bottom: $unnnic-spacing-stack-xs;
+        padding: $unnnic-inset-nano;
+        font-size: $unnnic-font-size-body-md;
+        font-family: $unnnic-font-family-secondary;
+        border-radius: $unnnic-border-radius-sm;
+        line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
 
         &--active {
-            background-color: rgba($unnic-color-brand-weni, $unnic-opacity-level-light);
-            font-weight: $unnic-font-weight-bold;
+            background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-light);
+            font-weight: $unnnic-font-weight-bold;
         }
 
         &__icon {
-           margin-right: $unnic-inline-xs;
-           color: $unnic-color-neutral-cloudy;
+           margin-right: $unnnic-inline-xs;
+           color: $unnnic-color-neutral-cloudy;
 
            &--active {
-               color: $unnic-color-brand-weni;
+               color: $unnnic-color-brand-weni;
            }
         }
     }

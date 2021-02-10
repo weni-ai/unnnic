@@ -1,4 +1,5 @@
 import alertCaller from '../components/Alert/AlertCaller.vue';
+import alert from '../utils/alert';
 
 export default {
   title: 'example/Alert',
@@ -33,7 +34,12 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { alertCaller },
-  template: '<alert-caller v-bind="$props" />',
+  template: '<button @click="unnnicCallAlert"> Click for alert </button>',
+  methods: {
+    unnnicCallAlert() {
+      alert.callAlert({ props: this.$props, seconds: this.$props.seconds });
+    },
+  },
 });
 
 export const Normal = Template.bind({});

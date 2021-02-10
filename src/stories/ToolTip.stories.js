@@ -1,8 +1,8 @@
-import unnicToolTip from '../components/ToolTip/ToolTip.vue';
+import unnnicToolTip from '../components/ToolTip/ToolTip.vue';
 
 export default {
   title: 'Example/ToolTip',
-  component: unnicToolTip,
+  component: unnnicToolTip,
   argTypes: {
     text: { control: { type: 'text' } },
     side: { control: { type: 'select', options: ['top', 'right', 'bottom', 'left'] } },
@@ -11,8 +11,8 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { unnicToolTip },
-  template: '<unnicToolTip v-bind="$props"> Hover over text </unnicToolTip>',
+  components: { unnnicToolTip },
+  template: '<unnnic-tool-tip v-bind="$props"> Hover over text </unnnic-tool-tip>',
 });
 
 export const Normal = Template.bind({});

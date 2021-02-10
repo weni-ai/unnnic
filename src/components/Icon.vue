@@ -3,7 +3,7 @@
       @click="onClick"
       :class="`icon icon-${icon}
         ${scheme ? `background-scheme--${scheme}` : ''}
-        icon-${size} ${ clickable ? 'unnic--clickable' : '' }`">
+        icon-${size} ${ clickable ? 'unnnic--clickable' : '' }`">
     </span>
 </template>
 
@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/scss/unnic.scss';
+@import '../assets/scss/unnnic.scss';
 @import '../assets/fonts/icons.css';
 
 $scheme-colors:
@@ -83,23 +83,23 @@ $scheme-colors:
 
 .icon {
   &-xs {
-    font-size: $unnic-icon-size-xs;
+    font-size: $unnnic-icon-size-xs;
   }
 
   &-sm {
-    font-size: $unnic-icon-size-sm;
+    font-size: $unnnic-icon-size-sm;
   }
 
   &-md {
-    font-size: $unnic-icon-size-md;
+    font-size: $unnnic-icon-size-md;
   }
 
   &-lg {
-    font-size: $unnic-icon-size-lg;
+    font-size: $unnnic-icon-size-lg;
   }
 
   &-xl {
-    font-size: $unnic-icon-size-xl;
+    font-size: $unnnic-icon-size-xl;
   }
 }
 

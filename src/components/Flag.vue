@@ -34,33 +34,33 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/scss/unnic.scss';
+@import '../assets/scss/unnnic.scss';
 
 .flag {
 
   &-xs {
-    width: $unnic-icon-size-xs;
-    height: $unnic-icon-size-xs;
+    width: $unnnic-icon-size-xs;
+    height: $unnnic-icon-size-xs;
   }
 
   &-sm {
-    width: $unnic-icon-size-sm;
-    height: $unnic-icon-size-sm;
+    width: $unnnic-icon-size-sm;
+    height: $unnnic-icon-size-sm;
   }
 
   &-md {
-    width: $unnic-icon-size-md;
-    height: $unnic-icon-size-md;
+    width: $unnnic-icon-size-md;
+    height: $unnnic-icon-size-md;
   }
 
   &-lg {
-    width: $unnic-icon-size-lg;
-    height: $unnic-icon-size-lg;
+    width: $unnnic-icon-size-lg;
+    height: $unnnic-icon-size-lg;
   }
 
   &-xl {
-    width: $unnic-icon-size-xl;
-    height: $unnic-icon-size-xl;
+    width: $unnnic-icon-size-xl;
+    height: $unnnic-icon-size-xl;
   }
 }
 

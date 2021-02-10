@@ -3,8 +3,8 @@
         v-bind="attributes"
         v-model="val"
         :class="{
-          'unnic-form__input': true,
-          'unnic-form__input--error': type === 'error',
+          'unnnic-form__input': true,
+          'unnnic-form__input--error': type === 'error',
           'has-icon-left': hasIconLeft,
           'has-icon-right': hasIconRight,
         }"
@@ -15,7 +15,7 @@
 <script>
 
 export default {
-  name: 'unnic-input',
+  name: 'unnnic-input',
   data() {
     return {
       val: null,
@@ -72,61 +72,61 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnic.scss';
+@import '../../assets/scss/unnnic.scss';
 
-.unnic-form {
+.unnnic-form {
 
   &__input {
-    background: $unnic-color-neutral-snow;
-    border: $unnic-border-width-thinner solid $unnic-color-neutral-soft;
-    border-radius: $unnic-border-radius-sm;
-    padding: $unnic-squish-xs;
+    background: $unnnic-color-neutral-snow;
+    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+    border-radius: $unnnic-border-radius-sm;
+    padding: $unnnic-squish-xs;
     color: inherit;
-    font-weight: $unnic-font-weight-regular;
-    font-size: $unnic-font-size-body-gt;
-    line-height: $unnic-font-size-body-gt + $unnic-line-height-medium;
-    font-family: $unnic-font-family-secondary;
+    font-weight: $unnnic-font-weight-regular;
+    font-size: $unnnic-font-size-body-gt;
+    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+    font-family: $unnnic-font-family-secondary;
     box-sizing: border-box;
     width: 100%;
 
     &:focus {
-      color: $unnic-color-brand-weni-soft;
-      border-color: $unnic-color-brand-weni;
+      color: $unnnic-color-brand-weni-soft;
+      border-color: $unnnic-color-brand-weni;
       outline: none;
     }
 
     &--error {
-      border: $unnic-border-width-thinner solid $unnic-color-feedback-red;
+      border: $unnnic-border-width-thinner solid $unnnic-color-feedback-red;
     }
 
     ::placeholder {
-      color: $unnic-color-brand-sec;
+      color: $unnnic-color-brand-sec;
       opacity: 1; /* Firefox */
     }
 
     &:-ms-input-placeholder, &::-ms-input-placeholder { /* Internet Explorer 10-11 */
-      color: $unnic-color-brand-sec;
+      color: $unnnic-color-brand-sec;
     }
 
     &:disabled {
-      border: 1px dashed $unnic-color-neutral-clean;
-      background-color: $unnic-color-neutral-light;
+      border: 1px dashed $unnnic-color-neutral-clean;
+      background-color: $unnnic-color-neutral-light;
     }
   }
 
   &--error {
-    color: $unnic-color-feedback-red;
+    color: $unnnic-color-feedback-red;
   }
 }
 
 .has-icon {
 
   &-left {
-    padding-left: calc(#{$unnic-inline-sm} + #{$unnic-icon-size-md} + #{$unnic-inline-xs});
+    padding-left: calc(#{$unnnic-inline-sm} + #{$unnnic-icon-size-md} + #{$unnnic-inline-xs});
   }
 
   &-right {
-    padding-right: calc(#{$unnic-inline-sm} + #{$unnic-icon-size-md} + #{$unnic-inline-xs});
+    padding-right: calc(#{$unnnic-inline-sm} + #{$unnnic-icon-size-md} + #{$unnnic-inline-xs});
   }
 }
 

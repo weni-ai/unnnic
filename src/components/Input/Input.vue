@@ -1,20 +1,20 @@
 <template>
   <div :class="{
-    'unnic-form': true,
-    'unnic-form--error': type === 'error'
+    'unnnic-form': true,
+    'unnnic-form--error': type === 'error'
     }">
-      <p class="unnic-form__label"> {{ label }}  </p>
+      <p class="unnnic-form__label"> {{ label }}  </p>
       <component
         v-model="val"
         v-on="inputListeners"
-        class="unnic-form-input"
+        class="unnnic-form-input"
         :is="currentComponent"
         :v-bind="$attrs"
         :icon-left="iconLeft"
         :icon-right="iconRight"
         :allow-toggle-password="togglePassword"
         :type="type" />
-    <p class="unnic-form__message"> {{ message }} </p>
+    <p class="unnnic-form__message"> {{ message }} </p>
   </div>
 </template>
 
@@ -24,7 +24,7 @@ import TextInput from './TextInput.vue';
 import UIcon from '../Icon.vue';
 
 export default {
-  name: 'unnic-input',
+  name: 'unnnic-input',
   components: { UIcon },
   props: {
     type: {
@@ -95,35 +95,35 @@ export default {
 </script>
 
 <style lang="scss" >
-@import '../../assets/scss/unnic.scss';
+@import '../../assets/scss/unnnic.scss';
 
-.unnic-form {
-  font-family: $unnic-font-family-secondary;
+.unnnic-form {
+  font-family: $unnnic-font-family-secondary;
   position: relative;
 
   &__input {
     width: 100%;
 
     &--error {
-      border: $unnic-border-width-thinner solid $unnic-color-feedback-red;
+      border: $unnnic-border-width-thinner solid $unnnic-color-feedback-red;
     }
   }
 
   &__message {
-    font-size: $unnic-font-size-body-md;
-    margin: $unnic-spacing-stack-nano 0;
+    font-size: $unnnic-font-size-body-md;
+    margin: $unnnic-spacing-stack-nano 0;
   }
 
   &__label {
-    font-weight: $unnic-font-weight-regular;
-    line-height: $unnic-font-size-body-md + $unnic-line-height-medium;
-    font-size: $unnic-font-size-body-md;
-    color: $unnic-color-neutral-darkest;
-    margin: $unnic-spacing-stack-xs 0;
+    font-weight: $unnnic-font-weight-regular;
+    line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+    font-size: $unnnic-font-size-body-md;
+    color: $unnnic-color-neutral-darkest;
+    margin: $unnnic-spacing-stack-xs 0;
   }
 
   &--error {
-    color: $unnic-color-feedback-red;
+    color: $unnnic-color-feedback-red;
   }
 }
 

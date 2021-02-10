@@ -1,7 +1,7 @@
 <template>
   <div :class="{
-    'unnic-form': true,
-    'unnic-form--error': type === 'error',
+    'unnnic-form': true,
+    'unnnic-form--error': type === 'error',
     'has-icon': iconLeft || iconRight,
     }">
       <base-input
@@ -30,7 +30,7 @@ import UIcon from '../Icon.vue';
 import BaseInput from './BaseInput.vue';
 
 export default {
-  name: 'unnic-input',
+  name: 'unnnic-input',
   components: {
     UIcon,
     BaseInput,
@@ -87,32 +87,32 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnic.scss';
+@import '../../assets/scss/unnnic.scss';
 
-.unnic-form {
+.unnnic-form {
 
   &:focus-within .icon {
-    color: $unnic-color-brand-weni;
+    color: $unnnic-color-brand-weni;
   }
 
   &--error {
-    color: $unnic-color-feedback-red;
+    color: $unnnic-color-feedback-red;
   }
 }
 
 .icon {
-  color: $unnic-color-neutral-clean;
+  color: $unnnic-color-neutral-clean;
 
   &-left {
     position: absolute;
     top: 25%;
-    left: $unnic-inline-sm;
+    left: $unnnic-inline-sm;
   }
 
   &-right {
     position: absolute;
     top: 25%;
-    right: $unnic-inline-sm;
+    right: $unnnic-inline-sm;
   }
 }
 

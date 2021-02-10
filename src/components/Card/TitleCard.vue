@@ -1,15 +1,15 @@
 <template>
-  <div class="unnic-card-title">
+  <div class="unnnic-card-title">
     <UICon
       :icon="icon"
-      :class="['unnic-card-title__icon', `unnic-card-scheme--${scheme}`]"
+      :class="['unnnic-card-title__icon', `unnnic-card-scheme--${scheme}`]"
       size="md" />
-    <div class="unnic-card-title__content">
-      <div class="unnic-card-title__content_title">{{ title }}</div>
+    <div class="unnnic-card-title__content">
+      <div class="unnnic-card-title__content_title">{{ title }}</div>
       <tool-tip :side="infoPosition" :text="info">
         <UICon
         icon="information-circle-4"
-        class="unnic-card-title__content_info"
+        class="unnnic-card-title__content_info"
         size="sm" />
       </tool-tip>
     </div>
@@ -21,7 +21,7 @@ import UICon from '../Icon.vue';
 import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
-  name: 'unnic-card',
+  name: 'unnnic-card',
   components: { UICon, ToolTip },
   props: {
     title: {
@@ -49,9 +49,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnic.scss";
+@import "../../assets/scss/unnnic.scss";
 
-.unnic-card-title {
+.unnnic-card-title {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -60,16 +60,16 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: row;
-    padding-top: $unnic-spacing-stack-xs;
-    padding-bottom: $unnic-spacing-stack-xs;
+    padding-top: $unnnic-spacing-stack-xs;
+    padding-bottom: $unnnic-spacing-stack-xs;
   }
 
   &__content_title {
-    font-family: $unnic-font-family-primary;
-    font-size: $unnic-font-size-body-lg;
-    font-weight: $unnic-font-weight-regular;
-    color: $unnic-color-neutral-darkest;
-    line-height: $unnic-font-size-body-lg + $unnic-line-height-medium;
+    font-family: $unnnic-font-family-primary;
+    font-size: $unnnic-font-size-body-lg;
+    font-weight: $unnnic-font-weight-regular;
+    color: $unnnic-color-neutral-darkest;
+    line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
     flex: 1;
   }
 
@@ -77,14 +77,14 @@ export default {
     position: relative;
     left: 0;
 
-    border-radius: $unnic-border-radius-sm;
-    padding: $unnic-inset-nano;
-    margin-right: $unnic-inline-sm;
+    border-radius: $unnnic-border-radius-sm;
+    padding: $unnnic-inset-nano;
+    margin-right: $unnnic-inline-sm;
   }
 
   &__content_info {
     position: relative;
-    color: $unnic-color-neutral-soft;
+    color: $unnnic-color-neutral-soft;
 
     // align to full right
     right: 0;

@@ -1,27 +1,27 @@
 <template>
-  <div :class="['unnic-alert', `unnic-alert-position--${position}`]">
-    <unnic-icon
-      :class="`unnic-card-scheme--${scheme}--icon`"
+  <div :class="['unnnic-alert', `unnnic-alert-position--${position}`]">
+    <unnnic-icon
+      :class="`unnnic-card-scheme--${scheme}--icon`"
       :icon="icon"
       size="sm"
     />
-    <div class="unnic-alert__content">
-      <div class="unnic-alert__title">
+    <div class="unnnic-alert__content">
+      <div class="unnnic-alert__title">
         {{ title.toUpperCase() }}
       </div>
-      <div class="unnic-alert__text">
+      <div class="unnnic-alert__text">
         {{ text }}
       </div>
     </div>
     <div
       v-if="closeText"
-      class="unnic-alert__close-text unnic--clickable"
+      class="unnnic-alert__close-text unnnic--clickable"
       @click="onClose()">
       {{ closeText.toUpperCase() }}
     </div>
-    <unnic-icon
+    <unnnic-icon
       v-else
-      class="unnic-alert__close-icon"
+      class="unnnic-alert__close-icon"
       clickable
       icon="close-1"
       size="xs"
@@ -31,11 +31,11 @@
 </template>
 
 <script>
-import unnicIcon from '../Icon.vue';
+import unnnicIcon from '../Icon.vue';
 
 export default {
-  name: 'UnnicAlert',
-  components: { unnicIcon },
+  name: 'unnnicAlert',
+  components: { unnnicIcon },
   props: {
     title: {
       type: String,
@@ -70,21 +70,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnic.scss';
+@import '../../assets/scss/unnnic.scss';
 
-  .unnic-alert {
+  .unnnic-alert {
     position: fixed;
-    padding: $unnic-inset-xs;
+    padding: $unnnic-inset-xs;
     min-width: 12.5rem;
 
     display: inline-flex;
     align-items: center;
 
-    font-family: $unnic-font-family-secondary;
-    border-radius: $unnic-border-radius-sm;
+    font-family: $unnnic-font-family-secondary;
+    border-radius: $unnnic-border-radius-sm;
 
-    background-color: $unnic-color-background-snow;
-    box-shadow: $unnic-shadow-level-near;
+    background-color: $unnnic-color-background-snow;
+    box-shadow: $unnnic-shadow-level-near;
     position: fixed;
 
     z-index: 9999;
@@ -110,28 +110,28 @@ export default {
 
     &__content {
       flex: 1;
-      margin: 0 $unnic-inline-xs;
+      margin: 0 $unnnic-inline-xs;
     }
 
     &__title {
-      font-size: $unnic-font-size-body-sm;
-      font-weight: $unnic-font-weight-bold;
-      color: $unnic-color-neutral-darkest;
+      font-size: $unnnic-font-size-body-sm;
+      font-weight: $unnnic-font-weight-bold;
+      color: $unnnic-color-neutral-darkest;
     }
 
     &__text {
-      font-size: $unnic-font-size-body-md;
-      font-weight: $unnic-font-weight-regular;
-      color: $unnic-color-neutral-dark;
+      font-size: $unnnic-font-size-body-md;
+      font-weight: $unnnic-font-weight-regular;
+      color: $unnnic-color-neutral-dark;
     }
 
     &__close {
       &-icon {
-        color: $unnic-color-brand-sec;
+        color: $unnnic-color-brand-sec;
       }
       &-text {
-        color: $unnic-color-brand-sec;
-        font-size: $unnic-font-size-body-md;
+        color: $unnnic-color-brand-sec;
+        font-size: $unnnic-font-size-body-md;
       }
     }
   }

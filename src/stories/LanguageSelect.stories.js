@@ -1,8 +1,8 @@
-import unnicLanguageSelect from '../components/Dropdown/LanguageSelect.vue';
+import unnnicLanguageSelect from '../components/Dropdown/LanguageSelect.vue';
 
 export default {
   title: 'example/LanguageSelect',
-  component: unnicLanguageSelect,
+  component: unnnicLanguageSelect,
   argTypes: {
     value: { control: { type: 'select', options: ['pt-br', 'en'] } },
     position: { control: { type: 'select', options: ['top', 'bottom', 'right', 'left'] } },
@@ -11,8 +11,8 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { unnicLanguageSelect },
-  template: '<unnic-language-select v-bind="$props" />',
+  components: { unnnicLanguageSelect },
+  template: '<unnnic-language-select v-bind="$props" />',
 });
 
 export const Normal = Template.bind({});

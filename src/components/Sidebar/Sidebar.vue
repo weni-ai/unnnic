@@ -1,10 +1,10 @@
 <template>
-    <div :class="{'unnic-side-bar': true, 'unnic-side-bar--contracted': !expanded}">
-        <div class="unnic-side-bar__header">
+    <div :class="{'unnnic-side-bar': true, 'unnnic-side-bar--contracted': !expanded}">
+        <div class="unnnic-side-bar__header">
             <slot name="header" />
         </div>
         <slot />
-        <div class="unnic-side-bar__footer">
+        <div class="unnnic-side-bar__footer">
             <slot name="footer"/>
         </div>
     </div>
@@ -13,50 +13,48 @@
 <script>
 
 export default {
-  name: 'unnic-sidebar',
+  name: 'unnnic-sidebar',
   props: {
     expanded: {
       type: Boolean,
       default: true,
     },
   },
-  mounted() {
-    // this.$scopedSlots.default();
-  },
 };
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnic.scss';
+@import '../../assets/scss/unnnic.scss';
 
-.unnic-side-bar {
-    background-color: $unnic-color-background-sky;
-    padding: $unnic-inset-md;
+.unnnic-side-bar {
+    background-color: $unnnic-color-background-sky;
+    padding: $unnnic-inset-md;
     display: flex;
     flex-direction: column;
     height: 100%;
     width: 15.375rem;
     transition: width .1s;
-    font-family: $unnic-font-family-secondary;
+    font-family: $unnnic-font-family-secondary;
     box-sizing: border-box;
 
     &--contracted {
         width: 5.625rem;
         transition: width .1s;
 
-        .unnic-side-bar {
+        .unnnic-side-bar {
             &-menu {
                 &__title {
-                    visibility: hidden;
+                    display: none;
                     margin: 0;
                 }
 
-                + .unnic-side-bar-menu::before {
+                + .unnnic-side-bar-menu::before {
                     width: 100%;
                     height: 0px;
-                    border: 1px $unnic-color-neutral-soft solid;
+                    border: 1px $unnnic-color-neutral-soft solid;
                     content: '';
                     display: block;
+                    margin-bottom: $unnnic-spacing-stack-md;
                 }
             }
 
@@ -66,9 +64,9 @@ export default {
 
                 &__icon {
                     margin: 0;
-                    font-size: $unnic-icon-size-md !important;
-                    width: $unnic-icon-size-md !important;
-                    height: $unnic-icon-size-md !important;
+                    font-size: $unnnic-icon-size-md !important;
+                    width: $unnnic-icon-size-md !important;
+                    height: $unnnic-icon-size-md !important;
                 }
 
                 &__label {
@@ -79,7 +77,7 @@ export default {
     }
 
     &__header {
-        margin-bottom: $unnic-spacing-stack-md;
+        margin-bottom: $unnnic-spacing-stack-md;
     }
 
     &__footer {

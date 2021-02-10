@@ -2,23 +2,22 @@
   <button
     v-bind="$attrs"
     :class="[
-      'unnic-button',
-      `unnic-button--size-${size}`,
-      `unnic-button--${type}`
+      'unnnic-button',
+      `unnnic-button--size-${size}`,
+      `unnnic-button--${type}`
     ]"
     v-on="$listeners">
     <u-icon
       v-if="iconLeft" :icon="iconLeft"
-      :class="{ 'unnic-button__icon-left': hasText }"
+      :class="{ 'unnnic-button__icon-left': hasText }"
       :size="iconSize"
-      line-height="md"
     />
-    <span class="unnic-button__label">
+    <span class="unnnic-button__label">
       <slot /> {{ text }}
     </span>
     <u-icon
       v-if="iconRight"
-      :class="{ 'unnic-button__icon-right': hasText }"
+      :class="{ 'unnnic-button__icon-right': hasText }"
       :icon="iconRight"
       :size="iconSize" />
   </button>
@@ -28,7 +27,7 @@
 import UIcon from '../Icon.vue';
 
 export default {
-  name: 'unnic-button',
+  name: 'unnnic-button',
   components: { UIcon },
   props: {
     size: {
@@ -72,71 +71,71 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnic.scss';
+@import '../../assets/scss/unnnic.scss';
 
-.unnic-button {
+.unnnic-button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: $unnic-border-radius-sm;
+  border-radius: $unnnic-border-radius-sm;
   border: 0;
   outline: none;
   overflow: hidden;
   white-space: nowrap;
-  font-weight: $unnic-font-weight-regular;
-  font-family: $unnic-font-family-secondary;
+  font-weight: $unnnic-font-weight-regular;
+  font-family: $unnnic-font-family-secondary;
   min-width: 56px;
   cursor: pointer;
 
   &__icon {
     &-left {
-      margin-right: $unnic-inline-nano;
+      margin-right: $unnnic-inline-nano;
     }
 
     &-right {
-      margin-left: $unnic-inline-nano;
+      margin-left: $unnnic-inline-nano;
     }
   }
 
   &--primary {
-    background-color: $unnic-color-neutral-darkest;
-    color: $unnic-color-background-snow;
+    background-color: $unnnic-color-neutral-darkest;
+    color: $unnnic-color-background-snow;
 
     &:hover:enabled {
-      opacity: $unnic-opacity-level-darkest;
+      opacity: $unnnic-opacity-level-darkest;
       border: 0;
     }
 
     &:disabled {
-      background-color: $unnic-color-neutral-light;
-      color: $unnic-color-neutral-clean;
+      background-color: $unnnic-color-neutral-light;
+      color: $unnnic-color-neutral-clean;
     }
   }
 
   &--terciary {
     background-color: transparent;
-    border: $unnic-border-width-thinner solid transparent;
+    border: $unnnic-border-width-thinner solid transparent;
     &:hover:enabled {
-      border: $unnic-border-width-thinner solid $unnic-color-neutral-soft;
+      border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
     }
 
     &:disabled {
-      background-color: $unnic-color-neutral-light;
-      color: $unnic-color-neutral-clean;
+      background-color: $unnnic-color-neutral-light;
+      color: $unnnic-color-neutral-clean;
     }
   }
 
   &--size {
     &-large {
-      padding: $unnic-squish-xs;
-      font-size: $unnic-font-size-body-lg;
-      line-height: ($unnic-font-size-body-lg + $unnic-line-height-medium);
+      padding: $unnnic-squish-xs;
+      font-size: $unnnic-font-size-body-lg;
+      line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
     }
 
     &-small {
-      padding: $unnic-squish-nano;
-      font-size: $unnic-font-size-body-md;
-      line-height: ($unnic-font-size-body-md + $unnic-line-height-medium);
+      padding: $unnnic-squish-nano;
+      font-size: $unnnic-font-size-body-md;
+      line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
     }
   }
 }
