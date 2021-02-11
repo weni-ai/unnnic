@@ -4,7 +4,9 @@ import unnnicSelectItem from '../components/Select/SelectItem.vue';
 export default {
   title: 'example/Select',
   component: unnnicSelect,
-  argTypes: {},
+  argTypes: {
+    size: { control: { type: 'select', options: ['md', 'sm'] } },
+  },
 };
 
 const Template = (args, { argTypes }) => ({

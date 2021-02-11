@@ -12,6 +12,8 @@ import card from './Card/Card.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
 import modal from './Modal/Modal.vue';
 import alert from '../utils/alert';
+import select from './Select/Select.vue';
+import selectItem from './Select/SelectItem.vue';
 
 const components = {
   unnnicInput: input,
@@ -26,6 +28,8 @@ const components = {
   unnnicCard: card,
   unnnicLanguageSelect: languageSelect,
   unnnicModal: modal,
+  unnnicSelect: select,
+  unnnicSelectItem: selectItem,
 };
 
 Object.keys(components).forEach((name) => {
@@ -44,4 +48,6 @@ export const unnnicToolTip = toolTip;
 export const unnnicCard = card;
 export const unnniclanguageSelect = languageSelect;
 export const unnnicModal = modal;
+export const unnnicSelect = select;
+export const unnnicSelectItem = selectItem;
 export const unnnicCallAlert = alert.callAlert;
