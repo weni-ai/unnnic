@@ -12,7 +12,9 @@
               }"
       size="sm"
       :icon="icon"/>
-    <span class="unnnic-side-bar-item__label"> {{ text }} <slot /> </span>
+    <span class="unnnic-side-bar-item__label"> {{ text }}
+      <slot v-show="expanded"/>
+      </span>
     </tool-tip>
   </div>
 </template>
@@ -31,6 +33,10 @@ export default {
   },
   props: {
     active: {
+      type: Boolean,
+      default: false,
+    },
+    expanded: {
       type: Boolean,
       default: false,
     },
