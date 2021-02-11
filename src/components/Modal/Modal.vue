@@ -21,6 +21,7 @@
                 `unnnic-card-scheme--${scheme}--icon`,
                  closeIcon ? '' : 'unnnic-modal-container-background-body-spacing_header']">
               <u-icon
+                :scheme="scheme"
                :icon="modalIcon"
                 size="xl"/>
             </div>

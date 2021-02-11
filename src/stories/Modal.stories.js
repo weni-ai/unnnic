@@ -36,8 +36,6 @@ Normal.args = {
   description: 'Message body',
   alertMessage: 'Message alert',
   closeIcon: true,
-  hasAlertMessage: true,
-  hasButton: false,
   showModal: true,
 };
 
@@ -47,7 +45,5 @@ Buttons.args = {
   description: 'Message body',
   alertMessage: 'Message alert',
   closeIcon: true,
-  hasAlertMessage: true,
-  hasButton: false,
   showModal: true,
 };

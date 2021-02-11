@@ -1,4 +1,5 @@
 import Icon from '../components/Icon.vue';
+import iconList from '../utils/iconList';
 
 export default {
   title: 'Example/Icon',
@@ -14,7 +15,7 @@ export default {
     icon: {
       control: {
         type: 'select',
-        options: ['add-1', 'alarm-bell-2', 'alarm-bell-3', 'check-square-1'],
+        options: iconList,
       },
     },
   },
