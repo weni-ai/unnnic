@@ -1,5 +1,6 @@
 export default [
   'headphones-customer-support-2',
+  'building-2-1',
   'expand-8-1',
   'flash-1-4',
   'phone-charger-1',

@@ -1,8 +1,9 @@
 <template>
     <span
       @click="onClick"
-      :class="`icon icon-${icon}
-        ${scheme ? `background-scheme--${scheme}` : ''}
+      :class="`unnnic-icon icon-${icon} unnnic-icon-${size}
+        ${scheme ? `unnnic-icon-scheme--${scheme}` : ''}
+        ${scheme && hasBackground ? `unnnic-icon-background-scheme--${scheme}` : ''}
         icon-${size} ${ clickable ? 'unnnic--clickable' : '' }`">
     </span>
 </template>
@@ -34,6 +35,10 @@ export default {
           'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink'].indexOf(value) !== -1;
       },
     },
+    hasBackground: {
+      type: Boolean,
+      default: false,
+    },
   },
   methods: {
     onClick() {
@@ -61,27 +66,30 @@ $scheme-colors:
    'aux-pink' $unnnic-color-aux-pink;
 
 @each $name, $color in $scheme-colors {
-  .background-scheme {
+  .unnnic-icon-scheme {
     &--#{$name} {
-      background-color: rgba($color, $unnnic-opacity-level-lighter);
       color: $color;
-      position: relative;
-      left: 0;
 
-      border-radius: $unnnic-border-radius-sm;
-      padding: $unnnic-inset-nano;
-      margin-right: $unnnic-inline-sm;
       &--icon {
         color: $color;
       }
-      &--border {
-        border-left: 4px solid $color;
-      }
+    }
+  }
+
+  .unnnic-icon-background-scheme {
+    &--#{$name} {
+      background-color: rgba($color, $unnnic-opacity-level-lighter);
+      border-radius: $unnnic-border-radius-sm;
+      padding: $unnnic-inset-nano;
+    }
+
+    &--border {
+      border-left: 4px solid $color;
     }
   }
 }
 
-.icon {
+.unnnic-icon {
   &-xs {
     font-size: $unnnic-icon-size-xs;
   }
