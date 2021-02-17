@@ -30,10 +30,6 @@ export default {
     scheme: {
       type: String,
       default: '',
-      validator(value) {
-        return ['feedback-red', 'feedback-green', 'feedback-yellow', 'feedback-blue', 'feedback-grey',
-          'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink'].indexOf(value) !== -1;
-      },
     },
     hasBackground: {
       type: Boolean,

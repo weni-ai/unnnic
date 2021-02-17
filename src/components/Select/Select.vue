@@ -89,7 +89,6 @@ export default {
     &__selected{
       font-family: $unnnic-font-family-secondary;
       font-weight: $unnnic-font-weight-regular;
-
       text-overflow: ellipsis;
       overflow: hidden;
       max-width: 100%;
@@ -122,6 +121,7 @@ export default {
     overflow-y: auto;
     margin-top: 4px;
     box-shadow: $unnnic-shadow-level-near;
+    background-color: $unnnic-color-background-snow;
 
     &--inactive{
       display: none;
