@@ -48,6 +48,7 @@ export default {
         display: flex;
         flex-direction: column;
         padding: $unnnic-squish-xs;
+        z-index: 2;
       &--hidden {
         display: none !important;
       }

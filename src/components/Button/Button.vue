@@ -109,6 +109,24 @@ export default {
     &:disabled {
       background-color: $unnnic-color-neutral-light;
       color: $unnnic-color-neutral-clean;
+      cursor: not-allowed;
+    }
+  }
+
+  &--secondary {
+    background-color: rgba($unnnic-color-neutral-clean, $unnnic-opacity-level-light);
+    color: $unnnic-color-neutral-dark;
+    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
+
+    &:hover:enabled {
+      border: 0;
+    }
+
+    &:disabled {
+      background-color: $unnnic-color-neutral-light;
+      color: $unnnic-color-neutral-cloudy;
+      border: $unnnic-border-width-thinner dashed $unnnic-color-neutral-clean;
+      cursor: not-allowed;
     }
   }
 
@@ -122,6 +140,7 @@ export default {
     &:disabled {
       background-color: $unnnic-color-neutral-light;
       color: $unnnic-color-neutral-clean;
+      cursor: not-allowed;
     }
   }
 
