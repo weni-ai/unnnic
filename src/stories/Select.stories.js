@@ -1,5 +1,4 @@
 import unnnicSelect from '../components/Select/Select.vue';
-import unnnicSelectItem from '../components/Select/SelectItem.vue';
 
 export default {
   title: 'example/Select',
@@ -11,8 +10,8 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { unnnicSelect, unnnicSelectItem },
-  template: '<unnnicSelect v-bind="$props"> <unnnicButton slot="trigger" /> <unnnicSelectItem> Item1 </unnnicSelectItem> <unnnicSelectItem> Item2 </unnnicSelectItem> </unnnicSelect>',
+  components: { unnnicSelect },
+  template: '<unnnicSelect v-bind="$props"> <option value=""> None </option> <option value="1">option 1</option> <option value="2"> option2 </option> </unnnicSelect>',
 });
 
 export const Medium = Template.bind({});

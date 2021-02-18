@@ -111,16 +111,6 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/unnnic.scss';
 
-.icon {
-  color: $unnnic-color-neutral-clean;
-}
-
-.icon-right {
-  position: absolute;
-  right: 7px;
-  top: 7px;
-}
-
 .unnnic-form {
 
     &:focus-within .icon{
@@ -128,12 +118,19 @@ export default {
   }
 
     &--error {
-      color: $unnnic-color-feedback-red;
+      color: $unnnic-color-feedback-red !important;
+
+      .unnnic-icon {
+        color: $unnnic-color-feedback-red !important;
+      }
     }
 }
 
-.icon {
+.unnnic-icon {
   color: $unnnic-color-neutral-clean;
+}
+
+.icon {
 
   &-left {
     position: absolute;

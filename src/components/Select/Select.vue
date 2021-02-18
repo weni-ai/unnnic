@@ -8,47 +8,78 @@
           'unnnic-select__field__selected',
           `unnnic-select__field__selected--${size}`
           ]">
-            {{selected}}
+            {{selected ? selected.text : placeholder}}
           </span>
             <UICon
-            v-if="active"
-              icon="arrow-button-up-1"
-              size="sm"/>
-            <UICon
-            v-else
-              icon="arrow-button-down-1"
+              :icon="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
               size="sm"/>
           </div>
-          <div :class="{'unnnic-select__options': true,
+          <slot />
+          <div
+          v-if="active"
+          :class="{'unnnic-select__options': true,
           'unnnic-select__options--active': active,
           'unnnic-select__options--inactive': !active }">
-             <slot @click="handleClickSelect()"/>
+            <select-item
+            v-for="(option, index) in options()"
+            :tabindex="index"
+            :size="size"
+            :key="option.value"
+            @click="onSelectOption(option)">
+                {{ option.text }}
+            </select-item>
       </div>
     </div>
 </template>
 
 <script>
 import UICon from '../Icon.vue';
+import selectItem from './SelectItem.vue';
 
 export default {
   name: 'UnnicSelect',
-  components: { UICon },
+  components: { UICon, selectItem },
   props: {
-    selected: {
-      type: String,
-      default: '',
-    },
     size: {
       type: String,
       default: '',
+    },
+    placeholder: {
+      type: String,
+      default: '',
+    },
+    value: {
+      type: null,
     },
   },
   data() {
     return {
       active: false,
+      selected: null,
     };
   },
+  watch: {
+    selected() {
+      const value = this.selected ? this.selected.value : null;
+      this.$emit('onChange', value);
+      this.$emit('input', value);
+    },
+    value() {
+      if (this.value === null) this.selected = null;
+    },
+  },
   methods: {
+    onSelectOption(option) {
+      if (option.value == null || option.value.length === 0) this.selected = null;
+      else this.selected = option;
+      this.active = false;
+    },
+    options() {
+      const children = this.$el.querySelectorAll('option');
+      return [...children].map((option) => (
+        { value: option.value, text: option.label || option.innerHtml }
+      ));
+    },
     handleClickSelect() {
       this.active = !this.active;
     },
@@ -58,6 +89,9 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../assets/scss/unnnic.scss';
+option {
+    display: none;
+}
 
  ::-webkit-scrollbar {
   width: 4px;

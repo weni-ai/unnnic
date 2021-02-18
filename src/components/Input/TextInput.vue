@@ -97,11 +97,18 @@ export default {
 
   &--error {
     color: $unnnic-color-feedback-red;
+
+    .unnnic-icon {
+      color: $unnnic-color-feedback-red !important;
+    }
   }
 }
 
-.icon {
+.unnnic-icon {
   color: $unnnic-color-neutral-clean;
+}
+
+.icon {
 
   &-left {
     position: absolute;
