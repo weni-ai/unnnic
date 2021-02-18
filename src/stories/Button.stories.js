@@ -26,6 +26,13 @@ Normal.args = {
   disabled: false,
 };
 
+export const Secondary = Template.bind({});
+Secondary.args = {
+  type: 'secondary',
+  text: 'Button Text',
+  disabled: false,
+};
+
 export const Terciary = Template.bind({});
 Terciary.args = {
   type: 'terciary',
