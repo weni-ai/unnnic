@@ -8,6 +8,7 @@
         'arrow-button-up-1' : 'arrow-button-down-1'"
         icon-right-clickable
         @icon-right-click="active = !active"
+        :size="size"
         @focus="active = true"
         readonly/>
       <slot />
@@ -41,7 +42,7 @@ export default {
   props: {
     size: {
       type: String,
-      default: '',
+      default: 'md',
     },
     placeholder: {
       type: String,

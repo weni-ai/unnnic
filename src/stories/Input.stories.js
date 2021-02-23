@@ -5,6 +5,7 @@ export default {
   title: 'Example/Input',
   component: unnnicInput,
   argTypes: {
+    size: { control: { type: 'select', options: ['md', 'sm'] } },
     type: { control: { type: 'select', options: ['normal', 'error'] } },
     nativeType: { control: { type: 'select', options: ['input', 'password'] } },
     placeholder: { control: { type: 'text' } },

@@ -6,11 +6,10 @@ export default {
   component: unnnicAutocomplete,
   argTypes: {
     type: { control: { type: 'select', options: ['normal', 'error'] } },
-    nativeType: { control: { type: 'select', options: ['input', 'password'] } },
+    size: { control: { type: 'select', options: ['md', 'sm'] } },
     placeholder: { control: { type: 'text' } },
     iconLeft: { control: { type: 'select', options: iconList } },
     iconRight: { control: { type: 'select', options: iconList } },
-    allowTogglePassword: { control: { type: 'select', options: [true, false] } },
   },
 };
 

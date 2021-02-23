@@ -16,13 +16,13 @@
         v-if="iconLeft"
         :icon="iconLeft"
         class="icon-left"
-        size="md"
+        :size="size"
         @click="onIconLeftClick" />
       <UIcon
         v-if="hasIconRight"
         :icon="iconToShowRight"
         class="icon-right"
-        size="md"
+        :size="size"
         :clickable="iconRightClickable || allowTogglePassword"
         @click="onIconRightClick" />
   </div>
@@ -72,6 +72,10 @@ export default {
     iconRightClickable: {
       type: Boolean,
       default: null,
+    },
+    size: {
+      type: String,
+      default: 'md',
     },
   },
   watch: {

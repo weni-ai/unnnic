@@ -10,6 +10,7 @@
         :hasIconLeft="iconLeft != null"
         :hasIconRight="iconRight != null"
         :type="type"
+        :size="size"
         v-on="inputListeners"
       />
       <u-icon
@@ -17,14 +18,14 @@
         :icon="iconLeft"
         :clickable="iconLeftClickable"
         class="icon-left"
-        size="md"
+        :size="size"
         @click="iconRightClicked" />
       <u-icon
         v-if="iconRight"
         :icon="iconRight"
         :clickable="iconRightClickable"
         class="icon-right"
-        size="md"
+        :size="size"
         @click="iconRightClicked" />
   </div>
 </template>
@@ -71,6 +72,10 @@ export default {
     iconRightClickable: {
       type: Boolean,
       default: null,
+    },
+    size: {
+      type: String,
+      default: 'md',
     },
   },
   mounted() {

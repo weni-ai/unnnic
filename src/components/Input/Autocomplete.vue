@@ -7,13 +7,16 @@
         :icon-left="iconLeft"
         :icon-right="iconRight"
         :type="type"
-        @focus="onFocus" />
+        @focus="onFocus"
+        :size="size" />
     <div
       v-show="open"
-      class="unnnic-autocomplete__list unnnic--clickable">
+      :class="['unnnic-autocomplete__list',
+                `unnnic-autocomplete__list--size-${size}`]">
         <p
           v-for="(option, index) in data"
           :key="index"
+          class="unnnic--clickable"
           @click="onChoose(option)" v-html="highlighted(option)" />
     </div>
   </div>
@@ -62,6 +65,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    size: {
+      type: String,
+      default: 'md',
+    },
   },
   data() {
     return {
@@ -90,6 +97,7 @@ export default {
     onChoose(option) {
       this.val = option;
       this.$emit('choose', option);
+      this.open = false;
     },
     onClickOutside() {
       if (!this.open) return;
@@ -127,14 +135,30 @@ export default {
     &__list {
         background-color: $unnnic-color-background-snow;
         font-family: $unnnic-font-family-secondary;
-        font-size: $unnnic-font-size-body-gt;
         display: absolute;
         top: 100%;
-        max-height: calc(5*(#{$unnnic-font-size-body-gt} + 16px));
         border-radius: $unnnic-border-radius-sm;
         box-shadow: $unnnic-shadow-level-near;
         overflow-y: auto;
         margin: $unnnic-spacing-stack-xs 0 0 0;
+
+        &--size-md {
+          max-height: calc(5*(#{$unnnic-font-size-body-gt} + 16px));
+          font-size: $unnnic-font-size-body-gt;
+
+          > * {
+            line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+          }
+        }
+
+        &--size-sm {
+          max-height: calc(5*(#{$unnnic-font-size-body-md} + 16px));
+          font-size: $unnnic-font-size-body-md;
+
+          > * {
+            line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+          }
+        }
 
         &::before {
           content: '';
@@ -150,7 +174,6 @@ export default {
 
         > * {
           padding: 0.25rem 0.5rem;
-          line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
           overflow: hidden;
           white-space: nowrap;
           margin: 0;
