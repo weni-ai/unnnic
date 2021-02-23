@@ -1,48 +1,48 @@
 <template>
+    <div v-click-outside="onClickOutside">
+    <p v-if="label" class="unnnic-form__label"> {{ label }}  </p>
     <div class='unnnic-select'>
-          <div :class="{'unnnic-select__field': true,
-          'unnnic-select__field--active': active,
-          'unnnic-select__field--inactive': !active,
-          }" @click="handleClickSelect()">
-          <span :class="[
-          'unnnic-select__field__selected',
-          `unnnic-select__field__selected--${size}`
-          ]">
-            {{selected ? selected.text : placeholder}}
-          </span>
-            <UICon
-              :icon="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
-              size="sm"/>
-          </div>
-          <slot />
-          <div
-          v-if="active"
-          :class="{'unnnic-select__options': true,
-          'unnnic-select__options--active': active,
-          'unnnic-select__options--inactive': !active }">
-            <select-item
-            v-for="(option, index) in options()"
-            :tabindex="index"
-            :size="size"
-            :key="option.value"
-            @click="onSelectOption(option)">
-                {{ option.text }}
-            </select-item>
+      <text-input
+        :value="selected ? selected.value : null"
+        :icon-right="active ?
+        'arrow-button-up-1' : 'arrow-button-down-1'"
+        icon-right-clickable
+        @icon-right-click="active = !active"
+        :size="size"
+        @focus="active = true"
+        readonly/>
+      <slot />
+      <div
+        v-if="active"
+        :class="{'unnnic-select__options': true,
+        'unnnic-select__options--active': active,
+        'unnnic-select__options--inactive': !active }">
+      <select-item
+        v-for="(option, index) in options()"
+        :tabindex="index"
+        :size="size"
+        :key="option.value"
+        @click="onSelectOption(option)">
+          {{ option.text }}
+        </select-item>
       </div>
     </div>
+    <p v-if="message" class="unnnic-form__message"> {{ message }} </p>
+  </div>
 </template>
 
 <script>
-import UICon from '../Icon.vue';
+import vClickOutside from 'v-click-outside';
 import selectItem from './SelectItem.vue';
+import TextInput from '../Input/TextInput.vue';
 
 export default {
   name: 'UnnicSelect',
-  components: { UICon, selectItem },
+  components: { TextInput, selectItem },
   props: {
     size: {
       type: String,
-      default: '',
+      default: 'md',
     },
     placeholder: {
       type: String,
@@ -51,12 +51,23 @@ export default {
     value: {
       type: null,
     },
+    label: {
+      type: String,
+      default: null,
+    },
+    message: {
+      type: String,
+      default: null,
+    },
   },
   data() {
     return {
       active: false,
       selected: null,
     };
+  },
+  directives: {
+    clickOutside: vClickOutside.directive,
   },
   watch: {
     selected() {
@@ -69,6 +80,9 @@ export default {
     },
   },
   methods: {
+    onClickOutside() {
+      this.active = false;
+    },
     onSelectOption(option) {
       if (option.value == null || option.value.length === 0) this.selected = null;
       else this.selected = option;

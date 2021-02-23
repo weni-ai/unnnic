@@ -2,12 +2,13 @@
       <input
         v-bind="attributes"
         v-model="val"
-        :class="{
-          'unnnic-form__input': true,
-          'unnnic-form__input--error': type === 'error',
-          'has-icon-left': hasIconLeft,
-          'has-icon-right': hasIconRight,
-        }"
+        :class="[
+          'unnnic-form__input',
+          `unnnic-form__input--size-${size}`,
+          type === 'error' ? 'unnnic-form__input--error' : '' ,
+          hasIconLeft ? 'has-icon-left': '',
+          hasIconRight ? 'has-icon-right': '',
+        ]"
         :type="nativeType"
         v-on="inputListeners"/>
 </template>
@@ -45,6 +46,10 @@ export default {
       type: String,
       default: 'text',
     },
+    size: {
+      type: String,
+      default: 'md',
+    },
   },
   computed: {
     inputListeners() {
@@ -80,14 +85,23 @@ export default {
     background: $unnnic-color-neutral-snow;
     border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
     border-radius: $unnnic-border-radius-sm;
-    padding: $unnnic-squish-xs;
     color: inherit;
     font-weight: $unnnic-font-weight-regular;
-    font-size: $unnnic-font-size-body-gt;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     font-family: $unnnic-font-family-secondary;
     box-sizing: border-box;
     width: 100%;
+
+    &--size-md {
+      font-size: $unnnic-font-size-body-gt;
+      line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+      padding: $unnnic-squish-xs;
+    }
+
+    &--size-sm {
+      font-size: $unnnic-font-size-body-md;
+      line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+      padding: $unnnic-squish-nano;
+    }
 
     &:focus {
       color: $unnnic-color-brand-weni-soft;

@@ -13,7 +13,10 @@
         :icon-left="iconLeft"
         :icon-right="iconRight"
         :allow-toggle-password="togglePassword"
-        :type="type" />
+        :type="type"
+        :icon-left-clickable="iconLeftClickable"
+        :icon-right-clickable="iconRightClickable"
+        :size="size" />
     <p class="unnnic-form__message"> {{ message }} </p>
   </div>
 </template>
@@ -61,6 +64,18 @@ export default {
     togglePassword: {
       type: Boolean,
       default: false,
+    },
+    iconLeftClickable: {
+      type: Boolean,
+      default: null,
+    },
+    iconRightClickable: {
+      type: Boolean,
+      default: null,
+    },
+    size: {
+      type: String,
+      default: 'md',
     },
   },
   data() {
