@@ -47,6 +47,11 @@ export default {
       this.active = false;
     },
   },
+  watch: {
+    active() {
+      this.$emit(this.active ? 'open' : 'close');
+    },
+  },
 };
 </script>
 
