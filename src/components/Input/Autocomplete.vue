@@ -15,7 +15,7 @@
         <p
           v-for="(option, index) in data"
           :key="index"
-          @click="onChoose(option)"> {{ option }} </p>
+          @click="onChoose(option)" v-html="highlighted(option)" />
     </div>
   </div>
 </template>
@@ -63,6 +63,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    highlight: {
+      type: Boolean,
+      default: false,
+    },
   },
   data() {
     return {
@@ -87,19 +91,18 @@ export default {
   methods: {
     onFocus() {
       this.open = true;
-      console.log('on focus');
     },
     onChoose(option) {
-      console.log('choose', option);
       this.val = option;
       this.$emit('choose', option);
     },
-    onClickOutside(event) {
-      console.log('on click outside', event);
-      console.log('ref', this.$refs.input);
-      console.log(event.srcElement.offsetParent === this.$refs.input);
+    onClickOutside() {
       if (!this.open) return;
       this.open = false;
+    },
+    highlighted(text) {
+      if (!this.highlight || !this.val || this.val.length === 0) return text;
+      return text.replaceAll(this.val, (match) => `<span class="unnnic-autocomplete--highlighted"> ${match} </span>`);
     },
   },
   computed: {
@@ -118,6 +121,14 @@ export default {
 
 .unnnic-autocomplete {
     display: relative;
+
+    &--highlighted {
+      white-space: nowrap;
+      color: $unnnic-color-brand-weni;
+      display: inline-block;
+      font-weight: $unnnic-font-weight-bold;
+    }
+
     &__list {
         background-color: $unnnic-color-background-snow;
         font-family: $unnnic-font-family-secondary;
@@ -129,6 +140,7 @@ export default {
         box-shadow: $unnnic-shadow-level-near;
         overflow-y: auto;
         margin: $unnnic-spacing-stack-xs 0 0 0;
+        // color: $unnnic-color-neutral-clean;
 
         &::before {
           content: '';
