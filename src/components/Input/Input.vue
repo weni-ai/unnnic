@@ -3,7 +3,7 @@
     'unnnic-form': true,
     'unnnic-form--error': type === 'error'
     }">
-      <p class="unnnic-form__label"> {{ label }}  </p>
+      <p v-if="label" class="unnnic-form__label"> {{ label }}  </p>
       <component
         v-model="val"
         v-on="inputListeners"
