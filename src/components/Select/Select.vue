@@ -1,31 +1,31 @@
 <template>
-    <div v-click-outside="onClickOutside">
+  <div v-click-outside="onClickOutside" class='unnnic-select'>
     <p v-if="label" class="unnnic-form__label"> {{ label }}  </p>
-    <div class='unnnic-select'>
-      <text-input
-        :value="selected ? selected.value : null"
-        :icon-right="active ?
-        'arrow-button-up-1' : 'arrow-button-down-1'"
-        icon-right-clickable
-        @icon-right-click="active = !active"
-        :size="size"
-        @focus="active = true"
-        readonly/>
-      <slot />
-      <div
-        v-if="active"
-        :class="{'unnnic-select__options': true,
-        'unnnic-select__options--active': active,
-        'unnnic-select__options--inactive': !active }">
-      <select-item
-        v-for="(option, index) in options()"
-        :tabindex="index"
-        :size="size"
-        :key="option.value"
-        @click="onSelectOption(option)">
-          {{ option.text }}
-        </select-item>
-      </div>
+    <text-input
+      :value="selected ? selected.value : null"
+      :placeholder="placeholder"
+      :icon-right="active ?
+      'arrow-button-up-1' : 'arrow-button-down-1'"
+      :type="type"
+      icon-right-clickable
+      @icon-right-click="active = !active"
+      :size="size"
+      @focus="active = true"
+      readonly/>
+    <slot />
+    <div
+      v-if="active"
+      :class="{'unnnic-select__options': true,
+      'unnnic-select__options--active': active,
+      'unnnic-select__options--inactive': !active }">
+    <select-item
+      v-for="(option, index) in options()"
+      :tabindex="index"
+      :size="size"
+      :key="option.value"
+      @click="onSelectOption(option)">
+        {{ option.text }}
+      </select-item>
     </div>
     <p v-if="message" class="unnnic-form__message"> {{ message }} </p>
   </div>
@@ -43,6 +43,13 @@ export default {
     size: {
       type: String,
       default: 'md',
+    },
+    type: {
+      type: String,
+      default: 'normal',
+      validator(value) {
+        return ['normal', 'error'].indexOf(value) !== -1;
+      },
     },
     placeholder: {
       type: String,
@@ -101,7 +108,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../assets/scss/unnnic.scss';
 option {
     display: none;
@@ -121,7 +128,8 @@ option {
 }
 
   .unnnic-select {
-
+  font-family: $unnnic-font-family-secondary;
+  position: relative;
   &__field {
     display: flex;
     justify-content: space-between;
@@ -170,6 +178,9 @@ option {
     margin-top: 4px;
     box-shadow: $unnnic-shadow-level-near;
     background-color: $unnnic-color-background-snow;
+    position: absolute;
+    left: 0;
+    right: 0;
 
     &--inactive{
       display: none;

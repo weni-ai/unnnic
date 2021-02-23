@@ -127,6 +127,7 @@ export default {
 
 .unnnic-autocomplete {
     position: relative;
+    font-family: $unnnic-font-family-secondary;
 
     &--highlighted {
       white-space: nowrap;
