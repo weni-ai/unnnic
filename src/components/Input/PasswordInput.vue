@@ -10,6 +10,7 @@
         :hasIconRight="hasIconRight"
         :type="type"
         :nativeType="showPassword ? 'text' : 'password'"
+        :size="size"
         v-model="val"
       />
       <UIcon
