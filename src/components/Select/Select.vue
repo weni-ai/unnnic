@@ -72,7 +72,6 @@ export default {
   watch: {
     selected() {
       const value = this.selected ? this.selected.value : null;
-      console.log(this.selected, value);
       this.$emit('onChange', value);
       this.$emit('input', value);
     },
