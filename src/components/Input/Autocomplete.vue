@@ -1,7 +1,6 @@
 <template>
   <div class="unnnic-autocomplete" v-click-outside="onClickOutside">
       <text-input
-        ref="input"
         v-model="val"
         v-on="inputListeners"
         :v-bind="$attrs"
@@ -58,10 +57,6 @@ export default {
     iconRight: {
       type: String,
       default: null,
-    },
-    togglePassword: {
-      type: Boolean,
-      default: false,
     },
     highlight: {
       type: Boolean,
@@ -140,7 +135,6 @@ export default {
         box-shadow: $unnnic-shadow-level-near;
         overflow-y: auto;
         margin: $unnnic-spacing-stack-xs 0 0 0;
-        // color: $unnnic-color-neutral-clean;
 
         &::before {
           content: '';

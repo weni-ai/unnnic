@@ -17,13 +17,13 @@
         :icon="iconLeft"
         class="icon-left"
         size="md"
-        @click="onIconRightClick" />
+        @click="onIconLeftClick" />
       <UIcon
         v-if="hasIconRight"
         :icon="iconToShowRight"
         class="icon-right"
         size="md"
-        :clickable="allowTogglePassword"
+        :clickable="iconRightClickable || allowTogglePassword"
         @click="onIconRightClick" />
   </div>
 </template>
@@ -65,6 +65,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    iconLeftClickable: {
+      type: Boolean,
+      default: null,
+    },
+    iconRightClickable: {
+      type: Boolean,
+      default: null,
+    },
   },
   watch: {
     val() {
@@ -79,9 +87,14 @@ export default {
     this.val = this.value;
   },
   methods: {
+    onIconLeftClick() {
+      if (this.attributes.disabled || !this.iconLeftClickable) return;
+      this.$emit('icon-leftt-click');
+    },
     onIconRightClick() {
-      if (this.attributes.disabled || !this.allowTogglePassword) return;
-      this.showPassword = !this.showPassword;
+      if (this.attributes.disabled) return;
+      if (this.allowTogglePassword) this.showPassword = !this.showPassword;
+      else if (this.iconRightClickable) this.$emit('icon-right-click');
     },
   },
   computed: {
