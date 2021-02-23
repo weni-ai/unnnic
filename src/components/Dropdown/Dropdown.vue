@@ -22,6 +22,10 @@ import vClickOutside from 'v-click-outside';
 export default {
   name: 'unnnicDropdown',
   props: {
+    open: {
+      type: Boolean,
+      default: false,
+    },
     position: {
       type: String,
       default: 'bottom-left',
@@ -48,8 +52,11 @@ export default {
     },
   },
   watch: {
+    open() {
+      this.active = this.open;
+    },
     active() {
-      this.$emit(this.active ? 'open' : 'close');
+      this.$emit('update:open', this.active);
     },
   },
 };
