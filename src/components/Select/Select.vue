@@ -1,4 +1,6 @@
 <template>
+    <div>
+    <p v-if="label" class="unnnic-form__label"> {{ label }}  </p>
     <div class='unnnic-select'>
           <div :class="{'unnnic-select__field': true,
           'unnnic-select__field--active': active,
@@ -19,7 +21,8 @@
           v-if="active"
           :class="{'unnnic-select__options': true,
           'unnnic-select__options--active': active,
-          'unnnic-select__options--inactive': !active }">
+          'unnnic-select__options--inactive': !active }"
+          v-click-outside="onClickOutside">
             <select-item
             v-for="(option, index) in options()"
             :tabindex="index"
@@ -30,9 +33,12 @@
             </select-item>
       </div>
     </div>
+    <p v-if="message" class="unnnic-form__message"> {{ message }} </p>
+  </div>
 </template>
 
 <script>
+import vClickOutside from 'v-click-outside';
 import UICon from '../Icon.vue';
 import selectItem from './SelectItem.vue';
 
@@ -51,12 +57,23 @@ export default {
     value: {
       type: null,
     },
+    label: {
+      type: String,
+      default: null,
+    },
+    message: {
+      type: String,
+      default: null,
+    },
   },
   data() {
     return {
       active: false,
       selected: null,
     };
+  },
+  directives: {
+    clickOutside: vClickOutside.directive,
   },
   watch: {
     selected() {
@@ -69,6 +86,9 @@ export default {
     },
   },
   methods: {
+    onClickOutside(event) {
+      this.active = false;
+    },
     onSelectOption(option) {
       if (option.value == null || option.value.length === 0) this.selected = null;
       else this.selected = option;

@@ -1,11 +1,15 @@
 <template>
-    <div class="unnnic-dropdown" @click="active = !active">
+    <div class="unnnic-dropdown" @click="onClickTrigger">
         <div class="unnnic-dropdown__trigger">
             <slot name="trigger" />
-            <div :class="[
-            'unnnic-dropdown__content',
-            active ? '' : 'unnnic-dropdown__content--hidden',
-            `unnnic-dropdown__content__position-${position}` ]">
+            <div
+            v-if="active"
+            :class="[
+              'unnnic-dropdown__content',
+              active ? '' : 'unnnic-dropdown__content--hidden',
+              `unnnic-dropdown__content__position-${position}` ]"
+              v-click-outside="onClickOutside"
+              >
             <slot />
         </div>
         </div>
@@ -13,6 +17,8 @@
 </template>
 
 <script>
+import vClickOutside from 'v-click-outside';
+
 export default {
   name: 'unnnicDropdown',
   props: {
@@ -28,6 +34,18 @@ export default {
     return {
       active: false,
     };
+  },
+  directives: {
+    clickOutside: vClickOutside.directive,
+  },
+  methods: {
+    onClickTrigger() {
+      this.active = true;
+    },
+    onClickOutside() {
+      if (!this.active) return;
+      this.active = false;
+    },
   },
 };
 </script>
