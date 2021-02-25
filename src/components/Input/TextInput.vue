@@ -18,14 +18,14 @@
         :icon="iconLeft"
         :clickable="iconLeftClickable"
         class="icon-left"
-        :size="size"
+        :size="iconSize"
         @click="iconRightClicked" />
       <u-icon
         v-if="iconRight"
         :icon="iconRight"
         :clickable="iconRightClickable"
         class="icon-right"
-        :size="size"
+        :size="iconSize"
         @click="iconRightClicked" />
   </div>
 </template>
@@ -91,6 +91,11 @@ export default {
     attributes() {
       return { ...this.$attrs, ...this.$attrs['v-bind'] };
     },
+    iconSize() {
+      if (this.size === 'md') return 'sm';
+      if (this.size === 'sm') return 'xs';
+      return 'sm';
+    },
   },
   methods: {
     iconRightClicked() {
@@ -139,13 +144,13 @@ export default {
 
   &-left {
     position: absolute;
-    top: 25%;
+    transform: translateY(100%);
     left: $unnnic-inline-sm;
   }
 
   &-right {
     position: absolute;
-    top: 25%;
+    transform: translateY(100%);
     right: $unnnic-inline-sm;
   }
 }

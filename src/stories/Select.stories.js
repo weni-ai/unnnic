@@ -5,6 +5,7 @@ export default {
   component: unnnicSelect,
   argTypes: {
     size: { control: { type: 'select', options: ['md', 'sm'] } },
+    type: { control: { type: 'select', options: ['normal', 'error'] } },
   },
 };
 

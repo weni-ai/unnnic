@@ -14,6 +14,7 @@ import modal from './Modal/Modal.vue';
 import alert from '../utils/alert';
 import select from './Select/Select.vue';
 import selectItem from './Select/SelectItem.vue';
+import autocomplete from './Input/Autocomplete.vue';
 
 const components = {
   unnnicInput: input,
@@ -30,6 +31,7 @@ const components = {
   unnnicModal: modal,
   unnnicSelect: select,
   unnnicSelectItem: selectItem,
+  unnnicAutocomplete: autocomplete,
 };
 
 Object.keys(components).forEach((name) => {
@@ -51,3 +53,4 @@ export const unnnicModal = modal;
 export const unnnicSelect = select;
 export const unnnicSelectItem = selectItem;
 export const unnnicCallAlert = alert.callAlert;
+export const unnnicAutocomplete = autocomplete;

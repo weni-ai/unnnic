@@ -1,5 +1,6 @@
 <template>
   <div class="unnnic-autocomplete" v-click-outside="onClickOutside">
+    <p v-if="label" class="unnnic-form__label"> {{ label }}  </p>
       <text-input
         v-model="val"
         v-on="inputListeners"
@@ -12,13 +13,15 @@
     <div
       v-show="open"
       :class="['unnnic-autocomplete__list',
-                `unnnic-autocomplete__list--size-${size}`]">
+                `unnnic-autocomplete__list--size-${size}`,
+                message && message.length > 0 ? 'unnnic-autocomplete__list--with-message' : '']">
         <p
           v-for="(option, index) in data"
           :key="index"
           class="unnnic--clickable"
           @click="onChoose(option)" v-html="highlighted(option)" />
     </div>
+    <p v-if="message" class="unnnic-form__message"> {{ message }} </p>
   </div>
 </template>
 
@@ -123,7 +126,8 @@ export default {
 @import '../../assets/scss/unnnic.scss';
 
 .unnnic-autocomplete {
-    display: relative;
+    position: relative;
+    font-family: $unnnic-font-family-secondary;
 
     &--highlighted {
       white-space: nowrap;
@@ -135,12 +139,19 @@ export default {
     &__list {
         background-color: $unnnic-color-background-snow;
         font-family: $unnnic-font-family-secondary;
-        display: absolute;
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: 1;
         top: 100%;
         border-radius: $unnnic-border-radius-sm;
         box-shadow: $unnnic-shadow-level-near;
         overflow-y: auto;
         margin: $unnnic-spacing-stack-xs 0 0 0;
+
+        &--with-message {
+          top: calc(100% - 20px);
+        }
 
         &--size-md {
           max-height: calc(5*(#{$unnnic-font-size-body-gt} + 16px));
