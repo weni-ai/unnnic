@@ -10,7 +10,7 @@
         :hasIconRight="hasIconRight"
         :type="type"
         :nativeType="showPassword ? 'text' : 'password'"
-        :size="size"
+        :size="iconSize"
         v-model="val"
       />
       <UIcon
@@ -23,7 +23,7 @@
         v-if="hasIconRight"
         :icon="iconToShowRight"
         class="icon-right"
-        :size="size"
+        :size="iconSize"
         :clickable="iconRightClickable || allowTogglePassword"
         @click="onIconRightClick" />
   </div>
@@ -103,6 +103,11 @@ export default {
     },
   },
   computed: {
+    iconSize() {
+      if (this.size === 'md') return 'sm';
+      if (this.size === 'sm') return 'xs';
+      return 'sm';
+    },
     hasIconRight() {
       return this.allowTogglePassword || this.iconRight != null;
     },
@@ -152,13 +157,13 @@ export default {
 
   &-left {
     position: absolute;
-    top: 25%;
+    transform: translateY(100%);
     left: $unnnic-inline-sm;
   }
 
   &-right {
     position: absolute;
-    top: 25%;
+    transform: translateY(100%);
     right: $unnnic-inline-sm;
   }
 }
