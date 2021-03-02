@@ -17,7 +17,7 @@
         :icon-left-clickable="iconLeftClickable"
         :icon-right-clickable="iconRightClickable"
         :size="size" />
-    <p class="unnnic-form__message"> {{ message }} </p>
+    <p v-if="message" class="unnnic-form__message"> {{ message }} </p>
   </div>
 </template>
 

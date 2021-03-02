@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import alert from '../../utils/alert';
+import alert from '../../utils/call';
 
 export default {
   props: {
