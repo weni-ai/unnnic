@@ -14,7 +14,6 @@ export default {
   },
 
   callModal({ props }) {
-    console.log(props);
     const ModalClass = Vue.extend(Modal);
     const instance = new ModalClass({
       propsData: { ...props, onClose: () => { instance.$el.remove(); } },
