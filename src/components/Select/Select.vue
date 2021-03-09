@@ -2,7 +2,7 @@
   <div v-click-outside="onClickOutside" class='unnnic-select'>
     <p v-if="label" class="unnnic-form__label"> {{ label }}  </p>
     <text-input
-      :value="selected ? selected.value : null"
+      :value="selected ? selected.text : null"
       :placeholder="placeholder"
       :icon-right="active ?
       'arrow-button-up-1' : 'arrow-button-down-1'"
