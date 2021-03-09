@@ -13,6 +13,7 @@
       :info-position="infoPosition"
       :enabled="enabled"
       :scheme="scheme"
+      :clickable="clickable"
     />
 </template>
 
@@ -22,6 +23,7 @@ import DashCard from './DashCard.vue';
 import TitleCard from './TitleCard.vue';
 import StatusCard from './StatusCard.vue';
 import AccountCard from './AccountCard.vue';
+import DefaultCard from './DefaultCard.vue';
 
 export default {
   name: 'unnnic-card',
@@ -80,6 +82,10 @@ export default {
           'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink'].indexOf(value) !== -1;
       },
     },
+    clickable: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     currentTypeIcon() {
@@ -95,6 +101,7 @@ export default {
       if (this.type === 'dash') return DashCard;
       if (this.type === 'status') return StatusCard;
       if (this.type === 'account') return AccountCard;
+      if (this.type === 'default') return DefaultCard;
       return TitleCard;
     },
   },
