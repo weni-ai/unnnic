@@ -84,7 +84,7 @@ export default {
     },
     clickable: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   computed: {
