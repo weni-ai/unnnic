@@ -1,7 +1,7 @@
 <template>
     <span
       @click="onClick"
-      :class="`unnnic-icon icon-${icon} unnnic-icon-${size}
+      :class="`unnnic-icon icon-${icon} unnnic-icon-${size || 'md'}
         ${scheme ? `unnnic-icon-scheme--${scheme}` : ''}
         ${scheme && hasBackground ? `unnnic-icon-background-scheme--${scheme}` : ''}
         icon-${size} ${ clickable ? 'unnnic--clickable' : '' }`">
@@ -24,7 +24,8 @@ export default {
       type: String,
       default: 'md',
       validator(value) {
-        return ['nano', 'xs', 'sm', 'md', 'lg'].indexOf(value) !== -1;
+        if (!value) return true;
+        return ['nano', 'xs', 'sm', 'md', 'lg', 'xl'].indexOf(value) !== -1;
       },
     },
     scheme: {

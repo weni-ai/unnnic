@@ -1,5 +1,5 @@
 import alertCaller from '../components/Alert/AlertCaller.vue';
-import alert from '../utils/alert';
+import alert from '../utils/call';
 
 export default {
   title: 'example/Alert',

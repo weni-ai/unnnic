@@ -1,4 +1,5 @@
 import unnnicModal from '../components/Modal/Modal.vue';
+import unnnicCallModal from '../components/Modal/CallModal.vue';
 import unnnicButton from '../components/Button/Button.vue';
 
 export default {
@@ -24,7 +25,7 @@ const Template = (args, { argTypes }) => ({
   template: '<unnnicModal v-bind="$props" />',
 });
 
-const ButtonTemplate = (args, { argTypes }) => ({
+const ModalTemplate = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicModal, unnnicButton },
   template: '<unnnicModal v-bind="$props"><unnnic-button slot="options"> Button 1 </unnnic-button> <unnnic-button slot="options"> Button 2 </unnnic-button> </div> </unnnic-modal>',
@@ -39,7 +40,7 @@ Normal.args = {
   showModal: true,
 };
 
-export const Buttons = ButtonTemplate.bind({});
+export const Buttons = ModalTemplate.bind({});
 Buttons.args = {
   text: 'Title text',
   description: 'Message body',
@@ -47,3 +48,11 @@ Buttons.args = {
   closeIcon: true,
   showModal: true,
 };
+
+const CallTemplate = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { unnnicCallModal },
+  template: '<unnnic-call-modal />',
+});
+
+export const Call = CallTemplate.bind({});

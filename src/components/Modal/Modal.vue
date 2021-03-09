@@ -57,11 +57,11 @@ export default {
     },
     modalIcon: {
       type: String,
-      default: 'alert-circle-1',
+      default: null,
     },
     closeIcon: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     description: {
       type: String,
