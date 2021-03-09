@@ -54,3 +54,10 @@ Account.args = {
   title: 'This is the title',
   description: 'This is the description',
 };
+
+export const Default = Template.bind({});
+Default.args = {
+  type: 'default',
+  title: 'This is the title',
+  description: 'This is the description',
+};
