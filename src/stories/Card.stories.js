@@ -7,7 +7,7 @@ export default {
   argTypes: {
     enabled: { control: { type: 'select', options: [true, false] } },
     infoPosition: { control: { type: 'select', options: ['top', 'right', 'bottom', 'left'] } },
-    type: { control: { type: 'select', options: ['title', 'dash', 'account', 'status'] } },
+    type: { control: { type: 'select', options: ['title', 'dash', 'account', 'status', 'default'] } },
     icon: { control: { type: 'select', options: iconList } },
     scheme: {
       control: {
