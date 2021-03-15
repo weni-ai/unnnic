@@ -15,6 +15,7 @@ import call from '../utils/call';
 import select from './Select/Select.vue';
 import selectItem from './Select/SelectItem.vue';
 import autocomplete from './Input/Autocomplete.vue';
+import tag from './Tag/Tag.vue';
 
 const components = {
   unnnicInput: input,
@@ -32,6 +33,7 @@ const components = {
   unnnicSelect: select,
   unnnicSelectItem: selectItem,
   unnnicAutocomplete: autocomplete,
+  unnnicTag: tag,
 };
 
 Object.keys(components).forEach((name) => {
@@ -55,3 +57,4 @@ export const unnnicSelectItem = selectItem;
 export const unnnicCallAlert = call.callAlert;
 export const unnnicCallModal = call.callModal;
 export const unnnicAutocomplete = autocomplete;
+export const unnnicTag = tag;
