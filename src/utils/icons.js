@@ -1,3 +1,4 @@
+/* eslint-disable import/no-webpack-loader-syntax */
 import headphonesCustomerSupport2 from '!!svg-inline-loader!../assets/icons/headphones-customer-support-2.svg';
 import expand81 from '!!svg-inline-loader!../assets/icons/expand-8-1.svg';
 import flash14 from '!!svg-inline-loader!../assets/icons/flash-1-4.svg';
@@ -5,7 +6,7 @@ import phoneCharger1 from '!!svg-inline-loader!../assets/icons/phone-charger-1.s
 import checkboxDisable from '!!svg-inline-loader!../assets/icons/checkbox-disable.svg';
 import headphonesCustomerSupport1 from '!!svg-inline-loader!../assets/icons/headphones-customer-support-1.svg';
 import arrowButtonDown1 from '!!svg-inline-loader!../assets/icons/arrow-button-down-1.svg';
-import iconScript from '!!svg-inline-loader!../assets/icons/icon-script.py';
+// import iconScript from '!!svg-inline-loader!../assets/icons/icon-script.py';
 import vipCrownQueen2 from '!!svg-inline-loader!../assets/icons/vip-crown-queen-2.svg';
 import readEmailAt1 from '!!svg-inline-loader!../assets/icons/read-email-at-1.svg';
 import flash13 from '!!svg-inline-loader!../assets/icons/flash-1-3.svg';
