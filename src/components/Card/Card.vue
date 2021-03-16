@@ -4,6 +4,7 @@
       :is="currentComponent"
       :v-bind="$attrs"
       :title="title"
+      :text="text"
       :info="info"
       :icon="currentTypeIcon"
       :value="value"
@@ -24,6 +25,7 @@ import TitleCard from './TitleCard.vue';
 import StatusCard from './StatusCard.vue';
 import AccountCard from './AccountCard.vue';
 import DefaultCard from './DefaultCard.vue';
+import BlankCard from './BlankCard.vue';
 
 export default {
   name: 'unnnic-card',
@@ -34,7 +36,7 @@ export default {
       default: 'title',
       validator(value) {
         return (
-          ['title', 'status', 'dash', 'account'].indexOf(value) !== -1
+          ['title', 'status', 'dash', 'account', 'default', 'blank'].indexOf(value) !== -1
         );
       },
     },
@@ -51,6 +53,10 @@ export default {
       default: null,
     },
     info: {
+      type: String,
+      default: null,
+    },
+    text: {
       type: String,
       default: null,
     },
@@ -94,6 +100,7 @@ export default {
       if (this.type === 'dash') return 'messages-bubble-1';
       if (this.type === 'status') return 'science-fiction-robot-2';
       if (this.type === 'account') return 'single-neutral-2';
+      // if (this.type === 'blank') return 'add-1';
       return null;
     },
     currentComponent() {
@@ -102,6 +109,7 @@ export default {
       if (this.type === 'status') return StatusCard;
       if (this.type === 'account') return AccountCard;
       if (this.type === 'default') return DefaultCard;
+      if (this.type === 'blank') return BlankCard;
       return TitleCard;
     },
   },

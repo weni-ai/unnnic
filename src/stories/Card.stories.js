@@ -7,7 +7,7 @@ export default {
   argTypes: {
     enabled: { control: { type: 'select', options: [true, false] } },
     infoPosition: { control: { type: 'select', options: ['top', 'right', 'bottom', 'left'] } },
-    type: { control: { type: 'select', options: ['title', 'dash', 'account', 'status'] } },
+    type: { control: { type: 'select', options: ['title', 'dash', 'account', 'status', 'default', 'blank'] } },
     icon: { control: { type: 'select', options: iconList } },
     scheme: {
       control: {
@@ -60,4 +60,10 @@ Default.args = {
   type: 'default',
   title: 'This is the title',
   description: 'This is the description',
+};
+
+export const Blank = Template.bind({});
+Blank.args = {
+  type: 'blank',
+  text: 'This is the text',
 };
