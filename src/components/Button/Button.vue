@@ -4,7 +4,8 @@
     :class="[
       'unnnic-button',
       `unnnic-button--size-${size}`,
-      `unnnic-button--${type}`
+      `unnnic-button--${type}`,
+      iconCenter ? `unnnic-button--icon-on-center` : null
     ]"
     v-on="$listeners">
     <u-icon
@@ -12,6 +13,7 @@
       :class="{ 'unnnic-button__icon-left': hasText }"
       :size="iconSize"
     />
+    <unnnic-icon-svg v-if="iconCenter" :icon="iconCenter" :scheme="iconScheme"></unnnic-icon-svg>
     <span class="unnnic-button__label">
       <slot /> {{ text }}
     </span>
@@ -25,10 +27,11 @@
 
 <script>
 import UIcon from '../Icon.vue';
+import UnnnicIconSvg from '../Icon-svg.vue';
 
 export default {
   name: 'unnnic-button',
-  components: { UIcon },
+  components: { UIcon, UnnnicIconSvg },
   props: {
     size: {
       type: String,
@@ -56,6 +59,10 @@ export default {
       type: String,
       default: null,
     },
+    iconCenter: {
+      type: String,
+      default: null,
+    },
   },
   computed: {
     iconSize() {
@@ -66,12 +73,19 @@ export default {
       if (this.$slots.default) return true;
       return this.text && this.text.length > 0;
     },
+    iconScheme() {
+      if (this.type === 'secondary') {
+        return 'neutral-dark';
+      }
+
+      return '';
+    },
   },
 };
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnnic.scss';
+@import "../../assets/scss/unnnic.scss";
 
 .unnnic-button {
   display: inline-flex;
@@ -116,10 +130,10 @@ export default {
   &--secondary {
     background-color: rgba($unnnic-color-neutral-clean, $unnnic-opacity-level-light);
     color: $unnnic-color-neutral-dark;
-    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
+    box-shadow: inset 0px 0px 0px $unnnic-border-width-thinner $unnnic-color-neutral-clean;
 
     &:hover:enabled {
-      border: 0;
+      box-shadow: none;
     }
 
     &:disabled {
@@ -155,6 +169,34 @@ export default {
       padding: $unnnic-squish-nano;
       font-size: $unnnic-font-size-body-md;
       line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
+    }
+  }
+}
+</style>
+
+<style lang="scss" scoped>
+@import "../../assets/scss/unnnic.scss";
+
+.unnnic-button--icon-on-center {
+  min-width: auto;
+
+  &.unnnic-button--size {
+    &-large {
+      padding: $unnnic-inset-xs;
+
+      .unnnic-icon {
+        width: $unnnic-icon-size-md;
+        height: $unnnic-icon-size-md;
+      }
+    }
+
+    &-small {
+      padding: $unnnic-inset-nano;
+
+      .unnnic-icon {
+        width: $unnnic-icon-size-ant;
+        height: $unnnic-icon-size-ant;
+      }
     }
   }
 }

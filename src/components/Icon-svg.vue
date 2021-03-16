@@ -5,7 +5,9 @@
       'unnnic-icon',
       `unnnic-icon__size--${size}`,
       clickable ? 'unnnic--clickable' : '',
-      lineHeight ? `unnnic-icon__line-height--${lineHeight}` : '']"
+      lineHeight ? `unnnic-icon__line-height--${lineHeight}` : '',
+      scheme ? `unnnic-icon-scheme--${scheme}` : '',
+    ]"
     v-html="svg" />
 </template>
 
@@ -31,16 +33,18 @@ export default {
       },
     },
     lineHeight: {
-        type: String,
-        default: null,
-        validator(value) {
-          return !value || ['sm', 'md', 'lg'].indexOf(value) !== -1;
-        },
+      type: String,
+      default: null,
+      validator(value) {
+        return !value || ['sm', 'md', 'lg'].indexOf(value) !== -1;
       },
+    },
+    scheme: {
+      type: String,
+      default: '',
+    },
   },
-  mounted() {
-    console.log({ icons });
-  },
+  mounted() {},
   computed: {
     svg() {
       return icons[this.icon];
@@ -56,7 +60,29 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../assets/scss/unnnic.scss';
+@import "../assets/scss/unnnic.scss";
+
+$scheme-colors: "feedback-red" $unnnic-color-feedback-red,
+  "feedback-green" $unnnic-color-feedback-green, "feedback-yellow" $unnnic-color-feedback-yellow,
+  "feedback-blue" $unnnic-color-feedback-blue, "feedback-grey" $unnnic-color-feedback-grey,
+  "aux-blue" $unnnic-color-aux-blue, "aux-purple" $unnnic-color-aux-purple,
+  "aux-orange" $unnnic-color-aux-orange, "aux-lemon" $unnnic-color-aux-lemon,
+  "aux-pink" $unnnic-color-aux-pink, "brand-weni" $unnnic-color-brand-weni,
+  "neutral-clean" $unnnic-color-neutral-clean, "neutral-dark" $unnnic-color-neutral-dark;
+
+@each $name, $color in $scheme-colors {
+  .unnnic-icon-scheme {
+    &--#{$name} {
+      & .primary {
+        fill: $color;
+      }
+
+      & .primary-stroke {
+        stroke: $color;
+      }
+    }
+  }
+}
 
 $icon-sizes:
     'xl' $unnnic-icon-size-xl,
@@ -73,6 +99,8 @@ $line-heights:
     .unnnic-icon {
       position: relative;
       display: inline-block;
+      vertical-align: middle;
+
         @each $name, $size in $icon-sizes {
             &__size--#{$name} {
                 width: $size;
@@ -90,9 +118,6 @@ $line-heights:
         svg {
             width: 100%;
             height: 100%;
-            path {
-                fill: currentColor!important;
-            }
         }
     }
 </style>
