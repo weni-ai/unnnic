@@ -1,7 +1,7 @@
 import unnnicTable from '../components/Table/Table.vue';
 import unnnicTableRow from '../components/Table/TableRow.vue';
 import unnnicButton from '../components/Button/Button.vue';
-import unnnicIconSvg from '../components/Icon-svg.vue';
+import unnnicCheckbox from '../components/Checkbox/Checkbox.vue';
 
 export default {
   title: 'example/Table',
@@ -18,7 +18,7 @@ const Template = (args, { argTypes }) => ({
     unnnicTable,
     unnnicTableRow,
     unnnicButton,
-    unnnicIconSvg,
+    unnnicCheckbox,
   },
   template: `
     <div>
@@ -30,7 +30,7 @@ const Template = (args, { argTypes }) => ({
         <template v-slot:header>
           <unnnic-table-row :headers="table.headers">
             <template v-slot:checkarea>
-              <unnnic-icon-svg :icon="generalIcon.name" :scheme="generalIcon.color" clickable @click="clickGeneralCheckbox" :style="{margin: '4px'}"/>
+              <unnnic-checkbox :value="generalValue" @change="changeGeneralCheckbox" :style="{margin: '4px'}"/>
             </template>
           </unnnic-table-row>
         </template>
@@ -38,7 +38,7 @@ const Template = (args, { argTypes }) => ({
         <template v-slot:item="{ item }">
           <unnnic-table-row :headers="table.headers">
             <template v-slot:checkarea>
-              <unnnic-icon-svg size="md" :icon="item.selected ? 'checkbox-select' : 'checkbox-default'" :scheme="item.selected ? 'brand-weni' : 'neutral-clean'" clickable @click="item.selected = !item.selected" :style="{margin: '4px'}"/>
+              <unnnic-checkbox v-model="item.selected" :style="{margin: '4px'}"/>
             </template>
 
             <template v-slot:project>
@@ -113,41 +113,25 @@ const Template = (args, { argTypes }) => ({
   },
 
   computed: {
-    generalIconType() {
+    generalValue() {
       if (!this.table.items.find((item) => item.selected)) {
-        return 'none';
+        return false;
       }
-      if (!this.table.items.find((item) => !item.selected)) {
-        return 'all';
-      }
-      return 'some';
-    },
 
-    generalIcon() {
-      return {
-        none: {
-          name: 'checkbox-default',
-          color: 'neutral-clean',
-        },
-        all: {
-          name: 'checkbox-select',
-          color: 'brand-weni',
-        },
-        some: {
-          name: 'checkbox-less',
-          color: 'brand-weni',
-        },
-      }[this.generalIconType];
+      if (!this.table.items.find((item) => !item.selected)) {
+        return true;
+      }
+
+      return 'less';
     },
   },
 
   methods: {
-    clickGeneralCheckbox() {
-      const status = this.generalIconType !== 'all';
-
-      this.table.items.forEach((item) => {
-        item.selected = status;
-      });
+    changeGeneralCheckbox(value) {
+      this.table.items = this.table.items.map((item) => ({
+        ...item,
+        selected: value,
+      }));
     },
   },
 });
