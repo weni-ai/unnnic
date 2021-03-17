@@ -45,7 +45,7 @@
     box-sizing: border-box;
 }
 
-@for $i from 1 to 12 {
+@for $i from 1 to 13 {
     .unnnic-grid-span-#{$i} {
         grid-column: span #{$i};
     }
