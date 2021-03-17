@@ -129,8 +129,10 @@ export default {
 
 <style lang="scss">
 @import '../../assets/scss/unnnic.scss';
-option {
+.unnnic-select {
+  option {
     display: none;
+  }
 }
 
  ::-webkit-scrollbar {
