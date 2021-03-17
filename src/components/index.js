@@ -11,6 +11,7 @@ import dropdownItem from './Dropdown/DropdownItem.vue';
 import icon from './Icon.vue';
 import toolTip from './ToolTip/ToolTip.vue';
 import card from './Card/Card.vue';
+import checkbox from './Checkbox/Checkbox.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
 import modal from './Modal/Modal.vue';
 import call from '../utils/call';
@@ -32,6 +33,7 @@ const components = {
   unnnicDropdownItem: dropdownItem,
   unnnicToolTip: toolTip,
   unnnicCard: card,
+  unnnicCheckbox: checkbox,
   unnnicLanguageSelect: languageSelect,
   unnnicModal: modal,
   unnnicSelect: select,
@@ -56,6 +58,7 @@ export const unnnicDropdownItem = dropdownItem;
 export const unnnicIcon = icon;
 export const unnnicToolTip = toolTip;
 export const unnnicCard = card;
+export const unnnicCheckbox = checkbox;
 export const unnniclanguageSelect = languageSelect;
 export const unnnicModal = modal;
 export const unnnicSelect = select;
