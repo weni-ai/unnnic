@@ -1,7 +1,10 @@
 <template>
     <div
       @click="$emit('click')"
-      class="unnnic-select-item unnnic--clickable">
+      :class="{
+        'unnnic-select-item': true,
+        'unnnic--clickable': selectable,
+        'unnnic-select-item--selectable': selectable}">
       <span :class="['unnnic-select-item__label', `unnnic-select-item__label--${size}`]">
         <slot/>
         </span>
@@ -15,6 +18,10 @@ export default {
     size: {
       type: String,
       default: '',
+    },
+    selectable: {
+      type: Boolean,
+      default: true,
     },
   },
 };
@@ -32,7 +39,7 @@ export default {
     max-width: 100%;
     -webkit-line-clamp: 1;
 
-    &:hover{
+    &--selectable:hover{
       background-color: $unnnic-color-neutral-lightest;
       border-radius: $unnnic-border-radius-sm;
     }

@@ -152,6 +152,7 @@ export default {
     position: absolute;
     transform: translateY(100%);
     right: $unnnic-inline-sm;
+    top: 0;
   }
 }
 

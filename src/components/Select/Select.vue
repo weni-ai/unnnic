@@ -19,13 +19,22 @@
       'unnnic-select__options--active': active,
       'unnnic-select__options--inactive': !active }">
     <select-item
-      v-for="(option, index) in options()"
-      :tabindex="index"
-      :size="size"
-      :key="option.value"
-      @click="onSelectOption(option)">
-        {{ option.text }}
+      v-if="hasHeader()"
+      class="unnnic-select__header"
+      :selectable="false"
+      :size="size">
+        <slot name="header" />
+    </select-item>
+    <div class="unnnic-select__options__scroll-area">
+      <select-item
+        v-for="(option, index) in options()"
+        :tabindex="index"
+        :size="size"
+        :key="option.value"
+        @click="onSelectOption(option)">
+          {{ option.text }}
       </select-item>
+    </div>
     </div>
     <p v-if="message" class="unnnic-form__message"> {{ message }} </p>
   </div>
@@ -76,6 +85,13 @@ export default {
   directives: {
     clickOutside: vClickOutside.directive,
   },
+  mounted() {
+    const options = this.options();
+    if (this.value) {
+      const selected = options.find((option) => option.value === this.value);
+      if (selected) this.selected = selected;
+    }
+  },
   watch: {
     selected() {
       const value = this.selected ? this.selected.value : null;
@@ -100,6 +116,9 @@ export default {
       return [...children].map((option) => (
         { value: option.value, text: option.label || option.innerHtml }
       ));
+    },
+    hasHeader() {
+      return !!this.$slots.header;
     },
     handleClickSelect() {
       this.active = !this.active;
@@ -130,6 +149,16 @@ option {
   .unnnic-select {
   font-family: $unnnic-font-family-secondary;
   position: relative;
+
+  &__header {
+    &::after {
+      content: '';
+      display: block;
+      border: 1px $unnnic-color-neutral-lightest solid;
+      margin: $unnnic-spacing-stack-xs 0 0 0;
+    }
+  }
+
   &__field {
     display: flex;
     justify-content: space-between;
@@ -173,14 +202,17 @@ option {
   }
 
   &__options{
-    max-height: 12.5rem;
-    overflow-y: auto;
     margin-top: 4px;
     box-shadow: $unnnic-shadow-level-near;
     background-color: $unnnic-color-background-snow;
     position: absolute;
     left: 0;
     right: 0;
+
+    &__scroll-area {
+      max-height: 12.5rem;
+      overflow-y: auto;
+    }
 
     &--inactive{
       display: none;

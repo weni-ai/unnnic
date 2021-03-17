@@ -10,7 +10,7 @@
         :hasIconRight="hasIconRight"
         :type="type"
         :nativeType="showPassword ? 'text' : 'password'"
-        :size="iconSize"
+        :size="size"
         v-model="val"
       />
       <UIcon
@@ -165,6 +165,7 @@ export default {
     position: absolute;
     transform: translateY(100%);
     right: $unnnic-inline-sm;
+    top: 0;
   }
 }
 
