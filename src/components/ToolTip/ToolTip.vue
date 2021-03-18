@@ -6,9 +6,7 @@
     :class="[
             'unnnic-tooltip-label',
             `unnnic-tooltip-label-${side}`,
-            ]">
-            {{text}}
-    </span>
+            ]">{{text}}</span>
 </div>
 </template>
 
@@ -47,6 +45,7 @@ export default {
 
 .unnnic-tooltip-label{
   z-index: 1;
+  white-space: nowrap;
   visibility: hidden;
   text-align: center;
   position: absolute;
@@ -60,9 +59,6 @@ export default {
   font-family: $unnnic-font-family-secondary;
   font-weight: $unnnic-font-weight-regular;
   line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
-
-  max-width: 15.625rem;
-  word-wrap: break-word;
 
   &::after {
     content: "";
