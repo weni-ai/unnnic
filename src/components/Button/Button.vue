@@ -130,17 +130,32 @@ export default {
   &--secondary {
     background-color: rgba($unnnic-color-neutral-clean, $unnnic-opacity-level-light);
     color: $unnnic-color-neutral-dark;
-    box-shadow: inset 0px 0px 0px $unnnic-border-width-thinner $unnnic-color-neutral-clean;
+    position: relative;
 
-    &:hover:enabled {
-      box-shadow: none;
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: $unnnic-border-radius-sm;
+      border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
+    }
+
+    &:hover:enabled:after {
+      border-width: 0;
     }
 
     &:disabled {
       background-color: $unnnic-color-neutral-light;
       color: $unnnic-color-neutral-cloudy;
-      border: $unnnic-border-width-thinner dashed $unnnic-color-neutral-clean;
       cursor: not-allowed;
+
+      &:after {
+        border: $unnnic-border-width-thinner dashed $unnnic-color-neutral-clean;
+      }
     }
   }
 
