@@ -8,7 +8,10 @@
       :hasCloseIcon="hasCloseIcon"
       :scheme="scheme"
       :count="count"
+      :hasBackButton="hasBackButton"
       :clickable="clickable"
+      :tooltipText="tooltipText"
+      :enableTooltip="enableTooltip"
     />
 </template>
 
@@ -32,6 +35,10 @@ export default {
       type: String,
       default: null,
     },
+    tooltipText: {
+      type: String,
+      default: null,
+    },
     clickable: {
       type: Boolean,
       default: false,
@@ -51,6 +58,14 @@ export default {
     scheme: {
       type: String,
       default: 'aux-purple',
+    },
+    hasBackButton: {
+      type: Boolean,
+      default: false,
+    },
+    enableTooltip: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {

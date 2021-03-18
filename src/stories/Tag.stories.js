@@ -32,4 +32,7 @@ Indicator.args = {
   text: 'Tag Name',
   count: 100,
   clickable: true,
+  hasBackButton: false,
+  enableTooltip: true,
+  tooltipText: 'This is the amount',
 };

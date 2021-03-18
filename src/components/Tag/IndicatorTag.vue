@@ -3,9 +3,12 @@
     :class="`unnnic-tag
         ${clickable ? 'unnnic-tag--clickable' : ''}`"
   >
-    <span class="unnnic-tag__count">{{ count }}</span>
+    <tool-tip :enabled="enableTooltip" :text="tooltipText" side="bottom">
+      <span class="unnnic-tag__count">{{ count }}</span>
+    </tool-tip>
     <span class="unnnic-tag__label">{{ text }}</span>
     <u-icon
+      v-if="hasBackButton"
       icon="arrow-right-1-1"
       class="unnnic-tag__icon"
       size="xs"
@@ -15,12 +18,17 @@
 
 <script>
 import UIcon from '../Icon.vue';
+import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
   name: 'unnnic-tag',
-  components: { UIcon },
+  components: { UIcon, ToolTip },
   props: {
     text: {
+      type: String,
+      default: null,
+    },
+    tooltipText: {
       type: String,
       default: null,
     },
@@ -29,6 +37,14 @@ export default {
       default: 0,
     },
     clickable: {
+      type: Boolean,
+      default: false,
+    },
+    hasBackButton: {
+      type: Boolean,
+      default: false,
+    },
+    enableTooltip: {
       type: Boolean,
       default: false,
     },
