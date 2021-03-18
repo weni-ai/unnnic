@@ -41,11 +41,6 @@ export default {
   padding: $unnnic-inset-md;
   border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
-  &:hover {
-    background-color: $unnnic-color-background-sky;
-    border: $unnnic-border-width-thinner solid $unnnic-color-background-sky;
-  }
-
   &__clickable {
     cursor: pointer;
   }
