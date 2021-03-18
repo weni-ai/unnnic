@@ -45,10 +45,13 @@ export default {
 
 .unnnic-tooltip-label{
   z-index: 1;
-  white-space: nowrap;
   visibility: hidden;
   text-align: center;
   position: absolute;
+  width: max-content;
+  min-width: 1.9375rem;
+  max-width: 18.125rem;
+  box-sizing: border-box;
 
   background-color: $unnnic-color-neutral-black;
   color: $unnnic-color-neutral-snow;
