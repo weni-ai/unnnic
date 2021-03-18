@@ -1,6 +1,6 @@
 {
   "name": "unnic-system-beta",
-  "version": "0.0.87",
+  "version": "0.0.88",
   "main": "./dist/unnnic.common.js",
   "files": [
     "dist/*",
