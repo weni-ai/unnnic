@@ -1,29 +1,33 @@
 <template>
-  <div
-  :class="`unnnic-tag
-        ${!disabled
-        ? `unnnic-tag-scheme--${scheme}`
-        : `unnnic-tag--disabled`}
-        ${ clickable ? 'unnnic-tag--clickable' : '' }`">
-    <span
-      :class="`unnnic-tag__label
-      ${hasCloseIcon ? 'unnnic-tag__label--hasIcon' : ''}
-      ${disabled ? 'unnnic-tag__label--disabled' : ''}`">{{text}}</span>
-    <u-icon
-      v-if="hasCloseIcon"
-      icon="close-1"
-      class="unnnic-tag__icon"
-      size="xs" />
-  </div>
+    <component
+      class="unnnic-tag-content"
+      :is="currentComponent"
+      :v-bind="$attrs"
+      :text="text"
+      :disabled="disabled"
+      :hasCloseIcon="hasCloseIcon"
+      :scheme="scheme"
+      :count="count"
+      :clickable="clickable"
+    />
 </template>
 
 <script>
-import UIcon from '../Icon.vue';
+import DefaultTag from './DefaultTag.vue';
+import IndicatorTag from './IndicatorTag.vue';
 
 export default {
   name: 'unnnic-tag',
-  components: { UIcon },
   props: {
+    type: {
+      type: String,
+      default: 'default',
+      validator(value) {
+        return (
+          ['default', 'indicator'].indexOf(value) !== -1
+        );
+      },
+    },
     text: {
       type: String,
       default: null,
@@ -31,6 +35,10 @@ export default {
     clickable: {
       type: Boolean,
       default: false,
+    },
+    count: {
+      type: Number,
+      default: 0,
     },
     disabled: {
       type: Boolean,
@@ -45,78 +53,11 @@ export default {
       default: 'aux-purple',
     },
   },
-  methods: {
-    closeClicked() {
-      if (!this.closeClicked) return;
-      this.$emit('close-click');
+  computed: {
+    currentComponent() {
+      if (this.type === 'indicator') return IndicatorTag;
+      return DefaultTag;
     },
   },
 };
 </script>
-
-<style lang="scss" scoped>
- @import '../../assets/scss/unnnic.scss';
-
-$scheme-colors:
-  'feedback-red' $unnnic-color-feedback-red,
-  'feedback-green' $unnnic-color-feedback-green,
-  'feedback-yellow' $unnnic-color-feedback-yellow,
-  'feedback-blue' $unnnic-color-feedback-blue,
-  'feedback-grey' $unnnic-color-feedback-grey,
-   'aux-blue' $unnnic-color-aux-blue,
-   'aux-purple' $unnnic-color-aux-purple,
-   'aux-orange' $unnnic-color-aux-orange,
-   'aux-lemon' $unnnic-color-aux-lemon,
-   'aux-pink' $unnnic-color-aux-pink;
-
-@each $name, $color in $scheme-colors {
-  .unnnic-tag-scheme {
-    &--#{$name} {
-      background-color: rgba($color, $unnnic-opacity-level-light);
-      &:hover {
-        border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
-      }
-    }
-  }
-}
-
-.unnnic-tag {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: $unnnic-border-radius-pill;
-
-    &--disabled {
-      background-color: $unnnic-color-background-sky;
-    }
-
-    &--clickable{
-      cursor: pointer;
-    }
-
-    &__label{
-      font-family: $unnnic-font-family-secondary;
-      font-size: $unnnic-font-size-body-md;
-      font-weight: $unnnic-font-weight-regular;
-      line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
-      padding: $unnnic-spacing-stack-nano $unnnic-inline-ant;
-      color: $unnnic-color-neutral-darkest;
-
-      &--disabled {
-        color: $unnnic-color-neutral-cloudy;
-      }
-
-      &--hasIcon {
-        padding-left: $unnnic-inline-ant;
-        padding-right: $unnnic-spacing-stack-nano;
-      }
-    }
-
-    &__icon {
-      color: $unnnic-color-neutral-darkest;
-      padding-right: $unnnic-inline-ant;
-      cursor: pointer;
-    }
-}
-
-</style>
