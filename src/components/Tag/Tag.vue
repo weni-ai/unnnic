@@ -13,8 +13,8 @@
 </template>
 
 <script>
-import TagDefault from './TagDefault.vue';
-import TagIndicator from './TagIndicator.vue';
+import DefaultTag from './DefaultTag.vue';
+import IndicatorTag from './IndicatorTag.vue';
 
 export default {
   name: 'unnnic-tag',
@@ -55,8 +55,8 @@ export default {
   },
   computed: {
     currentComponent() {
-      if (this.type === 'indicator') return TagIndicator;
-      return TagDefault;
+      if (this.type === 'indicator') return IndicatorTag;
+      return DefaultTag;
     },
   },
 };
