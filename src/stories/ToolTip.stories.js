@@ -18,4 +18,5 @@ const Template = (args, { argTypes }) => ({
 export const Normal = Template.bind({});
 Normal.args = {
   text: 'Label',
+  enabled: true,
 };
