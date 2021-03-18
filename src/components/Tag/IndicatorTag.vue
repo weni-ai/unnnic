@@ -62,7 +62,6 @@ export default {
   border-radius: $unnnic-border-radius-sm;
   background-color: $unnnic-color-background-sky;
   padding: $unnnic-inset-nano;
-  border: $unnnic-border-width-thinner solid $unnnic-color-background-sky;
 
   &:hover {
     border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
@@ -75,12 +74,13 @@ export default {
   &__count {
     background-color: $unnnic-color-neutral-soft;
     border-radius: $unnnic-border-radius-sm;
-    padding: 0 $unnnic-inline-nano;
+    padding: $unnnic-inline-nano;
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-md;
     font-weight: $unnnic-font-weight-regular;
     line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
     color: $unnnic-color-neutral-darkest;
+
   }
 
   &__label {
