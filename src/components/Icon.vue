@@ -60,7 +60,8 @@ $scheme-colors:
    'aux-purple' $unnnic-color-aux-purple,
    'aux-orange' $unnnic-color-aux-orange,
    'aux-lemon' $unnnic-color-aux-lemon,
-   'aux-pink' $unnnic-color-aux-pink;
+   'aux-pink' $unnnic-color-aux-pink,
+   'neutral-soft' $unnnic-color-neutral-soft;
 
 @each $name, $color in $scheme-colors {
   .unnnic-icon-scheme {
