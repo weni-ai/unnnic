@@ -9,6 +9,7 @@ import tableRow from './Table/TableRow.vue';
 import dropdown from './Dropdown/Dropdown.vue';
 import dropdownItem from './Dropdown/DropdownItem.vue';
 import icon from './Icon.vue';
+import iconSvg from './Icon-svg.vue';
 import toolTip from './ToolTip/ToolTip.vue';
 import card from './Card/Card.vue';
 import checkbox from './Checkbox/Checkbox.vue';
@@ -29,6 +30,7 @@ const components = {
   unnnicTable: table,
   unnnicTableRow: tableRow,
   unnnicIcon: icon,
+  unnnicIconSvg: iconSvg,
   unnnicDropdown: dropdown,
   unnnicDropdownItem: dropdownItem,
   unnnicToolTip: toolTip,
@@ -56,6 +58,7 @@ export const unnnicTableRow = tableRow;
 export const unnnicDropdown = dropdown;
 export const unnnicDropdownItem = dropdownItem;
 export const unnnicIcon = icon;
+export const unnnicIconSvg = iconSvg;
 export const unnnicToolTip = toolTip;
 export const unnnicCard = card;
 export const unnnicCheckbox = checkbox;
