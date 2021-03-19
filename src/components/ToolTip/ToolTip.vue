@@ -6,7 +6,11 @@
     :class="[
             'unnnic-tooltip-label',
             `unnnic-tooltip-label-${side}`,
-            ]">{{text}}</span>
+            ]"
+    :style="{ maxWidth: maxWidth }"
+  >
+    {{text}}
+  </span>
 </div>
 </template>
 
@@ -30,6 +34,9 @@ export default {
         return ['top', 'right', 'bottom', 'left'].indexOf(value) !== -1;
       },
     },
+    maxWidth: {
+      type: String,
+    },
   },
 };
 </script>
@@ -49,8 +56,7 @@ export default {
   text-align: center;
   position: absolute;
   width: max-content;
-  min-width: 1.9375rem;
-  max-width: 18.125rem;
+  min-width: 2rem;
   box-sizing: border-box;
 
   background-color: $unnnic-color-neutral-black;

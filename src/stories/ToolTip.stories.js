@@ -6,6 +6,7 @@ export default {
   argTypes: {
     text: { control: { type: 'text' } },
     side: { control: { type: 'select', options: ['top', 'right', 'bottom', 'left'] } },
+    maxWidth: { control: { type: 'text' } },
   },
 };
 
@@ -19,4 +20,5 @@ export const Normal = Template.bind({});
 Normal.args = {
   text: 'Label',
   enabled: true,
+  maxWidth: '15rem',
 };
