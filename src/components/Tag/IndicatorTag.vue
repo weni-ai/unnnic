@@ -62,6 +62,7 @@ export default {
   border-radius: $unnnic-border-radius-sm;
   background-color: $unnnic-color-background-sky;
   padding: $unnnic-inset-nano;
+  border: $unnnic-border-width-thinner solid $unnnic-color-background-sky;
 
   &:hover {
     border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
