@@ -59,6 +59,16 @@ export default {
 };
 </script>
 
+<style lang="scss" scoped>
+@import "../assets/scss/unnnic.scss";
+
+.unnnic-icon ::v-deep svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+</style>
+
 <style lang="scss">
 @import "../assets/scss/unnnic.scss";
 
@@ -69,7 +79,8 @@ $scheme-colors: "feedback-red" $unnnic-color-feedback-red,
   "aux-orange" $unnnic-color-aux-orange, "aux-lemon" $unnnic-color-aux-lemon,
   "aux-pink" $unnnic-color-aux-pink, "brand-weni" $unnnic-color-brand-weni,
   "neutral-clean" $unnnic-color-neutral-clean, "neutral-dark" $unnnic-color-neutral-dark,
-  "neutral-soft" $unnnic-color-neutral-soft;
+  "neutral-soft" $unnnic-color-neutral-soft,
+  "neutral-darkest" $unnnic-color-neutral-darkest;
 
 @each $name, $color in $scheme-colors {
   .unnnic-icon-scheme {
