@@ -30,8 +30,6 @@ export default {
   },
 };
 
-console.log(Object.keys(icons));
-
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicIconSvg },
