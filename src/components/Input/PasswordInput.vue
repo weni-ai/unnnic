@@ -17,7 +17,7 @@
         v-if="iconLeft"
         :icon="iconLeft"
         class="icon-left"
-        :size="size"
+        :size="iconSize"
         @click="onIconLeftClick" />
       <UIcon
         v-if="hasIconRight"
