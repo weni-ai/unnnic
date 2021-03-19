@@ -18,6 +18,7 @@ const schemes = [
   'neutral-clean',
   'neutral-dark',
   'neutral-soft',
+  'neutral-darkest',
 ];
 
 export default {
