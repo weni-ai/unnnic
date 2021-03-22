@@ -88,4 +88,5 @@ export default [
   'house-2-2',
   'copy-paste-1',
   'typing-1',
+  'drag',
 ];
