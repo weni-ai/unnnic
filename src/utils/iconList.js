@@ -87,4 +87,5 @@ export default [
   'synchronize-arrow-clock-4',
   'house-2-2',
   'copy-paste-1',
+  'typing-1',
 ];
