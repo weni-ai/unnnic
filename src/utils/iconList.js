@@ -81,6 +81,8 @@ export default [
   'book-address-2',
   'graph-stats-ascend-2',
   'synchronize-arrow-clock-5',
+  'keyboard-arrow-down-1',
+  'keyboard-arrow-left-1',
   'email-action-unread-1',
   'synchronize-arrow-clock-4',
   'house-2-2',
