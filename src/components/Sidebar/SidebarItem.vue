@@ -1,21 +1,25 @@
 <template>
-  <div
-    :class="{ 'unnnic-side-bar-item': true,
-              'unnnic-side-bar-item--active': active,
-              'unnnic--clickable': true,
-            }"
-    @click="onClick">
+  <div>
     <tool-tip :enabled="enableTooltip" :text="text" side="right">
-    <u-icon
-      :class="{'unnnic-side-bar-item__icon': true,
-               'unnnic-side-bar-item__icon--active': active,
-              }"
-      size="sm"
-      :icon="icon"/>
-    <span class="unnnic-side-bar-item__label"> {{ text }}
-      <slot />
-      </span>
+      <div
+        :class="{ 'unnnic-side-bar-item': true,
+                  'unnnic-side-bar-item--active': active,
+                  'unnnic--clickable': true,
+                }"
+        @click="onClick">
+        <u-icon
+          :class="{'unnnic-side-bar-item__icon': true,
+                  'unnnic-side-bar-item__icon--active': active,
+                  }"
+          size="ant"
+          :icon="icon"/>
+        <span class="unnnic-side-bar-item__label"> {{ text }}
+          <slot />
+          </span>
+      </div>
     </tool-tip>
+
+    <div class="spacer"></div>
   </div>
 </template>
 
@@ -66,17 +70,22 @@ export default {
     .unnnic-side-bar-item {
         display: flex;
         align-items: center;
-        color: $unnnic-color-neutral-darkest;
-        margin-bottom: $unnnic-spacing-stack-xs;
-        padding: $unnnic-inset-nano;
-        font-size: $unnnic-font-size-body-gt;
+
         font-family: $unnnic-font-family-secondary;
+        font-size: $unnnic-font-size-body-gt;
+        line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
+
+        background-color: $unnnic-color-background-sky;
+        font-weight: $unnnic-font-weight-regular;
+        color: $unnnic-color-neutral-dark;
+
+        padding: $unnnic-inset-nano;
         border-radius: $unnnic-border-radius-sm;
-        line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
         &--active {
-            background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-light);
-            font-weight: $unnnic-font-weight-bold;
+          color: $unnnic-color-neutral-darkest;
+          background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-light);
+          font-weight: $unnnic-font-weight-bold;
         }
 
         &__icon {
