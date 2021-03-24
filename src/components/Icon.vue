@@ -96,6 +96,10 @@ $scheme-colors:
     font-size: $unnnic-icon-size-sm;
   }
 
+  &-ant {
+    font-size: $unnnic-icon-size-ant;
+  }
+
   &-md {
     font-size: $unnnic-icon-size-md;
   }
