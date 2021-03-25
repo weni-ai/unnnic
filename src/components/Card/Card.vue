@@ -15,6 +15,7 @@
       :enabled="enabled"
       :scheme="scheme"
       :clickable="clickable"
+      :has-infomation="hasInfomation"
     />
 </template>
 
@@ -79,6 +80,10 @@ export default {
     infoPosition: {
       type: String,
       default: 'right',
+    },
+    hasInfomation: {
+      type: Boolean,
+      default: true,
     },
     scheme: {
       type: String,

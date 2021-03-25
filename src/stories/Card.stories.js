@@ -30,6 +30,7 @@ Title.args = {
   type: 'title',
   title: 'This is the title',
   info: 'This is the info',
+  hasInfomation: true,
 };
 
 export const Dash = Template.bind({});
