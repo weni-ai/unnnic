@@ -15,7 +15,7 @@
       :enabled="enabled"
       :scheme="scheme"
       :clickable="clickable"
-      :has-infomation="hasInfomation"
+      :has-information-icon="hasInformationIcon"
     />
 </template>
 
@@ -81,7 +81,7 @@ export default {
       type: String,
       default: 'right',
     },
-    hasInfomation: {
+    hasInformationIcon: {
       type: Boolean,
       default: true,
     },
