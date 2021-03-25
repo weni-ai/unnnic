@@ -29,7 +29,7 @@ export default {
       type: String,
       default: 'md',
       validator(value) {
-        return ['nano', 'xs', 'sm', 'md', 'lg'].indexOf(value) !== -1;
+        return ['nano', 'xs', 'sm', 'ant', 'md', 'lg'].indexOf(value) !== -1;
       },
     },
     lineHeight: {
@@ -100,6 +100,7 @@ $icon-sizes:
     'xl' $unnnic-icon-size-xl,
     'lg' $unnnic-icon-size-lg,
     'md' $unnnic-icon-size-md,
+    'ant' $unnnic-icon-size-ant,
     'sm' $unnnic-icon-size-sm,
     'xs' $unnnic-icon-size-xs;
 
