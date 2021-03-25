@@ -7,12 +7,14 @@
                   'unnnic--clickable': true,
                 }"
         @click="onClick">
-        <u-icon
+        <icon-svg
           :class="{'unnnic-side-bar-item__icon': true,
                   'unnnic-side-bar-item__icon--active': active,
                   }"
           size="ant"
-          :icon="icon"/>
+          :icon="icon"
+          :scheme="active && 'brand-weni'"
+        />
         <span class="unnnic-side-bar-item__label"> {{ text }}
           <slot />
           </span>
@@ -24,12 +26,12 @@
 </template>
 
 <script>
-import UIcon from '../Icon.vue';
+import IconSvg from '../Icon-svg.vue';
 import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
   name: 'SidebarItem',
-  components: { UIcon, ToolTip },
+  components: { IconSvg, ToolTip },
   data() {
     return {
       ToolTip,
@@ -75,7 +77,6 @@ export default {
         font-size: $unnnic-font-size-body-gt;
         line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
 
-        background-color: $unnnic-color-background-sky;
         font-weight: $unnnic-font-weight-regular;
         color: $unnnic-color-neutral-dark;
 
