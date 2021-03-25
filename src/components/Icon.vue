@@ -25,7 +25,7 @@ export default {
       default: 'md',
       validator(value) {
         if (!value) return true;
-        return ['nano', 'xs', 'sm', 'md', 'lg', 'xl'].indexOf(value) !== -1;
+        return ['nano', 'xs', 'sm', 'ant', 'md', 'lg', 'xl'].indexOf(value) !== -1;
       },
     },
     scheme: {
