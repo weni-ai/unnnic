@@ -23,14 +23,6 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
-
-.unnnic-side-bar ::v-deep .unnnic-side-bar-menu > div:not(:last-child) .spacer {
-  margin-bottom: $unnnic-spacing-stack-xs;
-}
-</style>
-
 <style lang="scss">
 @import '../../assets/scss/unnnic.scss';
 

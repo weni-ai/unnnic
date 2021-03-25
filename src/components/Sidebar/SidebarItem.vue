@@ -1,37 +1,31 @@
 <template>
-  <div>
+  <div
+    :class="{ 'unnnic-side-bar-item': true,
+              'unnnic-side-bar-item--active': active,
+              'unnnic--clickable': true,
+            }"
+    @click="onClick">
     <tool-tip :enabled="enableTooltip" :text="text" side="right">
-      <div
-        :class="{ 'unnnic-side-bar-item': true,
-                  'unnnic-side-bar-item--active': active,
-                  'unnnic--clickable': true,
-                }"
-        @click="onClick">
-        <icon-svg
-          :class="{'unnnic-side-bar-item__icon': true,
-                  'unnnic-side-bar-item__icon--active': active,
-                  }"
-          size="ant"
-          :icon="icon"
-          :scheme="active && 'brand-weni'"
-        />
-        <span class="unnnic-side-bar-item__label"> {{ text }}
-          <slot />
-          </span>
-      </div>
+    <u-icon
+      :class="{'unnnic-side-bar-item__icon': true,
+               'unnnic-side-bar-item__icon--active': active,
+              }"
+      size="sm"
+      :icon="icon"/>
+    <span class="unnnic-side-bar-item__label"> {{ text }}
+      <slot />
+      </span>
     </tool-tip>
-
-    <div class="spacer"></div>
   </div>
 </template>
 
 <script>
-import IconSvg from '../Icon-svg.vue';
+import UIcon from '../Icon.vue';
 import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
   name: 'SidebarItem',
-  components: { IconSvg, ToolTip },
+  components: { UIcon, ToolTip },
   data() {
     return {
       ToolTip,
@@ -72,21 +66,17 @@ export default {
     .unnnic-side-bar-item {
         display: flex;
         align-items: center;
-
-        font-family: $unnnic-font-family-secondary;
-        font-size: $unnnic-font-size-body-gt;
-        line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-
-        font-weight: $unnnic-font-weight-regular;
-        color: $unnnic-color-neutral-dark;
-
+        color: $unnnic-color-neutral-darkest;
+        margin-bottom: $unnnic-spacing-stack-xs;
         padding: $unnnic-inset-nano;
+        font-size: $unnnic-font-size-body-gt;
+        font-family: $unnnic-font-family-secondary;
         border-radius: $unnnic-border-radius-sm;
+        line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
         &--active {
-          color: $unnnic-color-neutral-darkest;
-          background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-light);
-          font-weight: $unnnic-font-weight-bold;
+            background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-light);
+            font-weight: $unnnic-font-weight-bold;
         }
 
         &__icon {
