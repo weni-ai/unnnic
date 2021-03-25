@@ -18,10 +18,10 @@ const Template = (args, { argTypes }) => ({
                 <unnnic-sidebar-item icon="expand-8-1" text="footer" slot="footer" /> \
                 <unnnic-sidebar-menu text="Submenu"> \
                   <unnnic-sidebar-item :enable-tooltip="!expanded" text="Item1" icon="developer-community-github-1-1" :active="true" /> \
-                  <unnnic-sidebar-item text="Item2" icon="alarm-bell-2" /> \
+                  <unnnic-sidebar-item :enable-tooltip="!expanded" text="Item2" icon="alarm-bell-2" /> \
                 </unnnic-sidebar-menu> \
                 <unnnic-sidebar-menu text="Submenu 2"> \
-                  <unnnic-sidebar-item text="Item3" icon="alarm-bell-2" /> \
+                  <unnnic-sidebar-item :enable-tooltip="!expanded" text="Item3" icon="alarm-bell-2" /> \
                 </unnnic-sidebar-menu> \
               </unnnic-sidebar>',
 });
