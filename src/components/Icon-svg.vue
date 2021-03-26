@@ -80,7 +80,8 @@ $scheme-colors: "feedback-red" $unnnic-color-feedback-red,
   "aux-pink" $unnnic-color-aux-pink, "brand-weni" $unnnic-color-brand-weni,
   "neutral-clean" $unnnic-color-neutral-clean, "neutral-dark" $unnnic-color-neutral-dark,
   "neutral-soft" $unnnic-color-neutral-soft,
-  "neutral-darkest" $unnnic-color-neutral-darkest;
+  "neutral-darkest" $unnnic-color-neutral-darkest,
+  "neutral-cloudy" $unnnic-color-neutral-cloudy;
 
 @each $name, $color in $scheme-colors {
   .unnnic-icon-scheme {
