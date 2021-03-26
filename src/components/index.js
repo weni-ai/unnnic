@@ -4,6 +4,7 @@ import button from './Button/Button.vue';
 import sidebar from './Sidebar/Sidebar.vue';
 import sidebarItem from './Sidebar/SidebarItem.vue';
 import sidebarMenu from './Sidebar/SidebarMenu.vue';
+import sidebarPrimary from './Sidebar/SidebarConnect.vue';
 import table from './Table/Table.vue';
 import tableRow from './Table/TableRow.vue';
 import dropdown from './Dropdown/Dropdown.vue';
@@ -27,6 +28,7 @@ const components = {
   unnnicSidebar: sidebar,
   unnnicSidebarItem: sidebarItem,
   unnnicSidebarMenu: sidebarMenu,
+  unnnicSidebarPrimary: sidebarPrimary,
   unnnicTable: table,
   unnnicTableRow: tableRow,
   unnnicIcon: icon,
@@ -53,6 +55,7 @@ export const unnnicButton = button;
 export const unnnicSidebar = sidebar;
 export const unnnicSidebarItem = sidebarItem;
 export const unnnicSidebarMenu = sidebarMenu;
+export const unnnicSidebarPrimary = sidebarPrimary;
 export const unnnicTable = table;
 export const unnnicTableRow = tableRow;
 export const unnnicDropdown = dropdown;
