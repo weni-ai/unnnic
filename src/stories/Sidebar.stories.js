@@ -1,3 +1,5 @@
+/* eslint-disable no-multi-str */
+
 import unnnicSidebar from '../components/Sidebar/Sidebar.vue';
 import unnnicSidebarItem from '../components/Sidebar/SidebarItem.vue';
 import unnnicSidebarMenu from '../components/Sidebar/SidebarMenu.vue';
