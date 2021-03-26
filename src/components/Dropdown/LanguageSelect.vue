@@ -160,6 +160,9 @@ export default {
 
     &__title {
       flex: 1;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     &__flag {
