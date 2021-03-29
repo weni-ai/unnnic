@@ -1,12 +1,12 @@
 <template>
   <div
-    :class="['unnnic-sidebar-connect', { 'unnnic-sidebar-connect-expanded': expanded, }]"
+    :class="['unnnic-sidebar-primary', { 'unnnic-sidebar-primary-expanded': expanded, }]"
   >
     <div class="header">
       <slot name="header"></slot>
     </div>
 
-    <div class="unnnic-sidebar-connect-content">
+    <div class="unnnic-sidebar-primary-content">
       <div v-for="(category, index) in items" :key="index" class="category">
         <div class="category-label">{{ category.label }}</div>
 
@@ -118,7 +118,7 @@ export default {
 
 $transition-time: 0.4s;
 
-.unnnic-sidebar-connect {
+.unnnic-sidebar-primary {
   width: 5.5rem;
   background-color: $unnnic-color-background-sky;
   padding: $unnnic-spacing-inset-md;

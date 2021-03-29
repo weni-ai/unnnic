@@ -1,8 +1,8 @@
-import SidebarConnect from '../components/Sidebar/SidebarConnect.vue';
+import SidebarPrimary from '../components/Sidebar/SidebarPrimary.vue';
 
 export default {
-  title: 'example/SidebarConnect',
-  component: SidebarConnect,
+  title: 'example/SidebarPrimary',
+  component: SidebarPrimary,
   argTypes: {
     expanded: { control: { type: 'boolean' } },
     items: { control: { type: 'array' } },
@@ -14,14 +14,14 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: {
-    SidebarConnect,
+    SidebarPrimary,
   },
   template: `
-    <sidebar-connect v-bind="$props" style="min-height: 300px;">
+    <sidebar-primary v-bind="$props" style="min-height: 300px;">
       <template v-slot:header>
         Header
       </template>
-    </sidebar-connect>
+    </sidebar-primary>
   `,
 });
 

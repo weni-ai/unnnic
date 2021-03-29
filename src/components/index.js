@@ -4,7 +4,7 @@ import button from './Button/Button.vue';
 import sidebar from './Sidebar/Sidebar.vue';
 import sidebarItem from './Sidebar/SidebarItem.vue';
 import sidebarMenu from './Sidebar/SidebarMenu.vue';
-import sidebarPrimary from './Sidebar/SidebarConnect.vue';
+import sidebarPrimary from './Sidebar/SidebarPrimary.vue';
 import table from './Table/Table.vue';
 import tableRow from './Table/TableRow.vue';
 import dropdown from './Dropdown/Dropdown.vue';
