@@ -224,6 +224,10 @@ $transition-time: 0.4s;
         user-select: none;
       }
 
+      &:hover {
+        background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-light);
+      }
+
       &.selected {
         background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-light);
 
