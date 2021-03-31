@@ -75,7 +75,7 @@ export default {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    width: 286px;
+    max-width: 17.875rem;
   }
 }
 </style>
