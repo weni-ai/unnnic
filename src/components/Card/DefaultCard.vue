@@ -5,7 +5,7 @@
     }">
     <div class="unnnic-card-default__content">
       <div class="unnnic-card-default__title">{{ title }}</div>
-      <div class="unnnic-card-default__description">{{ description }}</div>
+      <p class="unnnic-card-default__description" :title="description">{{ description }}</p>
     </div>
   </div>
 </template>
@@ -66,11 +66,16 @@ export default {
   }
 
   &__description {
+    margin: 0;
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-gt;
     font-weight: $unnnic-font-weight-regular;
     color: $unnnic-color-neutral-cloudy;
     line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 286px;
   }
 }
 </style>
