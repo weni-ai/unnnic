@@ -45,7 +45,7 @@
             />
           </div>
 
-          <div class="option-container">
+          <div v-show="!hideExpandButton" class="option-container">
             <tool-tip :enabled="!expanded" :text="hideText" side="right">
               <div class="option" @click="toggleExpanded">
                 <icon-svg
@@ -77,6 +77,11 @@ export default {
   },
 
   props: {
+    hideExpandButton: {
+      type: Boolean,
+      default: false,
+    },
+
     expanded: {
       type: Boolean,
       default: true,

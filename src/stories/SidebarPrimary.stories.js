@@ -4,6 +4,7 @@ export default {
   title: 'example/SidebarPrimary',
   component: SidebarPrimary,
   argTypes: {
+    hideExpandButton: { control: { type: 'boolean' } },
     expanded: { control: { type: 'boolean' } },
     items: { control: { type: 'array' } },
     hideText: { control: { type: 'text' } },
@@ -37,6 +38,7 @@ Normal.args = {
       label: 'Início',
       active: true,
       icon: 'house-1-1',
+      // eslint-disable-next-line no-param-reassign
       click(option) { option.active = !option.active; },
     }],
   }, {
