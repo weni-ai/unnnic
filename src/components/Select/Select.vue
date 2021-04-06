@@ -222,6 +222,7 @@ export default {
 
     &--active{
       display: block;
+      z-index: 1;
     }
   }
 }
