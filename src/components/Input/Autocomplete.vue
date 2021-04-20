@@ -108,7 +108,7 @@ export default {
     },
     highlighted(text) {
       if (!this.highlight || !this.val || this.val.length === 0) return text;
-      return text.replaceAll(this.val, (match) => `<span class="unnnic-autocomplete--highlighted"> ${match} </span>`);
+      return text.replaceAll(this.val, (match) => `<span class="unnnic-autocomplete--highlighted">${match.replace(/ /g, '&nbsp;')}</span>`);
     },
   },
   computed: {
