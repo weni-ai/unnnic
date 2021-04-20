@@ -123,7 +123,7 @@ export default {
 
 .unnnic-form {
 
-  &:focus-within .icon {
+  &:focus-within .icon, &:focus-within .unnnic-icon {
     color: $unnnic-color-brand-weni;
   }
 
