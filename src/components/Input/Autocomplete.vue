@@ -10,16 +10,34 @@
         :type="type"
         @focus="onFocus"
         :size="size" />
-    <div
-      v-show="open"
-      :class="['unnnic-autocomplete__list',
-                `unnnic-autocomplete__list--size-${size}`,
-                message && message.length > 0 ? 'unnnic-autocomplete__list--with-message' : '']">
-        <p
-          v-for="(option, index) in data"
-          :key="index"
-          class="unnnic--clickable"
-          @click="onChoose(option)" v-html="highlighted(option)" />
+
+    <div v-show="open" class="unnnic-autocomplete__container-list">
+      <div
+        :class="['unnnic-autocomplete__list',
+                  `unnnic-autocomplete__list--size-${size}`,
+                  message && message.length > 0 ? 'unnnic-autocomplete__list--with-message' : '']">
+
+          <template
+            v-for="(option, index) in dataParsed"
+          >
+            <div
+              v-if="option.type === 'category'"
+              :key="index"
+              class="category"
+            >
+              {{ option.text }}
+            </div>
+
+            <div
+              v-else
+              :key="index"
+              class="unnnic--clickable option"
+              @click="onChoose(option)"
+            >
+              <div class="label" v-html="highlighted(option.text)"></div>
+            </div>
+          </template>
+      </div>
     </div>
     <p v-if="message" class="unnnic-form__message"> {{ message }} </p>
   </div>
@@ -98,8 +116,8 @@ export default {
       this.open = true;
     },
     onChoose(option) {
-      this.val = option;
-      this.$emit('choose', option);
+      this.val = option.text;
+      this.$emit('choose', option.value ? option.value : option.text);
       this.open = false;
     },
     onClickOutside() {
@@ -118,6 +136,19 @@ export default {
         input: () => {},
       };
     },
+
+    dataParsed() {
+      return this.data.map((item) => {
+        if (item.type) {
+          return item;
+        }
+
+        return {
+          type: 'option',
+          text: String(item),
+        };
+      });
+    },
   },
 };
 </script>
@@ -125,29 +156,52 @@ export default {
 <style lang="scss" >
 @import '../../assets/scss/unnnic.scss';
 
+$scroll-size: 4px;
+
 .unnnic-autocomplete {
     position: relative;
     font-family: $unnnic-font-family-secondary;
 
     &--highlighted {
       white-space: nowrap;
-      color: $unnnic-color-brand-weni;
+      color: $unnnic-color-brand-weni-soft;
       display: inline-block;
       font-weight: $unnnic-font-weight-bold;
     }
 
+    &__container-list {
+      background-color: $unnnic-color-background-snow;
+      font-family: $unnnic-font-family-secondary;
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 1;
+      top: 100%;
+      border-radius: $unnnic-border-radius-sm;
+      box-shadow: $unnnic-shadow-level-near;
+      margin-top: $unnnic-spacing-stack-nano;
+    }
+
     &__list {
-        background-color: $unnnic-color-background-snow;
-        font-family: $unnnic-font-family-secondary;
-        position: absolute;
-        left: 0;
-        right: 0;
-        z-index: 1;
-        top: 100%;
-        border-radius: $unnnic-border-radius-sm;
-        box-shadow: $unnnic-shadow-level-near;
-        overflow-y: auto;
-        margin: $unnnic-spacing-stack-xs 0 0 0;
+      overflow-y: auto;
+      margin: $unnnic-spacing-stack-xs 0 0 0;
+      margin-right: $unnnic-spacing-inline-nano;
+      margin-bottom: $unnnic-spacing-inline-sm;
+
+        &::-webkit-scrollbar {
+          width: $scroll-size;
+          margin: 10px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: $unnnic-color-neutral-clean;
+          border-radius: $unnnic-border-radius-pill;
+        }
+
+        &::-webkit-scrollbar-track {
+          background: $unnnic-color-neutral-soft;
+          border-radius: $unnnic-border-radius-pill;
+        }
 
         &--with-message {
           top: calc(100% - 20px);
@@ -171,23 +225,43 @@ export default {
           }
         }
 
-        &::before {
-          content: '';
-          display: block;
-          height: $unnnic-spacing-stack-xs;
-        }
-
-        &::after {
-          content: '';
-          display: block;
-          height: $unnnic-spacing-stack-sm;
-        }
-
         > * {
-          padding: 0.25rem 0.5rem;
           overflow: hidden;
           white-space: nowrap;
           margin: 0;
+        }
+
+        .category {
+          padding: 0;
+          font-family: $unnnic-font-family-secondary;
+          font-weight: $unnnic-font-weight-bold;
+          font-size: $unnnic-font-size-body-md;
+          line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+          color: $unnnic-color-neutral-clean;
+          margin: 0 $unnnic-spacing-inline-sm;
+          margin-top: $unnnic-spacing-stack-sm;
+          margin-bottom: $unnnic-spacing-stack-xs;
+        }
+
+        .option {
+          background-color: $unnnic-color-background-snow;
+          margin: 0 $unnnic-spacing-inline-xs;
+
+          .label {
+            font-family: $unnnic-font-family-secondary;
+            font-weight: $unnnic-font-weight-regular;
+            font-size: $unnnic-font-size-body-gt;
+            line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
+            color: $unnnic-color-neutral-dark;
+            margin: $unnnic-spacing-stack-nano $unnnic-spacing-inline-xs;
+          }
+        }
+
+        &--size-sm {
+          .option .label {
+            font-size: $unnnic-font-size-body-md;
+            line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+          }
         }
     }
 }
