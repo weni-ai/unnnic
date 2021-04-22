@@ -20,8 +20,26 @@
         class="icon-left"
         :size="iconSize"
         @click="iconRightClicked" />
+
+      <tool-tip
+        v-if="tooltipIconRight"
+        :enabled="true"
+        :text="tooltipIconRight"
+        :side="tooltipSideIconRight"
+        :force-open="tooltipForceOpenIconRight"
+        class="icon-right"
+      >
+        <u-icon
+          v-if="iconRight"
+          :icon="iconRight"
+          :clickable="iconRightClickable"
+          :size="iconSize"
+          @click="iconRightClicked"
+        />
+      </tool-tip>
+
       <u-icon
-        v-if="iconRight"
+        v-else-if="iconRight"
         :icon="iconRight"
         :clickable="iconRightClickable"
         class="icon-right"
@@ -32,12 +50,14 @@
 
 <script>
 import UIcon from '../Icon.vue';
+import ToolTip from '../ToolTip/ToolTip.vue';
 import BaseInput from './BaseInput.vue';
 
 export default {
   name: 'unnnic-input',
   components: {
     UIcon,
+    ToolTip,
     BaseInput,
   },
   data() {
@@ -64,6 +84,21 @@ export default {
     iconRight: {
       type: String,
       default: null,
+    },
+    tooltipIconRight: {
+      type: String,
+      default: null,
+    },
+    tooltipSideIconRight: {
+      type: String,
+      default: 'right',
+      validator(value) {
+        return ['top', 'right', 'bottom', 'left'].indexOf(value) !== -1;
+      },
+    },
+    tooltipForceOpenIconRight: {
+      type: Boolean,
+      default: false,
     },
     iconLeftClickable: {
       type: Boolean,
