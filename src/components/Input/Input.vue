@@ -12,6 +12,9 @@
         :v-bind="$attrs"
         :icon-left="iconLeft"
         :icon-right="iconRight"
+        :tooltip-icon-right="tooltipIconRight"
+        :tooltip-side-icon-right="tooltipSideIconRight"
+        :tooltip-force-open-icon-right="tooltipForceOpenIconRight"
         :allow-toggle-password="togglePassword"
         :type="type"
         :icon-left-clickable="iconLeftClickable"
@@ -60,6 +63,21 @@ export default {
     iconRight: {
       type: String,
       default: null,
+    },
+    tooltipIconRight: {
+      type: String,
+      default: null,
+    },
+    tooltipSideIconRight: {
+      type: String,
+      default: 'right',
+      validator(value) {
+        return ['top', 'right', 'bottom', 'left'].indexOf(value) !== -1;
+      },
+    },
+    tooltipForceOpenIconRight: {
+      type: Boolean,
+      default: false,
     },
     togglePassword: {
       type: Boolean,

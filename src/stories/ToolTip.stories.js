@@ -7,6 +7,7 @@ export default {
     text: { control: { type: 'text' } },
     side: { control: { type: 'select', options: ['top', 'right', 'bottom', 'left'] } },
     maxWidth: { control: { type: 'text' } },
+    forceOpen: { control: { type: 'boolean' } },
   },
 };
 

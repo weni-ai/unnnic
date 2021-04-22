@@ -7,9 +7,13 @@
         :v-bind="$attrs"
         :icon-left="iconLeft"
         :icon-right="iconRight"
+        :tooltip-icon-right="tooltipIconRight"
+        :tooltip-side-icon-right="tooltipSideIconRight"
+        :tooltip-force-open-icon-right="tooltipForceOpenIconRight"
         :type="type"
         @focus="onFocus"
-        :size="size" />
+        :size="size"
+      />
 
     <div v-show="open" class="unnnic-autocomplete__container-list">
       <div
@@ -81,6 +85,21 @@ export default {
     iconRight: {
       type: String,
       default: null,
+    },
+    tooltipIconRight: {
+      type: String,
+      default: null,
+    },
+    tooltipSideIconRight: {
+      type: String,
+      default: 'right',
+      validator(value) {
+        return ['top', 'right', 'bottom', 'left'].indexOf(value) !== -1;
+      },
+    },
+    tooltipForceOpenIconRight: {
+      type: Boolean,
+      default: false,
     },
     highlight: {
       type: Boolean,
