@@ -1,5 +1,8 @@
 <template>
-<div :class="{ 'unnnic-tooltip': enabled }">
+  <div :class="{
+    'unnnic-tooltip': enabled,
+    'force-open': forceOpen,
+  }">
   <slot />
   <span
     v-if="enabled"
@@ -11,7 +14,7 @@
   >
     {{text}}
   </span>
-</div>
+  </div>
 </template>
 
 <script>
@@ -24,6 +27,10 @@ export default {
       default: null,
     },
     enabled: {
+      type: Boolean,
+      default: false,
+    },
+    forceOpen: {
       type: Boolean,
       default: false,
     },
@@ -132,6 +139,12 @@ export default {
         margin-top: -5px;
         border-color: transparent transparent transparent $unnnic-color-neutral-black;
       }
+    }
+}
+
+.unnnic-tooltip.force-open {
+  .unnnic-tooltip-label{
+      visibility: visible;
     }
 }
 
