@@ -10,6 +10,9 @@ export default {
     placeholder: { control: { type: 'text' } },
     iconLeft: { control: { type: 'select', options: iconList } },
     iconRight: { control: { type: 'select', options: iconList } },
+    tooltipIconRight: { control: { type: 'text' } },
+    tooltipSideIconRight: { control: { type: 'select', options: ['top', 'right', 'bottom', 'left'] } },
+    tooltipForceOpenIconRight: { control: { type: 'boolean' } },
   },
 };
 
