@@ -2,7 +2,7 @@
   <div v-click-outside="onClickOutside" class='unnnic-select'>
     <p v-if="label" class="unnnic-form__label"> {{ label }}  </p>
     <text-input
-      :value="selected ? selected.text : null"
+      :value="labelFor(value)"
       :placeholder="placeholder"
       :icon-right="active ?
       'arrow-button-up-1' : 'arrow-button-down-1'"
@@ -27,7 +27,7 @@
     </select-item>
     <div class="unnnic-select__options__scroll-area">
       <select-item
-        v-for="(option, index) in options()"
+        v-for="(option, index) in optionsAfterMounted"
         :tabindex="index"
         :size="size"
         :key="option.value"
@@ -79,36 +79,37 @@ export default {
   data() {
     return {
       active: false,
-      selected: null,
+      optionsAfterMounted: [],
     };
   },
   directives: {
     clickOutside: vClickOutside.directive,
   },
   mounted() {
-    const options = this.options();
-    if (this.value) {
-      const selected = options.find((option) => option.value === this.value);
-      if (selected) this.selected = selected;
-    }
-  },
-  watch: {
-    selected() {
-      const value = this.selected ? this.selected.value : null;
-      this.$emit('onChange', value);
-      this.$emit('input', value);
-    },
-    value() {
-      if (this.value === null) this.selected = null;
-    },
+    this.optionsAfterMounted = this.options();
   },
   methods: {
+    labelFor(value) {
+      const selected = this.optionsAfterMounted.find((option) => option.value === value);
+
+      if (selected) {
+        return selected.text;
+      }
+
+      return '';
+    },
+
     onClickOutside() {
       this.active = false;
     },
     onSelectOption(option) {
-      if (option.value == null || option.value.length === 0) this.selected = null;
-      else this.selected = option;
+      const value = (option.value == null || option.value.length === 0)
+        ? null
+        : option.value;
+
+      this.$emit('onChange', value);
+      this.$emit('input', value);
+
       this.active = false;
     },
     options() {
