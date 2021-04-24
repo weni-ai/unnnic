@@ -14,6 +14,7 @@ import iconSvg from './Icon-svg.vue';
 import toolTip from './ToolTip/ToolTip.vue';
 import card from './Card/Card.vue';
 import checkbox from './Checkbox/Checkbox.vue';
+import radio from './Radio/Radio.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
 import modal from './Modal/Modal.vue';
 import call from '../utils/call';
@@ -38,6 +39,7 @@ const components = {
   unnnicToolTip: toolTip,
   unnnicCard: card,
   unnnicCheckbox: checkbox,
+  unnnicRadio: radio,
   unnnicLanguageSelect: languageSelect,
   unnnicModal: modal,
   unnnicSelect: select,
@@ -65,6 +67,7 @@ export const unnnicIconSvg = iconSvg;
 export const unnnicToolTip = toolTip;
 export const unnnicCard = card;
 export const unnnicCheckbox = checkbox;
+export const unnnicRadio = radio;
 export const unnniclanguageSelect = languageSelect;
 export const unnnicModal = modal;
 export const unnnicSelect = select;
