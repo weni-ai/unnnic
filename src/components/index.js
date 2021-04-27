@@ -22,6 +22,7 @@ import select from './Select/Select.vue';
 import selectItem from './Select/SelectItem.vue';
 import autocomplete from './Input/Autocomplete.vue';
 import tag from './Tag/Tag.vue';
+import accordion from './Accordion/Accordion.vue';
 
 const components = {
   unnnicInput: input,
@@ -46,6 +47,7 @@ const components = {
   unnnicSelectItem: selectItem,
   unnnicAutocomplete: autocomplete,
   unnnicTag: tag,
+  unnnicAccordion: accordion,
 };
 
 Object.keys(components).forEach((name) => {
@@ -76,3 +78,4 @@ export const unnnicCallAlert = call.callAlert;
 export const unnnicCallModal = call.callModal;
 export const unnnicAutocomplete = autocomplete;
 export const unnnicTag = tag;
+export const unnnicAccordion = accordion;
