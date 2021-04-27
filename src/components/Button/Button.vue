@@ -8,11 +8,21 @@
       iconCenter ? `unnnic-button--icon-on-center` : null
     ]"
     v-on="$listeners">
+
+    <unnnic-icon-svg
+      v-if="showSvgIconLeft"
+      :icon="iconLeft"
+      :scheme="iconScheme"
+      :size="iconSize"
+      :class="{ 'unnnic-button__icon-left': hasText }"
+    />
+
     <u-icon
-      v-if="iconLeft" :icon="iconLeft"
+      v-else-if="iconLeft" :icon="iconLeft"
       :class="{ 'unnnic-button__icon-left': hasText }"
       :size="iconSize"
     />
+
     <unnnic-icon-svg v-if="iconCenter" :icon="iconCenter" :scheme="iconScheme"></unnnic-icon-svg>
     <span class="unnnic-button__label">
       <slot /> {{ text }}
@@ -65,6 +75,13 @@ export default {
     },
   },
   computed: {
+    showSvgIconLeft() {
+      return this.iconLeft
+        && [
+          'button-play-1',
+        ].includes(this.iconLeft);
+    },
+
     iconSize() {
       if (this.size === 'small') return 'sm';
       return 'md';
