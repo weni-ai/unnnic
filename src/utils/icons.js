@@ -91,6 +91,8 @@ import keyboardArrowDown1 from '!!svg-inline-loader!../assets/icons/keyboard-arr
 import keyboardArrowLeft1 from '!!svg-inline-loader!../assets/icons/keyboard-arrow-left-1.svg';
 import building21 from '!!svg-inline-loader!../assets/icons/building-2-1.svg';
 import folder1 from '!!svg-inline-loader!../assets/icons/folder-1.svg';
+import addCircle1 from '!!svg-inline-loader!../assets/icons/add-circle-1.svg';
+import subtractCircle1 from '!!svg-inline-loader!../assets/icons/subtract-circle-1.svg';
 
 export default {
   'headphones-customer-support-2': headphonesCustomerSupport2,
@@ -184,4 +186,6 @@ export default {
   'keyboard-arrow-left-1': keyboardArrowLeft1,
   'building-2-1': building21,
   'folder-1': folder1,
+  'add-circle-1': addCircle1,
+  'subtract-circle-1': subtractCircle1,
 };
