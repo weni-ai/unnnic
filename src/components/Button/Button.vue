@@ -178,6 +178,7 @@ export default {
 
   &--terciary {
     background-color: transparent;
+    color: $unnnic-color-neutral-dark;
     border: $unnnic-border-width-thinner solid transparent;
     &:hover:enabled {
       border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
