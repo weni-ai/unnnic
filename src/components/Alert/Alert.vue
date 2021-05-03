@@ -1,5 +1,5 @@
 <template>
-  <div :class="['unnnic-alert', `unnnic-alert-position--${position}`]">
+  <div v-if="version === '1.0'" :class="['unnnic-alert', `unnnic-alert-position--${position}`]">
     <unnnic-icon
       :class="`unnnic-card-scheme--${scheme}--icon`"
       :icon="icon"
@@ -28,15 +28,26 @@
       @click="onClose()"
     />
   </div>
+
+  <component v-else :is="'version' + version.replace(/\./g, 'dot')" v-bind="$props"></component>
 </template>
 
 <script>
 import unnnicIcon from '../Icon.vue';
+import Version1dot1 from './Version1.1.vue';
 
 export default {
   name: 'unnnicAlert',
-  components: { unnnicIcon },
+  components: {
+    unnnicIcon,
+    Version1dot1,
+  },
   props: {
+    version: {
+      type: String,
+      default: '1.0',
+    },
+
     title: {
       type: String,
       default: null,

@@ -24,10 +24,16 @@ export default {
     icon: {
       control: {
         type: 'select',
-        options: ['check-circle-1-1'],
+        options: ['check-circle-1-1', 'check-circle-1-1-1', 'alert-circle-1-1'],
       },
     },
     seconds: { control: { type: 'number' } },
+    version: {
+      control: {
+        type: 'select',
+        options: ['1.0', '1.1'],
+      },
+    },
   },
 };
 
