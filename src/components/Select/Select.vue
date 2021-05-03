@@ -89,9 +89,8 @@ export default {
         return '';
       }
 
-      const selected = this.options().find((option) =>
-        (option.value === '' && this.value == null)
-        || option.value == this.value);
+      const selected = this.options().find((option) => (option.value === '' && this.value == null)
+        || option.value === this.value);
 
       if (selected) {
         return selected.text;
