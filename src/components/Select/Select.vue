@@ -2,7 +2,7 @@
   <div v-click-outside="onClickOutside" class='unnnic-select'>
     <p v-if="label" class="unnnic-form__label"> {{ label }}  </p>
     <text-input
-      :value="labelFor(value)"
+      :value="labelForValue"
       :placeholder="placeholder"
       :icon-right="active ?
       'arrow-button-up-1' : 'arrow-button-down-1'"
@@ -79,14 +79,19 @@ export default {
   data() {
     return {
       active: false,
+      status: 'not-mounted',
     };
   },
-  directives: {
-    clickOutside: vClickOutside.directive,
-  },
-  methods: {
-    labelFor(value) {
-      const selected = this.options().find((option) => option.value === value);
+
+  computed: {
+    labelForValue() {
+      if (this.status !== 'mounted') {
+        return '';
+      }
+
+      const selected = this.options().find((option) =>
+        (option.value === '' && this.value == null)
+        || option.value == this.value);
 
       if (selected) {
         return selected.text;
@@ -94,12 +99,21 @@ export default {
 
       return '';
     },
+  },
 
+  mounted() {
+    this.status = 'mounted';
+  },
+
+  directives: {
+    clickOutside: vClickOutside.directive,
+  },
+  methods: {
     onClickOutside() {
       this.active = false;
     },
     onSelectOption(option) {
-      const value = (option.value == null || option.value.length === 0)
+      const value = (option.value === null || option.value.length === 0)
         ? null
         : option.value;
 

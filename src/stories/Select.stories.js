@@ -12,15 +12,35 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicSelect },
-  template: '<unnnicSelect v-bind="$props"> \
+  data() {
+    return {
+      value: '1',
+      options: [
+        { value: '', text: 'None' },
+        { value: '1', text: 'option1' },
+        { value: '2', text: 'option2' },
+        { value: '3', text: 'option3' },
+        { value: '4', text: 'option4' },
+        { value: '5', text: 'option5' },
+      ],
+    };
+  },
+
+  methods: {
+    addDynamicOption() {
+      const value = Math.floor(Math.random() * 1e3);
+
+      this.options.push({
+        value: value.toString(),
+        text: `option ${value}`,
+      });
+    },
+  },
+
+  template: '<div><unnnicSelect v-model="value"> \
     <div slot="header"> header </div>\
-    <option value=""> None </option> \
-    <option value="1">option 1</option>\
-    <option value="2"> option2 </option>\
-    <option value="3"> option3 </option>\
-    <option value="4"> option4 </option>\
-    <option value="5"> option5 </option>\
-  </unnnicSelect>',
+    <option v-for="option in options" :value="option.value">{{ option.text }}</option> \
+  </unnnicSelect><button @click="addDynamicOption">Add dynamic option</button></div>',
 });
 
 export const Medium = Template.bind({});
