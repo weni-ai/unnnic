@@ -23,6 +23,7 @@ import selectItem from './Select/SelectItem.vue';
 import autocomplete from './Input/Autocomplete.vue';
 import tag from './Tag/Tag.vue';
 import accordion from './Accordion/Accordion.vue';
+import indicator from './Indicator/Indicator.vue';
 
 const components = {
   unnnicInput: input,
@@ -48,6 +49,7 @@ const components = {
   unnnicAutocomplete: autocomplete,
   unnnicTag: tag,
   unnnicAccordion: accordion,
+  unnnicIndicator: indicator,
 };
 
 Object.keys(components).forEach((name) => {
@@ -79,3 +81,4 @@ export const unnnicCallModal = call.callModal;
 export const unnnicAutocomplete = autocomplete;
 export const unnnicTag = tag;
 export const unnnicAccordion = accordion;
+export const unnnicIndicator = indicator;
