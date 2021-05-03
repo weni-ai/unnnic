@@ -27,7 +27,7 @@
     </select-item>
     <div class="unnnic-select__options__scroll-area">
       <select-item
-        v-for="(option, index) in optionsAfterMounted"
+        v-for="(option, index) in options()"
         :tabindex="index"
         :size="size"
         :key="option.value"
@@ -79,18 +79,14 @@ export default {
   data() {
     return {
       active: false,
-      optionsAfterMounted: [],
     };
   },
   directives: {
     clickOutside: vClickOutside.directive,
   },
-  mounted() {
-    this.optionsAfterMounted = this.options();
-  },
   methods: {
     labelFor(value) {
-      const selected = this.optionsAfterMounted.find((option) => option.value === value);
+      const selected = this.options().find((option) => option.value === value);
 
       if (selected) {
         return selected.text;
