@@ -7,7 +7,7 @@
         size="md"
       />
 
-      <div class="title">{{ title }}</div>
+      <div :class="['title', { open }]">{{ title }}</div>
 
       <div v-show="open" class="actions">
         <slot name="actions"></slot>
@@ -114,6 +114,10 @@ export default {
       line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
       color: $unnnic-color-neutral-darkest;
       margin-left: $unnnic-spacing-inline-xs;
+
+      &.open {
+        font-weight: $unnnic-font-weight-bold;
+      }
     }
   }
 
