@@ -4,8 +4,8 @@ export default {
   title: 'Example/Indicator',
   component: unnnicIndicator,
   argTypes: {
-    steps: { control: { type: 'number' } },
-    current: { control: { type: 'number' } },
+    numberOfSteps: { control: { type: 'number' } },
+    currentStep: { control: { type: 'number' } },
   },
 };
 
@@ -17,7 +17,7 @@ const Template = (args, { argTypes }) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  steps: 3,
-  current: 2,
-  names: ['Indicator-1', 'Indicator-2', 'Indicator-3'],
+  numberOfSteps: 3,
+  currentStep: 2,
+  titles: ['Indicator-1', 'Indicator-2', 'Indicator-3'],
 };

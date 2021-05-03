@@ -1,7 +1,7 @@
 <template>
   <div class="weni-step-indicator">
     <div
-      v-for="step in steps"
+      v-for="step in numberOfSteps"
       :class="{
         'weni-step-indicator__step__wrapper': true,
         'weni-step-indicator--has-separator': step > 1,
@@ -12,16 +12,16 @@
         v-if="step !== 1"
         :class="{
           'weni-step-indicator__step__separator': true,
-          'weni-step-indicator__step__separator--active': step <= current,
+          'weni-step-indicator__step__separator--active': step <= currentStep,
         }"
       />
       <div
         :class="{
           'weni-step-indicator__step': true,
-          'weni-step-indicator__step--active': step <= current,
+          'weni-step-indicator__step--active': step <= currentStep,
         }"
       >
-        <span class="weni-step-indicator__label"> {{ nameForStep(step) }} </span>
+        <span class="weni-step-indicator__label"> {{ titleForStep(step) }} </span>
       </div>
     </div>
   </div>
@@ -30,23 +30,23 @@
 <script>
 export default {
   props: {
-    steps: {
+    numberOfSteps: {
       type: Number,
       required: true,
     },
-    names: {
+    titles: {
       type: Array,
       default: () => [],
     },
-    current: {
+    currentStep: {
       type: Number,
       default: 0,
     },
   },
   methods: {
-    nameForStep(step) {
+    titleForStep(step) {
       try {
-        return this.names[step - 1];
+        return this.titles[step - 1];
       } catch (e) {
         return null;
       }
