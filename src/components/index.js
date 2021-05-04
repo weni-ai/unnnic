@@ -24,6 +24,7 @@ import autocomplete from './Input/Autocomplete.vue';
 import tag from './Tag/Tag.vue';
 import accordion from './Accordion/Accordion.vue';
 import indicator from './Indicator/Indicator.vue';
+import skeletonLoading from './SkeletonLoading/SkeletonLoading.vue';
 
 const components = {
   unnnicInput: input,
@@ -50,6 +51,7 @@ const components = {
   unnnicTag: tag,
   unnnicAccordion: accordion,
   unnnicIndicator: indicator,
+  unnnicSkeletonLoading: skeletonLoading,
 };
 
 Object.keys(components).forEach((name) => {
@@ -82,3 +84,4 @@ export const unnnicAutocomplete = autocomplete;
 export const unnnicTag = tag;
 export const unnnicAccordion = accordion;
 export const unnnicIndicator = indicator;
+export const unnnicSkeletonLoading = skeletonLoading;
