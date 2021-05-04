@@ -29,6 +29,6 @@ const Template = (args, { argTypes }) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-  width:'1024px',
-  height:'300px'
+  width: '1024px',
+  height: '300px',
 };
