@@ -1,5 +1,6 @@
 <script lang="jsx">
-import {unnnicColorBackgroundSolo} from "../../assets/scss/colors.scss";
+import { unnnicColorBackgroundSolo } from '../../assets/scss/colors.scss';
+
 export const DEFAULT_BACKGROUND = unnnicColorBackgroundSolo;
 export const DEFAULT_HIGHLIGHT = 'rgba(255,255,255,0.375)';
 export const SkeletonStyle = {
@@ -9,41 +10,41 @@ export const SkeletonStyle = {
     ${DEFAULT_BACKGROUND},
     ${DEFAULT_HIGHLIGHT},
     ${DEFAULT_BACKGROUND}
-  )`
+  )`,
 };
 export default {
   name: 'unnnicSkeletonTheme',
   provide() {
     return {
       _themeStyle: this.themeStyle,
-      _skeletonTheme: this
+      _skeletonTheme: this,
     };
   },
   props: {
     color: {
       type: String,
-      default: DEFAULT_BACKGROUND
+      default: DEFAULT_BACKGROUND,
     },
     highlight: {
       type: String,
-      default: DEFAULT_HIGHLIGHT
+      default: DEFAULT_HIGHLIGHT,
     },
     duration: {
       type: Number,
-      default: 1.5
+      default: 1.5,
     },
     tag: {
       type: String,
-      default: 'div'
+      default: 'div',
     },
     loading: {
       type: Boolean,
-      default: undefined
-    }
+      default: undefined,
+    },
   },
   data() {
     return {
-      themeStyle: { ...SkeletonStyle }
+      themeStyle: { ...SkeletonStyle },
     };
   },
   render(h) {
@@ -65,10 +66,9 @@ export default {
       return h(this.tag, this.$slots.default);
     }
     return this.$slots.default[0];
-  }
+  },
 };
 </script>
 <style lang="scss">
 @import "../../assets/scss/unnnic.scss";
-
 </style>

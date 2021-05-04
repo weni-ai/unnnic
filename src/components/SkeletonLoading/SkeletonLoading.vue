@@ -1,6 +1,6 @@
 <script>
-
 import { SkeletonStyle } from './skeletonTheme.vue';
+
 const isEmptyVNode = (children) => {
   if (!children) return true;
   const [firstNode] = children;
@@ -16,43 +16,52 @@ export default {
   inject: {
     themeStyle: {
       from: '_themeStyle',
-      default: SkeletonStyle
+      default: SkeletonStyle,
     },
     theme: {
       from: '_skeletonTheme',
-      default: ({})
-    }
+      default: {},
+    },
   },
   props: {
     prefix: {
       type: String,
-      default: 'unnnic'
+      default: 'unnnic',
     },
     count: {
       type: Number,
-      default: 1
+      default: 1,
     },
     duration: {
       type: Number,
-      default: 1.5
+      default: 1.5,
     },
     tag: {
       type: String,
-      default: 'span'
+      default: 'span',
     },
     width: [String, Number],
     height: [String, Number],
     circle: Boolean,
-    loading: undefined
+    loading: undefined,
   },
   computed: {
     isLoading() {
-      return typeof this.theme.loading !== 'undefined' ? this.theme.loading : this.loading;
-    }
+      return typeof this.theme.loading !== 'undefined'
+        ? this.theme.loading
+        : this.loading;
+    },
   },
   render(h) {
     const {
-      width, height, duration, prefix, circle, count, tag, isLoading
+      width,
+      height,
+      duration,
+      prefix,
+      circle,
+      count,
+      tag,
+      isLoading,
     } = this;
     const classes = [`${prefix}-skeleton`];
     const elements = [];
@@ -67,20 +76,19 @@ export default {
     if (circle) styles.borderRadius = '50%';
     for (let i = 0; i < count; i += 1) {
       elements.push(
-        <span
-          key={i}
-          class={classes}
-          style={styles}>
+        <span key={i} class={classes} style={styles}>
           &zwnj;
-        </span>
+        </span>,
       );
     }
-    const showLoading = typeof isLoading !== 'undefined' ? isLoading : isEmptyVNode(this.$slots.default);
+    const showLoading = typeof isLoading !== 'undefined'
+      ? isLoading
+      : isEmptyVNode(this.$slots.default);
     if (tag) {
       return h(tag, !showLoading ? this.$slots.default : elements);
     }
-    return (!showLoading ? this.$slots.default : <span>{ elements }</span>);
-  }
+    return !showLoading ? this.$slots.default : <span>{elements}</span>;
+  },
 };
 </script>
 
