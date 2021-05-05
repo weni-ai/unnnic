@@ -7,7 +7,7 @@ export default {
   argTypes: {
     enabled: { control: { type: 'select', options: [true, false] } },
     infoPosition: { control: { type: 'select', options: ['top', 'right', 'bottom', 'left'] } },
-    type: { control: { type: 'select', options: ['title', 'dash', 'account', 'status', 'default', 'blank'] } },
+    type: { control: { type: 'select', options: ['title', 'dash', 'account', 'status', 'default', 'blank', 'content'] } },
     icon: { control: { type: 'select', options: iconList } },
     scheme: {
       control: {
@@ -67,4 +67,13 @@ export const Blank = Template.bind({});
 Blank.args = {
   type: 'blank',
   text: 'This is the text',
+};
+
+export const Content = Template.bind({});
+Content.args = {
+  type: 'content',
+  title: 'This is the title',
+  description: 'This is the description',
+  enabled: false,
+  icon: 'view-1-1',
 };

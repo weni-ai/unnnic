@@ -1,6 +1,6 @@
 <template>
     <component
-      class="unnnic-card-content"
+      class="unnnic-card-component"
       :is="currentComponent"
       :v-bind="$attrs"
       :title="title"
@@ -27,6 +27,7 @@ import StatusCard from './StatusCard.vue';
 import AccountCard from './AccountCard.vue';
 import DefaultCard from './DefaultCard.vue';
 import BlankCard from './BlankCard.vue';
+import ContentCard from './ContentCard.vue';
 
 export default {
   name: 'unnnic-card',
@@ -115,6 +116,7 @@ export default {
       if (this.type === 'account') return AccountCard;
       if (this.type === 'default') return DefaultCard;
       if (this.type === 'blank') return BlankCard;
+      if (this.type === 'content') return ContentCard;
       return TitleCard;
     },
   },
