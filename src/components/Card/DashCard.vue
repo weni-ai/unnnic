@@ -90,7 +90,7 @@ export default {
     margin-left: auto;
 
     border-radius: $unnnic-border-radius-sm;
-    padding: 4px 8px;
+    padding: $unnnic-inline-nano $unnnic-inset-nano;
 
     &__icon {
       margin-right: $unnnic-inline-nano;
