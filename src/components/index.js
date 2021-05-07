@@ -25,6 +25,7 @@ import tag from './Tag/Tag.vue';
 import accordion from './Accordion/Accordion.vue';
 import indicator from './Indicator/Indicator.vue';
 import skeletonLoading from './SkeletonLoading/SkeletonLoading.vue';
+import carousel from './Carousel/Carousel.vue';
 
 const components = {
   unnnicInput: input,
@@ -52,6 +53,7 @@ const components = {
   unnnicAccordion: accordion,
   unnnicIndicator: indicator,
   unnnicSkeletonLoading: skeletonLoading,
+  unnnicCarousel: carousel,
 };
 
 Object.keys(components).forEach((name) => {
@@ -85,3 +87,4 @@ export const unnnicTag = tag;
 export const unnnicAccordion = accordion;
 export const unnnicIndicator = indicator;
 export const unnnicSkeletonLoading = skeletonLoading;
+export const unnnicCarousel = carousel;

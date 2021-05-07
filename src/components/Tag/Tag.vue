@@ -12,12 +12,14 @@
       :clickable="clickable"
       :tooltipText="tooltipText"
       :enableTooltip="enableTooltip"
+      :icon="icon"
     />
 </template>
 
 <script>
 import DefaultTag from './DefaultTag.vue';
 import IndicatorTag from './IndicatorTag.vue';
+import BrandTag from './BrandTag.vue';
 
 export default {
   name: 'unnnic-tag',
@@ -27,7 +29,7 @@ export default {
       default: 'default',
       validator(value) {
         return (
-          ['default', 'indicator'].indexOf(value) !== -1
+          ['default', 'indicator', 'brand'].indexOf(value) !== -1
         );
       },
     },
@@ -67,10 +69,15 @@ export default {
       type: Boolean,
       default: false,
     },
+    icon: {
+      type: String,
+      default: null,
+    },
   },
   computed: {
     currentComponent() {
       if (this.type === 'indicator') return IndicatorTag;
+      if (this.type === 'brand') return BrandTag;
       return DefaultTag;
     },
   },
