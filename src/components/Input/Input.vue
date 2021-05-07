@@ -3,7 +3,12 @@
     'unnnic-form': true,
     'unnnic-form--error': type === 'error'
     }">
-      <p v-if="label" class="unnnic-form__label"> {{ label }}  </p>
+      <p v-if="hasLabelSlot" class="unnnic-form__label">
+        <slot name="label"/>
+      </p>
+
+      <p v-else-if="label" class="unnnic-form__label">{{ label }}</p>
+
       <component
         v-model="val"
         v-on="inputListeners"
@@ -122,6 +127,10 @@ export default {
         ...this.$listeners,
         input: () => {},
       };
+    },
+
+    hasLabelSlot() {
+      return !!this.$slots.label;
     },
   },
 };
