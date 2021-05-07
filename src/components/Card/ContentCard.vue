@@ -83,13 +83,13 @@ export default {
 
   &__icon {
     border-radius: $unnnic-border-radius-sm;
-    padding: 2px 4px;
+    padding: 0.125rem $unnnic-inline-nano;
     margin-right: $unnnic-inline-xs;
-    background-color: $unnnic-color-background-solo;
     color: $unnnic-color-neutral-cloudy;
+    background-color: $unnnic-color-neutral-lightest;
 
     &--disabled {
-      background-color: $unnnic-color-neutral-lightest;
+      background-color: $unnnic-color-background-solo;
     }
   }
 
