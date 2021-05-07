@@ -5,7 +5,7 @@ export default {
   component: unnnicTag,
   argTypes: {
     text: { control: { type: 'text' } },
-    type: { control: { type: 'select', options: ['default', 'indicator'] } },
+    type: { control: { type: 'select', options: ['default', 'indicator', 'brand'] } },
     scheme: {
       control: {
         type: 'select',
@@ -25,14 +25,22 @@ const Template = (args, { argTypes }) => ({
 export const Default = Template.bind({});
 Default.args = {
   text: 'Label',
+  type: 'default',
 };
 
 export const Indicator = Template.bind({});
 Indicator.args = {
   text: 'Tag Name',
+  type: 'indicator',
   count: 100,
   clickable: true,
   hasBackButton: false,
   enableTooltip: true,
   tooltipText: 'This is the amount',
+};
+
+export const Brand = Template.bind({});
+Brand.args = {
+  text: 'Settings',
+  type: 'brand',
 };
