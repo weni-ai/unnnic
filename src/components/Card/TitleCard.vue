@@ -6,7 +6,7 @@
       size="md" />
     <div class="unnnic-card-title__content">
       <div class="unnnic-card-title__content_title">{{ title }}</div>
-      <tool-tip :side="infoPosition" :text="info" v-if="hasInformationIcon">
+      <tool-tip :side="infoPosition" :text="info" v-if="hasInformationIcon" :enabled="enabled">
         <UICon
         icon="information-circle-4"
         class="unnnic-card-title__content_info"
@@ -45,6 +45,10 @@ export default {
       default: null,
     },
     hasInformationIcon: {
+      type: Boolean,
+      default: true,
+    },
+    enabled: {
       type: Boolean,
       default: true,
     },
