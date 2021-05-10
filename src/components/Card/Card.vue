@@ -38,7 +38,7 @@ export default {
       default: 'title',
       validator(value) {
         return (
-          ['title', 'status', 'dash', 'account', 'default', 'blank'].indexOf(value) !== -1
+          ['title', 'status', 'dash', 'account', 'default', 'blank', 'content'].indexOf(value) !== -1
         );
       },
     },
