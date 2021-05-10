@@ -3,7 +3,7 @@
       class="unnnic-carousel-component"
       :is="currentComponent"
       :v-bind="$attrs"
-      :title="title"
+      :name="name"
       :clickable="clickable"
       :tagItems="tagItems"
       @selected="$emit('change-selected', $event)"
@@ -31,7 +31,7 @@ export default {
       type: Array,
       default: () => [],
     },
-    title: {
+    name: {
       type: String,
       default: null,
     },

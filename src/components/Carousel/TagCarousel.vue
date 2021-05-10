@@ -4,7 +4,7 @@
     <transition-group class="unnnic-card-tag-carousel__transition" tag="div">
       <div v-for="tag in slides" class="unnnic-card-tag-carousel__transition__tags" :key="tag.id">
         <unnnic-tag
-          :text="`${tag.title} - ${tag.id}`"
+          :text="tag.name"
           clickable
           type="brand"
           :disabled="checkIsInclude(tag)"
