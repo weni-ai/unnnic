@@ -20,10 +20,10 @@ export const Tag = Template.bind({});
 Tag.args = {
   type: 'brand',
   tagItems: [
-    { id: 1, title: 'tag' },
-    { id: 2, title: 'tag' },
-    { id: 3, title: 'tag' },
-    { id: 4, title: 'tag' },
-    { id: 5, title: 'tag' },
+    { id: 1, name: 'tag' },
+    { id: 2, name: 'tag' },
+    { id: 3, name: 'tag' },
+    { id: 4, name: 'tag' },
+    { id: 5, name: 'tag' },
   ],
 };
