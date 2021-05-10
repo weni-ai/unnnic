@@ -1,7 +1,10 @@
 <template>
   <div :class="{
+    'unnnic-language-select': true,
     'unnnic-language-select__container': true,
-    'unnnic-language-select--contracted': contracted }">
+    'unnnic-language-select--contracted': contracted,
+    [position]: true,
+  }">
     <div
       v-show="open"
       :class="{
@@ -11,7 +14,7 @@
     <div
       :class="{
         'unnnic--clickable': true,
-        'unnnic-language-select': true,
+        'unnnic-language-select--item': true,
         'unnnic-language-select--open': open,
         'unnnic-language-select--open--contracted': open && contracted,
         'unnnic-language-select--expanded': !contracted
@@ -27,10 +30,20 @@
             {{ languages[val] }}
         </div>
         <UIcon
+          v-if="position.includes('top')"
           v-show="!contracted"
           class="unnnic-language-select__icon"
           :icon="open ? 'arrow-button-down-1' : 'arrow-button-up-1'"
-          size="xs" />
+          size="xs"
+        />
+
+        <UIcon
+          v-if="position.includes('bottom')"
+          v-show="!contracted"
+          class="unnnic-language-select__icon"
+          :icon="open ? 'arrow-button-up-1' : 'arrow-button-down-1'"
+          size="xs"
+        />
       </div>
       <div
         v-show="open"
@@ -40,6 +53,10 @@
         <div
           v-for="language in otherLanguages"
           :key="language.id">
+          <div
+            v-show="!contracted
+            && position.includes('bottom')" class="unnnic-language-select__list__item__separator"
+          />
           <div
             class="unnnic-language-select__list__item unnnic--clickable"
             @click=" open=false; val=language.id ">
@@ -53,7 +70,10 @@
               {{ language.name }}
             </div>
           </div>
-          <div v-show="!contracted" class="unnnic-language-select__list__item__separator" />
+          <div
+            v-show="!contracted && position.includes('top')"
+            class="unnnic-language-select__list__item__separator"
+          />
         </div>
       </div>
   </div>
@@ -119,10 +139,14 @@ export default {
 @import "../../assets/scss/unnnic.scss";
 
   .unnnic-language-select {
-    background-color: $unnnic-color-background-snow;
-    padding: $unnnic-squish-xs;
-    border-radius: $unnnic-border-radius-pill;
-    box-sizing: border-box;
+    &--item {
+      background-color: $unnnic-color-background-snow;
+      padding: $unnnic-squish-xs;
+      border-radius: $unnnic-border-radius-pill;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+    }
 
     &--contracted {
       display: inline-block;
@@ -150,13 +174,16 @@ export default {
       }
     }
 
+    &.bottom {
+      .unnnic-language-select--open {
+        border-radius: $unnnic-border-radius-sm $unnnic-border-radius-sm 0 0;
+      }
+    }
+
     &--expanded {
       padding: $unnnic-squish-nano;
       width: 100%;
     }
-
-    display: flex;
-    align-items: center;
 
     &__title {
       flex: 1;
@@ -209,6 +236,21 @@ export default {
           margin: $unnnic-spacing-stack-xs $unnnic-inline-sm;
           border: $unnnic-border-width-thinner solid $unnnic-color-background-sky;
         }
+      }
+    }
+
+    &.bottom {
+      .unnnic-language-select__list {
+        border-radius: 0 0 $unnnic-border-radius-sm $unnnic-border-radius-sm;
+        top: initial;
+        transform: translateY(100%);
+        bottom: 0;
+        z-index: 2;
+      }
+
+      .unnnic-language-select__seam--horizontal {
+        top: auto;
+        bottom: -3px;
       }
     }
 
