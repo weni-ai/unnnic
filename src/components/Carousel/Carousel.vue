@@ -6,7 +6,7 @@
       :title="title"
       :clickable="clickable"
       :tagItems="tagItems"
-      @selected="$emit('change-tag', $event)"
+      @selected="$emit('change-selected', $event)"
     />
 </template>
 
@@ -47,11 +47,6 @@ export default {
   computed: {
     currentComponent() {
       return TagCarousel;
-    },
-  },
-  methods: {
-    teste(o) {
-      console.log(o);
     },
   },
 };

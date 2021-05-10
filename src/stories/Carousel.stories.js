@@ -1,9 +1,9 @@
-import Carousel from '../components/Carousel/Carousel.vue';
+import unnnicCarousel from '../components/Carousel/Carousel.vue';
 import iconList from '../utils/iconList';
 
 export default {
   title: 'Example/Carousel',
-  component: Carousel,
+  component: unnnicCarousel,
   argTypes: {
     type: { control: { type: 'select', options: ['brand'] } },
     icon: { control: { type: 'select', options: iconList } },
@@ -12,8 +12,8 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { Carousel },
-  template: '<Carousel v-bind="$props"/>',
+  components: { unnnicCarousel },
+  template: '<unnnic-carousel v-bind="$props"/>',
 });
 
 export const Tag = Template.bind({});
