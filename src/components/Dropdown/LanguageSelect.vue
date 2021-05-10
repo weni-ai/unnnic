@@ -53,7 +53,10 @@
         <div
           v-for="language in otherLanguages"
           :key="language.id">
-          <div v-show="!contracted && position.includes('bottom')" class="unnnic-language-select__list__item__separator" />
+          <div
+            v-show="!contracted
+            && position.includes('bottom')" class="unnnic-language-select__list__item__separator"
+          />
           <div
             class="unnnic-language-select__list__item unnnic--clickable"
             @click=" open=false; val=language.id ">
@@ -67,7 +70,10 @@
               {{ language.name }}
             </div>
           </div>
-          <div v-show="!contracted && position.includes('top')" class="unnnic-language-select__list__item__separator" />
+          <div
+            v-show="!contracted && position.includes('top')"
+            class="unnnic-language-select__list__item__separator"
+          />
         </div>
       </div>
   </div>
