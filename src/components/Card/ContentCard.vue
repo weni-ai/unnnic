@@ -38,7 +38,7 @@ export default {
     },
     enabled: {
       type: Boolean,
-      default: true,
+      default: false,
     },
     clickable: {
       type: Boolean,
