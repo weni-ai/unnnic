@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       slides: [],
-      selectedTags: [],
+      selected: [],
     };
   },
   components: {
@@ -41,20 +41,20 @@ export default {
     this.slides = this.tagItems;
   },
   watch: {
-    selectedTags() {
-      this.$emit('selectedChanges', this.selectedTags);
+    selected() {
+      this.$emit('selected', this.selected);
     },
   },
   methods: {
     save(tagItem) {
-      if (this.selectedTags.includes(tagItem)) {
-        this.selectedTags = this.selectedTags.filter((tag) => tag.id !== tagItem.id);
+      if (this.selected.includes(tagItem)) {
+        this.selected = this.selected.filter((tag) => tag.id !== tagItem.id);
         return;
       }
-      this.selectedTags = [...this.selectedTags, tagItem];
+      this.selected = [...this.selected, tagItem];
     },
     checkIsInclude(tagItem) {
-      return this.selectedTags.includes(tagItem);
+      return this.selected.includes(tagItem);
     },
     next() {
       const first = this.slides.shift();
@@ -78,6 +78,7 @@ export default {
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    width: 100%;
 
     &__tags {
       flex: 0 0 8.5em;
