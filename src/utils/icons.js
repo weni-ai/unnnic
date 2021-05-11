@@ -12,7 +12,8 @@ import readEmailAt1 from '!!svg-inline-loader!../assets/icons/read-email-at-1.sv
 import flash13 from '!!svg-inline-loader!../assets/icons/flash-1-3.svg';
 import timeClockCircle1 from '!!svg-inline-loader!../assets/icons/time-clock-circle-1.svg';
 import search1 from '!!svg-inline-loader!../assets/icons/search-1.svg';
-import singleNeutral2 from '!!svg-inline-loader!../assets/icons/default-avatar.svg';
+import singleNeutral2 from '!!svg-inline-loader!../assets/icons/single-neutral-2.svg';
+import defaultAvatar from '!!svg-inline-loader!../assets/icons/default-avatar.svg';
 import messagingWeChat3 from '!!svg-inline-loader!../assets/icons/messaging-we-chat-3.svg';
 import uploadBottom1 from '!!svg-inline-loader!../assets/icons/upload-bottom-1.svg';
 import checkboxSelect from '!!svg-inline-loader!../assets/icons/checkbox-select.svg';
@@ -95,6 +96,7 @@ import folder1 from '!!svg-inline-loader!../assets/icons/folder-1.svg';
 import addCircle1 from '!!svg-inline-loader!../assets/icons/add-circle-1.svg';
 import subtractCircle1 from '!!svg-inline-loader!../assets/icons/subtract-circle-1.svg';
 import buttonPlay1 from '!!svg-inline-loader!../assets/icons/button-play-1.svg';
+import questionCircle1 from '!!svg-inline-loader!../assets/icons/question-circle-1.svg';
 import questionCircle2 from '!!svg-inline-loader!../assets/icons/question-circle-2.svg';
 
 export default {
@@ -111,6 +113,7 @@ export default {
   'time-clock-circle-1': timeClockCircle1,
   'search-1': search1,
   'single-neutral-2': singleNeutral2,
+  'default-avatar': defaultAvatar,
   'messaging-we-chat-3': messagingWeChat3,
   'upload-bottom-1': uploadBottom1,
   'checkbox-select': checkboxSelect,
@@ -193,5 +196,6 @@ export default {
   'add-circle-1': addCircle1,
   'subtract-circle-1': subtractCircle1,
   'button-play-1': buttonPlay1,
+  'question-circle-1': questionCircle1,
   'question-circle-2': questionCircle2,
 };
