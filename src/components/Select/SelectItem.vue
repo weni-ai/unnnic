@@ -3,6 +3,7 @@
       @click="$emit('click')"
       :class="{
         'unnnic-select-item': true,
+        'unnnic-select-item__active': active,
         'unnnic--clickable': selectable,
         'unnnic-select-item--selectable': selectable}">
       <span :class="['unnnic-select-item__label', `unnnic-select-item__label--${size}`]">
@@ -23,6 +24,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    active: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
@@ -39,7 +44,7 @@ export default {
     max-width: 100%;
     -webkit-line-clamp: 1;
 
-    &--selectable:hover{
+    &--selectable:hover, &__active{
       background-color: $unnnic-color-neutral-lightest;
       border-radius: $unnnic-border-radius-sm;
     }
