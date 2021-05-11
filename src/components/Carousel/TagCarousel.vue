@@ -1,14 +1,18 @@
 <template>
   <div>
     <div class="unnnic-card-tag-carousel">
-      <span class="unnnic-card-tag-carousel__button__left">
-         <div class="unnnic-card-tag-carousel__button__icon">
-        <unnnic-icon icon="arrow-left-1-1" size="sm" @click.native="previous" clickable />
+      <span class="unnnic-card-tag-carousel__button unnnic-card-tag-carousel__button--left">
+        <div class="unnnic-card-tag-carousel__button__icon">
+          <unnnic-icon icon="arrow-left-1-1" size="sm" @click.native="previous" clickable />
         </div>
-        <span class="unnnic-card-tag-carousel__button__left__blur" />
+        <span
+          class="unnnic-card-tag-carousel__button__blur
+          unnnic-card-tag-carousel__button__blur--left"
+        />
       </span>
       <transition-group class="unnnic-card-tag-carousel__transition" tag="div">
-        <div v-for="tag in slides" class="unnnic-card-tag-carousel__transition__tags" :key="tag.id">
+        <div v-for="tag in slides" :key="tag.id"
+        class="unnnic-card-tag-carousel__transition__tags">
           <unnnic-tag
             :text="tag.name"
             clickable
@@ -19,8 +23,11 @@
         </div>
       </transition-group>
 
-      <div class="unnnic-card-tag-carousel__button__right">
-        <span class="unnnic-card-tag-carousel__button__right__blur" />
+      <div class="unnnic-card-tag-carousel__button unnnic-card-tag-carousel__button--right">
+        <span
+          class="unnnic-card-tag-carousel__button__blur
+          unnnic-card-tag-carousel__button__blur--right"
+        />
         <div class="unnnic-card-tag-carousel__button__icon">
           <unnnic-icon icon="arrow-right-1-1" @click.native="next" size="sm" clickable />
         </div>
@@ -120,35 +127,39 @@ export default {
       align-items: center;
       background-color: $unnnic-color-background-snow;
     }
-    &__left {
-      z-index: 9999;
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      left: 0;
 
-      &__blur {
-        background-image: linear-gradient(to right, rgb(255, 255, 255), rgba(255, 255, 255, 0.219));
-        width: 3rem;
-        height: 2rem;
+    z-index: 9999;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__blur {
+      width: 3rem;
+      height: 2rem;
+
+      &--left {
+        background-image: linear-gradient(
+          to right,
+          $unnnic-color-background-snow,
+          rgba($unnnic-color-neutral-snow, $unnnic-opacity-level-lighter)
+        );
+      }
+      &--right {
+        background-image: linear-gradient(
+          to right,
+          rgba($unnnic-color-neutral-snow, $unnnic-opacity-level-lighter),
+          $unnnic-color-background-snow
+        );
       }
     }
 
-    &__right {
-      z-index: 9999;
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      right: 0;
+    &--left {
+      left: 0;
+    }
 
-      &__blur {
-        background-image: linear-gradient(to right, rgba(252, 255, 255, 0.219), rgb(255, 255, 255));
-        filter: blur(0.0625rem);
-        width: 3rem;
-        height: 2rem;
-      }
+    &--right {
+      right: 0;
     }
   }
 }
