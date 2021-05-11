@@ -31,8 +31,9 @@
         :tabindex="index"
         :size="size"
         :key="option.value"
+        :active="option.value === value"
         @click="onSelectOption(option)">
-          {{ option.text }}
+          {{ option.text }}{{option}}
       </select-item>
     </div>
     </div>
