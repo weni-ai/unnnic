@@ -2,16 +2,16 @@
   <div
     :class="{
       'unnnic-brand-tag': true,
-      'unnnic-brand-tag--disabled': disabled,
+      'unnnic-brand-tag--disabled': !disabled,
       'unnnic-brand-tag--clickable': clickable,
     }"
   >
     <span class="unnnic-brand-tag__label">{{ text }}</span>
     <u-icon
-      :icon="`${disabled ? 'close-1' : 'add-1'}`"
+      :icon="`${!disabled ? 'add-1' : 'close-1'}`"
       :class="{
         'unnnic-brand-tag__icon': true,
-        'unnnic-brand-tag__icon--disabled': disabled,
+        'unnnic-brand-tag__icon--disabled': !disabled,
       }"
       size="xs"
     />
@@ -60,12 +60,20 @@ export default {
   justify-content: center;
   border-radius: $unnnic-border-radius-pill;
   border: 1px solid $unnnic-color-brand-weni-soft;
+  transition: 0.2s;
 
-  color: $unnnic-color-brand-weni-dark;
+  color: $unnnic-color-neutral-snow;
+  background-color: $unnnic-color-brand-weni-dark;
+  &:hover {
+    background-color: $unnnic-color-brand-weni-soft;
+  }
 
   &--disabled {
-    color: $unnnic-color-neutral-snow;
-    background-color: $unnnic-color-brand-weni-dark;
+    color: $unnnic-color-brand-weni-dark;
+    background-color: $unnnic-color-background-snow;
+    &:hover {
+      background-color: rgba($unnnic-color-brand-ai-clean, $unnnic-opacity-level-lighter);
+    }
   }
   &--clickable {
     cursor: pointer;
@@ -80,12 +88,12 @@ export default {
   }
 
   &__icon {
-    color: $unnnic-color-brand-weni-dark;
     padding-right: $unnnic-inline-ant;
     cursor: pointer;
+    color: $unnnic-color-neutral-snow;
 
     &--disabled {
-      color: $unnnic-color-neutral-snow;
+      color: $unnnic-color-brand-weni-dark;
     }
   }
 }

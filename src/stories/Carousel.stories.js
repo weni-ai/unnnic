@@ -25,5 +25,12 @@ Tag.args = {
     { id: 3, name: 'tag' },
     { id: 4, name: 'tag' },
     { id: 5, name: 'tag' },
+    { id: 6, name: 'tag' },
+    { id: 7, name: 'tag' },
+    { id: 8, name: 'tag' },
+    { id: 9, name: 'tag' },
+    { id: 10, name: 'tag' },
+    { id: 11, name: 'tag' },
+    { id: 12, name: 'tag' },
   ],
 };
