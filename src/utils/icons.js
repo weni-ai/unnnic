@@ -63,6 +63,7 @@ import messagesBubble1 from '!!svg-inline-loader!../assets/icons/messages-bubble
 import switchDefault from '!!svg-inline-loader!../assets/icons/switch-default.svg';
 import developerCommunityGithub11 from '!!svg-inline-loader!../assets/icons/developer-community-github-1-1.svg';
 import lock21 from '!!svg-inline-loader!../assets/icons/lock-2-1.svg';
+import lockUnlock from '!!svg-inline-loader!../assets/icons/lock-unlock-1-1.svg';
 import pencilWrite1 from '!!svg-inline-loader!../assets/icons/pencil-write-1.svg';
 import bookAddress12 from '!!svg-inline-loader!../assets/icons/book-address-1-2.svg';
 import delete1 from '!!svg-inline-loader!../assets/icons/delete-1.svg';
@@ -160,6 +161,7 @@ export default {
   'switch-default': switchDefault,
   'developer-community-github-1-1': developerCommunityGithub11,
   'lock-2-1': lock21,
+  'lock-unlock-1-1': lockUnlock,
   'pencil-write-1': pencilWrite1,
   'book-address-1-2': bookAddress12,
   'delete-1': delete1,

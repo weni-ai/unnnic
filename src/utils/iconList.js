@@ -89,4 +89,5 @@ export default [
   'copy-paste-1',
   'typing-1',
   'drag',
+  'lock-unlock-1-1',
 ];
