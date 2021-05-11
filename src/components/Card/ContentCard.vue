@@ -8,21 +8,21 @@
   >
     <div :class="['unnnic-card-content__icon',
     enabled && 'unnnic-card-content__icon--disabled']">
-      <UICon :icon="icon" size="xs" />
+      <unnnic-icon :icon="icon" size="sm" />
     </div>
     <div class="unnnic-card-content__content">
-      <div class="unnnic-card-content__title">{{ title }}</div>
-      <div class="unnnic-card-content__description">{{ description }}</div>
+      <span class="unnnic-card-content__title title">{{ title }}</span>
+      <span class="unnnic-card-content__description description">{{ description }}</span>
     </div>
   </div>
 </template>
 
 <script>
-import UICon from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'unnnic-card',
-  components: { UICon },
+  components: { UnnnicIcon },
   props: {
     title: {
       type: String,
@@ -60,11 +60,26 @@ export default {
   padding: $unnnic-squish-xs;
   background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-light);
   border: 1px solid $unnnic-color-brand-weni;
+  transition: 0.2s;
 
   &--disabled {
     background-color: $unnnic-color-background-carpet;
     border: 1px solid $unnnic-color-neutral-soft;
+
+    &:hover {
+      background-color: $unnnic-color-background-snow;
+      border: 1px solid $unnnic-color-neutral-clean;
+    }
   }
+
+  &:hover {
+      .title{
+        font-weight: $unnnic-font-weight-bold;
+      }
+      .description {
+        color: $unnnic-color-neutral-dark;
+      }
+    }
 
   &__clickable {
     cursor: pointer;
