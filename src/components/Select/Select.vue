@@ -33,7 +33,7 @@
         :key="option.value"
         :active="option.value === value"
         @click="onSelectOption(option)">
-          {{ option.text }}{{option}}
+          {{ option.text }}
       </select-item>
     </div>
     </div>
