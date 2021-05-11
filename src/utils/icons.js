@@ -12,7 +12,7 @@ import readEmailAt1 from '!!svg-inline-loader!../assets/icons/read-email-at-1.sv
 import flash13 from '!!svg-inline-loader!../assets/icons/flash-1-3.svg';
 import timeClockCircle1 from '!!svg-inline-loader!../assets/icons/time-clock-circle-1.svg';
 import search1 from '!!svg-inline-loader!../assets/icons/search-1.svg';
-import singleNeutral2 from '!!svg-inline-loader!../assets/icons/single-neutral-2.svg';
+import singleNeutral2 from '!!svg-inline-loader!../assets/icons/default-avatar.svg';
 import messagingWeChat3 from '!!svg-inline-loader!../assets/icons/messaging-we-chat-3.svg';
 import uploadBottom1 from '!!svg-inline-loader!../assets/icons/upload-bottom-1.svg';
 import checkboxSelect from '!!svg-inline-loader!../assets/icons/checkbox-select.svg';
