@@ -11,8 +11,8 @@
       <UICon :icon="icon" size="xs" />
     </div>
     <div class="unnnic-card-content__content">
-      <div class="unnnic-card-content__title">{{ title }}</div>
-      <div class="unnnic-card-content__description">{{ description }}</div>
+      <h5 class="unnnic-card-content__title title">{{ title }}</h5>
+      <p class="unnnic-card-content__description description">{{ description }}</p>
     </div>
   </div>
 </template>
@@ -60,11 +60,26 @@ export default {
   padding: $unnnic-squish-xs;
   background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-light);
   border: 1px solid $unnnic-color-brand-weni;
+  transition: 0.2s;
 
   &--disabled {
     background-color: $unnnic-color-background-carpet;
     border: 1px solid $unnnic-color-neutral-soft;
+
+    &:hover {
+      background-color: $unnnic-color-background-snow;
+      border: 1px solid $unnnic-color-neutral-clean;
+    }
   }
+
+  &:hover {
+      .title{
+        font-weight: $unnnic-font-weight-bold;
+      }
+      .description {
+        color: $unnnic-color-neutral-dark;
+      }
+    }
 
   &__clickable {
     cursor: pointer;
@@ -99,6 +114,7 @@ export default {
     font-weight: $unnnic-font-weight-regular;
     color: $unnnic-color-neutral-darkest;
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
+    margin: 0;
   }
 
   &__description {
