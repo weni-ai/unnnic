@@ -8,21 +8,21 @@
   >
     <div :class="['unnnic-card-content__icon',
     enabled && 'unnnic-card-content__icon--disabled']">
-      <UICon :icon="icon" size="xs" />
+      <unnnic-icon :icon="icon" size="sm" />
     </div>
     <div class="unnnic-card-content__content">
-      <h5 class="unnnic-card-content__title title">{{ title }}</h5>
-      <p class="unnnic-card-content__description description">{{ description }}</p>
+      <span class="unnnic-card-content__title title">{{ title }}</span>
+      <span class="unnnic-card-content__description description">{{ description }}</span>
     </div>
   </div>
 </template>
 
 <script>
-import UICon from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'unnnic-card',
-  components: { UICon },
+  components: { UnnnicIcon },
   props: {
     title: {
       type: String,
