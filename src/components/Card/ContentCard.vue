@@ -114,7 +114,6 @@ export default {
     font-weight: $unnnic-font-weight-regular;
     color: $unnnic-color-neutral-darkest;
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
-    margin: 0;
   }
 
   &__description {
