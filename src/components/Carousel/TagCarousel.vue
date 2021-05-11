@@ -1,6 +1,9 @@
 <template>
   <div class="unnnic-card-tag-carousel">
-    <unnnic-icon icon="arrow-left-1-1" size="sm" @click.native="previous" clickable />
+    <span class="unnnic-card-tag-carousel__button__left">
+      <unnnic-icon icon="arrow-left-1-1" size="sm" @click.native="previous" clickable/>
+      <span class="unnnic-card-tag-carousel__button__left__blur" />
+    </span>
     <transition-group class="unnnic-card-tag-carousel__transition" tag="div">
       <div v-for="tag in slides" class="unnnic-card-tag-carousel__transition__tags" :key="tag.id">
         <unnnic-tag
@@ -12,7 +15,12 @@
         />
       </div>
     </transition-group>
-    <unnnic-icon icon="arrow-right-1-1" @click.native="next" size="sm" clickable />
+
+    <div class="unnnic-card-tag-carousel__button__right">
+      <span class="unnnic-card-tag-carousel__button__right__blur" />
+
+      <unnnic-icon icon="arrow-right-1-1" @click.native="next" size="sm" clickable />
+    </div>
   </div>
 </template>
 
@@ -92,6 +100,39 @@ export default {
       }
       &:last-of-type {
         opacity: 0;
+      }
+    }
+  }
+
+  &__button {
+    &__left {
+      z-index: 9999;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      left: 0;
+
+      &__blur {
+        background-image: linear-gradient(to right, rgb(255, 255, 255), rgba(255, 255, 255, 0.219));
+        width: 3rem;
+        height: 2rem;
+      }
+    }
+
+    &__right {
+      z-index: 9999;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      right: 0;
+
+      &__blur {
+        background-image: linear-gradient(to right, rgba(252, 255, 255, 0.219), rgb(255, 255, 255));
+        filter: blur(0.0625rem);
+        width: 3rem;
+        height: 2rem;
       }
     }
   }
