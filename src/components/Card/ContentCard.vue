@@ -6,13 +6,12 @@
       'unnnic-card-content__clickable': clickable,
     }"
   >
-    <div :class="['unnnic-card-content__icon',
-    enabled && 'unnnic-card-content__icon--disabled']">
+    <div :class="['unnnic-card-content__icon', enabled && 'unnnic-card-content__icon--disabled']">
       <unnnic-icon :icon="icon" size="sm" />
     </div>
     <div class="unnnic-card-content__content">
-      <span class="unnnic-card-content__title title">{{ title }}</span>
-      <span class="unnnic-card-content__description description">{{ description }}</span>
+      <div class="unnnic-card-content__content__title">{{ title }}</div>
+      <div class="unnnic-card-content__content__description">{{ description }}</div>
     </div>
   </div>
 </template>
@@ -73,13 +72,17 @@ export default {
   }
 
   &:hover {
-      .title{
-        font-weight: $unnnic-font-weight-bold;
-      }
-      .description {
-        color: $unnnic-color-neutral-dark;
+    .unnnic-card-content {
+      &__content {
+        &__title {
+          font-weight: $unnnic-font-weight-bold;
+        }
+        &__description {
+          color: $unnnic-color-neutral-dark;
+        }
       }
     }
+  }
 
   &__clickable {
     cursor: pointer;
@@ -89,6 +92,22 @@ export default {
     display: flex;
     flex-direction: column;
     width: 100%;
+
+    &__title {
+      font-family: $unnnic-font-family-primary;
+      font-size: $unnnic-font-size-body-lg;
+      font-weight: $unnnic-font-weight-regular;
+      color: $unnnic-color-neutral-darkest;
+      line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
+    }
+
+    &__description {
+      font-family: $unnnic-font-family-secondary;
+      font-size: $unnnic-font-size-body-md;
+      font-weight: $unnnic-font-weight-regular;
+      color: $unnnic-color-neutral-cloudy;
+      line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+    }
   }
 
   &__data {
@@ -106,22 +125,6 @@ export default {
     &--disabled {
       background-color: $unnnic-color-background-solo;
     }
-  }
-
-  &__title {
-    font-family: $unnnic-font-family-primary;
-    font-size: $unnnic-font-size-body-lg;
-    font-weight: $unnnic-font-weight-regular;
-    color: $unnnic-color-neutral-darkest;
-    line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
-  }
-
-  &__description {
-    font-family: $unnnic-font-family-secondary;
-    font-size: $unnnic-font-size-body-md;
-    font-weight: $unnnic-font-weight-regular;
-    color: $unnnic-color-neutral-cloudy;
-    line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
   }
 }
 </style>
