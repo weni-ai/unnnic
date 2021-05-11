@@ -121,7 +121,7 @@ export default {
 
   &__button {
     &__icon {
-      height: 2rem;
+      height: $unnnic-inline-lg;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -135,8 +135,8 @@ export default {
     align-items: center;
 
     &__blur {
-      width: 3rem;
-      height: 2rem;
+      width: $unnnic-inline-giant;
+      height: $unnnic-inline-lg;
 
       &--left {
         background-image: linear-gradient(
