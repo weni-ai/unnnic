@@ -127,8 +127,7 @@ export default {
       align-items: center;
       background-color: $unnnic-color-background-snow;
     }
-
-    z-index: 9999;
+    z-index: 1;
     position: absolute;
     display: flex;
     justify-content: center;
