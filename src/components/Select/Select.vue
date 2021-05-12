@@ -233,7 +233,7 @@ export default {
 
     &--active{
       display: block;
-      z-index: 1;
+      z-index: 2;
     }
   }
 }
