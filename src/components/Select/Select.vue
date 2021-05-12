@@ -19,6 +19,20 @@
       'unnnic-select__options--active': active,
       'unnnic-select__options--inactive': !active }">
     <select-item
+      v-if="search"
+      class="unnnic-select__header"
+      :selectable="false"
+      :size="size"
+    >
+      <text-input
+        v-model="searchValue"
+        :placeholder="searchPlaceholder"
+        :icon-left="searchIconLeft"
+        :size="searchSize"
+      />
+    </select-item>
+
+    <select-item
       v-if="hasHeader()"
       class="unnnic-select__header"
       :selectable="false"
@@ -27,7 +41,7 @@
     </select-item>
     <div class="unnnic-select__options__scroll-area">
       <select-item
-        v-for="(option, index) in options()"
+        v-for="(option, index) in filterOptions(options())"
         :tabindex="index"
         :size="size"
         :key="option.value"
@@ -50,6 +64,19 @@ export default {
   name: 'UnnicSelect',
   components: { TextInput, selectItem },
   props: {
+    search: {
+      type: Boolean,
+    },
+
+    searchIconLeft: {
+      type: String,
+      default: 'search-1',
+    },
+
+    searchPlaceholder: {
+      type: String,
+    },
+
     size: {
       type: String,
       default: 'md',
@@ -81,10 +108,19 @@ export default {
     return {
       active: false,
       status: 'not-mounted',
+
+      searchValue: '',
     };
   },
 
   computed: {
+    searchSize() {
+      return {
+        md: 'sm',
+        sm: 'sm',
+      }[this.size];
+    },
+
     labelForValue() {
       if (this.status !== 'mounted') {
         return '';
@@ -109,6 +145,11 @@ export default {
     clickOutside: vClickOutside.directive,
   },
   methods: {
+    filterOptions(options) {
+      return options
+        .filter(({ text }) => String(text).toLowerCase().includes(this.searchValue.toLowerCase()));
+    },
+
     onClickOutside() {
       this.active = false;
     },
