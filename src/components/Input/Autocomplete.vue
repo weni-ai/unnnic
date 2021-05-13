@@ -118,6 +118,8 @@ export default {
   },
   watch: {
     val() {
+      this.open = false;
+      if (this.val) this.open = true;
       this.$emit('input', this.val);
     },
     value() {
@@ -132,6 +134,7 @@ export default {
   },
   methods: {
     onFocus() {
+      if (!this.val) return;
       this.open = true;
     },
     onChoose(option) {
