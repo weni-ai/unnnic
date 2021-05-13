@@ -46,7 +46,9 @@
         :size="size"
         :key="option.value"
         :active="option.value === value"
-        @click="onSelectOption(option)">
+        @click="onSelectOption(option)"
+        :title="option.text"
+      >
           {{ option.text }}
       </select-item>
     </div>

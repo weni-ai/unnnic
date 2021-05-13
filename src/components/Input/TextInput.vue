@@ -49,6 +49,16 @@
         />
       </tool-tip>
 
+      <unnnic-icon-svg
+        v-else-if="showSvgIconRight"
+        :scheme="iconScheme"
+        :icon="iconRight"
+        :size="iconSize"
+        class="icon-right"
+        :clickable="iconRightClickable"
+        @click="iconRightClicked"
+      />
+
       <u-icon
         v-else-if="iconRight"
         :icon="iconRight"
@@ -136,7 +146,19 @@ export default {
         && [
           'button-play-1',
           'search-1',
+          'arrow-button-up-1',
+          'arrow-button-down-1',
         ].includes(this.iconLeft);
+    },
+
+    showSvgIconRight() {
+      return this.iconRight
+        && [
+          'button-play-1',
+          'search-1',
+          'arrow-button-up-1',
+          'arrow-button-down-1',
+        ].includes(this.iconRight);
     },
 
     iconScheme() {

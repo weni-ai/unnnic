@@ -39,6 +39,10 @@ export default {
     padding: $unnnic-spacing-stack-nano $unnnic-inline-xs;
     margin: $unnnic-inline-xs;
 
+    font-family: $unnnic-font-family-secondary;
+    color: $unnnic-color-neutral-dark;
+    font-weight: $unnnic-font-weight-regular;
+    white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
     max-width: 100%;
@@ -50,10 +54,6 @@ export default {
     }
 
     &__label{
-      font-family: $unnnic-font-family-secondary;
-      color: $unnnic-color-neutral-dark;
-      font-weight: $unnnic-font-weight-regular;
-
       &--md{
         font-size: $unnnic-font-size-body-gt;
         line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
