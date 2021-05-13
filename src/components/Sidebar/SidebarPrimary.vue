@@ -11,11 +11,11 @@
         <div class="category-label">{{ category.label }}</div>
 
         <div class="options">
-          <div v-for="(option, index) in category.items" :key="index" class="option-container">
+          <div  v-for="(option, index) in category.items" :key="index" class="option-container">
             <tool-tip :enabled="!expanded" :text="option.label" side="right">
-              <div
+              <a :href="option.viewUrl"
                 :class="['option', { selected: option.active, }]"
-                @click="clickOption(option)"
+                @click.prevent="clickOption(option)"
               >
                 <icon-svg
                   :icon="option.icon"
@@ -24,7 +24,7 @@
                 />
 
                 <span class="label">{{ option.label }}</span>
-              </div>
+              </a>
             </tool-tip>
           </div>
         </div>
@@ -99,7 +99,6 @@ export default {
       type: String,
     },
   },
-
   data() {
     return {};
   },
