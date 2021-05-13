@@ -268,6 +268,11 @@ $scroll-size: 4px;
         .option {
           background-color: $unnnic-color-background-snow;
           margin: 0 $unnnic-spacing-inline-xs;
+          border-radius: $unnnic-border-radius-sm;
+
+          &:hover{
+            background-color: $unnnic-color-neutral-light;
+          }
 
           .label {
             font-family: $unnnic-font-family-secondary;
