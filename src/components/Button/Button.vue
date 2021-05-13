@@ -79,6 +79,7 @@ export default {
       return this.iconLeft
         && [
           'button-play-1',
+          'search-1',
         ].includes(this.iconLeft);
     },
 

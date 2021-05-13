@@ -12,9 +12,20 @@
         :type="type"
         :size="size"
         v-on="inputListeners"
+        @focus="focus"
+        @blur="blur"
       />
+
+      <unnnic-icon-svg
+        v-if="showSvgIconLeft"
+        :scheme="iconScheme"
+        :icon="iconLeft"
+        :size="iconSize"
+        class="icon-left"
+      />
+
       <u-icon
-        v-if="iconLeft"
+        v-else-if="iconLeft"
         :icon="iconLeft"
         :clickable="iconLeftClickable"
         class="icon-left"
@@ -52,6 +63,7 @@
 import UIcon from '../Icon.vue';
 import ToolTip from '../ToolTip/ToolTip.vue';
 import BaseInput from './BaseInput.vue';
+import UnnnicIconSvg from '../Icon-svg.vue';
 
 export default {
   name: 'unnnic-input',
@@ -59,10 +71,12 @@ export default {
     UIcon,
     ToolTip,
     BaseInput,
+    UnnnicIconSvg,
   },
   data() {
     return {
       val: null,
+      isFocused: false,
     };
   },
   props: {
@@ -117,6 +131,26 @@ export default {
     this.val = this.value;
   },
   computed: {
+    showSvgIconLeft() {
+      return this.iconLeft
+        && [
+          'button-play-1',
+          'search-1',
+        ].includes(this.iconLeft);
+    },
+
+    iconScheme() {
+      if (this.isFocused) {
+        return 'brand-weni';
+      }
+
+      if (this.type === 'error') {
+        return 'feedback-red';
+      }
+
+      return 'neutral-clean';
+    },
+
     inputListeners() {
       return {
         ...this.$listeners,
@@ -133,6 +167,14 @@ export default {
     },
   },
   methods: {
+    focus() {
+      this.isFocused = true;
+    },
+
+    blur() {
+      this.isFocused = false;
+    },
+
     iconRightClicked() {
       if (!this.iconRightClickable) return;
       this.$emit('icon-right-click');
