@@ -10,7 +10,7 @@
       <div class="alert__title">
         {{ title.toUpperCase() }}
       </div>
-      <div class="alert__text">
+      <div v-show="text" class="alert__text">
         {{ text }}
       </div>
     </div>
@@ -76,7 +76,6 @@ export default {
 .alert {
   position: fixed;
   padding: $unnnic-inset-xs;
-  min-width: auto;
 
   display: inline-flex;
   align-items: center;
@@ -86,6 +85,7 @@ export default {
 
   background-color: $unnnic-color-background-snow;
   box-shadow: $unnnic-shadow-level-near;
+  word-spacing: $unnnic-spacing-inline-xs;
   position: fixed;
 
   z-index: 9999;
@@ -111,12 +111,13 @@ export default {
 
   &__content {
     flex: 1;
-    margin-left: $unnnic-inline-xs;
+    margin:0 $unnnic-inline-xs;
   }
 
   &__title {
     color: $unnnic-color-neutral-darkest;
     font-size: $unnnic-font-size-body-md;
+    font-family: $unnnic-font-family-secondary;
     line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
     font-weight: $unnnic-font-weight-bold;
   }

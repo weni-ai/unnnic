@@ -86,7 +86,6 @@ export default {
   .unnnic-alert {
     position: fixed;
     padding: $unnnic-inset-xs;
-    min-width: 12.5rem;
 
     display: inline-flex;
     align-items: center;
@@ -125,13 +124,13 @@ export default {
     }
 
     &__title {
-      font-size: $unnnic-font-size-body-sm;
+      font-size: $unnnic-font-size-body-md;
       font-weight: $unnnic-font-weight-bold;
       color: $unnnic-color-neutral-darkest;
     }
 
     &__text {
-      font-size: $unnnic-font-size-body-md;
+      font-size: $unnnic-font-size-body-gt;
       font-weight: $unnnic-font-weight-regular;
       color: $unnnic-color-neutral-dark;
     }
