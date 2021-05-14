@@ -98,11 +98,19 @@ export default {
 
       &.has-icon {
         &-left {
-          padding-left: calc(#{$unnnic-inline-sm} + #{$unnnic-icon-size-sm} + #{$unnnic-inline-xs});
+          padding-left: calc(
+            #{$unnnic-inline-sm} +
+            #{$unnnic-icon-size-sm} +
+            #{$unnnic-inline-xs}
+          );
         }
 
         &-right {
-          padding-right: calc(#{$unnnic-inline-sm} + #{$unnnic-icon-size-sm} + #{$unnnic-inline-xs});
+          padding-right: calc(
+            #{$unnnic-inline-sm} +
+            #{$unnnic-icon-size-sm} +
+            #{$unnnic-inline-xs}
+          );
         }
       }
     }
@@ -114,11 +122,19 @@ export default {
 
       &.has-icon {
         &-left {
-          padding-left: calc(#{$unnnic-inline-sm} + #{$unnnic-icon-size-xs} + #{$unnnic-inline-xs});
+          padding-left: calc(
+            #{$unnnic-inline-sm} +
+            #{$unnnic-icon-size-xs} +
+            #{$unnnic-inline-xs}
+          );
         }
 
         &-right {
-          padding-right: calc(#{$unnnic-inline-sm} + #{$unnnic-icon-size-xs} + #{$unnnic-inline-xs});
+          padding-right: calc(
+            #{$unnnic-inline-sm} +
+            #{$unnnic-icon-size-xs} +
+            #{$unnnic-inline-xs}
+          );
         }
       }
     }
