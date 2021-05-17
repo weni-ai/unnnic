@@ -60,6 +60,8 @@ export default {
   justify-content: center;
   border-radius: $unnnic-border-radius-pill;
   border: 1px solid $unnnic-color-brand-weni-soft;
+  height: 1.875rem;
+  white-space: nowrap;
   transition: 0.2s;
 
   color: $unnnic-color-neutral-snow;

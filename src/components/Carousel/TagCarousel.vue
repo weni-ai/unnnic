@@ -1,36 +1,47 @@
 <template>
-  <div>
-    <div class="unnnic-card-tag-carousel">
-      <span class="unnnic-card-tag-carousel__button unnnic-card-tag-carousel__button--left">
-        <div class="unnnic-card-tag-carousel__button__icon">
-          <unnnic-icon icon="arrow-left-1-1" size="sm" @click.native="previous" clickable />
-        </div>
-        <span
-          class="unnnic-card-tag-carousel__button__blur
-          unnnic-card-tag-carousel__button__blur--left"
+  <div class="unnnic-card-tag-carousel">
+    <div class="unnnic-card-tag-carousel__button unnnic-card-tag-carousel__button--left">
+      <div class="unnnic-card-tag-carousel__button__icon">
+        <unnnic-icon
+          icon="arrow-left-1-1"
+          size="sm"
+          @click.native="previous()"
+          clickable
+          :class="[!hasPrev && 'unnnic-card-tag-carousel__button__icon--disabled']"
         />
-      </span>
-      <transition-group class="unnnic-card-tag-carousel__transition" tag="div">
-        <div v-for="tag in slides" :key="tag.id"
-        class="unnnic-card-tag-carousel__transition__tags">
-          <unnnic-tag
-            :text="tag.name"
-            clickable
-            type="brand"
-            :disabled="checkIsInclude(tag)"
-            @click.native="save(tag)"
-          />
-        </div>
-      </transition-group>
+      </div>
+      <span
+        v-show="hasPrev"
+        class="unnnic-card-tag-carousel__button__blur unnnic-card-tag-carousel__button__blur--left"
+      />
+    </div>
 
-      <div class="unnnic-card-tag-carousel__button unnnic-card-tag-carousel__button--right">
-        <span
-          class="unnnic-card-tag-carousel__button__blur
-          unnnic-card-tag-carousel__button__blur--right"
+    <div class="unnnic-card-tag-carousel__container" id="scroll">
+      <div v-for="tag in slides" :key="tag.id" class="unnnic-card-tag-carousel__container__slide">
+        <unnnic-tag
+          :text="tag.name"
+          clickable
+          type="brand"
+          :disabled="checkIsInclude(tag)"
+          @click.native="save(tag)"
+          class="unnnic-card-tag-carousel__container__slide__item"
         />
-        <div class="unnnic-card-tag-carousel__button__icon">
-          <unnnic-icon icon="arrow-right-1-1" @click.native="next" size="sm" clickable />
-        </div>
+      </div>
+    </div>
+
+    <div class="unnnic-card-tag-carousel__button unnnic-card-tag-carousel__button--right">
+      <span
+        class="unnnic-card-tag-carousel__button__blur unnnic-card-tag-carousel__button__blur--right"
+        v-show="hasNext"
+      />
+      <div class="unnnic-card-tag-carousel__button__icon">
+        <unnnic-icon
+          icon="arrow-right-1-1"
+          @click.native="next()"
+          size="sm"
+          clickable
+          :class="[!hasNext && 'unnnic-card-tag-carousel__button__icon--disabled']"
+        />
       </div>
     </div>
   </div>
@@ -43,6 +54,8 @@ import UnnnicIcon from '../Icon.vue';
 export default {
   data() {
     return {
+      hasNext: true,
+      hasPrev: false,
       slides: [],
       selected: [],
     };
@@ -77,12 +90,29 @@ export default {
       return this.selected.includes(tagItem);
     },
     next() {
-      const first = this.slides.shift();
-      this.slides = this.slides.concat(first);
+      const element = document.querySelector('#scroll');
+      const scrollCalc = element.scrollWidth - element.clientWidth;
+      element.scrollLeft += 200;
+      if (scrollCalc !== element.scrollLeft) {
+        if (!this.hasNext) {
+          this.hasNext = true;
+        }
+        this.hasPrev = true;
+      } else {
+        this.hasNext = false;
+      }
     },
     previous() {
-      const last = this.slides.pop();
-      this.slides = [last].concat(this.slides);
+      const element = document.querySelector('#scroll');
+      element.scrollLeft -= 200;
+      if (element.scrollLeft !== 0) {
+        if (!this.hasPrev) {
+          this.hasPrev = true;
+        }
+        this.hasNext = true;
+      } else {
+        this.hasPrev = false;
+      }
     },
   },
 };
@@ -96,25 +126,21 @@ export default {
   align-items: center;
   position: relative;
 
-  &__transition {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+  &__container {
     width: 100%;
+    display: flex;
+    overflow: hidden;
+    scroll-behavior: smooth;
 
-    &__tags {
-      flex: 0 0 8.5em;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: transform 0.2s ease-in-out;
-
+    &__slide {
       &:first-of-type {
-        opacity: 0;
+        margin-left: $unnnic-inline-lg;
       }
       &:last-of-type {
-        opacity: 0;
+        margin-right: $unnnic-inline-awesome;
+      }
+      &__item {
+        margin-right: 2rem;
       }
     }
   }
@@ -126,17 +152,19 @@ export default {
       justify-content: center;
       align-items: center;
       background-color: $unnnic-color-background-snow;
+
+      &--disabled {
+        color: $unnnic-color-neutral-cleanest;
+      }
     }
     z-index: 1;
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-
     &__blur {
-      width: $unnnic-inline-giant;
-      height: $unnnic-inline-lg;
-
+      width: $unnnic-inline-awesome;
+      height: $unnnic-inline-awesome;
       &--left {
         background-image: linear-gradient(
           to right,
@@ -152,11 +180,9 @@ export default {
         );
       }
     }
-
     &--left {
       left: 0;
     }
-
     &--right {
       right: 0;
     }
