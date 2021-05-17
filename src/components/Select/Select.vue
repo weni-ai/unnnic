@@ -33,6 +33,17 @@
     </select-item>
 
     <select-item
+      v-for="(option, index) in optionsHeader"
+      :tabindex="index"
+      :size="size"
+      :key="index"
+      @click="onSelectOption(option, 'header')"
+      :title="option.text"
+    >
+      {{ option.text }}
+    </select-item>
+
+    <select-item
       v-if="hasHeader()"
       class="unnnic-select__header"
       :selectable="false"
@@ -46,7 +57,9 @@
         :size="size"
         :key="option.value"
         :active="option.value === value"
-        @click="onSelectOption(option)">
+        @click="onSelectOption(option)"
+        :title="option.text"
+      >
           {{ option.text }}
       </select-item>
     </div>
@@ -103,6 +116,10 @@ export default {
       type: String,
       default: null,
     },
+
+    optionsHeader: {
+      type: Array,
+    },
   },
   data() {
     return {
@@ -153,15 +170,21 @@ export default {
     onClickOutside() {
       this.active = false;
     },
-    onSelectOption(option) {
-      const value = (option.value === null || option.value.length === 0)
-        ? null
-        : option.value;
+    onSelectOption(option, type) {
+      if (type === 'header') {
+        if (option.click) {
+          option.click();
+        }
+      } else {
+        const value = (option.value === null || option.value.length === 0)
+          ? null
+          : option.value;
 
-      this.$emit('onChange', value);
-      this.$emit('input', value);
+        this.$emit('onChange', value);
+        this.$emit('input', value);
 
-      this.active = false;
+        this.active = false;
+      }
     },
     options() {
       const children = this.$el.querySelectorAll('option');

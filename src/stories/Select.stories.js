@@ -9,6 +9,7 @@ export default {
     search: { control: { type: 'boolean' } },
     searchIconLeft: { control: { type: 'text' } },
     searchPlaceholder: { control: { type: 'text' } },
+    optionsHeader: { control: { type: 'array' } },
   },
 };
 
@@ -50,4 +51,10 @@ export const Medium = Template.bind({});
 
 Medium.args = {
   searchPlaceholder: 'Buscar por...',
+  optionsHeader: [
+    {
+      text: '+ Criar novo projeto',
+      click() { console.log('clicked'); },
+    },
+  ],
 };

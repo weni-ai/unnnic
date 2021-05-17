@@ -95,12 +95,48 @@ export default {
       font-size: $unnnic-font-size-body-gt;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
       padding: $unnnic-squish-xs;
+
+      &.has-icon {
+        &-left {
+          padding-left: calc(
+            #{$unnnic-inline-sm} +
+            #{$unnnic-icon-size-sm} +
+            #{$unnnic-inline-xs}
+          );
+        }
+
+        &-right {
+          padding-right: calc(
+            #{$unnnic-inline-sm} +
+            #{$unnnic-icon-size-sm} +
+            #{$unnnic-inline-xs}
+          );
+        }
+      }
     }
 
     &--size-sm {
       font-size: $unnnic-font-size-body-md;
       line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
       padding: $unnnic-squish-nano;
+
+      &.has-icon {
+        &-left {
+          padding-left: calc(
+            #{$unnnic-inline-sm} +
+            #{$unnnic-icon-size-xs} +
+            #{$unnnic-inline-xs}
+          );
+        }
+
+        &-right {
+          padding-right: calc(
+            #{$unnnic-inline-sm} +
+            #{$unnnic-icon-size-xs} +
+            #{$unnnic-inline-xs}
+          );
+        }
+      }
     }
 
     &:focus {
@@ -130,17 +166,6 @@ export default {
 
   &--error {
     color: $unnnic-color-feedback-red;
-  }
-}
-
-.has-icon {
-
-  &-left {
-    padding-left: calc(#{$unnnic-inline-sm} + #{$unnnic-icon-size-md} + #{$unnnic-inline-xs});
-  }
-
-  &-right {
-    padding-right: calc(#{$unnnic-inline-sm} + #{$unnnic-icon-size-md} + #{$unnnic-inline-xs});
   }
 }
 

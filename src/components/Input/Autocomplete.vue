@@ -28,6 +28,7 @@
               v-if="option.type === 'category'"
               :key="index"
               class="category"
+              :title="option.text"
             >
               {{ option.text }}
             </div>
@@ -38,7 +39,7 @@
               class="unnnic--clickable option"
               @click="onChoose(option)"
             >
-              <div class="label" v-html="highlighted(option.text)"></div>
+              <div class="label" v-html="highlighted(option.text)" :title="option.text"></div>
             </div>
           </template>
       </div>
@@ -263,11 +264,20 @@ $scroll-size: 4px;
           margin: 0 $unnnic-spacing-inline-sm;
           margin-top: $unnnic-spacing-stack-sm;
           margin-bottom: $unnnic-spacing-stack-xs;
+
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .option {
           background-color: $unnnic-color-background-snow;
           margin: 0 $unnnic-spacing-inline-xs;
+          border-radius: $unnnic-border-radius-sm;
+
+          &:hover{
+            background-color: $unnnic-color-neutral-light;
+          }
 
           .label {
             font-family: $unnnic-font-family-secondary;
@@ -276,6 +286,10 @@ $scroll-size: 4px;
             line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
             color: $unnnic-color-neutral-dark;
             margin: $unnnic-spacing-stack-nano $unnnic-spacing-inline-xs;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
         }
 

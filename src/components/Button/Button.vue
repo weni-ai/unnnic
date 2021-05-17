@@ -79,6 +79,9 @@ export default {
       return this.iconLeft
         && [
           'button-play-1',
+          'search-1',
+          'arrow-button-up-1',
+          'arrow-button-down-1',
         ].includes(this.iconLeft);
     },
 
