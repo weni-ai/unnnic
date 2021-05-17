@@ -29,8 +29,5 @@ Tag.args = {
     { id: 7, name: 'tag - 7' },
     { id: 8, name: 'tag - 8' },
     { id: 9, name: 'tag - 9' },
-    { id: 10, name: 'tag - 10' },
-    { id: 11, name: 'tag - 11' },
-    { id: 12, name: 'tag - 12' },
   ],
 };
