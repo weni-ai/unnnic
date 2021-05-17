@@ -1,12 +1,20 @@
 <template>
-    <img :class="`flag-${size}`" :src="source" />
+  <unnnic-icon-svg
+    :icon="name"
+    :size="size"
+  />
 </template>
 
 <script>
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
+import UnnnicIconSvg from './Icon-svg.vue';
+
 export default {
   name: 'Flag',
+  components: {
+    UnnnicIconSvg,
+  },
   props: {
     code: {
       type: String,
@@ -21,47 +29,12 @@ export default {
     },
   },
   computed: {
-    source() {
-      if (!this.code) return '';
-      try {
-        return require(`../assets/img/flag/${this.code}.svg`);
-      } catch (e) {
-        return null;
-      }
+    name() {
+      return {
+        'pt-br': 'Brazil',
+        en: 'USA',
+      }[this.code];
     },
   },
 };
 </script>
-
-<style lang="scss">
-@import '../assets/scss/unnnic.scss';
-
-.flag {
-
-  &-xs {
-    width: $unnnic-icon-size-xs;
-    height: $unnnic-icon-size-xs;
-  }
-
-  &-sm {
-    width: $unnnic-icon-size-sm;
-    height: $unnnic-icon-size-sm;
-  }
-
-  &-md {
-    width: $unnnic-icon-size-md;
-    height: $unnnic-icon-size-md;
-  }
-
-  &-lg {
-    width: $unnnic-icon-size-lg;
-    height: $unnnic-icon-size-lg;
-  }
-
-  &-xl {
-    width: $unnnic-icon-size-xl;
-    height: $unnnic-icon-size-xl;
-  }
-}
-
-</style>
