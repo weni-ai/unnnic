@@ -163,19 +163,19 @@ export default {
     justify-content: center;
     align-items: center;
     &__blur {
-      width: $unnnic-inline-awesome;
-      height: $unnnic-inline-awesome;
+      width: $unnnic-inline-giant;
+      height: $unnnic-inline-lg;
       &--left {
         background-image: linear-gradient(
           to right,
           $unnnic-color-background-snow,
-          rgba($unnnic-color-neutral-snow, $unnnic-opacity-level-lighter)
+          rgba($unnnic-color-neutral-snow, $unnnic-opacity-level-overlay)
         );
       }
       &--right {
         background-image: linear-gradient(
           to right,
-          rgba($unnnic-color-neutral-snow, $unnnic-opacity-level-lighter),
+          rgba($unnnic-color-neutral-snow, $unnnic-opacity-level-overlay),
           $unnnic-color-background-snow
         );
       }
