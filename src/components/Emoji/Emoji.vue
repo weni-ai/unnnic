@@ -18,7 +18,7 @@ export default {
     },
     height: {
       type: Number,
-      default: 0,
+      default: 1,
     },
   },
   computed: {
