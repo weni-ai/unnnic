@@ -52,6 +52,7 @@ import UnnnicTag from '../Tag/Tag.vue';
 import UnnnicIcon from '../Icon.vue';
 
 export default {
+  name: 'unnnic-tag-carousel',
   data() {
     return {
       hasNext: true,
