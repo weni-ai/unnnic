@@ -29,6 +29,7 @@
 
 <script>
 export default {
+  name: 'unnnic-indicator',
   props: {
     numberOfSteps: {
       type: Number,
