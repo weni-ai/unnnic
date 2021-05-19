@@ -27,6 +27,7 @@ import indicator from './Indicator/Indicator.vue';
 import skeletonLoading from './SkeletonLoading/SkeletonLoading.vue';
 import carousel from './Carousel/Carousel.vue';
 import label from './Label/Label.vue';
+import emoji from './Emoji/Emoji.vue';
 
 const components = {
   unnnicInput: input,
@@ -56,6 +57,7 @@ const components = {
   unnnicSkeletonLoading: skeletonLoading,
   unnnicCarousel: carousel,
   unnnicLabel: label,
+  unnnicEmoji: emoji,
 };
 
 Object.keys(components).forEach((name) => {
@@ -91,3 +93,4 @@ export const unnnicIndicator = indicator;
 export const unnnicSkeletonLoading = skeletonLoading;
 export const unnnicCarousel = carousel;
 export const unnnicLabel = label;
+export const unnnicEmoji = emoji;
