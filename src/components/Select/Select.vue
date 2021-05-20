@@ -11,6 +11,7 @@
       @icon-right-click="active = !active"
       :size="size"
       @focus="active = true"
+      @keydown="onKeyDownSelect"
       readonly/>
     <slot />
     <div
@@ -169,6 +170,19 @@ export default {
 
     onClickOutside() {
       this.active = false;
+    },
+    onKeyDownSelect(event) {
+      event.preventDefault();
+      const options = this.filterOptions(this.options());
+      const activeOption = options.findIndex((item) => item.value === this.value);
+      const key = event.keyCode;
+      let value = options[activeOption].value;
+      if (key === 38) value = options[activeOption === 0 ? 0 : activeOption - 1].value;
+      if (key === 40) value = options[activeOption === options.length - 1 ? options.length - 1 : activeOption + 1].value;
+
+      this.$emit('onChange', value);
+      this.$emit('input', value);
+
     },
     onSelectOption(option, type) {
       if (type === 'header') {
