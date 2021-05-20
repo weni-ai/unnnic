@@ -16,7 +16,7 @@
     </div>
 
     <div
-      v-if="closeText"
+      v-if="hideCloseText"
       class="alert__close-text unnnic--clickable"
       @click="onClose"
     >
@@ -58,9 +58,13 @@ export default {
       type: Function,
       default: () => {},
     },
+    hideCloseText: {
+      type: Boolean,
+      default: true,
+    },
     closeText: {
       type: String,
-      default: null,
+      default: 'CLOSE',
     },
     position: {
       type: String,
