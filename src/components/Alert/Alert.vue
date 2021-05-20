@@ -45,7 +45,7 @@ export default {
   props: {
     version: {
       type: String,
-      default: '1.0',
+      default: '1.1',
     },
 
     title: {
@@ -70,7 +70,6 @@ export default {
     },
     closeText: {
       type: String,
-      default: null,
     },
     position: {
       type: String,
@@ -86,6 +85,7 @@ export default {
   .unnnic-alert {
     position: fixed;
     padding: $unnnic-inset-xs;
+    min-width: 12.5rem;
 
     display: inline-flex;
     align-items: center;
@@ -124,13 +124,13 @@ export default {
     }
 
     &__title {
-      font-size: $unnnic-font-size-body-md;
+      font-size: $unnnic-font-size-body-sm ;
       font-weight: $unnnic-font-weight-bold;
       color: $unnnic-color-neutral-darkest;
     }
 
     &__text {
-      font-size: $unnnic-font-size-body-gt;
+      font-size: $unnnic-font-size-body-md;
       font-weight: $unnnic-font-weight-regular;
       color: $unnnic-color-neutral-dark;
     }
