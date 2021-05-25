@@ -28,7 +28,7 @@ export default {
 
 .unnnic-side-bar {
     background-color: $unnnic-color-background-sky;
-    padding: $unnnic-inset-md;
+    padding: $unnnic-inset-sm;
     display: flex;
     flex-direction: column;
     height: 100%;
