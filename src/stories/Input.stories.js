@@ -15,6 +15,7 @@ export default {
     tooltipSideIconRight: { control: { type: 'select', options: ['top', 'right', 'bottom', 'left'] } },
     tooltipForceOpenIconRight: { control: { type: 'boolean' } },
     allowTogglePassword: { control: { type: 'select', options: [true, false] } },
+    hasCloudyColor: { control: { type: 'select', options: [true, false] } },
   },
 };
 

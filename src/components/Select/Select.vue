@@ -9,6 +9,7 @@
       :type="type"
       icon-right-clickable
       @icon-right-click="active = !active"
+      :hasCloudyColor="hasCloudyColor"
       :size="size"
       @focus="active = true"
       readonly/>
@@ -116,7 +117,10 @@ export default {
       type: String,
       default: null,
     },
-
+    hasCloudyColor: {
+      type: Boolean,
+      default: false,
+    },
     optionsHeader: {
       type: Array,
     },

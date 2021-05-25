@@ -24,6 +24,7 @@
         :type="type"
         :icon-left-clickable="iconLeftClickable"
         :icon-right-clickable="iconRightClickable"
+        :hasCloudyColor="hasCloudyColor"
         :size="size" />
     <p v-if="message" class="unnnic-form__message"> {{ message }} </p>
   </div>
@@ -95,6 +96,10 @@ export default {
     iconRightClickable: {
       type: Boolean,
       default: null,
+    },
+    hasCloudyColor: {
+      type: Boolean,
+      default: false,
     },
     size: {
       type: String,
