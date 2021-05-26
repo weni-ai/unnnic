@@ -166,8 +166,8 @@ export default {
     },
 
     iconScheme() {
-      if (this.isFocused) {
-        return 'brand-weni';
+      if (this.value || this.isFocused) {
+        return 'neutral-dark';
       }
 
       if (this.type === 'error') {
@@ -178,7 +178,7 @@ export default {
         return 'neutral-cloudy';
       }
 
-      return 'neutral-clean';
+      return 'neutral-cloudy';
     },
 
     inputListeners() {
