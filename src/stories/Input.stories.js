@@ -12,6 +12,7 @@ export default {
     iconLeft: { control: { type: 'select', options: iconList } },
     iconRight: { control: { type: 'select', options: iconList } },
     tooltipIconRight: { control: { type: 'text' } },
+    label: { control: { type: 'text' } },
     tooltipSideIconRight: { control: { type: 'select', options: ['top', 'right', 'bottom', 'left'] } },
     tooltipForceOpenIconRight: { control: { type: 'boolean' } },
     allowTogglePassword: { control: { type: 'select', options: [true, false] } },
