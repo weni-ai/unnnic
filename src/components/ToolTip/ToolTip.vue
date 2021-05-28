@@ -1,16 +1,17 @@
 <template>
-  <div :class="{
+  <div @mouseover.self="getRightPost" ref="tooltip" :class="{
     'unnnic-tooltip': enabled,
     'force-open': forceOpen,
   }">
   <slot />
   <span
     v-if="enabled"
+    ref="label"
     :class="[
             'unnnic-tooltip-label',
             `unnnic-tooltip-label-${side}`,
             ]"
-    :style="{ maxWidth: maxWidth }"
+    :style="{ maxWidth: maxWidth, 'top': topPos, 'left': leftPos}"
   >
     {{text}}
   </span>
@@ -21,6 +22,15 @@
 
 export default {
   name: 'unnnic-tooltip',
+  mounted() {
+    this.getRightPost(this.$refs.tooltip);
+  },
+  data() {
+    return {
+      topPos: null,
+      leftPos: null,
+    };
+  },
   props: {
     text: {
       type: String,
@@ -45,6 +55,27 @@ export default {
       type: String,
     },
   },
+  methods: {
+    getRightPost(event) {
+      const element = event.srcElement ? event.srcElement : event;
+      const elementPos = element.getBoundingClientRect();
+      if (element) {
+        if (this.side === 'right') {
+          this.leftPos = `${elementPos.x + elementPos.width}px`;
+          this.topPos = `${elementPos.y + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
+        } else if (this.side === 'left') {
+          this.leftPos = `${elementPos.x - this.$refs.label.offsetWidth - 12}px`;
+          this.topPos = `${elementPos.y + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
+        } else if (this.side === 'top') {
+          this.leftPos = `${elementPos.x + (elementPos.width / 2) - (this.$refs.label.offsetWidth / 2)}px`;
+          this.topPos = `${elementPos.y - this.$refs.label.offsetHeight - 8}px`;
+        } else if (this.side === 'bottom') {
+          this.leftPos = `${elementPos.x + (elementPos.width / 2) - (this.$refs.label.offsetWidth / 2) - 4}px`;
+          this.topPos = `${elementPos.y + this.$refs.label.offsetHeight + (this.$refs.label.offsetHeight / 2) + 12}px`;
+        }
+      }
+    },
+  },
 };
 </script>
 
@@ -61,10 +92,11 @@ export default {
   z-index: 1;
   visibility: hidden;
   text-align: center;
-  position: absolute;
+  position: fixed;
   width: max-content;
   min-width: 2rem;
   box-sizing: border-box;
+  margin: $unnnic-spacing-inline-nano;
 
   background-color: $unnnic-color-neutral-black;
   color: $unnnic-color-neutral-snow;
@@ -84,12 +116,7 @@ export default {
   }
 
     &-top{
-      top: auto;
-      right: auto;
-      bottom: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
-
+      margin-bottom: $unnnic-spacing-inline-xs;
       &::after {
         top: 100%;
         left: 50%;
@@ -99,12 +126,7 @@ export default {
     }
 
     &-bottom{
-      top: calc(100% + 8px);
-      right: auto;
-      bottom: auto;
-      left: 50%;
-      transform: translateX(-50%);
-
+      margin-top: $unnnic-spacing-inline-xs;
       &::after {
           bottom: 100%;
           left: 50%;
@@ -113,12 +135,7 @@ export default {
       }
     }
     &-right{
-      top: 50%;
-      right: auto;
-      bottom: auto;
-      left: calc(100% + 8px);
-      transform: translateY(-50%);
-
+      margin-left: $unnnic-spacing-inline-xs;
       &::after {
         top: 50%;
         right: 100%;
@@ -127,12 +144,7 @@ export default {
       }
     }
     &-left{
-      top: 50%;
-      right: calc(100% + 8px);
-      bottom: auto;
-      left: auto;
-      transform: translateY(-50%);
-
+      margin-right: $unnnic-spacing-inline-xs;
       &::after {
         top: 50%;
         left: 100%;

@@ -14,7 +14,7 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicToolTip },
-  template: '<unnnic-tool-tip v-bind="$props"> Hover over text </unnnic-tool-tip>',
+  template: '<unnnic-tool-tip v-bind="$props"><p> Hover over text <br> oi</p> </unnnic-tool-tip>',
 });
 
 export const Normal = Template.bind({});
@@ -22,4 +22,6 @@ Normal.args = {
   text: 'Label',
   enabled: true,
   maxWidth: '15rem',
+  side: 'top',
+  forceOpen: true,
 };
