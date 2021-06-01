@@ -76,7 +76,7 @@ $scheme-colors:
 
   .unnnic-icon-background-scheme {
     &--#{$name} {
-      background-color: rgba($color, $unnnic-opacity-level-lighter);
+      background-color: rgba($color, $unnnic-opacity-level-extra-light);
       border-radius: $unnnic-border-radius-sm;
       padding: $unnnic-inset-nano;
     }
