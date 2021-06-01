@@ -74,7 +74,7 @@ export default {
     color: $unnnic-color-brand-weni-dark;
     background-color: $unnnic-color-background-snow;
     &:hover {
-      background-color: rgba($unnnic-color-brand-ai-clean, $unnnic-opacity-level-lighter);
+      background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-lighter);
     }
   }
   &--clickable {
