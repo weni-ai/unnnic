@@ -21,9 +21,9 @@ export default {
   &__label {
     font-family: $unnnic-font-family-secondary;
     font-weight: $unnnic-font-weight-regular;
-    line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
-    font-size: $unnnic-font-size-body-md;
-    color: $unnnic-color-neutral-darkest;
+    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+    font-size: $unnnic-font-size-body-gt;
+    color: $unnnic-color-neutral-cloudy;
     margin: $unnnic-spacing-stack-xs 0;
   }
 }
