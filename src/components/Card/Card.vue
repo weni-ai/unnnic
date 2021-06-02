@@ -141,7 +141,7 @@ $scheme-colors:
 @each $name, $color in $scheme-colors {
   .unnnic-card-scheme {
     &--#{$name} {
-      background-color: rgba($color, $unnnic-opacity-level-lighter);
+      background-color: rgba($color, $unnnic-opacity-level-extra-light);
       color: $color;
       &--icon {
         color: $color;

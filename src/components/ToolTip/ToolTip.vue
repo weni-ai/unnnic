@@ -1,17 +1,16 @@
 <template>
-  <div @mouseover.self="getRightPost" ref="tooltip" :class="{
+  <div :class="{
     'unnnic-tooltip': enabled,
     'force-open': forceOpen,
   }">
   <slot />
   <span
     v-if="enabled"
-    ref="label"
     :class="[
             'unnnic-tooltip-label',
             `unnnic-tooltip-label-${side}`,
             ]"
-    :style="{ maxWidth: maxWidth, 'top': topPos, 'left': leftPos}"
+    :style="{ maxWidth: maxWidth }"
   >
     {{text}}
   </span>
@@ -108,7 +107,7 @@ export default {
   z-index: 1;
   visibility: hidden;
   text-align: center;
-  position: fixed;
+  position: absolute;
   width: max-content;
   min-width: 2rem;
   box-sizing: border-box;
@@ -131,7 +130,12 @@ export default {
   }
 
     &-top{
-      margin-bottom: $unnnic-spacing-inline-xs;
+      top: auto;
+      right: auto;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+
       &::after {
         top: 100%;
         left: 50%;
@@ -141,7 +145,12 @@ export default {
     }
 
     &-bottom{
-      margin-top: $unnnic-spacing-inline-xs;
+      top: calc(100% + 8px);
+      right: auto;
+      bottom: auto;
+      left: 50%;
+      transform: translateX(-50%);
+
       &::after {
           bottom: 100%;
           left: 50%;
@@ -150,7 +159,12 @@ export default {
       }
     }
     &-right{
-      margin-left: $unnnic-spacing-inline-xs;
+      top: 50%;
+      right: auto;
+      bottom: auto;
+      left: calc(100% + 8px);
+      transform: translateY(-50%);
+
       &::after {
         top: 50%;
         right: 100%;
@@ -159,7 +173,12 @@ export default {
       }
     }
     &-left{
-      margin-right: $unnnic-spacing-inline-xs;
+      top: 50%;
+      right: calc(100% + 8px);
+      bottom: auto;
+      left: auto;
+      transform: translateY(-50%);
+
       &::after {
         top: 50%;
         left: 100%;
