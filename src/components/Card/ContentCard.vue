@@ -94,11 +94,11 @@ export default {
     width: 100%;
 
     &__title {
-      font-family: $unnnic-font-family-primary;
-      font-size: $unnnic-font-size-body-lg;
+      font-family: $unnnic-font-family-secondary;
+      font-size: $unnnic-font-size-body-gt;
       font-weight: $unnnic-font-weight-regular;
       color: $unnnic-color-neutral-darkest;
-      line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
+      line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     }
 
     &__description {
@@ -123,7 +123,7 @@ export default {
     background-color: $unnnic-color-neutral-lightest;
 
     &--disabled {
-      background-color: $unnnic-color-background-solo;
+      background-color: rgba($unnnic-color-brand-weni-dark, $unnnic-opacity-level-extra-light);
     }
   }
 }
