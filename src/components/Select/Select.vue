@@ -12,6 +12,7 @@
       :hasCloudyColor="hasCloudyColor"
       :size="size"
       @focus="active = true"
+      @keydown="onKeyDownSelect"
       readonly/>
     <slot />
     <div
@@ -173,6 +174,25 @@ export default {
 
     onClickOutside() {
       this.active = false;
+    },
+    onKeyDownSelect(event) {
+      event.preventDefault();
+      const options = this.filterOptions(this.options());
+      const activeOption = options.findIndex((item) => item.value === this.value);
+      const verifyOption = activeOption === -1 ? 0 : activeOption;
+      const key = event.keyCode;
+      const elementScroll = document.querySelector('.unnnic-select__options__scroll-area');
+      let value = options[verifyOption].value;
+      if (key === 13) {
+        this.onSelectOption(options[verifyOption]);
+        return;
+      }
+      if (key === 38) value = options[activeOption === 0 ? 0 : activeOption - 1].value;
+      if (key === 40) value = options[activeOption === options.length - 1 ? options.length - 1 : activeOption + 1].value;
+      if(this.active) elementScroll.childNodes[value === '' ? 0 : value].scrollIntoView();
+      this.$emit('onChange', value);
+      this.$emit('input', value);
+
     },
     onSelectOption(option, type) {
       if (type === 'header') {
