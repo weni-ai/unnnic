@@ -25,10 +25,23 @@ export default {
   mounted() {
     this.getRightPost(this.$refs.tooltip);
   },
+  created() {
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
+  },
+  destroyed() {
+    window.removeEventListener('resize', this.handleResize);
+  },
+  watch: {
+    width() {
+      this.getRightPost(this.$refs.tooltip);
+    },
+  },
   data() {
     return {
       topPos: null,
       leftPos: null,
+      width: 0,
     };
   },
   props: {
@@ -56,22 +69,25 @@ export default {
     },
   },
   methods: {
+    handleResize() {
+      this.width = window.innerWidth;
+    },
     getRightPost(event) {
       const element = event.srcElement ? event.srcElement : event;
       const elementPos = element.getBoundingClientRect();
       if (element) {
         if (this.side === 'right') {
-          this.leftPos = `${elementPos.x + elementPos.width}px`;
-          this.topPos = `${elementPos.y + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
+          this.leftPos = `${elementPos.x + window.scrollX + elementPos.width}px`;
+          this.topPos = `${elementPos.y + window.scrollY + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
         } else if (this.side === 'left') {
-          this.leftPos = `${elementPos.x - this.$refs.label.offsetWidth - 12}px`;
-          this.topPos = `${elementPos.y + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
+          this.leftPos = `${elementPos.x + window.scrollX - this.$refs.label.offsetWidth - 12}px`;
+          this.topPos = `${elementPos.y + window.scrollY + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
         } else if (this.side === 'top') {
-          this.leftPos = `${elementPos.x + (elementPos.width / 2) - (this.$refs.label.offsetWidth / 2)}px`;
-          this.topPos = `${elementPos.y - this.$refs.label.offsetHeight - 8}px`;
+          this.leftPos = `${elementPos.x + window.scrollX + (elementPos.width / 2) - (this.$refs.label.offsetWidth / 2)}px`;
+          this.topPos = `${elementPos.y + window.scrollY - this.$refs.label.offsetHeight}px`;
         } else if (this.side === 'bottom') {
-          this.leftPos = `${elementPos.x + (elementPos.width / 2) - (this.$refs.label.offsetWidth / 2) - 4}px`;
-          this.topPos = `${elementPos.y + this.$refs.label.offsetHeight + (this.$refs.label.offsetHeight / 2) + 12}px`;
+          this.leftPos = `${elementPos.x + window.scrollX + (elementPos.width / 2) - (this.$refs.label.offsetWidth / 2)}px`;
+          this.topPos = `${elementPos.y + window.scrollY + this.$refs.label.offsetHeight + (this.$refs.label.offsetHeight / 2)}px`;
         }
       }
     },
@@ -96,7 +112,6 @@ export default {
   width: max-content;
   min-width: 2rem;
   box-sizing: border-box;
-  margin: $unnnic-spacing-inline-nano;
 
   background-color: $unnnic-color-neutral-black;
   color: $unnnic-color-neutral-snow;
