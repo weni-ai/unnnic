@@ -73,7 +73,7 @@ $scheme-colors:
   .unnnic-tag-scheme {
     &--#{$name} {
       background-color: rgba($color, $unnnic-opacity-level-light);
-      border: $unnnic-border-width-thinner solid rgba($color, $unnnic-opacity-level-lighter);
+      border: $unnnic-border-width-thinner solid rgba($color, $unnnic-opacity-level-extra-light);
       &:hover {
         border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
       }

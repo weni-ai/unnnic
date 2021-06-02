@@ -1,5 +1,5 @@
 <template>
-  <div :class="{
+  <div v-click-outside="onClickOutside" :class="{
     'unnnic-language-select': true,
     'unnnic-language-select__container': true,
     'unnnic-language-select--contracted': contracted,
@@ -19,7 +19,7 @@
         'unnnic-language-select--open--contracted': open && contracted,
         'unnnic-language-select--expanded': !contracted
       }"
-      @click="open=!open">
+      @click="onClickTrigger">
         <unnnic-flag
           :class="{ 'unnnic-language-select__flag': !contracted }"
           size="sm"
@@ -49,7 +49,8 @@
         v-show="open"
         :class="{
           'unnnic-language-select__list': true,
-           'unnnic-language-select__list--contracted': contracted }">
+           'unnnic-language-select__list--contracted': contracted, }"
+          >
         <div
           v-for="language in otherLanguages"
           :key="language.id">
@@ -59,7 +60,8 @@
           />
           <div
             class="unnnic-language-select__list__item unnnic--clickable"
-            @click=" open=false; val=language.id ">
+            @click="open=false; val=language.id "
+          >
             <unnnic-flag
               :class="{ 'unnnic-language-select__flag': !contracted }"
               size="sm"
@@ -79,6 +81,7 @@
   </div>
 </template>
 <script>
+import vClickOutside from 'v-click-outside';
 import UIcon from '../Icon.vue';
 import unnnicFlag from '../Flag.vue';
 
@@ -100,6 +103,18 @@ export default {
     contracted: {
       type: Boolean,
       default: false,
+    },
+  },
+  directives: {
+    clickOutside: vClickOutside.directive,
+  },
+  methods: {
+    onClickTrigger() {
+      this.open = !this.open;
+    },
+    onClickOutside() {
+      if (!this.open) return;
+      this.open = false;
     },
   },
   data() {

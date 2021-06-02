@@ -85,7 +85,7 @@ export default {
     background: $unnnic-color-neutral-snow;
     border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
     border-radius: $unnnic-border-radius-sm;
-    color: inherit;
+    color: $unnnic-color-neutral-dark;
     font-weight: $unnnic-font-weight-regular;
     font-family: $unnnic-font-family-secondary;
     box-sizing: border-box;
@@ -140,9 +140,12 @@ export default {
     }
 
     &:focus {
-      color: $unnnic-color-brand-weni-soft;
-      border-color: $unnnic-color-brand-weni;
+      border-color: $unnnic-color-neutral-cleanest;
       outline: none;
+      &::placeholder {
+        color: $unnnic-color-neutral-clean;
+        opacity: 1; /* Firefox */
+      }
     }
 
     &--error {
@@ -150,7 +153,7 @@ export default {
     }
 
     ::placeholder {
-      color: $unnnic-color-brand-sec;
+      color: $unnnic-color-neutral-clean;
       opacity: 1; /* Firefox */
     }
 

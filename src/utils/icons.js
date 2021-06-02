@@ -99,9 +99,11 @@ import subtractCircle1 from '!!svg-inline-loader!../assets/icons/subtract-circle
 import buttonPlay1 from '!!svg-inline-loader!../assets/icons/button-play-1.svg';
 import questionCircle1 from '!!svg-inline-loader!../assets/icons/question-circle-1.svg';
 import questionCircle2 from '!!svg-inline-loader!../assets/icons/question-circle-2.svg';
+import navigationMenuVertical1 from '!!svg-inline-loader!../assets/icons/navigation-menu-vertical-1.svg';
 
 export default {
   'headphones-customer-support-2': headphonesCustomerSupport2,
+  'navigation-menu-vertical-1': navigationMenuVertical1,
   'expand-8-1': expand81,
   'flash-1-4': flash14,
   'phone-charger-1': phoneCharger1,

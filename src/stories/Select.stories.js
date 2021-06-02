@@ -10,6 +10,7 @@ export default {
     searchIconLeft: { control: { type: 'text' } },
     searchPlaceholder: { control: { type: 'text' } },
     optionsHeader: { control: { type: 'array' } },
+    hasCloudyColor: { control: { type: 'select', options: [true, false] } },
   },
 };
 

@@ -132,6 +132,10 @@ export default {
       type: Boolean,
       default: null,
     },
+    hasCloudyColor: {
+      type: Boolean,
+      default: false,
+    },
     size: {
       type: String,
       default: 'md',
@@ -162,15 +166,19 @@ export default {
     },
 
     iconScheme() {
-      if (this.isFocused) {
-        return 'brand-weni';
+      if (this.value || this.isFocused) {
+        return 'neutral-dark';
       }
 
       if (this.type === 'error') {
         return 'feedback-red';
       }
 
-      return 'neutral-clean';
+      if (this.hasCloudyColor) {
+        return 'neutral-cloudy';
+      }
+
+      return 'neutral-cloudy';
     },
 
     inputListeners() {
