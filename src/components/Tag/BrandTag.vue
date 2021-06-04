@@ -82,7 +82,7 @@ export default {
   }
 
   &__label {
-    font-family: $unnnic-font-family-primary;
+    font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-md;
     font-weight: $unnnic-font-weight-regular;
     line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
