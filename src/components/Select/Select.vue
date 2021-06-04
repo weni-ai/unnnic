@@ -1,5 +1,5 @@
 <template>
-  <div v-click-outside="onClickOutside" class='unnnic-select'>
+  <div @keydown="onKeyDownSelect" v-click-outside="onClickOutside" class='unnnic-select'>
     <p v-if="label" class="unnnic-form__label"> {{ label }}  </p>
     <text-input
       :value="labelForValue"
@@ -12,7 +12,6 @@
       :hasCloudyColor="hasCloudyColor"
       :size="size"
       @focus="active = true"
-      @keydown="onKeyDownSelect"
       readonly/>
     <slot />
     <div

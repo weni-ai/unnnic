@@ -1,16 +1,17 @@
 <template>
-  <div :class="{
+  <div ref="tooltip" :class="{
     'unnnic-tooltip': enabled,
     'force-open': forceOpen,
   }">
   <slot />
   <span
     v-if="enabled"
+    ref="label"
     :class="[
             'unnnic-tooltip-label',
             `unnnic-tooltip-label-${side}`,
             ]"
-    :style="{ maxWidth: maxWidth }"
+    :style="{ maxWidth: maxWidth, left:leftPos, top:topPos }"
   >
     {{text}}
   </span>
@@ -33,6 +34,9 @@ export default {
   },
   watch: {
     width() {
+      this.getRightPost(this.$refs.tooltip);
+    },
+    side() {
       this.getRightPost(this.$refs.tooltip);
     },
   },
@@ -76,17 +80,17 @@ export default {
       const elementPos = element.getBoundingClientRect();
       if (element) {
         if (this.side === 'right') {
-          this.leftPos = `${elementPos.x + window.scrollX + elementPos.width}px`;
+          this.leftPos = `${elementPos.x + window.scrollX + elementPos.width + 10}px`;
           this.topPos = `${elementPos.y + window.scrollY + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
         } else if (this.side === 'left') {
           this.leftPos = `${elementPos.x + window.scrollX - this.$refs.label.offsetWidth - 12}px`;
           this.topPos = `${elementPos.y + window.scrollY + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
         } else if (this.side === 'top') {
-          this.leftPos = `${elementPos.x + window.scrollX + (elementPos.width / 2) - (this.$refs.label.offsetWidth / 2)}px`;
-          this.topPos = `${elementPos.y + window.scrollY - this.$refs.label.offsetHeight}px`;
+          this.leftPos = `${elementPos.x + window.scrollX + (elementPos.width / 2) - (this.$refs.label.clientWidth / 2)}px`;
+          this.topPos = `${elementPos.y + window.scrollY - this.$refs.label.offsetHeight - 8}px`;
         } else if (this.side === 'bottom') {
-          this.leftPos = `${elementPos.x + window.scrollX + (elementPos.width / 2) - (this.$refs.label.offsetWidth / 2)}px`;
-          this.topPos = `${elementPos.y + window.scrollY + this.$refs.label.offsetHeight + (this.$refs.label.offsetHeight / 2)}px`;
+          this.leftPos = `${elementPos.x + window.scrollX + (elementPos.width / 2) - (this.$refs.label.clientWidth / 2)}px`;
+          this.topPos = `${elementPos.y + window.scrollY + this.$refs.label.offsetHeight - (this.$refs.label.offsetHeight / 2) + 8}px`;
         }
       }
     },
@@ -130,12 +134,7 @@ export default {
   }
 
     &-top{
-      top: auto;
-      right: auto;
-      bottom: calc(100% + 8px);
-      left: 50%;
-      transform: translateX(-50%);
-
+      position: fixed;
       &::after {
         top: 100%;
         left: 50%;
@@ -145,12 +144,7 @@ export default {
     }
 
     &-bottom{
-      top: calc(100% + 8px);
-      right: auto;
-      bottom: auto;
-      left: 50%;
-      transform: translateX(-50%);
-
+      position: fixed;
       &::after {
           bottom: 100%;
           left: 50%;
@@ -159,12 +153,7 @@ export default {
       }
     }
     &-right{
-      top: 50%;
-      right: auto;
-      bottom: auto;
-      left: calc(100% + 8px);
-      transform: translateY(-50%);
-
+      position: fixed;
       &::after {
         top: 50%;
         right: 100%;
@@ -173,12 +162,7 @@ export default {
       }
     }
     &-left{
-      top: 50%;
-      right: calc(100% + 8px);
-      bottom: auto;
-      left: auto;
-      transform: translateY(-50%);
-
+      position: fixed;
       &::after {
         top: 50%;
         left: 100%;
