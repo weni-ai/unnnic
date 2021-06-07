@@ -23,19 +23,16 @@
 export default {
   name: 'unnnic-tooltip',
   mounted() {
-    this.getRightPost(this.$refs.tooltip);
-  },
-  created() {
-    window.addEventListener('resize', this.handleResize);
     this.handleResize();
+
+    window.addEventListener('scroll', this.handleResize);
+    window.addEventListener('resize', this.handleResize);
   },
   destroyed() {
+    window.removeEventListener('scroll', this.handleResize);
     window.removeEventListener('resize', this.handleResize);
   },
   watch: {
-    width() {
-      this.getRightPost(this.$refs.tooltip);
-    },
     side() {
       this.getRightPost(this.$refs.tooltip);
     },
@@ -44,7 +41,6 @@ export default {
     return {
       topPos: null,
       leftPos: null,
-      width: 0,
     };
   },
   props: {
@@ -73,24 +69,24 @@ export default {
   },
   methods: {
     handleResize() {
-      this.width = window.innerWidth;
+      this.getRightPost(this.$refs.tooltip);
     },
-    getRightPost(event) {
-      const element = event.srcElement ? event.srcElement : event;
+    getRightPost(element) {
       const elementPos = element.getBoundingClientRect();
+
       if (element) {
         if (this.side === 'right') {
-          this.leftPos = `${elementPos.x + window.scrollX + elementPos.width + 10}px`;
-          this.topPos = `${elementPos.y + window.scrollY + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
+          this.leftPos = `${elementPos.x + elementPos.width + 10}px`;
+          this.topPos = `${elementPos.y + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
         } else if (this.side === 'left') {
-          this.leftPos = `${elementPos.x + window.scrollX - this.$refs.label.offsetWidth - 12}px`;
-          this.topPos = `${elementPos.y + window.scrollY + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
+          this.leftPos = `${elementPos.x - this.$refs.label.offsetWidth - 12}px`;
+          this.topPos = `${elementPos.y + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
         } else if (this.side === 'top') {
-          this.leftPos = `${elementPos.x + window.scrollX + (elementPos.width / 2) - (this.$refs.label.clientWidth / 2)}px`;
-          this.topPos = `${elementPos.y + window.scrollY - this.$refs.label.offsetHeight - 8}px`;
+          this.leftPos = `${elementPos.x + (elementPos.width / 2) - (this.$refs.label.clientWidth / 2)}px`;
+          this.topPos = `${elementPos.y - this.$refs.label.offsetHeight - 8}px`;
         } else if (this.side === 'bottom') {
-          this.leftPos = `${elementPos.x + window.scrollX + (elementPos.width / 2) - (this.$refs.label.clientWidth / 2)}px`;
-          this.topPos = `${elementPos.y + window.scrollY + this.$refs.label.offsetHeight - (this.$refs.label.offsetHeight / 2) + 8}px`;
+          this.leftPos = `${elementPos.x + (elementPos.width / 2) - (this.$refs.label.clientWidth / 2)}px`;
+          this.topPos = `${elementPos.y + this.$refs.label.offsetHeight - (this.$refs.label.offsetHeight / 2) + 8}px`;
         }
       }
     },
@@ -111,7 +107,7 @@ export default {
   z-index: 1;
   visibility: hidden;
   text-align: center;
-  position: absolute;
+  position: fixed;
   width: max-content;
   min-width: 2rem;
   box-sizing: border-box;
