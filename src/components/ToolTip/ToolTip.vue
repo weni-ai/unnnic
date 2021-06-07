@@ -1,11 +1,15 @@
 <template>
-  <div ref="tooltip" :class="{
-    'unnnic-tooltip': enabled,
-    'force-open': forceOpen,
-  }">
+  <div
+    ref="tooltip"
+    :class="{
+      'unnnic-tooltip': enabled,
+      'force-open': forceOpen,
+    }"
+    @mouseover="handleResize"
+  >
   <slot />
   <span
-    v-if="enabled"
+    v-show="enabled"
     ref="label"
     :class="[
             'unnnic-tooltip-label',
@@ -74,7 +78,7 @@ export default {
     getRightPost(element) {
       const elementPos = element.getBoundingClientRect();
 
-      if (element) {
+      if (element && this.$refs.label) {
         if (this.side === 'right') {
           this.leftPos = `${elementPos.x + elementPos.width + 10}px`;
           this.topPos = `${elementPos.y + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
