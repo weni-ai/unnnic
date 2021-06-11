@@ -29,7 +29,7 @@ export default {
       type: String,
       default: 'md',
       validator(value) {
-        return ['nano', 'xs', 'sm', 'ant', 'md', 'lg'].indexOf(value) !== -1;
+        return ['nano', 'xs', 'sm', 'ant', 'md', 'lg', 'xl'].indexOf(value) !== -1;
       },
     },
     lineHeight: {

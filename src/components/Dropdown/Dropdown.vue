@@ -1,17 +1,17 @@
 <template>
     <div class="unnnic-dropdown" @click="onClickTrigger">
         <div class="unnnic-dropdown__trigger">
-            <slot name="trigger" />
-            <div
+          <slot name="trigger" />
+          <div
             v-if="active"
             :class="[
               'unnnic-dropdown__content',
               active ? '' : 'unnnic-dropdown__content--hidden',
               `unnnic-dropdown__content__position-${position}` ]"
-              v-click-outside="onClickOutside"
-              >
+            v-click-outside="onClickOutside"
+          >
             <slot />
-        </div>
+          </div>
         </div>
     </div>
 </template>
@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     onClickTrigger() {
-      this.active = true;
+      this.active = !this.active;
     },
     onClickOutside() {
       if (!this.active) return;
