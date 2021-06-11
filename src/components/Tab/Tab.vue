@@ -67,6 +67,7 @@ export default {
   font-size: $unnnic-font-size-body-lg;
   line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
   padding-bottom: $unnnic-inset-sm;
+  margin-bottom: $unnnic-inset-sm;
   border-bottom: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 }
 
