@@ -175,7 +175,6 @@ export default {
       this.active = false;
     },
     onKeyDownSelect(event) {
-      event.preventDefault();
       const options = this.filterOptions(this.options());
       const activeOption = options.findIndex((item) => item.value === this.value);
       const verifyOption = activeOption === -1 ? 0 : activeOption;
