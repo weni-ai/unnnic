@@ -1,6 +1,7 @@
 <template>
   <button
     v-bind="$attrs"
+    :disabled="buttonDisabled"
     :class="[
       'unnnic-button',
       `unnnic-button--size-${size}`,
@@ -10,28 +11,47 @@
     v-on="$listeners">
 
     <unnnic-icon-svg
+      v-if="loading"
+      icon="loading-circle-1"
+      :scheme="iconScheme"
+      :size="iconSize"
+      :style="{ position: 'absolute' }"
+      class="rotation"
+    />
+
+    <unnnic-icon-svg
       v-if="showSvgIconLeft"
       :icon="iconLeft"
       :scheme="iconScheme"
       :size="iconSize"
       :class="{ 'unnnic-button__icon-left': hasText }"
+      :style="{ visibility: loading && 'hidden' }"
     />
 
     <u-icon
       v-else-if="iconLeft" :icon="iconLeft"
       :class="{ 'unnnic-button__icon-left': hasText }"
       :size="iconSize"
+      :style="{ visibility: loading && 'hidden' }"
     />
 
-    <unnnic-icon-svg v-if="iconCenter" :icon="iconCenter" :scheme="iconScheme"></unnnic-icon-svg>
-    <span class="unnnic-button__label">
+    <unnnic-icon-svg
+      v-if="iconCenter"
+      :icon="iconCenter"
+      :scheme="iconScheme"
+      :style="{ visibility: loading && 'hidden' }"
+    ></unnnic-icon-svg>
+
+    <span class="unnnic-button__label" :style="{ visibility: loading && 'hidden' }">
       <slot /> {{ text }}
     </span>
     <u-icon
       v-if="iconRight"
       :class="{ 'unnnic-button__icon-right': hasText }"
       :icon="iconRight"
-      :size="iconSize" />
+      :size="iconSize"
+      :style="{ visibility: loading && 'hidden' }"
+    />
   </button>
 </template>
 
@@ -73,8 +93,20 @@ export default {
       type: String,
       default: null,
     },
+
+    disabled: {
+      type: Boolean,
+    },
+
+    loading: {
+      type: Boolean,
+    },
   },
   computed: {
+    buttonDisabled() {
+      return this.disabled || this.loading;
+    },
+
     showSvgIconLeft() {
       return this.iconLeft
         && [
@@ -94,8 +126,12 @@ export default {
       return this.text && this.text.length > 0;
     },
     iconScheme() {
+      if (this.type === 'primary') {
+        return this.buttonDisabled ? 'neutral-clean' : 'background-snow';
+      }
+
       if (this.type === 'secondary') {
-        return 'neutral-dark';
+        return this.buttonDisabled ? 'neutral-cloudy' : 'neutral-dark';
       }
 
       return '';
@@ -103,6 +139,21 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.rotation {
+  animation: rotation 1300ms linear infinite;
+}
+
+@keyframes rotation {
+  0% {}
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+</style>
 
 <style lang="scss">
 @import "../../assets/scss/unnnic.scss";
