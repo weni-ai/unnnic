@@ -25,24 +25,24 @@
       :scheme="iconScheme"
       :size="iconSize"
       :class="{ 'unnnic-button__icon-left': hasText }"
-      :style="{ visibility: loading && 'hidden' }"
+      :style="{ visibility: loading ? 'hidden' : null }"
     />
 
     <u-icon
       v-else-if="iconLeft" :icon="iconLeft"
       :class="{ 'unnnic-button__icon-left': hasText }"
       :size="iconSize"
-      :style="{ visibility: loading && 'hidden' }"
+      :style="{ visibility: loading ? 'hidden' : null }"
     />
 
     <unnnic-icon-svg
       v-if="iconCenter"
       :icon="iconCenter"
       :scheme="iconScheme"
-      :style="{ visibility: loading && 'hidden' }"
+      :style="{ visibility: loading ? 'hidden' : null }"
     ></unnnic-icon-svg>
 
-    <span class="unnnic-button__label" :style="{ visibility: loading && 'hidden' }">
+    <span class="unnnic-button__label" :style="{ visibility: loading ? 'hidden' : null }">
       <slot /> {{ text }}
     </span>
     <u-icon
@@ -50,7 +50,7 @@
       :class="{ 'unnnic-button__icon-right': hasText }"
       :icon="iconRight"
       :size="iconSize"
-      :style="{ visibility: loading && 'hidden' }"
+      :style="{ visibility: loading ? 'hidden' : null }"
     />
   </button>
 </template>
