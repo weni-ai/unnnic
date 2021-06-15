@@ -28,6 +28,7 @@ import skeletonLoading from './SkeletonLoading/SkeletonLoading.vue';
 import carousel from './Carousel/Carousel.vue';
 import label from './Label/Label.vue';
 import tab from './Tab/Tab.vue';
+import banner from './Banner/Banner.vue';
 
 const components = {
   unnnicInput: input,
@@ -58,6 +59,7 @@ const components = {
   unnnicCarousel: carousel,
   unnnicLabel: label,
   unnnicTab: tab,
+  unnnicBanner: banner,
 };
 
 Object.keys(components).forEach((name) => {
@@ -94,3 +96,4 @@ export const unnnicSkeletonLoading = skeletonLoading;
 export const unnnicCarousel = carousel;
 export const unnnicLabel = label;
 export const unnnicTab = tab;
+export const unnnicBanner = banner;
