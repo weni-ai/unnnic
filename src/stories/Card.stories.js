@@ -1,5 +1,6 @@
 import Card from '../components/Card/Card.vue';
 import iconList from '../utils/iconList';
+import call from '../utils/call';
 
 export default {
   title: 'Example/Card',
@@ -7,7 +8,7 @@ export default {
   argTypes: {
     enabled: { control: { type: 'select', options: [true, false] } },
     infoPosition: { control: { type: 'select', options: ['top', 'right', 'bottom', 'left'] } },
-    type: { control: { type: 'select', options: ['title', 'dash', 'account', 'status', 'default', 'blank', 'content'] } },
+    type: { control: { type: 'select', options: ['title', 'dash', 'account', 'status', 'default', 'blank', 'content', 'marketplace'] } },
     icon: { control: { type: 'select', options: iconList } },
     scheme: {
       control: {
@@ -16,6 +17,7 @@ export default {
           'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink'],
       },
     },
+    typeAction: { control: { type: 'select', options: ['add', 'config', 'edit'] } },
   },
 };
 
@@ -76,4 +78,28 @@ Content.args = {
   description: 'This is the description',
   enabled: false,
   icon: 'view-1-1',
+};
+
+export const Marketplace = Template.bind({});
+Marketplace.args = {
+  type: 'marketplace',
+  title: 'This is the title',
+  description: 'This is the description',
+  rating: 4.9,
+  comments: '3 comments',
+  iconSrc: 'https://api.iconify.design/grommet-icons:slack.svg',
+  enabled: false,
+  typeAction: 'add',
+  buttonAction: () => {
+    call.callModal({
+      props: {
+        text: 'Title',
+        modalIcon: 'check-circle-1-1',
+        description: 'description',
+        alertMessage: 'alert message',
+        scheme: 'feedback-green',
+      },
+    });
+  },
+  clickable: true,
 };

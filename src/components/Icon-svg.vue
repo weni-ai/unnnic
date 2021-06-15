@@ -91,6 +91,9 @@ $scheme-colors: "feedback-red" $unnnic-color-feedback-red,
 @each $name, $color in $scheme-colors {
   .unnnic-icon-scheme {
     &--#{$name} {
+
+      fill: $color;
+
       & .primary {
         fill: $color;
       }

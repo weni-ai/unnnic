@@ -100,6 +100,7 @@ import buttonPlay1 from '!!svg-inline-loader!../assets/icons/button-play-1.svg';
 import questionCircle1 from '!!svg-inline-loader!../assets/icons/question-circle-1.svg';
 import questionCircle2 from '!!svg-inline-loader!../assets/icons/question-circle-2.svg';
 import navigationMenuVertical1 from '!!svg-inline-loader!../assets/icons/navigation-menu-vertical-1.svg';
+import ratingStar1 from '!!svg-inline-loader!../assets/icons/rating-star-1.svg';
 
 export default {
   'headphones-customer-support-2': headphonesCustomerSupport2,
@@ -202,4 +203,5 @@ export default {
   'button-play-1': buttonPlay1,
   'question-circle-1': questionCircle1,
   'question-circle-2': questionCircle2,
+  'rating-star-1': ratingStar1,
 };

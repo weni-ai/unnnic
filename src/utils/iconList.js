@@ -90,4 +90,5 @@ export default [
   'typing-1',
   'drag',
   'lock-unlock-1-1',
+  'rating-star-1',
 ];

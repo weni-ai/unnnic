@@ -7,6 +7,11 @@
       :text="text"
       :info="info"
       :icon="currentTypeIcon"
+      :icon-src="iconSrc"
+      :rating="rating"
+      :comments="comments"
+      :type-action="typeAction"
+      :button-action="buttonAction"
       :value="value"
       :percent="percent"
       :status="status"
@@ -16,6 +21,7 @@
       :scheme="scheme"
       :clickable="clickable"
       :has-information-icon="hasInformationIcon"
+      @openModal="openModal"
     />
 </template>
 
@@ -28,6 +34,7 @@ import AccountCard from './AccountCard.vue';
 import DefaultCard from './DefaultCard.vue';
 import BlankCard from './BlankCard.vue';
 import ContentCard from './ContentCard.vue';
+import MarketplaceCard from './MarketplaceCard.vue';
 
 export default {
   name: 'unnnic-card',
@@ -38,7 +45,7 @@ export default {
       default: 'title',
       validator(value) {
         return (
-          ['title', 'status', 'dash', 'account', 'default', 'blank', 'content'].indexOf(value) !== -1
+          ['title', 'status', 'dash', 'account', 'default', 'blank', 'content', 'marketplace'].indexOf(value) !== -1
         );
       },
     },
@@ -70,11 +77,23 @@ export default {
       type: Number,
       default: 0,
     },
+    rating: {
+      type: Number,
+      default: 0,
+    },
+    comments: {
+      type: String,
+      default: null,
+    },
     enabled: {
       type: Boolean,
       default: true,
     },
     icon: {
+      type: String,
+      default: null,
+    },
+    iconSrc: {
       type: String,
       default: null,
     },
@@ -98,6 +117,17 @@ export default {
       type: Boolean,
       default: false,
     },
+    typeAction: {
+      type: String,
+      default: null,
+      validator(value) {
+        return ['add', 'config', 'edit'].indexOf(value) !== -1;
+      },
+    },
+    buttonAction: {
+      type: Function,
+      default: () => {},
+    },
   },
   computed: {
     currentTypeIcon() {
@@ -117,7 +147,13 @@ export default {
       if (this.type === 'default') return DefaultCard;
       if (this.type === 'blank') return BlankCard;
       if (this.type === 'content') return ContentCard;
+      if (this.type === 'marketplace') return MarketplaceCard;
       return TitleCard;
+    },
+  },
+  methods: {
+    openModal() {
+      this.$emit('openModal');
     },
   },
 };
