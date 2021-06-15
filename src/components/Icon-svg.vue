@@ -85,7 +85,8 @@ $scheme-colors: "feedback-red" $unnnic-color-feedback-red,
   "neutral-dark" $unnnic-color-neutral-dark,
   "neutral-soft" $unnnic-color-neutral-soft,
   "neutral-darkest" $unnnic-color-neutral-darkest,
-  "neutral-cloudy" $unnnic-color-neutral-cloudy;
+  "neutral-cloudy" $unnnic-color-neutral-cloudy,
+  "background-snow" $unnnic-color-background-snow;
 
 @each $name, $color in $scheme-colors {
   .unnnic-icon-scheme {

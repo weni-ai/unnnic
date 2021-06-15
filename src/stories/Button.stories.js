@@ -10,7 +10,8 @@ export default {
     text: { control: { type: 'text' } },
     iconLeft: { control: { type: 'select', options: [null, ...iconList] } },
     iconRight: { control: { type: 'select', options: [null, ...iconList] } },
-    disabled: { control: { type: 'select', options: [true, false] } },
+    disabled: { control: { type: 'boolean' } },
+    loading: { control: { type: 'boolean' } },
   },
 };
 

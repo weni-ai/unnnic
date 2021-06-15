@@ -89,6 +89,7 @@ Marketplace.args = {
   comments: '3 comments',
   iconSrc: 'https://api.iconify.design/grommet-icons:slack.svg',
   enabled: false,
+  typeAction: 'add',
   buttonAction: () => {
     call.callModal({
       props: {

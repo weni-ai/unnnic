@@ -16,7 +16,7 @@
         size="small"
         type="secondary"
         @click.stop="buttonClick"
-        :iconCenter="getIcon()"
+        :iconCenter="icon"
       />
     </div>
     <div class="unnnic-card-marketplace__content">
@@ -79,19 +79,8 @@ export default {
       default: () => {},
     },
   },
-
-  methods: {
-    buttonClick() {
-      if (this.typeAction === 'add') {
-        this.buttonAction();
-      } else {
-        this.$emit('openModal');
-      }
-    },
-    cardClick() {
-      this.$emit('openModal');
-    },
-    getIcon() {
+  computed: {
+    icon() {
       switch (this.typeAction) {
         case 'add':
           return 'add-1';
@@ -102,6 +91,18 @@ export default {
         default:
           return 'add-1';
       }
+    },
+  },
+  methods: {
+    buttonClick() {
+      if (this.typeAction === 'add') {
+        this.buttonAction();
+      } else {
+        this.$emit('openModal');
+      }
+    },
+    cardClick() {
+      this.$emit('openModal');
     },
   },
 };
