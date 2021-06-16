@@ -90,7 +90,7 @@ export default {
           this.topPos = `${elementPos.y - this.$refs.label.offsetHeight - 8}px`;
         } else if (this.side === 'bottom') {
           this.leftPos = `${elementPos.x + (elementPos.width / 2) - (this.$refs.label.clientWidth / 2)}px`;
-          this.topPos = `${elementPos.y + this.$refs.label.offsetHeight - (this.$refs.label.offsetHeight / 2) + 8}px`;
+          this.topPos = `${elementPos.y + this.$refs.label.offsetHeight - (this.$refs.label.offsetHeight / 2) + 12}px`;
         }
       }
     },
