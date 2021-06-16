@@ -101,8 +101,12 @@ import questionCircle1 from '!!svg-inline-loader!../assets/icons/question-circle
 import questionCircle2 from '!!svg-inline-loader!../assets/icons/question-circle-2.svg';
 import navigationMenuVertical1 from '!!svg-inline-loader!../assets/icons/navigation-menu-vertical-1.svg';
 import ratingStar1 from '!!svg-inline-loader!../assets/icons/rating-star-1.svg';
+import appWindowEdit1 from '!!svg-inline-loader!../assets/icons/app-window-edit-1.svg';
+import appWindowEdit2 from '!!svg-inline-loader!../assets/icons/app-window-edit-2.svg';
 
 export default {
+  'app-window-edit-1': appWindowEdit1,
+  'app-window-edit-2': appWindowEdit2,
   'headphones-customer-support-2': headphonesCustomerSupport2,
   'navigation-menu-vertical-1': navigationMenuVertical1,
   'expand-8-1': expand81,

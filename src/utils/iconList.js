@@ -1,4 +1,6 @@
 export default [
+  'app-window-edit-1',
+  'app-window-edit-2',
   'headphones-customer-support-2',
   'building-2-1',
   'expand-8-1',
