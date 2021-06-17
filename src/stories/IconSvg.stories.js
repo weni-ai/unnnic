@@ -15,6 +15,7 @@ const schemes = [
   'aux-lemon',
   'aux-pink',
   'brand-weni',
+  'brand-weni-soft',
   'neutral-clean',
   'neutral-cleanest',
   'neutral-dark',

@@ -58,6 +58,7 @@ Normal.args = {
       active: false,
       icon: 'messaging-we-chat-3',
       click() {},
+      notify: true,
     }],
   }, {
     label: 'Perfil',

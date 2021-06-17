@@ -24,6 +24,15 @@
                 />
 
                 <span class="label">{{ option.label }}</span>
+                <span :class="
+                  option.notify && !expanded ? 'notify':''"
+                  v-if="option.notify">
+                  <icon-svg
+                    icon="indicator"
+                    scheme="brand-weni-soft"
+                    size="ant"
+                  />
+                </span>
               </a>
             </tool-tip>
           </div>
@@ -196,6 +205,7 @@ $transition-time: 0.4s;
       cursor: pointer;
       overflow: hidden;
       white-space: nowrap;
+      position: relative;
 
       font-weight: $unnnic-font-weight-regular;
       color: $unnnic-color-neutral-dark;
@@ -237,6 +247,11 @@ $transition-time: 0.4s;
 
         font-weight: $unnnic-font-weight-bold;
         color: $unnnic-color-neutral-darkest;
+      }
+      .notify{
+        position: absolute;
+        top: 0;
+        right: 0;
       }
     }
   }
