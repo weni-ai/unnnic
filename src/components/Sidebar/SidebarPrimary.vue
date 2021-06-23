@@ -206,6 +206,7 @@ $transition-time: 0.4s;
       overflow: hidden;
       white-space: nowrap;
       position: relative;
+      text-decoration: none;
 
       font-weight: $unnnic-font-weight-regular;
       color: $unnnic-color-neutral-dark;
