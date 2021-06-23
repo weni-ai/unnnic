@@ -115,6 +115,7 @@ export default {
   width: max-content;
   min-width: 2rem;
   box-sizing: border-box;
+  width: auto;
 
   background-color: $unnnic-color-neutral-black;
   color: $unnnic-color-neutral-snow;
@@ -181,6 +182,7 @@ export default {
 .unnnic-tooltip:hover {
   .unnnic-tooltip-label{
       visibility: visible;
+      width: auto;
     }
 }
 
