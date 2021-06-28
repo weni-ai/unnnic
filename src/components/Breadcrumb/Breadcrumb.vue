@@ -37,7 +37,6 @@ export default {
   },
   methods: {
     emitAction(crumb) {
-      console.log('emmiting', crumb);
       this.$root.$emit('crumbClick', crumb);
     },
   },
