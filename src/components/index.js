@@ -29,6 +29,8 @@ import carousel from './Carousel/Carousel.vue';
 import label from './Label/Label.vue';
 import tab from './Tab/Tab.vue';
 import banner from './Banner/Banner.vue';
+import comment from './Comment/Comment.vue';
+import breadcrumb from './Breadcrumb/Breadcrumb.vue';
 
 const components = {
   unnnicInput: input,
@@ -60,6 +62,8 @@ const components = {
   unnnicLabel: label,
   unnnicTab: tab,
   unnnicBanner: banner,
+  unnnicComment: comment,
+  unnnicBreadcrumb: breadcrumb,
 };
 
 Object.keys(components).forEach((name) => {
@@ -97,3 +101,5 @@ export const unnnicCarousel = carousel;
 export const unnnicLabel = label;
 export const unnnicTab = tab;
 export const unnnicBanner = banner;
+export const unnnicComment = comment;
+export const unnnicBreadcrumb = breadcrumb;
