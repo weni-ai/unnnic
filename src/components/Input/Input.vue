@@ -25,7 +25,8 @@
         :icon-left-clickable="iconLeftClickable"
         :icon-right-clickable="iconRightClickable"
         :hasCloudyColor="hasCloudyColor"
-        :size="size" />
+        :size="size"
+        :mask="mask" />
     <p v-if="message" class="unnnic-form__message"> {{ message }} </p>
   </div>
 </template>
@@ -104,6 +105,10 @@ export default {
     size: {
       type: String,
       default: 'md',
+    },
+    mask: {
+      type: String,
+      default: '',
     },
   },
   data() {
