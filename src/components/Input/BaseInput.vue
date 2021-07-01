@@ -1,5 +1,6 @@
 <template>
       <input
+        v-if="!mask"
         v-bind="attributes"
         v-model="val"
         :class="[
@@ -10,10 +11,27 @@
           hasIconRight ? 'has-icon-right': '',
         ]"
         :type="nativeType"
-        v-on="inputListeners"/>
+        v-on="inputListeners"
+        />
+
+        <input
+        v-else
+        v-bind="attributes"
+        v-model="val"
+        :class="[
+          'unnnic-form__input',
+          `unnnic-form__input--size-${size}`,
+          type === 'error' ? 'unnnic-form__input--error' : '' ,
+          hasIconLeft ? 'has-icon-left': '',
+          hasIconRight ? 'has-icon-right': '',
+        ]"
+        :type="nativeType"
+        v-on="inputListeners"
+        v-mask="mask"/>
 </template>
 
 <script>
+import { mask } from 'vue-the-mask';
 
 export default {
   name: 'unnnic-input',
@@ -22,6 +40,7 @@ export default {
       val: null,
     };
   },
+  directives: { mask },
   props: {
     type: {
       type: String,
@@ -49,6 +68,10 @@ export default {
     size: {
       type: String,
       default: 'md',
+    },
+    mask: {
+      type: String,
+      default: '',
     },
   },
   computed: {
