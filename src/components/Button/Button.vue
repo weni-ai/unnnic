@@ -6,6 +6,7 @@
       'unnnic-button',
       `unnnic-button--size-${size}`,
       `unnnic-button--${type}`,
+      `unnnic-button-scheme--${buttonScheme}`,
       iconCenter ? `unnnic-button--icon-on-center` : null
     ]"
     v-on="$listeners">
@@ -101,6 +102,12 @@ export default {
     loading: {
       type: Boolean,
     },
+    scheme: {
+      type: String,
+      validator(value) {
+        return ['feedback-green', 'feedback-red'].indexOf(value) !== -1;
+      },
+    },
   },
   computed: {
     buttonDisabled() {
@@ -136,6 +143,13 @@ export default {
 
       return '';
     },
+    buttonScheme() {
+      if (this.type === 'primary') {
+        return this.scheme;
+      }
+
+      return '';
+    },
   },
 };
 </script>
@@ -157,6 +171,10 @@ export default {
 
 <style lang="scss">
 @import "../../assets/scss/unnnic.scss";
+
+$scheme-colors:
+  "feedback-red" $unnnic-color-feedback-red,
+  "feedback-green" $unnnic-color-feedback-green;
 
 .unnnic-button {
   display: inline-flex;
@@ -259,6 +277,15 @@ export default {
     }
   }
 }
+
+@each $name, $color in $scheme-colors {
+  .unnnic-button-scheme {
+    &--#{$name} {
+      background-color: $color;
+    }
+  }
+}
+
 </style>
 
 <style lang="scss" scoped>
