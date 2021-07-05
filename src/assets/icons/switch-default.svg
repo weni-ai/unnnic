@@ -1,4 +1,19 @@
-<svg width="80" height="40" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
-<rect x="4.20013" y="2.10046" width="71.6" height="35.8" rx="17.9"/>
-<circle cx="22.5" cy="20.0005" r="12.5" fill="white"/>
+<svg id="default" width="80" height="40" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg" >
+  <style type="text/css">
+    rect {
+      transition: fill .2s ease;
+    }
+  </style>
+  
+  <rect x="4.20013" y="2.10046" width="71.6" height="35.8" rx="17.9"/>
+  <circle cx="22.5" cy="20.0005" r="12.5" fill="white">
+    <animate
+      dur="0.2s" begin="startAnimation.begin" attributeName="cx" values="22.5; 35.5; 57.5" fill="freeze"  keyTimes:"0; 0.5; 1"  />
+  </circle>
+
+  <!--  controls -->
+  <!-- these are on top of the visible circle-->
+  <rect x="4.20013" y="2.10046" width="71.6" height="35.8" rx="17.9" fill-opacity="0">
+    <animate dur="0.01s" id="startAnimation" attributeName="width" values="71.6; 0" fill="freeze" begin="click" />
+  </rect>
 </svg>

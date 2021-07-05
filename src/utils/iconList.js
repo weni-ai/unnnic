@@ -94,4 +94,6 @@ export default [
   'lock-unlock-1-1',
   'rating-star-1',
   'send-email-3-1',
+  'switch-default-disabled',
+  'switch-selected-disabled',
 ];

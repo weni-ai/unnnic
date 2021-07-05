@@ -104,6 +104,8 @@ import ratingStar1 from '!!svg-inline-loader!../assets/icons/rating-star-1.svg';
 import appWindowEdit1 from '!!svg-inline-loader!../assets/icons/app-window-edit-1.svg';
 import appWindowEdit2 from '!!svg-inline-loader!../assets/icons/app-window-edit-2.svg';
 import sendEmail31 from '!!svg-inline-loader!../assets/icons/send-email-3-1.svg';
+import switchDefaultDisabled from '!!svg-inline-loader!../assets/icons/switch-default-disabled.svg';
+import switchSelectedDisabled from '!!svg-inline-loader!../assets/icons/switch-selected-disabled.svg';
 
 export default {
   'app-window-edit-1': appWindowEdit1,
@@ -210,4 +212,6 @@ export default {
   'question-circle-2': questionCircle2,
   'rating-star-1': ratingStar1,
   'send-email-3-1': sendEmail31,
+  'switch-default-disabled': switchDefaultDisabled,
+  'switch-selected-disabled': switchSelectedDisabled,
 };
