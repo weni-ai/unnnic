@@ -73,11 +73,8 @@ export default {
   methods: {
     toggleState() {
       if (this.disabled) return;
-      // preActive is used for the svg animation color fade occur before the switch
       this.preActive = !this.preActive;
-      // !this.isActive here because the isActive switch will occur with a delay for the animation
       this.$emit('setIsActive', !this.isActive);
-      // timeout used to allow the svg animation to occur
       setTimeout(() => {
         this.isActive = !this.isActive;
       }, 200);
@@ -138,13 +135,10 @@ export default {
   }
 }
 
-// Fixes md line-height issue for switch icon
-// since it's aspect ratio is uncommon
 .unnnic-icon__size--md.unnnic-icon__line-height--md svg {
   top: 0;
 }
 
-// Fixes switch icon aspect ratio issue with svg-icon component width
 .unnnic-icon__size {
   &--md,
   &--sm {
