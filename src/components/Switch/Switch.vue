@@ -140,9 +140,11 @@ export default {
 }
 
 .unnnic-icon__size {
-  &--md,
+  &--md {
+    width: 3rem;
+  }
   &--sm {
-    width: auto;
+    width: 2rem;
   }
 }
 </style>
