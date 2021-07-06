@@ -97,13 +97,13 @@ export default {
     },
 
     iconLineHeight() {
-      return this.size === 'small' ? 'sm' : 'md';
+      return this.size === 'small' ? 'sm' : '';
     },
   },
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../../assets/scss/unnnic.scss';
 
 .unnnic-switch {
@@ -133,10 +133,6 @@ export default {
     align-self: center;
     margin: $unnnic-spacing-stack-nano $unnnic-inline-nano;
   }
-}
-
-.unnnic-icon__size--md.unnnic-icon__line-height--md svg {
-  top: 0;
 }
 
 .unnnic-icon__size {
