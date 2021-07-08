@@ -183,7 +183,7 @@ $scheme-colors:
         color: $color;
       }
       &--border {
-        border-left: 4px solid $color;
+        border-left: 0.25rem solid $color;
       }
     }
   }
