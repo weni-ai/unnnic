@@ -13,6 +13,7 @@ import icon from './Icon.vue';
 import iconSvg from './Icon-svg.vue';
 import toolTip from './ToolTip/ToolTip.vue';
 import card from './Card/Card.vue';
+import cardCompany from './Card/CardCompany.vue';
 import checkbox from './Checkbox/Checkbox.vue';
 import radio from './Radio/Radio.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
@@ -48,6 +49,7 @@ const components = {
   unnnicDropdownItem: dropdownItem,
   unnnicToolTip: toolTip,
   unnnicCard: card,
+  unnnicCardCompany: cardCompany,
   unnnicCheckbox: checkbox,
   unnnicRadio: radio,
   unnnicLanguageSelect: languageSelect,
@@ -86,6 +88,7 @@ export const unnnicIcon = icon;
 export const unnnicIconSvg = iconSvg;
 export const unnnicToolTip = toolTip;
 export const unnnicCard = card;
+export const unnnicCardCompany = cardCompany;
 export const unnnicCheckbox = checkbox;
 export const unnnicRadio = radio;
 export const unnniclanguageSelect = languageSelect;
