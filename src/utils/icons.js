@@ -68,6 +68,7 @@ import lockUnlock from '!!svg-inline-loader!../assets/icons/lock-unlock-1-1.svg'
 import pencilWrite1 from '!!svg-inline-loader!../assets/icons/pencil-write-1.svg';
 import bookAddress12 from '!!svg-inline-loader!../assets/icons/book-address-1-2.svg';
 import delete1 from '!!svg-inline-loader!../assets/icons/delete-1.svg';
+import delete11 from '!!svg-inline-loader!../assets/icons/delete-1-1.svg';
 import arrowLeft11 from '!!svg-inline-loader!../assets/icons/arrow-left-1-1.svg';
 import add1 from '!!svg-inline-loader!../assets/icons/add-1.svg';
 import checkboxDefault from '!!svg-inline-loader!../assets/icons/checkbox-default.svg';
@@ -179,6 +180,7 @@ export default {
   'pencil-write-1': pencilWrite1,
   'book-address-1-2': bookAddress12,
   'delete-1': delete1,
+  'delete-1-1': delete11,
   'arrow-left-1-1': arrowLeft11,
   'add-1': add1,
   'checkbox-default': checkboxDefault,

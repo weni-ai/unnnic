@@ -4,7 +4,9 @@
         ${!disabled
         ? `unnnic-tag-scheme--${scheme}`
         : `unnnic-tag--disabled`}
-        ${ clickable ? 'unnnic-tag--clickable' : '' }`">
+        ${ clickable ? 'unnnic-tag--clickable' : '' }`"
+    @click="$emit('click')"
+  >
     <span
       :class="`unnnic-tag__label
       ${hasCloseIcon ? 'unnnic-tag__label--hasIcon' : ''}

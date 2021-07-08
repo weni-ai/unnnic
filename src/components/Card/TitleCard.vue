@@ -1,28 +1,35 @@
 <template>
   <div class="unnnic-card-title">
-    <UICon
-      :icon="icon"
-      :class="['unnnic-card-title__icon', `unnnic-card-scheme--${scheme}`]"
-      size="md" />
-    <div class="unnnic-card-title__content">
-      <div class="unnnic-card-title__content_title">{{ title }}</div>
-      <tool-tip :side="infoPosition" :text="info" v-if="hasInformationIcon" :enabled="enabled">
-        <UICon
+    <div :class="['avatar-icon', `unnnic-card-scheme--${scheme}`]">
+      <unnnic-icon :icon="icon" :scheme="scheme" size="md" />
+    </div>
+
+    <div class="title">{{ title }}</div>
+
+    <tool-tip
+      class="information"
+      :side="infoPosition"
+      :text="info"
+      v-if="hasInformationIcon"
+      :enabled="enabled"
+    >
+      <unnnic-icon
         icon="information-circle-4"
         class="unnnic-card-title__content_info"
-        size="sm" />
-      </tool-tip>
-    </div>
+        size="sm"
+        scheme="neutral-soft"
+      />
+    </tool-tip>
   </div>
 </template>
 
 <script>
-import UICon from '../Icon.vue';
+import UnnnicIcon from '../Icon-svg.vue';
 import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
   name: 'unnnic-card',
-  components: { UICon, ToolTip },
+  components: { ToolTip, UnnnicIcon },
   props: {
     title: {
       type: String,
@@ -61,47 +68,29 @@ export default {
 
 .unnnic-card-title {
   display: flex;
-  flex-direction: row;
   align-items: center;
 
-  &__content {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    padding-top: $unnnic-spacing-stack-xs;
-    padding-bottom: $unnnic-spacing-stack-xs;
-  }
-
-  &__content_title {
-    font-family: $unnnic-font-family-primary;
-    font-size: $unnnic-font-size-body-lg;
-    font-weight: $unnnic-font-weight-regular;
-    color: $unnnic-color-neutral-darkest;
-    line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
-    flex: 1;
-  }
-
-  &__icon {
-    position: relative;
-    left: 0;
-
+  .avatar-icon {
+    width: $unnnic-avatar-size-sm;
+    height: $unnnic-avatar-size-sm;
     border-radius: $unnnic-border-radius-sm;
-    padding: $unnnic-inset-nano;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-right: $unnnic-inline-sm;
   }
 
-  &__content_info {
-    position: relative;
-    color: $unnnic-color-neutral-soft;
+  .title {
+    font-family: $unnnic-font-family-primary;
+    font-size: $unnnic-font-size-title-sm;
+    font-weight: $unnnic-font-weight-regular;
+    line-height: $unnnic-font-size-title-sm + $unnnic-line-height-md;
+    color: $unnnic-color-neutral-darkest;
+    flex: 1;
+  }
 
-    // align to full right
-    right: 0;
-    margin-left: auto;
-
-    // center vertically
-    align-items: center;
-    justify-content: center;
-    display: flex;
+  .information {
+    margin-left: $unnnic-spacing-inline-xs;
   }
 }
 </style>

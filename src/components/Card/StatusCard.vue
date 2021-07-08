@@ -1,36 +1,28 @@
 <template>
   <div :class="['unnnic-card-status', `unnnic-card-scheme--${scheme}--border`]">
-    <div class="unnnic-card-status__header">
-        <UICon
-          class="unnnic-card-status__icon"
-          :icon="icon"
-          size="sm"
-        />
-      <div class="unnnic-card-status__title">{{ title }}</div>
+    <div class="header">
+      <unnnic-icon :icon="icon" scheme="neutral-dark" size="md" class="icon" />
+
+      <div class="label">{{ title }}</div>
     </div>
-    <div class="unnnic-card-status__data">
-        <span :class="[
-          `unnnic-card-scheme--${scheme}--icon`,
-          'unnnic-card-status__icon_indicator',
-        ]"> &#11044; </span>
-      <div class="unnnic-card-status__data_content">
-        <div class="unnnic-card-status__data_content_status">
-          {{ status }}
-        </div>
-        <div class="unnnic-card-status__data_content_description">
-          {{ description }}
-        </div>
+
+    <div class="content">
+      <div class="title-container">
+        <unnnic-icon icon="indicator" :scheme="scheme" size="sm" />
+        <div class="title">{{ status }}</div>
       </div>
+
+      <div class="description">{{ description }}</div>
     </div>
   </div>
 </template>
 
 <script>
-import UICon from '../Icon.vue';
+import UnnnicIcon from '../Icon-svg.vue';
 
 export default {
   name: 'unnnic-card',
-  components: { UICon },
+  components: { UnnnicIcon },
   props: {
     title: {
       type: String,
@@ -56,7 +48,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../assets/scss/unnnic.scss";
 
 .unnnic-card-status {
@@ -66,73 +58,47 @@ export default {
   border-radius: $unnnic-border-radius-sm;
   padding: $unnnic-inset-sm;
 
-  // TODO: MAKE COLORS VARIABLE FROM STATUS
-  border-left: 4px solid $unnnic-color-feedback-green;
-
-  &__header {
+  .header {
     display: flex;
-    flex-direction: row;
+    align-items: center;
+
+    .icon {
+      margin-right: $unnnic-spacing-inline-nano;
+    }
+
+    .label {
+      font-family: $unnnic-font-family-secondary;
+      font-size: $unnnic-font-size-body-lg;
+      font-weight: $unnnic-font-weight-regular;
+      line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
+      color: $unnnic-color-neutral-dark;
+    }
   }
 
-  &__data {
-    display: flex;
-    flex-direction: row;
-    padding-top: $unnnic-spacing-stack-xs;
-  }
+  .content {
+    margin-top: $unnnic-spacing-stack-xs;
 
-  &__data_content {
-    margin-left: 4px;
-  }
+    .title-container {
+      display: flex;
+      align-items: center;
 
-  &__data_content_status {
-    font-family: $unnnic-font-family-secondary;
-    font-size: $unnnic-font-size-body-gt;
-    font-weight: $unnnic-font-weight-regular;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
-    color: $unnnic-color-neutral-darkest;
-  }
+      .title {
+        font-family: $unnnic-font-family-secondary;
+        font-size: $unnnic-font-size-body-gt;
+        font-weight: $unnnic-font-weight-regular;
+        line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
+        color: $unnnic-color-neutral-darkest;
+      }
+    }
 
-  &__data_content_description {
-    font-family: $unnnic-font-family-secondary;
-    font-size: $unnnic-font-size-body-md;
-    font-weight: $unnnic-font-weight-regular;
-    color: $unnnic-color-neutral-dark;
-    line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
-  }
-
-  &__icon {
-    color: $unnnic-color-neutral-dark;
-    line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
-  }
-
-  &__title {
-    font-family: $unnnic-font-family-secondary;
-    font-size: $unnnic-font-size-body-lg;
-    font-weight: $unnnic-font-weight-regular;
-    line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
-    color: $unnnic-color-neutral-dark;
-    margin-left: $unnnic-inline-nano;
-  }
-
-  &__value {
-    font-family: $unnnic-font-family-secondary;
-    font-size: $unnnic-font-size-title-md;
-    font-weight: $unnnic-font-weight-bold;
-    color: $unnnic-color-neutral-darkest;
-    padding-top: $unnnic-spacing-stack-nano;
-    padding-right: $unnnic-inline-nano;
-  }
-
-  &__percent_value {
-    color: $unnnic-color-feedback-green;
-    border-radius: $unnnic-border-radius-sm;
-  }
-
-  &__icon_indicator {
-    line-height: $unnnic-line-height-medium;
-    font-size: 4px;
-    border-radius: 50%;
-    line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+    .description {
+      font-family: $unnnic-font-family-secondary;
+      font-size: $unnnic-font-size-body-gt;
+      font-weight: $unnnic-font-weight-regular;
+      color: $unnnic-color-neutral-cloudy;
+      line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
+      margin-left: $unnnic-icon-size-sm;
+    }
   }
 }
 </style>

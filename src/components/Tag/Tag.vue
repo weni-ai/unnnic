@@ -13,6 +13,7 @@
       :tooltipText="tooltipText"
       :enableTooltip="enableTooltip"
       :icon="icon"
+      @click="$emit('click')"
     />
 </template>
 
