@@ -7,9 +7,12 @@
     }"
   >
     <div class="icon">
-      <div :class="['avatar-icon', enabled ? `unnnic-card-scheme--${scheme}` : 'disabled']">
-        <unnnic-icon :icon="icon" :scheme="enabled ? scheme : 'neutral-cloudy'" size="sm" />
-      </div>
+      <unnnic-avatar-icon
+        size="xs"
+        :scheme="scheme"
+        :icon="icon"
+        :enabled="enabled"
+      ></unnnic-avatar-icon>
     </div>
 
     <div class="content">
@@ -21,11 +24,13 @@
 </template>
 
 <script>
-import UnnnicIcon from '../Icon-svg.vue';
+import UnnnicAvatarIcon from '../AvatarIcon/AvatarIcon.vue';
 
 export default {
   name: 'unnnic-card',
-  components: { UnnnicIcon },
+  components: {
+    UnnnicAvatarIcon,
+  },
   props: {
     title: {
       type: String,
@@ -65,19 +70,6 @@ export default {
 
   .icon {
     margin-right: $unnnic-inline-xs;
-
-    .avatar-icon {
-      width: $unnnic-avatar-size-xs;
-      height: $unnnic-avatar-size-xs;
-      border-radius: $unnnic-border-radius-sm;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      &.disabled {
-        background-color: $unnnic-color-background-grass;
-      }
-    }
   }
 
   .content {

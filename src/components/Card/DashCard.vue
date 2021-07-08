@@ -1,9 +1,11 @@
 <template>
   <div class="unnnic-card-dash">
     <div class="header">
-      <div :class="['avatar-icon', `unnnic-card-scheme--${scheme}`]">
-        <unnnic-icon :icon="icon" :scheme="scheme" size="md"/>
-      </div>
+      <unnnic-avatar-icon
+        size="sm"
+        :scheme="scheme"
+        :icon="icon"
+      ></unnnic-avatar-icon>
 
       <div class="label">{{ title }}</div>
     </div>
@@ -28,11 +30,15 @@
 </template>
 
 <script>
+import UnnnicAvatarIcon from '../AvatarIcon/AvatarIcon.vue';
 import UnnnicIcon from '../Icon-svg.vue';
 
 export default {
   name: 'unnnic-card',
-  components: { UnnnicIcon },
+  components: {
+    UnnnicIcon,
+    UnnnicAvatarIcon,
+  },
   props: {
     title: {
       type: String,
@@ -79,15 +85,6 @@ export default {
     display: flex;
     align-items: center;
     margin-bottom: $unnnic-spacing-stack-nano;
-
-    .avatar-icon {
-      width: $unnnic-avatar-size-sm;
-      height: $unnnic-avatar-size-sm;
-      border-radius: $unnnic-border-radius-sm;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
 
     .label {
       font-family: $unnnic-font-family-secondary;
