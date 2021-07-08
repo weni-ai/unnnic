@@ -1,30 +1,31 @@
 <template>
-  <div :class="{
+  <!-- Card Item List Selected Icon On -->
+  <div
+    :class="{
       'unnnic-card-account': true,
-      'unnnic-card-account__disabled': !enabled,
-    }">
-    <div :class="[
-        'unnnic-card-account__icon',
-        `unnnic-card-scheme--${scheme}`,
-        enabled ? '' : 'unnnic-card-account__icon__disabled',
-      ]">
-      <UICon
-        :icon="icon"
-        size="xs"/>
+      enabled: enabled,
+    }"
+  >
+    <div class="icon">
+      <div :class="['avatar-icon', enabled ? `unnnic-card-scheme--${scheme}` : 'disabled']">
+        <unnnic-icon :icon="icon" :scheme="enabled ? scheme : 'neutral-cloudy'" size="sm" />
+      </div>
     </div>
-    <div class="unnnic-card-account__content">
-      <div class="unnnic-card-account__title">{{ title }}</div>
-      <div class="unnnic-card-account__description">{{ description }}</div>
+
+    <div class="content">
+      <div class="title">{{ title }}</div>
+
+      <div class="description">{{ description }}</div>
     </div>
   </div>
 </template>
 
 <script>
-import UICon from '../Icon.vue';
+import UnnnicIcon from '../Icon-svg.vue';
 
 export default {
   name: 'unnnic-card',
-  components: { UICon },
+  components: { UnnnicIcon },
   props: {
     title: {
       type: String,
@@ -55,51 +56,47 @@ export default {
 
 .unnnic-card-account {
   display: flex;
-  background-color: $unnnic-color-background-sky;
   border-radius: $unnnic-border-radius-sm;
   padding: $unnnic-squish-xs;
 
-  &__disabled {
-    background-color: inherit;
+  &.enabled {
+    background-color: $unnnic-color-background-sky;
   }
 
-  &__content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-
-  &__data {
-    display: flex;
-    flex-direction: row;
-  }
-
-  &__icon {
-    border-radius: $unnnic-border-radius-sm;
-    padding: 2px 4px;
+  .icon {
     margin-right: $unnnic-inline-xs;
-    align-self: flex-start;
 
-    &__disabled {
-      color: $unnnic-color-neutral-cloudy !important;
-      background-color: $unnnic-color-background-grass !important;
+    .avatar-icon {
+      width: $unnnic-avatar-size-xs;
+      height: $unnnic-avatar-size-xs;
+      border-radius: $unnnic-border-radius-sm;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &.disabled {
+        background-color: $unnnic-color-background-grass;
+      }
     }
   }
 
-  &__title {
-    font-family: $unnnic-font-family-primary;
-    font-size: $unnnic-font-size-body-lg;
-    font-weight: $unnnic-font-weight-regular;
-    color: $unnnic-color-neutral-darkest;
-    line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
-  }
+  .content {
+    .title {
+      font-family: $unnnic-font-family-primary;
+      font-size: $unnnic-font-size-body-lg;
+      font-weight: $unnnic-font-weight-regular;
+      color: $unnnic-color-neutral-darkest;
+      line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
+    }
 
-  &__description {
-    font-family: $unnnic-font-family-secondary;
-    font-size: $unnnic-font-size-body-md;
-    font-weight: $unnnic-font-weight-regular;
-    color: $unnnic-color-neutral-cloudy;
-    line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+    .description {
+      font-family: $unnnic-font-family-secondary;
+      font-size: $unnnic-font-size-body-gt;
+      font-weight: $unnnic-font-weight-regular;
+      color: $unnnic-color-neutral-cloudy;
+      line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
+      margin-top: $unnnic-spacing-stack-nano;
+    }
   }
 }
 </style>
