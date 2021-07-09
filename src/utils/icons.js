@@ -107,6 +107,7 @@ import appWindowEdit2 from '!!svg-inline-loader!../assets/icons/app-window-edit-
 import sendEmail31 from '!!svg-inline-loader!../assets/icons/send-email-3-1.svg';
 import switchDefaultDisabled from '!!svg-inline-loader!../assets/icons/switch-default-disabled.svg';
 import switchSelectedDisabled from '!!svg-inline-loader!../assets/icons/switch-selected-disabled.svg';
+import paginateFilterText1 from '!!svg-inline-loader!../assets/icons/paginate-filter-text-1.svg';
 
 export default {
   'app-window-edit-1': appWindowEdit1,
@@ -216,4 +217,5 @@ export default {
   'send-email-3-1': sendEmail31,
   'switch-default-disabled': switchDefaultDisabled,
   'switch-selected-disabled': switchSelectedDisabled,
+  'paginate-filter-text-1': paginateFilterText1,
 };

@@ -96,4 +96,5 @@ export default [
   'send-email-3-1',
   'switch-default-disabled',
   'switch-selected-disabled',
+  'paginate-filter-text-1',
 ];
