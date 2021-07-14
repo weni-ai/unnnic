@@ -1,13 +1,26 @@
 <template>
-  <unnnic-icon-svg
-    class="unnnic-checkbox"
-    :icon="icon"
-    :scheme="color"
-    :disabled="disabled"
-    :clickable="!disabled"
-    :size="size"
-    @click="click"
-  />
+  <div class="unnnic-checkbox-wrapper">
+    <unnnic-icon-svg
+      class="unnnic-checkbox"
+      :icon="icon"
+      :scheme="color"
+      :disabled="disabled"
+      :clickable="!disabled"
+      :size="size"
+      @click="click"
+    />
+
+    <div
+      v-if="textRight"
+      :class="[
+        'unnnic-checkbox__label',
+        'unnnic-checkbox__label__right',
+        `unnnic-checkbox__label__${size}`,
+      ]"
+    >
+      {{ textRight }}
+    </div>
+  </div>
 </template>
 
 <script>
@@ -38,6 +51,10 @@ export default {
       validator(value) {
         return ['md', 'sm'].includes(value);
       },
+    },
+    textRight: {
+      type: String,
+      default: null,
     },
   },
 
@@ -88,11 +105,34 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/scss/unnnic.scss";
 
+.unnnic-checkbox-wrapper{
+  display: flex;
+  align-items: flex-start;
+}
+
 .unnnic-checkbox {
   &[disabled] {
     ::v-deep .primary {
       fill: $unnnic-color-brand-sec;
     }
+  }
+}
+
+.unnnic-checkbox__label {
+  font-family: $unnnic-font-family-secondary;
+  font-weight: $unnnic-font-weight-regular;
+  color: $unnnic-color-neutral-darkest;
+
+  &__sm {
+    margin-left: $unnnic-inline-nano;
+    font-size: $unnnic-font-size-body-md;
+    line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+  }
+
+  &__md {
+    margin-left: $unnnic-inline-xs;
+    font-size: $unnnic-font-size-body-gt;
+    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
   }
 }
 </style>
