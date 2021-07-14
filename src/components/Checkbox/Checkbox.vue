@@ -108,6 +108,7 @@ export default {
 .unnnic-checkbox-wrapper{
   display: flex;
   align-items: flex-start;
+  cursor: pointer;
 }
 
 .unnnic-checkbox {
