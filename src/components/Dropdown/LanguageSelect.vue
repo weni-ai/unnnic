@@ -36,7 +36,7 @@
 
             <unnnic-icon
               size="xs"
-              :icon="open ? 'arrow-button-down-1' : 'arrow-button-up-1'"
+              :icon="dropdownIcon"
               scheme="neutral-clean"
             />
           </div>
@@ -65,7 +65,7 @@
 
             <unnnic-icon
               size="xs"
-              :icon="open ? 'arrow-button-down-1' : 'arrow-button-up-1'"
+              :icon="dropdownIcon"
               scheme="neutral-clean"
             />
           </div>
@@ -135,6 +135,18 @@ export default {
     },
     languageList() {
       return Object.entries(this.languages).map(([id, name]) => ({ id, name }));
+    },
+
+    dropdownIcon() {
+      let side = '';
+
+      if (this.position === 'bottom') {
+        side = this.open ? 'up' : 'down';
+      } else {
+        side = this.open ? 'down' : 'up';
+      }
+
+      return `arrow-button-${side}-1`;
     },
   },
 };
