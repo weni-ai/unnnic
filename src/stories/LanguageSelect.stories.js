@@ -18,6 +18,7 @@ const Template = (args, { argTypes }) => ({
 export const Normal = Template.bind({});
 Normal.args = {
   value: 'pt-br',
+  position: 'bottom',
 };
 
 export const Contracted = Template.bind({});
