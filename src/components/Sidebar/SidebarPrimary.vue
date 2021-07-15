@@ -19,7 +19,7 @@
               >
                 <icon-svg
                   :icon="option.icon"
-                  :scheme="option.active ? 'brand-weni' : 'neutral-cloudy'"
+                  :scheme="option.active ? 'brand-weni-soft' : 'neutral-cloudy'"
                   :size="!expanded ? 'md' : 'ant'"
                 />
 
