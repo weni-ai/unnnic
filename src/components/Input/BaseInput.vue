@@ -12,6 +12,7 @@
         ]"
         :type="nativeType"
         v-on="inputListeners"
+        :size="inputValue.length"
         />
 
         <input
@@ -27,6 +28,7 @@
         ]"
         :type="nativeType"
         v-on="inputListeners"
+        :size="inputValue.length"
         v-mask="mask"/>
 </template>
 
@@ -37,7 +39,7 @@ export default {
   name: 'unnnic-input',
   data() {
     return {
-      val: null,
+      val: this.value,
     };
   },
   directives: { mask },
@@ -83,6 +85,9 @@ export default {
     },
     attributes() {
       return { ...this.$attrs, ...this.$attrs['v-bind'] };
+    },
+    inputValue() {
+      return this.val || '';
     },
   },
   mounted() {

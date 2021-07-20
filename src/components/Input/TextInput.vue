@@ -85,7 +85,7 @@ export default {
   },
   data() {
     return {
-      val: null,
+      val: this.value,
       isFocused: false,
     };
   },
