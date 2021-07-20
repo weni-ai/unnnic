@@ -49,7 +49,7 @@ export default {
     },
     value: {
       type: String,
-      default: null,
+      default: '',
     },
     nativeType: {
       type: String,
@@ -113,7 +113,7 @@ export default {
   },
   data() {
     return {
-      val: null,
+      val: this.value,
     };
   },
   watch: {
