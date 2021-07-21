@@ -12,7 +12,7 @@
     </div>
 
     <unnnic-icon-svg
-      class="unnnic-switch__icon"
+      :class="{ 'unnnic-switch__icon': true, 'unnnic-switch__icon__animate': animation }"
       :icon="currentIcon"
       :size="iconSize"
       :scheme="iconScheme"
@@ -59,23 +59,26 @@ export default {
       type: Boolean,
       default: false,
     },
-    initialState: {
+    value: {
       type: Boolean,
       default: false,
     },
   },
   data() {
     return {
-      preActive: this.initialState,
-      isActive: this.initialState,
+      preActive: this.value,
+      isActive: this.value,
+      animation: false,
     };
   },
   methods: {
     toggleState() {
       if (this.disabled) return;
       this.preActive = !this.preActive;
-      this.$emit('setIsActive', !this.isActive);
+      this.animation = true;
+      this.$emit('input', !this.isActive);
       setTimeout(() => {
+        this.animation = false;
         this.isActive = !this.isActive;
       }, 200);
     },
@@ -132,6 +135,39 @@ export default {
   &__icon {
     align-self: center;
     margin: $unnnic-spacing-stack-nano $unnnic-inline-nano;
+
+    &__animate {
+      @keyframes on {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(45%);
+        }
+      }
+      @keyframes off {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-45%);
+        }
+      }
+
+      ::v-deep svg {
+        #default-circle {
+          animation-name: on;
+          animation-duration: 0.2s;
+        }
+      }
+
+      ::v-deep svg {
+        #selected-circle {
+          animation-name: off;
+          animation-duration: 0.2s;
+        }
+      }
+    }
   }
 }
 
