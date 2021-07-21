@@ -14,7 +14,12 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicSwitch },
-  template: '<unnnicSwitch v-bind="$props"/>',
+  data() {
+    return {
+      val: true,
+    };
+  },
+  template: '<div><unnnicSwitch v-bind="$props" v-model="val"/> <div>{{val}}</div></div>',
 });
 
 export const Default = Template.bind({});
@@ -22,5 +27,5 @@ Default.args = {
   size: 'medium',
   textRight: 'Default',
   disabled: false,
-  initialState: true,
+  // initialState: true,
 };
