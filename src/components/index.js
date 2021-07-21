@@ -34,6 +34,7 @@ import banner from './Banner/Banner.vue';
 import comment from './Comment/Comment.vue';
 import breadcrumb from './Breadcrumb/Breadcrumb.vue';
 import Switch from './Switch/Switch.vue';
+import Slider from './Slider/Slider.vue';
 
 const components = {
   unnnicInput: input,
@@ -70,6 +71,7 @@ const components = {
   unnnicComment: comment,
   unnnicBreadcrumb: breadcrumb,
   unnnicSwitch: Switch,
+  unnnicSlider: Slider,
 };
 
 Object.keys(components).forEach((name) => {
@@ -112,3 +114,4 @@ export const unnnicBanner = banner;
 export const unnnicComment = comment;
 export const unnnicBreadcrumb = breadcrumb;
 export const unnnicSwitch = Switch;
+export const unnnicSlider = Slider;
