@@ -160,7 +160,6 @@ export default {
 
 .unnnic-slider {
   display: flex;
-  margin-top: 50px;
   width: 100%;
   &__content {
     display: flex;
