@@ -32,6 +32,7 @@ import label from './Label/Label.vue';
 import tab from './Tab/Tab.vue';
 import banner from './Banner/Banner.vue';
 import comment from './Comment/Comment.vue';
+import datePicker from './DatePicker/DatePicker.vue';
 import breadcrumb from './Breadcrumb/Breadcrumb.vue';
 import Switch from './Switch/Switch.vue';
 import Slider from './Slider/Slider.vue';
@@ -69,6 +70,7 @@ const components = {
   unnnicTab: tab,
   unnnicBanner: banner,
   unnnicComment: comment,
+  unnnicDatePicker: datePicker,
   unnnicBreadcrumb: breadcrumb,
   unnnicSwitch: Switch,
   unnnicSlider: Slider,
@@ -112,6 +114,7 @@ export const unnnicLabel = label;
 export const unnnicTab = tab;
 export const unnnicBanner = banner;
 export const unnnicComment = comment;
+export const unnnicDatePicker = datePicker;
 export const unnnicBreadcrumb = breadcrumb;
 export const unnnicSwitch = Switch;
 export const unnnicSlider = Slider;
