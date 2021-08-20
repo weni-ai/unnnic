@@ -22,5 +22,5 @@ Normal.args = {
   text: 'Label',
   enabled: true,
   maxWidth: '15rem',
-  side:'bottom'
+  side: 'bottom',
 };

@@ -172,7 +172,8 @@ $scheme-colors:
    'aux-purple' $unnnic-color-aux-purple,
    'aux-orange' $unnnic-color-aux-orange,
    'aux-lemon' $unnnic-color-aux-lemon,
-   'aux-pink' $unnnic-color-aux-pink;
+   'aux-pink' $unnnic-color-aux-pink,
+   'brand-weni-soft' $unnnic-color-brand-weni-soft;
 
 @each $name, $color in $scheme-colors {
   .unnnic-card-scheme {
