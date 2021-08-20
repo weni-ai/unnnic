@@ -6,10 +6,7 @@ import unnnicCheckbox from '../components/Checkbox/Checkbox.vue';
 export default {
   title: 'example/Table',
   component: unnnicTable,
-  argTypes: {
-    loading: { control: { type: 'boolean' } },
-    loadingText: { control: { type: 'text' } },
-  },
+  argTypes: {},
 };
 
 const Template = (args, { argTypes }) => ({
@@ -54,11 +51,13 @@ const Template = (args, { argTypes }) => ({
             </template>
 
             <template v-slot:export>
-              <unnnic-button
-                size="small"
-                type="secondary"
-                iconCenter="upload-bottom-1"
-              />
+              <div :style="{ textAlign: 'center' }">
+                <unnnic-button
+                  size="small"
+                  type="secondary"
+                  iconCenter="upload-bottom-1"
+                />
+              </div>
             </template>
           </unnnic-table-row>
         </template>
@@ -74,6 +73,7 @@ const Template = (args, { argTypes }) => ({
             id: 'checkarea',
             text: '',
             width: '32px',
+            condensed: true,
           },
           {
             id: 'project',
@@ -92,6 +92,11 @@ const Template = (args, { argTypes }) => ({
           },
         ],
         items: [
+          {
+            selected: false,
+            project: 'Funil de Marketing Digital',
+            contacts: '125.256.325',
+          },
           {
             selected: false,
             project: 'Funil de Marketing Digital',
@@ -137,7 +142,4 @@ const Template = (args, { argTypes }) => ({
 });
 
 export const Default = Template.bind({});
-Default.args = {
-  loading: true,
-  loadingText: 'Carregando...',
-};
+Default.args = {};

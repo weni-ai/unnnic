@@ -12,7 +12,11 @@
         <slot :name="header.id">{{ header.text }}</slot>
       </div>
 
-      <div v-show="index + 1 !== headers.length" class="divider" :key="`divider-${index}`"></div>
+      <div
+        v-show="index + 1 !== headers.length"
+        :class="['divider', { condensed: header.condensed }]"
+        :key="`divider-${index}`"
+      ></div>
     </template>
   </div>
 </template>
