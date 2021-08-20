@@ -14,7 +14,7 @@ export default {
       control: {
         type: 'select',
         options: ['feedback-red', 'feedback-green', 'feedback-yellow', 'feedback-blue', 'feedback-grey',
-          'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink'],
+          'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink', 'brand-weni-soft'],
       },
     },
     typeAction: { control: { type: 'select', options: ['add', 'config', 'edit'] } },
