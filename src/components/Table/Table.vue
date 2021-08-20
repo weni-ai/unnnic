@@ -13,21 +13,7 @@
         <div class="item" :key="index">
           <slot name="item" :item="item"></slot>
         </div>
-
-        <div
-          v-show="index + 1 !== items.length"
-          class="item-spacer"
-          :key="`item-spacer-${index}`"
-        ></div>
       </template>
-
-      <div v-show="loading" class="footer">
-        <div class="item-spacer"></div>
-
-        <div class="item loading">
-          {{ loadingText }}
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -41,16 +27,6 @@ export default {
   props: {
     items: {
       type: Array,
-    },
-
-    loading: {
-      type: Boolean,
-      default: false,
-    },
-
-    loadingText: {
-      type: String,
-      default: 'Carregando...',
     },
   },
 
@@ -94,6 +70,8 @@ $scroll-size: 4px;
 .unnnic-table {
   display: flex;
   flex-direction: column;
+  background-color: $unnnic-color-background-snow;
+  border-radius: $unnnic-border-radius-sm;
 
   .header,
   .item {
@@ -101,22 +79,36 @@ $scroll-size: 4px;
     border-radius: $unnnic-border-radius-sm;
 
     ::v-deep .divider {
-      width: $unnnic-border-width-thinner;
-      margin: 0 $unnnic-inline-sm;
+      width: $unnnic-inline-lg;
       align-self: stretch;
+
+      &.condensed {
+        width: $unnnic-spacing-inline-sm;
+      }
     }
   }
 
   .header {
     background-color: $unnnic-color-background-carpet;
 
-    ::v-deep .divider {
-      background-color: $unnnic-color-neutral-soft;
+    ::v-deep .col {
+      font-family: $unnnic-font-family-secondary;
+      color: $unnnic-color-neutral-cloudy;
+      font-weight: $unnnic-font-weight-regular;
+      font-size: $unnnic-font-size-body-gt;
+      line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
   }
 
   .item {
     background-color: $unnnic-color-background-snow;
+
+    &:hover {
+      background-color: $unnnic-color-background-carpet;
+    }
 
     &.loading {
       font-family: $unnnic-font-family-secondary;
