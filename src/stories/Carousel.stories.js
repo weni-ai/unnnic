@@ -13,7 +13,12 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicCarousel },
-  template: '<unnnic-carousel v-bind="$props"/>',
+  data() {
+    return {
+      selecteds: [{ id: 1 }],
+    };
+  },
+  template: '<div><unnnic-carousel v-model="selecteds" v-bind="$props"/></div>',
 });
 
 export const Tag = Template.bind({});

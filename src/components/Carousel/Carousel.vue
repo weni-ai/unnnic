@@ -7,6 +7,7 @@
       :clickable="clickable"
       :tagItems="tagItems"
       @selected="$emit('change-selected', $event)"
+      :value="value"
     />
 </template>
 
@@ -15,9 +16,19 @@ import UICon from '../Icon.vue';
 import TagCarousel from './TagCarousel.vue';
 
 export default {
+  model: {
+    event: 'change-selected',
+  },
+
   name: 'unnnic-carousel',
   components: { UICon },
   props: {
+    value: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
     type: {
       type: String,
       default: 'brand',

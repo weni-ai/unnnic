@@ -110,7 +110,7 @@ export default {
       default: 'aux-blue',
       validator(value) {
         return ['feedback-red', 'feedback-green', 'feedback-yellow', 'feedback-blue', 'feedback-grey',
-          'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink'].indexOf(value) !== -1;
+          'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink', 'brand-weni-soft'].indexOf(value) !== -1;
       },
     },
     clickable: {
