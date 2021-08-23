@@ -83,14 +83,14 @@ export default {
     save(tagItem) {
       let valueLocal = this.value;
       if (this.checkIsInclude(tagItem)) {
-        valueLocal = valueLocal.filter((tag) => tag.id !== tagItem.id);
+        valueLocal = valueLocal.filter((id) => id !== tagItem.id);
       } else {
-        valueLocal = [...valueLocal, tagItem];
+        valueLocal = [...valueLocal, tagItem.id];
       }
       this.$emit('selected', valueLocal);
     },
     checkIsInclude(tagItem) {
-      return this.value.some((item) => item.id === tagItem.id);
+      return this.value.some((id) => id === tagItem.id);
     },
     next() {
       const element = document.querySelector('#scroll');

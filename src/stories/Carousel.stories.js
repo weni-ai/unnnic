@@ -15,7 +15,7 @@ const Template = (args, { argTypes }) => ({
   components: { unnnicCarousel },
   data() {
     return {
-      selecteds: [{ id: 1 }],
+      selecteds: [1],
     };
   },
   template: '<div><unnnic-carousel v-model="selecteds" v-bind="$props"/></div>',
