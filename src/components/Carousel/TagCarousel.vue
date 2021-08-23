@@ -58,7 +58,6 @@ export default {
       hasNext: true,
       hasPrev: false,
       slides: [],
-      selected: [],
     };
   },
   components: {
@@ -66,6 +65,12 @@ export default {
     UnnnicIcon,
   },
   props: {
+    value: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
     tagItems: {
       type: Array,
       default: () => [],
@@ -74,21 +79,18 @@ export default {
   mounted() {
     this.slides = this.tagItems;
   },
-  watch: {
-    selected() {
-      this.$emit('selected', this.selected);
-    },
-  },
   methods: {
     save(tagItem) {
-      if (this.selected.includes(tagItem)) {
-        this.selected = this.selected.filter((tag) => tag.id !== tagItem.id);
-        return;
+      let valueLocal = this.value;
+      if (this.checkIsInclude(tagItem)) {
+        valueLocal = valueLocal.filter((id) => id !== tagItem.id);
+      } else {
+        valueLocal = [...valueLocal, tagItem.id];
       }
-      this.selected = [...this.selected, tagItem];
+      this.$emit('selected', valueLocal);
     },
     checkIsInclude(tagItem) {
-      return this.selected.includes(tagItem);
+      return this.value.some((id) => id === tagItem.id);
     },
     next() {
       const element = document.querySelector('#scroll');
