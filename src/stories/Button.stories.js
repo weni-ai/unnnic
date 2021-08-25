@@ -12,7 +12,7 @@ export default {
     iconRight: { control: { type: 'select', options: [null, ...iconList] } },
     disabled: { control: { type: 'boolean' } },
     loading: { control: { type: 'boolean' } },
-    scheme: { control: { type: 'select', options: ['feedback-red', 'feedback-green'] } },
+    scheme: { control: { type: 'select', options: ['feedback-red', 'feedback-green', 'feedback-yellow'] } },
   },
 };
 
