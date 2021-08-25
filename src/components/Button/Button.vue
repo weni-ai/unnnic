@@ -105,7 +105,7 @@ export default {
     scheme: {
       type: String,
       validator(value) {
-        return ['feedback-green', 'feedback-red'].indexOf(value) !== -1;
+        return ['feedback-green', 'feedback-red', 'feedback-yellow'].indexOf(value) !== -1;
       },
     },
   },
@@ -174,7 +174,8 @@ export default {
 
 $scheme-colors:
   "feedback-red" $unnnic-color-feedback-red,
-  "feedback-green" $unnnic-color-feedback-green;
+  "feedback-green" $unnnic-color-feedback-green,
+  "feedback-yellow" $unnnic-color-feedback-yellow;
 
 .unnnic-button {
   display: inline-flex;
