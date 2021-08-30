@@ -97,4 +97,6 @@ export default [
   'switch-default-disabled',
   'switch-selected-disabled',
   'paginate-filter-text-1',
+  'bin-1-1',
+  'floppy-disk-1',
 ];
