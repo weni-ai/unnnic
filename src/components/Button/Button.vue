@@ -121,6 +121,8 @@ export default {
           'search-1',
           'arrow-button-up-1',
           'arrow-button-down-1',
+          'bin-1-1',
+          'floppy-disk-1',
         ].includes(this.iconLeft);
     },
 
