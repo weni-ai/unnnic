@@ -109,6 +109,8 @@ import switchDefaultDisabled from '!!svg-inline-loader!../assets/icons/switch-de
 import switchSelectedDisabled from '!!svg-inline-loader!../assets/icons/switch-selected-disabled.svg';
 import paginateFilterText1 from '!!svg-inline-loader!../assets/icons/paginate-filter-text-1.svg';
 import check2 from '!!svg-inline-loader!../assets/icons/check-2.svg';
+import bin1 from '!!svg-inline-loader!../assets/icons/bin-1-1.svg';
+import floppyDisk1 from '!!svg-inline-loader!../assets/icons/floppy-disk-1.svg';
 
 export default {
   'app-window-edit-1': appWindowEdit1,
@@ -220,4 +222,6 @@ export default {
   'switch-selected-disabled': switchSelectedDisabled,
   'paginate-filter-text-1': paginateFilterText1,
   'check-2': check2,
+  'bin-1-1': bin1,
+  'floppy-disk-1': floppyDisk1,
 };
