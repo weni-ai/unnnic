@@ -1,6 +1,8 @@
 import Card from '../components/Card/Card.vue';
 import iconList from '../utils/iconList';
-import call from '../utils/call';
+import unnnicButton from '../components/Button/Button.vue';
+import unnnicDropdown from '../components/Dropdown/Dropdown.vue';
+import unnnicDropdownItem from '../components/Dropdown/DropdownItem.vue';
 
 export default {
   title: 'Example/Card',
@@ -23,8 +25,30 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { Card },
-  template: '<Card v-bind="$props"/>',
+  components: {
+    Card,
+    unnnicButton,
+    unnnicDropdown,
+    unnnicDropdownItem,
+  },
+  template: `
+    <Card v-bind="$props">
+      <unnnic-dropdown slot="actions">
+        <unnnic-button
+          slot="trigger"
+          size="small"
+          type="secondary"
+          iconCenter="cog-1"
+        />
+        <unnnic-dropdown-item>
+          Configure
+        </unnnic-dropdown-item>
+        <unnnic-dropdown-item>
+          Remove
+        </unnnic-dropdown-item>
+      </unnnic-dropdown>
+    </Card>
+  `,
 });
 
 export const Title = Template.bind({});
@@ -90,16 +114,5 @@ Marketplace.args = {
   iconSrc: 'https://api.iconify.design/grommet-icons:slack.svg',
   enabled: false,
   typeAction: 'add',
-  buttonAction: () => {
-    call.callModal({
-      props: {
-        text: 'Title',
-        modalIcon: 'check-circle-1-1',
-        description: 'description',
-        alertMessage: 'alert message',
-        scheme: 'feedback-green',
-      },
-    });
-  },
   clickable: true,
 };

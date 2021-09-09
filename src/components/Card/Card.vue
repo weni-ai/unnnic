@@ -22,7 +22,9 @@
       :clickable="clickable"
       :has-information-icon="hasInformationIcon"
       @openModal="openModal"
-    />
+    >
+      <slot v-for="(_, name) in $slots" :name="name" :slot="name" />
+    </component>
 </template>
 
 <script>

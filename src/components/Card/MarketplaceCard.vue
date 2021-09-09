@@ -11,13 +11,7 @@
   >
     <div :class="['unnnic-card-marketplace__icons']">
       <img class="unnnic-card-marketplace__icons__app" :src="iconSrc" />
-      <unnnic-button
-        class="unnnic-card-marketplace__icons__button"
-        size="small"
-        type="secondary"
-        @click.stop="buttonClick"
-        :iconCenter="icon"
-      />
+      <slot name="actions"></slot>
     </div>
     <div class="unnnic-card-marketplace__content">
       <div class="unnnic-card-marketplace__content__title">{{ title }}</div>
@@ -39,12 +33,11 @@
 </template>
 
 <script>
-import UnnnicButton from '../Button/Button.vue';
 import UnnnicIconSvg from '../Icon-svg.vue';
 
 export default {
   name: 'unnnic-card',
-  components: { UnnnicButton, UnnnicIconSvg },
+  components: { UnnnicIconSvg },
   props: {
     title: {
       type: String,
@@ -74,33 +67,8 @@ export default {
       type: String,
       default: null,
     },
-    buttonAction: {
-      type: Function,
-      default: () => {},
-    },
-  },
-  computed: {
-    icon() {
-      switch (this.typeAction) {
-        case 'add':
-          return 'add-1';
-        case 'config':
-          return 'cog-1';
-        case 'edit':
-          return 'pencil-write-1';
-        default:
-          return 'add-1';
-      }
-    },
   },
   methods: {
-    buttonClick() {
-      if (this.typeAction === 'add') {
-        this.buttonAction();
-      } else {
-        this.$emit('openModal');
-      }
-    },
     cardClick() {
       this.$emit('openModal');
     },
@@ -109,7 +77,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-card-marketplace__config {
   opacity: $unnnic-opacity-level-dark;
