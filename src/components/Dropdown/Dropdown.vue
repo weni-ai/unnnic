@@ -1,5 +1,5 @@
 <template>
-    <div class="unnnic-dropdown" @click="onClickTrigger">
+    <div class="unnnic-dropdown" @click.stop="onClickTrigger">
         <div class="unnnic-dropdown__trigger">
           <slot name="trigger" />
           <div
