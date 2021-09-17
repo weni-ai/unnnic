@@ -7,9 +7,9 @@
           v-for="tab in tabs"
           :key="tab"
           v-bind:class="{
-            'tab-head--active': activeTab === tab,
+            'tab-head--active': localValue === tab,
           }"
-          @click="switchTab(tab)"
+          @click="change(tab)"
         >
           <slot :name="tabHeadSlotName(tab)">{{ tab }} </slot>
         </li>
@@ -23,7 +23,14 @@
 
 <script>
 export default {
+  model: {
+    prop: 'activeTab',
+    event: 'change',
+  },
   props: {
+    activeTab: {
+      type: String,
+    },
     initialTab: {
       type: String,
       default: null,
@@ -35,20 +42,31 @@ export default {
   },
   data() {
     return {
-      activeTab: this.initialTab,
+      localValue: '',
     };
+  },
+  created() {
+    const value = this.initialTab || this.activeTab || this.tabs?.[0];
+
+    this.change(value);
   },
   computed: {
     tabPanelSlotName() {
-      return `tab-panel-${this.activeTab}`;
+      return `tab-panel-${this.localValue}`;
+    },
+  },
+  watch: {
+    activeTab() {
+      this.localValue = this.activeTab;
     },
   },
   methods: {
     tabHeadSlotName(tabName) {
       return `tab-head-${tabName}`;
     },
-    switchTab(tabName) {
-      this.activeTab = tabName;
+    change(value) {
+      this.localValue = value;
+      this.$emit('change', this.localValue);
     },
   },
 };
