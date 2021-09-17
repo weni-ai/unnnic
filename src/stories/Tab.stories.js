@@ -9,7 +9,7 @@ const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicTab },
   template: `
-  <unnnic-tab v-bind="$props">  
+  <unnnic-tab v-bind="$props">
       <template slot="tab-head-first">
         First
       </template>
@@ -28,7 +28,7 @@ const Template = (args, { argTypes }) => ({
           Second description
         </p>
       </template>
-  </unnnic-tab> 
+  </unnnic-tab>
   `,
 });
 
