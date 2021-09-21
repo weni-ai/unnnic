@@ -111,6 +111,9 @@ import paginateFilterText1 from '!!svg-inline-loader!../assets/icons/paginate-fi
 import check2 from '!!svg-inline-loader!../assets/icons/check-2.svg';
 import bin1 from '!!svg-inline-loader!../assets/icons/bin-1-1.svg';
 import floppyDisk1 from '!!svg-inline-loader!../assets/icons/floppy-disk-1.svg';
+import currencyDollarCircle1 from '!!svg-inline-loader!../assets/icons/currency-dollar-circle-1.svg';
+import subtract1 from '!!svg-inline-loader!../assets/icons/subtract-1.svg';
+import mastercard from '!!svg-inline-loader!../assets/icons/mastercard.svg';
 
 export default {
   'app-window-edit-1': appWindowEdit1,
@@ -224,4 +227,7 @@ export default {
   'check-2': check2,
   'bin-1-1': bin1,
   'floppy-disk-1': floppyDisk1,
+  'currency-dollar-circle-1': currencyDollarCircle1,
+  'subtract-1': subtract1,
+  mastercard,
 };
