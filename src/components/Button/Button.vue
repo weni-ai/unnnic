@@ -123,6 +123,7 @@ export default {
           'arrow-button-down-1',
           'bin-1-1',
           'floppy-disk-1',
+          'messaging-whatsapp-1',
         ].includes(this.iconLeft);
     },
 
