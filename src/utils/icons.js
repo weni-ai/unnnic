@@ -114,6 +114,7 @@ import floppyDisk1 from '!!svg-inline-loader!../assets/icons/floppy-disk-1.svg';
 import currencyDollarCircle1 from '!!svg-inline-loader!../assets/icons/currency-dollar-circle-1.svg';
 import subtract1 from '!!svg-inline-loader!../assets/icons/subtract-1.svg';
 import mastercard from '!!svg-inline-loader!../assets/icons/mastercard.svg';
+import messagingWhatsapp1 from '!!svg-inline-loader!../assets/icons/messaging-whatsapp-1.svg';
 
 export default {
   'app-window-edit-1': appWindowEdit1,
@@ -230,4 +231,5 @@ export default {
   'currency-dollar-circle-1': currencyDollarCircle1,
   'subtract-1': subtract1,
   mastercard,
+  'messaging-whatsapp-1': messagingWhatsapp1,
 };
