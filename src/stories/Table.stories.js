@@ -39,15 +39,15 @@ const Template = (args, { argTypes }) => ({
             </template>
 
             <template v-slot:project>
-              <span :title="item.project">
+              <div :title="item.project" class="break-text">
                 {{ item.project }}
-              </span>
+              </div>
             </template>
 
             <template v-slot:contacts>
-              <span :title="item.contacts">
+              <div :title="item.contacts" class="break-text">
                 {{ item.contacts }}
-              </span>
+              </div>
             </template>
 
             <template v-slot:export>

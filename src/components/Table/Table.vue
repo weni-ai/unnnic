@@ -77,15 +77,6 @@ $scroll-size: 4px;
   .item {
     padding: $unnnic-squish-xs;
     border-radius: $unnnic-border-radius-sm;
-
-    ::v-deep .divider {
-      width: $unnnic-inline-lg;
-      align-self: stretch;
-
-      &.condensed {
-        width: $unnnic-spacing-inline-sm;
-      }
-    }
   }
 
   .header {
@@ -97,9 +88,6 @@ $scroll-size: 4px;
       font-weight: $unnnic-font-weight-regular;
       font-size: $unnnic-font-size-body-gt;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      white-space: nowrap;
     }
   }
 
