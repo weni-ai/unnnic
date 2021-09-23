@@ -113,6 +113,10 @@ import bin1 from '!!svg-inline-loader!../assets/icons/bin-1-1.svg';
 import floppyDisk1 from '!!svg-inline-loader!../assets/icons/floppy-disk-1.svg';
 import currencyDollarCircle1 from '!!svg-inline-loader!../assets/icons/currency-dollar-circle-1.svg';
 import subtract1 from '!!svg-inline-loader!../assets/icons/subtract-1.svg';
+import filter from '!!svg-inline-loader!../assets/icons/filter.svg';
+import sortDefault from '!!svg-inline-loader!../assets/icons/sort-default.svg';
+import sortAsc from '!!svg-inline-loader!../assets/icons/sort-asc.svg';
+import sortDesc from '!!svg-inline-loader!../assets/icons/sort-desc.svg';
 import mastercard from '!!svg-inline-loader!../assets/icons/mastercard.svg';
 import messagingWhatsapp1 from '!!svg-inline-loader!../assets/icons/messaging-whatsapp-1.svg';
 
@@ -230,6 +234,10 @@ export default {
   'floppy-disk-1': floppyDisk1,
   'currency-dollar-circle-1': currencyDollarCircle1,
   'subtract-1': subtract1,
+  filter,
+  'sort-default': sortDefault,
+  'sort-asc': sortAsc,
+  'sort-desc': sortDesc,
   mastercard,
   'messaging-whatsapp-1': messagingWhatsapp1,
 };

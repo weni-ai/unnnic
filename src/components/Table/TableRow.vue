@@ -7,9 +7,12 @@
         :style="{
           width: header.width,
           flex: header.flex,
+          minWidth: 0,
         }"
       >
-        <slot :name="header.id">{{ header.text }}</slot>
+        <slot :name="header.id">
+          <div class="break-text">{{ header.text }}</div>
+        </slot>
       </div>
 
       <div
@@ -37,6 +40,14 @@ export default {
 };
 </script>
 
+<style lang="scss">
+.break-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+</style>
+
 <style lang="scss" scoped>
 @import "../../assets/scss/unnnic.scss";
 
@@ -50,9 +61,15 @@ export default {
     font-size: $unnnic-font-size-body-gt;
     font-weight: $unnnic-font-weight-regular;
     line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
+  }
+
+  .divider {
+    width: $unnnic-inline-lg;
+    align-self: stretch;
+
+    &.condensed {
+      width: $unnnic-spacing-inline-sm;
+    }
   }
 }
 </style>
