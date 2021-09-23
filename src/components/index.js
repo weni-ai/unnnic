@@ -36,6 +36,7 @@ import datePicker from './DatePicker/DatePicker.vue';
 import breadcrumb from './Breadcrumb/Breadcrumb.vue';
 import Switch from './Switch/Switch.vue';
 import Slider from './Slider/Slider.vue';
+import DataArea from './DataArea/DataArea.vue';
 
 const components = {
   unnnicInput: input,
@@ -74,6 +75,7 @@ const components = {
   unnnicBreadcrumb: breadcrumb,
   unnnicSwitch: Switch,
   unnnicSlider: Slider,
+  unnnicDataArea: DataArea,
 };
 
 Object.keys(components).forEach((name) => {
@@ -118,3 +120,4 @@ export const unnnicDatePicker = datePicker;
 export const unnnicBreadcrumb = breadcrumb;
 export const unnnicSwitch = Switch;
 export const unnnicSlider = Slider;
+export const unnnicDataArea = DataArea;
