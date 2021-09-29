@@ -107,7 +107,7 @@ export default {
       default: 'md',
     },
     mask: {
-      type: String,
+      type: [String, Array],
       default: '',
     },
   },
