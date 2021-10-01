@@ -125,6 +125,12 @@ export default {
       color: $unnnic-color-neutral-darkest;
       padding-top: $unnnic-spacing-stack-sm;
       padding-bottom: $unnnic-spacing-stack-nano;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     &__description {
