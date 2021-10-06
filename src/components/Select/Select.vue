@@ -1,6 +1,7 @@
 <template>
   <div @keydown="onKeyDownSelect" v-click-outside="onClickOutside" class='unnnic-select'>
     <p v-if="label" class="unnnic-form__label"> {{ label }}  </p>
+    <dropdown-skeleton type="manual" :value="active" position="bottom" ref="dropdown-skeleton">
     <text-input
       :value="labelForValue"
       :placeholder="placeholder"
@@ -14,11 +15,14 @@
       @focus="active = true"
       readonly/>
     <slot />
+    <template v-slot:inside="props">
     <div
       v-if="active"
+      :style="{ width: props.width }"
       :class="{'unnnic-select__options': true,
       'unnnic-select__options--active': active,
       'unnnic-select__options--inactive': !active }">
+    <div :style="{ overflow: 'auto' }">
     <select-item
       v-if="search"
       class="unnnic-select__header"
@@ -65,6 +69,9 @@
       </select-item>
     </div>
     </div>
+    </div>
+    </template>
+    </dropdown-skeleton>
     <p v-if="message" class="unnnic-form__message"> {{ message }} </p>
   </div>
 </template>
@@ -73,10 +80,11 @@
 import vClickOutside from 'v-click-outside';
 import selectItem from './SelectItem.vue';
 import TextInput from '../Input/TextInput.vue';
+import DropdownSkeleton from '../Dropdown/DropdownSkeleton.vue';
 
 export default {
   name: 'UnnicSelect',
-  components: { TextInput, selectItem },
+  components: { TextInput, selectItem, DropdownSkeleton },
   props: {
     search: {
       type: Boolean,
@@ -132,6 +140,14 @@ export default {
 
       searchValue: '',
     };
+  },
+
+  watch: {
+    active() {
+      this.$nextTick(() => {
+        this.$refs['dropdown-skeleton'].calculatePosition();
+      });
+    },
   },
 
   computed: {
@@ -313,7 +329,7 @@ export default {
     margin-top: 4px;
     box-shadow: $unnnic-shadow-level-near;
     background-color: $unnnic-color-background-snow;
-    position: absolute;
+    margin-bottom: 4px;
     left: 0;
     right: 0;
 
