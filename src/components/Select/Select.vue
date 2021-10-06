@@ -148,6 +148,12 @@ export default {
         this.$refs['dropdown-skeleton'].calculatePosition();
       });
     },
+
+    searchValue() {
+      this.$nextTick(() => {
+        this.$refs['dropdown-skeleton'].calculatePosition();
+      });
+    },
   },
 
   computed: {
