@@ -151,6 +151,7 @@ export default {
   position: relative;
 
   .dropdown-data {
+    z-index: 1;
     pointer-events: none;
     display: none;
   }
