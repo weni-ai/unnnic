@@ -338,10 +338,28 @@ export default {
     margin-bottom: 4px;
     left: 0;
     right: 0;
+    border-radius: $unnnic-border-radius-sm;
 
     &__scroll-area {
       max-height: 12.5rem;
       overflow-y: auto;
+      margin-right: $unnnic-spacing-inline-nano;
+      margin-top: $unnnic-spacing-stack-xs;
+      margin-bottom: $unnnic-spacing-stack-sm;
+
+      &::-webkit-scrollbar {
+        width: $unnnic-spacing-inline-nano;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $unnnic-color-neutral-clean;
+        border-radius: $unnnic-border-radius-pill;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: $unnnic-color-neutral-soft;
+        border-radius: $unnnic-border-radius-pill;
+      }
     }
 
     &--inactive{
