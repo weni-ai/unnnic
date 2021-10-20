@@ -258,6 +258,10 @@ export default {
 <style lang="scss">
 @import '../../assets/scss/unnnic.scss';
 .unnnic-select {
+  cursor: pointer;
+  .unnnic-form__input{
+    cursor: pointer;
+  }
   option {
     display: none;
   }
