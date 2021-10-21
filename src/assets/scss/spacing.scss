@@ -41,13 +41,15 @@ $unnnic-opacity-level-extra-light: 0.08;
 
 // Spacing
 $unnnic-inset-nano: 0.5rem;
-$unnnic-spacing-inset-nano: $unnnic-inset-nano;
 $unnnic-inset-xs: 0.75rem;
 $unnnic-inset-sm: 1rem;
-$unnnic-spacing-inset-sm: $unnnic-inset-sm;
 $unnnic-inset-md: 1.5rem;
-$unnnic-spacing-inset-md: $unnnic-inset-md;
 $unnnic-inset-lg: 2rem;
+$unnnic-spacing-inset-nano: $unnnic-inset-nano;
+$unnnic-spacing-inset-xs: $unnnic-inset-xs;
+$unnnic-spacing-inset-sm: $unnnic-inset-sm;
+$unnnic-spacing-inset-md: $unnnic-inset-md;
+$unnnic-spacing-inset-lg: $unnnic-inset-lg;
 
 // Squish
 $unnnic-squish-nano: 0.5rem 1rem;
