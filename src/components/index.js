@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import input from './Input/Input.vue';
 import button from './Button/Button.vue';
+import buttonIcon from './Button/ButtonIcon.vue';
 import sidebar from './Sidebar/Sidebar.vue';
 import sidebarItem from './Sidebar/SidebarItem.vue';
 import sidebarMenu from './Sidebar/SidebarMenu.vue';
@@ -41,6 +42,7 @@ import DataArea from './DataArea/DataArea.vue';
 const components = {
   unnnicInput: input,
   unnnicButton: button,
+  unnnicButtonIcon: buttonIcon,
   unnnicSidebar: sidebar,
   unnnicSidebarItem: sidebarItem,
   unnnicSidebarMenu: sidebarMenu,
@@ -84,6 +86,7 @@ Object.keys(components).forEach((name) => {
 
 export const unnnicInput = input;
 export const unnnicButton = button;
+export const unnnicButtonIcon = buttonIcon;
 export const unnnicSidebar = sidebar;
 export const unnnicSidebarItem = sidebarItem;
 export const unnnicSidebarMenu = sidebarMenu;
