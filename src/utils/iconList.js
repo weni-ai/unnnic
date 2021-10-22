@@ -100,4 +100,5 @@ export default [
   'bin-1-1',
   'floppy-disk-1',
   'messaging-whatsapp-1',
+  'export-1',
 ];
