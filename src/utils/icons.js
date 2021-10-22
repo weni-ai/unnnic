@@ -119,6 +119,7 @@ import sortAsc from '!!svg-inline-loader!../assets/icons/sort-asc.svg';
 import sortDesc from '!!svg-inline-loader!../assets/icons/sort-desc.svg';
 import mastercard from '!!svg-inline-loader!../assets/icons/mastercard.svg';
 import messagingWhatsapp1 from '!!svg-inline-loader!../assets/icons/messaging-whatsapp-1.svg';
+import export1 from '!!svg-inline-loader!../assets/icons/export-1.svg';
 
 export default {
   'app-window-edit-1': appWindowEdit1,
@@ -240,4 +241,5 @@ export default {
   'sort-desc': sortDesc,
   mastercard,
   'messaging-whatsapp-1': messagingWhatsapp1,
+  'export-1': export1,
 };
