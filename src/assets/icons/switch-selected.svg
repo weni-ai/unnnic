@@ -5,7 +5,7 @@
     }
   </style>
   
-  <rect x="4.20013" y="2.10046" width="71.6" height="35.8" rx="17.9"/>
+  <rect x="4.20013" y="2.10046" width="71.6" height="35.8" rx="17.9" class="primary"/>
   <circle id="selected-circle" cx="57.5" cy="20.0005" r="12.5" fill="white">
   </circle>
 </svg>
