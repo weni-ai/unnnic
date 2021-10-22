@@ -1,6 +1,8 @@
 <template>
   <div class="unnnic-comment">
-    <img class="unnnic-comment__avatar" :src="avatar" />
+    <div class="unnnic-comment__avatar">
+      <slot name="avatar"></slot>
+    </div>
     <div class="unnnic-comment__content">
       <div class="unnnic-comment__content__header">
         <div class="unnnic-comment__content__header__title">{{ title }}</div>
@@ -19,10 +21,6 @@ export default {
   name: 'unnnic-comment',
   components: {},
   props: {
-    avatar: {
-      type: String,
-      default: null,
-    },
     title: {
       type: String,
       default: null,
@@ -50,8 +48,6 @@ export default {
     align-self: flex-start;
     width: 56px;
     height: 56px;
-
-    border-radius: 100%;
   }
 
   &__content {
