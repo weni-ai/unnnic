@@ -38,6 +38,7 @@ import phone3 from '!!svg-inline-loader!../assets/icons/phone-3.svg';
 import buttonRefreshArrows1 from '!!svg-inline-loader!../assets/icons/button-refresh-arrows-1.svg';
 import chatTranslate1 from '!!svg-inline-loader!../assets/icons/chat-translate-1.svg';
 import Brazil from '!!svg-inline-loader!../assets/icons/Brazil.svg';
+import Spain from '!!svg-inline-loader!../assets/icons/Spain.svg';
 import charger1 from '!!svg-inline-loader!../assets/icons/charger-1.svg';
 import phone4 from '!!svg-inline-loader!../assets/icons/phone-4.svg';
 import expandFull1 from '!!svg-inline-loader!../assets/icons/expand-full-1.svg';
@@ -163,6 +164,7 @@ export default {
   'button-refresh-arrows-1': buttonRefreshArrows1,
   'chat-translate-1': chatTranslate1,
   Brazil,
+  Spain,
   'charger-1': charger1,
   'phone-4': phone4,
   'expand-full-1': expandFull1,

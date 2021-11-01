@@ -33,6 +33,7 @@ export default {
       return {
         'pt-br': 'Brazil',
         en: 'USA',
+        es: 'Spain',
       }[this.code];
     },
   },

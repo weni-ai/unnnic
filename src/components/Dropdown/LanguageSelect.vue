@@ -98,6 +98,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    supportedLanguages: {
+      type: Array,
+      default: () => ['pt-br', 'en'],
+    },
   },
   directives: {
     clickOutside: vClickOutside.directive,
@@ -115,10 +119,6 @@ export default {
     return {
       open: false,
       val: this.value,
-      languages: {
-        'pt-br': 'Português - Brasil',
-        en: 'English',
-      },
     };
   },
   watch: {
@@ -130,6 +130,19 @@ export default {
     },
   },
   computed: {
+    languages() {
+      const languages = {
+        'pt-br': 'Português - Brasil',
+        en: 'English',
+        es: 'Español',
+      };
+
+      return this.supportedLanguages.reduce((previous, current) => ({
+        ...previous,
+        [current]: languages[current],
+      }), {});
+    },
+
     otherLanguages() {
       return this.languageList.filter(({ id }) => id !== this.val);
     },
