@@ -1,95 +1,60 @@
 <template>
-  <div :class="{
-    'unnnic-form': true,
-    'unnnic-form--error': type === 'error',
-    'has-icon': iconLeft || iconRight,
-    }">
-      <base-input
-        v-model="val"
-        v-bind="attributes"
-        :hasIconLeft="iconLeft != null"
-        :hasIconRight="iconRight != null"
-        :type="type"
-        :size="size"
-        v-on="inputListeners"
-        @focus="focus"
-        @blur="blur"
-      />
+  <div>
+    <base-input
+      :value="value"
+      v-bind="attributes"
+      :hasIconLeft="!!iconLeft"
+      :hasIconRight="!!iconRight"
+      :native-type="nativeType === 'password' && showPassword ? 'text' : nativeType"
+      :type="type"
+      :size="size"
+      v-on="inputListeners"
+      @focus="focus"
+      @blur="blur"
+    />
 
-      <unnnic-icon-svg
-        v-if="showSvgIconLeft"
-        :scheme="iconScheme"
-        :icon="iconLeft"
-        :size="iconSize"
-        class="icon-left"
-      />
+    <unnnic-icon
+      v-if="iconLeft"
+      :scheme="iconScheme"
+      :icon="iconLeft"
+      :size="iconSize"
+      :clickable="iconLeftClickable"
+      @click="onIconLeftClick"
+      class="icon-left"
+    />
 
-      <u-icon
-        v-else-if="iconLeft"
-        :icon="iconLeft"
-        :clickable="iconLeftClickable"
-        class="icon-left"
-        :size="iconSize"
-        @click="iconRightClicked" />
-
-      <tool-tip
-        v-if="tooltipIconRight"
-        :enabled="true"
-        :text="tooltipIconRight"
-        :side="tooltipSideIconRight"
-        :force-open="tooltipForceOpenIconRight"
-        class="icon-right"
-      >
-        <u-icon
-          v-if="iconRight"
-          :icon="iconRight"
-          :clickable="iconRightClickable"
-          :size="iconSize"
-          @click="iconRightClicked"
-        />
-      </tool-tip>
-
-      <unnnic-icon-svg
-        v-else-if="showSvgIconRight"
-        :scheme="iconScheme"
-        :icon="iconRight"
-        :size="iconSize"
-        class="icon-right"
-        :clickable="iconRightClickable"
-        @click="iconRightClicked"
-      />
-
-      <u-icon
-        v-else-if="iconRight"
-        :icon="iconRight"
-        :clickable="iconRightClickable"
-        class="icon-right"
-        :size="iconSize"
-        @click="iconRightClicked" />
+    <unnnic-icon
+      v-if="iconRightSvg"
+      :scheme="iconScheme"
+      :icon="iconRightSvg"
+      :size="iconSize"
+      :clickable="iconRightClickable || allowTogglePassword"
+      @click="onIconRightClick"
+      class="icon-right"
+    />
   </div>
 </template>
 
 <script>
-import UIcon from '../Icon.vue';
-import ToolTip from '../ToolTip/ToolTip.vue';
 import BaseInput from './BaseInput.vue';
-import UnnnicIconSvg from '../Icon-svg.vue';
+import UnnnicIcon from '../Icon-svg.vue';
 
 export default {
-  name: 'unnnic-input',
   components: {
-    UIcon,
-    ToolTip,
     BaseInput,
-    UnnnicIconSvg,
+    UnnnicIcon,
   },
   data() {
     return {
-      val: this.value,
       isFocused: false,
+      showPassword: false,
     };
   },
   props: {
+    placeholder: {
+      type: String,
+      default: null,
+    },
     type: {
       type: String,
       default: 'normal',
@@ -101,6 +66,9 @@ export default {
       type: String,
       default: '',
     },
+    nativeType: {
+      type: String,
+    },
     iconLeft: {
       type: String,
       default: null,
@@ -109,21 +77,6 @@ export default {
       type: String,
       default: null,
     },
-    tooltipIconRight: {
-      type: String,
-      default: null,
-    },
-    tooltipSideIconRight: {
-      type: String,
-      default: 'right',
-      validator(value) {
-        return ['top', 'right', 'bottom', 'left'].indexOf(value) !== -1;
-      },
-    },
-    tooltipForceOpenIconRight: {
-      type: Boolean,
-      default: false,
-    },
     iconLeftClickable: {
       type: Boolean,
       default: null,
@@ -131,6 +84,10 @@ export default {
     iconRightClickable: {
       type: Boolean,
       default: null,
+    },
+    allowTogglePassword: {
+      type: Boolean,
+      default: false,
     },
     hasCloudyColor: {
       type: Boolean,
@@ -141,38 +98,22 @@ export default {
       default: 'md',
     },
   },
-  mounted() {
-    this.val = this.value;
-  },
   computed: {
-    showSvgIconLeft() {
-      return this.iconLeft
-        && [
-          'button-play-1',
-          'search-1',
-          'arrow-button-up-1',
-          'arrow-button-down-1',
-        ].includes(this.iconLeft);
-    },
+    iconRightSvg() {
+      if (this.allowTogglePassword) {
+        return this.showPassword ? 'view-off-1' : 'view-1-1';
+      }
 
-    showSvgIconRight() {
-      return this.iconRight
-        && [
-          'button-play-1',
-          'search-1',
-          'arrow-button-up-1',
-          'arrow-button-down-1',
-          'send-email-3-1',
-        ].includes(this.iconRight);
+      return this.iconRight;
     },
 
     iconScheme() {
-      if (this.value || this.isFocused) {
-        return 'neutral-dark';
-      }
-
       if (this.type === 'error') {
         return 'feedback-red';
+      }
+
+      if (this.value || this.isFocused) {
+        return 'neutral-dark';
       }
 
       if (this.hasCloudyColor) {
@@ -185,11 +126,13 @@ export default {
     inputListeners() {
       return {
         ...this.$listeners,
-        input: () => {},
+        input: (event) => {
+          this.$emit('input', event);
+        },
       };
     },
     attributes() {
-      return { ...this.$attrs, ...this.$attrs['v-bind'] };
+      return { ...this.$attrs, ...this.$attrs['v-bind'], ...this.$props };
     },
     iconSize() {
       if (this.size === 'md') return 'sm';
@@ -206,21 +149,14 @@ export default {
       this.isFocused = false;
     },
 
-    iconRightClicked() {
-      if (!this.iconRightClickable) return;
-      this.$emit('icon-right-click');
+    onIconLeftClick() {
+      if (this.iconLeftClickable) this.$emit('icon-left-click');
     },
-    iconLeftClicked() {
-      if (!this.iconLeftClickable) return;
-      this.$emit('icon-left-click');
-    },
-  },
-  watch: {
-    val() {
-      this.$emit('input', this.val);
-    },
-    value() {
-      this.val = this.value;
+
+    onIconRightClick() {
+      if (this.attributes.disabled) return;
+      if (this.allowTogglePassword) this.showPassword = !this.showPassword;
+      else if (this.iconRightClickable) this.$emit('icon-right-click');
     },
   },
 };
@@ -229,27 +165,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/unnnic.scss';
 
-.unnnic-form {
-
-  &:focus-within .icon, &:focus-within .unnnic-icon {
-    color: $unnnic-color-brand-weni;
-  }
-
-  &--error {
-    color: $unnnic-color-feedback-red;
-
-    .unnnic-icon {
-      color: $unnnic-color-feedback-red !important;
-    }
-  }
-}
-
-.unnnic-icon {
-  color: $unnnic-color-neutral-clean;
-}
-
 .icon {
-
   &-left {
     position: absolute;
     transform: translateY(100%);
@@ -260,8 +176,6 @@ export default {
     position: absolute;
     transform: translateY(100%);
     right: $unnnic-inline-sm;
-    top: 0;
   }
 }
-
 </style>
