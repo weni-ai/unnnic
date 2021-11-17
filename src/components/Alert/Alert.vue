@@ -34,7 +34,7 @@
 
 <script>
 import unnnicIcon from '../Icon.vue';
-import Version1dot1 from './Version1.1.vue';
+import Version1dot1 from './Version1dot1.vue';
 
 export default {
   name: 'unnnicAlert',
