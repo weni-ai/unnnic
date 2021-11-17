@@ -46,7 +46,7 @@ export default {
     };
   },
   created() {
-    const value = this.initialTab || this.activeTab || this.tabs?.[0];
+    const value = this.initialTab || this.activeTab || (this.tabs && this.tabs[0]);
 
     this.change(value);
   },
