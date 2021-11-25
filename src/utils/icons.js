@@ -120,6 +120,13 @@ import sortDefault from '!!svg-inline-loader!../assets/icons/sort-default.svg';
 import sortAsc from '!!svg-inline-loader!../assets/icons/sort-asc.svg';
 import sortDesc from '!!svg-inline-loader!../assets/icons/sort-desc.svg';
 import mastercard from '!!svg-inline-loader!../assets/icons/mastercard.svg';
+import americanExpress from '!!svg-inline-loader!../assets/icons/american-express.svg';
+import dinersClub from '!!svg-inline-loader!../assets/icons/diners-club.svg';
+import discover from '!!svg-inline-loader!../assets/icons/discover.svg';
+import genericCard from '!!svg-inline-loader!../assets/icons/generic-card.svg';
+import jcb from '!!svg-inline-loader!../assets/icons/jcb.svg';
+import unionpay from '!!svg-inline-loader!../assets/icons/unionpay.svg';
+import visa from '!!svg-inline-loader!../assets/icons/visa.svg';
 import messagingWhatsapp1 from '!!svg-inline-loader!../assets/icons/messaging-whatsapp-1.svg';
 import export1 from '!!svg-inline-loader!../assets/icons/export-1.svg';
 
@@ -244,6 +251,13 @@ export default {
   'sort-asc': sortAsc,
   'sort-desc': sortDesc,
   mastercard,
+  'american-express': americanExpress,
+  'diners-club': dinersClub,
+  discover,
+  'generic-card': genericCard,
+  jcb,
+  unionpay,
+  visa,
   'messaging-whatsapp-1': messagingWhatsapp1,
   'export-1': export1,
 };
