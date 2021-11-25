@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <div :style="{ position: 'relative' }">
     <base-input
+      ref="base-input"
       :value="value"
       v-bind="attributes"
       :hasIconLeft="!!iconLeft"
@@ -9,8 +10,8 @@
       :type="type"
       :size="size"
       v-on="inputListeners"
-      @focus="focus"
-      @blur="blur"
+      @focus="onFocus"
+      @blur="onBlur"
     />
 
     <unnnic-icon
@@ -142,10 +143,14 @@ export default {
   },
   methods: {
     focus() {
+      this.$refs['base-input'].$el.focus();
+    },
+
+    onFocus() {
       this.isFocused = true;
     },
 
-    blur() {
+    onBlur() {
       this.isFocused = false;
     },
 
