@@ -91,6 +91,7 @@ import emailActionUnread1 from '!!svg-inline-loader!../assets/icons/email-action
 import synchronizeArrowClock4 from '!!svg-inline-loader!../assets/icons/synchronize-arrow-clock-4.svg';
 import house22 from '!!svg-inline-loader!../assets/icons/house-2-2.svg';
 import copyPaste1 from '!!svg-inline-loader!../assets/icons/copy-paste-1.svg';
+import keyboardArrowRight1 from '!!svg-inline-loader!../assets/icons/keyboard-arrow-right-1.svg';
 import keyboardArrowDown1 from '!!svg-inline-loader!../assets/icons/keyboard-arrow-down-1.svg';
 import keyboardArrowLeft1 from '!!svg-inline-loader!../assets/icons/keyboard-arrow-left-1.svg';
 import building21 from '!!svg-inline-loader!../assets/icons/building-2-1.svg';
@@ -217,6 +218,7 @@ export default {
   'synchronize-arrow-clock-4': synchronizeArrowClock4,
   'house-2-2': house22,
   'copy-paste-1': copyPaste1,
+  'keyboard-arrow-right-1': keyboardArrowRight1,
   'keyboard-arrow-down-1': keyboardArrowDown1,
   'keyboard-arrow-left-1': keyboardArrowLeft1,
   'building-2-1': building21,
