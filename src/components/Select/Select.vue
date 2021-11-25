@@ -376,4 +376,22 @@ export default {
     }
   }
 }
+
+.unnnic-form {
+  font-family: $unnnic-font-family-secondary;
+  position: relative;
+
+  &__message {
+    font-size: $unnnic-font-size-body-md;
+    margin: $unnnic-spacing-stack-nano 0;
+  }
+
+  &__label {
+    font-weight: $unnnic-font-weight-regular;
+    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+    font-size: $unnnic-font-size-body-gt;
+    color: $unnnic-color-neutral-cloudy;
+    margin: $unnnic-spacing-stack-xs 0;
+  }
+}
 </style>
