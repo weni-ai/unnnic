@@ -80,17 +80,17 @@ export default {
 
       if (element && this.$refs.label) {
         if (this.side === 'right') {
-          this.leftPos = `${elementPos.x + elementPos.width + 10}px`;
+          this.leftPos = `${elementPos.x + elementPos.width + 8}px`;
           this.topPos = `${elementPos.y + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
         } else if (this.side === 'left') {
-          this.leftPos = `${elementPos.x - this.$refs.label.offsetWidth - 12}px`;
+          this.leftPos = `${elementPos.x - this.$refs.label.offsetWidth - 8}px`;
           this.topPos = `${elementPos.y + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
         } else if (this.side === 'top') {
           this.leftPos = `${elementPos.x + (elementPos.width / 2) - (this.$refs.label.clientWidth / 2)}px`;
           this.topPos = `${elementPos.y - this.$refs.label.offsetHeight - 8}px`;
         } else if (this.side === 'bottom') {
           this.leftPos = `${elementPos.x + (elementPos.width / 2) - (this.$refs.label.clientWidth / 2)}px`;
-          this.topPos = `${elementPos.y + this.$refs.label.offsetHeight - (this.$refs.label.offsetHeight / 2) + 12}px`;
+          this.topPos = `${elementPos.y + elementPos.height + 8}px`;
         }
       }
     },
