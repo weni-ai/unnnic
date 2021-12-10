@@ -12,7 +12,7 @@
     </div>
 
     <unnnic-icon-svg
-      :class="{ 'unnnic-switch__icon': true, 'unnnic-switch__icon__animate': animation }"
+      :class="{ 'unnnic-switch__icon': true, active: isActive }"
       :icon="currentIcon"
       :size="iconSize"
       :scheme="iconScheme"
@@ -66,21 +66,24 @@ export default {
   },
   data() {
     return {
-      preActive: this.value,
-      isActive: this.value,
-      animation: false,
+      isActive: false,
     };
   },
+
+  watch: {
+    value: {
+      immediate: true,
+      handler() {
+        this.isActive = this.value;
+      },
+    },
+  },
+
   methods: {
     toggleState() {
       if (this.disabled) return;
-      this.preActive = !this.preActive;
-      this.animation = true;
-      this.$emit('input', !this.isActive);
-      setTimeout(() => {
-        this.animation = false;
-        this.isActive = !this.isActive;
-      }, 200);
+      this.isActive = !this.isActive;
+      this.$emit('input', this.isActive);
     },
   },
   computed: {
@@ -88,7 +91,7 @@ export default {
       if (this.disabled) {
         return this.isActive ? 'switch-selected-disabled' : 'switch-default-disabled';
       }
-      return this.isActive ? 'switch-selected' : 'switch-default';
+      return 'switch-default';
     },
 
     iconSize() {
@@ -96,7 +99,11 @@ export default {
     },
 
     iconScheme() {
-      return this.preActive === false ? 'neutral-soft' : 'brand-weni';
+      if (this.disabled) {
+        return 'neutral-soft';
+      }
+
+      return this.isActive === false ? 'neutral-soft' : 'brand-weni';
     },
 
     iconLineHeight() {
@@ -136,35 +143,16 @@ export default {
     align-self: center;
     margin: $unnnic-spacing-stack-nano $unnnic-inline-nano;
 
-    &__animate {
-      @keyframes on {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(45%);
-        }
+    ::v-deep svg {
+      #default-circle {
+        transition: 0.2s linear transform;
       }
-      @keyframes off {
-        from {
-          transform: translateX(0);
-        }
-        to {
-          transform: translateX(-45%);
-        }
-      }
+    }
 
+    &.active {
       ::v-deep svg {
         #default-circle {
-          animation-name: on;
-          animation-duration: 0.2s;
-        }
-      }
-
-      ::v-deep svg {
-        #selected-circle {
-          animation-name: off;
-          animation-duration: 0.2s;
+          transform: translateX(45%);
         }
       }
     }
