@@ -147,7 +147,6 @@ export default {
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
-      word-break: break-all;
     }
 
     &__rating {
