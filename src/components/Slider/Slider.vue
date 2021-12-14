@@ -29,25 +29,22 @@
       </div>
     </div>
 
-    <unnnicInput
-      class="unnnic-slider__value-input"
-      type="normal"
-      size="sm "
-      :value="sliderVal.toString()"
+    <div
+      ref="value-input"
+      class="value-input"
+      contenteditable="true"
       @input="handleInput"
-    ></unnnicInput>
+    />
   </div>
 </template>
 
 <script>
 import unnnicTooltip from '../ToolTip/ToolTip.vue';
-import unnnicInput from '../Input/TextInput.vue';
 
 export default {
   name: 'unnnic-slider',
   components: {
     unnnicTooltip,
-    unnnicInput,
   },
   props: {
     initialValue: {
@@ -101,8 +98,12 @@ export default {
       handler() {
         this.$nextTick(() => {
           this.configureTooltip();
+          if (this.$refs['value-input'].textContent !== this.sliderVal) {
+            this.$refs['value-input'].textContent = this.sliderVal;
+          }
         });
       },
+      immediate: true,
       deep: true,
     },
   },
@@ -119,8 +120,9 @@ export default {
       this.configureTooltip();
       this.$emit('valueChange', this.sliderVal);
     },
-    handleInput(newValue) {
-      this.sliderVal = newValue;
+    handleInput(event) {
+      this.sliderVal = event.srcElement.textContent;
+
       this.handleValueChange();
     },
     getNewTooltipPosition() {
@@ -154,6 +156,46 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import '../../assets/scss/unnnic.scss';
+
+.value-input {
+  display: flex;
+  margin-left: $unnnic-spacing-inline-sm;
+  background: $unnnic-color-neutral-snow;
+  border-radius: $unnnic-border-radius-sm;
+  color: $unnnic-color-neutral-dark;
+  font-weight: $unnnic-font-weight-regular;
+  font-family: $unnnic-font-family-secondary;
+  box-sizing: border-box;
+  font-size: $unnnic-font-size-body-md;
+  line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+  padding: $unnnic-squish-nano;
+  height: $unnnic-font-size-body-md + $unnnic-line-height-medium + 0.5rem * 2;
+  position: relative;
+
+  &:before {
+    content: " ";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
+    border-radius: inherit;
+    pointer-events: none;
+  }
+
+  &:focus:before {
+    border-color: $unnnic-color-neutral-cleanest;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+</style>
 
 <style lang="scss">
 @import '../../assets/scss/unnnic.scss';
@@ -267,15 +309,6 @@ export default {
       &::-ms-fill-lower {
         @include fill;
       }
-    }
-  }
-
-  &__value-input {
-    margin-left: $unnnic-spacing-inline-sm;
-
-    .unnnic-form__input {
-      text-align: center;
-      padding: $unnnic-spacing-inset-nano;
     }
   }
 
