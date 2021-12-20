@@ -50,7 +50,7 @@
               class="language-select"
               :contracted="!expanded"
               :value="language"
-              :supported-languages="['pt-br', 'en', 'es']"
+              :supported-languages="['pt-br', 'en']"
               @input="$emit('change-language', $event)"
             />
           </div>
