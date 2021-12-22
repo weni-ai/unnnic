@@ -82,6 +82,9 @@ export default {
   },
 
   props: {
+    initialStartDate: String,
+    initialEndDate: String,
+
     clearLabel: {
       type: String,
     },
@@ -155,8 +158,8 @@ export default {
 
     return {
       referenceDate,
-      startDate: '',
-      endDate: '',
+      startDate: this.initialStartDate || '',
+      endDate: this.initialEndDate || '',
       optionSelected: '',
     };
   },
