@@ -25,7 +25,7 @@ const Template = (args, { argTypes }) => ({
 
   template: `
     <div>
-      <unnnic-date-picker v-bind="$props"></unnnic-date-picker>
+      <unnnic-date-picker v-bind="$props" initial-start-date="12-01-2021" initial-end-date="12-31-2021"></unnnic-date-picker>
     </div>
   `,
 
