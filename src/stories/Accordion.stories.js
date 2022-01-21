@@ -34,7 +34,7 @@ const Template = (args, { argTypes }) => ({
 
   methods: {
     click() {
-      console.log('clicked');
+      console.log('clicked test');
     },
   },
 });
