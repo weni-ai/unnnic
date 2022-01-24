@@ -130,6 +130,8 @@ import unionpay from '!!svg-inline-loader!../assets/icons/unionpay.svg';
 import visa from '!!svg-inline-loader!../assets/icons/visa.svg';
 import messagingWhatsapp1 from '!!svg-inline-loader!../assets/icons/messaging-whatsapp-1.svg';
 import export1 from '!!svg-inline-loader!../assets/icons/export-1.svg';
+import bookLibrary1 from '!!svg-inline-loader!../assets/icons/book-library-1.svg';
+import bookLibrary2 from '!!svg-inline-loader!../assets/icons/book-library-2.svg';
 
 export default {
   'app-window-edit-1': appWindowEdit1,
@@ -262,4 +264,6 @@ export default {
   visa,
   'messaging-whatsapp-1': messagingWhatsapp1,
   'export-1': export1,
+  'book-library-1': bookLibrary1,
+  'book-library-2': bookLibrary2,
 };

@@ -101,4 +101,6 @@ export default [
   'floppy-disk-1',
   'messaging-whatsapp-1',
   'export-1',
+  'book-library-1',
+  'book-library-2',
 ];
