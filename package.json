@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "1.1.84",
+  "version": "1.1.85",
   "main": "./dist/unnnic.common.js",
   "files": [
     "dist/*",
@@ -17,7 +17,8 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "postversion": "git push --tags && yarn lint --fix && yarn build-bundle && yarn publish . --tag $npm_package_version && git push && echo \"Successfully released version $npm_package_version!\""
   },
   "repository": {
     "type": "git",
