@@ -42,6 +42,7 @@ const Template = (args, { argTypes }) => ({
     },
   },
 
+  // eslint-disable-next-line no-multi-str
   template: '<div><unnnicSelect v-model="value" v-bind="$props"> \
     <div slot="header"> header </div>\
     <option v-for="option in options" :value="option.value">{{ option.text }}</option> \
