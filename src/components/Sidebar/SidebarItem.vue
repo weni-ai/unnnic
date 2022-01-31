@@ -7,9 +7,8 @@
     @click="onClick">
     <tool-tip :enabled="enableTooltip" :text="text" side="right">
     <u-icon
-      :class="{'unnnic-side-bar-item__icon': true,
-               'unnnic-side-bar-item__icon--active': active,
-              }"
+      class="unnnic-side-bar-item__icon"
+      :scheme="active ? 'brand-weni-soft' : 'neutral-cloudy'"
       size="sm"
       :icon="icon"/>
     <span class="unnnic-side-bar-item__label"> {{ text }}
