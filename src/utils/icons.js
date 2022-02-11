@@ -133,6 +133,8 @@ import export1 from '!!svg-inline-loader!../assets/icons/export-1.svg';
 import bookLibrary1 from '!!svg-inline-loader!../assets/icons/book-library-1.svg';
 import bookLibrary2 from '!!svg-inline-loader!../assets/icons/book-library-2.svg';
 import notes1 from '!!svg-inline-loader!../assets/icons/notes-1.svg';
+import videoFileMp41 from '!!svg-inline-loader!../assets/icons/video-file-mp4-1.svg';
+import officeFilePdf11 from '!!svg-inline-loader!../assets/icons/office-file-pdf-1-1.svg';
 
 export default {
   'app-window-edit-1': appWindowEdit1,
@@ -268,4 +270,6 @@ export default {
   'book-library-1': bookLibrary1,
   'book-library-2': bookLibrary2,
   'notes-1': notes1,
+  'video-file-mp4-1': videoFileMp41,
+  'office-file-pdf-1-1': officeFilePdf11,
 };
