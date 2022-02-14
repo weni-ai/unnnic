@@ -50,7 +50,7 @@
               class="language-select"
               :contracted="!expanded"
               :value="language"
-              :supported-languages="['pt-br', 'en']"
+              :supported-languages="languages"
               @input="$emit('change-language', $event)"
             />
           </div>
@@ -99,6 +99,11 @@ export default {
 
     items: {
       type: Array,
+    },
+
+    languages: {
+      type: Array,
+      default: () => ['pt-br', 'en'],
     },
 
     language: {
