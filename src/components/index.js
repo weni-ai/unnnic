@@ -39,6 +39,7 @@ import breadcrumb from './Breadcrumb/Breadcrumb.vue';
 import Switch from './Switch/Switch.vue';
 import Slider from './Slider/Slider.vue';
 import DataArea from './DataArea/DataArea.vue';
+import Pagination from './Pagination/Pagination.vue';
 
 const components = {
   unnnicInput: input,
@@ -80,6 +81,7 @@ const components = {
   unnnicSwitch: Switch,
   unnnicSlider: Slider,
   unnnicDataArea: DataArea,
+  unnnicPagination: Pagination,
 };
 
 Object.keys(components).forEach((name) => {
@@ -127,3 +129,4 @@ export const unnnicBreadcrumb = breadcrumb;
 export const unnnicSwitch = Switch;
 export const unnnicSlider = Slider;
 export const unnnicDataArea = DataArea;
+export const unnnicPagination = Pagination;
