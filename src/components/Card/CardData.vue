@@ -14,9 +14,10 @@
 
     <div class="description">{{ description }}</div>
 
-    <div class="footer">
+    <div v-if="score || info" class="footer">
       <div class="evaluation">
         <unnnic-icon
+          v-if="score"
           size="sm"
           icon="rating-star-1"
           scheme="feedback-yellow"
