@@ -1,0 +1,16 @@
+{
+  "upload_area": {
+    "title": {
+      "text": "Arraste seu arquivo aqui, ou",
+      "highlight": "procure-o"
+    },
+    "invalid": {
+      "text": ", tente novamente",
+      "highlight": "Arquivo inválido"
+    },
+    "subtitle": "Formatos suportados:"
+  },
+  "import_card": {
+    "importing": "Importando"
+  }
+}
