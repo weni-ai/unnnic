@@ -7,6 +7,7 @@
         'unnnic-upload-area__dropzone__is-dragover': isDragging,
       }"
       v-on:dragenter.stop.prevent="dragenter"
+      v-on:dragover.stop.prevent="dragover"
       v-on:dragleave.stop.prevent="dragleave"
       v-on:dragend.stop.prevent="dragend"
       v-on:drop.stop.prevent="drop"
@@ -112,6 +113,9 @@ export default {
   methods: {
     dragenter() {
       this.dragEnterCounter += 1;
+      this.isDragging = true;
+    },
+    dragover() {
       this.isDragging = true;
     },
     dragleave() {
