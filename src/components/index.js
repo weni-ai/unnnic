@@ -16,6 +16,7 @@ import iconSvg from './Icon-svg.vue';
 import toolTip from './ToolTip/ToolTip.vue';
 import card from './Card/Card.vue';
 import cardCompany from './Card/CardCompany.vue';
+import cardData from './Card/CardData.vue';
 import checkbox from './Checkbox/Checkbox.vue';
 import radio from './Radio/Radio.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
@@ -38,6 +39,7 @@ import breadcrumb from './Breadcrumb/Breadcrumb.vue';
 import Switch from './Switch/Switch.vue';
 import Slider from './Slider/Slider.vue';
 import DataArea from './DataArea/DataArea.vue';
+import Pagination from './Pagination/Pagination.vue';
 import UploadArea from './UploadArea/UploadArea.vue';
 import ImportCard from './ImportCard/ImportCard.vue';
 
@@ -59,6 +61,7 @@ const components = {
   unnnicToolTip: toolTip,
   unnnicCard: card,
   unnnicCardCompany: cardCompany,
+  unnnicCardData: cardData,
   unnnicCheckbox: checkbox,
   unnnicRadio: radio,
   unnnicLanguageSelect: languageSelect,
@@ -80,6 +83,7 @@ const components = {
   unnnicSwitch: Switch,
   unnnicSlider: Slider,
   unnnicDataArea: DataArea,
+  unnnicPagination: Pagination,
   unnnicUploadArea: UploadArea,
   unnnicImportCard: ImportCard,
 };
@@ -105,6 +109,7 @@ export const unnnicIconSvg = iconSvg;
 export const unnnicToolTip = toolTip;
 export const unnnicCard = card;
 export const unnnicCardCompany = cardCompany;
+export const unnnicCardData = cardData;
 export const unnnicCheckbox = checkbox;
 export const unnnicRadio = radio;
 export const unnniclanguageSelect = languageSelect;
@@ -128,5 +133,6 @@ export const unnnicBreadcrumb = breadcrumb;
 export const unnnicSwitch = Switch;
 export const unnnicSlider = Slider;
 export const unnnicDataArea = DataArea;
+export const unnnicPagination = Pagination;
 export const unnnicUploadArea = UploadArea;
 export const unnnicImportCard = ImportCard;

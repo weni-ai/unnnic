@@ -191,7 +191,6 @@ $scheme-colors:
   white-space: nowrap;
   font-weight: $unnnic-font-weight-regular;
   font-family: $unnnic-font-family-secondary;
-  min-width: 56px;
   cursor: pointer;
 
   &__icon {
@@ -255,8 +254,18 @@ $scheme-colors:
   &--terciary {
     background-color: transparent;
     color: $unnnic-color-neutral-dark;
-    border: $unnnic-border-width-thinner solid transparent;
-    &:hover:enabled {
+
+    position: relative;
+
+    &:hover:enabled:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-radius: $unnnic-border-radius-sm;
       border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
     }
 
