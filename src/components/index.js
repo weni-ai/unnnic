@@ -38,6 +38,8 @@ import breadcrumb from './Breadcrumb/Breadcrumb.vue';
 import Switch from './Switch/Switch.vue';
 import Slider from './Slider/Slider.vue';
 import DataArea from './DataArea/DataArea.vue';
+import UploadArea from './UploadArea/UploadArea.vue';
+import ImportCard from './ImportCard/ImportCard.vue';
 
 const components = {
   unnnicInput: input,
@@ -78,6 +80,8 @@ const components = {
   unnnicSwitch: Switch,
   unnnicSlider: Slider,
   unnnicDataArea: DataArea,
+  unnnicUploadArea: UploadArea,
+  unnnicImportCard: ImportCard,
 };
 
 Object.keys(components).forEach((name) => {
@@ -124,3 +128,5 @@ export const unnnicBreadcrumb = breadcrumb;
 export const unnnicSwitch = Switch;
 export const unnnicSlider = Slider;
 export const unnnicDataArea = DataArea;
+export const unnnicUploadArea = UploadArea;
+export const unnnicImportCard = ImportCard;
