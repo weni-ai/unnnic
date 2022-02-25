@@ -111,33 +111,25 @@ export default {
     },
   },
   methods: {
-    debug(event) {
-      console.log('Event0:', event.type);
-    },
     dragenter() {
       this.dragEnterCounter += 1;
       this.isDragging = true;
-      console.log('Entered');
     },
     dragover() {
-      console.log('over');
+      this.isDragging = true;
     },
     dragleave() {
       this.dragEnterCounter -= 1;
       if (this.dragEnterCounter === 0) {
         this.isDragging = false;
-        console.log('leaving');
       }
     },
     dragend() {
       this.isDragging = false;
-      console.log('end');
     },
     drop(event) {
       this.isDragging = false;
 
-      console.log('Drop:', event);
-      console.log('Files');
       const { files } = event.dataTransfer;
 
       if (!this.acceptMultiple && files.length > 1) {
@@ -155,8 +147,6 @@ export default {
 
     validFormat(files) {
       const formats = this.supportedFormats.replace('.', '').split(',');
-      console.log('Files:', files);
-      console.log('Formats:', formats);
 
       const isValid = Array.from(files).find((file) => {
         // eslint-disable-next-line arrow-body-style
