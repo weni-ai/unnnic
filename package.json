@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "1.1.93",
+  "version": "1.1.94",
   "main": "./dist/unnnic.common.js",
   "files": [
     "dist/*",
@@ -32,6 +32,7 @@
     "core-js": "^3.6.5",
     "v-click-outside": "^3.1.2",
     "vue": "^2.6.11",
+    "vue-i18n": "8",
     "vue-the-mask": "^0.11.1"
   },
   "devDependencies": {

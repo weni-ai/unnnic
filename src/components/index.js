@@ -40,6 +40,8 @@ import Switch from './Switch/Switch.vue';
 import Slider from './Slider/Slider.vue';
 import DataArea from './DataArea/DataArea.vue';
 import Pagination from './Pagination/Pagination.vue';
+import UploadArea from './UploadArea/UploadArea.vue';
+import ImportCard from './ImportCard/ImportCard.vue';
 
 const components = {
   unnnicInput: input,
@@ -82,6 +84,8 @@ const components = {
   unnnicSlider: Slider,
   unnnicDataArea: DataArea,
   unnnicPagination: Pagination,
+  unnnicUploadArea: UploadArea,
+  unnnicImportCard: ImportCard,
 };
 
 Object.keys(components).forEach((name) => {
@@ -130,3 +134,5 @@ export const unnnicSwitch = Switch;
 export const unnnicSlider = Slider;
 export const unnnicDataArea = DataArea;
 export const unnnicPagination = Pagination;
+export const unnnicUploadArea = UploadArea;
+export const unnnicImportCard = ImportCard;

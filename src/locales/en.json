@@ -1,0 +1,16 @@
+{
+  "upload_area": {
+    "title": {
+      "text": "Drag your file here or",
+      "highlight": "search it"
+    },
+    "invalid": {
+      "text": "file, try again",
+      "highlight": "Invalid"
+    },
+    "subtitle": "Supported formats:"
+  },
+  "import_card": {
+    "importing": "Importing"
+  }
+}
