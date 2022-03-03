@@ -66,6 +66,10 @@ export default {
     UnnnicImportCard,
   },
   props: {
+    files: {
+      type: Array,
+      default: () => [],
+    },
     acceptMultiple: {
       type: Boolean,
       default: true,
@@ -94,14 +98,27 @@ export default {
       type: Boolean,
       default: true,
     },
+    maxFileSize: {
+      type: Number,
+      default: undefined,
+    },
+  },
+  model: {
+    prop: 'files',
+    event: 'fileChange',
   },
   data() {
     return {
       hasError: false,
       isDragging: false,
       dragEnterCounter: 0, // to handle dragenter/dragleave on child elements
-      currentFiles: [],
+      currentFiles: this.files,
     };
+  },
+  watch: {
+    files(newValue) {
+      this.currentFiles = newValue;
+    },
   },
   computed: {
     formattedSupportedFormats() {
@@ -142,6 +159,11 @@ export default {
         return;
       }
 
+      if (!this.validSize(files)) {
+        this.setErrorState();
+        return;
+      }
+
       this.addFiles(files);
     },
 
@@ -155,6 +177,20 @@ export default {
         });
 
         return validFormat;
+      });
+
+      return isValid;
+    },
+
+    validSize(files) {
+      if (!this.maxFileSize) {
+        return true;
+      }
+
+      const isValid = Array.from(files).find((file) => {
+        const sizeInMB = (file.size / (1024 * 1024)).toFixed(2);
+
+        return sizeInMB <= this.maxFileSize;
       });
 
       return isValid;
@@ -179,7 +215,7 @@ export default {
       }
 
       const validFiles = Array.from(files).filter((file) => {
-        if (this.validFormat([file])) {
+        if (this.validFormat([file]) && this.validSize([file])) {
           return true;
         }
         return false;

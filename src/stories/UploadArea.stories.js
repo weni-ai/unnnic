@@ -18,8 +18,23 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicUploadArea },
-
-  template: '<unnnic-upload-area v-bind="$props"></unnnic-upload-area >',
+  data() {
+    return {
+      files: [],
+    };
+  },
+  methods: {
+    addFile(event) {
+      this.files = Array.from(event.target.files);
+      console.log('files:', this.files);
+    },
+    handleFileChange(files) {
+      this.files = files;
+      console.log('handle', files);
+    },
+  },
+  template:
+    '<div><unnnic-upload-area v-model="files" @fileChange="handleFileChange" v-bind="$props" /> <input type="file" @change="addFile"/></div>',
   i18n,
 });
 
@@ -32,4 +47,5 @@ Default.args = {
   isUploading: false,
   canImport: true,
   canDelete: true,
+  maxFileSize: 10,
 };
