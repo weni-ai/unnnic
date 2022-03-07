@@ -11,6 +11,7 @@
       v-on:dragleave.stop.prevent="dragleave"
       v-on:dragend.stop.prevent="dragend"
       v-on:drop.stop.prevent="drop"
+      @click="() => this.$refs.file.click()"
     >
       <unnnic-icon-svg
         class="unnnic-upload-area__dropzone__icon"
@@ -36,6 +37,14 @@
           {{ $t('upload_area.subtitle') }} {{ formattedSupportedFormats }}
         </span>
       </div>
+      <input
+        type="file"
+        ref="file"
+        :accept="supportedFormats"
+        :multiple="acceptMultiple"
+        @input="handleFileChange"
+        style="display: none;"
+      />
     </div>
     <div v-if="currentFiles.length > 0" class="unnnic-upload-area__cards">
       <unnnic-import-card
@@ -149,24 +158,36 @@ export default {
 
       const { files } = event.dataTransfer;
 
+      if (this.validateFiles(files)) {
+        this.addFiles(files);
+      }
+    },
+    handleFileChange(event) {
+      const { files } = event.target;
+
+      if (this.validateFiles(files)) {
+        this.addFiles(files);
+      }
+      this.$refs.file.value = '';
+    },
+    validateFiles(files) {
       if (!this.acceptMultiple && files.length > 1) {
         this.setErrorState();
-        return;
+        return false;
       }
 
       if (!this.validFormat(files)) {
         this.setErrorState();
-        return;
+        return false;
       }
 
       if (!this.validSize(files)) {
         this.setErrorState();
-        return;
+        return false;
       }
 
-      this.addFiles(files);
+      return true;
     },
-
     validFormat(files) {
       const formats = this.supportedFormats.replace('.', '').split(',');
 
