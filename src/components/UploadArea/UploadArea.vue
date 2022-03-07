@@ -259,8 +259,8 @@ export default {
     checkDragAndDropSupport() {
       const { dropzone } = this.$refs;
       return (
-        'FileReader' in window &&
-        ('draggable' in dropzone || ('ondragstart' in dropzone && 'ondrop' in dropzone))
+        'FileReader' in window
+        && ('draggable' in dropzone || ('ondragstart' in dropzone && 'ondrop' in dropzone))
       );
     },
   },
