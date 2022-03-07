@@ -189,7 +189,7 @@ export default {
       return true;
     },
     validFormat(files) {
-      const formats = this.supportedFormats.replace('.', '').split(',');
+      const formats = this.supportedFormats.replaceAll('.', '').split(',');
 
       const isValid = Array.from(files).find((file) => {
         // eslint-disable-next-line arrow-body-style
