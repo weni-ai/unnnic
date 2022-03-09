@@ -5,6 +5,7 @@
       :class="{
         'unnnic-upload-area__dropzone': true,
         'unnnic-upload-area__dropzone__is-dragover': isDragging,
+        'unnnic-upload-area__dropzone__has-error': hasError,
       }"
       v-on:dragenter.stop.prevent="dragenter"
       v-on:dragover.stop.prevent="dragover"
@@ -21,20 +22,24 @@
       />
 
       <div class="unnnic-upload-area__dropzone__content">
-        <span v-if="!hasError" class="unnnic-upload-area__dropzone__content__title">
+        <span class="unnnic-upload-area__dropzone__content__title">
           {{ $t('upload_area.title.text') }}
-          <span class="unnnic-upload-area__dropzone__content__title__search">
+          <span
+            :class="`unnnic-upload-area__dropzone__content__title__${
+              hasError ? 'error' : 'search'
+            }`"
+          >
             {{ $t('upload_area.title.highlight') }}
           </span>
         </span>
-        <span v-else class="unnnic-upload-area__dropzone__content__title">
-          <span class="unnnic-upload-area__dropzone__content__title__error">
-            {{ $t('upload_area.invalid.highlight') }}
-          </span>
-          {{ $t('upload_area.invalid.text') }}
-        </span>
-        <span class="unnnic-upload-area__dropzone__content__subtitle">
-          {{ $t('upload_area.subtitle') }} {{ formattedSupportedFormats }}
+        <span
+          :class="[
+            'unnnic-upload-area__dropzone__content__subtitle',
+            { 'unnnic-upload-area__dropzone__content__subtitle__error': hasError }
+          ]"
+        >
+          {{ $t(`upload_area${hasError ? '.invalid' : ''}.subtitle`) }}
+          {{ formattedSupportedFormats }}
         </span>
       </div>
       <input
@@ -270,6 +275,10 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/unnnic.scss';
 
+@function borderDashed($color) {
+  @return url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='16' ry='16' stroke='%23#{str-slice(quote($color), 2)}' stroke-width='4' stroke-dasharray='4%2c 12' stroke-dashoffset='9' stroke-linecap='square'/%3e%3c/svg%3e");
+}
+
 .unnnic-upload-area {
   &__dropzone {
     border-radius: $unnnic-border-radius-lg;
@@ -277,11 +286,15 @@ export default {
     padding: $unnnic-spacing-inset-lg;
 
     // Dashed border with increased dashes spacing and color neutral clean
-    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='16' ry='16' stroke='%23D0D3D9FF' stroke-width='4' stroke-dasharray='4%2c 12' stroke-dashoffset='9' stroke-linecap='square'/%3e%3c/svg%3e");
+    background-image: borderDashed($unnnic-color-neutral-clean);
+
+    &__has-error {
+      background-image: borderDashed($unnnic-color-feedback-red);
+    }
 
     &__is-dragover {
       background-color: $unnnic-color-background-sky;
-      background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='16' ry='16' stroke='%2300DED2FF' stroke-width='4' stroke-dasharray='4%2c 12' stroke-dashoffset='9' stroke-linecap='square'/%3e%3c/svg%3e");
+      background-image: borderDashed($unnnic-color-brand-weni);
     }
 
     &__icon {
@@ -319,6 +332,10 @@ export default {
         font-weight: $unnnic-font-weight-regular;
         font-size: $unnnic-font-size-body-md;
         line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+
+        &__error {
+          color: $unnnic-color-feedback-red;
+        }
       }
     }
   }
