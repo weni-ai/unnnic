@@ -5,8 +5,7 @@
       "highlight": "procure-o"
     },
     "invalid": {
-      "text": ", tente novamente",
-      "highlight": "Arquivo inválido"
+      "subtitle": "Arquivo não compatível, selecione formatos suportados:"
     },
     "subtitle": "Formatos suportados:"
   },

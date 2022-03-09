@@ -5,10 +5,9 @@
       "highlight": "búscalo"
     },
     "invalid": {
-      "text": ", inténtalo de nuevo",
-      "highlight": "Arquivo inválido"
+      "subtitle": "Archivo no compatible, seleccione los formatos compatibles:"
     },
-    "subtitle": "Formatos suportados:"
+    "subtitle": "Formatos compatibles:"
   },
   "import_card": {
     "importing": "Importando"
