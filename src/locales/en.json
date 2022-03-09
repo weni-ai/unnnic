@@ -5,8 +5,7 @@
       "highlight": "search it"
     },
     "invalid": {
-      "text": "file, try again",
-      "highlight": "Invalid"
+      "subtitle": "File not supported, select supported formats:"
     },
     "subtitle": "Supported formats:"
   },
