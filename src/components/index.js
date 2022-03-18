@@ -25,6 +25,7 @@ import modalUpload from './ModalUpload/ModalUpload.vue';
 import call from '../utils/call';
 import select from './Select/Select.vue';
 import selectItem from './Select/SelectItem.vue';
+import alert from './Alert/Alert.vue';
 import autocomplete from './Input/Autocomplete.vue';
 import tag from './Tag/Tag.vue';
 import accordion from './Accordion/Accordion.vue';
@@ -70,6 +71,7 @@ const components = {
   unnnicModalUpload: modalUpload,
   unnnicSelect: select,
   unnnicSelectItem: selectItem,
+  unnnicAlert: alert,
   unnnicAutocomplete: autocomplete,
   unnnicTag: tag,
   unnnicAccordion: accordion,
@@ -119,6 +121,7 @@ export const unnnicModal = modal;
 export const unnnicModalUpload = modalUpload;
 export const unnnicSelect = select;
 export const unnnicSelectItem = selectItem;
+export const unnnicAlert = alert;
 export const unnnicCallAlert = call.callAlert;
 export const unnnicCallModal = call.callModal;
 export const unnnicAutocomplete = autocomplete;

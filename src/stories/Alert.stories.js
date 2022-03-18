@@ -1,9 +1,10 @@
 import alertCaller from '../components/Alert/AlertCaller.vue';
 import alert from '../utils/call';
+import unnnicAlert from '../components/Alert/Alert.vue';
 
 export default {
   title: 'example/Alert',
-  component: alertCaller,
+  component: unnnicAlert,
   argTypes: {
     text: { control: { type: 'text' } },
     title: { control: { type: 'text' } },
@@ -18,7 +19,7 @@ export default {
     position: {
       control: {
         type: 'select',
-        options: ['top-left', 'top-right', 'bottom-left', 'bottom-right'],
+        options: ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'bottom-center'],
       },
     },
     icon: {
@@ -39,8 +40,8 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { alertCaller },
-  template: '<button @click="unnnicCallAlert"> Click for alert </button>',
+  components: { alertCaller, unnnicAlert },
+  template: '<div><button @click="unnnicCallAlert"> Click for alert </button> <unnnic-alert v-bind="$props"></unnnic-alert> </div>',
   methods: {
     unnnicCallAlert() {
       alert.callAlert({ props: this.$props, seconds: this.$props.seconds });
