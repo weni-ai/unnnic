@@ -4,6 +4,12 @@ export default {
   title: 'example/DatePicker',
   component: unnnicDatePicker,
   argTypes: {
+    size: {
+      control: {
+        type: 'select',
+        options: ['small', 'large'],
+      },
+    },
     months: { control: { type: 'array' } },
     days: { control: { type: 'array' } },
     options: { control: { type: 'array' } },
@@ -35,6 +41,7 @@ const Template = (args, { argTypes }) => ({
 export const Default = Template.bind({});
 
 Default.args = {
+  size: 'large',
   clearLabel: 'Limpar',
   actionLabel: 'Filtrar',
   months: [
