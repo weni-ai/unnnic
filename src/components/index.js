@@ -44,6 +44,7 @@ import DataArea from './DataArea/DataArea.vue';
 import Pagination from './Pagination/Pagination.vue';
 import UploadArea from './UploadArea/UploadArea.vue';
 import ImportCard from './ImportCard/ImportCard.vue';
+import DateFilter from './DateFilter/DateFilter.vue';
 
 const components = {
   unnnicInput: input,
@@ -90,6 +91,7 @@ const components = {
   unnnicPagination: Pagination,
   unnnicUploadArea: UploadArea,
   unnnicImportCard: ImportCard,
+  unnnicDateFilter: DateFilter,
 };
 
 Object.keys(components).forEach((name) => {
@@ -142,3 +144,4 @@ export const unnnicDataArea = DataArea;
 export const unnnicPagination = Pagination;
 export const unnnicUploadArea = UploadArea;
 export const unnnicImportCard = ImportCard;
+export const unnnicDateFilter = DateFilter;
