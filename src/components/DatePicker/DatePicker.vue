@@ -2,23 +2,23 @@
   <div class="unnnic-date-picker">
     <template v-for="(openMonth, index) in openMonths">
       <div :key="openMonth" class="month-container">
-        <div class="header">
+        <div :class="['header', `header--${size}`]">
           <unnnic-button
             size="small"
             :icon-center="`arrow-${index === 0 ? 'left' : 'right'}-1-1`"
-            type="secondary"
+            :type="size === 'large' ? 'secondary' : 'terciary'"
             class="button-space"
             :style="{ gridArea: `${index === 0 ? 'left' : 'right'}-button` }"
             @click="referenceDate = addMonth(referenceDate, index === 0 ? -1 : 1)"
           />
 
-          <div class="label">
+          <div :class="['label', `label--${size}`]">
             {{ months[getMonth(openMonth)] }}
             {{ getFullYear(openMonth) }}
           </div>
         </div>
 
-        <div class="days">
+        <div :class="['days', `days--${size}`]">
           <div v-for="(day, index) in days" :key="index" class="name">{{ day }}</div>
           <div
             v-for="(date, index) in getDatesOfTheMonth(openMonth)"
@@ -42,7 +42,7 @@
       <div :key="`divider-${openMonth}`" class="divider"></div>
     </template>
 
-    <div class="options-container">
+    <div v-if="size !== 'small'" class="options-container">
       <div class="options">
         <div
           :class="['option', { selected: optionSelected === option.id }]"
@@ -84,6 +84,14 @@ export default {
   props: {
     initialStartDate: String,
     initialEndDate: String,
+
+    size: {
+      type: String,
+      default: 'large',
+      validator(size) {
+        return ['small', 'large'].includes(size);
+      },
+    },
 
     clearLabel: {
       type: String,
@@ -243,7 +251,9 @@ export default {
 
       const dates = [];
 
-      for (let i = 0; i < 6 * 7; i += 1) {
+      const rowsCount = this.size === 'large' ? 6 : 5;
+
+      for (let i = 0; i < rowsCount * 7; i += 1) {
         const dateString = this.dateToString(date);
         const properties = [];
 
@@ -380,34 +390,58 @@ export default {
     .header {
       display: grid;
       align-items: center;
-      grid-template-columns: 36px auto 36px;
       grid-template-areas: "left-button label right-button";
-      margin-bottom: $unnnic-spacing-stack-xs;
+
+      &--small {
+        grid-template-columns: 32px auto 32px;
+      }
+
+      &--large {
+        grid-template-columns: 36px auto 36px;
+        margin-bottom: $unnnic-spacing-stack-xs;
+      }
 
       .label {
         font-family: $unnnic-font-family-secondary;
         font-weight: $unnnic-font-weight-black;
-        font-size: $unnnic-font-size-body-gt;
-        line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
         color: $unnnic-color-neutral-darkest;
         text-align: center;
         grid-area: label;
+
+        &--small {
+          font-size: $unnnic-font-size-body-gt;
+          // line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
+        }
+
+        &--large {
+          font-size: $unnnic-font-size-body-gt;
+          line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
+        }
       }
     }
 
     .days {
       display: grid;
-      grid-template-columns: repeat(7, 32px);
-      grid-template-rows: repeat(7, 32px);
-
       font-family: $unnnic-font-family-secondary;
       font-weight: $unnnic-font-weight-regular;
-      font-size: $unnnic-font-size-body-gt;
-      line-height: 32px;
       color: $unnnic-color-neutral-darkest;
       text-align: center;
 
       user-select: none;
+
+      &--small {
+        grid-template-columns: repeat(7, 22px);
+        grid-template-rows: repeat(6, 25px);
+        font-size: $unnnic-font-size-body-md;
+        line-height: 25px;
+      }
+
+      &--large {
+        grid-template-columns: repeat(7, 32px);
+        grid-template-rows: repeat(7, 32px);
+        font-size: $unnnic-font-size-body-gt;
+        line-height: 32px;
+      }
 
       .selectable {
         cursor: pointer;
