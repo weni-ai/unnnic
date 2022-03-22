@@ -19,7 +19,5 @@ const Template = (args, { argTypes }) => ({
 export const Default = Template.bind({});
 Default.args = {
   dateFormat: 'DD/MM/YYYY',
-  // startDate: new Date('01/01/2020'),
-  // endDate: new Date('12/31/2022'),
   placeholder: 'DD/MM/YYYY ~ DD/MM/YYYY',
 };
