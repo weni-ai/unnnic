@@ -8,6 +8,7 @@
       readonly
       :mask="fullMask"
       :value="dateRange"
+      :placeholder="placeholder"
     ></unnnic-input>
   </div>
 </template>
@@ -39,6 +40,10 @@ export default {
     endDate: {
       type: Date,
       default: null,
+    },
+    placeholder: {
+      type: String,
+      default: '',
     },
   },
   methods: {
