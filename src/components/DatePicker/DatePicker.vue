@@ -410,7 +410,6 @@ export default {
 
         &--small {
           font-size: $unnnic-font-size-body-gt;
-          // line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
         }
 
         &--large {
