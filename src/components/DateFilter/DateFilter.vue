@@ -63,7 +63,6 @@ export default {
       return range;
     },
     fullMask() {
-      console.log(this.maskedDateFormat);
       return `${this.maskedDateFormat} !${this.dateSeparator} ${this.maskedDateFormat}`;
     },
     maskedDateFormat() {
