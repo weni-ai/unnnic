@@ -126,6 +126,8 @@ $line-heights:
             &__size--#{$name} {
                 width: $size;
                 height: $size;
+                min-width: $size;
+                min-height: $size;
 
                 @each $line-name, $line-size in $line-heights {
                   &.unnnic-icon__line-height--#{$line-name} svg {
