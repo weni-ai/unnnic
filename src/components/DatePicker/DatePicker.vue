@@ -251,9 +251,7 @@ export default {
 
       const dates = [];
 
-      const rowsCount = this.size === 'large' ? 6 : 5;
-
-      for (let i = 0; i < rowsCount * 7; i += 1) {
+      for (let i = 0; i < 6 * 7; i += 1) {
         const dateString = this.dateToString(date);
         const properties = [];
 
@@ -429,10 +427,10 @@ export default {
       user-select: none;
 
       &--small {
-        grid-template-columns: repeat(7, 22px);
-        grid-template-rows: repeat(6, 25px);
+        grid-template-columns: repeat(7, 28px);
+        grid-template-rows: repeat(7, 28px);
         font-size: $unnnic-font-size-body-md;
-        line-height: 25px;
+        line-height: 28px;
       }
 
       &--large {
