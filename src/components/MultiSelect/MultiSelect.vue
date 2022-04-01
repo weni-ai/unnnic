@@ -17,6 +17,8 @@
       />
     </div>
     <div v-if="active" class="select-content" v-click-outside="onClickOutside" tabindex="0">
+      <div>
+
       <h6 class="title">Permissões Gerais</h6>
       <section v-for="(group, indexGroup) in groups" :key="indexGroup">
         <template v-for="(item, indexItem) in group.items">
@@ -35,6 +37,7 @@
           </UnnnicRadio>
         </template>
       </section>
+    </div>
     </div>
   </div>
 </template>
@@ -120,11 +123,21 @@ export default {
 @import "../../assets/scss/unnnic.scss";
 
 .normal-multiselect {
+  position: relative;
   max-width: 319px;
+
+  .select-content {
+    max-width: 319px;
+  }
 }
 
 .expand-multiselect {
+  position: relative;
   width: 100%;
+
+  .select-content {
+    width: 100%;
+  }
 }
 
 .noselect {
@@ -138,7 +151,7 @@ export default {
 }
 
 .select-permission,
-.select-content {
+.select-content > div {
   padding: $unnnic-squish-xs;
   background-color: $unnnic-color-neutral-snow;
   box-shadow: $unnnic-shadow-level-near;
@@ -168,51 +181,55 @@ export default {
 }
 
 .select-content {
+  position: absolute;
   margin-top: $unnnic-spacing-stack-xs;
 
-  .title {
-    margin-bottom: $unnnic-spacing-stack-sm;
-  }
-
-  & section {
-    display: flex;
-    flex-direction: column;
-
-    & + section {
-      margin-top: $unnnic-spacing-stack-sm;
-      padding-top: $unnnic-spacing-stack-sm;
-      border-top: $unnnic-border-width-thinner solid
-        $unnnic-color-neutral-darkest;
+  > div {
+    .title {
+      margin-bottom: $unnnic-spacing-stack-sm;
     }
 
-    strong,
-    span {
-      display: block;
-      font-family: $unnnic-font-family-secondary;
-      font-size: $unnnic-font-size-body-gt;
-    }
+    & section {
+      display: flex;
+      flex-direction: column;
 
-    strong {
-      font-weight: $unnnic-font-weight-regular;
-    }
-    span {
-      font-weight: $unnnic-font-weight-light;
-    }
-
-    .unnnic-radio-container {
-      & + .unnnic-radio-container {
+      & + section {
         margin-top: $unnnic-spacing-stack-sm;
         padding-top: $unnnic-spacing-stack-sm;
         border-top: $unnnic-border-width-thinner solid
-          $unnnic-color-neutral-lightest;
-
+          $unnnic-color-neutral-darkest;
       }
 
-      ::v-deep .unnnic-icon {
-        margin-right: $unnnic-inline-xs;
+      strong,
+      span {
+        display: block;
+        font-family: $unnnic-font-family-secondary;
+        font-size: $unnnic-font-size-body-gt;
       }
+
+      strong {
+        font-weight: $unnnic-font-weight-regular;
+      }
+      span {
+        font-weight: $unnnic-font-weight-light;
+      }
+
+      .unnnic-radio-container {
+        & + .unnnic-radio-container {
+          margin-top: $unnnic-spacing-stack-sm;
+          padding-top: $unnnic-spacing-stack-sm;
+          border-top: $unnnic-border-width-thinner solid
+            $unnnic-color-neutral-lightest;
+
+        }
+
+        ::v-deep .unnnic-icon {
+          margin-right: $unnnic-inline-xs;
+        }
+      }
+
     }
-
   }
+
 }
 </style>
