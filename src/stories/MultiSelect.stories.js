@@ -26,6 +26,7 @@ const Template = (args, { argTypes }) => ({
             {
               title: 'Vizualizador',
               description: 'Apenas vizualiza o projeto',
+              disabled: true,
             },
           ],
         },

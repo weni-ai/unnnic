@@ -31,6 +31,7 @@
             size="sm"
             :key="indexItem + 'input'"
             class=""
+            :disabled="item.disabled"
           >
             <strong>{{ item.title }}</strong>
             <span>{{ item.description }}</span>
@@ -154,7 +155,6 @@ export default {
 .select-content > div {
   padding: $unnnic-squish-xs;
   background-color: $unnnic-color-neutral-snow;
-  box-shadow: $unnnic-shadow-level-near;
 
   border-radius: $unnnic-border-radius-sm;
   border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
@@ -181,9 +181,11 @@ export default {
 }
 
 .select-content {
+  z-index: 1;
+
   position: absolute;
   margin-top: $unnnic-spacing-stack-xs;
-
+  box-shadow: $unnnic-shadow-level-near;
   > div {
     .title {
       margin-bottom: $unnnic-spacing-stack-sm;
@@ -225,6 +227,12 @@ export default {
 
         ::v-deep .unnnic-icon {
           margin-right: $unnnic-inline-xs;
+        }
+
+        &.disabled {
+          ::v-deep svg > .primary, ::v-deep .label {
+            fill: $unnnic-color-neutral-cleanest;
+          }
         }
       }
 
