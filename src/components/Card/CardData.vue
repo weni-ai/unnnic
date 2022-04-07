@@ -113,5 +113,11 @@ export default {
       }
     }
   }
+
+  transition: box-shadow .2s;
+  cursor: pointer;
+  &:hover{
+    box-shadow: $unnnic-shadow-level-near;
+  }
 }
 </style>
