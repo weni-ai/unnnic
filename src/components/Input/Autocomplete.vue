@@ -13,6 +13,7 @@
         :type="type"
         @focus="onFocus"
         :size="size"
+        :placeholder="placeholder"
       />
 
     <div v-show="open" class="unnnic-autocomplete__container-list">
@@ -110,6 +111,12 @@ export default {
       type: String,
       default: 'md',
     },
+    placeholder: {
+      type: String,
+    },
+    openWithFocus: {
+      type: Boolean,
+    },
   },
   data() {
     return {
@@ -135,7 +142,7 @@ export default {
   },
   methods: {
     onFocus() {
-      if (!this.val) return;
+      if (!this.val && !this.openWithFocus) return;
       this.open = true;
     },
     onChoose(option) {
