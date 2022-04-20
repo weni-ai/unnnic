@@ -46,5 +46,52 @@ $unnnic-color-brand-sec-soft: #808080;
 $unnnic-color-brand-sec: #CCCCCC;
 
 :export{
-    unnnicColorBackgroundSolo: $unnnic-color-background-solo
+    unnnicColorBackgroundSolo: $unnnic-color-background-solo;
 }
+
+$scheme-colors:
+  "background-solo" $unnnic-color-background-solo,
+  "background-sky" $unnnic-color-background-sky,
+  "background-grass" $unnnic-color-background-grass,
+  "background-carpet" $unnnic-color-background-carpet,
+  "background-snow" $unnnic-color-background-snow,
+
+  /* Neutral */
+  "neutral-black" $unnnic-color-neutral-black,
+  "neutral-darkest" $unnnic-color-neutral-darkest,
+  "neutral-dark" $unnnic-color-neutral-dark,
+  "neutral-cloudy" $unnnic-color-neutral-cloudy,
+  "neutral-cleanest" $unnnic-color-neutral-cleanest,
+  "neutral-clean" $unnnic-color-neutral-clean,
+  "neutral-soft" $unnnic-color-neutral-soft,
+  "neutral-lightest" $unnnic-color-neutral-lightest,
+  "neutral-light" $unnnic-color-neutral-light,
+  "neutral-snow" $unnnic-color-neutral-snow,
+
+  /* Feedback colors */
+  "feedback-red" $unnnic-color-feedback-red,
+  "feedback-green" $unnnic-color-feedback-green,
+  "feedback-yellow" $unnnic-color-feedback-yellow,
+  "feedback-blue" $unnnic-color-feedback-blue,
+  "feedback-grey" $unnnic-color-feedback-grey,
+
+  /* Auxiliary colors */
+  "aux-blue" $unnnic-color-aux-blue,
+  "aux-purple" $unnnic-color-aux-purple,
+  "aux-orange" $unnnic-color-aux-orange,
+  "aux-lemon" $unnnic-color-aux-lemon,
+  "aux-pink" $unnnic-color-aux-pink,
+
+  "aux-baby-blue" $unnnic-color-aux-baby-blue,
+  "aux-baby-yellow" $unnnic-color-aux-baby-yellow,
+  "aux-baby-red" $unnnic-color-aux-baby-red,
+  "aux-baby-green" $unnnic-color-aux-baby-green,
+  "aux-baby-pink" $unnnic-color-aux-baby-pink,
+
+  /* Brand */
+  "brand-weni" $unnnic-color-brand-weni,
+  "brand-weni-dark" $unnnic-color-brand-weni-dark,
+  "brand-weni-soft" $unnnic-color-brand-weni-soft,
+  "brand-sec-dark" $unnnic-color-brand-sec-dark,
+  "brand-sec-soft" $unnnic-color-brand-sec-soft,
+  "brand-sec" $unnnic-color-brand-sec;
