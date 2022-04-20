@@ -1,11 +1,18 @@
 import unnnicChatText from '../components/ChatText/ChatText.vue';
 import UnnnicButtonIcon from '../components/Button/ButtonIcon.vue';
+import colorsList from '../utils/colorsList';
 
 export default {
   title: 'example/ChatText',
   component: unnnicChatText,
   argTypes: {
     size: { control: { type: 'select', options: ['normal', 'small'] } },
+    titleColor: {
+      control: {
+        type: 'select',
+        options: colorsList,
+      },
+    },
   },
 };
 

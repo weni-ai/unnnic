@@ -1,7 +1,7 @@
 <template>
   <div :class="['unnnic-chat-text', size]">
     <div class="header">
-      <div class="title">
+      <div :class="['title', titleColor]">
         {{ title }}
 
         <unnnic-tool-tip v-if="info" side="top" :text="info" enabled>
@@ -43,6 +43,11 @@ export default {
 
     title: {
       type: String,
+    },
+
+    titleColor: {
+      type: String,
+      default: 'brand-weni-soft',
     },
 
     info: {
@@ -94,11 +99,16 @@ export default {
       font-weight: $unnnic-font-weight-black;
       font-size: $unnnic-font-size-body-gt;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-      color: $unnnic-color-brand-weni-soft;
       flex: 1;
 
       .info {
         margin-left: $unnnic-spacing-inline-nano;
+      }
+
+      @each $name, $color in $scheme-colors {
+        &.#{$name} {
+          color: $color;
+        }
       }
     }
   }
