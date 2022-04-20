@@ -46,11 +46,11 @@ $unnnic-color-brand-sec-soft: #808080;
 $unnnic-color-brand-sec: #CCCCCC;
 
 :export{
-    unnnicColorBackgroundSolo: $unnnic-color-background-solo
+    unnnicColorBackgroundSolo: $unnnic-color-background-solo;
 }
 
 $scheme-colors:
-  "background-solo" $color-background-solo,
+  "background-solo" $unnnic-color-background-solo,
   "background-sky" $unnnic-color-background-sky,
   "background-grass" $unnnic-color-background-grass,
   "background-carpet" $unnnic-color-background-carpet,
