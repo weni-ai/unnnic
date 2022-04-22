@@ -3,6 +3,7 @@
     :class="expand ? 'expand-multiselect' : 'normal-multiselect'"
     tabindex="-1"
   >
+    <span class="select-permission-label" v-if="label">{{label}}</span>
     <div
       @keypress="handleIsOpenKeyboard"
       @click="active = !active"
@@ -66,6 +67,10 @@ export default {
     },
     expand: {
       default: false,
+    },
+    label: {
+      type: String,
+      default: '',
     },
     groups: {
       type: Array,
@@ -154,7 +159,6 @@ export default {
 .select-content > div {
   padding: $unnnic-squish-xs;
   background-color: $unnnic-color-neutral-snow;
-  box-shadow: $unnnic-shadow-level-near;
 
   border-radius: $unnnic-border-radius-sm;
   border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
@@ -164,12 +168,22 @@ export default {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
   cursor: pointer;
-
   .icon {
     margin-left: $unnnic-spacing-inline-xs;
   }
+}
+.select-permission-label {
+    display: block;
+
+    color: $unnnic-color-neutral-cloudy;
+    margin-bottom: $unnnic-spacing-stack-xs;
+
+    font-family: $unnnic-font-family-secondary;
+    font-size:  $unnnic-font-size-body-gt;
+    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 }
 
 .title {
@@ -185,6 +199,7 @@ export default {
   margin-top: $unnnic-spacing-stack-xs;
 
   > div {
+    box-shadow: $unnnic-shadow-level-near;
     .title {
       margin-bottom: $unnnic-spacing-stack-sm;
     }
