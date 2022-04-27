@@ -9,21 +9,24 @@
           <div
             v-if="closeIcon"
             class="unnnic-modal-container-background-body-close_icon">
-              <u-icon
-              icon="close-1"
-              size="sm"
-              clickable
-              @click="onCloseClick"/>
+              <unnnic-icon-svg
+                icon="close-1"
+                scheme="neutral-dark"
+                size="sm"
+                clickable
+                @click="onCloseClick"
+              />
             </div>
             <div
               :class="[
                 'unnnic-modal-container-background-body-alert_icon',
                 `unnnic-card-scheme--${scheme}--icon`,
                  closeIcon ? '' : 'unnnic-modal-container-background-body-spacing_header']">
-              <u-icon
+              <unnnic-icon-svg
                 :scheme="scheme"
-               :icon="modalIcon"
-                size="xl"/>
+                :icon="modalIcon"
+                size="xl"
+              />
             </div>
             <div class="unnnic-modal-container-background-body-title">
              {{ text }}
@@ -45,11 +48,13 @@
 </template>
 
 <script>
-import UIcon from '../Icon.vue';
+import UnnnicIconSvg from '../Icon-svg.vue';
 
 export default {
   name: 'unnnic-modal',
-  components: { UIcon },
+  components: {
+    UnnnicIconSvg,
+  },
   props: {
     text: {
       type: String,
@@ -143,7 +148,6 @@ export default {
         width: 100%;
         display: flex;
         justify-content: flex-end;
-        color: $unnnic-color-neutral-dark;
         padding-top: $unnnic-spacing-stack-sm;
         padding-bottom: $unnnic-spacing-stack-xs;
     }

@@ -21,18 +21,11 @@
     />
 
     <unnnic-icon-svg
-      v-if="showSvgIconLeft"
+      v-if="iconLeft"
       :icon="iconLeft"
       :scheme="iconScheme"
       :size="iconSize"
       :class="{ 'unnnic-button__icon-left': hasText }"
-      :style="{ visibility: loading ? 'hidden' : null }"
-    />
-
-    <u-icon
-      v-else-if="iconLeft" :icon="iconLeft"
-      :class="{ 'unnnic-button__icon-left': hasText }"
-      :size="iconSize"
       :style="{ visibility: loading ? 'hidden' : null }"
     />
 
@@ -46,23 +39,26 @@
     <span class="unnnic-button__label" :style="{ visibility: loading ? 'hidden' : null }">
       <slot /> {{ text }}
     </span>
-    <u-icon
+
+    <unnnic-icon-svg
       v-if="iconRight"
-      :class="{ 'unnnic-button__icon-right': hasText }"
       :icon="iconRight"
+      :scheme="iconScheme"
       :size="iconSize"
+      :class="{ 'unnnic-button__icon-right': hasText }"
       :style="{ visibility: loading ? 'hidden' : null }"
     />
   </button>
 </template>
 
 <script>
-import UIcon from '../Icon.vue';
 import UnnnicIconSvg from '../Icon-svg.vue';
 
 export default {
   name: 'unnnic-button',
-  components: { UIcon, UnnnicIconSvg },
+  components: {
+    UnnnicIconSvg,
+  },
   props: {
     size: {
       type: String,
@@ -112,19 +108,6 @@ export default {
   computed: {
     buttonDisabled() {
       return this.disabled || this.loading;
-    },
-
-    showSvgIconLeft() {
-      return this.iconLeft
-        && [
-          'button-play-1',
-          'search-1',
-          'arrow-button-up-1',
-          'arrow-button-down-1',
-          'bin-1-1',
-          'floppy-disk-1',
-          'messaging-whatsapp-1',
-        ].includes(this.iconLeft);
     },
 
     iconSize() {

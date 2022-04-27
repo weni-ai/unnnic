@@ -2,12 +2,12 @@
   <div class="unnnic-card-tag-carousel">
     <div class="unnnic-card-tag-carousel__button unnnic-card-tag-carousel__button--left">
       <div class="unnnic-card-tag-carousel__button__icon">
-        <unnnic-icon
+        <unnnic-icon-svg
           icon="arrow-left-1-1"
           size="sm"
           @click.native="previous()"
+          :scheme="[hasPrev ? 'neutral-black' : 'neutral-cleanest']"
           clickable
-          :class="[!hasPrev && 'unnnic-card-tag-carousel__button__icon--disabled']"
         />
       </div>
       <span
@@ -35,12 +35,12 @@
         v-show="hasNext"
       />
       <div class="unnnic-card-tag-carousel__button__icon">
-        <unnnic-icon
+        <unnnic-icon-svg
           icon="arrow-right-1-1"
           @click.native="next()"
           size="sm"
+          :scheme="[hasNext ? 'neutral-black' : 'neutral-cleanest']"
           clickable
-          :class="[!hasNext && 'unnnic-card-tag-carousel__button__icon--disabled']"
         />
       </div>
     </div>
@@ -49,7 +49,7 @@
 
 <script>
 import UnnnicTag from '../Tag/Tag.vue';
-import UnnnicIcon from '../Icon.vue';
+import UnnnicIconSvg from '../Icon-svg.vue';
 
 export default {
   name: 'unnnic-tag-carousel',
@@ -62,7 +62,7 @@ export default {
   },
   components: {
     UnnnicTag,
-    UnnnicIcon,
+    UnnnicIconSvg,
   },
   props: {
     value: {
@@ -155,10 +155,6 @@ export default {
       justify-content: center;
       align-items: center;
       background-color: $unnnic-color-background-snow;
-
-      &--disabled {
-        color: $unnnic-color-neutral-cleanest;
-      }
     }
     z-index: 1;
     position: absolute;

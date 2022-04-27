@@ -7,7 +7,11 @@
     }"
   >
     <div :class="['unnnic-card-content__icon', enabled && 'unnnic-card-content__icon--disabled']">
-      <unnnic-icon :icon="icon" size="sm" />
+      <unnnic-icon-svg
+        :icon="icon"
+        scheme="neutral-cloudy"
+        size="sm"
+      />
     </div>
     <div class="unnnic-card-content__content">
       <div class="unnnic-card-content__content__title">{{ title }}</div>
@@ -17,11 +21,13 @@
 </template>
 
 <script>
-import UnnnicIcon from '../Icon.vue';
+import UnnnicIconSvg from '../Icon-svg.vue';
 
 export default {
   name: 'unnnic-card',
-  components: { UnnnicIcon },
+  components: {
+    UnnnicIconSvg,
+  },
   props: {
     title: {
       type: String,
@@ -119,7 +125,6 @@ export default {
     border-radius: $unnnic-border-radius-sm;
     padding: 0.125rem $unnnic-inline-nano;
     margin-right: $unnnic-inline-xs;
-    color: $unnnic-color-neutral-cloudy;
     background-color: $unnnic-color-neutral-lightest;
 
     &--disabled {

@@ -1,8 +1,8 @@
 <template>
   <div v-if="version === '1.0'" :class="['unnnic-alert', `unnnic-alert-position--${position}`]">
-    <unnnic-icon
-      :class="`unnnic-card-scheme--${scheme}--icon`"
+    <unnnic-icon-svg
       :icon="icon"
+      :scheme="scheme"
       size="sm"
     />
     <div class="unnnic-alert__content">
@@ -19,13 +19,13 @@
       @click="onClose()">
       {{ closeText.toUpperCase() }}
     </div>
-    <unnnic-icon
+    <unnnic-icon-svg
       v-else
-      class="unnnic-alert__close-icon"
       clickable
       icon="close-1"
+      scheme="brand-sec"
       size="xs"
-      @click="onClose()"
+      @click="onClose"
     />
   </div>
 
@@ -33,13 +33,13 @@
 </template>
 
 <script>
-import unnnicIcon from '../Icon.vue';
+import unnnicIconSvg from '../Icon-svg.vue';
 import Version1dot1 from './Version1dot1.vue';
 
 export default {
   name: 'unnnicAlert',
   components: {
-    unnnicIcon,
+    unnnicIconSvg,
     Version1dot1,
   },
   props: {
@@ -136,9 +136,6 @@ export default {
     }
 
     &__close {
-      &-icon {
-        color: $unnnic-color-brand-sec;
-      }
       &-text {
         color: $unnnic-color-brand-sec;
         font-size: $unnnic-font-size-body-md;
