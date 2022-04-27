@@ -11,20 +11,24 @@
       :class="`unnnic-tag__label
       ${hasCloseIcon ? 'unnnic-tag__label--hasIcon' : ''}
       ${disabled ? 'unnnic-tag__label--disabled' : ''}`">{{text}}</span>
-    <u-icon
+    <unnnic-icon-svg
       v-if="hasCloseIcon"
       icon="close-1"
       class="unnnic-tag__icon"
-      size="xs" />
+      scheme="neutral-darkest"
+      size="xs"
+    />
   </div>
 </template>
 
 <script>
-import UIcon from '../Icon.vue';
+import UnnnicIconSvg from '../Icon-svg.vue';
 
 export default {
   name: 'unnnic-tag',
-  components: { UIcon },
+  components: {
+    UnnnicIconSvg,
+  },
   props: {
     text: {
       type: String,
@@ -116,8 +120,7 @@ $scheme-colors:
     }
 
     &__icon {
-      color: $unnnic-color-neutral-darkest;
-      padding-right: $unnnic-inline-ant;
+      margin-right: $unnnic-inline-ant;
       cursor: pointer;
     }
 }

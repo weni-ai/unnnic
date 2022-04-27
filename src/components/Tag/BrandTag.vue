@@ -7,23 +7,23 @@
     }"
   >
     <span class="unnnic-brand-tag__label">{{ text }}</span>
-    <u-icon
-      :icon="`${!disabled ? 'add-1' : 'close-1'}`"
-      :class="{
-        'unnnic-brand-tag__icon': true,
-        'unnnic-brand-tag__icon--disabled': !disabled,
-      }"
+    <unnnic-icon-svg
+      :icon="disabled ? 'close-1' : 'add-1'"
+      :scheme="disabled ? 'neutral-snow': 'brand-weni-dark'"
+      class="unnnic-brand-tag__icon"
       size="xs"
     />
   </div>
 </template>
 
 <script>
-import UIcon from '../Icon.vue';
+import UnnnicIconSvg from '../Icon-svg.vue';
 
 export default {
   name: 'unnnic-brand-tag',
-  components: { UIcon },
+  components: {
+    UnnnicIconSvg,
+  },
   props: {
     text: {
       type: String,
@@ -90,13 +90,8 @@ export default {
   }
 
   &__icon {
-    padding-right: $unnnic-inline-ant;
+    margin-right: $unnnic-inline-ant;
     cursor: pointer;
-    color: $unnnic-color-neutral-snow;
-
-    &--disabled {
-      color: $unnnic-color-brand-weni-dark;
-    }
   }
 }
 </style>

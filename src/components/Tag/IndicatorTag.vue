@@ -7,22 +7,26 @@
       <span class="unnnic-tag__count">{{ count }}</span>
     </tool-tip>
     <span class="unnnic-tag__label">{{ text }}</span>
-    <u-icon
+    <unnnic-icon-svg
       v-if="hasBackButton"
       icon="arrow-right-1-1"
       class="unnnic-tag__icon"
+      scheme="neutral-darkest"
       size="xs"
     />
   </div>
 </template>
 
 <script>
-import UIcon from '../Icon.vue';
+import UnnnicIconSvg from '../Icon-svg.vue';
 import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
   name: 'unnnic-tag',
-  components: { UIcon, ToolTip },
+  components: {
+    UnnnicIconSvg,
+    ToolTip,
+  },
   props: {
     text: {
       type: String,
@@ -94,8 +98,7 @@ export default {
   }
 
   &__icon {
-    color: $unnnic-color-neutral-darkest;
-    padding-right: $unnnic-inline-ant;
+    margin-right: $unnnic-inline-ant;
   }
 }
 </style>

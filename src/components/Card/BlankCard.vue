@@ -4,10 +4,12 @@
       'unnnic-card-blank__clickable': clickable,
     }">
     <div class="unnnic-card-blank__content">
-        <u-icon
-        :icon="icon"
-        class="unnnic-card-blank__content__icon"
-        size="xl" />
+        <unnnic-icon-svg
+          :icon="icon"
+          scheme="neutral-clean"
+          class="unnnic-card-blank__content__icon"
+          size="xl"
+        />
 
       <div class="unnnic-card-blank__content__text">{{ text }}</div>
     </div>
@@ -15,11 +17,13 @@
 </template>
 
 <script>
-import UIcon from '../Icon.vue';
+import UnnnicIconSvg from '../Icon-svg.vue';
 
 export default {
   name: 'unnnic-card',
-  components: { UIcon },
+  components: {
+    UnnnicIconSvg,
+  },
   props: {
     text: {
       type: String,
@@ -64,7 +68,6 @@ export default {
     width: 100%;
 
     &__icon {
-      color: $unnnic-color-neutral-clean;
       padding-bottom: $unnnic-spacing-stack-xs;
     }
 

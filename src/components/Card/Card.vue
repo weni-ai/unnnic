@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import UICon from '../Icon.vue';
 import DashCard from './DashCard.vue';
 import TitleCard from './TitleCard.vue';
 import StatusCard from './StatusCard.vue';
@@ -40,7 +39,6 @@ import MarketplaceCard from './MarketplaceCard.vue';
 
 export default {
   name: 'unnnic-card',
-  components: { UICon },
   props: {
     type: {
       type: String,
