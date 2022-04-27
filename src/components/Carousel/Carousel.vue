@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import UICon from '../Icon.vue';
 import TagCarousel from './TagCarousel.vue';
 
 export default {
@@ -21,7 +20,6 @@ export default {
   },
 
   name: 'unnnic-carousel',
-  components: { UICon },
   props: {
     value: {
       type: Array,
