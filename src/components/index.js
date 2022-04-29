@@ -47,6 +47,7 @@ import UploadArea from './UploadArea/UploadArea.vue';
 import ImportCard from './ImportCard/ImportCard.vue';
 import DateFilter from './DateFilter/DateFilter.vue';
 import ChatText from './ChatText/ChatText.vue';
+import TextArea from './TextArea/TextArea.vue';
 
 const components = {
   unnnicInput: input,
@@ -96,6 +97,7 @@ const components = {
   unnnicImportCard: ImportCard,
   unnnicDateFilter: DateFilter,
   unnnicChatText: ChatText,
+  unnnicTextArea: TextArea,
 };
 
 Object.keys(components).forEach((name) => {
@@ -151,3 +153,4 @@ export const unnnicUploadArea = UploadArea;
 export const unnnicImportCard = ImportCard;
 export const unnnicDateFilter = DateFilter;
 export const unnnicChatText = ChatText;
+export const unnnicTextArea = TextArea;
