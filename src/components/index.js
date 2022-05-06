@@ -49,6 +49,7 @@ import ImportCard from './ImportCard/ImportCard.vue';
 import DateFilter from './DateFilter/DateFilter.vue';
 import ChatText from './ChatText/ChatText.vue';
 import TextArea from './TextArea/TextArea.vue';
+import CardNumber from './CardNumber/CardNumber.vue';
 
 const components = {
   unnnicInput: input,
@@ -100,6 +101,7 @@ const components = {
   unnnicDateFilter: DateFilter,
   unnnicChatText: ChatText,
   unnnicTextArea: TextArea,
+  unnnicCardNumber: CardNumber,
 };
 
 Object.keys(components).forEach((name) => {
@@ -157,3 +159,4 @@ export const unnnicImportCard = ImportCard;
 export const unnnicDateFilter = DateFilter;
 export const unnnicChatText = ChatText;
 export const unnnicTextArea = TextArea;
+export const unnnicCardNumber = CardNumber;
