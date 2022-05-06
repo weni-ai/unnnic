@@ -67,10 +67,6 @@ export default {
 
     this.isScrollable = areaScrollable;
   },
-
-  updated() {
-    console.log(this.$refs.description.scrollHeight);
-  },
 };
 </script>
 
