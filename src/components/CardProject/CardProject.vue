@@ -129,7 +129,7 @@ export default {
       align-items: center;
 
       .action {
-        margin: $unnnic-spacing-inset-xs;
+        margin: $unnnic-spacing-inset-nano;
       }
     }
   }
