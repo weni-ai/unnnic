@@ -2,7 +2,14 @@
   <div class="unnnic-chart-rainbow">
     <svg width="332" height="166" class="semicircle">
       <defs xmlns="http://www.w3.org/2000/svg">
-        <linearGradient id="paint0_linear_10224_36584" x1="178" y1="45" x2="28" y2="198" gradientUnits="userSpaceOnUse">
+        <linearGradient
+          id="paint0_linear_10224_36584"
+          x1="178"
+          y1="45"
+          x2="28"
+          y2="198"
+          gradientUnits="userSpaceOnUse"
+        >
           <stop stop-color="#00DED2"/>
           <stop offset="1" stop-color="#00DED2" stop-opacity="0"/>
         </linearGradient>
@@ -93,7 +100,7 @@ export default {
 
     this.$refs.background.setAttribute('d', path);
 
-    this.$refs.front.setAttribute('d', describeArc(166, 166, 139.44, 152.72, -85, -85 + (this.value / 100 * 170)));
+    this.$refs.front.setAttribute('d', describeArc(166, 166, 139.44, 152.72, -85, -85 + ((this.value / 100) * 170)));
   },
 };
 </script>
