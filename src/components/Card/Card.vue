@@ -14,6 +14,7 @@
       :button-action="buttonAction"
       :value="value"
       :percent="percent"
+      :inverted-percentage="invertedPercentage"
       :status="status"
       :description="description"
       :info-position="infoPosition"
@@ -76,6 +77,10 @@ export default {
     percent: {
       type: Number,
       default: 0,
+    },
+    invertedPercentage: {
+      type: Boolean,
+      default: false,
     },
     rating: {
       type: Number,
