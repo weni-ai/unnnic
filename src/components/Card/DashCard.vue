@@ -56,6 +56,10 @@ export default {
       type: Number,
       default: 0,
     },
+    invertedPercentage: {
+      type: Boolean,
+      default: false,
+    },
     scheme: {
       type: String,
       default: null,
@@ -64,6 +68,10 @@ export default {
 
   computed: {
     color() {
+      if (this.invertedPercentage) {
+        return this.percent < 0 ? 'green' : 'red';
+      }
+
       return this.percent < 0 ? 'red' : 'green';
     },
   },
