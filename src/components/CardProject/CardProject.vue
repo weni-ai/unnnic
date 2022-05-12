@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import unnnicIcon from '../Icon-svg.vue';
+import unnnicIcon from '../Icon.vue';
 import unnnicDropdown from '../Dropdown/Dropdown.vue';
 import unnnicTag from '../Tag/Tag.vue';
 import unnnicAvatarIcon from '../AvatarIcon/AvatarIcon.vue';

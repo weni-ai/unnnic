@@ -1,6 +1,6 @@
 import unnnicCardProject from '../components/CardProject/CardProject.vue';
 import unnnicDropdownItem from '../components/Dropdown/DropdownItem.vue';
-import unnnicIcon from '../components/Icon-svg.vue';
+import unnnicIcon from '../components/Icon.vue';
 
 export default {
   title: 'example/CardProject',

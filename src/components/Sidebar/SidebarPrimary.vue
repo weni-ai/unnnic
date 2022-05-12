@@ -77,7 +77,7 @@
 <script>
 import ToolTip from '../ToolTip/ToolTip.vue';
 import languageSelect from '../Dropdown/LanguageSelect.vue';
-import iconSvg from '../Icon-svg.vue';
+import iconSvg from '../Icon.vue';
 
 export default {
   components: {

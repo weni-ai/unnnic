@@ -27,7 +27,7 @@
 
 <script>
 import UnnnicToolTip from '../ToolTip/ToolTip.vue';
-import UnnnicIcon from '../Icon-svg.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   components: {

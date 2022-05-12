@@ -45,7 +45,7 @@
 
 <script>
 import vClickOutside from 'v-click-outside';
-import UnnnicIcon from '../Icon-svg.vue';
+import UnnnicIcon from '../Icon.vue';
 import UnnnicRadio from '../Radio/Radio.vue';
 
 export default {

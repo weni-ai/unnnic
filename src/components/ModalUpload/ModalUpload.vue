@@ -47,7 +47,7 @@
 
 <script>
 import UnnnicUploadArea from '../UploadArea/UploadArea.vue';
-import UnnnicIcon from '../Icon-svg.vue';
+import UnnnicIcon from '../Icon.vue';
 import UnnnicButton from '../Button/Button.vue';
 
 export default {

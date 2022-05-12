@@ -38,7 +38,7 @@
 
 <script>
 import BaseInput from './BaseInput.vue';
-import UnnnicIcon from '../Icon-svg.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   components: {

@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import unnnicIcon from '../Icon-svg.vue';
+import unnnicIcon from '../Icon.vue';
 
 export default {
   components: { unnnicIcon },
