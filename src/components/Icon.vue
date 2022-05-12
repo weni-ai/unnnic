@@ -1,14 +1,19 @@
 <template>
-    <span
-      @click="onClick"
-      :class="`unnnic-icon icon-${icon} unnnic-icon-${size || 'md'}
-        ${scheme ? `unnnic-icon-scheme--${scheme}` : ''}
-        ${scheme && hasBackground ? `unnnic-icon-background-scheme--${scheme}` : ''}
-        icon-${size} ${ clickable ? 'unnnic--clickable' : '' }`">
-    </span>
+<span
+    @click="onClick"
+    :class="[
+      'unnnic-icon',
+      `unnnic-icon__size--${size}`,
+      clickable ? 'unnnic--clickable' : '',
+      lineHeight ? `unnnic-icon__line-height--${lineHeight}` : '',
+      scheme ? `unnnic-icon-scheme--${scheme}` : '',
+    ]"
+    v-html="svg" />
 </template>
 
 <script>
+import icons from '../utils/icons';
+
 export default {
   name: 'uIcon',
   props: {
@@ -24,17 +29,25 @@ export default {
       type: String,
       default: 'md',
       validator(value) {
-        if (!value) return true;
         return ['nano', 'xs', 'sm', 'ant', 'md', 'lg', 'xl'].indexOf(value) !== -1;
+      },
+    },
+    lineHeight: {
+      type: String,
+      default: null,
+      validator(value) {
+        return !value || ['sm', 'md', 'lg'].indexOf(value) !== -1;
       },
     },
     scheme: {
       type: String,
       default: '',
     },
-    hasBackground: {
-      type: Boolean,
-      default: false,
+  },
+  mounted() {},
+  computed: {
+    svg() {
+      return icons[this.icon];
     },
   },
   methods: {
@@ -46,71 +59,89 @@ export default {
 };
 </script>
 
-<style lang="scss">
-@import '../assets/scss/unnnic.scss';
-@import '../assets/fonts/icons.css';
+<style lang="scss" scoped>
+@import "../assets/scss/unnnic.scss";
 
-$scheme-colors:
-  'feedback-red' $unnnic-color-feedback-red,
-  'feedback-green' $unnnic-color-feedback-green,
-  'feedback-yellow' $unnnic-color-feedback-yellow,
-  'feedback-blue' $unnnic-color-feedback-blue,
-  'feedback-grey' $unnnic-color-feedback-grey,
-   'aux-blue' $unnnic-color-aux-blue,
-   'aux-purple' $unnnic-color-aux-purple,
-   'aux-orange' $unnnic-color-aux-orange,
-   'aux-lemon' $unnnic-color-aux-lemon,
-   'aux-pink' $unnnic-color-aux-pink,
-   'neutral-soft' $unnnic-color-neutral-soft;
+.unnnic-icon ::v-deep svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+</style>
+
+<style lang="scss">
+@import "../assets/scss/unnnic.scss";
+
+$scheme-colors: "feedback-red" $unnnic-color-feedback-red,
+  "feedback-green" $unnnic-color-feedback-green, "feedback-yellow" $unnnic-color-feedback-yellow,
+  "feedback-blue" $unnnic-color-feedback-blue, "feedback-grey" $unnnic-color-feedback-grey,
+  "aux-blue" $unnnic-color-aux-blue, "aux-purple" $unnnic-color-aux-purple,
+  "aux-orange" $unnnic-color-aux-orange, "aux-lemon" $unnnic-color-aux-lemon,
+  "aux-pink" $unnnic-color-aux-pink,
+  "brand-weni" $unnnic-color-brand-weni,
+  "brand-weni-soft" $unnnic-color-brand-weni-soft,
+  "brand-weni-dark" $unnnic-color-brand-weni-dark,
+  "brand-sec" $unnnic-color-brand-sec,
+  "neutral-clean" $unnnic-color-neutral-clean,
+  "neutral-cleanest" $unnnic-color-neutral-cleanest,
+  "neutral-dark" $unnnic-color-neutral-dark,
+  "neutral-soft" $unnnic-color-neutral-soft,
+  "neutral-darkest" $unnnic-color-neutral-darkest,
+  "neutral-cloudy" $unnnic-color-neutral-cloudy,
+  "neutral-snow" $unnnic-color-neutral-snow,
+  "background-snow" $unnnic-color-background-snow;
 
 @each $name, $color in $scheme-colors {
   .unnnic-icon-scheme {
     &--#{$name} {
-      color: $color;
+      & .primary {
+        fill: $color;
+      }
 
-      &--icon {
-        color: $color;
+      & .primary-stroke {
+        stroke: $color;
       }
     }
   }
-
-  .unnnic-icon-background-scheme {
-    &--#{$name} {
-      background-color: rgba($color, $unnnic-opacity-level-extra-light);
-      border-radius: $unnnic-border-radius-sm;
-      padding: $unnnic-inset-nano;
-    }
-
-    &--border {
-      border-left: 4px solid $color;
-    }
-  }
 }
 
-.unnnic-icon {
-  &-xs {
-    font-size: $unnnic-icon-size-xs;
-  }
+$icon-sizes:
+    'xl' $unnnic-icon-size-xl,
+    'lg' $unnnic-icon-size-lg,
+    'md' $unnnic-icon-size-md,
+    'ant' $unnnic-icon-size-ant,
+    'sm' $unnnic-icon-size-sm,
+    'xs' $unnnic-icon-size-xs;
 
-  &-sm {
-    font-size: $unnnic-icon-size-sm;
-  }
+$line-heights:
+  'sm' $unnnic-line-height-small,
+  'md' $unnnic-line-height-medium,
+  'lg' $unnnic-line-height-large;
 
-  &-ant {
-    font-size: $unnnic-icon-size-ant;
-  }
+    .unnnic-icon {
+      position: relative;
+      display: inline-block;
+      vertical-align: middle;
 
-  &-md {
-    font-size: $unnnic-icon-size-md;
-  }
+        @each $name, $size in $icon-sizes {
+            &__size--#{$name} {
+                width: $size;
+                height: $size;
+                min-width: $size;
+                min-height: $size;
 
-  &-lg {
-    font-size: $unnnic-icon-size-lg;
-  }
+                @each $line-name, $line-size in $line-heights {
+                  &.unnnic-icon__line-height--#{$line-name} svg {
+                    position: relative;
+                    top: (($size + $line-size) - ($size*1.2))/1.2;
+                  }
+              }
+            }
+        }
 
-  &-xl {
-    font-size: $unnnic-icon-size-xl;
-  }
-}
-
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+    }
 </style>
