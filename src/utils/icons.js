@@ -87,6 +87,7 @@ import alarmBell3 from '!!svg-inline-loader!../assets/icons/alarm-bell-3.svg';
 import alertCircle1 from '!!svg-inline-loader!../assets/icons/alert-circle-1.svg';
 import bookAddress2 from '!!svg-inline-loader!../assets/icons/book-address-2.svg';
 import graphStatsAscend2 from '!!svg-inline-loader!../assets/icons/graph-stats-ascend-2.svg';
+import graphStatsDescend2 from '!!svg-inline-loader!../assets/icons/graph-stats-descend-2.svg';
 import synchronizeArrowClock5 from '!!svg-inline-loader!../assets/icons/synchronize-arrow-clock-5.svg';
 import emailActionUnread1 from '!!svg-inline-loader!../assets/icons/email-action-unread-1.svg';
 import synchronizeArrowClock4 from '!!svg-inline-loader!../assets/icons/synchronize-arrow-clock-4.svg';
@@ -229,6 +230,7 @@ export default {
   'alert-circle-1': alertCircle1,
   'book-address-2': bookAddress2,
   'graph-stats-ascend-2': graphStatsAscend2,
+  'graph-stats-descend-2': graphStatsDescend2,
   'synchronize-arrow-clock-5': synchronizeArrowClock5,
   'email-action-unread-1': emailActionUnread1,
   'synchronize-arrow-clock-4': synchronizeArrowClock4,

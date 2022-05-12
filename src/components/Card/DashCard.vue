@@ -15,7 +15,7 @@
 
       <div v-if="percent" :class="['percent', `unnnic-card-scheme--feedback-${color}`]">
         <unnnic-icon
-          icon="graph-stats-ascend-2"
+          :icon="`graph-stats-${percent >= 0 ? 'ascend' : 'descend'}-2`"
           :scheme="`feedback-${color}`"
           size="sm"
           class="icon"
