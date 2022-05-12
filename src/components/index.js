@@ -12,7 +12,6 @@ import dropdown from './Dropdown/Dropdown.vue';
 import dropdownItem from './Dropdown/DropdownItem.vue';
 import avatarIcon from './AvatarIcon/AvatarIcon.vue';
 import icon from './Icon.vue';
-import iconSvg from './Icon-svg.vue';
 import toolTip from './ToolTip/ToolTip.vue';
 import card from './Card/Card.vue';
 import cardCompany from './Card/CardCompany.vue';
@@ -64,7 +63,7 @@ const components = {
   unnnicTableRow: tableRow,
   unnnicAvatarIcon: avatarIcon,
   unnnicIcon: icon,
-  unnnicIconSvg: iconSvg,
+  unnnicIconSvg: icon,
   unnnicDropdown: dropdown,
   unnnicDropdownItem: dropdownItem,
   unnnicToolTip: toolTip,
@@ -123,7 +122,7 @@ export const unnnicDropdown = dropdown;
 export const unnnicDropdownItem = dropdownItem;
 export const unnnicAvatarIcon = avatarIcon;
 export const unnnicIcon = icon;
-export const unnnicIconSvg = iconSvg;
+export const unnnicIconSvg = icon;
 export const unnnicToolTip = toolTip;
 export const unnnicCard = card;
 export const unnnicCardCompany = cardCompany;

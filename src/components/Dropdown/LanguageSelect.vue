@@ -77,7 +77,7 @@
 <script>
 import vClickOutside from 'v-click-outside';
 import unnnicFlag from '../Flag.vue';
-import UnnnicIcon from '../Icon-svg.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'LanguageSelect',

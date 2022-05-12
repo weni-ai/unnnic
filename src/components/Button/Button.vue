@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon-svg.vue';
+import UnnnicIconSvg from '../Icon.vue';
 
 export default {
   name: 'unnnic-button',

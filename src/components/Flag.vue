@@ -8,7 +8,7 @@
 <script>
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
-import UnnnicIconSvg from './Icon-svg.vue';
+import UnnnicIconSvg from './Icon.vue';
 
 export default {
   name: 'Flag',

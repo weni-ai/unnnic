@@ -64,7 +64,7 @@
 
 <script>
 import UnnnicTag from '../Tag/Tag.vue';
-import UnnnicIcon from '../Icon-svg.vue';
+import UnnnicIcon from '../Icon.vue';
 import UnnnicDropdown from '../Dropdown/Dropdown.vue';
 import UnnnicDropdownItem from '../Dropdown/DropdownItem.vue';
 import ToolTip from '../ToolTip/ToolTip.vue';

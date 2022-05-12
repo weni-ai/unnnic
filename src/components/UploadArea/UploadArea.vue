@@ -70,7 +70,7 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon-svg.vue';
+import UnnnicIconSvg from '../Icon.vue';
 import UnnnicImportCard from '../ImportCard/ImportCard.vue';
 
 export default {

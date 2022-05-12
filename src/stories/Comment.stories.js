@@ -2,7 +2,7 @@ import unnnicComment from '../components/Comment/Comment.vue';
 import unnnicButton from '../components/Button/Button.vue';
 import unnnicDropdown from '../components/Dropdown/Dropdown.vue';
 import unnnicDropdownItem from '../components/Dropdown/DropdownItem.vue';
-import unnnicIconSvg from '../components/Icon-svg.vue';
+import unnnicIconSvg from '../components/Icon.vue';
 
 export default {
   title: 'Example/Comment',
@@ -43,7 +43,7 @@ const Template = (args, { argTypes }) => ({
           size="small"
         />
       </unnnic-dropdown-item>
-    </unnnic-dropdown>    
+    </unnnic-dropdown>
   </unnnic-comment>
   `,
 });

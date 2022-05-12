@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon-svg.vue';
+import UnnnicIconSvg from '../Icon.vue';
 import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {

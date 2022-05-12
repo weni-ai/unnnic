@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import unnnicIconSvg from '../Icon-svg.vue';
+import unnnicIconSvg from '../Icon.vue';
 
 export default {
   model: {

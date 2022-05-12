@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import UIcon from '../Icon-svg.vue';
+import UIcon from '../Icon.vue';
 import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {

@@ -49,7 +49,7 @@
 
 <script>
 import UnnnicTag from '../Tag/Tag.vue';
-import UnnnicIconSvg from '../Icon-svg.vue';
+import UnnnicIconSvg from '../Icon.vue';
 
 export default {
   name: 'unnnic-tag-carousel',
