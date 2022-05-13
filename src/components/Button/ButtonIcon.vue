@@ -1,11 +1,11 @@
 <template>
   <button
-    :class="['button-icon', size]"
+    :class="['button-icon', size, type]"
     v-on="$listeners"
   >
     <unnnic-icon
       :icon="icon"
-      scheme="neutral-darkest"
+      :scheme="iconScheme"
       size="ant"
     ></unnnic-icon>
   </button>
@@ -20,6 +20,11 @@ export default {
   },
 
   props: {
+    type: {
+      type: String,
+      default: 'secondary',
+    },
+
     size: {
       type: String,
       required: true,
@@ -33,6 +38,16 @@ export default {
       required: true,
     },
   },
+
+  computed: {
+    iconScheme() {
+      if (this.type === 'primary') {
+        return 'neutral-snow';
+      }
+
+      return 'neutral-darkest';
+    },
+  },
 };
 </script>
 
@@ -40,23 +55,9 @@ export default {
 @import "../../assets/scss/unnnic.scss";
 
 .button-icon {
-  background-color: rgba($unnnic-color-neutral-soft, $unnnic-opacity-level-light);
-  border-radius: $unnnic-border-radius-sm;
-  position: relative;
   border: 0;
   cursor: pointer;
-
-  &:before {
-    content: " ";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
-    border-radius: inherit;
-    pointer-events: none;
-  }
+  border-radius: $unnnic-border-radius-sm;
 
   &.small {
     padding: $unnnic-spacing-inset-nano;
@@ -66,11 +67,36 @@ export default {
     padding: $unnnic-spacing-inset-xs;
   }
 
-  &:hover {
-    background-color: rgba($unnnic-color-neutral-soft, $unnnic-opacity-level-overlay);
+  &.primary {
+    background-color: $unnnic-color-neutral-darkest;
+
+    &:hover {
+      opacity: $unnnic-opacity-level-clear;
+    }
+  }
+
+  &.secondary {
+    background-color: rgba($unnnic-color-neutral-soft, $unnnic-opacity-level-light);
+    position: relative;
 
     &:before {
-      border: 0;
+      content: " ";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
+      border-radius: inherit;
+      pointer-events: none;
+    }
+
+    &:hover {
+      background-color: rgba($unnnic-color-neutral-soft, $unnnic-opacity-level-overlay);
+
+      &:before {
+        border: 0;
+      }
     }
   }
 }
