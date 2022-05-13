@@ -50,6 +50,7 @@ import ChatText from './ChatText/ChatText.vue';
 import TextArea from './TextArea/TextArea.vue';
 import CardNumber from './CardNumber/CardNumber.vue';
 import chartRainbow from './ChartRainbow/ChartRainbow.vue';
+import textEditor from './TextEditor/TextEditor.vue';
 
 const components = {
   unnnicInput: input,
@@ -103,6 +104,7 @@ const components = {
   unnnicTextArea: TextArea,
   unnnicCardNumber: CardNumber,
   unnnicChartRainbow: chartRainbow,
+  unnnicTextEditor: textEditor,
 };
 
 Object.keys(components).forEach((name) => {
@@ -162,3 +164,4 @@ export const unnnicChatText = ChatText;
 export const unnnicTextArea = TextArea;
 export const unnnicCardNumber = CardNumber;
 export const unnnicChartRainbow = chartRainbow;
+export const unnnicTextEditor = textEditor;
