@@ -138,6 +138,16 @@ import videoFileMp41 from '!!svg-inline-loader!../assets/icons/video-file-mp4-1.
 import officeFilePdf11 from '!!svg-inline-loader!../assets/icons/office-file-pdf-1-1.svg';
 import fitnessBiceps1 from '!!svg-inline-loader!../assets/icons/fitness-biceps-1.svg';
 import studyLightIdea1 from '!!svg-inline-loader!../assets/icons/study-light-idea-1.svg';
+import textJustified from '!!svg-inline-loader!../assets/icons/text-justified.svg';
+import arrowUndo from '!!svg-inline-loader!../assets/icons/arrow-undo.svg';
+import arrowRedo from '!!svg-inline-loader!../assets/icons/arrow-redo.svg';
+import textBold from '!!svg-inline-loader!../assets/icons/text-bold.svg';
+import textItalic from '!!svg-inline-loader!../assets/icons/text-italic.svg';
+import textUnderline from '!!svg-inline-loader!../assets/icons/text-underline.svg';
+import unorderedList from '!!svg-inline-loader!../assets/icons/unordered-list.svg';
+import textLeft from '!!svg-inline-loader!../assets/icons/text-left.svg';
+import textCenter from '!!svg-inline-loader!../assets/icons/text-center.svg';
+import textRight from '!!svg-inline-loader!../assets/icons/text-right.svg';
 
 export default {
   'app-window-edit-1': appWindowEdit1,
@@ -278,4 +288,14 @@ export default {
   'office-file-pdf-1-1': officeFilePdf11,
   'fitness-biceps-1': fitnessBiceps1,
   'study-light-idea-1': studyLightIdea1,
+  'text-justified': textJustified,
+  'arrow-undo': arrowUndo,
+  'arrow-redo': arrowRedo,
+  'text-bold': textBold,
+  'text-italic': textItalic,
+  'text-underline': textUnderline,
+  'unordered-list': unorderedList,
+  'text-left': textLeft,
+  'text-center': textCenter,
+  'text-right': textRight,
 };
