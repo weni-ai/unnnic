@@ -162,12 +162,12 @@ export default {
 
   data() {
     const today = new Date();
-    const referenceDate = `${today.getMonth() + 1}-1-${today.getFullYear()}`;
+    const referenceDate = `${today.getMonth() + 1} 1 ${today.getFullYear()}`;
 
     return {
       referenceDate,
-      startDate: this.initialStartDate || '',
-      endDate: this.initialEndDate || '',
+      startDate: this.initialStartDate.replace(/-/g, ' ') || '',
+      endDate: this.initialEndDate.replace(/-/g, ' ') || '',
       optionSelected: '',
     };
   },
@@ -198,7 +198,7 @@ export default {
 
   methods: {
     dateToString(date) {
-      return `${date.getMonth() + 1}-${date.getDate()}-${date.getFullYear()}`;
+      return `${date.getMonth() + 1} ${date.getDate()} ${date.getFullYear()}`;
     },
 
     stringToTime(date) {
@@ -206,7 +206,7 @@ export default {
     },
 
     getDate(date) {
-      return new Date(date).getDate();
+      return new Date(date.toString()).getDate();
     },
 
     getMonth(date) {
@@ -353,7 +353,7 @@ export default {
 
       if (this.endDate) {
         const secondMonth = this.addMonth(this.referenceDate, 1);
-        const firstDateOfEndDate = `${this.getMonth(this.endDate) + 1}-1-${this.getFullYear(this.endDate)}`;
+        const firstDateOfEndDate = `${this.getMonth(this.endDate) + 1} 1 ${this.getFullYear(this.endDate)}`;
 
         if (![this.referenceDate, secondMonth].includes(firstDateOfEndDate)) {
           this.referenceDate = firstDateOfEndDate;
