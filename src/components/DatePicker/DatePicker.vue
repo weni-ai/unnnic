@@ -166,8 +166,8 @@ export default {
 
     return {
       referenceDate,
-      startDate: this.initialStartDate.replace(/-/g, ' ') || '',
-      endDate: this.initialEndDate.replace(/-/g, ' ') || '',
+      startDate: (this.initialStartDate || '').replace(/-/g, ' '),
+      endDate: (this.initialEndDate || '').replace(/-/g, ' '),
       optionSelected: '',
     };
   },
