@@ -182,8 +182,8 @@ export default {
 
     value() {
       return {
-        startDate: this.startDate.replace(' ', '-'),
-        endDate: this.endDate.replace(' ', '-'),
+        startDate: this.startDate.replaceAll(' ', '-'),
+        endDate: this.endDate.replaceAll(' ', '-'),
       };
     },
   },
