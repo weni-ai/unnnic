@@ -107,8 +107,8 @@ export default {
     justify-content: space-between;
 
     &__app {
-      width: 56px;
-      height: 56px;
+      width: $unnnic-icon-size-xl;
+      height: $unnnic-icon-size-xl;
     }
 
     &__button {
