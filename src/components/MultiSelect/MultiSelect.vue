@@ -10,7 +10,7 @@
       class="select-permission"
       tabindex="0"
     >
-      <h6 class="title noselect">{{inputTitle}}</h6>
+      <h6 class="title noselect">{{ inputTitle }}</h6>
       <UnnnicIcon
         :icon="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
         size="sm"
@@ -19,26 +19,27 @@
     </div>
     <div v-if="active" class="select-content" v-click-outside="onClickOutside" tabindex="0">
       <div>
-
-      <h6 class="title">Permissões Gerais</h6>
-      <section v-for="(group, indexGroup) in groups" :key="indexGroup">
-        <template v-for="(item, indexItem) in group.items">
-          <UnnnicRadio
-            name=""
-            :globalValue="group.selected"
-            @change="change(indexGroup, $event)"
-            :value="indexItem"
-            id=""
-            size="sm"
-            :key="indexItem + 'input'"
-            class=""
-          >
-            <strong>{{ item.title }}</strong>
-            <span>{{ item.description }}</span>
-          </UnnnicRadio>
+        <template v-for="(group, indexGroup) in groups">
+          <h6 class="title" :key="`title-${indexGroup}`">{{ group.title }}</h6>
+          <section :key="`section-${indexGroup}`">
+            <template v-for="(item, indexItem) in group.items">
+              <UnnnicRadio
+                name=""
+                :globalValue="group.selected"
+                @change="change(indexGroup, $event)"
+                :value="indexItem"
+                id=""
+                size="sm"
+                :key="indexItem + 'input'"
+                class=""
+              >
+                <strong>{{ item.title }}</strong>
+                <span>{{ item.description }}</span>
+              </UnnnicRadio>
+            </template>
+          </section>
         </template>
-      </section>
-    </div>
+      </div>
     </div>
   </div>
 </template>
@@ -127,6 +128,10 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/scss/unnnic.scss";
 
+.normal-multiselect, .expand-multiselect {
+  user-select: none;
+}
+
 .normal-multiselect {
   position: relative;
   max-width: 319px;
@@ -208,7 +213,7 @@ export default {
       display: flex;
       flex-direction: column;
 
-      & + section {
+      & + h6 {
         margin-top: $unnnic-spacing-stack-sm;
         padding-top: $unnnic-spacing-stack-sm;
         border-top: $unnnic-border-width-thinner solid
