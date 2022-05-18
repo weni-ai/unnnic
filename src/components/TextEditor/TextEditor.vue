@@ -25,94 +25,165 @@
     </div>
 
     <div class="format">
-      <unnnic-icon
-        icon="arrow-undo"
-        size="ant"
-        clickable
-        scheme="neutral-cleanest"
-        @click="formatDoc('undo')"
-      />
-      <unnnic-icon
-        icon="arrow-redo"
-        size="ant"
-        clickable
-        scheme="neutral-cleanest"
-        @click="formatDoc('redo')"
-      />
+      <unnnic-tool-tip
+        side="top"
+        text="Undo"
+        enabled
+      >
+        <unnnic-icon
+          icon="arrow-undo"
+          size="ant"
+          clickable
+          scheme="neutral-cleanest"
+          @click="formatDoc('undo')"
+        />
+      </unnnic-tool-tip>
+
+      <unnnic-tool-tip
+        side="top"
+        text="Redo"
+        enabled
+      >
+        <unnnic-icon
+          icon="arrow-redo"
+          size="ant"
+          clickable
+          scheme="neutral-cleanest"
+          @click="formatDoc('redo')"
+        />
+      </unnnic-tool-tip>
       <!-- <unnnic-icon
         icon="email-action-unread-1"
         size="ant"
         clickable
         scheme="neutral-cleanest"
       /> -->
-      <unnnic-icon
+
+      <unnnic-tool-tip
+        side="top"
+        text="Bold"
+        enabled
         :style="{ marginLeft: '1rem', }"
-        icon="text-bold"
-        size="ant"
-        clickable
-        scheme="neutral-cleanest"
-        @click="formatDoc('bold')"
-      />
-      <unnnic-icon
-        icon="text-italic"
-        size="ant"
-        clickable
-        scheme="neutral-cleanest"
-        @click="formatDoc('italic')"
-      />
-      <unnnic-icon
-        icon="text-underline"
-        size="ant"
-        clickable
-        scheme="neutral-cleanest"
-        @click="formatDoc('underline')"
-      />
-      <unnnic-icon
-        icon="unordered-list"
-        size="ant"
-        clickable
-        scheme="neutral-cleanest"
-        @click="formatDoc('insertunorderedlist')"
-      />
-      <unnnic-icon
-        icon="text-left"
-        size="ant"
-        clickable
-        scheme="neutral-cleanest"
-        @click="formatDoc('justifyleft')"
-      />
-      <unnnic-icon
-        icon="text-center"
-        size="ant"
-        clickable
-        scheme="neutral-cleanest"
-        @click="formatDoc('justifycenter')"
-      />
-      <unnnic-icon
-        icon="text-right"
-        size="ant"
-        clickable
-        scheme="neutral-cleanest"
-        @click="formatDoc('justifyright')"
-      />
-      <unnnic-icon
-        icon="text-justified"
-        size="ant"
-        clickable
-        scheme="neutral-cleanest"
-        @click="formatDoc('justifyFull')"
-      />
+      >
+        <unnnic-icon
+          icon="text-bold"
+          size="ant"
+          clickable
+          scheme="neutral-cleanest"
+          @click="formatDoc('bold')"
+        />
+      </unnnic-tool-tip>
+
+      <unnnic-tool-tip
+        side="top"
+        text="Italic"
+        enabled
+      >
+        <unnnic-icon
+          icon="text-italic"
+          size="ant"
+          clickable
+          scheme="neutral-cleanest"
+          @click="formatDoc('italic')"
+        />
+      </unnnic-tool-tip>
+
+      <unnnic-tool-tip
+        side="top"
+        text="Underline"
+        enabled
+      >
+        <unnnic-icon
+          icon="text-underline"
+          size="ant"
+          clickable
+          scheme="neutral-cleanest"
+          @click="formatDoc('underline')"
+        />
+      </unnnic-tool-tip>
+
+      <unnnic-tool-tip
+        side="top"
+        text="List"
+        enabled
+      >
+        <unnnic-icon
+          icon="unordered-list"
+          size="ant"
+          clickable
+          scheme="neutral-cleanest"
+          @click="formatDoc('insertunorderedlist')"
+        />
+      </unnnic-tool-tip>
+
+      <unnnic-tool-tip
+        side="top"
+        text="Left"
+        enabled
+      >
+        <unnnic-icon
+          icon="text-left"
+          size="ant"
+          clickable
+          scheme="neutral-cleanest"
+          @click="formatDoc('justifyleft')"
+        />
+      </unnnic-tool-tip>
+
+      <unnnic-tool-tip
+        side="top"
+        text="Center"
+        enabled
+      >
+        <unnnic-icon
+          icon="text-center"
+          size="ant"
+          clickable
+          scheme="neutral-cleanest"
+          @click="formatDoc('justifycenter')"
+        />
+      </unnnic-tool-tip>
+
+      <unnnic-tool-tip
+        side="top"
+        text="Right"
+        enabled
+      >
+        <unnnic-icon
+          icon="text-right"
+          size="ant"
+          clickable
+          scheme="neutral-cleanest"
+          @click="formatDoc('justifyright')"
+        />
+      </unnnic-tool-tip>
+
+      <unnnic-tool-tip
+        side="top"
+        text="Justify"
+        enabled
+      >
+        <unnnic-icon
+          icon="text-justified"
+          size="ant"
+          clickable
+          scheme="neutral-cleanest"
+          @click="formatDoc('justifyFull')"
+        />
+      </unnnic-tool-tip>
     </div>
   </div>
 </template>
 
 <script>
 import UnnnicButtonIcon from '../Button/ButtonIcon.vue';
+import UnnnicToolTip from '../ToolTip/ToolTip.vue';
 import UnnnicIcon from '../Icon.vue';
 
 export default {
   components: {
     UnnnicButtonIcon,
+    UnnnicToolTip,
     UnnnicIcon,
   },
 
