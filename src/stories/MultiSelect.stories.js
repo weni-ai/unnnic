@@ -1,11 +1,9 @@
 import unnnicMultiSelect from '../components/MultiSelect/MultiSelect.vue';
 
 export default {
-  title: 'example/MultiSelect',
+  title: 'Form/MultiSelect',
   component: unnnicMultiSelect,
-  argTypes: {
-
-  },
+  argTypes: {},
 };
 
 const Template = (args, { argTypes }) => ({
