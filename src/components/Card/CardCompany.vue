@@ -63,11 +63,11 @@
 </template>
 
 <script>
-import UnnnicTag from "../Tag/Tag.vue";
-import UnnnicIcon from "../Icon.vue";
-import UnnnicDropdown from "../Dropdown/Dropdown.vue";
-import UnnnicDropdownItem from "../Dropdown/DropdownItem.vue";
-import ToolTip from "../ToolTip/ToolTip.vue";
+import UnnnicTag from '../Tag/Tag.vue';
+import UnnnicIcon from '../Icon.vue';
+import UnnnicDropdown from '../Dropdown/Dropdown.vue';
+import UnnnicDropdownItem from '../Dropdown/DropdownItem.vue';
+import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
   components: {
@@ -116,7 +116,7 @@ export default {
 
   methods: {
     join() {
-      this.$emit("join");
+      this.$emit('join');
     },
   },
 
