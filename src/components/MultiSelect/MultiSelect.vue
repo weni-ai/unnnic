@@ -14,16 +14,21 @@
       <UnnnicIcon
         :icon="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
         size="sm"
-        scheme="neutral-clean"
+        scheme="neutral-dark"
       />
     </div>
     <div v-if="active" class="select-content" v-click-outside="onClickOutside" tabindex="0">
       <div>
         <template v-for="(group, indexGroup) in groups">
-          <h6 class="title" :key="`title-${indexGroup}`">{{ group.title }}</h6>
+          <h6 v-if="!hideGroupTitle" class="title" :key="`title-${indexGroup}`">{{ group.title }}</h6>
           <section :key="`section-${indexGroup}`">
             <template v-for="(item, indexItem) in group.items">
+              <div @click="change(indexGroup, indexItem)" :key="indexItem + 'input'" v-if="hideRadio" class="unnnic-radio-container unnnic-radio-container--sm" style="cursor: pointer">
+                <strong>{{ item.title }}</strong>
+                <span>{{ item.description }}</span>
+              </div>
               <UnnnicRadio
+                v-else
                 name=""
                 :globalValue="group.selected"
                 @change="change(indexGroup, $event)"
@@ -81,6 +86,14 @@ export default {
       type: String,
       default: 'Teste',
     },
+    hideRadio: {
+      type: Boolean,
+      default: false,
+    },
+    hideGroupTitle: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -110,6 +123,7 @@ export default {
     },
 
     change(indexGroup, indexSelected) {
+      console.log(indexGroup, indexSelected);
       this.$emit(
         'change',
         this.groups.map((item, index) => {
