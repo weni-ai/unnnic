@@ -125,7 +125,6 @@ export default {
     },
 
     change(indexGroup, indexSelected) {
-      console.log(indexGroup, indexSelected);
       this.$emit(
         'change',
         this.groups.map((item, index) => {
