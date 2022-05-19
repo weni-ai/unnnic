@@ -1,9 +1,6 @@
 <template>
-  <div
-    :class="expand ? 'expand-multiselect' : 'normal-multiselect'"
-    tabindex="-1"
-  >
-    <span class="select-permission-label" v-if="label">{{label}}</span>
+  <div :class="expand ? 'expand-multiselect' : 'normal-multiselect'" tabindex="-1">
+    <span class="select-permission-label" v-if="label">{{ label }}</span>
     <div
       @keypress="handleIsOpenKeyboard"
       @click="active = !active"
@@ -14,16 +11,29 @@
       <UnnnicIcon
         :icon="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
         size="sm"
-        scheme="neutral-clean"
+        scheme="neutral-dark"
       />
     </div>
     <div v-if="active" class="select-content" v-click-outside="onClickOutside" tabindex="0">
       <div>
         <template v-for="(group, indexGroup) in groups">
-          <h6 class="title" :key="`title-${indexGroup}`">{{ group.title }}</h6>
+          <h6 v-if="!hideGroupTitle" class="title" :key="`title-${indexGroup}`">
+            {{ group.title }}
+          </h6>
           <section :key="`section-${indexGroup}`">
             <template v-for="(item, indexItem) in group.items">
+              <div
+                @click="change(indexGroup, indexItem)"
+                :key="indexItem + 'input'"
+                v-if="hideRadio"
+                class="unnnic-radio-container unnnic-radio-container--sm"
+                style="cursor: pointer;"
+              >
+                <strong>{{ item.title }}</strong>
+                <span>{{ item.description }}</span>
+              </div>
               <UnnnicRadio
+                v-else
                 name=""
                 :globalValue="group.selected"
                 @change="change(indexGroup, $event)"
@@ -81,6 +91,14 @@ export default {
       type: String,
       default: 'Teste',
     },
+    hideRadio: {
+      type: Boolean,
+      default: false,
+    },
+    hideGroupTitle: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -96,10 +114,7 @@ export default {
   },
   methods: {
     handleIsOpenKeyboard(event) {
-      if (
-        document.querySelector('.select-permission:focus-visible')
-        && event.keyCode === 32
-      ) {
+      if (document.querySelector('.select-permission:focus-visible') && event.keyCode === 32) {
         this.active = !this.active;
       }
     },
@@ -128,7 +143,8 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/scss/unnnic.scss";
 
-.normal-multiselect, .expand-multiselect {
+.normal-multiselect,
+.expand-multiselect {
   user-select: none;
 }
 
@@ -181,14 +197,14 @@ export default {
   }
 }
 .select-permission-label {
-    display: block;
+  display: block;
 
-    color: $unnnic-color-neutral-cloudy;
-    margin-bottom: $unnnic-spacing-stack-xs;
+  color: $unnnic-color-neutral-cloudy;
+  margin-bottom: $unnnic-spacing-stack-xs;
 
-    font-family: $unnnic-font-family-secondary;
-    font-size:  $unnnic-font-size-body-gt;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+  font-family: $unnnic-font-family-secondary;
+  font-size: $unnnic-font-size-body-gt;
+  line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 }
 
 .title {
@@ -216,8 +232,7 @@ export default {
       & + h6 {
         margin-top: $unnnic-spacing-stack-sm;
         padding-top: $unnnic-spacing-stack-sm;
-        border-top: $unnnic-border-width-thinner solid
-          $unnnic-color-neutral-darkest;
+        border-top: $unnnic-border-width-thinner solid $unnnic-color-neutral-darkest;
       }
 
       strong,
@@ -238,18 +253,14 @@ export default {
         & + .unnnic-radio-container {
           margin-top: $unnnic-spacing-stack-sm;
           padding-top: $unnnic-spacing-stack-sm;
-          border-top: $unnnic-border-width-thinner solid
-            $unnnic-color-neutral-lightest;
-
+          border-top: $unnnic-border-width-thinner solid $unnnic-color-neutral-lightest;
         }
 
         ::v-deep .unnnic-icon {
           margin-right: $unnnic-inline-xs;
         }
       }
-
     }
   }
-
 }
 </style>
