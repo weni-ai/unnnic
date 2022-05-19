@@ -55,19 +55,19 @@
 </template>
 
 <script>
-import vClickOutside from "v-click-outside";
-import UnnnicIcon from "../Icon.vue";
-import UnnnicRadio from "../Radio/Radio.vue";
+import vClickOutside from 'v-click-outside';
+import UnnnicIcon from '../Icon.vue';
+import UnnnicRadio from '../Radio/Radio.vue';
 
 export default {
-  name: "UnnicMultiSelect",
+  name: 'UnnicMultiSelect',
   components: {
     UnnnicIcon,
     UnnnicRadio,
   },
   model: {
-    prop: "groups",
-    event: "change",
+    prop: 'groups',
+    event: 'change',
   },
   directives: {
     clickOutside: vClickOutside.directive,
@@ -81,7 +81,7 @@ export default {
     },
     label: {
       type: String,
-      default: "",
+      default: '',
     },
     groups: {
       type: Array,
@@ -89,7 +89,7 @@ export default {
     },
     inputTitle: {
       type: String,
-      default: "Teste",
+      default: 'Teste',
     },
     hideRadio: {
       type: Boolean,
@@ -114,7 +114,7 @@ export default {
   },
   methods: {
     handleIsOpenKeyboard(event) {
-      if (document.querySelector(".select-permission:focus-visible") && event.keyCode === 32) {
+      if (document.querySelector('.select-permission:focus-visible') && event.keyCode === 32) {
         this.active = !this.active;
       }
     },
@@ -127,14 +127,14 @@ export default {
     change(indexGroup, indexSelected) {
       console.log(indexGroup, indexSelected);
       this.$emit(
-        "change",
+        'change',
         this.groups.map((item, index) => {
           if (index === indexGroup) {
             return { ...item, selected: indexSelected };
           }
 
           return item;
-        })
+        }),
       );
     },
   },
