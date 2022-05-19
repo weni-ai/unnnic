@@ -25,7 +25,7 @@
     <div class="join-button">
       <unnnic-tag @click="join" :text="joinLabel" scheme="aux-blue" clickable></unnnic-tag>
     </div>
-    <div class="more-button">
+    <div class="more-button" v-if="options.length">
       <unnnic-dropdown>
         <unnnic-icon
           slot="trigger"
