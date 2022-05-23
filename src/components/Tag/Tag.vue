@@ -14,6 +14,7 @@
       :enableTooltip="enableTooltip"
       :icon="icon"
       @click="$emit('click')"
+      @close="$emit('close')"
     />
 </template>
 

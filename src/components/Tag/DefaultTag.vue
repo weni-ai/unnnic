@@ -17,6 +17,7 @@
       class="unnnic-tag__icon"
       scheme="neutral-darkest"
       size="xs"
+      @click.native.stop="$emit('close')"
     />
   </div>
 </template>
