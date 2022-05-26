@@ -1,4 +1,5 @@
 import unnnicTag from '../components/Tag/Tag.vue';
+import colorsList from '../utils/colorsList';
 
 export default {
   title: 'Example/Tag',
@@ -9,8 +10,7 @@ export default {
     scheme: {
       control: {
         type: 'select',
-        options: ['feedback-red', 'feedback-green', 'feedback-yellow', 'feedback-blue', 'feedback-grey',
-          'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink'],
+        options: colorsList,
       },
     },
   },
