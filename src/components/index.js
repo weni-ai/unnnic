@@ -17,6 +17,7 @@ import card from './Card/Card.vue';
 import cardCompany from './Card/CardCompany.vue';
 import cardData from './Card/CardData.vue';
 import cardProject from './CardProject/CardProject.vue';
+import cardInformation from './CardInformation/CardInformation.vue';
 import checkbox from './Checkbox/Checkbox.vue';
 import radio from './Radio/Radio.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
@@ -72,6 +73,7 @@ const components = {
   unnnicCardCompany: cardCompany,
   unnnicCardData: cardData,
   unnnicCardProject: cardProject,
+  unnnicCardInformation: cardInformation,
   unnnicCheckbox: checkbox,
   unnnicRadio: radio,
   unnnicLanguageSelect: languageSelect,
@@ -130,6 +132,7 @@ export const unnnicCard = card;
 export const unnnicCardCompany = cardCompany;
 export const unnnicCardData = cardData;
 export const unnnicCardProject = cardProject;
+export const unnnicCardInformation = cardInformation;
 export const unnnicCheckbox = checkbox;
 export const unnnicRadio = radio;
 export const unnniclanguageSelect = languageSelect;
