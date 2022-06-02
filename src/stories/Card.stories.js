@@ -5,7 +5,7 @@ import unnnicDropdown from '../components/Dropdown/Dropdown.vue';
 import unnnicDropdownItem from '../components/Dropdown/DropdownItem.vue';
 
 export default {
-  title: 'Example/Card',
+  title: 'Card/Card',
   component: Card,
   argTypes: {
     enabled: { control: { type: 'select', options: [true, false] } },

@@ -2,7 +2,7 @@ import unnnicInput from '../components/Input/Input.vue';
 import iconList from '../utils/iconList';
 
 export default {
-  title: 'Example/Input',
+  title: 'Form/Input',
   component: unnnicInput,
   argTypes: {
     label: { control: { type: 'text' } },

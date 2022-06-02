@@ -1,7 +1,7 @@
 import unnnicCardData from '../components/Card/CardData.vue';
 
 export default {
-  title: 'example/CardData',
+  title: 'Card/CardData',
   component: unnnicCardData,
   argTypes: {
     title: { control: { type: 'text' } },

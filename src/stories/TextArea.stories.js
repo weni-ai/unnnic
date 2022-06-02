@@ -1,7 +1,7 @@
 import unnnicTextArea from '../components/TextArea/TextArea.vue';
 
 export default {
-  title: 'example/TextArea',
+  title: 'Form/TextArea',
   component: unnnicTextArea,
   argTypes: {},
 };

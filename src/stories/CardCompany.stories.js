@@ -1,7 +1,7 @@
 import CardCompany from '../components/Card/CardCompany.vue';
 
 export default {
-  title: 'Example/CardCompany',
+  title: 'Card/CardCompany',
   component: CardCompany,
   argTypes: {},
 };

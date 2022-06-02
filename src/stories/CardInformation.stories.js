@@ -1,7 +1,7 @@
 import unnnicCardInformation from '../components/CardInformation/CardInformation.vue';
 
 export default {
-  title: 'example/CardInformation',
+  title: 'Card/CardInformation',
   component: unnnicCardInformation,
   argTypes: {},
 };
