@@ -3,7 +3,7 @@ import unnnicDropdownItem from '../components/Dropdown/DropdownItem.vue';
 import unnnicIcon from '../components/Icon.vue';
 
 export default {
-  title: 'example/CardProject',
+  title: 'Card/CardProject',
   component: unnnicCardProject,
   argTypes: {},
 };

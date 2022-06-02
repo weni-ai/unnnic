@@ -62,17 +62,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
- @import '../../assets/scss/unnnic.scss';
+@import '../../assets/scss/unnnic.scss';
 
 @each $name, $color in $scheme-colors {
-  .unnnic-tag-scheme {
-    &--#{$name} {
-      background-color: rgba($color, $unnnic-opacity-level-light);
-      border: $unnnic-border-width-thinner solid rgba($color, $unnnic-opacity-level-extra-light);
-      &:hover {
-        border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
-      }
-    }
+  &.unnnic-tag-scheme--#{$name} {
+    background-color: rgba($color, $unnnic-opacity-level-light);
+    border: $unnnic-border-width-thinner solid rgba($color, $unnnic-opacity-level-extra-light);
   }
 }
 
@@ -88,6 +83,12 @@ export default {
 
     &--clickable{
       cursor: pointer;
+
+      @each $name, $color in $scheme-colors {
+        &.unnnic-tag-scheme--#{$name}:hover {
+          border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
+        }
+      }
     }
 
     &__label{

@@ -1,7 +1,7 @@
 import unnnicCardNumber from '../components/CardNumber/CardNumber.vue';
 
 export default {
-  title: 'example/CardNumber',
+  title: 'Card/CardNumber',
   component: unnnicCardNumber,
   argTypes: {},
 };
