@@ -13,6 +13,7 @@ import readEmailAt1 from '!!svg-inline-loader!../assets/icons/read-email-at-1.sv
 import flash13 from '!!svg-inline-loader!../assets/icons/flash-1-3.svg';
 import timeClockCircle1 from '!!svg-inline-loader!../assets/icons/time-clock-circle-1.svg';
 import search1 from '!!svg-inline-loader!../assets/icons/search-1.svg';
+import singleNeutralActions1 from '!!svg-inline-loader!../assets/icons/single-neutral-actions-1.svg';
 import singleNeutral2 from '!!svg-inline-loader!../assets/icons/single-neutral-2.svg';
 import defaultAvatar from '!!svg-inline-loader!../assets/icons/default-avatar.svg';
 import messagingWeChat3 from '!!svg-inline-loader!../assets/icons/messaging-we-chat-3.svg';
@@ -51,7 +52,6 @@ import hierarchy33 from '!!svg-inline-loader!../assets/icons/hierarchy-3-3.svg';
 import radioDisable from '!!svg-inline-loader!../assets/icons/radio-disable.svg';
 import viewOff1 from '!!svg-inline-loader!../assets/icons/view-off-1.svg';
 import hierarchy32 from '!!svg-inline-loader!../assets/icons/hierarchy-3-2.svg';
-import singleNeutralActions1 from '!!svg-inline-loader!../assets/icons/single-neutral-actions-1.svg';
 import checkboxLess from '!!svg-inline-loader!../assets/icons/checkbox-less.svg';
 import arrowRight11 from '!!svg-inline-loader!../assets/icons/arrow-right-1-1.svg';
 import taskListClock1 from '!!svg-inline-loader!../assets/icons/task-list-clock-1.svg';
@@ -66,6 +66,7 @@ import messagesBubble1 from '!!svg-inline-loader!../assets/icons/messages-bubble
 import switchDefault from '!!svg-inline-loader!../assets/icons/switch-default.svg';
 import developerCommunityGithub11 from '!!svg-inline-loader!../assets/icons/developer-community-github-1-1.svg';
 import lock21 from '!!svg-inline-loader!../assets/icons/lock-2-1.svg';
+import lock22 from '!!svg-inline-loader!../assets/icons/lock-2-2.svg';
 import lockUnlock from '!!svg-inline-loader!../assets/icons/lock-unlock-1-1.svg';
 import pencilWrite1 from '!!svg-inline-loader!../assets/icons/pencil-write-1.svg';
 import bookAddress12 from '!!svg-inline-loader!../assets/icons/book-address-1-2.svg';
@@ -166,6 +167,7 @@ export default {
   'flash-1-3': flash13,
   'time-clock-circle-1': timeClockCircle1,
   'search-1': search1,
+  'single-neutral-actions-1': singleNeutralActions1,
   'single-neutral-2': singleNeutral2,
   'default-avatar': defaultAvatar,
   'messaging-we-chat-3': messagingWeChat3,
@@ -204,7 +206,6 @@ export default {
   'radio-disable': radioDisable,
   'view-off-1': viewOff1,
   'hierarchy-3-2': hierarchy32,
-  'single-neutral-actions-1': singleNeutralActions1,
   'checkbox-less': checkboxLess,
   'arrow-right-1-1': arrowRight11,
   'task-list-clock-1': taskListClock1,
@@ -219,6 +220,7 @@ export default {
   'switch-default': switchDefault,
   'developer-community-github-1-1': developerCommunityGithub11,
   'lock-2-1': lock21,
+  'lock-2-2': lock22,
   'lock-unlock-1-1': lockUnlock,
   'pencil-write-1': pencilWrite1,
   'book-address-1-2': bookAddress12,
