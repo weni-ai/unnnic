@@ -1,7 +1,13 @@
 <template>
   <div class="unnnic-card-company">
     <div class="content">
-      <div class="title">{{ title }}</div>
+      <div class="header">
+        <div class="title">
+          {{ title }}
+        </div>
+
+        <div v-if="tag" class="tag">{{ tag }}</div>
+      </div>
 
       <div class="description">{{ description }}</div>
 
@@ -83,6 +89,10 @@ export default {
       type: String,
     },
 
+    tag: {
+      type: String,
+    },
+
     description: {
       type: String,
     },
@@ -147,13 +157,36 @@ export default {
   .content {
     flex: 1;
 
-    .title {
-      font-family: $unnnic-font-family-secondary;
-      font-size: $unnnic-font-size-title-md;
-      font-weight: $unnnic-font-weight-bold;
-      line-height: $unnnic-font-size-title-md + $unnnic-line-height-md;
-      color: $unnnic-color-neutral-black;
+    .header {
+      display: flex;
+      align-items: center;
       margin-bottom: $unnnic-spacing-stack-nano;
+
+      .title {
+        font-family: $unnnic-font-family-secondary;
+        font-size: $unnnic-font-size-title-md;
+        font-weight: $unnnic-font-weight-bold;
+        line-height: $unnnic-font-size-title-md + $unnnic-line-height-md;
+        color: $unnnic-color-neutral-black;
+
+      }
+
+      .tag {
+        margin-left: $unnnic-spacing-inline-ant;
+        padding: $unnnic-spacing-stack-nano $unnnic-spacing-inline-ant;
+        outline-style: solid;
+        outline-color: $unnnic-color-neutral-dark;
+        outline-width: $unnnic-border-width-thinner;
+        outline-offset: -$unnnic-border-width-thinner;
+        border-radius: $unnnic-border-radius-sm;
+        user-select: none;
+
+        font-family: $unnnic-font-family-secondary;
+        font-size: $unnnic-font-size-body-md;
+        line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+        font-weight: $unnnic-font-weight-regular;
+        color: $unnnic-color-neutral-dark;
+      }
     }
 
     .description {
