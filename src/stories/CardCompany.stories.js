@@ -15,6 +15,7 @@ const Template = (args, { argTypes }) => ({
 export const Normal = Template.bind({});
 Normal.args = {
   title: 'Weni',
+  tag: 'Gratuita',
   description: 'Description',
   joinLabel: 'Join',
   options: [{
