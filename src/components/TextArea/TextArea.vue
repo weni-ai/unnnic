@@ -79,10 +79,9 @@ export default {
     }
 
     &:focus {
-      border-color: $unnnic-color-neutral-dark;
-
+      border-color: $unnnic-color-neutral-cleanest;
       &::placeholder {
-        color: $unnnic-color-neutral-dark;
+        color: $unnnic-color-neutral-clean;
       }
     }
   }
