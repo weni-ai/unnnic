@@ -149,6 +149,9 @@ import unorderedList from '!!svg-inline-loader!../assets/icons/unordered-list.sv
 import textLeft from '!!svg-inline-loader!../assets/icons/text-left.svg';
 import textCenter from '!!svg-inline-loader!../assets/icons/text-center.svg';
 import textRight from '!!svg-inline-loader!../assets/icons/text-right.svg';
+import microphone from '!!svg-inline-loader!../assets/icons/microphone.svg';
+import controlsPause1 from '!!svg-inline-loader!../assets/icons/controls-pause-1.svg';
+import controlsPlay1 from '!!svg-inline-loader!../assets/icons/controls-play-1.svg';
 
 export default {
   'app-window-edit-1': appWindowEdit1,
@@ -300,4 +303,7 @@ export default {
   'text-left': textLeft,
   'text-center': textCenter,
   'text-right': textRight,
+  microphone,
+  'controls-pause-1': controlsPause1,
+  'controls-play-1': controlsPlay1,
 };

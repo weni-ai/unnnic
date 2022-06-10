@@ -1,12 +1,18 @@
 <template>
   <div class="unnnic-text-editor">
-    <div
-      class="text-editor"
-      contenteditable="true"
-      ref="oDoc"
-      v-html="initialContent"
-      @input="onInput"
-    ></div>
+    <div class="text-editor" @click="$refs.oDoc.focus()">
+      <div
+        class="inside"
+        contenteditable="true"
+        ref="oDoc"
+        v-html="initialContent"
+        @input="onInput"
+      ></div>
+
+      <div v-if="$slots['footer-input']" class="footer-input" @click.stop>
+        <slot name="footer-input" />
+      </div>
+    </div>
 
     <div class="actions">
       <unnnic-button-icon
@@ -52,6 +58,21 @@
           @click="formatDoc('redo')"
         />
       </unnnic-tool-tip>
+
+      <unnnic-tool-tip
+        side="top"
+        text="Record Audio"
+        enabled
+      >
+        <unnnic-icon
+          icon="microphone"
+          size="ant"
+          clickable
+          scheme="neutral-cleanest"
+          @click="$emit('record-audio')"
+        />
+      </unnnic-tool-tip>
+
       <!-- <unnnic-icon
         icon="email-action-unread-1"
         size="ant"
@@ -248,6 +269,20 @@ export default {
     font-size: $unnnic-font-size-body-gt;
     line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
     font-weight: $unnnic-font-weight-regular;
+    cursor: text;
+    display: flex;
+    flex-direction: column;
+
+    .inside {
+      flex: 1;
+      outline: none;
+    }
+
+    .footer-input {
+      margin-top: $unnnic-spacing-stack-xs;
+      align-self: flex-start;
+      cursor: initial;
+    }
 
     p {
       margin: 0;
