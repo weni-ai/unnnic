@@ -21,7 +21,11 @@ const Template = (args, { argTypes }) => ({
 
   template: `
     <div>
-      <unnnic-text-editor v-bind="$props" v-model="content" />
+      <unnnic-text-editor v-bind="$props" v-model="content">
+        <template slot="footer-input">
+          Audio Component
+        </template>
+      </unnnic-text-editor>
     </div>
   `,
 
