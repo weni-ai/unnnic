@@ -44,7 +44,10 @@ import Spain from '!!svg-inline-loader!../assets/icons/Spain.svg';
 import charger1 from '!!svg-inline-loader!../assets/icons/charger-1.svg';
 import phone4 from '!!svg-inline-loader!../assets/icons/phone-4.svg';
 import expandFull1 from '!!svg-inline-loader!../assets/icons/expand-full-1.svg';
+import gaugeDashboard1 from '!!svg-inline-loader!../assets/icons/gauge-dashboard-1.svg';
+import gaugeDashboard2 from '!!svg-inline-loader!../assets/icons/gauge-dashboard-2.svg';
 import graphStats1 from '!!svg-inline-loader!../assets/icons/graph-stats-1.svg';
+import graphStatsCircle1 from '!!svg-inline-loader!../assets/icons/graph-stats-circle-1.svg';
 import checkCircle11 from '!!svg-inline-loader!../assets/icons/check-circle-1-1.svg';
 import messagesBubble4 from '!!svg-inline-loader!../assets/icons/messages-bubble-4.svg';
 import USA from '!!svg-inline-loader!../assets/icons/USA.svg';
@@ -77,9 +80,7 @@ import add1 from '!!svg-inline-loader!../assets/icons/add-1.svg';
 import checkboxDefault from '!!svg-inline-loader!../assets/icons/checkbox-default.svg';
 import layoutDashboard2 from '!!svg-inline-loader!../assets/icons/layout-dashboard-2.svg';
 import downloadThickBottom1 from '!!svg-inline-loader!../assets/icons/download-thick-bottom-1.svg';
-import gaugeDashboard1 from '!!svg-inline-loader!../assets/icons/gauge-dashboard-1.svg';
 import logout11 from '!!svg-inline-loader!../assets/icons/logout-1-1.svg';
-import gaugeDashboard2 from '!!svg-inline-loader!../assets/icons/gauge-dashboard-2.svg';
 import switchSelected from '!!svg-inline-loader!../assets/icons/switch-selected.svg';
 import socialMediaGoogle1 from '!!svg-inline-loader!../assets/icons/social-media-google-1.svg';
 import alarmBell2 from '!!svg-inline-loader!../assets/icons/alarm-bell-2.svg';
@@ -201,7 +202,10 @@ export default {
   'charger-1': charger1,
   'phone-4': phone4,
   'expand-full-1': expandFull1,
+  'gauge-dashboard-1': gaugeDashboard1,
+  'gauge-dashboard-2': gaugeDashboard2,
   'graph-stats-1': graphStats1,
+  'graph-status-circle-1': graphStatsCircle1,
   'check-circle-1-1': checkCircle11,
   'messages-bubble-4': messagesBubble4,
   USA,
@@ -234,9 +238,7 @@ export default {
   'checkbox-default': checkboxDefault,
   'layout-dashboard-2': layoutDashboard2,
   'download-thick-bottom-1': downloadThickBottom1,
-  'gauge-dashboard-1': gaugeDashboard1,
   'logout-1-1': logout11,
-  'gauge-dashboard-2': gaugeDashboard2,
   'switch-selected': switchSelected,
   'social-media-google-1': socialMediaGoogle1,
   'alarm-bell-2': alarmBell2,
