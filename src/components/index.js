@@ -29,6 +29,7 @@ import selectItem from './Select/SelectItem.vue';
 import multiSelect from './MultiSelect/MultiSelect.vue';
 import alert from './Alert/Alert.vue';
 import autocomplete from './Input/Autocomplete.vue';
+import autocompleteSelect from './AutocompleteSelect/AutocompleteSelect.vue';
 import tag from './Tag/Tag.vue';
 import accordion from './Accordion/Accordion.vue';
 import indicator from './Indicator/Indicator.vue';
@@ -84,6 +85,7 @@ const components = {
   unnnicMultiSelect: multiSelect,
   unnnicAlert: alert,
   unnnicAutocomplete: autocomplete,
+  unnnicAutocompleteSelect: autocompleteSelect,
   unnnicTag: tag,
   unnnicAccordion: accordion,
   unnnicIndicator: indicator,
@@ -145,6 +147,7 @@ export const unnnicAlert = alert;
 export const unnnicCallAlert = call.callAlert;
 export const unnnicCallModal = call.callModal;
 export const unnnicAutocomplete = autocomplete;
+export const unnnicAutocompleteSelect = autocompleteSelect;
 export const unnnicTag = tag;
 export const unnnicAccordion = accordion;
 export const unnnicIndicator = indicator;
