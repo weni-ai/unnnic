@@ -5,7 +5,9 @@
         'unnnic-select-item': true,
         'unnnic-select-item__active': active,
         'unnnic--clickable': selectable,
-        'unnnic-select-item--selectable': selectable}">
+        'unnnic-select-item--selectable': selectable,
+        'text-focused': textFocused,
+      }">
       <span :class="['unnnic-select-item__label', `unnnic-select-item__label--${size}`]">
         <slot/>
         </span>
@@ -28,6 +30,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    textFocused: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
@@ -47,6 +53,11 @@ export default {
     overflow: hidden;
     max-width: 100%;
     -webkit-line-clamp: 1;
+
+    &.text-focused {
+      color: $unnnic-color-brand-weni-soft;
+      font-weight: $unnnic-font-weight-bold;
+    }
 
     &--selectable:hover, &__active{
       background-color: $unnnic-color-neutral-lightest;
