@@ -83,7 +83,11 @@ export default {
       }
 
       this.$nextTick(() => {
-        this.$refs[`option-${index}`]?.[0]?.$el?.scrollIntoView();
+        const element = this.$refs[`option-${index}`];
+
+        if (element && element[0] && element[0].$el && element[0].$el.scrollIntoView) {
+          element[0].$el.scrollIntoView();
+        }
       });
     },
   },
