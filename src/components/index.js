@@ -55,6 +55,7 @@ import chartRainbow from './ChartRainbow/ChartRainbow.vue';
 import textEditor from './TextEditor/TextEditor.vue';
 import moodRating from './MoodRating/MoodRating.vue';
 import starRating from './StarRating/StarRating.vue';
+import audioRecorder from './AudioRecorder/AudioRecorder.vue';
 
 const components = {
   unnnicInput: input,
@@ -113,6 +114,7 @@ const components = {
   unnnicTextEditor: textEditor,
   unnnicMoodRating: moodRating,
   unnnicStarRating: starRating,
+  unnnicAudioRecorder: audioRecorder,
 };
 
 Object.keys(components).forEach((name) => {
@@ -177,3 +179,4 @@ export const unnnicChartRainbow = chartRainbow;
 export const unnnicTextEditor = textEditor;
 export const unnnicMoodRating = moodRating;
 export const unnnicStarRating = starRating;
+export const unnnicAudioRecorder = audioRecorder;

@@ -1,0 +1,85 @@
+<template>
+  <div class="audio-handler">
+    <unnnic-tool-tip enabled text="Descartar" side="top">
+      <span @click="discard" @keypress.enter="discard" class="clickable">
+        <unnnic-icon icon="delete-1-1" scheme="feedback-red" />
+      </span>
+    </unnnic-tool-tip>
+
+    <div class="audio-handler__progress-bar">
+      <div class="audio-recorder__progress-bar__bar" ref="progressBar" />
+    </div>
+
+    <span class="audio-handler__time">
+      {{ time }}
+    </span>
+
+    <unnnic-icon icon="indicator" :scheme="isRecording ? 'feedback-red' : 'neutral-clean'" />
+
+    <unnnic-tool-tip enabled text="Salvar" side="top">
+      <span @click="save" @keypress.enter="save" class="clickable">
+        <unnnic-icon icon="check-circle-1-1" scheme="feedback-green" />
+      </span>
+    </unnnic-tool-tip>
+  </div>
+</template>
+
+<script>
+import UnnnicIcon from '../Icon.vue';
+import UnnnicToolTip from '../ToolTip/ToolTip.vue';
+
+export default {
+  components: {
+    UnnnicIcon,
+    UnnnicToolTip,
+  },
+
+  props: {
+    isRecording: {
+      type: Boolean,
+      default: false,
+    },
+    time: {
+      type: String,
+      default: '',
+    },
+  },
+
+  methods: {
+    discard() {
+      this.$emit('discard');
+    },
+    save() {
+      this.$emit('save');
+    },
+  },
+};
+</script>
+
+<style lang="scss" scoped>
+@import "../../assets/scss/unnnic.scss";
+
+.audio-handler {
+  display: inline-flex;
+  align-items: center;
+  gap: $unnnic-spacing-stack-xs;
+
+  &__progress-bar {
+    width: 11.5rem;
+    height: 2px;
+    border-radius: $unnnic-border-radius-sm;
+    background: $unnnic-color-neutral-clean;
+
+    &__bar {
+      background: $unnnic-color-neutral-darkest;
+      height: 100%;
+      width: 0%; // updated programmatically
+    }
+  }
+
+  &__time {
+    font-size: $unnnic-font-size-body-md;
+    color: $unnnic-color-neutral-darkest;
+  }
+}
+</style>
