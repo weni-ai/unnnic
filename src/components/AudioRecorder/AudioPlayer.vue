@@ -14,7 +14,12 @@
     </div>
 
     <div v-else class="audio-player__progress-bar-bars">
-      <div v-for="(bar, index) in bars" :key="index" :style="{ height: `${bar * 100}%` }" :class="['bar', { active: isBarActive(index) }]">
+      <div
+        v-for="(bar, index) in bars"
+        :key="index"
+        :style="{ height: `${bar * 100}%` }"
+        :class="['bar', { active: isBarActive(index) }]"
+      >
       </div>
     </div>
 
