@@ -6,12 +6,18 @@
     <span v-else @click="play" @keypress.enter="play" class="clickable">
       <unnnic-icon icon="controls-play-1" scheme="neutral-darkest" />
     </span>
-    <div class="audio-player__progress-bar">
+    <div v-if="bars.length === 0" class="audio-player__progress-bar">
       <div
         class="audio-player__progress-bar__bar"
         :style="{ width: `${progressBarPercentualValue}%` }"
       />
     </div>
+
+    <div v-else class="audio-player__progress-bar-bars">
+      <div v-for="(bar, index) in bars" :key="index" :style="{ height: `${bar * 100}%` }" :class="['bar', { active: isBarActive(index) }]">
+      </div>
+    </div>
+
     <span class="audio-player__time">
       {{ time }}
     </span>
@@ -43,6 +49,9 @@ export default {
       type: Number,
       default: 0,
     },
+    bars: {
+      type: Array,
+    },
   },
 
   methods: {
@@ -51,6 +60,10 @@ export default {
     },
     pause() {
       this.$emit('pause');
+    },
+
+    isBarActive(index) {
+      return (this.progressBarPercentualValue / 100) * 22 > index;
     },
   },
 };
@@ -63,6 +76,25 @@ export default {
   display: inline-flex;
   align-items: center;
   gap: $unnnic-spacing-stack-xs;
+
+  &__progress-bar-bars {
+    width: 11.5rem;
+    height: 1rem;
+    border-radius: $unnnic-border-radius-sm;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .bar {
+      background: $unnnic-color-neutral-clean;
+      border-radius: 1.5px;
+      width: 3px;
+
+      &.active {
+        background: $unnnic-color-neutral-darkest;
+      }
+    }
+  }
 
   &__progress-bar {
     width: 11.5rem;

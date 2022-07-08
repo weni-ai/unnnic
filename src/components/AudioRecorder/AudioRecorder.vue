@@ -1,5 +1,5 @@
 <template>
-  <section v-if="hasAudio" class="audio-recorder">
+  <section v-if="hasAudio || src" class="unnnic-audio-recorder">
     <audio-handler
       v-if="isRecording || isRecorded"
       :is-recording="isRecording"
@@ -14,13 +14,41 @@
       :is-playing="isPlaying"
       @pause="pause"
       @play="play"
+      :bars="bars"
     />
+
+    <div v-if="canDelete && (['idle', 'playing', 'paused'].includes(status))" class="delete-button">
+      <unnnic-icon @click="discard" icon="delete-2-1" clickable></unnnic-icon>
+    </div>
   </section>
 </template>
 
 <script>
 import AudioHandler from './AudioHandler.vue';
 import AudioPlayer from './AudioPlayer.vue';
+import UnnnicIcon from '../Icon.vue';
+
+const filterData = (audioBuffer) => {
+  const rawData = audioBuffer.getChannelData(0); // We only need to work with one channel of data
+  const samples = 22; // Number of samples we want to have in our final data set
+  const blockSize = Math.floor(rawData.length / samples); // the number of samples in each subdivision
+  const filteredData = [];
+  for (let i = 0; i < samples; i++) {
+    const blockStart = blockSize * i; // the location of the first sample in the block
+    let sum = 0;
+    for (let j = 0; j < blockSize; j++) {
+      sum += Math.abs(rawData[blockStart + j]); // find the sum of all the samples in the block
+    }
+    filteredData.push(sum / blockSize); // divide the sum by the block size to get the average
+  }
+
+  return filteredData;
+};
+
+const normalizeData = (filteredData) => {
+  const multiplier = Math.pow(Math.max(...filteredData), -1);
+  return filteredData.map((n) => n * multiplier);
+};
 
 export default {
   name: 'AudioRecorder',
@@ -28,6 +56,17 @@ export default {
   components: {
     AudioHandler,
     AudioPlayer,
+    UnnnicIcon,
+  },
+
+  props: {
+    canDelete: {
+      type: Boolean,
+    },
+
+    src: {
+      type: String,
+    },
   },
 
   data: () => ({
@@ -50,6 +89,8 @@ export default {
      * @type {('idle'|'recording'|'recorded'|'playing'|'paused')}
      */
     status: 'idle',
+
+    bars: [],
   }),
 
   computed: {
@@ -70,6 +111,25 @@ export default {
     },
     playedPercentual() {
       return (this.currentTime * 100) / this.duration;
+    },
+  },
+
+  watch: {
+    src: {
+      immediate: true,
+
+      async handler() {
+        if (!this.src) {
+          return;
+        }
+
+        this.audio = new Audio();
+        this.audio.setAttribute('src', this.src);
+
+        this.addAudioEventListeners();
+
+        this.bars = await this.srcToBars(this.src);
+      },
     },
   },
 
@@ -114,6 +174,10 @@ export default {
         this.recorder = null;
       });
 
+      this.addAudioEventListeners();
+    },
+
+    addAudioEventListeners() {
       this.audio.addEventListener('loadeddata', () => {
         this.audio.currentTime = 0;
         this.duration = this.audio.duration;
@@ -154,13 +218,26 @@ export default {
     pause() {
       this.audio.pause();
     },
-    stop() {
+    async stop() {
       this.status = 'recorded';
       this.recorder.stop();
+
+      this.bars = await this.srcToBars(this.audio.src);
     },
 
     play() {
       this.audio.play();
+    },
+
+    async srcToBars(src) {
+      window.AudioContext = window.AudioContext || window.webkitAudioContext;
+      const audioContext = new AudioContext();
+
+      const response = await fetch(src);
+      const arrayBuffer = await response.arrayBuffer();
+      const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
+
+      return normalizeData(filterData(audioBuffer));
     },
 
     numberToTimeString(time) {
@@ -178,12 +255,13 @@ export default {
 <style lang="scss" scoped>
 @import "../../assets/scss/unnnic.scss";
 
-.audio-recorder {
+.unnnic-audio-recorder {
   display: inline-flex;
   align-items: center;
   background: $unnnic-color-neutral-lightest;
   padding: $unnnic-spacing-inset-nano $unnnic-spacing-inset-sm;
   border-radius: $unnnic-border-radius-sm;
+  position: relative;
 
   &__progress-bar {
     width: 11.5rem;
@@ -201,6 +279,12 @@ export default {
   &__time {
     font-size: $unnnic-font-size-body-md;
     color: $unnnic-color-neutral-darkest;
+  }
+
+  .delete-button {
+    position: absolute;
+    right: -0.75rem;
+    top: -0.625rem;
   }
 }
 </style>
