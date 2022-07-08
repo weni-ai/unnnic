@@ -31,4 +31,12 @@ const Template = (args, { argTypes }) => ({
 
 export const Default = Template.bind({});
 
-Default.args = {};
+Default.args = {
+  canDelete: true,
+};
+
+export const Player = Template.bind({});
+
+Player.args = {
+  src: 'http://172.17.32.1:8080/sample-3s.mp3',
+};
