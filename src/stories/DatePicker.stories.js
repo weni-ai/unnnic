@@ -4,6 +4,12 @@ export default {
   title: 'example/DatePicker',
   component: unnnicDatePicker,
   argTypes: {
+    type: {
+      control: {
+        type: 'select',
+        options: ['day', 'month', 'year'],
+      },
+    },
     size: {
       control: {
         type: 'select',

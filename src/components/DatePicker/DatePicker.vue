@@ -1,45 +1,149 @@
 <template>
   <div class="unnnic-date-picker">
-    <template v-for="(openMonth, index) in openMonths">
-      <div :key="openMonth" class="month-container">
-        <div :class="['header', `header--${size}`]">
-          <unnnic-button
-            size="small"
-            :icon-center="`arrow-${index === 0 ? 'left' : 'right'}-1-1`"
-            :type="size === 'large' ? 'secondary' : 'terciary'"
-            class="button-space"
-            :style="{ gridArea: `${index === 0 ? 'left' : 'right'}-button` }"
-            @click="referenceDate = addMonth(referenceDate, index === 0 ? -1 : 1)"
-          />
+    <template v-if="type === 'day'">
+      <template v-for="(openMonth, index) in openMonths">
+        <div :key="openMonth" class="month-container">
+          <div :class="['header', `header--${size}`]">
+            <unnnic-button
+              size="small"
+              :icon-center="`arrow-${index === 0 ? 'left' : 'right'}-1-1`"
+              :type="size === 'large' ? 'secondary' : 'terciary'"
+              class="button-space"
+              :style="{ gridArea: `${index === 0 ? 'left' : 'right'}-button` }"
+              @click="referenceDate = addMonth(referenceDate, index === 0 ? -1 : 1)"
+            />
 
-          <div :class="['label', `label--${size}`]">
-            {{ months[getMonth(openMonth)] }}
-            {{ getFullYear(openMonth) }}
+            <div :class="['label', `label--${size}`]">
+              {{ months[getMonth(openMonth)] }}
+              {{ getFullYear(openMonth) }}
+            </div>
+          </div>
+
+          <div :class="['days', `days--${size}`]">
+            <div v-for="(day, index) in days" :key="index" class="name">{{ day }}</div>
+            <div
+              v-for="(date, index) in getDatesOfTheMonth(openMonth)"
+              :key="`${openMonth}-${index}`"
+              :class="{
+                disabled: !date.properties.includes('inside month'),
+                selectable: date.properties.includes('inside month'),
+                today: date.properties.includes('today'),
+                selected: date.properties.includes('selected'),
+                highlighted: date.properties.includes('highlighted'),
+                left: date.properties.includes('left-highlighted'),
+                right: date.properties.includes('right-highlighted'),
+              }"
+              @click="date.properties.includes('inside month') && selectDate(date)"
+            >
+              {{ getDate(date) }}
+            </div>
           </div>
         </div>
 
-        <div :class="['days', `days--${size}`]">
-          <div v-for="(day, index) in days" :key="index" class="name">{{ day }}</div>
-          <div
-            v-for="(date, index) in getDatesOfTheMonth(openMonth)"
-            :key="`${openMonth}-${index}`"
-            :class="{
-              disabled: !date.properties.includes('inside month'),
-              selectable: date.properties.includes('inside month'),
-              today: date.properties.includes('today'),
-              selected: date.properties.includes('selected'),
-              highlighted: date.properties.includes('highlighted'),
-              left: date.properties.includes('left-highlighted'),
-              right: date.properties.includes('right-highlighted'),
-            }"
-            @click="date.properties.includes('inside month') && selectDate(date)"
-          >
-            {{ getDate(date) }}
+        <div :key="`divider-${openMonth}`" class="divider"></div>
+      </template>
+    </template>
+
+    <template v-else-if="type === 'month'">
+      <template v-for="openMonth in [referenceDate]">
+        <div :key="openMonth" class="month-container">
+          <div :class="['header', `header--${size}`]">
+            <unnnic-button
+              size="small"
+              icon-center="arrow-left-1-1"
+              :type="size === 'large' ? 'secondary' : 'terciary'"
+              class="button-space"
+              :style="{ gridArea: 'left-button' }"
+              @click="referenceDate = addMonth(referenceDate, -12)"
+            />
+
+            <div :class="['label', `label--${size}`]">
+              {{ getFullYear(openMonth) }}
+            </div>
+
+            <unnnic-button
+              size="small"
+              icon-center="arrow-right-1-1"
+              :type="size === 'large' ? 'secondary' : 'terciary'"
+              class="button-space"
+              :style="{ gridArea: 'right-button' }"
+              @click="referenceDate = addMonth(referenceDate, 12)"
+            />
+          </div>
+
+          <div :class="['days', `months--${size}`]">
+            <div
+              v-for="(date, index) in getMonthsOfTheYear(openMonth)"
+              :key="`${openMonth}-${index}`"
+              :class="{
+                disabled: !date.properties.includes('inside month'),
+                selectable: date.properties.includes('inside month'),
+                today: date.properties.includes('today'),
+                selected: date.properties.includes('selected'),
+                highlighted: date.properties.includes('highlighted'),
+                left: date.properties.includes('left-highlighted'),
+                right: date.properties.includes('right-highlighted'),
+              }"
+              @click="date.properties.includes('inside month') && selectDate(date)"
+            >
+              {{ months[getMonth(date)].substr(0, 3) }}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div :key="`divider-${openMonth}`" class="divider"></div>
+        <div :key="`divider-${openMonth}`" class="divider"></div>
+      </template>
+    </template>
+
+    <template v-else-if="type === 'year'">
+      <template v-for="openMonth in [referenceDate]">
+        <div :key="openMonth" class="month-container">
+          <div :class="['header', `header--${size}`]">
+            <unnnic-button
+              size="small"
+              icon-center="arrow-left-1-1"
+              :type="size === 'large' ? 'secondary' : 'terciary'"
+              class="button-space"
+              :style="{ gridArea: 'left-button' }"
+              @click="referenceDate = addMonth(referenceDate, -12 * 12)"
+            />
+
+            <div :class="['label', `label--${size}`]">
+              {{ getFullYear(openMonth) }}
+            </div>
+
+            <unnnic-button
+              size="small"
+              icon-center="arrow-right-1-1"
+              :type="size === 'large' ? 'secondary' : 'terciary'"
+              class="button-space"
+              :style="{ gridArea: 'right-button' }"
+              @click="referenceDate = addMonth(referenceDate, 12 * 12)"
+            />
+          </div>
+
+          <div :class="['days', `months--${size}`]">
+            <div
+              v-for="(date, index) in getYears(openMonth)"
+              :key="`${openMonth}-${index}`"
+              :class="{
+                disabled: !date.properties.includes('inside month'),
+                selectable: date.properties.includes('inside month'),
+                today: date.properties.includes('today'),
+                selected: date.properties.includes('selected'),
+                highlighted: date.properties.includes('highlighted'),
+                left: date.properties.includes('left-highlighted'),
+                right: date.properties.includes('right-highlighted'),
+              }"
+              @click="date.properties.includes('inside month') && selectDate(date)"
+            >
+              {{ date.date }}
+            </div>
+          </div>
+        </div>
+
+        <div :key="`divider-${openMonth}`" class="divider"></div>
+      </template>
     </template>
 
     <div v-if="size !== 'small'" class="options-container">
@@ -84,6 +188,11 @@ export default {
   props: {
     initialStartDate: String,
     initialEndDate: String,
+
+    type: {
+      type: String,
+      default: 'day',
+    },
 
     size: {
       type: String,
@@ -201,6 +310,14 @@ export default {
       return `${date.getMonth() + 1} ${date.getDate()} ${date.getFullYear()}`;
     },
 
+    dateToStringMonth(date) {
+      return `${date.getMonth() + 1} ${date.getFullYear()}`;
+    },
+
+    dateToStringYear(date) {
+      return date.getFullYear();
+    },
+
     stringToTime(date) {
       return new Date(date).getTime();
     },
@@ -234,6 +351,49 @@ export default {
           return true;
         }
       } else if (this.startDate && internalDate >= this.stringToTime(this.startDate)) {
+        return true;
+      } else if (this.endDate && internalDate <= this.stringToTime(this.endDate)) {
+        return true;
+      }
+
+      return false;
+    },
+
+    isDateBetweenMonth(internalDate) {
+      const startDate = new Date(this.startDate);
+      startDate.setDate(1);
+      const startDateTime = startDate.getTime();
+
+      if (this.startDate && this.endDate) {
+        if (
+          internalDate >= startDateTime
+          && internalDate <= this.stringToTime(this.endDate)
+        ) {
+          return true;
+        }
+      } else if (this.startDate && internalDate >= startDateTime) {
+        return true;
+      } else if (this.endDate && internalDate <= this.stringToTime(this.endDate)) {
+        return true;
+      }
+
+      return false;
+    },
+
+    isDateBetweenYear(internalDate) {
+      const startDate = new Date(this.startDate);
+      startDate.setDate(1);
+      startDate.setMonth(0);
+      const startDateTime = startDate.getTime();
+
+      if (this.startDate && this.endDate) {
+        if (
+          internalDate >= startDateTime
+          && internalDate <= this.stringToTime(this.endDate)
+        ) {
+          return true;
+        }
+      } else if (this.startDate && internalDate >= startDateTime) {
         return true;
       } else if (this.endDate && internalDate <= this.stringToTime(this.endDate)) {
         return true;
@@ -289,6 +449,116 @@ export default {
         });
 
         date.setDate(date.getDate() + 1);
+      }
+
+      return dates;
+    },
+
+    getMonthsOfTheYear(referenceDate) {
+      const date = new Date(referenceDate);
+
+      date.setMonth(0);
+
+      const dates = [];
+
+      for (let i = 0; i < 3 * 4; i += 1) {
+        const dateString = this.dateToString(date);
+        const properties = [];
+
+        properties.push('inside month');
+
+        const dateInTime = this.stringToTime(this.dateToString(date));
+        let monthBefore = new Date(dateInTime);
+        let monthAfter = new Date(dateInTime);
+
+        monthBefore.setMonth(monthBefore.getMonth() - 1);
+        monthAfter.setMonth(monthAfter.getMonth() + 1);
+
+        monthBefore = monthBefore.getTime();
+        monthAfter = monthAfter.getTime();
+
+        if (this.isDateBetweenMonth(dateInTime)) {
+          properties.push('selected');
+
+          if (!this.isDateBetweenMonth(monthBefore)) {
+            properties.push('left-highlighted');
+          }
+
+          if (!this.isDateBetweenMonth(monthAfter)) {
+            properties.push('right-highlighted');
+          }
+
+          if (properties.includes('left-highlighted') || properties.includes('right-highlighted')) {
+            properties.push('highlighted');
+          }
+        }
+
+        if (this.dateToStringMonth(date) === this.dateToStringMonth(new Date())) {
+          properties.push('today');
+        }
+
+        dates.push({
+          properties,
+          date: dateString,
+          toString: () => dateString,
+        });
+
+        date.setMonth(date.getMonth() + 1);
+      }
+
+      return dates;
+    },
+
+    getYears(referenceDate) {
+      const date = new Date(referenceDate);
+
+      date.setMonth(0);
+
+      const dates = [];
+
+      for (let i = 0; i < 3 * 4; i += 1) {
+        const dateString = this.dateToString(date);
+        const properties = [];
+
+        properties.push('inside month');
+
+        const dateInTime = this.stringToTime(this.dateToString(date));
+        let yearBefore = new Date(dateInTime);
+        let yearAfter = new Date(dateInTime);
+
+        yearBefore.setMonth(yearBefore.getMonth() - 12);
+        yearAfter.setMonth(yearAfter.getMonth() + 12);
+
+        yearBefore = yearBefore.getTime();
+        yearAfter = yearAfter.getTime();
+
+        if (this.isDateBetweenYear(dateInTime)) {
+          properties.push('selected');
+
+          if (!this.isDateBetweenYear(yearBefore)) {
+            properties.push('left-highlighted');
+          }
+
+          if (!this.isDateBetweenYear(yearAfter)) {
+            properties.push('right-highlighted');
+          }
+
+          if (properties.includes('left-highlighted') || properties.includes('right-highlighted')) {
+            properties.push('highlighted');
+          }
+        }
+
+        if (this.dateToStringYear(date) === this.dateToStringYear(new Date())) {
+          properties.push('today');
+        }
+
+        dates.push({
+          properties,
+          date: date.getFullYear(),
+          toString: () => dateString,
+        });
+
+        date.setFullYear(date.getFullYear() + 1);
       }
 
       return dates;
@@ -438,6 +708,13 @@ export default {
         grid-template-rows: repeat(7, 32px);
         font-size: $unnnic-font-size-body-gt;
         line-height: 32px;
+      }
+
+      &.months--small, &.months--large {
+        grid-template-columns: repeat(3, 4.75rem);
+        grid-template-rows: repeat(4, 3.3125rem);
+        font-size: $unnnic-font-size-body-md;
+        line-height: 3.3125rem;
       }
 
       .selectable {
