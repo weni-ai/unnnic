@@ -192,6 +192,9 @@ export default {
     type: {
       type: String,
       default: 'day',
+      validator(type) {
+        return ['day', 'month', 'year'].includes(type);
+      },
     },
 
     size: {
