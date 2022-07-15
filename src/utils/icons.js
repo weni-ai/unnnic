@@ -4,6 +4,8 @@ import expand81 from '!!svg-inline-loader!../assets/icons/expand-8-1.svg';
 import flash14 from '!!svg-inline-loader!../assets/icons/flash-1-4.svg';
 import phoneCharger1 from '!!svg-inline-loader!../assets/icons/phone-charger-1.svg';
 import checkboxDisable from '!!svg-inline-loader!../assets/icons/checkbox-disable.svg';
+import commonFileEmpty1 from '!!svg-inline-loader!../assets/icons/common-file-empty-1.svg';
+import commonFileHorizontalImage1 from '!!svg-inline-loader!../assets/icons/common-file-horizontal-image-1.svg';
 import headphonesCustomerSupport1 from '!!svg-inline-loader!../assets/icons/headphones-customer-support-1.svg';
 import headphonesCustomerSupportHuman11 from '!!svg-inline-loader!../assets/icons/headphones-customer-support-human-1-1.svg';
 import arrowButtonDown1 from '!!svg-inline-loader!../assets/icons/arrow-button-down-1.svg';
@@ -164,6 +166,8 @@ export default {
   'flash-1-4': flash14,
   'phone-charger-1': phoneCharger1,
   'checkbox-disable': checkboxDisable,
+  'common-file-empty-1': commonFileEmpty1,
+  'common-file-horizontal-image-1': commonFileHorizontalImage1,
   'headphones-customer-support-1': headphonesCustomerSupport1,
   'headphones-customer-support-human-1-1': headphonesCustomerSupportHuman11,
   'arrow-button-down-1': arrowButtonDown1,
