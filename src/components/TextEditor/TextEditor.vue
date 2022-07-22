@@ -243,6 +243,11 @@ export default {
       this.$emit('input', event.srcElement.innerHTML);
     },
 
+    setValue(value) {
+      this.$refs.oDoc.innerHTML = value;
+      this.$emit('input', this.$refs.oDoc.innerHTML);
+    },
+
     clear() {
       this.$refs.oDoc.innerHTML = '';
       this.$emit('input', this.$refs.oDoc.innerHTML);
