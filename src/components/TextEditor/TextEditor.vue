@@ -70,6 +70,8 @@
           size="ant"
           clickable
           scheme="neutral-cleanest"
+          @mousedown="$emit('record-audio-down')"
+          @mouseup="$emit('record-audio-up')"
           @click="$emit('record-audio')"
         />
       </unnnic-tool-tip>
