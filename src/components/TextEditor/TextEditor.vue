@@ -7,6 +7,7 @@
         ref="oDoc"
         v-html="initialContent"
         @input="onInput"
+        @keydown="$emit('keydown', $event)"
       ></div>
 
       <div v-if="$slots['footer-input']" class="footer-input" @click.stop>
