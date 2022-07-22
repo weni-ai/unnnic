@@ -7,6 +7,7 @@
         ref="oDoc"
         v-html="initialContent"
         @input="onInput"
+        @keydown="$emit('keydown', $event)"
       ></div>
 
       <div v-if="$slots['footer-input']" class="footer-input" @click.stop>
@@ -69,6 +70,8 @@
           size="ant"
           clickable
           scheme="neutral-cleanest"
+          @mousedown="$emit('record-audio-down')"
+          @mouseup="$emit('record-audio-up')"
           @click="$emit('record-audio')"
         />
       </unnnic-tool-tip>
@@ -238,6 +241,16 @@ export default {
 
     onInput(event) {
       this.$emit('input', event.srcElement.innerHTML);
+    },
+
+    setValue(value) {
+      this.$refs.oDoc.innerHTML = value;
+      this.$emit('input', this.$refs.oDoc.innerHTML);
+    },
+
+    clear() {
+      this.$refs.oDoc.innerHTML = '';
+      this.$emit('input', this.$refs.oDoc.innerHTML);
     },
   },
 };
