@@ -240,6 +240,11 @@ export default {
     onInput(event) {
       this.$emit('input', event.srcElement.innerHTML);
     },
+
+    clear() {
+      this.$refs.oDoc.innerHTML = '';
+      this.$emit('input', this.$refs.oDoc.innerHTML);
+    },
   },
 };
 </script>
