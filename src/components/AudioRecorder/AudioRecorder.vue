@@ -224,6 +224,8 @@ export default {
       this.status = 'recorded';
       this.recorder.stop();
 
+      this.$emit('input', this.audio);
+
       this.bars = await this.srcToBars(this.audio.src);
     },
 
