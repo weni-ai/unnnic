@@ -1,6 +1,8 @@
 <template>
 <span
     @click="onClick"
+    @mousedown="$emit('mousedown')"
+    @mouseup="$emit('mouseup')"
     :class="[
       'unnnic-icon',
       `unnnic-icon__size--${size}`,
