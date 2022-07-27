@@ -21,7 +21,9 @@
             :text="member.name"
             enabled
           >
-            <div class="avatar" :style="{ backgroundImage: `url(${member.photo})` }"></div>
+            <div class="avatar__background">
+              <div class="avatar" :style="{ backgroundImage: `url(${member.photo})` }" />
+            </div>
           </tool-tip>
         </div>
 
@@ -209,6 +211,11 @@ export default {
           &:not(:first-child) {
             margin-left: -0.875rem;
           }
+        }
+
+        .avatar__background {
+          border-radius: 50%;
+          background: $unnnic-color-neutral-clean;
         }
 
         .avatar {
