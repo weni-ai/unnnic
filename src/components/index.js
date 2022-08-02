@@ -58,6 +58,7 @@ import moodRating from './MoodRating/MoodRating.vue';
 import starRating from './StarRating/StarRating.vue';
 import audioRecorder from './AudioRecorder/AudioRecorder.vue';
 import circleProgressBar from './CircleProgressBar/CircleProgressBar.vue';
+import progressBar from './ProgressBar/ProgressBar.vue';
 
 const components = {
   unnnicInput: input,
@@ -119,6 +120,7 @@ const components = {
   unnnicStarRating: starRating,
   unnnicAudioRecorder: audioRecorder,
   unnnicCircleProgressBar: circleProgressBar,
+  unnnicProgressBar: progressBar,
 };
 
 Object.keys(components).forEach((name) => {
@@ -186,3 +188,4 @@ export const unnnicMoodRating = moodRating;
 export const unnnicStarRating = starRating;
 export const unnnicAudioRecorder = audioRecorder;
 export const unnnicCircleProgressBar = circleProgressBar;
+export const unnnicProgressBar = progressBar;

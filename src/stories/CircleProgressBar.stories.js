@@ -1,7 +1,7 @@
 import unnnicCircleProgressBar from '../components/CircleProgressBar/CircleProgressBar.vue';
 
 export default {
-  title: 'example/CircleProgressBar',
+  title: 'Progress/CircleProgressBar',
   component: unnnicCircleProgressBar,
   argTypes: {},
 };
