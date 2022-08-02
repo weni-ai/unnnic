@@ -71,6 +71,7 @@ import genericCard from '!!svg-inline-loader!../assets/icons/generic-card.svg';
 import graphStats1 from '!!svg-inline-loader!../assets/icons/graph-stats-1.svg';
 import graphStatsAscend2 from '!!svg-inline-loader!../assets/icons/graph-stats-ascend-2.svg';
 import graphStatsCircle1 from '!!svg-inline-loader!../assets/icons/graph-stats-circle-1.svg';
+import graphStatsCircle11 from '!!svg-inline-loader!../assets/icons/graph-stats-circle-1-1.svg';
 import graphStatsDescend2 from '!!svg-inline-loader!../assets/icons/graph-stats-descend-2.svg';
 import headphonesCustomerSupport1 from '!!svg-inline-loader!../assets/icons/headphones-customer-support-1.svg';
 import headphonesCustomerSupport2 from '!!svg-inline-loader!../assets/icons/headphones-customer-support-2.svg';
@@ -230,6 +231,7 @@ export default {
   'graph-stats-ascend-2': graphStatsAscend2,
   'graph-stats-descend-2': graphStatsDescend2,
   'graph-status-circle-1': graphStatsCircle1,
+  'graph-status-circle-1-1': graphStatsCircle11,
   'headphones-customer-support-1': headphonesCustomerSupport1,
   'headphones-customer-support-2': headphonesCustomerSupport2,
   'headphones-customer-support-human-1-1': headphonesCustomerSupportHuman11,
