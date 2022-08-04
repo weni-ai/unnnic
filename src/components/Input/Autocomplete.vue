@@ -7,6 +7,7 @@
         :v-bind="$attrs"
         :icon-left="iconLeft"
         :icon-right="iconRight"
+        :icon-right-clickable="Object.keys($listeners).includes('icon-right-click')"
         :tooltip-icon-right="tooltipIconRight"
         :tooltip-side-icon-right="tooltipSideIconRight"
         :tooltip-force-open-icon-right="tooltipForceOpenIconRight"
