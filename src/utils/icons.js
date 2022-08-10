@@ -110,6 +110,7 @@ import phone3 from '!!svg-inline-loader!../assets/icons/phone-3.svg';
 import phone4 from '!!svg-inline-loader!../assets/icons/phone-4.svg';
 import phoneCharger1 from '!!svg-inline-loader!../assets/icons/phone-charger-1.svg';
 import photographyEquipmentBag1 from '!!svg-inline-loader!../assets/icons/photography-equipment-bag-1.svg';
+import pieLineGraph1 from '!!svg-inline-loader!../assets/icons/pie-line-graph-1.svg';
 import questionCircle1 from '!!svg-inline-loader!../assets/icons/question-circle-1.svg';
 import questionCircle2 from '!!svg-inline-loader!../assets/icons/question-circle-2.svg';
 import radioDefault from '!!svg-inline-loader!../assets/icons/radio-default.svg';
@@ -137,6 +138,7 @@ import switchSelected from '!!svg-inline-loader!../assets/icons/switch-selected.
 import switchSelectedDisabled from '!!svg-inline-loader!../assets/icons/switch-selected-disabled.svg';
 import synchronizeArrowClock4 from '!!svg-inline-loader!../assets/icons/synchronize-arrow-clock-4.svg';
 import synchronizeArrowClock5 from '!!svg-inline-loader!../assets/icons/synchronize-arrow-clock-5.svg';
+import taskChecklist1 from '!!svg-inline-loader!../assets/icons/task-checklist-1.svg';
 import taskListClock1 from '!!svg-inline-loader!../assets/icons/task-list-clock-1.svg';
 import textBold from '!!svg-inline-loader!../assets/icons/text-bold.svg';
 import textCenter from '!!svg-inline-loader!../assets/icons/text-center.svg';
@@ -269,6 +271,7 @@ export default {
   'phone-4': phone4,
   'phone-charger-1': phoneCharger1,
   'photography-equipment-bag-1': photographyEquipmentBag1,
+  'pie-line-graph-1': pieLineGraph1,
   'question-circle-1': questionCircle1,
   'question-circle-2': questionCircle2,
   'radio-default': radioDefault,
@@ -296,6 +299,7 @@ export default {
   'switch-selected': switchSelected,
   'synchronize-arrow-clock-4': synchronizeArrowClock4,
   'synchronize-arrow-clock-5': synchronizeArrowClock5,
+  'task-checklist-1': taskChecklist1,
   'task-list-clock-1': taskListClock1,
   'text-bold': textBold,
   'text-center': textCenter,
