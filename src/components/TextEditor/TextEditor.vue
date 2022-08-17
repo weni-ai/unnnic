@@ -34,7 +34,7 @@
     <div class="format">
       <unnnic-tool-tip
         side="top"
-        text="Undo"
+        :text="text('Undo')"
         enabled
       >
         <unnnic-icon
@@ -48,7 +48,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Redo"
+        :text="text('Redo')"
         enabled
       >
         <unnnic-icon
@@ -62,7 +62,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Record Audio"
+        :text="text('RecordAudio')"
         enabled
       >
         <unnnic-icon
@@ -76,6 +76,30 @@
         />
       </unnnic-tool-tip>
 
+      <unnnic-tool-tip
+        side="top"
+        :text="text('Attach')"
+        :enabled="!attachmentOptionsOpen"
+      >
+        <unnnic-dropdown
+          :open.sync="attachmentOptionsOpen"
+          position="none"
+          class="attachment-options-dropdown"
+        >
+          <unnnic-icon
+            slot="trigger"
+            icon="attachment"
+            size="ant"
+            clickable
+            scheme="neutral-cleanest"
+          />
+
+          <div class="attachment-options-container">
+            <slot name="attachment-options" />
+          </div>
+        </unnnic-dropdown>
+      </unnnic-tool-tip>
+
       <!-- <unnnic-icon
         icon="email-action-unread-1"
         size="ant"
@@ -85,7 +109,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Bold"
+        :text="text('Bold')"
         enabled
         :style="{ marginLeft: '1rem', }"
       >
@@ -100,7 +124,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Italic"
+        :text="text('Italic')"
         enabled
       >
         <unnnic-icon
@@ -114,7 +138,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Underline"
+        :text="text('Underline')"
         enabled
       >
         <unnnic-icon
@@ -128,7 +152,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="List"
+        :text="text('List')"
         enabled
       >
         <unnnic-icon
@@ -142,7 +166,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Left"
+        :text="text('Left')"
         enabled
       >
         <unnnic-icon
@@ -156,7 +180,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Center"
+        :text="text('Center')"
         enabled
       >
         <unnnic-icon
@@ -170,7 +194,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Right"
+        :text="text('Right')"
         enabled
       >
         <unnnic-icon
@@ -184,7 +208,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Justify"
+        :text="text('Justify')"
         enabled
       >
         <unnnic-icon
@@ -203,12 +227,14 @@
 import UnnnicButtonIcon from '../Button/ButtonIcon.vue';
 import UnnnicToolTip from '../ToolTip/ToolTip.vue';
 import UnnnicIcon from '../Icon.vue';
+import UnnnicDropdown from '../Dropdown/Dropdown.vue';
 
 export default {
   components: {
     UnnnicButtonIcon,
     UnnnicToolTip,
     UnnnicIcon,
+    UnnnicDropdown,
   },
 
   props: {
@@ -216,11 +242,33 @@ export default {
       type: String,
       default: '',
     },
+
+    texts: {
+      type: Object,
+      default() {
+        return {
+          Undo: 'Undo',
+          Redo: 'Redo',
+          RecordAudio: 'Record Audio',
+          Bold: 'Bold',
+          Italic: 'Italic',
+          Underline: 'Underline',
+          List: 'List',
+          Left: 'Left',
+          Center: 'Center',
+          Right: 'Right',
+          Justify: 'Justify',
+          Attach: 'Attach',
+        };
+      },
+    },
   },
 
   data() {
     return {
       initialContent: '',
+
+      attachmentOptionsOpen: false,
     };
   },
 
@@ -251,6 +299,10 @@ export default {
     clear() {
       this.$refs.oDoc.innerHTML = '';
       this.$emit('input', this.$refs.oDoc.innerHTML);
+    },
+
+    text(key) {
+      return this.texts[key];
     },
   },
 };
@@ -317,6 +369,17 @@ export default {
     user-select: none;
     display: flex;
     gap: $unnnic-spacing-inline-xs;
+
+    .attachment-options-dropdown ::v-deep .unnnic-dropdown__content {
+      padding: 0;
+      bottom: 100%;
+      margin-bottom: 0.5rem;
+      right: (-10.375rem / 2) + 0.625rem;
+    }
+
+    .attachment-options-container {
+      width: 10.375rem;
+    }
   }
 }
 </style>

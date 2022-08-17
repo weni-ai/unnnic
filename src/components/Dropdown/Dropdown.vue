@@ -30,7 +30,7 @@ export default {
       type: String,
       default: 'bottom-left',
       validator(value) {
-        return ['top-left', 'bottom-left', 'bottom-left', 'bottom-right'].indexOf(value) !== -1;
+        return ['top-left', 'none', 'bottom-left', 'bottom-left', 'bottom-right'].indexOf(value) !== -1;
       },
     },
   },

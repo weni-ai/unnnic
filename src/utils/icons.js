@@ -15,6 +15,7 @@ import arrowLeft11 from '!!svg-inline-loader!../assets/icons/arrow-left-1-1.svg'
 import arrowRedo from '!!svg-inline-loader!../assets/icons/arrow-redo.svg';
 import arrowRight11 from '!!svg-inline-loader!../assets/icons/arrow-right-1-1.svg';
 import arrowUndo from '!!svg-inline-loader!../assets/icons/arrow-undo.svg';
+import attachment from '!!svg-inline-loader!../assets/icons/attachment.svg';
 import bin1 from '!!svg-inline-loader!../assets/icons/bin-1-1.svg';
 import bookAddress12 from '!!svg-inline-loader!../assets/icons/book-address-1-2.svg';
 import bookAddress2 from '!!svg-inline-loader!../assets/icons/book-address-2.svg';
@@ -176,6 +177,7 @@ export default {
   'arrow-redo': arrowRedo,
   'arrow-right-1-1': arrowRight11,
   'arrow-undo': arrowUndo,
+  attachment,
   'bin-1-1': bin1,
   'book-address-1-2': bookAddress12,
   'book-address-2': bookAddress2,

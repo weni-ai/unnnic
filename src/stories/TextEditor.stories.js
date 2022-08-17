@@ -22,6 +22,10 @@ const Template = (args, { argTypes }) => ({
   template: `
     <div>
       <unnnic-text-editor v-bind="$props" v-model="content">
+        <template slot="attachment-options">
+          Attach
+        </template>
+
         <template slot="footer-input">
           Audio Component
         </template>
@@ -34,4 +38,19 @@ const Template = (args, { argTypes }) => ({
 
 export const Default = Template.bind({});
 
-Default.args = {};
+Default.args = {
+  texts: {
+    Undo: 'Undo',
+    Redo: 'Redo',
+    RecordAudio: 'Record Audio',
+    Bold: 'Bold',
+    Italic: 'Italic',
+    Underline: 'Underline',
+    List: 'List',
+    Left: 'Left',
+    Center: 'Center',
+    Right: 'Right',
+    Justify: 'Justify',
+    Attach: 'Attach',
+  },
+};
