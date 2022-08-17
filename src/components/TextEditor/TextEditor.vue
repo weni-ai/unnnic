@@ -76,6 +76,30 @@
         />
       </unnnic-tool-tip>
 
+      <unnnic-tool-tip
+        side="top"
+        :text="text('Attach')"
+        :enabled="!attachmentOptionsOpen"
+      >
+        <unnnic-dropdown
+          :open.sync="attachmentOptionsOpen"
+          position="none"
+          class="attachment-options-dropdown"
+        >
+          <unnnic-icon
+            slot="trigger"
+            icon="attachment"
+            size="ant"
+            clickable
+            scheme="neutral-cleanest"
+          />
+
+          <div class="attachment-options-container">
+            <slot name="attachment-options" />
+          </div>
+        </unnnic-dropdown>
+      </unnnic-tool-tip>
+
       <!-- <unnnic-icon
         icon="email-action-unread-1"
         size="ant"
@@ -203,12 +227,14 @@
 import UnnnicButtonIcon from '../Button/ButtonIcon.vue';
 import UnnnicToolTip from '../ToolTip/ToolTip.vue';
 import UnnnicIcon from '../Icon.vue';
+import UnnnicDropdown from '../Dropdown/Dropdown.vue';
 
 export default {
   components: {
     UnnnicButtonIcon,
     UnnnicToolTip,
     UnnnicIcon,
+    UnnnicDropdown,
   },
 
   props: {
@@ -232,6 +258,7 @@ export default {
           Center: 'Center',
           Right: 'Right',
           Justify: 'Justify',
+          Attach: 'Attach',
         };
       },
     },
@@ -240,6 +267,8 @@ export default {
   data() {
     return {
       initialContent: '',
+
+      attachmentOptionsOpen: false,
     };
   },
 
@@ -273,7 +302,6 @@ export default {
     },
 
     text(key) {
-      console.log(key, this.texts);
       return this.texts[key];
     },
   },
@@ -341,6 +369,17 @@ export default {
     user-select: none;
     display: flex;
     gap: $unnnic-spacing-inline-xs;
+
+    .attachment-options-dropdown ::v-deep .unnnic-dropdown__content {
+      padding: 0;
+      bottom: 100%;
+      margin-bottom: 0.5rem;
+      right: (-10.375rem / 2) + 0.625rem;
+    }
+
+    .attachment-options-container {
+      width: 10.375rem;
+    }
   }
 }
 </style>
