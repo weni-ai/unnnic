@@ -34,7 +34,7 @@
     <div class="format">
       <unnnic-tool-tip
         side="top"
-        text="Undo"
+        :text="text('Undo')"
         enabled
       >
         <unnnic-icon
@@ -48,7 +48,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Redo"
+        :text="text('Redo')"
         enabled
       >
         <unnnic-icon
@@ -62,7 +62,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Record Audio"
+        :text="text('RecordAudio')"
         enabled
       >
         <unnnic-icon
@@ -85,7 +85,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Bold"
+        :text="text('Bold')"
         enabled
         :style="{ marginLeft: '1rem', }"
       >
@@ -100,7 +100,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Italic"
+        :text="text('Italic')"
         enabled
       >
         <unnnic-icon
@@ -114,7 +114,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Underline"
+        :text="text('Underline')"
         enabled
       >
         <unnnic-icon
@@ -128,7 +128,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="List"
+        :text="text('List')"
         enabled
       >
         <unnnic-icon
@@ -142,7 +142,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Left"
+        :text="text('Left')"
         enabled
       >
         <unnnic-icon
@@ -156,7 +156,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Center"
+        :text="text('Center')"
         enabled
       >
         <unnnic-icon
@@ -170,7 +170,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Right"
+        :text="text('Right')"
         enabled
       >
         <unnnic-icon
@@ -184,7 +184,7 @@
 
       <unnnic-tool-tip
         side="top"
-        text="Justify"
+        :text="text('Justify')"
         enabled
       >
         <unnnic-icon
@@ -215,6 +215,25 @@ export default {
     value: {
       type: String,
       default: '',
+    },
+
+    texts: {
+      type: Object,
+      default() {
+        return {
+          Undo: 'Undo',
+          Redo: 'Redo',
+          RecordAudio: 'Record Audio',
+          Bold: 'Bold',
+          Italic: 'Italic',
+          Underline: 'Underline',
+          List: 'List',
+          Left: 'Left',
+          Center: 'Center',
+          Right: 'Right',
+          Justify: 'Justify',
+        };
+      },
     },
   },
 
@@ -251,6 +270,11 @@ export default {
     clear() {
       this.$refs.oDoc.innerHTML = '';
       this.$emit('input', this.$refs.oDoc.innerHTML);
+    },
+
+    text(key) {
+      console.log(key, this.texts);
+      return this.texts[key];
     },
   },
 };

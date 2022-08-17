@@ -34,4 +34,18 @@ const Template = (args, { argTypes }) => ({
 
 export const Default = Template.bind({});
 
-Default.args = {};
+Default.args = {
+  texts: {
+    Undo: 'Undo',
+    Redo: 'Redo',
+    RecordAudio: 'Record Audio',
+    Bold: 'Bold',
+    Italic: 'Italic',
+    Underline: 'Underline',
+    List: 'List',
+    Left: 'Left',
+    Center: 'Center',
+    Right: 'Right',
+    Justify: 'Justify',
+  },
+};
