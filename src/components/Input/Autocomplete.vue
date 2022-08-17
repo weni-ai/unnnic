@@ -149,7 +149,10 @@ export default {
     onChoose(option) {
       this.val = option.text;
       this.$emit('choose', option.value ? option.value : option.text);
-      this.open = false;
+
+      this.$nextTick(() => {
+        this.open = false;
+      });
     },
     onClickOutside() {
       if (!this.open) return;
