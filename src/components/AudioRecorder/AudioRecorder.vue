@@ -4,7 +4,7 @@
       v-if="isRecording || isRecorded"
       :is-recording="isRecording"
       :time="numberToTimeString(duration)"
-      @discard="discard"
+      @discard="stop(); discard()"
       @save="save"
     />
     <audio-player
@@ -215,6 +215,7 @@ export default {
       this.status = 'idle';
     },
     save() {
+      this.stop();
       this.status = 'idle';
     },
     pause() {
