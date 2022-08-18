@@ -19,7 +19,7 @@ const Template = (args, { argTypes }) => ({
 
   template: `
     <div>
-      <button @mousedown="$refs['audio-recorder'].record()" @mouseup="$refs['audio-recorder'].stop()">Gravar</button>
+      <button @click="$refs['audio-recorder'].record()">Gravar</button>
 
       <unnnic-audio-recorder v-bind="$props" ref="audio-recorder">
       </unnnic-audio-recorder>
