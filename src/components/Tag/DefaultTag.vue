@@ -67,7 +67,10 @@ export default {
 @each $name, $color in $scheme-colors {
   &.unnnic-tag-scheme--#{$name} {
     background-color: rgba($color, $unnnic-opacity-level-light);
-    border: $unnnic-border-width-thinner solid rgba($color, $unnnic-opacity-level-extra-light);
+    outline-style: solid;
+    outline-color: rgba($color, $unnnic-opacity-level-extra-light);
+    outline-width: $unnnic-border-width-thinner;
+    outline-offset: -$unnnic-border-width-thinner;
   }
 }
 
@@ -86,7 +89,10 @@ export default {
 
       @each $name, $color in $scheme-colors {
         &.unnnic-tag-scheme--#{$name}:hover {
-          border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
+          outline-style: solid;
+          outline-color: $unnnic-color-neutral-cleanest;
+          outline-width: $unnnic-border-width-thinner;
+          outline-offset: -$unnnic-border-width-thinner;
         }
       }
     }
