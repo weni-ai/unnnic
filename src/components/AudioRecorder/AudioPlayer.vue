@@ -112,10 +112,5 @@ export default {
       height: 100%;
     }
   }
-
-  &__time {
-    font-size: $unnnic-font-size-body-md;
-    color: $unnnic-color-neutral-darkest;
-  }
 }
 </style>
