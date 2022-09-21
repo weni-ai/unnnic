@@ -281,9 +281,13 @@ export default {
     }
   }
 
-  &__time {
+  ::v-deep .audio-player__time, ::v-deep .audio-handler__time {
+    font-family: $unnnic-font-family-secondary;
+    font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-md;
+    line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
     color: $unnnic-color-neutral-darkest;
+    user-select: none;
   }
 
   .delete-button {
