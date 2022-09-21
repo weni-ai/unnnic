@@ -14,7 +14,11 @@
       {{ time }}
     </span>
 
-    <unnnic-icon icon="indicator" :scheme="isRecording ? 'feedback-red' : 'neutral-clean'" />
+    <unnnic-icon
+      icon="indicator"
+      :class="[{ 'is-recording': isRecording }]"
+      :scheme="isRecording ? null : 'neutral-clean'"
+    />
 
     <unnnic-tool-tip enabled text="Salvar" side="top">
       <span @click="save" @keypress.enter="save" class="clickable">
@@ -77,9 +81,22 @@ export default {
     }
   }
 
-  &__time {
-    font-size: $unnnic-font-size-body-md;
-    color: $unnnic-color-neutral-darkest;
+  .unnnic-icon.is-recording ::v-deep .primary {
+    animation: ease pulse 1s infinite;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    fill: $unnnic-color-neutral-soft;
+  }
+
+  50% {
+    fill: $unnnic-color-feedback-red;
+  }
+
+  100% {
+    fill: $unnnic-color-neutral-soft;
   }
 }
 </style>
