@@ -1,7 +1,7 @@
 import unnnicSwitch from '../components/Switch/Switch.vue';
 
 export default {
-  title: 'Example/Switch',
+  title: 'Form/Switch',
   component: unnnicSwitch,
   argTypes: {
     size: { control: { type: 'select', options: ['small', 'medium'] } },

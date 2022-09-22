@@ -2,7 +2,7 @@ import unnnicButton from '../components/Button/Button.vue';
 import iconList from '../utils/iconList';
 
 export default {
-  title: 'Example/Button',
+  title: 'Form/Button',
   component: unnnicButton,
   argTypes: {
     type: { control: { type: 'select', options: ['primary', 'secondary', 'terciary'] } },
