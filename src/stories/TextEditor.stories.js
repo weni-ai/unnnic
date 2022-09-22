@@ -52,5 +52,6 @@ Default.args = {
     Right: 'Right',
     Justify: 'Justify',
     Attach: 'Attach',
+    action: 'Mensagens rápidas',
   },
 };

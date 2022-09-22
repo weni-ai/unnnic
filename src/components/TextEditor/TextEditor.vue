@@ -16,12 +16,18 @@
     </div>
 
     <div class="actions">
-      <unnnic-button-icon
-        @click="$emit('action')"
-        type="secondary"
-        size="small"
-        icon="flash-1-3"
-      />
+      <unnnic-tool-tip
+        side="left"
+        :text="text('action')"
+        enabled
+      >
+        <unnnic-button-icon
+          @click="$emit('action')"
+          type="secondary"
+          size="small"
+          icon="flash-1-3"
+        />
+      </unnnic-tool-tip>
 
       <unnnic-button-icon
         @click="$emit('send')"
@@ -259,6 +265,7 @@ export default {
           Right: 'Right',
           Justify: 'Justify',
           Attach: 'Attach',
+          action: 'Mensagens rápidas',
         };
       },
     },
