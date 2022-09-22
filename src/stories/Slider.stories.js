@@ -1,7 +1,7 @@
 import unnnicSlider from '../components/Slider/Slider.vue';
 
 export default {
-  title: 'Example/Slider',
+  title: 'Form/Slider',
   component: unnnicSlider,
   argTypes: {
     size: { control: { type: 'select', options: ['small', 'medium'] } },

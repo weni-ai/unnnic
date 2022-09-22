@@ -1,7 +1,7 @@
 import unnnicDateFilter from '../components/DateFilter/DateFilter.vue';
 
 export default {
-  title: 'Example/DateFilter',
+  title: 'Form/DateFilter',
   component: unnnicDateFilter,
   argTypes: {
     dateFormat: { control: { type: 'text' } },

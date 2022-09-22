@@ -4,7 +4,7 @@ import icons from '../utils/icons';
 const iconsOptions = Object.keys(icons);
 
 export default {
-  title: 'Example/ButtonIcon',
+  title: 'Form/ButtonIcon',
   component: unnnicButtonIcon,
   argTypes: {
     size: {

@@ -2,7 +2,7 @@ import i18n from '../utils/plugins/i18n';
 import unnnicUploadArea from '../components/UploadArea/UploadArea.vue';
 
 export default {
-  title: 'Example/UploadArea',
+  title: 'Form/UploadArea',
   component: unnnicUploadArea,
   argTypes: {
     acceptMultiple: { control: { type: 'boolean' } },

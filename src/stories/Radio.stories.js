@@ -1,7 +1,7 @@
 import unnnicRadio from '../components/Radio/Radio.vue';
 
 export default {
-  title: 'example/Radio',
+  title: 'Form/Radio',
   component: unnnicRadio,
   argTypes: {
     value: { control: { type: 'text' } },
