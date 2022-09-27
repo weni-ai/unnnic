@@ -8,6 +8,8 @@
         v-html="initialContent"
         @input="onInput"
         @keydown="$emit('keydown', $event)"
+        @focus="isFocused = true"
+        @blur="isFocused = false"
       ></div>
 
       <div v-if="$slots['footer-input']" class="footer-input" @click.stop>
@@ -47,7 +49,7 @@
           icon="arrow-undo"
           size="ant"
           clickable
-          scheme="neutral-cleanest"
+          :scheme="iconScheme"
           @click="formatDoc('undo')"
         />
       </unnnic-tool-tip>
@@ -61,7 +63,7 @@
           icon="arrow-redo"
           size="ant"
           clickable
-          scheme="neutral-cleanest"
+          :scheme="iconScheme"
           @click="formatDoc('redo')"
         />
       </unnnic-tool-tip>
@@ -75,7 +77,7 @@
           icon="microphone"
           size="ant"
           clickable
-          scheme="neutral-cleanest"
+          :scheme="iconScheme"
           @mousedown="$emit('record-audio-down')"
           @mouseup="$emit('record-audio-up')"
           @click="$emit('record-audio')"
@@ -97,7 +99,7 @@
             icon="attachment"
             size="ant"
             clickable
-            scheme="neutral-cleanest"
+            :scheme="iconScheme"
           />
 
           <div class="attachment-options-container">
@@ -110,7 +112,7 @@
         icon="email-action-unread-1"
         size="ant"
         clickable
-        scheme="neutral-cleanest"
+        :scheme="iconScheme"
       /> -->
 
       <unnnic-tool-tip
@@ -123,7 +125,7 @@
           icon="text-bold"
           size="ant"
           clickable
-          scheme="neutral-cleanest"
+          :scheme="iconScheme"
           @click="formatDoc('bold')"
         />
       </unnnic-tool-tip>
@@ -137,7 +139,7 @@
           icon="text-italic"
           size="ant"
           clickable
-          scheme="neutral-cleanest"
+          :scheme="iconScheme"
           @click="formatDoc('italic')"
         />
       </unnnic-tool-tip>
@@ -151,7 +153,7 @@
           icon="text-underline"
           size="ant"
           clickable
-          scheme="neutral-cleanest"
+          :scheme="iconScheme"
           @click="formatDoc('underline')"
         />
       </unnnic-tool-tip>
@@ -165,7 +167,7 @@
           icon="unordered-list"
           size="ant"
           clickable
-          scheme="neutral-cleanest"
+          :scheme="iconScheme"
           @click="formatDoc('insertunorderedlist')"
         />
       </unnnic-tool-tip>
@@ -179,7 +181,7 @@
           icon="text-left"
           size="ant"
           clickable
-          scheme="neutral-cleanest"
+          :scheme="iconScheme"
           @click="formatDoc('justifyleft')"
         />
       </unnnic-tool-tip>
@@ -193,7 +195,7 @@
           icon="text-center"
           size="ant"
           clickable
-          scheme="neutral-cleanest"
+          :scheme="iconScheme"
           @click="formatDoc('justifycenter')"
         />
       </unnnic-tool-tip>
@@ -207,7 +209,7 @@
           icon="text-right"
           size="ant"
           clickable
-          scheme="neutral-cleanest"
+          :scheme="iconScheme"
           @click="formatDoc('justifyright')"
         />
       </unnnic-tool-tip>
@@ -221,7 +223,7 @@
           icon="text-justified"
           size="ant"
           clickable
-          scheme="neutral-cleanest"
+          :scheme="iconScheme"
           @click="formatDoc('justifyFull')"
         />
       </unnnic-tool-tip>
@@ -276,7 +278,15 @@ export default {
       initialContent: '',
 
       attachmentOptionsOpen: false,
+
+      isFocused: false,
     };
+  },
+
+  computed: {
+    iconScheme() {
+      return this.isFocused ? 'neutral-darkest' : 'neutral-cleanest';
+    },
   },
 
   created() {

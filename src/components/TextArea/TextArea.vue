@@ -1,5 +1,5 @@
 <template>
-  <div :class="['unnnic-text-area', { disabled }]">
+  <div :class="['unnnic-text-area', { disabled }, size]">
     <div v-if="label" class="label">{{ label }}</div>
 
     <textarea
@@ -17,6 +17,11 @@
 <script>
 export default {
   props: {
+    size: {
+      type: String,
+      default: 'md',
+    },
+
     label: {
       type: String,
     },
@@ -47,10 +52,42 @@ export default {
   .label {
     color: $unnnic-color-neutral-cloudy;
     font-family: $unnnic-font-family-secondary;
-    font-size: $unnnic-font-size-body-gt;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
     font-weight: $unnnic-font-weight-regular;
     margin-bottom: $unnnic-spacing-stack-nano;
+  }
+
+  &.md {
+    .label {
+      font-size: $unnnic-font-size-body-gt;
+      line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
+    }
+
+    textarea {
+      font-size: $unnnic-font-size-body-gt;
+      line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
+
+      &::placeholder {
+        font-size: $unnnic-font-size-body-gt;
+        line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
+      }
+    }
+  }
+
+  &.sm {
+    .label {
+      font-size: $unnnic-font-size-body-md;
+      line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+    }
+
+    textarea {
+      font-size: $unnnic-font-size-body-md;
+      line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+
+      &::placeholder {
+        font-size: $unnnic-font-size-body-md;
+        line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+      }
+    }
   }
 
   textarea {
@@ -66,8 +103,6 @@ export default {
 
     color: $unnnic-color-neutral-dark;
     font-family: $unnnic-font-family-secondary;
-    font-size: $unnnic-font-size-body-gt;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
     font-weight: $unnnic-font-weight-regular;
 
     &::placeholder {

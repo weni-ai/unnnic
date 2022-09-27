@@ -3,7 +3,9 @@ import unnnicTextArea from '../components/TextArea/TextArea.vue';
 export default {
   title: 'Form/TextArea',
   component: unnnicTextArea,
-  argTypes: {},
+  argTypes: {
+    size: { control: { type: 'select', options: ['md', 'sm'] } },
+  },
 };
 
 const Template = (args, { argTypes }) => ({

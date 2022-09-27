@@ -1,5 +1,5 @@
 <template>
-  <div class="unnnic-form">
+  <div :class="['unnnic-form', size]">
     <p v-if="hasLabelSlot" class="unnnic-form__label">
       <slot name="label" />
     </p>
@@ -144,6 +144,11 @@ export default {
     font-size: $unnnic-font-size-body-gt;
     color: $unnnic-color-neutral-cloudy;
     margin: $unnnic-spacing-stack-xs 0;
+  }
+
+  &.sm &__label {
+    font-size: $unnnic-font-size-body-md;
+    line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
   }
 }
 </style>
