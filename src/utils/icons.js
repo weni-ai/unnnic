@@ -149,6 +149,7 @@ import textLeft from '!!svg-inline-loader!../assets/icons/text-left.svg';
 import textRight from '!!svg-inline-loader!../assets/icons/text-right.svg';
 import textUnderline from '!!svg-inline-loader!../assets/icons/text-underline.svg';
 import timeClockCircle1 from '!!svg-inline-loader!../assets/icons/time-clock-circle-1.svg';
+import typing1 from '!!svg-inline-loader!../assets/icons/typing-1.svg';
 import translate1 from '!!svg-inline-loader!../assets/icons/translate-1.svg';
 import translate2 from '!!svg-inline-loader!../assets/icons/translate-2.svg';
 import unionpay from '!!svg-inline-loader!../assets/icons/unionpay.svg';
@@ -311,6 +312,7 @@ export default {
   'text-right': textRight,
   'text-underline': textUnderline,
   'time-clock-circle-1': timeClockCircle1,
+  'typing-1': typing1,
   'translate-1': translate1,
   'translate-2': translate2,
   unionpay,
