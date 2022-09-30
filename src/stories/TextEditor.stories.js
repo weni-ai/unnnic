@@ -21,6 +21,8 @@ const Template = (args, { argTypes }) => ({
 
   template: `
     <div>
+      <pre>{{ content }}</pre>
+      <button @click="content = ''">Clear</button>
       <unnnic-text-editor v-bind="$props" v-model="content">
         <template slot="attachment-options">
           Attach

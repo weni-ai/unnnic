@@ -271,6 +271,27 @@ export default {
         };
       },
     },
+
+    tags: {
+      type: Array,
+      default() {
+        return ['b', 'i', 'u', 'ul', 'li', 'br', 'div'];
+      },
+    },
+
+    attributes: {
+      type: Array,
+      default() {
+        return ['style'];
+      },
+    },
+
+    styleProperties: {
+      type: Array,
+      default() {
+        return ['text-align'];
+      },
+    },
   },
 
   data() {
@@ -280,6 +301,8 @@ export default {
       attachmentOptionsOpen: false,
 
       isFocused: false,
+
+      lastValueFromInside: '',
     };
   },
 
@@ -291,6 +314,19 @@ export default {
 
   created() {
     this.initialContent = this.value;
+    document.execCommand('defaultParagraphSeparator', false, 'div');
+  },
+
+  watch: {
+    value: {
+      immediate: true,
+
+      handler() {
+        if (this.value !== this.lastValueFromInside) {
+          this.$refs.oDoc.innerHTML = this.value;
+        }
+      },
+    },
   },
 
   methods: {
@@ -304,18 +340,53 @@ export default {
       return this.$refs.oDoc.focus();
     },
 
-    onInput(event) {
-      this.$emit('input', event.srcElement.innerHTML);
+    emitInput() {
+      this.lastValueFromInside = this.$refs.oDoc.innerHTML;
+
+      this.lastValueFromInside = this.lastValueFromInside.replace(/<(\/)?([^> ]+)( [^>]+)?>/gi, ($1, $2 = '', $3, $4 = '') => {
+        if (this.tags.includes($3)) {
+          const complements = [];
+
+          // eslint-disable-next-line no-restricted-syntax
+          for (const i of $4.matchAll(/((?<name1>[^ =]+)="(?<value1>[^"]*)"|(?<name2>[^ =]+)='(?<value2>[^"]*)')/g)) {
+            const name = i.groups.name1 || i.groups.name2;
+            const value = i.groups.value1 || i.groups.value2;
+
+            if (this.attributes.includes('style') && name === 'style') {
+              const styles = [];
+
+              // eslint-disable-next-line no-restricted-syntax
+              for (const j of value.matchAll(/(?<propertyName>[^:]+):(?<propertyValue>[^;]+);?/g)) {
+                if (this.styleProperties.includes(j.groups.propertyName.toLowerCase().trim())) {
+                  styles.push(`${j.groups.propertyName.toLowerCase().trim()}: ${j.groups.propertyValue.trim()}`);
+                }
+              }
+
+              complements.push(`style="${styles.join('; ')};"`);
+            }
+          }
+
+          return `<${$2}${$3}${complements.length ? ` ${complements.join(' ')}` : ''}>`;
+        }
+
+        return '';
+      });
+
+      this.$emit('input', this.lastValueFromInside);
+    },
+
+    onInput() {
+      this.emitInput();
     },
 
     setValue(value) {
       this.$refs.oDoc.innerHTML = value;
-      this.$emit('input', this.$refs.oDoc.innerHTML);
+      this.emitInput();
     },
 
     clear() {
       this.$refs.oDoc.innerHTML = '';
-      this.$emit('input', this.$refs.oDoc.innerHTML);
+      this.emitInput();
     },
 
     text(key) {
@@ -358,6 +429,10 @@ export default {
     .inside {
       flex: 1;
       outline: none;
+
+      ::v-deep p {
+        margin: 0;
+      }
     }
 
     .footer-input {
