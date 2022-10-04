@@ -1,16 +1,25 @@
 <template>
   <div class="unnnic-text-editor">
     <div class="text-editor" @click="$refs.oDoc.focus()">
-      <div
+      <textarea
+        class="inside"
+        ref="oDoc"
+        :value="value"
+        @input="$emit('input', $event.srcElement.value)"
+        @keydown="$emit('keydown', $event)"
+        @focus="isFocused = true"
+        @blur="isFocused = false"
+      ></textarea>
+
+      <!-- <div
         class="inside"
         contenteditable="true"
-        ref="oDoc"
         v-html="initialContent"
         @input="onInput"
         @keydown="$emit('keydown', $event)"
         @focus="isFocused = true"
         @blur="isFocused = false"
-      ></div>
+      ></div> -->
 
       <div v-if="$slots['footer-input']" class="footer-input" @click.stop>
         <slot name="footer-input" />
@@ -114,6 +123,8 @@
         clickable
         :scheme="iconScheme"
       /> -->
+
+      <!--
 
       <unnnic-tool-tip
         side="top"
@@ -227,6 +238,8 @@
           @click="formatDoc('justifyFull')"
         />
       </unnnic-tool-tip>
+
+      -->
     </div>
   </div>
 </template>
@@ -322,9 +335,14 @@ export default {
       immediate: true,
 
       handler() {
-        if (this.value !== this.lastValueFromInside) {
-          this.$refs.oDoc.innerHTML = this.value;
-        }
+        // if (this.value !== this.lastValueFromInside) {
+        //   this.$refs.oDoc.innerHTML = this.value;
+        // }
+
+        this.$nextTick(() => {
+          this.$refs.oDoc.style.minHeight = 0;
+          this.$refs.oDoc.style.minHeight = `${this.$refs.oDoc.scrollHeight}px`;
+        });
       },
     },
   },
@@ -427,6 +445,16 @@ export default {
     flex-direction: column;
 
     .inside {
+      color: $unnnic-color-neutral-cloudy;
+      font-family: $unnnic-font-family-secondary;
+      font-size: $unnnic-font-size-body-gt;
+      line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
+      font-weight: $unnnic-font-weight-regular;
+      border: none;
+      padding: 0;
+      resize: none;
+      overflow-y: hidden;
+
       flex: 1;
       outline: none;
 
