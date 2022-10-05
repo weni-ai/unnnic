@@ -56,6 +56,7 @@ import discover from '!!svg-inline-loader!../assets/icons/discover.svg';
 import downloadBottom1 from '!!svg-inline-loader!../assets/icons/download-bottom-1.svg';
 import downloadThickBottom1 from '!!svg-inline-loader!../assets/icons/download-thick-bottom-1.svg';
 import emailActionUnread1 from '!!svg-inline-loader!../assets/icons/email-action-unread-1.svg';
+import emoji from '!!svg-inline-loader!../assets/icons/emoji.svg';
 import expand81 from '!!svg-inline-loader!../assets/icons/expand-8-1.svg';
 import expandFull1 from '!!svg-inline-loader!../assets/icons/expand-full-1.svg';
 import export1 from '!!svg-inline-loader!../assets/icons/export-1.svg';
@@ -219,6 +220,7 @@ export default {
   'download-bottom-1': downloadBottom1,
   'download-thick-bottom-1': downloadThickBottom1,
   'email-action-unread-1': emailActionUnread1,
+  emoji,
   'expand-8-1': expand81,
   'expand-full-1': expandFull1,
   'export-1': export1,
