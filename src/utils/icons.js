@@ -113,6 +113,7 @@ import phone4 from '!!svg-inline-loader!../assets/icons/phone-4.svg';
 import phoneCharger1 from '!!svg-inline-loader!../assets/icons/phone-charger-1.svg';
 import photographyEquipmentBag1 from '!!svg-inline-loader!../assets/icons/photography-equipment-bag-1.svg';
 import pieLineGraph1 from '!!svg-inline-loader!../assets/icons/pie-line-graph-1.svg';
+import preferences from '!!svg-inline-loader!../assets/icons/preferences.svg';
 import questionCircle1 from '!!svg-inline-loader!../assets/icons/question-circle-1.svg';
 import questionCircle2 from '!!svg-inline-loader!../assets/icons/question-circle-2.svg';
 import radioDefault from '!!svg-inline-loader!../assets/icons/radio-default.svg';
@@ -277,6 +278,7 @@ export default {
   'phone-charger-1': phoneCharger1,
   'photography-equipment-bag-1': photographyEquipmentBag1,
   'pie-line-graph-1': pieLineGraph1,
+  preferences,
   'question-circle-1': questionCircle1,
   'question-circle-2': questionCircle2,
   'radio-default': radioDefault,
