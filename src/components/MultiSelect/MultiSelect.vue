@@ -99,6 +99,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    unselectable: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -129,7 +133,11 @@ export default {
         'change',
         this.groups.map((item, index) => {
           if (index === indexGroup) {
-            return { ...item, selected: indexSelected };
+            let selected = indexSelected;
+            if (this.unselectable && item.selected === indexSelected) {
+              selected = -1;
+            }
+            return { ...item, selected };
           }
 
           return item;
@@ -141,7 +149,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .normal-multiselect,
 .expand-multiselect {
