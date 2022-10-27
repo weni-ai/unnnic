@@ -10,6 +10,7 @@ import americanExpress from '!!svg-inline-loader!../assets/icons/american-expres
 import appWindowEdit1 from '!!svg-inline-loader!../assets/icons/app-window-edit-1.svg';
 import appWindowEdit2 from '!!svg-inline-loader!../assets/icons/app-window-edit-2.svg';
 import arrowButtonDown1 from '!!svg-inline-loader!../assets/icons/arrow-button-down-1.svg';
+import arrowButtonRight1 from '!!svg-inline-loader!../assets/icons/arrow-button-right-1.svg';
 import arrowButtonUp1 from '!!svg-inline-loader!../assets/icons/arrow-button-up-1.svg';
 import arrowLeft11 from '!!svg-inline-loader!../assets/icons/arrow-left-1-1.svg';
 import arrowRedo from '!!svg-inline-loader!../assets/icons/arrow-redo.svg';
@@ -175,6 +176,7 @@ export default {
   'app-window-edit-1': appWindowEdit1,
   'app-window-edit-2': appWindowEdit2,
   'arrow-button-down-1': arrowButtonDown1,
+  'arrow-button-right-1': arrowButtonRight1,
   'arrow-button-up-1': arrowButtonUp1,
   'arrow-left-1-1': arrowLeft11,
   'arrow-redo': arrowRedo,
