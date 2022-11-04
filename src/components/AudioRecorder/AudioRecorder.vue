@@ -188,8 +188,6 @@ export default {
         this.duration = this.audio.duration;
       };
 
-      this.audio.load();
-
       this.audio.addEventListener('loadeddata', setDuration);
       this.audio.addEventListener('durationchange', setDuration);
 
