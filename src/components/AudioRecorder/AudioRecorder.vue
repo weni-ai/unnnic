@@ -180,10 +180,18 @@ export default {
     },
 
     addAudioEventListeners() {
-      this.audio.addEventListener('loadeddata', () => {
+      const setDuration = () => {
+        if (this.audio.duration === Infinity) {
+          return;
+        }
         this.audio.currentTime = 0;
         this.duration = this.audio.duration;
-      });
+      };
+
+      this.audio.load();
+
+      this.audio.addEventListener('loadeddata', setDuration);
+      this.audio.addEventListener('durationchange', setDuration);
 
       this.audio.addEventListener('play', () => {
         this.status = 'playing';
