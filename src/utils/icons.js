@@ -4,6 +4,7 @@ import add1 from '!!svg-inline-loader!../assets/icons/add-1.svg';
 import addCircle1 from '!!svg-inline-loader!../assets/icons/add-circle-1.svg';
 import alarmBell2 from '!!svg-inline-loader!../assets/icons/alarm-bell-2.svg';
 import alarmBell3 from '!!svg-inline-loader!../assets/icons/alarm-bell-3.svg';
+import alarmBellRing from '!!svg-inline-loader!../assets/icons/alarm-bell-ring.svg';
 import alertCircle1 from '!!svg-inline-loader!../assets/icons/alert-circle-1.svg';
 import alertCircle11 from '!!svg-inline-loader!../assets/icons/alert-circle-1-1.svg';
 import americanExpress from '!!svg-inline-loader!../assets/icons/american-express.svg';
@@ -36,6 +37,7 @@ import checkboxLess from '!!svg-inline-loader!../assets/icons/checkbox-less.svg'
 import checkboxSelect from '!!svg-inline-loader!../assets/icons/checkbox-select.svg';
 import checkCircle11 from '!!svg-inline-loader!../assets/icons/check-circle-1-1.svg';
 import checkCircle111 from '!!svg-inline-loader!../assets/icons/check-circle-1-1-1.svg';
+import checkDouble from '!!svg-inline-loader!../assets/icons/check-double.svg';
 import checkSquare1 from '!!svg-inline-loader!../assets/icons/check-square-1.svg';
 import checkSquare2 from '!!svg-inline-loader!../assets/icons/check-square-2.svg';
 import close1 from '!!svg-inline-loader!../assets/icons/close-1.svg';
@@ -121,6 +123,7 @@ import radioDefault from '!!svg-inline-loader!../assets/icons/radio-default.svg'
 import radioDisable from '!!svg-inline-loader!../assets/icons/radio-disable.svg';
 import radioSelected from '!!svg-inline-loader!../assets/icons/radio-selected.svg';
 import ratingStar1 from '!!svg-inline-loader!../assets/icons/rating-star-1.svg';
+import ratingStar11 from '!!svg-inline-loader!../assets/icons/rating-star-1-1.svg';
 import readEmailAt1 from '!!svg-inline-loader!../assets/icons/read-email-at-1.svg';
 import scienceFictionRobot1 from '!!svg-inline-loader!../assets/icons/science-fiction-robot-1.svg';
 import scienceFictionRobot2 from '!!svg-inline-loader!../assets/icons/science-fiction-robot-2.svg';
@@ -170,6 +173,7 @@ export default {
   'add-circle-1': addCircle1,
   'alarm-bell-2': alarmBell2,
   'alarm-bell-3': alarmBell3,
+  'alarm-bell-ring': alarmBellRing,
   'alert-circle-1-1': alertCircle11,
   'alert-circle-1': alertCircle1,
   'american-express': americanExpress,
@@ -198,6 +202,7 @@ export default {
   'check-2': check2,
   'check-circle-1-1-1': checkCircle111,
   'check-circle-1-1': checkCircle11,
+  'check-double': checkDouble,
   'check-square-1': checkSquare1,
   'check-square-2': checkSquare2,
   'checkbox-default': checkboxDefault,
@@ -287,6 +292,7 @@ export default {
   'radio-disable': radioDisable,
   'radio-selected': radioSelected,
   'rating-star-1': ratingStar1,
+  'rating-star-1-1': ratingStar11,
   'read-email-at-1': readEmailAt1,
   'science-fiction-robot-1': scienceFictionRobot1,
   'science-fiction-robot-2': scienceFictionRobot2,
