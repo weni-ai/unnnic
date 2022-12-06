@@ -5,6 +5,7 @@ export default {
   component: unnnicTextArea,
   argTypes: {
     size: { control: { type: 'select', options: ['md', 'sm'] } },
+    type: { control: { type: 'select', options: ['normal', 'error'] } },
   },
 };
 
@@ -37,4 +38,6 @@ Default.args = {
   placeholder: 'Placeholder',
   maxLength: 150,
   disabled: false,
+  type: 'normal',
+  errors: [],
 };
