@@ -9,7 +9,7 @@
       :value="filterText"
     ></unnnic-input>
 
-    <div class="dropdown-data">
+    <div class="dropdown-data" :style="{ [position]: '0' }">
       <unnnic-date-picker
         v-if="showCalendarFilter"
         :type="type"
@@ -86,6 +86,11 @@ export default {
     inputFormat: {
       type: String,
       default: 'MM-DD-YYYY',
+    },
+
+    position: {
+      type: String,
+      default: 'left',
     },
   },
 
@@ -170,7 +175,6 @@ export default {
     position: absolute;
     pointer-events: none;
     display: none;
-    left: 0%;
     top: 100%;
     z-index: 2;
     margin-top: $unnnic-spacing-stack-nano;
