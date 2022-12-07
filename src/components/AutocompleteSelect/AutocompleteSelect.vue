@@ -6,9 +6,10 @@
       icon-left="search-1"
       :placeholder="placeholder"
       @focus="isMenuOpen = true"
+      :disabled="disabled"
     ></unnnic-input>
 
-    <div v-if="isMenuOpen" class="options-container">
+    <div v-if="isMenuOpen && !disabled" class="options-container">
       <div class="options">
         <unnnic-select-item
           v-for="(item, index) in items"
@@ -48,6 +49,10 @@ export default {
     placeholder: {
       type: String,
       default: 'Buscar por',
+    },
+
+    disabled: {
+      type: Boolean,
     },
   },
 
