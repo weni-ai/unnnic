@@ -10,6 +10,12 @@ export default {
         options: ['day', 'month', 'year'],
       },
     },
+    position: {
+      control: {
+        type: 'select',
+        options: ['left', 'right'],
+      },
+    },
   },
 };
 
