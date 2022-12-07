@@ -89,7 +89,6 @@ export default {
 
   background-color: $unnnic-color-background-snow;
   box-shadow: $unnnic-shadow-level-near;
-  word-spacing: $unnnic-spacing-inline-xs;
   position: fixed;
 
   z-index: 9999;
