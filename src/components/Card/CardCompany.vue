@@ -134,7 +134,7 @@ export default {
 
   computed: {
     membersLimited() {
-      return this.members.slice(0, 4);
+      return this.members.slice(0, 3);
     },
   },
 };
