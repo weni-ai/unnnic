@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "1.10.25",
+  "version": "1.10.26",
   "main": "./dist/unnnic.common.js",
   "files": [
     "dist/*",
