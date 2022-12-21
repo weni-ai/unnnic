@@ -2,14 +2,16 @@
   <div class="unnnic-card-company">
     <div class="content">
       <div class="header">
-        <div class="title">
-          {{ title }}
+        <div class="title" :title="title">
+          {{ cutLength(title, 20) }}
         </div>
 
         <div v-if="tag" class="tag">{{ tag }}</div>
       </div>
 
-      <div class="description">{{ description }}</div>
+      <div class="description" :title="description">
+        {{ cutLength(description, 36) }}
+      </div>
 
       <div class="members">
         <div class="avatars">
@@ -130,6 +132,16 @@ export default {
     join() {
       this.$emit('join');
     },
+
+    cutLength(text, length) {
+      const posText = text.trim();
+
+      if (posText.length > length) {
+        return `${posText.slice(0, length).trim()}...`;
+      }
+
+      return posText;
+    },
   },
 
   computed: {
@@ -170,7 +182,6 @@ export default {
         font-weight: $unnnic-font-weight-bold;
         line-height: $unnnic-font-size-title-md + $unnnic-line-height-md;
         color: $unnnic-color-neutral-black;
-
       }
 
       .tag {
