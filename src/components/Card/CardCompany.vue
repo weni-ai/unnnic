@@ -182,6 +182,12 @@ export default {
         font-weight: $unnnic-font-weight-bold;
         line-height: $unnnic-font-size-title-md + $unnnic-line-height-md;
         color: $unnnic-color-neutral-black;
+
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .tag {
@@ -209,6 +215,12 @@ export default {
       line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
       color: $unnnic-color-neutral-dark;
       margin-bottom: $unnnic-spacing-stack-md;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .members {
