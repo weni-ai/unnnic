@@ -1,5 +1,9 @@
 <template>
-  <div class="unnnic-text-editor">
+  <div :class="['unnnic-text-editor', loadingValue !== undefined && 'status-loading']">
+    <div v-if="loadingValue !== undefined" class="loading">
+      <div class="indicator" :style="{ width: `${loadingValue * 100}%` }"></div>
+    </div>
+
     <div class="text-editor" @click="$refs.oDoc.focus()">
       <textarea
         class="inside"
@@ -36,13 +40,13 @@
           @click="$emit('action')"
           type="secondary"
           size="small"
-          icon="flash-1-3"
+          icon="flash-1-4"
         />
       </unnnic-tool-tip>
 
       <unnnic-button-icon
         @click="$emit('send')"
-        type="primary"
+        type="secondary"
         size="small"
         icon="send-email-3-1"
       />
@@ -58,7 +62,7 @@
           icon="arrow-undo"
           size="ant"
           clickable
-          :scheme="iconScheme"
+          scheme="neutral-cloudy"
           @click="formatDoc('undo')"
         />
       </unnnic-tool-tip>
@@ -72,7 +76,7 @@
           icon="arrow-redo"
           size="ant"
           clickable
-          :scheme="iconScheme"
+          scheme="neutral-cloudy"
           @click="formatDoc('redo')"
         />
       </unnnic-tool-tip>
@@ -86,7 +90,7 @@
           icon="microphone"
           size="ant"
           clickable
-          :scheme="iconScheme"
+          scheme="neutral-cloudy"
           @mousedown="$emit('record-audio-down')"
           @mouseup="$emit('record-audio-up')"
           @click="$emit('record-audio')"
@@ -108,7 +112,7 @@
             icon="attachment"
             size="ant"
             clickable
-            :scheme="iconScheme"
+            scheme="neutral-cloudy"
           />
 
           <div class="attachment-options-container">
@@ -121,7 +125,7 @@
         icon="email-action-unread-1"
         size="ant"
         clickable
-        :scheme="iconScheme"
+        scheme="neutral-cloudy"
       /> -->
 
       <!--
@@ -136,7 +140,7 @@
           icon="text-bold"
           size="ant"
           clickable
-          :scheme="iconScheme"
+          scheme="neutral-cloudy"
           @click="formatDoc('bold')"
         />
       </unnnic-tool-tip>
@@ -150,7 +154,7 @@
           icon="text-italic"
           size="ant"
           clickable
-          :scheme="iconScheme"
+          scheme="neutral-cloudy"
           @click="formatDoc('italic')"
         />
       </unnnic-tool-tip>
@@ -164,7 +168,7 @@
           icon="text-underline"
           size="ant"
           clickable
-          :scheme="iconScheme"
+          scheme="neutral-cloudy"
           @click="formatDoc('underline')"
         />
       </unnnic-tool-tip>
@@ -178,7 +182,7 @@
           icon="unordered-list"
           size="ant"
           clickable
-          :scheme="iconScheme"
+          scheme="neutral-cloudy"
           @click="formatDoc('insertunorderedlist')"
         />
       </unnnic-tool-tip>
@@ -192,7 +196,7 @@
           icon="text-left"
           size="ant"
           clickable
-          :scheme="iconScheme"
+          scheme="neutral-cloudy"
           @click="formatDoc('justifyleft')"
         />
       </unnnic-tool-tip>
@@ -206,7 +210,7 @@
           icon="text-center"
           size="ant"
           clickable
-          :scheme="iconScheme"
+          scheme="neutral-cloudy"
           @click="formatDoc('justifycenter')"
         />
       </unnnic-tool-tip>
@@ -220,7 +224,7 @@
           icon="text-right"
           size="ant"
           clickable
-          :scheme="iconScheme"
+          scheme="neutral-cloudy"
           @click="formatDoc('justifyright')"
         />
       </unnnic-tool-tip>
@@ -234,7 +238,7 @@
           icon="text-justified"
           size="ant"
           clickable
-          :scheme="iconScheme"
+          scheme="neutral-cloudy"
           @click="formatDoc('justifyFull')"
         />
       </unnnic-tool-tip>
@@ -259,6 +263,10 @@ export default {
   },
 
   props: {
+    loadingValue: {
+      type: Number,
+    },
+
     value: {
       type: String,
       default: '',
@@ -319,11 +327,7 @@ export default {
     };
   },
 
-  computed: {
-    iconScheme() {
-      return this.isFocused ? 'neutral-darkest' : 'neutral-cleanest';
-    },
-  },
+  computed: {},
 
   created() {
     this.initialContent = this.value;
@@ -420,10 +424,31 @@ export default {
 .unnnic-text-editor {
   display: grid;
   grid-template-areas:
+    "loading loading-side"
     "text-editor actions"
     "format empty";
   grid-template-columns: 1fr auto;
   grid-column-gap: $unnnic-spacing-inline-xs;
+
+  .loading {
+    grid-area: loading;
+    width: 100%;
+    height: $unnnic-border-width-thin;
+    border-radius: $unnnic-border-radius-sm $unnnic-border-radius-sm 0 0;
+    position: relative;
+    overflow: hidden;
+    background-color: rgba($unnnic-color-neutral-cleanest, $unnnic-opacity-level-light);
+
+    .indicator {
+      height: $unnnic-border-width-thin;
+      background-color: $unnnic-color-neutral-cleanest;
+      transition: width 0.2s;
+    }
+  }
+
+  &:not(.status-loading) .text-editor {
+    border-radius: $unnnic-border-radius-sm;
+  }
 
   .text-editor {
     grid-area: text-editor;
@@ -431,7 +456,7 @@ export default {
     box-sizing: border-box;
     overflow: auto;
     background-color: $unnnic-color-neutral-snow;
-    border-radius: $unnnic-border-radius-sm;
+    border-radius: 0 0 $unnnic-border-radius-sm $unnnic-border-radius-sm;
     padding: $unnnic-spacing-inset-sm;
     border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
     outline: none;
