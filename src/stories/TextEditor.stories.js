@@ -57,3 +57,24 @@ Default.args = {
     action: 'Mensagens rápidas',
   },
 };
+
+export const Loading = Template.bind({});
+
+Loading.args = {
+  texts: {
+    Undo: 'Undo',
+    Redo: 'Redo',
+    RecordAudio: 'Record Audio',
+    Bold: 'Bold',
+    Italic: 'Italic',
+    Underline: 'Underline',
+    List: 'List',
+    Left: 'Left',
+    Center: 'Center',
+    Right: 'Right',
+    Justify: 'Justify',
+    Attach: 'Attach',
+    action: 'Mensagens rápidas',
+  },
+  loadingValue: 0.5,
+};
