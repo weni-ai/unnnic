@@ -76,6 +76,8 @@ export default [
   'gauge-dashboard-2',
   'switch-selected',
   'social-media-google-1',
+  'social-media-facebook-1',
+  'social-instagram-1',
   'alarm-bell-2',
   'check-circle-1-1-1',
   'alarm-bell-3',

@@ -132,6 +132,8 @@ import sendEmail31 from '!!svg-inline-loader!../assets/icons/send-email-3-1.svg'
 import singleNeutral2 from '!!svg-inline-loader!../assets/icons/single-neutral-2.svg';
 import singleNeutralActions1 from '!!svg-inline-loader!../assets/icons/single-neutral-actions-1.svg';
 import socialMediaGoogle1 from '!!svg-inline-loader!../assets/icons/social-media-google-1.svg';
+import socialMediaFacebook1 from '!!svg-inline-loader!../assets/icons/social-media-facebook-1.svg';
+import socialInstagram1 from '!!svg-inline-loader!../assets/icons/social-instagram-1.svg';
 import sortAsc from '!!svg-inline-loader!../assets/icons/sort-asc.svg';
 import sortDefault from '!!svg-inline-loader!../assets/icons/sort-default.svg';
 import sortDesc from '!!svg-inline-loader!../assets/icons/sort-desc.svg';
@@ -301,6 +303,8 @@ export default {
   'single-neutral-2': singleNeutral2,
   'single-neutral-actions-1': singleNeutralActions1,
   'social-media-google-1': socialMediaGoogle1,
+  'social-media-facebook-1': socialMediaFacebook1,
+  'social-instagram-1': socialInstagram1,
   'sort-asc': sortAsc,
   'sort-default': sortDefault,
   'sort-desc': sortDesc,
