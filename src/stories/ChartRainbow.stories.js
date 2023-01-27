@@ -1,7 +1,7 @@
 import unnnicChartRainbow from '../components/ChartRainbow/ChartRainbow.vue';
 
 export default {
-  title: 'example/ChartRainbow',
+  title: 'charts/ChartRainbow',
   component: unnnicChartRainbow,
   argTypes: {},
 };
