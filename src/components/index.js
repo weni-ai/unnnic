@@ -53,6 +53,8 @@ import ChatText from './ChatText/ChatText.vue';
 import TextArea from './TextArea/TextArea.vue';
 import CardNumber from './CardNumber/CardNumber.vue';
 import chartRainbow from './ChartRainbow/ChartRainbow.vue';
+import chartBar from './ChartBar/ChartBar.vue';
+import chartLine from './ChartLine/ChartLine.vue';
 import textEditor from './TextEditor/TextEditor.vue';
 import moodRating from './MoodRating/MoodRating.vue';
 import starRating from './StarRating/StarRating.vue';
@@ -115,6 +117,8 @@ const components = {
   unnnicTextArea: TextArea,
   unnnicCardNumber: CardNumber,
   unnnicChartRainbow: chartRainbow,
+  unnnicChartBar: chartBar,
+  unnnicChartLine: chartLine,
   unnnicTextEditor: textEditor,
   unnnicMoodRating: moodRating,
   unnnicStarRating: starRating,
@@ -183,6 +187,8 @@ export const unnnicChatText = ChatText;
 export const unnnicTextArea = TextArea;
 export const unnnicCardNumber = CardNumber;
 export const unnnicChartRainbow = chartRainbow;
+export const unnnicChartBar = chartBar;
+export const unnnicChartLine = chartLine;
 export const unnnicTextEditor = textEditor;
 export const unnnicMoodRating = moodRating;
 export const unnnicStarRating = starRating;
