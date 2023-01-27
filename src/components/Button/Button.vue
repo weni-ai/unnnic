@@ -34,6 +34,7 @@
       :icon="iconCenter"
       :scheme="iconScheme"
       :style="{ visibility: loading ? 'hidden' : null }"
+      :size="iconSize"
     ></unnnic-icon-svg>
 
     <span class="unnnic-button__label" :style="{ visibility: loading ? 'hidden' : null }">
