@@ -35,7 +35,7 @@
         <span
           :class="[
             'unnnic-upload-area__dropzone__content__subtitle',
-            { 'unnnic-upload-area__dropzone__content__subtitle__error': hasError }
+            { 'unnnic-upload-area__dropzone__content__subtitle__error': hasError },
           ]"
         >
           {{ $t(`upload_area${hasError ? '.invalid' : ''}.subtitle`) }}
@@ -115,6 +115,10 @@ export default {
     maxFileSize: {
       type: Number,
       default: undefined,
+    },
+    shouldReplace: {
+      type: Boolean,
+      default: false,
     },
   },
   model: {
@@ -235,7 +239,13 @@ export default {
     },
 
     addFiles(files) {
-      if (this.currentFiles.length + files.length > this.maximumUploads) {
+      let totalLength = files.length;
+
+      if (!this.shouldReplace) {
+        totalLength += this.currentFiles.length;
+      }
+
+      if (totalLength > this.maximumUploads) {
         this.setErrorState();
         return;
       }
@@ -247,7 +257,11 @@ export default {
         return false;
       });
 
-      this.currentFiles = this.currentFiles.concat(validFiles);
+      if (this.shouldReplace) {
+        this.currentFiles = validFiles;
+      } else {
+        this.currentFiles = this.currentFiles.concat(validFiles);
+      }
       this.emitFileChange();
     },
 
