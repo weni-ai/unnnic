@@ -1,5 +1,5 @@
 <template>
-  <section v-if="hasAudio || src" class="unnnic-audio-recorder">
+  <section v-if="value || isRecording || src" class="unnnic-audio-recorder">
     <audio-handler
       v-if="isRecording || isRecorded"
       :is-recording="isRecording"
@@ -62,6 +62,10 @@ export default {
   },
 
   props: {
+    value: {
+      type: HTMLAudioElement,
+    },
+
     canDelete: {
       type: Boolean,
     },
@@ -96,9 +100,6 @@ export default {
   }),
 
   computed: {
-    hasAudio() {
-      return !!this.audio;
-    },
     isIdle() {
       return this.status === 'idle';
     },
@@ -139,6 +140,8 @@ export default {
     // entry point; accessed by external components
     async record() {
       if (this.hasInUseRecordDevice()) return;
+
+      this.discard();
 
       await this.getAudioRecordDevice();
       this.setupRecorderAndAudio();
@@ -217,7 +220,12 @@ export default {
     },
 
     discard() {
-      this.audio = null;
+      if (this.audio) {
+        this.pause();
+      }
+
+      this.$emit('input', null);
+
       this.status = 'idle';
     },
     save() {
