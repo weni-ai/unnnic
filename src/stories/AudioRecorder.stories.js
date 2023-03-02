@@ -14,14 +14,18 @@ const Template = (args, { argTypes }) => ({
   },
 
   data() {
-    return {};
+    return {
+      audio: null,
+    };
   },
 
   template: `
     <div>
       <button @click="$refs['audio-recorder'].record()">Gravar</button>
 
-      <unnnic-audio-recorder v-bind="$props" ref="audio-recorder">
+      <pre>v-model: {{ audio }}</pre>
+
+      <unnnic-audio-recorder v-bind="$props" ref="audio-recorder" v-model="audio">
       </unnnic-audio-recorder>
     </div>
   `,
