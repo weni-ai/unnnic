@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import input from './Input/Input.vue';
+import inputNext from './InputNext/InputNext.vue';
 import inputDatePicker from './InputDatePicker/InputDatePicker.vue';
 import button from './Button/Button.vue';
 import buttonIcon from './Button/ButtonIcon.vue';
@@ -64,6 +65,7 @@ import progressBar from './ProgressBar/ProgressBar.vue';
 
 const components = {
   unnnicInput: input,
+  unnnicInputNext: inputNext,
   unnnicInputDatePicker: inputDatePicker,
   unnnicButton: button,
   unnnicButtonIcon: buttonIcon,
@@ -132,6 +134,7 @@ Object.keys(components).forEach((name) => {
 });
 
 export const unnnicInput = input;
+export const unnnicInputNext = inputNext;
 export const unnnicInputDatePicker = inputDatePicker;
 export const unnnicButton = button;
 export const unnnicButtonIcon = buttonIcon;

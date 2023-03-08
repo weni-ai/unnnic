@@ -95,3 +95,14 @@ $scheme-colors:
   "brand-sec-dark" $unnnic-color-brand-sec-dark,
   "brand-sec-soft" $unnnic-color-brand-sec-soft,
   "brand-sec" $unnnic-color-brand-sec;
+
+
+@each $name, $color in $scheme-colors {
+  .color-#{$name} {
+    color: $color;
+  }
+
+  .bg-#{$name} {
+    background-color: $color;
+  }
+}
