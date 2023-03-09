@@ -138,7 +138,7 @@ export default {
 
   methods: {
     mouseout(event) {
-      if (event && event.path && event.path.includes && event.path.includes(this.$refs.dropdown)) {
+      if (this.$refs.dropdown.contains(event.target)) {
         return;
       }
 
