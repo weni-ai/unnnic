@@ -24,6 +24,7 @@ import checkbox from './Checkbox/Checkbox.vue';
 import radio from './Radio/Radio.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
 import modal from './Modal/Modal.vue';
+import modalNext from './ModalNext/ModalNext.vue';
 import modalUpload from './ModalUpload/ModalUpload.vue';
 import call from '../utils/call';
 import select from './Select/Select.vue';
@@ -90,6 +91,7 @@ const components = {
   unnnicRadio: radio,
   unnnicLanguageSelect: languageSelect,
   unnnicModal: modal,
+  unnnicModalNext: modalNext,
   unnnicModalUpload: modalUpload,
   unnnicSelect: select,
   unnnicSelectItem: selectItem,
@@ -159,6 +161,7 @@ export const unnnicCheckbox = checkbox;
 export const unnnicRadio = radio;
 export const unnniclanguageSelect = languageSelect;
 export const unnnicModal = modal;
+export const unnnicModalNext = modalNext;
 export const unnnicModalUpload = modalUpload;
 export const unnnicSelect = select;
 export const unnnicSelectItem = selectItem;
