@@ -19,7 +19,21 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicAutocomplete },
-  template: '<unnnic-autocomplete v-bind="$props" :data="[\'option 1\', {type: \'category\', text: \'Artificial Intelligence\'}, \'option 2\', \'option 3\', {type: \'category\', text: \'Flows\'}, \'option 4\', \'option 5\']" />',
+  data() {
+    return {
+      v: '',
+      d: [
+        'option 1',
+        { type: 'category', text: 'Artificial Intelligence' },
+        'option 2',
+        'option 3',
+        { type: 'category', text: 'Flows' },
+        'option 4',
+        'option 5',
+      ],
+    };
+  },
+  template: '<unnnic-autocomplete v-model="v" v-bind="$props" :data="d.filter(e => e.includes?.(v))" />',
 });
 
 export const Normal = Template.bind({});

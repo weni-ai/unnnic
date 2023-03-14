@@ -13,11 +13,15 @@
         :tooltip-force-open-icon-right="tooltipForceOpenIconRight"
         :type="type"
         @focus="onFocus"
+        @blur="onBlur"
         :size="size"
         :placeholder="placeholder"
       />
 
-    <div v-show="open" class="unnnic-autocomplete__container-list">
+    <div
+      v-show="(open || (this.openWithFocus && this.isFocused)) && data.length"
+      class="unnnic-autocomplete__container-list"
+    >
       <div
         :class="['unnnic-autocomplete__list',
                   `unnnic-autocomplete__list--size-${size}`,
@@ -123,6 +127,7 @@ export default {
     return {
       val: null,
       open: false,
+      isFocused: false,
     };
   },
   watch: {
@@ -143,8 +148,12 @@ export default {
   },
   methods: {
     onFocus() {
+      this.isFocused = true;
       if (!this.val && !this.openWithFocus) return;
       this.open = true;
+    },
+    onBlur() {
+      this.isFocused = false;
     },
     onChoose(option) {
       this.val = option.text;
