@@ -36,6 +36,7 @@
         :disabled="disabled"
         :value="value"
         @input="$emit('input', $event.srcElement.value)"
+        :maxlength="maxlength"
       />
 
       <unnnic-icon
@@ -88,6 +89,10 @@ export default {
 
     allowTogglePassword: Boolean,
     disabled: Boolean,
+
+    maxlength: {
+      type: [String, Number],
+    },
 
     size: {
       type: String,
