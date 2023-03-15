@@ -80,7 +80,7 @@
               v-if="validate || actionSecondaryLabel"
               type="terciary"
               @click="
-                $listeners.clickActionSecondary
+                $listeners['click-action-secondary']
                   ? $emit('click-action-secondary', { close: justClose })
                   : $emit('close')
               "
@@ -93,7 +93,7 @@
               v-if="validate || actionPrimaryLabel"
               :type="actionPrimaryButtonType"
               @click="
-                $listeners.clickActionPrimary
+                $listeners['click-action-primary']
                   ? $emit('click-action-primary', { close: justClose })
                   : null
               "
