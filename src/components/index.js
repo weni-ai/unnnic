@@ -18,6 +18,7 @@ import toolTip from './ToolTip/ToolTip.vue';
 import card from './Card/Card.vue';
 import cardCompany from './Card/CardCompany.vue';
 import cardData from './Card/CardData.vue';
+import cardImage from './CardImage/CardImage.vue';
 import cardProject from './CardProject/CardProject.vue';
 import cardInformation from './CardInformation/CardInformation.vue';
 import checkbox from './Checkbox/Checkbox.vue';
@@ -86,6 +87,7 @@ const components = {
   unnnicCard: card,
   unnnicCardCompany: cardCompany,
   unnnicCardData: cardData,
+  unnnicCardImage: cardImage,
   unnnicCardProject: cardProject,
   unnnicCardInformation: cardInformation,
   unnnicCheckbox: checkbox,
@@ -157,6 +159,7 @@ export const unnnicToolTip = toolTip;
 export const unnnicCard = card;
 export const unnnicCardCompany = cardCompany;
 export const unnnicCardData = cardData;
+export const unnnicCardImage = cardImage;
 export const unnnicCardProject = cardProject;
 export const unnnicCardInformation = cardInformation;
 export const unnnicCheckbox = checkbox;
