@@ -40,6 +40,7 @@ import skeletonLoading from './SkeletonLoading/SkeletonLoading.vue';
 import carousel from './Carousel/Carousel.vue';
 import label from './Label/Label.vue';
 import tab from './Tab/Tab.vue';
+import tabsExpanded from './TabsExpanded/TabsExpanded.vue';
 import banner from './Banner/Banner.vue';
 import comment from './Comment/Comment.vue';
 import datePicker from './DatePicker/DatePicker.vue';
@@ -106,6 +107,7 @@ const components = {
   unnnicCarousel: carousel,
   unnnicLabel: label,
   unnnicTab: tab,
+  unnnicTabsExpanded: tabsExpanded,
   unnnicBanner: banner,
   unnnicComment: comment,
   unnnicDatePicker: datePicker,
@@ -178,6 +180,7 @@ export const unnnicSkeletonLoading = skeletonLoading;
 export const unnnicCarousel = carousel;
 export const unnnicLabel = label;
 export const unnnicTab = tab;
+export const unnnicTabsExpanded = tabsExpanded;
 export const unnnicBanner = banner;
 export const unnnicComment = comment;
 export const unnnicDatePicker = datePicker;
