@@ -106,3 +106,16 @@ $scheme-colors:
     background-color: $color;
   }
 }
+
+
+.u {
+  @each $name, $color in $scheme-colors {
+    &.color-#{$name} {
+      color: $color;
+    }
+  
+    &.bg-#{$name} {
+      background-color: $color;
+    }
+  }
+}

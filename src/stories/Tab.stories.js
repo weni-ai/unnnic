@@ -1,7 +1,7 @@
 import unnnicTab from '../components/Tab/Tab.vue';
 
 export default {
-  title: 'Example/Tab',
+  title: 'tabs/Tab',
   component: unnnicTab,
 };
 
