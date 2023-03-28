@@ -30,6 +30,7 @@ import modalUpload from './ModalUpload/ModalUpload.vue';
 import call from '../utils/call';
 import select from './Select/Select.vue';
 import selectItem from './Select/SelectItem.vue';
+import selectListItem from './SelectListItem/SelectListItem.vue';
 import multiSelect from './MultiSelect/MultiSelect.vue';
 import alert from './Alert/Alert.vue';
 import autocomplete from './Input/Autocomplete.vue';
@@ -98,6 +99,7 @@ const components = {
   unnnicModalUpload: modalUpload,
   unnnicSelect: select,
   unnnicSelectItem: selectItem,
+  unnnicSelectListItem: selectListItem,
   unnnicMultiSelect: multiSelect,
   unnnicAlert: alert,
   unnnicAutocomplete: autocomplete,
@@ -170,6 +172,7 @@ export const unnnicModalNext = modalNext;
 export const unnnicModalUpload = modalUpload;
 export const unnnicSelect = select;
 export const unnnicSelectItem = selectItem;
+export const unnnicSelectListItem = selectListItem;
 export const unnnicMultiSelect = multiSelect;
 export const unnnicAlert = alert;
 export const unnnicCallAlert = call.callAlert;
