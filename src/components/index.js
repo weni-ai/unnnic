@@ -19,6 +19,7 @@ import card from './Card/Card.vue';
 import cardCompany from './Card/CardCompany.vue';
 import cardData from './Card/CardData.vue';
 import cardImage from './CardImage/CardImage.vue';
+import cardFlow from './CardFlow/CardFlow.vue';
 import cardProject from './CardProject/CardProject.vue';
 import cardInformation from './CardInformation/CardInformation.vue';
 import checkbox from './Checkbox/Checkbox.vue';
@@ -89,6 +90,7 @@ const components = {
   unnnicCardCompany: cardCompany,
   unnnicCardData: cardData,
   unnnicCardImage: cardImage,
+  unnnicCardFlow: cardFlow,
   unnnicCardProject: cardProject,
   unnnicCardInformation: cardInformation,
   unnnicCheckbox: checkbox,
@@ -162,6 +164,7 @@ export const unnnicCard = card;
 export const unnnicCardCompany = cardCompany;
 export const unnnicCardData = cardData;
 export const unnnicCardImage = cardImage;
+export const unnnicCardFlow = cardFlow;
 export const unnnicCardProject = cardProject;
 export const unnnicCardInformation = cardInformation;
 export const unnnicCheckbox = checkbox;
