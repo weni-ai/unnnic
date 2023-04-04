@@ -4,7 +4,7 @@
       v-if="!!this.$slots.label || label"
       :class="[
         'label unnnic-font secondary color-neutral-cloudy',
-        { 'body-md': size === 'sm', 'body-gt': size == 'md' }
+        { 'body-md': size === 'sm', 'body-gt': size == 'md' },
       ]"
       @click="$refs.input.focus()"
     >
@@ -23,7 +23,10 @@
         :icon="iconLeft"
         size="sm"
         :scheme="iconScheme"
-        @click.native="$refs.input.focus()"
+        @click.native="
+          $listeners['icon-left-click'] ? $emit('icon-left-click') : $refs.input.focus()
+        "
+        :clickable="!!$listeners['icon-left-click']"
       />
 
       <input
@@ -44,7 +47,10 @@
         :icon="iconRight"
         size="sm"
         :scheme="iconScheme"
-        @click.native="$refs.input.focus()"
+        @click.native="
+          $listeners['icon-right-click'] ? $emit('icon-right-click') : $refs.input.focus()
+        "
+        :clickable="!!$listeners['icon-right-click']"
       />
 
       <unnnic-icon
@@ -64,10 +70,7 @@
       {{ error }}
     </div>
 
-    <div
-      v-else-if="message"
-      class="message unnnic-font secondary body-md color-neutral-cloudy"
-    >
+    <div v-else-if="message" class="message unnnic-font secondary body-md color-neutral-cloudy">
       {{ message }}
     </div>
   </div>
