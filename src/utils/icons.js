@@ -169,6 +169,10 @@ import view11 from '!!svg-inline-loader!../assets/icons/view-1-1.svg';
 import viewOff1 from '!!svg-inline-loader!../assets/icons/view-off-1.svg';
 import vipCrownQueen2 from '!!svg-inline-loader!../assets/icons/vip-crown-queen-2.svg';
 import visa from '!!svg-inline-loader!../assets/icons/visa.svg';
+import interactionTime from '!!svg-inline-loader!../assets/icons/interaction-time.svg';
+import responseTime from '!!svg-inline-loader!../assets/icons/response-time.svg';
+import messages from '!!svg-inline-loader!../assets/icons/messages.svg';
+import transferMessage from '!!svg-inline-loader!../assets/icons/transfer-message.svg';
 
 export default {
   'add-1': add1,
@@ -340,4 +344,8 @@ export default {
   'view-off-1': viewOff1,
   'vip-crown-queen-2': vipCrownQueen2,
   visa,
+  'interaction-time': interactionTime,
+  'response-time': responseTime,
+  messages,
+  'transfer-message': transferMessage,
 };
