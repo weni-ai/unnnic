@@ -64,7 +64,7 @@ Default.args = {
     'Novembro',
     'Dezembro',
   ],
-  days: ['D', 'T', 'Q', 'Q', 'S', 'S', 'D'],
+  days: ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
   options: [{
     name: 'Últimos 7 dias',
     id: 'last-7-days',

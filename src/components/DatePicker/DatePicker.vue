@@ -239,7 +239,7 @@ export default {
     days: {
       type: Array,
       default() {
-        return ['S', 'T', 'Q', 'Q', 'S', 'S', 'D'];
+        return ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
       },
       validator(days) {
         return days.length === 7;
