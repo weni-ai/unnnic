@@ -3,6 +3,7 @@
     <div v-if="label" class="label">{{ label }}</div>
 
     <textarea
+      ref="textarea"
       :placeholder="placeholder"
       :maxlength="maxLength"
       :disabled="disabled"
@@ -60,6 +61,12 @@ export default {
     errors: {
       type: Array,
       default: () => [],
+    },
+  },
+
+  methods: {
+    focus() {
+      this.$refs.textarea.focus();
     },
   },
 };
