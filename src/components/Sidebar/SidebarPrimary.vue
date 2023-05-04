@@ -7,15 +7,38 @@
     </div>
 
     <div class="unnnic-sidebar-primary-content">
+      <div ref="sidebar-modal" class="hover" :style="{ top: `${hoverTop}px` }">
+        <slot :name="'block-' + blockActiveId"></slot>
+      </div>
+
       <div v-for="(category, index) in items" :key="index" class="category">
         <div class="category-label">{{ category.label }}</div>
 
         <div class="options">
           <div  v-for="(option, index) in category.items" :key="index" class="option-container">
-            <tool-tip :enabled="!expanded" :text="option.label" side="right">
-              <a :href="option.viewUrl"
-                :class="['option', { selected: option.active, }]"
-                @click.prevent="clickOption(option)"
+            <tool-tip
+              :enabled="!expanded"
+              :text="option.label"
+              side="right"
+              @mouseenter.native="hover($event, option.id)"
+              @mouseleave.native="mouseout"
+            >
+              <a
+                :href="option.viewUrl"
+                :class="[
+                  'option',
+                  {
+                    selected: option.active,
+                    disabled: $slots[`block-${option.id}`]
+                  }
+                ]"
+                @click.prevent="() => {
+                  if ($slots[`block-${option.id}`]) {
+                    return;
+                  }
+
+                  clickOption(option);
+                }"
               >
                 <icon-svg
                   :icon="option.icon"
@@ -115,7 +138,11 @@ export default {
     },
   },
   data() {
-    return {};
+    return {
+      hoverTop: 0,
+      call: null,
+      blockActiveId: '',
+    };
   },
 
   methods: {
@@ -128,6 +155,30 @@ export default {
     toggleExpanded() {
       this.$emit('toggle-expanded', !this.expanded);
     },
+
+    hover(event, id) {
+      if (!this.$slots[`block-${id}`]) {
+        return;
+      }
+
+      this.hoverTop = event.srcElement.offsetTop;
+
+      this.blockActiveId = id;
+
+      clearTimeout(this.call);
+
+      setTimeout(() => {
+        this.$refs['sidebar-modal'].classList.add('active', 'move-transition');
+      }, 0);
+    },
+
+    mouseout() {
+      this.$refs['sidebar-modal'].classList.remove('active');
+
+      this.call = setTimeout(() => {
+        this.$refs['sidebar-modal'].classList.remove('move-transition');
+      }, 300);
+    },
   },
 };
 </script>
@@ -138,6 +189,7 @@ export default {
 $transition-time: 0.4s;
 
 .unnnic-sidebar-primary {
+  position: relative;
   width: 5.5rem;
   background-color: $unnnic-color-background-sky;
   padding: $unnnic-spacing-inset-md;
@@ -146,6 +198,37 @@ $transition-time: 0.4s;
 
   display: flex;
   flex-direction: column;
+
+  .hover {
+    width: 16.875rem;
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    pointer-events: none;
+    left: 100%;
+    margin-left: -2rem;
+    opacity: 0;
+    transition: opacity 10ms;
+    margin-top: -9.375rem;
+
+    &:hover {
+      pointer-events: all;
+      opacity: 1;
+    }
+
+    &.active {
+      pointer-events: all;
+      opacity: 1;
+    }
+
+    &.move-transition {
+      transition: opacity 100ms, top 100ms;
+    }
+  }
+
+  &-expanded .hover {
+    margin-left: -2.625rem;
+  }
 
   &-content {
     flex: 1;
@@ -211,7 +294,7 @@ $transition-time: 0.4s;
       cursor: pointer;
       overflow: hidden;
       white-space: nowrap;
-      position: relative;
+      // position: relative;
       text-decoration: none;
 
       font-weight: $unnnic-font-weight-regular;
@@ -245,7 +328,7 @@ $transition-time: 0.4s;
         user-select: none;
       }
 
-      &:hover {
+      &:hover:not(.disabled) {
         background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-light);
       }
 
@@ -255,6 +338,19 @@ $transition-time: 0.4s;
         font-weight: $unnnic-font-weight-bold;
         color: $unnnic-color-neutral-darkest;
       }
+
+      &.disabled {
+        cursor: not-allowed;
+
+        .unnnic-icon ::v-deep .primary {
+          fill: $unnnic-color-neutral-cleanest;
+        }
+
+        .label {
+          color: $unnnic-color-neutral-cleanest;
+        }
+      }
+
       .notify{
         position: absolute;
         top: 0;
