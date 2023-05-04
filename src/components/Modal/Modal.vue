@@ -14,6 +14,7 @@
               />
             </div>
             <div
+              v-if="modalIcon"
               :class="[
                 'unnnic-modal-container-background-body-alert_icon',
                 `unnnic-card-scheme--${scheme}--icon`,
