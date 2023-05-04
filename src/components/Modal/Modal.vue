@@ -1,14 +1,10 @@
 <template>
-<transition name="modal" v-if="showModal">
-  <div
-    v-bind="$attrs"
-    :class="['unnnic-modal']" v-on="$listeners">
-    <div class="unnnic-modal-container">
-      <div class="unnnic-modal-container-background">
-        <div class="unnnic-modal-container-background-body">
-          <div
-            v-if="closeIcon"
-            class="unnnic-modal-container-background-body-close_icon">
+  <transition name="modal" v-if="showModal">
+    <div v-bind="$attrs" :class="['unnnic-modal']" v-on="$listeners">
+      <div class="unnnic-modal-container">
+        <div class="unnnic-modal-container-background">
+          <div class="unnnic-modal-container-background-body">
+            <div v-if="closeIcon" class="unnnic-modal-container-background-body-close_icon">
               <unnnic-icon-svg
                 icon="close-1"
                 scheme="neutral-dark"
@@ -21,15 +17,13 @@
               :class="[
                 'unnnic-modal-container-background-body-alert_icon',
                 `unnnic-card-scheme--${scheme}--icon`,
-                 closeIcon ? '' : 'unnnic-modal-container-background-body-spacing_header']">
-              <unnnic-icon-svg
-                :scheme="scheme"
-                :icon="modalIcon"
-                size="xl"
-              />
+                closeIcon ? '' : 'unnnic-modal-container-background-body-spacing_header',
+              ]"
+            >
+              <unnnic-icon-svg :scheme="scheme" :icon="modalIcon" size="xl" />
             </div>
             <div class="unnnic-modal-container-background-body-title">
-             {{ text }}
+              {{ text }}
             </div>
             <div class="unnnic-modal-container-background-body-description">
               {{ description }} <slot name="message" />
@@ -41,10 +35,10 @@
           <div v-if="hasButton" class="unnnic-modal-container-background-button">
             <slot name="options" />
           </div>
+        </div>
       </div>
     </div>
-  </div>
-</transition>
+  </transition>
 </template>
 
 <script>
@@ -105,90 +99,90 @@ export default {
 @import '../../assets/scss/unnnic.scss';
 
 .unnnic-modal {
-    position: fixed;
-    z-index: 9998;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    transition: opacity 0.3s ease;
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.3s ease;
 
-  &-container{
+  &-container {
     display: flex;
     width: 100%;
     height: 100%;
     justify-content: center;
     align-items: center;
 
-  &-background {
-    width: 31.125rem;
-    box-shadow: $unnnic-shadow-level-separated;
-    transition: all 0.3s ease;
-    border-radius: $unnnic-border-radius-sm;
-    overflow: hidden;
+    &-background {
+      width: 31.125rem;
+      box-shadow: $unnnic-shadow-level-separated;
+      transition: all 0.3s ease;
+      border-radius: $unnnic-border-radius-sm;
+      overflow: hidden;
 
-    &-body{
-      min-height: 13.75rem;
-      background-color: $unnnic-color-background-carpet;
-      padding: 0 $unnnic-inline-md;
-      text-align: center;
+      &-body {
+        min-height: 13.75rem;
+        background-color: $unnnic-color-background-carpet;
+        padding: 0 $unnnic-inline-md;
+        text-align: center;
 
-    &-title{
-      text-align: center;
-      font-family: $unnnic-font-family-secondary;
-      color: $unnnic-color-neutral-darkest;
-      font-weight: $unnnic-font-weight-black;
-      font-size: $unnnic-font-size-title-sm;
-      line-height: ($unnnic-font-size-title-sm + $unnnic-line-height-medium);
-      padding-bottom: $unnnic-spacing-stack-md;
-    }
+        &-title {
+          text-align: center;
+          font-family: $unnnic-font-family-secondary;
+          color: $unnnic-color-neutral-darkest;
+          font-weight: $unnnic-font-weight-black;
+          font-size: $unnnic-font-size-title-sm;
+          line-height: ($unnnic-font-size-title-sm + $unnnic-line-height-medium);
+          padding-bottom: $unnnic-spacing-stack-md;
+        }
 
-    &-close_icon{
+        &-close_icon {
+          width: 100%;
+          display: flex;
+          justify-content: flex-end;
+          padding-top: $unnnic-spacing-stack-sm;
+          padding-bottom: $unnnic-spacing-stack-xs;
+        }
+        &-alert_icon {
+          width: 100%;
+          display: flex;
+          justify-content: center;
+          padding-bottom: $unnnic-spacing-stack-sm;
+        }
+
+        &-spacing_header {
+          padding-top: $unnnic-spacing-stack-giant;
+        }
+
+        &-description {
+          width: 100%;
+          text-align: center;
+
+          font-family: $unnnic-font-family-secondary;
+          color: $unnnic-color-neutral-cloudy;
+          font-weight: $unnnic-font-weight-regular;
+          font-size: $unnnic-font-size-body-lg;
+          line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
+          padding-bottom: $unnnic-spacing-stack-giant;
+        }
+      }
+
+      &-report {
         width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        padding-top: $unnnic-spacing-stack-sm;
-        padding-bottom: $unnnic-spacing-stack-xs;
-    }
-    &-alert_icon{
-        width: 100%;
+        min-height: 4.25rem;
+        background-color: $unnnic-color-neutral-soft;
         display: flex;
         justify-content: center;
-        padding-bottom: $unnnic-spacing-stack-sm;
-    }
+        align-items: center;
 
-    &-spacing_header{
-      padding-top: $unnnic-spacing-stack-giant;
-    }
-
-    &-description{
-      width: 100%;
-      text-align: center;
-
-      font-family: $unnnic-font-family-secondary;
-      color: $unnnic-color-neutral-cloudy;
-      font-weight: $unnnic-font-weight-regular;
-      font-size: $unnnic-font-size-body-lg;
-      line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
-      padding-bottom: $unnnic-spacing-stack-giant;
-    }
-  }
-
-  &-report{
-    width: 100%;
-    min-height: 4.25rem;
-    background-color: $unnnic-color-neutral-soft;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-family: $unnnic-font-family-secondary;
-    color: $unnnic-color-neutral-dark;
-    font-weight: $unnnic-font-weight-regular;
-    font-size: $unnnic-font-size-body-md;
-    line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
-  }
+        font-family: $unnnic-font-family-secondary;
+        color: $unnnic-color-neutral-dark;
+        font-weight: $unnnic-font-weight-regular;
+        font-size: $unnnic-font-size-body-md;
+        line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
+      }
 
       &-button /deep/ {
         display: flex;
@@ -199,7 +193,7 @@ export default {
         border-bottom-left-radius: $unnnic-border-radius-sm;
         border-bottom-right-radius: $unnnic-border-radius-sm;
 
-        >  * {
+        > * {
           flex: 1;
         }
 
