@@ -203,7 +203,8 @@ export default {
   },
   methods: {
     filterOptions(options) {
-      return options.filter(({ text }) => String(text).toLowerCase().includes(this.searchValue.toLowerCase()));
+      return options
+        .filter(({ text }) => String(text).toLowerCase().includes(this.searchValue.toLowerCase()));
     },
 
     onClickOutside() {
@@ -227,8 +228,8 @@ export default {
         if (key === 38) {
           value = options[verifyOption === 0 ? 0 : verifyOption - 1].value;
         } else if (key === 40) {
-          value = options[verifyOption === options.length - 1 ? options.length - 1 : verifyOption + 1]
-            .value;
+          value = options[verifyOption === options.length - 1
+            ? options.length - 1 : verifyOption + 1].value;
         }
         const indexOfValue = options.findIndex((item) => item.value === value);
         if (this.active) elementScroll.childNodes[value === '' ? 0 : indexOfValue].scrollIntoView();
