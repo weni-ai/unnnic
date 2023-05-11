@@ -123,7 +123,7 @@ export default {
   &__label {
     font-family: $unnnic-font-family-secondary;
     font-weight: $unnnic-font-weight-regular;
-    color: $unnnic-color-neutral-darkest;
+    color: $unnnic-color-neutral-dark;
 
     margin: $unnnic-spacing-stack-nano 0;
     margin-right: $unnnic-inline-nano;
