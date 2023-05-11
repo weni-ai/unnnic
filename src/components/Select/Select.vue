@@ -1,78 +1,82 @@
 <template>
-  <div @keydown="onKeyDownSelect" v-click-outside="onClickOutside" class='unnnic-select'>
-    <p v-if="label" class="unnnic-form__label"> {{ label }}  </p>
+  <div @keydown="onKeyDownSelect" v-click-outside="onClickOutside" class="unnnic-select">
+    <p v-if="label" class="unnnic-form__label">{{ label }}</p>
     <dropdown-skeleton type="manual" :value="active" position="bottom" ref="dropdown-skeleton">
-    <text-input
-      :value="labelForValue"
-      :placeholder="placeholder"
-      :icon-right="active ?
-      'arrow-button-up-1' : 'arrow-button-down-1'"
-      :type="type"
-      icon-right-clickable
-      @icon-right-click="active = !active"
-      :hasCloudyColor="hasCloudyColor"
-      :size="size"
-      @focus="active = true"
-      readonly/>
-    <slot />
-    <template v-slot:inside="props">
-    <div
-      v-if="active"
-      :style="{ width: props.width }"
-      :class="{'unnnic-select__options': true,
-      'unnnic-select__options--active': active,
-      'unnnic-select__options--inactive': !active }">
-    <div :style="{ overflow: 'auto' }">
-    <select-item
-      v-if="search"
-      class="unnnic-select__header"
-      :selectable="false"
-      :size="size"
-    >
       <text-input
-        v-model="searchValue"
-        :placeholder="searchPlaceholder"
-        :icon-left="searchIconLeft"
-        :size="searchSize"
-      />
-    </select-item>
-
-    <select-item
-      v-for="(option, index) in optionsHeader"
-      :tabindex="index"
-      :size="size"
-      :key="index"
-      @click="onSelectOption(option, 'header')"
-      :title="option.text"
-    >
-      {{ option.text }}
-    </select-item>
-
-    <select-item
-      v-if="hasHeader()"
-      class="unnnic-select__header"
-      :selectable="false"
-      :size="size">
-        <slot name="header" />
-    </select-item>
-    <div class="unnnic-select__options__scroll-area">
-      <select-item
-        v-for="(option, index) in filterOptions(options())"
-        :tabindex="index"
+        :value="valueLabel || labelForValue"
+        :placeholder="placeholder"
+        :icon-right="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
+        :type="type"
+        icon-right-clickable
+        @icon-right-click="active = !active"
+        :hasCloudyColor="hasCloudyColor"
         :size="size"
-        :key="option.value"
-        :active="option.value === value"
-        @click="onSelectOption(option)"
-        :title="option.text"
-      >
-          {{ option.text }}
-      </select-item>
-    </div>
-    </div>
-    </div>
-    </template>
+        @focus="active = true"
+        readonly
+      />
+      <slot />
+      <template v-slot:inside="props">
+        <div
+          v-if="active"
+          :style="{ width: props.width }"
+          :class="{
+            'unnnic-select__options': true,
+            'unnnic-select__options--active': active,
+            'unnnic-select__options--inactive': !active,
+          }"
+        >
+          <div :style="{ overflow: 'auto' }">
+            <select-item
+              v-if="search"
+              class="unnnic-select__header"
+              :selectable="false"
+              :size="size"
+            >
+              <text-input
+                v-model="searchValue"
+                :placeholder="searchPlaceholder"
+                :icon-left="searchIconLeft"
+                :size="searchSize"
+              />
+            </select-item>
+
+            <select-item
+              v-for="(option, index) in optionsHeader"
+              :tabindex="index"
+              :size="size"
+              :key="index"
+              @click="onSelectOption(option, 'header')"
+              :title="option.text"
+            >
+              {{ option.text }}
+            </select-item>
+
+            <select-item
+              v-if="hasHeader()"
+              class="unnnic-select__header"
+              :selectable="false"
+              :size="size"
+            >
+              <slot name="header" />
+            </select-item>
+            <div class="unnnic-select__options__scroll-area">
+              <select-item
+                v-for="(option, index) in filterOptions(options())"
+                :tabindex="index"
+                :size="size"
+                :key="option.value"
+                :active="option.value === value"
+                @click="onSelectOption(option)"
+                :title="option.text"
+              >
+                {{ option.text }}
+              </select-item>
+            </div>
+          </div>
+        </div>
+      </template>
     </dropdown-skeleton>
-    <p v-if="message" class="unnnic-form__message"> {{ message }} </p>
+    <p v-if="message" class="unnnic-form__message">{{ message }}</p>
   </div>
 </template>
 
@@ -132,6 +136,10 @@ export default {
     optionsHeader: {
       type: Array,
     },
+    valueLabel: {
+      type: String,
+      default: null,
+    },
   },
   data() {
     return {
@@ -169,8 +177,9 @@ export default {
         return '';
       }
 
-      const selected = this.options().find((option) => (option.value === '' && this.value == null)
-        || option.value === this.value);
+      const selected = this.options().find(
+        (option) => (option.value === '' && this.value == null) || option.value === this.value,
+      );
 
       if (selected) {
         return selected.text;
@@ -189,8 +198,9 @@ export default {
   },
   methods: {
     filterOptions(options) {
-      return options
-        .filter(({ text }) => String(text).toLowerCase().includes(this.searchValue.toLowerCase()));
+      return options.filter(({ text }) =>
+        String(text).toLowerCase().includes(this.searchValue.toLowerCase()),
+      );
     },
 
     onClickOutside() {
@@ -214,8 +224,9 @@ export default {
         if (key === 38) {
           value = options[verifyOption === 0 ? 0 : verifyOption - 1].value;
         } else if (key === 40) {
-          value = options[verifyOption === options.length - 1
-            ? options.length - 1 : verifyOption + 1].value;
+          value =
+            options[verifyOption === options.length - 1 ? options.length - 1 : verifyOption + 1]
+              .value;
         }
         const indexOfValue = options.findIndex((item) => item.value === value);
         if (this.active) elementScroll.childNodes[value === '' ? 0 : indexOfValue].scrollIntoView();
@@ -229,9 +240,7 @@ export default {
           option.click();
         }
       } else {
-        const value = (option.value === null || option.value.length === 0)
-          ? null
-          : option.value;
+        const value = option.value === null || option.value.length === 0 ? null : option.value;
 
         this.$emit('onChange', value);
         this.$emit('input', value);
@@ -241,9 +250,10 @@ export default {
     },
     options() {
       const children = this.$el.querySelectorAll('option');
-      return [...children].map((option) => (
-        { value: option.value, text: option.label || option.innerHtml }
-      ));
+      return [...children].map((option) => ({
+        value: option.value,
+        text: option.label || option.innerHtml,
+      }));
     },
     hasHeader() {
       return !!this.$slots.header;
@@ -259,7 +269,7 @@ export default {
 @import '../../assets/scss/unnnic.scss';
 .unnnic-select {
   cursor: pointer;
-  .unnnic-form__input{
+  .unnnic-form__input {
     cursor: pointer;
   }
   option {
@@ -267,7 +277,7 @@ export default {
   }
 }
 
- ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 4px;
 }
 
@@ -280,7 +290,7 @@ export default {
   border-radius: $unnnic-border-radius-pill;
 }
 
-  .unnnic-select {
+.unnnic-select {
   font-family: $unnnic-font-family-secondary;
   position: relative;
 
@@ -305,7 +315,7 @@ export default {
     align-items: center;
     cursor: pointer;
 
-    &__selected{
+    &__selected {
       font-family: $unnnic-font-family-secondary;
       font-weight: $unnnic-font-weight-regular;
       text-overflow: ellipsis;
@@ -313,29 +323,28 @@ export default {
       max-width: 100%;
       -webkit-line-clamp: 1;
 
-      &--md{
+      &--md {
         font-size: $unnnic-font-size-body-gt;
         line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
       }
-      &--sm{
+      &--sm {
         font-size: $unnnic-font-size-body-md;
         line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
       }
     }
 
-     &--inactive{
+    &--inactive {
       border: 1px solid $unnnic-color-neutral-soft;
       color: $unnnic-color-neutral-clean;
     }
 
-    &--active{
+    &--active {
       border: 1px solid $unnnic-color-brand-weni;
       color: $unnnic-color-brand-weni;
     }
-
   }
 
-  &__options{
+  &__options {
     margin-top: 4px;
     box-shadow: $unnnic-shadow-level-near;
     background-color: $unnnic-color-background-snow;
@@ -366,11 +375,11 @@ export default {
       }
     }
 
-    &--inactive{
+    &--inactive {
       display: none;
     }
 
-    &--active{
+    &--active {
       display: block;
       z-index: 2;
     }
