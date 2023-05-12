@@ -1,5 +1,5 @@
 <template>
-  <div class="tab">
+  <div :class="['tab', `size-${size}`]">
     <header class="tab-header">
       <ul class="tab-content">
         <li
@@ -28,6 +28,11 @@ export default {
     event: 'change',
   },
   props: {
+    size: {
+      type: String,
+      default: 'md',
+      validator: (size) => ['md', 'sm'].includes(size),
+    },
     activeTab: {
       type: String,
     },
@@ -108,5 +113,17 @@ export default {
   font-size: $unnnic-font-size-body-lg;
   line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
   transition: 0.4s;
+}
+
+.tab.size-sm {
+  .tab-header {
+    padding-bottom: $unnnic-spacing-stack-xs;
+    margin-bottom: $unnnic-spacing-stack-xs;
+
+    .tab-head, .tab-head--active {
+      font-size: $unnnic-font-size-body-md;
+      line-height: ($unnnic-font-size-body-md + $unnnic-line-height-md);
+    }
+  }
 }
 </style>
