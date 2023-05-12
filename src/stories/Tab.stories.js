@@ -3,6 +3,9 @@ import unnnicTab from '../components/Tab/Tab.vue';
 export default {
   title: 'tabs/Tab',
   component: unnnicTab,
+  argTypes: {
+    size: { control: { type: 'select', options: ['md', 'sm'] } },
+  },
 };
 
 const Template = (args, { argTypes }) => ({
