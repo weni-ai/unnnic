@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import { unnnicFontSize as fontSize } from './config';
 import input from './Input/Input.vue';
 import inputNext from './InputNext/InputNext.vue';
 import inputDatePicker from './InputDatePicker/InputDatePicker.vue';
@@ -143,6 +144,7 @@ Object.keys(components).forEach((name) => {
   Vue.component(name, components[name]);
 });
 
+export const unnnicFontSize = fontSize;
 export const unnnicInput = input;
 export const unnnicInputNext = inputNext;
 export const unnnicInputDatePicker = inputDatePicker;

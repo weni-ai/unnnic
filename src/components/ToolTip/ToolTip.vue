@@ -116,7 +116,7 @@ export default {
   text-align: center;
   position: fixed;
   width: max-content;
-  min-width: 2rem;
+  min-width: 2 * $unnnic-font-size;
   box-sizing: border-box;
   width: auto;
 

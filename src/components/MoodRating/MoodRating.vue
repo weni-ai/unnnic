@@ -90,7 +90,7 @@ export default {
     display: flex;
     justify-content: center;
     column-gap: $unnnic-spacing-inline-sm;
-    height: 2.5rem;
+    height: 2.5 * $unnnic-font-size;
 
     &.selected .mood img {
       opacity: $unnnic-opacity-level-overlay;

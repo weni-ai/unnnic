@@ -1,3 +1,4 @@
+import { unnnicFontSize } from '../components/config';
 import unnnicToolTip from '../components/ToolTip/ToolTip.vue';
 
 export default {
@@ -21,6 +22,6 @@ export const Normal = Template.bind({});
 Normal.args = {
   text: 'Label',
   enabled: true,
-  maxWidth: '15rem',
+  maxWidth: `${15 * unnnicFontSize}px`,
   side: 'bottom',
 };

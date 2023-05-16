@@ -165,7 +165,7 @@ export default {
     margin-bottom: -$unnnic-spacing-stack-sm;
     display: grid;
     grid-gap: $unnnic-spacing-inline-lg;
-    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(10 * $unnnic-font-size, 1fr));
   }
 }
 </style>

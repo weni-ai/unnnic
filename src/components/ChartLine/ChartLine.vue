@@ -188,7 +188,7 @@ export default {
   }
 
   .main {
-    height: 9.125rem;
+    height: 9.125 * $unnnic-font-size;
     display: flex;
     justify-content: center;
 

@@ -75,7 +75,7 @@ export default {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 17.875rem;
+    max-width: 17.875 * $unnnic-font-size;
   }
 }
 </style>

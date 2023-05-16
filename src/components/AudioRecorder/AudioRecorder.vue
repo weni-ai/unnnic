@@ -283,7 +283,7 @@ export default {
   position: relative;
 
   &__progress-bar {
-    width: 11.5rem;
+    width: 11.5 * $unnnic-font-size;
     height: 2px;
     border-radius: $unnnic-border-radius-sm;
     background: $unnnic-color-neutral-clean;
@@ -306,8 +306,8 @@ export default {
 
   .delete-button {
     position: absolute;
-    right: -0.75rem;
-    top: -0.625rem;
+    right: -0.75 * $unnnic-font-size;
+    top: -0.625 * $unnnic-font-size;
   }
 }
 </style>

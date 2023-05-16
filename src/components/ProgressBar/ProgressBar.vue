@@ -141,8 +141,8 @@ export default {
 
       .progress-container {
         background-color: rgba($unnnic-color-aux-blue, $unnnic-opacity-level-light);
-        height: 1.25rem;
-        min-width: 14rem;
+        height: 1.25 * $unnnic-font-size;
+        min-width: 14 * $unnnic-font-size;
         border-radius: $unnnic-border-radius-pill;
         overflow: hidden;
         flex: 1;
@@ -183,7 +183,7 @@ export default {
 
     &.has-subtitle {
       &:not(.can-close) .progress-bar-container .progress-container {
-        height: 0.5rem;
+        height: 0.5 * $unnnic-font-size;
       }
 
       .footer {
@@ -209,7 +209,7 @@ export default {
 
       .close {
         margin-left: $unnnic-spacing-inline-nano;
-        line-height: 1rem;
+        line-height: 1 * $unnnic-font-size;
       }
     }
   }
@@ -221,7 +221,7 @@ export default {
           text-align: right;
 
           .percentage {
-            line-height: 1.25rem;
+            line-height: 1.25 * $unnnic-font-size;
             margin: 0 $unnnic-spacing-inline-xs;
           }
         }

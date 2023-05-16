@@ -125,7 +125,7 @@ export default {
     padding-right: $unnnic-spacing-inline-nano;
     padding-bottom: $unnnic-spacing-stack-sm;
     margin-top: $unnnic-spacing-stack-nano;
-    max-height: 9rem;
+    max-height: 9 * $unnnic-font-size;
     width: 100%;
     box-sizing: border-box;
     display: flex;

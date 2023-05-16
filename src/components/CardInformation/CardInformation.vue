@@ -7,13 +7,14 @@
     :description-row="descriptionRow"
     :description-row-info="descriptionRowInfo"
     :statuses="statuses"
-    min-status-width="8.75rem"
+    :min-status-width="8.75 * unnnicFontSize + 'px'"
   >
   </card-statuses-container>
 </template>
 
 <script>
 import CardStatusesContainer from '../Card/CardStatusesContainer.vue';
+import { unnnicFontSize } from '../config';
 
 export default {
   components: {
@@ -49,6 +50,12 @@ export default {
     statuses: {
       type: Array,
     },
+  },
+
+  data() {
+    return {
+      unnnicFontSize,
+    };
   },
 };
 </script>

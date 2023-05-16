@@ -119,7 +119,7 @@ export default {
 
   textarea {
     outline: none;
-    min-height: 6.5rem;
+    min-height: 6.5 * $unnnic-font-size;
     width: 100%;
     resize: vertical;
     box-sizing: border-box;

@@ -84,7 +84,7 @@ export default {
     padding: $unnnic-spacing-inset-sm;
     cursor: pointer;
     user-select: none;
-    min-width: 1.375rem;
+    min-width: 1.375 * $unnnic-font-size;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -94,17 +94,17 @@ export default {
     border-right: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
     .unnnic-icon {
-      width: 1.375rem;
-      height: 1.375rem;
-      min-width: 1.375rem;
-      min-height: 1.375rem;
+      width: 1.375 * $unnnic-font-size;
+      height: 1.375 * $unnnic-font-size;
+      min-width: 1.375 * $unnnic-font-size;
+      min-height: 1.375 * $unnnic-font-size;
     }
   }
 
   .tab {
     cursor: pointer;
     user-select: none;
-    width: 10.25rem;
+    width: 10.25 * $unnnic-font-size;
     padding: $unnnic-squish-nano;
     box-sizing: border-box;
     display: flex;

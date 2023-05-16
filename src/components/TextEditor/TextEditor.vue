@@ -452,7 +452,7 @@ export default {
 
   .text-editor {
     grid-area: text-editor;
-    height: 7.25rem;
+    height: 7.25 * $unnnic-font-size;
     box-sizing: border-box;
     overflow: auto;
     background-color: $unnnic-color-neutral-snow;
@@ -518,12 +518,12 @@ export default {
     .attachment-options-dropdown ::v-deep .unnnic-dropdown__content {
       padding: 0;
       bottom: 100%;
-      margin-bottom: 0.5rem;
-      right: (-10.375rem / 2) + 0.625rem;
+      margin-bottom: 0.5 * $unnnic-font-size;
+      right: (-10.375 * $unnnic-font-size / 2) + 0.625 * $unnnic-font-size;
     }
 
     .attachment-options-container {
-      width: 10.375rem;
+      width: 10.375 * $unnnic-font-size;
     }
   }
 }

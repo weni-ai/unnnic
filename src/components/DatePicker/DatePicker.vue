@@ -714,10 +714,10 @@ export default {
       }
 
       &.months--small, &.months--large {
-        grid-template-columns: repeat(3, 4.75rem);
-        grid-template-rows: repeat(4, 3.3125rem);
+        grid-template-columns: repeat(3, 4.75 * $unnnic-font-size);
+        grid-template-rows: repeat(4, 3.3125 * $unnnic-font-size);
         font-size: $unnnic-font-size-body-md;
-        line-height: 3.3125rem;
+        line-height: 3.3125 * $unnnic-font-size;
       }
 
       .selectable {

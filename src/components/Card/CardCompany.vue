@@ -159,7 +159,7 @@ export default {
   background-color: $unnnic-color-background-sky;
   border-radius: $unnnic-border-radius-md;
   padding: $unnnic-spacing-inset-md;
-  min-width: 18.5rem;
+  min-width: 18.5 * $unnnic-font-size;
   border: $unnnic-border-width-thin solid transparent;
   display: flex;
   align-items: center;
@@ -232,7 +232,7 @@ export default {
           border-radius: 50%;
 
           &:not(:first-child) {
-            margin-left: -0.875rem;
+            margin-left: -0.875 * $unnnic-font-size;
           }
         }
 
