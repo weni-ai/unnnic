@@ -137,7 +137,7 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width: calc(100% - 5 * $unnnic-font-size);
+      width: calc(100% - #{5 * $unnnic-font-size});
       margin-right: $unnnic-spacing-inline-xs;
 
       .name {
