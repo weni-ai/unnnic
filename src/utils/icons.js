@@ -91,6 +91,8 @@ import jcb from '!!svg-inline-loader!../assets/icons/jcb.svg';
 import keyboardArrowDown1 from '!!svg-inline-loader!../assets/icons/keyboard-arrow-down-1.svg';
 import keyboardArrowLeft1 from '!!svg-inline-loader!../assets/icons/keyboard-arrow-left-1.svg';
 import keyboardArrowRight1 from '!!svg-inline-loader!../assets/icons/keyboard-arrow-right-1.svg';
+import keyboardReturn1 from '!!svg-inline-loader!../assets/icons/keyboard-return-1.svg';
+import keyboardReturn11 from '!!svg-inline-loader!../assets/icons/keyboard-return-1-1.svg';
 import layoutDashboard1 from '!!svg-inline-loader!../assets/icons/layout-dashboard-1.svg';
 import layoutDashboard2 from '!!svg-inline-loader!../assets/icons/layout-dashboard-2.svg';
 import loadingCircle1 from '!!svg-inline-loader!../assets/icons/loading-circle-1.svg';
@@ -266,6 +268,8 @@ export default {
   'keyboard-arrow-down-1': keyboardArrowDown1,
   'keyboard-arrow-left-1': keyboardArrowLeft1,
   'keyboard-arrow-right-1': keyboardArrowRight1,
+  'keyboard-return-1': keyboardReturn1,
+  'keyboard-return-1-1': keyboardReturn11,
   'layout-dashboard-1': layoutDashboard1,
   'layout-dashboard-2': layoutDashboard2,
   'loading-circle-1': loadingCircle1,

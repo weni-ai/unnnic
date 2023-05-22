@@ -21,7 +21,7 @@ const Template = (args, { argTypes }) => ({
 
   template: `
     <div>
-      <!--<pre>v-model: {{ selecteds }}</pre>-->
+      <pre>v-model: {{ selecteds }}</pre>
       <unnnic-autocomplete-select v-bind="$props" v-model="selecteds">
       </unnnic-autocomplete-select>
     </div>
@@ -34,12 +34,12 @@ export const Default = Template.bind({});
 
 Default.args = {
   items: [
-    { value: 'Item 1', text: 'Item 1' },
-    { value: 'Item 2', text: 'Item 2' },
-    { value: 'Item 3', text: 'Item 3' },
-    { value: 'Item 4', text: 'Item 4' },
-    { value: 'Item 5', text: 'Item 5' },
-    { value: 'Item 6', text: 'Item 6' },
-    { value: 'Item 7', text: 'Item 7' },
+    { value: 'Item 1', text: 'Item 1', description: 'Description 1' },
+    { value: 'Item 2', text: 'Item 2', description: 'Description 2' },
+    { value: 'Item 3', text: 'Item 3', description: 'Description 3' },
+    { value: 'Item 4', text: 'Item 4', description: 'Description 4' },
+    { value: 'Item 5', text: 'Item 5', description: 'Description 5' },
+    { value: 'Item 6', text: 'Item 6', description: 'Description 6' },
+    { value: 'Item 7', text: 'Item 7', description: 'Description 7' },
   ],
 };
