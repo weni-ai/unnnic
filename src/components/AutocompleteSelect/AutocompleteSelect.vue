@@ -12,7 +12,10 @@
       @keyup.enter="emitTagCreate"
     />
 
-    <div v-if="isMenuOpen && !disabled" class="options-container">
+    <div
+      v-if="isMenuOpen && !disabled && (items.length || (tag && inputValue))"
+      class="options-container"
+    >
       <div class="options">
         <unnnic-select-item
           v-for="(item, index) in items"
@@ -128,6 +131,7 @@ export default {
     return {
       isMenuOpen: false,
       inputValue: '',
+      isCreated: false,
     };
   },
 
@@ -135,8 +139,11 @@ export default {
     clickOutside: vClickOutside.directive,
   },
 
-  mounted() {
-    this.updateInputValue({});
+  created() {
+    if (this.value && this.value.length) {
+      this.updateInputValue({ items: this.value });
+    }
+    this.isCreated = true;
   },
 
   computed: {
@@ -225,12 +232,15 @@ export default {
 
         if (this.closeOnSelect) {
           this.isMenuOpen = false;
+          this.inputValue = '';
         }
       }
     },
     openMenuAndEmitSearch(event) {
-      this.isMenuOpen = true;
-      this.$emit('search', event);
+      if (this.isCreated) {
+        this.isMenuOpen = true;
+        this.$emit('search', event);
+      }
     },
   },
 };
@@ -243,6 +253,7 @@ export default {
   position: relative;
 
   .options-container {
+    z-index: 1;
     background-color: $unnnic-color-background-snow;
     border-radius: $unnnic-border-radius-sm;
     box-shadow: $unnnic-shadow-level-near;
