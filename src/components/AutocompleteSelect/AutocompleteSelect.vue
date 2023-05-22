@@ -8,7 +8,8 @@
       :placeholder="placeholder"
       @focus="isMenuOpen = true"
       :disabled="disabled"
-      @input="() => $emit('search', $event)"
+      @input="openMenuAndEmitSearch"
+      @keyup.enter="emitTagCreate"
     />
 
     <div v-if="isMenuOpen && !disabled" class="options-container">
@@ -26,6 +27,15 @@
           <div v-if="descriptionKey" class="options__description">
             {{ getDescription(item) }}
           </div>
+        </unnnic-select-item>
+
+        <unnnic-select-item
+          v-if="tag && inputValue && !containInputInItems"
+          size="md"
+          @click="emitTagCreate"
+          :text-focused="false"
+        >
+          {{ `${tagCreateLabel} ${inputValue}` }}
         </unnnic-select-item>
       </div>
     </div>
@@ -100,6 +110,18 @@ export default {
       type: String,
       default: 'keyboard-return-1',
     },
+    showValue: {
+      type: Boolean,
+      default: false,
+    },
+    tag: {
+      type: Boolean,
+      default: false,
+    },
+    tagCreateLabel: {
+      type: String,
+      default: '',
+    },
   },
 
   data() {
@@ -113,9 +135,18 @@ export default {
     clickOutside: vClickOutside.directive,
   },
 
+  mounted() {
+    this.updateInputValue({});
+  },
+
   computed: {
     inputValueAndIsMenuOpen() {
       return [this.inputValue, this.isMenuOpen].join('-');
+    },
+    containInputInItems() {
+      return this.items.some(
+        (item) => this.getText(item).toLowerCase() === this.inputValue.toLowerCase(),
+      );
     },
   },
 
@@ -154,22 +185,25 @@ export default {
       return item[this.descriptionKey];
     },
     toggle(item) {
+      let finalValue = [item];
       if (!this.multi) {
-        this.$emit('input', [item]);
+        this.$emit('input', finalValue);
+        this.updateInputValue({ items: finalValue });
       } else {
         const alreadySelected = this.value.some(
           (itemSelected) => this.getValue(itemSelected) === this.getValue(item),
         );
 
         if (alreadySelected) {
-          this.$emit(
-            'input',
-            this.value.filter(
-              (itemSelected) => this.getValue(itemSelected) !== this.getValue(item),
-            ),
+          finalValue = this.value.filter(
+            (itemSelected) => this.getValue(itemSelected) !== this.getValue(item),
           );
+          this.$emit('input', finalValue);
+          this.updateInputValue({ items: finalValue });
         } else {
-          this.$emit('input', this.value.concat(item));
+          finalValue = this.value.concat(item);
+          this.$emit('input', finalValue);
+          this.updateInputValue({ items: finalValue });
         }
       }
 
@@ -178,8 +212,25 @@ export default {
       }
     },
     checkFocus(itemSelected) {
-      console.log('itemSelected', itemSelected);
       return this.value.some((item) => this.getValue(item) === this.getValue(itemSelected));
+    },
+    updateInputValue({ items }) {
+      if (this.showValue && items && Array.isArray(items)) {
+        this.inputValue = items.map((item) => this.getText(item)).join(', ');
+      }
+    },
+    emitTagCreate() {
+      if (this.tag) {
+        this.$emit('tag-create', this.inputValue);
+
+        if (this.closeOnSelect) {
+          this.isMenuOpen = false;
+        }
+      }
+    },
+    openMenuAndEmitSearch(event) {
+      this.isMenuOpen = true;
+      this.$emit('search', event);
     },
   },
 };
