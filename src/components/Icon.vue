@@ -1,68 +1,70 @@
 <template>
-<span
-    @click="onClick"
-    @mousedown="$emit('mousedown')"
-    @mouseup="$emit('mouseup')"
+  <component
     :class="[
-      'unnnic-icon',
-      `unnnic-icon__size--${size}`,
-      clickable ? 'unnnic--clickable' : '',
-      lineHeight ? `unnnic-icon__line-height--${lineHeight}` : '',
-      scheme ? `unnnic-icon-scheme--${scheme}` : '',
+      `unnnic-icon scheme--${scheme} size--${size}`,
+      {
+        'unnnic--clickable': clickable
+      }
     ]"
-    v-html="svg" />
+    :is="iconComponent"
+  />
 </template>
 
 <script>
-import icons from '../utils/icons';
+import icons from '../utils/icons'
 
 export default {
   name: 'uIcon',
   props: {
     icon: {
       type: String,
-      default: null,
+      default: null
     },
     clickable: {
       type: Boolean,
-      default: false,
+      default: false
     },
     size: {
       type: String,
       default: 'md',
       validator(value) {
-        return ['nano', 'xs', 'sm', 'ant', 'md', 'lg', 'xl'].indexOf(value) !== -1;
-      },
+        return ['nano', 'xs', 'sm', 'ant', 'md', 'lg', 'xl'].indexOf(value) !== -1
+      }
     },
     lineHeight: {
       type: String,
       default: null,
       validator(value) {
-        return !value || ['sm', 'md', 'lg'].indexOf(value) !== -1;
-      },
+        return !value || ['sm', 'md', 'lg'].indexOf(value) !== -1
+      }
     },
     scheme: {
       type: String,
-      default: '',
-    },
+      default: ''
+    }
+  },
+  data() {
+    return {
+      icons
+    }
   },
   mounted() {},
   computed: {
-    svg() {
-      return icons[this.icon];
-    },
+    iconComponent() {
+      return icons[this.icon]
+    }
   },
   methods: {
     onClick() {
-      if (!this.clickable) return;
-      this.$emit('click');
-    },
-  },
-};
+      if (!this.clickable) return
+      this.$emit('click')
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
-@import "../assets/scss/unnnic.scss";
+@import '../assets/scss/unnnic.scss';
 
 .unnnic-icon ::v-deep svg {
   position: absolute;
@@ -71,79 +73,61 @@ export default {
 }
 </style>
 
-<style lang="scss">
-@import "../assets/scss/unnnic.scss";
+<style lang="scss" scoped>
+@import '../assets/scss/unnnic.scss';
 
-$scheme-colors: "feedback-red" $unnnic-color-feedback-red,
-  "feedback-green" $unnnic-color-feedback-green, "feedback-yellow" $unnnic-color-feedback-yellow,
-  "feedback-blue" $unnnic-color-feedback-blue, "feedback-grey" $unnnic-color-feedback-grey,
-  "aux-blue" $unnnic-color-aux-blue, "aux-purple" $unnnic-color-aux-purple,
-  "aux-orange" $unnnic-color-aux-orange, "aux-lemon" $unnnic-color-aux-lemon,
-  "aux-pink" $unnnic-color-aux-pink,
-  "brand-weni" $unnnic-color-brand-weni,
-  "brand-weni-soft" $unnnic-color-brand-weni-soft,
-  "brand-weni-dark" $unnnic-color-brand-weni-dark,
-  "brand-sec" $unnnic-color-brand-sec,
-  "neutral-clean" $unnnic-color-neutral-clean,
-  "neutral-cleanest" $unnnic-color-neutral-cleanest,
-  "neutral-dark" $unnnic-color-neutral-dark,
-  "neutral-soft" $unnnic-color-neutral-soft,
-  "neutral-darkest" $unnnic-color-neutral-darkest,
-  "neutral-cloudy" $unnnic-color-neutral-cloudy,
-  "neutral-snow" $unnnic-color-neutral-snow,
-  "background-snow" $unnnic-color-background-snow;
+$scheme-colors: 'feedback-red' $unnnic-color-feedback-red,
+  'feedback-green' $unnnic-color-feedback-green, 'feedback-yellow' $unnnic-color-feedback-yellow,
+  'feedback-blue' $unnnic-color-feedback-blue, 'feedback-grey' $unnnic-color-feedback-grey,
+  'aux-blue' $unnnic-color-aux-blue, 'aux-purple' $unnnic-color-aux-purple,
+  'aux-orange' $unnnic-color-aux-orange, 'aux-lemon' $unnnic-color-aux-lemon,
+  'aux-pink' $unnnic-color-aux-pink, 'brand-weni' $unnnic-color-brand-weni,
+  'brand-weni-soft' $unnnic-color-brand-weni-soft, 'brand-weni-dark' $unnnic-color-brand-weni-dark,
+  'brand-sec' $unnnic-color-brand-sec, 'neutral-clean' $unnnic-color-neutral-clean,
+  'neutral-cleanest' $unnnic-color-neutral-cleanest, 'neutral-dark' $unnnic-color-neutral-dark,
+  'neutral-soft' $unnnic-color-neutral-soft, 'neutral-darkest' $unnnic-color-neutral-darkest,
+  'neutral-cloudy' $unnnic-color-neutral-cloudy, 'neutral-snow' $unnnic-color-neutral-snow,
+  'background-snow' $unnnic-color-background-snow;
 
 @each $name, $color in $scheme-colors {
-  .unnnic-icon-scheme {
+  .unnnic-icon.scheme {
     &--#{$name} {
-      & .primary {
+      :deep(.primary) {
         fill: $color;
       }
 
-      & .primary-stroke {
+      :deep(.primary-stroke) {
         stroke: $color;
       }
     }
   }
 }
 
-$icon-sizes:
-    'xl' $unnnic-icon-size-xl,
-    'lg' $unnnic-icon-size-lg,
-    'md' $unnnic-icon-size-md,
-    'ant' $unnnic-icon-size-ant,
-    'sm' $unnnic-icon-size-sm,
-    'xs' $unnnic-icon-size-xs;
+$icon-sizes: 'xl' $unnnic-icon-size-xl, 'lg' $unnnic-icon-size-lg, 'md' $unnnic-icon-size-md,
+  'ant' $unnnic-icon-size-ant, 'sm' $unnnic-icon-size-sm, 'xs' $unnnic-icon-size-xs;
 
-$line-heights:
-  'sm' $unnnic-line-height-small,
-  'md' $unnnic-line-height-medium,
+$line-heights: 'sm' $unnnic-line-height-small, 'md' $unnnic-line-height-medium,
   'lg' $unnnic-line-height-large;
 
-    .unnnic-icon {
-      position: relative;
-      display: inline-block;
-      vertical-align: middle;
+.unnnic-icon {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
 
-        @each $name, $size in $icon-sizes {
-            &__size--#{$name} {
-                width: $size;
-                height: $size;
-                min-width: $size;
-                min-height: $size;
-
-                @each $line-name, $line-size in $line-heights {
-                  &.unnnic-icon__line-height--#{$line-name} svg {
-                    position: relative;
-                    top: (($size + $line-size) - ($size*1.2))/1.2;
-                  }
-              }
-            }
-        }
-
-        svg {
-            width: 100%;
-            height: 100%;
-        }
+  @each $name, $size in $icon-sizes {
+    &.size--#{$name} {
+      width: $size;
+      height: $size;
+      min-width: $size;
+      min-height: $size;
     }
+
+    @each $line-name, $line-size in $line-heights {
+      &.line-height--#{$line-name} svg {
+        position: relative;
+        top: (($size + $line-size) - ($size * 1.2))/1.2;
+      }
+    }
+  }
+}
 </style>

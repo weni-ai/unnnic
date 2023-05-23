@@ -1,351 +1,350 @@
-/* eslint-disable import/no-webpack-loader-syntax */
-// import iconScript from '!!svg-inline-loader!../assets/icons/icon-script.py';
-import add1 from '!!svg-inline-loader!../assets/icons/add-1.svg';
-import addCircle1 from '!!svg-inline-loader!../assets/icons/add-circle-1.svg';
-import alarmBell2 from '!!svg-inline-loader!../assets/icons/alarm-bell-2.svg';
-import alarmBell3 from '!!svg-inline-loader!../assets/icons/alarm-bell-3.svg';
-import alarmBellRing from '!!svg-inline-loader!../assets/icons/alarm-bell-ring.svg';
-import alertCircle1 from '!!svg-inline-loader!../assets/icons/alert-circle-1.svg';
-import alertCircle11 from '!!svg-inline-loader!../assets/icons/alert-circle-1-1.svg';
-import americanExpress from '!!svg-inline-loader!../assets/icons/american-express.svg';
-import appWindowEdit1 from '!!svg-inline-loader!../assets/icons/app-window-edit-1.svg';
-import appWindowEdit2 from '!!svg-inline-loader!../assets/icons/app-window-edit-2.svg';
-import arrowButtonDown1 from '!!svg-inline-loader!../assets/icons/arrow-button-down-1.svg';
-import arrowButtonRight1 from '!!svg-inline-loader!../assets/icons/arrow-button-right-1.svg';
-import arrowButtonUp1 from '!!svg-inline-loader!../assets/icons/arrow-button-up-1.svg';
-import arrowLeft11 from '!!svg-inline-loader!../assets/icons/arrow-left-1-1.svg';
-import arrowRedo from '!!svg-inline-loader!../assets/icons/arrow-redo.svg';
-import arrowRight11 from '!!svg-inline-loader!../assets/icons/arrow-right-1-1.svg';
-import arrowUndo from '!!svg-inline-loader!../assets/icons/arrow-undo.svg';
-import attachment from '!!svg-inline-loader!../assets/icons/attachment.svg';
-import bin1 from '!!svg-inline-loader!../assets/icons/bin-1-1.svg';
-import bookAddress12 from '!!svg-inline-loader!../assets/icons/book-address-1-2.svg';
-import bookAddress2 from '!!svg-inline-loader!../assets/icons/book-address-2.svg';
-import bookLibrary1 from '!!svg-inline-loader!../assets/icons/book-library-1.svg';
-import bookLibrary2 from '!!svg-inline-loader!../assets/icons/book-library-2.svg';
-import Brazil from '!!svg-inline-loader!../assets/icons/Brazil.svg';
-import building21 from '!!svg-inline-loader!../assets/icons/building-2-1.svg';
-import buttonPlay1 from '!!svg-inline-loader!../assets/icons/button-play-1.svg';
-import buttonRefreshArrow1 from '!!svg-inline-loader!../assets/icons/button-refresh-arrow-1.svg';
-import buttonRefreshArrows1 from '!!svg-inline-loader!../assets/icons/button-refresh-arrows-1.svg';
-import charger1 from '!!svg-inline-loader!../assets/icons/charger-1.svg';
-import chatTranslate1 from '!!svg-inline-loader!../assets/icons/chat-translate-1.svg';
-import check2 from '!!svg-inline-loader!../assets/icons/check-2.svg';
-import checkboxDefault from '!!svg-inline-loader!../assets/icons/checkbox-default.svg';
-import checkboxDisable from '!!svg-inline-loader!../assets/icons/checkbox-disable.svg';
-import checkboxLess from '!!svg-inline-loader!../assets/icons/checkbox-less.svg';
-import checkboxSelect from '!!svg-inline-loader!../assets/icons/checkbox-select.svg';
-import checkCircle11 from '!!svg-inline-loader!../assets/icons/check-circle-1-1.svg';
-import checkCircle111 from '!!svg-inline-loader!../assets/icons/check-circle-1-1-1.svg';
-import checkDouble from '!!svg-inline-loader!../assets/icons/check-double.svg';
-import checkSquare1 from '!!svg-inline-loader!../assets/icons/check-square-1.svg';
-import checkSquare2 from '!!svg-inline-loader!../assets/icons/check-square-2.svg';
-import close1 from '!!svg-inline-loader!../assets/icons/close-1.svg';
-import cog1 from '!!svg-inline-loader!../assets/icons/cog-1.svg';
-import cog2 from '!!svg-inline-loader!../assets/icons/cog-2.svg';
-import commonFileEmpty1 from '!!svg-inline-loader!../assets/icons/common-file-empty-1.svg';
-import commonFileHorizontalImage1 from '!!svg-inline-loader!../assets/icons/common-file-horizontal-image-1.svg';
-import controlsPause1 from '!!svg-inline-loader!../assets/icons/controls-pause-1.svg';
-import controlsPlay1 from '!!svg-inline-loader!../assets/icons/controls-play-1.svg';
-import copyPaste1 from '!!svg-inline-loader!../assets/icons/copy-paste-1.svg';
-import currencyDollarCircle1 from '!!svg-inline-loader!../assets/icons/currency-dollar-circle-1.svg';
-import defaultAvatar from '!!svg-inline-loader!../assets/icons/default-avatar.svg';
-import delete1 from '!!svg-inline-loader!../assets/icons/delete-1.svg';
-import delete11 from '!!svg-inline-loader!../assets/icons/delete-1-1.svg';
-import delete21 from '!!svg-inline-loader!../assets/icons/delete-2-1.svg';
-import developerCommunityGithub11 from '!!svg-inline-loader!../assets/icons/developer-community-github-1-1.svg';
-import dinersClub from '!!svg-inline-loader!../assets/icons/diners-club.svg';
-import discover from '!!svg-inline-loader!../assets/icons/discover.svg';
-import downloadBottom1 from '!!svg-inline-loader!../assets/icons/download-bottom-1.svg';
-import downloadThickBottom1 from '!!svg-inline-loader!../assets/icons/download-thick-bottom-1.svg';
-import emailActionUnread1 from '!!svg-inline-loader!../assets/icons/email-action-unread-1.svg';
-import emoji from '!!svg-inline-loader!../assets/icons/emoji.svg';
-import expand81 from '!!svg-inline-loader!../assets/icons/expand-8-1.svg';
-import expandFull1 from '!!svg-inline-loader!../assets/icons/expand-full-1.svg';
-import export1 from '!!svg-inline-loader!../assets/icons/export-1.svg';
-import filter from '!!svg-inline-loader!../assets/icons/filter.svg';
-import fitnessBiceps1 from '!!svg-inline-loader!../assets/icons/fitness-biceps-1.svg';
-import flash13 from '!!svg-inline-loader!../assets/icons/flash-1-3.svg';
-import flash14 from '!!svg-inline-loader!../assets/icons/flash-1-4.svg';
-import floppyDisk1 from '!!svg-inline-loader!../assets/icons/floppy-disk-1.svg';
-import folder1 from '!!svg-inline-loader!../assets/icons/folder-1.svg';
-import folder2 from '!!svg-inline-loader!../assets/icons/folder-2.svg';
-import gaugeDashboard1 from '!!svg-inline-loader!../assets/icons/gauge-dashboard-1.svg';
-import gaugeDashboard2 from '!!svg-inline-loader!../assets/icons/gauge-dashboard-2.svg';
-import genericCard from '!!svg-inline-loader!../assets/icons/generic-card.svg';
-import graphStats1 from '!!svg-inline-loader!../assets/icons/graph-stats-1.svg';
-import graphStatsAscend2 from '!!svg-inline-loader!../assets/icons/graph-stats-ascend-2.svg';
-import graphStatsCircle1 from '!!svg-inline-loader!../assets/icons/graph-stats-circle-1.svg';
-import graphStatsCircle11 from '!!svg-inline-loader!../assets/icons/graph-stats-circle-1-1.svg';
-import graphStatsDescend2 from '!!svg-inline-loader!../assets/icons/graph-stats-descend-2.svg';
-import headphonesCustomerSupport1 from '!!svg-inline-loader!../assets/icons/headphones-customer-support-1.svg';
-import headphonesCustomerSupport2 from '!!svg-inline-loader!../assets/icons/headphones-customer-support-2.svg';
-import headphonesCustomerSupportHuman11 from '!!svg-inline-loader!../assets/icons/headphones-customer-support-human-1-1.svg';
-import hierarchy32 from '!!svg-inline-loader!../assets/icons/hierarchy-3-2.svg';
-import hierarchy33 from '!!svg-inline-loader!../assets/icons/hierarchy-3-3.svg';
-import house11 from '!!svg-inline-loader!../assets/icons/house-1-1.svg';
-import house22 from '!!svg-inline-loader!../assets/icons/house-2-2.svg';
-import indicator from '!!svg-inline-loader!../assets/icons/indicator.svg';
-import informationCircle4 from '!!svg-inline-loader!../assets/icons/information-circle-4.svg';
-import jcb from '!!svg-inline-loader!../assets/icons/jcb.svg';
-import keyboardArrowDown1 from '!!svg-inline-loader!../assets/icons/keyboard-arrow-down-1.svg';
-import keyboardArrowLeft1 from '!!svg-inline-loader!../assets/icons/keyboard-arrow-left-1.svg';
-import keyboardArrowRight1 from '!!svg-inline-loader!../assets/icons/keyboard-arrow-right-1.svg';
-import layoutDashboard1 from '!!svg-inline-loader!../assets/icons/layout-dashboard-1.svg';
-import layoutDashboard2 from '!!svg-inline-loader!../assets/icons/layout-dashboard-2.svg';
-import loadingCircle1 from '!!svg-inline-loader!../assets/icons/loading-circle-1.svg';
-import lock21 from '!!svg-inline-loader!../assets/icons/lock-2-1.svg';
-import lock22 from '!!svg-inline-loader!../assets/icons/lock-2-2.svg';
-import lockUnlock from '!!svg-inline-loader!../assets/icons/lock-unlock-1-1.svg';
-import logout11 from '!!svg-inline-loader!../assets/icons/logout-1-1.svg';
-import mastercard from '!!svg-inline-loader!../assets/icons/mastercard.svg';
-import messagesBubble1 from '!!svg-inline-loader!../assets/icons/messages-bubble-1.svg';
-import messagesBubble3 from '!!svg-inline-loader!../assets/icons/messages-bubble-3.svg';
-import messagesBubble4 from '!!svg-inline-loader!../assets/icons/messages-bubble-4.svg';
-import messagingWeChat2 from '!!svg-inline-loader!../assets/icons/messaging-we-chat-2.svg';
-import messagingWeChat3 from '!!svg-inline-loader!../assets/icons/messaging-we-chat-3.svg';
-import messagingWhatsapp1 from '!!svg-inline-loader!../assets/icons/messaging-whatsapp-1.svg';
-import microphone from '!!svg-inline-loader!../assets/icons/microphone.svg';
-import navigationMenuVertical1 from '!!svg-inline-loader!../assets/icons/navigation-menu-vertical-1.svg';
-import notes1 from '!!svg-inline-loader!../assets/icons/notes-1.svg';
-import officeFilePdf11 from '!!svg-inline-loader!../assets/icons/office-file-pdf-1-1.svg';
-import paginateFilterText1 from '!!svg-inline-loader!../assets/icons/paginate-filter-text-1.svg';
-import pencilWrite1 from '!!svg-inline-loader!../assets/icons/pencil-write-1.svg';
-import phone3 from '!!svg-inline-loader!../assets/icons/phone-3.svg';
-import phone4 from '!!svg-inline-loader!../assets/icons/phone-4.svg';
-import phoneCharger1 from '!!svg-inline-loader!../assets/icons/phone-charger-1.svg';
-import photographyEquipmentBag1 from '!!svg-inline-loader!../assets/icons/photography-equipment-bag-1.svg';
-import pieLineGraph1 from '!!svg-inline-loader!../assets/icons/pie-line-graph-1.svg';
-import preferences from '!!svg-inline-loader!../assets/icons/preferences.svg';
-import questionCircle1 from '!!svg-inline-loader!../assets/icons/question-circle-1.svg';
-import questionCircle2 from '!!svg-inline-loader!../assets/icons/question-circle-2.svg';
-import radioDefault from '!!svg-inline-loader!../assets/icons/radio-default.svg';
-import radioDisable from '!!svg-inline-loader!../assets/icons/radio-disable.svg';
-import radioSelected from '!!svg-inline-loader!../assets/icons/radio-selected.svg';
-import ratingStar1 from '!!svg-inline-loader!../assets/icons/rating-star-1.svg';
-import ratingStar11 from '!!svg-inline-loader!../assets/icons/rating-star-1-1.svg';
-import readEmailAt1 from '!!svg-inline-loader!../assets/icons/read-email-at-1.svg';
-import scienceFictionRobot1 from '!!svg-inline-loader!../assets/icons/science-fiction-robot-1.svg';
-import scienceFictionRobot2 from '!!svg-inline-loader!../assets/icons/science-fiction-robot-2.svg';
-import search1 from '!!svg-inline-loader!../assets/icons/search-1.svg';
-import sendEmail31 from '!!svg-inline-loader!../assets/icons/send-email-3-1.svg';
-import singleNeutral2 from '!!svg-inline-loader!../assets/icons/single-neutral-2.svg';
-import singleNeutralActions1 from '!!svg-inline-loader!../assets/icons/single-neutral-actions-1.svg';
-import socialMediaGoogle1 from '!!svg-inline-loader!../assets/icons/social-media-google-1.svg';
-import socialMediaFacebook1 from '!!svg-inline-loader!../assets/icons/social-media-facebook-1.svg';
-import socialInstagram1 from '!!svg-inline-loader!../assets/icons/social-instagram-1.svg';
-import sortAsc from '!!svg-inline-loader!../assets/icons/sort-asc.svg';
-import sortDefault from '!!svg-inline-loader!../assets/icons/sort-default.svg';
-import sortDesc from '!!svg-inline-loader!../assets/icons/sort-desc.svg';
-import Spain from '!!svg-inline-loader!../assets/icons/Spain.svg';
-import studyLightIdea1 from '!!svg-inline-loader!../assets/icons/study-light-idea-1.svg';
-import subtract1 from '!!svg-inline-loader!../assets/icons/subtract-1.svg';
-import subtractCircle1 from '!!svg-inline-loader!../assets/icons/subtract-circle-1.svg';
-import switchDefault from '!!svg-inline-loader!../assets/icons/switch-default.svg';
-import switchDefaultDisabled from '!!svg-inline-loader!../assets/icons/switch-default-disabled.svg';
-import switchSelected from '!!svg-inline-loader!../assets/icons/switch-selected.svg';
-import switchSelectedDisabled from '!!svg-inline-loader!../assets/icons/switch-selected-disabled.svg';
-import synchronizeArrowClock4 from '!!svg-inline-loader!../assets/icons/synchronize-arrow-clock-4.svg';
-import synchronizeArrowClock5 from '!!svg-inline-loader!../assets/icons/synchronize-arrow-clock-5.svg';
-import taskChecklist1 from '!!svg-inline-loader!../assets/icons/task-checklist-1.svg';
-import taskListClock1 from '!!svg-inline-loader!../assets/icons/task-list-clock-1.svg';
-import textBold from '!!svg-inline-loader!../assets/icons/text-bold.svg';
-import textCenter from '!!svg-inline-loader!../assets/icons/text-center.svg';
-import textItalic from '!!svg-inline-loader!../assets/icons/text-italic.svg';
-import textJustified from '!!svg-inline-loader!../assets/icons/text-justified.svg';
-import textLeft from '!!svg-inline-loader!../assets/icons/text-left.svg';
-import textRight from '!!svg-inline-loader!../assets/icons/text-right.svg';
-import textUnderline from '!!svg-inline-loader!../assets/icons/text-underline.svg';
-import timeClockCircle1 from '!!svg-inline-loader!../assets/icons/time-clock-circle-1.svg';
-import typing1 from '!!svg-inline-loader!../assets/icons/typing-1.svg';
-import translate1 from '!!svg-inline-loader!../assets/icons/translate-1.svg';
-import translate2 from '!!svg-inline-loader!../assets/icons/translate-2.svg';
-import unionpay from '!!svg-inline-loader!../assets/icons/unionpay.svg';
-import unorderedList from '!!svg-inline-loader!../assets/icons/unordered-list.svg';
-import uploadBottom1 from '!!svg-inline-loader!../assets/icons/upload-bottom-1.svg';
-import USA from '!!svg-inline-loader!../assets/icons/USA.svg';
-import videoFileMp41 from '!!svg-inline-loader!../assets/icons/video-file-mp4-1.svg';
-import view11 from '!!svg-inline-loader!../assets/icons/view-1-1.svg';
-import viewOff1 from '!!svg-inline-loader!../assets/icons/view-off-1.svg';
-import vipCrownQueen2 from '!!svg-inline-loader!../assets/icons/vip-crown-queen-2.svg';
-import visa from '!!svg-inline-loader!../assets/icons/visa.svg';
-import interactionTime from '!!svg-inline-loader!../assets/icons/interaction-time.svg';
-import responseTime from '!!svg-inline-loader!../assets/icons/response-time.svg';
-import messages from '!!svg-inline-loader!../assets/icons/messages.svg';
-import transferMessage from '!!svg-inline-loader!../assets/icons/transfer-message.svg';
+// import iconScript from '../assets/icons/icon-script.py';
+import Add1 from '../assets/icons/Add1.vue'
+import AddCircle1 from '../assets/icons/AddCircle1.vue'
+import AlarmBell2 from '../assets/icons/AlarmBell2.vue'
+import AlarmBell3 from '../assets/icons/AlarmBell3.vue'
+import AlarmBellRing from '../assets/icons/AlarmBellRing.vue'
+import AlertCircle1 from '../assets/icons/AlertCircle1.vue'
+import AlertCircle11 from '../assets/icons/AlertCircle11.vue'
+import AmericanExpress from '../assets/icons/AmericanExpress.vue'
+import AppWindowEdit1 from '../assets/icons/AppWindowEdit1.vue'
+import AppWindowEdit2 from '../assets/icons/AppWindowEdit2.vue'
+import ArrowButtonDown1 from '../assets/icons/ArrowButtonDown1.vue'
+import ArrowButtonRight1 from '../assets/icons/ArrowButtonRight1.vue'
+import ArrowButtonUp1 from '../assets/icons/ArrowButtonUp1.vue'
+import ArrowLeft11 from '../assets/icons/ArrowLeft11.vue'
+import ArrowRedo from '../assets/icons/ArrowRedo.vue'
+import ArrowRight11 from '../assets/icons/ArrowRight11.vue'
+import ArrowUndo from '../assets/icons/ArrowUndo.vue'
+import Attachment from '../assets/icons/Attachment.vue'
+import Bin1 from '../assets/icons/Bin11.vue'
+import BookAddress12 from '../assets/icons/BookAddress12.vue'
+import BookAddress2 from '../assets/icons/BookAddress2.vue'
+import BookLibrary1 from '../assets/icons/BookLibrary1.vue'
+import BookLibrary2 from '../assets/icons/BookLibrary2.vue'
+import Brazil from '../assets/icons/Brazil.vue'
+import Building21 from '../assets/icons/Building21.vue'
+import ButtonPlay1 from '../assets/icons/ButtonPlay1.vue'
+import ButtonRefreshArrow1 from '../assets/icons/ButtonRefreshArrow1.vue'
+import ButtonRefreshArrows1 from '../assets/icons/ButtonRefreshArrows1.vue'
+import Charger1 from '../assets/icons/Charger1.vue'
+import ChatTranslate1 from '../assets/icons/ChatTranslate1.vue'
+import Check2 from '../assets/icons/Check2.vue'
+import CheckboxDefault from '../assets/icons/CheckboxDefault.vue'
+import CheckboxDisable from '../assets/icons/CheckboxDisable.vue'
+import CheckboxLess from '../assets/icons/CheckboxLess.vue'
+import CheckboxSelect from '../assets/icons/CheckboxSelect.vue'
+import CheckCircle11 from '../assets/icons/CheckCircle11.vue'
+import CheckCircle111 from '../assets/icons/CheckCircle111.vue'
+import CheckDouble from '../assets/icons/CheckDouble.vue'
+import CheckSquare1 from '../assets/icons/CheckSquare1.vue'
+import CheckSquare2 from '../assets/icons/CheckSquare2.vue'
+import Close1 from '../assets/icons/Close1.vue'
+import Cog1 from '../assets/icons/Cog1.vue'
+import Cog2 from '../assets/icons/Cog2.vue'
+import CommonFileEmpty1 from '../assets/icons/CommonFileEmpty1.vue'
+import CommonFileHorizontalImage1 from '../assets/icons/CommonFileHorizontalImage1.vue'
+import ControlsPause1 from '../assets/icons/ControlsPause1.vue'
+import ControlsPlay1 from '../assets/icons/ControlsPlay1.vue'
+import CopyPaste1 from '../assets/icons/CopyPaste1.vue'
+import CurrencyDollarCircle1 from '../assets/icons/CurrencyDollarCircle1.vue'
+import DefaultAvatar from '../assets/icons/DefaultAvatar.vue'
+import Delete1 from '../assets/icons/Delete1.vue'
+import Delete11 from '../assets/icons/Delete11.vue'
+import Delete21 from '../assets/icons/Delete21.vue'
+import DeveloperCommunityGithub11 from '../assets/icons/DeveloperCommunityGithub11.vue'
+import DinersClub from '../assets/icons/DinersClub.vue'
+import Discover from '../assets/icons/Discover.vue'
+import DownloadBottom1 from '../assets/icons/DownloadBottom1.vue'
+import DownloadThickBottom1 from '../assets/icons/DownloadThickBottom1.vue'
+import EmailActionUnread1 from '../assets/icons/EmailActionUnread1.vue'
+import Emoji from '../assets/icons/Emoji.vue'
+import Expand81 from '../assets/icons/Expand81.vue'
+import ExpandFull1 from '../assets/icons/ExpandFull1.vue'
+import Export1 from '../assets/icons/Export1.vue'
+import Filter from '../assets/icons/Filter.vue'
+import FitnessBiceps1 from '../assets/icons/FitnessBiceps1.vue'
+import Flash13 from '../assets/icons/Flash13.vue'
+import Flash14 from '../assets/icons/Flash14.vue'
+import FloppyDisk1 from '../assets/icons/FloppyDisk1.vue'
+import Folder1 from '../assets/icons/Folder1.vue'
+import Folder2 from '../assets/icons/Folder2.vue'
+import GaugeDashboard1 from '../assets/icons/GaugeDashboard1.vue'
+import GaugeDashboard2 from '../assets/icons/GaugeDashboard2.vue'
+import GenericCard from '../assets/icons/GenericCard.vue'
+import GraphStats1 from '../assets/icons/GraphStats1.vue'
+import GraphStatsAscend2 from '../assets/icons/GraphStatsAscend2.vue'
+import GraphStatsCircle1 from '../assets/icons/GraphStatsCircle1.vue'
+import GraphStatsCircle11 from '../assets/icons/GraphStatsCircle11.vue'
+import GraphStatsDescend2 from '../assets/icons/GraphStatsDescend2.vue'
+import HeadphonesCustomerSupport1 from '../assets/icons/HeadphonesCustomerSupport1.vue'
+import HeadphonesCustomerSupport2 from '../assets/icons/HeadphonesCustomerSupport2.vue'
+import HeadphonesCustomerSupportHuman11 from '../assets/icons/HeadphonesCustomerSupportHuman11.vue'
+import Hierarchy32 from '../assets/icons/Hierarchy32.vue'
+import Hierarchy33 from '../assets/icons/Hierarchy33.vue'
+import House11 from '../assets/icons/House11.vue'
+import House22 from '../assets/icons/House22.vue'
+import Indicator from '../assets/icons/Indicator.vue'
+import InformationCircle4 from '../assets/icons/InformationCircle4.vue'
+import Jcb from '../assets/icons/Jcb.vue'
+import KeyboardArrowDown1 from '../assets/icons/KeyboardArrowDown1.vue'
+import KeyboardArrowLeft1 from '../assets/icons/KeyboardArrowLeft1.vue'
+import KeyboardArrowRight1 from '../assets/icons/KeyboardArrowRight1.vue'
+import LayoutDashboard1 from '../assets/icons/LayoutDashboard1.vue'
+import LayoutDashboard2 from '../assets/icons/LayoutDashboard2.vue'
+import LoadingCircle1 from '../assets/icons/LoadingCircle1.vue'
+import Lock21 from '../assets/icons/Lock21.vue'
+import Lock22 from '../assets/icons/Lock22.vue'
+import LockUnlock from '../assets/icons/LockUnlock11.vue'
+import Logout11 from '../assets/icons/Logout11.vue'
+import Mastercard from '../assets/icons/Mastercard.vue'
+import MessagesBubble1 from '../assets/icons/MessagesBubble1.vue'
+import MessagesBubble3 from '../assets/icons/MessagesBubble3.vue'
+import MessagesBubble4 from '../assets/icons/MessagesBubble4.vue'
+import MessagingWeChat2 from '../assets/icons/MessagingWeChat2.vue'
+import MessagingWeChat3 from '../assets/icons/MessagingWeChat3.vue'
+import MessagingWhatsapp1 from '../assets/icons/MessagingWhatsapp1.vue'
+import Microphone from '../assets/icons/Microphone.vue'
+import NavigationMenuVertical1 from '../assets/icons/NavigationMenuVertical1.vue'
+import Notes1 from '../assets/icons/Notes1.vue'
+import OfficeFilePdf11 from '../assets/icons/OfficeFilePdf11.vue'
+import PaginateFilterText1 from '../assets/icons/PaginateFilterText1.vue'
+import PencilWrite1 from '../assets/icons/PencilWrite1.vue'
+import Phone3 from '../assets/icons/Phone3.vue'
+import Phone4 from '../assets/icons/Phone4.vue'
+import PhoneCharger1 from '../assets/icons/PhoneCharger1.vue'
+import PhotographyEquipmentBag1 from '../assets/icons/PhotographyEquipmentBag1.vue'
+import PieLineGraph1 from '../assets/icons/PieLineGraph1.vue'
+import Preferences from '../assets/icons/Preferences.vue'
+import QuestionCircle1 from '../assets/icons/QuestionCircle1.vue'
+import QuestionCircle2 from '../assets/icons/QuestionCircle2.vue'
+import RadioDefault from '../assets/icons/RadioDefault.vue'
+import RadioDisable from '../assets/icons/RadioDisable.vue'
+import RadioSelected from '../assets/icons/RadioSelected.vue'
+import RatingStar1 from '../assets/icons/RatingStar1.vue'
+import RatingStar11 from '../assets/icons/RatingStar11.vue'
+import ReadEmailAt1 from '../assets/icons/ReadEmailAt1.vue'
+import ScienceFictionRobot1 from '../assets/icons/ScienceFictionRobot1.vue'
+import ScienceFictionRobot2 from '../assets/icons/ScienceFictionRobot2.vue'
+import Search1 from '../assets/icons/Search1.vue'
+import SendEmail31 from '../assets/icons/SendEmail31.vue'
+import SingleNeutral2 from '../assets/icons/SingleNeutral2.vue'
+import SingleNeutralActions1 from '../assets/icons/SingleNeutralActions1.vue'
+import SocialMediaGoogle1 from '../assets/icons/SocialMediaGoogle1.vue'
+import SocialMediaFacebook1 from '../assets/icons/SocialMediaFacebook1.vue'
+import SocialInstagram1 from '../assets/icons/SocialInstagram1.vue'
+import SortAsc from '../assets/icons/SortAsc.vue'
+import SortDefault from '../assets/icons/SortDefault.vue'
+import SortDesc from '../assets/icons/SortDesc.vue'
+import Spain from '../assets/icons/Spain.vue'
+import StudyLightIdea1 from '../assets/icons/StudyLightIdea1.vue'
+import Subtract1 from '../assets/icons/Subtract1.vue'
+import SubtractCircle1 from '../assets/icons/SubtractCircle1.vue'
+import SwitchDefault from '../assets/icons/SwitchDefault.vue'
+import SwitchDefaultDisabled from '../assets/icons/SwitchDefaultDisabled.vue'
+import SwitchSelected from '../assets/icons/SwitchSelected.vue'
+import SwitchSelectedDisabled from '../assets/icons/SwitchSelectedDisabled.vue'
+import SynchronizeArrowClock4 from '../assets/icons/SynchronizeArrowClock4.vue'
+import SynchronizeArrowClock5 from '../assets/icons/SynchronizeArrowClock5.vue'
+import TaskChecklist1 from '../assets/icons/TaskChecklist1.vue'
+import TaskListClock1 from '../assets/icons/TaskListClock1.vue'
+import TextBold from '../assets/icons/TextBold.vue'
+import TextCenter from '../assets/icons/TextCenter.vue'
+import TextItalic from '../assets/icons/TextItalic.vue'
+import TextJustified from '../assets/icons/TextJustified.vue'
+import TextLeft from '../assets/icons/TextLeft.vue'
+import TextRight from '../assets/icons/TextRight.vue'
+import TextUnderline from '../assets/icons/TextUnderline.vue'
+import TimeClockCircle1 from '../assets/icons/TimeClockCircle1.vue'
+import Typing1 from '../assets/icons/Typing1.vue'
+import Translate1 from '../assets/icons/Translate1.vue'
+import Translate2 from '../assets/icons/Translate2.vue'
+import Unionpay from '../assets/icons/Unionpay.vue'
+import UnorderedList from '../assets/icons/UnorderedList.vue'
+import UploadBottom1 from '../assets/icons/UploadBottom1.vue'
+import USA from '../assets/icons/USA.vue'
+import VideoFileMp41 from '../assets/icons/VideoFileMp41.vue'
+import View11 from '../assets/icons/View11.vue'
+import ViewOff1 from '../assets/icons/ViewOff1.vue'
+import VipCrownQueen2 from '../assets/icons/VipCrownQueen2.vue'
+import Visa from '../assets/icons/Visa.vue'
+import InteractionTime from '../assets/icons/InteractionTime.vue'
+import ResponseTime from '../assets/icons/ResponseTime.vue'
+import Messages from '../assets/icons/Messages.vue'
+import TransferMessage from '../assets/icons/TransferMessage.vue'
 
 export default {
-  'add-1': add1,
-  'add-circle-1': addCircle1,
-  'alarm-bell-2': alarmBell2,
-  'alarm-bell-3': alarmBell3,
-  'alarm-bell-ring': alarmBellRing,
-  'alert-circle-1-1': alertCircle11,
-  'alert-circle-1': alertCircle1,
-  'american-express': americanExpress,
-  'app-window-edit-1': appWindowEdit1,
-  'app-window-edit-2': appWindowEdit2,
-  'arrow-button-down-1': arrowButtonDown1,
-  'arrow-button-right-1': arrowButtonRight1,
-  'arrow-button-up-1': arrowButtonUp1,
-  'arrow-left-1-1': arrowLeft11,
-  'arrow-redo': arrowRedo,
-  'arrow-right-1-1': arrowRight11,
-  'arrow-undo': arrowUndo,
-  attachment,
-  'bin-1-1': bin1,
-  'book-address-1-2': bookAddress12,
-  'book-address-2': bookAddress2,
-  'book-library-1': bookLibrary1,
-  'book-library-2': bookLibrary2,
+  'add-1': Add1,
+  'add-circle-1': AddCircle1,
+  'alarm-bell-2': AlarmBell2,
+  'alarm-bell-3': AlarmBell3,
+  'alarm-bell-ring': AlarmBellRing,
+  'alert-circle-1-1': AlertCircle11,
+  'alert-circle-1': AlertCircle1,
+  'american-express': AmericanExpress,
+  'app-window-edit-1': AppWindowEdit1,
+  'app-window-edit-2': AppWindowEdit2,
+  'arrow-button-down-1': ArrowButtonDown1,
+  'arrow-button-right-1': ArrowButtonRight1,
+  'arrow-button-up-1': ArrowButtonUp1,
+  'arrow-left-1-1': ArrowLeft11,
+  'arrow-redo': ArrowRedo,
+  'arrow-right-1-1': ArrowRight11,
+  'arrow-undo': ArrowUndo,
+  attachment: Attachment,
+  'bin-1-1': Bin1,
+  'book-address-1-2': BookAddress12,
+  'book-address-2': BookAddress2,
+  'book-library-1': BookLibrary1,
+  'book-library-2': BookLibrary2,
   Brazil,
-  'building-2-1': building21,
-  'button-play-1': buttonPlay1,
-  'button-refresh-arrow-1': buttonRefreshArrow1,
-  'button-refresh-arrows-1': buttonRefreshArrows1,
-  'charger-1': charger1,
-  'chat-translate-1': chatTranslate1,
-  'check-2': check2,
-  'check-circle-1-1-1': checkCircle111,
-  'check-circle-1-1': checkCircle11,
-  'check-double': checkDouble,
-  'check-square-1': checkSquare1,
-  'check-square-2': checkSquare2,
-  'checkbox-default': checkboxDefault,
-  'checkbox-disable': checkboxDisable,
-  'checkbox-less': checkboxLess,
-  'checkbox-select': checkboxSelect,
-  'close-1': close1,
-  'cog-1': cog1,
-  'cog-2': cog2,
-  'common-file-empty-1': commonFileEmpty1,
-  'common-file-horizontal-image-1': commonFileHorizontalImage1,
-  'controls-pause-1': controlsPause1,
-  'controls-play-1': controlsPlay1,
-  'copy-paste-1': copyPaste1,
-  'currency-dollar-circle-1': currencyDollarCircle1,
-  'default-avatar': defaultAvatar,
-  'delete-1-1': delete11,
-  'delete-1': delete1,
-  'delete-2-1': delete21,
-  'developer-community-github-1-1': developerCommunityGithub11,
-  'diners-club': dinersClub,
-  discover,
-  'download-bottom-1': downloadBottom1,
-  'download-thick-bottom-1': downloadThickBottom1,
-  'email-action-unread-1': emailActionUnread1,
-  emoji,
-  'expand-8-1': expand81,
-  'expand-full-1': expandFull1,
-  'export-1': export1,
-  filter,
-  'fitness-biceps-1': fitnessBiceps1,
-  'flash-1-3': flash13,
-  'flash-1-4': flash14,
-  'floppy-disk-1': floppyDisk1,
-  'folder-1': folder1,
-  'folder-2': folder2,
-  'gauge-dashboard-1': gaugeDashboard1,
-  'gauge-dashboard-2': gaugeDashboard2,
-  'generic-card': genericCard,
-  'graph-stats-1': graphStats1,
-  'graph-stats-ascend-2': graphStatsAscend2,
-  'graph-stats-descend-2': graphStatsDescend2,
-  'graph-status-circle-1': graphStatsCircle1,
-  'graph-status-circle-1-1': graphStatsCircle11,
-  'headphones-customer-support-1': headphonesCustomerSupport1,
-  'headphones-customer-support-2': headphonesCustomerSupport2,
-  'headphones-customer-support-human-1-1': headphonesCustomerSupportHuman11,
-  'hierarchy-3-2': hierarchy32,
-  'hierarchy-3-3': hierarchy33,
-  'house-1-1': house11,
-  'house-2-2': house22,
-  indicator,
-  'information-circle-4': informationCircle4,
-  jcb,
-  'keyboard-arrow-down-1': keyboardArrowDown1,
-  'keyboard-arrow-left-1': keyboardArrowLeft1,
-  'keyboard-arrow-right-1': keyboardArrowRight1,
-  'layout-dashboard-1': layoutDashboard1,
-  'layout-dashboard-2': layoutDashboard2,
-  'loading-circle-1': loadingCircle1,
-  'lock-2-1': lock21,
-  'lock-2-2': lock22,
-  'lock-unlock-1-1': lockUnlock,
-  'logout-1-1': logout11,
-  mastercard,
-  'messages-bubble-1': messagesBubble1,
-  'messages-bubble-3': messagesBubble3,
-  'messages-bubble-4': messagesBubble4,
-  'messaging-we-chat-2': messagingWeChat2,
-  'messaging-we-chat-3': messagingWeChat3,
-  'messaging-whatsapp-1': messagingWhatsapp1,
-  microphone,
-  'navigation-menu-vertical-1': navigationMenuVertical1,
-  'notes-1': notes1,
-  'office-file-pdf-1-1': officeFilePdf11,
-  'paginate-filter-text-1': paginateFilterText1,
-  'pencil-write-1': pencilWrite1,
-  'phone-3': phone3,
-  'phone-4': phone4,
-  'phone-charger-1': phoneCharger1,
-  'photography-equipment-bag-1': photographyEquipmentBag1,
-  'pie-line-graph-1': pieLineGraph1,
-  preferences,
-  'question-circle-1': questionCircle1,
-  'question-circle-2': questionCircle2,
-  'radio-default': radioDefault,
-  'radio-disable': radioDisable,
-  'radio-selected': radioSelected,
-  'rating-star-1': ratingStar1,
-  'rating-star-1-1': ratingStar11,
-  'read-email-at-1': readEmailAt1,
-  'science-fiction-robot-1': scienceFictionRobot1,
-  'science-fiction-robot-2': scienceFictionRobot2,
-  'search-1': search1,
-  'send-email-3-1': sendEmail31,
-  'single-neutral-2': singleNeutral2,
-  'single-neutral-actions-1': singleNeutralActions1,
-  'social-media-google-1': socialMediaGoogle1,
-  'social-media-facebook-1': socialMediaFacebook1,
-  'social-instagram-1': socialInstagram1,
-  'sort-asc': sortAsc,
-  'sort-default': sortDefault,
-  'sort-desc': sortDesc,
+  'building-2-1': Building21,
+  'button-play-1': ButtonPlay1,
+  'button-refresh-arrow-1': ButtonRefreshArrow1,
+  'button-refresh-arrows-1': ButtonRefreshArrows1,
+  'charger-1': Charger1,
+  'chat-translate-1': ChatTranslate1,
+  'check-2': Check2,
+  'check-circle-1-1-1': CheckCircle111,
+  'check-circle-1-1': CheckCircle11,
+  'check-double': CheckDouble,
+  'check-square-1': CheckSquare1,
+  'check-square-2': CheckSquare2,
+  'checkbox-default': CheckboxDefault,
+  'checkbox-disable': CheckboxDisable,
+  'checkbox-less': CheckboxLess,
+  'checkbox-select': CheckboxSelect,
+  'close-1': Close1,
+  'cog-1': Cog1,
+  'cog-2': Cog2,
+  'common-file-empty-1': CommonFileEmpty1,
+  'common-file-horizontal-image-1': CommonFileHorizontalImage1,
+  'controls-pause-1': ControlsPause1,
+  'controls-play-1': ControlsPlay1,
+  'copy-paste-1': CopyPaste1,
+  'currency-dollar-circle-1': CurrencyDollarCircle1,
+  'default-avatar': DefaultAvatar,
+  'delete-1-1': Delete11,
+  'delete-1': Delete1,
+  'delete-2-1': Delete21,
+  'developer-community-github-1-1': DeveloperCommunityGithub11,
+  'diners-club': DinersClub,
+  discover: Discover,
+  'download-bottom-1': DownloadBottom1,
+  'download-thick-bottom-1': DownloadThickBottom1,
+  'email-action-unread-1': EmailActionUnread1,
+  emoji: Emoji,
+  'expand-8-1': Expand81,
+  'expand-full-1': ExpandFull1,
+  'export-1': Export1,
+  filter: Filter,
+  'fitness-biceps-1': FitnessBiceps1,
+  'flash-1-3': Flash13,
+  'flash-1-4': Flash14,
+  'floppy-disk-1': FloppyDisk1,
+  'folder-1': Folder1,
+  'folder-2': Folder2,
+  'gauge-dashboard-1': GaugeDashboard1,
+  'gauge-dashboard-2': GaugeDashboard2,
+  'generic-card': GenericCard,
+  'graph-stats-1': GraphStats1,
+  'graph-stats-ascend-2': GraphStatsAscend2,
+  'graph-stats-descend-2': GraphStatsDescend2,
+  'graph-status-circle-1': GraphStatsCircle1,
+  'graph-status-circle-1-1': GraphStatsCircle11,
+  'headphones-customer-support-1': HeadphonesCustomerSupport1,
+  'headphones-customer-support-2': HeadphonesCustomerSupport2,
+  'headphones-customer-support-human-1-1': HeadphonesCustomerSupportHuman11,
+  'hierarchy-3-2': Hierarchy32,
+  'hierarchy-3-3': Hierarchy33,
+  'house-1-1': House11,
+  'house-2-2': House22,
+  indicator: Indicator,
+  'information-circle-4': InformationCircle4,
+  jcb: Jcb,
+  'keyboard-arrow-down-1': KeyboardArrowDown1,
+  'keyboard-arrow-left-1': KeyboardArrowLeft1,
+  'keyboard-arrow-right-1': KeyboardArrowRight1,
+  'layout-dashboard-1': LayoutDashboard1,
+  'layout-dashboard-2': LayoutDashboard2,
+  'loading-circle-1': LoadingCircle1,
+  'lock-2-1': Lock21,
+  'lock-2-2': Lock22,
+  'lock-unlock-1-1': LockUnlock,
+  'logout-1-1': Logout11,
+  mastercard: Mastercard,
+  'messages-bubble-1': MessagesBubble1,
+  'messages-bubble-3': MessagesBubble3,
+  'messages-bubble-4': MessagesBubble4,
+  'messaging-we-chat-2': MessagingWeChat2,
+  'messaging-we-chat-3': MessagingWeChat3,
+  'messaging-whatsapp-1': MessagingWhatsapp1,
+  microphone: Microphone,
+  'navigation-menu-vertical-1': NavigationMenuVertical1,
+  'notes-1': Notes1,
+  'office-file-pdf-1-1': OfficeFilePdf11,
+  'paginate-filter-text-1': PaginateFilterText1,
+  'pencil-write-1': PencilWrite1,
+  'phone-3': Phone3,
+  'phone-4': Phone4,
+  'phone-charger-1': PhoneCharger1,
+  'photography-equipment-bag-1': PhotographyEquipmentBag1,
+  'pie-line-graph-1': PieLineGraph1,
+  preferences: Preferences,
+  'question-circle-1': QuestionCircle1,
+  'question-circle-2': QuestionCircle2,
+  'radio-default': RadioDefault,
+  'radio-disable': RadioDisable,
+  'radio-selected': RadioSelected,
+  'rating-star-1': RatingStar1,
+  'rating-star-1-1': RatingStar11,
+  'read-email-at-1': ReadEmailAt1,
+  'science-fiction-robot-1': ScienceFictionRobot1,
+  'science-fiction-robot-2': ScienceFictionRobot2,
+  'search-1': Search1,
+  'send-email-3-1': SendEmail31,
+  'single-neutral-2': SingleNeutral2,
+  'single-neutral-actions-1': SingleNeutralActions1,
+  'social-media-google-1': SocialMediaGoogle1,
+  'social-media-facebook-1': SocialMediaFacebook1,
+  'social-instagram-1': SocialInstagram1,
+  'sort-asc': SortAsc,
+  'sort-default': SortDefault,
+  'sort-desc': SortDesc,
   Spain,
-  'study-light-idea-1': studyLightIdea1,
-  'subtract-1': subtract1,
-  'subtract-circle-1': subtractCircle1,
-  'switch-default-disabled': switchDefaultDisabled,
-  'switch-default': switchDefault,
-  'switch-selected-disabled': switchSelectedDisabled,
-  'switch-selected': switchSelected,
-  'synchronize-arrow-clock-4': synchronizeArrowClock4,
-  'synchronize-arrow-clock-5': synchronizeArrowClock5,
-  'task-checklist-1': taskChecklist1,
-  'task-list-clock-1': taskListClock1,
-  'text-bold': textBold,
-  'text-center': textCenter,
-  'text-italic': textItalic,
-  'text-justified': textJustified,
-  'text-left': textLeft,
-  'text-right': textRight,
-  'text-underline': textUnderline,
-  'time-clock-circle-1': timeClockCircle1,
-  'typing-1': typing1,
-  'translate-1': translate1,
-  'translate-2': translate2,
-  unionpay,
-  'unordered-list': unorderedList,
-  'upload-bottom-1': uploadBottom1,
+  'study-light-idea-1': StudyLightIdea1,
+  'subtract-1': Subtract1,
+  'subtract-circle-1': SubtractCircle1,
+  'switch-default-disabled': SwitchDefaultDisabled,
+  'switch-default': SwitchDefault,
+  'switch-selected-disabled': SwitchSelectedDisabled,
+  'switch-selected': SwitchSelected,
+  'synchronize-arrow-clock-4': SynchronizeArrowClock4,
+  'synchronize-arrow-clock-5': SynchronizeArrowClock5,
+  'task-checklist-1': TaskChecklist1,
+  'task-list-clock-1': TaskListClock1,
+  'text-bold': TextBold,
+  'text-center': TextCenter,
+  'text-italic': TextItalic,
+  'text-justified': TextJustified,
+  'text-left': TextLeft,
+  'text-right': TextRight,
+  'text-underline': TextUnderline,
+  'time-clock-circle-1': TimeClockCircle1,
+  'typing-1': Typing1,
+  'translate-1': Translate1,
+  'translate-2': Translate2,
+  unionpay: Unionpay,
+  'unordered-list': UnorderedList,
+  'upload-bottom-1': UploadBottom1,
   USA,
-  'video-file-mp4-1': videoFileMp41,
-  'view-1-1': view11,
-  'view-off-1': viewOff1,
-  'vip-crown-queen-2': vipCrownQueen2,
-  visa,
-  'interaction-time': interactionTime,
-  'response-time': responseTime,
-  messages,
-  'transfer-message': transferMessage,
-};
+  'video-file-mp4-1': VideoFileMp41,
+  'view-1-1': View11,
+  'view-off-1': ViewOff1,
+  'vip-crown-queen-2': VipCrownQueen2,
+  visa: Visa,
+  'interaction-time': InteractionTime,
+  'response-time': ResponseTime,
+  messages: Messages,
+  'transfer-message': TransferMessage
+}
