@@ -7,10 +7,9 @@
       `unnnic-button--size-${size}`,
       `unnnic-button--${type}`,
       `unnnic-button-scheme--${buttonScheme}`,
-      iconCenter ? `unnnic-button--icon-on-center` : null
+      iconCenter ? `unnnic-button--icon-on-center` : null,
     ]"
-    v-on="$listeners">
-
+  >
     <unnnic-icon-svg
       v-if="loading"
       icon="loading-circle-1"
@@ -147,22 +146,20 @@ export default {
 }
 
 @keyframes rotation {
-  0% {}
+  0% {
+  }
 
   100% {
     transform: rotate(360deg);
   }
 }
-
 </style>
 
 <style lang="scss">
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
-$scheme-colors:
-  "feedback-red" $unnnic-color-feedback-red,
-  "feedback-green" $unnnic-color-feedback-green,
-  "feedback-yellow" $unnnic-color-feedback-yellow;
+$scheme-colors: 'feedback-red' $unnnic-color-feedback-red,
+  'feedback-green' $unnnic-color-feedback-green, 'feedback-yellow' $unnnic-color-feedback-yellow;
 
 .unnnic-button {
   display: inline-flex;
@@ -282,11 +279,10 @@ $scheme-colors:
     }
   }
 }
-
 </style>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-button--icon-on-center {
   min-width: auto;

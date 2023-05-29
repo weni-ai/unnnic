@@ -1,52 +1,52 @@
 .unnnic-grid-xs {
-    display: grid;
-    grid-gap: 16px;
-    grid-template-columns: repeat(auto-fill, calc((1/4)*100% - (16px * 3/4)));
-    padding: 0 16px;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fill, calc((1 / 4) * 100% - (16px * 3 / 4)));
+  padding: 0 16px;
 }
 
 .unnnic-grid-sm {
-    display: grid;
-    grid-gap: 16px;
-    grid-template-columns: repeat(auto-fill, calc((1/4)*100% - (16px * 3/4)));
-    padding: 0 16px;
-    box-sizing: border-box;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fill, calc((1 / 4) * 100% - (16px * 3 / 4)));
+  padding: 0 16px;
+  box-sizing: border-box;
 }
 
 .unnnic-grid-md {
-    display: grid;
-    grid-gap: 16px;
-    grid-template-columns: repeat(auto-fill, calc((1/6)*100% - (16px * 5/6)));
-    padding: 0 48px;
-    box-sizing: border-box;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fill, calc((1 / 6) * 100% - (16px * 5 / 6)));
+  padding: 0 48px;
+  box-sizing: border-box;
 }
 
 .unnnic-grid-lg {
-    display: grid;
-    grid-gap: 16px;
-    grid-template-columns: repeat(auto-fill, calc((1/12)*100% - (16px * 11/12)));
-    padding: 0 64px;
-    box-sizing: border-box;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fill, calc((1 / 12) * 100% - (16px * 11 / 12)));
+  padding: 0 64px;
+  box-sizing: border-box;
 }
 
 .unnnic-grid-xl {
-    display: grid;
-    grid-gap: 16px;
-    grid-template-columns: repeat(auto-fill, calc((1/12)*100% - (16px * 11/12)));
-    padding: 0 176px;
-    box-sizing: border-box;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fill, calc((1 / 12) * 100% - (16px * 11 / 12)));
+  padding: 0 176px;
+  box-sizing: border-box;
 }
 
 .unnnic-grid-giant {
-    display: grid;
-    grid-gap: 16px;
-    grid-template-columns: repeat(auto-fill, calc((1/12)*100% - (16px * 11/12)));
-    padding: 0 24px;
-    box-sizing: border-box;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fill, calc((1 / 12) * 100% - (16px * 11 / 12)));
+  padding: 0 24px;
+  box-sizing: border-box;
 }
 
 @for $i from 1 to 13 {
-    .unnnic-grid-span-#{$i} {
-        grid-column: span #{$i};
-    }
+  .unnnic-grid-span-#{$i} {
+    grid-column: span #{$i};
+  }
 }

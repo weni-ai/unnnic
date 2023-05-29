@@ -1,11 +1,14 @@
-import { addDecorator } from '@storybook/vue';
-import i18n from '../src/utils/plugins/i18n';
+/** @type { import('@storybook/vue3').Preview } */
+const preview = {
+  parameters: {
+    actions: { argTypesRegex: '^on[A-Z].*' },
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/
+      }
+    }
+  }
+}
 
-addDecorator(() => ({
-  i18n,
-  template: '<story/>',
-}));
-
-export const parameters = {
-  actions: { argTypesRegex: '^on[A-Z].*' },
-};
+export default preview

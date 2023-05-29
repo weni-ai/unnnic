@@ -25,10 +25,10 @@ $unnnic-border-width-thin: 0.125rem;
 $unnnic-border-width-thick: 0.25rem;
 
 // Shadow levels
-$unnnic-shadow-level-near: 0rem 0.25rem 8px rgba(0, 0, 0, .12);
-$unnnic-shadow-level-separated: 0px 8px 16px rgba(0, 0, 0, .08);
-$unnnic-shadow-level-far: 0px 12px 32px rgba(0, 0, 0, .04);
-$unnnic-shadow-level-distant: 0px 20px 40px rgba(0, 0, 0, .06);
+$unnnic-shadow-level-near: 0rem 0.25rem 8px rgba(0, 0, 0, 0.12);
+$unnnic-shadow-level-separated: 0px 8px 16px rgba(0, 0, 0, 0.08);
+$unnnic-shadow-level-far: 0px 12px 32px rgba(0, 0, 0, 0.04);
+$unnnic-shadow-level-distant: 0px 20px 40px rgba(0, 0, 0, 0.06);
 
 // Opacity levels
 $unnnic-opacity-level-darkest: 0.8;

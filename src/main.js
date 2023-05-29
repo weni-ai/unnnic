@@ -1,13 +1,6 @@
-import Vue from 'vue';
-import vClickOutside from 'v-click-outside';
-import i18n from './utils/plugins/i18n';
-import App from './App.vue';
+import './assets/main.css'
 
-Vue.config.productionTip = false;
+import { createApp } from 'vue'
+import App from './App.vue'
 
-Vue.use(vClickOutside);
-
-new Vue({
-  i18n,
-  render: (h) => h(App),
-}).$mount('#app');
+createApp(App).mount('#app')

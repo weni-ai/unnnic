@@ -1,20 +1,10 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
+    node: true
   },
-  extends: ['plugin:vue/essential', '@vue/airbnb', 'plugin:storybook/recommended'],
+  extends: ['plugin:vue/vue3-essential', 'eslint:recommended', '@vue/eslint-config-prettier/skip-formatting', 'plugin:storybook/recommended'],
   parserOptions: {
-    parser: 'babel-eslint',
-  },
-  rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-  },
-  overrides: [{
-    files: ['**/__tests__/*.{j,t}s?(x)', '**/tests/unit/**/*.spec.{j,t}s?(x)'],
-    env: {
-      jest: true,
-    },
-  }],
+    ecmaVersion: 'latest'
+  }
 };
