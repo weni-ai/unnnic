@@ -3,32 +3,15 @@ import unnnicChartRainbow from '../components/ChartRainbow/ChartRainbow.vue';
 export default {
   title: 'charts/ChartRainbow',
   component: unnnicChartRainbow,
-  argTypes: {},
+  argTypes: {
+    value: { control: { type: 'number', min: 0, max: 100, step: 0.1 } },
+    description: { control: 'text' },
+  },
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-
-  components: {
-    unnnicChartRainbow,
+export const Default = {
+  args: {
+    value: 50,
+    description: 'Description',
   },
-
-  data() {
-    return {};
-  },
-
-  template: `
-    <div>
-      <unnnic-chart-rainbow v-bind="$props" />
-    </div>
-  `,
-
-  methods: {},
-});
-
-export const Default = Template.bind({});
-
-Default.args = {
-  value: 50,
-  description: 'Description',
 };
