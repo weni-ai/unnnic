@@ -70,6 +70,8 @@
 </template>
 
 <script>
+import mime from 'mime-types';
+
 import UnnnicIconSvg from '../Icon.vue';
 import UnnnicImportCard from '../ImportCard/ImportCard.vue';
 
@@ -198,15 +200,17 @@ export default {
       return true;
     },
     validFormat(files) {
-      const formats = this.supportedFormats.replaceAll('.', '').split(',');
+      const formats = this.supportedFormats.split(',').map((format) => format.trim());
 
       const isValid = Array.from(files).find((file) => {
-        // eslint-disable-next-line arrow-body-style
-        const validFormat = formats.find((format) => {
-          return file.type.toLowerCase().includes(format.toLowerCase());
-        });
+        const fileName = file.name.toLowerCase();
+        const fileType = file.type.toLowerCase();
+        const fileExtension = `.${fileName.split('.').pop()}`;
 
-        return validFormat;
+        const isValidFileExtension = formats.includes(fileExtension);
+        const isValidFileType = fileType === mime.lookup(fileName);
+
+        return isValidFileExtension && isValidFileType;
       });
 
       return isValid;
