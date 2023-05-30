@@ -163,9 +163,11 @@ export default {
         return;
       }
 
+      const loweredInput = this.inputValue.toLowerCase();
+
       const index = this.items
         .map((item) => ({ ...item, text: this.getText(item).toLowerCase() }))
-        .findIndex((item) => this.getText(item).includes(this.inputValue.toLowerCase()));
+        .findIndex((item) => this.getText(item).toLowerCase().includes(loweredInput));
 
       if (index === -1) {
         return;
