@@ -125,6 +125,10 @@ export default {
       type: String,
       default: '',
     },
+    getTextFunc: {
+      type: Function,
+      default: null,
+    },
   },
 
   data() {
@@ -185,6 +189,9 @@ export default {
 
   methods: {
     getText(item) {
+      if (this.getTextFunc) {
+        return this.getTextFunc(item);
+      }
       return item[this.textKey];
     },
     getValue(item) {
