@@ -175,6 +175,7 @@ import interactionTime from '!!svg-inline-loader!../assets/icons/interaction-tim
 import responseTime from '!!svg-inline-loader!../assets/icons/response-time.svg';
 import messages from '!!svg-inline-loader!../assets/icons/messages.svg';
 import transferMessage from '!!svg-inline-loader!../assets/icons/transfer-message.svg';
+import bookmarkTag1 from '!!svg-inline-loader!../assets/icons/bookmark-tag-1.svg';
 
 export default {
   'add-1': add1,
@@ -352,4 +353,5 @@ export default {
   'response-time': responseTime,
   messages,
   'transfer-message': transferMessage,
+  'bookmark-tag-1': bookmarkTag1,
 };
