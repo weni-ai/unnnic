@@ -43,7 +43,7 @@
         </div>
 
         <div :class="['content', { 'with-validation': validate }]">
-          <div class="icon">
+          <div v-if="icon" class="icon">
             <unnnic-icon
               :icon="icon"
               :scheme="scheme"
