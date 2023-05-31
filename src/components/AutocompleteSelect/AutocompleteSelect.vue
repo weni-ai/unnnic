@@ -129,6 +129,10 @@ export default {
       type: Function,
       default: null,
     },
+    clearOnCreate: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   data() {
@@ -241,6 +245,9 @@ export default {
 
         if (this.closeOnSelect) {
           this.isMenuOpen = false;
+        }
+
+        if (this.clearOnCreate) {
           this.inputValue = '';
         }
       }
