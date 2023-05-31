@@ -29,7 +29,23 @@ export default {
   argTypes: {
     icon: { control: { type: 'select', options: iconsOptions } },
     scheme: { control: { type: 'select', options: schemes } },
-    size: { control: { type: 'select', options: ['nano', 'xs', 'sm', 'md', 'lg'] } },
+    size: {
+      control: {
+        type: 'select',
+        options: [
+          'nano',
+          'xs',
+          'sm',
+          'md',
+          'lg',
+          'avatar-lg',
+          'avatar-md',
+          'avatar-sm',
+          'avatar-xs',
+          'avatar-nano',
+        ],
+      },
+    },
   },
 };
 
