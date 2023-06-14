@@ -23,7 +23,7 @@
         v-if="canImport"
         class="unnnic-import-card__buttons__import"
         size="small"
-        :icon-center="`upload-bottom-1`"
+        :icon-center="uploadIcon"
         type="primary"
         @click="importFile"
       >
@@ -84,6 +84,10 @@ export default {
     acceptedFormats: {
       type: String,
       default: '*',
+    },
+    uploadIcon: {
+      type: String,
+      default: 'upload-bottom-1',
     },
   },
   methods: {
