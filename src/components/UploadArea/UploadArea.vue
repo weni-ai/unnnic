@@ -62,6 +62,7 @@
         :canImport="canImport"
         :canDelete="canDelete"
         :acceptedFormats="supportedFormats"
+        uploadIcon="button-refresh-arrows-1"
         @delete="removeFile(index)"
         @modifiedFile="modifyFile(index, $event)"
       />
