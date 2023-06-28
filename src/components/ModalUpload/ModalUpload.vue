@@ -24,6 +24,7 @@
       :can-delete="canDelete"
       :max-file-size="maxFileSize"
       :files="files"
+      :subtitle="subtitle"
       @fileChange="$emit('file-change', $event)"
     />
 
@@ -121,6 +122,11 @@ export default {
     files: {
       type: Array,
       default: () => [],
+    },
+    subtitle: {
+      required: false,
+      type: String,
+      default: '',
     },
   },
 

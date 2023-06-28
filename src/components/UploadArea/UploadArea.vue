@@ -37,9 +37,14 @@
             'unnnic-upload-area__dropzone__content__subtitle',
             { 'unnnic-upload-area__dropzone__content__subtitle__error': hasError },
           ]"
+          :title='formattedSupportedFormats'
         >
-          {{ $t(`upload_area${hasError ? '.invalid' : ''}.subtitle`) }}
-          {{ formattedSupportedFormats }}
+          {{
+            subtitle ||
+            `${$t(
+              `upload_area${hasError ? '.invalid' : ''}.subtitle`
+            )} ${formattedSupportedFormats}`
+          }}
         </span>
       </div>
       <input
@@ -122,6 +127,11 @@ export default {
     shouldReplace: {
       type: Boolean,
       default: false,
+    },
+    subtitle: {
+      required: false,
+      type: String,
+      default: '',
     },
   },
   model: {
