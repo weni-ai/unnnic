@@ -37,9 +37,14 @@
             'unnnic-upload-area__dropzone__content__subtitle',
             { 'unnnic-upload-area__dropzone__content__subtitle__error': hasError },
           ]"
+          :title='formattedSupportedFormats'
         >
-          {{ $t(`upload_area${hasError ? '.invalid' : ''}.subtitle`) }}
-          {{ formattedSupportedFormats }}
+          {{
+            subtitle ||
+            `${$t(
+              `upload_area${hasError ? '.invalid' : ''}.subtitle`
+            )} ${formattedSupportedFormats}`
+          }}
         </span>
       </div>
       <input
@@ -62,6 +67,7 @@
         :canImport="canImport"
         :canDelete="canDelete"
         :acceptedFormats="supportedFormats"
+        uploadIcon="button-refresh-arrows-1"
         @delete="removeFile(index)"
         @modifiedFile="modifyFile(index, $event)"
       />
@@ -70,6 +76,8 @@
 </template>
 
 <script>
+import mime from 'mime-types';
+
 import UnnnicIconSvg from '../Icon.vue';
 import UnnnicImportCard from '../ImportCard/ImportCard.vue';
 
@@ -119,6 +127,11 @@ export default {
     shouldReplace: {
       type: Boolean,
       default: false,
+    },
+    subtitle: {
+      required: false,
+      type: String,
+      default: '',
     },
   },
   model: {
@@ -198,15 +211,17 @@ export default {
       return true;
     },
     validFormat(files) {
-      const formats = this.supportedFormats.replaceAll('.', '').split(',');
+      const formats = this.supportedFormats.split(',').map((format) => format.trim());
 
       const isValid = Array.from(files).find((file) => {
-        // eslint-disable-next-line arrow-body-style
-        const validFormat = formats.find((format) => {
-          return file.type.toLowerCase().includes(format.toLowerCase());
-        });
+        const fileName = file.name.toLowerCase();
+        const fileType = file.type.toLowerCase();
+        const fileExtension = `.${fileName.split('.').pop()}`;
 
-        return validFormat;
+        const isValidFileExtension = formats.includes(fileExtension);
+        const isValidFileType = fileType === mime.lookup(fileName);
+
+        return isValidFileExtension && isValidFileType;
       });
 
       return isValid;
