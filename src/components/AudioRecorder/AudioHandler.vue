@@ -69,7 +69,7 @@ export default {
   gap: $unnnic-spacing-stack-xs;
 
   &__progress-bar {
-    width: 11.5rem;
+    width: 11.5 * $unnnic-font-size;
     height: 2px;
     border-radius: $unnnic-border-radius-sm;
     background: $unnnic-color-neutral-clean;

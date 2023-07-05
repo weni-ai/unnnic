@@ -190,7 +190,7 @@ $transition-time: 0.4s;
 
 .unnnic-sidebar-primary {
   position: relative;
-  width: 5.5rem;
+  width: 5.5 * $unnnic-font-size;
   background-color: $unnnic-color-background-sky;
   padding: $unnnic-spacing-inset-md;
   box-sizing: border-box;
@@ -200,16 +200,16 @@ $transition-time: 0.4s;
   flex-direction: column;
 
   .hover {
-    width: 16.875rem;
+    width: 16.875 * $unnnic-font-size;
     z-index: 2;
     position: absolute;
     top: 0;
     pointer-events: none;
     left: 100%;
-    margin-left: -2rem;
+    margin-left: -2 * $unnnic-font-size;
     opacity: 0;
     transition: opacity 10ms;
-    margin-top: -9.375rem;
+    margin-top: -9.375 * $unnnic-font-size;
 
     &:hover {
       pointer-events: all;
@@ -227,7 +227,7 @@ $transition-time: 0.4s;
   }
 
   &-expanded .hover {
-    margin-left: -2.625rem;
+    margin-left: -2.625 * $unnnic-font-size;
   }
 
   &-content {
@@ -303,7 +303,7 @@ $transition-time: 0.4s;
       border-radius: $unnnic-border-radius-sm;
       padding: $unnnic-spacing-inset-nano;
 
-      height: 2.375rem;
+      height: 2.375 * $unnnic-font-size;
       box-sizing: border-box;
 
       display: flex;
@@ -360,7 +360,7 @@ $transition-time: 0.4s;
   }
 
   &-expanded {
-    width: 15.375rem;
+    width: 15.375 * $unnnic-font-size;
 
     .category {
       &-label {

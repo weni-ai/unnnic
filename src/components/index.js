@@ -1,4 +1,6 @@
 import Vue from 'vue';
+import { unnnicFontSize as fontSize } from './config';
+import formElement from './FormElement/FormElement.vue';
 import input from './Input/Input.vue';
 import inputNext from './InputNext/InputNext.vue';
 import inputDatePicker from './InputDatePicker/InputDatePicker.vue';
@@ -69,6 +71,7 @@ import circleProgressBar from './CircleProgressBar/CircleProgressBar.vue';
 import progressBar from './ProgressBar/ProgressBar.vue';
 
 const components = {
+  unnnicFormElement: formElement,
   unnnicInput: input,
   unnnicInputNext: inputNext,
   unnnicInputDatePicker: inputDatePicker,
@@ -143,6 +146,8 @@ Object.keys(components).forEach((name) => {
   Vue.component(name, components[name]);
 });
 
+export const unnnicFontSize = fontSize;
+export const unnnicFormElement = formElement;
 export const unnnicInput = input;
 export const unnnicInputNext = inputNext;
 export const unnnicInputDatePicker = inputDatePicker;

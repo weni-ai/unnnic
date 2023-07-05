@@ -85,12 +85,12 @@ export default {
       &__position {
           &-top-left {
             bottom: 100%;
-            right: 1rem;
+            right: 1 * $unnnic-font-size;
             margin-bottom: $unnnic-spacing-stack-xs;
           }
           &-top-right {
             bottom: 100%;
-            left: 1rem;
+            left: 1 * $unnnic-font-size;
             margin-bottom: $unnnic-inline-xs;
           }
           &-bottom-left {
@@ -101,7 +101,7 @@ export default {
           &-bottom-right {
             margin-top: $unnnic-inline-xs;
             top: 100%;
-            left: 1rem;
+            left: 1 * $unnnic-font-size;
           }
       }
     }

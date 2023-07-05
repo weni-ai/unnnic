@@ -117,14 +117,14 @@ export default {
     align-items: center;
 
     &-background {
-      width: 31.125rem;
+      width: 31.125 * $unnnic-font-size;
       box-shadow: $unnnic-shadow-level-separated;
       transition: all 0.3s ease;
       border-radius: $unnnic-border-radius-sm;
       overflow: hidden;
 
       &-body {
-        min-height: 13.75rem;
+        min-height: 13.75 * $unnnic-font-size;
         background-color: $unnnic-color-background-carpet;
         padding: 0 $unnnic-inline-md;
         text-align: center;
@@ -172,7 +172,7 @@ export default {
 
       &-report {
         width: 100%;
-        min-height: 4.25rem;
+        min-height: 4.25 * $unnnic-font-size;
         background-color: $unnnic-color-neutral-soft;
         display: flex;
         justify-content: center;

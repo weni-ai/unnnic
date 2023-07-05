@@ -80,7 +80,7 @@ export default {
   border-radius: $unnnic-border-radius-md;
   border: $unnnic-border-width-thin solid $unnnic-color-neutral-cleanest;
   width: min-content;
-  min-width: 13.75rem;
+  min-width: 13.75 * $unnnic-font-size;
 
   .text-center {
     text-align: center;
@@ -103,7 +103,7 @@ export default {
     justify-content: center;
     background-color: $unnnic-color-background-sky;
     color: $unnnic-color-neutral-darkest;
-    border-radius: 0.3125rem 0.3125rem 0 0;
+    border-radius: 0.3125 * $unnnic-font-size 0.3125 * $unnnic-font-size 0 0;
   }
 
   main {
@@ -134,17 +134,17 @@ export default {
     .option {
       flex: 1;
       text-align: center;
-      min-width: 6.875rem;
+      min-width: 6.875 * $unnnic-font-size;
       padding: $unnnic-spacing-inset-xs;
       box-sizing: border-box;
       position: relative;
 
       &:first-child {
-        border-radius: 0 0 0 0.3125rem;
+        border-radius: 0 0 0 0.3125 * $unnnic-font-size;
       }
 
       &:last-child {
-        border-radius: 0 0 0.3125rem 0;
+        border-radius: 0 0 0.3125 * $unnnic-font-size 0;
       }
 
       .ball {
@@ -165,7 +165,7 @@ export default {
           border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
 
           &.u.font {
-            line-height: 0.875rem;
+            line-height: 0.875 * $unnnic-font-size;
           }
         }
       }

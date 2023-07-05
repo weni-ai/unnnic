@@ -357,7 +357,7 @@ export default {
     border-radius: $unnnic-border-radius-sm;
 
     &__scroll-area {
-      max-height: 12.5rem;
+      max-height: 12.5 * $unnnic-font-size;
       overflow-y: auto;
       margin-right: $unnnic-spacing-inline-nano;
       margin-top: $unnnic-spacing-stack-xs;

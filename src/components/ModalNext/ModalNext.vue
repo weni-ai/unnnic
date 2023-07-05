@@ -43,7 +43,7 @@
         </div>
 
         <div :class="['content', { 'with-validation': validate }]">
-          <div class="icon">
+          <div v-if="icon" class="icon">
             <unnnic-icon
               :icon="icon"
               :scheme="scheme"
@@ -269,7 +269,7 @@ export default {
 
   &.type-video {
     .container {
-      max-width: 60rem;
+      max-width: 60 * $unnnic-font-size;
       margin: 0 auto;
       padding: 0 $unnnic-inline-md;
       // padding-top: $unnnic-spacing-stack-giant;
@@ -295,7 +295,7 @@ export default {
   }
 
   &.type-default .container {
-    max-width: 31.125rem;
+    max-width: 31.125 * $unnnic-font-size;
     margin: 0 auto;
     padding: 0 $unnnic-inline-md;
     padding-top: $unnnic-spacing-stack-sm;
@@ -345,7 +345,7 @@ export default {
   }
 
   &.confirm .container {
-    max-width: 31.125rem;
+    max-width: 31.125 * $unnnic-font-size;
     margin: 0 auto;
     padding: 0 $unnnic-spacing-stack-lg;
     padding-top: $unnnic-spacing-stack-giant;
@@ -357,7 +357,7 @@ export default {
   }
 
   &.type-alert .container {
-    max-width: 31.125rem;
+    max-width: 31.125 * $unnnic-font-size;
     margin: 0 auto;
 
     .header {

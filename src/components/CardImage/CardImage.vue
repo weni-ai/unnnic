@@ -123,7 +123,7 @@ export default {
   }
 
   .image {
-    height: 9.5rem;
+    height: 9.5 * $unnnic-font-size;
     object-fit: cover;
     user-select: none;
     border-radius: $unnnic-border-radius-sm;
@@ -132,7 +132,7 @@ export default {
   .details {
     display: grid;
     grid-gap: $unnnic-spacing-inline-xs $unnnic-spacing-stack-xs;
-    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(9 * $unnnic-font-size, 1fr));
 
     .data {
       display: flex;

@@ -95,20 +95,20 @@ export default {
 
   &-position {
     &--top-right {
-      top: 1rem;
-      right: 1rem;
+      top: 1 * $unnnic-font-size;
+      right: 1 * $unnnic-font-size;
     }
     &--top-left {
-      top: 1rem;
-      left: 1rem;
+      top: 1 * $unnnic-font-size;
+      left: 1 * $unnnic-font-size;
     }
     &--bottom-right {
-      bottom: 1rem;
-      right: 1rem;
+      bottom: 1 * $unnnic-font-size;
+      right: 1 * $unnnic-font-size;
     }
     &--bottom-left {
-      bottom: 1rem;
-      left: 1rem;
+      bottom: 1 * $unnnic-font-size;
+      left: 1 * $unnnic-font-size;
     }
   }
 

@@ -143,7 +143,7 @@ export default {
         margin-right: $unnnic-inline-awesome;
       }
       &__item {
-        margin-right: 2rem;
+        margin-right: 2 * $unnnic-font-size;
       }
     }
   }

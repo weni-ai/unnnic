@@ -161,10 +161,10 @@ export default {
 
 .unnnic-icon__size {
   &--md {
-    width: 3rem;
+    width: 3 * $unnnic-font-size;
   }
   &--sm {
-    width: 2rem;
+    width: 2 * $unnnic-font-size;
   }
 }
 </style>

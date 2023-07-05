@@ -123,7 +123,7 @@ export default {
 
   &__icon {
     border-radius: $unnnic-border-radius-sm;
-    padding: 0.125rem $unnnic-inline-nano;
+    padding: 0.125 * $unnnic-font-size $unnnic-inline-nano;
     margin-right: $unnnic-inline-xs;
     background-color: $unnnic-color-neutral-lightest;
 

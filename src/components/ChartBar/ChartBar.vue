@@ -183,7 +183,7 @@ export default {
   background-color: $unnnic-color-background-snow;
   border-radius: $unnnic-border-radius-md;
   padding: $unnnic-spacing-inset-md;
-  min-width: 15.5625rem;
+  min-width: 15.5625 * $unnnic-font-size;
   box-sizing: border-box;
   display: inline-flex;
   flex-direction: column;
@@ -251,7 +251,7 @@ export default {
   }
 
   .main {
-    height: 16rem;
+    height: 16 * $unnnic-font-size;
     display: flex;
     justify-content: center;
 
@@ -260,7 +260,7 @@ export default {
       column-gap: $unnnic-spacing-inline-lg;
 
       .group {
-        min-width: 4rem;
+        min-width: 4 * $unnnic-font-size;
         display: flex;
         flex-direction: column;
         row-gap: $unnnic-spacing-stack-sm;
@@ -273,7 +273,7 @@ export default {
           column-gap: $unnnic-spacing-inline-xs;
 
           .bar {
-            width: 1rem;
+            width: 1 * $unnnic-font-size;
             height: 100%;
             border-radius: $unnnic-border-radius-sm;
 

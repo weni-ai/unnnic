@@ -62,6 +62,7 @@
 import UnnnicAvatarIcon from '../AvatarIcon/AvatarIcon.vue';
 import UnnnicToolTip from '../ToolTip/ToolTip.vue';
 import UnnnicIcon from '../Icon.vue';
+import { unnnicFontSize } from '../config';
 
 export default {
   components: {
@@ -102,7 +103,7 @@ export default {
 
     minStatusWidth: {
       type: String,
-      default: '5.625rem',
+      default: 5.625 * unnnicFontSize,
     },
   },
 };
@@ -136,7 +137,7 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width: calc(100% - 5rem);
+      width: calc(100% - #{5 * $unnnic-font-size});
       margin-right: $unnnic-spacing-inline-xs;
 
       .name {
@@ -188,7 +189,7 @@ export default {
     display: grid;
     justify-content: space-between;
     gap: $unnnic-spacing-inline-xs;
-    grid-template-columns: repeat(auto-fit, minmax(5.625rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(5.625 * $unnnic-font-size, 1fr));
 
     .status {
       flex: 1;

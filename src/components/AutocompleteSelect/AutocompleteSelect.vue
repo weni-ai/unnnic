@@ -1,25 +1,44 @@
 <template>
-  <div class="unnnic-autocomplete-select" v-click-outside="() => isMenuOpen = false">
+  <div class="unnnic-autocomplete-select" v-click-outside="() => (isMenuOpen = false)">
     <unnnic-input
       v-model="inputValue"
-      size="md"
-      icon-left="search-1"
+      :size="size"
+      :icon-left="hasIconLeft ? iconLeft : null"
+      :icon-right="hasIconRight ? iconRight : null"
       :placeholder="placeholder"
       @focus="isMenuOpen = true"
       :disabled="disabled"
-    ></unnnic-input>
+      @input="openMenuAndEmitSearch"
+      @keyup.enter="emitTagCreate"
+    />
 
-    <div v-if="isMenuOpen && !disabled" class="options-container">
+    <div
+      v-if="isMenuOpen && !disabled && (items.length || (tag && inputValue))"
+      class="options-container"
+    >
       <div class="options">
         <unnnic-select-item
           v-for="(item, index) in items"
-          :key="item.value"
+          :key="`${getValue(item)}-${index}`"
           size="md"
           @click="toggle(item)"
-          :text-focused="value.some((itemSelected) => itemSelected.value === item.value)"
+          :text-focused="checkFocus(item)"
           :ref="`option-${index}`"
         >
-          {{ item.text }}
+          {{ getText(item) }}
+
+          <div v-if="descriptionKey" class="options__description">
+            {{ getDescription(item) }}
+          </div>
+        </unnnic-select-item>
+
+        <unnnic-select-item
+          v-if="tag && inputValue && !containInputInItems"
+          size="md"
+          @click="emitTagCreate"
+          :text-focused="false"
+        >
+          {{ `${tagCreateLabel} ${inputValue}` }}
         </unnnic-select-item>
       </div>
     </div>
@@ -41,18 +60,78 @@ export default {
     value: {
       type: Array,
     },
-
     items: {
       type: Array,
     },
-
     placeholder: {
       type: String,
       default: 'Buscar por',
     },
-
     disabled: {
       type: Boolean,
+    },
+    size: {
+      type: String,
+      default: 'md',
+      validator(value) {
+        return ['sm', 'md'].indexOf(value) !== -1;
+      },
+    },
+    textKey: {
+      type: String,
+      default: 'text',
+    },
+    valueKey: {
+      type: String,
+      default: 'value',
+    },
+    descriptionKey: {
+      type: String,
+      default: '',
+    },
+    closeOnSelect: {
+      type: Boolean,
+      default: false,
+    },
+    multi: {
+      type: Boolean,
+      default: true,
+    },
+    hasIconLeft: {
+      type: Boolean,
+      default: true,
+    },
+    iconLeft: {
+      type: String,
+      default: 'search-1',
+    },
+    hasIconRight: {
+      type: Boolean,
+      default: false,
+    },
+    iconRight: {
+      type: String,
+      default: 'keyboard-return-1',
+    },
+    showValue: {
+      type: Boolean,
+      default: false,
+    },
+    tag: {
+      type: Boolean,
+      default: false,
+    },
+    tagCreateLabel: {
+      type: String,
+      default: '',
+    },
+    getTextFunc: {
+      type: Function,
+      default: null,
+    },
+    clearOnCreate: {
+      type: Boolean,
+      default: true,
     },
   },
 
@@ -60,6 +139,7 @@ export default {
     return {
       isMenuOpen: false,
       inputValue: '',
+      isCreated: false,
     };
   },
 
@@ -67,9 +147,21 @@ export default {
     clickOutside: vClickOutside.directive,
   },
 
+  created() {
+    if (this.value && this.value.length) {
+      this.updateInputValue({ items: this.value });
+    }
+    this.isCreated = true;
+  },
+
   computed: {
     inputValueAndIsMenuOpen() {
       return [this.inputValue, this.isMenuOpen].join('-');
+    },
+    containInputInItems() {
+      return this.items.some(
+        (item) => this.getText(item).toLowerCase() === this.inputValue.toLowerCase(),
+      );
     },
   },
 
@@ -79,9 +171,11 @@ export default {
         return;
       }
 
+      const loweredInput = this.inputValue.toLowerCase();
+
       const index = this.items
-        .map((item) => ({ ...item, text: item.text.toLowerCase() }))
-        .findIndex((item) => item.text.includes(this.inputValue.toLowerCase()));
+        .map((item) => ({ ...item, text: this.getText(item).toLowerCase() }))
+        .findIndex((item) => this.getText(item).toLowerCase().includes(loweredInput));
 
       if (index === -1) {
         return;
@@ -98,13 +192,70 @@ export default {
   },
 
   methods: {
+    getText(item) {
+      if (this.getTextFunc) {
+        return this.getTextFunc(item);
+      }
+      return item[this.textKey];
+    },
+    getValue(item) {
+      return item[this.valueKey];
+    },
+    getDescription(item) {
+      return item[this.descriptionKey];
+    },
     toggle(item) {
-      const alreadySelected = this.value.some((itemSelected) => itemSelected.value === item.value);
-
-      if (alreadySelected) {
-        this.$emit('input', this.value.filter((itemSelected) => itemSelected.value !== item.value));
+      let finalValue = [item];
+      if (!this.multi) {
+        this.$emit('input', finalValue);
+        this.updateInputValue({ items: finalValue });
       } else {
-        this.$emit('input', this.value.concat(item));
+        const alreadySelected = this.value.some(
+          (itemSelected) => this.getValue(itemSelected) === this.getValue(item),
+        );
+
+        if (alreadySelected) {
+          finalValue = this.value.filter(
+            (itemSelected) => this.getValue(itemSelected) !== this.getValue(item),
+          );
+          this.$emit('input', finalValue);
+          this.updateInputValue({ items: finalValue });
+        } else {
+          finalValue = this.value.concat(item);
+          this.$emit('input', finalValue);
+          this.updateInputValue({ items: finalValue });
+        }
+      }
+
+      if (this.closeOnSelect) {
+        this.isMenuOpen = false;
+      }
+    },
+    checkFocus(itemSelected) {
+      return this.value.some((item) => this.getValue(item) === this.getValue(itemSelected));
+    },
+    updateInputValue({ items }) {
+      if (this.showValue && items && Array.isArray(items)) {
+        this.inputValue = items.map((item) => this.getText(item)).join(', ');
+      }
+    },
+    emitTagCreate() {
+      if (this.tag) {
+        this.$emit('tag-create', this.inputValue);
+
+        if (this.closeOnSelect) {
+          this.isMenuOpen = false;
+        }
+
+        if (this.clearOnCreate) {
+          this.inputValue = '';
+        }
+      }
+    },
+    openMenuAndEmitSearch(event) {
+      if (this.isCreated) {
+        this.isMenuOpen = true;
+        this.$emit('search', event);
       }
     },
   },
@@ -118,6 +269,7 @@ export default {
   position: relative;
 
   .options-container {
+    z-index: 1;
     background-color: $unnnic-color-background-snow;
     border-radius: $unnnic-border-radius-sm;
     box-shadow: $unnnic-shadow-level-near;
@@ -125,7 +277,7 @@ export default {
     padding-right: $unnnic-spacing-inline-nano;
     padding-bottom: $unnnic-spacing-stack-sm;
     margin-top: $unnnic-spacing-stack-nano;
-    max-height: 9rem;
+    max-height: 9 * $unnnic-font-size;
     width: 100%;
     box-sizing: border-box;
     display: flex;
@@ -153,6 +305,12 @@ export default {
         user-select: none;
         margin-top: 0;
         margin-bottom: 0;
+      }
+
+      &__description {
+        font-size: $unnnic-font-size-body-gt;
+        color: $unnnic-color-neutral-cloudy;
+        line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
       }
     }
   }

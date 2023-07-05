@@ -29,12 +29,7 @@
       </div>
     </div>
 
-    <div
-      ref="value-input"
-      class="value-input"
-      contenteditable="true"
-      @input="handleInput"
-    />
+    <div ref="value-input" class="value-input" contenteditable="true" @input="handleInput" />
   </div>
 </template>
 
@@ -172,11 +167,11 @@ export default {
   font-size: $unnnic-font-size-body-md;
   line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
   padding: $unnnic-squish-nano;
-  height: $unnnic-font-size-body-md + $unnnic-line-height-medium + 0.5rem * 2;
+  height: $unnnic-font-size-body-md + $unnnic-line-height-medium + 0.5 * $unnnic-font-size * 2;
   position: relative;
 
   &:before {
-    content: " ";
+    content: ' ';
     position: absolute;
     left: 0;
     right: 0;
@@ -230,6 +225,7 @@ export default {
     }
 
     &__range-input {
+      appearance: none;
       -webkit-appearance: none;
       width: 100%;
       margin: 0;

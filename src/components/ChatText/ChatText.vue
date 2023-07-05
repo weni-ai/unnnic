@@ -76,11 +76,11 @@ export default {
 .unnnic-chat-text {
   border-radius: $unnnic-border-radius-lg;
   background-color: $unnnic-color-background-snow;
-  max-width: 31.25rem;
+  max-width: 31.25 * $unnnic-font-size;
   padding: $unnnic-spacing-inset-md;
   box-sizing: border-box;
   border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
-  max-height: 15.625rem;
+  max-height: 15.625 * $unnnic-font-size;
   display: flex;
   flex-direction: column;
 
@@ -127,7 +127,7 @@ export default {
       position: absolute;
       background-image: linear-gradient(transparent, $unnnic-color-background-snow);
       width: 100%;
-      height: 5rem;
+      height: 5 * $unnnic-font-size;
       bottom: 0;
       left: 0;
       pointer-events: none;
@@ -137,7 +137,7 @@ export default {
   &.small {
     border-radius: $unnnic-border-radius-md;
     padding: $unnnic-spacing-inset-sm;
-    max-height: 7.1875rem;
+    max-height: 7.1875 * $unnnic-font-size;
 
     .header {
       margin-bottom: $unnnic-spacing-stack-xs;
@@ -148,7 +148,7 @@ export default {
       line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
 
       .scrollable-gradient {
-        height: 2rem;
+        height: 2 * $unnnic-font-size;
       }
     }
   }

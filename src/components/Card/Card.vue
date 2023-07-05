@@ -189,7 +189,7 @@ $scheme-colors:
         color: $color;
       }
       &--border {
-        border-left: 0.25rem solid $color;
+        border-left: 0.25 * $unnnic-font-size solid $color;
       }
     }
   }

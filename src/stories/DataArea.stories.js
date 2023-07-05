@@ -1,5 +1,6 @@
 import unnnicDataArea from '../components/DataArea/DataArea.vue';
 import unnnicButton from '../components/Button/Button.vue';
+import { unnnicFontSize } from '../components/config';
 
 export default {
   title: 'example/DataArea',
@@ -24,7 +25,7 @@ const Template = (args, { argTypes }) => ({
     return {
       slotStyle: {
         display: 'flex',
-        gap: '0.5rem',
+        gap: `${0.5 * unnnicFontSize}px`,
         color: 'red',
       },
       linkStyle: {

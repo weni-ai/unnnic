@@ -21,10 +21,10 @@
       <div
         :style="{
           position: 'absolute',
-          [position === 'bottom' ? 'top' : 'bottom']: '-0.125rem',
+          [position === 'bottom' ? 'top' : 'bottom']: -0.125 * unnnicFontSize + 'px',
           width: '100%',
-          padding: '0.0625rem',
-          left: '-0.0625rem',
+          padding: 0.0625 * unnnicFontSize + 'px',
+          left: -0.0625 * unnnicFontSize + 'px',
         }"
         class="all"
       >
@@ -78,6 +78,7 @@
 import vClickOutside from 'v-click-outside';
 import unnnicFlag from '../Flag.vue';
 import UnnnicIcon from '../Icon.vue';
+import { unnnicFontSize } from '../config';
 
 export default {
   name: 'LanguageSelect',
@@ -119,6 +120,7 @@ export default {
     return {
       open: false,
       val: this.value,
+      unnnicFontSize,
     };
   },
   watch: {
@@ -212,7 +214,7 @@ export default {
   .container.normal {
     border-radius: $unnnic-border-radius-pill;
     background-color: $unnnic-color-background-snow;
-    min-width: 9rem;
+    min-width: 9 * $unnnic-font-size;
     width: 100%;
     height: $unnnic-font-size-body-md + $unnnic-line-height-md + 2 * $unnnic-spacing-stack-xs;
     box-sizing: border-box;

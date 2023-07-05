@@ -1,31 +1,31 @@
 // Icon size
-$unnnic-icon-size-xl: 2.5rem;
-$unnnic-icon-size-lg: 2rem;
-$unnnic-icon-size-md: 1.5rem;
-$unnnic-icon-size-ant: 1.25rem;
-$unnnic-icon-size-sm: 1rem;
-$unnnic-icon-size-xs: 0.75rem;
+$unnnic-icon-size-xl: 2.5 * $unnnic-font-size;
+$unnnic-icon-size-lg: 2 * $unnnic-font-size;
+$unnnic-icon-size-md: 1.5 * $unnnic-font-size;
+$unnnic-icon-size-ant: 1.25 * $unnnic-font-size;
+$unnnic-icon-size-sm: 1 * $unnnic-font-size;
+$unnnic-icon-size-xs: 0.75 * $unnnic-font-size;
 
 // Avatar size
-$unnnic-avatar-size-lg: 6.5rem;
-$unnnic-avatar-size-md: 4.5rem;
-$unnnic-avatar-size-sm: 2.5rem;
-$unnnic-avatar-size-xs: 2rem;
-$unnnic-avatar-size-nano: 1.25rem;
+$unnnic-avatar-size-lg: 6.5 * $unnnic-font-size;
+$unnnic-avatar-size-md: 4.5 * $unnnic-font-size;
+$unnnic-avatar-size-sm: 2.5 * $unnnic-font-size;
+$unnnic-avatar-size-xs: 2 * $unnnic-font-size;
+$unnnic-avatar-size-nano: 1.25 * $unnnic-font-size;
 
 // Border radius
-$unnnic-border-radius-sm: 0.25rem;
-$unnnic-border-radius-md: 0.5rem;
-$unnnic-border-radius-lg: 1rem;
-$unnnic-border-radius-pill: 37.5rem;
+$unnnic-border-radius-sm: 0.25 * $unnnic-font-size;
+$unnnic-border-radius-md: 0.5 * $unnnic-font-size;
+$unnnic-border-radius-lg: 1 * $unnnic-font-size;
+$unnnic-border-radius-pill: 37.5 * $unnnic-font-size;
 
 // Border width
-$unnnic-border-width-thinner: 0.0625rem;
-$unnnic-border-width-thin: 0.125rem;
-$unnnic-border-width-thick: 0.25rem;
+$unnnic-border-width-thinner: 0.0625 * $unnnic-font-size;
+$unnnic-border-width-thin: 0.125 * $unnnic-font-size;
+$unnnic-border-width-thick: 0.25 * $unnnic-font-size;
 
 // Shadow levels
-$unnnic-shadow-level-near: 0rem 0.25rem 8px rgba(0, 0, 0, .12);
+$unnnic-shadow-level-near: 0 * $unnnic-font-size 0.25 * $unnnic-font-size 8px rgba(0, 0, 0, .12);
 $unnnic-shadow-level-separated: 0px 8px 16px rgba(0, 0, 0, .08);
 $unnnic-shadow-level-far: 0px 12px 32px rgba(0, 0, 0, .04);
 $unnnic-shadow-level-distant: 0px 20px 40px rgba(0, 0, 0, .06);
@@ -40,11 +40,11 @@ $unnnic-opacity-level-light: 0.16;
 $unnnic-opacity-level-extra-light: 0.08;
 
 // Spacing
-$unnnic-inset-nano: 0.5rem;
-$unnnic-inset-xs: 0.75rem;
-$unnnic-inset-sm: 1rem;
-$unnnic-inset-md: 1.5rem;
-$unnnic-inset-lg: 2rem;
+$unnnic-inset-nano: 0.5 * $unnnic-font-size;
+$unnnic-inset-xs: 0.75 * $unnnic-font-size;
+$unnnic-inset-sm: 1 * $unnnic-font-size;
+$unnnic-inset-md: 1.5 * $unnnic-font-size;
+$unnnic-inset-lg: 2 * $unnnic-font-size;
 $unnnic-spacing-inset-nano: $unnnic-inset-nano;
 $unnnic-spacing-inset-xs: $unnnic-inset-xs;
 $unnnic-spacing-inset-sm: $unnnic-inset-sm;
@@ -52,23 +52,23 @@ $unnnic-spacing-inset-md: $unnnic-inset-md;
 $unnnic-spacing-inset-lg: $unnnic-inset-lg;
 
 // Squish
-$unnnic-squish-nano: 0.5rem 1rem;
-$unnnic-squish-xs: 0.75rem 1rem;
-$unnnic-squish-sm: 0.75rem 1.5rem;
-$unnnic-squish-md: 1rem 1.5rem;
-$unnnic-squish-lg: 1.5rem 2rem;
+$unnnic-squish-nano: 0.5 * $unnnic-font-size 1 * $unnnic-font-size;
+$unnnic-squish-xs: 0.75 * $unnnic-font-size 1 * $unnnic-font-size;
+$unnnic-squish-sm: 0.75 * $unnnic-font-size 1.5 * $unnnic-font-size;
+$unnnic-squish-md: 1 * $unnnic-font-size 1.5 * $unnnic-font-size;
+$unnnic-squish-lg: 1.5 * $unnnic-font-size 2 * $unnnic-font-size;
 
 // Inline
-$unnnic-inline-nano: 0.25rem;
-$unnnic-inline-xs: 0.5rem;
-$unnnic-inline-ant: 0.75rem;
-$unnnic-inline-sm: 1rem;
-$unnnic-inline-md: 1.5rem;
-$unnnic-inline-lg: 2rem;
-$unnnic-inline-xl: 2.5rem;
-$unnnic-inline-giant: 3rem;
-$unnnic-inline-xgiant: 4rem;
-$unnnic-inline-awesome: 5rem;
+$unnnic-inline-nano: 0.25 * $unnnic-font-size;
+$unnnic-inline-xs: 0.5 * $unnnic-font-size;
+$unnnic-inline-ant: 0.75 * $unnnic-font-size;
+$unnnic-inline-sm: 1 * $unnnic-font-size;
+$unnnic-inline-md: 1.5 * $unnnic-font-size;
+$unnnic-inline-lg: 2 * $unnnic-font-size;
+$unnnic-inline-xl: 2.5 * $unnnic-font-size;
+$unnnic-inline-giant: 3 * $unnnic-font-size;
+$unnnic-inline-xgiant: 4 * $unnnic-font-size;
+$unnnic-inline-awesome: 5 * $unnnic-font-size;
 $unnnic-spacing-inline-nano: $unnnic-inline-nano;
 $unnnic-spacing-inline-xs: $unnnic-inline-xs;
 $unnnic-spacing-inline-ant: $unnnic-inline-ant;
@@ -81,12 +81,12 @@ $unnnic-spacing-inline-xgiant: $unnnic-inline-xgiant;
 $unnnic-spacing-inline-awesome: $unnnic-inline-awesome;
 
 // Stack
-$unnnic-spacing-stack-nano: 0.25rem;
-$unnnic-spacing-stack-xs: 0.5rem;
-$unnnic-spacing-stack-sm: 1rem;
-$unnnic-spacing-stack-md: 1.5rem;
-$unnnic-spacing-stack-lg: 2rem;
-$unnnic-spacing-stack-xl: 2.5rem;
-$unnnic-spacing-stack-giant: 3rem;
-$unnnic-spacing-stack-xgiant: 4rem;
-$unnnic-spacing-stack-awesome: 5rem;
+$unnnic-spacing-stack-nano: 0.25 * $unnnic-font-size;
+$unnnic-spacing-stack-xs: 0.5 * $unnnic-font-size;
+$unnnic-spacing-stack-sm: 1 * $unnnic-font-size;
+$unnnic-spacing-stack-md: 1.5 * $unnnic-font-size;
+$unnnic-spacing-stack-lg: 2 * $unnnic-font-size;
+$unnnic-spacing-stack-xl: 2.5 * $unnnic-font-size;
+$unnnic-spacing-stack-giant: 3 * $unnnic-font-size;
+$unnnic-spacing-stack-xgiant: 4 * $unnnic-font-size;
+$unnnic-spacing-stack-awesome: 5 * $unnnic-font-size;

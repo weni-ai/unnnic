@@ -31,7 +31,10 @@ export default {
       type: String,
       default: 'md',
       validator(value) {
-        return ['nano', 'xs', 'sm', 'ant', 'md', 'lg', 'xl'].indexOf(value) !== -1;
+        return [
+          'nano', 'xs', 'sm', 'ant', 'md', 'lg', 'xl',
+          'avatar-lg', 'avatar-md', 'avatar-sm', 'avatar-xs', 'avatar-nano',
+        ].indexOf(value) !== -1;
       },
     },
     lineHeight: {
@@ -113,7 +116,12 @@ $icon-sizes:
     'md' $unnnic-icon-size-md,
     'ant' $unnnic-icon-size-ant,
     'sm' $unnnic-icon-size-sm,
-    'xs' $unnnic-icon-size-xs;
+    'xs' $unnnic-icon-size-xs,
+    'avatar-lg' $unnnic-avatar-size-lg,
+    'avatar-md' $unnnic-avatar-size-md,
+    'avatar-sm' $unnnic-avatar-size-sm,
+    'avatar-xs' $unnnic-avatar-size-xs,
+    'avatar-nano' $unnnic-avatar-size-nano;
 
 $line-heights:
   'sm' $unnnic-line-height-small,
