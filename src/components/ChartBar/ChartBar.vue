@@ -109,13 +109,13 @@
 <script>
 import UnnnicIcon from '../Icon.vue';
 import UnnnicButton from '../Button/Button.vue';
-import UnnnicToolTip from '../ToolTip/ToolTip.vue';
+// import UnnnicToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
   components: {
     UnnnicIcon,
     UnnnicButton,
-    UnnnicToolTip,
+    // UnnnicToolTip,
   },
 
   props: {
