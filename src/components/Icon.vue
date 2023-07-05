@@ -31,13 +31,6 @@ export default {
         return ['nano', 'xs', 'sm', 'ant', 'md', 'lg', 'xl'].indexOf(value) !== -1
       }
     },
-    lineHeight: {
-      type: String,
-      default: null,
-      validator(value) {
-        return !value || ['sm', 'md', 'lg'].indexOf(value) !== -1
-      }
-    },
     scheme: {
       type: String,
       default: ''
@@ -106,9 +99,6 @@ $scheme-colors: 'feedback-red' $unnnic-color-feedback-red,
 $icon-sizes: 'xl' $unnnic-icon-size-xl, 'lg' $unnnic-icon-size-lg, 'md' $unnnic-icon-size-md,
   'ant' $unnnic-icon-size-ant, 'sm' $unnnic-icon-size-sm, 'xs' $unnnic-icon-size-xs;
 
-$line-heights: 'sm' $unnnic-line-height-small, 'md' $unnnic-line-height-medium,
-  'lg' $unnnic-line-height-large;
-
 .unnnic-icon {
   position: relative;
   display: inline-block;
@@ -120,13 +110,6 @@ $line-heights: 'sm' $unnnic-line-height-small, 'md' $unnnic-line-height-medium,
       height: $size;
       min-width: $size;
       min-height: $size;
-    }
-
-    @each $line-name, $line-size in $line-heights {
-      &.line-height--#{$line-name} svg {
-        position: relative;
-        top: calc((($size + $line-size) - ($size * 1.2)) / 1.2);
-      }
     }
   }
 }
