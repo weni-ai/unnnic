@@ -125,7 +125,7 @@ $line-heights: 'sm' $unnnic-line-height-small, 'md' $unnnic-line-height-medium,
     @each $line-name, $line-size in $line-heights {
       &.line-height--#{$line-name} svg {
         position: relative;
-        top: (($size + $line-size) - ($size * 1.2))/1.2;
+        top: calc((($size + $line-size) - ($size * 1.2)) / 1.2);
       }
     }
   }
