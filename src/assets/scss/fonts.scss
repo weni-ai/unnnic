@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
 
+$unnnic-font-size: 16px;
+
 // Font family
 $unnnic-font-family-primary: 'Aleo', serif;
 $unnnic-font-family-secondary: Lato;
@@ -12,39 +14,50 @@ $unnnic-font-weight-regular: 400;
 $unnnic-font-weight-light: 300;
 
 // Font size
-$unnnic-font-size-body-sm: 0.5rem;
-$unnnic-font-size-body-md: 0.75rem;
-$unnnic-font-size-body-gt: 0.875rem;
-$unnnic-font-size-body-lg: 1rem;
+$unnnic-font-size-body-sm: 0.5 * $unnnic-font-size;
+$unnnic-font-size-body-md: 0.75 * $unnnic-font-size;
+$unnnic-font-size-body-gt: 0.875 * $unnnic-font-size;
+$unnnic-font-size-body-lg: 1 * $unnnic-font-size;
 
-$unnnic-font-size-title-sm: 1.25rem;
-$unnnic-font-size-title-md: 1.5rem;
-$unnnic-font-size-title-lg: 2rem;
+$unnnic-font-size-title-sm: 1.25 * $unnnic-font-size;
+$unnnic-font-size-title-md: 1.5 * $unnnic-font-size;
+$unnnic-font-size-title-lg: 2 * $unnnic-font-size;
 
-$unnnic-font-size-h4: 2.5rem;
-$unnnic-font-size-h3: 3rem;
-$unnnic-font-size-h2: 3.5rem;
-$unnnic-font-size-h1: 4.5rem;
+$unnnic-font-size-h4: 2.5 * $unnnic-font-size;
+$unnnic-font-size-h3: 3 * $unnnic-font-size;
+$unnnic-font-size-h2: 3.5 * $unnnic-font-size;
+$unnnic-font-size-h1: 4.5 * $unnnic-font-size;
 
 // Line height
 // Add this to font size when using
-$unnnic-line-height-small: 0.25rem;
-$unnnic-line-height-medium: 0.5rem;
+$unnnic-line-height-small: 0.25 * $unnnic-font-size;
+$unnnic-line-height-medium: 0.5 * $unnnic-font-size;
 $unnnic-line-height-md: $unnnic-line-height-medium;
-$unnnic-line-height-large: 1rem;
+$unnnic-line-height-large: 1 * $unnnic-font-size;
 
 .unnnic-font {
   font-weight: $unnnic-font-weight-regular;
   font-family: $unnnic-font-family-primary;
 
-  $font-sizes: 'body-sm' $unnnic-font-size-body-sm, 'body-md' $unnnic-font-size-body-md,
-    'body-gt' $unnnic-font-size-body-gt, 'body-lg' $unnnic-font-size-body-lg,
-    'title-sm' $unnnic-font-size-title-sm, 'title-md' $unnnic-font-size-title-md,
-    'title-lg' $unnnic-font-size-title-lg, 'h4' $unnnic-font-size-h4, 'h3' $unnnic-font-size-h3,
-    'h2' $unnnic-font-size-h2, 'h1' $unnnic-font-size-h1;
+  $font-sizes:
+    "body-sm" $unnnic-font-size-body-sm,
+    "body-md" $unnnic-font-size-body-md,
+    "body-gt" $unnnic-font-size-body-gt,
+    "body-lg" $unnnic-font-size-body-lg,
 
-  $font-weights: 'black' $unnnic-font-weight-black, 'bold' $unnnic-font-weight-bold,
-    'light' $unnnic-font-weight-light;
+    "title-sm" $unnnic-font-size-title-sm,
+    "title-md" $unnnic-font-size-title-md,
+    "title-lg" $unnnic-font-size-title-lg,
+
+    "h4" $unnnic-font-size-h4,
+    "h3" $unnnic-font-size-h3,
+    "h2" $unnnic-font-size-h2,
+    "h1" $unnnic-font-size-h1;
+
+  $font-weights:
+    "black" $unnnic-font-weight-black,
+    "bold" $unnnic-font-weight-bold,
+    "light" $unnnic-font-weight-light;
 
   &.secondary {
     font-family: $unnnic-font-family-secondary;
@@ -64,19 +77,31 @@ $unnnic-line-height-large: 1rem;
   }
 }
 
+
 .u {
   &.font {
     font-weight: $unnnic-font-weight-regular;
     font-family: $unnnic-font-family-primary;
 
-    $font-sizes: 'body-sm' $unnnic-font-size-body-sm, 'body-md' $unnnic-font-size-body-md,
-      'body-gt' $unnnic-font-size-body-gt, 'body-lg' $unnnic-font-size-body-lg,
-      'title-sm' $unnnic-font-size-title-sm, 'title-md' $unnnic-font-size-title-md,
-      'title-lg' $unnnic-font-size-title-lg, 'h4' $unnnic-font-size-h4, 'h3' $unnnic-font-size-h3,
-      'h2' $unnnic-font-size-h2, 'h1' $unnnic-font-size-h1;
+    $font-sizes:
+      "body-sm" $unnnic-font-size-body-sm,
+      "body-md" $unnnic-font-size-body-md,
+      "body-gt" $unnnic-font-size-body-gt,
+      "body-lg" $unnnic-font-size-body-lg,
 
-    $font-weights: 'black' $unnnic-font-weight-black, 'bold' $unnnic-font-weight-bold,
-      'light' $unnnic-font-weight-light;
+      "title-sm" $unnnic-font-size-title-sm,
+      "title-md" $unnnic-font-size-title-md,
+      "title-lg" $unnnic-font-size-title-lg,
+
+      "h4" $unnnic-font-size-h4,
+      "h3" $unnnic-font-size-h3,
+      "h2" $unnnic-font-size-h2,
+      "h1" $unnnic-font-size-h1;
+
+    $font-weights:
+      "black" $unnnic-font-weight-black,
+      "bold" $unnnic-font-weight-bold,
+      "light" $unnnic-font-weight-light;
 
     &.secondary {
       font-family: $unnnic-font-family-secondary;
