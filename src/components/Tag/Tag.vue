@@ -1,0 +1,87 @@
+<template>
+    <component
+      class="unnnic-tag-content"
+      :is="currentComponent"
+      :v-bind="$attrs"
+      :text="text"
+      :disabled="disabled"
+      :hasCloseIcon="hasCloseIcon"
+      :scheme="scheme"
+      :count="count"
+      :hasBackButton="hasBackButton"
+      :clickable="clickable"
+      :tooltipText="tooltipText"
+      :enableTooltip="enableTooltip"
+      :icon="icon"
+      @click="$emit('click')"
+      @close="$emit('close')"
+    />
+</template>
+
+<script>
+import DefaultTag from './DefaultTag.vue';
+import IndicatorTag from './IndicatorTag.vue';
+import BrandTag from './BrandTag.vue';
+
+export default {
+  name: 'unnnic-tag',
+  props: {
+    type: {
+      type: String,
+      default: 'default',
+      validator(value) {
+        return (
+          ['default', 'indicator', 'brand'].indexOf(value) !== -1
+        );
+      },
+    },
+    text: {
+      type: String,
+      default: null,
+    },
+    tooltipText: {
+      type: String,
+      default: null,
+    },
+    clickable: {
+      type: Boolean,
+      default: false,
+    },
+    count: {
+      type: Number,
+      default: 0,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+    hasCloseIcon: {
+      type: Boolean,
+      default: false,
+    },
+    scheme: {
+      type: String,
+      default: 'aux-purple',
+    },
+    hasBackButton: {
+      type: Boolean,
+      default: false,
+    },
+    enableTooltip: {
+      type: Boolean,
+      default: false,
+    },
+    icon: {
+      type: String,
+      default: null,
+    },
+  },
+  computed: {
+    currentComponent() {
+      if (this.type === 'indicator') return IndicatorTag;
+      if (this.type === 'brand') return BrandTag;
+      return DefaultTag;
+    },
+  },
+};
+</script>
