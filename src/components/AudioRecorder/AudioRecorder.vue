@@ -300,8 +300,6 @@ export default {
 .unnnic-audio-recorder {
   display: inline-flex;
   align-items: center;
-  background: $unnnic-color-neutral-lightest;
-  padding: $unnnic-spacing-inset-nano $unnnic-spacing-inset-sm;
   border-radius: $unnnic-border-radius-sm;
   position: relative;
 
