@@ -3,13 +3,13 @@
     <audio-handler
       v-if="isRecording || isRecorded"
       :is-recording="isRecording"
-      :time="numberToTimeString(duration)"
+      :time="numberToTimeString({time: duration})"
       @discard="stop(); discard()"
       @save="save"
     />
     <audio-player
       v-else
-      :time="numberToTimeString(isIdle ? duration : currentTime)"
+      :time="numberToTimeString({time: isIdle ? duration : currentTime, milliseconds: false})"
       :progress-bar-percentual-value="playedPercentual"
       :is-playing="isPlaying"
       @pause="pause"
@@ -91,6 +91,8 @@ export default {
     audioChunks: [],
     duration: 0,
     currentTime: 0,
+    mockMilliseconds: 0,
+    intervalMockMilliseconds: null,
     /**
      * @type {('idle'|'recording'|'recorded'|'playing'|'paused')}
      */
@@ -211,14 +213,30 @@ export default {
       this.audio.addEventListener('ended', () => {
         this.currentTime = 0;
         this.status = 'idle';
+        this.stopMockMilliseconds();
       });
     },
+
+    startMockMilliseconds() {
+      this.intervalMockMilliseconds = setInterval(() => {
+        this.mockMilliseconds++
+
+        if (this.mockMilliseconds >= 100) {
+          this.mockMilliseconds = 0
+        }
+      }, 10) // 0.01 second
+    },
+    stopMockMilliseconds() {
+      clearInterval(this.intervalMockMilliseconds)
+    },
+
     startRecord() {
       this.status = 'recording';
       const recordTimeSliceInMilliseconds = 500;
       this.recorder.start(recordTimeSliceInMilliseconds);
-    },
 
+      this.startMockMilliseconds();
+    },
     discard() {
       if (this.audio) {
         this.pause();
@@ -234,6 +252,7 @@ export default {
     },
     pause() {
       this.audio.pause();
+      this.stopMockMilliseconds();
     },
     async stop() {
       this.status = 'recorded';
@@ -242,6 +261,7 @@ export default {
       this.$emit('input', this.audio);
 
       this.bars = await this.srcToBars(this.audio.src);
+      this.stopMockMilliseconds();
     },
 
     play() {
@@ -259,13 +279,16 @@ export default {
       return normalizeData(filterData(audioBuffer));
     },
 
-    numberToTimeString(time) {
-      const minutes = Math.floor(time / 60);
-      const seconds = Math.round(time % 60)
-        .toString()
-        .padStart(2, '0');
+    numberToTimeString({time, milliseconds = true}) {
+      function formatNumber(number){
+        return number.toString().padStart(2, '0');
+      }
 
-      return `${minutes}:${seconds}`;
+      const minutes = formatNumber(Math.floor(time / 60))
+      const seconds = formatNumber(Math.round(time % 60))
+      const millisecondsFormatted = formatNumber(this.mockMilliseconds)
+
+      return `${minutes}:${seconds}${milliseconds ? `:${millisecondsFormatted}` : ''}`;
     },
   },
 };
