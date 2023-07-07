@@ -8,13 +8,12 @@
     <audio-handler
       v-if="isRecording || isRecorded"
       :is-recording="isRecording"
-      :time="numberToTimeString({time: duration})"
-      @discard="stop(); discard()"
+      :time="numberToTimeString(duration)"
       @save="save"
     />
     <audio-player
       v-else
-      :time="numberToTimeString({time: isIdle ? duration : currentTime, milliseconds: false})"
+      :time="numberToTimeString(isIdle ? duration : currentTime)"
       :progress-bar-percentual-value="playedPercentual"
       :is-playing="isPlaying"
       @pause="pause"
@@ -212,21 +211,20 @@ export default {
       this.audio.addEventListener('ended', () => {
         this.currentTime = 0;
         this.status = 'idle';
-        this.stopMockMilliseconds();
       });
     },
 
     startMockMilliseconds() {
       this.intervalMockMilliseconds = setInterval(() => {
-        this.mockMilliseconds++
+        this.mockMilliseconds += 1;
 
         if (this.mockMilliseconds >= 100) {
-          this.mockMilliseconds = 0
+          this.mockMilliseconds = 0;
         }
-      }, 10) // 0.01 second
+      }, 10); // 0.01 second
     },
     stopMockMilliseconds() {
-      clearInterval(this.intervalMockMilliseconds)
+      clearInterval(this.intervalMockMilliseconds);
     },
 
     startRecord() {
@@ -248,19 +246,23 @@ export default {
     save() {
       this.stop();
       this.status = 'idle';
+
+      this.stopMockMilliseconds();
     },
     pause() {
       this.audio.pause();
-      this.stopMockMilliseconds();
     },
     async stop() {
       this.status = 'recorded';
-      this.recorder.stop();
+
+      if (this.recorder) {
+        this.recorder.stop();
+      }
 
       this.$emit('input', this.audio);
 
-      this.bars = await this.srcToBars(this.audio.src);
       this.stopMockMilliseconds();
+      this.bars = await this.srcToBars(this.audio.src);
     },
 
     play() {
@@ -278,16 +280,18 @@ export default {
       return normalizeData(filterData(audioBuffer));
     },
 
-    numberToTimeString({time, milliseconds = true}) {
-      function formatNumber(number){
-        return number.toString().padStart(2, '0');
+    numberToTimeString(time) {
+      const { isRecording } = this;
+
+      function formatNumber(number, decimals = 2) {
+        return number.toString().padStart(decimals, '0');
       }
 
-      const minutes = formatNumber(Math.floor(time / 60))
-      const seconds = formatNumber(Math.round(time % 60))
-      const millisecondsFormatted = formatNumber(this.mockMilliseconds)
+      const minutes = formatNumber(Math.floor(time / 60), isRecording ? 2 : 1);
+      const seconds = formatNumber(Math.round(time % 60));
+      const millisecondsFormatted = formatNumber(this.mockMilliseconds);
 
-      return `${minutes}:${seconds}${milliseconds ? `:${millisecondsFormatted}` : ''}`;
+      return `${minutes}:${seconds}${isRecording ? `:${millisecondsFormatted}` : ''}`;
     },
   },
 };
