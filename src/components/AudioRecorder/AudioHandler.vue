@@ -6,19 +6,18 @@
       </span>
     </unnnic-tool-tip>
 
-    <div class="audio-handler__progress-bar">
-      <div class="audio-recorder__progress-bar__bar" ref="progressBar" />
+    <div>
+      <span class="audio-handler__time">
+        {{ time }}
+      </span>
+
+      <unnnic-icon
+        icon="indicator"
+        size="sm"
+        :class="[{ 'is-recording': isRecording }]"
+        :scheme="isRecording ? null : 'neutral-clean'"
+      />
     </div>
-
-    <span class="audio-handler__time">
-      {{ time }}
-    </span>
-
-    <unnnic-icon
-      icon="indicator"
-      :class="[{ 'is-recording': isRecording }]"
-      :scheme="isRecording ? null : 'neutral-clean'"
-    />
 
     <unnnic-tool-tip enabled text="Salvar" side="top">
       <span @click="save" @keypress.enter="save" class="clickable">
@@ -82,7 +81,7 @@ export default {
   }
 
   .unnnic-icon.is-recording ::v-deep .primary {
-    animation: ease pulse 1s infinite;
+    animation: ease-in-out pulse 2s infinite;
   }
 }
 
