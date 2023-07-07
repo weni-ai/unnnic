@@ -1,11 +1,5 @@
 <template>
   <div class="audio-handler">
-    <unnnic-tool-tip enabled text="Descartar" side="top">
-      <span @click="discard" @keypress.enter="discard" class="clickable">
-        <unnnic-icon icon="delete-1-1" scheme="feedback-red" />
-      </span>
-    </unnnic-tool-tip>
-
     <div>
       <span class="audio-handler__time">
         {{ time }}
@@ -49,9 +43,6 @@ export default {
   },
 
   methods: {
-    discard() {
-      this.$emit('discard');
-    },
     save() {
       this.$emit('save');
     },

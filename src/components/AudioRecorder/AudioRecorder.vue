@@ -1,5 +1,10 @@
 <template>
   <section v-if="value || isRecording || src" class="unnnic-audio-recorder">
+    <unnnic-tool-tip enabled text="Descartar" side="top">
+      <span @click="discard" @keypress.enter="discard" class="clickable delete-button">
+        <unnnic-icon icon="delete-1-1" scheme="feedback-red" />
+      </span>
+    </unnnic-tool-tip>
     <audio-handler
       v-if="isRecording || isRecorded"
       :is-recording="isRecording"
@@ -16,10 +21,6 @@
       @play="play"
       :bars="bars"
     />
-
-    <div v-if="canDelete && (['idle', 'playing', 'paused'].includes(status))" class="delete-button">
-      <unnnic-icon @click="discard" icon="delete-2-1" clickable></unnnic-icon>
-    </div>
   </section>
 </template>
 
@@ -27,6 +28,7 @@
 import AudioHandler from './AudioHandler.vue';
 import AudioPlayer from './AudioPlayer.vue';
 import UnnnicIcon from '../Icon.vue';
+import UnnnicToolTip from '../ToolTip/ToolTip.vue';
 
 const filterData = (audioBuffer) => {
   const rawData = audioBuffer.getChannelData(0); // We only need to work with one channel of data
@@ -59,15 +61,12 @@ export default {
     AudioHandler,
     AudioPlayer,
     UnnnicIcon,
+    UnnnicToolTip,
   },
 
   props: {
     value: {
       type: HTMLAudioElement,
-    },
-
-    canDelete: {
-      type: Boolean,
     },
 
     src: {
@@ -326,9 +325,7 @@ export default {
   }
 
   .delete-button {
-    position: absolute;
-    right: -0.75 * $unnnic-font-size;
-    top: -0.625 * $unnnic-font-size;
+    margin-right: $unnnic-spacing-inline-xs;
   }
 }
 </style>
