@@ -16,9 +16,10 @@
       :time="numberToTimeString(isIdle ? duration : currentTime)"
       :progress-bar-percentual-value="playedPercentual"
       :is-playing="isPlaying"
+      :bars="playbackAudioBars ? bars : null"
       @pause="pause"
       @play="play"
-      :bars="bars"
+      @progress-bar-update="progressBarUpdate"
     />
   </section>
 </template>
@@ -70,6 +71,11 @@ export default {
 
     src: {
       type: String,
+    },
+
+    playbackAudioBars: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -267,6 +273,12 @@ export default {
 
     play() {
       this.audio.play();
+    },
+
+    progressBarUpdate(event) {
+      const { audio } = this;
+
+      audio.currentTime = (event.target.value * audio.duration) / 100;
     },
 
     async srcToBars(src) {
