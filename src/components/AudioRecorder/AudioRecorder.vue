@@ -1,10 +1,14 @@
 <template>
   <section v-if="value || isRecording || src" class="unnnic-audio-recorder">
+    <unnnic-tool-tip enabled text="Descartar" side="top">
+      <span @click="discard" @keypress.enter="discard" class="delete-button unnnic--clickable">
+        <unnnic-icon icon="delete-1-1" scheme="feedback-red" />
+      </span>
+    </unnnic-tool-tip>
     <audio-handler
       v-if="isRecording || isRecorded"
       :is-recording="isRecording"
       :time="numberToTimeString(duration)"
-      @discard="stop(); discard()"
       @save="save"
     />
     <audio-player
@@ -12,14 +16,11 @@
       :time="numberToTimeString(isIdle ? duration : currentTime)"
       :progress-bar-percentual-value="playedPercentual"
       :is-playing="isPlaying"
+      :bars="playbackAudioBars ? bars : null"
       @pause="pause"
       @play="play"
-      :bars="bars"
+      @progress-bar-update="progressBarUpdate"
     />
-
-    <div v-if="canDelete && (['idle', 'playing', 'paused'].includes(status))" class="delete-button">
-      <unnnic-icon @click="discard" icon="delete-2-1" clickable></unnnic-icon>
-    </div>
   </section>
 </template>
 
@@ -27,6 +28,7 @@
 import AudioHandler from './AudioHandler.vue';
 import AudioPlayer from './AudioPlayer.vue';
 import UnnnicIcon from '../Icon.vue';
+import UnnnicToolTip from '../ToolTip/ToolTip.vue';
 
 const filterData = (audioBuffer) => {
   const rawData = audioBuffer.getChannelData(0); // We only need to work with one channel of data
@@ -59,6 +61,7 @@ export default {
     AudioHandler,
     AudioPlayer,
     UnnnicIcon,
+    UnnnicToolTip,
   },
 
   props: {
@@ -66,12 +69,13 @@ export default {
       type: HTMLAudioElement,
     },
 
-    canDelete: {
-      type: Boolean,
-    },
-
     src: {
       type: String,
+    },
+
+    playbackAudioBars: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -91,6 +95,8 @@ export default {
     audioChunks: [],
     duration: 0,
     currentTime: 0,
+    mockMilliseconds: 0,
+    intervalMockMilliseconds: null,
     /**
      * @type {('idle'|'recording'|'recorded'|'playing'|'paused')}
      */
@@ -213,15 +219,30 @@ export default {
         this.status = 'idle';
       });
     },
+
+    startMockMilliseconds() {
+      this.intervalMockMilliseconds = setInterval(() => {
+        this.mockMilliseconds += 1;
+
+        if (this.mockMilliseconds >= 100) {
+          this.mockMilliseconds = 0;
+        }
+      }, 10); // 0.01 second
+    },
+    stopMockMilliseconds() {
+      clearInterval(this.intervalMockMilliseconds);
+    },
+
     startRecord() {
       this.status = 'recording';
       const recordTimeSliceInMilliseconds = 500;
       this.recorder.start(recordTimeSliceInMilliseconds);
-    },
 
+      this.startMockMilliseconds();
+    },
     discard() {
       if (this.audio) {
-        this.pause();
+        this.stop();
       }
 
       this.$emit('input', null);
@@ -231,21 +252,34 @@ export default {
     save() {
       this.stop();
       this.status = 'idle';
+
+      this.stopMockMilliseconds();
     },
     pause() {
       this.audio.pause();
     },
     async stop() {
       this.status = 'recorded';
-      this.recorder.stop();
+      this.pause();
+
+      if (this.hasInUseRecordDevice()) {
+        this.recorder.stop();
+      }
 
       this.$emit('input', this.audio);
 
+      this.stopMockMilliseconds();
       this.bars = await this.srcToBars(this.audio.src);
     },
 
     play() {
       this.audio.play();
+    },
+
+    progressBarUpdate(event) {
+      const { audio } = this;
+
+      audio.currentTime = (event.target.value * audio.duration) / 100;
     },
 
     async srcToBars(src) {
@@ -260,12 +294,17 @@ export default {
     },
 
     numberToTimeString(time) {
-      const minutes = Math.floor(time / 60);
-      const seconds = Math.round(time % 60)
-        .toString()
-        .padStart(2, '0');
+      const { isRecording } = this;
 
-      return `${minutes}:${seconds}`;
+      function formatNumber(number, decimals = 2) {
+        return number.toString().padStart(decimals, '0');
+      }
+
+      const minutes = formatNumber(Math.floor(time / 60), isRecording ? 2 : 1);
+      const seconds = formatNumber(Math.round(time % 60));
+      const millisecondsFormatted = formatNumber(this.mockMilliseconds);
+
+      return `${minutes}:${seconds}${isRecording ? `:${millisecondsFormatted}` : ''}`;
     },
   },
 };
@@ -277,8 +316,6 @@ export default {
 .unnnic-audio-recorder {
   display: inline-flex;
   align-items: center;
-  background: $unnnic-color-neutral-lightest;
-  padding: $unnnic-spacing-inset-nano $unnnic-spacing-inset-sm;
   border-radius: $unnnic-border-radius-sm;
   position: relative;
 
@@ -305,9 +342,7 @@ export default {
   }
 
   .delete-button {
-    position: absolute;
-    right: -0.75 * $unnnic-font-size;
-    top: -0.625 * $unnnic-font-size;
+    margin-right: $unnnic-spacing-inline-xs;
   }
 }
 </style>

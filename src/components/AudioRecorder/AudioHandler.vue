@@ -1,27 +1,20 @@
 <template>
   <div class="audio-handler">
-    <unnnic-tool-tip enabled text="Descartar" side="top">
-      <span @click="discard" @keypress.enter="discard" class="clickable">
-        <unnnic-icon icon="delete-1-1" scheme="feedback-red" />
+    <div>
+      <span class="audio-handler__time">
+        {{ time }}
       </span>
-    </unnnic-tool-tip>
 
-    <div class="audio-handler__progress-bar">
-      <div class="audio-recorder__progress-bar__bar" ref="progressBar" />
+      <unnnic-icon
+        icon="indicator"
+        size="sm"
+        :class="[{ 'is-recording': isRecording }]"
+        :scheme="isRecording ? null : 'neutral-clean'"
+      />
     </div>
 
-    <span class="audio-handler__time">
-      {{ time }}
-    </span>
-
-    <unnnic-icon
-      icon="indicator"
-      :class="[{ 'is-recording': isRecording }]"
-      :scheme="isRecording ? null : 'neutral-clean'"
-    />
-
     <unnnic-tool-tip enabled text="Salvar" side="top">
-      <span @click="save" @keypress.enter="save" class="clickable">
+      <span @click="save" @keypress.enter="save" class="unnnic--clickable">
         <unnnic-icon icon="check-circle-1-1" scheme="feedback-green" />
       </span>
     </unnnic-tool-tip>
@@ -50,9 +43,6 @@ export default {
   },
 
   methods: {
-    discard() {
-      this.$emit('discard');
-    },
     save() {
       this.$emit('save');
     },
@@ -82,7 +72,7 @@ export default {
   }
 
   .unnnic-icon.is-recording ::v-deep .primary {
-    animation: ease pulse 1s infinite;
+    animation: ease-in-out pulse 2s infinite;
   }
 }
 

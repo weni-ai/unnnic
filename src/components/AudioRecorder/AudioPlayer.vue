@@ -1,17 +1,20 @@
 <template>
   <div class="audio-player">
-    <span v-if="isPlaying" @click="pause" @keypress.enter="pause" class="clickable">
-      <unnnic-icon icon="controls-pause-1" scheme="neutral-darkest" />
+    <span @click="togglePlayback" @keypress.enter="togglePlayback" class="unnnic--clickable">
+      <unnnic-icon :icon="playbackIcon" scheme="neutral-darkest" />
     </span>
-    <span v-else @click="play" @keypress.enter="play" class="clickable">
-      <unnnic-icon icon="controls-play-1" scheme="neutral-darkest" />
-    </span>
-    <div v-if="bars.length === 0" class="audio-player__progress-bar">
-      <div
-        class="audio-player__progress-bar__bar"
-        :style="{ width: `${progressBarPercentualValue}%` }"
-      />
-    </div>
+
+    <input
+      v-if="showProgressBar"
+      class="audio-player__progress-bar unnnic--clickable"
+      type="range"
+      min="0"
+      :max="duration"
+      step="0.001"
+      v-model="progress"
+      @input="emitProgressBarUpdate"
+      :style="progressBarStyle"
+    />
 
     <div v-else class="audio-player__progress-bar-bars">
       <div
@@ -59,16 +62,51 @@ export default {
     },
   },
 
+  data() {
+    return {
+      progress: 0,
+    };
+  },
+
   methods: {
+    togglePlayback() {
+      this[this.isPlaying ? 'pause' : 'play']();
+    },
+
     play() {
       this.$emit('play');
     },
+
     pause() {
       this.$emit('pause');
     },
 
+    emitProgressBarUpdate(event) {
+      this.$emit('progress-bar-update', event);
+    },
+
     isBarActive(index) {
       return (this.progressBarPercentualValue / 100) * 22 > index;
+    },
+  },
+
+  computed: {
+    showProgressBar() {
+      return !this.bars || this.bars.length === 0;
+    },
+    playbackIcon() {
+      return this.isPlaying ? 'controls-pause-1' : 'controls-play-1';
+    },
+    progressBarStyle() {
+      return {
+        '--progressBarPercentualValue': `${this.progress}%`,
+      };
+    },
+  },
+
+  watch: {
+    progressBarPercentualValue(newValue) {
+      this.progress = newValue;
     },
   },
 };
@@ -82,35 +120,74 @@ export default {
   align-items: center;
   gap: $unnnic-spacing-stack-xs;
 
-  &__progress-bar-bars {
+  &__progress-bar {
+    position: relative;
+
     width: 11.5 * $unnnic-font-size;
-    height: 1 * $unnnic-font-size;
-    border-radius: $unnnic-border-radius-sm;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    height: 2px;
 
-    .bar {
+    outline: none;
+
+    &::before {
+      content: '';
+
+      position: absolute;
+      left: 0;
+
+      width: var(--progressBarPercentualValue);
+      height: 100%;
+      place-self: center;
+
+      border-radius: $unnnic-border-radius-sm;
+      background: $unnnic-color-neutral-darkest;
+    }
+
+    &::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 100%;
+
+      border-radius: $unnnic-border-radius-sm;
       background: $unnnic-color-neutral-clean;
-      border-radius: 1.5px;
-      width: 3px;
+    }
+    &::-webkit-slider-thumb {
+      opacity: 0;
+    }
 
-      &.active {
-        background: $unnnic-color-neutral-darkest;
+    // Duplicate moz code from webkit needed to work.
+    // It won't work if combine the two.
+    &::-moz-range-track {
+      width: 100%;
+      height: 100%;
+
+      border-radius: $unnnic-border-radius-sm;
+      background: $unnnic-color-neutral-clean;
+    }
+    &::-moz-range-thumb {
+      opacity: 0;
+    }
+
+    &-bars {
+      width: 11.5 * $unnnic-font-size;
+      height: 1 * $unnnic-font-size;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border-radius: $unnnic-border-radius-sm;
+
+      .bar {
+        width: 3px;
+
+        background: $unnnic-color-neutral-clean;
+        border-radius: 1.5px;
+
+        &.active {
+          background: $unnnic-color-neutral-darkest;
+        }
       }
     }
   }
 
-  &__progress-bar {
-    width: 11.5 * $unnnic-font-size;
-    height: 2px;
-    border-radius: $unnnic-border-radius-sm;
-    background: $unnnic-color-neutral-clean;
-
-    &__bar {
-      background: $unnnic-color-neutral-darkest;
-      height: 100%;
-    }
-  }
 }
 </style>
