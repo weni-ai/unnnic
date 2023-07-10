@@ -25,8 +25,7 @@ const Template = (args, { argTypes }) => ({
 
       <pre>v-model: {{ audio }}</pre>
 
-      <unnnic-audio-recorder v-bind="$props" ref="audio-recorder" v-model="audio">
-      </unnnic-audio-recorder>
+      <unnnic-audio-recorder v-bind="$props" ref="audio-recorder" v-model="audio" />
     </div>
   `,
 
