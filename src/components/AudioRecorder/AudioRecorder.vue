@@ -242,7 +242,7 @@ export default {
     },
     discard() {
       if (this.audio) {
-        this.pause();
+        this.stop();
       }
 
       this.$emit('input', null);
@@ -260,8 +260,9 @@ export default {
     },
     async stop() {
       this.status = 'recorded';
+      this.pause();
 
-      if (this.recorder) {
+      if (this.hasInUseRecordDevice()) {
         this.recorder.stop();
       }
 
