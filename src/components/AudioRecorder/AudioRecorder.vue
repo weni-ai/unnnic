@@ -1,7 +1,7 @@
 <template>
   <section v-if="value || isRecording || src" class="unnnic-audio-recorder">
     <unnnic-tool-tip enabled text="Descartar" side="top">
-      <span @click="discard" @keypress.enter="discard" class="clickable delete-button">
+      <span @click="discard" @keypress.enter="discard" class="delete-button unnnic--clickable">
         <unnnic-icon icon="delete-1-1" scheme="feedback-red" />
       </span>
     </unnnic-tool-tip>

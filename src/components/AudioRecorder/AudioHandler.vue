@@ -14,7 +14,7 @@
     </div>
 
     <unnnic-tool-tip enabled text="Salvar" side="top">
-      <span @click="save" @keypress.enter="save" class="clickable">
+      <span @click="save" @keypress.enter="save" class="unnnic--clickable">
         <unnnic-icon icon="check-circle-1-1" scheme="feedback-green" />
       </span>
     </unnnic-tool-tip>
