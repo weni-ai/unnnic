@@ -16,6 +16,7 @@ const Template = (args, { argTypes }) => ({
   data() {
     return {
       audio: null,
+      status: '',
     };
   },
 
@@ -24,8 +25,9 @@ const Template = (args, { argTypes }) => ({
       <button @click="$refs['audio-recorder'].record()">Gravar</button>
 
       <pre>v-model: {{ audio }}</pre>
+      <pre>status: {{ status }}</pre>
 
-      <unnnic-audio-recorder v-bind="$props" ref="audio-recorder" v-model="audio" />
+      <unnnic-audio-recorder v-bind="$props" ref="audio-recorder" v-model="audio" @status="(value) => this.status = value" />
     </div>
   `,
 

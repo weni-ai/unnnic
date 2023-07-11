@@ -145,6 +145,9 @@ export default {
         this.bars = await this.srcToBars(this.src);
       },
     },
+    status(newValue) {
+      this.$emit('status', newValue);
+    },
   },
 
   methods: {
