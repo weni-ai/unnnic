@@ -1,12 +1,12 @@
 <template>
   <section v-if="value || isRecording || src" class="unnnic-audio-recorder">
-    <unnnic-tool-tip enabled text="Descartar" side="top">
+    <unnnic-tool-tip v-if="isRecording || canDiscard" enabled text="Descartar" side="top">
       <span @click="discard" @keypress.enter="discard" class="delete-button unnnic--clickable">
         <unnnic-icon icon="delete-1-1" scheme="feedback-red" />
       </span>
     </unnnic-tool-tip>
     <audio-handler
-      v-if="isRecording || isRecorded"
+      v-if="isRecording"
       :is-recording="isRecording"
       :time="numberToTimeString(duration)"
       @save="save"
@@ -71,6 +71,11 @@ export default {
 
     src: {
       type: String,
+    },
+
+    canDiscard: {
+      type: Boolean,
+      default: true,
     },
 
     playbackAudioBars: {
@@ -139,6 +144,9 @@ export default {
 
         this.bars = await this.srcToBars(this.src);
       },
+    },
+    status(newValue) {
+      this.$emit('status', newValue);
     },
   },
 
@@ -216,7 +224,7 @@ export default {
 
       this.audio.addEventListener('ended', () => {
         this.currentTime = 0;
-        this.status = 'idle';
+        this.status = 'recorded';
       });
     },
 
@@ -251,7 +259,7 @@ export default {
     },
     save() {
       this.stop();
-      this.status = 'idle';
+      this.status = 'recorded';
 
       this.stopMockMilliseconds();
     },
@@ -277,9 +285,10 @@ export default {
     },
 
     progressBarUpdate(event) {
-      const { audio } = this;
-
-      audio.currentTime = (event.target.value * audio.duration) / 100;
+      if (this.audio) {
+        const { audio } = this;
+        audio.currentTime = (event.target.value * audio.duration) / 100;
+      }
     },
 
     async srcToBars(src) {

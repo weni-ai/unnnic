@@ -1,4 +1,5 @@
 import unnnicAudioRecorder from '../components/AudioRecorder/AudioRecorder.vue';
+import AudioSample from './assets/audios/audio-recorder-sample.mp3';
 
 export default {
   title: 'Form/AudioRecorder',
@@ -16,6 +17,7 @@ const Template = (args, { argTypes }) => ({
   data() {
     return {
       audio: null,
+      status: '',
     };
   },
 
@@ -24,8 +26,9 @@ const Template = (args, { argTypes }) => ({
       <button @click="$refs['audio-recorder'].record()">Gravar</button>
 
       <pre>v-model: {{ audio }}</pre>
+      <pre>status: {{ status }}</pre>
 
-      <unnnic-audio-recorder v-bind="$props" ref="audio-recorder" v-model="audio" />
+      <unnnic-audio-recorder v-bind="$props" ref="audio-recorder" v-model="audio" @status="(value) => this.status = value" />
     </div>
   `,
 
@@ -35,11 +38,11 @@ const Template = (args, { argTypes }) => ({
 export const Default = Template.bind({});
 
 Default.args = {
-  canDelete: true,
+  canDiscard: true,
 };
 
 export const Player = Template.bind({});
 
 Player.args = {
-  src: 'http://172.17.32.1:8080/sample-3s.mp3',
+  src: AudioSample,
 };

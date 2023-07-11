@@ -189,5 +189,9 @@ export default {
     }
   }
 
+  &__time {
+    margin-left: $unnnic-spacing-stack-xs;
+  }
+
 }
 </style>
