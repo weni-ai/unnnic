@@ -285,9 +285,10 @@ export default {
     },
 
     progressBarUpdate(event) {
-      const { audio } = this;
-
-      audio.currentTime = (event.target.value * audio.duration) / 100;
+      if (this.audio) {
+        const { audio } = this;
+        audio.currentTime = (event.target.value * audio.duration) / 100;
+      }
     },
 
     async srcToBars(src) {

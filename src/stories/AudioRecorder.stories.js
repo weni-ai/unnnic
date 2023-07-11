@@ -1,4 +1,5 @@
 import unnnicAudioRecorder from '../components/AudioRecorder/AudioRecorder.vue';
+import AudioSample from './assets/audios/audio-recorder-sample.mp3';
 
 export default {
   title: 'Form/AudioRecorder',
@@ -43,5 +44,5 @@ Default.args = {
 export const Player = Template.bind({});
 
 Player.args = {
-  src: 'http://172.17.32.1:8080/sample-3s.mp3',
+  src: AudioSample,
 };
