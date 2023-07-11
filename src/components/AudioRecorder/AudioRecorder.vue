@@ -6,7 +6,7 @@
       </span>
     </unnnic-tool-tip>
     <audio-handler
-      v-if="isRecording || isRecorded"
+      v-if="isRecording"
       :is-recording="isRecording"
       :time="numberToTimeString(duration)"
       @save="save"
@@ -224,7 +224,7 @@ export default {
 
       this.audio.addEventListener('ended', () => {
         this.currentTime = 0;
-        this.status = 'idle';
+        this.status = 'recorded';
       });
     },
 
@@ -259,7 +259,7 @@ export default {
     },
     save() {
       this.stop();
-      this.status = 'idle';
+      this.status = 'recorded';
 
       this.stopMockMilliseconds();
     },
