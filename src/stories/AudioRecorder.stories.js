@@ -35,7 +35,7 @@ const Template = (args, { argTypes }) => ({
 export const Default = Template.bind({});
 
 Default.args = {
-  canDelete: true,
+  canDiscard: true,
 };
 
 export const Player = Template.bind({});
