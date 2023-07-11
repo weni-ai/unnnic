@@ -51,7 +51,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .audio-handler {
   display: inline-flex;
@@ -71,8 +71,12 @@ export default {
     }
   }
 
-  .unnnic-icon.is-recording ::v-deep .primary {
-    animation: ease-in-out pulse 2s infinite;
+  .unnnic-icon.is-recording ::v-deep {
+    margin-left: $unnnic-spacing-inline-nano;
+
+    .primary {
+      animation: ease-in-out pulse 2s infinite;
+    }
   }
 }
 
