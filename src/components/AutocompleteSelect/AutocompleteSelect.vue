@@ -13,7 +13,7 @@
     />
 
     <div
-      v-if="isMenuOpen && !disabled && (items.length || (tag && inputValue))"
+      v-if="showMenu && isMenuOpen && !disabled && (items.length || (tag && inputValue))"
       class="options-container"
     >
       <div class="options">
@@ -130,6 +130,10 @@ export default {
       default: null,
     },
     clearOnCreate: {
+      type: Boolean,
+      default: true,
+    },
+    showMenu: {
       type: Boolean,
       default: true,
     },
@@ -254,7 +258,10 @@ export default {
     },
     openMenuAndEmitSearch(event) {
       if (this.isCreated) {
-        this.isMenuOpen = true;
+        if (this.showMenu) {
+          this.isMenuOpen = true;
+        }
+
         this.$emit('search', event);
       }
     },
