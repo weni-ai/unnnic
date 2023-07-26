@@ -156,6 +156,7 @@ export default {
 
   &.error {
     border: $unnnic-border-width-thinner solid $unnnic-color-feedback-red;
+    color: $unnnic-color-feedback-red;
   }
 
   &::placeholder {
