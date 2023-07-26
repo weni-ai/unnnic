@@ -136,6 +136,7 @@ export default {
   &__message {
     font-size: $unnnic-font-size-body-md;
     margin: $unnnic-spacing-stack-nano 0;
+    color: $unnnic-color-feedback-red;
   }
 
   &__label {

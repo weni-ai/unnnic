@@ -48,6 +48,7 @@ export default {
   data() {
     return {
       isFocused: false,
+      isDisabled: false,
       showPassword: false,
     };
   },
@@ -117,6 +118,10 @@ export default {
         return 'neutral-dark';
       }
 
+      if (this.isDisabled) {
+        return 'neutral-cleanest';
+      }
+
       if (this.hasCloudyColor) {
         return 'neutral-cloudy';
       }
@@ -163,6 +168,9 @@ export default {
       if (this.allowTogglePassword) this.showPassword = !this.showPassword;
       else if (this.iconRightClickable) this.$emit('icon-right-click');
     },
+  },
+  mounted() {
+    this.isDisabled = !!this.$refs['base-input'].$el.disabled;
   },
 };
 </script>

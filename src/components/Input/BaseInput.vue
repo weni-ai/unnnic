@@ -101,6 +101,7 @@ export default {
   border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
   border-radius: $unnnic-border-radius-sm;
   color: $unnnic-color-neutral-dark;
+  caret-color: $unnnic-color-neutral-cleanest;
   font-weight: $unnnic-font-weight-regular;
   font-family: $unnnic-font-family-secondary;
   box-sizing: border-box;
@@ -155,9 +156,10 @@ export default {
 
   &.error {
     border: $unnnic-border-width-thinner solid $unnnic-color-feedback-red;
+    color: $unnnic-color-feedback-red;
   }
 
-  ::placeholder {
+  &::placeholder {
     color: $unnnic-color-neutral-clean;
     opacity: 1; /* Firefox */
   }
@@ -169,8 +171,13 @@ export default {
   }
 
   &:disabled {
-    border: 1px dashed $unnnic-color-neutral-clean;
+    border: 1px solid transparent;
     background-color: $unnnic-color-neutral-light;
+
+    &::placeholder {
+      color: $unnnic-color-neutral-cleanest;
+      opacity: 1; /* Firefox */
+    }
   }
 }
 </style>
