@@ -171,8 +171,13 @@ export default {
   }
 
   &:disabled {
-    border: 1px dashed $unnnic-color-neutral-clean;
+    border: 1px solid transparent;
     background-color: $unnnic-color-neutral-light;
+
+    &::placeholder {
+      color: $unnnic-color-neutral-cleanest;
+      opacity: 1; /* Firefox */
+    }
   }
 }
 </style>
