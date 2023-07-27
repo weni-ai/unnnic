@@ -2,6 +2,8 @@
   <div class="unnnic-autocomplete-select" v-click-outside="() => (isMenuOpen = false)">
     <unnnic-input
       v-model="inputValue"
+      :type="type"
+      :message="message"
       :size="size"
       :icon-left="hasIconLeft ? iconLeft : null"
       :icon-right="hasIconRight ? iconRight : null"
@@ -69,6 +71,17 @@ export default {
     },
     disabled: {
       type: Boolean,
+    },
+    type: {
+      type: String,
+      default: 'normal',
+      validator(value) {
+        return ['normal', 'error'].indexOf(value) !== -1;
+      },
+    },
+    message: {
+      type: String,
+      default: null,
     },
     size: {
       type: String,
