@@ -12,7 +12,7 @@
         :hasCloudyColor="hasCloudyColor"
         readonly
         :icon-right="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
-        icon-right-clickable
+        :icon-right-clickable="!disabled"
         @icon-right-click="handleClickSelect"
         @click="handleClickSelect"
       />
@@ -343,6 +343,10 @@ export default {
 
       &::placeholder {
         color: $unnnic-color-neutral-cleanest;
+      }
+
+      + .icon-right {
+        cursor: not-allowed;
       }
     }
   }
