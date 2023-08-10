@@ -15,6 +15,7 @@
       >{{ label }}</span
     >
     <p
+      v-if="description"
       :class="[
         'unnnic-select-smart-option__description',
         `unnnic-select-smart-option__description--${size}`,
@@ -101,7 +102,7 @@ export default {
     }
     &--sm {
       font-size: $unnnic-font-size-body-md;
-      line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+      line-height: $unnnic-font-size-body-md + $unnnic-line-height-small;
     }
   }
 
@@ -117,6 +118,7 @@ export default {
     }
     &--sm {
       font-size: $unnnic-font-size-body-sm;
+      line-height: $unnnic-font-size-body-md + $unnnic-line-height-small;
     }
   }
 }

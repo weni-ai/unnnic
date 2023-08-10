@@ -2,10 +2,7 @@
   <div @keydown="onKeyDownSelect" v-click-outside="onClickOutside" class="unnnic-select-smart">
     <dropdown-skeleton type="manual" :value="active" position="bottom" ref="dropdown-skeleton">
       <text-input
-        :class="{
-          'unnnic-select-smart__input': true,
-          'unnnic-select-smart__input--disabled': disabled,
-        }"
+        class="unnnic-select-smart__input"
         ref="selectSmartInput"
         :value="valueLabel"
         :placeholder="placeholder || labelForValue"
@@ -26,14 +23,20 @@
           :style="{ width: props.width }"
           :class="{
             'unnnic-select-smart__options': true,
-            'unnnic-select-smart__options--active': active,
-            'unnnic-select-smart__options--inactive': !active,
+            active: active,
+            inactive: !active,
           }"
         >
           <div :style="{ overflow: 'auto' }">
             <div
               ref="selectSmartOptionsScrollArea"
-              class="unnnic-select-smart__options__scroll-area"
+              :class="[
+                'unnnic-select-smart__options__scroll-area',
+                `size-${size}`,
+                {
+                  'with-descriptions': hasDescriptionOptions,
+                },
+              ]"
             >
               <select-smart-option
                 v-for="(option, index) in filterOptions(options)"
@@ -147,6 +150,10 @@ export default {
       }
 
       return '';
+    },
+
+    hasDescriptionOptions() {
+      return this.options.some((item) => typeof item.description !== 'undefined');
     },
   },
 
@@ -272,10 +279,15 @@ export default {
     cursor: default;
 
     &__scroll-area {
+      @function calc-max-height($value) {
+        @return ($value * $unnnic-font-size) - ($unnnic-spacing-xs * 2);
+      }
+
       margin: $unnnic-spacing-xs $unnnic-spacing-nano;
       margin-left: 0;
 
-      max-height: 12.2 * $unnnic-font-size;
+      max-height: calc-max-height(8.5);
+
       overflow-y: auto;
 
       &::-webkit-scrollbar {
@@ -291,38 +303,50 @@ export default {
         background: $unnnic-color-neutral-soft;
         border-radius: $unnnic-border-radius-pill;
       }
+
+      &.with-descriptions {
+        max-height: calc-max-height(13.5);
+      }
+
+      &.size-sm {
+        max-height: calc-max-height(8);
+
+        &.with-descriptions {
+          max-height: calc-max-height(12);
+        }
+      }
     }
 
-    &--inactive {
+    &.inactive {
       display: none;
     }
 
-    &--active {
+    &.active {
       display: block;
       z-index: 2;
     }
   }
 
   .unnnic-select-smart__input input {
-      &:read-only {
-        cursor: pointer;
+    &:read-only {
+      cursor: pointer;
 
-        &::placeholder {
-          color: $unnnic-color-neutral-dark;
-        }
+      &::placeholder {
+        color: $unnnic-color-neutral-dark;
       }
+    }
 
-      &:disabled {
-        border: 1px solid $unnnic-color-neutral-cleanest;
+    &:disabled {
+      border: 1px solid $unnnic-color-neutral-cleanest;
 
-        cursor: not-allowed;
+      cursor: not-allowed;
 
-        &::placeholder {
-          color: $unnnic-color-neutral-cleanest;
-        }
+      &::placeholder {
+        color: $unnnic-color-neutral-cleanest;
       }
     }
   }
+}
 
 ::-webkit-scrollbar {
   width: 4px;
