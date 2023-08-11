@@ -13,8 +13,8 @@
         :icon-left="isAutocompleteAllowed && autocompleteIconLeft ? 'search-1' : ''"
         :icon-right="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
         :icon-right-clickable="!disabled"
-        @icon-right-click="handleClickSelect"
-        @click="handleClickSelect"
+        @icon-right-click="handleClickInput"
+        @click="handleClickInput"
         @input="searchValue = $event"
       />
 
@@ -83,12 +83,9 @@
                 :tabindex="index"
                 :size="size"
                 :active="option.value === value || optionIsSelected(option)"
+                :focused="focusedOption && focusedOption.value === option.value"
                 :allowCheckbox="!!multiple"
-                @click="
-                  multiple && optionIsSelected(option)
-                    ? unselectOption(option)
-                    : onSelectOption(option)
-                "
+                @click="handleSelect(option)"
               />
               <p
                 v-if="filterOptions(options).length === 0"
@@ -180,6 +177,7 @@ export default {
     return {
       active: false,
       status: 'not-mounted',
+      focusedOption: null,
 
       searchValue: '',
       isAutocompleteAllowed: false,
@@ -195,7 +193,7 @@ export default {
         this.$refs['dropdown-skeleton'].calculatePosition();
 
         if (newValue && !this.multiple) {
-          const activeOptionIndex = this.getActiveOptionIndex();
+          const activeOptionIndex = this.getOptionIndex('active');
 
           if (activeOptionIndex !== -1) {
             this.scrollToOption(activeOptionIndex);
@@ -213,6 +211,8 @@ export default {
     selectedOptions(newSelectedOptions) {
       this.$emit('onChange', newSelectedOptions);
       this.$emit('input', newSelectedOptions);
+
+      this.onSelectOption(newSelectedOptions.at(-1));
     },
   },
 
@@ -300,7 +300,16 @@ export default {
       this.selectedOptions = [];
     },
 
-    handleClickSelect() {
+    handleSelect(option) {
+      if (this.multiple && this.optionIsSelected(option)) {
+        this.unselectOption(option);
+        return;
+      }
+
+      this.selectOption(option);
+    },
+
+    handleClickInput() {
       if (this.isAutocompleteAllowed) {
         if (this.active) {
           return;
@@ -352,10 +361,16 @@ export default {
       }
     },
 
-    getActiveOptionIndex() {
-      const activeValue = this.value?.[0]?.value;
+    getOptionIndex(type) {
       const options = this.filterOptions(this.options);
-      return options.findIndex((option) => option.value === activeValue);
+      let valueByType = '';
+      if (type === 'active') {
+        valueByType = this.value?.[0]?.value;
+      }
+      if (type === 'focused') {
+        valueByType = this.focusedOption?.value;
+      }
+      return options.findIndex((option) => option.value === valueByType);
     },
 
     scrollToOption(optionIndex) {
@@ -363,26 +378,12 @@ export default {
       elementScroll.childNodes[optionIndex].scrollIntoViewIfNeeded();
     },
 
-    onSelectOption(option) {
+    selectOption(option) {
       const selectedOption = option.value === null || option.value.length === 0 ? null : option;
 
       this.selectedOptions = this.multiple
         ? [...this.selectedOptions, selectedOption]
         : [selectedOption];
-
-      if (!this.multiple) this.active = false;
-
-      if (this.isAutocompleteAllowed && !this.multiple) {
-        this.searchValue = option.label;
-        return;
-      }
-
-      if (this.multiple) {
-        this.searchValue = '';
-        return;
-      }
-
-      this.$refs.selectSmartInput.focus();
     },
 
     unselectOption(option) {
@@ -399,7 +400,23 @@ export default {
       }
     },
 
-    onKeyDownSelect(event) {
+    onSelectOption(newOption) {
+      if (!this.multiple) this.active = false;
+
+      if (this.isAutocompleteAllowed && !this.multiple) {
+        this.searchValue = newOption.label;
+        return;
+      }
+
+      if (this.multiple) {
+        this.searchValue = '';
+        return;
+      }
+
+      this.$refs.selectSmartInput.focus();
+    },
+
+    async onKeyDownSelect(event) {
       const { key } = event;
 
       const validKeys = ['Enter', 'ArrowUp', 'ArrowDown'];
@@ -413,29 +430,46 @@ export default {
           return;
         }
 
-        const activeOptionIndex = this.getActiveOptionIndex();
+        const focusedOptionIndex = this.getOptionIndex('focused');
 
         let newIndex;
 
         // eslint-disable-next-line default-case
         switch (key) {
           case 'Enter':
-            this.active = !this.active;
+            if (!this.active) {
+              this.active = true;
+              break;
+            }
+            this.handleSelect(this.focusedOption);
             break;
           case 'ArrowUp':
-            newIndex = Math.max(activeOptionIndex - 1, 0);
+            if (this.multiple && !this.active) {
+              this.active = true;
+              await this.$nextTick();
+            }
+            newIndex = Math.max(focusedOptionIndex - 1, 0);
+            if (!this.active) {
+              this.handleSelect(options[newIndex]);
+            }
             break;
           case 'ArrowDown':
-            newIndex = Math.min(activeOptionIndex + 1, options.length - 1);
-            break;
+            if (this.multiple && !this.active) {
+              this.active = true;
+              await this.$nextTick();
+            }
+            newIndex = Math.min(focusedOptionIndex + 1, options.length - 1);
+            if (!this.active) {
+              this.handleSelect(options[newIndex]);
+            }
         }
 
         if (newIndex !== undefined && this.active) {
           this.scrollToOption(newIndex);
         }
 
-        const newValue = options[newIndex === undefined ? activeOptionIndex : newIndex];
-        this.selectedOptions = [newValue];
+        const newOption = options[newIndex === undefined ? focusedOptionIndex : newIndex];
+        this.focusedOption = newOption;
       }
     },
   },

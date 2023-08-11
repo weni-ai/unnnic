@@ -3,6 +3,7 @@
     @click="$emit('click')"
     :class="{
       'unnnic-select-smart-option': true,
+      'unnnic-select-smart-option--focused': focused,
       'unnnic-select-smart-option--active': active,
       'unnnic--clickable': selectable,
       'unnnic-select-smart-option--selectable': selectable,
@@ -54,6 +55,10 @@ export default {
       type: Boolean,
       default: true,
     },
+    focused: {
+      type: Boolean,
+      default: false,
+    },
     active: {
       type: Boolean,
       default: false,
@@ -84,6 +89,7 @@ export default {
   -webkit-line-clamp: 1;
 
   &--selectable:hover,
+  &--focused,
   &--active {
     border-radius: $unnnic-border-radius-sm;
 
