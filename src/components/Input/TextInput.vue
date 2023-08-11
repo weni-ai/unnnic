@@ -1,24 +1,28 @@
 <template>
-  <div :style="{ position: 'relative' }">
+  <div
+    :class="['text-input', `size--${size}`, {
+      'has-icon-left': !!iconLeft,
+      'has-icon-right': !!iconRight
+    }]"
+  >
     <base-input
       ref="base-input"
       :value="value"
       v-bind="attributes"
-      :hasIconLeft="!!iconLeft"
-      :hasIconRight="!!iconRight"
       :native-type="nativeType === 'password' && showPassword ? 'text' : nativeType"
       :type="type"
       :size="size"
       v-on="inputListeners"
       @focus="onFocus"
       @blur="onBlur"
+      class="input-itself"
     />
 
     <unnnic-icon
       v-if="iconLeft"
       :scheme="iconScheme"
       :icon="iconLeft"
-      :size="iconSize"
+      size="sm"
       :clickable="iconLeftClickable"
       @click="onIconLeftClick"
       class="icon-left"
@@ -28,7 +32,7 @@
       v-if="iconRightSvg"
       :scheme="iconScheme"
       :icon="iconRightSvg"
-      :size="iconSize"
+      size="sm"
       :clickable="iconRightClickable || allowTogglePassword"
       @click="onIconRightClick"
       class="icon-right"
@@ -114,12 +118,12 @@ export default {
         return 'feedback-red';
       }
 
-      if (this.value || this.isFocused) {
-        return 'neutral-dark';
-      }
-
       if (this.isDisabled) {
         return 'neutral-cleanest';
+      }
+
+      if (this.value || this.isFocused) {
+        return 'neutral-dark';
       }
 
       if (this.hasCloudyColor) {
@@ -139,11 +143,6 @@ export default {
     },
     attributes() {
       return { ...this.$attrs, ...this.$attrs['v-bind'], ...this.$props };
-    },
-    iconSize() {
-      if (this.size === 'md') return 'sm';
-      if (this.size === 'sm') return 'xs';
-      return 'sm';
     },
   },
   methods: {
@@ -179,16 +178,39 @@ export default {
 @import '../../assets/scss/unnnic.scss';
 
 .icon {
+  &-left, &-right {
+    pointer-events: none;
+  }
+
   &-left {
     position: absolute;
-    transform: translateY(100%);
+    top: $unnnic-spacing-ant + 0.1875 * $unnnic-font-size;
     left: $unnnic-inline-sm;
   }
 
   &-right {
     position: absolute;
-    transform: translateY(100%);
+    top: $unnnic-spacing-ant + 0.1875 * $unnnic-font-size;
     right: $unnnic-inline-sm;
+  }
+}
+.text-input {
+  position: relative;
+
+  &.size--md, &.size--sm {
+    &.has-icon-left .input-itself {
+      padding-left: $unnnic-spacing-sm + $unnnic-icon-size-sm + $unnnic-spacing-xs;
+    }
+
+    &.has-icon-right .input-itself {
+      padding-right: $unnnic-spacing-sm + $unnnic-icon-size-sm + $unnnic-spacing-xs;
+    }
+  }
+
+  &.size--sm {
+    .icon-left, .icon-right {
+      top: $unnnic-spacing-xs + 0.125 * $unnnic-font-size;
+    }
   }
 }
 </style>

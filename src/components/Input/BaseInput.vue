@@ -41,14 +41,6 @@ export default {
       type: String,
       default: '',
     },
-    hasIconLeft: {
-      type: Boolean,
-      default: null,
-    },
-    hasIconRight: {
-      type: Boolean,
-      default: null,
-    },
     nativeType: {
       type: String,
       default: 'text',
@@ -83,10 +75,6 @@ export default {
         'input',
         `size-${this.size}`,
         this.type,
-        {
-          'has-icon-left': this.hasIconLeft,
-          'has-icon-right': this.hasIconRight,
-        },
       ];
     },
   },
@@ -98,7 +86,11 @@ export default {
 
 .input {
   background: $unnnic-color-neutral-snow;
-  border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+  border: none;
+  outline-style: solid;
+  outline-color: $unnnic-color-neutral-soft;
+  outline-width: $unnnic-border-width-thinner;
+  outline-offset: -$unnnic-border-width-thinner;
   border-radius: $unnnic-border-radius-sm;
   color: $unnnic-color-neutral-dark;
   caret-color: $unnnic-color-neutral-cleanest;
@@ -112,55 +104,26 @@ export default {
       font-size: $unnnic-font-size-body-gt;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
       padding: $unnnic-squish-xs;
-
-      &.has-icon {
-        &-left {
-          padding-left: calc(#{$unnnic-inline-sm} + #{$unnnic-icon-size-sm} + #{$unnnic-inline-xs});
-        }
-
-        &-right {
-          padding-right: calc(
-            #{$unnnic-inline-sm} + #{$unnnic-icon-size-sm} + #{$unnnic-inline-xs}
-          );
-        }
-      }
     }
 
     &-sm {
       font-size: $unnnic-font-size-body-md;
       line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
       padding: $unnnic-squish-nano;
-
-      &.has-icon {
-        &-left {
-          padding-left: calc(#{$unnnic-inline-sm} + #{$unnnic-icon-size-xs} + #{$unnnic-inline-xs});
-        }
-
-        &-right {
-          padding-right: calc(
-            #{$unnnic-inline-sm} + #{$unnnic-icon-size-xs} + #{$unnnic-inline-xs}
-          );
-        }
-      }
     }
   }
 
   &:focus {
-    border-color: $unnnic-color-neutral-cleanest;
-    outline: none;
-    &::placeholder {
-      color: $unnnic-color-neutral-clean;
-      opacity: 1; /* Firefox */
-    }
+    outline-color: $unnnic-color-neutral-clean;
   }
 
   &.error {
-    border: $unnnic-border-width-thinner solid $unnnic-color-feedback-red;
+    outline-color: $unnnic-color-feedback-red;
     color: $unnnic-color-feedback-red;
   }
 
   &::placeholder {
-    color: $unnnic-color-neutral-clean;
+    color: $unnnic-color-neutral-cleanest;
     opacity: 1; /* Firefox */
   }
 
@@ -171,8 +134,10 @@ export default {
   }
 
   &:disabled {
-    border: 1px solid transparent;
-    background-color: $unnnic-color-neutral-light;
+    outline-color: $unnnic-color-neutral-cleanest;
+    background-color: $unnnic-color-neutral-lightest;
+    cursor: not-allowed;
+    color: $unnnic-color-neutral-cleanest;
 
     &::placeholder {
       color: $unnnic-color-neutral-cleanest;
