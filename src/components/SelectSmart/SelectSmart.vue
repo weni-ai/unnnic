@@ -9,7 +9,6 @@
         :type="type"
         :size="size"
         :disabled="disabled"
-        :hasCloudyColor="hasCloudyColor"
         readonly
         :icon-right="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
         :icon-right-clickable="!disabled"
@@ -80,6 +79,9 @@ export default {
         },
       ],
     },
+    value: {
+      type: null,
+    },
     size: {
       type: String,
       default: 'md',
@@ -92,13 +94,6 @@ export default {
       },
     },
     disabled: {
-      type: Boolean,
-      default: false,
-    },
-    value: {
-      type: null,
-    },
-    hasCloudyColor: {
       type: Boolean,
       default: false,
     },

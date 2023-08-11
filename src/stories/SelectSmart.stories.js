@@ -7,10 +7,6 @@ export default {
     size: { control: { type: 'select', options: ['md', 'sm'] } },
     type: { control: { type: 'select', options: ['normal', 'error'] } },
     search: { control: { type: 'boolean' } },
-    searchIconLeft: { control: { type: 'text' } },
-    searchPlaceholder: { control: { type: 'text' } },
-    optionsHeader: { control: { type: 'array' } },
-    hasCloudyColor: { control: { type: 'select', options: [true, false] } },
   },
 };
 
