@@ -41,7 +41,7 @@
             >
               <select-smart-option
                 v-for="(option, index) in filterOptions(options)"
-                :key="option.value + index"
+                :key="option.value"
                 :label="option.label"
                 :description="option.description"
                 :tabindex="index"
@@ -209,7 +209,7 @@ export default {
     },
 
     filterOptions(options) {
-      const removeAccents = (str) => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const removeAccents = (value) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
       const searchValueWithoutAccents = removeAccents(this.searchValue.toLowerCase());
       const searchTerms = searchValueWithoutAccents.split(' ');
@@ -220,7 +220,24 @@ export default {
         return searchTerms.every((term) => labelWithoutAccents.includes(term)) && value;
       };
 
-      return options.filter(filterOption);
+      const filteredOptions = options.filter(filterOption);
+
+      const sortedOptions = filteredOptions.sort((a, b) => {
+        const labelA = removeAccents(a.label.toString()).toLowerCase();
+        const labelB = removeAccents(b.label.toString()).toLowerCase();
+
+        const numberA = parseInt(labelA.match(/\d+/)?.[0], 10) || 0;
+        const numberB = parseInt(labelB.match(/\d+/)?.[0], 10) || 0;
+
+        if (numberA < numberB) return -1;
+        if (numberA > numberB) return 1;
+
+        if (labelA < labelB) return -1;
+        if (labelA > labelB) return 1;
+        return 0;
+      });
+
+      return sortedOptions;
     },
 
     onClickOutside() {
