@@ -13,6 +13,7 @@
     "importing": "Importando"
   },
   "select_smart": {
-    "without_results": "Nenhum resultado encontrado"
+    "without_results": "Nenhum resultado encontrado",
+    "without_multiple_selected": "Nenhuma opção selecionada"
   }
 }

@@ -101,7 +101,7 @@ export default {
     gap: $unnnic-spacing-xs;
 
     .unnnic-checkbox rect {
-      rx: $unnnic-border-radius-sm;
+      rx: $unnnic-border-radius-md;
     }
   }
 
