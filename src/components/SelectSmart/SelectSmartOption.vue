@@ -3,14 +3,16 @@
     @click="$emit('click')"
     :class="{
       'unnnic-select-smart-option': true,
-      'unnnic-select-smart-option__active': active,
+      'unnnic-select-smart-option--active': active,
       'unnnic--clickable': selectable,
       'unnnic-select-smart-option--selectable': selectable,
-      'text-focused': textFocused,
+      'unnnic-select-smart-option--with-checkbox': allowCheckbox,
     }"
     :title="label"
   >
-    <span
+    <unnnic-checkbox v-if="allowCheckbox" ref="checkbox" :value="active" :size="size" />
+    <div>
+      <span
       :class="['unnnic-select-smart-option__label', `unnnic-select-smart-option__label--${size}`]"
       >{{ label }}</span
     >
@@ -23,12 +25,16 @@
     >
       {{ description }}
     </p>
+    </div>
   </div>
 </template>
 
 <script>
+import UnnnicCheckbox from '../Checkbox/Checkbox.vue';
+
 export default {
   name: 'UnnicSelectSmartOption',
+  components: { UnnnicCheckbox },
   props: {
     label: {
       type: String,
@@ -52,7 +58,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    textFocused: {
+    allowCheckbox: {
       type: Boolean,
       default: false,
     },
@@ -63,7 +69,6 @@ export default {
 <style lang="scss">
 @import '../../assets/scss/unnnic.scss';
 .unnnic-select-smart-option {
-  margin: 0 $unnnic-inline-xs;
   background-color: $unnnic-color-background-snow;
   padding: $unnnic-spacing-stack-nano $unnnic-inline-xs;
 
@@ -78,21 +83,26 @@ export default {
   overflow: hidden;
   -webkit-line-clamp: 1;
 
-  &.text-focused {
-    color: $unnnic-color-brand-weni-soft;
-    font-weight: $unnnic-font-weight-bold;
-  }
-
   &--selectable:hover,
-  &__active {
+  &--active {
     border-radius: $unnnic-border-radius-sm;
 
     background-color: $unnnic-color-neutral-light;
   }
 
-  &__active {
+  &--active:not(&--with-checkbox) {
     color: $unnnic-color-weni-600;
     font-weight: $unnnic-font-weight-bold;
+  }
+
+  &--with-checkbox {
+    display: flex;
+    align-items: center;
+    gap: $unnnic-spacing-xs;
+
+    .unnnic-checkbox rect {
+      rx: $unnnic-border-radius-sm;
+    }
   }
 
   &__label {

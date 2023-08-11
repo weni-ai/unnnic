@@ -34,10 +34,11 @@ const Template = (args, { argTypes }) => ({
 
   template: `
     <div>
+    <button v-if="!(disabled || autocomplete)" @click="addDynamicOption">Add dynamic option</button>
+    <p v-if="!disabled">v-model: {{exampleValue}}</p>
       <unnnic-select-smart v-model="exampleValue" :options="exampleOptions" v-bind="$props" />
 
 
-      <button v-if="!(disabled || autocomplete)" @click="addDynamicOption">Add dynamic option</button>
     </div>
   `,
 });
@@ -97,4 +98,33 @@ Autocomplete.args = {
     { value: 'saudi_arabia', label: 'Arábia Saudita' },
   ],
   autocomplete: true,
+};
+
+export const Multiple = Template.bind({});
+Multiple.args = {
+  exampleOptions: [
+    { value: '', label: 'Select some option' },
+    { value: 'united_states', label: 'Estados Unidos' },
+    { value: 'brazil', label: 'Brasil' },
+    { value: 'china', label: 'China' },
+    { value: 'india', label: 'Índia' },
+    { value: 'russia', label: 'Rússia' },
+    { value: 'japan', label: 'Japão' },
+    { value: 'germany', label: 'Alemanha' },
+    { value: 'france', label: 'França' },
+    { value: 'canada', label: 'Canadá' },
+    { value: 'australia', label: 'Austrália' },
+    { value: 'south_korea', label: 'Coreia do Sul' },
+    { value: 'mexico', label: 'México' },
+    { value: 'egypt', label: 'Egito' },
+    { value: 'south_africa', label: 'África do Sul' },
+    { value: 'turkey', label: 'Turquia' },
+    { value: 'nigeria', label: 'Nigéria' },
+    { value: 'argentina', label: 'Argentina' },
+    { value: 'italy', label: 'Itália' },
+    { value: 'spain', label: 'Espanha' },
+    { value: 'saudi_arabia', label: 'Arábia Saudita' },
+  ],
+  autocomplete: true,
+  multiple: true,
 };

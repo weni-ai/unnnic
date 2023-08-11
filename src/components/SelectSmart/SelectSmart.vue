@@ -4,13 +4,13 @@
       <text-input
         class="unnnic-select-smart__input"
         ref="selectSmartInput"
-        :value="autocomplete ? searchValue : valueLabel"
+        :value="inputValue"
         :placeholder="autocompletePlaceholder || selectedLabel"
         :type="type"
         :size="size"
         :disabled="disabled"
-        :readonly="!autocomplete"
-        :icon-left="autocomplete && autocompleteIconLeft ? 'search-1' : ''"
+        :readonly="!isAutocompleteAllowed"
+        :icon-left="isAutocompleteAllowed && autocompleteIconLeft ? 'search-1' : ''"
         :icon-right="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
         :icon-right-clickable="!disabled"
         @icon-right-click="handleClickSelect"
@@ -46,15 +46,20 @@
                 :description="option.description"
                 :tabindex="index"
                 :size="size"
-                :active="option.value === value"
-                @click="onSelectOption(option)"
+                :active="option.value === value || optionIsSelected(option)"
+                :allowCheckbox="!!multiple"
+                @click="
+                  multiple && optionIsSelected(option)
+                    ? unselectOption(option)
+                    : onSelectOption(option)
+                "
               />
-              <p
-                v-if="filterOptions(options).length === 0"
-                class="unnnic-select-smart__options--no-results"
-              >
-                {{ $t('select_smart.without_results') }}
-              </p>
+            <p
+              v-if="filterOptions(options).length === 0"
+              class="unnnic-select-smart__options--no-results"
+            >
+              {{ $t('select_smart.without_results') }}
+            </p>
             </div>
           </div>
         </div>
@@ -105,6 +110,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    multiple: {
+      type: Boolean,
+      default: false,
+    },
     autocomplete: {
       type: Boolean,
       default: false,
@@ -125,6 +134,9 @@ export default {
       status: 'not-mounted',
 
       searchValue: '',
+      isAutocompleteAllowed: false,
+
+      selectedOptions: [],
     };
   },
 
@@ -133,7 +145,7 @@ export default {
       this.$nextTick(() => {
         this.$refs['dropdown-skeleton'].calculatePosition();
 
-        if (newValue) {
+        if (newValue && !this.multiple) {
           const activeOptionIndex = this.getActiveOptionIndex();
 
           if (activeOptionIndex !== -1) {
@@ -148,6 +160,11 @@ export default {
         this.$refs['dropdown-skeleton'].calculatePosition();
       });
     },
+
+    selectedOptions(newSelectedOptions) {
+      this.$emit('onChange', newSelectedOptions);
+      this.$emit('input', newSelectedOptions);
+    },
   },
 
   computed: {
@@ -157,7 +174,7 @@ export default {
       }
 
       const selected = this.options.find((option) => {
-        if (this.autocomplete) {
+        if (this.isAutocompleteAllowed) {
           return option.value === this.value && option.value !== '';
         }
 
@@ -176,7 +193,7 @@ export default {
     },
 
     autocompletePlaceholder() {
-      if (this.autocomplete) {
+      if (this.isAutocompleteAllowed) {
         const selected = this.options.find((option) => option.value === '');
 
         if (selected) {
@@ -185,18 +202,41 @@ export default {
       }
       return '';
     },
+
+    inputValue() {
+      const {
+        isAutocompleteAllowed, searchValue, multiple, selectedOptions,
+      } = this;
+
+      if (isAutocompleteAllowed || multiple) {
+        return searchValue;
+      }
+      if (!multiple && selectedOptions.length !== 0) {
+        return selectedOptions[0].label;
+      }
+
+      return '';
+    },
   },
 
   mounted() {
     this.status = 'mounted';
+
+    if (this.multiple || this.autocomplete) {
+      this.isAutocompleteAllowed = true;
+    }
   },
 
   directives: {
     clickOutside: vClickOutside.directive,
   },
   methods: {
+    optionIsSelected(option) {
+      return this.selectedOptions.some((selectedOption) => selectedOption.value === option.value);
+    },
+
     handleClickSelect() {
-      if (this.autocomplete) {
+      if (this.isAutocompleteAllowed) {
         if (this.active) {
           return;
         }
@@ -242,14 +282,15 @@ export default {
 
     onClickOutside() {
       this.active = false;
-      if (this.autocomplete) {
+      if (this.isAutocompleteAllowed) {
         this.searchValue = this.selectedLabel;
       }
     },
 
     getActiveOptionIndex() {
+      const activeValue = this.value?.[0]?.value;
       const options = this.filterOptions(this.options);
-      return options.findIndex((option) => option.value === this.value);
+      return options.findIndex((option) => option.value === activeValue);
     },
 
     scrollToOption(optionIndex) {
@@ -257,26 +298,36 @@ export default {
       elementScroll.childNodes[optionIndex].scrollIntoViewIfNeeded();
     },
 
-    onSelectOption(option, type) {
-      if (type === 'header') {
-        if (option.click) {
-          option.click();
-        }
-      } else {
-        const value = option.value === null || option.value.length === 0 ? null : option.value;
+    onSelectOption(option) {
+      const selectedOption = option.value === null || option.value.length === 0 ? null : option;
 
-        this.$emit('onChange', value);
-        this.$emit('input', value);
+      this.selectedOptions = this.multiple
+        ? [...this.selectedOptions, selectedOption]
+        : [selectedOption];
 
-        this.active = false;
-      }
+      if (!this.multiple) this.active = false;
 
-      if (this.autocomplete) {
+      if (this.isAutocompleteAllowed && !this.multiple) {
         this.searchValue = option.label;
         return;
       }
 
+      if (this.multiple) {
+        this.searchValue = '';
+        return;
+      }
+
       this.$refs.selectSmartInput.focus();
+    },
+
+    unselectOption(option) {
+      const indexToRemove = this.selectedOptions.findIndex(
+        (selectedOption) => selectedOption === option,
+      );
+
+      if (indexToRemove !== -1) {
+        this.selectedOptions.splice(indexToRemove, 1);
+      }
     },
 
     onKeyDownSelect(event) {
@@ -314,9 +365,8 @@ export default {
           this.scrollToOption(newIndex);
         }
 
-        const newValue = options[newIndex === undefined ? activeOptionIndex : newIndex].value;
-        this.$emit('onChange', newValue);
-        this.$emit('input', newValue);
+        const newValue = options[newIndex === undefined ? activeOptionIndex : newIndex];
+        this.selectedOptions = [newValue];
       }
     },
   },
@@ -351,8 +401,9 @@ export default {
         @return ($value * $unnnic-font-size) - ($unnnic-spacing-xs * 2);
       }
 
-      margin: $unnnic-spacing-xs $unnnic-spacing-nano;
-      margin-left: 0;
+      margin: $unnnic-spacing-xs;
+      margin-right: $unnnic-inline-xs;
+      padding-right: $unnnic-inline-xs;
 
       max-height: calc-max-height(8.5);
 
@@ -403,7 +454,8 @@ export default {
     }
   }
 
-  .unnnic-select-smart__input input { // entire class name to have higher priority in styles
+  .unnnic-select-smart__input input {
+    // entire class name to have higher priority in styles
     &:read-only {
       cursor: pointer;
 
