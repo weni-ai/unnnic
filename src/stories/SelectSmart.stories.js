@@ -6,7 +6,9 @@ export default {
   argTypes: {
     size: { control: { type: 'select', options: ['md', 'sm'] } },
     type: { control: { type: 'select', options: ['normal', 'error'] } },
-    search: { control: { type: 'boolean' } },
+    autocomplete: { control: { type: 'boolean' } },
+    autocompleteIconLeft: { control: { type: 'boolean' } },
+    autocompleteClearOnFocus: { control: { type: 'boolean' } },
   },
 };
 
@@ -57,8 +59,8 @@ Disabled.args = {
   disabled: true,
 };
 
-export const WithDescription = Template.bind({});
-WithDescription.args = {
+export const WithDescriptions = Template.bind({});
+WithDescriptions.args = {
   exampleOptions: [
     { value: '', label: 'Select some option' },
     { value: '1', label: 'Option 1', description: 'This is the first option' },
@@ -67,4 +69,17 @@ WithDescription.args = {
     { value: '4', label: 'Option 4', description: 'Yet another choice among the options' },
     { value: '5', label: 'Option 5', description: 'The last option available for selection' },
   ],
+};
+
+export const Autocomplete = Template.bind({});
+Autocomplete.args = {
+  exampleOptions: [
+    { value: '', label: 'Select some option' },
+    { value: '1', label: 'Option 1' },
+    { value: '2', label: 'Option 2' },
+    { value: '3', label: 'Option 3' },
+    { value: '4', label: 'Option 4' },
+    { value: '5', label: 'Option 5' },
+  ],
+  autocomplete: true,
 };

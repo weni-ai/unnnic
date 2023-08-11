@@ -4,16 +4,18 @@
       <text-input
         class="unnnic-select-smart__input"
         ref="selectSmartInput"
-        :value="valueLabel"
-        :placeholder="placeholder || labelForValue"
+        :value="autocomplete ? searchValue : valueLabel"
+        :placeholder="autocompletePlaceholder || selectedLabel"
         :type="type"
         :size="size"
         :disabled="disabled"
-        readonly
+        :readonly="!autocomplete"
+        :icon-left="autocomplete && autocompleteIconLeft ? 'search-1' : ''"
         :icon-right="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
         :icon-right-clickable="!disabled"
         @icon-right-click="handleClickSelect"
         @click="handleClickSelect"
+        @input="searchValue = $event"
       />
 
       <template v-slot:inside="props">
@@ -47,6 +49,12 @@
                 :active="option.value === value"
                 @click="onSelectOption(option)"
               />
+              <p
+                v-if="filterOptions(options).length === 0"
+                class="unnnic-select-smart__options--no-results"
+              >
+                {{ $t('select_smart.without_results') }}
+              </p>
             </div>
           </div>
         </div>
@@ -97,6 +105,18 @@ export default {
       type: Boolean,
       default: false,
     },
+    autocomplete: {
+      type: Boolean,
+      default: false,
+    },
+    autocompleteIconLeft: {
+      type: Boolean,
+      default: false,
+    },
+    autocompleteClearOnFocus: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -131,14 +151,18 @@ export default {
   },
 
   computed: {
-    labelForValue() {
+    selectedLabel() {
       if (this.status !== 'mounted') {
         return '';
       }
 
-      const selected = this.options.find(
-        (option) => (option.value === '' && this.value == null) || option.value === this.value,
-      );
+      const selected = this.options.find((option) => {
+        if (this.autocomplete) {
+          return option.value === this.value && option.value !== '';
+        }
+
+        return (option.value === '' && this.value == null) || option.value === this.value;
+      });
 
       if (selected) {
         return selected.label;
@@ -149,6 +173,17 @@ export default {
 
     hasDescriptionOptions() {
       return this.options.some((item) => typeof item.description !== 'undefined');
+    },
+
+    autocompletePlaceholder() {
+      if (this.autocomplete) {
+        const selected = this.options.find((option) => option.value === '');
+
+        if (selected) {
+          return selected.label;
+        }
+      }
+      return '';
     },
   },
 
@@ -161,15 +196,28 @@ export default {
   },
   methods: {
     handleClickSelect() {
+      if (this.autocomplete) {
+        if (this.active) {
+          return;
+        }
+        if (this.autocompleteClearOnFocus) {
+          this.searchValue = '';
+        }
+      }
+
       this.active = !this.active;
     },
 
     filterOptions(options) {
-      const searchValueLowerCase = this.searchValue.toLowerCase();
+      const removeAccents = (str) => str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+      const searchValueWithoutAccents = removeAccents(this.searchValue.toLowerCase());
+      const searchTerms = searchValueWithoutAccents.split(' ');
 
       const filterOption = ({ value, label }) => {
-        const filteredLabel = label.toString().toLowerCase().includes(searchValueLowerCase);
-        return value && filteredLabel;
+        const labelWithoutAccents = removeAccents(label.toString().toLowerCase());
+
+        return searchTerms.every((term) => labelWithoutAccents.includes(term)) && value;
       };
 
       return options.filter(filterOption);
@@ -177,6 +225,9 @@ export default {
 
     onClickOutside() {
       this.active = false;
+      if (this.autocomplete) {
+        this.searchValue = this.selectedLabel;
+      }
     },
 
     getActiveOptionIndex() {
@@ -201,6 +252,11 @@ export default {
         this.$emit('input', value);
 
         this.active = false;
+      }
+
+      if (this.autocomplete) {
+        this.searchValue = option.label;
+        return;
       }
 
       this.$refs.selectSmartInput.focus();
@@ -312,6 +368,14 @@ export default {
       }
     }
 
+    &--no-results {
+      margin: 0;
+      padding: $unnnic-spacing-nano $unnnic-spacing-ant;
+
+      color: $unnnic-color-neutral-cleanest;
+      font-size: $unnnic-font-size-body-md;
+    }
+
     &.inactive {
       display: none;
     }
@@ -322,12 +386,26 @@ export default {
     }
   }
 
-  .unnnic-select-smart__input input {
+  .unnnic-select-smart__input input { // entire class name to have higher priority in styles
     &:read-only {
       cursor: pointer;
 
       &::placeholder {
         color: $unnnic-color-neutral-dark;
+      }
+    }
+
+    &:not(:read-only :focus) {
+      &::placeholder {
+        color: $unnnic-color-neutral-dark;
+      }
+    }
+
+    &:not(:read-only) {
+      &:focus {
+        &::placeholder {
+          color: $unnnic-color-neutral-cleanest;
+        }
       }
     }
 
