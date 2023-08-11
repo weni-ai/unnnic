@@ -199,6 +199,8 @@ export default {
             this.scrollToOption(activeOptionIndex);
           }
         }
+
+        this.focusedOption = null;
       });
     },
 
@@ -206,6 +208,10 @@ export default {
       this.$nextTick(() => {
         this.$refs['dropdown-skeleton'].calculatePosition();
       });
+
+      this.focusedOption = null;
+
+      if (!this.active) this.active = true;
     },
 
     selectedOptions(newSelectedOptions) {
@@ -301,12 +307,14 @@ export default {
     },
 
     handleSelect(option) {
-      if (this.multiple && this.optionIsSelected(option)) {
-        this.unselectOption(option);
-        return;
-      }
+      if (option) {
+        if (this.multiple && this.optionIsSelected(option)) {
+          this.unselectOption(option);
+          return;
+        }
 
-      this.selectOption(option);
+        this.selectOption(option);
+      }
     },
 
     handleClickInput() {
@@ -419,16 +427,12 @@ export default {
     async onKeyDownSelect(event) {
       const { key } = event;
 
-      const validKeys = ['Enter', 'ArrowUp', 'ArrowDown'];
+      const validKeys = ['Escape', 'Enter', 'ArrowUp', 'ArrowDown'];
 
       if (validKeys.includes(key)) {
         event.preventDefault();
 
         const options = this.filterOptions(this.options);
-
-        if (options.length === 0) {
-          return;
-        }
 
         const focusedOptionIndex = this.getOptionIndex('focused');
 
@@ -436,12 +440,17 @@ export default {
 
         // eslint-disable-next-line default-case
         switch (key) {
+          case 'Escape':
+            this.active = false;
+            break;
           case 'Enter':
             if (!this.active) {
               this.active = true;
               break;
             }
-            this.handleSelect(this.focusedOption);
+            if (this.focusedOption) {
+              this.handleSelect(this.focusedOption);
+            }
             break;
           case 'ArrowUp':
             if (this.multiple && !this.active) {
