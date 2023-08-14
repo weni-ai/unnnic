@@ -23,7 +23,7 @@
       <icon-svg
         class="unnnic-select-smart__options__multiple__selecteds__clear"
         icon="close-1"
-        size="sm"
+        size="xs"
         clickable
         @click="clearSelectedOptions"
       />
