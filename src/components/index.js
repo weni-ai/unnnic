@@ -31,6 +31,7 @@ import modal from './Modal/Modal.vue';
 import modalNext from './ModalNext/ModalNext.vue';
 import modalUpload from './ModalUpload/ModalUpload.vue';
 import call from '../utils/call';
+import selectSmart from './SelectSmart/SelectSmart.vue';
 import select from './Select/Select.vue';
 import selectItem from './Select/SelectItem.vue';
 import selectListItem from './SelectListItem/SelectListItem.vue';
@@ -102,6 +103,7 @@ const components = {
   unnnicModal: modal,
   unnnicModalNext: modalNext,
   unnnicModalUpload: modalUpload,
+  unnnicSelectSmart: selectSmart,
   unnnicSelect: select,
   unnnicSelectItem: selectItem,
   unnnicSelectListItem: selectListItem,
@@ -178,6 +180,7 @@ export const unnniclanguageSelect = languageSelect;
 export const unnnicModal = modal;
 export const unnnicModalNext = modalNext;
 export const unnnicModalUpload = modalUpload;
+export const unnnicSelectSmart = selectSmart;
 export const unnnicSelect = select;
 export const unnnicSelectItem = selectItem;
 export const unnnicSelectListItem = selectListItem;
