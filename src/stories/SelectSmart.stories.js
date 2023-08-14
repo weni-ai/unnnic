@@ -54,6 +54,7 @@ const exampleOptionsDefault = [
   { value: '3', label: 'Option 3' },
   { value: '4', label: 'Option 4' },
   { value: '5', label: 'Option 5' },
+  { value: '5', label: 'Option 5' },
 ];
 
 const exampleOptionsWithDescriptions = [
@@ -89,9 +90,23 @@ const exampleOptionsCountries = [
   { value: 'saudi_arabia', label: 'Arábia Saudita' },
 ];
 
+const exampleOptionsFirstSelected = [
+  { value: '1', label: 'Option 1' },
+  { value: '2', label: 'Option 2' },
+  { value: '3', label: 'Option 3' },
+  { value: '4', label: 'Option 4' },
+  { value: '5', label: 'Option 5' },
+  { value: '5', label: 'Option 5' },
+];
+
 export const Default = Template.bind({});
 Default.args = {
   exampleOptions: exampleOptionsDefault,
+};
+
+export const FirstSelected = Template.bind({});
+FirstSelected.args = {
+  exampleOptions: exampleOptionsFirstSelected,
 };
 
 export const Disabled = Template.bind({});

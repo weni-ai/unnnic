@@ -196,11 +196,9 @@ export default {
           const activeOptionIndex = this.getOptionIndex('active');
 
           if (activeOptionIndex !== -1) {
-            this.scrollToOption(activeOptionIndex);
+            this.scrollToOption(activeOptionIndex, 'center');
           }
         }
-
-        this.focusedOption = null;
       });
     },
 
@@ -229,18 +227,21 @@ export default {
       }
 
       const selected = this.options.find((option) => {
+        const isValueMatch = option.value === this.value;
+
         if (this.isAutocompleteAllowed) {
-          return option.value === this.value && option.value !== '';
+          return isValueMatch && option.value !== '';
         }
 
-        return (option.value === '' && this.value == null) || option.value === this.value;
+        const isEmptyOption = option.value === '' && this.value == null;
+        return isEmptyOption || isValueMatch;
       });
 
       if (selected) {
         return selected.label;
       }
 
-      return '';
+      return this.multiple ? '' : this.selectedOptions.at(-1)?.label || '';
     },
 
     hasDescriptionOptions() {
@@ -291,6 +292,10 @@ export default {
     if (this.multiple || this.autocomplete) {
       this.isAutocompleteAllowed = true;
     }
+
+    if (this.options[0].value) {
+      this.selectOption(this.options[0]);
+    }
   },
 
   directives: {
@@ -331,41 +336,49 @@ export default {
     },
 
     filterOptions(options) {
-      const removeAccents = (value) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+      const searchValue = this.searchValue.toLowerCase();
+      const searchTerms = searchValue
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .split(' ');
 
-      const searchValueWithoutAccents = removeAccents(this.searchValue.toLowerCase());
-      const searchTerms = searchValueWithoutAccents.split(' ');
+      const normalizeLabel = (label) => label
+        .toString()
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '');
 
-      const filterOption = ({ value, label }) => {
-        const labelWithoutAccents = removeAccents(label.toString().toLowerCase());
+      const getNumber = (str) => parseInt(str.match(/\d+/)?.[0], 10) || 0;
 
-        return searchTerms.every((term) => labelWithoutAccents.includes(term)) && value;
-      };
+      const filteredOptions = options.filter(({ value, label }, index, self) => {
+        const labelWithoutAccents = normalizeLabel(label);
+        const isValueUnique = self.findIndex((option) => option.value === value) === index;
+        const matchesSearchTerms = searchTerms.every((term) => labelWithoutAccents.includes(term));
 
-      const filteredOptions = options.filter(filterOption);
+        return isValueUnique && matchesSearchTerms && value;
+      });
 
       const sortedOptions = filteredOptions.sort((a, b) => {
-        const labelA = removeAccents(a.label.toString()).toLowerCase();
-        const labelB = removeAccents(b.label.toString()).toLowerCase();
+        const labelA = normalizeLabel(a.label);
+        const labelB = normalizeLabel(b.label);
 
-        const numberA = parseInt(labelA.match(/\d+/)?.[0], 10) || 0;
-        const numberB = parseInt(labelB.match(/\d+/)?.[0], 10) || 0;
+        const numberA = getNumber(labelA);
+        const numberB = getNumber(labelB);
 
-        if (numberA < numberB) return -1;
-        if (numberA > numberB) return 1;
-
-        if (labelA < labelB) return -1;
-        if (labelA > labelB) return 1;
-        return 0;
+        return numberA - numberB || labelA.localeCompare(labelB);
       });
 
       return sortedOptions;
     },
 
     onClickOutside() {
-      this.active = false;
-      if (this.isAutocompleteAllowed) {
-        this.searchValue = this.selectedLabel;
+      if (this.active) {
+        if (this.isAutocompleteAllowed) {
+          this.searchValue = this.selectedLabel;
+        }
+        this.$nextTick(() => {
+          this.active = false;
+        });
       }
     },
 
@@ -376,14 +389,21 @@ export default {
         valueByType = this.value?.[0]?.value;
       }
       if (type === 'focused') {
-        valueByType = this.focusedOption?.value;
+        valueByType = this.focusedOption?.value || this.selectedOptions.at(-1)?.value;
       }
       return options.findIndex((option) => option.value === valueByType);
     },
 
-    scrollToOption(optionIndex) {
+    scrollToOption(optionIndex, scrollBlock = 'nearest') {
       const elementScroll = this.$refs.selectSmartOptionsScrollArea;
-      elementScroll.childNodes[optionIndex].scrollIntoViewIfNeeded();
+
+      if (elementScroll && optionIndex >= 0 && optionIndex < elementScroll.childNodes.length) {
+        const optionElement = elementScroll.childNodes[optionIndex];
+
+        if (optionElement instanceof HTMLElement) {
+          optionElement.scrollIntoView({ block: scrollBlock });
+        }
+      }
     },
 
     selectOption(option) {
@@ -409,7 +429,11 @@ export default {
     },
 
     onSelectOption(newOption) {
-      if (!this.multiple) this.active = false;
+      this.$nextTick(() => {
+        if (!this.multiple) {
+          this.active = false;
+        }
+      });
 
       if (this.isAutocompleteAllowed && !this.multiple) {
         this.searchValue = newOption.label;
@@ -418,10 +442,7 @@ export default {
 
       if (this.multiple) {
         this.searchValue = '';
-        return;
       }
-
-      this.$refs.selectSmartInput.focus();
     },
 
     async onKeyDownSelect(event) {
@@ -433,44 +454,37 @@ export default {
         event.preventDefault();
 
         const options = this.filterOptions(this.options);
-
         const focusedOptionIndex = this.getOptionIndex('focused');
-
         let newIndex;
 
         // eslint-disable-next-line default-case
         switch (key) {
           case 'Escape':
             this.active = false;
+            this.searchValue = '';
             break;
           case 'Enter':
-            if (!this.active) {
-              this.active = true;
-              break;
-            }
-            if (this.focusedOption) {
+            if (this.focusedOption && this.active) {
               this.handleSelect(this.focusedOption);
             }
-            break;
-          case 'ArrowUp':
-            if (this.multiple && !this.active) {
-              this.active = true;
-              await this.$nextTick();
-            }
-            newIndex = Math.max(focusedOptionIndex - 1, 0);
             if (!this.active) {
-              this.handleSelect(options[newIndex]);
+              this.active = true;
             }
             break;
+
+          case 'ArrowUp':
           case 'ArrowDown':
             if (this.multiple && !this.active) {
               this.active = true;
               await this.$nextTick();
             }
-            newIndex = Math.min(focusedOptionIndex + 1, options.length - 1);
+            newIndex = key === 'ArrowUp'
+              ? Math.max(focusedOptionIndex - 1, 0)
+              : Math.min(focusedOptionIndex + 1, options.length - 1);
             if (!this.active) {
               this.handleSelect(options[newIndex]);
             }
+            break;
         }
 
         if (newIndex !== undefined && this.active) {
