@@ -156,6 +156,19 @@ export default {
     };
   },
 
+  mounted() {
+    this.status = 'mounted';
+
+    if (this.multiple || this.autocomplete) {
+      // The "multiple" variation only exists with autocomplete, so it can't be false
+      this.isAutocompleteAllowed = true;
+    }
+
+    if (this.options[0].value) {
+      this.selectOption(this.options[0]);
+    }
+  },
+
   watch: {
     active(newValue) {
       this.$nextTick(() => {
@@ -186,6 +199,13 @@ export default {
       this.$emit('input', newSelectedOptions);
 
       this.onSelectOption(newSelectedOptions.at(-1));
+    },
+
+    autocomplete(newAutocomplete) {
+      if (!this.multiple) {
+        // The "multiple" variation only exists with autocomplete, so it can't be false
+        this.isAutocompleteAllowed = newAutocomplete;
+      }
     },
   },
 
@@ -242,18 +262,6 @@ export default {
 
       return '';
     },
-  },
-
-  mounted() {
-    this.status = 'mounted';
-
-    if (this.multiple || this.autocomplete) {
-      this.isAutocompleteAllowed = true;
-    }
-
-    if (this.options[0].value) {
-      this.selectOption(this.options[0]);
-    }
   },
 
   directives: {
