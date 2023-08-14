@@ -29,42 +29,13 @@
           }"
         >
           <div :style="{ overflow: 'auto' }">
-            <div v-if="multiple" class="unnnic-select-smart__options__multiple">
-              <div
-                v-if="selectedOptions[0]"
-                class="unnnic-select-smart__options__multiple__selecteds__container"
-              >
-                <div class="unnnic-select-smart__options__multiple__selecteds">
-                  <tag
-                    v-for="option in firstMultipleSelecteds"
-                    class="unnnic-select-smart__options__multiple__selecteds__option"
-                    :key="option.value"
-                    :text="option.label"
-                    hasCloseIcon
-                    @close="unselectOption(option)"
-                  />
-                  <p
-                    v-if="selectedOptions.length > multipleSelectedsTags"
-                    class="unnnic-select-smart__options__multiple__selecteds__remaining"
-                  >
-                    +{{ selectedOptions.length - multipleSelectedsTags }}
-                  </p>
-                </div>
-                <icon-svg
-                  class="unnnic-select-smart__options__multiple__selecteds__clear"
-                  icon="close-1"
-                  size="sm"
-                  clickable
-                  @click="clearSelectedOptions"
-                />
-              </div>
-              <p
-                v-if="!selectedOptions[0]"
-                class="unnnic-select-smart__options__multiple--without-multiples"
-              >
-                {{ multipleWithoutSelectsMessage || $t('select_smart.without_multiple_selected') }}
-              </p>
-            </div>
+            <select-smart-multiple-header
+              v-if="multiple"
+              :selectedOptions="selectedOptions"
+              :withoutSelectsMessage="multipleWithoutSelectsMessage"
+              @clear-selected-options="clearSelectedOptions"
+              @unselect-option="unselectOption"
+            />
             <div
               ref="selectSmartOptionsScrollArea"
               :class="[
@@ -104,19 +75,17 @@
 <script>
 import vClickOutside from 'v-click-outside';
 import SelectSmartOption from './SelectSmartOption.vue';
+import SelectSmartMultipleHeader from './SelectSmartMultipleHeader.vue';
 import TextInput from '../Input/TextInput.vue';
 import DropdownSkeleton from '../Dropdown/DropdownSkeleton.vue';
-import Tag from '../Tag/Tag.vue';
-import IconSvg from '../Icon.vue';
 
 export default {
-  name: 'UnnicSelectSmart',
+  name: 'UnnnicSelectSmart',
   components: {
     TextInput,
     SelectSmartOption,
+    SelectSmartMultipleHeader,
     DropdownSkeleton,
-    Tag,
-    IconSvg,
   },
   props: {
     options: {
@@ -272,17 +241,6 @@ export default {
       }
 
       return '';
-    },
-
-    firstMultipleSelecteds() {
-      const { selectedOptions, multipleSelectedsTags } = this;
-      const selectedArray = [];
-
-      for (let i = 0; i < multipleSelectedsTags; i += 1) {
-        selectedArray.push(selectedOptions?.[i]);
-      }
-
-      return selectedArray.filter((option) => option !== undefined);
     },
   },
 
@@ -562,60 +520,14 @@ export default {
       }
     }
 
-    &__multiple--without-multiples,
     &--no-results {
       margin: 0;
 
       color: $unnnic-color-neutral-cleanest;
       line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
       font-size: $unnnic-font-size-body-md;
-    }
 
-    &__multiple--without-multiples {
-      padding: $unnnic-spacing-ant;
-    }
-
-    &--no-results {
       padding: $unnnic-spacing-nano $unnnic-spacing-ant;
-    }
-
-    &__multiple {
-      border-bottom: 1px solid $unnnic-color-neutral-soft;
-
-      &__selecteds {
-        display: flex;
-
-        color: $unnnic-color-neutral-dark;
-
-        &__container {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-        }
-
-        &__option {
-          margin: $unnnic-spacing-xs;
-          margin-right: 0;
-
-          &.unnnic-tag {
-            outline-color: $unnnic-color-neutral-light;
-            background-color: $unnnic-color-neutral-light;
-
-            color: $unnnic-color-neutral-dark;
-          }
-        }
-
-        &__remaining {
-          margin-left: $unnnic-spacing-xs;
-
-          line-height: $unnnic-font-size-body-md + $unnnic-line-height-small;
-          font-size: $unnnic-font-size-body-gt;
-        }
-
-        &__clear {
-          margin-right: $unnnic-spacing-sm;
-        }
-      }
     }
 
     &.inactive {

@@ -34,7 +34,7 @@
 import UnnnicCheckbox from '../Checkbox/Checkbox.vue';
 
 export default {
-  name: 'UnnicSelectSmartOption',
+  name: 'UnnnicSelectSmartOption',
   components: { UnnnicCheckbox },
   props: {
     label: {
