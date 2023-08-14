@@ -230,7 +230,13 @@ export default {
         return selected.label;
       }
 
-      return this.multiple ? '' : this.selectedOptions.at(-1)?.label || '';
+      if (this.multiple) {
+        const labels = this.selectedOptions.map((item) => item.label);
+        return labels.join(', ');
+      }
+
+      const label = this.selectedOptions.at(-1)?.label || '';
+      return label;
     },
 
     hasDescriptionOptions() {
@@ -293,7 +299,7 @@ export default {
         if (this.active) {
           return;
         }
-        if (this.autocompleteClearOnFocus) {
+        if (this.autocompleteClearOnFocus || this.multiple) {
           this.searchValue = '';
         }
       }
