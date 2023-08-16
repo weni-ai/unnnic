@@ -22,7 +22,7 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicModal, unnnicButton },
-  template: '<unnnicModal v-bind="$props" />',
+  template: '<unnnic-modal v-bind="$props">Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modalConteúdo do modal<br></unnnic-modal>',
 });
 
 const ModalTemplate = (args, { argTypes }) => ({
