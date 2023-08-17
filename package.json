@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "1.16.33",
+  "version": "1.16.34",
   "main": "./dist/unnnic.common.js",
   "files": [
     "dist/*",
@@ -19,7 +19,7 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "preversion": "yarn lint --fix --quiet",
-    "postversion": "git push --tags"
+    "postversion": "git push && git push --tags"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
