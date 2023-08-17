@@ -141,6 +141,8 @@ export default {
     },
 
     async onCloseClick() {
+      console.log('keycloak log', window);
+
       if (window.innerWidth <= 600) {
         await this.mobileAnimateClose();
       }

@@ -2,7 +2,7 @@
   <div
     :class="['text-input', `size--${size}`, {
       'has-icon-left': !!iconLeft,
-      'has-icon-right': !!iconRight
+      'has-icon-right': !!iconRight || allowTogglePassword,
     }]"
   >
     <base-input
@@ -25,7 +25,7 @@
       size="sm"
       :clickable="iconLeftClickable"
       @click="onIconLeftClick"
-      class="icon-left"
+      :class="['icon-left', { 'clickable': iconLeftClickable }]"
     />
 
     <unnnic-icon
@@ -35,7 +35,10 @@
       size="sm"
       :clickable="iconRightClickable || allowTogglePassword"
       @click="onIconRightClick"
-      class="icon-right"
+      :class="[
+        'icon-right',
+        { 'clickable': iconRightClickable || allowTogglePassword }
+      ]"
     />
   </div>
 </template>
@@ -179,7 +182,9 @@ export default {
 
 .icon {
   &-left, &-right {
-    pointer-events: none;
+    &:not(.clickable) {
+      pointer-events: none;
+    }
   }
 
   &-left {
