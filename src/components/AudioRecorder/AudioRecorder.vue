@@ -332,7 +332,7 @@ export default {
     width: 11.5 * $unnnic-font-size;
     height: 2px;
     border-radius: $unnnic-border-radius-sm;
-    background: $unnnic-color-neutral-clean;
+    background: $unnnic-color-neutral-cleanest;
 
     &__bar {
       background: $unnnic-color-neutral-darkest;

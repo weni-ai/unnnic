@@ -125,7 +125,7 @@ export default {
     box-sizing: border-box;
     padding: $unnnic-spacing-inset-nano;
     border-radius: $unnnic-border-radius-sm;
-    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
+    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
     background-color: $unnnic-color-neutral-snow;
 
     color: $unnnic-color-neutral-dark;
@@ -141,9 +141,9 @@ export default {
     }
 
     &:focus {
-      border-color: $unnnic-color-neutral-cleanest;
+      border-color: $unnnic-color-neutral-clean;
       &::placeholder {
-        color: $unnnic-color-neutral-clean;
+        color: $unnnic-color-neutral-cleanest;
       }
     }
   }
@@ -160,7 +160,7 @@ export default {
 
   &.disabled {
     textarea::placeholder {
-      color: $unnnic-color-neutral-cleanest;
+      color: $unnnic-color-neutral-clean;
     }
   }
 

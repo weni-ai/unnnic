@@ -237,7 +237,7 @@ $scroll-size: 4px;
         }
 
         &::-webkit-scrollbar-thumb {
-          background: $unnnic-color-neutral-clean;
+          background: $unnnic-color-neutral-cleanest;
           border-radius: $unnnic-border-radius-pill;
         }
 
@@ -280,7 +280,7 @@ $scroll-size: 4px;
           font-weight: $unnnic-font-weight-bold;
           font-size: $unnnic-font-size-body-md;
           line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
-          color: $unnnic-color-neutral-clean;
+          color: $unnnic-color-neutral-cleanest;
           margin: 0 $unnnic-spacing-inline-sm;
           margin-top: $unnnic-spacing-stack-sm;
           margin-bottom: $unnnic-spacing-stack-xs;

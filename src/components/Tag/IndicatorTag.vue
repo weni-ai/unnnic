@@ -69,7 +69,7 @@ export default {
   border: $unnnic-border-width-thinner solid $unnnic-color-background-sky;
 
   &:hover {
-    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
+    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
   }
 
   &--clickable {

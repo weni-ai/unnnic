@@ -289,7 +289,7 @@ export default {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $unnnic-color-neutral-clean;
+  background: $unnnic-color-neutral-cleanest;
   border-radius: $unnnic-border-radius-pill;
 }
 
@@ -338,7 +338,7 @@ export default {
 
     &--inactive {
       border: 1px solid $unnnic-color-neutral-soft;
-      color: $unnnic-color-neutral-clean;
+      color: $unnnic-color-neutral-cleanest;
     }
 
     &--active {
@@ -368,7 +368,7 @@ export default {
       }
 
       &::-webkit-scrollbar-thumb {
-        background: $unnnic-color-neutral-clean;
+        background: $unnnic-color-neutral-cleanest;
         border-radius: $unnnic-border-radius-pill;
       }
 

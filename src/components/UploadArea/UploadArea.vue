@@ -315,7 +315,7 @@ export default {
     padding: $unnnic-spacing-inset-lg;
 
     // Dashed border with increased dashes spacing and color neutral clean
-    background-image: borderDashed($unnnic-color-neutral-clean);
+    background-image: borderDashed($unnnic-color-neutral-cleanest);
 
     &__has-error {
       background-image: borderDashed($unnnic-color-feedback-red);

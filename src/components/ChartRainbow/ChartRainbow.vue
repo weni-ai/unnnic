@@ -148,7 +148,7 @@ export default {
     }
 
     .description {
-      color: $unnnic-color-neutral-cleanest;
+      color: $unnnic-color-neutral-clean;
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-lg;
       line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;

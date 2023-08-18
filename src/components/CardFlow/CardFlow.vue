@@ -78,7 +78,7 @@ export default {
   flex-direction: column;
   background-color: $unnnic-color-background-snow;
   border-radius: $unnnic-border-radius-md;
-  border: $unnnic-border-width-thin solid $unnnic-color-neutral-cleanest;
+  border: $unnnic-border-width-thin solid $unnnic-color-neutral-clean;
   width: min-content;
   min-width: 13.75 * $unnnic-font-size;
 
@@ -162,7 +162,7 @@ export default {
 
         &.has-content {
           background-color: $unnnic-color-neutral-snow;
-          border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
+          border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
 
           &.u.font {
             line-height: 0.875 * $unnnic-font-size;

@@ -84,7 +84,7 @@ export default {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  color: $unnnic-color-neutral-clean;
+  color: $unnnic-color-neutral-cleanest;
   font-family: $unnnic-font-family-secondary;
   font-weight: $unnnic-font-weight-bold;
   font-size: $unnnic-font-size-body-lg;

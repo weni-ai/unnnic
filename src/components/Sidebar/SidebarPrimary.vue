@@ -343,11 +343,11 @@ $transition-time: 0.4s;
         cursor: not-allowed;
 
         .unnnic-icon ::v-deep .primary {
-          fill: $unnnic-color-neutral-cleanest;
+          fill: $unnnic-color-neutral-clean;
         }
 
         .label {
-          color: $unnnic-color-neutral-cleanest;
+          color: $unnnic-color-neutral-clean;
         }
       }
 

@@ -238,7 +238,7 @@ export default {
 
         .avatar__background {
           border-radius: 50%;
-          background: $unnnic-color-neutral-clean;
+          background: $unnnic-color-neutral-cleanest;
         }
 
         .avatar {

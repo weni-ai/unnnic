@@ -147,7 +147,7 @@ export default {
       height: 100%;
 
       border-radius: $unnnic-border-radius-sm;
-      background: $unnnic-color-neutral-clean;
+      background: $unnnic-color-neutral-cleanest;
     }
     &::-webkit-slider-thumb {
       opacity: 0;
@@ -160,7 +160,7 @@ export default {
       height: 100%;
 
       border-radius: $unnnic-border-radius-sm;
-      background: $unnnic-color-neutral-clean;
+      background: $unnnic-color-neutral-cleanest;
     }
     &::-moz-range-thumb {
       opacity: 0;
@@ -179,7 +179,7 @@ export default {
       .bar {
         width: 3px;
 
-        background: $unnnic-color-neutral-clean;
+        background: $unnnic-color-neutral-cleanest;
         border-radius: 1.5px;
 
         &.active {
