@@ -1,46 +1,40 @@
 <template>
-  <div :class="['alert', `alert-position--${position}`]">
-    <unnnic-icon-svg
-      :icon="icon"
-      :scheme="scheme"
-      size="sm"
-    />
+  <div ref="alertContainer" class="alert-container">
+    <div :class="['alert', {
+      'alert--scheme-aux-green': scheme === 'feedback-green' || type === 'success',
+      'alert--scheme-aux-red': scheme === 'feedback-red' || type === 'error',
+    }]">
+      <div ref="progress" class="alert__progress"></div>
 
-    <div class="alert__content">
-      <div class="alert__title">
-        {{ title.toUpperCase() }}
-      </div>
       <div v-show="text" class="alert__text">
         {{ text }}
       </div>
-    </div>
 
-    <div
-      v-if="hideCloseText"
-      class="alert__close-text unnnic--clickable"
-      @click="onClose"
-    >
-      {{ closeText.toUpperCase() }}
+      <a v-if="linkHref" class="alert__link" :href="linkHref" :target="linkTarget">
+        {{ linkText }}
+      </a>
+
+      <div
+        class="alert__close"
+        @click="emitClose"
+      >
+        <unnnic-icon icon="close-1" size="sm" scheme="neutral-white" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   components: {
-    UnnnicIconSvg,
+    UnnnicIcon,
   },
   props: {
     version: {
       type: String,
       default: '1.0',
-    },
-
-    title: {
-      type: String,
-      default: null,
     },
     text: {
       type: String,
@@ -50,25 +44,45 @@ export default {
       type: String,
       default: null,
     },
-    icon: {
-      type: String,
-      default: null,
-    },
     onClose: {
       type: Function,
       default: () => {},
     },
-    hideCloseText: {
-      type: Boolean,
-      default: true,
-    },
-    closeText: {
+    linkHref: {
       type: String,
-      default: 'CLOSE',
+      default: '',
     },
-    position: {
+    linkTarget: {
       type: String,
-      default: 'top-right',
+      default: '_blank',
+    },
+    linkText: {
+      type: String,
+      default: 'Learn more',
+    },
+    type: {
+      type: String,
+      default: 'default',
+    },
+  },
+
+  mounted() {
+    this.$refs.progress.addEventListener('animationend', () => {
+      this.$refs.alertContainer.classList.add('slide-down');
+    });
+
+    this.$refs.alertContainer.addEventListener('animationend', (event) => {
+      if (event.animationName.startsWith('slideDown')) {
+        this.emitClose();
+      }
+    });
+  },
+
+  methods: {
+    emitClose() {
+      this.onClose();
+
+      this.$emit('close');
     },
   },
 };
@@ -77,69 +91,144 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/unnnic.scss';
 
-.alert {
+.alert-container {
   position: fixed;
-  padding: $unnnic-inset-xs;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  animation: slideUp 200ms ease;
+
+  @keyframes slideUp {
+    from {
+      bottom: -3.375 * $unnnic-font-size;
+    }
+
+    to {
+      bottom: 0;
+    }
+  }
+
+  &.slide-down {
+    animation-name: slideDown;
+  }
+
+  @keyframes slideDown {
+    from {
+      bottom: 0;
+    }
+
+    to {
+      bottom: -3.375 * $unnnic-font-size;
+    }
+  }
+}
+
+.alert {
+  position: relative;
+  border-radius: $unnnic-border-radius-sm;
 
   display: inline-flex;
   align-items: center;
+  margin-bottom: $unnnic-spacing-sm;
 
+  color: $unnnic-color-neutral-white;
   font-family: $unnnic-font-family-secondary;
-  border-radius: $unnnic-border-radius-sm;
+  font-size: $unnnic-font-size-body-gt;
+  line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
+  font-weight: $unnnic-font-weight-regular;
 
-  background-color: $unnnic-color-background-snow;
-  box-shadow: $unnnic-shadow-level-near;
-  position: fixed;
+  background-color: $unnnic-color-neutral-dark;
 
   z-index: 9999;
 
-  &-position {
-    &--top-right {
-      top: 1 * $unnnic-font-size;
-      right: 1 * $unnnic-font-size;
+  overflow: hidden;
+
+  @keyframes progress {
+    from {
+      width: 0;
     }
-    &--top-left {
-      top: 1 * $unnnic-font-size;
-      left: 1 * $unnnic-font-size;
-    }
-    &--bottom-right {
-      bottom: 1 * $unnnic-font-size;
-      right: 1 * $unnnic-font-size;
-    }
-    &--bottom-left {
-      bottom: 1 * $unnnic-font-size;
-      left: 1 * $unnnic-font-size;
+
+    to {
+      width: 100%;
     }
   }
 
-  &__content {
-    flex: 1;
-    margin:0 $unnnic-inline-xs;
+  &__progress {
+    position: absolute;
+    height: 100%;
+    background-color: $unnnic-color-neutral-darkest;
+    border-radius: $unnnic-border-radius-sm;
+    left: 0;
+    top: 0;
+    pointer-events: none;
+    z-index: -1;
+    animation-name: progress;
+    animation-duration: 5000ms;
+    animation-timing-function: linear;
   }
 
-  &__title {
-    color: $unnnic-color-neutral-darkest;
-    font-size: $unnnic-font-size-body-md;
-    font-family: $unnnic-font-family-secondary;
-    line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
-    font-weight: $unnnic-font-weight-bold;
+  &:hover {
+    .alert__progress {
+      animation-play-state: paused;
+    }
   }
 
   &__text {
-    color: $unnnic-color-neutral-dark;
-    font-size: $unnnic-font-size-body-gt;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-    font-weight: $unnnic-font-weight-regular;
+    padding: $unnnic-spacing-xs $unnnic-spacing-sm;
+  }
+
+  &__link, &__close {
+    border-left: $unnnic-border-width-thinner solid $unnnic-color-neutral-cloudy;
+
+    &:hover {
+      background-color: $unnnic-color-neutral-cloudy;
+    }
+  }
+
+  &__link {
+    padding: $unnnic-spacing-xs $unnnic-spacing-sm;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    font-weight: $unnnic-font-weight-bold;
   }
 
   &__close {
-    &-text {
-      color: $unnnic-color-brand-sec;
-      font-size: $unnnic-font-size-body-md;
-      line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
-      font-weight: $unnnic-font-weight-regular;
+    padding: $unnnic-spacing-xs $unnnic-spacing-sm;
+    cursor: pointer;
+    user-select: none;
+  }
 
-      margin-left: $unnnic-inline-xs;
+  &--scheme-aux-green {
+    background-color: $unnnic-color-aux-green-500;
+
+    .alert__progress {
+      background-color: $unnnic-color-aux-green-700;
+    }
+
+    .alert__link, .alert__close {
+      border-left: $unnnic-border-width-thinner solid $unnnic-color-aux-green-300;
+
+      &:hover {
+        background-color: $unnnic-color-aux-green-300;
+      }
+    }
+  }
+
+  &--scheme-aux-red {
+    background-color: $unnnic-color-aux-red-500;
+
+    .alert__progress {
+      background-color: $unnnic-color-aux-red-700;
+    }
+
+    .alert__link, .alert__close {
+      border-left: $unnnic-border-width-thinner solid $unnnic-color-aux-red-300;
+
+      &:hover {
+        background-color: $unnnic-color-aux-red-300;
+      }
     }
   }
 }

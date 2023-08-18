@@ -29,7 +29,11 @@
     />
   </div>
 
-  <component v-else :is="'version' + version.replace(/\./g, 'dot')" v-bind="$props"></component>
+  <component
+    v-else :is="'version' + version.replace(/\./g, 'dot')"
+    v-bind="{ ...$props }"
+    @close="$emit('close')"
+  ></component>
 </template>
 
 <script>
@@ -74,6 +78,18 @@ export default {
     position: {
       type: String,
       default: 'top-right',
+    },
+    linkHref: {
+      type: String,
+    },
+    linkTarget: {
+      type: String,
+    },
+    linkText: {
+      type: String,
+    },
+    type: {
+      type: String,
     },
   },
 };
