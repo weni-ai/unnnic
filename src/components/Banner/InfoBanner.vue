@@ -144,7 +144,7 @@ export default {
   &__divider {
     align-self: center;
 
-    border-left: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
+    border-left: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
     height: 36px;
     margin: 0 $unnnic-inline-md;
   }

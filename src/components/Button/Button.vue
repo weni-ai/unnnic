@@ -204,7 +204,7 @@ $scheme-colors:
   }
 
   &--secondary {
-    background-color: rgba($unnnic-color-neutral-clean, $unnnic-opacity-level-light);
+    background-color: rgba($unnnic-color-neutral-cleanest, $unnnic-opacity-level-light);
     color: $unnnic-color-neutral-dark;
     position: relative;
 
@@ -217,7 +217,7 @@ $scheme-colors:
       left: 0;
       right: 0;
       border-radius: $unnnic-border-radius-sm;
-      border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
+      border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
     }
 
     &:hover:enabled:after {
@@ -230,7 +230,7 @@ $scheme-colors:
       cursor: not-allowed;
 
       &:after {
-        border: $unnnic-border-width-thinner dashed $unnnic-color-neutral-clean;
+        border: $unnnic-border-width-thinner dashed $unnnic-color-neutral-cleanest;
       }
     }
   }
@@ -255,7 +255,7 @@ $scheme-colors:
 
     &:disabled {
       background-color: $unnnic-color-neutral-light;
-      color: $unnnic-color-neutral-clean;
+      color: $unnnic-color-neutral-cleanest;
       cursor: not-allowed;
     }
   }

@@ -178,12 +178,12 @@ export default {
     column-gap: $unnnic-spacing-inline-xs;
 
     &:focus-within {
-      outline-color: $unnnic-color-neutral-cleanest;
+      outline-color: $unnnic-color-neutral-clean;
     }
 
     &:has(input:disabled) {
       outline-style: dashed;
-      outline-color: $unnnic-color-neutral-clean;
+      outline-color: $unnnic-color-neutral-cleanest;
       background-color: $unnnic-color-neutral-light;
       cursor: default;
     }
@@ -198,7 +198,7 @@ export default {
       color: $unnnic-color-neutral-dark;
 
       &:focus::placeholder {
-        color: $unnnic-color-neutral-clean;
+        color: $unnnic-color-neutral-cleanest;
       }
 
       &::placeholder {

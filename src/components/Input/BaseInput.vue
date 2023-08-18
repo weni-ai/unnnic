@@ -93,7 +93,7 @@ export default {
   outline-offset: -$unnnic-border-width-thinner;
   border-radius: $unnnic-border-radius-sm;
   color: $unnnic-color-neutral-dark;
-  caret-color: $unnnic-color-neutral-cleanest;
+  caret-color: $unnnic-color-neutral-clean;
   font-weight: $unnnic-font-weight-regular;
   font-family: $unnnic-font-family-secondary;
   box-sizing: border-box;

@@ -136,7 +136,7 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
 
-    color: $unnnic-color-neutral-cleanest;
+    color: $unnnic-color-neutral-clean;
     font-family: $unnnic-font-family-secondary;
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-gt;

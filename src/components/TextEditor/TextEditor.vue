@@ -437,11 +437,11 @@ export default {
     border-radius: $unnnic-border-radius-sm $unnnic-border-radius-sm 0 0;
     position: relative;
     overflow: hidden;
-    background-color: rgba($unnnic-color-neutral-cleanest, $unnnic-opacity-level-light);
+    background-color: rgba($unnnic-color-neutral-clean, $unnnic-opacity-level-light);
 
     .indicator {
       height: $unnnic-border-width-thin;
-      background-color: $unnnic-color-neutral-cleanest;
+      background-color: $unnnic-color-neutral-clean;
       transition: width 0.2s;
     }
   }
@@ -458,7 +458,7 @@ export default {
     background-color: $unnnic-color-neutral-snow;
     border-radius: 0 0 $unnnic-border-radius-sm $unnnic-border-radius-sm;
     padding: $unnnic-spacing-inset-sm;
-    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
+    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
     outline: none;
     color: $unnnic-color-neutral-cloudy;
     font-family: $unnnic-font-family-secondary;

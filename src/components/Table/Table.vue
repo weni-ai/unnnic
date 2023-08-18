@@ -56,7 +56,7 @@ $scroll-size: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $unnnic-color-neutral-clean;
+    background: $unnnic-color-neutral-cleanest;
     border-radius: $unnnic-border-radius-pill;
   }
 
@@ -100,7 +100,7 @@ $scroll-size: 4px;
 
     &.loading {
       font-family: $unnnic-font-family-secondary;
-      color: $unnnic-color-neutral-cleanest;
+      color: $unnnic-color-neutral-clean;
       font-size: $unnnic-font-size-body-gt;
       font-weight: $unnnic-font-weight-regular;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;

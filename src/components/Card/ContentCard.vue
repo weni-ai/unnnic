@@ -73,7 +73,7 @@ export default {
 
     &:hover {
       background-color: $unnnic-color-background-snow;
-      border: 1px solid $unnnic-color-neutral-clean;
+      border: 1px solid $unnnic-color-neutral-cleanest;
     }
   }
 

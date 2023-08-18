@@ -100,7 +100,7 @@ export default {
     left: 50%;
     top: 100%;
     margin: $unnnic-inline-xs 0 0 0;
-    color: $unnnic-color-neutral-cleanest;
+    color: $unnnic-color-neutral-clean;
     font-size: $unnnic-font-size-body-gt;
     line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   }

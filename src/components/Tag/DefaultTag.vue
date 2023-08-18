@@ -90,7 +90,7 @@ export default {
       @each $name, $color in $scheme-colors {
         &.unnnic-tag-scheme--#{$name}:hover {
           outline-style: solid;
-          outline-color: $unnnic-color-neutral-cleanest;
+          outline-color: $unnnic-color-neutral-clean;
           outline-width: $unnnic-border-width-thinner;
           outline-offset: -$unnnic-border-width-thinner;
         }

@@ -86,7 +86,7 @@ export default {
       right: 0;
       top: 0;
       bottom: 0;
-      border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
+      border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
       border-radius: inherit;
       pointer-events: none;
     }
