@@ -1,6 +1,6 @@
 <template>
   <div @keydown="onKeyDownSelect" v-click-outside="onClickOutside" class="unnnic-select-smart">
-    <dropdown-skeleton type="manual" :value="active" position="bottom" ref="dropdown-skeleton">
+    <dropdown-skeleton type="manual" :value="active" position="bottom">
       <text-input
         class="unnnic-select-smart__input"
         ref="selectSmartInput"
@@ -176,8 +176,6 @@ export default {
   watch: {
     active(newValue) {
       this.$nextTick(() => {
-        this.$refs['dropdown-skeleton'].calculatePosition();
-
         if (newValue && !this.multiple) {
           const activeOptionIndex = this.getOptionIndex('active');
 
@@ -189,10 +187,6 @@ export default {
     },
 
     searchValue() {
-      this.$nextTick(() => {
-        this.$refs['dropdown-skeleton'].calculatePosition();
-      });
-
       this.focusedOption = null;
 
       if (!this.active) this.active = true;
@@ -486,6 +480,11 @@ export default {
   font-family: $unnnic-font-family-secondary;
 
   cursor: pointer;
+
+  .dropdown-data {
+    position: absolute !important;
+    top: 100% !important;
+  }
 
   &__options {
     left: 0;

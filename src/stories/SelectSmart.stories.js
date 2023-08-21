@@ -35,15 +35,13 @@ const Template = (args, { argTypes }) => ({
 
   template: `
     <div>
-    <unnnic-select-smart
-      v-model="exampleValue"
-      :options="exampleOptions"
-      v-bind="$props"
-    />
+      <unnnic-select-smart
+        v-model="exampleValue"
+        :options="exampleOptions"
+        v-bind="$props"
+      />
 
-    <button v-if="!(disabled || autocomplete)" @click="addDynamicOption">Add dynamic option</button>
-
-    <p v-if="!disabled">v-model: {{exampleValue}}</p>
+      <button v-if="!(disabled || autocomplete)" @click="addDynamicOption">Add dynamic option</button>
     </div>
   `,
 });
