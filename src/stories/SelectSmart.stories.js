@@ -6,6 +6,7 @@ export default {
   argTypes: {
     size: { control: { type: 'select', options: ['md', 'sm'] } },
     type: { control: { type: 'select', options: ['normal', 'error'] } },
+    orderedByIndex: { control: { type: 'boolean' } },
     autocomplete: { control: { type: 'boolean' } },
     autocompleteIconLeft: { control: { type: 'boolean' } },
     autocompleteClearOnFocus: { control: { type: 'boolean' } },
@@ -49,12 +50,11 @@ const Template = (args, { argTypes }) => ({
 
 const exampleOptionsDefault = [
   { value: '', label: 'Select some option' },
-  { value: '1', label: 'Option 1' },
-  { value: '2', label: 'Option 2' },
+  { value: '5', label: 'Option 5' },
   { value: '3', label: 'Option 3' },
+  { value: '1', label: 'Option 1' },
   { value: '4', label: 'Option 4' },
-  { value: '5', label: 'Option 5' },
-  { value: '5', label: 'Option 5' },
+  { value: '2', label: 'Option 2' },
 ];
 
 const exampleOptionsWithDescriptions = [
@@ -107,6 +107,12 @@ Default.args = {
 export const FirstSelected = Template.bind({});
 FirstSelected.args = {
   exampleOptions: exampleOptionsFirstSelected,
+};
+
+export const OrderedByIndex = Template.bind({});
+OrderedByIndex.args = {
+  exampleOptions: exampleOptionsDefault,
+  orderedByIndex: true,
 };
 
 export const Disabled = Template.bind({});

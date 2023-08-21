@@ -120,6 +120,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    orderedByIndex: {
+      type: Boolean,
+      default: false,
+    },
     multiple: {
       type: Boolean,
       default: false,
@@ -330,6 +334,10 @@ export default {
         return isValueUnique && matchesSearchTerms && value;
       });
 
+      if (this.orderedByIndex) {
+        return filteredOptions;
+      }
+
       const sortedOptions = filteredOptions.sort((a, b) => {
         const labelA = normalizeLabel(a.label);
         const labelB = normalizeLabel(b.label);
@@ -339,7 +347,6 @@ export default {
 
         return numberA - numberB || labelA.localeCompare(labelB);
       });
-
       return sortedOptions;
     },
 
