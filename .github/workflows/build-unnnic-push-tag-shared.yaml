@@ -68,58 +68,20 @@ jobs:
           no-cache: true
 
       - name: Check out Kubernetes Manifests
-        uses: actions/checkout@master
+        uses: actions/checkout@v3
         with:
           ref: main
           repository: "${{ env.MANIFESTS_REPOSITORY }}"
           token: "${{ secrets.DEVOPS_GITHUB_PERMANENT_TOKEN }}"
           path: ./kubernetes-manifests/
 
-      - name: Update image on deployment
+      - name: Kustomize
+        uses: syntaqx/setup-kustomize@v1
+
+      - name: "Update Deployment Image Tag" 
+        working-directory: "${{ env.MANIFESTS_APPLICATION }}/${MANIFESTS_ENVIRONMENT}"
         run: |
-            which jq > /dev/null 2>&1 || ( sudo apt update ; sudo apt install -y jq )
-            # Dep: coreutils
-            verlte() {
-              [ "$1" = "`echo -e "$1\n$2" | sort -V | head -n1`" ]
-            }
-            verlt(){
-              [ "$1" = "$2" ] && return 1 || verlte $1 $2
-            }
-            export PROJECT_DIR="${{ env.MANIFESTS_APPLICATION }}"
-            ENV_DIR="kubernetes-manifests/${{ env.MANIFESTS_APPLICATION }}/${MANIFESTS_ENVIRONMENT}"
-            for e in ${ENV_DIR}; do
-              echo "Update ${e}:"
-              if [ ! -d "${e}" ] ; then
-                echo "${e}: Does not exist, skipping"
-              elif [ ! -r "${e}/kustomization.yaml" ] ; then
-                echo "${e}/kustomization.yaml: Does not readable, skipping"
-              elif [ ! -r "${e}/${{ env.MANIFESTS_PATCH_TARGET }}" ] ; then
-                echo "${e}/${{ env.MANIFESTS_PATCH_TARGET }}: Does not readable, skipping"
-              else
-                OLD_IMAGE=$(
-                  cat "${e}/${{ env.MANIFESTS_PATCH_TARGET }}" \
-                    | jq '.[] | select(.path == "/spec/template/spec/containers/0/image") | .value'
-                )
-                echo "Old image to replace: ${OLD_IMAGE}"
-                OLD_VERSION=$(
-                  echo "${OLD_IMAGE}" \
-                    | sed s'/^.*[v:-]\([0-9]*\.[0-9]*\.[0-9]*\).*$/\1/'g \
-                    | head -n1
-                )
-                echo "Old image version to compare: ${OLD_VERSION}<=${{env.VERSION}}"
-                if verlte "${OLD_VERSION}" "${VERSION}" || [[ ! "${OLD_VERSION}" =~ [0-9]+\.[0-9]+\.[0-9]+ ]] ; then
-                  echo 'New configurations:'
-                  new_configuration=$(
-                    cat "${e}/${{ env.MANIFESTS_PATCH_TARGET }}" \
-                      | jq '(..|select(.path == "/spec/template/spec/containers/0/image")?) += {value: "'"${{env.IMAGE_TAG}}"'"}'
-                  )
-                  echo "${new_configuration}"
-                  echo "${new_configuration}" > "${e}/${{ env.MANIFESTS_PATCH_TARGET }}"
-                else
-                  echo "Version in file is greater than build, skipping update yaml"
-                fi
-              fi
-            done
+          kustomize edit set image unnnic-image=${{env.IMAGE_TAG}}
 
       - name: Commit & Push changes
         uses: actions-js/push@master
