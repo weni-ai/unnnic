@@ -5,14 +5,14 @@ export default {
   title: 'Form/Button',
   component: unnnicButton,
   argTypes: {
-    type: { control: { type: 'select', options: ['primary', 'secondary', 'terciary'] } },
+    type: { control: { type: 'select', options: ['primary', 'secondary', 'terciary', 'ghost', 'warning'] } },
     size: { control: { type: 'select', options: ['large', 'small'] } },
     text: { control: { type: 'text' } },
     iconLeft: { control: { type: 'select', options: [null, ...iconList] } },
+    iconCenter: { control: { type: 'select', options: [null, ...iconList] } },
     iconRight: { control: { type: 'select', options: [null, ...iconList] } },
     disabled: { control: { type: 'boolean' } },
     loading: { control: { type: 'boolean' } },
-    scheme: { control: { type: 'select', options: ['feedback-red', 'feedback-green', 'feedback-yellow'] } },
   },
 };
 
@@ -38,6 +38,20 @@ Secondary.args = {
 export const Terciary = Template.bind({});
 Terciary.args = {
   type: 'terciary',
+  text: 'Button Text',
+  disabled: false,
+};
+
+export const Ghost = Template.bind({});
+Ghost.args = {
+  type: 'ghost',
+  text: 'Button Text',
+  disabled: false,
+};
+
+export const Warning = Template.bind({});
+Warning.args = {
+  type: 'warning',
   text: 'Button Text',
   disabled: false,
 };
