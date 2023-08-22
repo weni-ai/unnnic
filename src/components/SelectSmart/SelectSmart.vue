@@ -1,6 +1,6 @@
 <template>
   <div @keydown="onKeyDownSelect" v-click-outside="onClickOutside" class="unnnic-select-smart">
-    <dropdown-skeleton type="manual" :value="active" position="bottom">
+    <dropdown-skeleton type="manual" :value="active" position="bottom" ref="dropdown-skeleton">
       <text-input
         class="unnnic-select-smart__input"
         ref="selectSmartInput"
@@ -175,6 +175,8 @@ export default {
 
   watch: {
     active(newValue) {
+      this.$refs['dropdown-skeleton'].calculatePosition();
+
       this.$nextTick(() => {
         if (newValue && !this.multiple) {
           const activeOptionIndex = this.getOptionIndex('active');
