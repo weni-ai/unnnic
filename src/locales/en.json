@@ -11,9 +11,5 @@
   },
   "import_card": {
     "importing": "Importing"
-  },
-  "select_smart": {
-    "without_results": "No results found",
-    "without_multiple_selected": "No option selected"
   }
 }

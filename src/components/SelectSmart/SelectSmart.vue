@@ -35,6 +35,8 @@
               :withoutSelectsMessage="multipleWithoutSelectsMessage"
               @clear-selected-options="clearSelectedOptions"
               @unselect-option="unselectOption"
+              :locale="locale"
+              :translations="translations"
             />
             <div
               ref="selectSmartOptionsScrollArea"
@@ -62,7 +64,7 @@
                 v-if="filterOptions(options).length === 0"
                 class="unnnic-select-smart__options--no-results"
               >
-                {{ $t('select_smart.without_results') }}
+                {{ i18n('without_results') }}
               </p>
             </div>
           </div>
@@ -78,9 +80,11 @@ import SelectSmartOption from './SelectSmartOption.vue';
 import SelectSmartMultipleHeader from './SelectSmartMultipleHeader.vue';
 import TextInput from '../Input/TextInput.vue';
 import DropdownSkeleton from '../Dropdown/DropdownSkeleton.vue';
+import UnnnicI18n from '../../mixins/i18n';
 
 export default {
   name: 'UnnnicSelectSmart',
+  mixins: [UnnnicI18n],
   components: {
     TextInput,
     SelectSmartOption,
@@ -157,6 +161,14 @@ export default {
 
       selectedOptions: [],
       multipleSelectedsTags: 2,
+
+      defaultTranslations: {
+        without_results: {
+          'pt-br': 'Nenhum resultado encontrado',
+          en: 'No results found',
+          es: 'Ningún resultado encontrado',
+        },
+      },
     };
   },
 
