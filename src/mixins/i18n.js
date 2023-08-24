@@ -40,7 +40,7 @@ export default {
       });
 
       Object.keys(vars).forEach((varName) => {
-        text = text.replaceAll(new RegExp(`{ *${varName} *}`, 'g'), vars[varName]);
+        text = text?.replaceAll(new RegExp(`{ *${varName} *}`, 'g'), vars[varName]);
       });
 
       return text;
