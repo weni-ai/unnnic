@@ -1,6 +1,7 @@
 <template>
   <div
     class="contact"
+    ref="transitionContainer"
     :class="{
       selected,
       disabled,
@@ -11,8 +12,11 @@
     @keypress.enter="$emit('click')"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
-    @mousedown="isActived = true"
-    @mouseup="isActived = false"
+    @mousedown="
+      (event) => {
+        this.$refs.transitionRipple.addRipple(event);
+      }
+    "
     :tabindex="0"
   >
     <user-avatar
@@ -33,11 +37,7 @@
         <p v-if="waitingTime !== 0" class="ellipsis">
           {{ $tc('chats_contact.waiting_for', waitingTime) }}
         </p>
-        <p
-          v-else-if="lastMessage"
-          class="ellipsis"
-          :title="lastMessage"
-        >
+        <p v-else-if="lastMessage" class="ellipsis" :title="lastMessage">
           {{ lastMessage }}
         </p>
       </div>
@@ -50,17 +50,20 @@
     >
       {{ unreadMessages }}
     </span>
+    <transition-ripple ref="transitionRipple" color="weni-500" />
   </div>
 </template>
 
 <script>
 import UserAvatar from '../ChatsUserAvatar/ChatsUserAvatar.vue';
+import TransitionRipple from '../TransitionRipple/TransitionRipple.vue';
 
 export default {
   name: 'ChatsContact',
 
   components: {
     UserAvatar,
+    TransitionRipple,
   },
 
   props: {
@@ -98,7 +101,6 @@ export default {
   data() {
     return {
       isHovered: false,
-      isActived: false,
     };
   },
 };
@@ -111,13 +113,13 @@ export default {
   display: grid;
   grid-template-columns: max-content 1fr min-content;
   align-items: center;
-  gap: 0.5rem;
+  gap: $unnnic-spacing-xs;
 
   background-color: $unnnic-color-background-white;
   border-radius: $unnnic-border-radius-sm;
   font-family: $unnnic-font-family-secondary;
 
-  padding: 0.5rem;
+  padding: $unnnic-spacing-xs;
 
   cursor: pointer;
 
@@ -178,18 +180,6 @@ export default {
   &:hover,
   &.selected:hover {
     background-color: $unnnic-color-neutral-lightest;
-
-    .contact__infos {
-      &__unread-messages {
-        background: $unnnic-color-background-white;
-      }
-    }
-  }
-
-  &:active,
-  &.selected:active,
-  &.waiting:active {
-    background-color: $unnnic-color-weni-100;
 
     .contact__infos {
       &__unread-messages {
