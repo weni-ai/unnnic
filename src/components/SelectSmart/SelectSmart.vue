@@ -166,7 +166,7 @@ export default {
         without_results: {
           'pt-br': 'Nenhum resultado encontrado',
           en: 'No results found',
-          es: 'Ningún resultado encontrado'
+          es: 'Ningún resultado encontrado',
         },
       },
     };
