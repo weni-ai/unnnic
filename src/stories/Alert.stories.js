@@ -41,7 +41,32 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { alertCaller, unnnicAlert },
-  template: '<div><button @click="unnnicCallAlert"> Click for alert </button> <unnnic-alert v-bind="$props"></unnnic-alert> </div>',
+  template: `
+<div>
+  <button @click="unnnicCallAlert">Click for alert</button>
+
+<h3>Refactoring changes:</h3>
+
+<ul>
+  <li>Removed props: title, icon, hide-close-text, close-text, position</li>
+  <li>Added props: link-text, link-href, link-target (default: '_blank'), type (default, success, error)</li>
+  <li>Avoid using scheme prop, instead use the 'type' prop to change the color variant</li>
+  <li>Avoid using on-close prop to listen to close event, instead use the '@close' event</li>
+</ul>
+
+<pre>
+Recommended use:
+
+&lt;unnnic-alert
+  type            String default 'default' ('default', 'success', 'error')
+  text            String required
+  @close          Event
+  link-href       String
+   ┠ link-text    String default 'Learn more'
+   ┖ link-target  String default '_blank'
+/&gt;
+</pre>
+</div>`,
   methods: {
     unnnicCallAlert() {
       alert.callAlert({ props: this.$props, seconds: this.$props.seconds });

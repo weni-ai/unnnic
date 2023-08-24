@@ -29,7 +29,7 @@
       />
     </div>
     <p v-if="!selectedOptions[0]" class="unnnic-select-smart__options__multiple--without-multiples">
-      {{ withoutSelectsMessage || $t('select_smart.without_multiple_selected') }}
+      {{ withoutSelectsMessage || i18n('without_multiple_selected') }}
     </p>
   </div>
 </template>
@@ -37,9 +37,11 @@
 <script>
 import Tag from '../Tag/Tag.vue';
 import IconSvg from '../Icon.vue';
+import UnnnicI18n from '../../mixins/i18n';
 
 export default {
   name: 'UnnnicSelectSmartMultipleHeader',
+  mixins: [UnnnicI18n],
   components: {
     Tag,
     IconSvg,
@@ -57,6 +59,14 @@ export default {
   data() {
     return {
       multipleSelectedsTags: 2,
+
+      defaultTranslations: {
+        without_multiple_selected: {
+          'pt-br': 'Nenhuma opção selecionada',
+          en: 'No option selected',
+          es: 'Ninguna opción seleccionada',
+        },
+      },
     };
   },
   computed: {

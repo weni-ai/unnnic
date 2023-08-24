@@ -1,39 +1,39 @@
 <template>
-  <button 
-    v-bind="$attrs" 
-    :disabled="buttonDisabled" 
+  <button
+    v-bind="$attrs"
+    :disabled="buttonDisabled"
     :class="[
       'unnnic-button',
       `unnnic-button--size-${size}`,
       `unnnic-button--${type}`,
       `unnnic-button-scheme--${buttonScheme}`,
       iconCenter ? `unnnic-button--icon-on-center` : null
-    ]" 
+    ]"
     v-on="$listeners">
 
-    <unnnic-icon-svg 
-      v-if="loading" 
-      icon="loading-circle-1" 
-      :scheme="iconScheme" 
-      :size="iconSize"
-      :style="{ position: 'absolute' }" 
-      class="rotation" 
-    />
-
-    <unnnic-icon-svg 
-      v-if="iconLeft" 
-      :icon="iconLeft" 
-      :scheme="iconScheme" 
-      :size="iconSize"
-      :class="{ 'unnnic-button__icon-left': hasText }" 
-      :style="{ visibility: loading ? 'hidden' : null }" 
-    />
-
-    <unnnic-icon-svg 
-      v-if="iconCenter" 
-      :icon="iconCenter" 
+    <unnnic-icon-svg
+      v-if="loading"
+      icon="loading-circle-1"
       :scheme="iconScheme"
-      :style="{ visibility: loading ? 'hidden' : null }" 
+      :size="iconSize"
+      :style="{ position: 'absolute' }"
+      class="rotation"
+    />
+
+    <unnnic-icon-svg
+      v-if="iconLeft"
+      :icon="iconLeft"
+      :scheme="iconScheme"
+      :size="iconSize"
+      :class="{ 'unnnic-button__icon-left': hasText }"
+      :style="{ visibility: loading ? 'hidden' : null }"
+    />
+
+    <unnnic-icon-svg
+      v-if="iconCenter"
+      :icon="iconCenter"
+      :scheme="iconScheme"
+      :style="{ visibility: loading ? 'hidden' : null }"
       :size="iconSize"
     />
 
@@ -41,13 +41,13 @@
       <slot /> {{ text }}
     </span>
 
-    <unnnic-icon-svg 
-      v-if="iconRight" 
-      :icon="iconRight" 
-      :scheme="iconScheme" 
+    <unnnic-icon-svg
+      v-if="iconRight"
+      :icon="iconRight"
+      :scheme="iconScheme"
       :size="iconSize"
-      :class="{ 'unnnic-button__icon-right': hasText }" 
-      :style="{ visibility: loading ? 'hidden' : null }" 
+      :class="{ 'unnnic-button__icon-right': hasText }"
+      :style="{ visibility: loading ? 'hidden' : null }"
     />
   </button>
 </template>
@@ -220,7 +220,6 @@ $scheme-colors:
   &--secondary {
     background-color: $unnnic-color-weni-50;
     color: $unnnic-color-weni-800;
-
 
     &:hover:enabled {
       background-color: $unnnic-color-weni-100;

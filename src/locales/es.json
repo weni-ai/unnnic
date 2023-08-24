@@ -11,13 +11,5 @@
   },
   "import_card": {
     "importing": "Importando"
-  },
-  "select_smart": {
-    "without_results": "Ningún resultado encontrado",
-    "without_multiple_selected": "Ninguna opción seleccionada"
-  },
-  "chats_contact": {
-    "waiting_for": "Esperando por un minuto | Esperando por {time} minutos",
-    "unread_messages": "{unreadMessages} mensajes no leídos"
   }
 }
