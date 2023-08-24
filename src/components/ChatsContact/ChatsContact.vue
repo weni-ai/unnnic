@@ -35,7 +35,7 @@
       </h1>
       <div class="contact__infos__additional-information" :class="{ bold: unreadMessages }">
         <p v-if="waitingTime !== 0" class="ellipsis">
-          {{ i18nPlural('waiting_for', waitingTime) }}
+          {{ i18n('waiting_for', waitingTime) }}
         </p>
         <p v-else-if="lastMessage" class="ellipsis" :title="lastMessage">
           {{ lastMessage }}
@@ -46,7 +46,7 @@
     <span
       v-if="!selected && unreadMessages"
       class="contact__infos__unread-messages"
-      :title="i18nPlural('unread_messages', unreadMessages)"
+      :title="i18n('unread_messages', unreadMessages)"
     >
       {{ unreadMessages }}
     </span>
