@@ -35,7 +35,7 @@
       </h1>
       <div class="contact__infos__additional-information" :class="{ bold: unreadMessages }">
         <p v-if="waitingTime !== 0" class="ellipsis">
-          {{ $tc('chats_contact.waiting_for', waitingTime) }}
+          {{ i18nPlural('waiting_for', waitingTime) }}
         </p>
         <p v-else-if="lastMessage" class="ellipsis" :title="lastMessage">
           {{ lastMessage }}
@@ -46,7 +46,7 @@
     <span
       v-if="!selected && unreadMessages"
       class="contact__infos__unread-messages"
-      :title="$t('chats_contact.unread_messages', { unreadMessages })"
+      :title="i18nPlural('unread_messages', unreadMessages)"
     >
       {{ unreadMessages }}
     </span>
@@ -57,9 +57,12 @@
 <script>
 import UserAvatar from '../ChatsUserAvatar/ChatsUserAvatar.vue';
 import TransitionRipple from '../TransitionRipple/TransitionRipple.vue';
+import UnnnicI18n from '../../mixins/i18n';
 
 export default {
   name: 'ChatsContact',
+
+  mixins: [UnnnicI18n],
 
   components: {
     UserAvatar,
@@ -101,6 +104,19 @@ export default {
   data() {
     return {
       isHovered: false,
+
+      defaultTranslations: {
+        waiting_for: {
+          'pt-br': 'Aguardando há 1 minuto | Aguardando há {n} minutos',
+          en: '1 minute waiting | {time} minutes waiting',
+          es: 'Esperando por un minuto | Esperando por {time} minutos',
+        },
+        unread_messages: {
+          'pt-br': '{unreadMessages} mensagens não lidas',
+          en: '{unreadMessages} unread messages',
+          es: '{unreadMessages} mensajes no leídos',
+        },
+      },
     };
   },
 };
