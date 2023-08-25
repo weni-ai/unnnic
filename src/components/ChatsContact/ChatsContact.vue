@@ -107,9 +107,9 @@ export default {
 
       defaultTranslations: {
         waiting_for: {
-          'pt-br': 'Aguardando há 1 minuto | Aguardando há {n} minutos',
-          en: '1 minute waiting | {time} minutes waiting',
-          es: 'Esperando por un minuto | Esperando por {time} minutos',
+          'pt-br': 'Aguardando há 1 minuto | Aguardando há {waitingTime} minutos',
+          en: '1 minute waiting | {waitingTime} minutes waiting',
+          es: 'Esperando por un minuto | Esperando por {waitingTime} minutos',
         },
         unread_messages: {
           'pt-br': '{unreadMessages} mensagens não lidas',
