@@ -25,7 +25,8 @@ const Template = (args, { argTypes }) => ({
 
   props: Object.keys(argTypes),
 
-  template: '<unnnic-chart-bar v-bind="$props" @update="update" @previous="previous" @next="next" />',
+  template:
+    '<unnnic-chart-bar v-bind="$props" @update="update" @previous="previous" @next="next" />',
 });
 
 export const Default = Template.bind({});
@@ -34,31 +35,36 @@ Default.args = {
   title: 'Title Graph',
   description: 'Description graph',
   updateText: 'Atualizar',
-  groups: [{
-    values: {
-      'Legend 1': 1,
-      'Legend 2': 0.5,
+  groups: [
+    {
+      values: {
+        'Legend 1': 1,
+        'Legend 2': 0.5,
+      },
+      title: 'Group 1',
     },
-    title: 'Group 1',
-  }, {
-    values: {
-      'Legend 1': 1,
-      'Legend 2': 1,
+    {
+      values: {
+        'Legend 1': 1,
+        'Legend 2': 1,
+      },
+      title: 'Group 2',
     },
-    title: 'Group 2',
-  }, {
-    values: {
-      'Legend 1': 1,
-      'Legend 2': 1,
+    {
+      values: {
+        'Legend 1': 1,
+        'Legend 2': 1,
+      },
+      title: 'Group 3',
     },
-    title: 'Group 3',
-  }, {
-    values: {
-      'Legend 1': 1,
-      'Legend 2': 1,
+    {
+      values: {
+        'Legend 1': 1,
+        'Legend 2': 1,
+      },
+      title: 'Group 4',
     },
-    title: 'Group 4',
-  }],
+  ],
   showFooterLegend: true,
 };
 
@@ -67,19 +73,22 @@ export const Condensed = Template.bind({});
 Condensed.args = {
   condensed: true,
   fixedMaxValue: 1,
-  groups: [{
-    values: {
-      'Legend 1': 1,
-      'Legend 2': 0.5,
+  groups: [
+    {
+      values: {
+        'Legend 1': 1,
+        'Legend 2': 0.5,
+      },
+      title: 'Group 1',
     },
-    title: 'Group 1',
-  }, {
-    values: {
-      'Legend 1': 1,
-      'Legend 2': 1,
+    {
+      values: {
+        'Legend 1': 1,
+        'Legend 2': 1,
+      },
+      title: 'Group 2',
     },
-    title: 'Group 2',
-  }],
+  ],
 };
 
 export const CondensedWithoutEventsAndTitleAndDescription = (args, { argTypes }) => ({
@@ -95,25 +104,30 @@ export const CondensedWithoutEventsAndTitleAndDescription = (args, { argTypes })
 CondensedWithoutEventsAndTitleAndDescription.args = {
   condensed: true,
   fixedMaxValue: 1,
-  groups: [{
-    values: {
-      'Legend 1': 1,
+  groups: [
+    {
+      values: {
+        'Legend 1': 1,
+      },
+      title: 'Group 1',
     },
-    title: 'Group 1',
-  }, {
-    values: {
-      'Legend 1': 1,
+    {
+      values: {
+        'Legend 1': 1,
+      },
+      title: 'Group 2',
     },
-    title: 'Group 2',
-  }, {
-    values: {
-      'Legend 1': 1,
+    {
+      values: {
+        'Legend 1': 1,
+      },
+      title: 'Group 3',
     },
-    title: 'Group 3',
-  }, {
-    values: {
-      'Legend 1': 0.5,
+    {
+      values: {
+        'Legend 1': 0.5,
+      },
+      title: 'Group 4',
     },
-    title: 'Group 4',
-  }],
+  ],
 };
