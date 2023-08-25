@@ -1,10 +1,10 @@
 <template>
-  <nav class="unnnic-navbar-chats">
-    <ol class="unnnic-navbar-chats__list">
+  <nav class="unnnic-chats-navbar">
+    <ol class="unnnic-chats-navbar__list">
       <li v-for="(link, index) in links" :key="link.icon + index">
         <a
           :class="[
-            'unnnic-navbar-chats__link',
+            'unnnic-chats-navbar__link',
             'unnnic--clickable',
             { selected: isSelected(link) },
           ]"
@@ -30,7 +30,7 @@
 import UnnnicIcon from '../Icon.vue';
 
 export default {
-  name: 'unnnic-navbar-chats',
+  name: 'unnnic-chats-navbar',
 
   components: {
     UnnnicIcon,
@@ -102,7 +102,7 @@ export default {
 <style lang="scss">
 @import '../../assets/scss/unnnic.scss';
 
-.unnnic-navbar-chats {
+.unnnic-chats-navbar {
   width: 100vw;
   max-width: 100%;
 

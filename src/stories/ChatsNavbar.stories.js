@@ -1,9 +1,9 @@
 /* eslint-disable no-alert */
-import unnnicNavbarChats from '../components/NavbarChats/NavbarChats.vue';
+import unnnicChatsNavbar from '../components/ChatsNavbar/ChatsNavbar.vue';
 
 export default {
-  title: 'Example/NavbarChats',
-  component: unnnicNavbarChats,
+  title: 'Chats/Navbar',
+  component: unnnicChatsNavbar,
   argTypes: {
     links: [
       {
@@ -16,8 +16,8 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { unnnicNavbarChats },
-  template: '<unnnic-navbar-chats v-bind="$props"/>',
+  components: { unnnicChatsNavbar },
+  template: '<unnnic-chats-navbar v-bind="$props"/>',
 });
 
 export const Default = Template.bind({});
