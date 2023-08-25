@@ -22,7 +22,7 @@
     <user-avatar
       :username="username"
       :photo-url="userPhoto"
-      :active="(isHovered || selected) && !isActived"
+      :active="isHovered || selected"
     />
 
     <div class="contact__infos">
@@ -35,7 +35,7 @@
       </h1>
       <div class="contact__infos__additional-information" :class="{ bold: unreadMessages }">
         <p v-if="waitingTime !== 0" class="ellipsis">
-          {{ i18n('waiting_for', waitingTime) }}
+          {{ i18n('waiting_for', waitingTime, { waitingTime }) }}
         </p>
         <p v-else-if="lastMessage" class="ellipsis" :title="lastMessage">
           {{ lastMessage }}
@@ -46,7 +46,7 @@
     <span
       v-if="!selected && unreadMessages"
       class="contact__infos__unread-messages"
-      :title="i18n('unread_messages', unreadMessages)"
+      :title="i18n('unread_messages', unreadMessages, { unreadMessages })"
     >
       {{ unreadMessages }}
     </span>
