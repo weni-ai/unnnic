@@ -1,7 +1,7 @@
 <template>
   <div :class="['unnnic-chart-bar', { condensed }]">
     <div
-      v-if="title || description || $listeners.update || $listeners.previous || $listeners.next"
+      v-if="title || description || $attrs.update || $attrs.previous || $attrs.next"
       class="header"
     >
       <div v-if="title || description" class="content">
@@ -21,21 +21,18 @@
         </div>
       </div>
 
-      <div v-if="$listeners.update || $listeners.previous || $listeners.next" class="actions">
-        <div v-if="$listeners.update" class="update-button" @click="$emit('update')">
+      <div v-if="$attrs.update || $attrs.previous || $attrs.next" class="actions">
+        <div v-if="$attrs.update" class="update-button" @click="$emit('update')">
           <unnnic-icon icon="button-refresh-arrow-1" size="sm" scheme="neutral-darkest" />
 
-          <span
-            v-if="updateText"
-            class="unnnic-font secondary body-md color-neutral-dark"
-          >
+          <span v-if="updateText" class="unnnic-font secondary body-md color-neutral-dark">
             {{ updateText }}
           </span>
         </div>
 
-        <div v-if="$listeners.previous || $listeners.next" class="navigation-container">
+        <div v-if="$attrs.previous || $attrs.next" class="navigation-container">
           <unnnic-button
-            v-if="$listeners.previous"
+            v-if="$attrs.previous"
             @click="$emit('previous')"
             size="small"
             type="terciary"
@@ -44,7 +41,7 @@
           ></unnnic-button>
 
           <unnnic-button
-            v-if="$listeners.next"
+            v-if="$attrs.next"
             @click="$emit('next')"
             size="small"
             type="terciary"
@@ -109,13 +106,13 @@
 <script>
 import UnnnicIcon from '../Icon.vue';
 import UnnnicButton from '../Button/Button.vue';
-// import UnnnicToolTip from '../ToolTip/ToolTip.vue';
+import UnnnicToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
   components: {
     UnnnicIcon,
     UnnnicButton,
-    // UnnnicToolTip,
+    UnnnicToolTip,
   },
 
   props: {
@@ -177,13 +174,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-chart-bar {
   background-color: $unnnic-color-background-snow;
   border-radius: $unnnic-border-radius-md;
   padding: $unnnic-spacing-inset-md;
-  min-width: 15.5625rem;
+  min-width: 15.5625 * $unnnic-font-size;
   box-sizing: border-box;
   display: inline-flex;
   flex-direction: column;
@@ -251,7 +248,7 @@ export default {
   }
 
   .main {
-    height: 16rem;
+    height: 16 * $unnnic-font-size;
     display: flex;
     justify-content: center;
 
@@ -260,7 +257,7 @@ export default {
       column-gap: $unnnic-spacing-inline-lg;
 
       .group {
-        min-width: 4rem;
+        min-width: 4 * $unnnic-font-size;
         display: flex;
         flex-direction: column;
         row-gap: $unnnic-spacing-stack-sm;
@@ -273,7 +270,7 @@ export default {
           column-gap: $unnnic-spacing-inline-xs;
 
           .bar {
-            width: 1rem;
+            width: 1 * $unnnic-font-size;
             height: 100%;
             border-radius: $unnnic-border-radius-sm;
 
@@ -391,5 +388,4 @@ export default {
     }
   }
 }
-
 </style>
