@@ -104,6 +104,8 @@ $avatar-sizes: '2xl' 3rem, 'xl' $unnnic-icon-size-xl, 'lg' $unnnic-icon-size-lg,
 
   @each $name, $size in $avatar-sizes {
     &--#{$name} {
+      min-width: $size;
+      max-height: $size;
       width: $size;
       height: $size;
 
