@@ -79,7 +79,7 @@ jobs:
         uses: syntaqx/setup-kustomize@v1
 
       - name: "Update Deployment Image Tag" 
-        working-directory: "${{ env.MANIFESTS_APPLICATION }}/${MANIFESTS_ENVIRONMENT}"
+        working-directory: "${{ env.MANIFESTS_APPLICATION }}/${{ env.MANIFESTS_ENVIRONMENT }}"
         run: |
           kustomize edit set image unnnic-image=${{env.IMAGE_TAG}}
 
