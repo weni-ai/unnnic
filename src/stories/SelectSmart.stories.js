@@ -13,39 +13,6 @@ export default {
   },
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { unnnicSelectSmart },
-  data() {
-    return {
-      exampleValue: '',
-    };
-  },
-
-  methods: {
-    addDynamicOption() {
-      const value = Math.floor(Math.random() * 1e3);
-
-      this.exampleOptions.push({
-        value: `option${value}`,
-        label: `Option ${value}`,
-      });
-    },
-  },
-
-  template: `
-    <div>
-      <unnnic-select-smart
-        v-model="exampleValue"
-        :options="exampleOptions"
-        v-bind="$props"
-      />
-
-      <button v-if="!(disabled || autocomplete)" @click="addDynamicOption">Add dynamic option</button>
-    </div>
-  `,
-});
-
 const exampleOptionsDefault = [
   { value: '', label: 'Select some option' },
   { value: '5', label: 'Option 5' },
@@ -97,6 +64,41 @@ const exampleOptionsFirstSelected = [
   { value: '5', label: 'Option 5' },
 ];
 
+const Template = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { unnnicSelectSmart },
+  data() {
+    return {
+      exampleValue: [],
+    };
+  },
+
+  methods: {
+    addDynamicOption() {
+      const value = Math.floor(Math.random() * 1e3);
+
+      this.exampleOptions.push({
+        value: `option${value}`,
+        label: `Option ${value}`,
+      });
+    },
+  },
+
+  template: `
+    <div>
+      <unnnic-select-smart
+        v-model="exampleValue"
+        :options="exampleOptions || []"
+        v-bind="$props"
+      />
+
+      <p>v-model: {{exampleValue}}</p>
+
+      <button v-if="!(disabled || autocomplete)" @click="addDynamicOption">Add dynamic option</button>
+    </div>
+  `,
+});
+
 export const Default = Template.bind({});
 Default.args = {
   exampleOptions: exampleOptionsDefault,
@@ -115,6 +117,7 @@ OrderedByIndex.args = {
 
 export const Disabled = Template.bind({});
 Disabled.args = {
+  exampleOptions: exampleOptionsDefault,
   disabled: true,
 };
 
