@@ -11,7 +11,9 @@ export default {
   },
 
   methods: {
-    i18n(key, defaults) {
+    i18n(...args) {
+      const [key, defaults] = args;
+
       const locale = (this.locale || get(this, '$i18n.locale'))?.toLowerCase();
 
       let text = get(this.translations, `${key}.${locale}`, get(this.translations, key));
@@ -20,8 +22,8 @@ export default {
         text = get(get(this.defaultTranslations, key), locale, defaults);
       }
 
-      if (text?.includes('|') && typeof arguments[1] === 'number') {
-        const count = arguments[1];
+      if (text?.includes('|') && typeof args[1] === 'number') {
+        const count = args[1];
         const pluralization = text.split('|');
 
         if (pluralization.length === 3) {
@@ -33,7 +35,7 @@ export default {
 
       let vars = {};
 
-      Object.values(arguments).slice(1).forEach((argument) => {
+      Object.values(args).slice(1).forEach((argument) => {
         if (!(argument instanceof Array) && argument instanceof Object) {
           vars = argument;
         }
