@@ -14,7 +14,12 @@ import unnnicSelectSmart from "../components/SelectSmart/SelectSmart.vue";
 export const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicSelectSmart },
-  template: '<unnnic-select-smart v-bind="$props" />',
+  data() {
+    return {
+      exampleValue: [],
+    };
+  },
+  template: '<unnnic-select-smart v-model="exampleValue" v-bind="$props" />',
 });
 
 # SelectSmart
@@ -33,13 +38,19 @@ these components have been unified and improved and it also brings a new design.
   language='html'
   dark
   code={`
-<unnnic-select-smart :options="exampleArray" />
+<unnnic-select-smart v-model="exampleValue" :options="exampleArray" />
   `}
 />
 
+---
 
+#### **IMPORTANT:**
 
-The only required property is `options`, which requires an array of objects in the following format:
+To ensure proper functioning of the component, it is fundamental to provide the `v-model` 
+(or `value` and `@input`), even if it is empty (`[]`), since it is through this property 
+that the selected options are controlled.
+
+The other one required property is `options`, which requires an array of objects in the following format:
 
 | Key       | Description                                                                                                                            | Type   |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------ |
@@ -73,6 +84,9 @@ The only required property is `options`, which requires an array of objects in t
 regardless of the sequence in which the objects are supplied to the `:options` property. 
 However, if the `orderedByIndex` property is included, the options will be sorted 
 according to the arrangement given to `:options`. 
+
+---
+<br />
 
 ## Default
 
@@ -154,7 +168,7 @@ becoming disabled when set to _true_ and remaining enabled when set to _false_.
   <Story
     name='Disabled'
     args={{
-      options: [{ value: "2", label: "Option 2" }],
+      options: [{ value: "", label: "Select some option" }],
       disabled: true,
     }}>
     {Template.bind({})}
