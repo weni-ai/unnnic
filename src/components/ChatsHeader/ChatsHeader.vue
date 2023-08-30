@@ -1,41 +1,38 @@
 <template>
-  <header class="unnnic-chats-header" :class="{ large: computed.showTopbar }">
-    <div class="unnnic-chats-header__topbar" v-if="computed.showTopbar">
+  <header class="unnnic-chats-header" :class="{ large: size === 'large' && !avatarName }">
+    <div class="unnnic-chats-header__topbar" v-if="size === 'large' && !avatarName">
       <unnnic-breadcrumb :crumbs="crumbs" />
       <unnnic-button-close @close="close" size="ant" />
     </div>
     <main class="unnnic-chats-header__main">
-      <unnnic-icon
-        v-if="computed.showBackIcon"
-        class="unnnic-chats-header__main__back"
-        icon="keyboard-arrow-left-1"
-        size="md"
-      />
-      <section class="unnnic-chats-header__infos">
-        <unnnic-avatar-icon
-          scheme="aux-purple"
-          v-if="computed.showAvatarIcon"
-          :icon="computed.avatarIcon"
-          :size="computed.avatarIconSize"
+      <div v-if="back && size === 'small'" @click="back" @keypress.esc="back">
+        <unnnic-icon
+          class="unnnic-chats-header__main__back"
+          icon="keyboard-arrow-left-1"
+          size="md"
         />
-        <unnnic-chats-user-avatar v-else :username="title" />
+      </div>
+      <section class="unnnic-chats-header__infos">
+        <unnnic-chats-user-avatar v-if="avatarName" :username="avatarName" />
+        <unnnic-avatar-icon
+          v-else
+          scheme="aux-purple"
+          :icon="avatarIcon"
+          :size="size === 'small' ? 'sm' : 'lg'"
+        />
 
-        <hgroup
-          class="unnnic-chats-header__infos__title"
-          :class="{ contact: this.type === 'contact' }"
-        >
+        <hgroup class="unnnic-chats-header__infos__title" :class="{ contact: !!avatarName }">
           <h1>
-            {{ computed.mainTitle }}
+            {{ title }}
           </h1>
-          <h2 v-if="computed.showSubtitle">
-            {{ computed.showSubtitle }}
+          <h2 v-if="subtitle">
+            {{ subtitle }}
           </h2>
         </hgroup>
-
-        <div></div>
       </section>
+      <slot v-if="size === 'large'"/>
     </main>
-    <unnnic-button-close v-if="computed.showSmallCloseButton" @close="close" size="sm" />
+    <unnnic-button-close v-if="avatarName || size === 'small'" @close="close" size="sm" />
   </header>
 </template>
 <script>
@@ -48,7 +45,7 @@ import UnnnicBreadcrumb from '../Breadcrumb/Breadcrumb.vue';
 import UnnnicIcon from '../Icon.vue';
 
 export default {
-  name: 'ChatsHeader',
+  name: 'UnnnicChatsHeader',
 
   mixins: [UnnnicI18n],
 
@@ -61,17 +58,21 @@ export default {
   },
 
   props: {
-    type: {
-      type: String,
-      required: true,
-      default: 'contact',
-      validator(value) {
-        return ['contact', 'dashboard', 'history'].includes(value);
-      },
-    },
     title: {
       type: String,
       required: true,
+      default: '',
+    },
+    subtitle: {
+      type: String,
+      default: '',
+    },
+    avatarIcon: {
+      type: String,
+      default: '',
+    },
+    avatarName: {
+      type: String,
       default: '',
     },
     back: {
@@ -90,24 +91,6 @@ export default {
 
   data: () => ({
     size: 'small',
-
-    defaultTranslations: {
-      history: {
-        'pt-br': 'Histórico',
-        en: 'History',
-        es: 'Historia',
-      },
-      history_of_project: {
-        'pt-br': 'Histórico do projeto',
-        en: 'Project history',
-        es: 'Historia del proyecto',
-      },
-      dashboard_of_project: {
-        'pt-br': 'Dashboard do projeto',
-        en: 'Dashboard of the project',
-        es: 'Dashboard del proyecto',
-      },
-    },
   }),
 
   beforeMount() {
@@ -129,42 +112,9 @@ export default {
     },
   },
 
-  computed: {
-    computed() {
-      const { size, back, title } = this;
-
-      const typeMap = {
-        dashboard: {
-          showTopbar: size === 'large',
-          showBackIcon: back && size === 'small',
-          showAvatarIcon: true,
-          avatarIcon: 'graph-stats-1',
-          avatarIconSize: size === 'small' ? 'sm' : 'lg',
-          mainTitle: size === 'small' ? 'Dashboard' : title,
-          showSubtitle: size === 'small' ? title : this.i18n('dashboard_of_project'),
-          showSmallCloseButton: size === 'small',
-        },
-        history: {
-          showTopbar: size === 'large',
-          showBackIcon: back && size === 'small',
-          showAvatarIcon: true,
-          avatarIcon: 'task-list-clock-1',
-          avatarIconSize: size === 'small' ? 'sm' : 'lg',
-          mainTitle: size === 'small' ? this.i18n('history') : title,
-          showSubtitle: size === 'small' ? title : this.i18n('history_of_project'),
-          showSmallCloseButton: size === 'small',
-        },
-        contact: {
-          showTopbar: false,
-          showBackIcon: back && size === 'small',
-          showAvatarIcon: false,
-          mainTitle: title,
-          showSubtitle: false,
-          showSmallCloseButton: true,
-        },
-      };
-
-      return typeMap[this.type] || {};
+  watch: {
+    size(newSize) {
+      this.$emit('resize', newSize);
     },
   },
 };
@@ -215,8 +165,10 @@ export default {
   }
 
   &__main {
-    display: flex;
+    display: grid;
     align-items: center;
+    grid-template-columns: 1fr auto;
+    gap: $unnnic-spacing-xs;
 
     &__back {
       margin-right: $unnnic-spacing-md;
