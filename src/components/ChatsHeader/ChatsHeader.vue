@@ -1,5 +1,5 @@
 <template>
-  <header class="unnnic-chats-header" :class="{ large: size === 'large' && !avatarName }">
+  <header class="unnnic-chats-header" :class="{ large: size === 'large', contact: !!avatarName }">
     <div class="unnnic-chats-header__topbar" v-if="size === 'large' && !avatarName">
       <unnnic-breadcrumb :crumbs="crumbs" />
       <unnnic-button-close @close="close" size="ant" />
@@ -21,7 +21,7 @@
           :size="size === 'small' ? 'sm' : 'lg'"
         />
 
-        <hgroup class="unnnic-chats-header__infos__title" :class="{ contact: !!avatarName }">
+        <hgroup class="unnnic-chats-header__infos__title">
           <h1>
             {{ title }}
           </h1>
@@ -30,7 +30,7 @@
           </h2>
         </hgroup>
       </section>
-      <slot v-if="size === 'large'"/>
+      <slot v-if="size === 'large'" />
     </main>
     <unnnic-button-close v-if="avatarName || size === 'small'" @close="close" size="sm" />
   </header>
@@ -128,33 +128,45 @@ export default {
   justify-content: space-between;
   align-items: center;
 
-  box-shadow: $unnnic-shadow-level-far;
+  box-shadow: inset 0 -1px 0 $unnnic-color-neutral-light, $unnnic-shadow-level-far;
   background-color: $unnnic-color-background-white;
 
   font-family: $unnnic-font-family-secondary;
 
   &.large {
-    padding: $unnnic-spacing-md;
+    &:not(.contact) {
+      padding: $unnnic-spacing-md;
 
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: $unnnic-spacing-md;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: $unnnic-spacing-md;
 
-    box-shadow: none;
-    box-shadow: inset 0 -1px 0 $unnnic-color-neutral-soft;
+      box-shadow: none;
+      box-shadow: inset 0 -1px 0 $unnnic-color-neutral-soft;
 
-    .unnnic-chats-header__infos__title {
-      h1 {
-        font-size: $unnnic-font-size-title-md;
-        line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
-        font-weight: $unnnic-font-weight-regular;
+      .unnnic-chats-header__infos__title {
+        h1 {
+          font-size: $unnnic-font-size-title-md;
+          line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
+          font-weight: $unnnic-font-weight-regular;
+        }
+
+        h2 {
+          font-size: $unnnic-font-size-body-gt;
+          line-height: $unnnic-font-size-body-lg + $unnnic-line-height-small;
+        }
       }
+    }
 
-      h2 {
-        font-size: $unnnic-font-size-body-gt;
-        line-height: $unnnic-font-size-body-lg + $unnnic-line-height-small;
-      }
+    &.contact {
+      box-shadow: $unnnic-shadow-level-far;
+    }
+  }
+
+  &.contact {
+    .unnnic-chats-header__infos__title h1 {
+      font-weight: $unnnic-font-weight-regular;
     }
   }
 
@@ -197,10 +209,6 @@ export default {
       display: grid;
       align-items: center;
 
-      &.contact h1 {
-        font-weight: $unnnic-font-weight-regular;
-      }
-
       h1,
       h2 {
         white-space: nowrap;
@@ -215,7 +223,7 @@ export default {
       }
 
       h2 {
-        font-size: $unnnic-font-size-body-md;
+        font-size: $unnnic-font-size-body-gt;
         line-height: $unnnic-font-size-body-lg;
         font-weight: $unnnic-font-weight-regular;
       }
