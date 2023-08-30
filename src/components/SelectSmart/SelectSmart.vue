@@ -107,7 +107,8 @@ export default {
       ],
     },
     value: {
-      type: null,
+      type: Array,
+      default: () => [],
     },
     size: {
       type: String,
@@ -180,7 +181,15 @@ export default {
       this.isAutocompleteAllowed = true;
     }
 
-    if (this.options[0].value) {
+    if (this.value[0] && this.value[0].value) {
+      this.value.forEach((option) => this.selectOption(option));
+
+      if (this.isAutocompleteAllowed) {
+        this.$nextTick(() => {
+          this.searchValue = this.selectedLabel;
+        });
+      }
+    } else if (this.options[0] && this.options[0].value) {
       this.selectOption(this.options[0]);
     }
   },
@@ -200,10 +209,10 @@ export default {
       });
     },
 
-    searchValue() {
+    searchValue(newSearchValue, oldSearchValue) {
       this.focusedOption = null;
 
-      if (!this.active) this.active = true;
+      if (!this.active && oldSearchValue) this.active = true;
     },
 
     selectedOptions(newSelectedOptions) {
@@ -234,7 +243,7 @@ export default {
           return isValueMatch && option.value !== '';
         }
 
-        const isEmptyOption = option.value === '' && this.value == null;
+        const isEmptyOption = option.value === '' && this.value.length === 0;
         return isEmptyOption || isValueMatch;
       });
 
@@ -403,7 +412,7 @@ export default {
 
     unselectOption(option) {
       const indexToRemove = this.selectedOptions.findIndex(
-        (selectedOption) => selectedOption === option,
+        (selectedOption) => selectedOption.value === option.value,
       );
 
       if (indexToRemove !== -1) {

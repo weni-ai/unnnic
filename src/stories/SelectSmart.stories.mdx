@@ -1,0 +1,291 @@
+import { Canvas, Meta, Source, Story } from "@storybook/addon-docs";
+import unnnicSelectSmart from "../components/SelectSmart/SelectSmart.vue";
+
+<Meta
+  title='Select/SelectSmart'
+  component={unnnicSelectSmart}
+  decorators={[
+    () => ({
+      template: '<div style="marginBottom: 200px"><story /></div>',
+    }),
+  ]}
+/>
+
+export const Template = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { unnnicSelectSmart },
+  data() {
+    return {
+      exampleValue: [],
+    };
+  },
+  template: '<unnnic-select-smart v-model="exampleValue" v-bind="$props" />',
+});
+
+# SelectSmart
+
+SelectSmart is designed to solve common problems related to option selection. 
+It combines three elements: Select, Autocomplete, and AutocompleteSelect, which 
+originally didn't follow a consistent pattern and had some bugs. With SelectSmart, 
+these components have been unified and improved and it also brings a new design.
+
+> It is a _self-closing_ component, which means it does not support child elements.
+
+> Available in small and medium versions, which can be toggled through the 
+`size` property, accepting the strings "sm" or "md".
+
+<Source
+  language='html'
+  dark
+  code={`
+<unnnic-select-smart v-model="exampleValue" :options="exampleArray" />
+  `}
+/>
+
+---
+
+#### **IMPORTANT:**
+
+To ensure proper functioning of the component, it is fundamental to provide the `v-model` 
+(or `value` and `@input`), even if it is empty (`[]`), since it is through this property 
+that the selected options are controlled.
+
+The other one required property is `options`, which requires an array of objects in the following format:
+
+| Key       | Description                                                                                                                            | Type   |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------ | ------ |
+| value       | **Required.**<br/>Sets the option value. If it is empty, the _label_ of this object will be used as the _placeholder_ of the SelectSmart. | string |
+| label       | **Required.**<br/>Provides user-friendly text that represents the option to the user.                                                | string |
+| description | _Not required._<br/>Provides an additional description for the option.                                                               | string |
+
+<Source
+  language='json'
+  dark
+  code={`
+[
+  {
+    "value": "",
+    "label": "Select some option"  <---- Since the value of this object is empty, this will be the placeholder
+  },
+  {
+    "value": "1",
+    "label": "Option 1",
+  },
+  {
+    "value": "2",
+    "label": "Option 2",
+    "description": "This is the first option"
+  },
+]
+  `}
+/>
+
+> The options will be presented in alphabetical order, following the value of each `label`, 
+regardless of the sequence in which the objects are supplied to the `:options` property. 
+However, if the `orderedByIndex` property is included, the options will be sorted 
+according to the arrangement given to `:options`. 
+
+---
+<br />
+
+## Default
+
+Allows you to choose from a list.
+
+<Canvas>
+  <Story
+    name='Default'
+    args={{
+      options: [
+        { value: "", label: "Select some option" },
+        { value: "5", label: "Option 5" },
+        { value: "3", label: "Option 3" },
+        { value: "1", label: "Option 1" },
+        { value: "4", label: "Option 4" },
+        { value: "2", label: "Option 2" },
+        { value: "6", label: "Option 6" },
+        { value: "7", label: "Option 7" },
+      ],
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Default option selected
+
+For the first option to be selected by default, it is essential that 
+there is no object with its `value` field empty.
+
+If your intention is to set a specific option as the default, you can 
+accomplish this using the `value` (or `v-model`) property. Make sure that this 
+value is passed as an array, and that the object is structured according to the 
+pattern of the other options.
+
+<Canvas>
+  <Story
+    name='FirstSelected'
+    args={{
+      options: [
+        { value: "1", label: "Option 1" },
+        { value: "2", label: "Option 2" },
+        { value: "3", label: "Option 3" },
+        { value: "4", label: "Option 4" },
+        { value: "5", label: "Option 5" },
+      ],
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Ordered by index
+
+If the `orderedByIndex` property is included, the options will 
+be ordered according to the arrangement given to `:options`.
+
+<Canvas>
+  <Story
+    name='OrderedByIndex'
+    args={{
+      options: [
+        { value: "5", label: "Option 5" },
+        { value: "3", label: "Option 3" },
+        { value: "1", label: "Option 1" },
+        { value: "4", label: "Option 4" },
+        { value: "2", label: "Option 2" },
+      ],
+      orderedByIndex: true,
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Disabled
+
+SelectSmart will respond to the value passed to the `disabled` property, 
+becoming disabled when set to _true_ and remaining enabled when set to _false_.
+
+<Canvas>
+  <Story
+    name='Disabled'
+    args={{
+      options: [{ value: "", label: "Select some option" }],
+      disabled: true,
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## With descriptions
+
+If you want a more detailed description for your options, you can include the 
+`description` key inside the object corresponding to each option.
+
+<Canvas>
+  <Story
+    name='WithDescriptions'
+    args={{
+      options: [
+        { value: "", label: "Select some option" },
+        { value: "1", label: "Option 1", description: "This is the first option" },
+        { value: "2", label: "Option 2", description: "Another alternative you can consider" },
+        { value: "3", label: "Option 3", description: "A third option for your consideration" },
+        { value: "4", label: "Option 4", description: "Yet another choice among the options" },
+        { value: "5", label: "Option 5", description: "The last option available for selection" },
+      ],
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Autocomplete
+
+To activate the search functionality, just include the `autocomplete` property. 
+The search takes place based on the text of the `label`, without distinction 
+between uppercase and lowercase, spaces and accents.
+
+If you want the search bar to be emptied when focusing on the component, use 
+the `autocompleteClearOnFocus` property.
+
+Furthermore, it is possible to incorporate the magnifying glass icon on the side (left) of 
+the search bar by using the `autocompleteIconLeft` property.
+
+<Canvas>
+  <Story
+    name='Autocomplete'
+    args={{
+      options: [
+        { value: "", label: "Select some option" },
+        { value: "united_states", label: "Estados Unidos" },
+        { value: "brazil", label: "Brasil" },
+        { value: "china", label: "China" },
+        { value: "india", label: "Índia" },
+        { value: "russia", label: "Rússia" },
+        { value: "japan", label: "Japão" },
+        { value: "germany", label: "Alemanha" },
+        { value: "france", label: "França" },
+        { value: "canada", label: "Canadá" },
+        { value: "australia", label: "Austrália" },
+        { value: "south_korea", label: "Coreia do Sul" },
+        { value: "mexico", label: "México" },
+        { value: "egypt", label: "Egito" },
+        { value: "south_africa", label: "África do Sul" },
+        { value: "turkey", label: "Turquia" },
+        { value: "nigeria", label: "Nigéria" },
+        { value: "argentina", label: "Argentina" },
+        { value: "italy", label: "Itália" },
+        { value: "spain", label: "Espanha" },
+        { value: "saudi_arabia", label: "Arábia Saudita" },
+      ],
+      autocomplete: true,
+      autocompleteClearOnFocus: true,
+      autocompleteIconLeft: true,
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
+
+## Multiple
+
+To use the component version that allows the selection of 
+several options, just pass the `multiple` property.
+
+You also have the freedom to customize the message that signals 
+when no option has been selected, through the `multipleWithoutSelectsMessage` property.
+
+Typically, components involving multiple options offer a considerable range 
+of choices. So, in order to improve the user experience, the `multiple` option 
+automatically activates the `autocomplete` feature, it cannot be deactivated.
+
+<Canvas>
+  <Story
+    name='Multiple'
+    args={{
+      options: [
+        { value: "", label: "Select some countries" },
+        { value: "united_states", label: "Estados Unidos" },
+        { value: "brazil", label: "Brasil" },
+        { value: "china", label: "China" },
+        { value: "india", label: "Índia" },
+        { value: "russia", label: "Rússia" },
+        { value: "japan", label: "Japão" },
+        { value: "germany", label: "Alemanha" },
+        { value: "france", label: "França" },
+        { value: "canada", label: "Canadá" },
+        { value: "australia", label: "Austrália" },
+        { value: "south_korea", label: "Coreia do Sul" },
+        { value: "mexico", label: "México" },
+        { value: "egypt", label: "Egito" },
+        { value: "south_africa", label: "África do Sul" },
+        { value: "turkey", label: "Turquia" },
+        { value: "nigeria", label: "Nigéria" },
+        { value: "argentina", label: "Argentina" },
+        { value: "italy", label: "Itália" },
+        { value: "spain", label: "Espanha" },
+        { value: "saudi_arabia", label: "Arábia Saudita" },
+      ],
+      multiple: true,
+      multipleWithoutSelectsMessage: 'No country selected yet :(',
+    }}>
+    {Template.bind({})}
+  </Story>
+</Canvas>
