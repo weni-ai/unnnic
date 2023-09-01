@@ -1,12 +1,18 @@
 <template>
   <div class="audio-player">
-    <span @click="togglePlayback" @keypress.enter="togglePlayback" class="unnnic--clickable">
+    <span
+      @click="click"
+      @keypress.enter="click"
+      class="unnnic--clickable"
+      :class="{ inactive: reqStatus === 'sending' }"
+    >
       <unnnic-icon :icon="playbackIcon" scheme="neutral-darkest" />
     </span>
 
     <input
       v-if="showProgressBar"
       class="audio-player__progress-bar unnnic--clickable"
+      :class="{ inactive: reqStatus !== 'default' }"
       type="range"
       min="0"
       :max="duration"
@@ -22,8 +28,7 @@
         :key="index"
         :style="{ height: `${bar * 100}%` }"
         :class="['bar', { active: isBarActive(index) }]"
-      >
-      </div>
+      ></div>
     </div>
 
     <span class="audio-player__time">
@@ -49,6 +54,13 @@ export default {
       type: String,
       default: '',
     },
+    reqStatus: {
+      type: String,
+      default: 'default',
+      validate(status) {
+        return ['default', 'sending', 'failed'].includes(status);
+      },
+    },
     isPlaying: {
       type: Boolean,
       default: false,
@@ -69,6 +81,14 @@ export default {
   },
 
   methods: {
+    click() {
+      if (this.reqStatus === 'failed') {
+        this.$emit('failed-click');
+      } else if (this.reqStatus !== 'sending') {
+        this.togglePlayback();
+      }
+    },
+
     togglePlayback() {
       this[this.isPlaying ? 'pause' : 'play']();
     },
@@ -95,6 +115,15 @@ export default {
       return !this.bars || this.bars.length === 0;
     },
     playbackIcon() {
+      const statusMapping = {
+        sending: 'loading-circle-1',
+        failed: 'upload-bottom-1',
+      };
+
+      if (this.reqStatus in statusMapping) {
+        return statusMapping[this.reqStatus];
+      }
+
       return this.isPlaying ? 'controls-pause-1' : 'controls-play-1';
     },
     progressBarStyle() {
@@ -113,7 +142,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .audio-player {
   display: inline-flex;
@@ -193,5 +222,8 @@ export default {
     margin-left: $unnnic-spacing-stack-xs;
   }
 
+  .inactive {
+    pointer-events: none;
+  }
 }
 </style>
