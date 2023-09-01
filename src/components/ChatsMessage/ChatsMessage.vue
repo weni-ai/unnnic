@@ -6,6 +6,7 @@
       sending: status === 'sending',
       'is-media': isMedia,
       'is-image': isImage,
+      'is-video': isVideo,
     }"
   >
     <p class="unnnic-chats-message__text" v-if="this.$slots.text">
@@ -18,7 +19,7 @@
     >
       <slot name="media" />
       <unnnic-chats-message-status-backdrop
-        v-if="(sendingMedia || failedToSendMedia) && isImage"
+        v-if="(sendingMedia || failedToSendMedia) && (isImage || isVideo)"
         :status="status"
       />
     </div>
@@ -86,6 +87,15 @@ export default {
       }
       return false;
     },
+    isVideo() {
+      const slotContents = this.$slots.media;
+
+      if (slotContents && slotContents[0]) {
+        const isVideoTag = slotContents[0].tag === 'video';
+        return isVideoTag;
+      }
+      return false;
+    },
     sendingMedia() {
       return this.isMedia && this.status === 'sending';
     },
@@ -136,13 +146,14 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   &.is-media {
     padding: $unnnic-spacing-nano $unnnic-spacing-xs;
 
-    &.is-image {
+    &.is-image, &.is-video {
       display: grid;
       justify-items: end;
 
       overflow: hidden;
+    }
 
-      img {
+    &.is-image img {
         width: 200px;
         height: auto;
         max-width: 200px;
@@ -150,7 +161,14 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
         max-height: 300px;
 
         object-fit: cover;
-      }
+    }
+
+    &.is-video video {
+        width: 300px;
+        height: auto;
+        max-width: 300px;
+        min-height: 200px;
+        max-height: 300px;
     }
   }
 

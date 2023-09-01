@@ -4,6 +4,7 @@ import AudioSample from './assets/audios/audio-recorder-sample.mp3';
 import ImageSample1 from './assets/images/un.png';
 import ImageSample2 from './assets/images/unnnic.png';
 import ImageSample3 from './assets/images/unnnicPortrait.png';
+import VideoSample from './assets/videos/weni.mp4';
 
 export default {
   title: 'Chats/Message',
@@ -99,6 +100,7 @@ const MediaTemplate = (args, { argTypes }) => ({
       image1: ImageSample1,
       image2: ImageSample2,
       image3: ImageSample3,
+      video: VideoSample,
     };
   },
   template: `
@@ -111,6 +113,34 @@ const MediaTemplate = (args, { argTypes }) => ({
         <unnnic-audio-recorder style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
       </template>
     </unnnic-chats-message>
+
+    <div  style="
+      display: flex;
+      gap: 16px;
+    ">
+      <unnnic-chats-message v-bind="$props">
+        <template #media>
+          <video controls>
+            <source :src="video" />
+          </video>
+        </template>
+      </unnnic-chats-message>
+      <unnnic-chats-message status="sending" v-bind="$props">
+        <template #media>
+          <video controls>
+            <source :src="video" />
+          </video>
+        </template>
+      </unnnic-chats-message>
+      <unnnic-chats-message status="failed" v-bind="$props">
+        <template #media>
+          <video controls>
+            <source :src="video" />
+          </video>
+        </template>
+      </unnnic-chats-message>
+    </div>
+
     <div  style="
       display: flex;
       gap: 16px;
@@ -131,6 +161,7 @@ const MediaTemplate = (args, { argTypes }) => ({
         </template>
       </unnnic-chats-message>
     </div>
+
     <unnnic-chats-message v-bind="$props">
       <template #media>
         <img :src="image2" />
