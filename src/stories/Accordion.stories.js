@@ -2,7 +2,7 @@ import unnnicAccordion from '../components/Accordion/Accordion.vue';
 import unnnicButton from '../components/Button/Button.vue';
 
 export default {
-  title: 'example/Accordion',
+  title: 'accordion/Accordion',
   component: unnnicAccordion,
   argTypes: {
     open: { control: { type: 'boolean' } },
