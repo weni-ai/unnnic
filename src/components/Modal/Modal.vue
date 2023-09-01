@@ -13,6 +13,9 @@
                 @click="onCloseClick"
               />
             </div>
+            <div v-if="$slots.icon" class="unnnic-modal-container-background-body__icon-slot">
+              <slot name="icon"></slot>
+            </div>
             <div
               v-if="modalIcon"
               :class="[
@@ -192,6 +195,7 @@ export default {
         background-color: $unnnic-color-background-carpet;
         padding: 0 $unnnic-inline-md;
         text-align: center;
+        padding-top: $unnnic-spacing-sm;
 
         &-title {
           text-align: center;
@@ -207,9 +211,13 @@ export default {
           width: 100%;
           display: flex;
           justify-content: flex-end;
-          padding-top: $unnnic-spacing-stack-sm;
           padding-bottom: $unnnic-spacing-stack-xs;
         }
+
+        &__icon-slot {
+          margin-bottom: $unnnic-spacing-md;
+        }
+
         &-alert_icon {
           width: 100%;
           display: flex;
@@ -218,7 +226,7 @@ export default {
         }
 
         &-spacing_header {
-          padding-top: $unnnic-spacing-stack-giant;
+          padding-top: $unnnic-spacing-stack-giant - $unnnic-spacing-sm;
         }
 
         &-description {
