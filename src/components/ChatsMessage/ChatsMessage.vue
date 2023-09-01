@@ -4,15 +4,31 @@
     :class="{
       sent: type === 'sent',
       sending: status === 'sending',
+      'is-document': isDocument,
       'is-media': isMedia,
       'is-image': isImage,
       'is-video': isVideo,
     }"
+    @click="$emit('click')"
   >
-    <p class="unnnic-chats-message__text" v-if="this.$slots.text">
+    <p v-if="isText" class="unnnic-chats-message__text">
       <slot name="text" :content="formattedText" />
     </p>
+
+    <div v-if="isDocument" class="unnnic-chats-message__document">
+      <unnnic-icon
+        v-if="status === 'sending' || status === 'failed'"
+        :icon="status === 'sending' ? 'loading-circle-1' : 'upload-bottom-1'"
+        size="lg"
+      />
+      <unnnic-icon v-else icon="office-file-pdf-1-1" scheme="neutral-dark" size="lg" />
+      <p class="unnnic-chats-message__document__text">
+        {{ documentName }}
+      </p>
+    </div>
+
     <div
+      v-else
       class="unnnic-chats-message__media__container"
       :class="{ failed: failedToSendMedia }"
       @click="$emit('click-image')"
@@ -49,7 +65,7 @@ export default {
       default: null,
       required: true,
     },
-    sending: {
+    documentName: {
       type: Boolean,
       default: false,
     },
@@ -75,6 +91,9 @@ export default {
       const formattedTime = `${hours}:${minutes}`;
       return formattedTime;
     },
+    isText() {
+      return !!this.$slots.text;
+    },
     isMedia() {
       return !!this.$slots.media;
     },
@@ -95,6 +114,9 @@ export default {
         return isVideoTag;
       }
       return false;
+    },
+    isDocument() {
+      return !!this.documentName;
     },
     sendingMedia() {
       return this.isMedia && this.status === 'sending';
@@ -146,7 +168,8 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   &.is-media {
     padding: $unnnic-spacing-nano $unnnic-spacing-xs;
 
-    &.is-image, &.is-video {
+    &.is-image,
+    &.is-video {
       display: grid;
       justify-items: end;
 
@@ -154,25 +177,44 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     }
 
     &.is-image img {
-        width: 200px;
-        height: auto;
-        max-width: 200px;
-        min-height: 200px;
-        max-height: 300px;
+      width: 200px;
+      height: auto;
+      max-width: 200px;
+      min-height: 200px;
+      max-height: 300px;
 
-        object-fit: cover;
+      object-fit: cover;
     }
 
     &.is-video video {
-        width: 300px;
-        height: auto;
-        max-width: 300px;
-        min-height: 200px;
-        max-height: 300px;
+      width: 300px;
+      height: auto;
+      max-width: 300px;
+      min-height: 200px;
+      max-height: 300px;
     }
   }
 
-  &__text {
+  &.is-document {
+    min-width: 200px;
+    max-width: 400px;
+  }
+
+  &__document {
+    display: flex;
+    align-items: center;
+    gap: $unnnic-spacing-xs;
+
+    &__text {
+      &:hover {
+        text-decoration: underline;
+
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__text, &__document__text {
     padding: $unnnic-spacing-nano 0;
 
     color: $unnnic-color-neutral-dark;

@@ -176,6 +176,24 @@ const MediaTemplate = (args, { argTypes }) => ({
   `,
 });
 
+const DocumentTemplate = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { unnnicChatsMessage },
+  template: `
+    <div  style="
+      display: grid;
+      gap: 16px;
+    ">
+      <unnnic-chats-message documentName="Lorem.pdf" type="received" v-bind="$props" />
+      <unnnic-chats-message documentName="Lorem.pdf" v-bind="$props" />
+      <unnnic-chats-message documentName="Lorem Ipsum.pdf" status="sending" v-bind="$props" />
+      <unnnic-chats-message documentName="Lorem Ipsum.pdf" status="failed" v-bind="$props" />
+      <unnnic-chats-message documentName="Lorem ipsum dolor sit amet consectetur adipiscing elit.docx" v-bind="$props" />
+      <unnnic-chats-message documentName="Lorem ipsum dolor sit amet consectetur adipiscing elit fusce iaculis ligula fringilla consectetur tempor ex massa convallis risus ut sagittis est quam non est integer bibendum vehicula.csv" v-bind="$props" />
+    </div>
+  `,
+});
+
 const defaultArgs = { time: new Date('2023-08-08T09:54:07.876230-03:00') };
 
 export const Default = Template.bind({});
@@ -203,6 +221,12 @@ MultipleMessages.args = {
 
 export const Media = MediaTemplate.bind({});
 Media.args = {
+  ...defaultArgs,
+  type: 'sent',
+};
+
+export const Document = DocumentTemplate.bind({});
+Document.args = {
   ...defaultArgs,
   type: 'sent',
 };
