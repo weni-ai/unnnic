@@ -25,6 +25,7 @@ import cardFlow from './CardFlow/CardFlow.vue';
 import cardProject from './CardProject/CardProject.vue';
 import cardInformation from './CardInformation/CardInformation.vue';
 import checkbox from './Checkbox/Checkbox.vue';
+import collapse from './Collapse/Collapse.vue';
 import radio from './Radio/Radio.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
 import modal from './Modal/Modal.vue';
@@ -98,6 +99,7 @@ const components = {
   unnnicCardProject: cardProject,
   unnnicCardInformation: cardInformation,
   unnnicCheckbox: checkbox,
+  unnnicCollapse: collapse,
   unnnicRadio: radio,
   unnnicLanguageSelect: languageSelect,
   unnnicModal: modal,
@@ -175,6 +177,7 @@ export const unnnicCardFlow = cardFlow;
 export const unnnicCardProject = cardProject;
 export const unnnicCardInformation = cardInformation;
 export const unnnicCheckbox = checkbox;
+export const unnnicCollapse = collapse;
 export const unnnicRadio = radio;
 export const unnniclanguageSelect = languageSelect;
 export const unnnicModal = modal;

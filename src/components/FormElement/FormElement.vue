@@ -41,7 +41,9 @@ export default {
     message: String,
   },
 
-  data() {},
+  data() {
+    return {};
+  },
 };
 </script>
 
