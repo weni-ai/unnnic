@@ -14,9 +14,11 @@
     <audio-player
       v-else
       :time="numberToTimeString(isIdle ? duration : currentTime)"
+      :reqStatus="reqStatus"
       :progress-bar-percentual-value="playedPercentual"
       :is-playing="isPlaying"
       :bars="playbackAudioBars ? bars : null"
+      @failed-click="$emit('failed-click')"
       @pause="pause"
       @play="play"
       @progress-bar-update="progressBarUpdate"
@@ -76,6 +78,14 @@ export default {
     canDiscard: {
       type: Boolean,
       default: true,
+    },
+
+    reqStatus: {
+      type: String,
+      default: 'default',
+      validate(status) {
+        return ['default', 'sending', 'failed'].includes(status);
+      },
     },
 
     playbackAudioBars: {

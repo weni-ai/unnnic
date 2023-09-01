@@ -108,11 +108,26 @@ const MediaTemplate = (args, { argTypes }) => ({
     display: grid;
     gap: 16px;
   ">
-    <unnnic-chats-message v-bind="$props">
-      <template #media>
-        <unnnic-audio-recorder style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
-      </template>
-    </unnnic-chats-message>
+    <div  style="
+      display: flex;
+      gap: 16px;
+    ">
+      <unnnic-chats-message v-bind="$props">
+        <template #media>
+          <unnnic-audio-recorder style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
+        </template>
+      </unnnic-chats-message>
+      <unnnic-chats-message status="sending" v-bind="$props">
+        <template #media>
+          <unnnic-audio-recorder reqStatus="sending" style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
+        </template>
+      </unnnic-chats-message>
+      <unnnic-chats-message status="failed" v-bind="$props">
+        <template #media>
+          <unnnic-audio-recorder reqStatus="failed" style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
+        </template>
+      </unnnic-chats-message>
+    </div>
 
     <div  style="
       display: flex;
