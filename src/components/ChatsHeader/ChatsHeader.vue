@@ -1,5 +1,5 @@
 <template>
-  <header class="unnnic-chats-header" :class="{ large: size === 'large', contact: !!avatarName }">
+  <header class="unnnic-chats-header" :class="[size, { contact: !!avatarName }]">
     <div class="unnnic-chats-header__topbar" v-if="size === 'large' && !avatarName">
       <unnnic-breadcrumb :crumbs="crumbs" />
       <unnnic-button-close @close="close" size="ant" />
