@@ -170,28 +170,33 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
     &.is-image,
     &.is-video {
+      padding: $unnnic-spacing-xs;
+
       display: grid;
       justify-items: end;
 
       overflow: hidden;
+
+      img, video {
+        border-radius: $unnnic-border-radius-md;
+
+        min-height: 200px;
+        max-height: 300px;
+        height: auto;
+      }
     }
 
     &.is-image img {
       width: 200px;
       height: auto;
       max-width: 200px;
-      min-height: 200px;
-      max-height: 300px;
 
       object-fit: cover;
     }
 
     &.is-video video {
       width: 300px;
-      height: auto;
       max-width: 300px;
-      min-height: 200px;
-      max-height: 300px;
     }
   }
 
@@ -223,8 +228,9 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   }
 
   &__time {
-    color: $unnnic-color-neutral-clean;
+    font-size: $unnnic-font-size-body-gt;
     line-height: $defaultLineHeight;
+    color: $unnnic-color-neutral-clean;
   }
 
   &__media__container {
