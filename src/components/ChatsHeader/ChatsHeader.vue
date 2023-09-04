@@ -172,6 +172,10 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .unnnic-breadcrumb__container__link {
+      font-size: $unnnic-font-size-body-gt;
+    }
   }
 
   &__main {
