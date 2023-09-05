@@ -3,11 +3,11 @@
     v-bind="$attrs"
     :disabled="buttonDisabled"
     :class="[
-      'unnnic-button',
-      `unnnic-button--size-${size}`,
-      `unnnic-button--${type}`,
-      `unnnic-button-scheme--${buttonScheme}`,
-      iconCenter ? `unnnic-button--icon-on-center` : null
+      'unnnic-button-next',
+      `unnnic-button-next--size-${size}`,
+      `unnnic-button-next--${type}`,
+      `unnnic-button-next-scheme--${buttonScheme}`,
+      iconCenter ? `unnnic-button-next--icon-on-center` : null
     ]"
     v-on="$listeners">
 
@@ -25,7 +25,7 @@
       :icon="iconLeft"
       :scheme="iconScheme"
       :size="iconSize"
-      :class="{ 'unnnic-button__icon-left': hasText }"
+      :class="{ 'unnnic-button-next__icon-left': hasText }"
       :style="{ visibility: loading ? 'hidden' : null }"
     />
 
@@ -35,9 +35,9 @@
       :scheme="iconScheme"
       :style="{ visibility: loading ? 'hidden' : null }"
       :size="iconSize"
-    ></unnnic-icon-svg>
+    />
 
-    <span class="unnnic-button__label" :style="{ visibility: loading ? 'hidden' : null }">
+    <span class="unnnic-button-next__label" :style="{ visibility: loading ? 'hidden' : null }">
       <slot /> {{ text }}
     </span>
 
@@ -46,7 +46,7 @@
       :icon="iconRight"
       :scheme="iconScheme"
       :size="iconSize"
-      :class="{ 'unnnic-button__icon-right': hasText }"
+      :class="{ 'unnnic-button-next__icon-right': hasText }"
       :style="{ visibility: loading ? 'hidden' : null }"
     />
   </button>
@@ -56,7 +56,6 @@
 import UnnnicIconSvg from '../Icon.vue';
 
 export default {
-  name: 'unnnic-button',
   components: {
     UnnnicIconSvg,
   },
@@ -76,7 +75,7 @@ export default {
       type: String,
       default: 'primary',
       validator(value) {
-        return ['primary', 'secondary', 'terciary'].indexOf(value) !== -1;
+        return ['primary', 'secondary', 'terciary', 'ghost', 'warning'].indexOf(value) !== -1;
       },
     },
     iconLeft: {
@@ -121,11 +120,23 @@ export default {
     },
     iconScheme() {
       if (this.type === 'primary') {
-        return this.buttonDisabled ? 'neutral-clean' : 'background-snow';
+        return this.buttonDisabled ? 'neutral-clean' : 'neutral-white';
       }
 
       if (this.type === 'secondary') {
-        return this.buttonDisabled ? 'neutral-cloudy' : 'neutral-dark';
+        return this.buttonDisabled ? 'neutral-clean' : 'weni-900';
+      }
+
+      if (this.type === 'terciary') {
+        return this.buttonDisabled ? 'neutral-clean' : 'neutral-dark';
+      }
+
+      if (this.type === 'ghost') {
+        return this.buttonDisabled ? 'neutral-clean' : 'neutral-dark';
+      }
+
+      if (this.type === 'warning') {
+        return this.buttonDisabled ? 'neutral-clean' : 'neutral-white';
       }
 
       return '';
@@ -153,10 +164,9 @@ export default {
     transform: rotate(360deg);
   }
 }
-
 </style>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "../../assets/scss/unnnic.scss";
 
 $scheme-colors:
@@ -164,7 +174,7 @@ $scheme-colors:
   "feedback-green" $unnnic-color-feedback-green,
   "feedback-yellow" $unnnic-color-feedback-yellow;
 
-.unnnic-button {
+.unnnic-button-next {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -188,112 +198,141 @@ $scheme-colors:
   }
 
   &--primary {
-    background-color: $unnnic-color-neutral-darkest;
-    color: $unnnic-color-background-snow;
+    background-color: $unnnic-color-weni-600;
+    color: $unnnic-color-neutral-white;
 
     &:hover:enabled {
-      opacity: $unnnic-opacity-level-darkest;
-      border: 0;
+      background-color: $unnnic-color-weni-700;
     }
 
     &:disabled {
-      background-color: $unnnic-color-neutral-light;
+      background-color: $unnnic-color-neutral-soft;
       color: $unnnic-color-neutral-clean;
       cursor: not-allowed;
+    }
+
+    &:active:enabled {
+      background-color: $unnnic-color-weni-800;
     }
   }
 
   &--secondary {
-    background-color: rgba($unnnic-color-neutral-cleanest, $unnnic-opacity-level-light);
-    color: $unnnic-color-neutral-dark;
-    position: relative;
+    background-color: $unnnic-color-weni-50;
+    color: $unnnic-color-weni-800;
 
-    &:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      border-radius: $unnnic-border-radius-sm;
-      border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
-    }
-
-    &:hover:enabled:after {
-      border-width: 0;
+    &:hover:enabled {
+      background-color: $unnnic-color-weni-100;
     }
 
     &:disabled {
-      background-color: $unnnic-color-neutral-light;
-      color: $unnnic-color-neutral-cloudy;
+      background-color: $unnnic-color-neutral-soft;
+      color: $unnnic-color-neutral-clean;
       cursor: not-allowed;
 
-      &:after {
-        border: $unnnic-border-width-thinner dashed $unnnic-color-neutral-cleanest;
-      }
+    }
+
+    &:active:enabled {
+      background-color: $unnnic-color-weni-200;
+      color: $unnnic-color-weni-900;
     }
   }
 
   &--terciary {
-    background-color: transparent;
+    background-color: $unnnic-color-neutral-white;
     color: $unnnic-color-neutral-dark;
+    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
 
-    position: relative;
-
-    &:hover:enabled:after {
-      content: '';
-      display: block;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      border-radius: $unnnic-border-radius-sm;
-      border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+    &:hover:enabled {
+      background-color: $unnnic-color-neutral-light;
     }
 
     &:disabled {
-      background-color: $unnnic-color-neutral-light;
-      color: $unnnic-color-neutral-cleanest;
+      background-color: $unnnic-color-neutral-soft;
+      color: $unnnic-color-neutral-clean;
       cursor: not-allowed;
+      border: 0;
+    }
+
+    &:active:enabled {
+      background-color: $unnnic-color-neutral-soft;
+    }
+  }
+
+  &--ghost {
+    background-color: transparent;
+    color: $unnnic-color-neutral-dark;
+
+    &:hover:enabled {
+      background-color: $unnnic-color-neutral-light;
+    }
+
+    &:disabled {
+      color: $unnnic-color-neutral-clean;
+      cursor: not-allowed;
+    }
+
+    &:active:enabled {
+      background-color: $unnnic-color-neutral-soft;
+    }
+  }
+
+  &--warning {
+    background-color: $unnnic-color-aux-red-500;
+    color: $unnnic-color-neutral-white;
+
+    &:hover:enabled {
+      background-color:$unnnic-color-aux-red-700;
+    }
+
+    &:disabled {
+      background-color: $unnnic-color-neutral-soft;
+      color: $unnnic-color-neutral-clean;
+      cursor: not-allowed;
+    }
+
+    &:active:enabled {
+      background-color: $unnnic-color-aux-red-900;
     }
   }
 
   &--size {
     &-large {
       padding: $unnnic-squish-xs;
-      font-size: $unnnic-font-size-body-lg;
-      line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
+      font-size: $unnnic-font-size-body-gt;
+      line-height: ($unnnic-font-size-body-gt + $unnnic-line-height-medium);
+      height: 46px;
     }
 
     &-small {
-      padding: $unnnic-squish-nano;
-      font-size: $unnnic-font-size-body-md;
-      line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
+      padding: $unnnic-squish-xs;
+      font-size: $unnnic-font-size-body-gt;
+      line-height: ($unnnic-font-size-body-gt + $unnnic-line-height-medium);
+      height: 38px;
     }
   }
 }
 
-@each $name, $color in $scheme-colors {
-  .unnnic-button-scheme {
+@each $name,
+$color in $scheme-colors {
+  .unnnic-button-next-scheme {
     &--#{$name} {
       background-color: $color;
     }
   }
 }
-
 </style>
 
 <style lang="scss" scoped>
 @import "../../assets/scss/unnnic.scss";
 
-.unnnic-button--icon-on-center {
+.unnnic-button-next--icon-on-center {
   min-width: auto;
 
-  &.unnnic-button--size {
+  &.unnnic-button-next--size {
     &-large {
       padding: $unnnic-inset-xs;
+      height: 46px;
+      width: 46px;
 
       .unnnic-icon {
         width: $unnnic-icon-size-md;
@@ -303,6 +342,8 @@ $scheme-colors:
 
     &-small {
       padding: $unnnic-inset-nano;
+      height: 38px;
+      width: 38px;
 
       .unnnic-icon {
         width: $unnnic-icon-size-ant;

@@ -5,6 +5,7 @@ import input from './Input/Input.vue';
 import inputNext from './InputNext/InputNext.vue';
 import inputDatePicker from './InputDatePicker/InputDatePicker.vue';
 import button from './Button/Button.vue';
+import buttonNext from './ButtonNext/ButtonNext.vue';
 import buttonIcon from './Button/ButtonIcon.vue';
 import sidebar from './Sidebar/Sidebar.vue';
 import sidebarItem from './Sidebar/SidebarItem.vue';
@@ -78,6 +79,7 @@ const components = {
   unnnicInputNext: inputNext,
   unnnicInputDatePicker: inputDatePicker,
   unnnicButton: button,
+  unnnicButtonNext: buttonNext,
   unnnicButtonIcon: buttonIcon,
   unnnicSidebar: sidebar,
   unnnicSidebarItem: sidebarItem,
@@ -156,6 +158,7 @@ export const unnnicInput = input;
 export const unnnicInputNext = inputNext;
 export const unnnicInputDatePicker = inputDatePicker;
 export const unnnicButton = button;
+export const unnnicButtonNext = buttonNext;
 export const unnnicButtonIcon = buttonIcon;
 export const unnnicSidebar = sidebar;
 export const unnnicSidebarItem = sidebarItem;
