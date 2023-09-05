@@ -1,25 +1,25 @@
-import unnnicButton from '../components/Button/Button.vue';
+import unnnicButtonNext from '../components/ButtonNext/ButtonNext.vue';
 import iconList from '../utils/iconList';
 
 export default {
-  title: 'Form/Button',
-  component: unnnicButton,
+  title: 'Form/ButtonNext',
+  component: unnnicButtonNext,
   argTypes: {
-    type: { control: { type: 'select', options: ['primary', 'secondary', 'terciary'] } },
+    type: { control: { type: 'select', options: ['primary', 'secondary', 'terciary', 'ghost', 'warning'] } },
     size: { control: { type: 'select', options: ['large', 'small'] } },
     text: { control: { type: 'text' } },
     iconLeft: { control: { type: 'select', options: [null, ...iconList] } },
+    iconCenter: { control: { type: 'select', options: [null, ...iconList] } },
     iconRight: { control: { type: 'select', options: [null, ...iconList] } },
     disabled: { control: { type: 'boolean' } },
     loading: { control: { type: 'boolean' } },
-    scheme: { control: { type: 'select', options: ['feedback-red', 'feedback-green', 'feedback-yellow'] } },
   },
 };
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { unnnicButton },
-  template: '<unnnicButton v-bind="$props" />',
+  components: { unnnicButtonNext },
+  template: '<unnnic-button-next v-bind="$props" />',
 });
 
 export const Normal = Template.bind({});
@@ -38,6 +38,20 @@ Secondary.args = {
 export const Terciary = Template.bind({});
 Terciary.args = {
   type: 'terciary',
+  text: 'Button Text',
+  disabled: false,
+};
+
+export const Ghost = Template.bind({});
+Ghost.args = {
+  type: 'ghost',
+  text: 'Button Text',
+  disabled: false,
+};
+
+export const Warning = Template.bind({});
+Warning.args = {
+  type: 'warning',
   text: 'Button Text',
   disabled: false,
 };
