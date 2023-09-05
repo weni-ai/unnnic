@@ -40,6 +40,7 @@
         :value="value"
         @input="$emit('input', $event.srcElement.value)"
         :maxlength="maxlength"
+        :readonly="readonly"
       />
 
       <unnnic-icon
@@ -121,6 +122,11 @@ export default {
 
     error: {
       type: [Boolean, String],
+    },
+
+    readonly: {
+      type: Boolean,
+      default: false,
     },
   },
 
