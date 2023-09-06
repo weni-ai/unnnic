@@ -72,6 +72,12 @@ import starRating from './StarRating/StarRating.vue';
 import audioRecorder from './AudioRecorder/AudioRecorder.vue';
 import circleProgressBar from './CircleProgressBar/CircleProgressBar.vue';
 import progressBar from './ProgressBar/ProgressBar.vue';
+import ChatsContact from './ChatsContact/ChatsContact.vue';
+import ChatsDashboardTagLive from './ChatsDashboardTagLive/ChatsDashboardTagLive.vue';
+import ChatsHeader from './ChatsHeader/ChatsHeader.vue';
+import ChatsMessage from './ChatsMessage/ChatsMessage.vue';
+import ChatsNavbar from './ChatsNavbar/ChatsNavbar.vue';
+import ChatsUserAvatar from './ChatsUserAvatar/ChatsUserAvatar.vue';
 
 const components = {
   unnnicFormElement: formElement,
@@ -146,6 +152,12 @@ const components = {
   unnnicAudioRecorder: audioRecorder,
   unnnicCircleProgressBar: circleProgressBar,
   unnnicProgressBar: progressBar,
+  unnnicChatsContact: ChatsContact,
+  unnnicChatsDashboardTagLive: ChatsDashboardTagLive,
+  unnnicChatsHeader: ChatsHeader,
+  unnnicChatsMessage: ChatsMessage,
+  unnnicChatsNavbar: ChatsNavbar,
+  unnnicChatsUserAvatar: ChatsUserAvatar,
 };
 
 Object.keys(components).forEach((name) => {
@@ -227,3 +239,9 @@ export const unnnicStarRating = starRating;
 export const unnnicAudioRecorder = audioRecorder;
 export const unnnicCircleProgressBar = circleProgressBar;
 export const unnnicProgressBar = progressBar;
+export const unnnicChatsContact = ChatsContact;
+export const unnnicChatsDashboardTagLive = ChatsDashboardTagLive;
+export const unnnicChatsHeader = ChatsHeader;
+export const unnnicChatsMessage = ChatsMessage;
+export const unnnicChatsNavbar = ChatsNavbar;
+export const unnnicChatsUserAvatar = ChatsUserAvatar;
