@@ -109,7 +109,7 @@ $avatar-sizes: '2xl' 3rem, 'xl' $unnnic-icon-size-xl, 'lg' $unnnic-icon-size-lg,
       width: $size;
       height: $size;
 
-      font-size: calc($size / 2);
+      font-size: $size / 2;
       font-family: $unnnic-font-family-secondary;
 
       overflow: hidden;
