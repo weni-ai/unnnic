@@ -86,7 +86,11 @@ export default {
     formattedTime() {
       const date = new Date(this.time);
       const hours = date.getHours();
-      const minutes = date.getMinutes();
+      let minutes = date.getMinutes();
+
+      if (minutes < 10) {
+        minutes = `0${minutes}`;
+      }
 
       const formattedTime = `${hours}:${minutes}`;
       return formattedTime;

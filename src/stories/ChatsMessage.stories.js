@@ -209,7 +209,7 @@ const DocumentTemplate = (args, { argTypes }) => ({
   `,
 });
 
-const defaultArgs = { time: new Date('2023-08-08T09:54:07.876230-03:00') };
+const defaultArgs = { time: new Date('2023-08-08T11:09:07.876230-03:00') };
 
 export const Default = Template.bind({});
 Default.args = {
