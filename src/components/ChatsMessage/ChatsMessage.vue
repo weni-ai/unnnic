@@ -66,8 +66,8 @@ export default {
       required: true,
     },
     documentName: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: '',
     },
     status: {
       type: String,

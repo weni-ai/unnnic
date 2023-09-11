@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/valid-v-on -->
 <template>
   <header class="unnnic-chats-header" :class="[size, { contact: !!avatarName }]">
     <div class="unnnic-chats-header__topbar" v-if="size === 'large' && !avatarName">
@@ -15,9 +16,9 @@
       <section class="unnnic-chats-header__infos">
         <unnnic-chats-user-avatar
           v-if="avatarName"
-          :class="{ clickable: !!avatarClick }"
+          :clickable="!!avatarClick"
           :username="avatarName"
-          @click="avatarClick"
+          @click="avatarClick || (() => {})"
         />
         <unnnic-avatar-icon
           v-else
@@ -27,7 +28,7 @@
         />
 
         <hgroup class="unnnic-chats-header__infos__title">
-          <h1 :class="{ clickable: !!titleClick }" @click="titleClick">
+          <h1 :class="{ clickable: !!titleClick }" @click="titleClick || (() => {})">
             {{ title }}
           </h1>
           <h2 v-if="subtitle">
@@ -82,19 +83,19 @@ export default {
     },
     back: {
       type: Function,
-      default: null,
+      required: false,
     },
     close: {
       type: Function,
-      default: null,
+      required: false,
     },
     avatarClick: {
       type: Function,
-      default: null,
+      required: false,
     },
     titleClick: {
       type: Function,
-      default: null,
+      required: false,
     },
     crumbs: {
       type: Array,
