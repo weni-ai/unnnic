@@ -13,7 +13,12 @@
         />
       </div>
       <section class="unnnic-chats-header__infos">
-        <unnnic-chats-user-avatar v-if="avatarName" :username="avatarName" />
+        <unnnic-chats-user-avatar
+          v-if="avatarName"
+          :class="{ clickable: !!avatarClick }"
+          :username="avatarName"
+          @click="avatarClick"
+        />
         <unnnic-avatar-icon
           v-else
           scheme="aux-purple"
@@ -22,7 +27,7 @@
         />
 
         <hgroup class="unnnic-chats-header__infos__title">
-          <h1>
+          <h1 :class="{ clickable: !!titleClick }" @click="titleClick">
             {{ title }}
           </h1>
           <h2 v-if="subtitle">
@@ -81,7 +86,15 @@ export default {
     },
     close: {
       type: Function,
-      default: () => {},
+      default: null,
+    },
+    avatarClick: {
+      type: Function,
+      default: null,
+    },
+    titleClick: {
+      type: Function,
+      default: null,
     },
     crumbs: {
       type: Array,
@@ -230,6 +243,10 @@ export default {
         font-weight: $unnnic-font-weight-regular;
       }
     }
+  }
+
+  .clickable {
+    cursor: pointer;
   }
 }
 </style>
