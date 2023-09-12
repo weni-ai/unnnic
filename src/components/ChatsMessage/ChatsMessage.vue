@@ -9,7 +9,6 @@
       'is-image': isImage,
       'is-video': isVideo,
     }"
-    @click="$emit('click')"
   >
     <p v-if="isText" class="unnnic-chats-message__text">
       <slot name="text" :content="formattedText" />
@@ -22,7 +21,7 @@
         size="lg"
       />
       <unnnic-icon v-else icon="office-file-pdf-1-1" scheme="neutral-dark" size="lg" />
-      <p class="unnnic-chats-message__document__text">
+      <p class="unnnic-chats-message__document__text" @click="$emit('click')">
         {{ documentName }}
       </p>
     </div>
@@ -37,6 +36,7 @@
       <unnnic-chats-message-status-backdrop
         v-if="(sendingMedia || failedToSendMedia) && (isImage || isVideo)"
         :status="status"
+        @click="status === 'failed' ? $emit('click') : () => {}"
       />
     </div>
 
