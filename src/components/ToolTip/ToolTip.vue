@@ -21,6 +21,12 @@
       {{ line }}
       <br :key="index">
     </template>
+
+    <template v-if="shortcutText">
+      <span class="unnnic-tooltip-label-shortcut">
+        {{ shortcutText }}
+      </span>
+    </template>
   </span>
   </div>
 </template>
@@ -73,6 +79,10 @@ export default {
     maxWidth: {
       type: String,
     },
+    shortcutText: {
+      type: String,
+      default: null,
+    },
   },
   methods: {
     handleResize() {
@@ -119,6 +129,9 @@ export default {
   min-width: 2 * $unnnic-font-size;
   box-sizing: border-box;
   width: auto;
+  display: flex;
+  gap: $unnnic-spacing-xs;
+  align-items: center;
 
   background-color: $unnnic-color-neutral-black;
   color: $unnnic-color-neutral-snow;
@@ -174,6 +187,12 @@ export default {
         border-color: transparent transparent transparent $unnnic-color-neutral-black;
       }
     }
+
+  &-shortcut{
+    background-color: $unnnic-color-neutral-darkest;
+    border-radius: $unnnic-border-radius-sm;
+    padding: $unnnic-inset-nano / 2 $unnnic-inset-nano;
+  }
 }
 
 .unnnic-tooltip.force-open {
