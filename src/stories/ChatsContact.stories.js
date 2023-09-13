@@ -45,6 +45,13 @@ Selected.args = {
   selected: true,
 };
 
+export const SelectedWithCheckbox = Template.bind({});
+SelectedWithCheckbox.args = {
+  ...defaultArgs,
+  selected: true,
+  checkboxWhenSelect: true,
+};
+
 export const Read = Template.bind({});
 Read.args = {
   ...defaultArgs,

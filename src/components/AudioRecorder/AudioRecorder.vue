@@ -13,7 +13,7 @@
     />
     <audio-player
       v-else
-      :time="numberToTimeString(isIdle ? duration : currentTime)"
+      :time="numberToTimeString(isIdle || isRecorded ? duration : currentTime)"
       :reqStatus="reqStatus"
       :progress-bar-percentual-value="playedPercentual"
       :is-playing="isPlaying"
@@ -151,8 +151,6 @@ export default {
         this.audio.setAttribute('src', this.src);
 
         this.addAudioEventListeners();
-
-        this.bars = await this.srcToBars(this.src);
       },
     },
     status(newValue) {
@@ -287,7 +285,6 @@ export default {
       this.$emit('input', this.audio);
 
       this.stopMockMilliseconds();
-      this.bars = await this.srcToBars(this.audio.src);
     },
 
     play() {

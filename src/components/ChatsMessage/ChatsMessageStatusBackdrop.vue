@@ -1,5 +1,5 @@
 <template>
-  <div class="unnnic-chats-message-status-backdrop">
+  <div class="unnnic-chats-message-status-backdrop" @click="$emit('click')">
     <unnnic-icon
       :icon="status === 'sending' ? 'loading-circle-1' : 'upload-bottom-1'"
       scheme="neutral-white"

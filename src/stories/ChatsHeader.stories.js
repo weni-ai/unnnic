@@ -24,6 +24,8 @@ const DashboardTemplate = (args, { argTypes }) => ({
 
 const back = () => alert('back');
 const close = () => alert('close');
+const titleClick = () => alert('titleClick');
+const avatarClick = () => alert('avatarClick');
 
 const size = window.innerWidth < 600 ? 'small' : 'large';
 
@@ -36,7 +38,9 @@ export const Contact = Template.bind({});
 Contact.args = {
   ...defaultArgs,
   title: 'John Doe',
+  titleClick,
   avatarName: 'John Doe',
+  avatarClick,
 };
 
 export const ContactInfos = Template.bind({});

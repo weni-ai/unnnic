@@ -19,11 +19,7 @@
     "
     :tabindex="0"
   >
-    <user-avatar
-      :username="username"
-      :photo-url="userPhoto"
-      :active="isHovered || selected"
-    />
+    <user-avatar :username="username" :photo-url="userPhoto" :active="isHovered || selected" />
 
     <div class="contact__infos">
       <h1
@@ -33,7 +29,10 @@
       >
         {{ username }}
       </h1>
-      <div class="contact__infos__additional-information" :class="{ bold: unreadMessages }">
+      <div
+        class="contact__infos__additional-information"
+        :class="{ bold: unreadMessages || (checkboxWhenSelect && selected) }"
+      >
         <p v-if="waitingTime !== 0" class="ellipsis">
           {{ i18n('waiting_for', waitingTime, { waitingTime }) }}
         </p>
@@ -50,6 +49,11 @@
     >
       {{ unreadMessages }}
     </span>
+    <checkbox
+      v-else-if="selected && checkboxWhenSelect"
+      class="contact__infos__checkbox"
+      :value="true"
+    />
     <transition-ripple ref="transitionRipple" color="weni-500" />
   </div>
 </template>
@@ -58,6 +62,7 @@
 import UserAvatar from '../ChatsUserAvatar/ChatsUserAvatar.vue';
 import TransitionRipple from '../TransitionRipple/TransitionRipple.vue';
 import UnnnicI18n from '../../mixins/i18n';
+import Checkbox from '../Checkbox/Checkbox.vue';
 
 export default {
   name: 'ChatsContact',
@@ -67,6 +72,7 @@ export default {
   components: {
     UserAvatar,
     TransitionRipple,
+    Checkbox,
   },
 
   props: {
@@ -96,6 +102,10 @@ export default {
       default: false,
     },
     disabled: {
+      type: Boolean,
+      default: false,
+    },
+    checkboxWhenSelect: {
       type: Boolean,
       default: false,
     },
