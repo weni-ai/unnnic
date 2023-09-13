@@ -188,7 +188,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
       overflow: hidden;
 
-      .unnnic-chats-message__media__container .media > :first-child  {
+      .media > :first-child  {
         border-radius: $unnnic-border-radius-md;
 
         min-height: 200px;
