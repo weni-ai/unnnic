@@ -11,7 +11,7 @@
     }"
   >
     <p v-if="isText" class="unnnic-chats-message__text">
-      <slot name="text" :content="formattedText" />
+      <slot :content="formattedText" />
     </p>
 
     <div v-if="isDocument" class="unnnic-chats-message__document">
@@ -27,14 +27,12 @@
     </div>
 
     <div
-      v-else
+      v-else-if="isMedia"
       class="unnnic-chats-message__media__container"
       :class="{ failed: failedToSendMedia }"
       @click="$emit('click-image')"
     >
-      <div class="media">
-        <slot name="media" />
-      </div>
+      <slot />
       <unnnic-chats-message-status-backdrop
         v-if="(sendingMedia || failedToSendMedia) && (isImage || isVideo)"
         :status="status"
@@ -78,6 +76,13 @@ export default {
         return ['sending', 'sent', 'failed'].includes(status);
       },
     },
+    mediaType: {
+      type: String,
+      default: '',
+      validate(status) {
+        return ['audio', 'image', 'video'].includes(status);
+      },
+    },
   },
 
   computed: {
@@ -97,37 +102,20 @@ export default {
       const formattedTime = `${hours}:${minutes}`;
       return formattedTime;
     },
-    isText() {
-      return !!this.$slots.text;
-    },
     isMedia() {
-      return !!this.$slots.media;
-    },
-    isImage() {
-      const slotContents = this.$slots.media;
-
-      if (slotContents && slotContents[0]) {
-        const isImgTag = slotContents[0].tag === 'img';
-        return isImgTag;
-      }
-      return false;
-    },
-    isVideo() {
-      const slotContents = this.$slots.media;
-
-      if (slotContents) {
-        const firstChildrenTag = slotContents[0]?.tag;
-        const secondChildrenTag = slotContents[0].children?.[0]?.tag;
-        const thirdChildrenTag = slotContents[0].children?.[0].children?.[0]?.tag;
-
-        const slotChildrensTags = [firstChildrenTag, secondChildrenTag, thirdChildrenTag];
-        const isVideoTag = slotChildrensTags.includes('video');
-        return isVideoTag;
-      }
-      return false;
+      return !!this.mediaType;
     },
     isDocument() {
       return !!this.documentName;
+    },
+    isText() {
+      return !this.isMedia && !this.isDocument;
+    },
+    isImage() {
+      return this.isMedia && this.mediaType === 'image';
+    },
+    isVideo() {
+      return this.isMedia && this.mediaType === 'video';
     },
     sendingMedia() {
       return this.isMedia && this.status === 'sending';
@@ -188,7 +176,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
       overflow: hidden;
 
-      .media > :first-child  {
+      .media {
         border-radius: $unnnic-border-radius-md;
 
         min-height: 200px;
@@ -197,7 +185,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
       }
     }
 
-    &.is-image .media > :first-child {
+    &.is-image .media {
       width: 200px;
       height: auto;
       max-width: 200px;
@@ -205,7 +193,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
       object-fit: cover;
     }
 
-    &.is-video .media > :first-child {
+    &.is-video .media {
       width: 300px;
       max-width: 300px;
     }
@@ -232,6 +220,8 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
   &__text,
   &__document__text {
+    margin: 0;
+
     padding: $unnnic-spacing-nano 0;
 
     color: $unnnic-color-neutral-dark;

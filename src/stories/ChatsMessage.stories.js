@@ -16,10 +16,8 @@ const Template = (args, { argTypes }) => ({
   components: { unnnicChatsMessage },
   template: `
     <unnnic-chats-message v-bind="$props">
-      <template #text>
-        Interdum et malesuada fames ac ante ipsum primis in faucibus.
-        Curabitur facilisis congue sagittis.
-      </template>
+      Interdum et malesuada fames ac ante ipsum primis in faucibus.
+      Curabitur facilisis congue sagittis.
     </unnnic-chats-message>
   `,
 });
@@ -32,16 +30,12 @@ const ReceivedAndSentTemplate = (args, { argTypes }) => ({
       display: flex;
     ">
       <unnnic-chats-message v-bind="$props">
-        <template #text>
-          Interdum et malesuada fames ac ante ipsum primis in faucibus.
-          Curabitur facilisis congue sagittis.
-        </template>
+        Interdum et malesuada fames ac ante ipsum primis in faucibus.
+        Curabitur facilisis congue sagittis.
       </unnnic-chats-message>
       <unnnic-chats-message type="sent" v-bind="$props">
-        <template #text>
-          Interdum et malesuada fames ac ante ipsum primis in faucibus.
-          Curabitur facilisis congue sagittis.
-        </template>
+        Interdum et malesuada fames ac ante ipsum primis in faucibus.
+        Curabitur facilisis congue sagittis.
       </unnnic-chats-message>
     </div>
   `,
@@ -56,36 +50,30 @@ const MultipleMessagesTemplate = (args, { argTypes }) => ({
       gap: 16px;
     ">
       <unnnic-chats-message v-bind="$props">
-        <template #text>Ita.</template>
+        Ita.
       </unnnic-chats-message>
       <unnnic-chats-message v-bind="$props">
-        <template #text>Pashca ovum 😯😉</template>
+        Pashca ovum 😯😉
       </unnnic-chats-message>
       <unnnic-chats-message v-bind="$props">
-        <template #text>Fusce scelerisque odio sit amet eleifend.</template>
+        Fusce scelerisque odio sit amet eleifend.
       </unnnic-chats-message>
       <unnnic-chats-message v-bind="$props">
-        <template #text>
-          In mattis tristique massa, ornare urna porttitor faucibus. Pellentesque habitant morbi.
-        </template>
+        In mattis tristique massa, ornare urna porttitor faucibus. Pellentesque habitant morbi.
       </unnnic-chats-message>
       <unnnic-chats-message v-bind="$props">
-        <template #text>
-          Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-          Donec dignissim sapien ac condimentum sagittis. Cras vitae consectetur risus.
-        </template>
+        Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+        Donec dignissim sapien ac condimentum sagittis. Cras vitae consectetur risus.
       </unnnic-chats-message>
       <unnnic-chats-message v-bind="$props">
-        <template #text>
-          Aenean vel pharetra ligula. Donec sit amet porttitor dui.
-          Suspendisse lacinia mauris egestas, aliquam dui non, tristique augue. Donec at pulvinar
-          leo, eget lobortis turpis. Ut hendrerit varius tortor, id mollis justo dictum eget.
-          Praesent finibus urna vel lacus pretium consequat. Proin imperdiet ante tempus feugiat
-          tristique. Duis in ultrices sem. Cras pharetra eleifend ligula vel commodo.
-          Phasellus placerat faucibus est, nec posuere est venenatis sed. Phasellus a quam felis.
-          Fusce volutpat sem eget urna sagittis laoreet non maximus quam. Mauris porta
-          posuere commodo.
-        </template>
+        Aenean vel pharetra ligula. Donec sit amet porttitor dui.
+        Suspendisse lacinia mauris egestas, aliquam dui non, tristique augue. Donec at pulvinar
+        leo, eget lobortis turpis. Ut hendrerit varius tortor, id mollis justo dictum eget.
+        Praesent finibus urna vel lacus pretium consequat. Proin imperdiet ante tempus feugiat
+        tristique. Duis in ultrices sem. Cras pharetra eleifend ligula vel commodo.
+        Phasellus placerat faucibus est, nec posuere est venenatis sed. Phasellus a quam felis.
+        Fusce volutpat sem eget urna sagittis laoreet non maximus quam. Mauris porta
+        posuere commodo.
       </unnnic-chats-message>
     </div>
   `,
@@ -112,20 +100,14 @@ const MediaTemplate = (args, { argTypes }) => ({
       display: flex;
       gap: 16px;
     ">
-      <unnnic-chats-message v-bind="$props">
-        <template #media>
-          <unnnic-audio-recorder style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
-        </template>
+      <unnnic-chats-message mediaType="audio" v-bind="$props">
+        <unnnic-audio-recorder class="media" style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
       </unnnic-chats-message>
-      <unnnic-chats-message status="sending" v-bind="$props">
-        <template #media>
-          <unnnic-audio-recorder reqStatus="sending" style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
-        </template>
+      <unnnic-chats-message mediaType="audio" status="sending" v-bind="$props">
+        <unnnic-audio-recorder class="media" reqStatus="sending" style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
       </unnnic-chats-message>
-      <unnnic-chats-message status="failed" v-bind="$props">
-        <template #media>
-          <unnnic-audio-recorder reqStatus="failed" style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
-        </template>
+      <unnnic-chats-message mediaType="audio" status="failed" v-bind="$props">
+        <unnnic-audio-recorder class="media" reqStatus="failed" style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
       </unnnic-chats-message>
     </div>
 
@@ -133,26 +115,20 @@ const MediaTemplate = (args, { argTypes }) => ({
       display: flex;
       gap: 16px;
     ">
-      <unnnic-chats-message v-bind="$props">
-        <template #media>
-          <video controls>
-            <source :src="video" />
-          </video>
-        </template>
+      <unnnic-chats-message v-bind="$props" mediaType="video">
+      <video class="media" controls>
+        <source :src="video" />
+      </video>
       </unnnic-chats-message>
-      <unnnic-chats-message status="sending" v-bind="$props">
-        <template #media>
-          <video controls>
-            <source :src="video" />
-          </video>
-        </template>
+      <unnnic-chats-message status="sending" v-bind="$props" mediaType="video">
+        <video class="media" controls>
+          <source :src="video" />
+        </video>
       </unnnic-chats-message>
-      <unnnic-chats-message status="failed" v-bind="$props">
-        <template #media>
-          <video controls>
-            <source :src="video" />
-          </video>
-        </template>
+      <unnnic-chats-message status="failed" v-bind="$props" mediaType="video">
+        <video class="media" controls>
+          <source :src="video" />
+        </video>
       </unnnic-chats-message>
     </div>
 
@@ -160,32 +136,22 @@ const MediaTemplate = (args, { argTypes }) => ({
       display: flex;
       gap: 16px;
     ">
-      <unnnic-chats-message v-bind="$props">
-        <template #media>
-          <img :src="image1" />
-        </template>
+      <unnnic-chats-message mediaType="image" v-bind="$props">
+        <img class="media" :src="image1" />
       </unnnic-chats-message>
-      <unnnic-chats-message  status="sending" v-bind="$props">
-        <template #media>
-          <img :src="image1" />
-        </template>
+      <unnnic-chats-message  status="sending" mediaType="image" v-bind="$props">
+        <img class="media" :src="image1" />
       </unnnic-chats-message>
-      <unnnic-chats-message  status="failed" v-bind="$props">
-        <template #media>
-          <img :src="image1" />
-        </template>
+      <unnnic-chats-message  status="failed" mediaType="image" v-bind="$props">
+        <img class="media" :src="image1" />
       </unnnic-chats-message>
     </div>
 
-    <unnnic-chats-message v-bind="$props">
-      <template #media>
-        <img :src="image2" />
-      </template>
+    <unnnic-chats-message mediaType="image" v-bind="$props">
+      <img class="media" :src="image2" />
     </unnnic-chats-message>
-    <unnnic-chats-message v-bind="$props">
-      <template #media>
-        <img :src="image3" />
-      </template>
+    <unnnic-chats-message mediaType="image" v-bind="$props">
+      <img class="media" :src="image3" />
     </unnnic-chats-message>
   </div>
   `,
