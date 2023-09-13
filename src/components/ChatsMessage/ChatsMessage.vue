@@ -32,7 +32,9 @@
       :class="{ failed: failedToSendMedia }"
       @click="$emit('click-image')"
     >
-      <slot name="media" />
+      <div class="media">
+        <slot name="media" />
+      </div>
       <unnnic-chats-message-status-backdrop
         v-if="(sendingMedia || failedToSendMedia) && (isImage || isVideo)"
         :status="status"
@@ -113,8 +115,13 @@ export default {
     isVideo() {
       const slotContents = this.$slots.media;
 
-      if (slotContents && slotContents[0]) {
-        const isVideoTag = slotContents[0].tag === 'video';
+      if (slotContents) {
+        const firstChildrenTag = slotContents[0]?.tag;
+        const secondChildrenTag = slotContents[0].children?.[0]?.tag;
+        const thirdChildrenTag = slotContents[0].children?.[0].children?.[0]?.tag;
+
+        const slotChildrensTags = [firstChildrenTag, secondChildrenTag, thirdChildrenTag];
+        const isVideoTag = slotChildrensTags.includes('video');
         return isVideoTag;
       }
       return false;
@@ -155,7 +162,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
   font-family: $unnnic-font-family-secondary;
 
-  * {
+  & > * {
     margin: 0;
   }
 
@@ -181,7 +188,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
       overflow: hidden;
 
-      img, video {
+      .unnnic-chats-message__media__container .media > :first-child  {
         border-radius: $unnnic-border-radius-md;
 
         min-height: 200px;
@@ -190,7 +197,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
       }
     }
 
-    &.is-image img {
+    &.is-image .media > :first-child {
       width: 200px;
       height: auto;
       max-width: 200px;
@@ -198,7 +205,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
       object-fit: cover;
     }
 
-    &.is-video video {
+    &.is-video .media > :first-child {
       width: 300px;
       max-width: 300px;
     }
@@ -223,7 +230,8 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     }
   }
 
-  &__text, &__document__text {
+  &__text,
+  &__document__text {
     padding: $unnnic-spacing-nano 0;
 
     color: $unnnic-color-neutral-dark;
