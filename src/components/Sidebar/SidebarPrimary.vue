@@ -6,6 +6,10 @@
       <slot name="header"></slot>
     </div>
 
+    <div>
+      <slot name="search"></slot>
+    </div>
+
     <div class="unnnic-sidebar-primary-content">
       <div ref="sidebar-modal" class="hover" :style="{ top: `${hoverTop}px` }">
         <slot :name="'block-' + blockActiveId"></slot>
