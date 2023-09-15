@@ -232,7 +232,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   }
 
   &__time {
-    font-size: $unnnic-font-size-body-gt;
+    font-size: $unnnic-font-size-body-md;
     line-height: $defaultLineHeight;
     color: $unnnic-color-neutral-clean;
   }
