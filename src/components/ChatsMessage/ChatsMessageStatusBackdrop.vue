@@ -52,6 +52,7 @@ export default {
 
     padding: $unnnic-spacing-ant;
 
+    box-sizing: content-box;
     background-color: rgba($unnnic-color-neutral-darkest, 0.3);
 
     svg {

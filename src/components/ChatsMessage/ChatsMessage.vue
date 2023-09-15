@@ -177,6 +177,8 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
       overflow: hidden;
 
       .media {
+        overflow: hidden;
+
         border-radius: $unnnic-border-radius-md;
 
         min-height: 200px;
