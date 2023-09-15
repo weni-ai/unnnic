@@ -1,7 +1,18 @@
-<script lang="jsx">
-import colors from '../../assets/scss/colors.scss';
+<template>
+  <div :style="themeStyle">
+    <component v-if="tag" :is="tag">
+      <slot></slot>
+    </component>
+    <slot v-else></slot>
+  </div>
+</template>
 
-export const DEFAULT_BACKGROUND = colors.unnnicColorBackgroundSolo;
+<script>
+import { ref, provide } from 'vue';
+import colors from '../../assets/scss/colors.scss?inline'
+
+const backgroundValueRegex = /unnnicColorBackgroundSolo:\s*(.*)\;/
+export const DEFAULT_BACKGROUND = backgroundValueRegex.exec(colors)[1];
 export const DEFAULT_HIGHLIGHT = 'rgba(255,255,255,0.375)';
 export const SkeletonStyle = {
   backgroundColor: DEFAULT_BACKGROUND,
@@ -14,10 +25,16 @@ export const SkeletonStyle = {
 };
 export default {
   name: 'unnnicSkeletonTheme',
-  provide() {
+  setup() {
+    const themeStyle = ref(SkeletonStyle);
+    const theme = ref({});
+
+    provide('_themeStyle', themeStyle);
+    provide('_skeletonTheme', theme);
+
     return {
-      _themeStyle: this.themeStyle,
-      _skeletonTheme: this,
+      themeStyle,
+      theme,
     };
   },
   props: {
@@ -47,7 +64,7 @@ export default {
       themeStyle: { ...SkeletonStyle },
     };
   },
-  render(h) {
+  mounted() {
     const { color, highlight, duration } = this;
     this.themeStyle.backgroundColor = color;
     this.themeStyle.backgroundImage = `linear-gradient(
@@ -62,13 +79,6 @@ export default {
       this.themeStyle.animation = '';
       this.themeStyle.backgroundImage = '';
     }
-    if (this.tag) {
-      return h(this.tag, this.$slots.default);
-    }
-    return this.$slots.default[0];
   },
 };
 </script>
-<style lang="scss">
-@import "../../assets/scss/unnnic.scss";
-</style>

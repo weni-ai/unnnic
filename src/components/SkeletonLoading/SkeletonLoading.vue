@@ -1,27 +1,30 @@
-<script lang="jsx">
+<template>
+  <component :is="tag" v-if="showLoading">
+    <span
+      v-for="(element, index) in elements"
+      :key="index"
+      :class="classes"
+      :style="styles"
+    >
+      &zwnj;
+    </span>
+  </component>
+</template>
+
+<script>
+import { ref, inject } from 'vue';
 import { SkeletonStyle } from './skeletonTheme.vue';
 
-const isEmptyVNode = (children) => {
-  if (!children) return true;
-  const [firstNode] = children;
-  let str = firstNode.text;
-  if (str) {
-    // remove all line-break and space character
-    str = str.replace(/(\n|\r\n|\s)/g, '');
-  }
-  return typeof firstNode.tag === 'undefined' && !str;
-};
 export default {
   name: 'unnnicSkeletonLoading',
-  inject: {
-    themeStyle: {
-      from: '_themeStyle',
-      default: SkeletonStyle,
-    },
-    theme: {
-      from: '_skeletonTheme',
-      default: {},
-    },
+  setup() {
+    const themeStyle = inject('_themeStyle', ref(SkeletonStyle));
+    const theme = inject('_skeletonTheme', ref({}));
+
+    return {
+      themeStyle,
+      theme,
+    };
   },
   props: {
     prefix: {
@@ -42,8 +45,14 @@ export default {
     },
     width: [String, Number],
     height: [String, Number],
-    circle: Boolean,
-    loading: undefined,
+    circle: {
+      type: Boolean,
+      default: false,
+    },
+    loading: {
+      type: Boolean,
+      default: undefined,
+    },
   },
   computed: {
     isLoading() {
@@ -51,43 +60,45 @@ export default {
         ? this.theme.loading
         : this.loading;
     },
+    classes() {
+      return [`${this.prefix}-skeleton`];
+    },
+    styles() {
+      const styles = { ...this.themeStyle };
+      if (this.duration) {
+        styles.animation = `SkeletonLoading ${this.duration}s ease-in-out infinite`;
+      } else {
+        styles.backgroundImage = '';
+      }
+      if (this.width) styles.width = this.width;
+      if (this.height) styles.height = this.height;
+      if (this.circle) styles.borderRadius = '50%';
+      return styles;
+    },
+    elements() {
+      const elements = [];
+      for (let i = 0; i < this.count; i += 1) {
+        elements.push({});
+      }
+      return elements;
+    },
+    showLoading() {
+      return typeof this.isLoading !== 'undefined'
+      ? this.isLoading
+      : this.isEmptyVNode(this.$slots.default);
+    },
   },
-  render(h) {
-    const {
-      width,
-      height,
-      duration,
-      prefix,
-      circle,
-      count,
-      tag,
-      isLoading,
-    } = this;
-    const classes = [`${prefix}-skeleton`];
-    const elements = [];
-    const styles = { ...this.themeStyle };
-    if (duration) {
-      styles.animation = `SkeletonLoading ${duration}s ease-in-out infinite`;
-    } else {
-      styles.backgroundImage = '';
-    }
-    if (width) styles.width = width;
-    if (height) styles.height = height;
-    if (circle) styles.borderRadius = '50%';
-    for (let i = 0; i < count; i += 1) {
-      elements.push(
-        <span key={i} class={classes} style={styles}>
-          &zwnj;
-        </span>
-      );
-    }
-    const showLoading = typeof isLoading !== 'undefined'
-      ? isLoading
-      : isEmptyVNode(this.$slots.default);
-    if (tag) {
-      return h(tag, !showLoading ? this.$slots.default : elements);
-    }
-    return !showLoading ? this.$slots.default : <span>{elements}</span>;
+  methods: {
+    isEmptyVNode(children) {
+      if (!children) return true;
+      const [firstNode] = children;
+      let str = firstNode.text;
+      if (str) {
+        // remove all line-break and space character
+        str = str.replace(/(\n|\r\n|\s)/g, '');
+      }
+      return typeof firstNode.tag === 'undefined' && !str;
+    },
   },
 };
 </script>
