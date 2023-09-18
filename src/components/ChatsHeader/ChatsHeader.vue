@@ -1,45 +1,54 @@
-<!-- eslint-disable vue/valid-v-on -->
 <template>
-  <header class="unnnic-chats-header" :class="[size, { contact: !!avatarName }]">
-    <div class="unnnic-chats-header__topbar" v-if="size === 'large' && !avatarName">
-      <unnnic-breadcrumb :crumbs="crumbs" />
-      <unnnic-button-close @close="close" size="ant" />
-    </div>
-    <main class="unnnic-chats-header__main">
-      <div v-if="back && size === 'small'" @click="back" @keypress.esc="back">
-        <unnnic-icon
-          class="unnnic-chats-header__main__back"
-          icon="keyboard-arrow-left-1"
-          size="md"
-        />
+  <div class="unnnic-chats-header__container">
+    <header class="unnnic-chats-header" :class="{ contact: !!avatarName }">
+      <div class="unnnic-chats-header__topbar" v-if="!avatarName">
+        <unnnic-breadcrumb :crumbs="crumbs" />
+        <unnnic-button-close @close="close" size="ant" />
       </div>
-      <section class="unnnic-chats-header__infos">
-        <unnnic-chats-user-avatar
-          v-if="avatarName"
-          :clickable="!!avatarClick"
-          :username="avatarName"
-          @click="avatarClick || (() => {})"
-        />
-        <unnnic-avatar-icon
-          v-else
-          scheme="aux-purple"
-          :icon="avatarIcon"
-          :size="size === 'small' ? 'sm' : 'lg'"
-        />
+      <main class="unnnic-chats-header__main">
+        <div v-if="back" class="unnnic-chats-header__main__back" @click="back">
+          <unnnic-icon icon="keyboard-arrow-left-1" size="md" />
+        </div>
+        <section class="unnnic-chats-header__infos">
+          <unnnic-chats-user-avatar
+            v-if="avatarName"
+            :clickable="!!avatarClick"
+            :username="avatarName"
+            @click="avatarClick"
+          />
+          <div
+            v-else
+            :class="{ clickable: !!avatarClick }"
+            @click="avatarClick"
+          >
+            <unnnic-avatar-icon
+              scheme="aux-purple"
+              class="unnnic-chats-header__avatar-icon"
+              size="sm"
+              :icon="avatarIcon"
+            />
+          </div>
 
-        <hgroup class="unnnic-chats-header__infos__title">
-          <h1 :class="{ clickable: !!titleClick }" @click="titleClick || (() => {})">
-            {{ title }}
-          </h1>
-          <h2 v-if="subtitle">
-            {{ subtitle }}
-          </h2>
-        </hgroup>
-      </section>
-      <slot v-if="size === 'large'" />
-    </main>
-    <unnnic-button-close v-if="avatarName || size === 'small'" @close="close" size="sm" />
-  </header>
+          <hgroup class="unnnic-chats-header__infos__title">
+            <h1 :class="{ clickable: !!titleClick }" @click="titleClick">
+              {{ title }}
+            </h1>
+            <h2 v-if="subtitle">
+              {{ subtitle }}
+            </h2>
+          </hgroup>
+        </section>
+        <div class="unnnic-chats-header__slot">
+          <slot />
+        </div>
+      </main>
+      <unnnic-button-close
+        class="unnnic-chats-header__close--sm"
+        size="sm"
+        @close="close"
+      />
+    </header>
+  </div>
 </template>
 <script>
 import UnnnicI18n from '../../mixins/i18n';
@@ -102,35 +111,6 @@ export default {
       default: () => [],
     },
   },
-
-  data: () => ({
-    size: 'small',
-  }),
-
-  beforeMount() {
-    this.updateSize();
-    window.addEventListener('resize', this.updateSize);
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.updateSize);
-  },
-
-  methods: {
-    updateSize() {
-      const PHONE_SIZE = 600;
-      if (window.innerWidth < PHONE_SIZE) {
-        this.size = 'small';
-      } else {
-        this.size = 'large';
-      }
-    },
-  },
-
-  watch: {
-    size(newSize) {
-      this.$emit('resize', newSize);
-    },
-  },
 };
 </script>
 <style lang="scss">
@@ -147,49 +127,20 @@ export default {
 
   font-family: $unnnic-font-family-secondary;
 
-  &.large {
-    &:not(.contact) {
-      padding: $unnnic-spacing-md;
+  &__topbar {
+    display: none;
+  }
 
-      display: flex;
-      flex-direction: column;
-      align-items: stretch;
-      gap: $unnnic-spacing-md;
+  &__close--sm {
+    display: initial;
+  }
 
-      box-shadow: none;
-      box-shadow: inset 0 -1px 0 $unnnic-color-neutral-soft;
-
-      .unnnic-chats-header__infos__title {
-        h1 {
-          font-size: $unnnic-font-size-title-md;
-          line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
-          font-weight: $unnnic-font-weight-regular;
-        }
-
-        h2 {
-          font-size: $unnnic-font-size-body-gt;
-          line-height: $unnnic-font-size-body-lg + $unnnic-line-height-small;
-        }
-      }
-    }
-
-    &.contact {
-      box-shadow: $unnnic-shadow-level-far;
-    }
+  &__slot {
+    display: none;
   }
 
   &.contact {
     gap: $unnnic-spacing-nano;
-  }
-
-  &__topbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    .unnnic-breadcrumb__container__link {
-      font-size: $unnnic-font-size-body-gt;
-    }
   }
 
   &__main {
@@ -248,6 +199,75 @@ export default {
 
   .clickable {
     cursor: pointer;
+  }
+}
+
+.unnnic-chats-header__container {
+  container-type: inline-size;
+
+  // Header large
+  @container (min-width: 600px) {
+    .unnnic-chats-header {
+      &:not(.contact) {
+        padding: $unnnic-spacing-md;
+
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: $unnnic-spacing-md;
+
+        box-shadow: none;
+        box-shadow: inset 0 -1px 0 $unnnic-color-neutral-soft;
+
+        .unnnic-chats-header__infos__title {
+          h1 {
+            font-size: $unnnic-font-size-title-md;
+            line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
+            font-weight: $unnnic-font-weight-regular;
+          }
+
+          h2 {
+            font-size: $unnnic-font-size-body-gt;
+            line-height: $unnnic-font-size-body-lg + $unnnic-line-height-small;
+          }
+        }
+
+        .unnnic-chats-header__avatar-icon .unnnic-icon {
+          width: $unnnic-icon-size-lg;
+          height: $unnnic-icon-size-lg;
+        }
+
+        .unnnic-chats-header__slot {
+          display: initial;
+        }
+      }
+
+      &__close--sm {
+        display: none;
+      }
+
+      &.contact {
+        box-shadow: $unnnic-shadow-level-far;
+
+        .unnnic-chats-header__close--sm {
+          display: initial;
+        }
+      }
+
+      &__main__back {
+        display: none;
+      }
+
+      &__topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .unnnic-breadcrumb__container__link {
+          font-size: $unnnic-font-size-body-gt;
+        }
+      }
+    }
   }
 }
 </style>

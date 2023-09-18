@@ -1,5 +1,5 @@
 <template>
-  <div @click="close" @keypress.enter="close" class="unnnic-button-close">
+  <div @click="$emit('close')" @keypress.enter="$emit('close')" class="unnnic-button-close">
     <unnnic-icon icon="close-1" :size="size" />
   </div>
 </template>
@@ -24,10 +24,6 @@ export default {
           'avatar-lg', 'avatar-md', 'avatar-sm', 'avatar-xs', 'avatar-nano',
         ].indexOf(value) !== -1;
       },
-    },
-    close: {
-      type: Function,
-      default: () => {},
     },
   },
 };
