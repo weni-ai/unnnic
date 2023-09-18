@@ -14,12 +14,12 @@
             v-if="avatarName"
             :clickable="!!avatarClick"
             :username="avatarName"
-            @click="avatarClick"
+            @click="avatarClick ? avatarClick() : () => {}"
           />
           <div
             v-else
             :class="{ clickable: !!avatarClick }"
-            @click="avatarClick"
+            @click="avatarClick ? avatarClick() : () => {}"
           >
             <unnnic-avatar-icon
               scheme="aux-purple"
@@ -30,7 +30,7 @@
           </div>
 
           <hgroup class="unnnic-chats-header__infos__title">
-            <h1 :class="{ clickable: !!titleClick }" @click="titleClick">
+            <h1 :class="{ clickable: !!titleClick }" @click="titleClick ? titleClick() : () => {}">
               {{ title }}
             </h1>
             <h2 v-if="subtitle">
