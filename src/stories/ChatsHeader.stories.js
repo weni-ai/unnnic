@@ -32,6 +32,8 @@ const size = window.innerWidth < 600 ? 'small' : 'large';
 const defaultArgs = {
   back,
   close,
+  titleClick,
+  avatarClick,
 };
 
 export const Contact = Template.bind({});
