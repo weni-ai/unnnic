@@ -10,9 +10,7 @@
       'is-video': isVideo,
     }"
   >
-    <p v-if="isText" class="unnnic-chats-message__text">
-      <slot :content="formattedText" />
-    </p>
+    <p v-if="isText" v-html="formattedText" class="unnnic-chats-message__text" />
 
     <div v-if="isDocument" class="unnnic-chats-message__document">
       <unnnic-icon
@@ -87,8 +85,49 @@ export default {
 
   computed: {
     formattedText() {
-      const slotContent = this.$slots.text?.[0]?.text;
-      return typeof slotContent === 'string' ? slotContent : '';
+      const slotContent = this.$slots.default?.[0]?.text || this.$slots.text?.[0]?.text;
+
+      function removeHtmlDangerousContent(text) {
+      // eslint-disable-next-line default-param-last
+        return text.replace(/<(\/)?([^> ]+)( [^>]+)?>/gi, ($1, $2 = '', $3, $4 = '') => {
+          if (['b', 'i', 'u', 'ul', 'li', 'br', 'div'].includes($3)) {
+            const complements = [];
+
+            // eslint-disable-next-line no-restricted-syntax
+            for (const i of $4.matchAll(
+              /((?<name1>[^ =]+)="(?<value1>[^"]*)"|(?<name2>[^ =]+)='(?<value2>[^"]*)')/g,
+            )) {
+              const name = i.groups.name1 || i.groups.name2;
+              const value = i.groups.value1 || i.groups.value2;
+
+              if (name === 'style') {
+                const styles = [];
+
+                // eslint-disable-next-line no-restricted-syntax
+                for (const j of value.matchAll(/(?<propertyName>[^:]+):(?<propertyValue>[^;]+);?/g)) {
+                  if (j.groups.propertyName.toLowerCase().trim() === 'text-align') {
+                    styles.push(
+                      `${j.groups.propertyName
+                        .toLowerCase()
+                        .trim()}: ${j.groups.propertyValue.trim()}`,
+                    );
+                  }
+                }
+
+                complements.push(`style="${styles.join('; ')};"`);
+              }
+            }
+
+            return `<${$2}${$3}${complements.length ? ` ${complements.join(' ')}` : ''}>`;
+          }
+
+          return '';
+        });
+      }
+
+      const formattedText = removeHtmlDangerousContent(slotContent).trim()?.replace(/\n/g, '<br/>');
+
+      return typeof slotContent === 'string' ? formattedText : '';
     },
     formattedTime() {
       const date = new Date(this.time);
