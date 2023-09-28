@@ -72,8 +72,18 @@ const MultipleMessagesTemplate = (args, { argTypes }) => ({
         Praesent finibus urna vel lacus pretium consequat. Proin imperdiet ante tempus feugiat
         tristique. Duis in ultrices sem. Cras pharetra eleifend ligula vel commodo.
         Phasellus placerat faucibus est, nec posuere est venenatis sed. Phasellus a quam felis.
-        Fusce volutpat sem eget urna sagittis laoreet non maximus quam. Mauris porta
-        posuere commodo.
+        Fusce volutpat sem eget urna sagittis laoreet non maximus quam. Mauris porta posuere commodo.
+      </unnnic-chats-message>
+      <unnnic-chats-message v-bind="$props">
+        Aenean vel pharetra ligula.
+        Donec sit amet porttitor dui.
+
+        Suspendisse lacinia mauris egestas, aliquam dui non, tristique augue.
+        Donec at pulvinar leo, eget lobortis turpis.
+        Ut hendrerit varius tortor, id mollis justo dictum eget.
+
+        Praesent finibus urna vel lacus pretium consequat. Proin imperdiet ante tempus feugiat
+        tristique. Duis in ultrices sem. Cras pharetra eleifend ligula vel commodo.
       </unnnic-chats-message>
     </div>
   `,

@@ -191,6 +191,7 @@ export default {
     .content {
       .username {
         color: $unnnic-color-neutral-cleanest;
+        font-weight: $unnnic-font-weight-bold;
       }
 
       .additional-information {
@@ -230,6 +231,7 @@ export default {
     }
 
     &__username {
+      font-weight: $unnnic-font-weight-bold;
       color: $unnnic-color-neutral-darkest;
     }
 
