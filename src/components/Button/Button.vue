@@ -192,7 +192,7 @@ export default {
   &--secondary {
     background-color: $unnnic-color-neutral-white;
     color: $unnnic-color-neutral-dark;
-    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
+    box-shadow: inset 0 0 0 $unnnic-border-width-thinner $unnnic-color-neutral-cleanest;
 
     &:hover:enabled {
       background-color: $unnnic-color-neutral-light;
@@ -202,7 +202,7 @@ export default {
       background-color: $unnnic-color-neutral-soft;
       color: $unnnic-color-neutral-clean;
       cursor: not-allowed;
-      border: 0;
+      box-shadow: none;
     }
 
     &:active:enabled {
