@@ -5,26 +5,26 @@ export default {
   title: 'Form/Button',
   component: unnnicButton,
   argTypes: {
-    type: { control: { type: 'select', options: ['primary', 'secondary', 'terciary'] } },
+    type: { control: { type: 'select', options: ['primary', 'secondary', 'tertiary', 'alternative', 'warning'] } },
     size: { control: { type: 'select', options: ['large', 'small'] } },
     text: { control: { type: 'text' } },
     iconLeft: { control: { type: 'select', options: [null, ...iconList] } },
+    iconCenter: { control: { type: 'select', options: [null, ...iconList] } },
     iconRight: { control: { type: 'select', options: [null, ...iconList] } },
     disabled: { control: { type: 'boolean' } },
     loading: { control: { type: 'boolean' } },
-    scheme: { control: { type: 'select', options: ['feedback-red', 'feedback-green', 'feedback-yellow'] } },
   },
 };
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicButton },
-  template: '<unnnicButton v-bind="$props" />',
+  template: '<unnnic-button v-bind="$props" />',
 });
 
-export const Normal = Template.bind({});
-Normal.args = {
-  text: 'Button text',
+export const Primary = Template.bind({});
+Primary.args = {
+  text: 'Button Text',
   disabled: false,
 };
 
@@ -35,15 +35,20 @@ Secondary.args = {
   disabled: false,
 };
 
-export const Terciary = Template.bind({});
-Terciary.args = {
-  type: 'terciary',
+export const Tertiary = Template.bind({});
+Tertiary.args = {
+  type: 'tertiary',
   text: 'Button Text',
   disabled: false,
 };
 
-export const withIcon = Template.bind({});
-withIcon.args = {
+export const WithIcon = Template.bind({});
+WithIcon.args = {
   text: 'Button Text',
   iconLeft: 'developer-community-github-1-1',
+};
+
+export const OnlyIcon = Template.bind({});
+OnlyIcon.args = {
+  iconCenter: 'add-1',
 };
