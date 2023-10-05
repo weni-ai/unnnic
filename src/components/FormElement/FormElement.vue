@@ -4,7 +4,7 @@
       v-if="label"
       :class="[
         'label unnnic-font secondary color-neutral-cloudy',
-        { 'body-md': size === 'sm', 'body-gt': size == 'md' },
+        { 'body-md': size === 'sm', 'body-gt': size == 'md', 'label--fixed': fixedLabel },
       ]"
     >
       {{ label }}
@@ -36,6 +36,8 @@ export default {
 
     label: String,
 
+    fixedLabel: Boolean,
+
     error: [Boolean, String],
 
     message: String,
@@ -52,7 +54,34 @@ export default {
 
 .unnnic-form-element {
   .label {
-    margin-bottom: $unnnic-spacing-stack-xs;
+    margin-bottom: $unnnic-spacing-xs;
+
+    $label-bottom-spacing: 3px;
+
+    &--fixed.unnnic-font.body-md {
+      margin-top: - $unnnic-font-size-body-md - $unnnic-line-height-md + $label-bottom-spacing;
+    }
+
+    &--fixed.unnnic-font.body-gt {
+      margin-top: - $unnnic-font-size-body-gt - $unnnic-line-height-md + $label-bottom-spacing;
+    }
+
+    &--fixed {
+      margin-bottom: 0;
+      position: absolute;
+      padding: 0 $unnnic-spacing-nano;
+      margin-left: $unnnic-spacing-xs;
+
+      &:after {
+        content: " ";
+        position: absolute;
+        left: 0;
+        bottom: $label-bottom-spacing - $unnnic-border-width-thinner;
+        width: 100%;
+        height: $unnnic-border-width-thinner;
+        background-color: $unnnic-color-neutral-white;
+      }
+    }
   }
 
   .message {
