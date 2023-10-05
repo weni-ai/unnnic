@@ -56,12 +56,14 @@ export default {
   .label {
     margin-bottom: $unnnic-spacing-xs;
 
+    $label-bottom-spacing: 3px;
+
     &--fixed.unnnic-font.body-md {
-      margin-top: - $unnnic-font-size-body-md - $unnnic-line-height-md + 3px;
+      margin-top: - $unnnic-font-size-body-md - $unnnic-line-height-md + $label-bottom-spacing;
     }
 
     &--fixed.unnnic-font.body-gt {
-      margin-top: - $unnnic-font-size-body-gt - $unnnic-line-height-md + 3px;
+      margin-top: - $unnnic-font-size-body-gt - $unnnic-line-height-md + $label-bottom-spacing;
     }
 
     &--fixed {
@@ -74,7 +76,7 @@ export default {
         content: " ";
         position: absolute;
         left: 0;
-        bottom: 3px - $unnnic-border-width-thinner;
+        bottom: $label-bottom-spacing - $unnnic-border-width-thinner;
         width: 100%;
         height: $unnnic-border-width-thinner;
         background-color: $unnnic-color-neutral-white;
