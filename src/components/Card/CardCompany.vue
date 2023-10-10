@@ -32,7 +32,7 @@
         <div class="members-description">{{ membersDescription }}</div>
       </div>
     </div>
-    <div class="join-button">
+    <div v-if="joinLabel" class="join-button">
       <unnnic-tag @click="join" :text="joinLabel" scheme="aux-blue" clickable></unnnic-tag>
     </div>
     <div class="more-button" v-if="options.length">
