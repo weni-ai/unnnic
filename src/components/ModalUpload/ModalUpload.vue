@@ -31,7 +31,7 @@
     <div class="footer">
       <unnnic-button
         size="large"
-        type="terciary"
+        type="tertiary"
         :text="textCancel"
         @click="$emit('cancel')"
       />

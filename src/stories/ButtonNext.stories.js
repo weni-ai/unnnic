@@ -5,7 +5,7 @@ export default {
   title: 'Form/ButtonNext',
   component: unnnicButtonNext,
   argTypes: {
-    type: { control: { type: 'select', options: ['primary', 'secondary', 'terciary', 'ghost', 'warning'] } },
+    type: { control: { type: 'select', options: ['primary', 'secondary', 'tertiary', 'ghost', 'warning'] } },
     size: { control: { type: 'select', options: ['large', 'small'] } },
     text: { control: { type: 'text' } },
     iconLeft: { control: { type: 'select', options: [null, ...iconList] } },
@@ -35,9 +35,9 @@ Secondary.args = {
   disabled: false,
 };
 
-export const Terciary = Template.bind({});
-Terciary.args = {
-  type: 'terciary',
+export const Tertiary = Template.bind({});
+Tertiary.args = {
+  type: 'tertiary',
   text: 'Button Text',
   disabled: false,
 };
