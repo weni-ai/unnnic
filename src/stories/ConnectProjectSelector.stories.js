@@ -46,5 +46,5 @@ export const Default = Template.bind({});
 
 Default.args = {
   env: 'develop',
-  authentication: 'Bearer Token',
+  authorization: 'Bearer Token',
 };

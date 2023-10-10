@@ -141,7 +141,7 @@ export default {
       validator: (env) => ['develop', 'staging', 'production'].includes(env),
     },
 
-    authentication: {
+    authorization: {
       type: String,
       required: true,
     },
@@ -233,7 +233,7 @@ export default {
       return axios.create({
         baseURL: this.baseURL,
         headers: {
-          Authentication: this.authentication,
+          Authorization: this.authorization,
         },
       });
     },
