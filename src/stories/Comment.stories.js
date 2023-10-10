@@ -29,7 +29,7 @@ const Template = (args, { argTypes }) => ({
       />
       <unnnic-dropdown-item>
         <unnnic-button
-          type="terciary"
+          type="tertiary"
           iconLeft="pencil-write-1"
           text="Edit comment"
           size="small"
@@ -37,7 +37,7 @@ const Template = (args, { argTypes }) => ({
       </unnnic-dropdown-item>
       <unnnic-dropdown-item>
         <unnnic-button
-          type="terciary"
+          type="tertiary"
           iconLeft="delete-1"
           text="Delete Comment"
           size="small"

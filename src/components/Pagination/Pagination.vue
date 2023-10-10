@@ -1,7 +1,7 @@
 <template>
   <div class="pagination">
     <unnnic-button
-      type="terciary"
+      type="tertiary"
       size="small"
       icon-center="arrow-left-1-1"
       :disabled="!canPrevious || disabled"
@@ -11,7 +11,7 @@
     <unnnic-button
       v-for="(page, index) in pages"
       :key="index"
-      :type="page === value ? 'secondary' : 'terciary'"
+      :type="page === value ? 'secondary' : 'tertiary'"
       size="small"
       :text="['left-hidden', 'right-hidden'].includes(page) ? '...' : String(page)"
       @click="selectPage(page)"
@@ -19,7 +19,7 @@
     />
 
     <unnnic-button
-      type="terciary"
+      type="tertiary"
       size="small"
       icon-center="arrow-right-1-1"
       :disabled="!canNext || disabled"
