@@ -607,7 +607,7 @@ export default {
     }
 
     &:disabled {
-      border: 1px solid $unnnic-color-neutral-cleanest;
+      box-shadow: inset 0 0 0 $unnnic-border-width-thinner $unnnic-color-neutral-cleanest;
 
       cursor: not-allowed;
 
