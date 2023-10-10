@@ -100,6 +100,7 @@ export default {
 
   &__selecteds {
     display: flex;
+    align-items: center;
 
     color: $unnnic-color-neutral-dark;
 
