@@ -584,17 +584,20 @@ export default {
 
   .unnnic-select-smart__input input {
     // entire class name to have higher priority in styles
+
+    color: $unnnic-color-neutral-dark;
+
     &:read-only {
       cursor: pointer;
 
       &::placeholder {
-        color: $unnnic-color-neutral-dark;
+        color: $unnnic-color-neutral-cloudy;
       }
     }
 
     &:not(:read-only :focus) {
       &::placeholder {
-        color: $unnnic-color-neutral-dark;
+        color: $unnnic-color-neutral-cloudy;
       }
     }
 
