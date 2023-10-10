@@ -31,7 +31,7 @@
           <div :style="{ overflow: 'auto' }">
             <select-smart-multiple-header
               v-if="multiple"
-              :selectedOptions="selectedOptions"
+              :selectedOptions="value"
               :withoutSelectsMessage="multipleWithoutSelectsMessage"
               @clear-selected-options="clearSelectedOptions"
               @unselect-option="unselectOption"
@@ -160,7 +160,6 @@ export default {
       searchValue: '',
       isAutocompleteAllowed: false,
 
-      selectedOptions: [],
       multipleSelectedsTags: 2,
 
       defaultTranslations: {
@@ -215,11 +214,11 @@ export default {
       if (!this.active && oldSearchValue) this.active = true;
     },
 
-    selectedOptions(newSelectedOptions) {
-      this.$emit('onChange', newSelectedOptions);
-      this.$emit('input', newSelectedOptions);
+    value(newValue) {
+      this.$emit('onChange', newValue);
+      this.$emit('input', newValue);
 
-      this.onSelectOption(newSelectedOptions.at(-1));
+      this.onSelectOption(newValue.at(-1));
     },
 
     autocomplete(newAutocomplete) {
@@ -252,11 +251,11 @@ export default {
       }
 
       if (this.multiple) {
-        const labels = this.selectedOptions.map((item) => item.label);
+        const labels = this.value.map((item) => item.label);
         return labels.join(', ');
       }
 
-      const label = this.selectedOptions.at(-1)?.label || '';
+      const label = this.value.at(-1)?.label || '';
       return label;
     },
 
@@ -277,14 +276,14 @@ export default {
 
     inputValue() {
       const {
-        isAutocompleteAllowed, searchValue, multiple, selectedOptions,
+        isAutocompleteAllowed, searchValue, multiple, value,
       } = this;
 
       if (isAutocompleteAllowed || multiple) {
         return searchValue;
       }
-      if (!multiple && selectedOptions.length !== 0) {
-        return selectedOptions[0].label;
+      if (!multiple && value.length !== 0) {
+        return value[0].label;
       }
 
       return '';
@@ -297,11 +296,11 @@ export default {
 
   methods: {
     optionIsSelected(option) {
-      return this.selectedOptions.some((selectedOption) => selectedOption.value === option.value);
+      return this.value.some((selectedOption) => selectedOption.value === option.value);
     },
 
     clearSelectedOptions() {
-      this.selectedOptions = [];
+      this.$emit('input', []);
     },
 
     handleSelect(option) {
@@ -385,7 +384,7 @@ export default {
         valueByType = this.value?.[0]?.value;
       }
       if (type === 'focused') {
-        valueByType = this.focusedOption?.value || this.selectedOptions.at(-1)?.value;
+        valueByType = this.focusedOption?.value || this.value.at(-1)?.value;
       }
       return options.findIndex((option) => option.value === valueByType);
     },
@@ -405,18 +404,18 @@ export default {
     selectOption(option) {
       const selectedOption = option.value === null || option.value.length === 0 ? null : option;
 
-      this.selectedOptions = this.multiple
-        ? [...this.selectedOptions, selectedOption]
-        : [selectedOption];
+      this.$emit('input', this.multiple
+        ? [...this.value, selectedOption]
+        : [selectedOption]);
     },
 
     unselectOption(option) {
-      const indexToRemove = this.selectedOptions.findIndex(
+      const indexToRemove = this.value.findIndex(
         (selectedOption) => selectedOption.value === option.value,
       );
 
       if (indexToRemove !== -1) {
-        this.selectedOptions.splice(indexToRemove, 1);
+        this.value.splice(indexToRemove, 1);
       }
 
       if (this.multiple) {
