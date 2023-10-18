@@ -2,7 +2,7 @@
   <div class="unnnic-chats-header__container">
     <header class="unnnic-chats-header" :class="{ contact: !!avatarName }">
       <div class="unnnic-chats-header__topbar" v-if="!avatarName">
-        <unnnic-breadcrumb :crumbs="crumbs" @crumbClick="$emit('crumbClick')"/>
+        <unnnic-breadcrumb :crumbs="crumbs" @crumbClick="(crumb) => $emit('crumbClick', crumb)"/>
         <unnnic-button-close @close="close" size="ant" />
       </div>
       <main class="unnnic-chats-header__main">
