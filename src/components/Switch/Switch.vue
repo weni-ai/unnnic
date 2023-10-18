@@ -63,6 +63,9 @@ export default {
       type: Boolean,
       default: false,
     },
+    useVModel: {
+      type: Boolean,
+    },
   },
   data() {
     return {
@@ -82,8 +85,13 @@ export default {
   methods: {
     toggleState() {
       if (this.disabled) return;
-      this.isActive = !this.isActive;
-      this.$emit('input', this.isActive);
+
+      if (this.useVModel) {
+        this.$emit('input', !this.isActive);
+      } else {
+        this.isActive = !this.isActive;
+        this.$emit('input', this.isActive);
+      }
     },
   },
   computed: {
