@@ -2,13 +2,18 @@
   <div class="unnnic-chats-header__container">
     <header class="unnnic-chats-header" :class="{ contact: !!avatarName }">
       <div class="unnnic-chats-header__topbar" v-if="!avatarName">
-        <unnnic-breadcrumb :crumbs="crumbs" @crumbClick="$emit('crumbClick')"/>
-        <unnnic-button-close @close="close" size="ant" />
+        <unnnic-breadcrumb :crumbs="crumbs" @crumbClick="(crumb) => $emit('crumbClick', crumb)" />
+        <unnnic-button @click="close" type="tertiary" iconCenter="close-1" size="small" />
       </div>
       <main class="unnnic-chats-header__main">
-        <div v-if="back" class="unnnic-chats-header__main__back" @click="back">
-          <unnnic-icon icon="keyboard-arrow-left-1" size="md" />
-        </div>
+        <unnnic-button
+          v-if="back"
+          class="unnnic-chats-header__main__back"
+          type="tertiary"
+          size="small"
+          iconCenter="keyboard-arrow-left-1"
+          @click="back"
+        />
         <section class="unnnic-chats-header__infos">
           <unnnic-chats-user-avatar
             v-if="avatarName"
@@ -42,10 +47,13 @@
           <slot />
         </div>
       </main>
-      <unnnic-button-close
+      <unnnic-button
+        v-if="close"
         class="unnnic-chats-header__close--sm"
-        size="sm"
-        @close="close"
+        @click="close"
+        type="tertiary"
+        iconCenter="close-1"
+        size="small"
       />
     </header>
   </div>
@@ -53,11 +61,10 @@
 <script>
 import UnnnicI18n from '../../mixins/i18n';
 
-import UnnnicButtonClose from '../ButtonClose/ButtonClose.vue';
+import UnnnicButton from '../Button/Button.vue';
 import UnnnicAvatarIcon from '../AvatarIcon/AvatarIcon.vue';
 import UnnnicChatsUserAvatar from '../ChatsUserAvatar/ChatsUserAvatar.vue';
 import UnnnicBreadcrumb from '../Breadcrumb/Breadcrumb.vue';
-import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'UnnnicChatsHeader',
@@ -65,11 +72,10 @@ export default {
   mixins: [UnnnicI18n],
 
   components: {
-    UnnnicButtonClose,
+    UnnnicButton,
     UnnnicAvatarIcon,
     UnnnicChatsUserAvatar,
     UnnnicBreadcrumb,
-    UnnnicIcon,
   },
 
   props: {
@@ -147,11 +153,9 @@ export default {
     display: grid;
     align-items: center;
     grid-template-columns: 1fr auto;
-    gap: $unnnic-spacing-xs;
+    gap: $unnnic-spacing-nano;
 
     &__back {
-      margin-right: $unnnic-spacing-md;
-
       cursor: pointer;
     }
   }

@@ -26,7 +26,7 @@ const back = () => alert('back');
 const close = () => alert('close');
 const titleClick = () => alert('titleClick');
 const avatarClick = () => alert('avatarClick');
-const crumbClick = () => alert('crumbClick');
+const crumbClick = (event) => alert(JSON.stringify(event));
 
 const size = window.innerWidth < 600 ? 'small' : 'large';
 
