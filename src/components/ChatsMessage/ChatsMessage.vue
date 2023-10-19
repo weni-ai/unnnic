@@ -87,6 +87,11 @@ export default {
     formattedText() {
       const slotContent = this.$slots.default?.[0]?.text || this.$slots.text?.[0]?.text;
 
+      function treatTextUrl(text) {
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        return text.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
+      }
+
       function removeHtmlDangerousContent(text) {
       // eslint-disable-next-line default-param-last
         return text.replace(/<(\/)?([^> ]+)( [^>]+)?>/gi, ($1, $2 = '', $3, $4 = '') => {
@@ -125,7 +130,7 @@ export default {
         });
       }
 
-      const formattedText = removeHtmlDangerousContent(slotContent).trim()?.replace(/\n/g, '<br/>');
+      const formattedText = treatTextUrl(removeHtmlDangerousContent(slotContent).trim()?.replace(/\n/g, '<br/>'));
 
       return typeof slotContent === 'string' ? formattedText : '';
     },
