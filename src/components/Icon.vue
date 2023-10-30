@@ -1,5 +1,24 @@
 <template>
-<span
+  <span
+    v-if="materialSymbolsName"
+    @click="onClick"
+    @mousedown="$emit('mousedown')"
+    @mouseup="$emit('mouseup')"
+    :class="[
+      'material-symbols-rounded',
+      `unnnic-icon-scheme--${scheme}`,
+      `unnnic-icon-size--${size}`,
+      {
+        'unnnic--clickable': clickable,
+        'material-symbols-rounded--filled': filled,
+      },
+    ]"
+  >
+    {{ materialSymbolsName }}
+  </span>
+
+  <span
+    v-else
     @click="onClick"
     @mousedown="$emit('mousedown')"
     @mouseup="$emit('mouseup')"
@@ -10,15 +29,23 @@
       lineHeight ? `unnnic-icon__line-height--${lineHeight}` : '',
       scheme ? `unnnic-icon-scheme--${scheme}` : '',
     ]"
-    v-html="svg" />
+    v-html="svg"
+  ></span>
 </template>
 
 <script>
 import icons from '../utils/icons';
+import OldIconsMap from './Icon/OldIconsMap.json';
 
 export default {
   name: 'uIcon',
   props: {
+    filled: {
+      type: Boolean,
+    },
+    next: {
+      type: Boolean,
+    },
     icon: {
       type: String,
       default: null,
@@ -46,13 +73,21 @@ export default {
     },
     scheme: {
       type: String,
-      default: '',
+      default: 'neutral-darkest',
     },
   },
   mounted() {},
   computed: {
     svg() {
       return icons[this.icon];
+    },
+
+    materialSymbolsName() {
+      if (Object.keys(icons).includes(this.icon) && !this.next) {
+        return null;
+      }
+
+      return OldIconsMap[this.icon] || this.icon;
     },
   },
   methods: {
@@ -166,6 +201,66 @@ $scheme-colors:
   "brand-sec-soft" $unnnic-color-brand-sec-soft,
   "brand-sec" $unnnic-color-brand-sec;
 
+  $icon-sizes:
+    'xl' $unnnic-icon-size-xl,
+    'lg' $unnnic-icon-size-lg,
+    'md' $unnnic-icon-size-md,
+    'ant' $unnnic-icon-size-ant,
+    'sm' $unnnic-icon-size-sm,
+    'xs' $unnnic-icon-size-xs,
+    'avatar-lg' $unnnic-avatar-size-lg,
+    'avatar-md' $unnnic-avatar-size-md,
+    'avatar-sm' $unnnic-avatar-size-sm,
+    'avatar-xs' $unnnic-avatar-size-xs,
+    'avatar-nano' $unnnic-avatar-size-nano;
+
+@font-face {
+  font-family: 'Material Symbols Rounded';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../assets/fonts/Material Symbols Rounded.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Material Symbols Rounded Filled';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../assets/fonts/Material Symbols Rounded Filled.woff2') format('woff2');
+}
+
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+
+  &--filled {
+    font-family: 'Material Symbols Rounded Filled';
+  }
+
+  @each $name, $color in $scheme-colors {
+    &.unnnic-icon-scheme--#{$name} {
+      color: $color;
+    }
+  }
+
+  @each $name, $size in $icon-sizes {
+    &.unnnic-icon-size--#{$name} {
+      font-size: $size;
+    }
+  }
+}
+
 @each $name, $color in $scheme-colors {
   .unnnic-icon-scheme {
     &--#{$name} {
@@ -179,19 +274,6 @@ $scheme-colors:
     }
   }
 }
-
-$icon-sizes:
-    'xl' $unnnic-icon-size-xl,
-    'lg' $unnnic-icon-size-lg,
-    'md' $unnnic-icon-size-md,
-    'ant' $unnnic-icon-size-ant,
-    'sm' $unnnic-icon-size-sm,
-    'xs' $unnnic-icon-size-xs,
-    'avatar-lg' $unnnic-avatar-size-lg,
-    'avatar-md' $unnnic-avatar-size-md,
-    'avatar-sm' $unnnic-avatar-size-sm,
-    'avatar-xs' $unnnic-avatar-size-xs,
-    'avatar-nano' $unnnic-avatar-size-nano;
 
 $line-heights:
   'sm' $unnnic-line-height-small,
