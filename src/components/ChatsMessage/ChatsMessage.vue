@@ -10,7 +10,7 @@
       'is-video': isVideo,
     }"
   >
-    <p v-if="isText" v-html="formattedText" class="unnnic-chats-message__text" />
+    <unnnic-chats-message-text v-if="isText" :text="slotText"/>
 
     <div v-if="isDocument" class="unnnic-chats-message__document">
       <unnnic-icon
@@ -45,11 +45,12 @@
 
 <script>
 import UnnnicChatsMessageStatusBackdrop from './ChatsMessageStatusBackdrop.vue';
+import UnnnicChatsMessageText from './ChatsMessageText.vue';
 import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'UnnnicChatsMessage',
-  components: { UnnnicChatsMessageStatusBackdrop, UnnnicIcon },
+  components: { UnnnicChatsMessageText, UnnnicChatsMessageStatusBackdrop, UnnnicIcon },
   props: {
     type: {
       type: String,
@@ -84,56 +85,6 @@ export default {
   },
 
   computed: {
-    formattedText() {
-      const slotContent = this.$slots.default?.[0]?.text || this.$slots.text?.[0]?.text;
-
-      function treatTextUrl(text) {
-        const urlRegex = /(https?:\/\/[^\s]+)/g;
-        return text.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
-      }
-
-      function removeHtmlDangerousContent(text) {
-      // eslint-disable-next-line default-param-last
-        return text.replace(/<(\/)?([^> ]+)( [^>]+)?>/gi, ($1, $2 = '', $3, $4 = '') => {
-          if (['b', 'i', 'u', 'ul', 'li', 'br', 'div'].includes($3)) {
-            const complements = [];
-
-            // eslint-disable-next-line no-restricted-syntax
-            for (const i of $4.matchAll(
-              /((?<name1>[^ =]+)="(?<value1>[^"]*)"|(?<name2>[^ =]+)='(?<value2>[^"]*)')/g,
-            )) {
-              const name = i.groups.name1 || i.groups.name2;
-              const value = i.groups.value1 || i.groups.value2;
-
-              if (name === 'style') {
-                const styles = [];
-
-                // eslint-disable-next-line no-restricted-syntax
-                for (const j of value.matchAll(/(?<propertyName>[^:]+):(?<propertyValue>[^;]+);?/g)) {
-                  if (j.groups.propertyName.toLowerCase().trim() === 'text-align') {
-                    styles.push(
-                      `${j.groups.propertyName
-                        .toLowerCase()
-                        .trim()}: ${j.groups.propertyValue.trim()}`,
-                    );
-                  }
-                }
-
-                complements.push(`style="${styles.join('; ')};"`);
-              }
-            }
-
-            return `<${$2}${$3}${complements.length ? ` ${complements.join(' ')}` : ''}>`;
-          }
-
-          return '';
-        });
-      }
-
-      const formattedText = treatTextUrl(removeHtmlDangerousContent(slotContent).trim()?.replace(/\n/g, '<br/>'));
-
-      return typeof slotContent === 'string' ? formattedText : '';
-    },
     formattedTime() {
       const date = new Date(this.time);
       const hours = date.getHours();
@@ -160,6 +111,9 @@ export default {
     },
     isVideo() {
       return this.isMedia && this.mediaType === 'video';
+    },
+    slotText() {
+      return this.$slots?.default?.[0]?.text || this.$slots?.text?.[0]?.text || '';
     },
     sendingMedia() {
       return this.isMedia && this.status === 'sending';
