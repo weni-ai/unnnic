@@ -1,12 +1,12 @@
 <template>
   <div
-    class="contact"
+    class="chats-contact"
     ref="transitionContainer"
     :class="{
       selected,
       disabled,
       'unread-messages': unreadMessages,
-      waiting: waitingTime,
+      waiting: waitingTime && !discussionGoal,
     }"
     @click="$emit('click')"
     @keypress.enter="$emit('click')"
@@ -19,39 +19,47 @@
     "
     :tabindex="0"
   >
-    <user-avatar :username="username" :photo-url="userPhoto" :active="isHovered || selected" />
+    <div v-if="discussionGoal" class="chats-contact__discussion-icon">
+      <unnnic-icon icon="forum" scheme="weni-50" />
+    </div>
+    <user-avatar
+      v-else
+      :username="title"
+      :photo-url="userPhoto"
+      :active="isHovered || selected"
+    />
 
-    <div class="contact__infos">
+    <div class="chats-contact__infos">
       <h1
-        class="contact__infos__username ellipsis"
-        :title="username"
+        class="chats-contact__infos__title ellipsis"
+        :title="title"
         :class="{ bold: unreadMessages }"
       >
-        {{ username }}
+        {{ title }}
       </h1>
       <div
-        class="contact__infos__additional-information"
+        class="chats-contact__infos__additional-information"
         :class="{ bold: unreadMessages || (checkboxWhenSelect && selected) }"
       >
-        <p v-if="waitingTime !== 0" class="ellipsis">
+        <p v-if="waitingTime !== 0 && !discussionGoal" class="ellipsis">
           {{ i18n('waiting_for', waitingTime, { waitingTime }) }}
         </p>
-        <p v-else-if="lastMessage" class="ellipsis" :title="lastMessage">
-          {{ lastMessage }}
+        <p v-else-if="subtitle" class="ellipsis" :title="subtitle">
+          {{ subtitle }}
         </p>
       </div>
     </div>
 
     <span
       v-if="!selected && unreadMessages"
-      class="contact__infos__unread-messages"
+      class="chats-contact__infos__unread-messages"
       :title="i18n('unread_messages', unreadMessages, { unreadMessages })"
     >
       {{ unreadMessages }}
     </span>
     <checkbox
       v-else-if="selected && checkboxWhenSelect"
-      class="contact__infos__checkbox"
+      class="chats-contact__infos__checkbox"
       :value="true"
     />
     <transition-ripple ref="transitionRipple" color="weni-500" />
@@ -60,6 +68,7 @@
 
 <script>
 import UserAvatar from '../ChatsUserAvatar/ChatsUserAvatar.vue';
+import UnnnicIcon from '../Icon.vue';
 import TransitionRipple from '../TransitionRipple/TransitionRipple.vue';
 import UnnnicI18n from '../../mixins/i18n';
 import Checkbox from '../Checkbox/Checkbox.vue';
@@ -71,12 +80,13 @@ export default {
 
   components: {
     UserAvatar,
+    UnnnicIcon,
     TransitionRipple,
     Checkbox,
   },
 
   props: {
-    username: {
+    title: {
       type: String,
       default: '',
       required: true,
@@ -109,6 +119,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    discussionGoal: {
+      type: String,
+      default: '',
+    },
   },
 
   data() {
@@ -126,8 +140,20 @@ export default {
           en: '{unreadMessages} unread messages',
           es: '{unreadMessages} mensajes no leídos',
         },
+        discussion_about: {
+          'pt-br': 'Discussão sobre {discussionGoal}',
+          en: 'Discussion about {discussionGoal}',
+          es: 'Discusión sobre {discussionGoal}',
+        },
       },
     };
+  },
+
+  computed: {
+    subtitle() {
+      const { discussionGoal, lastMessage } = this;
+      return discussionGoal ? this.i18n('discussion_about', discussionGoal, { discussionGoal }) : lastMessage;
+    },
   },
 };
 </script>
@@ -135,7 +161,7 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/unnnic.scss';
 
-.contact {
+.chats-contact {
   display: grid;
   grid-template-columns: max-content 1fr min-content;
   align-items: center;
@@ -170,13 +196,13 @@ export default {
       background-color: $unnnic-color-neutral-light;
     }
 
-    .contact__infos__unread-messages {
+    .chats-contact__infos__unread-messages {
       background: $unnnic-color-background-white;
     }
   }
 
   &.unread-messages {
-    .username {
+    .title {
       color: $unnnic-color-neutral-darkest;
       font-weight: $unnnic-font-weight-bold;
     }
@@ -189,7 +215,7 @@ export default {
 
   &.disabled {
     .content {
-      .username {
+      .title {
         color: $unnnic-color-neutral-cleanest;
         font-weight: $unnnic-font-weight-bold;
       }
@@ -208,11 +234,23 @@ export default {
   &.selected:hover {
     background-color: $unnnic-color-neutral-lightest;
 
-    .contact__infos {
+    .chats-contact__infos {
       &__unread-messages {
         background: $unnnic-color-background-white;
       }
     }
+  }
+
+  &__discussion-icon {
+    width: $unnnic-icon-size-xl;
+    height: $unnnic-icon-size-xl;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $unnnic-border-radius-sm;
+
+    background-color: $unnnic-color-aux-purple-500;
   }
 
   &__infos {
@@ -224,13 +262,13 @@ export default {
     width: 100%;
     overflow: hidden;
 
-    &__username,
+    &__title,
     &__additional-information {
       font-size: $unnnic-font-size-body-gt;
       line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
     }
 
-    &__username {
+    &__title {
       font-weight: $unnnic-font-weight-bold;
       color: $unnnic-color-neutral-darkest;
     }
