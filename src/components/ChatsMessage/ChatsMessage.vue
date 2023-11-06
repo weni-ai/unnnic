@@ -170,12 +170,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   }
 
   &.is-media {
-    padding: $unnnic-spacing-nano $unnnic-spacing-xs;
-
-    &.is-image,
-    &.is-video {
-      padding: $unnnic-spacing-xs;
-    }
+    padding: $unnnic-spacing-xs;
   }
 
   &__main {
