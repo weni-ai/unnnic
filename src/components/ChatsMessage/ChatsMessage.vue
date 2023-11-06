@@ -10,46 +10,55 @@
       'is-video': isVideo,
     }"
   >
-    <p v-if="isText" v-html="formattedText" class="unnnic-chats-message__text" />
-
-    <div v-if="isDocument" class="unnnic-chats-message__document">
-      <unnnic-icon
-        v-if="status === 'sending' || status === 'failed'"
-        :icon="status === 'sending' ? 'loading-circle-1' : 'upload-bottom-1'"
-        size="lg"
-      />
-      <unnnic-icon v-else icon="office-file-pdf-1-1" scheme="neutral-dark" size="lg" />
-      <p class="unnnic-chats-message__document__text" @click="$emit('click')">
-        {{ documentName }}
-      </p>
-    </div>
-
-    <div
-      v-else-if="isMedia"
-      class="unnnic-chats-message__media__container"
-      :class="{ failed: failedToSendMedia }"
-      @click="$emit('click-image')"
+    <p v-if="signature" class="unnnic-chats-message__signature">{{ signature }}</p>
+    <main
+      class="unnnic-chats-message__main"
+      :class="{
+        'is-document': isDocument,
+        'is-media': isMedia,
+        'is-image': isImage,
+        'is-video': isVideo,
+      }"
     >
-      <slot />
-      <unnnic-chats-message-status-backdrop
-        v-if="(sendingMedia || failedToSendMedia) && (isImage || isVideo)"
-        :status="status"
-        @click="status === 'failed' ? $emit('click') : () => {}"
-      />
-    </div>
-
-    <unnnic-icon v-if="sendingMedia" icon="loading-circle-1" size="avatar-nano" />
-    <p v-else class="unnnic-chats-message__time">{{ formattedTime }}</p>
+      <unnnic-chats-message-text v-if="isText" :text="slotText" />
+      <div v-if="isDocument" class="unnnic-chats-message__document">
+        <unnnic-icon
+          v-if="status === 'sending' || status === 'failed'"
+          :icon="status === 'sending' ? 'loading-circle-1' : 'upload-bottom-1'"
+          size="lg"
+        />
+        <unnnic-icon v-else icon="office-file-pdf-1-1" scheme="neutral-dark" size="lg" />
+        <p class="unnnic-chats-message__document__text" @click="$emit('click')">
+          {{ documentName }}
+        </p>
+      </div>
+      <div
+        v-else-if="isMedia"
+        class="unnnic-chats-message__media__container"
+        :class="{ failed: failedToSendMedia }"
+        @click="$emit('click-image')"
+      >
+        <slot />
+        <unnnic-chats-message-status-backdrop
+          v-if="(sendingMedia || failedToSendMedia) && (isImage || isVideo)"
+          :status="status"
+          @click="status === 'failed' ? $emit('click') : () => {}"
+        />
+      </div>
+      <unnnic-icon v-if="sendingMedia" icon="loading-circle-1" size="avatar-nano" />
+      <p v-else class="unnnic-chats-message__time">{{ formattedTime }}</p>
+    </main>
   </div>
 </template>
 
 <script>
 import UnnnicChatsMessageStatusBackdrop from './ChatsMessageStatusBackdrop.vue';
+import UnnnicChatsMessageText from './ChatsMessageText.vue';
 import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'UnnnicChatsMessage',
-  components: { UnnnicChatsMessageStatusBackdrop, UnnnicIcon },
+  components: { UnnnicChatsMessageText, UnnnicChatsMessageStatusBackdrop, UnnnicIcon },
   props: {
     type: {
       type: String,
@@ -62,6 +71,11 @@ export default {
       type: Date,
       default: null,
       required: true,
+    },
+    signature: {
+      type: String,
+      default: '',
+      required: false,
     },
     documentName: {
       type: String,
@@ -84,56 +98,6 @@ export default {
   },
 
   computed: {
-    formattedText() {
-      const slotContent = this.$slots.default?.[0]?.text || this.$slots.text?.[0]?.text;
-
-      function treatTextUrl(text) {
-        const urlRegex = /(https?:\/\/[^\s]+)/g;
-        return text.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');
-      }
-
-      function removeHtmlDangerousContent(text) {
-      // eslint-disable-next-line default-param-last
-        return text.replace(/<(\/)?([^> ]+)( [^>]+)?>/gi, ($1, $2 = '', $3, $4 = '') => {
-          if (['b', 'i', 'u', 'ul', 'li', 'br', 'div'].includes($3)) {
-            const complements = [];
-
-            // eslint-disable-next-line no-restricted-syntax
-            for (const i of $4.matchAll(
-              /((?<name1>[^ =]+)="(?<value1>[^"]*)"|(?<name2>[^ =]+)='(?<value2>[^"]*)')/g,
-            )) {
-              const name = i.groups.name1 || i.groups.name2;
-              const value = i.groups.value1 || i.groups.value2;
-
-              if (name === 'style') {
-                const styles = [];
-
-                // eslint-disable-next-line no-restricted-syntax
-                for (const j of value.matchAll(/(?<propertyName>[^:]+):(?<propertyValue>[^;]+);?/g)) {
-                  if (j.groups.propertyName.toLowerCase().trim() === 'text-align') {
-                    styles.push(
-                      `${j.groups.propertyName
-                        .toLowerCase()
-                        .trim()}: ${j.groups.propertyValue.trim()}`,
-                    );
-                  }
-                }
-
-                complements.push(`style="${styles.join('; ')};"`);
-              }
-            }
-
-            return `<${$2}${$3}${complements.length ? ` ${complements.join(' ')}` : ''}>`;
-          }
-
-          return '';
-        });
-      }
-
-      const formattedText = treatTextUrl(removeHtmlDangerousContent(slotContent).trim()?.replace(/\n/g, '<br/>'));
-
-      return typeof slotContent === 'string' ? formattedText : '';
-    },
     formattedTime() {
       const date = new Date(this.time);
       const hours = date.getHours();
@@ -161,6 +125,9 @@ export default {
     isVideo() {
       return this.isMedia && this.mediaType === 'video';
     },
+    slotText() {
+      return this.$slots?.default?.[0]?.text || this.$slots?.text?.[0]?.text || '';
+    },
     sendingMedia() {
       return this.isMedia && this.status === 'sending';
     },
@@ -181,10 +148,8 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   min-width: 70px;
   max-width: 500px;
 
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: $unnnic-spacing-xs;
+  display: grid;
+  gap: $unnnic-spacing-nano;
 
   border-radius: $unnnic-border-radius-md;
 
@@ -193,10 +158,6 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   background-color: $unnnic-color-neutral-white;
 
   font-family: $unnnic-font-family-secondary;
-
-  & > * {
-    margin: 0;
-  }
 
   &.sent {
     background-color: $unnnic-color-weni-50;
@@ -209,45 +170,56 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   }
 
   &.is-media {
-    padding: $unnnic-spacing-nano $unnnic-spacing-xs;
+    padding: $unnnic-spacing-xs;
+  }
 
-    &.is-image,
-    &.is-video {
-      padding: $unnnic-spacing-xs;
+  &__main {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: $unnnic-spacing-xs;
 
-      display: grid;
-      justify-items: end;
+    & > * {
+      margin: 0;
+    }
 
-      overflow: hidden;
+    &.is-media {
+      &.is-image,
+      &.is-video {
+        display: grid;
+        justify-items: end;
 
-      .media {
         overflow: hidden;
 
-        border-radius: $unnnic-border-radius-md;
+        .media {
+          overflow: hidden;
 
-        min-height: 200px;
-        max-height: 300px;
+          border-radius: $unnnic-border-radius-md;
+
+          min-height: 200px;
+          max-height: 300px;
+          height: auto;
+        }
+      }
+
+      &.is-image .media {
+        width: 200px;
         height: auto;
+        max-width: 200px;
+
+        object-fit: cover;
+      }
+
+      &.is-video .media {
+        width: 300px;
+        max-width: 300px;
       }
     }
 
-    &.is-image .media {
-      width: 200px;
-      height: auto;
-      max-width: 200px;
-
-      object-fit: cover;
+    &.is-document {
+      min-width: 200px;
+      max-width: 400px;
     }
-
-    &.is-video .media {
-      width: 300px;
-      max-width: 300px;
-    }
-  }
-
-  &.is-document {
-    min-width: 200px;
-    max-width: 400px;
   }
 
   &__document {
@@ -265,14 +237,22 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   }
 
   &__text,
-  &__document__text {
+  &__document__text,
+  &__signature {
     margin: 0;
 
     padding: $unnnic-spacing-nano 0;
 
+    font-size: $unnnic-font-size-body-gt;
     color: $unnnic-color-neutral-dark;
     line-height: $defaultLineHeight;
     word-break: break-word;
+  }
+
+  &__signature {
+    padding: 0;
+
+    font-weight: $unnnic-font-weight-bold;
   }
 
   &__time {
