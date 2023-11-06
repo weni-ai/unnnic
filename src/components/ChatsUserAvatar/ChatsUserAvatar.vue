@@ -67,7 +67,13 @@ export default {
 
   computed: {
     getUsernameFirstCharacter() {
-      return this.username ? this.username.charAt(0).toUpperCase() : '';
+      const cleanUsername = this.username.replace(/[^a-zA-Z0-9]+/g, '');
+
+      const firstCodePoint = (cleanUsername || this.username).codePointAt(0);
+      if (firstCodePoint) {
+        return String.fromCodePoint(firstCodePoint);
+      }
+      return '';
     },
   },
 };
