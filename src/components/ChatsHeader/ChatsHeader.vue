@@ -1,9 +1,15 @@
 <template>
-  <div class="unnnic-chats-header__container">
+  <div class="unnnic-chats-header__container" :class="[size]">
     <header class="unnnic-chats-header" :class="{ contact: !!avatarName }">
       <div class="unnnic-chats-header__topbar" v-if="!avatarName">
         <unnnic-breadcrumb :crumbs="crumbs" @crumbClick="(crumb) => $emit('crumbClick', crumb)" />
-        <unnnic-button @click="close" type="tertiary" iconCenter="close-1" size="small" />
+        <unnnic-button
+          v-if="close"
+          @click="close"
+          type="tertiary"
+          iconCenter="close-1"
+          size="small"
+        />
       </div>
       <main class="unnnic-chats-header__main">
         <unnnic-button
@@ -27,7 +33,7 @@
             @click="avatarClick ? avatarClick() : () => {}"
           >
             <unnnic-avatar-icon
-              scheme="aux-purple"
+              :scheme="sectionIconScheme"
               class="unnnic-chats-header__avatar-icon"
               size="sm"
               :icon="avatarIcon"
@@ -88,6 +94,10 @@ export default {
       type: String,
       default: '',
     },
+    sectionIconScheme: {
+      type: String,
+      default: 'aux-purple',
+    },
     avatarIcon: {
       type: String,
       default: '',
@@ -115,6 +125,13 @@ export default {
     crumbs: {
       type: Array,
       default: () => [],
+    },
+    size: {
+      type: String,
+      default: 'auto',
+      validator(size) {
+        return ['auto', 'small', 'large'].includes(size);
+      },
     },
   },
 };
@@ -207,10 +224,7 @@ export default {
 }
 
 .unnnic-chats-header__container {
-  container-type: inline-size;
-
-  // Header large
-  @container (min-width: 600px) {
+  @mixin header-large-styles {
     .unnnic-chats-header {
       &:not(.contact) {
         padding: $unnnic-spacing-md;
@@ -271,6 +285,18 @@ export default {
           font-size: $unnnic-font-size-body-gt;
         }
       }
+    }
+  }
+
+  &.large {
+    @include header-large-styles;
+  }
+
+  &.auto {
+    container-type: inline-size;
+
+    @container (min-width: 600px) {
+      @include header-large-styles;
     }
   }
 }
