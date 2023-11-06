@@ -13,7 +13,6 @@ export default {
   },
   computed: {
     formattedText() {
-      console.log(this.text);
       function treatTextUrl(text) {
         const urlRegex = /(https?:\/\/[^\s]+)/g;
         return text.replace(urlRegex, '<a href="$1" target="_blank">$1</a>');

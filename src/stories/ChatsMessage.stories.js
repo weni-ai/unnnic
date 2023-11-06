@@ -214,6 +214,13 @@ ReceivedAndSent.args = {
   ...defaultArgs,
 };
 
+export const WithSignature = Template.bind({});
+WithSignature.args = {
+  ...defaultArgs,
+  type: 'sent',
+  signature: 'John Doe',
+};
+
 export const WithLink = TemplateWithLink.bind({});
 WithLink.args = {
   ...defaultArgs,

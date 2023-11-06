@@ -10,36 +10,44 @@
       'is-video': isVideo,
     }"
   >
-    <unnnic-chats-message-text v-if="isText" :text="slotText"/>
-
-    <div v-if="isDocument" class="unnnic-chats-message__document">
-      <unnnic-icon
-        v-if="status === 'sending' || status === 'failed'"
-        :icon="status === 'sending' ? 'loading-circle-1' : 'upload-bottom-1'"
-        size="lg"
-      />
-      <unnnic-icon v-else icon="office-file-pdf-1-1" scheme="neutral-dark" size="lg" />
-      <p class="unnnic-chats-message__document__text" @click="$emit('click')">
-        {{ documentName }}
-      </p>
-    </div>
-
-    <div
-      v-else-if="isMedia"
-      class="unnnic-chats-message__media__container"
-      :class="{ failed: failedToSendMedia }"
-      @click="$emit('click-image')"
+    <p v-if="signature" class="unnnic-chats-message__signature">{{ signature }}</p>
+    <main
+      class="unnnic-chats-message__main"
+      :class="{
+        'is-document': isDocument,
+        'is-media': isMedia,
+        'is-image': isImage,
+        'is-video': isVideo,
+      }"
     >
-      <slot />
-      <unnnic-chats-message-status-backdrop
-        v-if="(sendingMedia || failedToSendMedia) && (isImage || isVideo)"
-        :status="status"
-        @click="status === 'failed' ? $emit('click') : () => {}"
-      />
-    </div>
-
-    <unnnic-icon v-if="sendingMedia" icon="loading-circle-1" size="avatar-nano" />
-    <p v-else class="unnnic-chats-message__time">{{ formattedTime }}</p>
+      <unnnic-chats-message-text v-if="isText" :text="slotText" />
+      <div v-if="isDocument" class="unnnic-chats-message__document">
+        <unnnic-icon
+          v-if="status === 'sending' || status === 'failed'"
+          :icon="status === 'sending' ? 'loading-circle-1' : 'upload-bottom-1'"
+          size="lg"
+        />
+        <unnnic-icon v-else icon="office-file-pdf-1-1" scheme="neutral-dark" size="lg" />
+        <p class="unnnic-chats-message__document__text" @click="$emit('click')">
+          {{ documentName }}
+        </p>
+      </div>
+      <div
+        v-else-if="isMedia"
+        class="unnnic-chats-message__media__container"
+        :class="{ failed: failedToSendMedia }"
+        @click="$emit('click-image')"
+      >
+        <slot />
+        <unnnic-chats-message-status-backdrop
+          v-if="(sendingMedia || failedToSendMedia) && (isImage || isVideo)"
+          :status="status"
+          @click="status === 'failed' ? $emit('click') : () => {}"
+        />
+      </div>
+      <unnnic-icon v-if="sendingMedia" icon="loading-circle-1" size="avatar-nano" />
+      <p v-else class="unnnic-chats-message__time">{{ formattedTime }}</p>
+    </main>
   </div>
 </template>
 
@@ -63,6 +71,11 @@ export default {
       type: Date,
       default: null,
       required: true,
+    },
+    signature: {
+      type: String,
+      default: '',
+      required: false,
     },
     documentName: {
       type: String,
@@ -135,10 +148,8 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   min-width: 70px;
   max-width: 500px;
 
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: $unnnic-spacing-xs;
+  display: grid;
+  gap: $unnnic-spacing-nano;
 
   border-radius: $unnnic-border-radius-md;
 
@@ -147,10 +158,6 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   background-color: $unnnic-color-neutral-white;
 
   font-family: $unnnic-font-family-secondary;
-
-  & > * {
-    margin: 0;
-  }
 
   &.sent {
     background-color: $unnnic-color-weni-50;
@@ -168,40 +175,56 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     &.is-image,
     &.is-video {
       padding: $unnnic-spacing-xs;
-
-      display: grid;
-      justify-items: end;
-
-      overflow: hidden;
-
-      .media {
-        overflow: hidden;
-
-        border-radius: $unnnic-border-radius-md;
-
-        min-height: 200px;
-        max-height: 300px;
-        height: auto;
-      }
-    }
-
-    &.is-image .media {
-      width: 200px;
-      height: auto;
-      max-width: 200px;
-
-      object-fit: cover;
-    }
-
-    &.is-video .media {
-      width: 300px;
-      max-width: 300px;
     }
   }
 
-  &.is-document {
-    min-width: 200px;
-    max-width: 400px;
+  &__main {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: $unnnic-spacing-xs;
+
+    & > * {
+      margin: 0;
+    }
+
+    &.is-media {
+      &.is-image,
+      &.is-video {
+        display: grid;
+        justify-items: end;
+
+        overflow: hidden;
+
+        .media {
+          overflow: hidden;
+
+          border-radius: $unnnic-border-radius-md;
+
+          min-height: 200px;
+          max-height: 300px;
+          height: auto;
+        }
+      }
+
+      &.is-image .media {
+        width: 200px;
+        height: auto;
+        max-width: 200px;
+
+        object-fit: cover;
+      }
+
+      &.is-video .media {
+        width: 300px;
+        max-width: 300px;
+      }
+    }
+
+    &.is-document {
+      min-width: 200px;
+      max-width: 400px;
+    }
   }
 
   &__document {
@@ -219,14 +242,22 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   }
 
   &__text,
-  &__document__text {
+  &__document__text,
+  &__signature {
     margin: 0;
 
     padding: $unnnic-spacing-nano 0;
 
+    font-size: $unnnic-font-size-body-gt;
     color: $unnnic-color-neutral-dark;
     line-height: $defaultLineHeight;
     word-break: break-word;
+  }
+
+  &__signature {
+    padding: 0;
+
+    font-weight: $unnnic-font-weight-bold;
   }
 
   &__time {
