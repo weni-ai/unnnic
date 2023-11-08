@@ -330,23 +330,14 @@ export default {
 @import "../../assets/scss/unnnic.scss";
 
 .unnnic-audio-recorder {
-  display: inline-flex;
-  align-items: center;
-  border-radius: $unnnic-border-radius-sm;
   position: relative;
 
-  &__progress-bar {
-    width: 11.5 * $unnnic-font-size;
-    height: 2px;
-    border-radius: $unnnic-border-radius-sm;
-    background: $unnnic-color-neutral-cleanest;
+  border-radius: $unnnic-border-radius-sm;
 
-    &__bar {
-      background: $unnnic-color-neutral-darkest;
-      height: 100%;
-      width: 0%; // updated programmatically
-    }
-  }
+  display: inline-flex;
+  align-items: center;
+
+  width: 100%;
 
   ::v-deep .audio-player__time, ::v-deep .audio-handler__time {
     font-family: $unnnic-font-family-secondary;
