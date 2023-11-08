@@ -54,18 +54,6 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/unnnic.scss';
 
-$scheme-colors:
-  'feedback-red' $unnnic-color-feedback-red,
-  'feedback-green' $unnnic-color-feedback-green,
-  'feedback-yellow' $unnnic-color-feedback-yellow,
-  'feedback-blue' $unnnic-color-feedback-blue,
-  'feedback-grey' $unnnic-color-feedback-grey,
-   'aux-blue' $unnnic-color-aux-blue,
-   'aux-purple' $unnnic-color-aux-purple,
-   'aux-orange' $unnnic-color-aux-orange,
-   'aux-lemon' $unnnic-color-aux-lemon,
-   'aux-pink' $unnnic-color-aux-pink;
-
 @each $name, $color in $scheme-colors {
   .unnnic-avatar-icon {
     &.#{$name} {
