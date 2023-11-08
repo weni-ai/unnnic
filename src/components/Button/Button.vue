@@ -166,6 +166,7 @@ export default {
   font-weight: $unnnic-font-weight-regular;
   font-family: $unnnic-font-family-secondary;
   cursor: pointer;
+  position: relative;
 
   &__icon {
     &-left {
