@@ -149,10 +149,12 @@ export default {
   align-items: center;
   gap: $unnnic-spacing-stack-xs;
 
+  width: 100%;
+
   &__progress-bar {
     position: relative;
 
-    width: 11.5 * $unnnic-font-size;
+    width: clamp(85px, 100%, 185px);
     height: 2px;
 
     outline: none;

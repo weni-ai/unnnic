@@ -58,19 +58,6 @@ export default {
   align-items: center;
   gap: $unnnic-spacing-stack-xs;
 
-  &__progress-bar {
-    width: 11.5 * $unnnic-font-size;
-    height: 2px;
-    border-radius: $unnnic-border-radius-sm;
-    background: $unnnic-color-neutral-cleanest;
-
-    &__bar {
-      background: $unnnic-color-neutral-darkest;
-      height: 100%;
-      width: 0%; // updated programmatically
-    }
-  }
-
   .unnnic-icon.is-recording ::v-deep {
     margin-left: $unnnic-spacing-inline-nano;
 
