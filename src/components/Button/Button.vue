@@ -17,6 +17,7 @@
       :size="iconSize"
       :style="{ position: 'absolute' }"
       class="rotation"
+      :next="next"
     />
 
     <unnnic-icon-svg
@@ -26,6 +27,7 @@
       :size="iconSize"
       :class="{ 'unnnic-button__icon-left': hasText }"
       :style="{ visibility: loading ? 'hidden' : null }"
+      :next="next"
     />
 
     <unnnic-icon-svg
@@ -34,6 +36,7 @@
       :scheme="iconScheme"
       :style="{ visibility: loading ? 'hidden' : null }"
       :size="iconSize"
+      :next="next"
     />
 
     <span class="unnnic-button__label" :style="{ visibility: loading ? 'hidden' : null }">
@@ -47,6 +50,7 @@
       :size="iconSize"
       :class="{ 'unnnic-button__icon-right': hasText }"
       :style="{ visibility: loading ? 'hidden' : null }"
+      :next="next"
     />
   </button>
 </template>
@@ -88,6 +92,9 @@ export default {
     iconCenter: {
       type: String,
       default: null,
+    },
+    next: {
+      type: Boolean,
     },
 
     disabled: {
