@@ -1,21 +1,19 @@
 <template>
-    <component
-      class="unnnic-tag-content"
-      :is="currentComponent"
-      :v-bind="$attrs"
-      :text="text"
-      :disabled="disabled"
-      :hasCloseIcon="hasCloseIcon"
-      :scheme="scheme"
-      :count="count"
-      :hasBackButton="hasBackButton"
-      :clickable="clickable"
-      :tooltipText="tooltipText"
-      :enableTooltip="enableTooltip"
-      :icon="icon"
-      @click="$emit('click')"
-      @close="$emit('close')"
-    />
+  <component
+    class="unnnic-tag-content"
+    :is="currentComponent"
+    :v-bind="$attrs"
+    :text="text"
+    :disabled="disabled"
+    :hasCloseIcon="hasCloseIcon"
+    :scheme="scheme"
+    :count="count"
+    :hasBackButton="hasBackButton"
+    :clickable="clickable"
+    :tooltipText="tooltipText"
+    :enableTooltip="enableTooltip"
+    :icon="icon"
+  />
 </template>
 
 <script>
@@ -30,9 +28,7 @@ export default {
       type: String,
       default: 'default',
       validator(value) {
-        return (
-          ['default', 'indicator', 'brand'].indexOf(value) !== -1
-        );
+        return ['default', 'indicator', 'brand'].indexOf(value) !== -1;
       },
     },
     text: {
