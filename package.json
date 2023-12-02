@@ -27,8 +27,10 @@
     "url": "https://github.com/Ilhasoft/unnnic.git"
   },
   "dependencies": {
+    "@vue/compat": "^3.3.9",
+    "@vue/compiler-sfc": "^3.3.9",
     "@vueuse/components": "^10.4.1",
-    "vue": "^3.3.2"
+    "vue": "^3.3.9"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",
@@ -49,7 +51,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.62.1",
-    "storybook": "^7.0.14",
+    "storybook": "^7.6.3",
     "vite": "^4.3.5"
   }
 }

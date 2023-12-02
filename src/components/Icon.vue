@@ -59,7 +59,7 @@ export default {
 <style lang="scss" scoped>
 @import '../assets/scss/unnnic.scss';
 
-.unnnic-icon ::v-deep svg {
+.unnnic-icon :deep(svg) {
   position: absolute;
   top: 0;
   left: 0;

@@ -18,9 +18,9 @@
         <unnnic-icon-svg
           :key="index"
           v-for="index in 5"
-          @click.native="emitRatingAction(index)"
-          @mouseover.native="starOver(index)"
-          @mouseout.native="starOut"
+          @click="emitRatingAction(index)"
+          @mouseover="starOver(index)"
+          @mouseout="starOut"
           :class="{
             'unnnic-banner-info__rating__star': true,
             'unnnic-banner-info__rating__star__active': index <= baseRating,

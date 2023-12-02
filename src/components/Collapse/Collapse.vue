@@ -96,7 +96,7 @@ watch(
     &:hover {
       color: $unnnic-color-neutral-dark;
 
-      ::v-deep svg .primary {
+      :deep(svg .primary) {
         fill: $unnnic-color-neutral-dark;
       }
     }
