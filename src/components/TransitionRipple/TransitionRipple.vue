@@ -1,18 +1,13 @@
 <template>
-    <transition-group class="ripples" name="grow" tag="div">
-      <div
-        class="ripple"
-        v-for="ripple in ripples"
-        :key="ripple.id"
-        :style="{
-          top: ripple.top,
-          left: ripple.left,
-          width: ripple.width,
-          height: ripple.height,
-        }"
-        :class="`ripples-color--${color}`"
-      ></div>
-    </transition-group>
+  <transition-group class="ripples" name="grow" tag="div">
+    <div
+      class="ripple"
+      v-for="ripple in ripples"
+      :key="ripple.id"
+      :style="getRippleStyle(ripple)"
+      :class="getRippleColorClass(color)"
+    ></div>
+  </transition-group>
 </template>
 
 <script>
@@ -23,6 +18,7 @@ export default {
       default: 'neutral-white',
     },
   },
+
   data() {
     return {
       ripples: [],
@@ -30,27 +26,35 @@ export default {
       halfRippleWidth: 0,
     };
   },
+
   mounted() {
-    const { transitionContainer } = this.$parent.$refs;
-
-    if (transitionContainer) {
-      this.$parent.$refs.transitionContainer.style.position = 'relative';
-      this.$parent.$refs.transitionContainer.style.overflow = 'hidden';
-    }
-
-    const width = transitionContainer.offsetWidth;
-    const height = transitionContainer.offsetHeight;
-    this.rippleWidth = width > height ? width : height;
-    this.halfRippleWidth = this.rippleWidth / 2;
-
+    this.setTransitionContainerStyles();
     window.addEventListener('mouseup', this.purgeRipples);
   },
+
   beforeDestroy() {
     window.removeEventListener('mouseup', this.purgeRipples);
   },
+
   methods: {
+    setTransitionContainerStyles() {
+      const { transitionContainer } = this.$parent.$refs;
+
+      if (transitionContainer) {
+        this.$parent.$refs.transitionContainer.style.position = 'relative';
+        this.$parent.$refs.transitionContainer.style.overflow = 'hidden';
+      }
+    },
+
     addRipple(e) {
-      const { left, top } = this.$parent.$refs.transitionContainer.getBoundingClientRect();
+      const { transitionContainer } = this.$parent.$refs;
+
+      const width = transitionContainer.offsetWidth;
+      const height = transitionContainer.offsetHeight;
+      this.rippleWidth = width > height ? width : height;
+      this.halfRippleWidth = this.rippleWidth / 2;
+
+      const { left, top } = transitionContainer.getBoundingClientRect();
       const rippleId = Date.now();
       this.ripples.push({
         width: `${this.rippleWidth}px`,
@@ -62,6 +66,18 @@ export default {
     },
     purgeRipples() {
       this.ripples = [];
+    },
+
+    getRippleStyle(ripple) {
+      return {
+        top: ripple.top,
+        left: ripple.left,
+        width: ripple.width,
+        height: ripple.height,
+      };
+    },
+    getRippleColorClass(color) {
+      return `ripples-color--${color}`;
     },
   },
 };
@@ -77,10 +93,10 @@ export default {
   z-index: 1;
 
   @each $name, $color in $scheme-colors {
-  &-color--#{$name} {
-    background-color: $color;
+    &-color--#{$name} {
+      background-color: $color;
+    }
   }
-}
 }
 
 .ripple {
@@ -91,10 +107,12 @@ export default {
   animation: grow 1s ease-out;
 }
 
-.grow-enter-active, .grow-enter-to-active {
+.grow-enter-active,
+.grow-enter-to-active {
   transition: all 1.5s ease-out;
 }
-.grow-leave-active, .grow-leave-to-active {
+.grow-leave-active,
+.grow-leave-to-active {
   transition: all 1s ease-out;
 }
 

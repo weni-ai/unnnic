@@ -12,11 +12,7 @@
     @keypress.enter="$emit('click')"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
-    @mousedown="
-      (event) => {
-        this.$refs.transitionRipple.addRipple(event);
-      }
-    "
+    @mousedown="$refs.transitionRipple.addRipple($event)"
     :tabindex="0"
   >
     <div v-if="discussionGoal" class="chats-contact__discussion-icon">
