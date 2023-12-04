@@ -11,6 +11,8 @@ export default {
     iconLeft: { control: { type: 'select', options: [null, ...iconList] } },
     iconCenter: { control: { type: 'select', options: [null, ...iconList] } },
     iconRight: { control: { type: 'select', options: [null, ...iconList] } },
+    iconFilled: { control: { type: 'boolean' } },
+    next: { control: { type: 'boolean' } },
     disabled: { control: { type: 'boolean' } },
     loading: { control: { type: 'boolean' } },
   },
