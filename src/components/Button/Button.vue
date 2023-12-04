@@ -310,6 +310,10 @@ export default {
         width: $unnnic-icon-size-md;
         height: $unnnic-icon-size-md;
       }
+
+      .material-symbols-rounded {
+        font-size: $unnnic-icon-size-md;
+      }
     }
 
     &-small {
@@ -320,6 +324,10 @@ export default {
       .unnnic-icon {
         width: $unnnic-icon-size-ant;
         height: $unnnic-icon-size-ant;
+      }
+
+      .material-symbols-rounded {
+        font-size: $unnnic-icon-size-ant;
       }
     }
   }
