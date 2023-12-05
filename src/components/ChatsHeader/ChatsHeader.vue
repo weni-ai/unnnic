@@ -7,7 +7,7 @@
           v-if="close"
           @click="close"
           type="tertiary"
-          iconCenter="close-1"
+          iconCenter="close"
           size="small"
         />
       </div>
@@ -58,7 +58,7 @@
         class="unnnic-chats-header__close--sm"
         @click="close"
         type="tertiary"
-        iconCenter="close-1"
+        iconCenter="close"
         size="small"
       />
     </header>
