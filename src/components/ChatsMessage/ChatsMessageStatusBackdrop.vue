@@ -1,19 +1,30 @@
 <template>
-  <div class="unnnic-chats-message-status-backdrop" @click="$emit('click')">
-    <unnnic-icon
-      :icon="status === 'sending' ? 'loading-circle-1' : 'upload-bottom-1'"
-      scheme="neutral-white"
-      size="avatar-sm"
-    />
+  <div class="unnnic-chats-message-status-backdrop__container" @click="$emit('click')">
+    <div class="unnnic-chats-message-status-backdrop">
+      <unnnic-loading-icon
+        v-if="status === 'sending'"
+        scheme="neutral-white"
+        size="avatar-sm"
+      />
+      <unnnic-icon
+        v-else
+        icon="upload"
+        scheme="neutral-white"
+        size="avatar-sm"
+        :class="{ loading: status === 'sending' }"
+      />
+    </div>
   </div>
 </template>
 <script>
+import UnnnicLoadingIcon from '../LoadingIcon/LoadingIcon.vue';
 import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'UnnnicChatsMessageStatusBackdrop',
 
   components: {
+    UnnnicLoadingIcon,
     UnnnicIcon,
   },
 
@@ -32,7 +43,7 @@ export default {
 <style lang="scss">
 @import '../../assets/scss/unnnic.scss';
 
-.unnnic-chats-message-status-backdrop {
+.unnnic-chats-message-status-backdrop__container {
   position: absolute;
   top: 0;
   left: 0;
@@ -46,18 +57,19 @@ export default {
   justify-content: center;
 
   backdrop-filter: blur(1px);
+}
+.unnnic-chats-message-status-backdrop {
+  border-radius: $unnnic-border-radius-lg;
 
-  .unnnic-icon {
-    border-radius: $unnnic-border-radius-lg;
+  padding: $unnnic-spacing-ant;
 
-    padding: $unnnic-spacing-ant;
+  box-sizing: content-box;
+  background-color: rgba($unnnic-color-neutral-darkest, 0.3);
 
-    box-sizing: content-box;
-    background-color: rgba($unnnic-color-neutral-darkest, 0.3);
+  display: flex;
 
-    svg {
-      position: initial;
-    }
+  svg {
+    position: initial;
   }
 }
 </style>
