@@ -1,6 +1,6 @@
 <template>
   <unnnic-icon
-    class="unnnic-loading-icon"
+    class="unnnic-icon-loading"
     icon="progress_activity"
     :scheme="scheme"
     :size="size"
@@ -11,7 +11,7 @@
 import UnnnicIcon from '../Icon.vue';
 
 export default {
-  name: 'LoadingIcon',
+  name: 'IconLoading',
 
   components: {
     UnnnicIcon,
@@ -32,7 +32,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.unnnic-loading-icon {
+.unnnic-icon-loading {
   user-select: none;
 
   animation: loading 1300ms linear infinite;

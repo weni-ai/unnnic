@@ -6,7 +6,7 @@
       class="audio-player__handler"
       :class="{ inactive: reqStatus === 'sending' }"
     >
-      <unnnic-loading-icon v-if="this.reqStatus === 'sending'" size="md" scheme="neutral-darkest" />
+      <unnnic-icon-loading v-if="this.reqStatus === 'sending'" size="md" scheme="neutral-darkest" />
       <unnnic-icon v-else :icon="playbackIcon" scheme="neutral-darkest" />
     </div>
 
@@ -39,12 +39,12 @@
 </template>
 
 <script>
-import UnnnicLoadingIcon from '../LoadingIcon/LoadingIcon.vue';
+import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import UnnnicIcon from '../Icon.vue';
 
 export default {
   components: {
-    UnnnicLoadingIcon,
+    UnnnicIconLoading,
     UnnnicIcon,
   },
 

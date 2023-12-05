@@ -1,7 +1,7 @@
 <template>
   <div class="unnnic-chats-message-status-backdrop__container" @click="$emit('click')">
     <div class="unnnic-chats-message-status-backdrop">
-      <unnnic-loading-icon
+      <unnnic-icon-loading
         v-if="status === 'sending'"
         scheme="neutral-white"
         size="avatar-sm"
@@ -17,14 +17,14 @@
   </div>
 </template>
 <script>
-import UnnnicLoadingIcon from '../LoadingIcon/LoadingIcon.vue';
+import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'UnnnicChatsMessageStatusBackdrop',
 
   components: {
-    UnnnicLoadingIcon,
+    UnnnicIconLoading,
     UnnnicIcon,
   },
 

@@ -22,7 +22,7 @@
     >
       <unnnic-chats-message-text v-if="isText" :text="slotText" />
       <div v-if="isDocument" class="unnnic-chats-message__document">
-        <unnnic-loading-icon
+        <unnnic-icon-loading
           v-if="status === 'sending'"
           scheme="neutral-dark"
           size="lg"
@@ -51,7 +51,7 @@
           @click="status === 'failed' ? $emit('click') : () => {}"
         />
       </div>
-      <unnnic-loading-icon v-if="sendingMedia" size="avatar-nano" scheme="neutral-dark" />
+      <unnnic-icon-loading v-if="sendingMedia" size="avatar-nano" scheme="neutral-dark" />
       <p v-else class="unnnic-chats-message__time">{{ formattedTime }}</p>
     </main>
   </div>
@@ -60,12 +60,12 @@
 <script>
 import UnnnicChatsMessageStatusBackdrop from './ChatsMessageStatusBackdrop.vue';
 import UnnnicChatsMessageText from './ChatsMessageText.vue';
-import UnnnicLoadingIcon from '../LoadingIcon/LoadingIcon.vue';
+import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'UnnnicChatsMessage',
-  components: { UnnnicChatsMessageText, UnnnicChatsMessageStatusBackdrop, UnnnicLoadingIcon, UnnnicIcon },
+  components: { UnnnicChatsMessageText, UnnnicChatsMessageStatusBackdrop, UnnnicIconLoading, UnnnicIcon },
   props: {
     type: {
       type: String,
