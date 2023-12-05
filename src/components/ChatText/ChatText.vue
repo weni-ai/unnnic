@@ -4,10 +4,10 @@
       <div :class="['title', titleColor]">
         {{ title }}
 
-        <unnnic-tool-tip v-if="info" side="top" :text="info" enabled>
+        <unnnic-tool-tip v-if="info" side="top" class="info" :text="info" enabled>
           <unnnic-icon
-            class="info"
-            icon="information-circle-4"
+            class="info__icon"
+            icon="info"
             size="sm"
             scheme="neutral-clean"
           ></unnnic-icon>
@@ -91,6 +91,8 @@ export default {
     justify-content: space-between;
 
     .title {
+      display: flex;
+
       font-family: $unnnic-font-family-secondary;
       font-weight: $unnnic-font-weight-black;
       font-size: $unnnic-font-size-body-gt;
@@ -98,7 +100,13 @@ export default {
       flex: 1;
 
       .info {
-        margin-left: $unnnic-spacing-inline-nano;
+        display: flex;
+        align-items: center;
+
+        &__icon {
+          margin-left: $unnnic-spacing-inline-nano;
+          cursor: default;
+        }
       }
 
       @each $name, $color in $scheme-colors {
