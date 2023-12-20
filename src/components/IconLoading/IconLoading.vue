@@ -20,15 +20,15 @@ export default {
   props: {
     scheme: {
       type: String,
-      default: 'neutral-dark'
+      default: 'neutral-dark',
     },
     size: {
       type: String,
-      default: 'lg'
-    }
-  }
+      default: 'lg',
+    },
+  },
 
-}
+};
 </script>
 
 <style lang="scss" scoped>
