@@ -65,7 +65,9 @@ import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'UnnnicChatsMessage',
-  components: { UnnnicChatsMessageText, UnnnicChatsMessageStatusBackdrop, UnnnicIconLoading, UnnnicIcon },
+  components: {
+    UnnnicChatsMessageText, UnnnicChatsMessageStatusBackdrop, UnnnicIconLoading, UnnnicIcon,
+  },
   props: {
     type: {
       type: String,
