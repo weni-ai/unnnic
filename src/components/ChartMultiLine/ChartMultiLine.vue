@@ -134,7 +134,7 @@ export default {
 </script>
 
   <style lang="scss" scoped>
-  @import "../assets/scss/unnnic.scss";
+  @import "../../assets/scss/unnnic.scss";
 
   .unnnic-chart-line {
     background-color: $unnnic-color-background-snow;

@@ -131,7 +131,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../assets/scss/unnnic.scss";
+@import "../../../assets/scss/unnnic.scss";
 .chart {
   width: 940px;
   height: 146px;
