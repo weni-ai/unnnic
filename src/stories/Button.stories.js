@@ -1,51 +1,54 @@
-import unnnicButton from '../components/Button/Button.vue'
-import icons from '../utils/icons'
+import unnnicButton from '../components/Button/Button.vue';
+import iconList from '../utils/iconList';
 
 export default {
   title: 'Form/Button',
   component: unnnicButton,
   argTypes: {
-    type: { control: 'select', options: ['primary', 'secondary', 'terciary'] },
-    size: { control: 'select', options: ['large', 'small'] },
+    type: { control: { type: 'select', options: ['primary', 'secondary', 'tertiary', 'alternative', 'warning'] } },
+    size: { control: { type: 'select', options: ['large', 'small'] } },
     text: { control: { type: 'text' } },
-    iconLeft: { control: 'select', options: [undefined, ...Object.keys(icons)] },
-    iconRight: { control: 'select', options: [undefined, ...Object.keys(icons)] },
-    iconCenter: { control: 'select', options: [undefined, ...Object.keys(icons)] },
+    iconLeft: { control: { type: 'select', options: [null, ...iconList] } },
+    iconCenter: { control: { type: 'select', options: [null, ...iconList] } },
+    iconRight: { control: { type: 'select', options: [null, ...iconList] } },
     disabled: { control: { type: 'boolean' } },
     loading: { control: { type: 'boolean' } },
-    scheme: {
-      control: 'select',
-      options: ['feedback-red', 'feedback-green', 'feedback-yellow']
-    }
-  }
-}
+  },
+};
 
-export const Normal = {
-  args: {
-    text: 'Button text',
-    disabled: false,
-  }
-}
+const Template = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { unnnicButton },
+  template: '<unnnic-button v-bind="$props" />',
+});
 
-export const Secondary = {
-  args: {
-    type: 'secondary',
-    text: 'Button Text',
-    disabled: false
-  }
-}
+export const Primary = Template.bind({});
+Primary.args = {
+  text: 'Button Text',
+  disabled: false,
+};
 
-export const Terciary = {
-  args: {
-    type: 'terciary',
-    text: 'Button Text',
-    disabled: false
-  }
-}
+export const Secondary = Template.bind({});
+Secondary.args = {
+  type: 'secondary',
+  text: 'Button Text',
+  disabled: false,
+};
 
-export const WithIcon = {
-  args: {
-    text: 'Button Text',
-    iconLeft: 'developer-community-github-1-1'
-  }
-}
+export const Tertiary = Template.bind({});
+Tertiary.args = {
+  type: 'tertiary',
+  text: 'Button Text',
+  disabled: false,
+};
+
+export const WithIcon = Template.bind({});
+WithIcon.args = {
+  text: 'Button Text',
+  iconLeft: 'developer-community-github-1-1',
+};
+
+export const OnlyIcon = Template.bind({});
+OnlyIcon.args = {
+  iconCenter: 'add-1',
+};
