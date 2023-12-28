@@ -8,7 +8,7 @@
       `unnnic-button--${type}`,
       iconCenter ? `unnnic-button--icon-on-center` : null
     ]"
-    v-on="$listeners">
+    >
 
     <unnnic-icon-svg
       v-if="loading"
