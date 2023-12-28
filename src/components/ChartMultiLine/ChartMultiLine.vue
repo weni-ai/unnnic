@@ -29,7 +29,7 @@
 
       <div class="lines">
         <div class="groups">
-          <div v-for="({ data }, index) in data" :key="index">
+          <div v-for="({ data }, index) in data" :key="(index+Math.random())">
             <Lines
               :data="data"
               :fixedMaxValue="maxValue"
