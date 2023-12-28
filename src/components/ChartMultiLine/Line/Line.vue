@@ -2,7 +2,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="chart" :style="{ backgroundImage: svgChart }" ref="chart">
-    <div v-for="({ value }, index) in data" :key="index" class="group">
+    <div v-for="({ value }, index) in data" :key="index + Math.random() * 100" class="group">
       <unnnic-tool-tip
         enabled
         :text="String(value)"
@@ -17,11 +17,11 @@
     </div>
     <div
       v-for="n in 3"
-      :key="n"
+      :key="n + Math.random() * 100"
       class="horizontal-line color-neutral-cleanest"
-      :style="{top: `${(n-1)*(146/3)+32}px`,}"
+      :style="{ top: `${(n - 1) * (146 / 3) + 32}px` }"
     >
-        <hr class="line"/>
+      <hr class="line" />
     </div>
   </div>
 </template>
@@ -57,17 +57,13 @@ export default {
   },
   computed: {
     maxValue() {
-      return (
-        this.fixedMaxValue
-        || Math.max(...this.data.map(({ value }) => value).flat())
-      );
+      return this.fixedMaxValue || Math.max(...this.data.map(({ value }) => value).flat());
     },
 
     svgChart() {
       const points = this.data.map(({ value }, index) => {
         const dx = this.chartContainerWidth / (this.data.length - 1);
-        const dy = (this.chartContainerHeight - 48)
-          / (this.maxValue - this.fixedMinValue);
+        const dy = (this.chartContainerHeight - 48) / (this.maxValue - this.fixedMinValue);
 
         return [dx * index, this.chartContainerHeight - dy * value - 11];
       });
@@ -78,7 +74,7 @@ export default {
         const lengthX = pointB[0] - pointA[0];
         const lengthY = pointB[1] - pointA[1];
         return {
-          length: Math.sqrt((lengthX * lengthX) + (lengthY * lengthY)),
+          length: Math.sqrt(lengthX * lengthX + lengthY * lengthY),
           angle: Math.atan2(lengthY, lengthX),
         };
       };
@@ -131,7 +127,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../../assets/scss/unnnic.scss";
+@import '../../../assets/scss/unnnic.scss';
 .chart {
   width: 940px;
   height: 146px;
@@ -148,7 +144,7 @@ export default {
     border-left: 1px dashed $unnnic-color-neutral-dark;
     margin: 0 auto;
   }
-  .horizontal-line{
+  .horizontal-line {
     width: 100%;
     height: 5px;
     border-top: 1px dashed;
