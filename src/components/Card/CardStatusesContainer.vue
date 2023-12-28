@@ -102,7 +102,7 @@ export default {
     },
 
     minStatusWidth: {
-      type: String,
+      type: [String, Number],
       default: 5.625 * unnnicFontSize,
     },
   },
