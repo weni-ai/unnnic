@@ -40,6 +40,15 @@
         </div>
       </div>
     </div>
+    <div class="reference_values">
+      <div
+        v-for="(value, index) in lineData"
+        :key="index + Math.random() * 100"
+        class="title unnnic-font secondary body-md color-neutral-cleanest"
+      >
+        {{ value }}
+      </div>
+    </div>
     <div class="titles">
       <div
         v-for="(title, index) in labels"
@@ -167,6 +176,13 @@ export default {
     height: 80px;
     justify-content: space-between;
     margin: 5px;
+  }
+
+  .reference_values {
+    display: flex;
+    flex-direction: row;
+    padding-left: 36px;
+    justify-content: space-between;
   }
 
   .titles {

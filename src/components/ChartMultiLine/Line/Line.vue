@@ -146,13 +146,12 @@ export default {
   }
   .horizontal-line {
     width: 100%;
-    height: 5px;
     border-top: 1px dashed;
     line-height: 80%;
     display: flex;
     flex-direction: column;
     position: absolute;
-    z-index: 2;
+    transform: translateY(-8px);
   }
   .group {
     flex: 1;
