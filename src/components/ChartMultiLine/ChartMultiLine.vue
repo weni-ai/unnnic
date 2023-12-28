@@ -17,7 +17,7 @@
               value((maxValue - minValue) / 2 + minValue),
               value(minValue),
             ]"
-            :key="index"
+            :key="index + Math.random() * 100"
             class="value unnnic-font secondary body-md color-neutral-cleanest"
           >
             {{ value }}
@@ -29,7 +29,7 @@
 
       <div class="lines">
         <div class="groups">
-          <div v-for="({ data }, index) in data" :key="(index+Math.random())">
+          <div v-for="({ data }, index) in data" :key="index + Math.random() * 100">
             <Lines
               :data="data"
               :fixedMaxValue="maxValue"
@@ -43,7 +43,7 @@
     <div class="titles">
       <div
         v-for="(title, index) in labels"
-        :key="index"
+        :key="index + Math.random() * 100"
         class="title unnnic-font secondary body-md color-neutral-cleanest"
       >
         {{ title }}
@@ -54,7 +54,7 @@
       <div
         class="label unnnic-font secondary body-lg color-neutral-dark"
         v-for="({ title }, index) in data"
-        :key="index"
+        :key="index + Math.random() * 100"
       >
         <svg
           width="15"
