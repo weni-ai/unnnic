@@ -20,14 +20,14 @@ const Template = (args, { argTypes }) => ({
 
   data() {
     return {
-      open: true,
+      o: false,
     };
   },
 
   template: `
     <div>
-      <pre>v-model:open {{ open }}</pre>
-      <unnnic-accordion v-bind="$props" v-model:open="open">
+      <pre>v-model:open {{ o }}</pre>
+      <unnnic-accordion v-bind="$props" v-model:open="o">
         <template v-slot:actions>
           <unnnic-button @click.stop="click" type="secondary" size="small" icon-left="button-play-1">Assista ao vídeo</unnnic-button>
         </template>
