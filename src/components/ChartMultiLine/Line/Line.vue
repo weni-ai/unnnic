@@ -1,7 +1,7 @@
 <!-- eslint-disable linebreak-style -->
 <template>
   <div class="chart" :style="{ backgroundImage: svgChart }" ref="chart">
-    <div v-for="({ value }, index) in data" :key="index + Math.random() * 100" class="group">
+    <div v-for="({ value }, index) in data" :key="index" class="group">
       <unnnic-tool-tip
         enabled
         :text="String(value)"
@@ -48,7 +48,10 @@ export default {
   },
   computed: {
     maxValue() {
-      return this.fixedMaxValue || Math.max(...this.data.map(({ value }) => value).flat());
+      return (
+        this.fixedMaxValue
+        || Math.max(...this.data.map(({ value }) => value).flat())
+      );
     },
 
     svgChart() {
@@ -67,7 +70,7 @@ export default {
         const lengthX = pointB[0] - pointA[0];
         const lengthY = pointB[1] - pointA[1];
         return {
-          length: Math.sqrt(lengthX * lengthX + lengthY * lengthY),
+          length: Math.sqrt((lengthX * lengthX) + (lengthY * lengthY)),
           angle: Math.atan2(lengthY, lengthX),
         };
       };
@@ -120,7 +123,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnnic.scss';
+@import '../../../assets/scss/unnnic.scss';
 .chart {
   width: 100%;
   height: 146px;
@@ -137,7 +140,6 @@ export default {
     margin: 0 auto;
     cursor: pointer;
   }
-
   .group {
     flex: 1;
     display: flex;
