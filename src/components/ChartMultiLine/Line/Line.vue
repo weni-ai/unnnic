@@ -1,8 +1,7 @@
 <!-- eslint-disable linebreak-style -->
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="chart" :style="{ backgroundImage: svgChart }" ref="chart">
-    <div v-for="({ value }, index) in data" :key="index + Math.random() * 100" class="group">
+    <div v-for="({ value }, index) in data" :key="index" class="group">
       <unnnic-tool-tip
         enabled
         :text="String(value)"
@@ -14,14 +13,6 @@
       >
         <div class="bar"></div>
       </unnnic-tool-tip>
-    </div>
-    <div
-      v-for="n in 3"
-      :key="n + Math.random() * 100"
-      class="horizontal-line color-neutral-cleanest"
-      :style="{ top: `${(n - 1) * (146 / 3) + 32}px` }"
-    >
-      <hr class="line" />
     </div>
   </div>
 </template>
@@ -43,7 +34,7 @@ export default {
   data() {
     return {
       chartContainerWidth: 0,
-      chartContainerHeight: 146,
+      chartContainerHeight: 140,
       minValue: 0,
     };
   },
@@ -57,7 +48,10 @@ export default {
   },
   computed: {
     maxValue() {
-      return this.fixedMaxValue || Math.max(...this.data.map(({ value }) => value).flat());
+      return (
+        this.fixedMaxValue
+        || Math.max(...this.data.map(({ value }) => value).flat())
+      );
     },
 
     svgChart() {
@@ -67,6 +61,8 @@ export default {
 
         return [dx * index, this.chartContainerHeight - dy * value - 11];
       });
+      points.unshift([-900, 0]);
+      points.push([2000, 0]);
 
       console.log(points);
 
@@ -74,7 +70,7 @@ export default {
         const lengthX = pointB[0] - pointA[0];
         const lengthY = pointB[1] - pointA[1];
         return {
-          length: Math.sqrt(lengthX * lengthX + lengthY * lengthY),
+          length: Math.sqrt((lengthX * lengthX) + (lengthY * lengthY)),
           angle: Math.atan2(lengthY, lengthX),
         };
       };
@@ -129,7 +125,7 @@ export default {
 <style lang="scss">
 @import '../../../assets/scss/unnnic.scss';
 .chart {
-  width: 940px;
+  width: 100%;
   height: 146px;
   background-repeat: no-repeat;
   background-size: contain;
@@ -137,27 +133,17 @@ export default {
   display: flex;
   position: absolute;
   left: auto;
-  top: 48px;
   .unnnic-tooltip:hover .bar {
     width: 0;
     height: 100%;
     border-left: 1px dashed $unnnic-color-neutral-dark;
     margin: 0 auto;
-  }
-  .horizontal-line {
-    width: 100%;
-    border-top: 1px dashed;
-    line-height: 80%;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    transform: translateY(-8px);
+    cursor: pointer;
   }
   .group {
     flex: 1;
     display: flex;
     flex-direction: column;
-    row-gap: $unnnic-spacing-stack-nano;
     justify-content: flex-end;
   }
 }

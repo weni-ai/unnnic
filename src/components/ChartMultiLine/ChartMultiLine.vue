@@ -1,5 +1,4 @@
 <!-- eslint-disable linebreak-style -->
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div :class="['unnnic-chart-line', { condensed }]">
     <div v-if="title" class="header">
@@ -37,6 +36,12 @@
               :color="colors[index]"
             />
           </div>
+          <div
+            v-for="n in 3"
+            :key="n + Math.random() * 100"
+            class="horizontal-line color-neutral-cleanest"
+            :style="{ top: `${(n - 1) * (146 / 3) + 32}px` }"
+          />
         </div>
       </div>
     </div>
@@ -49,16 +54,6 @@
         {{ value }}
       </div>
     </div>
-    <div class="titles">
-      <div
-        v-for="(title, index) in labels"
-        :key="index + Math.random() * 100"
-        class="title unnnic-font secondary body-md color-neutral-cleanest"
-      >
-        {{ title }}
-      </div>
-    </div>
-
     <div class="labels">
       <div
         class="label unnnic-font secondary body-lg color-neutral-dark"
@@ -93,7 +88,6 @@ export default {
     fixedMaxValue: Number,
     data: Array,
     title: String,
-    labels: Array,
   },
 
   data() {
@@ -121,6 +115,9 @@ export default {
     },
     minValue() {
       return Math.min(...this.data.map(({ data }) => this.findMin(data)).flat());
+    },
+    lineData() {
+      return this.data[0].data.map((item) => item.title);
     },
   },
 
@@ -162,6 +159,14 @@ export default {
   width: 1024px;
   height: 296px;
 
+  .horizontal-line {
+    width: 100%;
+    border-top: 0.5px dashed;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    transform: translateY(-6px);
+  }
   .header {
     display: flex;
     height: 24px;
@@ -178,13 +183,6 @@ export default {
     margin: 5px;
   }
 
-  .reference_values {
-    display: flex;
-    flex-direction: row;
-    padding-left: 36px;
-    justify-content: space-between;
-  }
-
   .titles {
     display: flex;
     width: 100%;
@@ -193,6 +191,12 @@ export default {
       flex: 1;
       text-align: center;
     }
+  }
+  .reference_values {
+    display: flex;
+    flex-direction: row;
+    padding-left: 36px;
+    justify-content: space-around;
   }
 
   &.condensed {
@@ -224,7 +228,7 @@ export default {
         text-align: right;
         height: 146px;
         width: 12px;
-        transform: translateY(-14px);
+        transform: translateY(-6px);
       }
     }
 
@@ -236,7 +240,7 @@ export default {
         flex-direction: column;
         row-gap: $unnnic-spacing-stack-nano;
         width: 100%;
-        height: 265px;
+        height: 146px;
         position: relative;
 
         .unnnic-tooltip:hover .bar {
