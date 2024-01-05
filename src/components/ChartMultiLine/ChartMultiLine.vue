@@ -14,7 +14,7 @@
             v-for="(value, index) in [
               value(maxValue),
               value((maxValue - minValue) / 2 + minValue),
-              value(minValue),
+              minValue,
             ]"
             :key="index + Math.random() * 100"
             class="value unnnic-font secondary body-md color-neutral-cleanest"
@@ -40,7 +40,7 @@
             v-for="n in 3"
             :key="n + Math.random() * 100"
             class="horizontal-line color-neutral-cleanest"
-            :style="{ top: `${(n - 1) * (146 / 3) + 32}px` }"
+            :style="{ top: `${(n - 1) * ((122 + 66) / 3)}px` }"
           />
         </div>
       </div>
@@ -130,7 +130,6 @@ export default {
       return String(Math.ceil(value));
     },
     findMax(array) {
-      console.log(Math.max(...array.map(({ value }) => value)));
       return Math.max(...array.map(({ value }) => value));
     },
     findMin(array) {
@@ -142,7 +141,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@import '../assets/scss/unnnic.scss';
 
 .unnnic-chart-line {
   background-color: $unnnic-color-background-snow;
@@ -159,14 +158,6 @@ export default {
   width: 1024px;
   height: 296px;
 
-  .horizontal-line {
-    width: 100%;
-    border-top: 0.5px dashed;
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    transform: translateY(-6px);
-  }
   .header {
     display: flex;
     height: 24px;
@@ -219,16 +210,16 @@ export default {
       row-gap: $unnnic-spacing-stack-nano;
       margin-right: $unnnic-spacing-inline-md;
       height: 146px;
-      padding-top: 45px;
+      padding-top: 48px;
+      align-items: center;
 
       .values {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         text-align: right;
-        height: 146px;
+        height: 122px;
         width: 12px;
-        transform: translateY(-6px);
       }
     }
 
@@ -240,7 +231,7 @@ export default {
         flex-direction: column;
         row-gap: $unnnic-spacing-stack-nano;
         width: 100%;
-        height: 146px;
+        height: 122px;
         position: relative;
 
         .unnnic-tooltip:hover .bar {
@@ -248,6 +239,14 @@ export default {
           height: 100%;
           border-left: 1px dashed $unnnic-color-neutral-dark;
           margin: 0 auto;
+        }
+        .horizontal-line {
+          width: 100%;
+          border-top: 0.5px dashed;
+          display: flex;
+          flex-direction: column;
+          position: absolute;
+          transform: translateY(8px);
         }
       }
     }

@@ -1,28 +1,24 @@
 <!-- eslint-disable linebreak-style -->
 <template>
   <div class="chart" :style="{ backgroundImage: svgChart }" ref="chart">
-    <div v-for="({ value }, index) in data" :key="index" class="group">
-      <unnnic-tool-tip
-        enabled
-        :text="String(value)"
-        side="top"
+    <div v-for="({ value }, index) in data" :key="index + Math.random() * 100" class="group">
+      <div
         :style="{
-          height: `${(value / (maxValue - minValue)) * 100}%`,
-          width: '100%',
+          transform: `translateY(-${(value / (maxValue - minValue)) * 122}px)`,
         }"
+        class="tooltip"
       >
-        <div class="bar"></div>
-      </unnnic-tool-tip>
+        {{ value }}
+      </div>
     </div>
   </div>
 </template>
 <!-- eslint-disable linebreak-style -->
 <script>
-import UnnnicToolTip from '../../ToolTip/ToolTip.vue';
-
+// import UnnnicToolTip from "../ToolTip/ToolTip.vue";
 export default {
   components: {
-    UnnnicToolTip,
+    // UnnnicToolTip,
   },
   props: {
     fixedMaxValue: Number,
@@ -34,7 +30,7 @@ export default {
   data() {
     return {
       chartContainerWidth: 0,
-      chartContainerHeight: 140,
+      chartContainerHeight: 122,
       minValue: 0,
     };
   },
@@ -43,68 +39,58 @@ export default {
     this.chartContainerWidth = this.$refs.chart.offsetWidth;
     this.chartContainerHeigth = this.$refs.chart.offsetHeight;
     this.minValue = this.maxValue === this.findMax(this.data) ? 0 : this.findMin(this.data);
-
-    console.log(this.data);
   },
   computed: {
     maxValue() {
-      return (
-        this.fixedMaxValue
-        || Math.max(...this.data.map(({ value }) => value).flat())
-      );
+      return this.fixedMaxValue || Math.max(...this.data.map(({ value }) => value).flat());
     },
 
     svgChart() {
-      const points = this.data.map(({ value }, index) => {
-        const dx = this.chartContainerWidth / (this.data.length - 1);
-        const dy = (this.chartContainerHeight - 48) / (this.maxValue - this.fixedMinValue);
+      const bars = this.data.map(
+        ({ value }) => 50 - 122 / 200 - ((value / this.maxValue) * (50 - 122 / 100) + Math.random() * 0.01),
+      );
 
-        return [dx * index, this.chartContainerHeight - dy * value - 11];
-      });
-      points.unshift([-900, 0]);
-      points.push([2000, 0]);
+      const barWidth = 100 / bars.length;
+      const halfBar = barWidth / 2;
 
-      console.log(points);
+      let path = '';
 
-      const lineProperties = (pointA, pointB) => {
-        const lengthX = pointB[0] - pointA[0];
-        const lengthY = pointB[1] - pointA[1];
-        return {
-          length: Math.sqrt((lengthX * lengthX) + (lengthY * lengthY)),
-          angle: Math.atan2(lengthY, lengthX),
-        };
-      };
+      path += `L ${barWidth / 2} ${bars[0]}`;
 
-      const controlPointCalc = (current, previous, next, reverse) => {
-        const c = current;
-        const p = previous || c;
-        const n = next || c;
-        const smoothing = 0.2;
-        const o = lineProperties(p, n);
-        const rev = reverse ? Math.PI : 0;
+      let x = 0;
 
-        const x = c[0] + Math.cos(o.angle + rev) * o.length * smoothing;
-        const y = c[1] + Math.sin(o.angle + rev) * o.length * smoothing;
+      for (let i = 1; i < bars.length; i += 1) {
+        if (i === 1) {
+          x = barWidth * 1.5;
+        } else {
+          x += barWidth;
+        }
 
-        return [x, y];
-      };
+        path += `C ${x - halfBar} ${bars[i - 1]} ${x - halfBar} ${bars[i]} ${x} ${bars[i]}`;
+      }
 
-      const svgPathRender = (points1) => {
-        const d = points1.reduce((acc, e, i, a) => {
-          if (i > 0) {
-            const cs = controlPointCalc(a[i - 1], a[i - 2], e);
-            const ce = controlPointCalc(e, a[i - 1], a[i + 1], true);
-            return `${acc} C ${cs[0]},${cs[1]} ${ce[0]},${ce[1]} ${e[0]},${e[1]}`;
-          }
-          return `${acc} M ${e[0]},${e[1]}`;
-        }, '');
+      if (bars.length <= 1) {
+        x += barWidth / 2;
+      }
 
-        return `<path d="${d}" fill="none" stroke="${this.color}" stroke-width="2"/>`;
-      };
+      path += `L ${x + halfBar} ${bars[bars.length - 1]}`;
 
       const svg = `
-        <svg viewBox="0 0 980 146;"  version="1.1" xmlns="http://www.w3.org/2000/svg" class="svg">
-          ${svgPathRender(points)}
+        <svg xmlns='http://www.w3.org/2000/svg' viewBox="0 0 100 50" width="100%" height="100%">
+          <defs>
+            <linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="${this.color}" stop-opacity="1" />
+            </linearGradient>
+          </defs>
+
+          <g style="transform: scaleX(${
+  this.chartContainerWidth / ((122 / 50) * 100)
+}); transform-origin: center;">
+            <path fill="url(#linear1)" d="M0 50 L0 ${String(bars[0]) + path} L100 100Z" />
+            <path fill="none" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke" stroke="url(#linear)" d="M0 ${
+  String(bars[0]) + path
+}" />
+          </g>
         </svg>
       `;
 
@@ -126,13 +112,12 @@ export default {
 @import '../../../assets/scss/unnnic.scss';
 .chart {
   width: 100%;
-  height: 146px;
+  height: 100%;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 100%;
   flex: 1;
   display: flex;
   position: absolute;
-  left: auto;
   .unnnic-tooltip:hover .bar {
     width: 0;
     height: 100%;
@@ -140,11 +125,30 @@ export default {
     margin: 0 auto;
     cursor: pointer;
   }
+
   .group {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+
+    .tooltip {
+      display: flex;
+      height: 5px;
+      color: transparent;
+      justify-content: center;
+      align-items: end;
+      position: relative;
+      z-index: 99;
+      cursor: pointer;
+    }
+
+    .tooltip:hover {
+      color: $unnnic-color-neutral-dark;
+      font-family: $unnnic-font-family-primary;
+      justify-content: center;
+      align-items: end;
+    }
   }
 }
 </style>
