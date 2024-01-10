@@ -11,11 +11,7 @@
       <div class="reference">
         <div class="values">
           <div
-            v-for="(value, index) in [
-              value(maxValue),
-              value((maxValue - minValue) / 2 + minValue),
-              minValue,
-            ]"
+            v-for="(value, index) in [value(maxValue), value(maxValue / 2), 0]"
             :key="index + Math.random() * 100"
             class="value unnnic-font secondary body-md color-neutral-cleanest"
           >
