@@ -32,7 +32,7 @@ export default {
   },
 
   props: {
-    value: {
+    modelValue: {
       type: [Boolean, String],
       default: false,
       validator(value) {
@@ -64,10 +64,10 @@ export default {
 
   computed: {
     valueName() {
-      if (this.value === true) {
+      if (this.modelValue === true) {
         return 'checked';
       }
-      if (this.value === false) {
+      if (this.modelValue === false) {
         return 'default';
       }
 

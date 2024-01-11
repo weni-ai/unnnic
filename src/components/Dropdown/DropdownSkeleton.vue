@@ -1,11 +1,7 @@
 <template>
   <span :class="['dropdown', { active }]" ref="dropdown">
-    <slot>
-    </slot><div
-      class="dropdown-data"
-      :style="{ position: 'fixed', ...positions }"
-      ref="dropdown-data"
-    >
+    <slot> </slot>
+    <div class="dropdown-data" :style="{ position: 'fixed', ...positions }" ref="dropdown-data">
       <slot name="inside" :width="`${width}px`" :height="`${height}px`"></slot>
     </div>
   </span>
@@ -19,7 +15,7 @@ export default {
       default: 'automatic',
     },
 
-    value: Boolean,
+    modelValue: Boolean,
 
     position: {
       type: String,
@@ -49,7 +45,7 @@ export default {
   computed: {
     active() {
       if (this.type === 'manual') {
-        return this.value;
+        return this.modelValue;
       }
 
       return false;
@@ -117,7 +113,7 @@ export default {
     window.addEventListener('resize', this.calculatePosition);
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('scroll', this.calculatePosition);
     window.removeEventListener('resize', this.calculatePosition);
   },
@@ -145,7 +141,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .dropdown {
   position: relative;

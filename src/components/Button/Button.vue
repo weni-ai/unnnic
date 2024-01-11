@@ -6,10 +6,9 @@
       'unnnic-button',
       `unnnic-button--size-${size}`,
       `unnnic-button--${type}`,
-      iconCenter ? `unnnic-button--icon-on-center` : null
+      iconCenter ? `unnnic-button--icon-on-center` : null,
     ]"
-    >
-
+  >
     <unnnic-icon-svg
       v-if="loading"
       icon="loading-circle-1"
@@ -95,10 +94,12 @@ export default {
     },
     next: {
       type: Boolean,
+      default: null,
     },
 
     disabled: {
       type: Boolean,
+      default: null,
     },
 
     loading: {
@@ -143,7 +144,8 @@ export default {
 }
 
 @keyframes rotation {
-  0% {}
+  0% {
+  }
 
   100% {
     transform: rotate(360deg);
@@ -152,7 +154,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-button {
   display: inline-flex;
@@ -248,7 +250,6 @@ export default {
       background-color: $unnnic-color-neutral-soft;
       color: $unnnic-color-neutral-clean;
       cursor: not-allowed;
-
     }
 
     &:active:enabled {
@@ -262,7 +263,7 @@ export default {
     color: $unnnic-color-neutral-white;
 
     &:hover:enabled {
-      background-color:$unnnic-color-aux-red-700;
+      background-color: $unnnic-color-aux-red-700;
     }
 
     &:disabled {
@@ -295,7 +296,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-button--icon-on-center {
   min-width: auto;

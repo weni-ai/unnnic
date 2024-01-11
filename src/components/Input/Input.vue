@@ -13,7 +13,6 @@
       :placeholder="placeholder"
       :icon-left="iconLeft"
       :icon-right="iconRight"
-      :allow-toggle-password="allowTogglePassword"
       :type="type"
       :icon-left-clickable="iconLeftClickable"
       :icon-right-clickable="iconRightClickable"
@@ -101,7 +100,7 @@ export default {
   },
   watch: {
     val() {
-      this.$emit('update:model-value', this.val);
+      this.$emit('update:modelValue', this.val);
     },
     modelValue() {
       this.val = this.modelValue;

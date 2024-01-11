@@ -8,13 +8,7 @@
     v-mask="mask"
   />
 
-  <input
-    v-else
-    v-bind="attributes"
-    :value="modelValue"
-    :class="classes"
-    :type="nativeType"
-  />
+  <input v-else v-bind="attributes" :value="modelValue" :class="classes" :type="nativeType" />
 </template>
 
 <script>
@@ -56,17 +50,13 @@ export default {
         ...this.$attrs,
         ...this.$attrs['v-bind'],
         onInput: (event) => {
-          this.$emit('update:model-value', event.srcElement.value);
+          this.$emit('update:modelValue', event.srcElement.value);
         },
       };
     },
 
     classes() {
-      return [
-        'input',
-        `size-${this.size}`,
-        this.type,
-      ];
+      return ['input', `size-${this.size}`, this.type];
     },
   },
 };

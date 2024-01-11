@@ -1,15 +1,19 @@
 <template>
   <div
-    :class="['text-input', `size--${size}`, {
-      'has-icon-left': !!iconLeft,
-      'has-icon-right': !!iconRight || allowTogglePassword,
-    }]"
+    :class="[
+      'text-input',
+      `size--${size}`,
+      {
+        'has-icon-left': !!iconLeft,
+        'has-icon-right': !!iconRight || allowTogglePassword,
+      },
+    ]"
   >
     <base-input
+      :modelValue="modelValue"
       v-bind="attributes"
       :size="size"
       ref="base-input"
-      :model-value="modelValue"
       :native-type="nativeType === 'password' && showPassword ? 'text' : nativeType"
       :type="type"
       @focus="onFocus"
@@ -24,7 +28,7 @@
       size="sm"
       :clickable="iconLeftClickable"
       @click="onIconLeftClick"
-      :class="['icon-left', { 'clickable': iconLeftClickable }]"
+      :class="['icon-left', { clickable: iconLeftClickable }]"
     />
 
     <unnnic-icon
@@ -34,10 +38,7 @@
       size="sm"
       :clickable="iconRightClickable || allowTogglePassword"
       @click="onIconRightClick"
-      :class="[
-        'icon-right',
-        { 'clickable': iconRightClickable || allowTogglePassword }
-      ]"
+      :class="['icon-right', { clickable: iconRightClickable || allowTogglePassword }]"
     />
   </div>
 </template>
@@ -95,11 +96,11 @@ export default {
     },
     allowTogglePassword: {
       type: Boolean,
-      default: false,
+      default: null,
     },
     hasCloudyColor: {
       type: Boolean,
-      default: false,
+      default: null,
     },
     size: {
       type: String,
@@ -172,7 +173,8 @@ export default {
 @import '../../assets/scss/unnnic.scss';
 
 .icon {
-  &-left, &-right {
+  &-left,
+  &-right {
     &:not(.clickable) {
       pointer-events: none;
     }
@@ -193,7 +195,8 @@ export default {
 .text-input {
   position: relative;
 
-  &.size--md, &.size--sm {
+  &.size--md,
+  &.size--sm {
     &.has-icon-left .input-itself {
       padding-left: $unnnic-spacing-sm + $unnnic-icon-size-sm + $unnnic-spacing-xs;
     }
@@ -204,7 +207,8 @@ export default {
   }
 
   &.size--sm {
-    .icon-left, .icon-right {
+    .icon-left,
+    .icon-right {
       top: $unnnic-spacing-xs + 0.125 * $unnnic-font-size;
     }
   }
