@@ -27,7 +27,7 @@ const Template = (args, { argTypes }) => ({
         <template v-slot:header>
           <unnnic-table-row :headers="table.headers">
             <template v-slot:checkarea>
-              <unnnic-checkbox :value="generalValue" @change="changeGeneralCheckbox" :style="{margin: '4px'}"/>
+              <unnnic-checkbox :modelValue="generalValue" @change="changeGeneralCheckbox" :style="{margin: '4px'}"/>
             </template>
           </unnnic-table-row>
         </template>

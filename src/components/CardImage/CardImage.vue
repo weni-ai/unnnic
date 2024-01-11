@@ -11,7 +11,7 @@
         </div>
       </div>
 
-      <unnnic-checkbox :value="modelValue" @change="$emit('update:model-value', $event)" />
+      <unnnic-checkbox :modelValue="modelValue" @change="$emit('update:model-value', $event)" />
 
       <unnnic-dropdown v-if="$slots.actions" position="bottom-left">
         <template v-slot:trigger>
@@ -77,7 +77,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-card-image {
   display: flex;
