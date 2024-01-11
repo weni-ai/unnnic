@@ -15,11 +15,7 @@
 </template>
 <!-- eslint-disable linebreak-style -->
 <script>
-// import UnnnicToolTip from "../ToolTip/ToolTip.vue";
 export default {
-  components: {
-    // UnnnicToolTip,
-  },
   props: {
     fixedMaxValue: Number,
     fixedMinValue: Number,
@@ -46,12 +42,13 @@ export default {
     },
 
     svgChart() {
-      const bars = this.data
-        .map(
-          ({ value }) => 50
-            - (122 / 200)
-            - ((value / this.maxValue) * (50 - (122 / 100)) + Math.random() * 0.01),
-        );
+      const bars = this.data.map(
+        ({ value }) => 50
+          - 122 / 200
+          - ((value / this.maxValue)
+          * (50 - 122 / 100)
+          + Math.random() * 0.01),
+      );
 
       const barWidth = 100 / bars.length;
       const halfBar = barWidth / 2;
@@ -140,17 +137,18 @@ export default {
       height: 5px;
       color: transparent;
       justify-content: center;
-      align-items: end;
+      align-items: flex-end;
       position: relative;
       z-index: 99;
       cursor: pointer;
     }
 
     .tooltip:hover {
+      display: flex;
       color: $unnnic-color-neutral-dark;
       font-family: $unnnic-font-family-primary;
       justify-content: center;
-      align-items: end;
+      align-items: flex-end;
     }
   }
 }
