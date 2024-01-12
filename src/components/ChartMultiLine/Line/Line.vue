@@ -46,9 +46,10 @@ export default {
     svgChart() {
       const bars = this.data.map(
         ({ value }) => 50
-        - 122 / 200
-        - ((value / this.maxValue) * (50 - 122 / 100)
-        + Math.random() * 0.01),
+          - 122 / 200
+          - ((value / this.maxValue)
+          * (50 - 122 / 100)
+          + Math.random() * 0.01),
       );
 
       const barWidth = 100 / bars.length;
