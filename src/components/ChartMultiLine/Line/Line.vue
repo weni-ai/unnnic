@@ -116,7 +116,7 @@ export default {
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: 100% 100%;
   flex: 1;
   display: flex;
   position: absolute;
