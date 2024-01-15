@@ -9,12 +9,12 @@
     "*.json",
     "*.js"
   ],
-  "main": "./dist/unnnic-system.umd.cjs",
-  "module": "./dist/unnnic-system.js",
+  "main": "./dist/unnnic.umd.cjs",
+  "module": "./dist/unnnic.js",
   "exports": {
     ".": {
-      "import": "./dist/unnnic-system.js",
-      "require": "./dist/unnnic-system.umd.cjs"
+      "import": "./dist/unnnic.js",
+      "require": "./dist/unnnic.umd.cjs"
     },
     "./style.css": "./dist/style.css"
   },
@@ -33,7 +33,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Ilhasoft/unnnic.git"
+    "url": "https://github.com/weni-ai/unnnic.git"
   },
   "peerDependencies": {
     "vue": "^3.4.8"
