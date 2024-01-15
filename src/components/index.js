@@ -75,7 +75,7 @@ import ChatsNavbar from './ChatsNavbar/ChatsNavbar.vue';
 import ChatsUserAvatar from './ChatsUserAvatar/ChatsUserAvatar.vue';
 // import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
 
-const components = {
+export const components = {
   unnnicFormElement: formElement,
   unnnicInput: input,
   unnnicInputDatePicker: inputDatePicker,
@@ -151,14 +151,6 @@ const components = {
   unnnicChatsNavbar: ChatsNavbar,
   unnnicChatsUserAvatar: ChatsUserAvatar,
   // unnnicChartMultiLine: ChartMultiLine,
-};
-
-export const Unnnic = {
-  install: (app) => {
-    Object.keys(components).forEach((name) => {
-      app.component(name, components[name]);
-    });
-  },
 };
 
 export const unnnicFontSize = fontSize;

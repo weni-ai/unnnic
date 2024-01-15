@@ -21,13 +21,13 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/components/index.js'),
+      entry: resolve(__dirname, 'src/index.js'),
       name: 'Unnnic',
       fileName: 'unnnic',
     },
     rollupOptions: {
       input: {
-        main: resolve(__dirname, 'src/components/index.js'),
+        main: resolve(__dirname, 'src/index.js'),
       },
       external: ['vue'],
       output: {

@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import App from './App.vue';
-import { Unnnic } from '@/components';
+import Unnnic from './index.js';
 
 const app = createApp(App);
 

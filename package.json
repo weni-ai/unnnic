@@ -1,20 +1,16 @@
 {
   "name": "@weni/unnnic-system",
   "version": "2.0.0-alpha.7",
-  "type": "module",
+  "type": "commonjs",
   "files": [
-    "dist/*",
-    "src/*",
-    "public/*",
-    "*.json",
-    "*.js"
+    "dist"
   ],
-  "main": "./dist/unnnic.umd.cjs",
-  "module": "./dist/unnnic.js",
+  "main": "./dist/unnnic.umd.js",
+  "module": "./dist/unnnic.mjs",
   "exports": {
     ".": {
-      "import": "./dist/unnnic.js",
-      "require": "./dist/unnnic.umd.cjs"
+      "import": "./dist/unnnic.mjs",
+      "require": "./dist/unnnic.umd.js"
     }
   },
   "private": false,
