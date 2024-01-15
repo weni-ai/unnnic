@@ -154,9 +154,11 @@ const components = {
   // unnnicChartMultiLine: ChartMultiLine,
 };
 
-Object.keys(components).forEach((name) => {
-  Vue.component(name, components[name]);
-});
+export function registerGlobalComponents(app) {
+  Object.keys(components).forEach((name) => {
+    app.component(name, components[name]);
+  });
+}
 
 export const unnnicFontSize = fontSize;
 export const unnnicFormElement = formElement;

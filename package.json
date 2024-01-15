@@ -1,7 +1,15 @@
 {
   "name": "@weni/unnnic-system",
   "version": "2.0.0-alpha.0",
-  "main": "./dist/unnnic.common.js",
+  "type": "module",
+  "main": "./dist/unnnic-system.umd.cjs",
+  "module": "./dist/unnnic-system.js",
+  "exports": {
+    ".": {
+      "import": "./dist/unnnic-system.js",
+      "require": "./dist/unnnic-system.umd.cjs"
+    }
+  },
   "files": [
     "dist/*",
     "src/*",
