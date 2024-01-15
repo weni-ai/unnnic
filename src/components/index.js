@@ -153,7 +153,7 @@ const components = {
   // unnnicChartMultiLine: ChartMultiLine,
 };
 
-export default {
+export const Unnnic = {
   install: (app) => {
     Object.keys(components).forEach((name) => {
       app.component(name, components[name]);
