@@ -1,4 +1,3 @@
-import { fileURLToPath, URL } from 'node:url';
 import { resolve } from 'path';
 
 import { defineConfig } from 'vite';
@@ -22,9 +21,13 @@ export default defineConfig({
   build: {
     lib: {
       entry: resolve(__dirname, 'src/components/index.js'),
-      name: 'unnnic',
+      name: 'Unnnic',
+      fileName: 'unnnic',
     },
     rollupOptions: {
+      input: {
+        main: resolve(__dirname, 'src/components/index.js'),
+      },
       external: ['vue'],
       output: {
         globals: {
@@ -36,7 +39,7 @@ export default defineConfig({
   resolve: {
     alias: {
       vue: '@vue/compat',
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@': path.resolve(__dirname, 'src'),
     },
   },
 });

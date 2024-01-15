@@ -35,6 +35,9 @@
     "type": "git",
     "url": "https://github.com/Ilhasoft/unnnic.git"
   },
+  "peerDependencies": {
+    "vue": "^3.4.8"
+  },
   "dependencies": {
     "@vue/compat": "^3.4.8",
     "@vue/compiler-sfc": "^3.4.8",
