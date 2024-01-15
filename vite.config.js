@@ -1,3 +1,4 @@
+import { fileURLToPath, URL } from 'node:url';
 import { resolve } from 'path';
 
 import { defineConfig } from 'vite';
@@ -39,7 +40,7 @@ export default defineConfig({
   resolve: {
     alias: {
       vue: '@vue/compat',
-      '@': path.resolve(__dirname, 'src'),
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
 });
