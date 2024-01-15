@@ -36,7 +36,7 @@
             v-for="n in 3"
             :key="n + Math.random() * 100"
             class="horizontal-line color-neutral-cleanest"
-            :style="{ top: `${(n - 1) * ((122 + 66) / 3)}px` }"
+            :style="{ top: `${(n - 1) * ((122 + 67) / 3) - 8}px` }"
           />
         </div>
       </div>

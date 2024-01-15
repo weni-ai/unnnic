@@ -1,6 +1,20 @@
 <template>
-  <div :class="['unnnic-avatar-icon', scheme, size, { disabled: !enabled }]">
-    <unnnic-icon :icon="icon" :scheme="enabled ? scheme : 'neutral-cloudy'" :size="iconSize" />
+  <div
+    :class="[
+      'unnnic-avatar-icon',
+      scheme,
+      size,
+      { disabled: !enabled },
+      filled,
+      { opacity: !opacity },
+    ]"
+  >
+    <unnnic-icon
+      :icon="icon"
+      :scheme="enabled ? scheme : 'neutral-cloudy'"
+      :size="iconSize"
+      :filled="filled"
+    />
   </div>
 </template>
 
@@ -35,6 +49,15 @@ export default {
       type: String,
       default: 'aux-blue',
     },
+
+    filled: {
+      type: Boolean,
+      default: false,
+    },
+    opacity: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   computed: {
@@ -60,6 +83,12 @@ export default {
       background-color: rgba($color, $unnnic-opacity-level-extra-light);
     }
   }
+
+  .unnnic-avatar-icon.opacity {
+    &.#{$name} {
+      background-color: rgba($color, $unnnic-opacity-level-light);
+    }
+  }
 }
 
 .unnnic-avatar-icon.disabled {
@@ -71,7 +100,8 @@ export default {
   padding: $unnnic-spacing-inset-nano;
   display: inline-flex;
 
-  &.nano, &.xs {
+  &.nano,
+  &.xs {
     padding: $unnnic-spacing-stack-nano $unnnic-spacing-inline-nano;
   }
 }
