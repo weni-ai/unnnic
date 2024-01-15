@@ -40,7 +40,7 @@ import multiSelect from './MultiSelect/MultiSelect.vue';
 import tag from './Tag/Tag.vue';
 import accordion from './Accordion/Accordion.vue';
 import indicator from './Indicator/Indicator.vue';
-import skeletonLoading from './SkeletonLoading/SkeletonLoading.vue';
+// import skeletonLoading from './SkeletonLoading/SkeletonLoading.vue'; // TODO: Unbreak this component
 import carousel from './Carousel/Carousel.vue';
 import label from './Label/Label.vue';
 import tab from './Tab/Tab.vue';
@@ -117,7 +117,7 @@ export const components = {
   unnnicTag: tag,
   unnnicAccordion: accordion,
   unnnicIndicator: indicator,
-  unnnicSkeletonLoading: skeletonLoading,
+  // unnnicSkeletonLoading: skeletonLoading,
   unnnicCarousel: carousel,
   unnnicLabel: label,
   unnnicTab: tab,
@@ -197,7 +197,7 @@ export const unnnicMultiSelect = multiSelect;
 export const unnnicTag = tag;
 export const unnnicAccordion = accordion;
 export const unnnicIndicator = indicator;
-export const unnnicSkeletonLoading = skeletonLoading;
+// export const unnnicSkeletonLoading = skeletonLoading;
 export const unnnicCarousel = carousel;
 export const unnnicLabel = label;
 export const unnnicTab = tab;

@@ -3,16 +3,12 @@
   "version": "2.0.0-alpha.8",
   "type": "commonjs",
   "files": [
-    "dist"
+    "dist",
+    "src",
+    "public"
   ],
   "main": "./dist/unnnic.umd.js",
   "module": "./dist/unnnic.mjs",
-  "exports": {
-    ".": {
-      "import": "./dist/unnnic.mjs",
-      "require": "./dist/unnnic.umd.js"
-    }
-  },
   "private": false,
   "scripts": {
     "dev": "vite",
@@ -34,8 +30,6 @@
     "vue": "^3.4.8"
   },
   "dependencies": {
-    "@vue/compat": "^3.4.8",
-    "@vue/compiler-sfc": "^3.4.8",
     "@vueuse/components": "^10.4.1",
     "lodash": "^4.17.21",
     "moment": "^2.30.1",
@@ -44,6 +38,8 @@
     "vue-the-mask": "^0.11.1"
   },
   "devDependencies": {
+    "@vue/compat": "^3.4.8",
+    "@vue/compiler-sfc": "^3.4.8",
     "@rushstack/eslint-patch": "^1.2.0",
     "@storybook/addon-essentials": "^7.0.14",
     "@storybook/addon-interactions": "^7.0.14",
