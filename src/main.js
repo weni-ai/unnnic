@@ -1,11 +1,8 @@
-import './assets/main.css';
-
 import { createApp } from 'vue';
-import { registerGlobalComponents } from '@/components/';
 import App from './App.vue';
+import Unnnic from '@/components';
 
 const app = createApp(App);
 
-registerGlobalComponents(app);
-
+app.use(Unnnic);
 app.mount('#app');

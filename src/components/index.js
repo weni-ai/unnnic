@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { unnnicFontSize as fontSize } from './config';
 import formElement from './FormElement/FormElement.vue';
 import input from './Input/Input.vue';
@@ -154,11 +153,13 @@ const components = {
   // unnnicChartMultiLine: ChartMultiLine,
 };
 
-export function registerGlobalComponents(app) {
-  Object.keys(components).forEach((name) => {
-    app.component(name, components[name]);
-  });
-}
+export default {
+  install: (app) => {
+    Object.keys(components).forEach((name) => {
+      app.component(name, components[name]);
+    });
+  },
+};
 
 export const unnnicFontSize = fontSize;
 export const unnnicFormElement = formElement;
