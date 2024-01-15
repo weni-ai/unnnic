@@ -1,4 +1,5 @@
 import { fileURLToPath, URL } from 'node:url';
+import { resolve } from 'path';
 
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
@@ -20,7 +21,7 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: 'src/components/index.js',
+      entry: resolve(__dirname, 'src/components/index.js'),
       name: 'unnnic',
     },
     rollupOptions: {
