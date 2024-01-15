@@ -15,8 +15,7 @@
     ".": {
       "import": "./dist/unnnic.js",
       "require": "./dist/unnnic.umd.cjs"
-    },
-    "./style.css": "./dist/style.css"
+    }
   },
   "private": false,
   "scripts": {
