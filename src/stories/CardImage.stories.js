@@ -22,7 +22,7 @@ const Template = (args, { argTypes }) => ({
   },
 
   template: `<div><pre>v-model: {{ v }}</pre>
-  <unnnic-card-image v-model="v" v-bind="$props">
+  <unnnic-card-image v-bind="$props" v-model="v">
   <template slot="actions">
     <unnnic-dropdown-item>
       Option 1
@@ -42,15 +42,18 @@ Default.args = {
   title: 'Title Card',
   description: 'Last edit',
   image: 'https://picsum.photos/300/150',
-  data: [{
-    icon: 'graph-stats-1',
-    scheme: 'aux-purple',
-    name: 'Data',
-    value: '00',
-  }, {
-    icon: 'graph-stats-1',
-    scheme: 'aux-purple',
-    name: 'Data',
-    value: '00',
-  }],
+  data: [
+    {
+      icon: 'graph-stats-1',
+      scheme: 'aux-purple',
+      name: 'Data',
+      value: '00',
+    },
+    {
+      icon: 'graph-stats-1',
+      scheme: 'aux-purple',
+      name: 'Data',
+      value: '00',
+    },
+  ],
 };

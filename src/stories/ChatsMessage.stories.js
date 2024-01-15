@@ -43,7 +43,7 @@ const ReceivedAndSentTemplate = (args, { argTypes }) => ({
         Interdum et malesuada fames ac ante ipsum primis in faucibus.
         Curabitur facilisis congue sagittis.
       </unnnic-chats-message>
-      <unnnic-chats-message type="sent" v-bind="$props">
+      <unnnic-chats-message v-bind="$props" type="sent">
         Interdum et malesuada fames ac ante ipsum primis in faucibus.
         Curabitur facilisis congue sagittis.
       </unnnic-chats-message>
@@ -185,12 +185,12 @@ const DocumentTemplate = (args, { argTypes }) => ({
       display: grid;
       gap: 16px;
     ">
-      <unnnic-chats-message documentName="Lorem.pdf" type="received" v-bind="$props" />
-      <unnnic-chats-message documentName="Lorem.pdf" v-bind="$props" />
-      <unnnic-chats-message documentName="Lorem Ipsum.pdf" status="sending" v-bind="$props" />
-      <unnnic-chats-message documentName="Lorem Ipsum.pdf" status="failed" v-bind="$props" />
-      <unnnic-chats-message documentName="Lorem ipsum dolor sit amet consectetur adipiscing elit.docx" v-bind="$props" />
-      <unnnic-chats-message documentName="Lorem ipsum dolor sit amet consectetur adipiscing elit fusce iaculis ligula fringilla consectetur tempor ex massa convallis risus ut sagittis est quam non est integer bibendum vehicula.csv" v-bind="$props" />
+      <unnnic-chats-message v-bind="$props" documentName="Lorem.pdf" type="received" />
+      <unnnic-chats-message v-bind="$props" documentName="Lorem.pdf" />
+      <unnnic-chats-message v-bind="$props" documentName="Lorem Ipsum.pdf" status="sending" />
+      <unnnic-chats-message v-bind="$props" documentName="Lorem Ipsum.pdf" status="failed" />
+      <unnnic-chats-message v-bind="$props" documentName="Lorem ipsum dolor sit amet consectetur adipiscing elit.docx" />
+      <unnnic-chats-message v-bind="$props" documentName="Lorem ipsum dolor sit amet consectetur adipiscing elit fusce iaculis ligula fringilla consectetur tempor ex massa convallis risus ut sagittis est quam non est integer bibendum vehicula.csv" />
     </div>
   `,
 });
