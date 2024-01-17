@@ -131,7 +131,11 @@ export default {
     findMin(array) {
       return Math.min(...array.map(({ value }) => value));
     },
-    getLabel() {},
+    formatValue(value) {
+      return ` ${new Date(value).toLocaleString('default', { month: 'short' })} ${new Date(
+        value,
+      ).getDate()}`;
+    },
   },
 };
 </script>
