@@ -155,7 +155,7 @@ export default {
   outline-color: $unnnic-color-neutral-soft;
   outline-width: $unnnic-border-width-thinner;
   outline-offset: -$unnnic-border-width-thinner;
-  width: 1024px;
+  width: 100%;
   height: 296px;
 
   .header {
