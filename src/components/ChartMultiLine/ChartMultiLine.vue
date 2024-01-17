@@ -131,7 +131,11 @@ export default {
     findMin(array) {
       return Math.min(...array.map(({ value }) => value));
     },
-    getLabel() {},
+    formatValue(value) {
+      return ` ${new Date(value).toLocaleString('default', { month: 'short' })} ${new Date(
+        value,
+      ).getDate()}`;
+    },
   },
 };
 </script>
@@ -151,7 +155,7 @@ export default {
   outline-color: $unnnic-color-neutral-soft;
   outline-width: $unnnic-border-width-thinner;
   outline-offset: -$unnnic-border-width-thinner;
-  width: 1024px;
+  width: 100%;
   height: 296px;
 
   .header {
