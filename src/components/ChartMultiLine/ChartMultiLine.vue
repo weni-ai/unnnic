@@ -47,13 +47,13 @@
         :key="index + Math.random() * 100"
         class="title unnnic-font secondary body-md color-neutral-cleanest"
       >
-        {{ value }}
+        {{ formatValue(value) }}
       </div>
     </div>
     <div class="labels">
       <div
         class="label unnnic-font secondary body-lg color-neutral-dark"
-        v-for="({ title }, index) in data"
+        v-for="(chart, index) in data"
         :key="index + Math.random() * 100"
       >
         <svg
@@ -65,7 +65,7 @@
         >
           <rect width="15" height="6" rx="3" :fill="colors[index]" />
         </svg>
-        {{ title }}
+        {{ chart.title }} <strong>{{ findTotals(chart.data) }}</strong>
       </div>
     </div>
   </div>
@@ -130,6 +130,13 @@ export default {
     },
     findMin(array) {
       return Math.min(...array.map(({ value }) => value));
+    },
+    findTotals(array) {
+      const values = array.map(({ value }) => value);
+      return values.reduce(
+        (accumulator, currentValue) => accumulator + currentValue,
+        0,
+      );
     },
     formatValue(value) {
       return ` ${new Date(value).toLocaleString('default', { month: 'short' })} ${new Date(
