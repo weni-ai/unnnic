@@ -45,7 +45,7 @@ export default {
 
     window.addEventListener('mouseup', this.purgeRipples);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     window.removeEventListener('mouseup', this.purgeRipples);
   },
   methods: {

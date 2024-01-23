@@ -1,4 +1,0 @@
-import{U as s}from"./AvatarIcon-6b8edf9b.js";import{i as n}from"./Icon-b41b8868.js";import"./vue.esm-bundler-3f98aba2.js";import"./_plugin-vue_export-helper-c27b6911.js";const t=Object.keys(n),c=["feedback-red","feedback-green","feedback-yellow","feedback-blue","feedback-grey","aux-blue","aux-purple","aux-orange","aux-lemon","aux-pink"],d={title:"Example/AvatarIcon",component:s,argTypes:{enabled:{control:"boolean"},icon:{control:"select",options:t},size:{control:"select",options:["nano","xs","sm","lg","xl"]},scheme:{control:"select",options:c}}},e={args:{}};var o,a,r;e.parameters={...e.parameters,docs:{...(o=e.parameters)==null?void 0:o.docs,source:{originalSource:`{
-  args: {}
-}`,...(r=(a=e.parameters)==null?void 0:a.docs)==null?void 0:r.source}}};const u=["Normal"];export{e as Normal,u as __namedExportsOrder,d as default};
-//# sourceMappingURL=AvatarIcon.stories-e2aa4eb7.js.map

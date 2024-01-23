@@ -136,7 +136,7 @@ export default {
     window.document.body.addEventListener('click', this.mouseout);
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     window.document.body.removeEventListener('click', this.mouseout);
   },
 
