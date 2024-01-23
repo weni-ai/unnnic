@@ -1,0 +1,1 @@
+{"version":3,"file":"config-28154cde.js","sources":["../../src/components/config.js"],"sourcesContent":["// eslint-disable-next-line import/prefer-default-export\nexport const unnnicFontSize = 16; // px\n"],"names":["unnnicFontSize"],"mappings":"AACY,MAACA,EAAiB"}
