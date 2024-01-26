@@ -30,9 +30,9 @@
   </div>
 
   <component
-    v-else :is="'version' + version.replace(/\./g, 'dot')"
+    v-else
+    :is="'version' + version.replace(/\./g, 'dot')"
     v-bind="{ ...$props }"
-    @close="$emit('close')"
   ></component>
 </template>
 

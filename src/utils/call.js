@@ -1,16 +1,13 @@
-import * as Vue from 'vue';
+import { createApp } from 'vue';
 import Alert from '../components/Alert/Alert.vue';
 import Modal from '../components/Modal/Modal.vue';
 
 export default {
   callAlert({ props }) {
-    const AlertClass = Vue.createApp(Alert, {
-      name: 'Alert',
-      propsData: {
-        ...props,
-        onClose: () => {
-          instance.$el.remove();
-        },
+    const AlertComponent = createApp(Alert, {
+      ...props,
+      onClose: () => {
+        instance.$el.remove();
       },
       created() {
         this.$on(['close'], () => {
@@ -18,18 +15,16 @@ export default {
         });
       },
     });
-    const container = document.createElement('div');
-    AlertClass.mount(container);
-    return AlertClass._container;
+    const element = document.createElement('div');
+    const instance = AlertComponent.mount(element);
+    document.body.appendChild(element);
   },
 
   callModal({ props }) {
-    const ModalClass = Vue.createApp(Modal, {
-      propsData: {
-        ...props,
-        onClose: () => {
-          instance.$el.remove();
-        },
+    const ModalComponent = createApp(Modal, {
+      ...props,
+      onClose: () => {
+        instance.$el.remove();
       },
       created() {
         this.$on(['close'], () => {
@@ -37,8 +32,8 @@ export default {
         });
       },
     });
-    const container = document.createElement('div');
-    ModalClass.mount(container);
-    return ModalClass._container;
+    const element = document.createElement('div');
+    const instance = ModalComponent.mount(element);
+    document.body.appendChild(element);
   },
 };
