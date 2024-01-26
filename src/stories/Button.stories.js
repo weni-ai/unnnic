@@ -5,7 +5,7 @@ export default {
   title: 'Form/Button',
   component: unnnicButton,
   argTypes: {
-    type: { control: { type: 'select', options: ['primary', 'secondary', 'tertiary', 'alternative', 'warning'] } },
+    type: { control: { type: 'select', options: ['primary', 'secondary', 'tertiary', 'alternative', 'warning', 'attention'] } },
     size: { control: { type: 'select', options: ['large', 'small'] } },
     text: { control: { type: 'text' } },
     iconLeft: { control: { type: 'select', options: [null, ...iconList] } },
@@ -59,5 +59,19 @@ export const Alternative = Template.bind({});
 Alternative.args = {
   type: 'alternative',
   iconLeft: 'add',
+  text: 'Text',
+};
+
+export const Warning = Template.bind({});
+Warning.args = {
+  type: 'warning',
+  iconLeft: 'add-1',
+  text: 'Text',
+};
+
+export const Attention = Template.bind({});
+Attention.args = {
+  type: 'attention',
+  iconLeft: 'add-1',
   text: 'Text',
 };
