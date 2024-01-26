@@ -135,7 +135,6 @@ export default {
         primary: 'neutral-white',
         secondary: 'neutral-dark',
         tertiary: 'neutral-dark',
-        alternative: 'weni-900',
         warning: 'neutral-white',
       };
 
@@ -248,6 +247,14 @@ export default {
     background-color: $unnnic-color-weni-50;
     color: $unnnic-color-weni-800;
 
+    :deep(svg .primary) {
+      fill: $unnnic-color-weni-800;
+    }
+
+    :deep(svg .primary-stroke) {
+      stroke: $unnnic-color-weni-800;
+    }
+
     &:hover:enabled {
       background-color: $unnnic-color-weni-100;
     }
@@ -257,11 +264,26 @@ export default {
       color: $unnnic-color-neutral-clean;
       cursor: not-allowed;
 
+      :deep(svg .primary) {
+        fill: $unnnic-color-neutral-clean;
+      }
+
+      :deep(svg .primary-stroke) {
+        stroke: $unnnic-color-neutral-clean;
+      }
     }
 
     &:active:enabled {
       background-color: $unnnic-color-weni-200;
       color: $unnnic-color-weni-900;
+
+      :deep(svg .primary) {
+        fill: $unnnic-color-weni-900;
+      }
+
+      :deep(svg .primary-stroke) {
+        stroke: $unnnic-color-weni-900;
+      }
     }
   }
 

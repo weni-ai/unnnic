@@ -54,3 +54,10 @@ export const OnlyIcon = Template.bind({});
 OnlyIcon.args = {
   iconCenter: 'add-1',
 };
+
+export const Alternative = Template.bind({});
+Alternative.args = {
+  type: 'alternative',
+  iconLeft: 'add',
+  text: 'Text',
+};
