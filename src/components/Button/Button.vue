@@ -82,7 +82,14 @@ export default {
       type: String,
       default: 'primary',
       validator(value) {
-        return ['primary', 'secondary', 'tertiary', 'alternative', 'warning'].indexOf(value) !== -1;
+        return [
+          'primary',
+          'secondary',
+          'tertiary',
+          'alternative',
+          'warning',
+          'attention',
+        ].indexOf(value) !== -1;
       },
     },
     iconLeft: {
@@ -135,8 +142,8 @@ export default {
         primary: 'neutral-white',
         secondary: 'neutral-dark',
         tertiary: 'neutral-dark',
-        alternative: 'weni-900',
         warning: 'neutral-white',
+        attention: 'neutral-white',
       };
 
       return typeToSchemeMap[this.type] || '';
@@ -194,12 +201,6 @@ export default {
       background-color: $unnnic-color-weni-700;
     }
 
-    &:disabled {
-      background-color: $unnnic-color-neutral-soft;
-      color: $unnnic-color-neutral-clean;
-      cursor: not-allowed;
-    }
-
     &:active:enabled {
       background-color: $unnnic-color-weni-800;
     }
@@ -215,9 +216,6 @@ export default {
     }
 
     &:disabled {
-      background-color: $unnnic-color-neutral-soft;
-      color: $unnnic-color-neutral-clean;
-      cursor: not-allowed;
       box-shadow: none;
     }
 
@@ -248,20 +246,39 @@ export default {
     background-color: $unnnic-color-weni-50;
     color: $unnnic-color-weni-800;
 
+    :deep(svg .primary) {
+      fill: $unnnic-color-weni-800;
+    }
+
+    :deep(svg .primary-stroke) {
+      stroke: $unnnic-color-weni-800;
+    }
+
     &:hover:enabled {
       background-color: $unnnic-color-weni-100;
     }
 
     &:disabled {
-      background-color: $unnnic-color-neutral-soft;
-      color: $unnnic-color-neutral-clean;
-      cursor: not-allowed;
+      :deep(svg .primary) {
+        fill: $unnnic-color-neutral-clean;
+      }
 
+      :deep(svg .primary-stroke) {
+        stroke: $unnnic-color-neutral-clean;
+      }
     }
 
     &:active:enabled {
       background-color: $unnnic-color-weni-200;
       color: $unnnic-color-weni-900;
+
+      :deep(svg .primary) {
+        fill: $unnnic-color-weni-900;
+      }
+
+      :deep(svg .primary-stroke) {
+        stroke: $unnnic-color-weni-900;
+      }
     }
   }
 
@@ -273,15 +290,32 @@ export default {
       background-color:$unnnic-color-aux-red-700;
     }
 
-    &:disabled {
-      background-color: $unnnic-color-neutral-soft;
-      color: $unnnic-color-neutral-clean;
-      cursor: not-allowed;
-    }
-
     &:active:enabled {
       background-color: $unnnic-color-aux-red-900;
     }
+  }
+
+  &--attention {
+    background-color: $unnnic-color-aux-yellow-500;
+    color: $unnnic-color-neutral-white;
+
+    &:hover:enabled {
+      background-color:$unnnic-color-aux-yellow-700;
+    }
+
+    &:active:enabled {
+      background-color: $unnnic-color-aux-yellow-900;
+    }
+  }
+
+  &--primary:disabled,
+  &--secondary:disabled,
+  &--alternative:disabled,
+  &--warning:disabled,
+  &--attention:disabled {
+    background-color: $unnnic-color-neutral-soft;
+    color: $unnnic-color-neutral-clean;
+    cursor: not-allowed;
   }
 
   &--size {
