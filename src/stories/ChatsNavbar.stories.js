@@ -24,45 +24,39 @@ export const Default = Template.bind({});
 Default.args = {
   links: [
     {
-      name: 'house',
-      icon: {
-        default: 'house-1-1',
-        selected: 'house-2-2',
-      },
+      name: 'home',
+      icon: 'home',
       action: () => {},
     },
     {
-      name: 'messaging',
-      icon: {
-        default: 'messaging-we-chat-3',
-        selected: 'messaging-we-chat-2',
-      },
+      name: 'forum',
+      icon: 'forum',
       action: () => {},
     },
     {
       name: 'folder',
       icon: {
-        default: 'folder-1',
-        selected: 'folder-2',
+        default: 'folder',
+        selected: 'folder',
       },
       action: () => {},
     },
     {
-      name: 'gauge',
+      name: 'speed',
       icon: {
-        default: 'gauge-dashboard-2',
-        selected: 'gauge-dashboard-1',
+        default: 'speed',
+        selected: 'speed',
       },
       action: () => {},
     },
     {
-      name: 'cog',
+      name: 'settings',
       icon: {
-        default: 'cog-1',
-        selected: 'cog-2',
+        default: 'settings',
+        selected: 'settings',
       },
       action: () => {},
     },
   ],
-  initialLink: 'house',
+  initialLink: 'home',
 };
