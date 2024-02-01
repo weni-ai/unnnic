@@ -15,7 +15,15 @@ export default {
 };
 
 export const Default = {
+  render: (args) => ({
+    components: { unnnicChatsNavbar },
+    setup() {
+      return { args };
+    },
+    template: '<unnnic-chats-navbar v-bind="args" v-model="args.selectedLink" />',
+  }),
   args: {
+    selectedLink: 'home',
     links: [
       {
         name: 'home',
@@ -52,6 +60,5 @@ export const Default = {
         action: () => {},
       },
     ],
-    initialLink: 'home',
   },
 };
