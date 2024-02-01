@@ -69,39 +69,25 @@ export default {
       },
     },
 
-    initialLink: {
+    value: {
       type: String,
-      required: false,
+      required: true,
     },
-  },
-
-  data() {
-    return {
-      selectedLink: null,
-    };
   },
 
   methods: {
     selectLink(link) {
-      this.selectedLink = link;
+      this.$emit('input', link.name);
     },
 
     isSelected(link) {
-      return this.selectedLink === link;
+      return this.value === link.name;
     },
 
     getLinkIcon(link) {
       const { icon } = link;
       return typeof icon === 'string' ? icon : this.isSelected(link) ? icon.selected : icon.default;
     },
-  },
-
-  mounted() {
-    if (this.initialLink) {
-      const initialLinkToSelect = this.links.find((link) => link.name === this.initialLink);
-
-      this.selectLink(initialLinkToSelect);
-    }
   },
 };
 </script>

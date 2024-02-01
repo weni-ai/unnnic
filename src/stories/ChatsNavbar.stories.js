@@ -17,7 +17,12 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicChatsNavbar },
-  template: '<unnnic-chats-navbar v-bind="$props"/>',
+  data() {
+    return {
+      selectedLink: 'home',
+    };
+  },
+  template: '<unnnic-chats-navbar v-bind="$props" v-model="selectedLink"/>',
 });
 
 export const Default = Template.bind({});
@@ -58,5 +63,4 @@ Default.args = {
       action: () => {},
     },
   ],
-  initialLink: 'home',
 };
