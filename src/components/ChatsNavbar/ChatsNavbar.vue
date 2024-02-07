@@ -86,7 +86,15 @@ export default {
 
     getLinkIcon(link) {
       const { icon } = link;
-      return typeof icon === 'string' ? icon : this.isSelected(link) ? icon.selected : icon.default;
+      if (typeof icon === 'string') {
+        return icon;
+      }
+
+      if (this.isSelected(link)) {
+        return icon.selected;
+      }
+
+      return icon.default || '';
     },
   },
 };
