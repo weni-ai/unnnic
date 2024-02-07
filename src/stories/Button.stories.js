@@ -6,28 +6,30 @@ export default {
   component: unnnicButton,
   argTypes: {
     type: {
-      control: { type: 'select', },
+      control: { type: 'select' },
       options: ['primary', 'secondary', 'tertiary', 'alternative', 'warning', 'attention'],
     },
     size: {
-      control: { type: 'select', },
+      control: { type: 'select' },
       options: ['large', 'small'],
+      defaultValue: 'large',
     },
     text: { control: { type: 'text' } },
     iconLeft: {
-      control: { type: 'select', },
+      control: { type: 'select' },
       options: [null, ...iconList],
     },
     iconCenter: {
-      control: { type: 'select', },
+      control: { type: 'select' },
       options: [null, ...iconList],
     },
     iconRight: {
-      control: { type: 'select', },
+      control: { type: 'select' },
       options: [null, ...iconList],
     },
     disabled: { control: { type: 'boolean' } },
     loading: { control: { type: 'boolean' } },
+    float: { control: { type: 'boolean' } },
   },
 };
 
@@ -88,5 +90,38 @@ export const Attention = {
     type: 'attention',
     iconLeft: 'add-1',
     text: 'Text',
+  },
+};
+
+export const Float = {
+  argTypes: {
+    size: {
+      control: { type: 'select' },
+      options: ['extra-large', 'large'],
+      defaultValue: 'large',
+    },
+  },
+  render: (args) => ({
+    components: { unnnicButton },
+    setup() {
+      return { args };
+    },
+    template: `<div>
+      <unnnic-button v-bind="args" />
+
+      When to use this variation: <br/>
+      When there is a need to present a main action above a list of contents. <br/>
+      It is important that the component is always floating over the content and fixed to the bottom right side.
+
+      <br/>
+      <br/>
+
+      <p v-for="item in 50" :key="item">Scroll <br/></p>
+    </div>`,
+  }),
+  args: {
+    type: 'primary',
+    iconCenter: 'add',
+    float: true,
   },
 };
