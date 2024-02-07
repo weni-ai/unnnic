@@ -3,7 +3,7 @@ import Alert from '../components/Alert/Alert.vue';
 import Modal from '../components/Modal/Modal.vue';
 
 export default {
-  callAlert({ props }) {
+  callAlert({ props, containerRef }) {
     const AlertComponent = createApp(Alert, {
       ...props,
       onClose: () => {
@@ -17,7 +17,13 @@ export default {
     });
     const element = document.createElement('div');
     const instance = AlertComponent.mount(element);
-    document.body.appendChild(element);
+
+    if (containerRef) {
+      instance.$el.style.position = 'absolute';
+      containerRef.appendChild(instance.$el);
+    } else {
+      document.body.appendChild(instance.$el);
+    }
   },
 
   callModal({ props }) {
