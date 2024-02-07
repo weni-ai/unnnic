@@ -6,10 +6,11 @@
       'unnnic-button',
       `unnnic-button--size-${size}`,
       `unnnic-button--${type}`,
-      iconCenter ? `unnnic-button--icon-on-center` : null
+      iconCenter ? `unnnic-button--icon-on-center` : null,
+      float ? `unnnic-button--float` : null,
     ]"
-    v-on="$listeners">
-
+    v-on="$listeners"
+  >
     <unnnic-icon-svg
       v-if="loading"
       icon="loading-circle-1"
@@ -42,7 +43,11 @@
       :filled="iconFilled"
     />
 
-    <span class="unnnic-button__label" :style="{ visibility: loading ? 'hidden' : null }">
+    <span
+      v-if="!float"
+      class="unnnic-button__label"
+      :style="{ visibility: loading ? 'hidden' : null }"
+    >
       <slot /> {{ text }}
     </span>
 
@@ -70,9 +75,6 @@ export default {
     size: {
       type: String,
       default: 'large',
-      validator(value) {
-        return ['small', 'large'].indexOf(value) !== -1;
-      },
     },
     text: {
       type: String,
@@ -81,16 +83,10 @@ export default {
     type: {
       type: String,
       default: 'primary',
-      validator(value) {
-        return [
-          'primary',
-          'secondary',
-          'tertiary',
-          'alternative',
-          'warning',
-          'attention',
-        ].indexOf(value) !== -1;
-      },
+    },
+    float: {
+      type: Boolean,
+      default: false,
     },
     iconLeft: {
       type: String,
@@ -148,6 +144,52 @@ export default {
 
       return typeToSchemeMap[this.type] || '';
     },
+
+    isSizePropValid() {
+      return (
+        this.size === 'large' ||
+        (!this.float && this.size === 'small') ||
+        (this.float && this.size === 'extra-large')
+      );
+    },
+    isTypePropValid() {
+      const validTypes = [
+        'primary',
+        'secondary',
+        'tertiary',
+        'alternative',
+        'warning',
+        'attention',
+      ];
+      return validTypes.includes(this.type);
+    },
+  },
+  methods: {
+    validateProps() {
+      if (!this.isSizePropValid || !this.isTypePropValid) {
+        let errorMessage = 'TypeError:';
+
+        if (!this.isSizePropValid) {
+          errorMessage += ' Invalid size prop.';
+          errorMessage += ` Please provide 'large', 'small' (only if float prop is false), or 'extra-large' (only if float prop is true).`;
+        }
+
+        if (!this.isTypePropValid) {
+          errorMessage += ' Invalid type prop.';
+        }
+
+        throw new Error(errorMessage);
+      }
+    },
+  },
+  watch: {
+    $props: {
+      deep: true,
+      immediate: true,
+      handler() {
+        this.validateProps();
+      },
+    },
   },
 };
 </script>
@@ -158,7 +200,8 @@ export default {
 }
 
 @keyframes rotation {
-  0% {}
+  0% {
+  }
 
   100% {
     transform: rotate(360deg);
@@ -167,7 +210,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-button {
   display: inline-flex;
@@ -287,7 +330,7 @@ export default {
     color: $unnnic-color-neutral-white;
 
     &:hover:enabled {
-      background-color:$unnnic-color-aux-red-700;
+      background-color: $unnnic-color-aux-red-700;
     }
 
     &:active:enabled {
@@ -300,7 +343,7 @@ export default {
     color: $unnnic-color-neutral-white;
 
     &:hover:enabled {
-      background-color:$unnnic-color-aux-yellow-700;
+      background-color: $unnnic-color-aux-yellow-700;
     }
 
     &:active:enabled {
@@ -318,18 +361,33 @@ export default {
     cursor: not-allowed;
   }
 
-  &--size {
-    &-large {
-      padding: $unnnic-squish-xs;
-      font-size: $unnnic-font-size-body-gt;
-      line-height: ($unnnic-font-size-body-gt + $unnnic-line-height-medium);
-      height: 46px;
-    }
+  &--float {
+    position: fixed;
+    bottom: 0;
+    right: 0;
 
+    border-radius: $unnnic-border-radius-pill;
+    box-shadow: $unnnic-shadow-level-near;
+  }
+
+  &--size {
+    &-extra-large,
+    &-large,
     &-small {
       padding: $unnnic-squish-xs;
       font-size: $unnnic-font-size-body-gt;
       line-height: ($unnnic-font-size-body-gt + $unnnic-line-height-medium);
+    }
+
+    &-extra-large {
+      height: 58px;
+    }
+
+    &-large {
+      height: 46px;
+    }
+
+    &-small {
       height: 38px;
     }
   }
@@ -337,16 +395,25 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-button--icon-on-center {
   min-width: auto;
 
   &.unnnic-button--size {
+    &-extra-large {
+      height: 58px;
+      width: 58px;
+    }
+
     &-large {
-      padding: $unnnic-inset-xs;
       height: 46px;
       width: 46px;
+    }
+
+    &-large,
+    &-extra-large {
+      padding: $unnnic-inset-xs;
 
       .unnnic-icon {
         width: $unnnic-icon-size-md;
