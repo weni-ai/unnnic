@@ -1,6 +1,6 @@
 <template>
   <card-statuses-container class="unnnic-card-project" :name="name" :statuses="statuses">
-    <div slot="header-buttons" class="buttons">
+    <div v-if="actionText" slot="header-buttons" class="buttons">
       <unnnic-tag
         class="action"
         @click.native="$emit('action')"

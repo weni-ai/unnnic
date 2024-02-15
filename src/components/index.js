@@ -78,6 +78,7 @@ import ChatsHeader from './ChatsHeader/ChatsHeader.vue';
 import ChatsMessage from './ChatsMessage/ChatsMessage.vue';
 import ChatsNavbar from './ChatsNavbar/ChatsNavbar.vue';
 import ChatsUserAvatar from './ChatsUserAvatar/ChatsUserAvatar.vue';
+import ConnectProjectSelector from './ConnectProjectSelector/ConnectProjectSelector.vue';
 import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
 
 const components = {
@@ -159,6 +160,7 @@ const components = {
   unnnicChatsMessage: ChatsMessage,
   unnnicChatsNavbar: ChatsNavbar,
   unnnicChatsUserAvatar: ChatsUserAvatar,
+  unnnicConnectProjectSelector: ConnectProjectSelector,
   unnnicChartMultiLine: ChartMultiLine,
 };
 
@@ -247,4 +249,5 @@ export const unnnicChatsHeader = ChatsHeader;
 export const unnnicChatsMessage = ChatsMessage;
 export const unnnicChatsNavbar = ChatsNavbar;
 export const unnnicChatsUserAvatar = ChatsUserAvatar;
+export const unnnicConnectProjectSelector = ConnectProjectSelector;
 export const unnnicChartMultiLine = ChartMultiLine;
