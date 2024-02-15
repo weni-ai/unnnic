@@ -27,7 +27,7 @@ const TemplateList = (args, { argTypes }) => ({
 });
 
 const defaultArgs = {
-  username: 'John Doe',
+  title: 'John Doe',
   lastMessage: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel.',
 };
 const unreadMessages = 5;
@@ -68,6 +68,13 @@ export const WaitingRead = Template.bind({});
 WaitingRead.args = {
   ...defaultArgs,
   waitingTime,
+};
+
+export const Discussion = Template.bind({});
+Discussion.args = {
+  ...defaultArgs,
+  title: 'Lorem ipsum dolor sit amet',
+  discussionGoal: 'John Doe',
 };
 
 export const ContactList = TemplateList.bind({});

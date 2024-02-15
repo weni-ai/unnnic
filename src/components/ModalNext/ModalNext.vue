@@ -78,7 +78,7 @@
           >
             <unnnic-button
               v-if="validate || actionSecondaryLabel"
-              type="terciary"
+              type="tertiary"
               @click="
                 $listeners['click-action-secondary']
                   ? $emit('click-action-secondary', { close: justClose })

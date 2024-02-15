@@ -97,7 +97,6 @@ export default {
   title: 'example/Icon',
   component: unnnicIcon,
   argTypes: {
-    icon: { control: { type: 'select', options: iconsOptions } },
     scheme: { control: { type: 'select', options: schemes } },
     size: {
       control: {

@@ -12,8 +12,18 @@ export default {
     scheme: {
       control: {
         type: 'select',
-        options: ['feedback-red', 'feedback-green', 'feedback-yellow', 'feedback-blue', 'feedback-grey',
-          'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink'],
+        options: [
+          'feedback-red',
+          'feedback-green',
+          'feedback-yellow',
+          'feedback-blue',
+          'feedback-grey',
+          'aux-blue',
+          'aux-purple',
+          'aux-orange',
+          'aux-lemon',
+          'aux-pink',
+        ],
       },
     },
     position: {
@@ -74,8 +84,42 @@ Recommended use:
   },
 });
 
+const TemplateWithContainerRef = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { alertCaller, unnnicAlert },
+  template: `
+    <div ref="divContainer" style="height: 200px; position: relative; border: 1px solid black">
+      <button @click="unnnicCallAlert">Click for alert</button>
+
+      <pre>
+      To use, add position relative style to your container
+      and pass it as "containerRef" at callAlert function like:
+
+      alert.callAlert({
+        containerRef: this.$refs.divContainer,
+      });
+      </pre>
+    </div>`,
+  methods: {
+    unnnicCallAlert() {
+      alert.callAlert({
+        props: this.$props,
+        containerRef: this.$refs.divContainer,
+      });
+    },
+  },
+});
+
 export const Normal = Template.bind({});
 Normal.args = {
+  title: 'Title',
+  text: 'Text',
+  icon: 'check-circle-1-1',
+  scheme: 'feedback-green',
+};
+
+export const WithContainerRef = TemplateWithContainerRef.bind({});
+WithContainerRef.args = {
   title: 'Title',
   text: 'Text',
   icon: 'check-circle-1-1',

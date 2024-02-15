@@ -1,13 +1,14 @@
 <template>
   <div class="audio-player">
-    <span
+    <div
       @click="click"
       @keypress.enter="click"
-      class="unnnic--clickable"
+      class="audio-player__handler"
       :class="{ inactive: reqStatus === 'sending' }"
     >
-      <unnnic-icon :icon="playbackIcon" scheme="neutral-darkest" />
-    </span>
+      <unnnic-icon-loading v-if="this.reqStatus === 'sending'" size="md" scheme="neutral-darkest" />
+      <unnnic-icon v-else :icon="playbackIcon" scheme="neutral-darkest" />
+    </div>
 
     <input
       v-if="showProgressBar"
@@ -38,10 +39,12 @@
 </template>
 
 <script>
+import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import UnnnicIcon from '../Icon.vue';
 
 export default {
   components: {
+    UnnnicIconLoading,
     UnnnicIcon,
   },
 
@@ -115,16 +118,11 @@ export default {
       return !this.bars || this.bars.length === 0;
     },
     playbackIcon() {
-      const statusMapping = {
-        sending: 'loading-circle-1',
-        failed: 'upload-bottom-1',
-      };
-
-      if (this.reqStatus in statusMapping) {
-        return statusMapping[this.reqStatus];
+      if (this.reqStatus === 'failed') {
+        return 'upload';
       }
 
-      return this.isPlaying ? 'controls-pause-1' : 'controls-play-1';
+      return this.isPlaying ? 'pause_circle' : 'play_circle';
     },
     progressBarStyle() {
       return {
@@ -149,10 +147,18 @@ export default {
   align-items: center;
   gap: $unnnic-spacing-stack-xs;
 
+  width: 100%;
+
+  &__handler {
+    display: flex;
+
+    cursor: pointer;
+  }
+
   &__progress-bar {
     position: relative;
 
-    width: 11.5 * $unnnic-font-size;
+    width: clamp(85px, 100%, 185px);
     height: 2px;
 
     outline: none;

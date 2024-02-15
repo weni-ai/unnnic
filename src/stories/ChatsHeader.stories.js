@@ -10,14 +10,14 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicChatsHeader },
-  template: '<unnnic-chats-header v-bind="$props"/>',
+  template: '<unnnic-chats-header v-bind="$props" @crumbClick="crumbClick"/>',
 });
 
 const DashboardTemplate = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicChatsHeader, unnnicChatsDashboardTagLive },
   template:
-    `<unnnic-chats-header v-bind="$props">
+    `<unnnic-chats-header v-bind="$props" @crumbClick="crumbClick">
       <unnnic-chats-dashboard-tag-live />
     </unnnic-chats-header>`,
 });
@@ -26,6 +26,7 @@ const back = () => alert('back');
 const close = () => alert('close');
 const titleClick = () => alert('titleClick');
 const avatarClick = () => alert('avatarClick');
+const crumbClick = (event) => alert(JSON.stringify(event));
 
 const size = window.innerWidth < 600 ? 'small' : 'large';
 
@@ -34,6 +35,7 @@ const defaultArgs = {
   close,
   titleClick,
   avatarClick,
+  crumbClick,
 };
 
 export const Contact = Template.bind({});
@@ -59,6 +61,7 @@ Dashboard.args = {
   title: size === 'large' ? 'Lorem Ipsum Inc.' : 'Dashboard',
   subtitle: size === 'large' ? 'Dashboard of project' : 'Lorem Ipsum Inc.',
   avatarIcon: 'graph-stats-1',
+  crumbClick,
   crumbs: [
     {
       name: 'Chats',
@@ -77,6 +80,7 @@ History.args = {
   title: size === 'large' ? 'Lorem Ipsum Inc.' : 'History',
   subtitle: size === 'large' ? 'History of project' : 'Lorem Ipsum Inc.',
   avatarIcon: 'task-list-clock-1',
+  crumbClick,
   crumbs: [
     {
       name: 'Chats',

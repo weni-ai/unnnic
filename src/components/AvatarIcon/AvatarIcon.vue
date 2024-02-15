@@ -1,6 +1,20 @@
 <template>
-  <div :class="['unnnic-avatar-icon', scheme, size, { disabled: !enabled }]">
-    <unnnic-icon :icon="icon" :scheme="enabled ? scheme : 'neutral-cloudy'" :size="iconSize" />
+  <div
+    :class="[
+      'unnnic-avatar-icon',
+      scheme,
+      size,
+      { disabled: !enabled },
+      filled,
+      { opacity: !opacity },
+    ]"
+  >
+    <unnnic-icon
+      :icon="icon"
+      :scheme="enabled ? scheme : 'neutral-cloudy'"
+      :size="iconSize"
+      :filled="filled"
+    />
   </div>
 </template>
 
@@ -35,6 +49,15 @@ export default {
       type: String,
       default: 'aux-blue',
     },
+
+    filled: {
+      type: Boolean,
+      default: false,
+    },
+    opacity: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   computed: {
@@ -54,22 +77,16 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/unnnic.scss';
 
-$scheme-colors:
-  'feedback-red' $unnnic-color-feedback-red,
-  'feedback-green' $unnnic-color-feedback-green,
-  'feedback-yellow' $unnnic-color-feedback-yellow,
-  'feedback-blue' $unnnic-color-feedback-blue,
-  'feedback-grey' $unnnic-color-feedback-grey,
-   'aux-blue' $unnnic-color-aux-blue,
-   'aux-purple' $unnnic-color-aux-purple,
-   'aux-orange' $unnnic-color-aux-orange,
-   'aux-lemon' $unnnic-color-aux-lemon,
-   'aux-pink' $unnnic-color-aux-pink;
-
 @each $name, $color in $scheme-colors {
   .unnnic-avatar-icon {
     &.#{$name} {
       background-color: rgba($color, $unnnic-opacity-level-extra-light);
+    }
+  }
+
+  .unnnic-avatar-icon.opacity {
+    &.#{$name} {
+      background-color: rgba($color, $unnnic-opacity-level-light);
     }
   }
 }
@@ -83,7 +100,8 @@ $scheme-colors:
   padding: $unnnic-spacing-inset-nano;
   display: inline-flex;
 
-  &.nano, &.xs {
+  &.nano,
+  &.xs {
     padding: $unnnic-spacing-stack-nano $unnnic-spacing-inline-nano;
   }
 }

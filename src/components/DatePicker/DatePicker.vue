@@ -7,10 +7,10 @@
             <unnnic-button
               size="small"
               :icon-center="`arrow-${index === 0 ? 'left' : 'right'}-1-1`"
-              :type="size === 'large' ? 'secondary' : 'terciary'"
+              :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: `${index === 0 ? 'left' : 'right'}-button` }"
-              @click="referenceDate = addMonth(referenceDate, index === 0 ? -1 : 1)"
+              @click.stop="referenceDate = addMonth(referenceDate, index === 0 ? -1 : 1)"
             />
 
             <div :class="['label', `label--${size}`]">
@@ -51,7 +51,7 @@
             <unnnic-button
               size="small"
               icon-center="arrow-left-1-1"
-              :type="size === 'large' ? 'secondary' : 'terciary'"
+              :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'left-button' }"
               @click="referenceDate = addMonth(referenceDate, -12)"
@@ -64,7 +64,7 @@
             <unnnic-button
               size="small"
               icon-center="arrow-right-1-1"
-              :type="size === 'large' ? 'secondary' : 'terciary'"
+              :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'right-button' }"
               @click="referenceDate = addMonth(referenceDate, 12)"
@@ -102,7 +102,7 @@
             <unnnic-button
               size="small"
               icon-center="arrow-left-1-1"
-              :type="size === 'large' ? 'secondary' : 'terciary'"
+              :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'left-button' }"
               @click="referenceDate = addMonth(referenceDate, -12 * 12)"
@@ -115,7 +115,7 @@
             <unnnic-button
               size="small"
               icon-center="arrow-right-1-1"
-              :type="size === 'large' ? 'secondary' : 'terciary'"
+              :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'right-button' }"
               @click="referenceDate = addMonth(referenceDate, 12 * 12)"
@@ -162,7 +162,7 @@
         <unnnic-button
           size="small"
           :text="clearLabel"
-          type="terciary"
+          type="tertiary"
           @click="clear"
         />
 

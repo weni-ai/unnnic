@@ -32,7 +32,7 @@ jobs:
             echo "COMMIT_SHA=$GITHUB_SHA" | tee -a "${GITHUB_ENV}"
             echo "IMAGE_TAG=${{ secrets.ECR }}/unnnic:$TAG" | tee -a "${GITHUB_ENV}"
             echo "IMAGE_SOURCE_URL=https://github.com/Ilhasoft/unnnic" | tee -a "${GITHUB_ENV}"
-            echo "MANIFESTS_REPOSITORY=Ilhasoft/kubernetes-manifests" | tee -a "${GITHUB_ENV}"
+            echo "MANIFESTS_REPOSITORY=weni-ai/kubernetes-manifests" | tee -a "${GITHUB_ENV}"
             echo "MANIFESTS_APPLICATION=unnnic" | tee -a "${GITHUB_ENV}"
             echo "MANIFESTS_PATCH_TARGET=deployment.json" | tee -a "${GITHUB_ENV}"
             

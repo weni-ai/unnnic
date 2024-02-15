@@ -22,6 +22,16 @@ const Template = (args, { argTypes }) => ({
   `,
 });
 
+const TemplateWithLink = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { unnnicChatsMessage },
+  template: `
+    <unnnic-chats-message v-bind="$props">
+      A message with link: http://localhost:8080
+    </unnnic-chats-message>
+  `,
+});
+
 const ReceivedAndSentTemplate = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicChatsMessage },
@@ -202,6 +212,19 @@ Sending.args = {
 export const ReceivedAndSent = ReceivedAndSentTemplate.bind({});
 ReceivedAndSent.args = {
   ...defaultArgs,
+};
+
+export const WithSignature = Template.bind({});
+WithSignature.args = {
+  ...defaultArgs,
+  type: 'sent',
+  signature: 'John Doe',
+};
+
+export const WithLink = TemplateWithLink.bind({});
+WithLink.args = {
+  ...defaultArgs,
+  type: 'sent',
 };
 
 export const MultipleMessages = MultipleMessagesTemplate.bind({});

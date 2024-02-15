@@ -16,9 +16,10 @@
           "
         >
           <unnnic-icon
-            :icon="isSelected(link) ? link.icon.selected : link.icon.default"
+            :icon="getLinkIcon(link)"
             size="lg"
             scheme="neutral-snow"
+            :filled="isSelected(link)"
           />
         </a>
       </li>
@@ -57,7 +58,8 @@ export default {
 
         function isValidLink(link) {
           const hasValidName = typeof link.name === 'string';
-          const hasValidIcon = typeof link.icon.default === 'string';
+          const hasValidIcon =
+            typeof link.icon === 'string' || typeof link.icon.default === 'string';
           const hasValidAction = typeof link.action === 'function';
 
           return hasValidName && hasValidIcon && hasValidAction;
@@ -67,34 +69,33 @@ export default {
       },
     },
 
-    initialLink: {
+    value: {
       type: String,
-      required: false,
+      required: true,
     },
-  },
-
-  data() {
-    return {
-      selectedLink: null,
-    };
   },
 
   methods: {
     selectLink(link) {
-      this.selectedLink = link;
+      this.$emit('input', link.name);
     },
 
     isSelected(link) {
-      return this.selectedLink === link;
+      return this.value === link.name;
     },
-  },
 
-  mounted() {
-    if (this.initialLink) {
-      const initialLinkToSelect = this.links.find((link) => link.name === this.initialLink);
+    getLinkIcon(link) {
+      const { icon } = link;
+      if (typeof icon === 'string') {
+        return icon;
+      }
 
-      this.selectLink(initialLinkToSelect);
-    }
+      if (this.isSelected(link)) {
+        return icon.selected;
+      }
+
+      return icon.default || '';
+    },
   },
 };
 </script>

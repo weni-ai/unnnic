@@ -48,6 +48,7 @@
                   :icon="option.icon"
                   :scheme="option.active ? 'brand-weni-soft' : 'neutral-cloudy'"
                   :size="!expanded ? 'md' : 'ant'"
+                  :filled="option.active"
                 />
 
                 <span class="label">{{ option.label }}</span>
@@ -86,7 +87,7 @@
             <tool-tip :enabled="!expanded" :text="hideText" side="right">
               <div class="option" @click="toggleExpanded">
                 <icon-svg
-                  :icon="expanded ? 'expand-8-1' : 'expand-full-1'"
+                  :icon="expanded ? 'close_fullscreen' : 'open_in_full'"
                   :scheme="'neutral-cloudy'"
                   :size="!expanded ? 'md' : 'ant'"
                 />
@@ -330,6 +331,7 @@ $transition-time: 0.4s;
         overflow: hidden;
         text-overflow: ellipsis;
         user-select: none;
+        margin-left: $unnnic-spacing-xs;
       }
 
       &:hover:not(.disabled) {
@@ -371,10 +373,6 @@ $transition-time: 0.4s;
         width: 100%;
         height: ($unnnic-font-size-body-md + $unnnic-line-height-md);
         margin-bottom: $unnnic-spacing-stack-xs;
-      }
-
-      .option ::v-deep .unnnic-icon {
-        margin-right: $unnnic-spacing-inline-xs;
       }
 
       &:not(:last-child) .divider {

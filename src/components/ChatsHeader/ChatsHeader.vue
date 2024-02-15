@@ -1,14 +1,25 @@
 <template>
-  <div class="unnnic-chats-header__container">
+  <div class="unnnic-chats-header__container" :class="[size]">
     <header class="unnnic-chats-header" :class="{ contact: !!avatarName }">
       <div class="unnnic-chats-header__topbar" v-if="!avatarName">
-        <unnnic-breadcrumb :crumbs="crumbs" />
-        <unnnic-button-close @close="close" size="ant" />
+        <unnnic-breadcrumb :crumbs="crumbs" @crumbClick="(crumb) => $emit('crumbClick', crumb)" />
+        <unnnic-button
+          v-if="close"
+          @click="close"
+          type="tertiary"
+          iconCenter="close"
+          size="small"
+        />
       </div>
       <main class="unnnic-chats-header__main">
-        <div v-if="back" class="unnnic-chats-header__main__back" @click="back">
-          <unnnic-icon icon="keyboard-arrow-left-1" size="md" />
-        </div>
+        <unnnic-button
+          v-if="back"
+          class="unnnic-chats-header__main__back"
+          type="tertiary"
+          size="small"
+          iconCenter="keyboard-arrow-left-1"
+          @click="back"
+        />
         <section class="unnnic-chats-header__infos">
           <unnnic-chats-user-avatar
             v-if="avatarName"
@@ -22,7 +33,7 @@
             @click="avatarClick ? avatarClick() : () => {}"
           >
             <unnnic-avatar-icon
-              scheme="aux-purple"
+              :scheme="sectionIconScheme"
               class="unnnic-chats-header__avatar-icon"
               size="sm"
               :icon="avatarIcon"
@@ -42,10 +53,13 @@
           <slot />
         </div>
       </main>
-      <unnnic-button-close
+      <unnnic-button
+        v-if="close"
         class="unnnic-chats-header__close--sm"
-        size="sm"
-        @close="close"
+        @click="close"
+        type="tertiary"
+        iconCenter="close"
+        size="small"
       />
     </header>
   </div>
@@ -53,11 +67,10 @@
 <script>
 import UnnnicI18n from '../../mixins/i18n';
 
-import UnnnicButtonClose from '../ButtonClose/ButtonClose.vue';
+import UnnnicButton from '../Button/Button.vue';
 import UnnnicAvatarIcon from '../AvatarIcon/AvatarIcon.vue';
 import UnnnicChatsUserAvatar from '../ChatsUserAvatar/ChatsUserAvatar.vue';
 import UnnnicBreadcrumb from '../Breadcrumb/Breadcrumb.vue';
-import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'UnnnicChatsHeader',
@@ -65,11 +78,10 @@ export default {
   mixins: [UnnnicI18n],
 
   components: {
-    UnnnicButtonClose,
+    UnnnicButton,
     UnnnicAvatarIcon,
     UnnnicChatsUserAvatar,
     UnnnicBreadcrumb,
-    UnnnicIcon,
   },
 
   props: {
@@ -81,6 +93,10 @@ export default {
     subtitle: {
       type: String,
       default: '',
+    },
+    sectionIconScheme: {
+      type: String,
+      default: 'aux-purple',
     },
     avatarIcon: {
       type: String,
@@ -109,6 +125,13 @@ export default {
     crumbs: {
       type: Array,
       default: () => [],
+    },
+    size: {
+      type: String,
+      default: 'auto',
+      validator(size) {
+        return ['auto', 'small', 'large'].includes(size);
+      },
     },
   },
 };
@@ -147,11 +170,9 @@ export default {
     display: grid;
     align-items: center;
     grid-template-columns: 1fr auto;
-    gap: $unnnic-spacing-xs;
+    gap: $unnnic-spacing-nano;
 
     &__back {
-      margin-right: $unnnic-spacing-md;
-
       cursor: pointer;
     }
   }
@@ -203,10 +224,7 @@ export default {
 }
 
 .unnnic-chats-header__container {
-  container-type: inline-size;
-
-  // Header large
-  @container (min-width: 600px) {
+  @mixin header-large-styles {
     .unnnic-chats-header {
       &:not(.contact) {
         padding: $unnnic-spacing-md;
@@ -267,6 +285,18 @@ export default {
           font-size: $unnnic-font-size-body-gt;
         }
       }
+    }
+  }
+
+  &.large {
+    @include header-large-styles;
+  }
+
+  &.auto {
+    container-type: inline-size;
+
+    @container (min-width: 600px) {
+      @include header-large-styles;
     }
   }
 }
