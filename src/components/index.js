@@ -26,9 +26,9 @@ import checkbox from './Checkbox/Checkbox.vue';
 import collapse from './Collapse/Collapse.vue';
 import radio from './Radio/Radio.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
-// import modal from './Modal/Modal.vue';
-// import modalUpload from './ModalUpload/ModalUpload.vue';
-// import call from '../utils/call';
+import modal from './Modal/Modal.vue';
+import modalUpload from './ModalUpload/ModalUpload.vue';
+import call from '../utils/call';
 import selectSmart from './SelectSmart/SelectSmart.vue';
 // import select from './Select/Select.vue';
 import selectItem from './Select/SelectItem.vue';
@@ -53,10 +53,10 @@ import Switch from './Switch/Switch.vue';
 import Slider from './Slider/Slider.vue';
 import DataArea from './DataArea/DataArea.vue';
 import Pagination from './Pagination/Pagination.vue';
-// import UploadArea from './UploadArea/UploadArea.vue';
+import UploadArea from './UploadArea/UploadArea.vue';
 import ImportCard from './ImportCard/ImportCard.vue';
-// import DateFilter from './DateFilter/DateFilter.vue';
-// import ChatText from './ChatText/ChatText.vue';
+import DateFilter from './DateFilter/DateFilter.vue';
+import ChatText from './ChatText/ChatText.vue';
 import TextArea from './TextArea/TextArea.vue';
 import CardNumber from './CardNumber/CardNumber.vue';
 import chartRainbow from './ChartRainbow/ChartRainbow.vue';
@@ -73,7 +73,7 @@ import ChatsHeader from './ChatsHeader/ChatsHeader.vue';
 import ChatsMessage from './ChatsMessage/ChatsMessage.vue';
 import ChatsNavbar from './ChatsNavbar/ChatsNavbar.vue';
 import ChatsUserAvatar from './ChatsUserAvatar/ChatsUserAvatar.vue';
-// import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
+import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
 
 export const components = {
   unnnicFormElement: formElement,
@@ -104,14 +104,14 @@ export const components = {
   unnnicCollapse: collapse,
   unnnicRadio: radio,
   unnnicLanguageSelect: languageSelect,
-  // unnnicModal: modal,
-  // unnnicModalUpload: modalUpload,
+  unnnicModal: modal,
+  unnnicModalUpload: modalUpload,
   unnnicSelectSmart: selectSmart,
   // unnnicSelect: select,
   unnnicSelectItem: selectItem,
   // unnnicSelectListItem: selectListItem,
   unnnicMultiSelect: multiSelect,
-  // unnnicAlert: alert,
+  unnnicAlert: alert,
   // unnnicAutocomplete: autocomplete,
   // unnnicAutocompleteSelect: autocompleteSelect,
   unnnicTag: tag,
@@ -130,10 +130,10 @@ export const components = {
   unnnicSlider: Slider,
   unnnicDataArea: DataArea,
   unnnicPagination: Pagination,
-  // unnnicUploadArea: UploadArea,
+  unnnicUploadArea: UploadArea,
   unnnicImportCard: ImportCard,
-  // unnnicDateFilter: DateFilter,
-  // unnnicChatText: ChatText,
+  unnnicDateFilter: DateFilter,
+  unnnicChatText: ChatText,
   unnnicTextArea: TextArea,
   unnnicCardNumber: CardNumber,
   unnnicChartRainbow: chartRainbow,
@@ -182,16 +182,16 @@ export const unnnicCheckbox = checkbox;
 export const unnnicCollapse = collapse;
 export const unnnicRadio = radio;
 export const unnniclanguageSelect = languageSelect;
-// export const unnnicModal = modal;
-// export const unnnicModalUpload = modalUpload;
+export const unnnicModal = modal;
+export const unnnicModalUpload = modalUpload;
 export const unnnicSelectSmart = selectSmart;
 // export const unnnicSelect = select;
 export const unnnicSelectItem = selectItem;
 // export const unnnicSelectListItem = selectListItem;
 export const unnnicMultiSelect = multiSelect;
-// export const unnnicAlert = alert;
-// export const unnnicCallAlert = call.callAlert;
-// export const unnnicCallModal = call.callModal;
+export const unnnicAlert = alert;
+export const unnnicCallAlert = call.callAlert;
+export const unnnicCallModal = call.callModal;
 // export const unnnicAutocomplete = autocomplete;
 // export const unnnicAutocompleteSelect = autocompleteSelect;
 export const unnnicTag = tag;
@@ -210,10 +210,10 @@ export const unnnicSwitch = Switch;
 export const unnnicSlider = Slider;
 export const unnnicDataArea = DataArea;
 export const unnnicPagination = Pagination;
-// export const unnnicUploadArea = UploadArea;
+export const unnnicUploadArea = UploadArea;
 export const unnnicImportCard = ImportCard;
-// export const unnnicDateFilter = DateFilter;
-// export const unnnicChatText = ChatText;
+export const unnnicDateFilter = DateFilter;
+export const unnnicChatText = ChatText;
 export const unnnicTextArea = TextArea;
 export const unnnicCardNumber = CardNumber;
 export const unnnicChartRainbow = chartRainbow;
@@ -230,4 +230,4 @@ export const unnnicChatsHeader = ChatsHeader;
 export const unnnicChatsMessage = ChatsMessage;
 export const unnnicChatsNavbar = ChatsNavbar;
 export const unnnicChatsUserAvatar = ChatsUserAvatar;
-// export const unnnicChartMultiLine = ChartMultiLine;
+export const unnnicChartMultiLine = ChartMultiLine;
