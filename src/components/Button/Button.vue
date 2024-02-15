@@ -362,7 +362,7 @@ export default {
   }
 
   &--float {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     right: 0;
 

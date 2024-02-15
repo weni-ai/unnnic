@@ -36,17 +36,20 @@ const TemplateFloat = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicButton },
   template: `
-  <div>
+  <div style="height: 80vh; display: grid; position: relative;">
     <unnnic-button v-bind="$props" />
 
     When to use this variation: <br/>
     When there is a need to present a main action above a list of contents. <br/>
-    It is important that the component is always floating over the content and fixed to the bottom right side.
+    It is important that the component is always floating over the content and fixed to the bottom right side. <br/>
+    (Remember to add position relative style to your container)
 
     <br/>
     <br/>
 
-    <p v-for="item in 50" :key="item">Scroll <br/></p>
+    <div style="overflow: scroll;">
+      <p v-for="item in 50" :key="item">Scroll <br/></p>
+    </div>
   </div>
   `,
 });
