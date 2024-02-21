@@ -4,6 +4,10 @@
       {{ page === 'orgs' ? i18n('your_organizations_label') : i18n('your_projects_label') }}
     </div>
 
+    <h2 class="page-subtitle">
+      {{ i18n('choose_one') }}
+    </h2>
+
     <template v-if="page === 'orgs'">
       <unnnic-input
         size="sm"
@@ -15,11 +19,11 @@
 
       <div class="organizations-list">
         <unnnic-card-company
-          v-for="org in organizations.data.filter(({ name }) =>
-            name.toLowerCase().includes(organizationsSearch.toLowerCase())
-          )"
+          :locale="locale"
+          :translations="get(translations, 'plans') ? translations : defaultTranslations"
+          v-for="org in orgsFiltered"
           :key="org.uuid"
-          :title="org.name"
+          :name="org.name"
           :description="org.description"
           :tag="
             org.organization_billing.plan === 'trial'
@@ -57,6 +61,17 @@
             <unnnic-skeleton-loading tag="div" width="211px" height="24px" />
           </div>
         </div>
+
+        <div
+          v-else-if="
+            organizationsSearch
+            && organizations.status === 'complete'
+            && orgsFiltered.length === 0
+          "
+          class="organizations-list__not-found"
+        >
+          {{ i18n('no_matches_for_the_search') }}
+        </div>
       </div>
     </template>
 
@@ -71,9 +86,7 @@
 
       <div class="projects-list">
         <unnnic-card-project
-          v-for="project in projects[currentOrgUuid].data.filter(({ name }) =>
-            name.toLowerCase().includes(projectsSearch.toLowerCase())
-          )"
+          v-for="project in projectsFiltered"
           :key="project.uuid"
           :name="project.name"
           :statuses="[
@@ -103,6 +116,17 @@
           <unnnic-skeleton-loading :style="{ marginBottom: '16px' }" tag="div" height="50px" />
           <unnnic-skeleton-loading tag="div" width="100%" height="50px" />
         </div>
+
+        <div
+          v-else-if="
+            projectsSearch
+            && projects[currentOrgUuid].status === 'complete'
+            && projectsFiltered.length === 0
+          "
+          class="projects-list__not-found"
+        >
+          {{ i18n('no_matches_for_the_search') }}
+        </div>
       </div>
     </template>
   </div>
@@ -110,6 +134,7 @@
 
 <script>
 import axios from 'axios';
+import { get } from 'lodash';
 import UnnnicI18n from '../../mixins/i18n';
 import UnnnicInput from '../Input/Input.vue';
 import UnnnicCardCompany from '../Card/CardCompany.vue';
@@ -173,10 +198,22 @@ export default {
           es: 'Sus proyectos',
         },
 
+        choose_one: {
+          'pt-br': 'Escolha uma para acessar o Weni Chats',
+          en: 'Choose one to access Weni Chats',
+          es: 'Elija uno para acceder a los Weni Chats',
+        },
+
         search_placeholder: {
           'pt-br': 'Pesquisar',
           en: 'Search',
           es: 'Buscar',
+        },
+
+        no_matches_for_the_search: {
+          'pt-br': 'Não há correspondências para a pesquisa',
+          en: 'There are no matches for the search',
+          es: 'No hay resultados para la encuesta',
         },
 
         organizations_plans_trial: {
@@ -208,6 +245,32 @@ export default {
           en: 'Flows',
           es: 'Flujos',
         },
+
+        plans: {
+          trial: {
+            'pt-br': 'Teste',
+            en: 'Trial',
+            es: 'Prueba',
+          },
+
+          scale: {
+            'pt-br': 'Scale',
+            en: 'Scale',
+            es: 'Escala',
+          },
+
+          advanced: {
+            'pt-br': 'Avançado',
+            en: 'Advanced',
+            es: 'Avanzada',
+          },
+
+          enterprise: {
+            'pt-br': 'Empresarial',
+            en: 'Enterprise',
+            es: 'Empresa',
+          },
+        },
       },
     };
   },
@@ -236,6 +299,16 @@ export default {
           Authorization: this.authorization,
         },
       });
+    },
+
+    orgsFiltered() {
+      return this.organizations.data
+        .filter(({ name }) => name.toLowerCase().includes(this.organizationsSearch.toLowerCase()));
+    },
+
+    projectsFiltered() {
+      return this.projects[this.currentOrgUuid].data
+        .filter(({ name }) => name.toLowerCase().includes(this.projectsSearch.toLowerCase()));
     },
   },
 
@@ -287,6 +360,8 @@ export default {
   },
 
   methods: {
+    get,
+
     selectOrg(org) {
       this.$emit('update:page', `orgs/${org.uuid}/projects`);
     },
@@ -360,22 +435,44 @@ export default {
 .page-title {
   text-align: center;
   font-family: $unnnic-font-family-primary;
-  font-weight: $unnnic-font-weight-regular;
+  font-weight: $unnnic-font-weight-bold;
   font-size: $unnnic-font-size-title-sm;
   line-height: $unnnic-font-size-title-sm + $unnnic-line-height-md;
   color: $unnnic-color-neutral-dark;
 
-  margin-bottom: $unnnic-spacing-lg;
+  margin-bottom: $unnnic-spacing-nano;
+}
+
+.page-subtitle {
+  margin: 0;
+
+  text-align: center;
+  font-family: $unnnic-font-family-secondary;
+  font-weight: $unnnic-font-weight-regular;
+  font-size: $unnnic-font-size-body-lg;
+  line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
+  color: $unnnic-color-neutral-dark;
+
+  margin-bottom: $unnnic-spacing-md;
 }
 
 .search-input {
-  margin-bottom: $unnnic-spacing-md;
+  margin-bottom: $unnnic-spacing-xs;
 }
 
 .organizations-list,
 .projects-list {
   display: flex;
   flex-direction: column;
-  row-gap: $unnnic-spacing-sm;
+  row-gap: $unnnic-spacing-xs;
+
+  &__not-found {
+    font-family: $unnnic-font-family-secondary;
+    font-weight: $unnnic-font-weight-regular;
+    font-size: $unnnic-font-size-body-md;
+    line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+    color: $unnnic-color-neutral-cloudy;
+    padding-inline: $unnnic-spacing-xs;
+  }
 }
 </style>
