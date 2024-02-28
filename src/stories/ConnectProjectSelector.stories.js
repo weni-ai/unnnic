@@ -26,17 +26,28 @@ const Template = (args, { argTypes }) => ({
 
   data() {
     return {
-      pageInside: '',
+      organizationUuidInside: '',
       projectUuidInside: '',
+      organizationsItemsInside: [],
+      projectsItemsInside: [],
     };
   },
 
   template: `
     <div>
-      <pre>page: {{ pageInside }}
-projectUuid: {{ projectUuidInside }}</pre>
-      <button @click="pageInside = 'orgs'">Go back</button>
-      <unnnic-connect-project-selector v-bind="$props" :page.sync="pageInside" :project-uuid.sync="projectUuidInside">
+      <pre>organizationUuid: {{ organizationUuidInside }}
+projectUuid: {{ projectUuidInside }}
+organizationItems.slice(0, 1): {{ organizationsItemsInside.slice(0, 1) }}
+projectsItems.slice(0, 1): {{ projectsItemsInside.slice(0, 1) }}</pre>
+      <button @click="organizationUuidInside = ''">Go back</button>
+      <unnnic-connect-project-selector
+        v-bind="$props"
+        :organizationUuid.sync="organizationUuidInside"
+        :projectUuid.sync="projectUuidInside"
+        :organizationsItems.sync="organizationsItemsInside"
+        :projectsItems.sync="projectsItemsInside"
+      >
+        <template slot="subtitle">Escolha uma para acessar o Weni Chats</template>
       </unnnic-connect-project-selector>
     </div>
   `,

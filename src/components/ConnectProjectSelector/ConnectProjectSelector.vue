@@ -1,14 +1,14 @@
 <template>
   <div class="unnnic-form-element">
     <div class="page-title">
-      {{ page === 'orgs' ? i18n('your_organizations_label') : i18n('your_projects_label') }}
+      {{ !organizationUuid ? i18n('your_organizations_label') : i18n('your_projects_label') }}
     </div>
 
-    <h2 class="page-subtitle">
-      {{ i18n('choose_one') }}
+    <h2 v-if="$slots.subtitle" class="page-subtitle">
+      <slot name="subtitle"></slot>
     </h2>
 
-    <template v-if="page === 'orgs'">
+    <template v-if="!organizationUuid">
       <unnnic-input
         size="sm"
         icon-left="search-1"
@@ -19,25 +19,14 @@
 
       <div class="organizations-list">
         <unnnic-card-company
+          oldVersion
           :locale="locale"
           :translations="get(translations, 'plans') ? translations : defaultTranslations"
           v-for="org in orgsFiltered"
           :key="org.uuid"
           :name="org.name"
           :description="org.description"
-          :tag="
-            org.organization_billing.plan === 'trial'
-              ? i18n('organizations_plans_trial')
-              : undefined
-          "
-          :members="parseMembers(org.authorizations.users)"
-          :members-description="
-            org.authorizations.count > 3
-              ? i18n('remaining_members', org.authorizations.count - 3, {
-                  n: org.authorizations.count - 3,
-                })
-              : undefined
-          "
+          :action-text="i18n('enter')"
           @click.native="selectOrg(org)"
         />
 
@@ -75,7 +64,7 @@
       </div>
     </template>
 
-    <template v-else-if="currentOrgUuid">
+    <template v-else>
       <unnnic-input
         size="sm"
         icon-left="search-1"
@@ -109,10 +98,11 @@
               count: project.total_contact_count,
             },
           ]"
+          :action-text="i18n('enter')"
           @click.native="selectProject(project)"
         />
 
-        <div v-if="projects[currentOrgUuid].status === 'loading'">
+        <div v-if="projects[organizationUuid].status === 'loading'">
           <unnnic-skeleton-loading :style="{ marginBottom: '16px' }" tag="div" height="50px" />
           <unnnic-skeleton-loading tag="div" width="100%" height="50px" />
         </div>
@@ -120,7 +110,7 @@
         <div
           v-else-if="
             projectsSearch
-            && projects[currentOrgUuid].status === 'complete'
+            && projects[organizationUuid].status === 'complete'
             && projectsFiltered.length === 0
           "
           class="projects-list__not-found"
@@ -134,7 +124,7 @@
 
 <script>
 import axios from 'axios';
-import { get } from 'lodash';
+import { get, pick } from 'lodash';
 import UnnnicI18n from '../../mixins/i18n';
 import UnnnicInput from '../Input/Input.vue';
 import UnnnicCardCompany from '../Card/CardCompany.vue';
@@ -152,11 +142,19 @@ export default {
   },
 
   props: {
-    projectUuid: {
+    organizationUuid: {
       type: String,
     },
 
-    page: {
+    organizationsItems: {
+      type: Array,
+    },
+
+    projectsItems: {
+      type: Array,
+    },
+
+    projectUuid: {
       type: String,
     },
 
@@ -169,6 +167,20 @@ export default {
     authorization: {
       type: String,
       required: true,
+    },
+
+    organizationAttributes: {
+      type: Array,
+      default() {
+        return ['uuid', 'name', 'description', 'organization_billing.plan', 'authorization.uuid', 'authorization.role', 'is_suspended', 'enforce_2fa'];
+      },
+    },
+
+    projectAttributes: {
+      type: Array,
+      default() {
+        return ['uuid', 'name', 'description', 'authorization.uuid', 'authorization.role', 'authorization.chats_role'];
+      },
     },
   },
 
@@ -186,6 +198,12 @@ export default {
       projects: {},
 
       defaultTranslations: {
+        enter: {
+          'pt-br': 'Entrar',
+          en: 'Enter',
+          es: 'Entra',
+        },
+
         your_organizations_label: {
           'pt-br': 'Suas organizações',
           en: 'Your organizations',
@@ -198,12 +216,6 @@ export default {
           es: 'Sus proyectos',
         },
 
-        choose_one: {
-          'pt-br': 'Escolha uma para acessar o Weni Chats',
-          en: 'Choose one to access Weni Chats',
-          es: 'Elija uno para acceder a los Weni Chats',
-        },
-
         search_placeholder: {
           'pt-br': 'Pesquisar',
           en: 'Search',
@@ -214,18 +226,6 @@ export default {
           'pt-br': 'Não há correspondências para a pesquisa',
           en: 'There are no matches for the search',
           es: 'No hay resultados para la encuesta',
-        },
-
-        organizations_plans_trial: {
-          'pt-br': 'Trial',
-          en: 'Trial',
-          es: 'Prueba',
-        },
-
-        remaining_members: {
-          'pt-br': '+{n} membro | +{n} membros',
-          en: '+{n} member | +{n} members',
-          es: '+{n} miembro | +{n} miembros',
         },
 
         project_ai: {
@@ -276,14 +276,6 @@ export default {
   },
 
   computed: {
-    currentOrgUuid() {
-      const {
-        groups: { orgUuid },
-      } = this.page.match(/^orgs\/(?<orgUuid>.+)\/projects/) || { groups: {} };
-
-      return orgUuid;
-    },
-
     baseURL() {
       return {
         develop: 'https://api.dev.cloud.weni.ai',
@@ -307,7 +299,7 @@ export default {
     },
 
     projectsFiltered() {
-      return this.projects[this.currentOrgUuid].data
+      return this.projects[this.organizationUuid].data
         .filter(({ name }) => name.toLowerCase().includes(this.projectsSearch.toLowerCase()));
     },
   },
@@ -336,24 +328,33 @@ export default {
       },
     },
 
-    currentOrgUuid: {
+    organizationUuid: {
       immediate: true,
 
-      handler(orgUuid) {
-        if (!orgUuid) {
+      handler(organizationUuid) {
+        this.$emit('update:projectUuid', null);
+        this.$emit('update:projectsItems', []);
+
+        if (organizationUuid) {
+          if (!this.projects[organizationUuid]) {
+            this.$set(this.projects, organizationUuid, {
+              page: 0,
+              data: [],
+              status: null,
+            });
+          }
+
+          this.updateProjectsItems();
+
+          if (this.projects[organizationUuid].status === null) {
+            this.loadNextProjects(organizationUuid);
+          }
+
           return;
         }
 
-        if (!this.projects[orgUuid]) {
-          this.$set(this.projects, orgUuid, {
-            page: 0,
-            data: [],
-            status: null,
-          });
-        }
-
-        if (this.projects[orgUuid].status === null) {
-          this.loadNextProjects(orgUuid);
+        if (this.organizations.status === null) {
+          this.loadNextOrganizations();
         }
       },
     },
@@ -363,19 +364,15 @@ export default {
     get,
 
     selectOrg(org) {
-      this.$emit('update:page', `orgs/${org.uuid}/projects`);
+      this.$emit('update:organizationUuid', org.uuid);
     },
 
     selectProject(project) {
-      this.$emit('update:page', `orgs/${this.currentOrgUuid}/projects/${project.uuid}`);
+      this.$emit('update:projectUuid', project.uuid);
     },
 
-    parseMembers(authorizations) {
-      return authorizations.map((member) => ({
-        name:
-          [member.first_name, member.last_name].filter((name) => name).join(' ') || member.username,
-        photo: member.photo_user,
-      }));
+    updateProjectsItems() {
+      this.$emit('update:projectsItems', this.projects[this.organizationUuid].data.map((i) => pick(i, this.projectAttributes)));
     },
 
     async loadNextProjects(orgUuid) {
@@ -400,6 +397,8 @@ export default {
 
       this.projects[orgUuid].data = [...this.projects[orgUuid].data, ...results];
 
+      this.updateProjectsItems();
+
       if (this.projects[orgUuid].status !== 'complete') {
         this.loadNextProjects(orgUuid);
       }
@@ -421,6 +420,8 @@ export default {
 
       this.organizations.data = [...this.organizations.data, ...results];
 
+      this.$emit('update:organizationsItems', this.organizations.data.map((i) => pick(i, this.organizationAttributes)));
+
       if (this.organizations.status !== 'complete') {
         this.loadNextOrganizations();
       }
@@ -439,8 +440,6 @@ export default {
   font-size: $unnnic-font-size-title-sm;
   line-height: $unnnic-font-size-title-sm + $unnnic-line-height-md;
   color: $unnnic-color-neutral-dark;
-
-  margin-bottom: $unnnic-spacing-nano;
 }
 
 .page-subtitle {
@@ -452,11 +451,11 @@ export default {
   font-size: $unnnic-font-size-body-lg;
   line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
   color: $unnnic-color-neutral-dark;
-
-  margin-bottom: $unnnic-spacing-md;
+  margin-top: $unnnic-spacing-nano;
 }
 
 .search-input {
+  margin-top: $unnnic-spacing-md;
   margin-bottom: $unnnic-spacing-xs;
 }
 

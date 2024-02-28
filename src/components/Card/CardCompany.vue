@@ -1,5 +1,11 @@
 <template>
-  <div class="unnnic-connect-card-company" @click="$emit('enter')">
+  <div
+    :class="[
+      'unnnic-connect-card-company',
+      { 'unnnic-connect-card-company--old-version': oldVersion },
+    ]"
+    @click="$emit('enter')"
+  >
     <div>
       <h2 class="name">{{ name }}</h2>
 
@@ -11,6 +17,15 @@
         {{ i18n(`plans.${plan}`) }}
       </div>
     </div>
+
+    <unnnic-tag
+      v-if="actionText"
+      class="action"
+      @click.native="$emit('action')"
+      clickable
+      :text="actionText"
+      scheme="aux-blue"
+    />
 
     <div v-if="$slots.options">
       <unnnic-dropdown
@@ -34,14 +49,21 @@
 
 <script>
 import UnnnicI18n from '../../mixins/i18n';
+import UnnnicTag from '../Tag/Tag.vue';
 
 export default {
+  components: {
+    UnnnicTag,
+  },
+
   mixins: [UnnnicI18n],
 
   props: {
+    oldVersion: Boolean,
     name: String,
     description: String,
     plan: String,
+    actionText: String,
   },
 
   data() {
@@ -95,6 +117,29 @@ export default {
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
 
     margin: 0;
+  }
+
+  .action {
+    align-self: center;
+  }
+
+  &--old-version {
+    outline: none;
+    background-color: $unnnic-color-background-sky;
+    column-gap: $unnnic-spacing-xs;
+
+    &:hover {
+      box-shadow: none;
+
+      outline-style: solid;
+      outline-color: $unnnic-color-neutral-soft;
+      outline-width: $unnnic-border-width-thin;
+      outline-offset: -$unnnic-border-width-thin;
+    }
+
+    .name {
+      margin-bottom: $unnnic-spacing-nano;
+    }
   }
 
   .tag {
