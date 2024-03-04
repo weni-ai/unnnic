@@ -118,16 +118,8 @@ export default {
   },
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { unnnicIcon },
-  template: `
-    <unnnic-icon v-bind="$props" />
-  `,
-});
-
-export const Normal = Template.bind({});
-
-Normal.args = {
-  icon: iconsOptions[0],
+export const Normal = {
+  args: {
+    icon: iconsOptions[0],
+  },
 };

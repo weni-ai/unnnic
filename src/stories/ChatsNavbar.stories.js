@@ -14,49 +14,44 @@ export default {
   },
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { unnnicChatsNavbar },
-  template: '<unnnic-chats-navbar v-bind="$props"/>',
-});
-
-export const Default = Template.bind({});
-Default.args = {
-  links: [
-    {
-      name: 'home',
-      icon: 'home',
-      action: () => {},
-    },
-    {
-      name: 'forum',
-      icon: 'forum',
-      action: () => {},
-    },
-    {
-      name: 'folder',
-      icon: {
-        default: 'folder',
-        selected: 'folder',
+export const Default = {
+  args: {
+    links: [
+      {
+        name: 'home',
+        icon: 'home',
+        action: () => {},
       },
-      action: () => {},
-    },
-    {
-      name: 'speed',
-      icon: {
-        default: 'speed',
-        selected: 'speed',
+      {
+        name: 'forum',
+        icon: 'forum',
+        action: () => {},
       },
-      action: () => {},
-    },
-    {
-      name: 'settings',
-      icon: {
-        default: 'settings',
-        selected: 'settings',
+      {
+        name: 'folder',
+        icon: {
+          default: 'folder',
+          selected: 'folder',
+        },
+        action: () => {},
       },
-      action: () => {},
-    },
-  ],
-  initialLink: 'home',
+      {
+        name: 'speed',
+        icon: {
+          default: 'speed',
+          selected: 'speed',
+        },
+        action: () => {},
+      },
+      {
+        name: 'settings',
+        icon: {
+          default: 'settings',
+          selected: 'settings',
+        },
+        action: () => {},
+      },
+    ],
+    initialLink: 'home',
+  },
 };
