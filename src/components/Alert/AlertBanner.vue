@@ -119,7 +119,7 @@
   
     &__close {
       display: flex;
-      padding: ($unnnic-spacing-xs*1.375) $unnnic-spacing-sm;
+      padding: 11px $unnnic-spacing-sm;
       cursor: pointer;
       user-select: none;
       border-left: $unnnic-border-width-thinner solid $unnnic-color-aux-blue-300;
