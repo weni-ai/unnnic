@@ -44,10 +44,6 @@
       }
     },
     props: {
-      version: {
-        type: String,
-        default: '1.0',
-      },
       text: {
         type: String,
         default: null,
