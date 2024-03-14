@@ -111,7 +111,6 @@ export default {
 
     background-color: $unnnic-color-background-snow;
     box-shadow: $unnnic-shadow-level-near;
-    position: fixed;
 
     z-index: 9999;
 
