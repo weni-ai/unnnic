@@ -80,10 +80,9 @@
   @import '../../assets/scss/unnnic.scss';
   
   .banner-alert {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 1fr auto;
     text-align: center;
-    justify-content: space-between;
     margin-bottom: $unnnic-spacing-sm;
   
     color: $unnnic-color-neutral-white;
@@ -119,7 +118,9 @@
   
     &__close {
       display: flex;
-      padding: 11px $unnnic-spacing-sm;
+      align-items: center;
+      max-height: 38px;
+      padding: 0 $unnnic-spacing-sm;
       cursor: pointer;
       user-select: none;
       border-left: $unnnic-border-width-thinner solid $unnnic-color-aux-blue-300;
