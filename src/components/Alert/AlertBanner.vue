@@ -1,15 +1,15 @@
 <template>
-    <div :class="['banner-alert', {
+    <section :class="['banner-alert', {
         'banner-alert--banner-danger': type === 'danger',
         'banner-alert--banner-warning': type === 'warning',
       }]">
-        <div v-show="text" class="banner-alert__container-text">
+        <header v-show="text" class="banner-alert__container-text">
           <unnnic-icon class="banner-alert__textIcon" v-show="isShowTextIcon(type)" :icon="getIconType(type)" size="sm" scheme="neutral-white" />
-          <span class="text" >{{ text }}</span>
+          <p class="text" >{{ text }}</p>
           <a v-if="linkHref" class="banner-alert__link" :href="linkHref" :target="linkTarget">
             {{ linkText }}
           </a>
-        </div>
+        </header>
   
         <div
           v-show="showCloseButton"
@@ -18,7 +18,7 @@
         >
           <unnnic-icon icon="close" size="sm" scheme="neutral-white" />
         </div>
-      </div>
+      </section>
   </template>
   
   <script>
@@ -101,7 +101,7 @@
       flex-grow: 1;
 
       .text {
-        margin-right: $unnnic-spacing-nano;
+        margin: 0 $unnnic-spacing-nano 0 0;
       }
     }
 
