@@ -110,7 +110,7 @@
     }
 
     &__textIcon {
-      margin-right: $unnnic-spacing-ant * 0.9;
+      margin-right: $unnnic-spacing-xs;
     }
   
     &__link {
