@@ -1,12 +1,14 @@
 import alertCaller from '../components/Alert/AlertCaller.vue';
 import alert from '../utils/call';
 import unnnicAlert from '../components/Alert/Alert.vue';
+import alertBanner from '../components/Alert/AlertBanner.vue';
 
 export default {
   title: 'example/Alert',
   component: unnnicAlert,
   argTypes: {
     text: { control: { type: 'text' } },
+    showCloseButton: { control: { type: 'boolean' } },
     title: { control: { type: 'text' } },
     closeText: { control: { type: 'text' } },
     scheme: {
@@ -110,6 +112,29 @@ const TemplateWithContainerRef = (args, { argTypes }) => ({
   },
 });
 
+const TemplateBanner = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { alertBanner },
+  template: `
+    <div>
+      <alert-banner v-bind="$props" />
+
+    <pre>
+    Recommended use:
+
+    &lt;unnnic-alert-banner
+      type            String default 'info' ('info', 'warning', 'danger')
+      text            String required
+      showCloseButton Boolean default false
+      @close          Event
+      link-href       String
+      ┠ link-text    String default 'Learn more'
+      ┖ link-target  String default '_blank'
+    /&gt;
+    </pre>
+    </div>`
+});
+
 export const Normal = Template.bind({});
 Normal.args = {
   title: 'Title',
@@ -124,4 +149,10 @@ WithContainerRef.args = {
   text: 'Text',
   icon: 'check-circle-1-1',
   scheme: 'feedback-green',
+};
+
+export const Banner = TemplateBanner.bind({});
+Banner.args = {
+  text: 'Text',
+  showCloseButton: false
 };
