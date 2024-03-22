@@ -77,7 +77,7 @@ export default {
 
       return this.valueName === 'selected'
         ? 'brand-weni'
-        : 'neutral-soft';
+        : 'neutral-cleanest';
     },
   },
 

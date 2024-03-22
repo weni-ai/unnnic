@@ -114,7 +114,7 @@ export default {
 .unnnic-checkbox {
   &[disabled] {
     ::v-deep .primary {
-      fill: $unnnic-color-neutral-soft;
+      fill: $unnnic-color-neutral-cleanest;
     }
   }
 }
