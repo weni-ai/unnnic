@@ -15,8 +15,13 @@ const Template = (args, { argTypes }) => ({
   components: {
     unnnicCheckbox,
   },
+  data() {
+    return {
+      value: true,
+    };
+  },
   template: `
-    <unnnic-checkbox v-bind="$props"></unnnic-checkbox>
+    <unnnic-checkbox v-bind="$props" v-model="value" />
   `,
 });
 
