@@ -92,11 +92,8 @@ export default {
 
   methods: {
     click() {
-      if (this.valueName === 'checked') {
-        this.$emit('change', false);
-      } else {
-        this.$emit('change', true);
-      }
+      const isChecked = ['checked', 'less'].includes(this.valueName);
+      this.$emit('change', !isChecked);
     },
   },
 };
