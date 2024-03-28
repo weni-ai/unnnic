@@ -9,6 +9,14 @@
   ],
   "main": "./dist/unnnic.umd.js",
   "module": "./dist/unnnic.mjs",
+  "exports": {
+    ".": {
+      "import": "./dist/unnnic.mjs",
+      "require": "./dist/unnnic.umd.js"
+    },
+    "./dist/style.css": "./dist/style.css",
+    "./src/assets/scss/unnnic.scss": "./src/assets/scss/unnnic.scss"
+  },
   "private": false,
   "scripts": {
     "dev": "vite",
