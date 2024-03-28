@@ -99,12 +99,12 @@ $unnnic-color-aux-baby-green: #B2FCA6;
 $unnnic-color-aux-baby-pink: #FFCBF6;
 
 /* Brand */
-$unnnic-color-brand-weni: $unnnic-color-weni-500;
-$unnnic-color-brand-weni-dark: #005E5A;
-$unnnic-color-brand-weni-soft: #009E96;
-$unnnic-color-brand-sec-dark: #262626;
-$unnnic-color-brand-sec-soft: #808080;
-$unnnic-color-brand-sec: #CCCCCC;
+$unnnic-color-brand-weni: $unnnic-color-weni-600;
+$unnnic-color-brand-weni-dark: $unnnic-color-weni-800;
+$unnnic-color-brand-weni-soft: $unnnic-color-weni-600; 
+$unnnic-color-brand-sec-dark: $unnnic-color-neutral-black;
+$unnnic-color-brand-sec-soft: $unnnic-color-neutral-dark;
+$unnnic-color-brand-sec: $unnnic-color-neutral-cleanest;
 
 :export{
     unnnicColorBackgroundSolo: $unnnic-color-background-solo;
