@@ -1,6 +1,10 @@
 <template>
-  <div :class="['unnnic-avatar-icon', scheme, size, { disabled: !enabled }]">
-    <unnnic-icon :icon="icon" :scheme="enabled ? scheme : 'neutral-cloudy'" :size="iconSize" />
+  <div :class="['unnnic-avatar-icon', scheme, size, { disabled: !enabled },  filled,
+  { opacity: !opacity },]">
+    <unnnic-icon   :icon="icon"
+    :scheme="enabled ? scheme : 'neutral-cloudy'"
+    :size="iconSize"
+    :filled="filled" />
   </div>
 </template>
 
@@ -34,6 +38,14 @@ export default {
     scheme: {
       type: String,
       default: 'aux-blue',
+    },
+    filled: {
+      type: Boolean,
+      default: false,
+    },
+    opacity: {
+      type: Boolean,
+      default: true,
     },
   },
 
