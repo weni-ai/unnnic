@@ -35,7 +35,7 @@
             v-if="$attrs.previous"
             @click="$emit('previous')"
             size="small"
-            type="terciary"
+            type="tertiary"
             icon-center="arrow-left-1-1"
             :disabled="previousDisabled"
           ></unnnic-button>
@@ -44,7 +44,7 @@
             v-if="$attrs.next"
             @click="$emit('next')"
             size="small"
-            type="terciary"
+            type="tertiary"
             icon-center="arrow-right-1-1"
             :disabled="nextDisabled"
           ></unnnic-button>
