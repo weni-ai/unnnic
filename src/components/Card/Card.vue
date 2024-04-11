@@ -14,17 +14,19 @@
       :button-action="buttonAction"
       :value="value"
       :percent="percent"
-      :inverted-percentage="invertedPercentage"
+      :inverted-percentage="invertedPercentage || null"
       :status="status"
       :description="description"
       :info-position="infoPosition"
       :enabled="enabled"
       :scheme="scheme"
-      :clickable="clickable"
-      :has-information-icon="hasInformationIcon"
+      :clickable="clickable || null"
+      :has-information-icon="hasInformationIcon || null"
       @openModal="openModal"
     >
-      <slot v-for="(_, name) in $slots" :name="name" :slot="name" />
+    <template v-for="(_, name) in $slots" v-slot:[name]>
+      <slot :name="name" />
+    </template>
     </component>
 </template>
 
