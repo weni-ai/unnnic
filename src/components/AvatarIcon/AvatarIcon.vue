@@ -73,9 +73,13 @@ $scheme-colors:
   'feedback-blue' $unnnic-color-feedback-blue,
   'feedback-grey' $unnnic-color-feedback-grey,
    'aux-blue' $unnnic-color-aux-blue,
+   'aux-blue-500' $unnnic-color-aux-blue-500,
    'aux-purple' $unnnic-color-aux-purple,
+   'aux-purple-500' $unnnic-color-aux-purple-500,
    'aux-orange' $unnnic-color-aux-orange,
+   'aux-orange-500' $unnnic-color-aux-orange-500,
    'aux-lemon' $unnnic-color-aux-lemon,
+   'aux-red-500' $unnnic-color-aux-red-500,
    'aux-pink' $unnnic-color-aux-pink;
 
 @each $name, $color in $scheme-colors {

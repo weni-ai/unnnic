@@ -9,11 +9,15 @@ const schemes = [
   'feedback-yellow',
   'feedback-blue',
   'feedback-grey',
-  'aux-blue',
-  'aux-purple',
-  'aux-orange',
-  'aux-lemon',
-  'aux-pink',
+   'aux-blue',
+   'aux-blue-500',
+   'aux-purple',
+   'aux-purple-500',
+   'aux-orange',
+   'aux-orange-500',
+   'aux-lemon',
+   'aux-red-500',
+   'aux-pink',
 ];
 
 export default {
