@@ -9,6 +9,7 @@
       iconCenter ? `unnnic-button--icon-on-center` : null,
       float ? `unnnic-button--float` : null,
     ]"
+    @click="onClick"
   >
     <unnnic-icon-svg
       v-if="loading"
@@ -173,6 +174,9 @@ export default {
 
         throw new Error(errorMessage);
       }
+    },
+    onClick() {
+      this.$emit('click');
     },
   },
   watch: {
