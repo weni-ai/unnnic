@@ -84,6 +84,12 @@ $scheme-colors:
       background-color: rgba($color, $unnnic-opacity-level-extra-light);
     }
   }
+
+  .unnnic-avatar-icon.opacity {
+    &.#{$name} {
+      background-color: rgba($color, $unnnic-opacity-level-light);
+    }
+  }
 }
 
 .unnnic-avatar-icon.disabled {
