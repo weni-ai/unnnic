@@ -68,6 +68,5 @@
     "sass": "^1.62.1",
     "storybook": "^7.6.3",
     "vite": "^4.3.5"
-  },
-  "packageManager": "yarn@4.1.1"
+  }
 }

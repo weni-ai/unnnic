@@ -1,0 +1,27 @@
+name: Publish Node.js Package
+
+on:
+  push:
+    tags:
+      - '[0-9]+.[0-9]+.[0-9]+'
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+          scope: '@weni'
+      - name: Install Dependencies
+        run: yarn
+      - name: Run Lint
+        run: yarn lint --fix --quiet
+      - name: Build Bundle
+        run: yarn build
+      - name: Publish Package
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
