@@ -10,7 +10,7 @@
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: `${index === 0 ? 'left' : 'right'}-button` }"
-              @click="referenceDate = addMonth(referenceDate, index === 0 ? -1 : 1)"
+              @click.stop="referenceDate = addMonth(referenceDate, index === 0 ? -1 : 1)"
             />
 
             <div :class="['label', `label--${size}`]">
