@@ -175,7 +175,8 @@ export default {
         throw new Error(errorMessage);
       }
     },
-    onClick() {
+    onClick(event) {
+      event.stopPropagation();
       this.$emit('click');
     },
   },
