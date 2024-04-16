@@ -104,12 +104,12 @@ export default {
     filterText() {
       const dates = [];
 
-      if (this.modelValue.start) {
-        dates.push(moment(this.modelValue.start, this.format).format(this.inputFormat));
+      if (this.modelValue?.start) {
+        dates.push(moment(this.modelValue?.start, this.format).format(this.inputFormat));
       }
 
-      if (this.modelValue.end) {
-        dates.push(moment(this.modelValue.end, this.format).format(this.inputFormat));
+      if (this.modelValue?.end) {
+        dates.push(moment(this.modelValue?.end, this.format).format(this.inputFormat));
       }
 
       if (!dates.length) {
