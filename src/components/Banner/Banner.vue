@@ -2,7 +2,7 @@
   <component
     class="unnnic-banner-component"
     :is="currentComponent"
-    :v-bind="$attrs"
+    v-bind="$attrs"
     :firstTitle="firstTitle"
     :secondTitle="secondTitle"
     :thirdTitle="thirdTitle"

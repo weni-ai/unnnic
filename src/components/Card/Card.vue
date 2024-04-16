@@ -2,7 +2,7 @@
     <component
       class="unnnic-card-component"
       :is="currentComponent"
-      :v-bind="$attrs"
+      v-bind="$attrs"
       :title="title"
       :text="text"
       :info="info"

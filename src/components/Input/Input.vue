@@ -7,7 +7,7 @@
     <p v-else-if="label" class="unnnic-form__label">{{ label }}</p>
 
     <text-input
-      :v-bind="$attrs"
+      v-bind="$attrs"
       v-model="val"
       class="unnnic-form-input"
       :placeholder="placeholder"

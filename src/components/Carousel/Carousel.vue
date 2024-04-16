@@ -2,7 +2,7 @@
     <component
       class="unnnic-carousel-component"
       :is="currentComponent"
-      :v-bind="$attrs"
+      v-bind="$attrs"
       :name="name"
       :clickable="clickable"
       :tagItems="tagItems"

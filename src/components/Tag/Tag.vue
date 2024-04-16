@@ -2,7 +2,7 @@
   <component
     class="unnnic-tag-content"
     :is="currentComponent"
-    :v-bind="$attrs"
+    v-bind="$attrs"
     :text="text"
     :disabled="disabled"
     :hasCloseIcon="hasCloseIcon"
