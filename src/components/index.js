@@ -152,7 +152,7 @@ export const components = {
   unnnicChatsMessage: ChatsMessage,
   unnnicChatsNavbar: ChatsNavbar,
   unnnicChatsUserAvatar: ChatsUserAvatar,
-  // unnnicChartMultiLine: ChartMultiLine,
+  unnnicChartMultiLine: ChartMultiLine,
 };
 
 export const unnnicFontSize = fontSize;
