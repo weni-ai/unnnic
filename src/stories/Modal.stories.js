@@ -28,7 +28,7 @@ const Template = (args, { argTypes }) => ({
 const ModalTemplate = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicModal, unnnicButton },
-  template: '<unnnicModal v-bind="$props"><unnnic-button slot="options"> Button 1 </unnnic-button> <unnnic-button slot="options"> Button 2 </unnnic-button> </div> </unnnic-modal>',
+  template: '<unnnicModal v-bind="$props"> <template #message><span>Modal with Buttons</span></template><template #options><unnnic-button> Button 1 </unnnic-button> <unnnic-button > Button 2 </unnnic-button></template></unnnic-modal>',
 });
 
 export const Normal = Template.bind({});

@@ -268,7 +268,7 @@ export default {
         line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
       }
 
-      :deep( &-button ) {
+      &-button {
         display: flex;
         width: 100%;
         padding: $unnnic-inset-md;
