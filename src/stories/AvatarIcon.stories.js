@@ -11,6 +11,7 @@ const schemes = [
   'feedback-grey',
    'aux-blue',
    'aux-blue-500',
+   'aux-green-500',
    'aux-purple',
    'aux-purple-500',
    'aux-orange',
