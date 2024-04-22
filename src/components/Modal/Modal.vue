@@ -165,7 +165,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@import '../../assets/scss/unnnic';
 
 .unnnic-modal {
   position: fixed;
@@ -250,6 +250,7 @@ export default {
           font-size: $unnnic-font-size-body-lg;
           line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
         }
+  
       }
 
       &-report {
