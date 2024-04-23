@@ -75,6 +75,7 @@ import ChatsMessage from './ChatsMessage/ChatsMessage.vue';
 import ChatsNavbar from './ChatsNavbar/ChatsNavbar.vue';
 import ChatsUserAvatar from './ChatsUserAvatar/ChatsUserAvatar.vue';
 import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
+import EmojiPicker from './EmojiPicker/EmojiPicker.vue';
 
 export const components = {
   unnnicFormElement: formElement,
@@ -153,6 +154,7 @@ export const components = {
   unnnicChatsNavbar: ChatsNavbar,
   unnnicChatsUserAvatar: ChatsUserAvatar,
   unnnicChartMultiLine: ChartMultiLine,
+  unnnicEmojiPicker: EmojiPicker,
 };
 
 export const unnnicFontSize = fontSize;
@@ -234,3 +236,4 @@ export const unnnicChatsMessage = ChatsMessage;
 export const unnnicChatsNavbar = ChatsNavbar;
 export const unnnicChatsUserAvatar = ChatsUserAvatar;
 export const unnnicChartMultiLine = ChartMultiLine;
+export const unnnicEmojiPicker = EmojiPicker;

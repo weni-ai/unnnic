@@ -37,7 +37,9 @@
     "vue": "^3.4.8"
   },
   "dependencies": {
+    "@emoji-mart/data": "^1.1.2",
     "@vueuse/components": "^10.4.1",
+    "emoji-mart": "^5.5.2",
     "lodash": "^4.17.21",
     "mime": "^4.0.1",
     "moment": "^2.30.1",
