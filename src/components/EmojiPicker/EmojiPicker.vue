@@ -9,6 +9,7 @@
 
 <script>
 import i18n from '@emoji-mart/data/i18n/pt.json';
+import data from '@emoji-mart/data/sets/14/apple.json'
 import { Picker } from 'emoji-mart/';
 
 export default {
@@ -19,6 +20,7 @@ export default {
   computed: {
     emojiPickerPreferences() {
       return {
+        data,
         set: 'apple',
         theme: 'light',
         previewPosition: 'none',
@@ -58,7 +60,7 @@ export default {
   :deep(em-emoji-picker) {
     // Most variables don't work here
     --border-radius: 16px;
-    --font-family: $unnnic-font-family;
+    --font-family: Lato, sans-serif; // $unnnic-font-family
     --rgb-accent: 0, 164, 159; // $unnnic-color-weni-600
     --rgb-color: 59, 65, 77; // $unnnic-color-neutral-darkest
     --color-border: rgb(244, 246, 248);
