@@ -21,7 +21,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "format": "prettier --write src/",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
@@ -48,7 +48,6 @@
     "vue-the-mask": "^0.11.1"
   },
   "devDependencies": {
-    "@rushstack/eslint-patch": "^1.2.0",
     "@storybook/addon-essentials": "^7.0.14",
     "@storybook/addon-interactions": "^7.0.14",
     "@storybook/addon-links": "^7.0.14",
@@ -58,15 +57,18 @@
     "@storybook/vue3-vite": "^7.0.14",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
-    "@vue/eslint-config-prettier": "^7.1.0",
-    "eslint": "^8.39.0",
-    "eslint-plugin-storybook": "^0.6.12",
-    "eslint-plugin-vue": "^9.11.0",
-    "prettier": "^2.8.8",
+    "@vue/eslint-config-prettier": "^9.0.0",
+    "@weni/eslint-config": "^1.0.2",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-storybook": "^0.8.0",
+    "eslint-plugin-vue": "^9.25.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.62.1",
     "storybook": "^7.6.3",
-    "vite": "^4.3.5"
+    "vite": "^4.3.5",
+    "vue-eslint-parser": "^9.4.2"
   }
 }
