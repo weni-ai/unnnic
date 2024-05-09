@@ -6,7 +6,10 @@
       class="unnnic--clickable"
       :class="{ inactive: reqStatus === 'sending' }"
     >
-      <unnnic-icon :icon="playbackIcon" scheme="neutral-darkest" />
+      <UnnnicIcon
+        :icon="playbackIcon"
+        scheme="neutral-darkest"
+      />
     </span>
 
     <input
@@ -22,7 +25,10 @@
       :style="progressBarStyle"
     />
 
-    <div v-else class="audio-player__progress-bar-bars">
+    <div
+      v-else
+      class="audio-player__progress-bar-bars"
+    >
       <div
         v-for="(bar, index) in bars"
         :key="index"

@@ -1,22 +1,37 @@
 <template>
-  <section v-if="value || isRecording || src" class="unnnic-audio-recorder">
-    <unnnic-tool-tip v-if="isRecording || canDiscard" enabled text="Descartar" side="top">
-      <span @click="discard" @keypress.enter="discard" class="delete-button unnnic--clickable">
-        <unnnic-icon icon="delete-1-1" scheme="feedback-red" />
+  <section
+    v-if="value || isRecording || src"
+    class="unnnic-audio-recorder"
+  >
+    <UnnnicToolTip
+      v-if="isRecording || canDiscard"
+      enabled
+      text="Descartar"
+      side="top"
+    >
+      <span
+        @click="discard"
+        @keypress.enter="discard"
+        class="delete-button unnnic--clickable"
+      >
+        <UnnnicIcon
+          icon="delete-1-1"
+          scheme="feedback-red"
+        />
       </span>
-    </unnnic-tool-tip>
-    <audio-handler
+    </UnnnicToolTip>
+    <AudioHandler
       v-if="isRecording"
-      :is-recording="isRecording"
+      :isRecording="isRecording"
       :time="numberToTimeString(duration)"
       @save="save"
     />
-    <audio-player
+    <AudioPlayer
       v-else
       :time="numberToTimeString(isIdle || isRecorded ? duration : currentTime)"
       :reqStatus="reqStatus"
-      :progress-bar-percentual-value="playedPercentual"
-      :is-playing="isPlaying"
+      :progressBarPercentualValue="playedPercentual"
+      :isPlaying="isPlaying"
       :bars="playbackAudioBars ? bars : null"
       @failed-click="$emit('failed-click')"
       @pause="pause"
@@ -320,14 +335,16 @@ export default {
       const seconds = formatNumber(Math.round(time % 60));
       const millisecondsFormatted = formatNumber(this.mockMilliseconds);
 
-      return `${minutes}:${seconds}${isRecording ? `:${millisecondsFormatted}` : ''}`;
+      return `${minutes}:${seconds}${
+        isRecording ? `:${millisecondsFormatted}` : ''
+      }`;
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-audio-recorder {
   position: relative;
@@ -339,7 +356,8 @@ export default {
 
   width: 100%;
 
-  ::v-deep .audio-player__time, ::v-deep .audio-handler__time {
+  ::v-deep .audio-player__time,
+  ::v-deep .audio-handler__time {
     font-family: $unnnic-font-family-secondary;
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-md;

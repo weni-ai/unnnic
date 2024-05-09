@@ -1,6 +1,9 @@
 <template>
-  <div v-if="version === '1.0'" :class="['unnnic-alert', `unnnic-alert-position--${position}`]">
-    <unnnic-icon-svg
+  <div
+    v-if="version === '1.0'"
+    :class="['unnnic-alert', `unnnic-alert-position--${position}`]"
+  >
+    <UnnnicIconSvg
       :icon="icon"
       :scheme="scheme"
       size="sm"
@@ -16,10 +19,11 @@
     <div
       v-if="closeText"
       class="unnnic-alert__close-text unnnic--clickable"
-      @click="onClose()">
+      @click="onClose()"
+    >
       {{ closeText.toUpperCase() }}
     </div>
-    <unnnic-icon-svg
+    <UnnnicIconSvg
       v-else
       clickable
       icon="close-1"
@@ -98,64 +102,64 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/unnnic.scss';
 
-  .unnnic-alert {
-    position: fixed;
-    padding: $unnnic-inset-xs;
-    min-width: 12.5 * $unnnic-font-size;
+.unnnic-alert {
+  position: fixed;
+  padding: $unnnic-inset-xs;
+  min-width: 12.5 * $unnnic-font-size;
 
-    display: inline-flex;
-    align-items: center;
+  display: inline-flex;
+  align-items: center;
 
-    font-family: $unnnic-font-family-secondary;
-    border-radius: $unnnic-border-radius-sm;
+  font-family: $unnnic-font-family-secondary;
+  border-radius: $unnnic-border-radius-sm;
 
-    background-color: $unnnic-color-background-snow;
-    box-shadow: $unnnic-shadow-level-near;
-    position: fixed;
+  background-color: $unnnic-color-background-snow;
+  box-shadow: $unnnic-shadow-level-near;
+  position: fixed;
 
-    z-index: 9999;
+  z-index: 9999;
 
-    &-position {
-      &--top-right {
-        top: 1 * $unnnic-font-size;
-        right: 1 * $unnnic-font-size;
-      }
-      &--top-left {
-        top: 1 * $unnnic-font-size;
-        left: 1 * $unnnic-font-size;
-      }
-      &--bottom-right {
-        bottom: 1 * $unnnic-font-size;
-        right: 1 * $unnnic-font-size;
-      }
-      &--bottom-left {
-        bottom: 1 * $unnnic-font-size;
-        left: 1 * $unnnic-font-size;
-      }
+  &-position {
+    &--top-right {
+      top: 1 * $unnnic-font-size;
+      right: 1 * $unnnic-font-size;
     }
-
-    &__content {
-      flex: 1;
-      margin: 0 $unnnic-inline-xs;
+    &--top-left {
+      top: 1 * $unnnic-font-size;
+      left: 1 * $unnnic-font-size;
     }
-
-    &__title {
-      font-size: $unnnic-font-size-body-sm ;
-      font-weight: $unnnic-font-weight-bold;
-      color: $unnnic-color-neutral-darkest;
+    &--bottom-right {
+      bottom: 1 * $unnnic-font-size;
+      right: 1 * $unnnic-font-size;
     }
-
-    &__text {
-      font-size: $unnnic-font-size-body-md;
-      font-weight: $unnnic-font-weight-regular;
-      color: $unnnic-color-neutral-dark;
-    }
-
-    &__close {
-      &-text {
-        color: $unnnic-color-brand-sec;
-        font-size: $unnnic-font-size-body-md;
-      }
+    &--bottom-left {
+      bottom: 1 * $unnnic-font-size;
+      left: 1 * $unnnic-font-size;
     }
   }
+
+  &__content {
+    flex: 1;
+    margin: 0 $unnnic-inline-xs;
+  }
+
+  &__title {
+    font-size: $unnnic-font-size-body-sm;
+    font-weight: $unnnic-font-weight-bold;
+    color: $unnnic-color-neutral-darkest;
+  }
+
+  &__text {
+    font-size: $unnnic-font-size-body-md;
+    font-weight: $unnnic-font-weight-regular;
+    color: $unnnic-color-neutral-dark;
+  }
+
+  &__close {
+    &-text {
+      color: $unnnic-color-brand-sec;
+      font-size: $unnnic-font-size-body-md;
+    }
+  }
+}
 </style>

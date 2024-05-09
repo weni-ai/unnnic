@@ -1,7 +1,10 @@
 <template>
   <nav class="unnnic-chats-navbar">
     <ol class="unnnic-chats-navbar__list">
-      <li v-for="(link, index) in links" :key="link.icon + index">
+      <li
+        v-for="(link, index) in links"
+        :key="link.icon + index"
+      >
         <a
           :class="[
             'unnnic-chats-navbar__link',
@@ -15,7 +18,7 @@
             }
           "
         >
-          <unnnic-icon
+          <UnnnicIcon
             :icon="getLinkIcon(link)"
             size="lg"
             scheme="neutral-snow"
@@ -59,7 +62,8 @@ export default {
         function isValidLink(link) {
           const hasValidName = typeof link.name === 'string';
           const hasValidIcon =
-            typeof link.icon === 'string' || typeof link.icon.default === 'string';
+            typeof link.icon === 'string' ||
+            typeof link.icon.default === 'string';
           const hasValidAction = typeof link.action === 'function';
 
           return hasValidName && hasValidIcon && hasValidAction;

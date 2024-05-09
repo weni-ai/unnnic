@@ -21,7 +21,9 @@
           'weni-step-indicator__step--active': step <= currentStep,
         }"
       >
-        <span class="weni-step-indicator__label"> {{ titleForStep(step) }} </span>
+        <span class="weni-step-indicator__label">
+          {{ titleForStep(step) }}
+        </span>
       </div>
     </div>
   </div>
@@ -57,7 +59,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .weni-step-indicator {
   display: flex;

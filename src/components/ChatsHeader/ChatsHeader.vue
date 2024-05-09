@@ -1,9 +1,21 @@
 <template>
-  <div class="unnnic-chats-header__container" :class="[size]">
-    <header class="unnnic-chats-header" :class="{ contact: !!avatarName }">
-      <div class="unnnic-chats-header__topbar" v-if="!avatarName">
-        <unnnic-breadcrumb :crumbs="crumbs" @crumbClick="(crumb) => $emit('crumbClick', crumb)" />
-        <unnnic-button
+  <div
+    class="unnnic-chats-header__container"
+    :class="[size]"
+  >
+    <header
+      class="unnnic-chats-header"
+      :class="{ contact: !!avatarName }"
+    >
+      <div
+        class="unnnic-chats-header__topbar"
+        v-if="!avatarName"
+      >
+        <UnnnicBreadcrumb
+          :crumbs="crumbs"
+          @crumbClick="(crumb) => $emit('crumbClick', crumb)"
+        />
+        <UnnnicButton
           v-if="close"
           @click="close"
           type="tertiary"
@@ -12,7 +24,7 @@
         />
       </div>
       <main class="unnnic-chats-header__main">
-        <unnnic-button
+        <UnnnicButton
           v-if="back"
           class="unnnic-chats-header__main__back"
           type="tertiary"
@@ -21,7 +33,7 @@
           @click="back"
         />
         <section class="unnnic-chats-header__infos">
-          <unnnic-chats-user-avatar
+          <UnnnicChatsUserAvatar
             v-if="avatarName"
             :clickable="!!avatarClick"
             :username="avatarName"
@@ -32,7 +44,7 @@
             :class="{ clickable: !!avatarClick }"
             @click="avatarClick ? avatarClick() : () => {}"
           >
-            <unnnic-avatar-icon
+            <UnnnicAvatarIcon
               :scheme="sectionIconScheme"
               class="unnnic-chats-header__avatar-icon"
               size="sm"
@@ -41,7 +53,10 @@
           </div>
 
           <hgroup class="unnnic-chats-header__infos__title">
-            <h1 :class="{ clickable: !!titleClick }" @click="titleClick ? titleClick() : () => {}">
+            <h1
+              :class="{ clickable: !!titleClick }"
+              @click="titleClick ? titleClick() : () => {}"
+            >
               {{ title }}
             </h1>
             <h2 v-if="subtitle">
@@ -53,7 +68,7 @@
           <slot />
         </div>
       </main>
-      <unnnic-button
+      <UnnnicButton
         v-if="close"
         class="unnnic-chats-header__close--sm"
         @click="close"
@@ -145,7 +160,9 @@ export default {
   justify-content: space-between;
   align-items: center;
 
-  box-shadow: inset 0 -1px 0 $unnnic-color-neutral-light, $unnnic-shadow-level-far;
+  box-shadow:
+    inset 0 -1px 0 $unnnic-color-neutral-light,
+    $unnnic-shadow-level-far;
   background-color: $unnnic-color-background-white;
 
   font-family: $unnnic-font-family-secondary;

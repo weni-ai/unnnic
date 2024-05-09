@@ -1,13 +1,13 @@
 <template>
   <button
     :class="['button-icon', size, type]"
-    v-on="$listeners"
+    v-bind="$attrs"
   >
-    <unnnic-icon
+    <UnnnicIcon
       :icon="icon"
       :scheme="iconScheme"
       size="ant"
-    ></unnnic-icon>
+    ></UnnnicIcon>
   </button>
 </template>
 
@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .button-icon {
   border: 0;
@@ -76,11 +76,14 @@ export default {
   }
 
   &.secondary {
-    background-color: rgba($unnnic-color-neutral-soft, $unnnic-opacity-level-light);
+    background-color: rgba(
+      $unnnic-color-neutral-soft,
+      $unnnic-opacity-level-light
+    );
     position: relative;
 
     &:before {
-      content: " ";
+      content: ' ';
       position: absolute;
       left: 0;
       right: 0;
@@ -92,7 +95,10 @@ export default {
     }
 
     &:hover {
-      background-color: rgba($unnnic-color-neutral-soft, $unnnic-opacity-level-overlay);
+      background-color: rgba(
+        $unnnic-color-neutral-soft,
+        $unnnic-opacity-level-overlay
+      );
 
       &:before {
         border: 0;

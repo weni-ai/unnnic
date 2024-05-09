@@ -7,7 +7,14 @@ export default {
   argTypes: {
     type: {
       control: { type: 'select' },
-      options: ['primary', 'secondary', 'tertiary', 'alternative', 'warning', 'attention'],
+      options: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'alternative',
+        'warning',
+        'attention',
+      ],
     },
     size: {
       control: { type: 'select' },

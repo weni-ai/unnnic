@@ -1,5 +1,8 @@
 <template>
-  <div v-show="true" class="unnnic-table">
+  <div
+    v-show="true"
+    class="unnnic-table"
+  >
     <div class="header">
       <slot name="header"></slot>
     </div>
@@ -9,9 +12,15 @@
     </div>
 
     <div class="scroll">
-      <template v-for="(item, index) in items" :key="index">
+      <template
+        v-for="(item, index) in items"
+        :key="index"
+      >
         <div class="item">
-          <slot name="item" :item="item"></slot>
+          <slot
+            name="item"
+            :item="item"
+          ></slot>
         </div>
       </template>
     </div>

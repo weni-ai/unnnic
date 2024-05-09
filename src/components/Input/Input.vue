@@ -1,28 +1,41 @@
 <template>
   <div :class="['unnnic-form', size]">
-    <p v-if="hasLabelSlot" class="unnnic-form__label">
+    <p
+      v-if="hasLabelSlot"
+      class="unnnic-form__label"
+    >
       <slot name="label" />
     </p>
 
-    <p v-else-if="label" class="unnnic-form__label">{{ label }}</p>
+    <p
+      v-else-if="label"
+      class="unnnic-form__label"
+    >
+      {{ label }}
+    </p>
 
-    <text-input
+    <TextInput
       v-bind="$attrs"
       v-model="val"
       class="unnnic-form-input"
       :placeholder="placeholder"
-      :icon-left="iconLeft"
-      :icon-right="iconRight"
+      :iconLeft="iconLeft"
+      :iconRight="iconRight"
       :type="type"
-      :icon-left-clickable="iconLeftClickable"
-      :icon-right-clickable="iconRightClickable"
-      :has-cloudy-color="hasCloudyColor"
+      :iconLeftClickable="iconLeftClickable"
+      :iconRightClickable="iconRightClickable"
+      :hasCloudyColor="hasCloudyColor"
       :size="size"
       :mask="mask"
-      :native-type="nativeType"
+      :nativeType="nativeType"
     />
 
-    <p v-if="message" class="unnnic-form__message">{{ message }}</p>
+    <p
+      v-if="message"
+      class="unnnic-form__message"
+    >
+      {{ message }}
+    </p>
   </div>
 </template>
 

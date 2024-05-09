@@ -1,10 +1,15 @@
 <template>
   <div :class="['unnnic-chart-bar', { condensed }]">
     <div
-      v-if="title || description || $attrs.update || $attrs.previous || $attrs.next"
+      v-if="
+        title || description || $attrs.update || $attrs.previous || $attrs.next
+      "
       class="header"
     >
-      <div v-if="title || description" class="content">
+      <div
+        v-if="title || description"
+        class="content"
+      >
         <div
           v-if="title"
           @click="$emit('update')"
@@ -21,33 +26,50 @@
         </div>
       </div>
 
-      <div v-if="$attrs.update || $attrs.previous || $attrs.next" class="actions">
-        <div v-if="$attrs.update" class="update-button" @click="$emit('update')">
-          <unnnic-icon icon="button-refresh-arrow-1" size="sm" scheme="neutral-darkest" />
+      <div
+        v-if="$attrs.update || $attrs.previous || $attrs.next"
+        class="actions"
+      >
+        <div
+          v-if="$attrs.update"
+          class="update-button"
+          @click="$emit('update')"
+        >
+          <UnnnicIcon
+            icon="button-refresh-arrow-1"
+            size="sm"
+            scheme="neutral-darkest"
+          />
 
-          <span v-if="updateText" class="unnnic-font secondary body-md color-neutral-dark">
+          <span
+            v-if="updateText"
+            class="unnnic-font secondary body-md color-neutral-dark"
+          >
             {{ updateText }}
           </span>
         </div>
 
-        <div v-if="$attrs.previous || $attrs.next" class="navigation-container">
-          <unnnic-button
+        <div
+          v-if="$attrs.previous || $attrs.next"
+          class="navigation-container"
+        >
+          <UnnnicButton
             v-if="$attrs.previous"
             @click="$emit('previous')"
             size="small"
             type="tertiary"
-            icon-center="arrow-left-1-1"
+            iconCenter="arrow-left-1-1"
             :disabled="previousDisabled"
-          ></unnnic-button>
+          ></UnnnicButton>
 
-          <unnnic-button
+          <UnnnicButton
             v-if="$attrs.next"
             @click="$emit('next')"
             size="small"
             type="tertiary"
-            icon-center="arrow-right-1-1"
+            iconCenter="arrow-right-1-1"
             :disabled="nextDisabled"
-          ></unnnic-button>
+          ></UnnnicButton>
         </div>
       </div>
     </div>
@@ -56,7 +78,11 @@
       <div class="reference">
         <div class="values">
           <div
-            v-for="(value, index) in [value(maxValue), value(maxValue / 2), value(0)]"
+            v-for="(value, index) in [
+              value(maxValue),
+              value(maxValue / 2),
+              value(0),
+            ]"
             :key="index"
             class="value unnnic-font secondary body-md color-neutral-cleanest"
           >
@@ -64,15 +90,21 @@
           </div>
         </div>
 
-        <div class="unnnic-font secondary body-md color-neutral-cleanest">&nbsp;</div>
+        <div class="unnnic-font secondary body-md color-neutral-cleanest">
+          &nbsp;
+        </div>
       </div>
 
       <div class="groups">
-        <div v-for="(group, index) in groups" :key="index" class="group">
+        <div
+          v-for="(group, index) in groups"
+          :key="index"
+          class="group"
+        >
           <div class="bars">
-            <unnnic-tool-tip
+            <UnnnicToolTip
               enabled
-              v-for="({ legend, index }) in legends
+              v-for="{ legend, index } in legends
                 .map((legend, index) => ({ legend, index }))
                 .filter(({ legend }) => group.values[legend])"
               :key="index"
@@ -80,24 +112,35 @@
               side="top"
               :style="{ height: `${(group.values[legend] / maxValue) * 100}%` }"
             >
-              <div
-                :class="['bar', `color-${index}`]"
-
-              ></div>
-            </unnnic-tool-tip>
+              <div :class="['bar', `color-${index}`]"></div>
+            </UnnnicToolTip>
           </div>
 
-          <div class="title unnnic-font secondary body-md color-neutral-cleanest">
+          <div
+            class="title unnnic-font secondary body-md color-neutral-cleanest"
+          >
             {{ group.title }}
           </div>
         </div>
       </div>
     </div>
 
-    <div v-if="showFooterLegend" class="footer">
-      <div v-for="(legend, index) in legends" :key="index" class="legend">
-        <unnnic-icon icon="indicator" :scheme="colors[index]" />
-        <div class="unnnic-font secondary body-gt color-neutral-cloudy">{{ legend }}</div>
+    <div
+      v-if="showFooterLegend"
+      class="footer"
+    >
+      <div
+        v-for="(legend, index) in legends"
+        :key="index"
+        class="legend"
+      >
+        <UnnnicIcon
+          icon="indicator"
+          :scheme="colors[index]"
+        />
+        <div class="unnnic-font secondary body-gt color-neutral-cloudy">
+          {{ legend }}
+        </div>
       </div>
     </div>
   </div>
@@ -153,10 +196,11 @@ export default {
     },
 
     maxValue() {
-      return this.fixedMaxValue || Math.max(
-        ...this.groups
-          .map(({ values }) => Object.values(values))
-          .flat(),
+      return (
+        this.fixedMaxValue ||
+        Math.max(
+          ...this.groups.map(({ values }) => Object.values(values)).flat(),
+        )
       );
     },
   },
@@ -275,17 +319,16 @@ export default {
             border-radius: $unnnic-border-radius-sm;
 
             $colors:
-              "0" $unnnic-color-aux-blue,
-              "1" $unnnic-color-aux-purple,
-              "2" $unnnic-color-aux-orange,
-              "3" $unnnic-color-aux-lemon,
-              "4" $unnnic-color-aux-pink,
-
-              "5" $unnnic-color-aux-baby-blue,
-              "6" $unnnic-color-aux-baby-yellow,
-              "7" $unnnic-color-aux-baby-red,
-              "8" $unnnic-color-aux-baby-green,
-              "9" $unnnic-color-aux-baby-pink;
+              '0' $unnnic-color-aux-blue,
+              '1' $unnnic-color-aux-purple,
+              '2' $unnnic-color-aux-orange,
+              '3' $unnnic-color-aux-lemon,
+              '4' $unnnic-color-aux-pink,
+              '5' $unnnic-color-aux-baby-blue,
+              '6' $unnnic-color-aux-baby-yellow,
+              '7' $unnnic-color-aux-baby-red,
+              '8' $unnnic-color-aux-baby-green,
+              '9' $unnnic-color-aux-baby-pink;
 
             @each $name, $color in $colors {
               &.color-#{$name} {
@@ -352,24 +395,22 @@ export default {
   font-family: $unnnic-font-family-primary;
 
   $font-sizes:
-    "body-sm" $unnnic-font-size-body-sm,
-    "body-md" $unnnic-font-size-body-md,
-    "body-gt" $unnnic-font-size-body-gt,
-    "body-lg" $unnnic-font-size-body-lg,
-
-    "title-sm" $unnnic-font-size-title-sm,
-    "title-md" $unnnic-font-size-title-md,
-    "title-lg" $unnnic-font-size-title-lg,
-
-    "h4" $unnnic-font-size-h4,
-    "h3" $unnnic-font-size-h3,
-    "h2" $unnnic-font-size-h2,
-    "h1" $unnnic-font-size-h1;
+    'body-sm' $unnnic-font-size-body-sm,
+    'body-md' $unnnic-font-size-body-md,
+    'body-gt' $unnnic-font-size-body-gt,
+    'body-lg' $unnnic-font-size-body-lg,
+    'title-sm' $unnnic-font-size-title-sm,
+    'title-md' $unnnic-font-size-title-md,
+    'title-lg' $unnnic-font-size-title-lg,
+    'h4' $unnnic-font-size-h4,
+    'h3' $unnnic-font-size-h3,
+    'h2' $unnnic-font-size-h2,
+    'h1' $unnnic-font-size-h1;
 
   $font-weights:
-    "black" $unnnic-font-weight-black,
-    "bold" $unnnic-font-weight-bold,
-    "light" $unnnic-font-weight-light;
+    'black' $unnnic-font-weight-black,
+    'bold' $unnnic-font-weight-bold,
+    'light' $unnnic-font-weight-light;
 
   &.secondary {
     font-family: $unnnic-font-family-secondary;

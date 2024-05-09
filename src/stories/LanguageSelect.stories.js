@@ -5,7 +5,9 @@ export default {
   component: unnnicLanguageSelect,
   argTypes: {
     value: { control: { type: 'select', options: ['pt-br', 'en'] } },
-    position: { control: { type: 'select', options: ['top', 'bottom', 'right', 'left'] } },
+    position: {
+      control: { type: 'select', options: ['top', 'bottom', 'right', 'left'] },
+    },
   },
 };
 

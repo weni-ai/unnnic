@@ -10,10 +10,18 @@
     }"
     :title="label"
   >
-    <unnnic-checkbox v-if="allowCheckbox" ref="checkbox" :modelValue="active" :size="size" />
+    <UnnnicCheckbox
+      v-if="allowCheckbox"
+      ref="checkbox"
+      :modelValue="active"
+      :size="size"
+    />
     <div>
       <span
-        :class="['unnnic-select-smart-option__label', `unnnic-select-smart-option__label--${size}`]"
+        :class="[
+          'unnnic-select-smart-option__label',
+          `unnnic-select-smart-option__label--${size}`,
+        ]"
         >{{ label }}</span
       >
       <p

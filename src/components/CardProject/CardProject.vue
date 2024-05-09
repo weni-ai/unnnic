@@ -1,8 +1,12 @@
 <template>
-  <card-statuses-container class="unnnic-card-project" :name="name" :statuses="statuses">
+  <CardStatusesContainer
+    class="unnnic-card-project"
+    :name="name"
+    :statuses="statuses"
+  >
     <template v-slot:header-buttons>
       <div class="buttons">
-        <unnnic-tag
+        <UnnnicTag
           class="action"
           @click="$emit('action')"
           clickable
@@ -10,9 +14,12 @@
           scheme="aux-blue"
         />
 
-        <unnnic-dropdown v-if="$slots.actions" position="bottom-left">
+        <UnnnicDropdown
+          v-if="$slots.actions"
+          position="bottom-left"
+        >
           <template v-slot:trigger>
-            <unnnic-icon
+            <UnnnicIcon
               size="sm"
               icon="navigation-menu-vertical-1"
               clickable
@@ -21,10 +28,10 @@
           </template>
 
           <slot name="actions" />
-        </unnnic-dropdown>
+        </UnnnicDropdown>
       </div>
     </template>
-  </card-statuses-container>
+  </CardStatusesContainer>
 </template>
 
 <script>
@@ -59,7 +66,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-card-project {
   .header {

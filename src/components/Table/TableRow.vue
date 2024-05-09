@@ -1,6 +1,9 @@
 <template>
   <div class="table-row">
-    <template class="col" v-for="(header, index) in headers" :key="header.id">
+    <template
+      v-for="(header, index) in headers"
+      :key="header.id"
+    >
       <div
         class="col"
         :style="{

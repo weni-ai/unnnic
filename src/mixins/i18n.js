@@ -16,7 +16,11 @@ export default {
 
       const locale = (this.locale || get(this, '$i18n.locale'))?.toLowerCase();
 
-      let text = get(this.translations, `${key}.${locale}`, get(this.translations, key));
+      let text = get(
+        this.translations,
+        `${key}.${locale}`,
+        get(this.translations, key),
+      );
 
       if (!text) {
         text = get(get(this.defaultTranslations, key), locale, defaults);
@@ -35,14 +39,19 @@ export default {
 
       let vars = {};
 
-      Object.values(args).slice(1).forEach((argument) => {
-        if (!(argument instanceof Array) && argument instanceof Object) {
-          vars = argument;
-        }
-      });
+      Object.values(args)
+        .slice(1)
+        .forEach((argument) => {
+          if (!(argument instanceof Array) && argument instanceof Object) {
+            vars = argument;
+          }
+        });
 
       Object.keys(vars).forEach((varName) => {
-        text = text?.replaceAll(new RegExp(`{ *${varName} *}`, 'g'), vars[varName]);
+        text = text?.replaceAll(
+          new RegExp(`{ *${varName} *}`, 'g'),
+          vars[varName],
+        );
       });
 
       return text;

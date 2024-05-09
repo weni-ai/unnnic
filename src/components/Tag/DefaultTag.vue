@@ -10,7 +10,7 @@
       ${disabled ? 'unnnic-tag__label--disabled' : ''}`"
       >{{ text }}</span
     >
-    <unnnic-icon-svg
+    <UnnnicIconSvg
       v-if="hasCloseIcon"
       icon="close-1"
       class="unnnic-tag__icon"

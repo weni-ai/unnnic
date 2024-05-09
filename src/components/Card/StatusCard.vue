@@ -1,14 +1,23 @@
 <template>
   <div :class="['unnnic-card-status', `unnnic-card-scheme--${scheme}--border`]">
     <div class="header">
-      <unnnic-icon :icon="icon" scheme="neutral-dark" size="md" class="icon" />
+      <UnnnicIcon
+        :icon="icon"
+        scheme="neutral-dark"
+        size="md"
+        class="icon"
+      />
 
       <div class="label">{{ title }}</div>
     </div>
 
     <div class="content">
       <div class="title-container">
-        <unnnic-icon icon="indicator" :scheme="scheme" size="sm" />
+        <UnnnicIcon
+          icon="indicator"
+          :scheme="scheme"
+          size="sm"
+        />
         <div class="title">{{ status }}</div>
       </div>
 

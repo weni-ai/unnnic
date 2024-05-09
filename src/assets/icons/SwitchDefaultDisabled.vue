@@ -1,5 +1,11 @@
 <template>
-  <svg width="48" height="24" viewBox="0 0 48 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="48"
+    height="24"
+    viewBox="0 0 48 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <rect
       x="2.51953"
       y="1.2605"
@@ -9,6 +15,11 @@
       fill="#E2E6ED"
       class="primary"
     />
-    <circle cx="13.5" cy="12.0005" r="7.5" fill="#D0D3D9" />
+    <circle
+      cx="13.5"
+      cy="12.0005"
+      r="7.5"
+      fill="#D0D3D9"
+    />
   </svg>
 </template>

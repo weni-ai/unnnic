@@ -6,7 +6,9 @@ export default {
   component: unnnicTag,
   argTypes: {
     text: { control: { type: 'text' } },
-    type: { control: { type: 'select', options: ['default', 'indicator', 'brand'] } },
+    type: {
+      control: { type: 'select', options: ['default', 'indicator', 'brand'] },
+    },
     scheme: {
       control: {
         type: 'select',
@@ -20,8 +22,8 @@ export const Default = {
   args: {
     text: 'Label',
     type: 'default',
-  }
-}
+  },
+};
 
 export const Indicator = {
   args: {
@@ -32,12 +34,12 @@ export const Indicator = {
     hasBackButton: false,
     enableTooltip: true,
     tooltipText: 'This is the amount',
-  }
-}
+  },
+};
 
 export const Brand = {
   args: {
     text: 'Settings',
     type: 'brand',
-  }
-}
+  },
+};

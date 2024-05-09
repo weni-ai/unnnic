@@ -1,6 +1,19 @@
 <template>
-  <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="36" cy="36" r="35.5" fill="white" stroke="#E2E6ED" class="primary-stroke" />
+  <svg
+    width="72"
+    height="72"
+    viewBox="0 0 72 72"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      cx="36"
+      cy="36"
+      r="35.5"
+      fill="white"
+      stroke="#E2E6ED"
+      class="primary-stroke"
+    />
     <path
       d="M36.0008 35.6667C40.0509 35.6667 43.3341 32.3834 43.3341 28.3333C43.3341 24.2832 40.0509 21 36.0008 21C31.9507 21 28.6675 24.2832 28.6675 28.3333C28.6675 32.3834 31.9507 35.6667 36.0008 35.6667Z"
       fill="#D0D3D9"

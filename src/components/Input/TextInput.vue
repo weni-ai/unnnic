@@ -9,19 +9,21 @@
       },
     ]"
   >
-    <base-input
+    <BaseInput
       :modelValue="modelValue"
       v-bind="attributes"
       :size="size"
       ref="base-input"
-      :native-type="nativeType === 'password' && showPassword ? 'text' : nativeType"
+      :nativeType="
+        nativeType === 'password' && showPassword ? 'text' : nativeType
+      "
       :type="type"
       @focus="onFocus"
       @blur="onBlur"
       class="input-itself"
     />
 
-    <unnnic-icon
+    <UnnnicIcon
       v-if="iconLeft"
       :scheme="iconScheme"
       :icon="iconLeft"
@@ -31,14 +33,17 @@
       :class="['icon-left', { clickable: iconLeftClickable }]"
     />
 
-    <unnnic-icon
+    <UnnnicIcon
       v-if="iconRightSvg"
       :scheme="iconScheme"
       :icon="iconRightSvg"
       size="sm"
       :clickable="iconRightClickable || allowTogglePassword"
       @click="onIconRightClick"
-      :class="['icon-right', { clickable: iconRightClickable || allowTogglePassword }]"
+      :class="[
+        'icon-right',
+        { clickable: iconRightClickable || allowTogglePassword },
+      ]"
     />
   </div>
 </template>
@@ -198,11 +203,13 @@ export default {
   &.size--md,
   &.size--sm {
     &.has-icon-left .input-itself {
-      padding-left: $unnnic-spacing-sm + $unnnic-icon-size-sm + $unnnic-spacing-xs;
+      padding-left: $unnnic-spacing-sm + $unnnic-icon-size-sm +
+        $unnnic-spacing-xs;
     }
 
     &.has-icon-right .input-itself {
-      padding-right: $unnnic-spacing-sm + $unnnic-icon-size-sm + $unnnic-spacing-xs;
+      padding-right: $unnnic-spacing-sm + $unnnic-icon-size-sm +
+        $unnnic-spacing-xs;
     }
   }
 

@@ -10,7 +10,12 @@
       'is-video': isVideo,
     }"
   >
-    <p v-if="signature" class="unnnic-chats-message__signature">{{ signature }}</p>
+    <p
+      v-if="signature"
+      class="unnnic-chats-message__signature"
+    >
+      {{ signature }}
+    </p>
     <main
       class="unnnic-chats-message__main"
       :class="{
@@ -20,17 +25,35 @@
         'is-video': isVideo,
       }"
     >
-      <unnnic-chats-message-text v-if="isText" :text="slotText" />
-      <div v-if="isDocument" class="unnnic-chats-message__document">
-        <unnnic-icon-loading v-if="status === 'sending'" scheme="neutral-dark" size="lg" />
-        <unnnic-icon
+      <UnnnicChatsMessageText
+        v-if="isText"
+        :text="slotText"
+      />
+      <div
+        v-if="isDocument"
+        class="unnnic-chats-message__document"
+      >
+        <UnnnicIconLoading
+          v-if="status === 'sending'"
+          scheme="neutral-dark"
+          size="lg"
+        />
+        <UnnnicIcon
           v-else-if="status === 'failed'"
           icon="upload"
           scheme="neutral-dark"
           size="lg"
         />
-        <unnnic-icon v-else icon="article" scheme="neutral-dark" size="lg" />
-        <p class="unnnic-chats-message__document__text" @click="$emit('click')">
+        <UnnnicIcon
+          v-else
+          icon="article"
+          scheme="neutral-dark"
+          size="lg"
+        />
+        <p
+          class="unnnic-chats-message__document__text"
+          @click="$emit('click')"
+        >
           {{ documentName }}
         </p>
       </div>
@@ -41,14 +64,23 @@
         @click="$emit('click-image')"
       >
         <slot />
-        <unnnic-chats-message-status-backdrop
+        <UnnnicChatsMessageStatusBackdrop
           v-if="(sendingMedia || failedToSendMedia) && (isImage || isVideo)"
           :status="status"
           @click="status === 'failed' ? $emit('click') : () => {}"
         />
       </div>
-      <unnnic-icon-loading v-if="sendingMedia" size="avatar-nano" scheme="neutral-dark" />
-      <p v-else class="unnnic-chats-message__time">{{ formattedTime }}</p>
+      <UnnnicIconLoading
+        v-if="sendingMedia"
+        size="avatar-nano"
+        scheme="neutral-dark"
+      />
+      <p
+        v-else
+        class="unnnic-chats-message__time"
+      >
+        {{ formattedTime }}
+      </p>
     </main>
   </div>
 </template>
@@ -134,7 +166,11 @@ export default {
       return this.isMedia && this.mediaType === 'video';
     },
     slotText() {
-      return this.$slots?.default?.()?.[0]?.children || this.$slots?.text?.()?.[0]?.children || '';
+      return (
+        this.$slots?.default?.()?.[0]?.children ||
+        this.$slots?.text?.()?.[0]?.children ||
+        ''
+      );
     },
     sendingMedia() {
       return this.isMedia && this.status === 'sending';

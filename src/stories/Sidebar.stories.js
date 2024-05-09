@@ -15,7 +15,8 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicSidebar, unnnicSidebarItem, unnnicSidebarMenu },
-  template: '<unnnic-sidebar v-bind="$props"> \
+  template:
+    '<unnnic-sidebar v-bind="$props"> \
                 <p slot="header"> Title </p> \
                 <unnnic-sidebar-item icon="expand-8-1" text="footer" slot="footer" /> \
                 <unnnic-sidebar-menu text="Submenu"> \

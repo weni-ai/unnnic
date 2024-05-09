@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div :class="['tab', `size-${size}`]">
     <header class="tab-header">
@@ -51,7 +52,8 @@ export default {
     };
   },
   created() {
-    const value = this.initialTab || this.activeTab || (this.tabs && this.tabs[0]);
+    const value =
+      this.initialTab || this.activeTab || (this.tabs && this.tabs[0]);
 
     this.change(value);
   },
@@ -78,7 +80,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .tab-header {
   display: flex;
@@ -120,7 +122,8 @@ export default {
     padding-bottom: $unnnic-spacing-stack-xs;
     margin-bottom: $unnnic-spacing-stack-xs;
 
-    .tab-head, .tab-head--active {
+    .tab-head,
+    .tab-head--active {
       font-size: $unnnic-font-size-body-md;
       line-height: ($unnnic-font-size-body-md + $unnnic-line-height-md);
     }

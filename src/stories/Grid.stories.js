@@ -4,7 +4,12 @@ export default {
   title: 'Example/Grid',
   component: Grid,
   argTypes: {
-    size: { control: { type: 'select', options: ['xs', 'sm', 'md', 'lg', 'xl', 'giant'] } },
+    size: {
+      control: {
+        type: 'select',
+        options: ['xs', 'sm', 'md', 'lg', 'xl', 'giant'],
+      },
+    },
   },
 };
 

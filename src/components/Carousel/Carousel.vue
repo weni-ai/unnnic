@@ -1,14 +1,14 @@
 <template>
-    <component
-      class="unnnic-carousel-component"
-      :is="currentComponent"
-      v-bind="$attrs"
-      :name="name"
-      :clickable="clickable"
-      :tagItems="tagItems"
-      @selected="$emit('update:model-value', $event)"
-      :model-value="modelValue"
-    />
+  <component
+    class="unnnic-carousel-component"
+    :is="currentComponent"
+    v-bind="$attrs"
+    :name="name"
+    :clickable="clickable"
+    :tagItems="tagItems"
+    @selected="$emit('update:model-value', $event)"
+    :modelValue="modelValue"
+  />
 </template>
 
 <script>
@@ -31,9 +31,7 @@ export default {
       type: String,
       default: 'brand',
       validator(value) {
-        return (
-          ['brand'].indexOf(value) !== -1
-        );
+        return ['brand'].indexOf(value) !== -1;
       },
     },
     tagItems: {

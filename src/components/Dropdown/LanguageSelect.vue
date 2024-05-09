@@ -4,9 +4,15 @@
     class="unnnic-language-select contracted"
     v-on-click-outside="onClickOutside"
   >
-    <div :class="['container contracted', { open }]" @click="onClickTrigger">
+    <div
+      :class="['container contracted', { open }]"
+      @click="onClickTrigger"
+    >
       <div class="option">
-        <unnnic-flag size="sm" :code="val" />
+        <UnnnicFlag
+          size="sm"
+          :code="val"
+        />
       </div>
 
       <div
@@ -15,17 +21,28 @@
         class="option"
         @click="val = language.id"
       >
-        <unnnic-flag size="sm" :code="language.id" />
+        <UnnnicFlag
+          size="sm"
+          :code="language.id"
+        />
       </div>
     </div>
   </div>
 
-  <div v-else class="unnnic-language-select normal" v-on-click-outside="onClickOutside">
-    <div :class="['container normal', { open }]" @click="onClickTrigger">
+  <div
+    v-else
+    class="unnnic-language-select normal"
+    v-on-click-outside="onClickOutside"
+  >
+    <div
+      :class="['container normal', { open }]"
+      @click="onClickTrigger"
+    >
       <div
         :style="{
           position: 'absolute',
-          [position === 'bottom' ? 'top' : 'bottom']: -0.125 * unnnicFontSize + 'px',
+          [position === 'bottom' ? 'top' : 'bottom']:
+            -0.125 * unnnicFontSize + 'px',
           width: '100%',
           padding: 0.0625 * unnnicFontSize + 'px',
           left: -0.0625 * unnnicFontSize + 'px',
@@ -34,11 +51,18 @@
       >
         <template v-if="position === 'bottom'">
           <div class="option">
-            <unnnic-flag size="sm" :code="val" />
+            <UnnnicFlag
+              size="sm"
+              :code="val"
+            />
 
             <div class="label">{{ languages[val] }}</div>
 
-            <unnnic-icon size="xs" :icon="dropdownIcon" scheme="neutral-clean" />
+            <UnnnicIcon
+              size="xs"
+              :icon="dropdownIcon"
+              scheme="neutral-clean"
+            />
           </div>
 
           <div class="divider"></div>
@@ -50,7 +74,10 @@
           :key="language.id"
           @click="val = language.id"
         >
-          <unnnic-flag size="sm" :code="language.id" />
+          <UnnnicFlag
+            size="sm"
+            :code="language.id"
+          />
 
           <div class="label">{{ languages[language.id] }}</div>
         </div>
@@ -59,11 +86,18 @@
           <div class="divider"></div>
 
           <div class="option">
-            <unnnic-flag size="sm" :code="val" />
+            <UnnnicFlag
+              size="sm"
+              :code="val"
+            />
 
             <div class="label">{{ languages[val] }}</div>
 
-            <unnnic-icon size="xs" :icon="dropdownIcon" scheme="neutral-clean" />
+            <UnnnicIcon
+              size="xs"
+              :icon="dropdownIcon"
+              scheme="neutral-clean"
+            />
           </div>
         </template>
       </div>
@@ -172,7 +206,8 @@ export default {
 .unnnic-language-select {
   &.normal {
     width: 100%;
-    height: $unnnic-font-size-body-md + $unnnic-line-height-md + 2 * $unnnic-spacing-stack-xs;
+    height: $unnnic-font-size-body-md + $unnnic-line-height-md + 2 *
+      $unnnic-spacing-stack-xs;
     position: relative;
   }
 
@@ -215,7 +250,8 @@ export default {
     background-color: $unnnic-color-background-snow;
     min-width: 9 * $unnnic-font-size;
     width: 100%;
-    height: $unnnic-font-size-body-md + $unnnic-line-height-md + 2 * $unnnic-spacing-stack-xs;
+    height: $unnnic-font-size-body-md + $unnnic-line-height-md + 2 *
+      $unnnic-spacing-stack-xs;
     box-sizing: border-box;
     overflow: hidden;
     cursor: pointer;

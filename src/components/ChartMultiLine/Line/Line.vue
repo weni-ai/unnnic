@@ -1,7 +1,15 @@
-<!-- eslint-disable linebreak-style -->
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="chart" :style="{ backgroundImage: svgChart }" ref="chart">
-    <div v-for="({ value }, index) in data" :key="index + Math.random() * 100" class="group">
+  <div
+    class="chart"
+    :style="{ backgroundImage: svgChart }"
+    ref="chart"
+  >
+    <div
+      v-for="({ value }, index) in data"
+      :key="index + Math.random() * 100"
+      class="group"
+    >
       <div
         :style="{
           transform: `translateY(-${(value / (maxValue - minValue)) * 122}px)`,
@@ -13,7 +21,6 @@
     </div>
   </div>
 </template>
-<!-- eslint-disable linebreak-style -->
 <script>
 export default {
   props: {
@@ -40,16 +47,18 @@ export default {
   },
   computed: {
     maxValue() {
-      return this.fixedMaxValue || Math.max(...this.data.map(({ value }) => value).flat());
+      return (
+        this.fixedMaxValue ||
+        Math.max(...this.data.map(({ value }) => value).flat())
+      );
     },
 
     svgChart() {
       const bars = this.data.map(
-        ({ value }) => 50
-          - 122 / 200
-          - ((value / this.maxValue)
-          * (50 - 122 / 100)
-          + Math.random() * 0.01),
+        ({ value }) =>
+          50 -
+          122 / 200 -
+          ((value / this.maxValue) * (50 - 122 / 100) + Math.random() * 0.01),
       );
 
       const barWidth = 100 / bars.length;
@@ -68,7 +77,9 @@ export default {
           x += barWidth;
         }
 
-        path += `C ${x - halfBar} ${bars[i - 1]} ${x - halfBar} ${bars[i]} ${x} ${bars[i]}`;
+        path += `C ${x - halfBar} ${bars[i - 1]} ${x - halfBar} ${
+          bars[i]
+        } ${x} ${bars[i]}`;
       }
 
       if (bars.length <= 1) {
@@ -86,12 +97,14 @@ export default {
           </defs>
 
           <g style="transform: scaleX(${
-  this.chartContainerWidth / ((122 / 50) * 100)
-}); transform-origin: center;">
-            <path fill="url(#linear1)" d="M0 50 L0 ${String(bars[0]) + path} L100 100Z" />
+            this.chartContainerWidth / ((122 / 50) * 100)
+          }); transform-origin: center;">
+            <path fill="url(#linear1)" d="M0 50 L0 ${
+              String(bars[0]) + path
+            } L100 100Z" />
             <path fill="none" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke" stroke="url(#linear)" d="M0 ${
-  String(bars[0]) + path
-}" />
+              String(bars[0]) + path
+            }" />
           </g>
         </svg>
       `;

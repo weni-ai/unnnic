@@ -8,6 +8,22 @@ export default {
     disabled: { control: 'boolean' },
     size: { control: 'select', options: ['md', 'sm'] },
   },
+  render: (args) => ({
+    components: {
+      unnnicCheckbox,
+    },
+    setup() {
+      return { args };
+    },
+    data() {
+      return {
+        value: true,
+      };
+    },
+    template: `
+      <unnnicCheckbox v-model="value" />
+    `,
+  }),
 };
 
 export const Default = {

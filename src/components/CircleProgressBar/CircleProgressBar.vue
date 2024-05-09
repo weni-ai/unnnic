@@ -1,6 +1,10 @@
 <template>
   <div class="unnnic-circle-progress-bar">
-    <svg width="46" height="46" class="semicircle">
+    <svg
+      width="46"
+      height="46"
+      class="semicircle"
+    >
       <circle
         cx="23"
         cy="23"
@@ -104,7 +108,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-circle-progress-bar {
   position: relative;

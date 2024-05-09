@@ -2,20 +2,31 @@
   <div class="unnnic-card-company">
     <div class="content">
       <div class="header">
-        <div class="title" :title="title">
+        <div
+          class="title"
+          :title="title"
+        >
           {{ cutLength(title, 20) }}
         </div>
 
-        <div v-if="tag" class="tag">{{ tag }}</div>
+        <div
+          v-if="tag"
+          class="tag"
+        >
+          {{ tag }}
+        </div>
       </div>
 
-      <div class="description" :title="description">
+      <div
+        class="description"
+        :title="description"
+      >
         {{ cutLength(description, 36) }}
       </div>
 
       <div class="members">
         <div class="avatars">
-          <tool-tip
+          <ToolTip
             v-for="(member, index) in membersLimited"
             :key="index"
             class="avatar-container"
@@ -24,21 +35,32 @@
             enabled
           >
             <div class="avatar__background">
-              <div class="avatar" :style="{ backgroundImage: `url(${member.photo})` }" />
+              <div
+                class="avatar"
+                :style="{ backgroundImage: `url(${member.photo})` }"
+              />
             </div>
-          </tool-tip>
+          </ToolTip>
         </div>
 
         <div class="members-description">{{ membersDescription }}</div>
       </div>
     </div>
     <div class="join-button">
-      <unnnic-tag @click="join" :text="joinLabel" scheme="aux-blue" clickable></unnnic-tag>
+      <UnnnicTag
+        @click="join"
+        :text="joinLabel"
+        scheme="aux-blue"
+        clickable
+      ></UnnnicTag>
     </div>
-    <div class="more-button" v-if="options.length">
-      <unnnic-dropdown>
+    <div
+      class="more-button"
+      v-if="options.length"
+    >
+      <UnnnicDropdown>
         <template v-slot:trigger>
-          <unnnic-icon
+          <UnnnicIcon
             icon="navigation-menu-vertical-1"
             scheme="neutral-cleanest"
             size="sm"
@@ -46,7 +68,7 @@
           />
         </template>
 
-        <unnnic-dropdown-item
+        <UnnnicDropdownItem
           v-for="(option, index) in options"
           :key="index"
           @click="
@@ -58,7 +80,7 @@
           "
         >
           <div :class="['menu-item', { [option.scheme]: option.scheme }]">
-            <unnnic-icon
+            <UnnnicIcon
               class="icon"
               size="sm"
               :icon="option.icon"
@@ -67,8 +89,8 @@
 
             {{ option.title }}
           </div>
-        </unnnic-dropdown-item>
-      </unnnic-dropdown>
+        </UnnnicDropdownItem>
+      </UnnnicDropdown>
     </div>
   </div>
 </template>

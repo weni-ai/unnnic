@@ -18,7 +18,8 @@ const Template = (args, { argTypes }) => ({
       selecteds: [1],
     };
   },
-  template: '<div><pre>v-model: {{ selecteds }}</pre><unnnic-carousel v-bind="$props" v-model="selecteds" /></div>',
+  template:
+    '<div><pre>v-model: {{ selecteds }}</pre><unnnic-carousel v-bind="$props" v-model="selecteds" /></div>',
 });
 
 export const Tag = Template.bind({});

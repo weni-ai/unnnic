@@ -1,11 +1,25 @@
 <template>
-  <transition name="modal" v-if="showModal">
-    <div v-bind="$attrs"  ref="modalContainer" :class="['unnnic-modal']" v-on="$listeners">
-      <div class="unnnic-modal-container" @click.self="onOutsideCloseClick">
-        <div ref="modal" class="unnnic-modal-container-background">
+  <Transition name="modal">
+    <div
+      v-if="showModal"
+      v-bind="$attrs"
+      ref="modalContainer"
+      :class="['unnnic-modal']"
+    >
+      <div
+        class="unnnic-modal-container"
+        @click.self="onOutsideCloseClick"
+      >
+        <div
+          ref="modal"
+          class="unnnic-modal-container-background"
+        >
           <div class="unnnic-modal-container-background-body">
-            <div v-if="closeIcon" class="unnnic-modal-container-background-body-close_icon">
-              <unnnic-icon-svg
+            <div
+              v-if="closeIcon"
+              class="unnnic-modal-container-background-body-close_icon"
+            >
+              <UnnnicIconSvg
                 icon="close-1"
                 scheme="neutral-dark"
                 size="sm"
@@ -13,7 +27,10 @@
                 @click="onCloseClick"
               />
             </div>
-            <div v-if="$slots.icon" class="unnnic-modal-container-background-body__icon-slot">
+            <div
+              v-if="$slots.icon"
+              class="unnnic-modal-container-background-body__icon-slot"
+            >
               <slot name="icon"></slot>
             </div>
             <div
@@ -21,31 +38,45 @@
               :class="[
                 'unnnic-modal-container-background-body-alert_icon',
                 `unnnic-card-scheme--${scheme}--icon`,
-                closeIcon ? '' : 'unnnic-modal-container-background-body-spacing_header',
+                closeIcon
+                  ? ''
+                  : 'unnnic-modal-container-background-body-spacing_header',
               ]"
             >
-              <unnnic-icon-svg :scheme="scheme" :icon="modalIcon" size="xl" />
+              <UnnnicIconSvg
+                :scheme="scheme"
+                :icon="modalIcon"
+                size="xl"
+              />
             </div>
             <div class="unnnic-modal-container-background-body-title">
               {{ text }}
             </div>
           </div>
-          <div class="unnnic-modal-container-background-body-description-container">
+          <div
+            class="unnnic-modal-container-background-body-description-container"
+          >
             <div class="unnnic-modal-container-background-body-description">
               {{ description }} <slot name="message" />
               <slot name="default" />
             </div>
           </div>
-          <div class="unnnic-modal-container-background-report" v-if="hasAlertMessage">
+          <div
+            class="unnnic-modal-container-background-report"
+            v-if="hasAlertMessage"
+          >
             {{ alertMessage }}
           </div>
-          <div v-if="hasButton" class="unnnic-modal-container-background-button">
+          <div
+            v-if="hasButton"
+            class="unnnic-modal-container-background-button"
+          >
             <slot name="options" />
           </div>
         </div>
       </div>
     </div>
-  </transition>
+  </Transition>
 </template>
 
 <script>
@@ -106,7 +137,8 @@ export default {
         this.$refs.modalContainer.style.transition = 'none';
         this.$refs.modalContainer.style.backgroundColor = 'transparent';
         this.$refs.modal.style.transition = 'none';
-        this.$refs.modal.style.marginBottom = `${-this.$refs.modal.offsetHeight}px`;
+        this.$refs.modal.style.marginBottom = `${-this.$refs.modal
+          .offsetHeight}px`;
 
         setTimeout(() => {
           this.$refs.modalContainer.style.transition = 'background-color 0.2s';
@@ -126,7 +158,8 @@ export default {
         this.$refs.modalContainer.style.transition = 'background-color 0.2s';
         this.$refs.modalContainer.style.backgroundColor = 'transparent';
         this.$refs.modal.style.transition = 'margin-bottom 0.2s';
-        this.$refs.modal.style.marginBottom = `${-this.$refs.modal.offsetHeight}px`;
+        this.$refs.modal.style.marginBottom = `${-this.$refs.modal
+          .offsetHeight}px`;
 
         setTimeout(() => {
           this.mobileAnimateReset();
@@ -203,7 +236,9 @@ export default {
           color: $unnnic-color-neutral-darkest;
           font-weight: $unnnic-font-weight-black;
           font-size: $unnnic-font-size-title-sm;
-          line-height: ($unnnic-font-size-title-sm + $unnnic-line-height-medium);
+          line-height: (
+            $unnnic-font-size-title-sm + $unnnic-line-height-medium
+          );
           padding-bottom: $unnnic-spacing-stack-md;
         }
 
@@ -250,7 +285,6 @@ export default {
           font-size: $unnnic-font-size-body-lg;
           line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
         }
-  
       }
 
       &-report {

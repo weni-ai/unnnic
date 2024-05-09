@@ -1,11 +1,14 @@
 <template>
-  <div class="unnnic-slider" :style="cssVars">
+  <div
+    class="unnnic-slider"
+    :style="cssVars"
+  >
     <div class="unnnic-slider__content">
-      <unnnicTooltip
+      <UnnnicTooltip
         ref="tooltip"
         class="unnnic-slider__content__tooltip"
         :text="sliderVal.toString()"
-        :force-open="true"
+        :forceOpen="true"
         :enabled="showTooltip"
         side="top"
       >
@@ -21,7 +24,7 @@
           @mouseover="showTooltip = true"
           @mouseleave="showTooltip = false"
         />
-      </unnnicTooltip>
+      </UnnnicTooltip>
 
       <div class="unnnic-slider__content__labels">
         <div class="unnnic-slider__content__labels__min">{{ minLabel }}</div>
@@ -29,7 +32,12 @@
       </div>
     </div>
 
-    <div ref="value-input" class="value-input" contenteditable="true" @input="handleInput" />
+    <div
+      ref="value-input"
+      class="value-input"
+      contenteditable="true"
+      @input="handleInput"
+    />
   </div>
 </template>
 
@@ -85,7 +93,8 @@ export default {
   mounted() {
     const fallbackLabelWidth = 32 + this.sliderVal.toString().length * 4.5;
     this.sliderWidth = this.$refs.input.clientWidth;
-    this.labelWidth = this.$refs.tooltip.$refs.label.clientWidth || fallbackLabelWidth;
+    this.labelWidth =
+      this.$refs.tooltip.$refs.label.clientWidth || fallbackLabelWidth;
     this.tooltipOffset = this.getNewTooltipPosition();
   },
   watch: {
@@ -125,7 +134,8 @@ export default {
       const halfLabelWidth = this.labelWidth / 2;
       const centerPosition = this.sliderWidth / 2;
 
-      let percentOfRange = (this.sliderVal - this.minValue) / (this.maxValue - this.minValue);
+      let percentOfRange =
+        (this.sliderVal - this.minValue) / (this.maxValue - this.minValue);
       if (Number.isNaN(percentOfRange)) {
         percentOfRange = 0;
       }
@@ -167,7 +177,8 @@ export default {
   font-size: $unnnic-font-size-body-md;
   line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
   padding: $unnnic-squish-nano;
-  height: $unnnic-font-size-body-md + $unnnic-line-height-medium + 0.5 * $unnnic-font-size * 2;
+  height: $unnnic-font-size-body-md + $unnnic-line-height-medium + 0.5 *
+    $unnnic-font-size * 2;
   position: relative;
 
   &:before {
@@ -274,7 +285,9 @@ export default {
       &::-webkit-slider-runnable-track {
         @include track(1);
         margin: $unnnic-spacing-inline-xs 0;
-        --progress: calc((var(--val) - var(--min)) / ((var(--max) - var(--min))) * 100%);
+        --progress: calc(
+          (var(--val) - var(--min)) / ((var(--max) - var(--min))) * 100%
+        );
         background: linear-gradient(
           to right,
           $unnnic-color-aux-baby-blue 0%,

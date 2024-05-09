@@ -1,29 +1,44 @@
 <template>
   <div class="unnnic-import-card">
     <div class="unnnic-import-card__data">
-      <div v-if="isImporting" class="unnnic-import-card__data__title">
+      <div
+        v-if="isImporting"
+        class="unnnic-import-card__data__title"
+      >
         {{ $t('import_card.importing') }}...
       </div>
-      <div v-else class="unnnic-import-card__data__title">
+      <div
+        v-else
+        class="unnnic-import-card__data__title"
+      >
         {{ title }}
       </div>
 
-      <div v-if="subtitle && isImporting" class="unnnic-import-card__data__subtitle">
-        <div v-if="subtitle && isImporting" class="unnnic-import-card__data__subtitle__text">
+      <div
+        v-if="subtitle && isImporting"
+        class="unnnic-import-card__data__subtitle"
+      >
+        <div
+          v-if="subtitle && isImporting"
+          class="unnnic-import-card__data__subtitle__text"
+        >
           {{ subtitle }}
         </div>
-        <div v-if="subtitle && isImporting" class="unnnic-import-card__data__subtitle__progress">
+        <div
+          v-if="subtitle && isImporting"
+          class="unnnic-import-card__data__subtitle__progress"
+        >
           &nbsp;- {{ importProgress }}%
         </div>
       </div>
     </div>
 
     <div class="unnnic-import-card__buttons">
-      <unnnic-button
+      <UnnnicButton
         v-if="canImport"
         class="unnnic-import-card__buttons__import"
         size="small"
-        :icon-center="uploadIcon"
+        :iconCenter="uploadIcon"
         type="primary"
         @click="importFile"
       >
@@ -32,15 +47,15 @@
           ref="file"
           :accept="acceptedFormats"
           @change="handleFileChange"
-          style="display: none;"
+          style="display: none"
         />
-      </unnnic-button>
+      </UnnnicButton>
 
-      <unnnic-button
+      <UnnnicButton
         v-if="canDelete"
         class="unnnic-import-card__buttons__delete"
         size="small"
-        :icon-center="`close-1`"
+        :iconCenter="`close-1`"
         type="primary"
         @click="emitDeletion"
       />
@@ -172,7 +187,10 @@ export default {
     align-self: center;
 
     &__import {
-      background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-light);
+      background-color: rgba(
+        $unnnic-color-brand-weni,
+        $unnnic-opacity-level-light
+      );
 
       :deep(.unnnic-icon) {
         svg {
@@ -184,7 +202,10 @@ export default {
     }
 
     &__delete {
-      background-color: rgba($unnnic-color-feedback-red, $unnnic-opacity-level-light);
+      background-color: rgba(
+        $unnnic-color-feedback-red,
+        $unnnic-opacity-level-light
+      );
 
       :deep(.unnnic-icon) {
         svg {

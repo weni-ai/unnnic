@@ -1,6 +1,9 @@
 import { createApp } from 'vue';
 import Alert from '../components/Alert/Alert.vue';
 import Modal from '../components/Modal/Modal.vue';
+import mitt from 'mitt';
+
+const emitter = mitt();
 
 export default {
   callAlert({ props, containerRef }) {
@@ -10,7 +13,7 @@ export default {
         instance.$el.remove();
       },
       created() {
-        this.$on(['close'], () => {
+        emitter.on(['close'], () => {
           instance.$el.remove();
         });
       },
@@ -33,7 +36,7 @@ export default {
         instance.$el.remove();
       },
       created() {
-        this.$on(['close'], () => {
+        emitter.on(['close'], () => {
           instance.$el.remove();
         });
       },

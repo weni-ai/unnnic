@@ -9,7 +9,7 @@
 
 <script>
 import i18n from '@emoji-mart/data/i18n/pt.json';
-import data from '@emoji-mart/data/sets/14/apple.json'
+import data from '@emoji-mart/data/sets/14/apple.json';
 import { Picker } from 'emoji-mart/';
 
 export default {

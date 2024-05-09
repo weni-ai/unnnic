@@ -1,10 +1,15 @@
 <template>
-    <div :class="[gridClass, 'grid-example-container']">
-        <div v-for="i in gridNumber" :key="i" :class="[gridItemClass,'grid-example']" />
-    </div>
+  <div :class="[gridClass, 'grid-example-container']">
+    <div
+      v-for="i in gridNumber"
+      :key="i"
+      :class="[gridItemClass, 'grid-example']"
+    />
+  </div>
 </template>
 
 <script>
+/* eslint-disable vue/multi-word-component-names */
 export default {
   name: 'Grid',
   props: {
@@ -31,15 +36,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import '../../assets/scss/unnnic.scss';
+@import '../../assets/scss/unnnic.scss';
 
-  .grid-example {
-    background-color: $unnnic-color-brand-weni;
+.grid-example {
+  background-color: $unnnic-color-brand-weni;
 
-    &-container {
-      background-color: $unnnic-color-neutral-dark ;
-      width: 100%;
-      height: 100vh;
-    }
+  &-container {
+    background-color: $unnnic-color-neutral-dark;
+    width: 100%;
+    height: 100vh;
   }
+}
 </style>

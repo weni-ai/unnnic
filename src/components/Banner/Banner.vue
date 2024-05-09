@@ -11,7 +11,6 @@
     :thirdDescription="thirdDescription"
     :subtitle="subtitle"
     :rating="rating"
-    @ratingAction="emitRatingAction"
   />
 </template>
 

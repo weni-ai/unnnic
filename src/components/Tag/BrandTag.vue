@@ -7,9 +7,9 @@
     }"
   >
     <span class="unnnic-brand-tag__label">{{ text }}</span>
-    <unnnic-icon-svg
+    <UnnnicIconSvg
       :icon="disabled ? 'close-1' : 'add-1'"
-      :scheme="disabled ? 'neutral-snow': 'brand-weni-dark'"
+      :scheme="disabled ? 'neutral-snow' : 'brand-weni-dark'"
       class="unnnic-brand-tag__icon"
       size="xs"
     />
@@ -52,7 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-brand-tag {
   display: flex;
@@ -74,7 +74,10 @@ export default {
     color: $unnnic-color-brand-weni-dark;
     background-color: $unnnic-color-background-snow;
     &:hover {
-      background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-extra-light);
+      background-color: rgba(
+        $unnnic-color-brand-weni,
+        $unnnic-opacity-level-extra-light
+      );
     }
   }
   &--clickable {

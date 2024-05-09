@@ -5,18 +5,25 @@
       type,
       {
         inline,
-        'has-subtitle':
-        subtitle,
+        'has-subtitle': subtitle,
         'can-close': canClose,
-      }
+      },
     ]"
   >
     <div class="main">
-      <div v-if="title && !subtitle" class="title">{{ title }}</div>
+      <div
+        v-if="title && !subtitle"
+        class="title"
+      >
+        {{ title }}
+      </div>
 
       <div class="progress-bar-container">
         <div class="progress-container">
-          <div class="bar" :style="{ width: `${value}%` }">
+          <div
+            class="bar"
+            :style="{ width: `${value}%` }"
+          >
             <div
               v-if="type === 'secondary' && !subtitle"
               class="percentage"
@@ -34,25 +41,27 @@
         </div>
       </div>
 
-      <div v-if="type === 'primary' && subtitle" class="footer">
+      <div
+        v-if="type === 'primary' && subtitle"
+        class="footer"
+      >
         <div class="subtitle">{{ subtitle }}</div>
 
-        <div
-          class="percentage"
-        >
-          {{ percentage }}%
-        </div>
+        <div class="percentage">{{ percentage }}%</div>
       </div>
     </div>
 
-    <div v-if="type === 'primary' && subtitle && canClose" class="close">
-      <unnnic-icon
+    <div
+      v-if="type === 'primary' && subtitle && canClose"
+      class="close"
+    >
+      <UnnnicIcon
         icon="close-1"
         scheme="neutral-clean"
         size="sm"
         clickable
         @click="$emit('close')"
-      ></unnnic-icon>
+      ></UnnnicIcon>
     </div>
   </div>
 </template>
@@ -101,10 +110,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-progress-bar {
-  &.primary, &.secondary {
+  &.primary,
+  &.secondary {
     background-color: $unnnic-color-background-carpet;
     border-radius: $unnnic-border-radius-sm;
     padding: $unnnic-squish-md;
@@ -140,7 +150,10 @@ export default {
       align-items: center;
 
       .progress-container {
-        background-color: rgba($unnnic-color-aux-blue, $unnnic-opacity-level-light);
+        background-color: rgba(
+          $unnnic-color-aux-blue,
+          $unnnic-opacity-level-light
+        );
         height: 1.25 * $unnnic-font-size;
         min-width: 14 * $unnnic-font-size;
         border-radius: $unnnic-border-radius-pill;

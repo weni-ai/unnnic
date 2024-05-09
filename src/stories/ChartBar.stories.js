@@ -91,7 +91,10 @@ Condensed.args = {
   ],
 };
 
-export const CondensedWithoutEventsAndTitleAndDescription = (args, { argTypes }) => ({
+export const CondensedWithoutEventsAndTitleAndDescription = (
+  args,
+  { argTypes },
+) => ({
   components: {
     unnnicChartBar,
   },

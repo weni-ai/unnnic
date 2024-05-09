@@ -1,5 +1,5 @@
 <template>
-  <unnnic-icon-svg
+  <UnnnicIconSvg
     :icon="name"
     :size="size"
   />
@@ -7,7 +7,7 @@
 
 <script>
 /* eslint-disable global-require */
-/* eslint-disable import/no-dynamic-require */
+/* eslint-disable vue/multi-word-component-names */
 import UnnnicIconSvg from './Icon.vue';
 
 export default {

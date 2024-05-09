@@ -1,16 +1,38 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div ref="alertContainer" class="alert-container">
-    <div :class="['alert', {
-      'alert--scheme-aux-green': scheme === 'feedback-green' || type === 'success',
-      'alert--scheme-aux-red': scheme === 'feedback-red' || type === 'error',
-    }]">
-      <div ref="progress" class="alert__progress"></div>
+  <div
+    ref="alertContainer"
+    class="alert-container"
+  >
+    <div
+      :class="[
+        'alert',
+        {
+          'alert--scheme-aux-green':
+            scheme === 'feedback-green' || type === 'success',
+          'alert--scheme-aux-red':
+            scheme === 'feedback-red' || type === 'error',
+        },
+      ]"
+    >
+      <div
+        ref="progress"
+        class="alert__progress"
+      ></div>
 
-      <div v-show="text" class="alert__text">
+      <div
+        v-show="text"
+        class="alert__text"
+      >
         {{ text }}
       </div>
 
-      <a v-if="linkHref" class="alert__link" :href="linkHref" :target="linkTarget">
+      <a
+        v-if="linkHref"
+        class="alert__link"
+        :href="linkHref"
+        :target="linkTarget"
+      >
         {{ linkText }}
       </a>
 
@@ -18,7 +40,11 @@
         class="alert__close"
         @click="emitClose"
       >
-        <unnnic-icon icon="close-1" size="sm" scheme="neutral-white" />
+        <UnnnicIcon
+          icon="close-1"
+          size="sm"
+          scheme="neutral-white"
+        />
       </div>
     </div>
   </div>
@@ -178,7 +204,8 @@ export default {
     padding: $unnnic-spacing-xs $unnnic-spacing-sm;
   }
 
-  &__link, &__close {
+  &__link,
+  &__close {
     border-left: $unnnic-border-width-thinner solid $unnnic-color-neutral-cloudy;
 
     &:hover {
@@ -207,8 +234,10 @@ export default {
       background-color: $unnnic-color-aux-green-700;
     }
 
-    .alert__link, .alert__close {
-      border-left: $unnnic-border-width-thinner solid $unnnic-color-aux-green-300;
+    .alert__link,
+    .alert__close {
+      border-left: $unnnic-border-width-thinner solid
+        $unnnic-color-aux-green-300;
 
       &:hover {
         background-color: $unnnic-color-aux-green-300;
@@ -223,7 +252,8 @@ export default {
       background-color: $unnnic-color-aux-red-700;
     }
 
-    .alert__link, .alert__close {
+    .alert__link,
+    .alert__close {
       border-left: $unnnic-border-width-thinner solid $unnnic-color-aux-red-300;
 
       &:hover {

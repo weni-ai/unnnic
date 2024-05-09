@@ -7,26 +7,25 @@
     }"
     @mouseover="handleResize"
   >
-  <slot />
-  <span
-    v-show="enabled"
-    ref="label"
-    :class="[
-            'unnnic-tooltip-label',
-            `unnnic-tooltip-label-${side}`,
-            ]"
-    :style="{ maxWidth: maxWidth, left:leftPos, top:topPos }"
-  >
-    <template v-for="(line, index) in text.split('\n')" :key="index">
-      {{ line }}
-      <br>
-    </template>
-  </span>
+    <slot />
+    <span
+      v-show="enabled"
+      ref="label"
+      :class="['unnnic-tooltip-label', `unnnic-tooltip-label-${side}`]"
+      :style="{ maxWidth: maxWidth, left: leftPos, top: topPos }"
+    >
+      <template
+        v-for="(line, index) in text.split('\n')"
+        :key="index"
+      >
+        {{ line }}
+        <br />
+      </template>
+    </span>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'unnnic-tooltip',
   mounted() {
@@ -84,15 +83,31 @@ export default {
       if (element && this.$refs.label) {
         if (this.side === 'right') {
           this.leftPos = `${elementPos.x + elementPos.width + 8}px`;
-          this.topPos = `${elementPos.y + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
+          this.topPos = `${
+            elementPos.y +
+            elementPos.height / 2 -
+            this.$refs.label.offsetHeight / 2
+          }px`;
         } else if (this.side === 'left') {
           this.leftPos = `${elementPos.x - this.$refs.label.offsetWidth - 8}px`;
-          this.topPos = `${elementPos.y + (elementPos.height / 2) - (this.$refs.label.offsetHeight / 2)}px`;
+          this.topPos = `${
+            elementPos.y +
+            elementPos.height / 2 -
+            this.$refs.label.offsetHeight / 2
+          }px`;
         } else if (this.side === 'top') {
-          this.leftPos = `${elementPos.x + (elementPos.width / 2) - (this.$refs.label.clientWidth / 2)}px`;
+          this.leftPos = `${
+            elementPos.x +
+            elementPos.width / 2 -
+            this.$refs.label.clientWidth / 2
+          }px`;
           this.topPos = `${elementPos.y - this.$refs.label.offsetHeight - 8}px`;
         } else if (this.side === 'bottom') {
-          this.leftPos = `${elementPos.x + (elementPos.width / 2) - (this.$refs.label.clientWidth / 2)}px`;
+          this.leftPos = `${
+            elementPos.x +
+            elementPos.width / 2 -
+            this.$refs.label.clientWidth / 2
+          }px`;
           this.topPos = `${elementPos.y + elementPos.height + 8}px`;
         }
       }
@@ -102,7 +117,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
- @import '../../assets/scss/unnnic.scss';
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-tooltip {
   position: relative;
@@ -110,7 +125,7 @@ export default {
   overflow-wrap: break-word;
 }
 
-.unnnic-tooltip-label{
+.unnnic-tooltip-label {
   z-index: 1;
   visibility: hidden;
   text-align: center;
@@ -131,62 +146,65 @@ export default {
   line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
 
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     border-width: 5px;
     border-style: solid;
   }
 
-    &-top{
-      position: fixed;
-      &::after {
-        top: 100%;
-        left: 50%;
-        margin-left: -5px;
-        border-color: $unnnic-color-neutral-black transparent transparent transparent;
-      }
+  &-top {
+    position: fixed;
+    &::after {
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-color: $unnnic-color-neutral-black transparent transparent
+        transparent;
     }
+  }
 
-    &-bottom{
-      position: fixed;
-      &::after {
-          bottom: 100%;
-          left: 50%;
-          margin-left: -5px;
-          border-color: transparent transparent $unnnic-color-neutral-black transparent;
-      }
+  &-bottom {
+    position: fixed;
+    &::after {
+      bottom: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-color: transparent transparent $unnnic-color-neutral-black
+        transparent;
     }
-    &-right{
-      position: fixed;
-      &::after {
-        top: 50%;
-        right: 100%;
-        margin-top: -5px;
-        border-color: transparent $unnnic-color-neutral-black transparent transparent;
-      }
+  }
+  &-right {
+    position: fixed;
+    &::after {
+      top: 50%;
+      right: 100%;
+      margin-top: -5px;
+      border-color: transparent $unnnic-color-neutral-black transparent
+        transparent;
     }
-    &-left{
-      position: fixed;
-      &::after {
-        top: 50%;
-        left: 100%;
-        margin-top: -5px;
-        border-color: transparent transparent transparent $unnnic-color-neutral-black;
-      }
+  }
+  &-left {
+    position: fixed;
+    &::after {
+      top: 50%;
+      left: 100%;
+      margin-top: -5px;
+      border-color: transparent transparent transparent
+        $unnnic-color-neutral-black;
     }
+  }
 }
 
 .unnnic-tooltip.force-open {
-  .unnnic-tooltip-label{
-      visibility: visible;
-    }
+  .unnnic-tooltip-label {
+    visibility: visible;
+  }
 }
 
 .unnnic-tooltip:hover {
-  .unnnic-tooltip-label{
-      visibility: visible;
-      width: auto;
-    }
+  .unnnic-tooltip-label {
+    visibility: visible;
+    width: auto;
+  }
 }
-
 </style>

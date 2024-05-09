@@ -1,14 +1,23 @@
 <template>
   <div :class="['unnnic-chart-line', { condensed }]">
-    <div v-if="title" class="header">
-      <div class="title unnnic-font secondary body-lg color-neutral-dark">{{ title }}</div>
+    <div
+      v-if="title"
+      class="header"
+    >
+      <div class="title unnnic-font secondary body-lg color-neutral-dark">
+        {{ title }}
+      </div>
     </div>
 
     <div class="main">
       <div class="reference">
         <div class="values">
           <div
-            v-for="(value, index) in [value(maxValue), value(maxValue / 2), value(0)]"
+            v-for="(value, index) in [
+              value(maxValue),
+              value(maxValue / 2),
+              value(0),
+            ]"
             :key="index"
             class="value unnnic-font secondary body-md color-neutral-cleanest"
           >
@@ -16,20 +25,30 @@
           </div>
         </div>
 
-        <div class="unnnic-font secondary body-md color-neutral-cleanest">&nbsp;</div>
+        <div class="unnnic-font secondary body-md color-neutral-cleanest">
+          &nbsp;
+        </div>
       </div>
 
       <div class="groups">
-        <div class="chart" :style="{ backgroundImage: svgChart }" ref="chart">
-          <div v-for="({ value }, index) in data" :key="index" class="group">
-            <unnnic-tool-tip
+        <div
+          class="chart"
+          :style="{ backgroundImage: svgChart }"
+          ref="chart"
+        >
+          <div
+            v-for="({ value }, index) in data"
+            :key="index"
+            class="group"
+          >
+            <UnnnicToolTip
               enabled
               :text="String(value)"
               side="top"
               :style="{ height: `${(value / maxValue) * 100}%`, width: '100%' }"
             >
               <div class="bar"></div>
-            </unnnic-tool-tip>
+            </UnnnicToolTip>
           </div>
         </div>
 
@@ -85,20 +104,19 @@ export default {
 
   computed: {
     maxValue() {
-      return this.fixedMaxValue || Math.max(
-        ...this.data
-          .map(({ value }) => value)
-          .flat(),
+      return (
+        this.fixedMaxValue ||
+        Math.max(...this.data.map(({ value }) => value).flat())
       );
     },
 
     svgChart() {
-      const bars = this.data
-        .map(
-          ({ value }) => 50
-            - (122 / 200)
-            - ((value / this.maxValue) * (50 - (122 / 100)) + Math.random() * 0.01),
-        );
+      const bars = this.data.map(
+        ({ value }) =>
+          50 -
+          122 / 200 -
+          ((value / this.maxValue) * (50 - 122 / 100) + Math.random() * 0.01),
+      );
 
       const barWidth = 100 / bars.length;
       const halfBar = barWidth / 2;
@@ -116,7 +134,9 @@ export default {
           x += barWidth;
         }
 
-        path += `C ${x - halfBar} ${bars[i - 1]} ${x - halfBar} ${bars[i]} ${x} ${bars[i]}`;
+        path += `C ${x - halfBar} ${bars[i - 1]} ${x - halfBar} ${
+          bars[i]
+        } ${x} ${bars[i]}`;
       }
 
       if (bars.length <= 1) {
@@ -140,9 +160,15 @@ export default {
             </linearGradient>
           </defs>
 
-          <g style="transform: scaleX(${this.chartContainerWidth / ((122 / 50) * 100)}); transform-origin: center;">
-            <path fill="url(#linear1)" d="M0 50 L0 ${String(bars[0]) + path} L100 50Z" />
-            <path fill="none" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke" stroke="url(#linear)" d="M0 ${String(bars[0]) + path}" />
+          <g style="transform: scaleX(${
+            this.chartContainerWidth / ((122 / 50) * 100)
+          }); transform-origin: center;">
+            <path fill="url(#linear1)" d="M0 50 L0 ${
+              String(bars[0]) + path
+            } L100 50Z" />
+            <path fill="none" stroke-width="2" stroke-linecap="round" vector-effect="non-scaling-stroke" stroke="url(#linear)" d="M0 ${
+              String(bars[0]) + path
+            }" />
           </g>
         </svg>
       `;
@@ -164,7 +190,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-chart-line {
   background-color: $unnnic-color-background-snow;
@@ -261,24 +287,22 @@ export default {
   font-family: $unnnic-font-family-primary;
 
   $font-sizes:
-    "body-sm" $unnnic-font-size-body-sm,
-    "body-md" $unnnic-font-size-body-md,
-    "body-gt" $unnnic-font-size-body-gt,
-    "body-lg" $unnnic-font-size-body-lg,
-
-    "title-sm" $unnnic-font-size-title-sm,
-    "title-md" $unnnic-font-size-title-md,
-    "title-lg" $unnnic-font-size-title-lg,
-
-    "h4" $unnnic-font-size-h4,
-    "h3" $unnnic-font-size-h3,
-    "h2" $unnnic-font-size-h2,
-    "h1" $unnnic-font-size-h1;
+    'body-sm' $unnnic-font-size-body-sm,
+    'body-md' $unnnic-font-size-body-md,
+    'body-gt' $unnnic-font-size-body-gt,
+    'body-lg' $unnnic-font-size-body-lg,
+    'title-sm' $unnnic-font-size-title-sm,
+    'title-md' $unnnic-font-size-title-md,
+    'title-lg' $unnnic-font-size-title-lg,
+    'h4' $unnnic-font-size-h4,
+    'h3' $unnnic-font-size-h3,
+    'h2' $unnnic-font-size-h2,
+    'h1' $unnnic-font-size-h1;
 
   $font-weights:
-    "black" $unnnic-font-weight-black,
-    "bold" $unnnic-font-weight-bold,
-    "light" $unnnic-font-weight-light;
+    'black' $unnnic-font-weight-black,
+    'bold' $unnnic-font-weight-bold,
+    'light' $unnnic-font-weight-light;
 
   &.secondary {
     font-family: $unnnic-font-family-secondary;

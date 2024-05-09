@@ -47,7 +47,8 @@ const Template = (args, { argTypes }) => ({
   },
 
   // eslint-disable-next-line no-multi-str
-  template: '<div><unnnicMultiSelect v-bind="$props" v-model="groups"></unnnicMultiSelect></div>',
+  template:
+    '<div><unnnicMultiSelect v-bind="$props" v-model="groups"></unnnicMultiSelect></div>',
 });
 
 export const Medium = Template.bind({});

@@ -6,8 +6,13 @@
       'unnnic-card-content__clickable': clickable,
     }"
   >
-    <div :class="['unnnic-card-content__icon', enabled && 'unnnic-card-content__icon--disabled']">
-      <unnnic-icon-svg
+    <div
+      :class="[
+        'unnnic-card-content__icon',
+        enabled && 'unnnic-card-content__icon--disabled',
+      ]"
+    >
+      <UnnnicIconSvg
         :icon="icon"
         scheme="neutral-cloudy"
         size="sm"
@@ -15,7 +20,9 @@
     </div>
     <div class="unnnic-card-content__content">
       <div class="unnnic-card-content__content__title">{{ title }}</div>
-      <div class="unnnic-card-content__content__description">{{ description }}</div>
+      <div class="unnnic-card-content__content__description">
+        {{ description }}
+      </div>
     </div>
   </div>
 </template>
@@ -54,7 +61,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-card-content {
   display: flex;
@@ -128,7 +135,10 @@ export default {
     background-color: $unnnic-color-neutral-lightest;
 
     &--disabled {
-      background-color: rgba($unnnic-color-brand-weni-dark, $unnnic-opacity-level-extra-light);
+      background-color: rgba(
+        $unnnic-color-brand-weni-dark,
+        $unnnic-opacity-level-extra-light
+      );
     }
   }
 }

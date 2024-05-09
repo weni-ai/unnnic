@@ -40,44 +40,58 @@ Normal.args = {
   expanded: true,
   language: 'pt-br',
   hideText: 'Encolher',
-  items: [{
-    label: 'Menu principal',
-    items: [{
-      label: 'Início',
-      active: true,
-      icon: 'house-1-1',
-      // eslint-disable-next-line no-param-reassign
-      click(option) { option.active = !option.active; },
-    }],
-  }, {
-    label: 'Sistemas',
-    items: [{
-      id: 'flows',
-      label: 'Fluxos',
-      active: false,
-      icon: 'hierarchy-3-2',
-      click() {},
-    }, {
-      id: 'ia',
-      label: 'Inteligência Artificial',
-      active: false,
-      icon: 'science-fiction-robot-2',
-      click() {},
-    }, {
-      id: 'chats',
-      label: 'Agentes',
-      active: false,
-      icon: 'messaging-we-chat-3',
-      click() {},
-      notify: true,
-    }],
-  }, {
-    label: 'Perfil',
-    items: [{
-      label: 'Conta',
-      active: false,
-      icon: 'single-neutral-actions-1',
-      click() {},
-    }],
-  }],
+  items: [
+    {
+      label: 'Menu principal',
+      items: [
+        {
+          label: 'Início',
+          active: true,
+          icon: 'house-1-1',
+          // eslint-disable-next-line no-param-reassign
+          click(option) {
+            option.active = !option.active;
+          },
+        },
+      ],
+    },
+    {
+      label: 'Sistemas',
+      items: [
+        {
+          id: 'flows',
+          label: 'Fluxos',
+          active: false,
+          icon: 'hierarchy-3-2',
+          click() {},
+        },
+        {
+          id: 'ia',
+          label: 'Inteligência Artificial',
+          active: false,
+          icon: 'science-fiction-robot-2',
+          click() {},
+        },
+        {
+          id: 'chats',
+          label: 'Agentes',
+          active: false,
+          icon: 'messaging-we-chat-3',
+          click() {},
+          notify: true,
+        },
+      ],
+    },
+    {
+      label: 'Perfil',
+      items: [
+        {
+          label: 'Conta',
+          active: false,
+          icon: 'single-neutral-actions-1',
+          click() {},
+        },
+      ],
+    },
+  ],
 };

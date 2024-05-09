@@ -1,6 +1,11 @@
 <template>
   <div :class="['unnnic-text-area', { disabled }, size, type]">
-    <div v-if="label" class="label">{{ label }}</div>
+    <div
+      v-if="label"
+      class="label"
+    >
+      {{ label }}
+    </div>
 
     <textarea
       ref="textarea"
@@ -11,11 +16,20 @@
       @input="$emit('update:modelValue', $event.srcElement.value)"
     ></textarea>
 
-    <div v-if="maxLength && type === 'normal'" class="helper">
+    <div
+      v-if="maxLength && type === 'normal'"
+      class="helper"
+    >
       {{ modelValue.length }}/{{ maxLength }}
     </div>
-    <div v-if="type === 'error'" class="error-list">
-      <span v-for="(error, index) in errors" :key="index">
+    <div
+      v-if="type === 'error'"
+      class="error-list"
+    >
+      <span
+        v-for="(error, index) in errors"
+        :key="index"
+      >
         {{ error }}
       </span>
     </div>

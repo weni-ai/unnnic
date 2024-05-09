@@ -29,7 +29,13 @@ export default {
     position: {
       control: {
         type: 'select',
-        options: ['top-left', 'top-right', 'bottom-left', 'bottom-right', 'bottom-center'],
+        options: [
+          'top-left',
+          'top-right',
+          'bottom-left',
+          'bottom-right',
+          'bottom-center',
+        ],
       },
     },
     icon: {

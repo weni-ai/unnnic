@@ -11,7 +11,7 @@
       {{ textLeft }}
     </div>
 
-    <unnnic-icon-svg
+    <UnnnicIconSvg
       :class="{ 'unnnic-switch__icon': true, active: isActive }"
       :icon="currentIcon"
       :size="iconSize"
@@ -97,7 +97,9 @@ export default {
   computed: {
     currentIcon() {
       if (this.disabled) {
-        return this.isActive ? 'switch-selected-disabled' : 'switch-default-disabled';
+        return this.isActive
+          ? 'switch-selected-disabled'
+          : 'switch-default-disabled';
       }
 
       return 'switch-default';

@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-label {
   &__label {

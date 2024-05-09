@@ -15,7 +15,7 @@
       <div class="unnnic-banner-info__title">{{ thirdTitle }}</div>
       <div class="unnnic-banner-info__description">{{ thirdDescription }}</div>
       <div class="unnnic-banner-info__rating">
-        <unnnic-icon-svg
+        <UnnnicIconSvg
           :key="index"
           v-for="index in 5"
           @click="emitRatingAction(index)"

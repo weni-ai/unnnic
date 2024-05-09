@@ -9,17 +9,46 @@ export default {
   component: Card,
   argTypes: {
     enabled: { control: { type: 'select' }, options: [true, false] },
-    infoPosition: { control: { type: 'select' }, options: ['top', 'right', 'bottom', 'left'] },
-    type: { control: { type: 'select' }, options: ['title', 'dash', 'account', 'status', 'default', 'blank', 'content', 'marketplace'] },
+    infoPosition: {
+      control: { type: 'select' },
+      options: ['top', 'right', 'bottom', 'left'],
+    },
+    type: {
+      control: { type: 'select' },
+      options: [
+        'title',
+        'dash',
+        'account',
+        'status',
+        'default',
+        'blank',
+        'content',
+        'marketplace',
+      ],
+    },
     icon: { control: { type: 'select' }, options: iconList },
     scheme: {
       control: {
-        type: 'select'
+        type: 'select',
       },
-      options: ['feedback-red', 'feedback-green', 'feedback-yellow', 'feedback-blue', 'feedback-grey',
-        'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink', 'brand-weni-soft'],
+      options: [
+        'feedback-red',
+        'feedback-green',
+        'feedback-yellow',
+        'feedback-blue',
+        'feedback-grey',
+        'aux-blue',
+        'aux-purple',
+        'aux-orange',
+        'aux-lemon',
+        'aux-pink',
+        'brand-weni-soft',
+      ],
     },
-    typeAction: { control: { type: 'select' }, options: ['add', 'config', 'edit'] },
+    typeAction: {
+      control: { type: 'select' },
+      options: ['add', 'config', 'edit'],
+    },
   },
   render: (args) => ({
     components: {
@@ -97,7 +126,7 @@ export const Blank = {
   args: {
     type: 'blank',
     text: 'This is the text',
-    icon: 'add-1'
+    icon: 'add-1',
   },
 };
 export const Content = {

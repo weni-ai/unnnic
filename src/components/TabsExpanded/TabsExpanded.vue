@@ -1,18 +1,28 @@
 <template>
   <div class="unnnic-tabs-expanded">
-    <div class="back-container" @click="$emit('back')">
-      <unnnic-icon
+    <div
+      class="back-container"
+      @click="$emit('back')"
+    >
+      <UnnnicIcon
         icon="keyboard-arrow-left-1"
         scheme="neutral-cloudy"
       />
     </div>
 
-    <div class="tab" v-for="item in items" :key="item.value" @click="$emit('update:model-value', item.value)">
+    <div
+      class="tab"
+      v-for="item in items"
+      :key="item.value"
+      @click="$emit('update:model-value', item.value)"
+    >
       <div>
         <div
           :class="[
             'u font secondary body-gt bold',
-            item.value === modelValue ? 'color-brand-weni-soft' : 'color-neutral-cloudy',
+            item.value === modelValue
+              ? 'color-brand-weni-soft'
+              : 'color-neutral-cloudy',
           ]"
         >
           {{ item.title }}
@@ -23,8 +33,11 @@
         </div>
       </div>
 
-      <div v-if="item.value === modelValue" class="close-container">
-        <unnnic-icon
+      <div
+        v-if="item.value === modelValue"
+        class="close-container"
+      >
+        <UnnnicIcon
           @click.stop="$emit('close-tab', item)"
           icon="close-1"
           size="xs"
@@ -33,8 +46,11 @@
       </div>
     </div>
 
-    <div class="add-container" @click="$emit('add')">
-      <unnnic-icon
+    <div
+      class="add-container"
+      @click="$emit('add')"
+    >
+      <UnnnicIcon
         icon="add-1"
         scheme="neutral-cloudy"
         size="sm"
@@ -64,7 +80,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-tabs-expanded {
   position: relative;
@@ -76,7 +92,8 @@ export default {
     margin-bottom: -$unnnic-border-width-thinner;
   }
 
-  .back-container, .add-container {
+  .back-container,
+  .add-container {
     padding: $unnnic-spacing-inset-sm;
     cursor: pointer;
     user-select: none;

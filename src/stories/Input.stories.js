@@ -25,7 +25,8 @@ const Template = (args, { argTypes }) => ({
       v: '',
     };
   },
-  template: '<div><pre>v-model: {{ v }}</pre><unnnic-input v-bind="$props" v-model="v" /></div>',
+  template:
+    '<div><pre>v-model: {{ v }}</pre><unnnic-input v-bind="$props" v-model="v" /></div>',
 });
 
 export const Normal = Template.bind({});

@@ -20,7 +20,8 @@ export const Default = {
     setup() {
       return { args };
     },
-    template: '<unnnic-chats-navbar v-bind="args" v-model="args.selectedLink" />',
+    template:
+      '<unnnic-chats-navbar v-bind="args" v-model="args.selectedLink" />',
   }),
   args: {
     selectedLink: 'home',

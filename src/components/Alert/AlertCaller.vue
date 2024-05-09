@@ -1,5 +1,5 @@
 <template>
-    <button @click="callAlert"> Launch alert </button>
+  <button @click="callAlert">Launch alert</button>
 </template>
 
 <script>

@@ -4,7 +4,11 @@
       v-if="label"
       :class="[
         'label unnnic-font secondary color-neutral-cloudy',
-        { 'body-md': size === 'sm', 'body-gt': size == 'md', 'label--fixed': fixedLabel },
+        {
+          'body-md': size === 'sm',
+          'body-gt': size == 'md',
+          'label--fixed': fixedLabel,
+        },
       ]"
     >
       {{ label }}
@@ -19,7 +23,10 @@
       {{ error }}
     </div>
 
-    <div v-if="message" class="message unnnic-font secondary body-md color-neutral-cloudy">
+    <div
+      v-if="message"
+      class="message unnnic-font secondary body-md color-neutral-cloudy"
+    >
       {{ message }}
     </div>
   </div>
@@ -59,11 +66,13 @@ export default {
     $label-bottom-spacing: 3px;
 
     &--fixed.unnnic-font.body-md {
-      margin-top: - $unnnic-font-size-body-md - $unnnic-line-height-md + $label-bottom-spacing;
+      margin-top: -$unnnic-font-size-body-md - $unnnic-line-height-md +
+        $label-bottom-spacing;
     }
 
     &--fixed.unnnic-font.body-gt {
-      margin-top: - $unnnic-font-size-body-gt - $unnnic-line-height-md + $label-bottom-spacing;
+      margin-top: -$unnnic-font-size-body-gt - $unnnic-line-height-md +
+        $label-bottom-spacing;
     }
 
     &--fixed {
@@ -73,7 +82,7 @@ export default {
       margin-left: $unnnic-spacing-xs;
 
       &:after {
-        content: " ";
+        content: ' ';
         position: absolute;
         left: 0;
         bottom: $label-bottom-spacing - $unnnic-border-width-thinner;
