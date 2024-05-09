@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "2.0.0-beta.16",
+  "version": "2.0.0-staging.0",
   "type": "commonjs",
   "files": [
     "dist",
