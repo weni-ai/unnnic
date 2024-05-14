@@ -5,8 +5,7 @@ import mitt from 'mitt';
 
 const emitter = mitt();
 
-export default {
-  callAlert({ props, containerRef }) {
+  const callAlert = ({ props, containerRef })=>{
     const AlertComponent = createApp(Alert, {
       ...props,
       onClose: () => {
@@ -27,9 +26,9 @@ export default {
     } else {
       document.body.appendChild(instance.$el);
     }
-  },
+  };
 
-  callModal({ props }) {
+  const callModal = ({ props })=>{
     const ModalComponent = createApp(Modal, {
       ...props,
       onClose: () => {
@@ -44,5 +43,14 @@ export default {
     const element = document.createElement('div');
     const instance = ModalComponent.mount(element);
     document.body.appendChild(element);
-  },
-};
+  }
+
+  export{
+    callAlert,
+    callModal
+  }
+
+  export default{
+    callAlert,
+    callModal
+  }

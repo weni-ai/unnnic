@@ -1,13 +1,12 @@
-import alertCaller from '../components/Alert/AlertCaller.vue';
-import alert from '../utils/call';
 import unnnicAlert from '../components/Alert/Alert.vue';
+import { unnnicCallAlert } from '../components';
 
 export default {
   title: 'example/Alert',
   component: unnnicAlert,
   argTypes: {
+    type: { control: { type: 'text' } },
     text: { control: { type: 'text' } },
-    title: { control: { type: 'text' } },
     closeText: { control: { type: 'text' } },
     scheme: {
       control: {
@@ -56,7 +55,7 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { alertCaller, unnnicAlert },
+  components: { unnnicCallAlert },
   template: `
 <div>
   <button @click="unnnicCallAlert">Click for alert</button>
@@ -85,14 +84,21 @@ Recommended use:
 </div>`,
   methods: {
     unnnicCallAlert() {
-      alert.callAlert({ props: this.$props, seconds: this.$props.seconds });
+      unnnicCallAlert({
+        props: {
+          type: 'success',
+          text: 'Alert'
+        },
+        containerRef: this.$refs.divContainer,
+      })
     },
+
   },
 });
 
 const TemplateWithContainerRef = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { alertCaller, unnnicAlert },
+  components: { unnnicCallAlert },
   template: `
     <div ref="divContainer" style="height: 200px; position: relative; border: 1px solid black">
       <button @click="unnnicCallAlert">Click for alert</button>
@@ -108,26 +114,25 @@ const TemplateWithContainerRef = (args, { argTypes }) => ({
     </div>`,
   methods: {
     unnnicCallAlert() {
-      alert.callAlert({
-        props: this.$props,
+      unnnicCallAlert({
+        props: {
+          type: 'success',
+          text: 'Alert'
+        },
         containerRef: this.$refs.divContainer,
-      });
+      })
     },
   },
 });
 
 export const Normal = Template.bind({});
 Normal.args = {
-  title: 'Title',
+  type: 'success',
   text: 'Text',
-  icon: 'check-circle-1-1',
-  scheme: 'feedback-green',
 };
 
 export const WithContainerRef = TemplateWithContainerRef.bind({});
 WithContainerRef.args = {
-  title: 'Title',
+  type: 'error',
   text: 'Text',
-  icon: 'check-circle-1-1',
-  scheme: 'feedback-green',
 };
