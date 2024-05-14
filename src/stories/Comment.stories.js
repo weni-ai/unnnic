@@ -2,7 +2,7 @@ import unnnicComment from '../components/Comment/Comment.vue';
 import unnnicButton from '../components/Button/Button.vue';
 import unnnicDropdown from '../components/Dropdown/Dropdown.vue';
 import unnnicDropdownItem from '../components/Dropdown/DropdownItem.vue';
-import unnnicIconSvg from '../components/Icon.vue';
+import UnnnicIcon from '../components/Icon.vue';
 
 export default {
   title: 'Example/Comment',
@@ -16,7 +16,7 @@ const Template = (args, { argTypes }) => ({
     unnnicButton,
     unnnicDropdown,
     unnnicDropdownItem,
-    unnnicIconSvg,
+    UnnnicIcon,
   },
   template: `
   <unnnic-comment v-bind="$props">
@@ -24,7 +24,7 @@ const Template = (args, { argTypes }) => ({
     <template v-slot:actions>
     <unnnic-dropdown>
       <template v-slot:trigger>
-        <unnnic-icon-svg
+        <unnnic-icon
           slot="trigger"
           icon="navigation-menu-vertical-1"
           size="sm"

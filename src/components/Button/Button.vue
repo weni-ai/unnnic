@@ -11,7 +11,7 @@
       float ? `unnnic-button--float` : null,
     ]"
   >
-    <UnnnicIconSvg
+    <UnnnicIcon
       v-if="loading"
       icon="loading-circle-1"
       :scheme="iconScheme"
@@ -21,7 +21,7 @@
       :next="next"
     />
 
-    <UnnnicIconSvg
+    <UnnnicIcon
       v-if="iconLeft"
       :icon="iconLeft"
       :scheme="iconScheme"
@@ -31,7 +31,7 @@
       :next="next"
     />
 
-    <UnnnicIconSvg
+    <UnnnicIcon
       v-if="iconCenter"
       :icon="iconCenter"
       :scheme="iconScheme"
@@ -48,7 +48,7 @@
       <slot /> {{ text }}
     </span>
 
-    <UnnnicIconSvg
+    <UnnnicIcon
       v-if="iconRight"
       :icon="iconRight"
       :scheme="iconScheme"
@@ -61,11 +61,11 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   components: {
-    UnnnicIconSvg,
+    UnnnicIcon,
   },
   props: {
     size: {

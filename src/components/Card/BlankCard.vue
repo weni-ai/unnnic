@@ -6,7 +6,7 @@
     }"
   >
     <div class="unnnic-card-blank__content">
-      <UnnnicIconSvg
+      <UnnnicIcon
         :icon="icon"
         scheme="neutral-clean"
         class="unnnic-card-blank__content__icon"
@@ -19,12 +19,12 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'unnnic-card',
   components: {
-    UnnnicIconSvg,
+    UnnnicIcon,
   },
   props: {
     text: {

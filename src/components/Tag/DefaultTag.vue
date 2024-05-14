@@ -10,7 +10,7 @@
       ${disabled ? 'unnnic-tag__label--disabled' : ''}`"
       >{{ text }}</span
     >
-    <UnnnicIconSvg
+    <UnnnicIcon
       v-if="hasCloseIcon"
       icon="close-1"
       class="unnnic-tag__icon"
@@ -22,12 +22,12 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'unnnic-tag',
   components: {
-    UnnnicIconSvg,
+    UnnnicIcon,
   },
   props: {
     text: {

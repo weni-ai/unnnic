@@ -28,7 +28,7 @@
         v-if="typeAction === 'add'"
         class="unnnic-card-marketplace__content__rating"
       >
-        <UnnnicIconSvg
+        <UnnnicIcon
           class="unnnic-card-marketplace__content__rating__star"
           scheme="feedback-yellow"
           icon="rating-star-1"
@@ -46,11 +46,11 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'unnnic-card',
-  components: { UnnnicIconSvg },
+  components: { UnnnicIcon },
   props: {
     title: {
       type: String,

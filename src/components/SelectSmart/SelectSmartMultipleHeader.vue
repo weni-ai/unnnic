@@ -20,7 +20,7 @@
           +{{ selectedOptions.length - multipleSelectedsTags }}
         </p>
       </div>
-      <IconSvg
+      <UnnnicIcon
         class="unnnic-select-smart__options__multiple__selecteds__clear"
         icon="close-1"
         size="xs"
@@ -39,7 +39,7 @@
 
 <script>
 import Tag from '../Tag/Tag.vue';
-import IconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 import UnnnicI18n from '../../mixins/i18n';
 
 export default {
@@ -47,7 +47,7 @@ export default {
   mixins: [UnnnicI18n],
   components: {
     Tag,
-    IconSvg,
+    UnnnicIcon,
   },
   props: {
     selectedOptions: {

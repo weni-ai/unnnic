@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="unnnic-checkbox-wrapper">
-    <UIcon
+    <UnnnicIcon
       class="unnnic-checkbox"
       :class="{ disabled }"
       :icon="icon"
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import uIcon from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   model: {
@@ -60,7 +60,7 @@ export default {
   },
 
   components: {
-    uIcon,
+    UnnnicIcon,
   },
 
   computed: {

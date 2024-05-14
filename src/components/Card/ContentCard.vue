@@ -12,7 +12,7 @@
         enabled && 'unnnic-card-content__icon--disabled',
       ]"
     >
-      <UnnnicIconSvg
+      <UnnnicIcon
         :icon="icon"
         scheme="neutral-cloudy"
         size="sm"
@@ -28,12 +28,12 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'unnnic-card',
   components: {
-    UnnnicIconSvg,
+    UnnnicIcon,
   },
   props: {
     title: {
