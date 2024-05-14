@@ -115,6 +115,8 @@ export const components = {
   // unnnicSelectListItem: selectListItem,
   unnnicMultiSelect: multiSelect,
   unnnicAlert: alert,
+  unnnicCallAlert: callAlert,
+  unnnicCallModal: callModal,
   // unnnicAutocomplete: autocomplete,
   // unnnicAutocompleteSelect: autocompleteSelect,
   unnnicTag: tag,
