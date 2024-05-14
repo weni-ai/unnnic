@@ -19,7 +19,7 @@
               v-if="closeIcon"
               class="unnnic-modal-container-background-body-close_icon"
             >
-              <UnnnicIconSvg
+              <UnnnicIcon
                 icon="close-1"
                 scheme="neutral-dark"
                 size="sm"
@@ -43,7 +43,7 @@
                   : 'unnnic-modal-container-background-body-spacing_header',
               ]"
             >
-              <UnnnicIconSvg
+              <UnnnicIcon
                 :scheme="scheme"
                 :icon="modalIcon"
                 size="xl"
@@ -80,12 +80,12 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'unnnic-modal',
   components: {
-    UnnnicIconSvg,
+    UnnnicIcon,
   },
   props: {
     text: {

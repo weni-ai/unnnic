@@ -5,7 +5,7 @@
     class="unnnic-accordion"
   >
     <div class="header">
-      <UnnnicIconSvg
+      <UnnnicIcon
         :icon="open ? 'subtract-circle-1' : 'add-circle-1'"
         scheme="neutral-clean"
         size="md"
@@ -32,11 +32,11 @@
 </template>
 
 <script>
-import unnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   components: {
-    unnnicIconSvg,
+    UnnnicIcon,
   },
 
   props: {

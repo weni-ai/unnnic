@@ -61,7 +61,7 @@
                   }
                 "
               >
-                <IconSvg
+                <UnnnicIcon
                   :icon="option.icon"
                   :scheme="option.active ? 'brand-weni-soft' : 'neutral-cloudy'"
                   :size="!expanded ? 'md' : 'ant'"
@@ -73,7 +73,7 @@
                   :class="option.notify && !expanded ? 'notify' : ''"
                   v-if="option.notify"
                 >
-                  <IconSvg
+                  <UnnnicIcon
                     icon="indicator"
                     scheme="brand-weni-soft"
                     size="ant"
@@ -114,7 +114,7 @@
                 class="option"
                 @click="toggleExpanded"
               >
-                <IconSvg
+                <UnnnicIcon
                   :icon="expanded ? 'close_fullscreen' : 'open_in_full'"
                   :scheme="'neutral-cloudy'"
                   :size="!expanded ? 'md' : 'ant'"
@@ -133,12 +133,12 @@
 <script>
 import ToolTip from '../ToolTip/ToolTip.vue';
 import languageSelect from '../Dropdown/LanguageSelect.vue';
-import iconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   components: {
     ToolTip,
-    iconSvg,
+    UnnnicIcon,
     languageSelect,
   },
 

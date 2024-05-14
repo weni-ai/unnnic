@@ -11,7 +11,7 @@
       {{ textLeft }}
     </div>
 
-    <UnnnicIconSvg
+    <UnnnicIcon
       :class="{ 'unnnic-switch__icon': true, active: isActive }"
       :icon="currentIcon"
       :size="iconSize"
@@ -34,11 +34,11 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'unnnic-switch',
-  components: { UnnnicIconSvg },
+  components: { UnnnicIcon },
   props: {
     size: {
       type: String,

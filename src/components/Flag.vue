@@ -1,5 +1,5 @@
 <template>
-  <UnnnicIconSvg
+  <UnnnicIcon
     :icon="name"
     :size="size"
   />
@@ -8,12 +8,12 @@
 <script>
 /* eslint-disable global-require */
 /* eslint-disable vue/multi-word-component-names */
-import UnnnicIconSvg from './Icon.vue';
+import UnnnicIcon from './Icon.vue';
 
 export default {
   name: 'Flag',
   components: {
-    UnnnicIconSvg,
+    UnnnicIcon,
   },
   props: {
     code: {

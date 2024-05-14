@@ -3,7 +3,7 @@
     v-if="version === '1.0'"
     :class="['unnnic-alert', `unnnic-alert-position--${position}`]"
   >
-    <UnnnicIconSvg
+    <UnnnicIcon
       :icon="icon"
       :scheme="scheme"
       size="sm"
@@ -23,7 +23,7 @@
     >
       {{ closeText.toUpperCase() }}
     </div>
-    <UnnnicIconSvg
+    <UnnnicIcon
       v-else
       clickable
       icon="close-1"
@@ -41,13 +41,13 @@
 </template>
 
 <script>
-import unnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 import Version1dot1 from './Version1dot1.vue';
 
 export default {
   name: 'unnnicAlert',
   components: {
-    unnnicIconSvg,
+    UnnnicIcon,
     Version1dot1,
   },
   props: {

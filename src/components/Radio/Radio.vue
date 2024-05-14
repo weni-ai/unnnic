@@ -8,7 +8,7 @@
       disabled ? 'disabled' : null,
     ]"
   >
-    <UnnnicIconSvg
+    <UnnnicIcon
       class="unnnic-radio"
       :icon="icon"
       :scheme="color"
@@ -23,6 +23,7 @@
 
 <script setup>
 import { computed } from 'vue';
+import UnnnicIcon from '../Icon.vue';
 
 const props = defineProps({
   modelValue: {

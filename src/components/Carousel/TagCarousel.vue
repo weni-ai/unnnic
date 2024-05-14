@@ -4,7 +4,7 @@
       class="unnnic-card-tag-carousel__button unnnic-card-tag-carousel__button--left"
     >
       <div class="unnnic-card-tag-carousel__button__icon">
-        <UnnnicIconSvg
+        <UnnnicIcon
           icon="arrow-left-1-1"
           size="sm"
           @click="previous()"
@@ -46,7 +46,7 @@
         v-show="hasNext"
       />
       <div class="unnnic-card-tag-carousel__button__icon">
-        <UnnnicIconSvg
+        <UnnnicIcon
           icon="arrow-right-1-1"
           @click="next()"
           size="sm"
@@ -60,7 +60,7 @@
 
 <script>
 import UnnnicTag from '../Tag/Tag.vue';
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'unnnic-tag-carousel',
@@ -73,7 +73,7 @@ export default {
   },
   components: {
     UnnnicTag,
-    UnnnicIconSvg,
+    UnnnicIcon,
   },
   props: {
     modelValue: {

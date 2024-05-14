@@ -14,7 +14,7 @@
       v-on:drop.stop.prevent="drop"
       @click="() => this.$refs.file.click()"
     >
-      <UnnnicIconSvg
+      <UnnnicIcon
         class="unnnic-upload-area__dropzone__icon"
         icon="upload-bottom-1"
         :scheme="hasError ? 'feedback-red' : 'brand-weni'"
@@ -84,13 +84,13 @@
 <script>
 import mime from 'mime';
 
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 import UnnnicImportCard from '../ImportCard/ImportCard.vue';
 
 export default {
   name: 'unnnic-upload-area',
   components: {
-    UnnnicIconSvg,
+    UnnnicIcon,
     UnnnicImportCard,
   },
   props: {

@@ -11,7 +11,7 @@
       <span class="unnnic-tag__count">{{ count }}</span>
     </ToolTip>
     <span class="unnnic-tag__label">{{ text }}</span>
-    <UnnnicIconSvg
+    <UnnnicIcon
       v-if="hasBackButton"
       icon="arrow-right-1-1"
       class="unnnic-tag__icon"
@@ -22,13 +22,13 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
   name: 'unnnic-tag',
   components: {
-    UnnnicIconSvg,
+    UnnnicIcon,
     ToolTip,
   },
   props: {

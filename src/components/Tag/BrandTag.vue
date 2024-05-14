@@ -7,7 +7,7 @@
     }"
   >
     <span class="unnnic-brand-tag__label">{{ text }}</span>
-    <UnnnicIconSvg
+    <UnnnicIcon
       :icon="disabled ? 'close-1' : 'add-1'"
       :scheme="disabled ? 'neutral-snow' : 'brand-weni-dark'"
       class="unnnic-brand-tag__icon"
@@ -17,12 +17,12 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'unnnic-brand-tag',
   components: {
-    UnnnicIconSvg,
+    UnnnicIcon,
   },
   props: {
     text: {
