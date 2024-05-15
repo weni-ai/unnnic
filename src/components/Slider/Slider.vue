@@ -1,35 +1,35 @@
 <template>
   <div class="unnnic-slider" :style="cssVars">
     <div class="unnnic-slider__content">
-      <unnnicTooltip
-        ref="tooltip"
-        class="unnnic-slider__content__tooltip"
-        :text="sliderVal.toString()"
-        :force-open="true"
-        :enabled="showTooltip"
-        side="top"
-      >
-        <input
-          ref="input"
-          class="unnnic-slider__content__range-input"
-          v-model="sliderVal"
-          type="range"
-          :min="minValue"
-          :max="maxValue"
-          :step="step"
-          @change="handleValueChange"
-          @mouseover="showTooltip = true"
-          @mouseleave="showTooltip = false"
-        />
-      </unnnicTooltip>
 
       <div class="unnnic-slider__content__labels">
         <div class="unnnic-slider__content__labels__min">{{ minLabel }}</div>
+        <unnnicTooltip
+          ref="tooltip"
+          class="unnnic-slider__content__tooltip"
+          :text="sliderVal.toString()"
+          :force-open="true"
+          :enabled="showTooltip"
+          side="top"
+        >
+          <input
+            ref="input"
+            class="unnnic-slider__content__range-input"
+            v-model="sliderVal"
+            type="range"
+            :min="minValue"
+            :max="maxValue"
+            :step="step"
+            @change="handleValueChange"
+            @mouseover="showTooltip = true"
+            @mouseleave="showTooltip = false"
+          />
+        </unnnicTooltip>
         <div class="unnnic-slider__content__labels__max">{{ maxLabel }}</div>
       </div>
-    </div>
 
-    <div ref="value-input" class="value-input" contenteditable="true" @input="handleInput" />
+    </div>
+      <div ref="value-input" class="value-input" contenteditable="true" @input="handleInput" />
   </div>
 </template>
 
@@ -166,7 +166,8 @@ export default {
   box-sizing: border-box;
   font-size: $unnnic-font-size-body-md;
   line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
-  padding: $unnnic-squish-nano;
+  padding: $unnnic-spacing-xs $unnnic-spacing-xl $unnnic-spacing-xs $unnnic-spacing-sm;
+  gap: $unnnic-spacing-xs;
   height: $unnnic-font-size-body-md + $unnnic-line-height-medium + 0.5 * $unnnic-font-size * 2;
   position: relative;
 
@@ -212,7 +213,7 @@ export default {
 
     &__labels {
       display: flex;
-
+      gap: $unnnic-spacing-ant;
       font-family: $unnnic-font-family-secondary;
       font-weight: $unnnic-font-weight-regular;
       font-size: $unnnic-font-size-body-md;
@@ -233,13 +234,9 @@ export default {
         box-sizing: border-box;
         width: $unnnic-icon-size-xs;
         height: $unnnic-icon-size-xs;
-        background: $unnnic-color-neutral-snow;
-        border: $unnnic-border-width-thin solid $unnnic-color-aux-baby-blue;
+        background: $unnnic-color-weni-600;
+        border: $unnnic-border-width-thin solid $unnnic-color-weni-600;
         border-radius: 50%;
-
-        &:hover {
-          border: $unnnic-border-width-thin solid $unnnic-color-aux-blue;
-        }
 
         &:active {
           box-shadow: $unnnic-shadow-level-near;
@@ -277,8 +274,8 @@ export default {
         --progress: calc((var(--val) - var(--min)) / ((var(--max) - var(--min))) * 100%);
         background: linear-gradient(
           to right,
-          $unnnic-color-aux-baby-blue 0%,
-          $unnnic-color-aux-baby-blue calc(var(--progress)),
+          $unnnic-color-weni-600 0%,
+          $unnnic-color-weni-600 calc(var(--progress)),
           $unnnic-color-neutral-soft calc(var(--progress)),
           $unnnic-color-neutral-soft 100%
         );
@@ -294,7 +291,7 @@ export default {
 
       @mixin fill() {
         height: 4px;
-        background: $unnnic-color-aux-baby-blue;
+        background: $unnnic-color-weni-600;
       }
 
       /* Firefox */
