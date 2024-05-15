@@ -1,52 +1,74 @@
 <template>
-  <div class="unnnic-slider" :style="cssVars">
-    <div class="unnnic-slider__content">
+  <article>
+    <section class="unnnic-label">
+      <p v-if="label" class="unnnic-slider__label">{{ label }}</p>
+      <unnnicTooltip
+        v-if="labelInfo"
+        class="unnnic-label__tooltip"
+        :text="labelInfo"
+        enabled
+        side="top"
+      >
+      <unnnic-icon
 
-      <div class="unnnic-slider__content__labels">
-        <div class="unnnic-slider__content__labels__min">{{ minLabel }}</div>
-        <unnnicTooltip
-          ref="tooltip"
-          class="unnnic-slider__content__tooltip"
-          :text="sliderVal.toString()"
-          :force-open="true"
-          :enabled="showTooltip"
-          side="top"
-        >
-          <input
-            ref="input"
-            class="unnnic-slider__content__range-input"
-            v-model="sliderVal"
-            type="range"
-            :min="minValue"
-            :max="maxValue"
-            :step="step"
-            @change="handleValueChange"
-            @mouseover="showTooltip = true"
-            @mouseleave="showTooltip = false"
-          />
-        </unnnicTooltip>
-        <div class="unnnic-slider__content__labels__max">{{ maxLabel }}</div>
-      </div>
-
-    </div>
-    <template v-if="showInputValue">
-      <div
-        ref="value-input"
-        class="value-input"
-        contenteditable="true"
-        @input="handleInput"
+        class="unnnic-label__tooltip__icon"
+        icon="info"
+        size="sm"
+        scheme="neutral-clean"
+       :filled="true"
       />
-    </template>
-  </div>
+      </unnnicTooltip>
+    </section>
+
+    <section class="unnnic-slider" :style="cssVars">
+        <section class="unnnic-slider__content">
+        <section class="unnnic-slider__content__labels">
+          <div class="unnnic-slider__content__labels__min">{{ minLabel }}</div>
+          <unnnicTooltip
+            ref="tooltip"
+            class="unnnic-slider__content__tooltip"
+            :text="sliderVal.toString()"
+            :force-open="true"
+            :enabled="showTooltip"
+            side="top"
+          >
+            <input
+              ref="input"
+              class="unnnic-slider__content__range-input"
+              v-model="sliderVal"
+              type="range"
+              :min="minValue"
+              :max="maxValue"
+              :step="step"
+              @change="handleValueChange"
+              @mouseover="showTooltip = true"
+              @mouseleave="showTooltip = false"
+            />
+          </unnnicTooltip>
+          <div class="unnnic-slider__content__labels__max">{{ maxLabel }}</div>
+        </section>
+      </section>
+      <template v-if="showInputValue">
+        <div
+          ref="value-input"
+          class="value-input"
+          contenteditable="true"
+          @input="handleInput"
+        />
+      </template>
+    </section>
+  </article>
 </template>
 
 <script>
 import unnnicTooltip from '../ToolTip/ToolTip.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'unnnic-slider',
   components: {
     unnnicTooltip,
+    UnnnicIcon,
   },
   props: {
     initialValue: {
@@ -56,6 +78,14 @@ export default {
     showInputValue: {
       type: Boolean,
       default: true,
+    },
+    label: {
+      type: String,
+      default: '',
+    },
+    labelInfo: {
+      type: String,
+      default: '',
     },
     minValue: {
       type: Number,
@@ -212,9 +242,32 @@ export default {
 <style lang="scss">
 @import '../../assets/scss/unnnic.scss';
 
+.unnnic-label {
+      display: flex;
+      gap: $unnnic-spacing-xs;
+
+    &__tooltip {
+        display: flex !important;
+        align-self: center;
+
+        &__icon {
+          cursor: default;
+        }
+      }
+}
+
 .unnnic-slider {
   display: flex;
   width: 100%;
+
+  &__label {
+    font-family: $unnnic-font-family-secondary;
+    font-weight: $unnnic-font-weight-regular;
+    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+    font-size: $unnnic-font-size-body-gt;
+    color: $unnnic-color-neutral-cloudy;
+    margin: $unnnic-spacing-stack-xs 0;
+  }
   &__content {
     display: flex;
     flex-direction: column;
