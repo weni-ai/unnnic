@@ -29,7 +29,14 @@
       </div>
 
     </div>
-      <div ref="value-input" class="value-input" contenteditable="true" @input="handleInput" />
+    <template v-if="showInputValue">
+      <div
+        ref="value-input"
+        class="value-input"
+        contenteditable="true"
+        @input="handleInput"
+      />
+    </template>
   </div>
 </template>
 
@@ -45,6 +52,10 @@ export default {
     initialValue: {
       type: Number,
       default: 0,
+    },
+    showInputValue: {
+      type: Boolean,
+      default: true,
     },
     minValue: {
       type: Number,
