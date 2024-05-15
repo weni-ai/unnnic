@@ -166,10 +166,16 @@ export default {
   box-sizing: border-box;
   font-size: $unnnic-font-size-body-md;
   line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
-  padding: $unnnic-spacing-xs $unnnic-spacing-xl $unnnic-spacing-xs $unnnic-spacing-sm;
+  min-width: 70px;
+  max-width: 70px;
+  padding: $unnnic-spacing-xs $unnnic-spacing-sm $unnnic-spacing-xs $unnnic-spacing-sm;
   gap: $unnnic-spacing-xs;
   height: $unnnic-font-size-body-md + $unnnic-line-height-medium + 0.5 * $unnnic-font-size * 2;
   position: relative;
+  border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 
   &:before {
     content: ' ';
@@ -178,7 +184,6 @@ export default {
     right: 0;
     top: 0;
     bottom: 0;
-    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
     border-radius: inherit;
     pointer-events: none;
   }
