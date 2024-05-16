@@ -7,7 +7,7 @@
         class="unnnic-label__tooltip"
         :text="labelInfo"
         enabled
-        side="bottom"
+        side="top"
       >
       <unnnic-icon
         class="unnnic-label__tooltip__icon"
@@ -248,7 +248,7 @@ export default {
       gap: $unnnic-spacing-xs;
 
     &__tooltip {
-        display: flex !important;
+        display: flex;
         align-self: center;
 
         &__icon {
