@@ -163,7 +163,7 @@ export default {
     },
     getNewTooltipPosition() {
       const haldThumbWidth = 12 / 2;
-      const halfLabelWidth = this.labelWidth / 2;
+      const halfLabelWidth = (this.labelWidth === 0 ? 32 : this.labelWidth) / 2;
       const centerPosition = this.sliderWidth / 2;
 
       let percentOfRange = (this.sliderVal - this.minValue) / (this.maxValue - this.minValue);
