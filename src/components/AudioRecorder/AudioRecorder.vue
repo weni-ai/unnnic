@@ -1,6 +1,11 @@
 <template>
   <section v-if="value || isRecording || src" class="unnnic-audio-recorder">
-    <unnnic-tool-tip v-if="isRecording || canDiscard" enabled text="Descartar" side="top">
+    <unnnic-tool-tip
+      v-if="isRecording || canDiscard"
+      enabled
+      :text="$t('audio_recorder.discard_button')"
+      side="top"
+    >
       <span @click="discard" @keypress.enter="discard" class="delete-button unnnic--clickable">
         <unnnic-icon icon="delete-1-1" scheme="feedback-red" />
       </span>
@@ -221,7 +226,7 @@ export default {
       });
 
       this.audio.addEventListener('pause', () => {
-        this.status = 'paused';
+        if (this.audio) this.status = 'paused';
       });
 
       this.audio.addEventListener('timeupdate', () => {
@@ -261,6 +266,8 @@ export default {
         this.stop();
       }
 
+      this.audio = null;
+
       this.$emit('input', null);
 
       this.status = 'idle';
@@ -274,7 +281,7 @@ export default {
     pause() {
       this.audio.pause();
     },
-    async stop() {
+    stop() {
       this.status = 'recorded';
       this.pause();
 
