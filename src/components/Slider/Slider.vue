@@ -133,7 +133,9 @@ export default {
       handler() {
         this.$nextTick(() => {
           this.configureTooltip();
-          if (this.$refs['value-input'] && this.$refs['value-input'].textContent !== this.sliderVal) {
+          const ValueInput = this.$refs['value-input'];
+
+          if (ValueInput && ValueInput.textContent !== this.sliderVal) {
             this.$refs['value-input'].textContent = this.sliderVal;
           }
         });
