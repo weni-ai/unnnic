@@ -1,6 +1,11 @@
 <template>
   <section v-if="value || isRecording || src" class="unnnic-audio-recorder">
-    <unnnic-tool-tip v-if="isRecording || canDiscard" enabled text="Descartar" side="top">
+    <unnnic-tool-tip
+      v-if="isRecording || canDiscard"
+      enabled
+      :text="$t('audio_recorder.discard_button')"
+      side="top"
+    >
       <span @click="discard" @keypress.enter="discard" class="delete-button unnnic--clickable">
         <unnnic-icon icon="delete-1-1" scheme="feedback-red" />
       </span>
