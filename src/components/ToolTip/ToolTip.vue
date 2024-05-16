@@ -130,6 +130,7 @@ export default {
   box-sizing: border-box;
   width: auto;
   display: flex;
+  justify-content: center;
   gap: $unnnic-spacing-xs;
   align-items: center;
 
