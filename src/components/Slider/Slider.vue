@@ -7,10 +7,9 @@
         class="unnnic-label__tooltip"
         :text="labelInfo"
         enabled
-        side="top"
+        side="bottom"
       >
       <unnnic-icon
-
         class="unnnic-label__tooltip__icon"
         icon="info"
         size="sm"
@@ -23,7 +22,7 @@
     <section class="unnnic-slider" :style="cssVars">
         <section class="unnnic-slider__content">
         <section class="unnnic-slider__content__labels">
-          <div class="unnnic-slider__content__labels__min">{{ minLabel }}</div>
+          <span class="unnnic-slider__content__labels__min">{{ minLabel }}</span>
           <unnnicTooltip
             ref="tooltip"
             class="unnnic-slider__content__tooltip"
@@ -45,15 +44,15 @@
               @mouseleave="showTooltip = false"
             />
           </unnnicTooltip>
-          <div class="unnnic-slider__content__labels__max">{{ maxLabel }}</div>
+          <span class="unnnic-slider__content__labels__max">{{ maxLabel }}</span>
         </section>
       </section>
       <template v-if="showInputValue">
-        <div
+        <input
           ref="value-input"
           class="value-input"
-          contenteditable="true"
           @input="handleInput"
+          :value="sliderVal"
         />
       </template>
     </section>
@@ -157,7 +156,7 @@ export default {
       this.$emit('valueChange', this.sliderVal);
     },
     handleInput(event) {
-      this.sliderVal = event.srcElement.textContent;
+      this.sliderVal = event.target.value;
 
       this.handleValueChange();
     },
@@ -269,13 +268,13 @@ export default {
     margin: $unnnic-spacing-stack-xs 0;
   }
   &__content {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     width: 100%;
     margin-top: $unnnic-spacing-stack-xs;
 
     &__tooltip {
-      display: flex !important;
+      display: flex;
       width: 100%;
       align-self: center;
     }
@@ -283,14 +282,22 @@ export default {
     &__labels {
       display: flex;
       gap: $unnnic-spacing-ant;
-      font-family: $unnnic-font-family-secondary;
-      font-weight: $unnnic-font-weight-regular;
-      font-size: $unnnic-font-size-body-md;
-      line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
-      color: $unnnic-color-neutral-cloudy;
+
+      &__min {
+        font-family: $unnnic-font-family-secondary;
+        font-weight: $unnnic-font-weight-regular;
+        font-size: $unnnic-font-size-body-md;
+        line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+        color: $unnnic-color-neutral-cloudy;
+      }
 
       &__max {
         margin-left: auto;
+        font-family: $unnnic-font-family-secondary;
+        font-weight: $unnnic-font-weight-regular;
+        font-size: $unnnic-font-size-body-md;
+        line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+        color: $unnnic-color-neutral-cloudy;
       }
     }
 
