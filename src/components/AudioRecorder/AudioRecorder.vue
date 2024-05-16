@@ -221,7 +221,7 @@ export default {
       });
 
       this.audio.addEventListener('pause', () => {
-        this.status = 'paused';
+        if (this.audio) this.status = 'paused';
       });
 
       this.audio.addEventListener('timeupdate', () => {
@@ -261,6 +261,8 @@ export default {
         this.stop();
       }
 
+      this.audio = null;
+
       this.$emit('input', null);
 
       this.status = 'idle';
@@ -274,7 +276,7 @@ export default {
     pause() {
       this.audio.pause();
     },
-    async stop() {
+    stop() {
       this.status = 'recorded';
       this.pause();
 
