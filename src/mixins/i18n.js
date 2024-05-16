@@ -22,6 +22,8 @@ export default {
 
       locale = validLocaleValues.includes(locale) ? locale : treatedSelectedLocale;
 
+      locale = locale.toLowerCase();
+
       let text = get(this.translations, `${key}.${locale}`, get(this.translations, key));
 
       if (!text) {
