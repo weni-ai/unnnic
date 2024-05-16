@@ -270,7 +270,7 @@ export default {
     margin: $unnnic-spacing-stack-xs 0;
   }
   &__content {
-    display: flex !important;
+    display: flex;
     flex-direction: column;
     width: 100%;
     margin-top: $unnnic-spacing-stack-xs;
