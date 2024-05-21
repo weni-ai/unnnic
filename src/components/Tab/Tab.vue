@@ -84,18 +84,19 @@ export default {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  color: $unnnic-color-neutral-cleanest;
+  color: $unnnic-color-neutral-cloudy;
   font-family: $unnnic-font-family-secondary;
   font-weight: $unnnic-font-weight-bold;
   font-size: $unnnic-font-size-body-lg;
   line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
-  padding-bottom: $unnnic-inset-sm;
   margin-bottom: $unnnic-inset-sm;
   border-bottom: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 }
 
 .tab-content {
   display: flex;
+  gap: $unnnic-spacing-sm;
+
   margin: 0;
   padding: 0;
   list-style: none;
@@ -103,21 +104,40 @@ export default {
 
 .tab-head {
   cursor: pointer;
-  margin-right: $unnnic-inset-md;
+  margin: $unnnic-spacing-xs $unnnic-spacing-sm;
+
+  &:hover {
+      color: $unnnic-color-neutral-black;
+  }
 }
 
 .tab-head--active {
   font-family: $unnnic-font-family-secondary;
   font-weight: $unnnic-font-weight-bold;
-  color: $unnnic-color-neutral-darkest;
+  color: $unnnic-color-neutral-black;
   font-size: $unnnic-font-size-body-lg;
   line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
   transition: 0.4s;
+
+  position: relative;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    bottom: -$unnnic-spacing-xs;
+    left: -$unnnic-spacing-sm;
+
+    display: block;
+
+    width: calc(100% + (#{$unnnic-spacing-sm} * 2));
+
+    border-bottom: $unnnic-border-width-thin solid $unnnic-color-weni-600;
+  }
 }
 
 .tab.size-sm {
   .tab-header {
-    padding-bottom: $unnnic-spacing-stack-xs;
     margin-bottom: $unnnic-spacing-stack-xs;
 
     .tab-head, .tab-head--active {
