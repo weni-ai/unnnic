@@ -12,6 +12,19 @@
           @click="change(tab)"
         >
           <slot :name="tabHeadSlotName(tab)">{{ tab }} </slot>
+          <unnnic-tool-tip
+            v-if="getHeadTooltip(tab)"
+            enabled
+            :text="getHeadTooltip(tab)"
+            side="bottom"
+          >
+            <unnnic-icon
+              icon="info"
+              :size="size === 'sm' ? 'xs' : 'sm'"
+              filled
+              scheme="neutral-cleanest"
+            />
+          </unnnic-tool-tip>
         </li>
       </ul>
     </header>
@@ -22,6 +35,9 @@
 </template>
 
 <script>
+import UnnnicIcon from '../Icon.vue';
+import UnnnicToolTip from '../ToolTip/ToolTip.vue';
+
 export default {
   model: {
     prop: 'activeTab',
@@ -44,6 +60,10 @@ export default {
       type: Array,
       default: null,
     },
+  },
+  components: {
+    UnnnicIcon,
+    UnnnicToolTip,
   },
   data() {
     return {
@@ -68,6 +88,12 @@ export default {
   methods: {
     tabHeadSlotName(tabName) {
       return `tab-head-${tabName}`;
+    },
+    tabHeadTooltipSlotName(tabName) {
+      return tabName ? `tab-head-${tabName}-tooltip` : '';
+    },
+    getHeadTooltip(tabName) {
+      return this.$slots[this.tabHeadTooltipSlotName(tabName)]?.[0]?.text || '';
     },
     change(value) {
       this.localValue = value;
@@ -103,11 +129,19 @@ export default {
 }
 
 .tab-head {
+  display: flex;
+  gap: $unnnic-spacing-xs;
+  align-items: center;
+
   cursor: pointer;
   margin: $unnnic-spacing-xs $unnnic-spacing-sm;
 
+  .unnnic-tooltip {
+    display: flex;
+  }
+
   &:hover {
-      color: $unnnic-color-neutral-black;
+    color: $unnnic-color-neutral-black;
   }
 }
 
@@ -122,7 +156,7 @@ export default {
   position: relative;
 
   &::after {
-    content: '';
+    content: "";
 
     position: absolute;
     bottom: -$unnnic-spacing-xs;
@@ -140,7 +174,8 @@ export default {
   .tab-header {
     margin-bottom: $unnnic-spacing-stack-xs;
 
-    .tab-head, .tab-head--active {
+    .tab-head,
+    .tab-head--active {
       font-size: $unnnic-font-size-body-md;
       line-height: ($unnnic-font-size-body-md + $unnnic-line-height-md);
     }

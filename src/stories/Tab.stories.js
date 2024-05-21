@@ -16,6 +16,9 @@ const Template = (args, { argTypes }) => ({
       <template slot="tab-head-first">
         First
       </template>
+      <template slot="tab-head-first-tooltip">
+        Tooltip text
+      </template>
       <template slot="tab-panel-first">
         <h2 class="title">First Content</h2>
         <p class="description">
