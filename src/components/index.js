@@ -29,7 +29,7 @@ import radio from './Radio/Radio.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
 import modal from './Modal/Modal.vue';
 import modalUpload from './ModalUpload/ModalUpload.vue';
-import {callAlert, callModal} from '../utils/call';
+import { callAlert, callModal } from '../utils/call';
 import selectSmart from './SelectSmart/SelectSmart.vue';
 // import select from './Select/Select.vue';
 import selectItem from './Select/SelectItem.vue';
@@ -76,6 +76,7 @@ import ChatsNavbar from './ChatsNavbar/ChatsNavbar.vue';
 import ChatsUserAvatar from './ChatsUserAvatar/ChatsUserAvatar.vue';
 import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
 import EmojiPicker from './EmojiPicker/EmojiPicker.vue';
+import ChartFunnel from './ChartFunnel/ChartFunnel.vue';
 
 export const components = {
   unnnicFormElement: formElement,
@@ -157,6 +158,7 @@ export const components = {
   unnnicChatsUserAvatar: ChatsUserAvatar,
   unnnicChartMultiLine: ChartMultiLine,
   unnnicEmojiPicker: EmojiPicker,
+  unnnicChartFunnel: ChartFunnel,
 };
 
 export const unnnicFontSize = fontSize;
@@ -239,3 +241,4 @@ export const unnnicChatsNavbar = ChatsNavbar;
 export const unnnicChatsUserAvatar = ChatsUserAvatar;
 export const unnnicChartMultiLine = ChartMultiLine;
 export const unnnicEmojiPicker = EmojiPicker;
+export const unnnicChartFunnel = ChartFunnel;
