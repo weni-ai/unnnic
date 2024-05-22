@@ -39,6 +39,7 @@ import OldIconsMap from './Icon/OldIconsMap.json';
 /* eslint-disable vue/multi-word-component-names */
 export default {
   name: 'Icon',
+  emits: ['click', 'mousedown', 'mouseup'],
   props: {
     filled: {
       type: Boolean,
