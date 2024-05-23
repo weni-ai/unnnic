@@ -17,6 +17,8 @@
       :size="iconSize"
       :scheme="iconScheme"
       :lineHeight="iconLineHeight"
+      :disabled="disabled"
+      :clickable="!disabled"
       @click="toggleState"
     />
 
