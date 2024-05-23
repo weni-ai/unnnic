@@ -12,8 +12,8 @@
       v-if="showValue"
       class="rating-title"
     >
-      <span class="highlight">{{ value.toFixed(1) }}</span
-      >/5.0
+      <span class="highlight"> {{ modelValue.toFixed(1) }} </span>
+      /5.0
     </div>
   </div>
 </template>
@@ -27,7 +27,7 @@ export default {
   },
 
   props: {
-    value: {
+    modelValue: {
       type: Number,
     },
 
@@ -46,7 +46,7 @@ export default {
 
   methods: {
     starScheme(star) {
-      return star <= this.value ? 'feedback-yellow' : 'neutral-clean';
+      return star <= this.modelValue ? 'feedback-yellow' : 'neutral-clean';
     },
   },
 };
