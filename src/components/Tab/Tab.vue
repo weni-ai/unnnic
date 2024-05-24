@@ -13,6 +13,19 @@
           @click="change(tab)"
         >
           <slot :name="tabHeadSlotName(tab)">{{ tab }} </slot>
+          <UnnnicToolTip
+            v-if="getHeadTooltip(tab)"
+            enabled
+            :text="getHeadTooltip(tab)"
+            side="bottom"
+          >
+            <UnnnicIcon
+              icon="info"
+              :size="size === 'sm' ? 'xs' : 'sm'"
+              filled
+              scheme="neutral-cleanest"
+            />
+          </UnnnicToolTip>
         </li>
       </ul>
     </header>
@@ -23,10 +36,17 @@
 </template>
 
 <script>
+import UnnnicIcon from '../Icon.vue';
+import UnnnicToolTip from '../ToolTip/ToolTip.vue';
+
 export default {
   model: {
     prop: 'activeTab',
     event: 'change',
+  },
+  components: {
+    UnnnicIcon,
+    UnnnicToolTip,
   },
   props: {
     size: {
@@ -71,6 +91,17 @@ export default {
     tabHeadSlotName(tabName) {
       return `tab-head-${tabName}`;
     },
+    tabHeadTooltipSlotName(tabName) {
+      return tabName ? `tab-head-${tabName}-tooltip` : '';
+    },
+    getHeadTooltip(tabName) {
+      const tooltipSlot = this.$slots[this.tabHeadTooltipSlotName(tabName)];
+
+      if (tooltipSlot) {
+        return tooltipSlot()?.[0]?.children;
+      }
+      return '';
+    },
     change(value) {
       this.localValue = value;
       this.$emit('change', this.localValue);
@@ -86,40 +117,68 @@ export default {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  color: $unnnic-color-neutral-cleanest;
+  color: $unnnic-color-neutral-cloudy;
   font-family: $unnnic-font-family-secondary;
   font-weight: $unnnic-font-weight-bold;
   font-size: $unnnic-font-size-body-lg;
   line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
-  padding-bottom: $unnnic-inset-sm;
   margin-bottom: $unnnic-inset-sm;
   border-bottom: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 }
 
 .tab-content {
   display: flex;
+  gap: $unnnic-spacing-sm;
+
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
 .tab-head {
+  display: flex;
+  gap: $unnnic-spacing-xs;
+  align-items: center;
+
   cursor: pointer;
-  margin-right: $unnnic-inset-md;
+  margin: $unnnic-spacing-xs $unnnic-spacing-sm;
+
+  .unnnic-tooltip {
+    display: flex;
+  }
+
+  &:hover {
+    color: $unnnic-color-neutral-black;
+  }
 }
 
 .tab-head--active {
   font-family: $unnnic-font-family-secondary;
   font-weight: $unnnic-font-weight-bold;
-  color: $unnnic-color-neutral-darkest;
+  color: $unnnic-color-neutral-black;
   font-size: $unnnic-font-size-body-lg;
   line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
   transition: 0.4s;
+
+  position: relative;
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    bottom: -$unnnic-spacing-xs;
+    left: -$unnnic-spacing-sm;
+
+    display: block;
+
+    width: calc(100% + (#{$unnnic-spacing-sm} * 2));
+
+    border-bottom: $unnnic-border-width-thin solid $unnnic-color-weni-600;
+  }
 }
 
 .tab.size-sm {
   .tab-header {
-    padding-bottom: $unnnic-spacing-stack-xs;
     margin-bottom: $unnnic-spacing-stack-xs;
 
     .tab-head,
