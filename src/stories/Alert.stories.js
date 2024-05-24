@@ -1,12 +1,15 @@
+import alertCaller from '../components/Alert/AlertCaller.vue';
+import alert from '../utils/call';
 import unnnicAlert from '../components/Alert/Alert.vue';
-import { unnnicCallAlert } from '../components';
+import alertBanner from '../components/Alert/AlertBanner.vue';
 
 export default {
   title: 'example/Alert',
   component: unnnicAlert,
   argTypes: {
-    type: { control: { type: 'text' } },
     text: { control: { type: 'text' } },
+    showCloseButton: { control: { type: 'boolean' } },
+    title: { control: { type: 'text' } },
     closeText: { control: { type: 'text' } },
     scheme: {
       control: {
@@ -55,7 +58,7 @@ export default {
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { unnnicCallAlert },
+  components: { alertCaller, unnnicAlert },
   template: `
 <div>
   <button @click="unnnicCallAlert">Click for alert</button>
@@ -84,21 +87,14 @@ Recommended use:
 </div>`,
   methods: {
     unnnicCallAlert() {
-      unnnicCallAlert({
-        props: {
-          type: 'success',
-          text: 'Alert'
-        },
-        containerRef: this.$refs.divContainer,
-      })
+      alert.callAlert({ props: this.$props, seconds: this.$props.seconds });
     },
-
   },
 });
 
 const TemplateWithContainerRef = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { unnnicCallAlert },
+  components: { alertCaller, unnnicAlert },
   template: `
     <div ref="divContainer" style="height: 200px; position: relative; border: 1px solid black">
       <button @click="unnnicCallAlert">Click for alert</button>
@@ -114,25 +110,55 @@ const TemplateWithContainerRef = (args, { argTypes }) => ({
     </div>`,
   methods: {
     unnnicCallAlert() {
-      unnnicCallAlert({
-        props: {
-          type: 'success',
-          text: 'Alert'
-        },
+      alert.callAlert({
+        props: this.$props,
         containerRef: this.$refs.divContainer,
-      })
+      });
     },
   },
 });
 
+const TemplateBanner = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { alertBanner },
+  template: `
+    <div>
+      <alert-banner v-bind="$props" />
+
+    <pre>
+    Recommended use:
+
+    &lt;unnnic-alert-banner
+      type            String default 'info' ('info', 'warning', 'danger')
+      text            String required
+      showCloseButton Boolean default false
+      @close          Event
+      link-href       String
+      ┠ link-text    String default 'Learn more'
+      ┖ link-target  String default '_blank'
+    /&gt;
+    </pre>
+    </div>`,
+});
+
 export const Normal = Template.bind({});
 Normal.args = {
-  type: 'success',
+  title: 'Title',
   text: 'Text',
+  icon: 'check-circle-1-1',
+  scheme: 'feedback-green',
 };
 
 export const WithContainerRef = TemplateWithContainerRef.bind({});
 WithContainerRef.args = {
-  type: 'error',
+  title: 'Title',
   text: 'Text',
+  icon: 'check-circle-1-1',
+  scheme: 'feedback-green',
+};
+
+export const Banner = TemplateBanner.bind({});
+Banner.args = {
+  text: 'Text',
+  showCloseButton: false,
 };
