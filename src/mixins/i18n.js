@@ -14,7 +14,20 @@ export default {
     i18n(...args) {
       const [key, defaults] = args;
 
-      const locale = (this.locale || get(this, '$i18n.locale'))?.toLowerCase();
+      const validLocaleValues = Object.keys(this.$i18n.messages);
+
+      let { locale } = this;
+
+      const treatedSelectedLocale =
+        get(this, '$i18n.locale') === 'en-us'
+          ? 'en'
+          : get(this, '$i18n.locale');
+
+      locale = validLocaleValues.includes(locale)
+        ? locale
+        : treatedSelectedLocale;
+
+      locale = locale.toLowerCase();
 
       let text = get(
         this.translations,
