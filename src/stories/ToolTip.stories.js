@@ -12,6 +12,17 @@ export default {
     maxWidth: { control: { type: 'text' } },
     forceOpen: { control: { type: 'boolean' } },
   },
+  render: (args) => ({
+    components: {
+      unnnicToolTip,
+    },
+    setup() {
+      return { args };
+    },
+    template: `
+    <unnnic-tool-tip v-bind="args"> Hover over text </unnnic-tool-tip>
+    `,
+  }),
 };
 
 export const Normal = {

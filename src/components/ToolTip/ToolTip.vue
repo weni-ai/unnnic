@@ -21,6 +21,12 @@
         {{ line }}
         <br />
       </template>
+
+      <template v-if="shortcutText">
+        <span class="unnnic-tooltip-label-shortcut">
+          {{ shortcutText }}
+        </span>
+      </template>
     </span>
   </div>
 </template>
@@ -72,6 +78,10 @@ export default {
     maxWidth: {
       type: String,
     },
+    shortcutText: {
+      type: String,
+      default: null,
+    },
   },
   methods: {
     handleResize() {
@@ -83,31 +93,15 @@ export default {
       if (element && this.$refs.label) {
         if (this.side === 'right') {
           this.leftPos = `${elementPos.x + elementPos.width + 8}px`;
-          this.topPos = `${
-            elementPos.y +
-            elementPos.height / 2 -
-            this.$refs.label.offsetHeight / 2
-          }px`;
+          this.topPos = `${elementPos.y + elementPos.height / 2 - this.$refs.label.offsetHeight / 2}px`;
         } else if (this.side === 'left') {
           this.leftPos = `${elementPos.x - this.$refs.label.offsetWidth - 8}px`;
-          this.topPos = `${
-            elementPos.y +
-            elementPos.height / 2 -
-            this.$refs.label.offsetHeight / 2
-          }px`;
+          this.topPos = `${elementPos.y + elementPos.height / 2 - this.$refs.label.offsetHeight / 2}px`;
         } else if (this.side === 'top') {
-          this.leftPos = `${
-            elementPos.x +
-            elementPos.width / 2 -
-            this.$refs.label.clientWidth / 2
-          }px`;
+          this.leftPos = `${elementPos.x + elementPos.width / 2 - this.$refs.label.clientWidth / 2}px`;
           this.topPos = `${elementPos.y - this.$refs.label.offsetHeight - 8}px`;
         } else if (this.side === 'bottom') {
-          this.leftPos = `${
-            elementPos.x +
-            elementPos.width / 2 -
-            this.$refs.label.clientWidth / 2
-          }px`;
+          this.leftPos = `${elementPos.x + elementPos.width / 2 - this.$refs.label.clientWidth / 2}px`;
           this.topPos = `${elementPos.y + elementPos.height + 8}px`;
         }
       }
@@ -134,6 +128,10 @@ export default {
   min-width: 2 * $unnnic-font-size;
   box-sizing: border-box;
   width: auto;
+  display: flex;
+  justify-content: center;
+  gap: $unnnic-spacing-xs;
+  align-items: center;
 
   background-color: $unnnic-color-neutral-black;
   color: $unnnic-color-neutral-snow;
@@ -192,6 +190,12 @@ export default {
       border-color: transparent transparent transparent
         $unnnic-color-neutral-black;
     }
+  }
+
+  &-shortcut {
+    background-color: $unnnic-color-neutral-darkest;
+    border-radius: $unnnic-border-radius-sm;
+    padding: calc($unnnic-inset-nano / 2) $unnnic-inset-nano;
   }
 }
 
