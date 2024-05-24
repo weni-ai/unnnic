@@ -62,7 +62,7 @@ const color = computed(() => {
     return 'brand-sec';
   }
 
-  return valueName.value === 'selected' ? 'brand-weni' : 'neutral-soft';
+  return valueName.value === 'selected' ? 'brand-weni' : 'neutral-cleanest';
 });
 
 function click() {
