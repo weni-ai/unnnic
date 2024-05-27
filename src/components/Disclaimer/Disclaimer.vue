@@ -1,13 +1,16 @@
 <template>
   <div>
   <div class="unnnic-disclaimer">
-    <unnnic-icon :icon="icon" size="avatar-nano" :scheme="iconScheme"/>
+    <unnnic-icon :icon="icon" size="avatar-nano" :scheme="iconColor"/>
     <span class="unnnic-disclaimer__text">{{ text }}</span>
   </div>
 </div>
 </template>
 
 <script>
+import icons from '../../utils/iconList';
+import colors from '../../utils/colorsList';
+
 import unnnicIcon from '../Icon.vue';
 
 export default {
@@ -21,20 +24,15 @@ export default {
     icon: {
       type: String,
       default: 'alert-circle-1-1',
+      validator(value) {
+        return icons.includes(value);
+      },
     },
-    type: {
+    iconColor: {
       type: String,
-    },
-  },
-  computed: {
-    iconScheme() {
-      const typeToSchemeMap = {
-        info: 'feedback-blue',
-        success: 'feedback-green',
-        error: 'feedback-red',
-        warning: 'feedback-yellow',
-      };
-      return typeToSchemeMap[this.type] || '';
+      validator(value) {
+        return colors.includes(value);
+      },
     },
   },
 };
