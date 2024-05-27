@@ -54,7 +54,8 @@ export default {
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-gt;
     line-height: $unnnic-line-height-large * 1.375;
-    font-weight: $unnnic-font-weight-regular
+    font-weight: $unnnic-font-weight-regular;
+    color: $unnnic-color-neutral-dark;
   }
 }
 
