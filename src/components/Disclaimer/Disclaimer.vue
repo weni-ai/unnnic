@@ -1,10 +1,13 @@
 <template>
-  <div>
   <div class="unnnic-disclaimer">
-    <unnnic-icon :icon="icon" size="avatar-nano" :scheme="iconColor"/>
-    <span class="unnnic-disclaimer__text">{{ text }}</span>
+    <unnnic-icon
+      class="unnnic-disclaimer__icon"
+      size="avatar-nano"
+      :icon="icon"
+      :scheme="iconColor"
+    />
+    <p class="unnnic-disclaimer__text">{{ text }}</p>
   </div>
-</div>
 </template>
 
 <script>
@@ -49,6 +52,7 @@ export default {
   border: 1px solid $unnnic-color-neutral-soft;
   background: $unnnic-color-background-lightest;
   .unnnic-disclaimer__text {
+    margin: 0;
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-gt;
     line-height: $unnnic-line-height-large * 1.375;
