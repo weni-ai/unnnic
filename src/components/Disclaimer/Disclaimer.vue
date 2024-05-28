@@ -1,5 +1,5 @@
 <template>
-  <div class="unnnic-disclaimer">
+  <section class="unnnic-disclaimer">
     <unnnic-icon
       class="unnnic-disclaimer__icon"
       size="avatar-nano"
@@ -7,7 +7,7 @@
       :scheme="iconColor"
     />
     <p class="unnnic-disclaimer__text">{{ text }}</p>
-  </div>
+  </section>
 </template>
 
 <script>
