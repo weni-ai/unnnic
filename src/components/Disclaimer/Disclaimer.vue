@@ -1,10 +1,8 @@
 <template>
-  <div>
   <div class="unnnic-disclaimer">
     <unnnic-icon :icon="icon" size="avatar-nano" :scheme="iconColor"/>
     <span class="unnnic-disclaimer__text">{{ text }}</span>
   </div>
-</div>
 </template>
 
 <script>
