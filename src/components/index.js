@@ -77,6 +77,8 @@ import ChatsUserAvatar from './ChatsUserAvatar/ChatsUserAvatar.vue';
 import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
 import EmojiPicker from './EmojiPicker/EmojiPicker.vue';
 import ChartFunnel from './ChartFunnel/ChartFunnel.vue';
+import Disclaimer from './Disclaimer/Disclaimer.vue';
+import Drawer from './Drawer/Drawer.vue';
 
 export const components = {
   unnnicFormElement: formElement,
@@ -159,6 +161,8 @@ export const components = {
   unnnicChartMultiLine: ChartMultiLine,
   unnnicEmojiPicker: EmojiPicker,
   unnnicChartFunnel: ChartFunnel,
+  unnnicDisclaimer: Disclaimer,
+  unnnicDrawer: Drawer,
 };
 
 export const unnnicFontSize = fontSize;
@@ -242,3 +246,5 @@ export const unnnicChatsUserAvatar = ChatsUserAvatar;
 export const unnnicChartMultiLine = ChartMultiLine;
 export const unnnicEmojiPicker = EmojiPicker;
 export const unnnicChartFunnel = ChartFunnel;
+export const unnnicDisclaimer = Disclaimer;
+export const unnnicDrawer = Drawer;
