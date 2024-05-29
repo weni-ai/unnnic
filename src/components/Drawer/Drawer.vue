@@ -100,7 +100,7 @@ export default {
       setTimeout(() => {
         this.$emit('close');
         this.showDrawer = true;
-      }, 500);
+      }, 200);
     },
   },
 };
@@ -134,13 +134,13 @@ export default {
 
 .drawer-enter-active,
 .drawer-enter-to {
-  animation: drawerOpen 0.5s ease-in;
+  animation: drawerOpen 200ms ease-in;
 }
 
 .drawer-leave-active,
 .drawer-leave-to {
    display: none;
-   animation: drawerClose 0.5s ease-in;
+   animation: drawerClose 200ms ease-in;
 }
 
 .unnnic-drawer {
@@ -169,7 +169,6 @@ export default {
   flex-direction: column;
   font-family: $unnnic-font-family-secondary;
   justify-content: space-between;
-  gap: $unnnic-spacing-md;
   height: 100%;
   background-color: $unnnic-color-neutral-white;
   width: calc(100%/3);
@@ -181,7 +180,7 @@ export default {
   .unnnic-drawer__header {
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid #e2e6ed;
+    border-bottom: 1px solid $unnnic-color-neutral-soft;
     padding: $unnnic-spacing-md;
     .unnnic-drawer__title-container {
 
@@ -205,7 +204,7 @@ export default {
     overflow-y: auto;
     height: 610px;
     color: $unnnic-color-neutral-cloudy;
-    padding: 0 $unnnic-spacing-md ;
+    padding: $unnnic-spacing-md $unnnic-spacing-md 0 $unnnic-spacing-md ;
     flex: 1 0 0;
     ::v-deep * {
       margin: 0;
