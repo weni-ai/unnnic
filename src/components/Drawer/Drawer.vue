@@ -208,7 +208,7 @@ export default {
     color: $unnnic-color-neutral-cloudy;
     padding: 0 $unnnic-spacing-md ;
     flex: 1 0 0;
-    ::v-deep * {
+    :deep(*) {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
