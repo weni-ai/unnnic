@@ -4,36 +4,44 @@ import unnnicButton from '../components/Button/Button.vue';
 const primaryButtonTypeOptions = ['primary', 'secondary', 'tertiary', 'alternative', 'warning', 'attention']
 
 export default {
-    title: 'Example/Drawer',
-    component: unnnicDrawer,
-    argTypes: {
-        title: { control: { type: 'text' } },
-        description: { control: { type: 'text' } },
-        primaryButtonType: { options: primaryButtonTypeOptions, control: { type: 'select' } },
-        primaryButtonText: { control: { type: 'text' } },
-        secondaryButtonText: { control: { type: 'text' } },
-        modelValue: { control: { type: 'boolean' } },
-        wide: { control: { type: 'boolean' } },
-        hiddenFooter: { control: { type: 'boolean' } },
-    },
+  title: 'Example/Drawer',
+  component: unnnicDrawer,
+  argTypes: {
+    title: { control: { type: 'text' } },
+    description: { control: { type: 'text' } },
+    primaryButtonType: { options: primaryButtonTypeOptions, control: { type: 'select' } },
+    primaryButtonText: { control: { type: 'text' } },
+    secondaryButtonText: { control: { type: 'text' } },
+    modelValue: { control: { type: 'boolean' } },
+    wide: { control: { type: 'boolean' } },
+    hiddenFooter: { control: { type: 'boolean' } },
+  },
 };
 
 const Template = (args) => ({
-    props: Object.keys(args),
-    setup() {
-        return { args }
+  props: Object.keys(args),
+  setup() {
+    return { args }
+  },
+  components: { unnnicDrawer, unnnicButton },
+  data() {
+    return {
+      opened: false,
+    };
+  },
+  methods: {
+    primaryClick() {
+      console.log('primaryClick')
     },
-    components: { unnnicDrawer, unnnicButton },
-    data() {
-        return {
-            opened: false,
-        };
-    },
-    template: `
+    secondaryClick() {
+      console.log('secondaryClick')
+    }
+  },
+  template: `
   <div>
     <pre>v-model: {{ opened }}</pre>
     <button @click="opened = !opened">Change</button>
-    <unnnic-drawer v-bind="args" v-model="opened" @close="opened = false">
+    <unnnic-drawer v-bind="args" v-model="opened" @close="opened = false" @primaryButtonClick="primaryClick" @secondaryButtonClick="secondaryClick">
       <template #content>
         <p>Conteúdo</p>
       </template>
@@ -44,33 +52,33 @@ const Template = (args) => ({
 
 export const Default = Template.bind({});
 Default.args = {
-    title: 'Title',
-    description: 'Description',
-    primaryButtonText: 'Confirmar',
-    secondaryButtonText: 'Cancelar',
+  title: 'Title',
+  description: 'Description',
+  primaryButtonText: 'Confirmar',
+  secondaryButtonText: 'Cancelar',
 };
 
 export const Wide = Template.bind({});
 Wide.args = {
-    title: 'Title',
-    description: 'Description',
-    primaryButtonText: 'Confirmar',
-    secondaryButtonText: 'Cancelar',
-    wide: true,
+  title: 'Title',
+  description: 'Description',
+  primaryButtonText: 'Confirmar',
+  secondaryButtonText: 'Cancelar',
+  wide: true,
 };
 
 const TemplateOveflowed = (args) => ({
-    props: Object.keys(args),
-    components: { unnnicDrawer, unnnicButton },
-    setup() {
-        return { args }
-    },
-    data() {
-        return {
-            opened: false,
-        };
-    },
-    template: `
+  props: Object.keys(args),
+  components: { unnnicDrawer, unnnicButton },
+  setup() {
+    return { args }
+  },
+  data() {
+    return {
+      opened: false,
+    };
+  },
+  template: `
   <div>
     <pre>v-model: {{ opened }}</pre>
     <button @click="opened = !opened">Change</button>
@@ -90,25 +98,25 @@ const TemplateOveflowed = (args) => ({
 
 export const ContentOverflowed = TemplateOveflowed.bind({});
 ContentOverflowed.args = {
-    title: 'Title',
-    description: 'Description',
-    primaryButtonText: 'Confirmar',
-    secondaryButtonText: 'Cancelar',
-    wide: true,
+  title: 'Title',
+  description: 'Description',
+  primaryButtonText: 'Confirmar',
+  secondaryButtonText: 'Cancelar',
+  wide: true,
 };
 
 const TemplateVideo = (args) => ({
-    props: Object.keys(args),
-    components: { unnnicDrawer, unnnicButton },
-    setup() {
-        return { args }
-    },
-    data() {
-        return {
-            opened: false,
-        };
-    },
-    template: `
+  props: Object.keys(args),
+  components: { unnnicDrawer, unnnicButton },
+  setup() {
+    return { args }
+  },
+  data() {
+    return {
+      opened: false,
+    };
+  },
+  template: `
   <div>
     <pre>v-model: {{ opened }}</pre>
     <button @click="opened = !opened">Change</button>
@@ -123,8 +131,8 @@ const TemplateVideo = (args) => ({
 
 export const ContentVideo = TemplateVideo.bind({});
 ContentVideo.args = {
-    title: 'Title',
-    description: 'Description',
-    hiddenFooter: true,
-    wide: true,
+  title: 'Title',
+  description: 'Description',
+  hiddenFooter: true,
+  wide: true,
 };
