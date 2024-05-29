@@ -1,63 +1,52 @@
 <template>
-<aside v-if="value" class="unnnic-drawer">
-  <section class="unnnic-drawer__overlay"></section>
-  <transition appear name="drawer">
-    <section
-      v-if="showDrawer"
-      ref="drawer"
-      :class="['unnnic-drawer__container', wide && 'unnnic-drawer__container--wide']"
-    >
-      <header class="unnnic-drawer__header">
-        <section class="unnnic-drawer__title-container">
-          <h1 class="unnnic-drawer__title unnnic-font secondary title-sm black">{{ title }}</h1>
-          <p
-            v-if="description"
-            class="unnnic-drawer__description unnnic-font secondary body-gt"
-          >
-            {{ description }}
-          </p>
+  <aside v-if="value" class="unnnic-drawer">
+    <section class="unnnic-drawer__overlay"></section>
+    <transition appear name="drawer">
+      <section
+        v-if="showDrawer"
+        ref="drawer"
+        :class="['unnnic-drawer__container', wide && 'unnnic-drawer__container--wide']"
+      >
+        <header class="unnnic-drawer__header">
+          <section class="unnnic-drawer__title-container">
+            <h1 class="unnnic-drawer__title unnnic-font secondary title-sm black">{{ title }}</h1>
+            <p
+              v-if="description"
+              class="unnnic-drawer__description unnnic-font secondary body-gt"
+            >
+              {{ description }}
+            </p>
+          </section>
+          <unnnic-icon
+            class="unnnic-drawer__close"
+            icon="arrow_back"
+            size="avatar-nano"
+            clickable
+            @click="close"
+          />
+        </header>
+        <section class="unnnic-drawer__content">
+          <slot name="content"></slot>
         </section>
-        <unnnic-icon
-          class="unnnic-drawer__close"
-          icon="arrow_back"
-          size="avatar-nano"
-          clickable
-          @click="close"
-        />
-      </header>
-      <section class="unnnic-drawer__content">
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        </p>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        </p>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        </p>
-        <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-        </p>
+        <footer v-if="!hiddenFooter" class="unnnic-drawer__footer">
+          <unnnic-button
+            v-if="secondaryButtonText"
+            size="large"
+            type="tertiary"
+            :text="secondaryButtonText"
+            @click="$emit('secondaryButtonClick')"
+          />
+          <unnnic-button
+            v-if="primaryButtonText"
+            size="large"
+            :type="primaryButtonType"
+            :text="primaryButtonText"
+            @click="$emit('primaryButtonClick')"
+          />
+        </footer>
       </section>
-      <footer v-if="!hiddenFooter" class="unnnic-drawer__footer">
-        <unnnic-button
-          v-if="secondaryButtonText"
-          size="large"
-          type="tertiary"
-          :text="secondaryButtonText"
-          @click="$emit('secondaryButtonClick')"
-        />
-        <unnnic-button
-          v-if="primaryButtonText"
-          size="large"
-          :type="primaryButtonType"
-          :text="primaryButtonText"
-          @click="$emit('primaryButtonClick')"
-        />
-      </footer>
-    </section>
-  </transition>
-</aside>
+    </transition>
+  </aside>
 </template>
 
 <script>
@@ -160,6 +149,7 @@ export default {
   position: fixed;
   left: 0;
   top: 0;
+  z-index: 8;
 }
 
 .unnnic-drawer__overlay {
@@ -191,7 +181,6 @@ export default {
   .unnnic-drawer__header {
     display: flex;
     justify-content: space-between;
-    gap: $unnnic-spacing-nano;
     border-bottom: 1px solid #e2e6ed;
     padding: $unnnic-spacing-md;
     .unnnic-drawer__title-container {
@@ -217,6 +206,11 @@ export default {
     height: 610px;
     color: $unnnic-color-neutral-cloudy;
     padding: 0 $unnnic-spacing-md ;
+    ::v-deep * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
   }
 
   .unnnic-drawer__footer {
