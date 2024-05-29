@@ -1,23 +1,28 @@
 import unnnicDrawer from '../components/Drawer/Drawer.vue';
 import unnnicButton from '../components/Button/Button.vue';
 
+const primaryButtonTypeOptions = ['primary', 'secondary', 'tertiary', 'alternative', 'warning', 'attention']
+
 export default {
     title: 'Example/Drawer',
     component: unnnicDrawer,
     argTypes: {
         title: { control: { type: 'text' } },
         description: { control: { type: 'text' } },
-        primaryButtonType: { control: { type: 'select', options: ['primary', 'secondary', 'tertiary', 'alternative', 'warning', 'attention'] } },
+        primaryButtonType: { options: primaryButtonTypeOptions, control: { type: 'select' } },
         primaryButtonText: { control: { type: 'text' } },
         secondaryButtonText: { control: { type: 'text' } },
-        value: { control: { type: 'boolean' } },
+        modelValue: { control: { type: 'boolean' } },
         wide: { control: { type: 'boolean' } },
         hiddenFooter: { control: { type: 'boolean' } },
     },
 };
 
-const Template = (_args, { argTypes }) => ({
-    props: Object.keys(argTypes),
+const Template = (args) => ({
+    props: Object.keys(args),
+    setup() {
+        return { args }
+    },
     components: { unnnicDrawer, unnnicButton },
     data() {
         return {
@@ -28,7 +33,7 @@ const Template = (_args, { argTypes }) => ({
   <div>
     <pre>v-model: {{ opened }}</pre>
     <button @click="opened = !opened">Change</button>
-    <unnnic-drawer v-model="opened" v-bind="$props" @close="opened = false">
+    <unnnic-drawer v-bind="args" v-model="opened" @close="opened = false">
       <template #content>
         <p>Conteúdo</p>
       </template>
