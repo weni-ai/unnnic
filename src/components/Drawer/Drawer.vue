@@ -8,10 +8,10 @@
       >
         <header class="unnnic-drawer__header">
           <section class="unnnic-drawer__title-container">
-            <h1 class="unnnic-drawer__title unnnic-font secondary title-sm black">{{ title }}</h1>
+            <h1 class="unnnic-drawer__title">{{ title }}</h1>
             <p
               v-if="description"
-              class="unnnic-drawer__description unnnic-font secondary body-gt"
+              class="unnnic-drawer__description"
             >
               {{ description }}
             </p>
@@ -27,7 +27,7 @@
         <section class="unnnic-drawer__content">
           <slot name="content"></slot>
         </section>
-        <footer v-if="!hiddenFooter" class="unnnic-drawer__footer">
+        <footer v-if="showFooter" class="unnnic-drawer__footer">
           <unnnic-button
             v-if="secondaryButtonText"
             size="large"
@@ -81,10 +81,6 @@ export default {
     secondaryButtonText: {
       type: String,
     },
-    hiddenFooter: {
-      type: Boolean,
-      default: false,
-    },
     wide: {
       type: Boolean,
       default: false,
@@ -93,6 +89,11 @@ export default {
       type: Boolean,
       required: true,
     },
+  },
+  computed: {
+    showFooter() {
+      return !!(this.primaryButtonText || this.secondaryButtonText)
+    }
   },
   methods: {
     close() {
@@ -186,10 +187,17 @@ export default {
 
       .unnnic-drawer__title {
         color: $unnnic-color-neutral-darkest;
+        font-family: $unnnic-font-family-secondary;
+        font-size: $unnnic-font-size-title-sm;
+        font-weight: $unnnic-font-weight-black;
       }
 
       .unnnic-drawer__description {
         color: $unnnic-color-neutral-cloudy;
+        font-family: $unnnic-font-family-secondary;
+        font-size: $unnnic-font-size-body-gt;
+        font-weight: $unnnic-font-weight-regular;
+        line-height: $unnnic-line-height-large * 1.375;
       }
     }
 
@@ -202,7 +210,6 @@ export default {
 
   .unnnic-drawer__content {
     overflow-y: auto;
-    height: 610px;
     color: $unnnic-color-neutral-cloudy;
     padding: $unnnic-spacing-md $unnnic-spacing-md 0 $unnnic-spacing-md ;
     flex: 1 0 0;

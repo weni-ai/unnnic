@@ -12,7 +12,6 @@ export default {
     secondaryButtonText: { control: { type: 'text' } },
     value: { control: { type: 'boolean' } },
     wide: { control: { type: 'boolean' } },
-    hiddenFooter: { control: { type: 'boolean' } },
   },
 };
 
@@ -122,6 +121,5 @@ export const ContentVideo = TemplateVideo.bind({});
 ContentVideo.args = {
   title: 'Title',
   description: 'Description',
-  hiddenFooter: true,
   wide: true,
 };
