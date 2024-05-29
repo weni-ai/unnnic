@@ -190,6 +190,7 @@ export default {
         font-family: $unnnic-font-family-secondary;
         font-size: $unnnic-font-size-title-sm;
         font-weight: $unnnic-font-weight-black;
+        line-height: $unnnic-line-height-large * 1.75;
       }
 
       .unnnic-drawer__description {
