@@ -135,13 +135,13 @@ export default {
 
 .drawer-enter-active,
 .drawer-enter-to {
-  animation: drawerOpen 0.5s ease-in;
+  animation: drawerOpen 200ms ease-in;
 }
 
 .drawer-leave-active,
 .drawer-leave-to {
    display: none;
-   animation: drawerClose 0.5s ease-in;
+   animation: drawerClose 200ms ease-in;
 }
 
 .unnnic-drawer {
@@ -170,7 +170,6 @@ export default {
   flex-direction: column;
   font-family: $unnnic-font-family-secondary;
   justify-content: space-between;
-  gap: $unnnic-spacing-md;
   height: 100%;
   background-color: $unnnic-color-neutral-white;
   width: calc(100%/3);
@@ -206,7 +205,7 @@ export default {
     overflow-y: auto;
     height: 610px;
     color: $unnnic-color-neutral-cloudy;
-    padding: 0 $unnnic-spacing-md ;
+    padding: $unnnic-spacing-md $unnnic-spacing-md 0 $unnnic-spacing-md ;
     flex: 1 0 0;
     :deep(*) {
       margin: 0;
