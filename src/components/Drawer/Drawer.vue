@@ -4,7 +4,6 @@
     <transition appear name="drawer">
       <section
         v-if="showDrawer"
-        ref="drawer"
         :class="['unnnic-drawer__container', wide && 'unnnic-drawer__container--wide']"
       >
         <header class="unnnic-drawer__header">
@@ -134,12 +133,13 @@ export default {
 }
 
 .drawer-enter-active,
-.drawer-leave-active {
+.drawer-enter-to {
   animation: drawerOpen 0.5s ease-in;
 }
 
-.drawer-enter-from,
+.drawer-leave-active,
 .drawer-leave-to {
+   display: none;
    animation: drawerClose 0.5s ease-in;
 }
 
@@ -168,7 +168,7 @@ export default {
   display: flex;
   flex-direction: column;
   font-family: $unnnic-font-family-secondary;
-  padding: $unnnic-spacing-md;
+  justify-content: space-between;
   gap: $unnnic-spacing-md;
   height: 100%;
   background-color: $unnnic-color-neutral-white;
@@ -206,6 +206,7 @@ export default {
     height: 610px;
     color: $unnnic-color-neutral-cloudy;
     padding: 0 $unnnic-spacing-md ;
+    flex: 1 0 0;
     ::v-deep * {
       margin: 0;
       padding: 0;
