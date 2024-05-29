@@ -14,6 +14,7 @@ export default {
     iconRight: { control: { type: 'select', options: iconList } },
     allowTogglePassword: { control: { type: 'boolean' } },
     hasCloudyColor: { control: { type: 'select', options: [true, false] } },
+    maxLength: { control: { type: 'number' } },
   },
 };
 

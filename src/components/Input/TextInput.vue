@@ -40,6 +40,10 @@
         { 'clickable': iconRightClickable || allowTogglePassword }
       ]"
     />
+
+    <div v-else-if="maxLength" class="length-counter">
+      {{ value.length }} / {{ maxLength }}
+    </div>
   </div>
 </template>
 
@@ -105,6 +109,10 @@ export default {
     size: {
       type: String,
       default: 'md',
+    },
+    maxLength: {
+      type: Number,
+      default: null,
     },
   },
   computed: {
@@ -217,5 +225,14 @@ export default {
       top: $unnnic-spacing-xs + 0.125 * $unnnic-font-size;
     }
   }
+}
+
+.length-counter {
+  position: absolute;
+  top: $unnnic-spacing-ant + 0.125 * $unnnic-font-size;
+  right: $unnnic-inline-sm;
+  font-size: $unnnic-font-size-body-md;
+  color: $unnnic-color-neutral-cloudy;
+  line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
 }
 </style>

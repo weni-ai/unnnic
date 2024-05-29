@@ -22,6 +22,7 @@
       :size="size"
       :mask="mask"
       :native-type="nativeType"
+      :max-length="maxLength"
     />
 
     <p v-if="message" class="unnnic-form__message">{{ message }}</p>
@@ -93,6 +94,10 @@ export default {
     mask: {
       type: [String, Array],
       default: '',
+    },
+    maxLength: {
+      type: Number,
+      default: null,
     },
   },
   data() {
