@@ -80,6 +80,8 @@ import ChatsNavbar from './ChatsNavbar/ChatsNavbar.vue';
 import ChatsUserAvatar from './ChatsUserAvatar/ChatsUserAvatar.vue';
 import ConnectProjectSelector from './ConnectProjectSelector/ConnectProjectSelector.vue';
 import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
+import Disclaimer from './Disclaimer/Disclaimer.vue';
+import Drawer from './Drawer/Drawer.vue';
 
 const components = {
   unnnicFormElement: formElement,
@@ -162,6 +164,8 @@ const components = {
   unnnicChatsUserAvatar: ChatsUserAvatar,
   unnnicConnectProjectSelector: ConnectProjectSelector,
   unnnicChartMultiLine: ChartMultiLine,
+  unnnicDisclaimer: Disclaimer,
+  unnnicDrawer: Drawer,
 };
 
 Object.keys(components).forEach((name) => {
@@ -251,3 +255,5 @@ export const unnnicChatsNavbar = ChatsNavbar;
 export const unnnicChatsUserAvatar = ChatsUserAvatar;
 export const unnnicConnectProjectSelector = ConnectProjectSelector;
 export const unnnicChartMultiLine = ChartMultiLine;
+export const unnnicDisclaimer = Disclaimer;
+export const unnnicDrawer = Drawer;
