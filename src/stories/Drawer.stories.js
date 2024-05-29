@@ -24,11 +24,19 @@ const Template = (_args, { argTypes }) => ({
       opened: false,
     };
   },
+  methods: {
+    primaryClick() {
+      console.log('primaryClick');
+    },
+    secondaryClick() {
+      console.log('secondaryClick');
+    },
+  },
   template: `
   <div>
     <pre>v-model: {{ opened }}</pre>
     <button @click="opened = !opened">Change</button>
-    <unnnic-drawer v-model="opened" v-bind="$props" @close="opened = false">
+    <unnnic-drawer v-model="opened" v-bind="$props" @close="opened = false" @primaryButtonClick="primaryClick" @secondaryButtonClick="secondaryClick">
       <template #content>
         <p>Conteúdo</p>
       </template>
