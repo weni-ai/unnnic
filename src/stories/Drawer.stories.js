@@ -7,6 +7,7 @@ export default {
   argTypes: {
     title: { control: { type: 'text' } },
     description: { control: { type: 'text' } },
+    primaryButtonType: { control: { type: 'select', options: ['primary', 'secondary', 'tertiary', 'alternative', 'warning', 'attention'] } },
     primaryButtonText: { control: { type: 'text' } },
     secondaryButtonText: { control: { type: 'text' } },
     value: { control: { type: 'boolean' } },
