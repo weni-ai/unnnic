@@ -1,6 +1,6 @@
 <template>
   <aside v-if="value" class="unnnic-drawer">
-    <section class="unnnic-drawer__overlay"></section>
+    <section class="unnnic-drawer__overlay" @click.stop="close" />
     <transition appear name="drawer">
       <section
         v-if="showDrawer"
@@ -32,12 +32,16 @@
             v-if="secondaryButtonText"
             size="large"
             type="tertiary"
+            :disabled="disabledSecondaryButton"
+            :loading="loadingSecondaryButton"
             :text="secondaryButtonText"
             @click="$emit('secondaryButtonClick')"
           />
           <unnnic-button
             v-if="primaryButtonText"
             size="large"
+            :disabled="disabledPrimaryButton"
+            :loading="loadingPrimaryButton"
             :type="primaryButtonType"
             :text="primaryButtonText"
             @click="$emit('primaryButtonClick')"
@@ -70,6 +74,22 @@ export default {
     },
     description: {
       type: String,
+    },
+    disabledPrimaryButton: {
+      type: Boolean,
+      default: false,
+    },
+    disabledSecondaryButton: {
+      type: Boolean,
+      default: false,
+    },
+    loadingPrimaryButton: {
+      type: Boolean,
+      default: false,
+    },
+    loadingSecondaryButton: {
+      type: Boolean,
+      default: false,
     },
     primaryButtonText: {
       type: String,
@@ -214,11 +234,6 @@ export default {
     color: $unnnic-color-neutral-cloudy;
     padding: $unnnic-spacing-md $unnnic-spacing-md 0 $unnnic-spacing-md ;
     flex: 1 0 0;
-    ::v-deep * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
   }
 
   .unnnic-drawer__footer {

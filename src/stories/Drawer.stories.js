@@ -10,6 +10,10 @@ export default {
     primaryButtonType: { control: { type: 'select', options: ['primary', 'secondary', 'tertiary', 'alternative', 'warning', 'attention'] } },
     primaryButtonText: { control: { type: 'text' } },
     secondaryButtonText: { control: { type: 'text' } },
+    disabledPrimaryButton: { control: { type: 'boolean' } },
+    disabledSecondaryButton: { control: { type: 'boolean' } },
+    loadingPrimaryButton: { control: { type: 'boolean' } },
+    loadingSecondaryButton: { control: { type: 'boolean' } },
     value: { control: { type: 'boolean' } },
     wide: { control: { type: 'boolean' } },
   },
@@ -37,7 +41,7 @@ const Template = (_args, { argTypes }) => ({
     <button @click="opened = !opened">Change</button>
     <unnnic-drawer v-model="opened" v-bind="$props" @close="opened = false" @primaryButtonClick="primaryClick" @secondaryButtonClick="secondaryClick">
       <template #content>
-        <p>Conteúdo</p>
+        <p style="padding: 0; margin: 0;">Conteúdo</p>
       </template>
     </unnnic-drawer>
   </div>
