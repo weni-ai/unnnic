@@ -1,7 +1,14 @@
 import unnnicDrawer from '../components/Drawer/Drawer.vue';
 import unnnicButton from '../components/Button/Button.vue';
 
-const primaryButtonTypeOptions = ['primary', 'secondary', 'tertiary', 'alternative', 'warning', 'attention']
+const primaryButtonTypeOptions = [
+  'primary',
+  'secondary',
+  'tertiary',
+  'alternative',
+  'warning',
+  'attention',
+];
 
 export default {
   title: 'Example/Drawer',
@@ -9,7 +16,14 @@ export default {
   argTypes: {
     title: { control: { type: 'text' } },
     description: { control: { type: 'text' } },
-    primaryButtonType: { options: primaryButtonTypeOptions, control: { type: 'select' } },
+    primaryButtonType: {
+      options: primaryButtonTypeOptions,
+      control: { type: 'select' },
+    },
+    disabledPrimaryButton: { control: { type: 'boolean' } },
+    disabledSecondaryButton: { control: { type: 'boolean' } },
+    loadingPrimaryButton: { control: { type: 'boolean' } },
+    loadingSecondaryButton: { control: { type: 'boolean' } },
     primaryButtonText: { control: { type: 'text' } },
     secondaryButtonText: { control: { type: 'text' } },
     modelValue: { control: { type: 'boolean' } },
@@ -20,7 +34,7 @@ export default {
 const Template = (args) => ({
   props: Object.keys(args),
   setup() {
-    return { args }
+    return { args };
   },
   components: { unnnicDrawer, unnnicButton },
   data() {
@@ -30,11 +44,11 @@ const Template = (args) => ({
   },
   methods: {
     primaryClick() {
-      console.log('primaryClick')
+      console.log('primaryClick');
     },
     secondaryClick() {
-      console.log('secondaryClick')
-    }
+      console.log('secondaryClick');
+    },
   },
   template: `
   <div>
@@ -42,7 +56,7 @@ const Template = (args) => ({
     <button @click="opened = !opened">Change</button>
     <unnnic-drawer v-bind="args" v-model="opened" @close="opened = false" @primaryButtonClick="primaryClick" @secondaryButtonClick="secondaryClick">
       <template #content>
-        <p>Conteúdo</p>
+        <p style="padding: 0; margin:0;">Conteúdo</p>
       </template>
     </unnnic-drawer>
   </div>
@@ -70,7 +84,7 @@ const TemplateOveflowed = (args) => ({
   props: Object.keys(args),
   components: { unnnicDrawer, unnnicButton },
   setup() {
-    return { args }
+    return { args };
   },
   data() {
     return {
@@ -83,7 +97,7 @@ const TemplateOveflowed = (args) => ({
     <button @click="opened = !opened">Change</button>
     <unnnic-drawer v-bind="args" v-model="opened" @close="opened = false">
       <template #content>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum dolor viverra, aliquam metus dictum, vehicula felis. Nulla sapien nisi, laoreet sit amet nisi sed, consectetur ornare odio. Nullam facilisis a ligula quis accumsan. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus et sodales ex. Donec mauris dui, tempor eget lorem vel, blandit consequat tellus. Maecenas ut justo vitae orci commodo consectetur eget id nisl. Donec auctor sollicitudin ex at lacinia. Integer lobortis, eros nec congue facilisis, augue nisl elementum nibh, pharetra euismod odio turpis eu lorem. Vivamus a tristique tellus.</p>
+        <p style="padding: 0; margin:0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum dolor viverra, aliquam metus dictum, vehicula felis. Nulla sapien nisi, laoreet sit amet nisi sed, consectetur ornare odio. Nullam facilisis a ligula quis accumsan. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus et sodales ex. Donec mauris dui, tempor eget lorem vel, blandit consequat tellus. Maecenas ut justo vitae orci commodo consectetur eget id nisl. Donec auctor sollicitudin ex at lacinia. Integer lobortis, eros nec congue facilisis, augue nisl elementum nibh, pharetra euismod odio turpis eu lorem. Vivamus a tristique tellus.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum dolor viverra, aliquam metus dictum, vehicula felis. Nulla sapien nisi, laoreet sit amet nisi sed, consectetur ornare odio. Nullam facilisis a ligula quis accumsan. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus et sodales ex. Donec mauris dui, tempor eget lorem vel, blandit consequat tellus. Maecenas ut justo vitae orci commodo consectetur eget id nisl. Donec auctor sollicitudin ex at lacinia. Integer lobortis, eros nec congue facilisis, augue nisl elementum nibh, pharetra euismod odio turpis eu lorem. Vivamus a tristique tellus.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum dolor viverra, aliquam metus dictum, vehicula felis. Nulla sapien nisi, laoreet sit amet nisi sed, consectetur ornare odio. Nullam facilisis a ligula quis accumsan. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus et sodales ex. Donec mauris dui, tempor eget lorem vel, blandit consequat tellus. Maecenas ut justo vitae orci commodo consectetur eget id nisl. Donec auctor sollicitudin ex at lacinia. Integer lobortis, eros nec congue facilisis, augue nisl elementum nibh, pharetra euismod odio turpis eu lorem. Vivamus a tristique tellus.</p>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed interdum dolor viverra, aliquam metus dictum, vehicula felis. Nulla sapien nisi, laoreet sit amet nisi sed, consectetur ornare odio. Nullam facilisis a ligula quis accumsan. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Phasellus et sodales ex. Donec mauris dui, tempor eget lorem vel, blandit consequat tellus. Maecenas ut justo vitae orci commodo consectetur eget id nisl. Donec auctor sollicitudin ex at lacinia. Integer lobortis, eros nec congue facilisis, augue nisl elementum nibh, pharetra euismod odio turpis eu lorem. Vivamus a tristique tellus.</p>
@@ -108,7 +122,7 @@ const TemplateVideo = (args) => ({
   props: Object.keys(args),
   components: { unnnicDrawer, unnnicButton },
   setup() {
-    return { args }
+    return { args };
   },
   data() {
     return {

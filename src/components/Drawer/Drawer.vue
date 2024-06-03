@@ -1,10 +1,22 @@
 <template>
-  <aside v-if="modelValue" class="unnnic-drawer">
-    <section class="unnnic-drawer__overlay"></section>
-    <transition appear name="drawer">
+  <aside
+    v-if="modelValue"
+    class="unnnic-drawer"
+  >
+    <section
+      class="unnnic-drawer__overlay"
+      @click.stop="close"
+    />
+    <transition
+      appear
+      name="drawer"
+    >
       <section
         v-if="showDrawer"
-        :class="['unnnic-drawer__container', wide && 'unnnic-drawer__container--wide']"
+        :class="[
+          'unnnic-drawer__container',
+          wide && 'unnnic-drawer__container--wide',
+        ]"
       >
         <header class="unnnic-drawer__header">
           <section class="unnnic-drawer__title-container">
@@ -27,17 +39,24 @@
         <section class="unnnic-drawer__content">
           <slot name="content"></slot>
         </section>
-        <footer v-if="showFooter" class="unnnic-drawer__footer">
+        <footer
+          v-if="showFooter"
+          class="unnnic-drawer__footer"
+        >
           <unnnic-button
             v-if="secondaryButtonText"
             size="large"
             type="tertiary"
+            :disabled="disabledSecondaryButton"
+            :loading="loadingSecondaryButton"
             :text="secondaryButtonText"
             @click="$emit('secondaryButtonClick')"
           />
           <unnnic-button
             v-if="primaryButtonText"
             size="large"
+            :disabled="disabledPrimaryButton"
+            :loading="loadingPrimaryButton"
             :type="primaryButtonType"
             :text="primaryButtonText"
             @click="$emit('primaryButtonClick')"
@@ -72,6 +91,22 @@ export default {
     description: {
       type: String,
     },
+    disabledPrimaryButton: {
+      type: Boolean,
+      default: false,
+    },
+    disabledSecondaryButton: {
+      type: Boolean,
+      default: false,
+    },
+    loadingPrimaryButton: {
+      type: Boolean,
+      default: false,
+    },
+    loadingSecondaryButton: {
+      type: Boolean,
+      default: false,
+    },
     primaryButtonText: {
       type: String,
     },
@@ -93,8 +128,8 @@ export default {
   },
   computed: {
     showFooter() {
-      return !!(this.primaryButtonText || this.secondaryButtonText)
-    }
+      return !!(this.primaryButtonText || this.secondaryButtonText);
+    },
   },
   methods: {
     close() {
@@ -141,8 +176,8 @@ export default {
 
 .drawer-leave-active,
 .drawer-leave-to {
-   display: none;
-   animation: drawerClose 200ms ease-in;
+  display: none;
+  animation: drawerClose 200ms ease-in;
 }
 
 .unnnic-drawer {
@@ -156,10 +191,9 @@ export default {
 
 .unnnic-drawer__overlay {
   z-index: 9;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   width: 100%;
   height: 100%;
-
 }
 
 .unnnic-drawer__container {
@@ -173,7 +207,7 @@ export default {
   justify-content: space-between;
   height: 100%;
   background-color: $unnnic-color-neutral-white;
-  width: calc(100%/3);
+  width: calc(100% / 3);
 
   &--wide {
     width: 50%;
@@ -185,7 +219,6 @@ export default {
     border-bottom: 1px solid $unnnic-color-neutral-soft;
     padding: $unnnic-spacing-md;
     .unnnic-drawer__title-container {
-
       .unnnic-drawer__title {
         color: $unnnic-color-neutral-darkest;
         font-family: $unnnic-font-family-secondary;
@@ -207,19 +240,14 @@ export default {
       margin: $unnnic-spacing-nano;
       transform: rotate(180deg);
       display: flex;
-   }
+    }
   }
 
   .unnnic-drawer__content {
     overflow-y: auto;
     color: $unnnic-color-neutral-cloudy;
-    padding: $unnnic-spacing-md $unnnic-spacing-md 0 $unnnic-spacing-md ;
+    padding: $unnnic-spacing-md $unnnic-spacing-md 0 $unnnic-spacing-md;
     flex: 1 0 0;
-    :deep(*) {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
   }
 
   .unnnic-drawer__footer {
