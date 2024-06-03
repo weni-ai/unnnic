@@ -25,7 +25,12 @@
           :key="cell + index"
           class="unnnic-table-next__body-cell"
         >
-         {{cell}}
+          <template v-if="getIsComponent(cell)">
+            <component :is="cell.component" v-bind="cell.props" v-on="cell.events"/>
+          </template>
+          <template v-else>
+            <p class="unnnic-table-next__body-cell-text">{{ cell }}</p>
+          </template>
         </td>
       </tr>
     </tbody>
@@ -57,7 +62,7 @@ export default {
         }
 
         value.forEach((cell) => {
-          if (!cell.content || typeof cell.content !== 'string') {
+          if (typeof cell.content !== 'string') {
             throw new Error('Prop headers needs to be all the objects with content being a string.');
           }
 
@@ -106,7 +111,11 @@ export default {
     },
   },
 
-  computed: {},
+  methods: {
+    getIsComponent(cell) {
+      return typeof cell === 'object';
+    },
+  },
 };
 </script>
 
@@ -130,6 +139,9 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
     &-cell {
       @extend %base-cell;
 
+      height: 100%;
+
+      box-sizing: border-box;
       border: $tableBorder;
       background-color: $unnnic-color-neutral-light;
 
@@ -164,6 +176,10 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
     &-cell {
       @extend %base-cell;
+
+      &-text {
+        margin: 0;
+      }
     }
   }
 
@@ -186,6 +202,7 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
   %base-row {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    align-items: center;
   }
 }
 </style>
