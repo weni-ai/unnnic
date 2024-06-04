@@ -1,7 +1,5 @@
 <template>
-  <table
-    class="unnnic-table-next"
-  >
+  <table class="unnnic-table-next">
     <thead class="unnnic-table-next__header">
       <tr class="unnnic-table-next__header-row">
         <th
@@ -20,101 +18,75 @@
         :key="row.content + index"
         class="unnnic-table-next__body-row"
       >
-        <td
-          v-for="(cell, index) of row.content"
-          :key="cell + index"
-          class="unnnic-table-next__body-cell"
+        <a
+          v-if="row.link"
+          class="unnnic-table-next__body-row--redirect"
+          :href="row.link.url"
+          :target="row.link.target || '_blank'"
         >
-          <template v-if="getIsComponent(cell)">
-            <component :is="cell.component" v-bind="cell.props" v-on="cell.events"/>
-          </template>
-          <template v-else>
-            <p class="unnnic-table-next__body-cell-text">{{ cell }}</p>
-          </template>
-        </td>
+          <TableBodyCell
+            v-for="(cell, index) of row.content"
+            :key="cell + index"
+            class="unnnic-table-next__body-cell"
+            :cell="cell"
+          />
+        </a>
+        <template v-else>
+          <TableBodyCell
+            v-for="(cell, index) of row.content"
+            :key="cell + index"
+            class="unnnic-table-next__body-cell"
+            :cell="cell"
+          />
+        </template>
       </tr>
     </tbody>
   </table>
 </template>
 
 <script>
+import { validateHeaders, validateRows } from './validation';
+import TableBodyCell from './TableBodyCell.vue';
+
 export default {
   name: 'UnnnicTableNext',
 
-  components: {},
-
   props: {
     /**
-     * @typedef {Array} Headers
-     * @property {string} content - Content of head cell.
-     * @property {boolean|undefined} [isSortable] - Indicates if the cell is enabled for sorting.
+     * @typedef {Array} HeaderItem
+     * @property {string} content - The content of the header cell.
+     * @property {boolean|undefined} isSortable - Indicates if the cell is enabled for sorting.
+     */
+
+    /**
+     * Array of header items.
+     * @type {HeaderItem[]}
      */
     headers: {
       type: Array,
       default: () => [],
-      validator(value) {
-        if (!Array.isArray(value)) {
-          throw new Error('Prop headers needs to be an array.');
-        }
-
-        if (value.length === 0) {
-          throw new Error('Prop headers must not to be an empty array.');
-        }
-
-        value.forEach((cell) => {
-          if (typeof cell.content !== 'string') {
-            throw new Error('Prop headers needs to be all the objects with content being a string.');
-          }
-
-          if (Object.keys(cell).includes('isSortable') && typeof cell.isSortable !== 'boolean' && typeof cell.isSortable !== 'undefined') {
-            throw new Error('Prop headers needs to be all the objects with isSortable being a boolean or undefined.');
-          }
-
-          return true;
-        });
-
-        return true;
-      },
+      validator: validateHeaders,
     },
 
     /**
-     * @typedef {Array} Rows
-     * @property {string|array|} content - Content of row cell.
-     * @property {string|undefined} link - Link to redirect row cell.
+     * @typedef {Array} RowItem
+     * @property {Array} content - The content of the row cell.
+     * @property {object|undefined} link - Link object to redirect the row cell.
+     */
+
+    /**
+     * Array of row items.
+     * @type {RowItem[]}
      */
     rows: {
       type: Array,
       default: () => [],
-      validator(value) {
-        if (!Array.isArray(value)) {
-          throw new Error('Prop rows needs to be an array.');
-        }
-
-        if (value.length === 0) {
-          throw new Error('Prop rows must not to be an empty array.');
-        }
-
-        value.forEach((cell) => {
-          if (!cell.content || !Array.isArray(cell.content)) {
-            throw new Error('Prop rows needs to be all the objects with content being a array.');
-          }
-
-          if (Object.keys(cell).includes('link') && typeof cell.link !== 'string' && typeof cell.link !== 'undefined') {
-            throw new Error('Prop headers needs to be all the objects with link being a boolean or undefined.');
-          }
-
-          return true;
-        });
-
-        return true;
-      },
+      validator: validateRows,
     },
   },
 
-  methods: {
-    getIsComponent(cell) {
-      return typeof cell === 'object';
-    },
+  components: {
+    TableBodyCell,
   },
 };
 </script>
@@ -169,6 +141,19 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
       border-collapse: collapse;
       border-top: none;
 
+      &--redirect {
+        @extend %base-row;
+        text-decoration: none;
+
+        &:hover {
+          background-color: $unnnic-color-neutral-lightest;
+        }
+
+        :visited {
+          color: $unnnic-color-neutral-dark;
+        }
+      }
+
       &:last-of-type {
         border-radius: 0 0 $unnnic-border-radius-sm $unnnic-border-radius-sm;
       }
@@ -176,10 +161,6 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
     &-cell {
       @extend %base-cell;
-
-      &-text {
-        margin: 0;
-      }
     }
   }
 
