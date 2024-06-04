@@ -1,6 +1,6 @@
 <template>
   <div class="unnnic-chats-dashboard-tag-live">
-    <unnnic-icon
+    <UnnnicIcon
       class="unnnic-chats-dashboard-tag-live__indicator"
       icon="indicator"
       scheme="aux-green-300"
@@ -73,10 +73,10 @@ export default {
     }
   }
 
-    &__text {
-      margin: 0;
+  &__text {
+    margin: 0;
 
-      font-size: $unnnic-font-size-body-gt;
-    }
+    font-size: $unnnic-font-size-body-gt;
+  }
 }
 </style>

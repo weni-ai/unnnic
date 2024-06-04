@@ -1,16 +1,22 @@
 <template>
-  <div ref="dropdown" :class="['dropdown', { active: showCalendarFilter }]">
-    <unnnic-input
+  <div
+    ref="dropdown"
+    :class="['dropdown', { active: showCalendarFilter }]"
+  >
+    <UnnnicInput
       class="input"
       :size="size"
-      icon-left="notes-1"
+      iconLeft="notes-1"
       @focus="showCalendarFilter = true"
       readonly
       :modelValue="filterText"
-    ></unnnic-input>
+    ></UnnnicInput>
 
-    <div class="dropdown-data" :style="{ [position]: '0' }">
-      <unnnic-date-picker
+    <div
+      class="dropdown-data"
+      :style="{ [position]: '0' }"
+    >
+      <UnnnicDatePicker
         v-if="showCalendarFilter"
         :type="type"
         :clearLabel="clearText"
@@ -19,8 +25,8 @@
         :days="days"
         :options="options"
         @submit="changeDate"
-        :initial-start-date="initialStartDate"
-        :initial-end-date="initialEndDate"
+        :initialStartDate="initialStartDate"
+        :initialEndDate="initialEndDate"
       />
     </div>
   </div>
@@ -105,11 +111,15 @@ export default {
       const dates = [];
 
       if (this.modelValue?.start) {
-        dates.push(moment(this.modelValue?.start, this.format).format(this.inputFormat));
+        dates.push(
+          moment(this.modelValue?.start, this.format).format(this.inputFormat),
+        );
       }
 
       if (this.modelValue?.end) {
-        dates.push(moment(this.modelValue?.end, this.format).format(this.inputFormat));
+        dates.push(
+          moment(this.modelValue?.end, this.format).format(this.inputFormat),
+        );
       }
 
       if (!dates.length) {
@@ -150,14 +160,19 @@ export default {
     },
 
     changeDate(value) {
-      const startDate = value.startDate.replace(/(\d+)-(\d+)-(\d+)/, '$3-$1-$2');
+      const startDate = value.startDate.replace(
+        /(\d+)-(\d+)-(\d+)/,
+        '$3-$1-$2',
+      );
 
       const endDate = value.endDate.replace(/(\d+)-(\d+)-(\d+)/, '$3-$1-$2');
 
       this.showCalendarFilter = false;
 
       this.$emit('update:model-value', {
-        start: startDate ? moment(startDate, 'YYYY-MM-DD').format(this.format) : null,
+        start: startDate
+          ? moment(startDate, 'YYYY-MM-DD').format(this.format)
+          : null,
         end: endDate ? moment(endDate, 'YYYY-MM-DD').format(this.format) : null,
       });
     },

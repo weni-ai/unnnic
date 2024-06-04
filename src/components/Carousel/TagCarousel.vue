@@ -1,8 +1,10 @@
 <template>
   <div class="unnnic-card-tag-carousel">
-    <div class="unnnic-card-tag-carousel__button unnnic-card-tag-carousel__button--left">
+    <div
+      class="unnnic-card-tag-carousel__button unnnic-card-tag-carousel__button--left"
+    >
       <div class="unnnic-card-tag-carousel__button__icon">
-        <unnnic-icon-svg
+        <UnnnicIcon
           icon="arrow-left-1-1"
           size="sm"
           @click="previous()"
@@ -16,9 +18,16 @@
       />
     </div>
 
-    <div class="unnnic-card-tag-carousel__container" id="scroll">
-      <div v-for="tag in slides" :key="tag.id" class="unnnic-card-tag-carousel__container__slide">
-        <unnnic-tag
+    <div
+      class="unnnic-card-tag-carousel__container"
+      id="scroll"
+    >
+      <div
+        v-for="tag in slides"
+        :key="tag.id"
+        class="unnnic-card-tag-carousel__container__slide"
+      >
+        <UnnnicTag
           :text="tag.name"
           clickable
           type="brand"
@@ -29,13 +38,15 @@
       </div>
     </div>
 
-    <div class="unnnic-card-tag-carousel__button unnnic-card-tag-carousel__button--right">
+    <div
+      class="unnnic-card-tag-carousel__button unnnic-card-tag-carousel__button--right"
+    >
       <span
         class="unnnic-card-tag-carousel__button__blur unnnic-card-tag-carousel__button__blur--right"
         v-show="hasNext"
       />
       <div class="unnnic-card-tag-carousel__button__icon">
-        <unnnic-icon-svg
+        <UnnnicIcon
           icon="arrow-right-1-1"
           @click="next()"
           size="sm"
@@ -49,7 +60,7 @@
 
 <script>
 import UnnnicTag from '../Tag/Tag.vue';
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'unnnic-tag-carousel',
@@ -62,7 +73,7 @@ export default {
   },
   components: {
     UnnnicTag,
-    UnnnicIconSvg,
+    UnnnicIcon,
   },
   props: {
     modelValue: {
@@ -122,7 +133,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-card-tag-carousel {
   display: flex;

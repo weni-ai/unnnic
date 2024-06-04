@@ -6,4 +6,5 @@ export default {
       Vue.component(name, components[name]);
     });
   },
+  ...components,
 };

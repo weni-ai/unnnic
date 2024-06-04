@@ -1,15 +1,17 @@
 <template>
-  <div :class="{
+  <div
+    :class="{
       'unnnic-card-blank': true,
       'unnnic-card-blank__clickable': clickable,
-    }">
+    }"
+  >
     <div class="unnnic-card-blank__content">
-        <unnnic-icon-svg
-          :icon="icon"
-          scheme="neutral-clean"
-          class="unnnic-card-blank__content__icon"
-          size="xl"
-        />
+      <UnnnicIcon
+        :icon="icon"
+        scheme="neutral-clean"
+        class="unnnic-card-blank__content__icon"
+        size="xl"
+      />
 
       <div class="unnnic-card-blank__content__text">{{ text }}</div>
     </div>
@@ -17,12 +19,12 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'unnnic-card',
   components: {
-    UnnnicIconSvg,
+    UnnnicIcon,
   },
   props: {
     text: {
@@ -42,7 +44,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-card-blank {
   display: flex;

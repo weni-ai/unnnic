@@ -4,7 +4,8 @@ export default {
   title: 'Rating/StarRating',
   component: unnnicStarRating,
   argTypes: {
-    value: { control: { type: 'number', min: 0, max: 5, step: 0.1 } },
+    showValue: { control: { type: 'boolean' } },
+    readonly: { control: { type: 'boolean' } },
   },
 };
 
@@ -15,10 +16,16 @@ const Template = (args, { argTypes }) => ({
     unnnicStarRating,
   },
 
+  data() {
+    return {
+      value: 4,
+    };
+  },
+
   template: `
     <div>
       <pre>v-model: {{ value }}</pre>
-      <unnnic-star-rating v-bind="$props">
+      <unnnic-star-rating v-model="value" showValue readonly>
       </unnnic-star-rating>
     </div>
   `,

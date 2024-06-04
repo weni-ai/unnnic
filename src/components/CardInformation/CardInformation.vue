@@ -1,15 +1,15 @@
 <template>
-  <card-statuses-container
+  <CardStatusesContainer
     class="unnnic-card-information"
     :name="name"
     :subtitle="subtitle"
     :description="description"
-    :description-row="descriptionRow"
-    :description-row-info="descriptionRowInfo"
+    :descriptionRow="descriptionRow"
+    :descriptionRowInfo="descriptionRowInfo"
     :statuses="statuses"
-    :min-status-width="8.75 * unnnicFontSize + 'px'"
+    :minStatusWidth="8.75 * unnnicFontSize + 'px'"
   >
-  </card-statuses-container>
+  </CardStatusesContainer>
 </template>
 
 <script>
@@ -61,5 +61,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 </style>

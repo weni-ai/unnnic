@@ -1,10 +1,20 @@
 <template>
-  <div :class="['unnnic-avatar-icon', scheme, size, { disabled: !enabled },  filled,
-  { opacity: !opacity },]">
-    <unnnic-icon   :icon="icon"
-    :scheme="enabled ? scheme : 'neutral-cloudy'"
-    :size="iconSize"
-    :filled="filled" />
+  <div
+    :class="[
+      'unnnic-avatar-icon',
+      scheme,
+      size,
+      { disabled: !enabled },
+      filled,
+      { opacity: !opacity },
+    ]"
+  >
+    <UnnnicIcon
+      :icon="icon"
+      :scheme="enabled ? scheme : 'neutral-cloudy'"
+      :size="iconSize"
+      :filled="filled"
+    />
   </div>
 </template>
 
@@ -89,7 +99,8 @@ export default {
   padding: $unnnic-spacing-inset-nano;
   display: inline-flex;
 
-  &.nano, &.xs {
+  &.nano,
+  &.xs {
     padding: $unnnic-spacing-stack-nano $unnnic-spacing-inline-nano;
   }
 }

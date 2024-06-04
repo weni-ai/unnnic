@@ -1,8 +1,19 @@
 <template>
-  <span :class="['dropdown', { active }]" ref="dropdown">
+  <span
+    :class="['dropdown', { active }]"
+    ref="dropdown"
+  >
     <slot> </slot>
-    <div class="dropdown-data" :style="{ position: 'fixed', ...positions }" ref="dropdown-data">
-      <slot name="inside" :width="`${width}px`" :height="`${height}px`"></slot>
+    <div
+      class="dropdown-data"
+      :style="{ position: 'fixed', ...positions }"
+      ref="dropdown-data"
+    >
+      <slot
+        name="inside"
+        :width="`${width}px`"
+        :height="`${height}px`"
+      ></slot>
     </div>
   </span>
 </template>

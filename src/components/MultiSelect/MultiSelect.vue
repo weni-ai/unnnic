@@ -1,6 +1,13 @@
 <template>
-  <div :class="expand ? 'expand-multiselect' : 'normal-multiselect'" tabindex="-1">
-    <span class="select-permission-label" v-if="label">{{ label }}</span>
+  <div
+    :class="expand ? 'expand-multiselect' : 'normal-multiselect'"
+    tabindex="-1"
+  >
+    <span
+      class="select-permission-label"
+      v-if="label"
+      >{{ label }}</span
+    >
     <div
       @keypress="handleIsOpenKeyboard"
       @click="active = !active"
@@ -14,20 +21,35 @@
         scheme="neutral-dark"
       />
     </div>
-    <div v-if="active" class="select-content" v-on-click-outside="onClickOutside" tabindex="0">
+    <div
+      v-if="active"
+      class="select-content"
+      v-on-click-outside="onClickOutside"
+      tabindex="0"
+    >
       <div>
-        <template v-for="(group, indexGroup) in modelValue" :key="`group-${indexGroup}`">
-          <h6 v-if="!hideGroupTitle" class="title" :key="`title-${indexGroup}`">
+        <template
+          v-for="(group, indexGroup) in modelValue"
+          :key="`group-${indexGroup}`"
+        >
+          <h6
+            v-if="!hideGroupTitle"
+            class="title"
+            :key="`title-${indexGroup}`"
+          >
             {{ group.title }}
           </h6>
           <section>
-            <template v-for="(item, indexItem) in group.items" :key="`item-${indexItem}`">
+            <template
+              v-for="(item, indexItem) in group.items"
+              :key="`item-${indexItem}`"
+            >
               <div
                 @click="change(indexGroup, indexItem)"
                 :key="indexItem + 'input'"
                 v-if="hideRadio"
                 class="unnnic-radio-container unnnic-radio-container--sm"
-                style="cursor: pointer;"
+                style="cursor: pointer"
               >
                 <strong>{{ item.title }}</strong>
                 <span>{{ item.description }}</span>
@@ -35,7 +57,7 @@
               <UnnnicRadio
                 v-else
                 name=""
-                :model-value="group.selected"
+                :modelValue="group.selected"
                 @update:model-value="change(indexGroup, $event)"
                 :value="indexItem"
                 id=""
@@ -114,7 +136,10 @@ export default {
   },
   methods: {
     handleIsOpenKeyboard(event) {
-      if (document.querySelector('.select-permission:focus-visible') && event.keyCode === 32) {
+      if (
+        document.querySelector('.select-permission:focus-visible') &&
+        event.keyCode === 32
+      ) {
         this.active = !this.active;
       }
     },
@@ -236,7 +261,8 @@ export default {
       & + h6 {
         margin-top: $unnnic-spacing-stack-sm;
         padding-top: $unnnic-spacing-stack-sm;
-        border-top: $unnnic-border-width-thinner solid $unnnic-color-neutral-darkest;
+        border-top: $unnnic-border-width-thinner solid
+          $unnnic-color-neutral-darkest;
       }
 
       strong,
@@ -257,7 +283,8 @@ export default {
         & + .unnnic-radio-container {
           margin-top: $unnnic-spacing-stack-sm;
           padding-top: $unnnic-spacing-stack-sm;
-          border-top: $unnnic-border-width-thinner solid $unnnic-color-neutral-lightest;
+          border-top: $unnnic-border-width-thinner solid
+            $unnnic-color-neutral-lightest;
         }
 
         :deep(.unnnic-icon) {

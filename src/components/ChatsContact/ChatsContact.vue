@@ -19,10 +19,21 @@
     "
     :tabindex="0"
   >
-    <div v-if="discussionGoal" class="chats-contact__discussion-icon">
-      <unnnic-icon icon="forum" scheme="weni-50" />
+    <div
+      v-if="discussionGoal"
+      class="chats-contact__discussion-icon"
+    >
+      <UnnnicIcon
+        icon="forum"
+        scheme="weni-50"
+      />
     </div>
-    <user-avatar v-else :username="title" :photo-url="userPhoto" :active="isHovered || selected" />
+    <UserAvatar
+      v-else
+      :username="title"
+      :photoUrl="userPhoto"
+      :active="isHovered || selected"
+    />
 
     <div class="chats-contact__infos">
       <h1
@@ -36,10 +47,17 @@
         class="chats-contact__infos__additional-information"
         :class="{ bold: unreadMessages || (checkboxWhenSelect && selected) }"
       >
-        <p v-if="waitingTime !== 0 && !discussionGoal" class="ellipsis">
+        <p
+          v-if="waitingTime !== 0 && !discussionGoal"
+          class="ellipsis"
+        >
           {{ i18n('waiting_for', waitingTime, { waitingTime }) }}
         </p>
-        <p v-else-if="subtitle" class="ellipsis" :title="subtitle">
+        <p
+          v-else-if="subtitle"
+          class="ellipsis"
+          :title="subtitle"
+        >
           {{ subtitle }}
         </p>
       </div>
@@ -52,12 +70,15 @@
     >
       {{ unreadMessages }}
     </span>
-    <checkbox
+    <Checkbox
       v-else-if="selected && checkboxWhenSelect"
       class="chats-contact__infos__checkbox"
       :modelValue="true"
     />
-    <transition-ripple ref="transitionRipple" color="weni-500" />
+    <TransitionRipple
+      ref="transitionRipple"
+      color="weni-500"
+    />
   </div>
 </template>
 
@@ -126,7 +147,8 @@ export default {
 
       defaultTranslations: {
         waiting_for: {
-          'pt-br': 'Aguardando há 1 minuto | Aguardando há {waitingTime} minutos',
+          'pt-br':
+            'Aguardando há 1 minuto | Aguardando há {waitingTime} minutos',
           en: '1 minute waiting | {waitingTime} minutes waiting',
           es: 'Esperando por un minuto | Esperando por {waitingTime} minutos',
         },

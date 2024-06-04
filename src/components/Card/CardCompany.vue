@@ -1,154 +1,79 @@
 <template>
-  <div class="unnnic-card-company">
-    <div class="content">
-      <div class="header">
-        <div class="title" :title="title">
-          {{ cutLength(title, 20) }}
-        </div>
+  <div
+    :class="[
+      'unnnic-connect-card-company',
+      { 'unnnic-connect-card-company--old-version': oldVersion },
+    ]"
+    @click="$emit('enter')"
+  >
+    <div>
+      <h2 class="name">{{ name }}</h2>
 
-        <div v-if="tag" class="tag">{{ tag }}</div>
-      </div>
+      <p class="description">
+        {{ description }}
+      </p>
 
-      <div class="description" :title="description">
-        {{ cutLength(description, 36) }}
-      </div>
-
-      <div class="members">
-        <div class="avatars">
-          <tool-tip
-            v-for="(member, index) in membersLimited"
-            :key="index"
-            class="avatar-container"
-            side="top"
-            :text="member.name"
-            enabled
-          >
-            <div class="avatar__background">
-              <div class="avatar" :style="{ backgroundImage: `url(${member.photo})` }" />
-            </div>
-          </tool-tip>
-        </div>
-
-        <div class="members-description">{{ membersDescription }}</div>
+      <div
+        v-if="plan"
+        :class="['tag', plan]"
+      >
+        {{ i18n(`plans.${plan}`) }}
       </div>
     </div>
-    <div class="join-button">
-      <unnnic-tag @click="join" :text="joinLabel" scheme="aux-blue" clickable></unnnic-tag>
-    </div>
-    <div class="more-button" v-if="options.length">
-      <unnnic-dropdown>
+
+    <UnnnicTag
+      v-if="actionText"
+      class="action"
+      @click="$emit('action')"
+      clickable
+      :text="actionText"
+      scheme="aux-blue"
+    />
+
+    <div v-if="$slots.options">
+      <UnnnicDropdown
+        @click.prevent
+        v-model:open="isOptionsOpen"
+        class="unnnic-dropdown"
+      >
         <template v-slot:trigger>
-          <unnnic-icon
+          <UnnnicIcon
+            class="menu-icon"
             icon="navigation-menu-vertical-1"
-            scheme="neutral-cleanest"
             size="sm"
-            clickable
-          />
+            :scheme="isOptionsOpen ? 'neutral-cloudy' : 'neutral-clean'"
+          ></UnnnicIcon>
         </template>
 
-        <unnnic-dropdown-item
-          v-for="(option, index) in options"
-          :key="index"
-          @click="
-            () => {
-              if (option.click) {
-                option.click();
-              }
-            }
-          "
-        >
-          <div :class="['menu-item', { [option.scheme]: option.scheme }]">
-            <unnnic-icon
-              class="icon"
-              size="sm"
-              :icon="option.icon"
-              :scheme="option.scheme ? option.scheme : 'neutral-dark'"
-            />
-
-            {{ option.title }}
-          </div>
-        </unnnic-dropdown-item>
-      </unnnic-dropdown>
+        <slot name="options"></slot>
+      </UnnnicDropdown>
     </div>
   </div>
 </template>
 
 <script>
+import UnnnicI18n from '../../mixins/i18n';
 import UnnnicTag from '../Tag/Tag.vue';
-import UnnnicIcon from '../Icon.vue';
-import UnnnicDropdown from '../Dropdown/Dropdown.vue';
-import UnnnicDropdownItem from '../Dropdown/DropdownItem.vue';
-import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
   components: {
     UnnnicTag,
-    UnnnicIcon,
-    UnnnicDropdown,
-    UnnnicDropdownItem,
-    ToolTip,
   },
 
+  mixins: [UnnnicI18n],
+
   props: {
-    title: {
-      type: String,
-    },
-
-    tag: {
-      type: String,
-    },
-
-    description: {
-      type: String,
-    },
-
-    joinLabel: {
-      type: String,
-    },
-
-    options: {
-      type: Array,
-      default() {
-        return [];
-      },
-    },
-
-    members: {
-      type: Array,
-      default() {
-        return [];
-      },
-    },
-
-    membersDescription: {
-      type: String,
-    },
+    oldVersion: Boolean,
+    name: String,
+    description: String,
+    plan: String,
+    actionText: String,
   },
 
   data() {
-    return {};
-  },
-
-  methods: {
-    join() {
-      this.$emit('join');
-    },
-
-    cutLength(text, length) {
-      const posText = text.trim();
-
-      if (posText.length > length) {
-        return `${posText.slice(0, length).trim()}...`;
-      }
-
-      return posText;
-    },
-  },
-
-  computed: {
-    membersLimited() {
-      return this.members.slice(0, 3);
-    },
+    return {
+      isOptionsOpen: false,
+    };
   },
 };
 </script>
@@ -156,134 +81,108 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/scss/unnnic.scss';
 
-.unnnic-card-company {
-  background-color: $unnnic-color-background-sky;
-  border-radius: $unnnic-border-radius-md;
-  padding: $unnnic-spacing-inset-md;
-  min-width: 18.5 * $unnnic-font-size;
-  border: $unnnic-border-width-thin solid transparent;
+.unnnic-connect-card-company {
+  cursor: pointer;
   display: flex;
-  align-items: center;
+  column-gap: $unnnic-spacing-sm;
+  justify-content: space-between;
+
+  outline-style: solid;
+  outline-color: $unnnic-color-neutral-cleanest;
+  outline-width: $unnnic-border-width-thinner;
+  outline-offset: -$unnnic-border-width-thinner;
+
+  background-color: $unnnic-color-background-white;
+  padding: $unnnic-spacing-md;
+  border-radius: $unnnic-border-radius-md;
 
   &:hover {
-    border: $unnnic-border-width-thin solid $unnnic-color-neutral-soft;
+    box-shadow: $unnnic-shadow-level-near;
   }
 
-  .content {
-    flex: 1;
+  .name {
+    color: $unnnic-color-neutral-black;
 
-    .header {
-      display: flex;
-      align-items: center;
-      margin-bottom: $unnnic-spacing-stack-nano;
+    font-family: $unnnic-font-family-secondary;
+    font-weight: $unnnic-font-weight-bold;
+    font-size: $unnnic-font-size-title-md;
+    line-height: $unnnic-font-size-title-md + $unnnic-line-height-md;
 
-      .title {
-        font-family: $unnnic-font-family-secondary;
-        font-size: $unnnic-font-size-title-md;
-        font-weight: $unnnic-font-weight-bold;
-        line-height: $unnnic-font-size-title-md + $unnnic-line-height-md;
-        color: $unnnic-color-neutral-black;
+    margin: 0;
+    margin-bottom: $unnnic-spacing-ant;
+  }
 
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
+  .description {
+    color: $unnnic-color-neutral-dark;
 
-      .tag {
-        margin-left: $unnnic-spacing-inline-ant;
-        padding: $unnnic-spacing-stack-nano $unnnic-spacing-inline-ant;
-        outline-style: solid;
-        outline-color: $unnnic-color-neutral-dark;
-        outline-width: $unnnic-border-width-thinner;
-        outline-offset: -$unnnic-border-width-thinner;
-        border-radius: $unnnic-border-radius-sm;
-        user-select: none;
+    font-family: $unnnic-font-family-secondary;
+    font-weight: $unnnic-font-weight-regular;
+    font-size: $unnnic-font-size-body-lg;
+    line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
 
-        font-family: $unnnic-font-family-secondary;
-        font-size: $unnnic-font-size-body-md;
-        line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
-        font-weight: $unnnic-font-weight-regular;
-        color: $unnnic-color-neutral-dark;
-      }
+    margin: 0;
+  }
+
+  .action {
+    align-self: center;
+  }
+
+  &--old-version {
+    outline: none;
+    background-color: $unnnic-color-background-sky;
+    column-gap: $unnnic-spacing-xs;
+
+    &:hover {
+      box-shadow: none;
+
+      outline-style: solid;
+      outline-color: $unnnic-color-neutral-soft;
+      outline-width: $unnnic-border-width-thin;
+      outline-offset: -$unnnic-border-width-thin;
     }
 
-    .description {
-      font-family: $unnnic-font-family-secondary;
-      font-size: $unnnic-font-size-body-lg;
-      font-weight: $unnnic-font-weight-regular;
-      line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-      color: $unnnic-color-neutral-dark;
-      margin-bottom: $unnnic-spacing-stack-md;
-
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      text-overflow: ellipsis;
+    .name {
+      margin-bottom: $unnnic-spacing-nano;
     }
+  }
 
-    .members {
-      display: flex;
-      align-items: center;
+  .tag {
+    display: inline-block;
+    user-select: none;
 
-      .avatars {
-        .avatar-container {
-          border-radius: 50%;
+    font-family: $unnnic-font-family-secondary;
+    font-weight: $unnnic-font-weight-regular;
+    font-size: $unnnic-font-size-body-md;
+    line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
 
-          &:not(:first-child) {
-            margin-left: -0.875 * $unnnic-font-size;
-          }
-        }
+    margin-top: $unnnic-spacing-sm;
+    padding: $unnnic-spacing-nano $unnnic-spacing-ant;
+    border-radius: $unnnic-border-radius-pill;
 
-        .avatar__background {
-          border-radius: 50%;
-          background: $unnnic-color-neutral-cleanest;
-        }
+    $plan-colors:
+      'trial' $unnnic-color-aux-blue-500,
+      'scale' $unnnic-color-aux-orange-500,
+      'advanced' $unnnic-color-aux-purple-500,
+      'enterprise' $unnnic-color-aux-green-500;
 
-        .avatar {
-          width: $unnnic-avatar-size-sm;
-          height: $unnnic-avatar-size-sm;
-          border-radius: 50%;
-          border: $unnnic-border-width-thin solid $unnnic-color-neutral-black;
-          background-size: cover;
-          background-position: center center;
-        }
-      }
-
-      .members-description {
-        font-family: $unnnic-font-family-secondary;
-        font-size: $unnnic-font-size-body-gt;
-        font-weight: $unnnic-font-weight-regular;
-        line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-        color: $unnnic-color-neutral-darkest;
-        margin-left: $unnnic-spacing-inline-nano;
+    @each $name, $color in $plan-colors {
+      &.#{$name} {
+        color: $color;
+        background-color: rgba($color, $unnnic-opacity-level-extra-light);
       }
     }
   }
 
-  .join-button {
-    margin-left: $unnnic-spacing-inline-xs;
-    padding: $unnnic-spacing-inset-nano;
+  .menu-icon {
+    display: block;
+    margin-block: $unnnic-spacing-xs;
+    user-select: none;
   }
 
-  .more-button {
-    margin-left: $unnnic-spacing-inline-nano;
-
-    .menu-item {
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      white-space: nowrap;
-
-      .icon {
-        margin-right: $unnnic-inline-xs;
-      }
-
-      &.feedback-red {
-        color: $unnnic-color-feedback-red;
-      }
+  .unnnic-dropdown {
+    :deep(.unnnic-dropdown__trigger .unnnic-dropdown__content) {
+      margin-top: 0;
+      padding: 0;
     }
   }
 }

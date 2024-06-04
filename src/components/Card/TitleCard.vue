@@ -1,25 +1,29 @@
 <template>
   <div class="unnnic-card-title">
     <div :class="['avatar-icon', `unnnic-card-scheme--${scheme}`]">
-      <unnnic-icon :icon="icon" :scheme="scheme" size="md" />
+      <UnnnicIcon
+        :icon="icon"
+        :scheme="scheme"
+        size="md"
+      />
     </div>
 
     <div class="title">{{ title }}</div>
 
-    <tool-tip
+    <ToolTip
       class="information"
       :side="infoPosition"
       :text="info"
       v-if="hasInformationIcon"
       :enabled="enabled"
     >
-      <unnnic-icon
+      <UnnnicIcon
         icon="information-circle-4"
         class="unnnic-card-title__content_info"
         size="sm"
         scheme="neutral-soft"
       />
-    </tool-tip>
+    </ToolTip>
   </div>
 </template>
 

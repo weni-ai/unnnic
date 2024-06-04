@@ -1,16 +1,21 @@
 <template>
   <div class="unnnic-date-picker">
     <template v-if="type === 'day'">
-      <template v-for="(openMonth, index) in openMonths" :key="openMonth">
+      <template
+        v-for="(openMonth, index) in openMonths"
+        :key="openMonth"
+      >
         <div class="month-container">
           <div :class="['header', `header--${size}`]">
-            <unnnic-button
+            <UnnnicButton
               size="small"
-              :icon-center="`arrow-${index === 0 ? 'left' : 'right'}-1-1`"
+              :iconCenter="`arrow-${index === 0 ? 'left' : 'right'}-1-1`"
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: `${index === 0 ? 'left' : 'right'}-button` }"
-              @click.stop="referenceDate = addMonth(referenceDate, index === 0 ? -1 : 1)"
+              @click.stop="
+                referenceDate = addMonth(referenceDate, index === 0 ? -1 : 1)
+              "
             />
 
             <div :class="['label', `label--${size}`]">
@@ -20,7 +25,13 @@
           </div>
 
           <div :class="['days', `days--${size}`]">
-            <div v-for="(day, index) in days" :key="index" class="name">{{ day }}</div>
+            <div
+              v-for="(day, index) in days"
+              :key="index"
+              class="name"
+            >
+              {{ day }}
+            </div>
             <div
               v-for="(date, index) in getDatesOfTheMonth(openMonth)"
               :key="`${openMonth}-${index}`"
@@ -33,7 +44,9 @@
                 left: date.properties.includes('left-highlighted'),
                 right: date.properties.includes('right-highlighted'),
               }"
-              @click="date.properties.includes('inside month') && selectDate(date)"
+              @click="
+                date.properties.includes('inside month') && selectDate(date)
+              "
             >
               {{ getDate(date) }}
             </div>
@@ -45,12 +58,15 @@
     </template>
 
     <template v-else-if="type === 'month'">
-      <template v-for="openMonth in [referenceDate]" :key="openMonth">
+      <template
+        v-for="openMonth in [referenceDate]"
+        :key="openMonth"
+      >
         <div class="month-container">
           <div :class="['header', `header--${size}`]">
-            <unnnic-button
+            <UnnnicButton
               size="small"
-              icon-center="arrow-left-1-1"
+              iconCenter="arrow-left-1-1"
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'left-button' }"
@@ -61,9 +77,9 @@
               {{ getFullYear(openMonth) }}
             </div>
 
-            <unnnic-button
+            <UnnnicButton
               size="small"
-              icon-center="arrow-right-1-1"
+              iconCenter="arrow-right-1-1"
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'right-button' }"
@@ -84,7 +100,9 @@
                 left: date.properties.includes('left-highlighted'),
                 right: date.properties.includes('right-highlighted'),
               }"
-              @click="date.properties.includes('inside month') && selectDate(date)"
+              @click="
+                date.properties.includes('inside month') && selectDate(date)
+              "
             >
               {{ months[getMonth(date)].substr(0, 3) }}
             </div>
@@ -96,12 +114,15 @@
     </template>
 
     <template v-else-if="type === 'year'">
-      <template v-for="openMonth in [referenceDate]" :key="openMonth">
+      <template
+        v-for="openMonth in [referenceDate]"
+        :key="openMonth"
+      >
         <div class="month-container">
           <div :class="['header', `header--${size}`]">
-            <unnnic-button
+            <UnnnicButton
               size="small"
-              icon-center="arrow-left-1-1"
+              iconCenter="arrow-left-1-1"
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'left-button' }"
@@ -112,9 +133,9 @@
               {{ getFullYear(openMonth) }}
             </div>
 
-            <unnnic-button
+            <UnnnicButton
               size="small"
-              icon-center="arrow-right-1-1"
+              iconCenter="arrow-right-1-1"
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'right-button' }"
@@ -135,7 +156,9 @@
                 left: date.properties.includes('left-highlighted'),
                 right: date.properties.includes('right-highlighted'),
               }"
-              @click="date.properties.includes('inside month') && selectDate(date)"
+              @click="
+                date.properties.includes('inside month') && selectDate(date)
+              "
             >
               {{ date.date }}
             </div>
@@ -146,7 +169,10 @@
       </template>
     </template>
 
-    <div v-if="size !== 'small'" class="options-container">
+    <div
+      v-if="size !== 'small'"
+      class="options-container"
+    >
       <div class="options">
         <div
           :class="['option', { selected: optionSelected === option.id }]"
@@ -159,14 +185,14 @@
       </div>
 
       <div class="actions">
-        <unnnic-button
+        <UnnnicButton
           size="small"
           :text="clearLabel"
           type="tertiary"
           @click="clear"
         />
 
-        <unnnic-button
+        <UnnnicButton
           size="small"
           :text="actionLabel"
           type="secondary"
@@ -249,25 +275,32 @@ export default {
     options: {
       type: Array,
       default() {
-        return [{
-          name: 'Últimos 7 dias',
-          id: 'last-7-days',
-        }, {
-          name: 'Últimos 14 dias',
-          id: 'last-14-days',
-        }, {
-          name: 'Últimos 30 dias',
-          id: 'last-30-days',
-        }, {
-          name: 'Últimos 12 meses',
-          id: 'last-12-months',
-        }, {
-          name: 'Mês Atual',
-          id: 'current-month',
-        }, {
-          name: 'Personalizar',
-          id: 'custom',
-        }];
+        return [
+          {
+            name: 'Últimos 7 dias',
+            id: 'last-7-days',
+          },
+          {
+            name: 'Últimos 14 dias',
+            id: 'last-14-days',
+          },
+          {
+            name: 'Últimos 30 dias',
+            id: 'last-30-days',
+          },
+          {
+            name: 'Últimos 12 meses',
+            id: 'last-12-months',
+          },
+          {
+            name: 'Mês Atual',
+            id: 'current-month',
+          },
+          {
+            name: 'Personalizar',
+            id: 'custom',
+          },
+        ];
       },
     },
   },
@@ -286,10 +319,7 @@ export default {
 
   computed: {
     openMonths() {
-      return [
-        this.referenceDate,
-        this.addMonth(this.referenceDate, 1),
-      ];
+      return [this.referenceDate, this.addMonth(this.referenceDate, 1)];
     },
 
     value() {
@@ -302,7 +332,7 @@ export default {
 
   watch: {
     value({ startDate, endDate }) {
-      this.optionSelected = (startDate || endDate) ? 'custom' : '';
+      this.optionSelected = startDate || endDate ? 'custom' : '';
 
       this.$emit('change', this.value);
     },
@@ -348,14 +378,20 @@ export default {
     isDateBetween(internalDate) {
       if (this.startDate && this.endDate) {
         if (
-          internalDate >= this.stringToTime(this.startDate)
-          && internalDate <= this.stringToTime(this.endDate)
+          internalDate >= this.stringToTime(this.startDate) &&
+          internalDate <= this.stringToTime(this.endDate)
         ) {
           return true;
         }
-      } else if (this.startDate && internalDate >= this.stringToTime(this.startDate)) {
+      } else if (
+        this.startDate &&
+        internalDate >= this.stringToTime(this.startDate)
+      ) {
         return true;
-      } else if (this.endDate && internalDate <= this.stringToTime(this.endDate)) {
+      } else if (
+        this.endDate &&
+        internalDate <= this.stringToTime(this.endDate)
+      ) {
         return true;
       }
 
@@ -369,14 +405,17 @@ export default {
 
       if (this.startDate && this.endDate) {
         if (
-          internalDate >= startDateTime
-          && internalDate <= this.stringToTime(this.endDate)
+          internalDate >= startDateTime &&
+          internalDate <= this.stringToTime(this.endDate)
         ) {
           return true;
         }
       } else if (this.startDate && internalDate >= startDateTime) {
         return true;
-      } else if (this.endDate && internalDate <= this.stringToTime(this.endDate)) {
+      } else if (
+        this.endDate &&
+        internalDate <= this.stringToTime(this.endDate)
+      ) {
         return true;
       }
 
@@ -391,14 +430,17 @@ export default {
 
       if (this.startDate && this.endDate) {
         if (
-          internalDate >= startDateTime
-          && internalDate <= this.stringToTime(this.endDate)
+          internalDate >= startDateTime &&
+          internalDate <= this.stringToTime(this.endDate)
         ) {
           return true;
         }
       } else if (this.startDate && internalDate >= startDateTime) {
         return true;
-      } else if (this.endDate && internalDate <= this.stringToTime(this.endDate)) {
+      } else if (
+        this.endDate &&
+        internalDate <= this.stringToTime(this.endDate)
+      ) {
         return true;
       }
 
@@ -436,7 +478,10 @@ export default {
               properties.push('right-highlighted');
             }
 
-            if (properties.includes('left-highlighted') || properties.includes('right-highlighted')) {
+            if (
+              properties.includes('left-highlighted') ||
+              properties.includes('right-highlighted')
+            ) {
               properties.push('highlighted');
             }
           }
@@ -491,12 +536,17 @@ export default {
             properties.push('right-highlighted');
           }
 
-          if (properties.includes('left-highlighted') || properties.includes('right-highlighted')) {
+          if (
+            properties.includes('left-highlighted') ||
+            properties.includes('right-highlighted')
+          ) {
             properties.push('highlighted');
           }
         }
 
-        if (this.dateToStringMonth(date) === this.dateToStringMonth(new Date())) {
+        if (
+          this.dateToStringMonth(date) === this.dateToStringMonth(new Date())
+        ) {
           properties.push('today');
         }
 
@@ -546,7 +596,10 @@ export default {
             properties.push('right-highlighted');
           }
 
-          if (properties.includes('left-highlighted') || properties.includes('right-highlighted')) {
+          if (
+            properties.includes('left-highlighted') ||
+            properties.includes('right-highlighted')
+          ) {
             properties.push('highlighted');
           }
         }
@@ -626,7 +679,9 @@ export default {
 
       if (this.endDate) {
         const secondMonth = this.addMonth(this.referenceDate, 1);
-        const firstDateOfEndDate = `${this.getMonth(this.endDate) + 1} 1 ${this.getFullYear(this.endDate)}`;
+        const firstDateOfEndDate = `${
+          this.getMonth(this.endDate) + 1
+        } 1 ${this.getFullYear(this.endDate)}`;
 
         if (![this.referenceDate, secondMonth].includes(firstDateOfEndDate)) {
           this.referenceDate = firstDateOfEndDate;
@@ -642,7 +697,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-date-picker {
   display: inline-flex;
@@ -661,7 +716,7 @@ export default {
     .header {
       display: grid;
       align-items: center;
-      grid-template-areas: "left-button label right-button";
+      grid-template-areas: 'left-button label right-button';
 
       &--small {
         grid-template-columns: 32px auto 32px;
@@ -713,7 +768,8 @@ export default {
         line-height: 32px;
       }
 
-      &.months--small, &.months--large {
+      &.months--small,
+      &.months--large {
         grid-template-columns: repeat(3, 4.75 * $unnnic-font-size);
         grid-template-rows: repeat(4, 3.3125 * $unnnic-font-size);
         font-size: $unnnic-font-size-body-md;
@@ -784,7 +840,8 @@ export default {
         user-select: none;
         cursor: pointer;
 
-        &:hover, &.selected {
+        &:hover,
+        &.selected {
           background-color: $unnnic-color-background-sky;
         }
 

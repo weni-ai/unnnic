@@ -5,7 +5,7 @@
       class="unnnic-select-smart__options__multiple__selecteds__container"
     >
       <div class="unnnic-select-smart__options__multiple__selecteds">
-        <tag
+        <Tag
           v-for="option in firstMultipleSelecteds"
           class="unnnic-select-smart__options__multiple__selecteds__option"
           :key="option.value"
@@ -20,7 +20,7 @@
           +{{ selectedOptions.length - multipleSelectedsTags }}
         </p>
       </div>
-      <icon-svg
+      <UnnnicIcon
         class="unnnic-select-smart__options__multiple__selecteds__clear"
         icon="close-1"
         size="xs"
@@ -28,7 +28,10 @@
         @click="clearSelectedOptions"
       />
     </div>
-    <p v-if="!selectedOptions[0]" class="unnnic-select-smart__options__multiple--without-multiples">
+    <p
+      v-if="!selectedOptions[0]"
+      class="unnnic-select-smart__options__multiple--without-multiples"
+    >
       {{ withoutSelectsMessage || i18n('without_multiple_selected') }}
     </p>
   </div>
@@ -36,7 +39,7 @@
 
 <script>
 import Tag from '../Tag/Tag.vue';
-import IconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 import UnnnicI18n from '../../mixins/i18n';
 
 export default {
@@ -44,7 +47,7 @@ export default {
   mixins: [UnnnicI18n],
   components: {
     Tag,
-    IconSvg,
+    UnnnicIcon,
   },
   props: {
     selectedOptions: {

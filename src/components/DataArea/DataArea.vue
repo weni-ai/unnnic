@@ -9,9 +9,12 @@
     </div>
 
     <div class="data-area-container__content">
-      <tool-tip :enabled="enableHover" :text="hoverText">
+      <ToolTip
+        :enabled="enableHover"
+        :text="hoverText"
+      >
         <div class="data-area-container__content__text">{{ text }}</div>
-      </tool-tip>
+      </ToolTip>
 
       <div class="data-area-container__content__buttons-slot">
         <slot name="buttons"></slot>

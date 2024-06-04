@@ -1,6 +1,7 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="unnnic-checkbox-wrapper">
-    <unnnic-icon-svg
+    <UnnnicIcon
       class="unnnic-checkbox"
       :class="{ disabled }"
       :icon="icon"
@@ -24,7 +25,7 @@
 </template>
 
 <script>
-import unnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   model: {
@@ -59,7 +60,7 @@ export default {
   },
 
   components: {
-    unnnicIconSvg,
+    UnnnicIcon,
   },
 
   computed: {
@@ -93,11 +94,8 @@ export default {
 
   methods: {
     click() {
-      if (this.valueName === 'checked') {
-        this.$emit('change', false);
-      } else {
-        this.$emit('change', true);
-      }
+      const isChecked = ['checked', 'less'].includes(this.valueName);
+      this.$emit('change', !isChecked);
     },
   },
 };
@@ -115,7 +113,7 @@ export default {
 .unnnic-checkbox {
   &.disabled {
     :deep(.primary) {
-      fill: $unnnic-color-neutral-soft;
+      fill: $unnnic-color-neutral-cleanest;
     }
   }
 }

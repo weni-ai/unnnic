@@ -6,14 +6,29 @@ export default {
   title: 'Example/Modal',
   component: unnnicModal,
   argTypes: {
-    modalIcon: { control: { type: 'select', options: ['check-circle-1-1', 'alert-circle-1', 'delete-1'] } },
+    modalIcon: {
+      control: {
+        type: 'select',
+        options: ['check-circle-1-1', 'alert-circle-1', 'delete-1'],
+      },
+    },
     text: { control: { type: 'text' } },
     description: { control: { type: 'text' } },
     scheme: {
       control: {
         type: 'select',
-        options: ['feedback-red', 'feedback-green', 'feedback-yellow', 'feedback-blue', 'feedback-grey',
-          'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink'],
+        options: [
+          'feedback-red',
+          'feedback-green',
+          'feedback-yellow',
+          'feedback-blue',
+          'feedback-grey',
+          'aux-blue',
+          'aux-purple',
+          'aux-orange',
+          'aux-lemon',
+          'aux-pink',
+        ],
       },
     },
   },
@@ -22,13 +37,15 @@ export default {
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicModal, unnnicButton },
-  template: '<unnnic-modal v-bind="$props">Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modalConteúdo do modal<br></unnnic-modal>',
+  template:
+    '<unnnic-modal v-bind="$props">Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modalConteúdo do modal<br></unnnic-modal>',
 });
 
 const ModalTemplate = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicModal, unnnicButton },
-  template: '<unnnicModal v-bind="$props"> <template #message><span>Modal with Buttons</span></template><template #options><unnnic-button> Button 1 </unnnic-button> <unnnic-button > Button 2 </unnnic-button></template></unnnic-modal>',
+  template:
+    '<unnnicModal v-bind="$props"> <template #message><span>Modal with Buttons</span></template><template #options><unnnic-button> Button 1 </unnnic-button> <unnnic-button > Button 2 </unnnic-button></template></unnnic-modal>',
 });
 
 export const Normal = Template.bind({});

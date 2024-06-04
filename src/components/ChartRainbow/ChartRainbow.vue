@@ -1,6 +1,10 @@
 <template>
   <div class="unnnic-chart-rainbow">
-    <svg width="332" height="166" class="semicircle">
+    <svg
+      width="332"
+      height="166"
+      class="semicircle"
+    >
       <defs xmlns="http://www.w3.org/2000/svg">
         <linearGradient
           id="paint0_linear_10224_36584"
@@ -11,7 +15,11 @@
           gradientUnits="userSpaceOnUse"
         >
           <stop stop-color="#00DED2" />
-          <stop offset="1" stop-color="#00DED2" stop-opacity="0" />
+          <stop
+            offset="1"
+            stop-color="#00DED2"
+            stop-opacity="0"
+          />
         </linearGradient>
       </defs>
 
@@ -40,7 +48,12 @@
         <span class="symbol">%</span>
       </div>
 
-      <div v-if="description" class="description">{{ description }}</div>
+      <div
+        v-if="description"
+        class="description"
+      >
+        {{ description }}
+      </div>
     </div>
   </div>
 </template>
@@ -81,7 +94,14 @@ export default {
         };
       }
 
-      function describeArc(x, y, innerRadius, outerRadius, startAngle, endAngle) {
+      function describeArc(
+        x,
+        y,
+        innerRadius,
+        outerRadius,
+        startAngle,
+        endAngle,
+      ) {
         const radius = innerRadius;
         const spread = outerRadius - innerRadius;
         const outerStart = polarToCartesian(x, y, radius + spread, endAngle);
@@ -112,7 +132,14 @@ export default {
 
       this.$refs.front.setAttribute(
         'd',
-        describeArc(166, 166, 139.44, 152.72, -85, -85 + (this.value / 100) * 170),
+        describeArc(
+          166,
+          166,
+          139.44,
+          152.72,
+          -85,
+          -85 + (this.value / 100) * 170,
+        ),
       );
     },
   },

@@ -10,34 +10,47 @@
     @click="cardClick"
   >
     <div :class="['unnnic-card-marketplace__icons']">
-      <img class="unnnic-card-marketplace__icons__app" :src="iconSrc" />
+      <img
+        class="unnnic-card-marketplace__icons__app"
+        :src="iconSrc"
+      />
       <slot name="actions"></slot>
     </div>
     <div class="unnnic-card-marketplace__content">
       <div class="unnnic-card-marketplace__content__title">{{ title }}</div>
-      <div class="unnnic-card-marketplace__content__description" :title="description">
+      <div
+        class="unnnic-card-marketplace__content__description"
+        :title="description"
+      >
         {{ description }}
       </div>
-      <div v-if="typeAction === 'add'" class="unnnic-card-marketplace__content__rating">
-        <unnnic-icon-svg
+      <div
+        v-if="typeAction === 'add'"
+        class="unnnic-card-marketplace__content__rating"
+      >
+        <UnnnicIcon
           class="unnnic-card-marketplace__content__rating__star"
           scheme="feedback-yellow"
           icon="rating-star-1"
           size="ant"
         />
-        <div class="unnnic-card-marketplace__content__rating__value">{{ rating }}</div>
-        <div class="unnnic-card-marketplace__content__rating__comments">({{ comments }})</div>
+        <div class="unnnic-card-marketplace__content__rating__value">
+          {{ rating }}
+        </div>
+        <div class="unnnic-card-marketplace__content__rating__comments">
+          ({{ comments }})
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'unnnic-card',
-  components: { UnnnicIconSvg },
+  components: { UnnnicIcon },
   props: {
     title: {
       type: String,

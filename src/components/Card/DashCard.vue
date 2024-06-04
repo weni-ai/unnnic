@@ -1,7 +1,11 @@
 <template>
   <div class="unnnic-card-dash">
     <div class="header">
-      <unnnic-avatar-icon size="sm" :scheme="scheme" :icon="icon" />
+      <UnnnicAvatarIcon
+        size="sm"
+        :scheme="scheme"
+        :icon="icon"
+      />
 
       <div class="label">{{ title }}</div>
     </div>
@@ -9,8 +13,11 @@
     <div class="content">
       <div class="value">{{ value }}</div>
 
-      <div v-if="percent" :class="['percent', `unnnic-card-scheme--feedback-${color}`]">
-        <unnnic-icon
+      <div
+        v-if="percent"
+        :class="['percent', `unnnic-card-scheme--feedback-${color}`]"
+      >
+        <UnnnicIcon
           :icon="`graph-stats-${percent >= 0 ? 'ascend' : 'descend'}-2`"
           :scheme="`feedback-${color}`"
           size="sm"

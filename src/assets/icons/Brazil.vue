@@ -1,7 +1,20 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="40"
+    height="40"
+    viewBox="0 0 40 40"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <g clip-path="url(#clip0)">
-      <rect x="5.00018" y="8.75061" width="29.9997" height="22.4998" fill="#2B9F5A" />
+      <rect
+        x="5.00018"
+        y="8.75061"
+        width="29.9997"
+        height="22.4998"
+        fill="#2B9F5A"
+      />
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"
@@ -49,7 +62,12 @@
     </g>
     <defs>
       <clipPath id="clip0">
-        <rect width="40" height="39.9996" fill="white" transform="translate(0 0.000488281)" />
+        <rect
+          width="40"
+          height="39.9996"
+          fill="white"
+          transform="translate(0 0.000488281)"
+        />
       </clipPath>
     </defs>
   </svg>

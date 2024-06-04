@@ -1,5 +1,12 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="40"
+    height="40"
+    viewBox="0 0 40 40"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M5 12.5005C5 11.1198 6.11929 10.0005 7.5 10.0005H32.5C33.8807 10.0005 35 11.1198 35 12.5005V27.5005C35 28.8812 33.8807 30.0005 32.5 30.0005H7.5C6.11929 30.0005 5 28.8812 5 27.5005V12.5005Z"
       fill="#CCEAFF"
@@ -30,7 +37,10 @@
         gradientUnits="userSpaceOnUse"
       >
         <stop stop-color="#007B40" />
-        <stop offset="1" stop-color="#55B330" />
+        <stop
+          offset="1"
+          stop-color="#55B330"
+        />
       </linearGradient>
       <linearGradient
         id="paint1_linear"
@@ -41,7 +51,10 @@
         gradientUnits="userSpaceOnUse"
       >
         <stop stop-color="#1D2970" />
-        <stop offset="1" stop-color="#006DBA" />
+        <stop
+          offset="1"
+          stop-color="#006DBA"
+        />
       </linearGradient>
       <linearGradient
         id="paint2_linear"
@@ -52,7 +65,10 @@
         gradientUnits="userSpaceOnUse"
       >
         <stop stop-color="#6E2B2F" />
-        <stop offset="1" stop-color="#E30138" />
+        <stop
+          offset="1"
+          stop-color="#E30138"
+        />
       </linearGradient>
     </defs>
   </svg>

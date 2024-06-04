@@ -15,7 +15,7 @@
       <div class="unnnic-banner-info__title">{{ thirdTitle }}</div>
       <div class="unnnic-banner-info__description">{{ thirdDescription }}</div>
       <div class="unnnic-banner-info__rating">
-        <unnnic-icon-svg
+        <UnnnicIcon
           :key="index"
           v-for="index in 5"
           @click="emitRatingAction(index)"
@@ -35,11 +35,11 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'unnnic-banner',
-  components: { UnnnicIconSvg },
+  components: { UnnnicIcon },
   props: {
     firstTitle: {
       type: String,

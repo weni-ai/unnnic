@@ -1,5 +1,8 @@
 <template>
-  <div class="unnnic-dropdown" @click.stop="onClickTrigger">
+  <div
+    class="unnnic-dropdown"
+    @click.stop="onClickTrigger"
+  >
     <div class="unnnic-dropdown__trigger">
       <slot name="trigger" />
       <div
@@ -32,7 +35,13 @@ export default {
       default: 'bottom-left',
       validator(value) {
         return (
-          ['top-left', 'none', 'bottom-left', 'bottom-left', 'bottom-right'].indexOf(value) !== -1
+          [
+            'top-left',
+            'none',
+            'bottom-left',
+            'bottom-left',
+            'bottom-right',
+          ].indexOf(value) !== -1
         );
       },
     },

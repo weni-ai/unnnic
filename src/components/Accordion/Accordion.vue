@@ -1,7 +1,11 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div @click="$emit('update:open', !open)" class="unnnic-accordion">
+  <div
+    @click="$emit('update:open', !open)"
+    class="unnnic-accordion"
+  >
     <div class="header">
-      <unnnic-icon-svg
+      <UnnnicIcon
         :icon="open ? 'subtract-circle-1' : 'add-circle-1'"
         scheme="neutral-clean"
         size="md"
@@ -9,23 +13,30 @@
 
       <div :class="['title', { open }]">{{ title }}</div>
 
-      <div v-show="open" class="actions">
+      <div
+        v-show="open"
+        class="actions"
+      >
         <slot name="actions"></slot>
       </div>
     </div>
 
-    <div ref="content" :class="['content', { open }]" :style="{ height }">
-      <slot/>
+    <div
+      ref="content"
+      :class="['content', { open }]"
+      :style="{ height }"
+    >
+      <slot />
     </div>
   </div>
 </template>
 
 <script>
-import unnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   components: {
-    unnnicIconSvg,
+    UnnnicIcon,
   },
 
   props: {
@@ -75,7 +86,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-accordion {
   background-color: $unnnic-color-background-snow;

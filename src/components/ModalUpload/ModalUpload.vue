@@ -1,7 +1,7 @@
 <template>
   <div class="modal-upload">
     <div class="close-button-container">
-      <unnnic-icon
+      <UnnnicIcon
         class="close-button"
         icon="close-1"
         scheme="neutral-dark"
@@ -14,24 +14,34 @@
       {{ textTitle }}
     </div>
 
-    <unnnic-upload-area
-      :accept-multiple="acceptMultiple"
-      :supported-formats="supportedFormats"
-      :maximum-uploads="maximumUploads"
-      :files-progress="filesProgress"
-      :is-uploading="isUploading"
-      :can-import="canImport"
-      :can-delete="canDelete"
-      :max-file-size="maxFileSize"
+    <UnnnicUploadArea
+      :acceptMultiple="acceptMultiple"
+      :supportedFormats="supportedFormats"
+      :maximumUploads="maximumUploads"
+      :filesProgress="filesProgress"
+      :isUploading="isUploading"
+      :canImport="canImport"
+      :canDelete="canDelete"
+      :maxFileSize="maxFileSize"
       :files="files"
       :subtitle="subtitle"
       @fileChange="$emit('file-change', $event)"
     />
 
     <div class="footer">
-      <unnnic-button size="large" type="tertiary" :text="textCancel" @click="$emit('cancel')" />
+      <UnnnicButton
+        size="large"
+        type="tertiary"
+        :text="textCancel"
+        @click="$emit('cancel')"
+      />
 
-      <unnnic-button size="large" type="primary" :text="textAction" @click="$emit('action')" />
+      <UnnnicButton
+        size="large"
+        type="primary"
+        :text="textAction"
+        @click="$emit('action')"
+      />
     </div>
   </div>
 </template>
@@ -161,7 +171,10 @@ export default {
     margin-bottom: -$unnnic-spacing-stack-sm;
     display: grid;
     grid-gap: $unnnic-spacing-inline-lg;
-    grid-template-columns: repeat(auto-fit, minmax(10 * $unnnic-font-size, 1fr));
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(10 * $unnnic-font-size, 1fr)
+    );
   }
 }
 </style>

@@ -1,17 +1,21 @@
 <template>
   <div class="unnnic-breadcrumb">
-    <template v-for="(crumb, index) in crumbs" :key="crumb.name">
+    <template
+      v-for="(crumb, index) in crumbs"
+      :key="crumb.name"
+    >
       <div
         @click="$emit('crumb-click', crumb)"
         :class="{
           'unnnic-breadcrumb__container__link': true,
-          'unnnic-breadcrumb__container__link__active': index === crumbs.length - 1,
+          'unnnic-breadcrumb__container__link__active':
+            index === crumbs.length - 1,
         }"
       >
         {{ crumb.name }}
       </div>
 
-      <unnnic-icon
+      <UnnnicIcon
         v-if="index !== crumbs.length - 1"
         icon="arrow-right-1-1"
         size="xs"

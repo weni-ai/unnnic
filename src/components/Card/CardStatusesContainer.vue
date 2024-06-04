@@ -2,11 +2,17 @@
   <div class="unnnic-card-container">
     <div class="header">
       <div class="title">
-        <span class="name" :title="name.length > 25 ? name : null">
+        <span
+          class="name"
+          :title="name.length > 25 ? name : null"
+        >
           {{ name }}
         </span>
 
-        <div v-if="subtitle" class="subtitle">
+        <div
+          v-if="subtitle"
+          class="subtitle"
+        >
           {{ subtitle }}
         </div>
       </div>
@@ -14,23 +20,37 @@
       <slot name="header-buttons" />
     </div>
 
-    <div v-if="description" class="description">
+    <div
+      v-if="description"
+      class="description"
+    >
       {{ description }}
     </div>
 
-    <div v-if="descriptionRow || descriptionRowInfo" class="description-row-container">
-      <div v-if="descriptionRow" class="description-row">
+    <div
+      v-if="descriptionRow || descriptionRowInfo"
+      class="description-row-container"
+    >
+      <div
+        v-if="descriptionRow"
+        class="description-row"
+      >
         {{ descriptionRow }}
       </div>
 
-      <unnnic-tool-tip v-if="descriptionRowInfo" side="top" :text="descriptionRowInfo" enabled>
-        <unnnic-icon
+      <UnnnicToolTip
+        v-if="descriptionRowInfo"
+        side="top"
+        :text="descriptionRowInfo"
+        enabled
+      >
+        <UnnnicIcon
           class="info"
           icon="information-circle-4"
           size="sm"
           scheme="neutral-soft"
-        ></unnnic-icon>
-      </unnnic-tool-tip>
+        ></UnnnicIcon>
+      </UnnnicToolTip>
     </div>
 
     <div class="separator" />
@@ -43,11 +63,19 @@
         gridTemplateColumns: `repeat(auto-fit, minmax(${minStatusWidth}, 1fr))`,
       }"
     >
-      <div class="status" v-for="(status, index) in statuses" :key="index">
+      <div
+        class="status"
+        v-for="(status, index) in statuses"
+        :key="index"
+      >
         <div class="title">{{ status.title }}</div>
 
         <div class="content">
-          <unnnic-avatar-icon :icon="status.icon" :scheme="status.scheme" size="xs" />
+          <UnnnicAvatarIcon
+            :icon="status.icon"
+            :scheme="status.scheme"
+            size="xs"
+          />
 
           <div class="number">
             {{ status.count }}
@@ -110,7 +138,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-card-container {
   padding: $unnnic-inset-sm;
@@ -189,7 +217,10 @@ export default {
     display: grid;
     justify-content: space-between;
     gap: $unnnic-spacing-inline-xs;
-    grid-template-columns: repeat(auto-fit, minmax(5.625 * $unnnic-font-size, 1fr));
+    grid-template-columns: repeat(
+      auto-fit,
+      minmax(5.625 * $unnnic-font-size, 1fr)
+    );
 
     .status {
       flex: 1;

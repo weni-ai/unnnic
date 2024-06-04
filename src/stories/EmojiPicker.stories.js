@@ -5,15 +5,15 @@ export default {
   title: 'Form/EmojiPicker',
   decorators: () => {
     return {
-      template: '<div style="height: 90vh; display: flex; align-items: end"><story/></div>',
+      template:
+        '<div style="height: 90vh; display: flex; align-items: end"><story/></div>',
     };
-  }
-}
+  },
+};
 
 export const Default = () => ({
   components: { unnnicEmojiPicker, unnnicButton },
-  template:
-    `
+  template: `
     <section style="position: relative;">
       <unnnicButton @click.stop="handleEmojiPicker" type="secondary" iconCenter="emoji" size="small"/>
       <unnnicEmojiPicker

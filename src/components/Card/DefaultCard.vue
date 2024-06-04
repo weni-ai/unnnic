@@ -7,7 +7,10 @@
   >
     <div class="unnnic-card-default__content">
       <div class="unnnic-card-default__title">{{ title }}</div>
-      <p class="unnnic-card-default__description" :title="description">
+      <p
+        class="unnnic-card-default__description"
+        :title="description"
+      >
         {{ description }}
       </p>
     </div>

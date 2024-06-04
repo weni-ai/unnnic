@@ -1,6 +1,9 @@
 <template>
   <div
-    :class="['unnnic-sidebar-primary', { 'unnnic-sidebar-primary-expanded': expanded, }]"
+    :class="[
+      'unnnic-sidebar-primary',
+      { 'unnnic-sidebar-primary-expanded': expanded },
+    ]"
   >
     <div class="header">
       <slot name="header"></slot>
@@ -11,16 +14,28 @@
     </div>
 
     <div class="unnnic-sidebar-primary-content">
-      <div ref="sidebar-modal" class="hover" :style="{ top: `${hoverTop}px` }">
+      <div
+        ref="sidebar-modal"
+        class="hover"
+        :style="{ top: `${hoverTop}px` }"
+      >
         <slot :name="'block-' + blockActiveId"></slot>
       </div>
 
-      <div v-for="(category, index) in items" :key="index" class="category">
+      <div
+        v-for="(category, index) in items"
+        :key="index"
+        class="category"
+      >
         <div class="category-label">{{ category.label }}</div>
 
         <div class="options">
-          <div  v-for="(option, index) in category.items" :key="index" class="option-container">
-            <tool-tip
+          <div
+            v-for="(option, index) in category.items"
+            :key="index"
+            class="option-container"
+          >
+            <ToolTip
               :enabled="!expanded"
               :text="option.label"
               side="right"
@@ -33,18 +48,20 @@
                   'option',
                   {
                     selected: option.active,
-                    disabled: $slots[`block-${option.id}`]
-                  }
+                    disabled: $slots[`block-${option.id}`],
+                  },
                 ]"
-                @click.prevent="() => {
-                  if ($slots[`block-${option.id}`]) {
-                    return;
-                  }
+                @click.prevent="
+                  () => {
+                    if ($slots[`block-${option.id}`]) {
+                      return;
+                    }
 
-                  clickOption(option);
-                }"
+                    clickOption(option);
+                  }
+                "
               >
-                <icon-svg
+                <UnnnicIcon
                   :icon="option.icon"
                   :scheme="option.active ? 'brand-weni-soft' : 'neutral-cloudy'"
                   :size="!expanded ? 'md' : 'ant'"
@@ -52,17 +69,18 @@
                 />
 
                 <span class="label">{{ option.label }}</span>
-                <span :class="
-                  option.notify && !expanded ? 'notify':''"
-                  v-if="option.notify">
-                  <icon-svg
+                <span
+                  :class="option.notify && !expanded ? 'notify' : ''"
+                  v-if="option.notify"
+                >
+                  <UnnnicIcon
                     icon="indicator"
                     scheme="brand-weni-soft"
                     size="ant"
                   />
                 </span>
               </a>
-            </tool-tip>
+            </ToolTip>
           </div>
         </div>
 
@@ -74,19 +92,29 @@
       <div class="category">
         <div class="options">
           <div class="option-container">
-            <language-select
+            <LanguageSelect
               class="language-select"
               :contracted="!expanded"
               :value="language"
-              :supported-languages="languages"
+              :supportedLanguages="languages"
               @input="$emit('change-language', $event)"
             />
           </div>
 
-          <div v-show="!hideExpandButton" class="option-container">
-            <tool-tip :enabled="!expanded" :text="hideText" side="right">
-              <div class="option" @click="toggleExpanded">
-                <icon-svg
+          <div
+            v-show="!hideExpandButton"
+            class="option-container"
+          >
+            <ToolTip
+              :enabled="!expanded"
+              :text="hideText"
+              side="right"
+            >
+              <div
+                class="option"
+                @click="toggleExpanded"
+              >
+                <UnnnicIcon
                   :icon="expanded ? 'close_fullscreen' : 'open_in_full'"
                   :scheme="'neutral-cloudy'"
                   :size="!expanded ? 'md' : 'ant'"
@@ -94,7 +122,7 @@
 
                 <span class="label">{{ hideText }}</span>
               </div>
-            </tool-tip>
+            </ToolTip>
           </div>
         </div>
       </div>
@@ -105,12 +133,12 @@
 <script>
 import ToolTip from '../ToolTip/ToolTip.vue';
 import languageSelect from '../Dropdown/LanguageSelect.vue';
-import iconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   components: {
     ToolTip,
-    iconSvg,
+    UnnnicIcon,
     languageSelect,
   },
 
@@ -189,7 +217,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 $transition-time: 0.4s;
 
@@ -227,7 +255,9 @@ $transition-time: 0.4s;
     }
 
     &.move-transition {
-      transition: opacity 100ms, top 100ms;
+      transition:
+        opacity 100ms,
+        top 100ms;
     }
   }
 
@@ -245,7 +275,6 @@ $transition-time: 0.4s;
   }
 
   .footer {
-
     .category {
       padding-bottom: 0;
 
@@ -332,11 +361,17 @@ $transition-time: 0.4s;
       }
 
       &:hover:not(.disabled) {
-        background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-light);
+        background-color: rgba(
+          $unnnic-color-brand-weni,
+          $unnnic-opacity-level-light
+        );
       }
 
       &.selected {
-        background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-light);
+        background-color: rgba(
+          $unnnic-color-brand-weni,
+          $unnnic-opacity-level-light
+        );
 
         font-weight: $unnnic-font-weight-bold;
         color: $unnnic-color-neutral-darkest;
@@ -354,7 +389,7 @@ $transition-time: 0.4s;
         }
       }
 
-      .notify{
+      .notify {
         position: absolute;
         top: 0;
         right: 0;

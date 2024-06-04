@@ -3,11 +3,15 @@
     :class="`unnnic-tag
         ${clickable ? 'unnnic-tag--clickable' : ''}`"
   >
-    <tool-tip :enabled="enableTooltip" :text="tooltipText" side="bottom">
+    <ToolTip
+      :enabled="enableTooltip"
+      :text="tooltipText"
+      side="bottom"
+    >
       <span class="unnnic-tag__count">{{ count }}</span>
-    </tool-tip>
+    </ToolTip>
     <span class="unnnic-tag__label">{{ text }}</span>
-    <unnnic-icon-svg
+    <UnnnicIcon
       v-if="hasBackButton"
       icon="arrow-right-1-1"
       class="unnnic-tag__icon"
@@ -18,13 +22,13 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
   name: 'unnnic-tag',
   components: {
-    UnnnicIconSvg,
+    UnnnicIcon,
     ToolTip,
   },
   props: {
@@ -57,7 +61,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-tag {
   display: flex;
@@ -85,7 +89,6 @@ export default {
     font-weight: $unnnic-font-weight-regular;
     line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
     color: $unnnic-color-neutral-darkest;
-
   }
 
   &__label {

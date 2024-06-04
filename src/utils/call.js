@@ -1,16 +1,18 @@
 import { createApp } from 'vue';
 import Alert from '../components/Alert/Alert.vue';
 import Modal from '../components/Modal/Modal.vue';
+import mitt from 'mitt';
 
-export default {
-  callAlert({ props, containerRef }) {
+const emitter = mitt();
+
+  const callAlert = ({ props, containerRef })=>{
     const AlertComponent = createApp(Alert, {
       ...props,
       onClose: () => {
         instance.$el.remove();
       },
       created() {
-        this.$on(['close'], () => {
+        emitter.on(['close'], () => {
           instance.$el.remove();
         });
       },
@@ -24,16 +26,16 @@ export default {
     } else {
       document.body.appendChild(instance.$el);
     }
-  },
+  };
 
-  callModal({ props }) {
+  const callModal = ({ props })=>{
     const ModalComponent = createApp(Modal, {
       ...props,
       onClose: () => {
         instance.$el.remove();
       },
       created() {
-        this.$on(['close'], () => {
+        emitter.on(['close'], () => {
           instance.$el.remove();
         });
       },
@@ -41,5 +43,14 @@ export default {
     const element = document.createElement('div');
     const instance = ModalComponent.mount(element);
     document.body.appendChild(element);
-  },
-};
+  }
+
+  export{
+    callAlert,
+    callModal
+  }
+
+  export default{
+    callAlert,
+    callModal
+  }

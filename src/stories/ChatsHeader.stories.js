@@ -16,8 +16,7 @@ const Template = (args, { argTypes }) => ({
 const DashboardTemplate = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { unnnicChatsHeader, unnnicChatsDashboardTagLive },
-  template:
-    `<unnnic-chats-header v-bind="$props" @crumbClick="crumbClick">
+  template: `<unnnic-chats-header v-bind="$props" @crumbClick="crumbClick">
       <unnnic-chats-dashboard-tag-live />
     </unnnic-chats-header>`,
 });

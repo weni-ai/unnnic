@@ -15,54 +15,71 @@ export default {
     allowTogglePassword: { control: { type: 'boolean' } },
     hasCloudyColor: { control: { type: 'select' }, options: [true, false] },
   },
+  render: (args) => ({
+    components: {
+      unnnicInput,
+    },
+    setup() {
+      return { args };
+    },
+    data() {
+      return {
+        value: '',
+      };
+    },
+    methods: {
+      click() {
+        alert('click');
+      },
+    },
+    template: `
+      <div><pre>v-model: {{ value }}</pre><unnnic-input v-model="value" @icon-right-click="click" v-bind="args" /></div>
+    `,
+  }),
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { unnnicInput },
-  data() {
-    return {
-      v: '',
-    };
+export const Normal = {
+  args: {
+    type: 'normal',
+    placeholder: 'Placeholder',
   },
-  template: '<div><pre>v-model: {{ v }}</pre><unnnic-input v-bind="$props" v-model="v" /></div>',
-});
-
-export const Normal = Template.bind({});
-Normal.args = {
-  type: 'normal',
-  placeholder: 'Placeholder',
 };
 
-export const Error = Template.bind({});
-Error.args = {
-  type: 'error',
-  placeholder: 'Placeholder',
+export const Error = {
+  args: {
+    type: 'error',
+    placeholder: 'Placeholder',
+  },
 };
 
-export const Disabled = Template.bind({});
-Disabled.args = {
-  disabled: true,
-  placeholder: 'Placeholder',
+export const Disabled = {
+  args: {
+    disabled: true,
+    placeholder: 'Placeholder',
+  },
 };
 
-export const Password = Template.bind({});
-Password.args = {
-  placeholder: 'Password',
-  nativeType: 'password',
-  allowTogglePassword: true,
+export const Password = {
+  args: {
+    placeholder: 'Password',
+    nativeType: 'password',
+    allowTogglePassword: true,
+  },
 };
 
-export const IconLeftAndRight = Template.bind({});
-IconLeftAndRight.args = {
-  placeholder: 'Text',
-  iconLeft: 'read-email-at-1',
-  iconRight: 'read-email-at-1',
+export const IconLeftAndRight = {
+  args: {
+    placeholder: 'Text',
+    iconLeft: 'email',
+    iconRight: 'search',
+    iconRightClickable: true,
+  },
 };
 
-export const Mask = Template.bind({});
-Mask.args = {
-  label: 'CPF or CNPJ',
-  placeholder: 'Text',
-  mask: ['###.###.###-##', '##.###.###/####-##'],
+export const Mask = {
+  args: {
+    label: 'CPF or CNPJ',
+    placeholder: 'Text',
+    mask: ['###.###.###-##', '##.###.###/####-##'],
+  },
 };

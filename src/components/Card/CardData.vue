@@ -3,8 +3,11 @@
     <div class="header">
       <div class="title">{{ title }}</div>
 
-      <div v-if="checked" class="check">
-        <unnnic-icon
+      <div
+        v-if="checked"
+        class="check"
+      >
+        <UnnnicIcon
           size="md"
           icon="check-circle-1-1-1"
           scheme="feedback-green"
@@ -14,9 +17,12 @@
 
     <div class="description">{{ description }}</div>
 
-    <div v-if="score || info" class="footer">
+    <div
+      v-if="score || info"
+      class="footer"
+    >
       <div class="evaluation">
-        <unnnic-icon
+        <UnnnicIcon
           v-if="score"
           size="sm"
           icon="rating-star-1"
@@ -63,7 +69,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .card {
   background-color: $unnnic-color-background-snow;

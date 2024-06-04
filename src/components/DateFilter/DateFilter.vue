@@ -1,15 +1,15 @@
 <template>
   <div class="unnnic-date-filter">
-    <unnnic-input
+    <UnnnicInput
       class="unnnic-date-filter__input"
       :size="size"
-      icon-left="notes-1"
+      iconLeft="notes-1"
       @focus.stop="emitFilter"
       readonly
       :mask="fullMask"
       :value="dateRange"
       :placeholder="placeholder"
-    ></unnnic-input>
+    ></UnnnicInput>
   </div>
 </template>
 
@@ -56,12 +56,16 @@ export default {
       let range = '';
 
       if (this.startDate) {
-        const formattedDate = moment(this.startDate).format(this.dateFormat.replaceAll('/', ''));
+        const formattedDate = moment(this.startDate).format(
+          this.dateFormat.replaceAll('/', ''),
+        );
         range += formattedDate.toString();
       }
 
       if (this.endDate) {
-        const formattedDate = moment(this.endDate).format(this.dateFormat.replaceAll('/', ''));
+        const formattedDate = moment(this.endDate).format(
+          this.dateFormat.replaceAll('/', ''),
+        );
         range += formattedDate.toString();
       }
 

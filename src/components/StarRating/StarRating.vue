@@ -1,6 +1,6 @@
 <template>
   <div class="unnnic-star-rating">
-    <unnnic-icon
+    <UnnnicIcon
       :key="index"
       v-for="index in 5"
       :scheme="starScheme(index)"
@@ -8,8 +8,12 @@
       size="ant"
     />
 
-    <div v-if="showValue" class="rating-title">
-      <span class="highlight">{{ value.toFixed(1) }}</span>/5.0
+    <div
+      v-if="showValue"
+      class="rating-title"
+    >
+      <span class="highlight"> {{ modelValue.toFixed(1) }} </span>
+      /5.0
     </div>
   </div>
 </template>
@@ -23,7 +27,7 @@ export default {
   },
 
   props: {
-    value: {
+    modelValue: {
       type: Number,
     },
 
@@ -42,14 +46,14 @@ export default {
 
   methods: {
     starScheme(star) {
-      return star <= this.value ? 'feedback-yellow' : 'neutral-clean';
+      return star <= this.modelValue ? 'feedback-yellow' : 'neutral-clean';
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-star-rating {
   display: flex;

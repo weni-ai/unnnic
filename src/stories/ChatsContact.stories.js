@@ -34,7 +34,8 @@ const TemplateList = (args, { argTypes }) => ({
 
 const defaultArgs = {
   title: 'John Doe',
-  lastMessage: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel.',
+  lastMessage:
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel.',
 };
 const unreadMessages = 5;
 const waitingTime = 10;

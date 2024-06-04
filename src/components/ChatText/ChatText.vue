@@ -4,23 +4,35 @@
       <div :class="['title', titleColor]">
         {{ title }}
 
-        <unnnic-tool-tip v-if="info" side="top" class="info" :text="info" enabled>
-          <unnnic-icon
+        <UnnnicToolTip
+          v-if="info"
+          side="top"
+          class="info"
+          :text="info"
+          enabled
+        >
+          <UnnnicIcon
             class="info__icon"
             icon="info"
             size="sm"
             scheme="neutral-clean"
-          ></unnnic-icon>
-        </unnnic-tool-tip>
+          ></UnnnicIcon>
+        </UnnnicToolTip>
       </div>
 
       <slot name="actions" />
     </div>
 
-    <div class="description" ref="description">
+    <div
+      class="description"
+      ref="description"
+    >
       <slot name="description" />
 
-      <div v-if="isScrollable" class="scrollable-gradient"></div>
+      <div
+        v-if="isScrollable"
+        class="scrollable-gradient"
+      ></div>
     </div>
   </div>
 </template>
@@ -62,8 +74,8 @@ export default {
   },
 
   mounted() {
-    const
-      areaScrollable = this.$refs.description.scrollHeight - this.$refs.description.offsetHeight;
+    const areaScrollable =
+      this.$refs.description.scrollHeight - this.$refs.description.offsetHeight;
 
     this.isScrollable = areaScrollable;
   },
@@ -71,7 +83,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-chat-text {
   border-radius: $unnnic-border-radius-lg;
@@ -127,13 +139,19 @@ export default {
     position: relative;
 
     .intent {
-      background-color: rgba($unnnic-color-aux-purple, $unnnic-opacity-level-light);
+      background-color: rgba(
+        $unnnic-color-aux-purple,
+        $unnnic-opacity-level-light
+      );
       padding: calc($unnnic-line-height-md / 2) 0;
     }
 
     .scrollable-gradient {
       position: absolute;
-      background-image: linear-gradient(transparent, $unnnic-color-background-snow);
+      background-image: linear-gradient(
+        transparent,
+        $unnnic-color-background-snow
+      );
       width: 100%;
       height: 5 * $unnnic-font-size;
       bottom: 0;

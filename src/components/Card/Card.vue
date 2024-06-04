@@ -1,33 +1,36 @@
 <template>
-    <component
-      class="unnnic-card-component"
-      :is="currentComponent"
-      v-bind="$attrs"
-      :title="title"
-      :text="text"
-      :info="info"
-      :icon="currentTypeIcon"
-      :icon-src="iconSrc"
-      :rating="rating"
-      :comments="comments"
-      :type-action="typeAction"
-      :button-action="buttonAction"
-      :value="value"
-      :percent="percent"
-      :inverted-percentage="invertedPercentage || null"
-      :status="status"
-      :description="description"
-      :info-position="infoPosition"
-      :enabled="enabled"
-      :scheme="scheme"
-      :clickable="clickable || null"
-      :has-information-icon="hasInformationIcon || null"
-      @openModal="openModal"
+  <component
+    class="unnnic-card-component"
+    :is="currentComponent"
+    v-bind="$attrs"
+    :title="title"
+    :text="text"
+    :info="info"
+    :icon="currentTypeIcon"
+    :iconSrc="iconSrc"
+    :rating="rating"
+    :comments="comments"
+    :typeAction="typeAction"
+    :buttonAction="buttonAction"
+    :value="value"
+    :percent="percent"
+    :invertedPercentage="invertedPercentage || null"
+    :status="status"
+    :description="description"
+    :infoPosition="infoPosition"
+    :enabled="enabled"
+    :scheme="scheme"
+    :clickable="clickable || null"
+    :hasInformationIcon="hasInformationIcon || null"
+    @openModal="openModal"
+  >
+    <template
+      v-for="(_, name) in $slots"
+      v-slot:[name]
     >
-    <template v-for="(_, name) in $slots" v-slot:[name]>
       <slot :name="name" />
     </template>
-    </component>
+  </component>
 </template>
 
 <script>
@@ -48,7 +51,16 @@ export default {
       default: 'title',
       validator(value) {
         return (
-          ['title', 'status', 'dash', 'account', 'default', 'blank', 'content', 'marketplace'].indexOf(value) !== -1
+          [
+            'title',
+            'status',
+            'dash',
+            'account',
+            'default',
+            'blank',
+            'content',
+            'marketplace',
+          ].indexOf(value) !== -1
         );
       },
     },
@@ -116,8 +128,21 @@ export default {
       type: String,
       default: 'aux-blue',
       validator(value) {
-        return ['feedback-red', 'feedback-green', 'feedback-yellow', 'feedback-blue', 'feedback-grey',
-          'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink', 'brand-weni-soft'].indexOf(value) !== -1;
+        return (
+          [
+            'feedback-red',
+            'feedback-green',
+            'feedback-yellow',
+            'feedback-blue',
+            'feedback-grey',
+            'aux-blue',
+            'aux-purple',
+            'aux-orange',
+            'aux-lemon',
+            'aux-pink',
+            'brand-weni-soft',
+          ].indexOf(value) !== -1
+        );
       },
     },
     clickable: {
@@ -175,12 +200,12 @@ $scheme-colors:
   'feedback-yellow' $unnnic-color-feedback-yellow,
   'feedback-blue' $unnnic-color-feedback-blue,
   'feedback-grey' $unnnic-color-feedback-grey,
-   'aux-blue' $unnnic-color-aux-blue,
-   'aux-purple' $unnnic-color-aux-purple,
-   'aux-orange' $unnnic-color-aux-orange,
-   'aux-lemon' $unnnic-color-aux-lemon,
-   'aux-pink' $unnnic-color-aux-pink,
-   'brand-weni-soft' $unnnic-color-brand-weni-soft;
+  'aux-blue' $unnnic-color-aux-blue,
+  'aux-purple' $unnnic-color-aux-purple,
+  'aux-orange' $unnnic-color-aux-orange,
+  'aux-lemon' $unnnic-color-aux-lemon,
+  'aux-pink' $unnnic-color-aux-pink,
+  'brand-weni-soft' $unnnic-color-brand-weni-soft;
 
 @each $name, $color in $scheme-colors {
   .unnnic-card-scheme {

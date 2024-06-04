@@ -1,7 +1,7 @@
 import i18n from '../utils/plugins/i18n';
 import unnnicImportCard from '../components/ImportCard/ImportCard.vue';
 
-import { setup } from '@storybook/vue3'
+import { setup } from '@storybook/vue3';
 
 setup((app) => {
   app.use(i18n);

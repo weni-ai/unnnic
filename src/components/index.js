@@ -29,7 +29,7 @@ import radio from './Radio/Radio.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
 import modal from './Modal/Modal.vue';
 import modalUpload from './ModalUpload/ModalUpload.vue';
-import call from '../utils/call';
+import { callAlert, callModal } from '../utils/call';
 import selectSmart from './SelectSmart/SelectSmart.vue';
 // import select from './Select/Select.vue';
 import selectItem from './Select/SelectItem.vue';
@@ -76,6 +76,9 @@ import ChatsNavbar from './ChatsNavbar/ChatsNavbar.vue';
 import ChatsUserAvatar from './ChatsUserAvatar/ChatsUserAvatar.vue';
 import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
 import EmojiPicker from './EmojiPicker/EmojiPicker.vue';
+import ChartFunnel from './ChartFunnel/ChartFunnel.vue';
+import Disclaimer from './Disclaimer/Disclaimer.vue';
+import Drawer from './Drawer/Drawer.vue';
 
 export const components = {
   unnnicFormElement: formElement,
@@ -115,6 +118,8 @@ export const components = {
   // unnnicSelectListItem: selectListItem,
   unnnicMultiSelect: multiSelect,
   unnnicAlert: alert,
+  unnnicCallAlert: callAlert,
+  unnnicCallModal: callModal,
   // unnnicAutocomplete: autocomplete,
   // unnnicAutocompleteSelect: autocompleteSelect,
   unnnicTag: tag,
@@ -155,6 +160,9 @@ export const components = {
   unnnicChatsUserAvatar: ChatsUserAvatar,
   unnnicChartMultiLine: ChartMultiLine,
   unnnicEmojiPicker: EmojiPicker,
+  unnnicChartFunnel: ChartFunnel,
+  unnnicDisclaimer: Disclaimer,
+  unnnicDrawer: Drawer,
 };
 
 export const unnnicFontSize = fontSize;
@@ -195,8 +203,8 @@ export const unnnicSelectItem = selectItem;
 // export const unnnicSelectListItem = selectListItem;
 export const unnnicMultiSelect = multiSelect;
 export const unnnicAlert = alert;
-export const unnnicCallAlert = call.callAlert;
-export const unnnicCallModal = call.callModal;
+export const unnnicCallAlert = (props) => callAlert(props);
+export const unnnicCallModal = (props) => callModal(props);
 // export const unnnicAutocomplete = autocomplete;
 // export const unnnicAutocompleteSelect = autocompleteSelect;
 export const unnnicTag = tag;
@@ -237,3 +245,6 @@ export const unnnicChatsNavbar = ChatsNavbar;
 export const unnnicChatsUserAvatar = ChatsUserAvatar;
 export const unnnicChartMultiLine = ChartMultiLine;
 export const unnnicEmojiPicker = EmojiPicker;
+export const unnnicChartFunnel = ChartFunnel;
+export const unnnicDisclaimer = Disclaimer;
+export const unnnicDrawer = Drawer;

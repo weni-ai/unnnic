@@ -11,5 +11,5 @@ export default {
 export const Default = {
   args: {
     label: 'Label',
-  }
+  },
 };

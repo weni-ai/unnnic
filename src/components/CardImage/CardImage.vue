@@ -2,20 +2,32 @@
   <div :class="['unnnic-card-image', { checked: modelValue }]">
     <div class="header">
       <div class="content">
-        <div v-if="title" class="u font secondary body-lg bold color-neutral-darkest">
+        <div
+          v-if="title"
+          class="u font secondary body-lg bold color-neutral-darkest"
+        >
           {{ title }}
         </div>
 
-        <div v-if="description" class="u font secondary body-md color-neutral-cloudy">
+        <div
+          v-if="description"
+          class="u font secondary body-md color-neutral-cloudy"
+        >
           {{ description }}
         </div>
       </div>
 
-      <unnnic-checkbox :modelValue="modelValue" @change="$emit('update:model-value', $event)" />
+      <UnnnicCheckbox
+        :modelValue="modelValue"
+        @change="$emit('update:model-value', $event)"
+      />
 
-      <unnnic-dropdown v-if="$slots.actions" position="bottom-left">
+      <UnnnicDropdown
+        v-if="$slots.actions"
+        position="bottom-left"
+      >
         <template v-slot:trigger>
-          <unnnic-icon
+          <UnnnicIcon
             icon="navigation-menu-vertical-1"
             size="sm"
             scheme="neutral-cleanest"
@@ -24,19 +36,33 @@
         </template>
 
         <slot name="actions" />
-      </unnnic-dropdown>
+      </UnnnicDropdown>
     </div>
 
-    <img class="image" :src="image" />
+    <img
+      class="image"
+      :src="image"
+    />
 
-    <div v-if="data.length" class="details">
-      <div class="data" v-for="(item, index) in data" :key="index">
+    <div
+      v-if="data.length"
+      class="details"
+    >
+      <div
+        class="data"
+        v-for="(item, index) in data"
+        :key="index"
+      >
         <div class="u font secondary body-gt color-neutral-dark">
           {{ item.name }}
         </div>
 
         <div class="value-container">
-          <unnnic-avatar-icon :icon="item.icon" size="xs" :scheme="item.scheme" />
+          <UnnnicAvatarIcon
+            :icon="item.icon"
+            size="xs"
+            :scheme="item.scheme"
+          />
 
           <div class="u font secondary body-gt black color-neutral-darkest">
             {{ item.value }}

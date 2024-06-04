@@ -1,5 +1,5 @@
 <template>
-  <unnnic-icon
+  <UnnnicIcon
     class="unnnic-icon-loading"
     icon="progress_activity"
     :scheme="scheme"
@@ -27,7 +27,6 @@ export default {
       default: 'lg',
     },
   },
-
 };
 </script>
 

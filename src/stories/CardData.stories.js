@@ -34,7 +34,8 @@ export const Default = Template.bind({});
 
 Default.args = {
   title: 'Title Card',
-  description: 'Description Description Description Description Description Description Description Description.',
+  description:
+    'Description Description Description Description Description Description Description Description.',
   score: '4.9',
   info: '(3 comments)',
   checked: true,

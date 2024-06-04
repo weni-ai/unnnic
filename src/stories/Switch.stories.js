@@ -19,7 +19,8 @@ const Template = (args, { argTypes }) => ({
       val: true,
     };
   },
-  template: '<div><unnnicSwitch v-bind="$props" v-model="val"/> <div>{{val}}</div></div>',
+  template:
+    '<div><unnnicSwitch v-bind="$props" v-model="val"/> <div>{{val}}</div></div>',
 });
 
 export const Default = Template.bind({});

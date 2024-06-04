@@ -1,5 +1,12 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg
+    width="40"
+    height="40"
+    viewBox="0 0 40 40"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
     <path
       d="M11.5625 20.0005C11.045 20.0005 10.625 19.5805 10.625 19.063V17.188C10.625 16.6705 11.045 16.2505 11.5625 16.2505C12.08 16.2505 12.5 16.6705 12.5 17.188V19.063C12.5 19.5805 12.08 20.0005 11.5625 20.0005Z"
       fill="#3B414D"

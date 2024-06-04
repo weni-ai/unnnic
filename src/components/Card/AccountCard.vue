@@ -7,12 +7,12 @@
     }"
   >
     <div class="icon">
-      <unnnic-avatar-icon
+      <UnnnicAvatarIcon
         size="xs"
         :scheme="scheme"
         :icon="icon"
         :enabled="enabled"
-      ></unnnic-avatar-icon>
+      ></UnnnicAvatarIcon>
     </div>
 
     <div class="content">
@@ -57,7 +57,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-card-account {
   display: flex;

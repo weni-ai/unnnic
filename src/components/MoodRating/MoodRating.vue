@@ -3,20 +3,28 @@
     <div class="title">{{ title }}</div>
 
     <div :class="['moods', { selected: modelValue !== null }]">
-      <div v-for="(mood, index) in moods" :key="index" class="mood">
-        <unnnic-tool-tip
+      <div
+        v-for="(mood, index) in moods"
+        :key="index"
+        class="mood"
+      >
+        <UnnnicToolTip
           side="bottom"
           :text="titlesMoods[index]"
           enabled
         >
           <img
             :src="mood.image"
-            @click="modelValue && index === modelValue - 1 ? $emit('update:model-value', null) : $emit('update:model-value', index + 1)"
+            @click="
+              modelValue && index === modelValue - 1
+                ? $emit('update:model-value', null)
+                : $emit('update:model-value', index + 1)
+            "
             :class="{
-              active: modelValue && index === modelValue - 1
+              active: modelValue && index === modelValue - 1,
             }"
-          >
-        </unnnic-tool-tip>
+          />
+        </UnnnicToolTip>
       </div>
     </div>
   </div>
@@ -55,24 +63,30 @@ export default {
 
   data() {
     return {
-      moods: [{
-        image: mood1,
-      }, {
-        image: mood2,
-      }, {
-        image: mood3,
-      }, {
-        image: mood4,
-      }, {
-        image: mood5,
-      }],
+      moods: [
+        {
+          image: mood1,
+        },
+        {
+          image: mood2,
+        },
+        {
+          image: mood3,
+        },
+        {
+          image: mood4,
+        },
+        {
+          image: mood5,
+        },
+      ],
     };
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/unnnic.scss";
+@import '../../assets/scss/unnnic.scss';
 
 .unnnic-mood-rating {
   text-align: center;
@@ -104,7 +118,8 @@ export default {
         width: $unnnic-icon-size-lg;
         transition: all 300ms;
 
-        &:hover, &.active {
+        &:hover,
+        &.active {
           opacity: 1;
           width: $unnnic-icon-size-xl;
         }

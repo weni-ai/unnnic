@@ -5,7 +5,7 @@
         {{ time }}
       </span>
 
-      <unnnic-icon
+      <UnnnicIcon
         icon="indicator"
         size="sm"
         :class="[{ 'is-recording': isRecording }]"
@@ -13,11 +13,22 @@
       />
     </div>
 
-    <unnnic-tool-tip enabled text="Salvar" side="top">
-      <span @click="save" @keypress.enter="save" class="unnnic--clickable">
-        <unnnic-icon icon="check-circle-1-1" scheme="feedback-green" />
+    <UnnnicToolTip
+      enabled
+      text="Salvar"
+      side="top"
+    >
+      <span
+        @click="save"
+        @keypress.enter="save"
+        class="unnnic--clickable"
+      >
+        <UnnnicIcon
+          icon="check-circle-1-1"
+          scheme="feedback-green"
+        />
       </span>
-    </unnnic-tool-tip>
+    </UnnnicToolTip>
   </div>
 </template>
 

@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div
     @click="click"
@@ -7,7 +8,12 @@
       disabled ? 'disabled' : null,
     ]"
   >
-    <unnnic-icon-svg class="unnnic-radio" :icon="icon" :scheme="color" :size="size" />
+    <UnnnicIcon
+      class="unnnic-radio"
+      :icon="icon"
+      :scheme="color"
+      :size="size"
+    />
 
     <span class="label">
       <slot />
@@ -17,7 +23,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import unnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 const props = defineProps({
   modelValue: {
@@ -41,20 +47,22 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue']);
 
-const valueName = computed(() => (props.modelValue === props.value ? 'selected' : 'default'));
+const valueName = computed(() =>
+  props.modelValue === props.value ? 'selected' : 'default',
+);
 const icon = computed(
   () =>
     ({
       selected: 'radio-selected',
       default: props.disabled ? 'radio-disable' : 'radio-default',
-    }[valueName.value]),
+    })[valueName.value],
 );
 const color = computed(() => {
   if (props.disabled) {
     return 'brand-sec';
   }
 
-  return valueName.value === 'selected' ? 'brand-weni' : 'neutral-soft';
+  return valueName.value === 'selected' ? 'brand-weni' : 'neutral-cleanest';
 });
 
 function click() {

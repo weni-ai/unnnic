@@ -1,6 +1,11 @@
 <template>
   <div :class="['unnnic-text-area', { disabled }, size, type]">
-    <div v-if="label" class="label">{{ label }}</div>
+    <div
+      v-if="label"
+      class="label"
+    >
+      {{ label }}
+    </div>
 
     <textarea
       ref="textarea"
@@ -11,11 +16,20 @@
       @input="$emit('update:modelValue', $event.srcElement.value)"
     ></textarea>
 
-    <div v-if="maxLength && type === 'normal'" class="helper">
+    <div
+      v-if="maxLength && type === 'normal'"
+      class="helper"
+    >
       {{ modelValue.length }}/{{ maxLength }}
     </div>
-    <div v-if="type === 'error'" class="error-list">
-      <span v-for="(error, index) in errors" :key="index">
+    <div
+      v-if="type === 'error'"
+      class="error-list"
+    >
+      <span
+        v-for="(error, index) in errors"
+        :key="index"
+      >
         {{ error }}
       </span>
     </div>
@@ -133,7 +147,7 @@ export default {
     font-weight: $unnnic-font-weight-regular;
 
     &::placeholder {
-      color: $unnnic-color-neutral-cloudy;
+      color: $unnnic-color-neutral-cleanest;
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-gt;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
@@ -142,9 +156,6 @@ export default {
 
     &:focus {
       border-color: $unnnic-color-neutral-clean;
-      &::placeholder {
-        color: $unnnic-color-neutral-cleanest;
-      }
     }
   }
 

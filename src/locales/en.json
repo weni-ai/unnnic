@@ -11,5 +11,8 @@
   },
   "import_card": {
     "importing": "Importing"
+  },
+  "audio_recorder": {
+    "discard_button" : "Discard"
   }
 }

@@ -1,12 +1,15 @@
 <template>
-  <div class="unnnic-chats-message-status-backdrop__container" @click="$emit('click')">
+  <div
+    class="unnnic-chats-message-status-backdrop__container"
+    @click="$emit('click')"
+  >
     <div class="unnnic-chats-message-status-backdrop">
-      <unnnic-icon-loading
+      <UnnnicIconLoading
         v-if="status === 'sending'"
         scheme="neutral-white"
         size="avatar-sm"
       />
-      <unnnic-icon
+      <UnnnicIcon
         v-else
         icon="upload"
         scheme="neutral-white"

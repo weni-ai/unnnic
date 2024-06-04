@@ -1,7 +1,10 @@
 <!-- eslint-disable linebreak-style -->
 <template>
   <div :class="['unnnic-chart-line', { condensed }]">
-    <div v-if="title" class="header">
+    <div
+      v-if="title"
+      class="header"
+    >
       <div class="title unnnic-font secondary body-lg color-neutral-dark">
         {{ title }}
       </div>
@@ -19,12 +22,17 @@
           </div>
         </div>
 
-        <div class="unnnic-font secondary body-md color-neutral-cleanest">&nbsp;</div>
+        <div class="unnnic-font secondary body-md color-neutral-cleanest">
+          &nbsp;
+        </div>
       </div>
 
       <div class="lines">
         <div class="groups">
-          <div v-for="({ data }, index) in data" :key="index + Math.random() * 100">
+          <div
+            v-for="({ data }, index) in data"
+            :key="index + Math.random() * 100"
+          >
             <Lines
               :data="data"
               :fixedMaxValue="maxValue"
@@ -63,7 +71,12 @@
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <rect width="15" height="6" rx="3" :fill="colors[index]" />
+          <rect
+            width="15"
+            height="6"
+            rx="3"
+            :fill="colors[index]"
+          />
         </svg>
         {{ chart.title }} <strong>{{ findTotals(chart.data) }}</strong>
       </div>
@@ -106,11 +119,14 @@ export default {
   computed: {
     maxValue() {
       return (
-        this.fixedMaxValue || Math.max(...this.data.map(({ data }) => this.findMax(data)).flat())
+        this.fixedMaxValue ||
+        Math.max(...this.data.map(({ data }) => this.findMax(data)).flat())
       );
     },
     minValue() {
-      return Math.min(...this.data.map(({ data }) => this.findMin(data)).flat());
+      return Math.min(
+        ...this.data.map(({ data }) => this.findMin(data)).flat(),
+      );
     },
     lineData() {
       return this.data[0].data.map((item) => item.title);
@@ -139,9 +155,9 @@ export default {
       );
     },
     formatValue(value) {
-      return ` ${new Date(value).toLocaleString('default', { month: 'short' })} ${new Date(
-        value,
-      ).getDate()}`;
+      return ` ${new Date(value).toLocaleString('default', {
+        month: 'short',
+      })} ${new Date(value).getDate()}`;
     },
   },
 };
@@ -274,13 +290,22 @@ export default {
   font-weight: $unnnic-font-weight-regular;
   font-family: $unnnic-font-family-primary;
 
-  $font-sizes: 'body-sm' $unnnic-font-size-body-sm, 'body-md' $unnnic-font-size-body-md,
-    'body-gt' $unnnic-font-size-body-gt, 'body-lg' $unnnic-font-size-body-lg,
-    'title-sm' $unnnic-font-size-title-sm, 'title-md' $unnnic-font-size-title-md,
-    'title-lg' $unnnic-font-size-title-lg, 'h4' $unnnic-font-size-h4, 'h3' $unnnic-font-size-h3,
-    'h2' $unnnic-font-size-h2, 'h1' $unnnic-font-size-h1;
+  $font-sizes:
+    'body-sm' $unnnic-font-size-body-sm,
+    'body-md' $unnnic-font-size-body-md,
+    'body-gt' $unnnic-font-size-body-gt,
+    'body-lg' $unnnic-font-size-body-lg,
+    'title-sm' $unnnic-font-size-title-sm,
+    'title-md' $unnnic-font-size-title-md,
+    'title-lg' $unnnic-font-size-title-lg,
+    'h4' $unnnic-font-size-h4,
+    'h3' $unnnic-font-size-h3,
+    'h2' $unnnic-font-size-h2,
+    'h1' $unnnic-font-size-h1;
 
-  $font-weights: 'black' $unnnic-font-weight-black, 'bold' $unnnic-font-weight-bold,
+  $font-weights:
+    'black' $unnnic-font-weight-black,
+    'bold' $unnnic-font-weight-bold,
     'light' $unnnic-font-weight-light;
 
   &.secondary {

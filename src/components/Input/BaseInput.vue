@@ -8,7 +8,13 @@
     v-mask="mask"
   />
 
-  <input v-else v-bind="attributes" :value="modelValue" :class="classes" :type="nativeType" />
+  <input
+    v-else
+    v-bind="attributes"
+    :value="modelValue"
+    :class="classes"
+    :type="nativeType"
+  />
 </template>
 
 <script>

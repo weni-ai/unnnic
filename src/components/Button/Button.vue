@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <button
     v-bind="$attrs"
@@ -10,7 +11,7 @@
       float ? `unnnic-button--float` : null,
     ]"
   >
-    <unnnic-icon-svg
+    <UnnnicIcon
       v-if="loading"
       icon="loading-circle-1"
       :scheme="iconScheme"
@@ -20,7 +21,7 @@
       :next="next"
     />
 
-    <unnnic-icon-svg
+    <UnnnicIcon
       v-if="iconLeft"
       :icon="iconLeft"
       :scheme="iconScheme"
@@ -30,7 +31,7 @@
       :next="next"
     />
 
-    <unnnic-icon-svg
+    <UnnnicIcon
       v-if="iconCenter"
       :icon="iconCenter"
       :scheme="iconScheme"
@@ -47,7 +48,7 @@
       <slot /> {{ text }}
     </span>
 
-    <unnnic-icon-svg
+    <UnnnicIcon
       v-if="iconRight"
       :icon="iconRight"
       :scheme="iconScheme"
@@ -60,11 +61,11 @@
 </template>
 
 <script>
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   components: {
-    UnnnicIconSvg,
+    UnnnicIcon,
   },
   props: {
     size: {
@@ -245,7 +246,8 @@ export default {
   &--secondary {
     background-color: $unnnic-color-neutral-white;
     color: $unnnic-color-neutral-dark;
-    box-shadow: inset 0 0 0 $unnnic-border-width-thinner $unnnic-color-neutral-cleanest;
+    box-shadow: inset 0 0 0 $unnnic-border-width-thinner
+      $unnnic-color-neutral-cleanest;
 
     &:hover:enabled {
       background-color: $unnnic-color-neutral-light;

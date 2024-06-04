@@ -14,7 +14,7 @@
       v-on:drop.stop.prevent="drop"
       @click="() => this.$refs.file.click()"
     >
-      <unnnic-icon-svg
+      <UnnnicIcon
         class="unnnic-upload-area__dropzone__icon"
         icon="upload-bottom-1"
         :scheme="hasError ? 'feedback-red' : 'brand-weni'"
@@ -35,7 +35,10 @@
         <span
           :class="[
             'unnnic-upload-area__dropzone__content__subtitle',
-            { 'unnnic-upload-area__dropzone__content__subtitle__error': hasError },
+            {
+              'unnnic-upload-area__dropzone__content__subtitle__error':
+                hasError,
+            },
           ]"
           :title="formattedSupportedFormats"
         >
@@ -56,8 +59,11 @@
         style="display: none"
       />
     </div>
-    <div v-if="currentFiles.length > 0" class="unnnic-upload-area__cards">
-      <unnnic-import-card
+    <div
+      v-if="currentFiles.length > 0"
+      class="unnnic-upload-area__cards"
+    >
+      <UnnnicImportCard
         v-for="(file, index) in currentFiles"
         :key="index"
         :title="file.name"
@@ -78,13 +84,13 @@
 <script>
 import mime from 'mime';
 
-import UnnnicIconSvg from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 import UnnnicImportCard from '../ImportCard/ImportCard.vue';
 
 export default {
   name: 'unnnic-upload-area',
   components: {
-    UnnnicIconSvg,
+    UnnnicIcon,
     UnnnicImportCard,
   },
   props: {
@@ -153,7 +159,9 @@ export default {
   },
   computed: {
     formattedSupportedFormats() {
-      const formats = this.supportedFormats.split(',').map((format) => format.toUpperCase());
+      const formats = this.supportedFormats
+        .split(',')
+        .map((format) => format.toUpperCase());
 
       return formats.join(', ');
     },
@@ -215,7 +223,9 @@ export default {
         return true;
       }
 
-      const formats = this.supportedFormats.split(',').map((format) => format.trim());
+      const formats = this.supportedFormats
+        .split(',')
+        .map((format) => format.trim());
 
       const isValid = Array.from(files).find((file) => {
         const fileName = file.name.toLowerCase();
@@ -298,7 +308,8 @@ export default {
       const { dropzone } = this.$refs;
       return (
         'FileReader' in window &&
-        ('draggable' in dropzone || ('ondragstart' in dropzone && 'ondrop' in dropzone))
+        ('draggable' in dropzone ||
+          ('ondragstart' in dropzone && 'ondrop' in dropzone))
       );
     },
   },

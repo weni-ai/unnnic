@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div
     :class="[
@@ -10,17 +11,23 @@
       },
     ]"
   >
-    <div class="unnnic-collapse__header" @click="localActive = !localActive">
+    <div
+      class="unnnic-collapse__header"
+      @click="localActive = !localActive"
+    >
       {{ title }}<slot name="header"></slot>
 
-      <unnnic-icon
+      <UnnnicIcon
         size="xs"
         :icon="localActive ? 'arrow-button-up-1' : 'arrow-button-down-1'"
         :scheme="localActive ? 'neutral-dark' : 'neutral-cloudy'"
       />
     </div>
 
-    <div v-show="localActive" class="unnnic-collapse__body">
+    <div
+      v-show="localActive"
+      class="unnnic-collapse__body"
+    >
       <slot name="default"></slot>
     </div>
   </div>
@@ -114,7 +121,8 @@ watch(
 
   &--border-bottom {
     padding-bottom: $unnnic-spacing-ant - $unnnic-border-width-thinner;
-    border-bottom: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
+    border-bottom: $unnnic-border-width-thinner solid
+      $unnnic-color-neutral-cleanest;
   }
 
   &--active .unnnic-collapse__header {
