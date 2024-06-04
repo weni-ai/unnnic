@@ -13,7 +13,14 @@
     </thead>
 
     <tbody class="unnnic-table-next__body">
-      <template v-if="rows.length">
+      <tr v-if="isLoading" class="unnnic-table-next__body-row">
+        <img
+          class="unnnic-table-next__body-cell--loading"
+          src="../../assets/icons/weni-loading.svg"
+          height="40"
+        />
+      </tr>
+      <template v-else-if="rows.length">
         <tr
           v-for="(row, index) of rows"
           :key="row.content + index"
@@ -44,14 +51,16 @@
       </template>
       <tr v-else class="unnnic-table-next__body-row">
         <td class="unnnic-table-next__body-cell">
-          <p class="unnnic-table-next__body-cell-text">{{i18n('without_results')}}</p>
+          <p class="unnnic-table-next__body-cell-text">
+            {{ i18n("without_results") }}
+          </p>
         </td>
       </tr>
     </tbody>
     <TablePagination
       :value="pagination"
       @input="$emit('update:pagination', $event)"
-      :total="rows.length === 0 ? 0 : paginationTotal"
+      :total="treatedPaginationTotal"
       :interval="rows.length"
     />
   </table>
@@ -114,6 +123,10 @@ export default {
       type: Number,
       default: 1,
     },
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   data() {
@@ -126,6 +139,12 @@ export default {
         },
       },
     };
+  },
+
+  computed: {
+    treatedPaginationTotal() {
+      return this.rows.length === 0 ? 0 : this.paginationTotal;
+    },
   },
 };
 </script>
@@ -202,12 +221,20 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
       @extend %base-cell;
 
       &-text {
-  margin: 0;
+        margin: 0;
 
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+    }
+    &-cell--loading {
+      margin: $unnnic-spacing-xl 0;
+      padding: 0;
+
+      width: 100%;
+
+      pointer-events: none;
     }
   }
 

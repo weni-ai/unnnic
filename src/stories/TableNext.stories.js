@@ -97,3 +97,8 @@ Default.args = {
 export const WithoutResults = Template.bind({});
 WithoutResults.args = {
 };
+
+export const Loading = Template.bind({});
+Loading.args = {
+  isLoading: true,
+};
