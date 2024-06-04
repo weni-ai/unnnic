@@ -1,7 +1,6 @@
 <template>
   <section
     class="table-pagination"
-    v-if="value && total && interval"
   >
     <p
       class="table-pagination__count"

@@ -46,10 +46,6 @@ export const validateRows = (rows) => {
     throw new Error('Property rows needs to be an array.');
   }
 
-  if (rows.length === 0) {
-    throw new Error('Property rows must not to be an empty array.');
-  }
-
   rows.forEach(validateRow);
 
   return true;

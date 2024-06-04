@@ -13,39 +13,46 @@
     </thead>
 
     <tbody class="unnnic-table-next__body">
-      <tr
-        v-for="(row, index) of rows"
-        :key="row.content + index"
-        class="unnnic-table-next__body-row"
-      >
-        <a
-          v-if="row.link"
-          class="unnnic-table-next__body-row--redirect"
-          :href="row.link.url"
-          :target="row.link.target || '_blank'"
+      <template v-if="rows.length">
+        <tr
+          v-for="(row, index) of rows"
+          :key="row.content + index"
+          class="unnnic-table-next__body-row"
         >
-          <TableBodyCell
-            v-for="(cell, index) of row.content"
-            :key="cell + index"
-            class="unnnic-table-next__body-cell"
-            :cell="cell"
-          />
-        </a>
-        <template v-else>
-          <TableBodyCell
-            v-for="(cell, index) of row.content"
-            :key="cell + index"
-            class="unnnic-table-next__body-cell"
-            :cell="cell"
-          />
-        </template>
+          <a
+            v-if="row.link"
+            class="unnnic-table-next__body-row--redirect"
+            :href="row.link.url"
+            :target="row.link.target || '_blank'"
+          >
+            <TableBodyCell
+              v-for="(cell, index) of row.content"
+              :key="cell + index"
+              class="unnnic-table-next__body-cell"
+              :cell="cell"
+            />
+          </a>
+          <template v-else>
+            <TableBodyCell
+              v-for="(cell, index) of row.content"
+              :key="cell + index"
+              class="unnnic-table-next__body-cell"
+              :cell="cell"
+            />
+          </template>
+        </tr>
+      </template>
+      <tr v-else class="unnnic-table-next__body-row">
+        <td class="unnnic-table-next__body-cell">
+          <p class="unnnic-table-next__body-cell-text">{{i18n('without_results')}}</p>
+        </td>
       </tr>
     </tbody>
     <TablePagination
       :value="pagination"
       @input="$emit('update:pagination', $event)"
-      :total="paginationTotal"
-      :interval="paginationInterval"
+      :total="rows.length === 0 ? 0 : paginationTotal"
+      :interval="rows.length"
     />
   </table>
 </template>
@@ -54,9 +61,12 @@
 import { validateHeaders, validateRows } from './validation';
 import TableBodyCell from './TableBodyCell.vue';
 import TablePagination from './TablePagination.vue';
+import UnnnicI18n from '../../mixins/i18n';
 
 export default {
   name: 'UnnnicTableNext',
+
+  mixins: [UnnnicI18n],
 
   components: {
     TableBodyCell,
@@ -104,10 +114,18 @@ export default {
       type: Number,
       default: 1,
     },
-    paginationInterval: {
-      type: Number,
-      default: 1,
-    },
+  },
+
+  data() {
+    return {
+      defaultTranslations: {
+        without_results: {
+          'pt-br': 'Nenhum resultado correspondente',
+          en: 'No matching results',
+          es: 'No hay resultados coincidentes',
+        },
+      },
+    };
   },
 };
 </script>
@@ -182,6 +200,14 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
     &-cell {
       @extend %base-cell;
+
+      &-text {
+  margin: 0;
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
     }
   }
 

@@ -16,10 +16,9 @@ const Template = (args, { argTypes }) => ({
     <unnnic-table-next
       v-bind="$props"
       :headers="table.headers"
-      :rows="table.rows"
+      :rows="$props.rows || table.rows"
       :pagination.sync="pagination"
       :paginationTotal="125"
-      :paginationInterval="5"
     />
   `,
 
@@ -46,52 +45,55 @@ const Template = (args, { argTypes }) => ({
         ],
         rows: [],
       },
-      addButton: {
-        component: UnnnicButton,
-        props: {
-          text: 'Add',
-          type: 'tertiary',
-          iconLeft: 'add',
-          size: 'small',
-        },
-        events: {
-          click: (event) => {
-            event.preventDefault();
-            // eslint-disable-next-line no-alert
-            console.log('click');
-          },
-        },
-      },
     };
-  },
-
-  created() {
-    this.table.rows = [
-      {
-        content: ['1', 'Alice', '30', 'USA', this.addButton],
-        link: {
-          url: 'https://weni.ai/',
-          target: '_blank',
-        },
-      },
-      {
-        content: ['2', 'Bob', '25', 'Canada', this.addButton],
-        link: {
-          url: 'https://weni.ai/',
-        },
-      },
-      {
-        content: ['3', 'Charlie', '35', 'UK', this.addButton],
-      },
-      {
-        content: ['4', 'Diana', '28', 'Australia', this.addButton],
-      },
-      {
-        content: ['5', 'Ethan', '22', 'New Zealand', this.addButton],
-      },
-    ];
   },
 });
 
+const addButton = {
+  component: UnnnicButton,
+  props: {
+    text: 'Add',
+    type: 'tertiary',
+    iconLeft: 'add',
+    size: 'small',
+  },
+  events: {
+    click: (event) => {
+      event.preventDefault();
+      // eslint-disable-next-line no-alert
+      console.log('click');
+    },
+  },
+};
+
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  rows: [
+    {
+      content: ['1', 'Alice', '30', 'USA', addButton],
+      link: {
+        url: 'https://weni.ai/',
+        target: '_blank',
+      },
+    },
+    {
+      content: ['2', 'Bob', '25', 'Canada', addButton],
+      link: {
+        url: 'https://weni.ai/',
+      },
+    },
+    {
+      content: ['3', 'Charlie', '35', 'UK', addButton],
+    },
+    {
+      content: ['4', 'Diana', '28', 'Australia', addButton],
+    },
+    {
+      content: ['5', 'Ethan', '22', 'New Zealand', addButton],
+    },
+  ],
+};
+
+export const WithoutResults = Template.bind({});
+WithoutResults.args = {
+};
