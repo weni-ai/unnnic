@@ -82,6 +82,7 @@ import ConnectProjectSelector from './ConnectProjectSelector/ConnectProjectSelec
 import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
 import Disclaimer from './Disclaimer/Disclaimer.vue';
 import Drawer from './Drawer/Drawer.vue';
+import TableNext from './TableNext/TableNext.vue';
 
 const components = {
   unnnicFormElement: formElement,
@@ -166,6 +167,7 @@ const components = {
   unnnicChartMultiLine: ChartMultiLine,
   unnnicDisclaimer: Disclaimer,
   unnnicDrawer: Drawer,
+  unnnicTableNext: TableNext,
 };
 
 Object.keys(components).forEach((name) => {
@@ -257,3 +259,4 @@ export const unnnicConnectProjectSelector = ConnectProjectSelector;
 export const unnnicChartMultiLine = ChartMultiLine;
 export const unnnicDisclaimer = Disclaimer;
 export const unnnicDrawer = Drawer;
+export const unnnicTableNext = TableNext;
