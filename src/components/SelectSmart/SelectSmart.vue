@@ -1,16 +1,12 @@
 <template>
-  <div
-    @keydown="onKeyDownSelect"
-    v-on-click-outside="onClickOutside"
-    class="unnnic-select-smart"
-  >
-    <DropdownSkeleton
+  <div @keydown="onKeyDownSelect" v-on-click-outside="onClickOutside" class="unnnic-select-smart">
+    <dropdown-skeleton
       type="manual"
       :modelValue="active || null"
       position="bottom"
       ref="dropdown-skeleton"
     >
-      <TextInput
+      <text-input
         class="unnnic-select-smart__input"
         ref="selectSmartInput"
         :modelValue="inputValue"
@@ -19,11 +15,9 @@
         :size="size"
         :disabled="disabled"
         :readonly="!isAutocompleteAllowed"
-        :iconLeft="
-          isAutocompleteAllowed && autocompleteIconLeft ? 'search-1' : ''
-        "
-        :iconRight="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
-        :iconRightClickable="!disabled"
+        :icon-left="isAutocompleteAllowed && autocompleteIconLeft ? 'search-1' : ''"
+        :icon-right="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
+        :icon-right-clickable="!disabled"
         @icon-right-click="handleClickInput"
         @click.stop="handleClickInput"
         @update:modelValue="searchValue = $event"
@@ -40,7 +34,7 @@
           }"
         >
           <div :style="{ overflow: 'auto' }">
-            <SelectSmartMultipleHeader
+            <select-smart-multiple-header
               v-if="multiple"
               :selectedOptions="modelValue"
               :withoutSelectsMessage="multipleWithoutSelectsMessage"
@@ -59,16 +53,14 @@
                 },
               ]"
             >
-              <SelectSmartOption
+              <select-smart-option
                 v-for="(option, index) in filterOptions(options)"
                 :key="option.value"
                 :label="option.label"
                 :description="option.description"
                 :tabindex="index"
                 :size="size"
-                :active="
-                  option.value === modelValue || optionIsSelected(option)
-                "
+                :active="option.value === modelValue || optionIsSelected(option)"
                 :focused="focusedOption && focusedOption.value === option.value"
                 :allowCheckbox="!!multiple"
                 @click="handleSelect(option)"
@@ -83,7 +75,7 @@
           </div>
         </div>
       </template>
-    </DropdownSkeleton>
+    </dropdown-skeleton>
   </div>
 </template>
 
@@ -163,6 +155,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    selectFirst: {
+      type: Boolean,
+      default: true,
+    }
   },
 
   data() {
@@ -202,6 +198,8 @@ export default {
           this.searchValue = this.selectedLabel;
         });
       }
+    } else if (this.selectFirst && this.options?.[0] && this.options?.[0].value) {
+      this.selectOption(this.options?.[0]);
     }
   },
 
@@ -257,8 +255,7 @@ export default {
           return isValueMatch && option.value !== '';
         }
 
-        const isEmptyOption =
-          option.value === '' && this.modelValue.length === 0;
+        const isEmptyOption = option.value === '' && this.modelValue.length === 0;
         return isEmptyOption || isValueMatch;
       });
 
@@ -276,9 +273,7 @@ export default {
     },
 
     hasDescriptionOptions() {
-      return this.options.some(
-        (item) => typeof item.description !== 'undefined',
-      );
+      return this.options.some((item) => typeof item.description !== 'undefined');
     },
 
     autocompletePlaceholder() {
@@ -312,9 +307,7 @@ export default {
 
   methods: {
     optionIsSelected(option) {
-      return this.modelValue.some(
-        (selectedOption) => selectedOption.value === option.value,
-      );
+      return this.modelValue.some((selectedOption) => selectedOption.value === option.value);
     },
 
     clearSelectedOptions() {
@@ -361,18 +354,13 @@ export default {
 
       const getNumber = (str) => parseInt(str.match(/\d+/)?.[0], 10) || 0;
 
-      const filteredOptions = options.filter(
-        ({ value, label }, index, self) => {
-          const labelWithoutAccents = normalizeLabel(label);
-          const isValueUnique =
-            self.findIndex((option) => option.value === value) === index;
-          const matchesSearchTerms = searchTerms.every((term) =>
-            labelWithoutAccents.includes(term),
-          );
+      const filteredOptions = options.filter(({ value, label }, index, self) => {
+        const labelWithoutAccents = normalizeLabel(label);
+        const isValueUnique = self.findIndex((option) => option.value === value) === index;
+        const matchesSearchTerms = searchTerms.every((term) => labelWithoutAccents.includes(term));
 
-          return isValueUnique && matchesSearchTerms && value;
-        },
-      );
+        return isValueUnique && matchesSearchTerms && value;
+      });
 
       if (this.orderedByIndex) {
         return filteredOptions;
@@ -408,8 +396,7 @@ export default {
         valueByType = this.modelValue?.[0]?.value;
       }
       if (type === 'focused') {
-        valueByType =
-          this.focusedOption?.value || this.modelValue.at(-1)?.value;
+        valueByType = this.focusedOption?.value || this.modelValue.at(-1)?.value;
       }
       return options.findIndex((option) => option.value === valueByType);
     },
@@ -417,11 +404,7 @@ export default {
     scrollToOption(optionIndex, scrollBlock = 'nearest') {
       const elementScroll = this.$refs.selectSmartOptionsScrollArea;
 
-      if (
-        elementScroll &&
-        optionIndex >= 0 &&
-        optionIndex < elementScroll.childNodes.length
-      ) {
+      if (elementScroll && optionIndex >= 0 && optionIndex < elementScroll.childNodes.length) {
         const optionElement = elementScroll.childNodes[optionIndex];
 
         if (optionElement instanceof HTMLElement) {
@@ -431,8 +414,7 @@ export default {
     },
 
     selectOption(option) {
-      const selectedOption =
-        option.value === null || option.value.length === 0 ? null : option;
+      const selectedOption = option.value === null || option.value.length === 0 ? null : option;
 
       this.$emit(
         'update:modelValue',
@@ -446,9 +428,7 @@ export default {
       );
 
       if (indexToRemove !== -1) {
-        const newModelValue = this.modelValue;
-        newModelValue.splice(indexToRemove, 1);
-        this.$emit('update:modelValue', newModelValue);
+        this.modelValue.splice(indexToRemove, 1);
       }
 
       if (this.multiple) {
@@ -520,8 +500,7 @@ export default {
           this.scrollToOption(newIndex);
         }
 
-        const newOption =
-          options[newIndex === undefined ? focusedOptionIndex : newIndex];
+        const newOption = options[newIndex === undefined ? focusedOptionIndex : newIndex];
         this.focusedOption = newOption;
       }
     },
@@ -645,8 +624,7 @@ export default {
     }
 
     &:disabled {
-      box-shadow: inset 0 0 0 $unnnic-border-width-thinner
-        $unnnic-color-neutral-cleanest;
+      box-shadow: inset 0 0 0 $unnnic-border-width-thinner $unnnic-color-neutral-cleanest;
 
       cursor: not-allowed;
 
