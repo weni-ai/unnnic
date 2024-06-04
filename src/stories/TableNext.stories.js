@@ -4,7 +4,6 @@ import UnnnicButton from '../components/Button/Button.vue';
 export default {
   title: 'example/TableNext',
   component: UnnnicTableNext,
-  argTypes: {},
 };
 
 const Template = (args, { argTypes }) => ({
@@ -18,12 +17,15 @@ const Template = (args, { argTypes }) => ({
       v-bind="$props"
       :headers="table.headers"
       :rows="table.rows"
-    >
-    </unnnic-table-next>
+      :pagination.sync="pagination"
+      :paginationTotal="125"
+      :paginationInterval="5"
+    />
   `,
 
   data() {
     return {
+      pagination: 1,
       table: {
         headers: [
           {
@@ -53,8 +55,11 @@ const Template = (args, { argTypes }) => ({
           size: 'small',
         },
         events: {
-        // eslint-disable-next-line no-alert
-          click: () => alert('click'),
+          click: (event) => {
+            event.preventDefault();
+            // eslint-disable-next-line no-alert
+            console.log('click');
+          },
         },
       },
     };
@@ -64,9 +69,16 @@ const Template = (args, { argTypes }) => ({
     this.table.rows = [
       {
         content: ['1', 'Alice', '30', 'USA', this.addButton],
+        link: {
+          url: 'https://weni.ai/',
+          target: '_blank',
+        },
       },
       {
         content: ['2', 'Bob', '25', 'Canada', this.addButton],
+        link: {
+          url: 'https://weni.ai/',
+        },
       },
       {
         content: ['3', 'Charlie', '35', 'UK', this.addButton],
@@ -76,21 +88,6 @@ const Template = (args, { argTypes }) => ({
       },
       {
         content: ['5', 'Ethan', '22', 'New Zealand', this.addButton],
-      },
-      {
-        content: ['6', 'Fiona', '40', 'Ireland', this.addButton],
-      },
-      {
-        content: ['7', 'George', '45', 'Germany', this.addButton],
-      },
-      {
-        content: ['8', 'Hannah', '32', 'France', this.addButton],
-      },
-      {
-        content: ['9', 'Ian', '29', 'Spain', this.addButton],
-      },
-      {
-        content: ['10', 'Julia', '27', 'Italy', this.addButton],
       },
     ];
   },

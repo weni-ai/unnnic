@@ -41,15 +41,27 @@
         </template>
       </tr>
     </tbody>
+    <TablePagination
+      :value="pagination"
+      @input="$emit('update:pagination', $event)"
+      :total="paginationTotal"
+      :interval="paginationInterval"
+    />
   </table>
 </template>
 
 <script>
 import { validateHeaders, validateRows } from './validation';
 import TableBodyCell from './TableBodyCell.vue';
+import TablePagination from './TablePagination.vue';
 
 export default {
   name: 'UnnnicTableNext',
+
+  components: {
+    TableBodyCell,
+    TablePagination,
+  },
 
   props: {
     /**
@@ -83,10 +95,19 @@ export default {
       default: () => [],
       validator: validateRows,
     },
-  },
 
-  components: {
-    TableBodyCell,
+    pagination: {
+      type: Number,
+      default: 1,
+    },
+    paginationTotal: {
+      type: Number,
+      default: 1,
+    },
+    paginationInterval: {
+      type: Number,
+      default: 1,
+    },
   },
 };
 </script>
