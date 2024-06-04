@@ -12,7 +12,7 @@
     <UnnnicButton
       v-for="(page, index) in pages"
       :key="index"
-      :type="page === value ? 'secondary' : 'tertiary'"
+      :type="page === modelValue ? 'secondary' : 'tertiary'"
       size="small"
       :text="
         ['left-hidden', 'right-hidden'].includes(page) ? '...' : String(page)
@@ -32,15 +32,15 @@
 </template>
 
 <script>
-import unnnicButton from '../Button/Button.vue';
+import UnnnicButton from '../Button/Button.vue';
 
 export default {
   components: {
-    unnnicButton,
+    UnnnicButton,
   },
 
   props: {
-    value: {
+    modelValue: {
       type: Number,
       default: 1,
     },
@@ -94,11 +94,11 @@ export default {
     },
 
     canPrevious() {
-      return this.value > 1;
+      return this.modelValue > 1;
     },
 
     canNext() {
-      return this.value < this.max;
+      return this.modelValue < this.max;
     },
   },
 
@@ -108,13 +108,13 @@ export default {
         const pageNumber =
           this.pages[this.pages.indexOf('left-hidden') + 1] - 1;
 
-        this.$emit('input', pageNumber);
+        this.$emit('update:model-value', pageNumber);
         this.setReference(pageNumber);
       } else if (page === 'right-hidden') {
         const pageNumber =
           this.pages[this.pages.indexOf('right-hidden') - 1] + 1;
 
-        this.$emit('input', pageNumber);
+        this.$emit('update:model-value', pageNumber);
 
         if (this.pages.includes('left-hidden')) {
           this.setReference(
@@ -124,13 +124,13 @@ export default {
           this.setReference(4);
         }
       } else {
-        this.$emit('input', page);
+        this.$emit('update:model-value', page);
       }
     },
 
     previousPage() {
       if (this.canPrevious) {
-        const pageNumber = this.value - 1;
+        const pageNumber = this.modelValue - 1;
 
         this.selectPage(pageNumber);
 
@@ -142,7 +142,7 @@ export default {
 
     nextPage() {
       if (this.canNext) {
-        const pageNumber = this.value + 1;
+        const pageNumber = this.modelValue + 1;
 
         this.selectPage(pageNumber);
 

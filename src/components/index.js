@@ -79,6 +79,7 @@ import EmojiPicker from './EmojiPicker/EmojiPicker.vue';
 import ChartFunnel from './ChartFunnel/ChartFunnel.vue';
 import Disclaimer from './Disclaimer/Disclaimer.vue';
 import Drawer from './Drawer/Drawer.vue';
+import TableNext from './TableNext/TableNext.vue';
 
 export const components = {
   unnnicFormElement: formElement,
@@ -163,6 +164,7 @@ export const components = {
   unnnicChartFunnel: ChartFunnel,
   unnnicDisclaimer: Disclaimer,
   unnnicDrawer: Drawer,
+  unnnicTableNext: TableNext,
 };
 
 export const unnnicFontSize = fontSize;
@@ -248,3 +250,4 @@ export const unnnicEmojiPicker = EmojiPicker;
 export const unnnicChartFunnel = ChartFunnel;
 export const unnnicDisclaimer = Disclaimer;
 export const unnnicDrawer = Drawer;
+export const unnnicTableNext = TableNext;
