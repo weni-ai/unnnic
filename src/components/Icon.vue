@@ -104,9 +104,9 @@ export default {
     },
   },
   methods: {
-    onClick() {
+    onClick($event) {
       if (!this.clickable) return;
-      this.$emit('click');
+      this.$emit('click', $event);
     },
   },
 };
