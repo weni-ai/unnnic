@@ -169,7 +169,7 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
     &-cell {
       @extend %base-cell;
 
-      padding: $unnnic-spacing-sm;
+      padding: $unnnic-spacing-ant $unnnic-spacing-sm;
 
       height: 100%;
 
