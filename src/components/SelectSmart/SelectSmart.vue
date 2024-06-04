@@ -194,8 +194,6 @@ export default {
           this.searchValue = this.selectedLabel;
         });
       }
-    } else if (this.options?.[0] && this.options?.[0].value) {
-      this.selectOption(this.options?.[0]);
     }
   },
 
