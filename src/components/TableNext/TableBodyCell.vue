@@ -28,8 +28,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../../assets/scss/unnnic.scss";
+
 .unnnic-table-next__body-cell-text {
   margin: 0;
+  padding: $unnnic-spacing-sm;
 
   overflow: hidden;
   white-space: nowrap;

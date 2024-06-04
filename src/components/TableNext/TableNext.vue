@@ -169,6 +169,8 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
     &-cell {
       @extend %base-cell;
 
+      padding: $unnnic-spacing-sm;
+
       height: 100%;
 
       box-sizing: border-box;
@@ -226,6 +228,8 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
+
+        padding: $unnnic-spacing-sm;
       }
     }
     &-cell--loading {
@@ -240,8 +244,6 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
   %base-cell {
     border-collapse: collapse;
-
-    padding: $unnnic-spacing-ant $unnnic-spacing-sm;
 
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-gt;
