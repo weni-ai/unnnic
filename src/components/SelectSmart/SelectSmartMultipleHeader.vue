@@ -11,7 +11,7 @@
           :key="option.value"
           :text="option.label"
           hasCloseIcon
-          @close="unselectOption(option)"
+          @click="unselectOption(option)"
         />
         <p
           v-if="selectedOptions.length > multipleSelectedsTags"
@@ -89,6 +89,7 @@ export default {
       this.$emit('clear-selected-options');
     },
     unselectOption(option) {
+      console.log('alo');
       this.$emit('unselect-option', option);
     },
   },

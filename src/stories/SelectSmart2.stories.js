@@ -40,7 +40,7 @@ const Template = (args, { argTypes }) => ({
   template: `
     <div>
       <pre>v-model: {{ content }}</pre>
-      <unnnic-select-smart :options="options" v-model="selected" multiple :selectFirst="false" />
+      <unnnic-select-smart :options="options" v-model="selected" multiple :selectFirst="false" placeholder="Select option..."/>
     </div>
   `,
 

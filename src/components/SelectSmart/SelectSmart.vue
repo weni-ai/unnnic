@@ -10,7 +10,7 @@
         class="unnnic-select-smart__input"
         ref="selectSmartInput"
         :modelValue="inputValue"
-        :placeholder="autocompletePlaceholder || selectedLabel"
+        :placeholder="placeholder || autocompletePlaceholder || selectedLabel"
         :type="type"
         :size="size"
         :disabled="disabled"
@@ -158,7 +158,11 @@ export default {
     selectFirst: {
       type: Boolean,
       default: true,
-    }
+    },
+    placeholder: {
+      type: String,
+      default: null,
+    },
   },
 
   data() {
