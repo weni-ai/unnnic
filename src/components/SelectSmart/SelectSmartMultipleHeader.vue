@@ -89,7 +89,6 @@ export default {
       this.$emit('clear-selected-options');
     },
     unselectOption(option) {
-      console.log('alo');
       this.$emit('unselect-option', option);
     },
   },
