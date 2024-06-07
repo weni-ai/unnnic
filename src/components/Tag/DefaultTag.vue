@@ -10,14 +10,17 @@
       ${disabled ? 'unnnic-tag__label--disabled' : ''}`"
       >{{ text }}</span
     >
-    <UnnnicIcon
-      v-if="hasCloseIcon"
-      icon="close-1"
+    <div
+      @click.stop="emitClose"
       class="unnnic-tag__icon"
-      scheme="neutral-darkest"
-      size="xs"
-      @click.stop="$emit('close')"
-    />
+    >
+      <UnnnicIcon
+        v-if="hasCloseIcon"
+        icon="close-1"
+        scheme="neutral-darkest"
+        size="xs"
+      />
+    </div>
   </div>
 </template>
 
@@ -55,6 +58,9 @@ export default {
     closeClicked() {
       if (!this.closeClicked) return;
       this.$emit('close-click');
+    },
+    emitClose() {
+      this.$emit('close');
     },
   },
 };
@@ -115,6 +121,7 @@ export default {
   }
 
   &__icon {
+    display: flex;
     margin-right: $unnnic-inline-ant;
     cursor: pointer;
   }

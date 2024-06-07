@@ -11,7 +11,7 @@
           :key="option.value"
           :text="option.label"
           hasCloseIcon
-          @click="unselectOption(option)"
+          @close="unselectOption(option)"
         />
         <p
           v-if="selectedOptions.length > multipleSelectedsTags"
