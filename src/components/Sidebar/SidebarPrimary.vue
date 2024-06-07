@@ -22,7 +22,7 @@
           <div  v-for="(option, index) in category.items" :key="index" class="option-container">
             <tool-tip
               :enabled="!expanded"
-              :text="option.label"
+              :text="`${option.label} ${option.tag || ''}`.trim()"
               side="right"
               @mouseenter.native="hover($event, option.id)"
               @mouseleave.native="mouseout"
@@ -52,6 +52,7 @@
                 />
 
                 <span class="label">{{ option.label }}</span>
+                <span v-if="option.tag" class="tag">{{ option.tag }}</span>
                 <span :class="
                   option.notify && !expanded ? 'notify':''"
                   v-if="option.notify">
@@ -325,13 +326,22 @@ $transition-time: 0.4s;
         font-size: $unnnic-font-size-body-gt;
         line-height: ($unnnic-font-size-body-gt + $unnnic-line-height-md);
         float: left;
-        flex: 1;
         white-space: nowrap;
-        width: 50px;
+        width: min-content;
         overflow: hidden;
         text-overflow: ellipsis;
         user-select: none;
         margin-left: $unnnic-spacing-xs;
+      }
+
+      .tag {
+        font-family: $unnnic-font-family-secondary;
+        font-size: $unnnic-font-size-body-md;
+        font-weight: $unnnic-font-weight-regular;
+        font-style: italic;
+        margin-left: $unnnic-spacing-nano;
+        color: $unnnic-color-weni-600;
+
       }
 
       &:hover:not(.disabled) {
