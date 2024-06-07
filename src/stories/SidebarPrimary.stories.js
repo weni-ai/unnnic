@@ -12,13 +12,16 @@ export default {
   },
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
+const Template = (args) => ({
+  setup() {
+    return { args };
+},
+  props: Object.keys(args),
   components: {
     SidebarPrimary,
   },
   template: `
-    <sidebar-primary v-bind="$props" style="min-height: 300px;">
+    <sidebar-primary v-bind="args" style="min-height: 300px;">
       <template v-slot:header>
         Header
       </template>
@@ -58,6 +61,14 @@ Normal.args = {
     {
       label: 'Sistemas',
       items: [
+        {
+          id: 'insights',
+          label: 'Insights',
+          active: false,
+          tag: 'Alfa',
+          icon: 'bar_chart_4_bars',
+          click() {},
+        },
         {
           id: 'flows',
           label: 'Fluxos',
