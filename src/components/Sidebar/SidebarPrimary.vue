@@ -52,7 +52,7 @@
                 />
 
                 <span class="label">{{ option.label }}</span>
-                <span class="tag">Alfa</span>
+                <span v-if="option.tag" class="tag">{{ option.tag }}</span>
                 <span :class="
                   option.notify && !expanded ? 'notify':''"
                   v-if="option.notify">
@@ -336,12 +336,10 @@ $transition-time: 0.4s;
 
       .tag {
         font-family: $unnnic-font-family-secondary;
-        font-size: 12px;
-        display: flex;
-        align-self: baseline;
+        font-size: $unnnic-font-size-body-md;
+        font-weight: $unnnic-font-weight-regular;
         font-style: italic;
-        margin-left: 3px;
-        color: $unnnic-color-brand-weni
+        margin-left: $unnnic-spacing-nano;
 
       }
 
