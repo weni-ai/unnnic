@@ -22,7 +22,7 @@
           <div  v-for="(option, index) in category.items" :key="index" class="option-container">
             <tool-tip
               :enabled="!expanded"
-              :text="option.label"
+              :text="`${option.label} ${option.tag}`.trim()"
               side="right"
               @mouseenter.native="hover($event, option.id)"
               @mouseleave.native="mouseout"
