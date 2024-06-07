@@ -51,26 +51,35 @@ Normal.args = {
     }],
   }, {
     label: 'Sistemas',
-    items: [{
-      id: 'flows',
-      label: 'Fluxos',
-      active: false,
-      icon: 'hierarchy-3-2',
-      click() {},
-    }, {
-      id: 'ia',
-      label: 'Inteligência Artificial',
-      active: false,
-      icon: 'science-fiction-robot-2',
-      click() {},
-    }, {
-      id: 'chats',
-      label: 'Agentes',
-      active: false,
-      icon: 'messaging-we-chat-3',
-      click() {},
-      notify: true,
-    }],
+    items: [
+      {
+        id: 'insights',
+        label: 'Insights',
+        active: false,
+        tag: 'Alfa',
+        icon: 'bar_chart_4_bars',
+        click() {},
+      },
+      {
+        id: 'flows',
+        label: 'Fluxos',
+        active: false,
+        icon: 'hierarchy-3-2',
+        click() {},
+      }, {
+        id: 'ia',
+        label: 'Inteligência Artificial',
+        active: false,
+        icon: 'science-fiction-robot-2',
+        click() {},
+      }, {
+        id: 'chats',
+        label: 'Agentes',
+        active: false,
+        icon: 'messaging-we-chat-3',
+        click() {},
+        notify: true,
+      }],
   }, {
     label: 'Perfil',
     items: [{
