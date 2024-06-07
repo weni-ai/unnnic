@@ -106,14 +106,14 @@
 </template>
 <script>
 import { vOnClickOutside } from '@vueuse/components';
-import unnnicFlag from '../Flag.vue';
+import UnnnicFlag from '../Flag.vue';
 import UnnnicIcon from '../Icon.vue';
 import { unnnicFontSize } from '../config';
 
 export default {
   name: 'LanguageSelect',
   components: {
-    unnnicFlag,
+    UnnnicFlag,
     UnnnicIcon,
   },
   props: {
