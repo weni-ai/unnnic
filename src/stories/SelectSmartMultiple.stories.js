@@ -1,7 +1,7 @@
 import unnnicSelectSmart from '../components/SelectSmart/SelectSmart.vue';
 
 export default {
-  title: 'Form/SelectSmart2',
+  title: 'Form/SelectSmartMultiple',
   component: unnnicSelectSmart,
   argTypes: {
     'on-update:model-value': { action: '@update:model-value' },

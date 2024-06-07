@@ -13,9 +13,9 @@
     <div
       @click.stop="emitClose"
       class="unnnic-tag__icon"
+      v-if="hasCloseIcon"
     >
       <UnnnicIcon
-        v-if="hasCloseIcon"
         icon="close-1"
         scheme="neutral-darkest"
         size="xs"
