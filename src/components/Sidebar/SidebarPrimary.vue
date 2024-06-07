@@ -340,6 +340,7 @@ $transition-time: 0.4s;
         font-weight: $unnnic-font-weight-regular;
         font-style: italic;
         margin-left: $unnnic-spacing-nano;
+        color: $unnnic-color-weni-600;
 
       }
 
