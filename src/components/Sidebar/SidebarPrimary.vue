@@ -22,7 +22,7 @@
           <div  v-for="(option, index) in category.items" :key="index" class="option-container">
             <tool-tip
               :enabled="!expanded"
-              :text="option.label"
+              :text="`${option.label} ${option.tag}`.trim()"
               side="right"
               @mouseenter.native="hover($event, option.id)"
               @mouseleave.native="mouseout"
@@ -340,6 +340,7 @@ $transition-time: 0.4s;
         font-weight: $unnnic-font-weight-regular;
         font-style: italic;
         margin-left: $unnnic-spacing-nano;
+        color: $unnnic-color-weni-600;
 
       }
 
