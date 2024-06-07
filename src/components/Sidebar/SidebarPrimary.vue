@@ -52,6 +52,7 @@
                 />
 
                 <span class="label">{{ option.label }}</span>
+                <span class="tag">Alfa</span>
                 <span :class="
                   option.notify && !expanded ? 'notify':''"
                   v-if="option.notify">
@@ -325,13 +326,23 @@ $transition-time: 0.4s;
         font-size: $unnnic-font-size-body-gt;
         line-height: ($unnnic-font-size-body-gt + $unnnic-line-height-md);
         float: left;
-        flex: 1;
         white-space: nowrap;
-        width: 50px;
+        width: min-content;
         overflow: hidden;
         text-overflow: ellipsis;
         user-select: none;
         margin-left: $unnnic-spacing-xs;
+      }
+
+      .tag {
+        font-family: $unnnic-font-family-secondary;
+        font-size: 12px;
+        display: flex;
+        align-self: baseline;
+        font-style: italic;
+        margin-left: 3px;
+        color: $unnnic-color-brand-weni
+
       }
 
       &:hover:not(.disabled) {
