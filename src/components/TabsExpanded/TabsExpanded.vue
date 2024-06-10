@@ -41,6 +41,7 @@
           @click.stop="$emit('close-tab', item)"
           icon="close-1"
           size="xs"
+          clickable
           scheme="neutral-cloudy"
         />
       </div>
