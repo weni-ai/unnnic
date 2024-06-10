@@ -1,8 +1,8 @@
-import unnnicCollapse from '../components/Collapse/Collapse.vue';
+import UnnnicCollapse from '../components/Collapse/Collapse.vue';
 
 export default {
   title: 'accordion/Collapse',
-  component: unnnicCollapse,
+  component: UnnnicCollapse,
   argTypes: {
     'on-update:model-value': { action: '@update:model-value' },
     size: {
@@ -14,28 +14,25 @@ export default {
     borderBottom: { control: { type: 'boolean' } },
     unspacedIcon: { control: { type: 'boolean' } },
   },
-};
-
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-
-  components: {
-    unnnicCollapse,
-  },
-
-  data() {
-    return {
-      active: true,
-    };
-  },
-
-  template: `
-    <div>
+  render: (args) => ({
+    setup() {
+      return { args };
+    },
+    components: {
+      UnnnicCollapse,
+    },
+    data() {
+      return {
+        active: true,
+      };
+    },
+    template: `
+      <div>
       <button @click="active = !active">External change active</button>
 
       <pre>v-model: {{ active }}</pre>
 
-      <unnnic-collapse v-bind="$props" v-model="active">
+      <unnnic-collapse v-bind="args" v-model="active">
         Default slot
         <br />
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
@@ -43,55 +40,52 @@ const Template = (args, { argTypes }) => ({
         laboris nisi ut aliquip ex ea commodo consequat.
       </unnnic-collapse>
 
-<pre>
+      <pre>
 
-<b>Basic usage:</b>
+      <b>Basic usage:</b>
 
-&lt;unnnic-collapse title="Title"&gt;
-  Collapse body
-&lt;/unnnic-collapse&gt;
-
-
-<b>With header slot:</b>
-
-&lt;unnnic-collapse&gt;
-  &lt;template slot="header"&gt;Title&lt;/template&gt;
-
-  Collapse body
-&lt;/unnnic-collapse&gt;
+      &lt;unnnic-collapse title="Title"&gt;
+        Collapse body
+      &lt;/unnnic-collapse&gt;
 
 
-<b>With v-model:</b>
+      <b  >With header slot:</b>
 
-&lt;unnnic-collapse title="Title" v-model="active"&gt;
-  Collapse body
-&lt;/unnnic-collapse&gt;
+      &lt;unnnic-collapse&gt;
+        &lt;template slot="header"&gt;Title&lt;/template&gt;
+
+        Collapse body
+      &lt;/unnnic-collapse&gt;
 
 
-<b>Complete usage:</b>
+      <b>With v-model:</b>
 
-&lt;unnnic-collapse
-  title           String
-  border-bottom   Boolean
-  unspaced-icon   Boolean
-  active          Boolean
-  @change         Boolean Event
-&gt;
-  &lt;template slot="header"&gt;Title&lt;/template&gt;
+      &lt;unnnic-collapse title="Title" v-model="active"&gt;
+        Collapse body
+      &lt;/unnnic-collapse&gt;
 
-  Collapse body
-&lt;/unnnic-collapse&gt;
-</pre>
+
+      <b>Complete usage:</b>
+
+      &lt;unnnic-collapse
+        title           String
+        border-bottom   Boolean
+        unspaced-icon   Boolean
+        active          Boolean
+        @change         Boolean Event
+      &gt;
+        &lt;template slot="header"&gt;Title&lt;/template&gt;
+
+        Collapse body
+      &lt;/unnnic-collapse&gt;
+      </pre>  
     </div>
-  `,
+    `,
+  }),
+};
 
-  methods: {
-    click() {},
+export const Default = {
+  args: {
+    title: 'Title prop or header slot',
   },
-});
-
-export const Default = Template.bind({});
-
-Default.args = {
-  title: 'Title prop or header slot',
 };
