@@ -1,6 +1,6 @@
 <template>
   <section
-    v-if="value || isRecording || src"
+    v-if="modelValue || isRecording || src"
     class="unnnic-audio-recorder"
   >
     <UnnnicToolTip
@@ -82,7 +82,7 @@ export default {
   },
 
   props: {
-    value: {
+    modelValue: {
       type: HTMLAudioElement,
     },
 
@@ -278,7 +278,7 @@ export default {
 
       this.audio = null;
 
-      this.$emit('input', null);
+      this.$emit('update:model-value', null);
 
       this.status = 'idle';
     },
@@ -299,7 +299,7 @@ export default {
         this.recorder.stop();
       }
 
-      this.$emit('input', this.audio);
+      this.$emit('update:model-value', this.audio);
 
       this.stopMockMilliseconds();
     },

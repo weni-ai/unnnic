@@ -117,7 +117,7 @@ export default {
     UnnnicIcon,
   },
   props: {
-    value: {
+    modelValue: {
       type: String,
       default: '',
     },
@@ -149,16 +149,16 @@ export default {
   data() {
     return {
       open: false,
-      val: this.value,
+      val: this.modelValue,
       unnnicFontSize,
     };
   },
   watch: {
     val() {
-      this.$emit('input', this.val);
+      this.$emit('update:model-value', this.val);
     },
-    value() {
-      this.val = this.value;
+    modelValue() {
+      this.val = this.modelValue;
     },
   },
   computed: {

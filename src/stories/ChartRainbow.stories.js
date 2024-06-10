@@ -4,14 +4,14 @@ export default {
   title: 'charts/ChartRainbow',
   component: unnnicChartRainbow,
   argTypes: {
-    value: { control: { type: 'number', min: 0, max: 100, step: 0.1 } },
+    modelValue: { control: { type: 'number', min: 0, max: 100, step: 0.1 } },
     description: { control: 'text' },
   },
 };
 
 export const Default = {
   args: {
-    value: 50,
+    modelValue: 50,
     description: 'Description',
   },
 };

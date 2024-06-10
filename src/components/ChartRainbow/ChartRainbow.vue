@@ -44,7 +44,7 @@
 
     <div class="content">
       <div class="percentage">
-        <span class="number">{{ value }} </span>
+        <span class="number">{{ modelValue }} </span>
         <span class="symbol">%</span>
       </div>
 
@@ -63,7 +63,7 @@ export default {
   components: {},
 
   props: {
-    value: {
+    modelValue: {
       type: Number,
       default: 0,
     },
@@ -74,7 +74,7 @@ export default {
   },
 
   watch: {
-    value() {
+    modelValue() {
       this.updateChartSvg();
     },
   },
@@ -138,7 +138,7 @@ export default {
           139.44,
           152.72,
           -85,
-          -85 + (this.value / 100) * 170,
+          -85 + (this.modelValue / 100) * 170,
         ),
       );
     },
