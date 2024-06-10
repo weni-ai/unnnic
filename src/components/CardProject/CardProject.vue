@@ -36,16 +36,16 @@
 
 <script>
 import CardStatusesContainer from '../Card/CardStatusesContainer.vue';
-import unnnicIcon from '../Icon.vue';
-import unnnicDropdown from '../Dropdown/Dropdown.vue';
-import unnnicTag from '../Tag/Tag.vue';
+import UnnnicIcon from '../Icon.vue';
+import UnnnicDropdown from '../Dropdown/Dropdown.vue';
+import UnnnicTag from '../Tag/Tag.vue';
 
 export default {
   components: {
     CardStatusesContainer,
-    unnnicIcon,
-    unnnicDropdown,
-    unnnicTag,
+    UnnnicIcon,
+    UnnnicDropdown,
+    UnnnicTag,
   },
 
   props: {

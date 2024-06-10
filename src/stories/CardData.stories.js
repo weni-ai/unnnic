@@ -12,31 +12,13 @@ export default {
   },
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-
-  components: {
-    unnnicCardData,
+export const Default = {
+  args: {
+    title: 'Title Card',
+    description:
+      'Description Description Description Description Description Description Description Description.',
+    score: '4.9',
+    info: '(3 comments)',
+    checked: true,
   },
-
-  data() {
-    return {};
-  },
-
-  template: `
-    <div>
-      <unnnic-card-data v-bind="$props"/>
-    </div>
-  `,
-});
-
-export const Default = Template.bind({});
-
-Default.args = {
-  title: 'Title Card',
-  description:
-    'Description Description Description Description Description Description Description Description.',
-  score: '4.9',
-  info: '(3 comments)',
-  checked: true,
 };

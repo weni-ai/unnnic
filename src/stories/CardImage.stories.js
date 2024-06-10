@@ -5,55 +5,56 @@ export default {
   title: 'card/CardImage',
   component: UnnnicCardImage,
   argTypes: {},
+  render: (args) => ({
+    components: {
+      UnnnicCardImage,
+      UnnnicDropdownItem,
+    },
+    setup() {
+      return { args };
+    },
+    data() {
+      return {
+        value: true,
+      };
+    },
+    template: `
+      <div>
+        <pre>v-model: {{ value }}</pre>
+        <unnnic-card-image v-bind="args" v-model="value">
+        <template #actions>
+          <unnnic-dropdown-item>
+            Option 1
+          </unnnic-dropdown-item>
+
+          <unnnic-dropdown-item>
+            Option 2
+          </unnnic-dropdown-item>
+        </template>
+        </unnnic-card-image>
+      </div>
+    `,
+  }),
 };
 
-const Template = (args, { argTypes }) => ({
-  components: {
-    UnnnicCardImage,
-    UnnnicDropdownItem,
+export const Default = {
+  args: {
+    title: 'Title Card',
+    description: 'Last edit',
+    image: 'https://picsum.photos/300/150',
+    data: [
+      {
+        icon: 'graph-stats-1',
+        scheme: 'aux-purple',
+        name: 'Data',
+        value: '00',
+      },
+      {
+        icon: 'graph-stats-1',
+        scheme: 'aux-purple',
+        name: 'Data',
+        value: '00',
+      },
+    ],
   },
-
-  props: Object.keys(argTypes),
-
-  data() {
-    return {
-      v: false,
-    };
-  },
-
-  template: `<div><pre>v-model: {{ v }}</pre>
-  <unnnic-card-image v-bind="$props" v-model="v">
-  <template slot="actions">
-    <unnnic-dropdown-item>
-      Option 1
-    </unnnic-dropdown-item>
-
-    <unnnic-dropdown-item>
-      Option 2
-    </unnnic-dropdown-item>
-  </template>
-  </unnnic-card-image>
-</div>`,
-});
-
-export const Default = Template.bind({});
-
-Default.args = {
-  title: 'Title Card',
-  description: 'Last edit',
-  image: 'https://picsum.photos/300/150',
-  data: [
-    {
-      icon: 'graph-stats-1',
-      scheme: 'aux-purple',
-      name: 'Data',
-      value: '00',
-    },
-    {
-      icon: 'graph-stats-1',
-      scheme: 'aux-purple',
-      name: 'Data',
-      value: '00',
-    },
-  ],
 };

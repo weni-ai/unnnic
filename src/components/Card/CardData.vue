@@ -38,10 +38,10 @@
 </template>
 
 <script>
-import unnnicIcon from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
-  components: { unnnicIcon },
+  components: { UnnnicIcon },
 
   props: {
     title: {
