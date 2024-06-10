@@ -6,25 +6,9 @@ export default {
   argTypes: {},
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-
-  components: {
-    unnnicCircleProgressBar,
+export const Default = {
+  args: {
+    progress: 4,
+    totalProgress: 8,
   },
-
-  data() {
-    return {};
-  },
-
-  template: `<unnnic-circle-progress-bar v-bind="$props" />`,
-
-  methods: {},
-});
-
-export const Default = Template.bind({});
-
-Default.args = {
-  progress: 4,
-  totalProgress: 8,
 };

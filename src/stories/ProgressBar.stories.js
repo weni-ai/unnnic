@@ -1,8 +1,9 @@
-import unnnicProgressBar from '../components/ProgressBar/ProgressBar.vue';
+import { action } from '@storybook/addon-actions';
+import UnnnicProgressBar from '../components/ProgressBar/ProgressBar.vue';
 
 export default {
   title: 'Progress/ProgressBar',
-  component: unnnicProgressBar,
+  component: UnnnicProgressBar,
   argTypes: {
     type: {
       control: {
@@ -11,63 +12,27 @@ export default {
       options: ['primary', 'secondary'],
     },
   },
-};
-
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-
-  components: {
-    unnnicProgressBar,
+  args: {
+    modelValue: 25,
+    title: 'Title name',
+    onClose: action('close'),
   },
+};
+export const Primary = {};
 
-  data() {
-    return {
-      percentage: 25,
-    };
+export const Secondary = { args: { type: 'secondary' } };
+
+export const Inline = {
+  args: {
+    inline: true,
   },
-
-  template: `
-    <div>
-      <pre>v-model: {{ percentage }}</pre>
-      <unnnic-progress-bar v-model="percentage" v-bind="$props">
-      </unnnic-progress-bar>
-    </div>
-  `,
-
-  methods: {},
-});
-
-export const Primary = Template.bind({});
-
-Primary.args = {
-  title: 'Title name',
 };
 
-export const Secondary = Template.bind({});
+export const Subtitle = { args: { subtitle: 'Subtitle or description' } };
 
-Secondary.args = {
-  title: 'Title name',
-  type: 'secondary',
-};
-
-export const Inline = Template.bind({});
-
-Inline.args = {
-  title: 'Title name',
-  inline: true,
-};
-
-export const Subtitle = Template.bind({});
-
-Subtitle.args = {
-  title: 'test',
-  subtitle: 'Subtitle or description',
-};
-
-export const SubtitleCanClose = Template.bind({});
-
-SubtitleCanClose.args = {
-  title: 'test',
-  subtitle: 'Subtitle or description',
-  canClose: true,
+export const SubtitleCanClose = {
+  args: {
+    subtitle: 'Subtitle or description',
+    canClose: true,
+  },
 };

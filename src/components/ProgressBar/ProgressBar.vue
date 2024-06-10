@@ -22,7 +22,7 @@
         <div class="progress-container">
           <div
             class="bar"
-            :style="{ width: `${value}%` }"
+            :style="{ width: `${modelValue}%` }"
           >
             <div
               v-if="type === 'secondary' && !subtitle"
@@ -75,7 +75,7 @@ export default {
   },
 
   props: {
-    value: {
+    modelValue: {
       type: Number,
     },
 
@@ -103,7 +103,7 @@ export default {
 
   computed: {
     percentage() {
-      return Math.floor(this.value);
+      return Math.floor(this.modelValue);
     },
   },
 };
