@@ -204,11 +204,11 @@
 </template>
 
 <script>
-import unnnicButton from '../Button/Button.vue';
+import UnnnicButton from '../Button/Button.vue';
 
 export default {
   components: {
-    unnnicButton,
+    UnnnicButton,
   },
 
   props: {

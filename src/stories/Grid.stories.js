@@ -12,14 +12,8 @@ export default {
     },
   },
 };
-
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { Grid },
-  template: '<grid v-bind="$props" />',
-});
-
-export const grid = Template.bind({});
-grid.args = {
-  size: 'xs',
+export const grid = {
+  args: {
+    size: 'xs',
+  },
 };

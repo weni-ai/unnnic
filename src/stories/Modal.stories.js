@@ -1,10 +1,10 @@
-import unnnicModal from '../components/Modal/Modal.vue';
-import unnnicCallModal from '../components/Modal/CallModal.vue';
-import unnnicButton from '../components/Button/Button.vue';
+import UnnnicModal from '../components/Modal/Modal.vue';
+import UnnnicCallModal from '../components/Modal/CallModal.vue';
+import UnnnicButton from '../components/Button/Button.vue';
 
 export default {
   title: 'Example/Modal',
-  component: unnnicModal,
+  component: UnnnicModal,
   argTypes: {
     modalIcon: {
       control: {
@@ -34,42 +34,68 @@ export default {
   },
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { unnnicModal, unnnicButton },
-  template:
-    '<unnnic-modal v-bind="$props">Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modal<br>Conteúdo do modalConteúdo do modal<br></unnnic-modal>',
-});
-
-const ModalTemplate = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { unnnicModal, unnnicButton },
-  template:
-    '<unnnicModal v-bind="$props"> <template #message><span>Modal with Buttons</span></template><template #options><unnnic-button> Button 1 </unnnic-button> <unnnic-button > Button 2 </unnnic-button></template></unnnic-modal>',
-});
-
-export const Normal = Template.bind({});
-Normal.args = {
-  text: 'Title text',
-  description: 'Message body',
-  alertMessage: 'Message alert',
-  closeIcon: true,
-  showModal: true,
+export const Normal = {
+  render: (args) => ({
+    components: { UnnnicModal, UnnnicButton },
+    setup() {
+      return { args };
+    },
+    template: `
+      <unnnic-modal v-bind="args">
+        Conteúdo do modal<br>
+        Conteúdo do modal<br>
+        Conteúdo do modal<br>
+        Conteúdo do modal<br>
+        Conteúdo do modal<br>
+        Conteúdo do modal<br>
+        Conteúdo do modal<br>
+      </unnnic-modal>
+    `,
+  }),
+  args: {
+    text: 'Title text',
+    description: 'Message body',
+    alertMessage: 'Message alert',
+    closeIcon: true,
+    showModal: true,
+  },
+};
+export const Buttons = {
+  render: (args) => ({
+    components: { UnnnicModal, UnnnicButton },
+    setup() {
+      return { args };
+    },
+    template: `
+      <unnnic-modal v-bind="args">
+        <template #message>
+          <span>Modal with Buttons</span>
+        </template>
+        <template #options>
+          <unnnic-button> Button 1 </unnnic-button> 
+          <unnnic-button > Button 2 </unnnic-button>
+        </template>
+      </unnnic-modal>
+    `,
+  }),
+  args: {
+    text: 'Title text',
+    description: 'Message body',
+    alertMessage: 'Message alert',
+    closeIcon: true,
+    showModal: true,
+  },
 };
 
-export const Buttons = ModalTemplate.bind({});
-Buttons.args = {
-  text: 'Title text',
-  description: 'Message body',
-  alertMessage: 'Message alert',
-  closeIcon: true,
-  showModal: true,
+export const Call = {
+  render: (args) => ({
+    components: { UnnnicCallModal },
+    setup() {
+      return { args };
+    },
+    template: `
+      <unnnic-call-modal />
+    `,
+  }),
+  args: {},
 };
-
-const CallTemplate = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { unnnicCallModal },
-  template: '<unnnic-call-modal />',
-});
-
-export const Call = CallTemplate.bind({});

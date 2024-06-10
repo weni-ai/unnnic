@@ -5,6 +5,7 @@ const config = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-controls',
+    '@storybook/addon-actions',
     {
       name: '@storybook/addon-docs',
       options: {

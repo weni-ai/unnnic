@@ -1,31 +1,20 @@
-import unnnicBreadcrumb from '../components/Breadcrumb/Breadcrumb.vue';
+import UnnnicBreadcrumb from '../components/Breadcrumb/Breadcrumb.vue';
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Example/Breadcrumb',
-  component: unnnicBreadcrumb,
-  argTypes: {
-    'on-crumb-click': { action: '@crumb-click' },
+  component: UnnnicBreadcrumb,
+  args: {
+    onCrumbClick: action('crumb-click'),
   },
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-
-  components: {
-    unnnicBreadcrumb,
+export const Default = {
+  args: {
+    crumbs: [
+      { name: 'One', path: '/One' },
+      { name: 'Two', path: '/Two' },
+      { name: 'Active', path: '/Active' },
+    ],
   },
-
-  template: `
-    <unnnic-breadcrumb v-bind="$props"></unnnic-breadcrumb>
-  `,
-});
-
-export const Default = Template.bind({});
-
-Default.args = {
-  crumbs: [
-    { name: 'One', path: '/One' },
-    { name: 'Two', path: '/Two' },
-    { name: 'Active', path: '/Active' },
-  ],
 };

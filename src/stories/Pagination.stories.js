@@ -1,9 +1,8 @@
-import unnnicPagination from '../components/Pagination/Pagination.vue';
-import { ref } from 'vue';
+import UnnnicPagination from '../components/Pagination/Pagination.vue';
 
 export default {
   title: 'example/Pagination',
-  component: unnnicPagination,
+  component: UnnnicPagination,
   argTypes: {
     max: {
       control: {
@@ -17,29 +16,22 @@ export default {
   },
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-
-  components: {
-    unnnicPagination,
-  },
-
-  setup() {
-    let page = ref(1);
-    const onChange = (value) => {
-      page.value = value;
-    };
-
-    return { page, onChange };
-  },
-
-  template: `
-    <div>
-      <unnnic-pagination v-bind="$props" :value="page" @input="onChange"/>
-    </div>
-  `,
-});
-
-export const Default = Template.bind({});
-
-Default.args = {};
+export const Default = {
+  render: (args) => ({
+    components: { UnnnicPagination },
+    setup() {
+      return { args };
+    },
+    data() {
+      return {
+        page: 1,
+      };
+    },
+    template: `
+      <div>
+        <unnnic-pagination v-bind="args" v-model="page" :max="10" :show="5"/>
+      </div>
+    `,
+  }),
+  args: {},
+};

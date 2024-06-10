@@ -64,12 +64,12 @@
 </template>
 
 <script>
-import unnnicButton from '../Button/Button.vue';
+import UnnnicButton from '../Button/Button.vue';
 
 export default {
   name: 'ImportCard',
   components: {
-    unnnicButton,
+    UnnnicButton,
   },
   props: {
     title: {

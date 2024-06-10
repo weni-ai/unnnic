@@ -1,4 +1,4 @@
-import unnnicIconLoading from '../components/IconLoading/IconLoading.vue';
+import UnnnicIconLoading from '../components/IconLoading/IconLoading.vue';
 
 const schemes = [
   'background-solo',
@@ -92,7 +92,7 @@ const schemes = [
 
 export default {
   title: 'example/IconLoading',
-  component: unnnicIconLoading,
+  component: UnnnicIconLoading,
   argTypes: {
     scheme: { control: { type: 'select', options: schemes } },
     size: {
@@ -115,12 +115,6 @@ export default {
   },
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { unnnicIconLoading },
-  template: `
-    <unnnic-icon-loading v-bind="$props" />
-  `,
-});
-
-export const Default = Template.bind({});
+export const Default = {
+  args: {},
+};

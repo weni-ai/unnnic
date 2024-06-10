@@ -1,4 +1,4 @@
-import unnnicIcon from '../components/Icon.vue';
+import UnnnicIcon from '../components/Icon.vue';
 import icons from '../utils/icons';
 
 const iconsOptions = Object.keys(icons);
@@ -95,7 +95,7 @@ const schemes = [
 
 export default {
   title: 'example/Icon',
-  component: unnnicIcon,
+  component: UnnnicIcon,
   argTypes: {
     scheme: { control: { type: 'select', options: schemes } },
     size: {

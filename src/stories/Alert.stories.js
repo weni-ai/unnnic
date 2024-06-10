@@ -1,11 +1,11 @@
-import alertCaller from '../components/Alert/AlertCaller.vue';
+import AlertCaller from '../components/Alert/AlertCaller.vue';
 import alert from '../utils/call';
-import unnnicAlert from '../components/Alert/Alert.vue';
-import alertBanner from '../components/Alert/AlertBanner.vue';
+import UnnnicAlert from '../components/Alert/Alert.vue';
+import AlertBanner from '../components/Alert/AlertBanner.vue';
 
 export default {
   title: 'example/Alert',
-  component: unnnicAlert,
+  component: UnnnicAlert,
   argTypes: {
     text: { control: { type: 'text' } },
     showCloseButton: { control: { type: 'boolean' } },
@@ -56,74 +56,106 @@ export default {
   },
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { alertCaller, unnnicAlert },
-  template: `
-<div>
-  <button @click="unnnicCallAlert">Click for alert</button>
-
-<h3>Refactoring changes:</h3>
-
-<ul>
-  <li>Removed props: title, icon, hide-close-text, close-text, position</li>
-  <li>Added props: link-text, link-href, link-target (default: '_blank'), type (default, success, error)</li>
-  <li>Avoid using scheme prop, instead use the 'type' prop to change the color variant</li>
-  <li>Avoid using on-close prop to listen to close event, instead use the '@close' event</li>
-</ul>
-
-<pre>
-Recommended use:
-
-&lt;unnnic-alert
-  type            String default 'default' ('default', 'success', 'error')
-  text            String required
-  @close          Event
-  link-href       String
-   ┠ link-text    String default 'Learn more'
-   ┖ link-target  String default '_blank'
-/&gt;
-</pre>
-</div>`,
-  methods: {
-    unnnicCallAlert() {
-      alert.callAlert({ props: this.$props, seconds: this.$props.seconds });
+export const Normal = {
+  render: (args) => ({
+    components: { AlertCaller, UnnnicAlert },
+    setup() {
+      return { args };
     },
-  },
-});
-
-const TemplateWithContainerRef = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { alertCaller, unnnicAlert },
-  template: `
-    <div ref="divContainer" style="height: 200px; position: relative; border: 1px solid black">
+    methods: {
+      unnnicCallAlert() {
+        alert.callAlert({ props: this.args, seconds: this.args.seconds });
+      },
+    },
+    template: `
+    <div>
       <button @click="unnnicCallAlert">Click for alert</button>
 
-      <pre>
-      To use, add position relative style to your container
-      and pass it as "containerRef" at callAlert function like:
+    <h3>Refactoring changes:</h3>
 
-      alert.callAlert({
-        containerRef: this.$refs.divContainer,
-      });
-      </pre>
+    <ul>
+      <li>Removed props: title, icon, hide-close-text, close-text, position</li>
+      <li>Added props: link-text, link-href, link-target (default: '_blank'), type (default, success, error)</li>
+      <li>Avoid using scheme prop, instead use the 'type' prop to change the color variant</li>
+      <li>Avoid using on-close prop to listen to close event, instead use the '@close' event</li>
+    </ul>
+
+    <pre>
+    Recommended use:
+
+    &lt;unnnic-alert
+      type            String default 'default' ('default', 'success', 'error')
+      text            String required
+      @close          Event
+      link-href       String
+      ┠ link-text    String default 'Learn more'
+      ┖ link-target  String default '_blank'
+    /&gt;
+    </pre>
     </div>`,
-  methods: {
-    unnnicCallAlert() {
-      alert.callAlert({
-        props: this.$props,
-        containerRef: this.$refs.divContainer,
-      });
-    },
+  }),
+  args: {
+    title: 'Title',
+    text: 'Text',
+    icon: 'check-circle-1-1',
+    scheme: 'feedback-green',
   },
-});
+};
 
-const TemplateBanner = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { alertBanner },
-  template: `
+export const WithContainerRef = {
+  render: (args) => ({
+    components: { AlertCaller, UnnnicAlert },
+    setup() {
+      return { args };
+    },
+    methods: {
+      unnnicCallAlert() {
+        alert.callAlert({
+          props: this.args,
+          containerRef: this.$refs.divContainer,
+        });
+      },
+    },
+    template: `
+      <div ref="divContainer" style="height: 200px; position: relative; border: 1px solid black">
+        <button @click="unnnicCallAlert">Click for alert</button>
+
+        <pre>
+        To use, add position relative style to your container
+        and pass it as "containerRef" at callAlert function like:
+
+        alert.callAlert({
+          containerRef: this.$refs,
+        });
+        </pre>
+      </div>
+    `,
+  }),
+  args: {
+    title: 'Title',
+    text: 'Text',
+    icon: 'check-circle-1-1',
+    scheme: 'feedback-green',
+  },
+};
+
+export const Banner = {
+  render: (args) => ({
+    components: { AlertBanner },
+    setup() {
+      return { args };
+    },
+    methods: {
+      unnnicCallAlert() {
+        alert.callAlert({
+          props: this.args,
+          containerRef: this.$refs.divContainer,
+        });
+      },
+    },
+    template: `
     <div>
-      <alert-banner v-bind="$props" />
+      <alert-banner v-bind="args" />
 
     <pre>
     Recommended use:
@@ -139,26 +171,9 @@ const TemplateBanner = (args, { argTypes }) => ({
     /&gt;
     </pre>
     </div>`,
-});
-
-export const Normal = Template.bind({});
-Normal.args = {
-  title: 'Title',
-  text: 'Text',
-  icon: 'check-circle-1-1',
-  scheme: 'feedback-green',
-};
-
-export const WithContainerRef = TemplateWithContainerRef.bind({});
-WithContainerRef.args = {
-  title: 'Title',
-  text: 'Text',
-  icon: 'check-circle-1-1',
-  scheme: 'feedback-green',
-};
-
-export const Banner = TemplateBanner.bind({});
-Banner.args = {
-  text: 'Text',
-  showCloseButton: false,
+  }),
+  args: {
+    text: 'Text',
+    showCloseButton: false,
+  },
 };
