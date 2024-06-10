@@ -15,11 +15,11 @@
 
 <script>
 import moment from 'moment';
-import unnnicInput from '../Input/Input.vue';
+import UnnnicInput from '../Input/Input.vue';
 
 export default {
   name: 'unnnic-date-filter',
-  components: { unnnicInput },
+  components: { UnnnicInput },
   props: {
     size: {
       type: String,

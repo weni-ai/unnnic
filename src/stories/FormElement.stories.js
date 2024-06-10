@@ -11,30 +11,25 @@ export default {
       },
     },
   },
+  render: (args) => ({
+    components: {
+      UnnnicFormElement,
+    },
+    setup() {
+      return { args };
+    },
+    template: `
+      <unnnic-form-element v-bind="args">
+        <input />
+      </unnnic-form-element>
+    `,
+  }),
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-
-  components: {
-    UnnnicFormElement,
+export const Default = {
+  args: {
+    label: 'Name',
+    error: 'Error',
+    message: 'Message',
   },
-
-  data() {
-    return {};
-  },
-
-  template: `
-    <unnnic-form-element v-bind="$props">
-      <input />
-    </unnnic-form-element>
-  `,
-});
-
-export const Default = Template.bind({});
-
-Default.args = {
-  label: 'Name',
-  error: 'Error',
-  message: 'Message',
 };

@@ -1,11 +1,11 @@
-import unnnicButtonIcon from '../components/Button/ButtonIcon.vue';
+import UnnnicButtonIcon from '../components/Button/ButtonIcon.vue';
 import icons from '../utils/icons';
 
 const iconsOptions = Object.keys(icons);
 
 export default {
   title: 'Form/ButtonIcon',
-  component: unnnicButtonIcon,
+  component: UnnnicButtonIcon,
   argTypes: {
     size: {
       control: {

@@ -1,8 +1,8 @@
-import unnnicInputDatePicker from '../components/InputDatePicker/InputDatePicker.vue';
+import UnnnicInputDatePicker from '../components/InputDatePicker/InputDatePicker.vue';
 
 export default {
   title: 'Form/InputDatePicker',
-  component: unnnicInputDatePicker,
+  component: UnnnicInputDatePicker,
   argTypes: {
     type: {
       control: {
@@ -17,37 +17,32 @@ export default {
       },
     },
   },
+  render: (args) => ({
+    components: {
+      UnnnicInputDatePicker,
+    },
+    setup() {
+      return { args };
+    },
+    data() {
+      return {
+        dates: {
+          start: null,
+          end: null,
+        },
+      };
+    },
+    template: `
+      <div>
+        <!--<pre>v-model: {{ dates }}</pre>-->
+        <unnnic-input-date-picker v-bind="args" v-model="dates" />
+      </div>
+    `,
+  }),
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-
-  components: {
-    unnnicInputDatePicker,
+export const Default = {
+  args: {
+    size: 'sm',
   },
-
-  data() {
-    return {
-      dates: {
-        start: null,
-        end: null,
-      },
-    };
-  },
-
-  template: `
-    <div>
-      <!--<pre>v-model: {{ dates }}</pre>-->
-      <unnnic-input-date-picker v-bind="$props" v-model="dates">
-      </unnnic-input-date-picker>
-    </div>
-  `,
-
-  methods: {},
-});
-
-export const Default = Template.bind({});
-
-Default.args = {
-  size: 'sm',
 };

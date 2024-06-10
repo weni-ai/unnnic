@@ -1,48 +1,49 @@
-import unnnicRadio from '../components/Radio/Radio.vue';
+import UnnnicRadio from '../components/Radio/Radio.vue';
 
 export default {
   title: 'Form/Radio',
-  component: unnnicRadio,
+  component: UnnnicRadio,
   argTypes: {
-    'on-update:model-value': { action: '@update:model-value' },
     value: { control: { type: 'text' } },
     disabled: { control: { type: 'boolean' } },
     size: { control: { type: 'select', options: ['md', 'sm'] } },
   },
+  render: (args) => ({
+    components: {
+      UnnnicRadio,
+    },
+    setup() {
+      return { args };
+    },
+    data() {
+      return {
+        insideValue: 'option 1',
+      };
+    },
+    template: `
+      <div>
+        v-model: {{ insideValue }}
+        <br>
+
+        <unnnic-radio v-bind="args" v-model="insideValue" value="option 1">
+          Option 1
+        </unnnic-radio>
+
+        <unnnic-radio v-bind="args" v-model="insideValue" value="option 2">
+          Option 2
+        </unnnic-radio>
+
+        <unnnic-radio v-bind="args" v-model="insideValue" value="option 3">
+          Option 3
+        </unnnic-radio>
+      </div>
+    `,
+  }),
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes).concat(['input']),
-  components: {
-    unnnicRadio,
+export const Default = {
+  args: {
+    disabled: false,
+    size: 'md',
   },
-  data() {
-    return {
-      insideValue: 'option 1',
-    };
-  },
-  template: `
-    <div>
-      v-model: {{ insideValue }}
-      <br>
-
-      <unnnic-radio v-bind="$props" v-model="insideValue" value="option 1">
-        Option 1
-      </unnnic-radio>
-
-      <unnnic-radio v-bind="$props" v-model="insideValue" value="option 2">
-        Option 2
-      </unnnic-radio>
-
-      <unnnic-radio v-bind="$props" v-model="insideValue" value="option 3">
-        Option 3
-      </unnnic-radio>
-    </div>
-  `,
-});
-
-export const Default = Template.bind({});
-Default.args = {
-  disabled: false,
-  size: 'md',
 };
