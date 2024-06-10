@@ -74,6 +74,8 @@ const normalizeData = (filteredData) => {
 export default {
   name: 'AudioRecorder',
 
+  emits: ['update:model-value', 'status', 'failed-click'],
+
   components: {
     AudioHandler,
     AudioPlayer,

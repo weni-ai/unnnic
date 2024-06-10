@@ -37,6 +37,8 @@ import UnnnicIcon from '../Icon.vue';
 import UnnnicToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
+  emits: ['save'],
+
   components: {
     UnnnicIcon,
     UnnnicToolTip,

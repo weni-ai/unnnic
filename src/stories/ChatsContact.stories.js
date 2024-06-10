@@ -11,27 +11,6 @@ export default {
   component: unnnicChatsContact,
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { unnnicChatsContact },
-  template: '<unnnic-chats-contact v-bind="$props"/>',
-});
-
-const TemplateList = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { unnnicChatsContact },
-  data() {
-    return {
-      selectedContact: 1,
-    };
-  },
-  template: `
-    <div style="display: grid; gap: 5px;">
-      <unnnic-chats-contact v-for="index in 5" v-bind="$props" @click="selectedContact = index" :selected="selectedContact === index"/>
-    </div>
-  `,
-});
-
 const defaultArgs = {
   title: 'John Doe',
   lastMessage:
@@ -40,51 +19,75 @@ const defaultArgs = {
 const unreadMessages = 5;
 const waitingTime = 10;
 
-export const Default = Template.bind({});
-Default.args = {
-  ...defaultArgs,
-  unreadMessages,
+export const Default = {
+  args: {
+    ...defaultArgs,
+    unreadMessages,
+  },
 };
 
-export const Selected = Template.bind({});
-Selected.args = {
-  ...defaultArgs,
-  selected: true,
+export const Selected = {
+  args: {
+    ...defaultArgs,
+    selected: true,
+  },
 };
 
-export const SelectedWithCheckbox = Template.bind({});
-SelectedWithCheckbox.args = {
-  ...defaultArgs,
-  selected: true,
-  checkboxWhenSelect: true,
+export const SelectedWithCheckbox = {
+  args: {
+    ...defaultArgs,
+    selected: true,
+    checkboxWhenSelect: true,
+  },
 };
 
-export const Read = Template.bind({});
-Read.args = {
-  ...defaultArgs,
+export const Read = {
+  args: {
+    ...defaultArgs,
+  },
 };
 
-export const Waiting = Template.bind({});
-Waiting.args = {
-  ...defaultArgs,
-  waitingTime,
-  unreadMessages,
+export const Waiting = {
+  args: {
+    ...defaultArgs,
+    waitingTime,
+    unreadMessages,
+  },
 };
 
-export const WaitingRead = Template.bind({});
-WaitingRead.args = {
-  ...defaultArgs,
-  waitingTime,
+export const WaitingRead = {
+  args: {
+    ...defaultArgs,
+    waitingTime,
+  },
 };
 
-export const Discussion = Template.bind({});
-Discussion.args = {
-  ...defaultArgs,
-  title: 'Lorem ipsum dolor sit amet',
-  discussionGoal: 'John Doe',
+export const Discussion = {
+  args: {
+    ...defaultArgs,
+    title: 'Lorem ipsum dolor sit amet',
+    discussionGoal: 'John Doe',
+  },
 };
 
-export const ContactList = TemplateList.bind({});
-ContactList.args = {
-  ...defaultArgs,
+export const ContactList = {
+  args: {
+    ...defaultArgs,
+  },
+  render: (args) => ({
+    setup() {
+      return { args };
+    },
+    components: { unnnicChatsContact },
+    data() {
+      return {
+        selectedContact: 1,
+      };
+    },
+    template: `
+    <div style="display: grid; gap: 5px;">
+      <unnnic-chats-contact v-for="index in 5" v-bind="args" @click="selectedContact = index" :selected="selectedContact === index"/>
+    </div>
+  `,
+  }),
 };

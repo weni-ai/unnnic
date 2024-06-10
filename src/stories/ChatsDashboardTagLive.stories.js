@@ -14,11 +14,4 @@ export default {
   },
 };
 
-const Template = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-  components: { unnnicChatsDashboardTagLive },
-  template: '<unnnic-chats-dashboard-tag-live v-bind="$props"/>',
-});
-
-export const Default = Template.bind({});
-Default.args = {};
+export const Default = { args: {} };

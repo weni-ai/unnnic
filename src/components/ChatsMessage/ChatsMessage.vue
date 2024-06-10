@@ -61,13 +61,13 @@
         v-else-if="isMedia"
         class="unnnic-chats-message__media__container"
         :class="{ failed: failedToSendMedia }"
-        @click="$emit('click-image')"
+        @click="onClickMedia"
       >
         <slot />
         <UnnnicChatsMessageStatusBackdrop
           v-if="(sendingMedia || failedToSendMedia) && (isImage || isVideo)"
           :status="status"
-          @click="status === 'failed' ? $emit('click') : () => {}"
+          @click.stop="status === 'failed' ? $emit('click') : () => {}"
         />
       </div>
       <UnnnicIconLoading
@@ -93,6 +93,7 @@ import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'UnnnicChatsMessage',
+  emits: ['click', 'click-image'],
   components: {
     UnnnicChatsMessageText,
     UnnnicChatsMessageStatusBackdrop,
@@ -177,6 +178,14 @@ export default {
     },
     failedToSendMedia() {
       return (this.isImage || this.isVideo) && this.status === 'failed';
+    },
+  },
+
+  methods: {
+    onClickMedia() {
+      if (this.isImage || this.isVideo) {
+        this.$emit('click-image');
+      }
     },
   },
 };

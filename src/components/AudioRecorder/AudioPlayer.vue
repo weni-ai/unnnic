@@ -47,6 +47,8 @@
 import UnnnicIcon from '../Icon.vue';
 
 export default {
+  emits: ['play', 'pause', 'progress-bar-update', 'failed-click'],
+
   components: {
     UnnnicIcon,
   },
