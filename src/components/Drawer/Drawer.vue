@@ -7,7 +7,7 @@
       class="unnnic-drawer__overlay"
       @click.stop="close"
     />
-    <transition
+    <Transition
       appear
       name="drawer"
     >
@@ -28,7 +28,7 @@
               {{ description }}
             </p>
           </section>
-          <unnnic-icon
+          <UnnnicIcon
             class="unnnic-drawer__close"
             icon="arrow_back"
             size="avatar-nano"
@@ -43,7 +43,7 @@
           v-if="showFooter"
           class="unnnic-drawer__footer"
         >
-          <unnnic-button
+          <UnnnicButton
             v-if="secondaryButtonText"
             size="large"
             type="tertiary"
@@ -52,7 +52,7 @@
             :text="secondaryButtonText"
             @click="$emit('secondaryButtonClick')"
           />
-          <unnnic-button
+          <UnnnicButton
             v-if="primaryButtonText"
             size="large"
             :disabled="disabledPrimaryButton"
@@ -63,7 +63,7 @@
           />
         </footer>
       </section>
-    </transition>
+    </Transition>
   </aside>
 </template>
 
@@ -72,16 +72,10 @@ import unnnicIcon from '../Icon.vue';
 import unnnicButton from '../Button/Button.vue';
 
 export default {
-  name: 'unnnic-drawer',
-  emits: ['primaryButtonClick', 'secondaryButtonClick', 'close'],
+  name: 'UnnnicDrawer',
   components: {
     unnnicIcon,
     unnnicButton,
-  },
-  data() {
-    return {
-      showDrawer: true,
-    };
   },
   props: {
     title: {
@@ -125,6 +119,12 @@ export default {
       type: Boolean,
       required: true,
     },
+  },
+  emits: ['primaryButtonClick', 'secondaryButtonClick', 'close'],
+  data() {
+    return {
+      showDrawer: true,
+    };
   },
   computed: {
     showFooter() {

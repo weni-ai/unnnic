@@ -34,8 +34,8 @@
   </div>
 
   <component
-    v-else
     :is="'version' + version.replace(/\./g, 'dot')"
+    v-else
     v-bind="{ ...$props }"
   ></component>
 </template>
@@ -45,7 +45,7 @@ import UnnnicIcon from '../Icon.vue';
 import Version1dot1 from './Version1dot1.vue';
 
 export default {
-  name: 'unnnicAlert',
+  name: 'UnnnicAlert',
   components: {
     UnnnicIcon,
     Version1dot1,

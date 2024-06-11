@@ -1,13 +1,13 @@
 <template>
   <component
-    class="unnnic-carousel-component"
     :is="currentComponent"
+    class="unnnic-carousel-component"
     v-bind="$attrs"
     :name="name"
     :clickable="clickable"
     :tagItems="tagItems"
-    @selected="$emit('update:model-value', $event)"
     :modelValue="modelValue"
+    @selected="$emit('update:model-value', $event)"
   />
 </template>
 
@@ -15,11 +15,10 @@
 import TagCarousel from './TagCarousel.vue';
 
 export default {
+  name: 'UnnnicCarousel',
   model: {
     event: 'update:model-value',
   },
-
-  name: 'unnnic-carousel',
   props: {
     modelValue: {
       type: Array,

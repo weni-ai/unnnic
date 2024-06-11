@@ -1,8 +1,8 @@
 <template>
   <div :style="themeStyle">
     <component
-      v-if="tag"
       :is="tag"
+      v-if="tag"
     >
       <slot></slot>
     </component>
@@ -30,19 +30,7 @@ export const SkeletonStyle = {
   )`,
 };
 export default {
-  name: 'unnnicSkeletonTheme',
-  setup() {
-    const themeStyle = ref(SkeletonStyle);
-    const theme = ref({});
-
-    provide('_themeStyle', themeStyle);
-    provide('_skeletonTheme', theme);
-
-    return {
-      themeStyle,
-      theme,
-    };
-  },
+  name: 'UnnnicSkeletonTheme',
   props: {
     color: {
       type: String,
@@ -64,6 +52,18 @@ export default {
       type: Boolean,
       default: undefined,
     },
+  },
+  setup() {
+    const themeStyle = ref(SkeletonStyle);
+    const theme = ref({});
+
+    provide('_themeStyle', themeStyle);
+    provide('_skeletonTheme', theme);
+
+    return {
+      themeStyle,
+      theme,
+    };
   },
   mounted() {
     const { color, highlight, duration } = this;

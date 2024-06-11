@@ -26,7 +26,7 @@
         v-if="$slots.actions"
         position="bottom-left"
       >
-        <template v-slot:trigger>
+        <template #trigger>
           <UnnnicIcon
             icon="navigation-menu-vertical-1"
             size="sm"
@@ -49,9 +49,9 @@
       class="details"
     >
       <div
-        class="data"
         v-for="(item, index) in data"
         :key="index"
+        class="data"
       >
         <div class="u font secondary body-gt color-neutral-dark">
           {{ item.name }}

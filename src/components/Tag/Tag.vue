@@ -1,7 +1,7 @@
 <template>
   <component
-    class="unnnic-tag-content"
     :is="currentComponent"
+    class="unnnic-tag-content"
     v-bind="$attrs"
     :text="text"
     :disabled="disabled"
@@ -22,7 +22,7 @@ import IndicatorTag from './IndicatorTag.vue';
 import BrandTag from './BrandTag.vue';
 
 export default {
-  name: 'unnnic-tag',
+  name: 'UnnnicTag',
   props: {
     type: {
       type: String,

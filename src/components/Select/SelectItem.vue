@@ -1,6 +1,5 @@
 <template>
   <div
-    @click="$emit('click')"
     :class="{
       'unnnic-select-item': true,
       'unnnic-select-item__active': active,
@@ -8,6 +7,7 @@
       'unnnic-select-item--selectable': selectable,
       'text-focused': textFocused,
     }"
+    @click="$emit('click')"
   >
     <span
       :class="[

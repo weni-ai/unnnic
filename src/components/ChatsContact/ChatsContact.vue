@@ -1,23 +1,23 @@
 <template>
   <div
-    class="chats-contact"
     ref="transitionContainer"
+    class="chats-contact"
     :class="{
       selected,
       disabled,
       'unread-messages': unreadMessages,
       waiting: waitingTime && !discussionGoal,
     }"
+    :tabindex="0"
     @click="$emit('click')"
     @keypress.enter="$emit('click')"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
     @mousedown="
       (event) => {
-        this.$refs.transitionRipple.addRipple(event);
+        $refs.transitionRipple.addRipple(event);
       }
     "
-    :tabindex="0"
   >
     <div
       v-if="discussionGoal"
@@ -92,14 +92,14 @@ import Checkbox from '../Checkbox/Checkbox.vue';
 export default {
   name: 'ChatsContact',
 
-  mixins: [UnnnicI18n],
-
   components: {
     UserAvatar,
     UnnnicIcon,
     TransitionRipple,
     Checkbox,
   },
+
+  mixins: [UnnnicI18n],
 
   props: {
     title: {

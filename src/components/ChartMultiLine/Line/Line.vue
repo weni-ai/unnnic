@@ -1,9 +1,9 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div
+    ref="chart"
     class="chart"
     :style="{ backgroundImage: svgChart }"
-    ref="chart"
   >
     <div
       v-for="({ value }, index) in data"
@@ -36,14 +36,6 @@ export default {
       chartContainerHeight: 122,
       minValue: 0,
     };
-  },
-
-  mounted() {
-    this.chartContainerWidth = this.$refs.chart.offsetWidth;
-    this.chartContainerHeigth = this.$refs.chart.offsetHeight;
-    if (this.maxValue !== this.findMax(this.data)) {
-      this.minValue = this.findMin(this.data);
-    }
   },
   computed: {
     maxValue() {
@@ -111,6 +103,14 @@ export default {
 
       return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
     },
+  },
+
+  mounted() {
+    this.chartContainerWidth = this.$refs.chart.offsetWidth;
+    this.chartContainerHeigth = this.$refs.chart.offsetHeight;
+    if (this.maxValue !== this.findMax(this.data)) {
+      this.minValue = this.findMin(this.data);
+    }
   },
   methods: {
     findMax(array) {

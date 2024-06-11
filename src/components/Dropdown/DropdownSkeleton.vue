@@ -1,13 +1,13 @@
 <template>
   <span
-    :class="['dropdown', { active }]"
     ref="dropdown"
+    :class="['dropdown', { active }]"
   >
     <slot> </slot>
     <div
+      ref="dropdown-data"
       class="dropdown-data"
       :style="{ position: 'fixed', ...positions }"
-      ref="dropdown-data"
     >
       <slot
         name="inside"

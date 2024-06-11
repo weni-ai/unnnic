@@ -7,8 +7,8 @@
       <div class="unnnic-select-smart__options__multiple__selecteds">
         <Tag
           v-for="option in firstMultipleSelecteds"
-          class="unnnic-select-smart__options__multiple__selecteds__option"
           :key="option.value"
+          class="unnnic-select-smart__options__multiple__selecteds__option"
           :text="option.label"
           hasCloseIcon
           @close="unselectOption(option)"
@@ -44,11 +44,11 @@ import UnnnicI18n from '../../mixins/i18n';
 
 export default {
   name: 'UnnnicSelectSmartMultipleHeader',
-  mixins: [UnnnicI18n],
   components: {
     Tag,
     UnnnicIcon,
   },
+  mixins: [UnnnicI18n],
   props: {
     selectedOptions: {
       type: Array,

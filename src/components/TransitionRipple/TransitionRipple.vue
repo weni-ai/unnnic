@@ -5,9 +5,9 @@
     tag="div"
   >
     <div
-      class="ripple"
       v-for="ripple in ripples"
       :key="ripple.id"
+      class="ripple"
       :style="{
         top: ripple.top,
         left: ripple.left,

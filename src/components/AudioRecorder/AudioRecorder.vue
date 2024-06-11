@@ -10,9 +10,9 @@
       side="top"
     >
       <span
+        class="delete-button unnnic--clickable"
         @click="discard"
         @keypress.enter="discard"
-        class="delete-button unnnic--clickable"
       >
         <UnnnicIcon
           icon="delete-1-1"
@@ -74,8 +74,6 @@ const normalizeData = (filteredData) => {
 export default {
   name: 'AudioRecorder',
 
-  emits: ['update:model-value', 'status', 'failed-click'],
-
   components: {
     AudioHandler,
     AudioPlayer,
@@ -110,6 +108,8 @@ export default {
       default: false,
     },
   },
+
+  emits: ['update:model-value', 'status', 'failed-click'],
 
   data: () => ({
     /**

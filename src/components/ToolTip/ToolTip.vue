@@ -33,28 +33,7 @@
 
 <script>
 export default {
-  name: 'unnnic-tooltip',
-  mounted() {
-    this.handleResize();
-
-    window.addEventListener('scroll', this.handleResize);
-    window.addEventListener('resize', this.handleResize);
-  },
-  unmounted() {
-    window.removeEventListener('scroll', this.handleResize);
-    window.removeEventListener('resize', this.handleResize);
-  },
-  watch: {
-    side() {
-      this.getRightPost(this.$refs.tooltip);
-    },
-  },
-  data() {
-    return {
-      topPos: null,
-      leftPos: null,
-    };
-  },
+  name: 'UnnnicTooltip',
   props: {
     text: {
       type: String,
@@ -82,6 +61,27 @@ export default {
       type: String,
       default: null,
     },
+  },
+  data() {
+    return {
+      topPos: null,
+      leftPos: null,
+    };
+  },
+  watch: {
+    side() {
+      this.getRightPost(this.$refs.tooltip);
+    },
+  },
+  mounted() {
+    this.handleResize();
+
+    window.addEventListener('scroll', this.handleResize);
+    window.addEventListener('resize', this.handleResize);
+  },
+  unmounted() {
+    window.removeEventListener('scroll', this.handleResize);
+    window.removeEventListener('resize', this.handleResize);
   },
   methods: {
     handleResize() {

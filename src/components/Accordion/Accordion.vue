@@ -1,8 +1,8 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div
-    @click="$emit('update:open', !open)"
     class="unnnic-accordion"
+    @click="$emit('update:open', !open)"
   >
     <div class="header">
       <UnnnicIcon
@@ -57,12 +57,6 @@ export default {
     };
   },
 
-  mounted() {
-    if (this.open) {
-      this.height = null;
-    }
-  },
-
   watch: {
     open(value) {
       clearTimeout(this.setHeightToNull);
@@ -81,6 +75,12 @@ export default {
         }, 0);
       }
     },
+  },
+
+  mounted() {
+    if (this.open) {
+      this.height = null;
+    }
   },
 };
 </script>

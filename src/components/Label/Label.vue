@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: 'unnnic-label',
+  name: 'UnnnicLabel',
   props: {
     label: {
       type: String,

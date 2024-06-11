@@ -64,9 +64,9 @@
       }"
     >
       <div
-        class="status"
         v-for="(status, index) in statuses"
         :key="index"
+        class="status"
       >
         <div class="title">{{ status.title }}</div>
 

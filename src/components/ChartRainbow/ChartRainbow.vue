@@ -25,18 +25,18 @@
 
       <path
         id="path"
+        ref="background"
         fill="none"
         stroke-linecap="round"
-        ref="background"
         class="background"
         stroke-width="26.56px"
       ></path>
 
       <path
         id="path"
+        ref="front"
         fill="none"
         stroke-linecap="round"
-        ref="front"
         class="front"
         stroke-width="26.56px"
       ></path>

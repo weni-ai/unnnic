@@ -27,7 +27,7 @@
 
 <script>
 export default {
-  name: 'unnnicTableRow',
+  name: 'UnnnicTableRow',
 
   props: {
     headers: {

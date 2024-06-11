@@ -8,19 +8,19 @@
       :class="{ contact: !!avatarName }"
     >
       <div
-        class="unnnic-chats-header__topbar"
         v-if="!avatarName"
+        class="unnnic-chats-header__topbar"
       >
         <UnnnicBreadcrumb
           :crumbs="crumbs"
-          @crumbClick="(crumb) => $emit('crumbClick', crumb)"
+          @crumb-click="(crumb) => $emit('crumbClick', crumb)"
         />
         <UnnnicButton
           v-if="close"
-          @click="close"
           type="tertiary"
           iconCenter="close-1"
           size="small"
+          @click="close"
         />
       </div>
       <main class="unnnic-chats-header__main">
@@ -71,10 +71,10 @@
       <UnnnicButton
         v-if="close"
         class="unnnic-chats-header__close--sm"
-        @click="close"
         type="tertiary"
         iconCenter="close-1"
         size="small"
+        @click="close"
       />
     </header>
   </div>
@@ -90,14 +90,14 @@ import UnnnicBreadcrumb from '../Breadcrumb/Breadcrumb.vue';
 export default {
   name: 'UnnnicChatsHeader',
 
-  mixins: [UnnnicI18n],
-
   components: {
     UnnnicButton,
     UnnnicAvatarIcon,
     UnnnicChatsUserAvatar,
     UnnnicBreadcrumb,
   },
+
+  mixins: [UnnnicI18n],
 
   props: {
     title: {

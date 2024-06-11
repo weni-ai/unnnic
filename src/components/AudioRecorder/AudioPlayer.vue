@@ -1,10 +1,10 @@
 <template>
   <div class="audio-player">
     <span
-      @click="click"
-      @keypress.enter="click"
       class="unnnic--clickable"
       :class="{ inactive: reqStatus === 'sending' }"
+      @click="click"
+      @keypress.enter="click"
     >
       <UnnnicIcon
         :icon="playbackIcon"
@@ -14,15 +14,15 @@
 
     <input
       v-if="showProgressBar"
+      v-model="progress"
       class="audio-player__progress-bar unnnic--clickable"
       :class="{ inactive: reqStatus !== 'default' }"
       type="range"
       min="0"
       :max="duration"
       step="0.001"
-      v-model="progress"
-      @input="emitProgressBarUpdate"
       :style="progressBarStyle"
+      @input="emitProgressBarUpdate"
     />
 
     <div
@@ -47,8 +47,6 @@
 import UnnnicIcon from '../Icon.vue';
 
 export default {
-  emits: ['play', 'pause', 'progress-bar-update', 'failed-click'],
-
   components: {
     UnnnicIcon,
   },
@@ -81,11 +79,41 @@ export default {
       type: Array,
     },
   },
+  emits: ['play', 'pause', 'progress-bar-update', 'failed-click'],
 
   data() {
     return {
       progress: 0,
     };
+  },
+
+  computed: {
+    showProgressBar() {
+      return !this.bars || this.bars.length === 0;
+    },
+    playbackIcon() {
+      const statusMapping = {
+        sending: 'loading-circle-1',
+        failed: 'upload-bottom-1',
+      };
+
+      if (this.reqStatus in statusMapping) {
+        return statusMapping[this.reqStatus];
+      }
+
+      return this.isPlaying ? 'controls-pause-1' : 'controls-play-1';
+    },
+    progressBarStyle() {
+      return {
+        '--progressBarPercentualValue': `${this.progress}%`,
+      };
+    },
+  },
+
+  watch: {
+    progressBarPercentualValue(newValue) {
+      this.progress = newValue;
+    },
   },
 
   methods: {
@@ -115,35 +143,6 @@ export default {
 
     isBarActive(index) {
       return (this.progressBarPercentualValue / 100) * 22 > index;
-    },
-  },
-
-  computed: {
-    showProgressBar() {
-      return !this.bars || this.bars.length === 0;
-    },
-    playbackIcon() {
-      const statusMapping = {
-        sending: 'loading-circle-1',
-        failed: 'upload-bottom-1',
-      };
-
-      if (this.reqStatus in statusMapping) {
-        return statusMapping[this.reqStatus];
-      }
-
-      return this.isPlaying ? 'controls-pause-1' : 'controls-play-1';
-    },
-    progressBarStyle() {
-      return {
-        '--progressBarPercentualValue': `${this.progress}%`,
-      };
-    },
-  },
-
-  watch: {
-    progressBarPercentualValue(newValue) {
-      this.progress = newValue;
     },
   },
 };

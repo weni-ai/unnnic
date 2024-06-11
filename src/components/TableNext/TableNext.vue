@@ -65,9 +65,9 @@
     </tbody>
     <TablePagination
       :modelValue="pagination"
-      @update:model-value="$emit('update:pagination', $event)"
       :total="treatedPaginationTotal"
       :interval="rows.length"
+      @update:model-value="$emit('update:pagination', $event)"
     />
   </table>
 </template>
@@ -81,12 +81,12 @@ import UnnnicI18n from '../../mixins/i18n';
 export default {
   name: 'UnnnicTableNext',
 
-  mixins: [UnnnicI18n],
-
   components: {
     TableBodyCell,
     TablePagination,
   },
+
+  mixins: [UnnnicI18n],
 
   props: {
     /**

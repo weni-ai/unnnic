@@ -43,8 +43,8 @@
           >
             <input
               ref="input"
-              class="unnnic-slider__content__range-input"
               v-model="sliderVal"
+              class="unnnic-slider__content__range-input"
               type="range"
               :min="minValue"
               :max="maxValue"
@@ -63,8 +63,8 @@
         <input
           ref="value-input"
           class="value-input"
-          @input="handleInput"
           :value="sliderVal"
+          @input="handleInput"
         />
       </template>
     </section>
@@ -76,7 +76,7 @@ import UnnnicTooltip from '../ToolTip/ToolTip.vue';
 import UnnnicIcon from '../Icon.vue';
 
 export default {
-  name: 'unnnic-slider',
+  name: 'UnnnicSlider',
   components: {
     UnnnicTooltip,
     UnnnicIcon,
@@ -128,18 +128,15 @@ export default {
       labelWidth: 0,
     };
   },
-  created() {
-    window.addEventListener('resize', this.handleResize);
-  },
-  unmounted() {
-    window.removeEventListener('resize', this.handleResize);
-  },
-  mounted() {
-    const fallbackLabelWidth = 32 + this.sliderVal.toString().length * 4.5;
-    this.sliderWidth = this.$refs.input.clientWidth;
-    this.labelWidth =
-      this.$refs.tooltip.$refs.label.clientWidth || fallbackLabelWidth;
-    this.tooltipOffset = this.getNewTooltipPosition();
+  computed: {
+    cssVars() {
+      return {
+        '--val': this.sliderVal,
+        '--tooltip-offset': this.tooltipOffset,
+        '--min': this.minValue,
+        '--max': this.maxValue,
+      };
+    },
   },
   watch: {
     sliderVal: {
@@ -156,6 +153,19 @@ export default {
       immediate: true,
       deep: true,
     },
+  },
+  created() {
+    window.addEventListener('resize', this.handleResize);
+  },
+  unmounted() {
+    window.removeEventListener('resize', this.handleResize);
+  },
+  mounted() {
+    const fallbackLabelWidth = 32 + this.sliderVal.toString().length * 4.5;
+    this.sliderWidth = this.$refs.input.clientWidth;
+    this.labelWidth =
+      this.$refs.tooltip.$refs.label.clientWidth || fallbackLabelWidth;
+    this.tooltipOffset = this.getNewTooltipPosition();
   },
   methods: {
     configureTooltip() {
@@ -193,16 +203,6 @@ export default {
 
       const finalLabelPosition = valuePXPosition - halfLabelWidth - offset;
       return finalLabelPosition;
-    },
-  },
-  computed: {
-    cssVars() {
-      return {
-        '--val': this.sliderVal,
-        '--tooltip-offset': this.tooltipOffset,
-        '--min': this.minValue,
-        '--max': this.maxValue,
-      };
     },
   },
 };

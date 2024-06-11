@@ -2,11 +2,11 @@
   <div class="weni-step-indicator">
     <div
       v-for="step in numberOfSteps"
+      :key="step"
       :class="{
         'weni-step-indicator__step__wrapper': true,
         'weni-step-indicator--has-separator': step > 1,
       }"
-      :key="step"
     >
       <div
         v-if="step !== 1"
@@ -31,7 +31,7 @@
 
 <script>
 export default {
-  name: 'unnnic-indicator',
+  name: 'UnnnicIndicator',
   props: {
     numberOfSteps: {
       type: Number,

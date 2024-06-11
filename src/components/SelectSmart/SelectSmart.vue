@@ -1,18 +1,18 @@
 <template>
   <div
-    @keydown="onKeyDownSelect"
     v-on-click-outside="onClickOutside"
     class="unnnic-select-smart"
+    @keydown="onKeyDownSelect"
   >
     <DropdownSkeleton
+      ref="dropdown-skeleton"
       type="manual"
       :modelValue="active || null"
       position="bottom"
-      ref="dropdown-skeleton"
     >
       <TextInput
-        class="unnnic-select-smart__input"
         ref="selectSmartInput"
+        class="unnnic-select-smart__input"
         :modelValue="inputValue"
         :placeholder="placeholder || autocompletePlaceholder || selectedLabel"
         :type="type"
@@ -26,7 +26,7 @@
         :iconRightClickable="!disabled"
         @icon-right-click="handleClickInput"
         @click.stop="handleClickInput"
-        @update:modelValue="searchValue = $event"
+        @update:model-value="searchValue = $event"
       />
 
       <template #inside="props">
@@ -44,10 +44,10 @@
               v-if="multiple"
               :selectedOptions="modelValue"
               :withoutSelectsMessage="multipleWithoutSelectsMessage"
-              @clear-selected-options="clearSelectedOptions"
-              @unselect-option="unselectOption"
               :locale="locale"
               :translations="translations"
+              @clear-selected-options="clearSelectedOptions"
+              @unselect-option="unselectOption"
             />
             <div
               ref="selectSmartOptionsScrollArea"
@@ -98,13 +98,17 @@ import UnnnicI18n from '../../mixins/i18n';
 
 export default {
   name: 'UnnnicSelectSmart',
-  mixins: [UnnnicI18n],
   components: {
     TextInput,
     SelectSmartOption,
     SelectSmartMultipleHeader,
     DropdownSkeleton,
   },
+
+  directives: {
+    onClickOutside: vOnClickOutside,
+  },
+  mixins: [UnnnicI18n],
   props: {
     options: {
       type: Array,
@@ -194,70 +198,6 @@ export default {
     };
   },
 
-  mounted() {
-    this.status = 'mounted';
-
-    if (this.multiple || this.autocomplete) {
-      // The "multiple" variation only exists with autocomplete, so it can't be false
-      this.isAutocompleteAllowed = true;
-    }
-
-    if (this.modelValue?.[0] && this.modelValue?.[0].value) {
-      this.modelValue.forEach((option) => this.selectOption(option));
-
-      if (this.isAutocompleteAllowed) {
-        this.$nextTick(() => {
-          this.searchValue = this.selectedLabel;
-        });
-      }
-    } else if (
-      this.selectFirst &&
-      this.options?.[0] &&
-      this.options?.[0].value
-    ) {
-      this.selectOption(this.options?.[0]);
-    }
-  },
-
-  watch: {
-    active(newValue) {
-      this.$refs['dropdown-skeleton'].calculatePosition();
-
-      this.$nextTick(() => {
-        if (newValue && !this.multiple) {
-          const activeOptionIndex = this.getOptionIndex('active');
-
-          if (activeOptionIndex !== -1) {
-            this.scrollToOption(activeOptionIndex, 'center');
-          }
-        }
-      });
-    },
-
-    searchValue(newSearchValue, oldSearchValue) {
-      this.focusedOption = null;
-
-      if (!this.active && oldSearchValue) this.active = true;
-    },
-
-    modelValue: {
-      deep: true,
-      handler(newValue) {
-        this.$emit('onChange', newValue);
-        this.$emit('update:modelValue', newValue);
-
-        this.onSelectOption(newValue.at(-1));
-      },
-    },
-
-    autocomplete(newAutocomplete) {
-      if (!this.multiple) {
-        // The "multiple" variation only exists with autocomplete, so it can't be false
-        this.isAutocompleteAllowed = newAutocomplete;
-      }
-    },
-  },
-
   computed: {
     selectedLabel() {
       if (this.status !== 'mounted') {
@@ -320,8 +260,68 @@ export default {
     },
   },
 
-  directives: {
-    onClickOutside: vOnClickOutside,
+  watch: {
+    active(newValue) {
+      this.$refs['dropdown-skeleton'].calculatePosition();
+
+      this.$nextTick(() => {
+        if (newValue && !this.multiple) {
+          const activeOptionIndex = this.getOptionIndex('active');
+
+          if (activeOptionIndex !== -1) {
+            this.scrollToOption(activeOptionIndex, 'center');
+          }
+        }
+      });
+    },
+
+    searchValue(newSearchValue, oldSearchValue) {
+      this.focusedOption = null;
+
+      if (!this.active && oldSearchValue) this.active = true;
+    },
+
+    modelValue: {
+      deep: true,
+      handler(newValue) {
+        this.$emit('onChange', newValue);
+        this.$emit('update:modelValue', newValue);
+
+        this.onSelectOption(newValue.at(-1));
+      },
+    },
+
+    autocomplete(newAutocomplete) {
+      if (!this.multiple) {
+        // The "multiple" variation only exists with autocomplete, so it can't be false
+        this.isAutocompleteAllowed = newAutocomplete;
+      }
+    },
+  },
+
+  mounted() {
+    this.status = 'mounted';
+
+    if (this.multiple || this.autocomplete) {
+      // The "multiple" variation only exists with autocomplete, so it can't be false
+      this.isAutocompleteAllowed = true;
+    }
+
+    if (this.modelValue?.[0] && this.modelValue?.[0].value) {
+      this.modelValue.forEach((option) => this.selectOption(option));
+
+      if (this.isAutocompleteAllowed) {
+        this.$nextTick(() => {
+          this.searchValue = this.selectedLabel;
+        });
+      }
+    } else if (
+      this.selectFirst &&
+      this.options?.[0] &&
+      this.options?.[0].value
+    ) {
+      this.selectOption(this.options?.[0]);
+    }
   },
 
   methods: {

@@ -4,10 +4,10 @@
     <header class="tab-header">
       <ul class="tab-content">
         <li
-          class="tab-head"
           v-for="tab in tabs"
           :key="tab"
-          v-bind:class="{
+          class="tab-head"
+          :class="{
             'tab-head--active': localValue === tab,
           }"
           @click="change(tab)"
@@ -40,13 +40,13 @@ import UnnnicIcon from '../Icon.vue';
 import UnnnicToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
-  model: {
-    prop: 'activeTab',
-    event: 'change',
-  },
   components: {
     UnnnicIcon,
     UnnnicToolTip,
+  },
+  model: {
+    prop: 'activeTab',
+    event: 'change',
   },
   props: {
     size: {
@@ -71,12 +71,6 @@ export default {
       localValue: '',
     };
   },
-  created() {
-    const value =
-      this.initialTab || this.activeTab || (this.tabs && this.tabs[0]);
-
-    this.change(value);
-  },
   computed: {
     tabPanelSlotName() {
       return `tab-panel-${this.localValue}`;
@@ -86,6 +80,12 @@ export default {
     activeTab() {
       this.localValue = this.activeTab;
     },
+  },
+  created() {
+    const value =
+      this.initialTab || this.activeTab || (this.tabs && this.tabs[0]);
+
+    this.change(value);
   },
   methods: {
     tabHeadSlotName(tabName) {

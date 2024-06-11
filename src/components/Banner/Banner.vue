@@ -1,7 +1,7 @@
 <template>
   <component
-    class="unnnic-banner-component"
     :is="currentComponent"
+    class="unnnic-banner-component"
     v-bind="$attrs"
     :firstTitle="firstTitle"
     :secondTitle="secondTitle"
@@ -18,7 +18,7 @@
 import InfoBanner from './InfoBanner.vue';
 
 export default {
-  name: 'unnnic-banner',
+  name: 'UnnnicBanner',
   props: {
     type: {
       type: String,

@@ -60,9 +60,9 @@
     </div>
     <div class="labels">
       <div
-        class="label unnnic-font secondary body-lg color-neutral-dark"
         v-for="(chart, index) in data"
         :key="index + Math.random() * 100"
+        class="label unnnic-font secondary body-lg color-neutral-dark"
       >
         <svg
           width="15"

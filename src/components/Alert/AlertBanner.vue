@@ -13,8 +13,8 @@
       class="banner-alert__container-text"
     >
       <UnnnicIcon
-        class="banner-alert__textIcon"
         v-show="isShowTextIcon(type)"
+        class="banner-alert__textIcon"
         :icon="getIconType(type)"
         size="sm"
         scheme="neutral-white"
@@ -51,21 +51,6 @@ export default {
   components: {
     UnnnicIcon,
   },
-  methods: {
-    getIconType(type) {
-      if (type === 'danger') return 'block';
-      if (!type.trim()) return 'info'; // check if type is empty or whitespace
-      return type;
-    },
-    isShowTextIcon(type) {
-      return ['danger', 'warning', 'info', ''].includes(type);
-    },
-    emitClose() {
-      this.onClose();
-
-      this.$emit('close');
-    },
-  },
   props: {
     text: {
       type: String,
@@ -94,6 +79,21 @@ export default {
     type: {
       type: String,
       default: 'info',
+    },
+  },
+  methods: {
+    getIconType(type) {
+      if (type === 'danger') return 'block';
+      if (!type.trim()) return 'info'; // check if type is empty or whitespace
+      return type;
+    },
+    isShowTextIcon(type) {
+      return ['danger', 'warning', 'info', ''].includes(type);
+    },
+    emitClose() {
+      this.onClose();
+
+      this.$emit('close');
     },
   },
 };

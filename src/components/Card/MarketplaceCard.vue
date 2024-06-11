@@ -49,7 +49,7 @@
 import UnnnicIcon from '../Icon.vue';
 
 export default {
-  name: 'unnnic-card',
+  name: 'UnnnicCard',
   components: { UnnnicIcon },
   props: {
     title: {

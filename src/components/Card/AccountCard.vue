@@ -27,7 +27,7 @@
 import UnnnicAvatarIcon from '../AvatarIcon/AvatarIcon.vue';
 
 export default {
-  name: 'unnnic-card',
+  name: 'UnnnicCard',
   components: {
     UnnnicAvatarIcon,
   },

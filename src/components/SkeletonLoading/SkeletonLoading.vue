@@ -19,16 +19,7 @@ import { ref, inject } from 'vue';
 import { SkeletonStyle } from './skeletonTheme.vue';
 
 export default {
-  name: 'unnnicSkeletonLoading',
-  setup() {
-    const themeStyle = inject('_themeStyle', ref(SkeletonStyle));
-    const theme = inject('_skeletonTheme', ref({}));
-
-    return {
-      themeStyle,
-      theme,
-    };
-  },
+  name: 'UnnnicSkeletonLoading',
   props: {
     prefix: {
       type: String,
@@ -56,6 +47,15 @@ export default {
       type: Boolean,
       default: undefined,
     },
+  },
+  setup() {
+    const themeStyle = inject('_themeStyle', ref(SkeletonStyle));
+    const theme = inject('_skeletonTheme', ref({}));
+
+    return {
+      themeStyle,
+      theme,
+    };
   },
   computed: {
     isLoading() {

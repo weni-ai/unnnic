@@ -6,9 +6,9 @@
 
     <Pagination
       :modelValue="modelValue"
-      @update:model-value="$emit('update:model-value', $event)"
       :max="pages"
       :show="5"
+      @update:model-value="$emit('update:model-value', $event)"
     />
   </section>
 </template>
@@ -20,11 +20,11 @@ import UnnnicI18n from '../../mixins/i18n';
 export default {
   name: 'TablePagination',
 
-  mixins: [UnnnicI18n],
-
   components: {
     Pagination,
   },
+
+  mixins: [UnnnicI18n],
 
   props: {
     modelValue: {

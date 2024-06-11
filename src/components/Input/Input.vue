@@ -43,7 +43,7 @@
 import TextInput from './TextInput.vue';
 
 export default {
-  name: 'unnnic-input',
+  name: 'UnnnicInput',
   components: { TextInput },
   props: {
     placeholder: {
@@ -111,6 +111,11 @@ export default {
       val: this.modelValue,
     };
   },
+  computed: {
+    hasLabelSlot() {
+      return !!this.$slots.label;
+    },
+  },
   watch: {
     val() {
       this.$emit('update:modelValue', this.val);
@@ -121,11 +126,6 @@ export default {
   },
   mounted() {
     this.val = this.modelValue;
-  },
-  computed: {
-    hasLabelSlot() {
-      return !!this.$slots.label;
-    },
   },
 };
 </script>

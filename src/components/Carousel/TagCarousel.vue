@@ -7,9 +7,9 @@
         <UnnnicIcon
           icon="arrow-left-1-1"
           size="sm"
-          @click="previous()"
           :scheme="hasPrev ? 'neutral-black' : 'neutral-cleanest'"
           clickable
+          @click="previous()"
         />
       </div>
       <span
@@ -19,8 +19,8 @@
     </div>
 
     <div
-      class="unnnic-card-tag-carousel__container"
       id="scroll"
+      class="unnnic-card-tag-carousel__container"
     >
       <div
         v-for="tag in slides"
@@ -32,8 +32,8 @@
           clickable
           type="brand"
           :disabled="checkIsInclude(tag)"
-          @click="save(tag)"
           class="unnnic-card-tag-carousel__container__slide__item"
+          @click="save(tag)"
         />
       </div>
     </div>
@@ -42,16 +42,16 @@
       class="unnnic-card-tag-carousel__button unnnic-card-tag-carousel__button--right"
     >
       <span
-        class="unnnic-card-tag-carousel__button__blur unnnic-card-tag-carousel__button__blur--right"
         v-show="hasNext"
+        class="unnnic-card-tag-carousel__button__blur unnnic-card-tag-carousel__button__blur--right"
       />
       <div class="unnnic-card-tag-carousel__button__icon">
         <UnnnicIcon
           icon="arrow-right-1-1"
-          @click="next()"
           size="sm"
           :scheme="hasNext ? 'neutral-black' : 'neutral-cleanest'"
           clickable
+          @click="next()"
         />
       </div>
     </div>
@@ -63,14 +63,7 @@ import UnnnicTag from '../Tag/Tag.vue';
 import UnnnicIcon from '../Icon.vue';
 
 export default {
-  name: 'unnnic-tag-carousel',
-  data() {
-    return {
-      hasNext: true,
-      hasPrev: false,
-      slides: [],
-    };
-  },
+  name: 'UnnnicTagCarousel',
   components: {
     UnnnicTag,
     UnnnicIcon,
@@ -86,6 +79,13 @@ export default {
       type: Array,
       default: () => [],
     },
+  },
+  data() {
+    return {
+      hasNext: true,
+      hasPrev: false,
+      slides: [],
+    };
   },
   mounted() {
     this.slides = this.tagItems;

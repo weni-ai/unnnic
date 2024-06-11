@@ -11,9 +11,9 @@
       >{{ text }}</span
     >
     <div
-      @click.stop="emitClose"
-      class="unnnic-tag__icon"
       v-if="hasCloseIcon"
+      class="unnnic-tag__icon"
+      @click.stop="emitClose"
     >
       <UnnnicIcon
         icon="close-1"
@@ -28,7 +28,7 @@
 import UnnnicIcon from '../Icon.vue';
 
 export default {
-  name: 'unnnic-tag',
+  name: 'UnnnicTag',
   components: {
     UnnnicIcon,
   },
