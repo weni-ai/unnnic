@@ -7,7 +7,7 @@ on:
       - '*.*.*-staging'
 
 jobs:
-  publish-npm:
+  publish-npm-pre-release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -22,6 +22,10 @@ jobs:
         run: yarn lint --fix --quiet
       - name: Build Bundle
         run: yarn build
+      - name: Configure Git identity
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "GitHub Actions Bot"
       - name: Create Pre Release Version
         run: yarn version --prerelease --preid alpha
       - name: Publish Package
