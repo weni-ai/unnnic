@@ -19,14 +19,14 @@
             />
 
             <div :class="['label', `label--${size}`]">
-              {{ months[getMonth(openMonth)] }}
+              {{ monthsLocale[getMonth(openMonth)] }}
               {{ getFullYear(openMonth) }}
             </div>
           </div>
 
           <div :class="['days', `days--${size}`]">
             <div
-              v-for="(day, index) in days"
+              v-for="(day, index) in daysLocale"
               :key="index"
               class="name"
             >
@@ -104,7 +104,7 @@
                 date.properties.includes('inside month') && selectDate(date)
               "
             >
-              {{ months[getMonth(date)].substr(0, 3) }}
+              {{ monthsLocale[getMonth(date)].substr(0, 3) }}
             </div>
           </div>
         </div>
@@ -176,7 +176,7 @@
       <div class="options">
         <div
           :class="['option', { selected: optionSelected === option.id }]"
-          v-for="(option, index) in options"
+          v-for="(option, index) in periodsLocale"
           :key="index"
           @click="autoSelect(option.id)"
         >
@@ -187,14 +187,14 @@
       <div class="actions">
         <UnnnicButton
           size="small"
-          :text="clearLabel"
+          :text="clearText"
           type="tertiary"
           @click="clear"
         />
 
         <UnnnicButton
           size="small"
-          :text="actionLabel"
+          :text="filterText"
           type="secondary"
           @click="$emit('submit', value)"
         />
@@ -204,9 +204,19 @@
 </template>
 
 <script>
+import {
+  months as translationMonths,
+  days as translationDays,
+  periods as translationPeriods,
+} from './translations.js';
+
+import UnnnicI18n from '../../mixins/i18n';
+
 import UnnnicButton from '../Button/Button.vue';
 
 export default {
+  mixins: [UnnnicI18n],
+
   components: {
     UnnnicButton,
   },
@@ -241,22 +251,7 @@ export default {
 
     months: {
       type: Array,
-      default() {
-        return [
-          'Janeiro',
-          'Fevereiro',
-          'Março',
-          'Abril',
-          'Maio',
-          'Junho',
-          'Julho',
-          'Agosto',
-          'Setembro',
-          'Outubro',
-          'Novembro',
-          'Dezembro',
-        ];
-      },
+      default: () => [],
       validator(months) {
         return months.length === 12;
       },
@@ -264,9 +259,7 @@ export default {
 
     days: {
       type: Array,
-      default() {
-        return ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
-      },
+      default: () => [],
       validator(days) {
         return days.length === 7;
       },
@@ -274,34 +267,7 @@ export default {
 
     options: {
       type: Array,
-      default() {
-        return [
-          {
-            name: 'Últimos 7 dias',
-            id: 'last-7-days',
-          },
-          {
-            name: 'Últimos 14 dias',
-            id: 'last-14-days',
-          },
-          {
-            name: 'Últimos 30 dias',
-            id: 'last-30-days',
-          },
-          {
-            name: 'Últimos 12 meses',
-            id: 'last-12-months',
-          },
-          {
-            name: 'Mês Atual',
-            id: 'current-month',
-          },
-          {
-            name: 'Personalizar',
-            id: 'custom',
-          },
-        ];
-      },
+      default: () => [],
     },
   },
 
@@ -314,6 +280,18 @@ export default {
       startDate: (this.initialStartDate || '').replace(/-/g, ' '),
       endDate: (this.initialEndDate || '').replace(/-/g, ' '),
       optionSelected: '',
+      defaultTranslations: {
+        clean: {
+          'pt-br': 'Limpar',
+          en: 'Clean',
+          es: 'Limpiar',
+        },
+        filter: {
+          'pt-br': 'Filtrar',
+          en: 'Filter',
+          es: 'Filtrar',
+        },
+      },
     };
   },
 
@@ -327,6 +305,26 @@ export default {
         startDate: this.startDate.replaceAll(' ', '-'),
         endDate: this.endDate.replaceAll(' ', '-'),
       };
+    },
+
+    monthsLocale() {
+      const { months } = this;
+      return months.length ? months : translationMonths[this.$i18n.locale];
+    },
+    daysLocale() {
+      const { days } = this;
+      return days.length ? days : translationDays[this.$i18n.locale];
+    },
+    periodsLocale() {
+      const { options } = this;
+      return options.length ? options : translationPeriods[this.$i18n.locale];
+    },
+
+    clearText() {
+      return this.clearLabel || this.i18n('clean');
+    },
+    filterText() {
+      return this.actionLabel || this.i18n('filter');
     },
   },
 
