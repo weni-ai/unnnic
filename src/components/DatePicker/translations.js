@@ -1,3 +1,29 @@
+const englishMonths = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+const englishDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
+const englishPeriods = [
+  { name: 'Last 7 days', id: 'last-7-days' },
+  { name: 'Last 14 days', id: 'last-14-days' },
+  { name: 'Last 30 days', id: 'last-30-days' },
+  { name: 'Last 12 months', id: 'last-12-months' },
+  { name: 'Current month', id: 'current-month' },
+  { name: 'Custom', id: 'custom' },
+];
+
 export const months = {
   'pt-br': [
     'Janeiro',
@@ -13,20 +39,8 @@ export const months = {
     'Novembro',
     'Dezembro',
   ],
-  en: [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ],
+  en: englishMonths,
+  'en-us': englishMonths,
   es: [
     'Enero',
     'Febrero',
@@ -45,7 +59,8 @@ export const months = {
 
 export const days = {
   'pt-br': ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
-  en: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+  en: englishDays,
+  'en-us': englishDays,
   es: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
 };
 
@@ -76,32 +91,8 @@ export const periods = {
       id: 'custom',
     },
   ],
-  en: [
-    {
-      name: 'Last 7 days',
-      id: 'last-7-days',
-    },
-    {
-      name: 'Last 14 days',
-      id: 'last-14-days',
-    },
-    {
-      name: 'Last 30 days',
-      id: 'last-30-days',
-    },
-    {
-      name: 'Last 12 months',
-      id: 'last-12-months',
-    },
-    {
-      name: 'Current month',
-      id: 'current-month',
-    },
-    {
-      name: 'Custom',
-      id: 'custom',
-    },
-  ],
+  en: englishPeriods,
+  'en-us': englishPeriods,
   es: [
     {
       name: 'Últimos 7 días',

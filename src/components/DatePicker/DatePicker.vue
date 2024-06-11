@@ -253,7 +253,7 @@ export default {
       type: Array,
       default: () => [],
       validator(months) {
-        return months.length === 12;
+        return [0, 12].includes(months.length);
       },
     },
 
@@ -261,7 +261,7 @@ export default {
       type: Array,
       default: () => [],
       validator(days) {
-        return days.length === 7;
+        return [0, 7].includes(days.length);
       },
     },
 
@@ -307,17 +307,21 @@ export default {
       };
     },
 
+    i18nLocale() {
+      return this.$i18n.locale.toLowerCase();
+    },
+
     monthsLocale() {
       const { months } = this;
-      return months.length ? months : translationMonths[this.$i18n.locale];
+      return months.length ? months : translationMonths[this.i18nLocale];
     },
     daysLocale() {
       const { days } = this;
-      return days.length ? days : translationDays[this.$i18n.locale];
+      return days.length ? days : translationDays[this.i18nLocale];
     },
     periodsLocale() {
       const { options } = this;
-      return options.length ? options : translationPeriods[this.$i18n.locale];
+      return options.length ? options : translationPeriods[this.i18nLocale];
     },
 
     clearText() {
