@@ -27,7 +27,10 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "GitHub Actions Bot"
       - name: Create Pre Release Version
-        run: yarn version --prerelease --preid alpha
+        run: |
+          yarn version --prerelease --preid alpha
+          git push origin HEAD
+          git push --tags
       - name: Publish Package
         run: yarn publish
         env:
