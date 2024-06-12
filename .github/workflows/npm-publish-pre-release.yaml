@@ -3,7 +3,6 @@ name: Publish Pre Release Package to npmjs
 on:
   push:
     tags:
-      - '*.*.*-develop'
       - '*.*.*-staging'
 
 jobs:
