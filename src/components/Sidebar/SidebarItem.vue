@@ -33,11 +33,6 @@ import ToolTip from '../ToolTip/ToolTip.vue';
 export default {
   name: 'SidebarItem',
   components: { UIcon, ToolTip },
-  data() {
-    return {
-      ToolTip,
-    };
-  },
   props: {
     active: {
       type: Boolean,
@@ -58,6 +53,11 @@ export default {
     enableTooltip: {
       default: false,
     },
+  },
+  data() {
+    return {
+      ToolTip,
+    };
   },
   methods: {
     onClick() {

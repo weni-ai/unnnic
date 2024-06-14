@@ -16,11 +16,8 @@
       <div class="unnnic-banner-info__description">{{ thirdDescription }}</div>
       <div class="unnnic-banner-info__rating">
         <UnnnicIcon
-          :key="index"
           v-for="index in 5"
-          @click="emitRatingAction(index)"
-          @mouseover="starOver(index)"
-          @mouseout="starOut"
+          :key="index"
           :class="{
             'unnnic-banner-info__rating__star': true,
             'unnnic-banner-info__rating__star__active': index <= baseRating,
@@ -28,6 +25,9 @@
           :scheme="starScheme(index)"
           icon="rating-star-1"
           size="ant"
+          @click="emitRatingAction(index)"
+          @mouseover="starOver(index)"
+          @mouseout="starOut"
         />
       </div>
     </section>
@@ -38,7 +38,7 @@
 import UnnnicIcon from '../Icon.vue';
 
 export default {
-  name: 'unnnic-banner',
+  name: 'UnnnicBanner',
   components: { UnnnicIcon },
   props: {
     firstTitle: {

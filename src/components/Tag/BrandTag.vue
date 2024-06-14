@@ -20,7 +20,7 @@
 import UnnnicIcon from '../Icon.vue';
 
 export default {
-  name: 'unnnic-brand-tag',
+  name: 'UnnnicBrandTag',
   components: {
     UnnnicIcon,
   },

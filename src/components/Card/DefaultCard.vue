@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: 'unnnic-card',
+  name: 'UnnnicCard',
   props: {
     title: {
       type: String,

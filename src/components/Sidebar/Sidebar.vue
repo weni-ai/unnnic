@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'unnnic-sidebar',
+  name: 'UnnnicSidebar',
   props: {
     expanded: {
       type: Boolean,

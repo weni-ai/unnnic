@@ -15,14 +15,14 @@
         >
           <img
             :src="mood.image"
+            :class="{
+              active: modelValue && index === modelValue - 1,
+            }"
             @click="
               modelValue && index === modelValue - 1
                 ? $emit('update:model-value', null)
                 : $emit('update:model-value', index + 1)
             "
-            :class="{
-              active: modelValue && index === modelValue - 1,
-            }"
           />
         </UnnnicToolTip>
       </div>

@@ -4,11 +4,11 @@
       class="unnnic-date-filter__input"
       :size="size"
       iconLeft="notes-1"
-      @focus.stop="emitFilter"
       readonly
       :mask="fullMask"
       :value="dateRange"
       :placeholder="placeholder"
+      @focus.stop="emitFilter"
     ></UnnnicInput>
   </div>
 </template>
@@ -18,7 +18,7 @@ import moment from 'moment';
 import UnnnicInput from '../Input/Input.vue';
 
 export default {
-  name: 'unnnic-date-filter',
+  name: 'UnnnicDateFilter',
   components: { UnnnicInput },
   props: {
     size: {
@@ -46,11 +46,6 @@ export default {
       default: '',
     },
   },
-  methods: {
-    emitFilter() {
-      this.$emit('filter');
-    },
-  },
   computed: {
     dateRange() {
       let range = '';
@@ -76,6 +71,11 @@ export default {
     },
     maskedDateFormat() {
       return this.dateFormat.replace(/D|M|Y/gi, '#');
+    },
+  },
+  methods: {
+    emitFilter() {
+      this.$emit('filter');
     },
   },
 };

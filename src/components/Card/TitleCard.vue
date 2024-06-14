@@ -11,10 +11,10 @@
     <div class="title">{{ title }}</div>
 
     <ToolTip
+      v-if="hasInformationIcon"
       class="information"
       :side="infoPosition"
       :text="info"
-      v-if="hasInformationIcon"
       :enabled="enabled"
     >
       <UnnnicIcon
@@ -32,7 +32,7 @@ import UnnnicIcon from '../Icon.vue';
 import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
-  name: 'unnnic-card',
+  name: 'UnnnicCard',
   components: { ToolTip, UnnnicIcon },
   props: {
     title: {

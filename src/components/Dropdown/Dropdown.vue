@@ -7,12 +7,12 @@
       <slot name="trigger" />
       <div
         v-if="active"
+        v-on-click-outside="onClickOutside"
         :class="[
           'unnnic-dropdown__content',
           active ? '' : 'unnnic-dropdown__content--hidden',
           `unnnic-dropdown__content__position-${position}`,
         ]"
-        v-on-click-outside="onClickOutside"
       >
         <slot />
       </div>
@@ -24,7 +24,10 @@
 import { vOnClickOutside } from '@vueuse/components';
 
 export default {
-  name: 'unnnicDropdown',
+  name: 'UnnnicDropdown',
+  directives: {
+    onClickOutside: vOnClickOutside,
+  },
   props: {
     open: {
       type: Boolean,
@@ -51,8 +54,13 @@ export default {
       active: false,
     };
   },
-  directives: {
-    onClickOutside: vOnClickOutside,
+  watch: {
+    open() {
+      this.active = this.open;
+    },
+    active() {
+      this.$emit('update:open', this.active);
+    },
   },
   methods: {
     onClickTrigger() {
@@ -61,14 +69,6 @@ export default {
     onClickOutside() {
       if (!this.active) return;
       this.active = false;
-    },
-  },
-  watch: {
-    open() {
-      this.active = this.open;
-    },
-    active() {
-      this.$emit('update:open', this.active);
     },
   },
 };

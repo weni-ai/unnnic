@@ -24,19 +24,19 @@
     <UnnnicTag
       v-if="actionText"
       class="action"
-      @click="$emit('action')"
       clickable
       :text="actionText"
       scheme="aux-blue"
+      @click="$emit('action')"
     />
 
     <div v-if="$slots.options">
       <UnnnicDropdown
-        @click.prevent
         v-model:open="isOptionsOpen"
         class="unnnic-dropdown"
+        @click.prevent
       >
-        <template v-slot:trigger>
+        <template #trigger>
           <UnnnicIcon
             class="menu-icon"
             icon="navigation-menu-vertical-1"

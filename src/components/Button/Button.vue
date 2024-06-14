@@ -158,6 +158,15 @@ export default {
       return validTypes.includes(this.type);
     },
   },
+  watch: {
+    $props: {
+      deep: true,
+      immediate: true,
+      handler() {
+        this.validateProps();
+      },
+    },
+  },
   methods: {
     validateProps() {
       if (!this.isSizePropValid || !this.isTypePropValid) {
@@ -174,15 +183,6 @@ export default {
 
         throw new Error(errorMessage);
       }
-    },
-  },
-  watch: {
-    $props: {
-      deep: true,
-      immediate: true,
-      handler() {
-        this.validateProps();
-      },
     },
   },
 };

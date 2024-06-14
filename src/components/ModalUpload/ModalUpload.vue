@@ -25,7 +25,7 @@
       :maxFileSize="maxFileSize"
       :files="files"
       :subtitle="subtitle"
-      @fileChange="$emit('file-change', $event)"
+      @file-change="$emit('file-change', $event)"
     />
 
     <div class="footer">
@@ -52,15 +52,14 @@ import UnnnicIcon from '../Icon.vue';
 import UnnnicButton from '../Button/Button.vue';
 
 export default {
-  model: {
-    prop: 'files',
-    event: 'file-change',
-  },
-
   components: {
     UnnnicUploadArea,
     UnnnicIcon,
     UnnnicButton,
+  },
+  model: {
+    prop: 'files',
+    event: 'file-change',
   },
 
   props: {

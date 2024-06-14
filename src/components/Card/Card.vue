@@ -1,7 +1,7 @@
 <template>
   <component
-    class="unnnic-card-component"
     :is="currentComponent"
+    class="unnnic-card-component"
     v-bind="$attrs"
     :title="title"
     :text="text"
@@ -22,11 +22,11 @@
     :scheme="scheme"
     :clickable="clickable || null"
     :hasInformationIcon="hasInformationIcon || null"
-    @openModal="openModal"
+    @open-modal="openModal"
   >
     <template
       v-for="(_, name) in $slots"
-      v-slot:[name]
+      #[name]
     >
       <slot :name="name" />
     </template>
@@ -44,7 +44,7 @@ import ContentCard from './ContentCard.vue';
 import MarketplaceCard from './MarketplaceCard.vue';
 
 export default {
-  name: 'unnnic-card',
+  name: 'UnnnicCard',
   props: {
     type: {
       type: String,

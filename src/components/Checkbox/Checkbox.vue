@@ -28,6 +28,9 @@
 import UnnnicIcon from '../Icon.vue';
 
 export default {
+  components: {
+    UnnnicIcon,
+  },
   model: {
     event: 'change',
   },
@@ -57,10 +60,6 @@ export default {
       type: String,
       default: null,
     },
-  },
-
-  components: {
-    UnnnicIcon,
   },
 
   computed: {

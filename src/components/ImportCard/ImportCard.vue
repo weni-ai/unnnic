@@ -43,11 +43,11 @@
         @click="importFile"
       >
         <input
-          type="file"
           ref="file"
+          type="file"
           :accept="acceptedFormats"
-          @change="handleFileChange"
           style="display: none"
+          @change="handleFileChange"
         />
       </UnnnicButton>
 

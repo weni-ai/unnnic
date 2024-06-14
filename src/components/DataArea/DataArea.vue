@@ -27,7 +27,7 @@
 import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
-  name: 'unnnic-data-area',
+  name: 'UnnnicDataArea',
   components: {
     ToolTip,
   },

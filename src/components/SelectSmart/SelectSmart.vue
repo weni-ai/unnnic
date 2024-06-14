@@ -1,26 +1,32 @@
 <template>
-  <div @keydown="onKeyDownSelect" v-on-click-outside="onClickOutside" class="unnnic-select-smart">
-    <dropdown-skeleton
+  <div
+    v-on-click-outside="onClickOutside"
+    class="unnnic-select-smart"
+    @keydown="onKeyDownSelect"
+  >
+    <DropdownSkeleton
+      ref="dropdown-skeleton"
       type="manual"
       :modelValue="active || null"
       position="bottom"
-      ref="dropdown-skeleton"
     >
-      <text-input
-        class="unnnic-select-smart__input"
+      <TextInput
         ref="selectSmartInput"
+        class="unnnic-select-smart__input"
         :modelValue="inputValue"
         :placeholder="placeholder || autocompletePlaceholder || selectedLabel"
         :type="type"
         :size="size"
         :disabled="disabled"
         :readonly="!isAutocompleteAllowed"
-        :icon-left="isAutocompleteAllowed && autocompleteIconLeft ? 'search-1' : ''"
-        :icon-right="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
-        :icon-right-clickable="!disabled"
+        :iconLeft="
+          isAutocompleteAllowed && autocompleteIconLeft ? 'search-1' : ''
+        "
+        :iconRight="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
+        :iconRightClickable="!disabled"
         @icon-right-click="handleClickInput"
         @click.stop="handleClickInput"
-        @update:modelValue="searchValue = $event"
+        @update:model-value="searchValue = $event"
       />
 
       <template #inside="props">
@@ -34,14 +40,14 @@
           }"
         >
           <div :style="{ overflow: 'auto' }">
-            <select-smart-multiple-header
+            <SelectSmartMultipleHeader
               v-if="multiple"
               :selectedOptions="modelValue"
               :withoutSelectsMessage="multipleWithoutSelectsMessage"
-              @clear-selected-options="clearSelectedOptions"
-              @unselect-option="unselectOption"
               :locale="locale"
               :translations="translations"
+              @clear-selected-options="clearSelectedOptions"
+              @unselect-option="unselectOption"
             />
             <div
               ref="selectSmartOptionsScrollArea"
@@ -53,14 +59,16 @@
                 },
               ]"
             >
-              <select-smart-option
+              <SelectSmartOption
                 v-for="(option, index) in filterOptions(options)"
                 :key="option.value"
                 :label="option.label"
                 :description="option.description"
                 :tabindex="index"
                 :size="size"
-                :active="option.value === modelValue || optionIsSelected(option)"
+                :active="
+                  option.value === modelValue || optionIsSelected(option)
+                "
                 :focused="focusedOption && focusedOption.value === option.value"
                 :allowCheckbox="!!multiple"
                 @click="handleSelect(option)"
@@ -75,7 +83,7 @@
           </div>
         </div>
       </template>
-    </dropdown-skeleton>
+    </DropdownSkeleton>
   </div>
 </template>
 
@@ -90,13 +98,17 @@ import UnnnicI18n from '../../mixins/i18n';
 
 export default {
   name: 'UnnnicSelectSmart',
-  mixins: [UnnnicI18n],
   components: {
     TextInput,
     SelectSmartOption,
     SelectSmartMultipleHeader,
     DropdownSkeleton,
   },
+
+  directives: {
+    onClickOutside: vOnClickOutside,
+  },
+  mixins: [UnnnicI18n],
   props: {
     options: {
       type: Array,
@@ -186,25 +198,66 @@ export default {
     };
   },
 
-  mounted() {
-    this.status = 'mounted';
-
-    if (this.multiple || this.autocomplete) {
-      // The "multiple" variation only exists with autocomplete, so it can't be false
-      this.isAutocompleteAllowed = true;
-    }
-
-    if (this.modelValue?.[0] && this.modelValue?.[0].value) {
-      this.modelValue.forEach((option) => this.selectOption(option));
-
-      if (this.isAutocompleteAllowed) {
-        this.$nextTick(() => {
-          this.searchValue = this.selectedLabel;
-        });
+  computed: {
+    selectedLabel() {
+      if (this.status !== 'mounted') {
+        return '';
       }
-    } else if (this.selectFirst && this.options?.[0] && this.options?.[0].value) {
-      this.selectOption(this.options?.[0]);
-    }
+
+      const selected = this.options.find((option) => {
+        const isValueMatch = option.value === this.modelValue;
+
+        if (this.isAutocompleteAllowed) {
+          return isValueMatch && option.value !== '';
+        }
+
+        const isEmptyOption =
+          option.value === '' && this.modelValue.length === 0;
+        return isEmptyOption || isValueMatch;
+      });
+
+      if (selected) {
+        return selected.label;
+      }
+
+      if (this.multiple) {
+        const labels = this.modelValue.map((item) => item.label);
+        return labels.join(', ');
+      }
+
+      const label = this.modelValue.at(-1)?.label || '';
+      return label;
+    },
+
+    hasDescriptionOptions() {
+      return this.options.some(
+        (item) => typeof item.description !== 'undefined',
+      );
+    },
+
+    autocompletePlaceholder() {
+      if (this.isAutocompleteAllowed) {
+        const selected = this.options.find((option) => option.value === '');
+
+        if (selected) {
+          return selected.label;
+        }
+      }
+      return '';
+    },
+
+    inputValue() {
+      const { isAutocompleteAllowed, searchValue, multiple, modelValue } = this;
+
+      if (isAutocompleteAllowed || multiple) {
+        return searchValue;
+      }
+      if (!multiple && modelValue.length !== 0) {
+        return modelValue?.[0].label;
+      }
+
+      return '';
+    },
   },
 
   watch: {
@@ -246,72 +299,36 @@ export default {
     },
   },
 
-  computed: {
-    selectedLabel() {
-      if (this.status !== 'mounted') {
-        return '';
-      }
+  mounted() {
+    this.status = 'mounted';
 
-      const selected = this.options.find((option) => {
-        const isValueMatch = option.value === this.modelValue;
+    if (this.multiple || this.autocomplete) {
+      // The "multiple" variation only exists with autocomplete, so it can't be false
+      this.isAutocompleteAllowed = true;
+    }
 
-        if (this.isAutocompleteAllowed) {
-          return isValueMatch && option.value !== '';
-        }
+    if (this.modelValue?.[0] && this.modelValue?.[0].value) {
+      this.modelValue.forEach((option) => this.selectOption(option));
 
-        const isEmptyOption = option.value === '' && this.modelValue.length === 0;
-        return isEmptyOption || isValueMatch;
-      });
-
-      if (selected) {
-        return selected.label;
-      }
-
-      if (this.multiple) {
-        const labels = this.modelValue.map((item) => item.label);
-        return labels.join(', ');
-      }
-
-      const label = this.modelValue.at(-1)?.label || '';
-      return label;
-    },
-
-    hasDescriptionOptions() {
-      return this.options.some((item) => typeof item.description !== 'undefined');
-    },
-
-    autocompletePlaceholder() {
       if (this.isAutocompleteAllowed) {
-        const selected = this.options.find((option) => option.value === '');
-
-        if (selected) {
-          return selected.label;
-        }
+        this.$nextTick(() => {
+          this.searchValue = this.selectedLabel;
+        });
       }
-      return '';
-    },
-
-    inputValue() {
-      const { isAutocompleteAllowed, searchValue, multiple, modelValue } = this;
-
-      if (isAutocompleteAllowed || multiple) {
-        return searchValue;
-      }
-      if (!multiple && modelValue.length !== 0) {
-        return modelValue?.[0].label;
-      }
-
-      return '';
-    },
-  },
-
-  directives: {
-    onClickOutside: vOnClickOutside,
+    } else if (
+      this.selectFirst &&
+      this.options?.[0] &&
+      this.options?.[0].value
+    ) {
+      this.selectOption(this.options?.[0]);
+    }
   },
 
   methods: {
     optionIsSelected(option) {
-      return this.modelValue.some((selectedOption) => selectedOption.value === option.value);
+      return this.modelValue.some(
+        (selectedOption) => selectedOption.value === option.value,
+      );
     },
 
     clearSelectedOptions() {
@@ -358,13 +375,18 @@ export default {
 
       const getNumber = (str) => parseInt(str.match(/\d+/)?.[0], 10) || 0;
 
-      const filteredOptions = options.filter(({ value, label }, index, self) => {
-        const labelWithoutAccents = normalizeLabel(label);
-        const isValueUnique = self.findIndex((option) => option.value === value) === index;
-        const matchesSearchTerms = searchTerms.every((term) => labelWithoutAccents.includes(term));
+      const filteredOptions = options.filter(
+        ({ value, label }, index, self) => {
+          const labelWithoutAccents = normalizeLabel(label);
+          const isValueUnique =
+            self.findIndex((option) => option.value === value) === index;
+          const matchesSearchTerms = searchTerms.every((term) =>
+            labelWithoutAccents.includes(term),
+          );
 
-        return isValueUnique && matchesSearchTerms && value;
-      });
+          return isValueUnique && matchesSearchTerms && value;
+        },
+      );
 
       if (this.orderedByIndex) {
         return filteredOptions;
@@ -400,7 +422,8 @@ export default {
         valueByType = this.modelValue?.[0]?.value;
       }
       if (type === 'focused') {
-        valueByType = this.focusedOption?.value || this.modelValue.at(-1)?.value;
+        valueByType =
+          this.focusedOption?.value || this.modelValue.at(-1)?.value;
       }
       return options.findIndex((option) => option.value === valueByType);
     },
@@ -408,7 +431,11 @@ export default {
     scrollToOption(optionIndex, scrollBlock = 'nearest') {
       const elementScroll = this.$refs.selectSmartOptionsScrollArea;
 
-      if (elementScroll && optionIndex >= 0 && optionIndex < elementScroll.childNodes.length) {
+      if (
+        elementScroll &&
+        optionIndex >= 0 &&
+        optionIndex < elementScroll.childNodes.length
+      ) {
         const optionElement = elementScroll.childNodes[optionIndex];
 
         if (optionElement instanceof HTMLElement) {
@@ -418,7 +445,8 @@ export default {
     },
 
     selectOption(option) {
-      const selectedOption = option.value === null || option.value.length === 0 ? null : option;
+      const selectedOption =
+        option.value === null || option.value.length === 0 ? null : option;
 
       this.$emit(
         'update:modelValue',
@@ -432,7 +460,9 @@ export default {
       );
 
       if (indexToRemove !== -1) {
-        this.modelValue.splice(indexToRemove, 1);
+        const newModelValue = this.modelValue;
+        newModelValue.splice(indexToRemove, 1);
+        this.$emit('update:modelValue', newModelValue);
       }
 
       if (this.multiple) {
@@ -504,7 +534,8 @@ export default {
           this.scrollToOption(newIndex);
         }
 
-        const newOption = options[newIndex === undefined ? focusedOptionIndex : newIndex];
+        const newOption =
+          options[newIndex === undefined ? focusedOptionIndex : newIndex];
         this.focusedOption = newOption;
       }
     },
@@ -628,7 +659,8 @@ export default {
     }
 
     &:disabled {
-      box-shadow: inset 0 0 0 $unnnic-border-width-thinner $unnnic-color-neutral-cleanest;
+      box-shadow: inset 0 0 0 $unnnic-border-width-thinner
+        $unnnic-color-neutral-cleanest;
 
       cursor: not-allowed;
 

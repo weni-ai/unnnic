@@ -1,9 +1,9 @@
 <template>
   <div
-    @click.stop="() => {}"
-    @keypress.enter="() => {}"
     ref="pickerContainer"
     class="emoji-picker"
+    @click.stop="() => {}"
+    @keypress.enter="() => {}"
   />
 </template>
 
@@ -13,10 +13,6 @@ import data from '@emoji-mart/data/sets/14/apple.json';
 import { Picker } from 'emoji-mart/';
 
 export default {
-  mounted() {
-    this.initPicker();
-  },
-
   computed: {
     emojiPickerPreferences() {
       return {
@@ -30,6 +26,9 @@ export default {
         maxFrequentRows: 3,
       };
     },
+  },
+  mounted() {
+    this.initPicker();
   },
   methods: {
     initPicker() {

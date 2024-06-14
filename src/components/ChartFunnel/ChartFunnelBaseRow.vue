@@ -6,9 +6,9 @@
     xmlns="http://www.w3.org/2000/svg"
   >
     <g
-      class="unnnic-chart-funnel-base-rows__row"
       v-for="(row, index) of rows"
       :key="row.title + index"
+      class="unnnic-chart-funnel-base-rows__row"
     >
       <path
         class="row__path"

@@ -4,9 +4,12 @@ const validateHeader = (cell) => {
     throw new Error('Each item in "headers" must have "content" as a string.');
   }
 
-  const isSortableBoolean = 'isSortable' in cell && typeof cell.isSortable !== 'boolean';
+  const isSortableBoolean =
+    'isSortable' in cell && typeof cell.isSortable !== 'boolean';
   if (isSortableBoolean) {
-    throw new Error('Each item in "headers" that contains “isSortable” must assign it as boolean');
+    throw new Error(
+      'Each item in "headers" that contains “isSortable” must assign it as boolean',
+    );
   }
 };
 
@@ -30,9 +33,14 @@ const validateRow = (cell) => {
     throw new Error('Each item in "rows" must have "content" as an array.');
   }
 
-  const isLinkObject = 'link' in cell && typeof cell.link !== 'object' && typeof cell.link !== 'undefined';
+  const isLinkObject =
+    'link' in cell &&
+    typeof cell.link !== 'object' &&
+    typeof cell.link !== 'undefined';
   if (isLinkObject) {
-    throw new Error('Each item in "rows" that contains “link” must assign it as object');
+    throw new Error(
+      'Each item in "rows" that contains “link” must assign it as object',
+    );
   }
 
   const isLinkWithoutUrl = cell.link && !('url' in cell.link);

@@ -1,12 +1,12 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div
-    @click="click"
     :class="[
       'unnnic-radio-container',
       `unnnic-radio-container--${size}`,
       disabled ? 'disabled' : null,
     ]"
+    @click="click"
   >
     <UnnnicIcon
       class="unnnic-radio"

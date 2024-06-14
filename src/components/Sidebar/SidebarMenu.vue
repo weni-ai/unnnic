@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: 'unnnicSidebarMenu',
+  name: 'UnnnicSidebarMenu',
   props: {
     text: {
       type: String,

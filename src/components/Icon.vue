@@ -1,9 +1,6 @@
 <template>
   <span
     v-if="materialSymbolsName"
-    @click="onClick"
-    @mousedown="$emit('mousedown')"
-    @mouseup="$emit('mouseup')"
     :class="[
       'material-symbols-rounded',
       `unnnic-icon-scheme--${scheme}`,
@@ -13,15 +10,16 @@
         'material-symbols-rounded--filled': filled,
       },
     ]"
+    @click="onClick"
+    @mousedown="$emit('mousedown')"
+    @mouseup="$emit('mouseup')"
   >
     {{ materialSymbolsName }}
   </span>
 
   <component
+    :is="svg"
     v-else
-    @click="onClick"
-    @mousedown="$emit('mousedown')"
-    @mouseup="$emit('mouseup')"
     :class="[
       'unnnic-icon',
       `unnnic-icon__size--${size}`,
@@ -29,7 +27,9 @@
       lineHeight ? `unnnic-icon__line-height--${lineHeight}` : '',
       scheme ? `unnnic-icon-scheme--${scheme}` : '',
     ]"
-    :is="svg"
+    @click="onClick"
+    @mousedown="$emit('mousedown')"
+    @mouseup="$emit('mouseup')"
   />
 </template>
 
@@ -39,7 +39,6 @@ import OldIconsMap from './Icon/OldIconsMap.json';
 /* eslint-disable vue/multi-word-component-names */
 export default {
   name: 'Icon',
-  emits: ['click', 'mousedown', 'mouseup'],
   props: {
     filled: {
       type: Boolean,
@@ -89,7 +88,7 @@ export default {
       default: 'neutral-darkest',
     },
   },
-  mounted() {},
+  emits: ['click', 'mousedown', 'mouseup'],
   computed: {
     svg() {
       return icons[this.icon];
@@ -103,6 +102,7 @@ export default {
       return OldIconsMap[this.icon] || this.icon;
     },
   },
+  mounted() {},
   methods: {
     onClick($event) {
       if (!this.clickable) return;

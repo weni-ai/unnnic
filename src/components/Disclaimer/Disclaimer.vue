@@ -1,6 +1,6 @@
 <template>
   <section class="unnnic-disclaimer">
-    <unnnic-icon
+    <UnnnicIcon
       class="unnnic-disclaimer__icon"
       size="avatar-nano"
       :icon="icon"
@@ -17,7 +17,7 @@ import colors from '../../utils/colorsList';
 import unnnicIcon from '../Icon.vue';
 
 export default {
-  name: 'unnnic-disclaimer',
+  name: 'UnnnicDisclaimer',
   components: { unnnicIcon },
   props: {
     text: {
@@ -60,5 +60,4 @@ export default {
     color: $unnnic-color-neutral-dark;
   }
 }
-
 </style>

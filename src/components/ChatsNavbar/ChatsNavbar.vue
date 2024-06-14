@@ -34,7 +34,7 @@
 import UnnnicIcon from '../Icon.vue';
 
 export default {
-  name: 'unnnic-chats-navbar',
+  name: 'UnnnicChatsNavbar',
 
   components: {
     UnnnicIcon,

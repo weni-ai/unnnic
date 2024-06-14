@@ -11,9 +11,9 @@
     </div>
 
     <div
-      class="tab"
       v-for="item in items"
       :key="item.value"
+      class="tab"
       @click="$emit('update:model-value', item.value)"
     >
       <div>
@@ -38,11 +38,11 @@
         class="close-container"
       >
         <UnnnicIcon
-          @click.stop="$emit('close-tab', item)"
           icon="close-1"
           size="xs"
           clickable
           scheme="neutral-cloudy"
+          @click.stop="$emit('close-tab', item)"
         />
       </div>
     </div>

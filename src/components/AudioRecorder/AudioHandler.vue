@@ -19,9 +19,9 @@
       side="top"
     >
       <span
+        class="unnnic--clickable"
         @click="save"
         @keypress.enter="save"
-        class="unnnic--clickable"
       >
         <UnnnicIcon
           icon="check-circle-1-1"
@@ -37,8 +37,6 @@ import UnnnicIcon from '../Icon.vue';
 import UnnnicToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
-  emits: ['save'],
-
   components: {
     UnnnicIcon,
     UnnnicToolTip,
@@ -54,6 +52,7 @@ export default {
       default: '',
     },
   },
+  emits: ['save'],
 
   methods: {
     save() {

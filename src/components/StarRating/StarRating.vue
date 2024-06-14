@@ -1,8 +1,8 @@
 <template>
   <div class="unnnic-star-rating">
     <UnnnicIcon
-      :key="index"
       v-for="index in 5"
+      :key="index"
       :scheme="starScheme(index)"
       icon="rating-star-1"
       size="ant"

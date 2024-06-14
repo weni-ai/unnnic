@@ -32,9 +32,9 @@
 
       <div class="groups">
         <div
+          ref="chart"
           class="chart"
           :style="{ backgroundImage: svgChart }"
-          ref="chart"
         >
           <div
             v-for="({ value }, index) in data"
@@ -86,20 +86,6 @@ export default {
       chartContainerWidthInterval: null,
       chartContainerWidth: 0,
     };
-  },
-
-  mounted() {
-    this.chartContainerWidth = this.$refs.chart.offsetWidth;
-
-    this.chartContainerWidthInterval = setInterval(() => {
-      this.chartContainerWidth = this.$refs.chart.offsetWidth;
-    }, 100);
-  },
-
-  beforeUnmount() {
-    if (this.chartContainerWidthInterval) {
-      clearInterval(this.chartContainerWidthInterval);
-    }
   },
 
   computed: {
@@ -175,6 +161,20 @@ export default {
 
       return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
     },
+  },
+
+  mounted() {
+    this.chartContainerWidth = this.$refs.chart.offsetWidth;
+
+    this.chartContainerWidthInterval = setInterval(() => {
+      this.chartContainerWidth = this.$refs.chart.offsetWidth;
+    }, 100);
+  },
+
+  beforeUnmount() {
+    if (this.chartContainerWidthInterval) {
+      clearInterval(this.chartContainerWidthInterval);
+    }
   },
 
   methods: {

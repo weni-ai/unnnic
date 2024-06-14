@@ -1,8 +1,8 @@
 <template>
   <div
     v-if="contracted"
-    class="unnnic-language-select contracted"
     v-on-click-outside="onClickOutside"
+    class="unnnic-language-select contracted"
   >
     <div
       :class="['container contracted', { open }]"
@@ -31,8 +31,8 @@
 
   <div
     v-else
-    class="unnnic-language-select normal"
     v-on-click-outside="onClickOutside"
+    class="unnnic-language-select normal"
   >
     <div
       :class="['container normal', { open }]"
@@ -69,9 +69,9 @@
         </template>
 
         <div
-          class="option"
           v-for="language in otherLanguages"
           :key="language.id"
+          class="option"
           @click="val = language.id"
         >
           <UnnnicFlag
@@ -116,6 +116,9 @@ export default {
     UnnnicFlag,
     UnnnicIcon,
   },
+  directives: {
+    onClickOutside: vOnClickOutside,
+  },
   props: {
     modelValue: {
       type: String,
@@ -134,32 +137,12 @@ export default {
       default: () => ['pt-br', 'en'],
     },
   },
-  directives: {
-    onClickOutside: vOnClickOutside,
-  },
-  methods: {
-    onClickTrigger() {
-      this.open = !this.open;
-    },
-    onClickOutside() {
-      if (!this.open) return;
-      this.open = false;
-    },
-  },
   data() {
     return {
       open: false,
       val: this.modelValue,
       unnnicFontSize,
     };
-  },
-  watch: {
-    val() {
-      this.$emit('update:model-value', this.val);
-    },
-    modelValue() {
-      this.val = this.modelValue;
-    },
   },
   computed: {
     languages() {
@@ -195,6 +178,23 @@ export default {
       }
 
       return `arrow-button-${side}-1`;
+    },
+  },
+  watch: {
+    val() {
+      this.$emit('update:model-value', this.val);
+    },
+    modelValue() {
+      this.val = this.modelValue;
+    },
+  },
+  methods: {
+    onClickTrigger() {
+      this.open = !this.open;
+    },
+    onClickOutside() {
+      if (!this.open) return;
+      this.open = false;
     },
   },
 };

@@ -17,11 +17,11 @@ import UnnnicIcon from '../Icon.vue';
 export default {
   name: 'UnnnicChatsDashboardTagLive',
 
-  mixins: [UnnnicI18n],
-
   components: {
     UnnnicIcon,
   },
+
+  mixins: [UnnnicI18n],
 
   data() {
     return {

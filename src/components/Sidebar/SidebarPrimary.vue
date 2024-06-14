@@ -69,10 +69,14 @@
                 />
 
                 <span class="label">{{ option.label }}</span>
-                <span v-if="option.tag" class="tag">{{ option.tag }}</span>
                 <span
-                  :class="option.notify && !expanded ? 'notify' : ''"
+                  v-if="option.tag"
+                  class="tag"
+                  >{{ option.tag }}</span
+                >
+                <span
                   v-if="option.notify"
+                  :class="option.notify && !expanded ? 'notify' : ''"
                 >
                   <UnnnicIcon
                     icon="indicator"
@@ -367,7 +371,6 @@ $transition-time: 0.4s;
         font-style: italic;
         margin-left: $unnnic-spacing-nano;
         color: $unnnic-color-weni-600;
-
       }
 
       &:hover:not(.disabled) {

@@ -93,7 +93,6 @@ import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'UnnnicChatsMessage',
-  emits: ['click', 'click-image'],
   components: {
     UnnnicChatsMessageText,
     UnnnicChatsMessageStatusBackdrop,
@@ -137,6 +136,7 @@ export default {
       },
     },
   },
+  emits: ['click', 'click-image'],
 
   computed: {
     formattedTime() {

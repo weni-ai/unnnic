@@ -10,17 +10,17 @@
     ]"
   >
     <BaseInput
-      :modelValue="modelValue"
       v-bind="attributes"
-      :size="size"
       ref="base-input"
+      :modelValue="modelValue"
+      :size="size"
       :nativeType="
         nativeType === 'password' && showPassword ? 'text' : nativeType
       "
       :type="type"
+      class="input-itself"
       @focus="onFocus"
       @blur="onBlur"
-      class="input-itself"
     />
 
     <UnnnicIcon
@@ -29,8 +29,8 @@
       :icon="iconLeft"
       size="sm"
       :clickable="iconLeftClickable"
-      @click="onIconLeftClick"
       :class="['icon-left', { clickable: iconLeftClickable }]"
+      @click="onIconLeftClick"
     />
 
     <UnnnicIcon
@@ -39,11 +39,11 @@
       :icon="iconRightSvg"
       size="sm"
       :clickable="iconRightClickable || allowTogglePassword"
-      @click="onIconRightClick"
       :class="[
         'icon-right',
         { clickable: iconRightClickable || allowTogglePassword },
       ]"
+      @click="onIconRightClick"
     />
   </div>
 </template>
@@ -56,13 +56,6 @@ export default {
   components: {
     BaseInput,
     UnnnicIcon,
-  },
-  data() {
-    return {
-      isFocused: false,
-      isDisabled: false,
-      showPassword: false,
-    };
   },
   props: {
     placeholder: {
@@ -112,6 +105,13 @@ export default {
       default: 'md',
     },
   },
+  data() {
+    return {
+      isFocused: false,
+      isDisabled: false,
+      showPassword: false,
+    };
+  },
   computed: {
     iconRightSvg() {
       if (this.allowTogglePassword) {
@@ -145,6 +145,9 @@ export default {
       return { ...this.$attrs, ...this.$attrs['v-bind'], ...this.$props };
     },
   },
+  mounted() {
+    this.isDisabled = !!this.$refs['base-input'].$el.disabled;
+  },
   methods: {
     focus() {
       this.$refs['base-input'].$el.focus();
@@ -167,9 +170,6 @@ export default {
       if (this.allowTogglePassword) this.showPassword = !this.showPassword;
       else if (this.iconRightClickable) this.$emit('icon-right-click');
     },
-  },
-  mounted() {
-    this.isDisabled = !!this.$refs['base-input'].$el.disabled;
   },
 };
 </script>

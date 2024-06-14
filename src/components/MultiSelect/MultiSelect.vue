@@ -4,15 +4,15 @@
     tabindex="-1"
   >
     <span
-      class="select-permission-label"
       v-if="label"
+      class="select-permission-label"
       >{{ label }}</span
     >
     <div
-      @keypress="handleIsOpenKeyboard"
-      @click="active = !active"
       class="select-permission"
       tabindex="0"
+      @keypress="handleIsOpenKeyboard"
+      @click="active = !active"
     >
       <h6 class="title noselect">{{ inputTitle }}</h6>
       <UnnnicIcon
@@ -23,8 +23,8 @@
     </div>
     <div
       v-if="active"
-      class="select-content"
       v-on-click-outside="onClickOutside"
+      class="select-content"
       tabindex="0"
     >
       <div>
@@ -34,8 +34,8 @@
         >
           <h6
             v-if="!hideGroupTitle"
-            class="title"
             :key="`title-${indexGroup}`"
+            class="title"
           >
             {{ group.title }}
           </h6>
@@ -45,25 +45,25 @@
               :key="`item-${indexItem}`"
             >
               <div
-                @click="change(indexGroup, indexItem)"
-                :key="indexItem + 'input'"
                 v-if="hideRadio"
+                :key="indexItem + 'input'"
                 class="unnnic-radio-container unnnic-radio-container--sm"
                 style="cursor: pointer"
+                @click="change(indexGroup, indexItem)"
               >
                 <strong>{{ item.title }}</strong>
                 <span>{{ item.description }}</span>
               </div>
               <UnnnicRadio
                 v-else
+                id=""
+                :key="'else' + indexItem + 'input'"
                 name=""
                 :modelValue="group.selected"
-                @update:model-value="change(indexGroup, $event)"
                 :value="indexItem"
-                id=""
                 size="sm"
-                :key="'else' + indexItem + 'input'"
                 class=""
+                @update:model-value="change(indexGroup, $event)"
               >
                 <strong>{{ item.title }}</strong>
                 <span>{{ item.description }}</span>

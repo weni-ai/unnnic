@@ -7,12 +7,12 @@
         'unnnic-upload-area__dropzone__is-dragover': isDragging,
         'unnnic-upload-area__dropzone__has-error': hasError,
       }"
-      v-on:dragenter.stop.prevent="dragenter"
-      v-on:dragover.stop.prevent="dragover"
-      v-on:dragleave.stop.prevent="dragleave"
-      v-on:dragend.stop.prevent="dragend"
-      v-on:drop.stop.prevent="drop"
-      @click="() => this.$refs.file.click()"
+      @dragenter.stop.prevent="dragenter"
+      @dragover.stop.prevent="dragover"
+      @dragleave.stop.prevent="dragleave"
+      @dragend.stop.prevent="dragend"
+      @drop.stop.prevent="drop"
+      @click="() => $refs.file.click()"
     >
       <UnnnicIcon
         class="unnnic-upload-area__dropzone__icon"
@@ -51,12 +51,12 @@
         </span>
       </div>
       <input
-        type="file"
         ref="file"
+        type="file"
         :accept="supportedFormats"
         :multiple="acceptMultiple"
-        @input="handleFileChange"
         style="display: none"
+        @input="handleFileChange"
       />
     </div>
     <div
@@ -75,7 +75,7 @@
         :acceptedFormats="supportedFormats"
         uploadIcon="button-refresh-arrows-1"
         @delete="removeFile(index)"
-        @modifiedFile="modifyFile(index, $event)"
+        @modified-file="modifyFile(index, $event)"
       />
     </div>
   </div>
@@ -88,10 +88,14 @@ import UnnnicIcon from '../Icon.vue';
 import UnnnicImportCard from '../ImportCard/ImportCard.vue';
 
 export default {
-  name: 'unnnic-upload-area',
+  name: 'UnnnicUploadArea',
   components: {
     UnnnicIcon,
     UnnnicImportCard,
+  },
+  model: {
+    prop: 'files',
+    event: 'fileChange',
   },
   props: {
     files: {
@@ -140,10 +144,6 @@ export default {
       default: '',
     },
   },
-  model: {
-    prop: 'files',
-    event: 'fileChange',
-  },
   data() {
     return {
       hasError: false,
@@ -152,11 +152,6 @@ export default {
       currentFiles: this.files,
     };
   },
-  watch: {
-    files(newValue) {
-      this.currentFiles = newValue;
-    },
-  },
   computed: {
     formattedSupportedFormats() {
       const formats = this.supportedFormats
@@ -164,6 +159,11 @@ export default {
         .map((format) => format.toUpperCase());
 
       return formats.join(', ');
+    },
+  },
+  watch: {
+    files(newValue) {
+      this.currentFiles = newValue;
     },
   },
   methods: {

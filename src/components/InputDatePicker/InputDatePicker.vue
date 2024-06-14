@@ -7,9 +7,9 @@
       class="input"
       :size="size"
       iconLeft="notes-1"
-      @focus="showCalendarFilter = true"
       readonly
       :modelValue="filterText"
+      @focus="showCalendarFilter = true"
     ></UnnnicInput>
 
     <div
@@ -24,9 +24,9 @@
         :months="months"
         :days="days"
         :options="options"
-        @submit="changeDate"
         :initialStartDate="initialStartDate"
         :initialEndDate="initialEndDate"
+        @submit="changeDate"
       />
     </div>
   </div>
@@ -38,13 +38,12 @@ import UnnnicInput from '../Input/Input.vue';
 import UnnnicDatePicker from '../DatePicker/DatePicker.vue';
 
 export default {
-  model: {
-    event: 'changed',
-  },
-
   components: {
     UnnnicInput,
     UnnnicDatePicker,
+  },
+  model: {
+    event: 'changed',
   },
 
   props: {

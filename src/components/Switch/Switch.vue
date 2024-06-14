@@ -39,7 +39,7 @@
 import UnnnicIcon from '../Icon.vue';
 
 export default {
-  name: 'unnnic-switch',
+  name: 'UnnnicSwitch',
   components: { UnnnicIcon },
   props: {
     size: {
@@ -74,28 +74,6 @@ export default {
       isActive: false,
     };
   },
-
-  watch: {
-    modelValue: {
-      immediate: true,
-      handler() {
-        this.isActive = this.modelValue;
-      },
-    },
-  },
-
-  methods: {
-    toggleState() {
-      if (this.disabled) return;
-
-      if (this.useVModel) {
-        this.$emit('update:model-value', !this.isActive);
-      } else {
-        this.isActive = !this.isActive;
-        this.$emit('update:model-value', this.isActive);
-      }
-    },
-  },
   computed: {
     currentIcon() {
       if (this.disabled) {
@@ -121,6 +99,28 @@ export default {
 
     iconLineHeight() {
       return this.size === 'small' ? 'sm' : '';
+    },
+  },
+
+  watch: {
+    modelValue: {
+      immediate: true,
+      handler() {
+        this.isActive = this.modelValue;
+      },
+    },
+  },
+
+  methods: {
+    toggleState() {
+      if (this.disabled) return;
+
+      if (this.useVModel) {
+        this.$emit('update:model-value', !this.isActive);
+      } else {
+        this.isActive = !this.isActive;
+        this.$emit('update:model-value', this.isActive);
+      }
     },
   },
 };

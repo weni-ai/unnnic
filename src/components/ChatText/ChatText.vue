@@ -24,8 +24,8 @@
     </div>
 
     <div
-      class="description"
       ref="description"
+      class="description"
     >
       <slot name="description" />
 

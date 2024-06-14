@@ -4,21 +4,21 @@
     :name="name"
     :statuses="statuses"
   >
-    <template v-slot:header-buttons>
+    <template #header-buttons>
       <div class="buttons">
         <UnnnicTag
           class="action"
-          @click="$emit('action')"
           clickable
           :text="actionText"
           scheme="aux-blue"
+          @click="$emit('action')"
         />
 
         <UnnnicDropdown
           v-if="$slots.actions"
           position="bottom-left"
         >
-          <template v-slot:trigger>
+          <template #trigger>
             <UnnnicIcon
               size="sm"
               icon="navigation-menu-vertical-1"

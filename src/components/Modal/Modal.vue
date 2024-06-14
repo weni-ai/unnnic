@@ -62,8 +62,8 @@
             </div>
           </div>
           <div
-            class="unnnic-modal-container-background-report"
             v-if="hasAlertMessage"
+            class="unnnic-modal-container-background-report"
           >
             {{ alertMessage }}
           </div>
@@ -83,7 +83,7 @@
 import UnnnicIcon from '../Icon.vue';
 
 export default {
-  name: 'unnnic-modal',
+  name: 'UnnnicModal',
   components: {
     UnnnicIcon,
   },
@@ -119,6 +119,14 @@ export default {
     persistent: {
       type: Boolean,
       default: false,
+    },
+  },
+  computed: {
+    hasAlertMessage() {
+      return !(this.alertMessage === null || this.alertMessage.length === 0);
+    },
+    hasButton() {
+      return !!this.$slots.options;
     },
   },
   mounted() {
@@ -184,14 +192,6 @@ export default {
       }
 
       this.$emit('close');
-    },
-  },
-  computed: {
-    hasAlertMessage() {
-      return !(this.alertMessage === null || this.alertMessage.length === 0);
-    },
-    hasButton() {
-      return !!this.$slots.options;
     },
   },
 };

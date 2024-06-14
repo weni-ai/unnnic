@@ -17,9 +17,9 @@
       <path
         v-show="progress < totalProgress && progress > 0"
         id="path"
+        ref="background"
         fill="none"
         stroke-linecap="round"
-        ref="background"
         class="front"
         stroke-width="4px"
       ></path>
@@ -40,6 +40,12 @@ export default {
 
     totalProgress: {
       type: Number,
+    },
+  },
+
+  computed: {
+    progressChange() {
+      return `${this.progress}-${this.totalProgress}`;
     },
   },
 
@@ -96,12 +102,6 @@ export default {
           this.$refs.background.setAttribute('d', path);
         });
       },
-    },
-  },
-
-  computed: {
-    progressChange() {
-      return `${this.progress}-${this.totalProgress}`;
     },
   },
 };

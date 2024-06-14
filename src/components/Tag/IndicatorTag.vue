@@ -26,7 +26,7 @@ import UnnnicIcon from '../Icon.vue';
 import ToolTip from '../ToolTip/ToolTip.vue';
 
 export default {
-  name: 'unnnic-tag',
+  name: 'UnnnicTag',
   components: {
     UnnnicIcon,
     ToolTip,

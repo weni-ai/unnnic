@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'unnnic-comment',
+  name: 'UnnnicComment',
   components: {},
   props: {
     title: {

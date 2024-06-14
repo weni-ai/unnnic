@@ -175,9 +175,9 @@
     >
       <div class="options">
         <div
-          :class="['option', { selected: optionSelected === option.id }]"
           v-for="(option, index) in periodsLocale"
           :key="index"
+          :class="['option', { selected: optionSelected === option.id }]"
           @click="autoSelect(option.id)"
         >
           {{ option.name }}
@@ -215,11 +215,10 @@ import UnnnicI18n from '../../mixins/i18n';
 import UnnnicButton from '../Button/Button.vue';
 
 export default {
-  mixins: [UnnnicI18n],
-
   components: {
     UnnnicButton,
   },
+  mixins: [UnnnicI18n],
 
   props: {
     initialStartDate: String,

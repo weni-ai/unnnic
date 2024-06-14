@@ -12,8 +12,8 @@
       >
         <div
           v-if="title"
-          @click="$emit('update')"
           class="title unnnic-font bold title-sm color-neutral-darkest"
+          @click="$emit('update')"
         >
           {{ title }}
         </div>
@@ -55,20 +55,20 @@
         >
           <UnnnicButton
             v-if="$attrs.previous"
-            @click="$emit('previous')"
             size="small"
             type="tertiary"
             iconCenter="arrow-left-1-1"
             :disabled="previousDisabled"
+            @click="$emit('previous')"
           ></UnnnicButton>
 
           <UnnnicButton
             v-if="$attrs.next"
-            @click="$emit('next')"
             size="small"
             type="tertiary"
             iconCenter="arrow-right-1-1"
             :disabled="nextDisabled"
+            @click="$emit('next')"
           ></UnnnicButton>
         </div>
       </div>
@@ -103,11 +103,11 @@
         >
           <div class="bars">
             <UnnnicToolTip
-              enabled
               v-for="{ legend, index } in legends
                 .map((legend, index) => ({ legend, index }))
                 .filter(({ legend }) => group.values[legend])"
               :key="index"
+              enabled
               :text="`${group.title}: ${group.values[legend]}\n${legend}`"
               side="top"
               :style="{ height: `${(group.values[legend] / maxValue) * 100}%` }"

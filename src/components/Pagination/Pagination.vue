@@ -17,8 +17,8 @@
       :text="
         ['left-hidden', 'right-hidden'].includes(page) ? '...' : String(page)
       "
-      @click="selectPage(page)"
       :disabled="disabled"
+      @click="selectPage(page)"
     />
 
     <UnnnicButton

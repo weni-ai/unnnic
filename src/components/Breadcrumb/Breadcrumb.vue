@@ -5,12 +5,12 @@
       :key="crumb.name"
     >
       <div
-        @click="$emit('crumb-click', crumb)"
         :class="{
           'unnnic-breadcrumb__container__link': true,
           'unnnic-breadcrumb__container__link__active':
             index === crumbs.length - 1,
         }"
+        @click="$emit('crumb-click', crumb)"
       >
         {{ crumb.name }}
       </div>
@@ -31,7 +31,7 @@
 import UnnnicIcon from '../Icon.vue';
 
 export default {
-  name: 'unnnic-breadcrumb',
+  name: 'UnnnicBreadcrumb',
   components: { UnnnicIcon },
   props: {
     crumbs: {

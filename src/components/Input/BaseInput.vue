@@ -1,11 +1,11 @@
 <template>
   <input
     v-if="mask"
+    v-mask="mask"
     v-bind="attributes"
     :value="modelValue"
     :class="classes"
     :type="nativeType"
-    v-mask="mask"
   />
 
   <input
@@ -21,9 +21,6 @@
 import { mask } from 'vue-the-mask';
 
 export default {
-  data() {
-    return {};
-  },
   directives: { mask },
   props: {
     type: {
@@ -49,6 +46,9 @@ export default {
       type: [String, Array],
       default: '',
     },
+  },
+  data() {
+    return {};
   },
   computed: {
     attributes() {

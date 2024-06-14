@@ -1,7 +1,7 @@
 <template>
   <p
-    v-html="formattedText"
     class="unnnic-chats-message__text"
+    v-html="formattedText"
   />
 </template>
 
