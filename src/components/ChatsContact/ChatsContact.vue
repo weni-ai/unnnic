@@ -8,7 +8,7 @@
       'unread-messages': unreadMessages,
       waiting: waitingTime && !discussionGoal,
     }"
-    @click="$emit('click')"
+    @click.stop="$emit('click', $event)"
     @keypress.enter="$emit('click')"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
@@ -100,6 +100,8 @@ export default {
     TransitionRipple,
     Checkbox,
   },
+
+  emits: ['click'],
 
   props: {
     title: {
