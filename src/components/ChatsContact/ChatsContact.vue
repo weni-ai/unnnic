@@ -9,7 +9,7 @@
       waiting: waitingTime && !discussionGoal,
     }"
     :tabindex="0"
-    @click="$emit('click')"
+    @click.stop="$emit('click', $event)"
     @keypress.enter="$emit('click')"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
@@ -99,6 +99,8 @@ export default {
     Checkbox,
   },
 
+  emits: ['click'],
+  
   mixins: [UnnnicI18n],
 
   props: {
