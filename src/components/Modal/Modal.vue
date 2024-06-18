@@ -28,7 +28,7 @@
               />
             </div>
             <div
-              v-if="$slots.icon"
+              v-if="hasIcon"
               class="unnnic-modal-container-background-body__icon-slot"
             >
               <slot name="icon"></slot>
@@ -126,7 +126,10 @@ export default {
       return !(this.alertMessage === null || this.alertMessage.length === 0);
     },
     hasButton() {
-      return !!this.$slots.options;
+      return !!this.$slots.options?.().length;
+    },
+    hasIcon() {
+      return !!this.$slots.icon?.().length;
     },
   },
   mounted() {
