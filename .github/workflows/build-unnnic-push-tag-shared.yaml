@@ -3,8 +3,8 @@ name: Build unnnic in Shared (Push Tag)
 on:
   push:
     tags:
-      - '*.*.*-develop.*'
-      - '*.*.*-staging.*'
+      - '*.*.*-develop'
+      - '*.*.*-staging'
 
 jobs:
   docker:

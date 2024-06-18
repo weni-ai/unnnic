@@ -1,0 +1,36 @@
+name: Publish Pre Release Package to npmjs
+
+on:
+  push:
+    tags:
+      - '*.*.*-develop'
+
+jobs:
+  publish-npm-pre-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: https://registry.npmjs.org/
+          scope: '@weni'
+      - name: Install Dependencies
+        run: yarn
+      - name: Run Lint
+        run: yarn lint --fix --quiet
+      - name: Build Bundle
+        run: yarn build
+      - name: Configure Git identity
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "GitHub Actions Bot"
+      - name: Create Pre Release Version
+        run: |
+          yarn version --prerelease --preid alpha
+          git push origin HEAD:develop
+          git push --tags
+      - name: Publish Package
+        run: yarn publish
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
