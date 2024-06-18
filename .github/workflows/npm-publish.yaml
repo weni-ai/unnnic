@@ -1,9 +1,11 @@
-name: Publish Node.js Package
+name: Publish Package to npmjs
 
 on:
   push:
-    tags:
-      - '[0-9]+.[0-9]+.[0-9]+'
+    branches:    
+      - 'main'
+    paths:
+      - 'package.json'
 
 jobs:
   publish-npm:
@@ -21,6 +23,15 @@ jobs:
         run: yarn lint --fix --quiet
       - name: Build Bundle
         run: yarn build-bundle
+      - name: Configure Git identity
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "GitHub Actions Bot"
+      - name: Create Package Version Tag
+        run: |
+          VERSION=$(jq -r '.version' < package.json)
+          git tag "v$VERSION"
+          git push --tags
       - name: Publish Package
         run: yarn publish
         env:
