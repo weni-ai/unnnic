@@ -66,7 +66,7 @@
     <TablePagination
       :modelValue="pagination"
       :total="treatedPaginationTotal"
-      :interval="rows.length"
+      :interval="paginationInterval"
       @update:model-value="$emit('update:pagination', $event)"
     />
   </table>
@@ -126,6 +126,10 @@ export default {
       default: 1,
     },
     paginationTotal: {
+      type: Number,
+      default: 1,
+    },
+    paginationInterval: {
       type: Number,
       default: 1,
     },
