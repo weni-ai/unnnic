@@ -44,6 +44,7 @@ export default {
       :rows="args.rows || table.rows"
       v-model:pagination="pagination"
       :paginationTotal="125"
+      :paginationInterval="5"
     />
     `,
   }),
