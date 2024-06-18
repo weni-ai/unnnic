@@ -33,7 +33,7 @@
             :target="row.link.target || '_blank'"
           >
             <TableBodyCell
-              v-for="(cell, index) of row.content"
+              v-for="cell of row.content"
               :key="cell + index"
               class="unnnic-table-next__body-cell"
               :cell="cell"
@@ -41,7 +41,7 @@
           </a>
           <template v-else>
             <TableBodyCell
-              v-for="(cell, index) of row.content"
+              v-for="cell of row.content"
               :key="cell + index"
               class="unnnic-table-next__body-cell"
               :cell="cell"
@@ -61,7 +61,7 @@
       :value="pagination"
       @input="$emit('update:pagination', $event)"
       :total="treatedPaginationTotal"
-      :interval="rows.length"
+      :interval="paginationInterval"
     />
   </table>
 </template>
@@ -120,6 +120,10 @@ export default {
       default: 1,
     },
     paginationTotal: {
+      type: Number,
+      default: 1,
+    },
+    paginationInterval: {
       type: Number,
       default: 1,
     },
