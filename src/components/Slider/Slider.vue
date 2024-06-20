@@ -186,7 +186,7 @@ export default {
       const intervalId = setInterval(() => {
         const inputElement = this.$refs.input;
         if (inputElement) {
-          const offsetWidth = inputElement.offsetWidth;
+          const { offsetWidth } = inputElement;
           if (offsetWidth > 0) {
             this.sliderWidth = offsetWidth;
             this.configureTooltip();
@@ -197,13 +197,16 @@ export default {
     },
     checkTooltipLabelWidth() {
       const intervalId = setInterval(() => {
-        if (this.$refs.tooltip && this.$refs.tooltip.$refs.label) {
-          const offsetWidth = this.$refs.tooltip.$refs.label.clientWidth;
-          if (offsetWidth > 0) {
-            this.labelWidth = offsetWidth;
-            this.configureTooltip();
-            clearInterval(intervalId);
-          }
+        const tooltipLabel = this.$refs.tooltip?.$refs.label;
+        if (!tooltipLabel) {
+          return;
+        }
+
+        const { clientWidth } = tooltipLabel;
+        if (clientWidth > 0) {
+          this.labelWidth = clientWidth;
+          this.configureTooltip();
+          clearInterval(intervalId);
         }
       }, 100);
     },
