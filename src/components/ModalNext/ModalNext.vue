@@ -71,11 +71,11 @@
           </div>
 
           <div
-            v-if="$slots.title || title"
+            v-if="$slots.title?.().length || title"
             class="title"
           >
             <slot
-              v-if="$slots.title"
+              v-if="$slots.title?.().length"
               name="title"
             ></slot>
 
@@ -83,13 +83,14 @@
           </div>
 
           <div
-            v-if="$slots.description || description"
+            v-if="$slots.description?.().length || description"
             class="description"
           >
             <slot
-              v-if="$slots.description"
+              v-if="$slots.description?.().length"
               name="description"
-            ></slot>
+            >
+          </slot>
 
             <template v-else>{{ description }}</template>
           </div>
@@ -118,7 +119,7 @@
               type="tertiary"
               :disabled="actionPrimaryLoading"
               @click="
-                $attrs['click-action-secondary']
+                $attrs['onClickActionSecondary']
                   ? $emit('click-action-secondary', { close: justClose })
                   : $emit('close')
               "
@@ -137,7 +138,7 @@
               :disabled="disabled || actionPrimaryLoading"
               :loading="actionPrimaryLoading"
               @click="
-                $attrs['click-action-primary']
+                $attrs['onClickActionPrimary']
                   ? $emit('click-action-primary', { close: justClose })
                   : null
               "
@@ -157,6 +158,7 @@ import UnnnicInput from '../Input/Input.vue';
 import UnnnicButton from '../Button/Button.vue';
 
 export default {
+  name: "UnnnicModalNext",
   components: {
     UnnnicIcon,
     UnnnicInput,
@@ -190,7 +192,7 @@ export default {
     showCloseButton: Boolean,
   },
 
-  emits: ['close', 'click-action-primary', 'click-action-secondary'],
+  emits: ['close'],
 
   data() {
     return {
