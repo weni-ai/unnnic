@@ -179,13 +179,16 @@ export default {
     },
     checkTooltipLabelWidth() {
       const intervalId = setInterval(() => {
-        if (this.$refs.tooltip && this.$refs.tooltip.$refs.label) {
-          const { clientWidth } = this.$refs.tooltip.$refs.label;
-          if (clientWidth > 0) {
-            this.labelWidth = clientWidth;
-            this.configureTooltip();
-            clearInterval(intervalId);
-          }
+        const tooltipLabel = this.$refs.tooltip?.$refs.label
+        if (!tooltipLabel) {
+          return;
+        }
+        
+        const { clientWidth } = tooltipLabel;
+        if (clientWidth > 0) {
+          this.labelWidth = clientWidth;
+          this.configureTooltip();
+          clearInterval(intervalId);
         }
       }, 100);
     },
