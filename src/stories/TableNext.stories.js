@@ -19,6 +19,7 @@ const Template = (args, { argTypes }) => ({
       :rows="$props.rows || table.rows"
       :pagination.sync="pagination"
       :paginationTotal="125"
+      :paginationInterval="5"
     />
   `,
 
