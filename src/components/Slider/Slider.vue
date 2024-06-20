@@ -147,8 +147,9 @@ export default {
       if (this.$refs.input) {
         this.sliderWidth = this.$refs.input.clientWidth;
       }
-      if (this.$refs.tooltip && this.$refs.tooltip.$refs.label) {
-        this.labelWidth = this.$refs.tooltip.$refs.label.clientWidth || 32;
+      const tooltipLabel = this.$refs.tooltip?.$refs.label
+      if (tooltipLabel) {
+        this.labelWidth = tooltipLabel.clientWidth || 32;
       }
       this.tooltipOffset = this.getNewTooltipPosition();
     },
