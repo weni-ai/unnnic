@@ -183,7 +183,8 @@ export const AlertWithActionButtons = {
     confirmButtonType: undefined,
     actionPrimaryLabel: 'Confirm',
     actionSecondaryLabel: 'Cancel',
-    actionPrimaryButtonType: undefined,
     showCloseButton: true,
+    onClickActionSecondary: () => console.log('secondary click'),
+    onClickActionPrimary: () => console.log('primary click'),
   },
 };
