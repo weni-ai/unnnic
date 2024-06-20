@@ -80,6 +80,7 @@ import ChartFunnel from './ChartFunnel/ChartFunnel.vue';
 import Disclaimer from './Disclaimer/Disclaimer.vue';
 import Drawer from './Drawer/Drawer.vue';
 import TableNext from './TableNext/TableNext.vue';
+import ModalNext from './ModalNext/ModalNext.vue';
 
 export const components = {
   unnnicFormElement: formElement,
@@ -112,6 +113,7 @@ export const components = {
   unnnicRadio: radio,
   unnnicLanguageSelect: languageSelect,
   unnnicModal: modal,
+  unnnicModalNext: ModalNext,
   unnnicModalUpload: modalUpload,
   unnnicSelectSmart: selectSmart,
   // unnnicSelect: select,
@@ -198,6 +200,7 @@ export const unnnicCollapse = collapse;
 export const unnnicRadio = radio;
 export const unnniclanguageSelect = languageSelect;
 export const unnnicModal = modal;
+export const unnnicModalNext= ModalNext;
 export const unnnicModalUpload = modalUpload;
 export const unnnicSelectSmart = selectSmart;
 // export const unnnicSelect = select;
