@@ -161,11 +161,8 @@ export default {
     window.removeEventListener('resize', this.handleResize);
   },
   mounted() {
-    const fallbackLabelWidth = 32 + this.sliderVal.toString().length * 4.5;
-    this.sliderWidth = this.$refs.input.clientWidth;
-    this.labelWidth =
-      this.$refs.tooltip.$refs.label.clientWidth || fallbackLabelWidth;
-    this.tooltipOffset = this.getNewTooltipPosition();
+    this.checkInputWidth();
+    this.checkTooltipLabelWidth();
   },
   methods: {
     configureTooltip() {
@@ -185,9 +182,37 @@ export default {
 
       this.handleValueChange();
     },
+    checkInputWidth() {
+      const intervalId = setInterval(() => {
+        const inputElement = this.$refs.input;
+        if (inputElement) {
+          const offsetWidth = inputElement.offsetWidth;
+          if (offsetWidth > 0) {
+            this.sliderWidth = offsetWidth;
+            this.configureTooltip();
+            clearInterval(intervalId);
+          }
+        }
+      }, 100);
+    },
+    checkTooltipLabelWidth() {
+      const intervalId = setInterval(() => {
+        if (this.$refs.tooltip && this.$refs.tooltip.$refs.label) {
+          const offsetWidth = this.$refs.tooltip.$refs.label.clientWidth;
+          if (offsetWidth > 0) {
+            this.labelWidth = offsetWidth;
+            this.configureTooltip();
+            clearInterval(intervalId);
+          }
+        }
+      }, 100);
+    },
     getNewTooltipPosition() {
-      const haldThumbWidth = 12 / 2;
-      const halfLabelWidth = (this.labelWidth === 0 ? 32 : this.labelWidth) / 2;
+      if (this.sliderWidth === 0 || this.labelWidth === 0) {
+        return 0;
+      }
+      const halfThumbWidth = 12 / 2;
+      const halfLabelWidth = this.labelWidth / 2 || 16;
       const centerPosition = this.sliderWidth / 2;
 
       let percentOfRange =
@@ -199,7 +224,7 @@ export default {
       const valuePXPosition = percentOfRange * this.sliderWidth;
       const distFromCenter = valuePXPosition - centerPosition;
       const percentDistFromCenter = distFromCenter / centerPosition;
-      const offset = percentDistFromCenter * haldThumbWidth;
+      const offset = percentDistFromCenter * halfThumbWidth;
 
       const finalLabelPosition = valuePXPosition - halfLabelWidth - offset;
       return finalLabelPosition;
