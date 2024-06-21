@@ -1,6 +1,8 @@
 import unnnicModalNext from '../components/ModalNext/ModalNext.vue';
 import icons from '../utils/icons';
 
+import { action } from '@storybook/addon-actions';
+
 const iconsOptions = Object.keys(icons);
 
 const schemesOptions = [
@@ -183,7 +185,8 @@ export const AlertWithActionButtons = {
     confirmButtonType: undefined,
     actionPrimaryLabel: 'Confirm',
     actionSecondaryLabel: 'Cancel',
-    actionPrimaryButtonType: undefined,
     showCloseButton: true,
+    onClickActionSecondary: action('click-action-secondary'),
+    onClickActionPrimary: action('click-action-primay'),
   },
 };
