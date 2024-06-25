@@ -56,7 +56,7 @@
         class="unnnic-import-card__buttons__delete"
         size="small"
         :iconCenter="`close-1`"
-        type="primary"
+        type="warning"
         @click="emitDeletion"
       />
     </div>
@@ -196,21 +196,6 @@ export default {
         svg {
           & .primary {
             fill: $unnnic-color-brand-weni;
-          }
-        }
-      }
-    }
-
-    &__delete {
-      background-color: rgba(
-        $unnnic-color-feedback-red,
-        $unnnic-opacity-level-light
-      );
-
-      :deep(.unnnic-icon) {
-        svg {
-          & .primary {
-            fill: $unnnic-color-feedback-red;
           }
         }
       }
