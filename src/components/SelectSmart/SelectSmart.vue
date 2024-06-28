@@ -308,8 +308,6 @@ export default {
     }
 
     if (this.modelValue?.[0] && this.modelValue?.[0].value) {
-      this.modelValue.forEach((option) => this.selectOption(option));
-
       if (this.isAutocompleteAllowed) {
         this.$nextTick(() => {
           this.searchValue = this.selectedLabel;

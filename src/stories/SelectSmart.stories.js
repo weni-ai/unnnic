@@ -13,7 +13,10 @@ export default {
     },
     data() {
       return {
-        exampleValue: [],
+        exampleValue: [
+          { value: 'united_states', label: 'Estados Unidos' },
+          { value: 'south_korea', label: 'Coreia do Sul' },
+        ],
       };
     },
     template: `
