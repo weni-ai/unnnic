@@ -9,75 +9,75 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-* Export `UnnnicAlert` component.
+- Export `UnnnicAlert` component.
 
 ## 2.0.30 (2024-06-28)
 
 ### Fixed
 
-* When started with an item selected, that item was duplicated in the selection of the smart select when multiple selection was enabled.
+- When started with an item selected, that item was duplicated in the selection of the smart select when multiple selection was enabled.
 
 ## 2.0.29 (2024-06-25)
 
 ### Fixed
 
-* Correction in the visual of the remove file button in the file upload modal.
+- Correction in the visual of the remove file button in the file upload modal.
 
 ## 2.0.28 (2024-06-21)
 
 ### Fixed
 
-* Correction in the listener check on $attrs. This was preventing the correct operation of the listeners.
+- Correction in the listener check on $attrs. This was preventing the correct operation of the listeners.
 
 ## 2.0.27 (2024-06-20)
 
 ### Fixed
 
-* Adding ModalNext export component, before this it is not possible to use the component.
+- Adding ModalNext export component, before this it is not possible to use the component.
 
 ## 2.0.26 (2024-06-20)
 
 ### Added
 
-* Migrated ModalNext to Vue 3.
+- Migrated ModalNext to Vue 3.
 
 ## 2.0.25 (2024-06-20)
 
 ### Fixed
 
-* The slider component had a bug in the tooltip positioning when initialized with an initialValue. This was fixed in this version by normalizing the tooltip positioning.
+- The slider component had a bug in the tooltip positioning when initialized with an initialValue. This was fixed in this version by normalizing the tooltip positioning.
 
 ## 2.0.24 (2024-06-18)
 
 ### Fixed
 
-* The interval of TableNext component automatically calculated the pagination interval, generating a bug when the request was on the last page and it did not return the rows.length of other requests. This was fixed by adding a prop to receive the range in a fixed way.
+- The interval of TableNext component automatically calculated the pagination interval, generating a bug when the request was on the last page and it did not return the rows.length of other requests. This was fixed by adding a prop to receive the range in a fixed way.
 
 ## 2.0.23 (2024-06-14)
 
 ### Fixed
 
-* Bug fix in the ChatsContact component that triggered the click event twice.
+- Bug fix in the ChatsContact component that triggered the click event twice.
 
 ## 2.0.22 (2024-06-12)
 
 ### Added
 
-* Tag creation in the workflow when a new official version is released on npmjs.
+- Tag creation in the workflow when a new official version is released on npmjs.
 
 ## 2.0.21 (2024-06-12)
 
 ### Added
 
-* Project changelog file.
-* Created `Publish Pre Release Package to npmjs` workflow to publish alpha versions when a new version goes up to the staging environment from tags with the pattern `x.x.x-staging`.
+- Project changelog file.
+- Created `Publish Pre Release Package to npmjs` workflow to publish alpha versions when a new version goes up to the staging environment from tags with the pattern `x.x.x-staging`.
 
 ### Fixed
 
-* Updated the eslint version to fix dependency conflicts and ran lint again.
+- Updated the eslint version to fix dependency conflicts and ran lint again.
 
 ### Changed
 
-* Node version of Dockerfile to `20.14.0`.
+- Node version of Dockerfile to `20.14.0`.
 
 
