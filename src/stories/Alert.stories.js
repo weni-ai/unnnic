@@ -7,50 +7,34 @@ export default {
   title: 'example/Alert',
   component: UnnnicAlert,
   argTypes: {
-    text: { control: { type: 'text' } },
-    showCloseButton: { control: { type: 'boolean' } },
-    title: { control: { type: 'text' } },
-    closeText: { control: { type: 'text' } },
-    scheme: {
+    type: {
       control: {
         type: 'select',
-        options: [
-          'feedback-red',
-          'feedback-green',
-          'feedback-yellow',
-          'feedback-blue',
-          'feedback-grey',
-          'aux-blue',
-          'aux-purple',
-          'aux-orange',
-          'aux-lemon',
-          'aux-pink',
-        ],
+      },
+      options: ['default', 'success', 'error'],
+    },
+
+    text: {
+      control: {
+        type: 'text',
       },
     },
-    position: {
+
+    linkHref: {
       control: {
-        type: 'select',
-        options: [
-          'top-left',
-          'top-right',
-          'bottom-left',
-          'bottom-right',
-          'bottom-center',
-        ],
+        type: 'text',
       },
     },
-    icon: {
+
+    linkText: {
       control: {
-        type: 'select',
-        options: ['check-circle-1-1', 'check-circle-1-1-1', 'alert-circle-1-1'],
+        type: 'text',
       },
     },
-    seconds: { control: { type: 'number' } },
-    version: {
+
+    linkTarget: {
       control: {
-        type: 'select',
-        options: ['1.0', '1.1'],
+        type: 'text',
       },
     },
   },
@@ -62,14 +46,39 @@ export const Normal = {
     setup() {
       return { args };
     },
+
+    data() {
+      return {
+        alert: null,
+      };
+    },
+
     methods: {
       unnnicCallAlert() {
         alert.callAlert({ props: this.args, seconds: this.args.seconds });
       },
+
+      showAlertAsInlineComponent() {
+        this.alert = {
+          ...this.args,
+        };
+      },
     },
     template: `
     <div>
-      <button @click="unnnicCallAlert">Click for alert</button>
+      <button @click="unnnicCallAlert">Click for alert as callAlert function</button>
+
+      <br />
+
+      <button @click="showAlertAsInlineComponent">Click for alert as inline component</button>
+
+      <UnnnicAlert
+        v-if="alert"
+        v-bind="alert"
+        @close="alert = null"
+      />
+
+      <pre>{{ alert }}</pre>
 
     <h3>Refactoring changes:</h3>
 
@@ -97,8 +106,6 @@ export const Normal = {
   args: {
     title: 'Title',
     text: 'Text',
-    icon: 'check-circle-1-1',
-    scheme: 'feedback-green',
   },
 };
 

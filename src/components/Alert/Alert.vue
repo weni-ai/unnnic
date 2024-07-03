@@ -78,6 +78,7 @@ export default {
     },
     closeText: {
       type: String,
+      default: '',
     },
     position: {
       type: String,
@@ -85,15 +86,19 @@ export default {
     },
     linkHref: {
       type: String,
+      default: '',
     },
     linkTarget: {
       type: String,
+      default: '',
     },
     linkText: {
       type: String,
+      default: '',
     },
     type: {
       type: String,
+      default: '',
     },
   },
 };

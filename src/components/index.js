@@ -35,7 +35,7 @@ import selectSmart from './SelectSmart/SelectSmart.vue';
 import selectItem from './Select/SelectItem.vue';
 // import selectListItem from './SelectListItem/SelectListItem.vue';
 import multiSelect from './MultiSelect/MultiSelect.vue';
-// import alert from './Alert/Alert.vue';
+import alert from './Alert/Alert.vue';
 // import autocomplete from './Input/Autocomplete.vue';
 // import autocompleteSelect from './AutocompleteSelect/AutocompleteSelect.vue';
 import tag from './Tag/Tag.vue';
