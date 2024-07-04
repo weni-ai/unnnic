@@ -29,7 +29,30 @@ export const Normal = {
     },
     template: `
       <unnnic-modal-dialog v-bind="args">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod <br>
       </unnnic-modal-dialog>
     `,
   }),
@@ -38,5 +61,7 @@ export const Normal = {
     primaryButtonText: 'Primary',
     showCloseIcon: true,
     type: 'attention',
+    showActionsDivider: false,
+    modelValue: true,
   },
 };

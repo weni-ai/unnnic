@@ -1,48 +1,67 @@
 <template>
-  <section :class="['unnnic-modal-dialog', `unnnic-modal-dialog--${size}`]">
-    <header
-      v-if="title"
-      class="unnnic-modal-dialog__header"
-    >
-      <section class="unnnic-modal-dialog__title-container">
-        <UnnnicIcon
-          v-if="icon || type"
-          class="unnnic-modal-dialog__title-icon"
-          :icon="icon || iconsMapper[type].icon"
-          :scheme="iconScheme || iconsMapper[type].scheme"
-          size="md"
-        />
-        <h1 class="unnnic-modal-dialog__title-text">{{ title }}</h1>
-      </section>
-      <UnnnicIcon
-        v-if="showCloseIcon"
-        icon="close"
-        clickable
-        @click="$emit('close')"
-      />
-    </header>
-    <section class="unnnic-modal-dialog__content">
-      <slot></slot>
-    </section>
+  <section
+    v-if="modelValue"
+    class="unnnic-modal-dialog"
+  >
     <section
-      v-if="primaryButtonText"
+      class="unnnic-modal-dialog__overlay"
+      @click.stop="!persistent && close()"
+    />
+    <section
       :class="[
-        'unnnic-modal-dialog__actions',
-        showActionsDivider && 'unnnic-modal-dialog__actions--divider',
+        'unnnic-modal-dialog__container',
+        `unnnic-modal-dialog__container--${size}`,
       ]"
     >
-      <UnnnicButton
-        type="tertiary"
-        :text="secondaryButtonText || i18n('cancel')"
-        @click.stop="
-          secondaryButtonText ? $emit('secondaryButtonClick') : $emit('close')
-        "
-      />
-      <UnnnicButton
-        :type="primaryButtonType || primaryButtonTypeMapper[type] || 'primary'"
-        :text="primaryButtonText"
-        @click.stop="$emit('primaryButtonClick')"
-      />
+      <header
+        v-if="title"
+        class="unnnic-modal-dialog__container__header"
+      >
+        <section class="unnnic-modal-dialog__container__title-container">
+          <UnnnicIcon
+            v-if="icon || type"
+            class="unnnic-modal-dialog__container__title-icon"
+            :icon="icon || iconsMapper[type].icon"
+            :scheme="iconScheme || iconsMapper[type].scheme"
+            size="md"
+          />
+          <h1 class="unnnic-modal-dialog__container__title-text">
+            {{ title }}
+          </h1>
+        </section>
+        <UnnnicIcon
+          v-if="showCloseIcon"
+          icon="close"
+          clickable
+          @click="close()"
+        />
+      </header>
+      <section class="unnnic-modal-dialog__container__content">
+        <slot></slot>
+      </section>
+      <section
+        v-if="primaryButtonText"
+        :class="[
+          'unnnic-modal-dialog__container__actions',
+          showActionsDivider &&
+            'unnnic-modal-dialog__container__actions--divider',
+        ]"
+      >
+        <UnnnicButton
+          type="tertiary"
+          :text="secondaryButtonText || i18n('cancel')"
+          @click.stop="
+            secondaryButtonText ? $emit('secondaryButtonClick') : close()
+          "
+        />
+        <UnnnicButton
+          :type="
+            primaryButtonType || primaryButtonTypeMapper[type] || 'primary'
+          "
+          :text="primaryButtonText"
+          @click.stop="$emit('primaryButtonClick')"
+        />
+      </section>
     </section>
   </section>
 </template>
@@ -60,6 +79,14 @@ export default {
   },
   mixins: [UnnnicI18n],
   props: {
+    modelValue: {
+      type: Boolean,
+      required: true,
+    },
+    persistent: {
+      type: Boolean,
+      default: false,
+    },
     type: {
       type: String,
       default: '',
@@ -107,7 +134,7 @@ export default {
       default: false,
     },
   },
-  emits: ['close', 'primaryButtonClick', 'secondaryButtonClick'],
+  emits: ['primaryButtonClick', 'secondaryButtonClick', 'update:modelValue'],
 
   data() {
     return {
@@ -130,6 +157,11 @@ export default {
       },
     };
   },
+  methods: {
+    close() {
+      this.$emit('update:modelValue', false);
+    },
+  },
 };
 </script>
 
@@ -141,8 +173,30 @@ export default {
   box-sizing: border-box;
 }
 .unnnic-modal-dialog {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+
+  &__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.unnnic-modal-dialog__container {
+  background: $unnnic-color-neutral-white;
   border-radius: $unnnic-spacing-xs;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+  position: fixed;
+
   &--sm {
     width: 400px;
   }
