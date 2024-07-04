@@ -192,10 +192,13 @@ export default {
 }
 
 .unnnic-modal-dialog__container {
+  display: flex;
+  flex-direction: column;
   background: $unnnic-color-neutral-white;
   border-radius: $unnnic-spacing-xs;
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
   position: fixed;
+  max-height: calc(100vh - $unnnic-spacing-md * 2);
 
   &--sm {
     width: 400px;
@@ -213,6 +216,7 @@ export default {
     align-items: center;
     border-bottom: 1px solid $unnnic-color-neutral-soft;
     padding: $unnnic-spacing-md;
+    flex-shrink: 0;
   }
 
   &__title-container {
@@ -236,12 +240,29 @@ export default {
   &__content {
     padding: $unnnic-spacing-md;
     color: $unnnic-color-neutral-cloudy;
+    flex-grow: 1;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      width: $unnnic-spacing-inline-nano;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $unnnic-color-neutral-cleanest;
+      border-radius: $unnnic-border-radius-pill;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $unnnic-color-neutral-soft;
+      border-radius: $unnnic-border-radius-pill;
+    }
   }
 
   &__actions {
     display: flex;
     gap: 16px;
     padding: $unnnic-spacing-md;
+    flex-shrink: 0;
     > * {
       flex-grow: 1;
     }
