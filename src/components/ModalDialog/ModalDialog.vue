@@ -242,6 +242,7 @@ export default {
     color: $unnnic-color-neutral-cloudy;
     flex-grow: 1;
     overflow-y: auto;
+    font-family: $unnnic-font-family-secondary;
 
     &::-webkit-scrollbar {
       width: $unnnic-spacing-inline-nano;
