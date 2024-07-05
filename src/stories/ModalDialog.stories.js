@@ -1,26 +1,40 @@
 import UnnnicModalDialog from '../components/ModalDialog/ModalDialog.vue';
 import { action } from '@storybook/addon-actions';
+import iconsList from '../utils/iconList';
+import colorsList from '../utils/colorsList';
 
 export default {
-  title: 'Components/ModalDialog',
+  title: 'Example/ModalDialog',
   component: UnnnicModalDialog,
   argTypes: {
     type: {
       control: {
         type: 'select',
-        options: ['success', 'warning', 'attention', ''],
       },
+      options: ['', 'success', 'warning', 'attention'],
     },
     size: {
-      control: { type: 'select', options: ['sm', 'md', 'lg'] },
+      control: { type: 'select' },
+      options: ['sm', 'md', 'lg'],
     },
-    icon: { control: 'text' },
-    iconScheme: { control: 'text' },
+    icon: { options: ['', ...iconsList], control: { type: 'select' } },
+    iconScheme: { control: { type: 'select' }, options: ['', ...colorsList] },
     title: { control: 'text' },
     showCloseIcon: { control: 'boolean' },
     primaryButtonText: { control: 'text' },
     secondaryButtonText: { control: 'text' },
-    primaryButtonType: { control: 'text' },
+    primaryButtonType: {
+      control: { type: 'select' },
+      options: [
+        '',
+        'primary',
+        'secondary',
+        'tertiary',
+        'alternative',
+        'warning',
+        'attention',
+      ],
+    },
     showActionsDivider: { control: 'boolean' },
     persistent: { control: 'boolean' },
   },
@@ -37,17 +51,23 @@ export default {
 const Template = (args) => ({
   components: { UnnnicModalDialog },
   setup() {
-    return { args };
+    const updateModelValue = (value) => {
+      action('update:modelValue')(value);
+      args.modelValue = value;
+    };
+    return { args, updateModelValue };
   },
   template: `
-    <unnnic-modal-dialog v-bind="args" @primaryButtonClick="primaryButtonClick" @update:modelValue="updateModelValue">
+  <div>
+    <button @click="updateModelValue(true)">open modal</button>
+    <unnnic-modal-dialog v-bind="args" @primaryButtonClick="primaryButtonClick" @secondaryButtonClick="secondaryButtonClick" @update:modelValue="updateModelValue">
       <template v-slot>Slot content here</template>
     </unnnic-modal-dialog>
+  </div>
   `,
   methods: {
     primaryButtonClick: action('primaryButtonClick'),
     secondaryButtonClick: action('secondaryButtonClick'),
-    updateModelValue: action('update:modelValue'),
   },
 });
 

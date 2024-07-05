@@ -21,8 +21,8 @@
           <UnnnicIcon
             v-if="icon || type"
             class="unnnic-modal-dialog__container__title-icon"
-            :icon="icon || iconsMapper[type].icon"
-            :scheme="iconScheme || iconsMapper[type].scheme"
+            :icon="icon || iconsMapper[type]?.icon"
+            :scheme="iconScheme || iconsMapper[type]?.scheme"
             size="md"
           />
           <h1 class="unnnic-modal-dialog__container__title-text">
