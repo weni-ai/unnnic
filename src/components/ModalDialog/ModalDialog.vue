@@ -199,6 +199,7 @@ export default {
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
   position: fixed;
   max-height: calc(100vh - $unnnic-spacing-md * 2);
+  overflow: hidden;
 
   &--sm {
     width: 400px;
