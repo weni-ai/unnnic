@@ -157,6 +157,12 @@ export default {
       },
     };
   },
+  watch: {
+    modelValue(value) {
+      if (value) document.body.style.overflow = 'hidden';
+      else document.body.style.overflow = '';
+    },
+  },
   methods: {
     close() {
       this.$emit('update:modelValue', false);
@@ -171,6 +177,9 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+body {
+  overflow: hidden;
 }
 .unnnic-modal-dialog {
   width: 100vw;
