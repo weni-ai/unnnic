@@ -178,9 +178,6 @@ export default {
   padding: 0;
   box-sizing: border-box;
 }
-body {
-  overflow: hidden;
-}
 .unnnic-modal-dialog {
   width: 100vw;
   height: 100vh;
