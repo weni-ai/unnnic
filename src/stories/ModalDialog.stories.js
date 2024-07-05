@@ -41,7 +41,7 @@ export default {
     persistent: { control: 'boolean' },
   },
   args: {
-    modelValue: true,
+    modelValue: false,
     title: 'Default Modal',
     type: '',
     size: 'md',
@@ -61,7 +61,7 @@ const Template = (args) => ({
   },
   template: `
   <div>
-    <button @click="updateModelValue(true)">open modal</button>
+    <button @click="updateModelValue(true)">Open Modal</button>
     <unnnic-modal-dialog v-bind="args" @primaryButtonClick="primaryButtonClick" @secondaryButtonClick="secondaryButtonClick" @update:modelValue="updateModelValue">
       <template v-slot>Slot content here</template>
     </unnnic-modal-dialog>
@@ -84,7 +84,7 @@ const TemplateOverflowed = (args) => ({
   },
   template: `
   <div>
-    <button @click="updateModelValue(true)">open modal</button>
+    <button @click="updateModelValue(true)">Open Modal</button>
     <unnnic-modal-dialog v-bind="args" @primaryButtonClick="primaryButtonClick" @secondaryButtonClick="secondaryButtonClick" @update:modelValue="updateModelValue">
       <p style="margin: 0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non gravida velit. Mauris feugiat bibendum elit, ac semper tortor tempor quis. Maecenas ullamcorper condimentum ligula. Proin a rutrum enim. Nulla egestas porttitor congue. Suspendisse maximus, ante finibus aliquet hendrerit, metus nulla eleifend justo, et venenatis augue justo id ligula. Aenean convallis massa ligula, at scelerisque metus elementum at. Nulla facilisi. Integer imperdiet bibendum hendrerit. Etiam lobortis congue commodo. In dapibus odio sapien, ac volutpat lorem porta at.</p>
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non gravida velit. Mauris feugiat bibendum elit, ac semper tortor tempor quis. Maecenas ullamcorper condimentum ligula. Proin a rutrum enim. Nulla egestas porttitor congue. Suspendisse maximus, ante finibus aliquet hendrerit, metus nulla eleifend justo, et venenatis augue justo id ligula. Aenean convallis massa ligula, at scelerisque metus elementum at. Nulla facilisi. Integer imperdiet bibendum hendrerit. Etiam lobortis congue commodo. In dapibus odio sapien, ac volutpat lorem porta at.</p>
@@ -113,7 +113,7 @@ const TemplateForm = (args) => ({
   },
   template: `
   <div>
-    <button @click="updateModelValue(true)">open modal</button>
+    <button @click="updateModelValue(true)">Open Modal</button>
     <unnnic-modal-dialog v-bind="args" @primaryButtonClick="primaryButtonClick" @secondaryButtonClick="secondaryButtonClick" @update:modelValue="updateModelValue">
       <p style="margin-top: 0;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non gravida velit. Mauris feugiat bibendum elit, ac semper tortor tempor quis.</p>
       <form>
@@ -144,7 +144,7 @@ const TemplateImage = (args) => ({
   },
   template: `
   <div>
-    <button @click="updateModelValue(true)">open modal</button>
+    <button @click="updateModelValue(true)">Open Modal</button>
     <unnnic-modal-dialog v-bind="args" @primaryButtonClick="primaryButtonClick" @secondaryButtonClick="secondaryButtonClick" @update:modelValue="updateModelValue">
       <section style="display: flex; flex-direction: column; align-items: center; gap: 24px">
         <img height='120' width='120' src="./doris.png"/>

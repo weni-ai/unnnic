@@ -1,0 +1,64 @@
+import { Meta, Source, Story } from '@storybook/blocks';
+
+import * as ModalDialogStories from './ModalDialog.stories';
+
+<Meta of={ModalDialogStories}/>
+
+# ModalDialog
+
+The ModalDialog was designed to inform the user about a specific task, request information, or involve other tasks.
+
+<Source
+  language='html'
+  dark
+  code={`
+    <UnnnicModalDialog v-model="showModal">
+    <p>Modal Content</p>
+</UnnnicModalDialog>
+  `}
+/>
+
+---
+
+#### **Props Options:**
+
+| Key                 | Description                                                                                                                                   | Values                                | Default |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|---------|
+| type                | Modal type predefinition                                                                                                                      | 'success' \| 'warning' \| 'attention' | ''      |
+| persistent          | Clicking outside of the element will not deactive it                                                                                          | true \| false                         | false   |
+| size                | Modal width size (sm = 400px; md = 600px; lg = 800px)                                                                                         | 'sm' \| 'md' \| 'lg'                  | 'md'    |
+| title               | Modal card title (if not provided, the title section will not be displayed)                                                                   | string                                | ''      |
+| icon                | Custom title section icon (if not provided, the preset icons will be considered according to the chosen modal type)                           | string                                | ''      |
+| iconScheme          | Custom scheme color to icon in title section (if not provided, the preset scheme color will be considered according to the chosen modal type) | string                                | ''      |
+| showCloseIcon       | Show close icon in title section                                                                                                              | boolean                               | false   |
+| primaryButtonText   | Button primary action text (if not provided, the actions section will not be displayed)                                                       | string                                | ''      |
+| secondaryButtonText | Button secondary action text (if not provided and there is primaryButtonText, this button will take 'Cancel' action                           | string                                | ''      |
+| primaryButtonType   | Button primary type (if not provided, defaults to the specified type)                                                                         | string                                | ''      |
+| showActionsDivider  | Show divider in between actions and dialog content                                                                                            | boolean                               | false   |
+
+## Examples
+Some examples of uses of the modal
+
+### Default
+
+<Story of={ModalDialogStories.Default} />
+
+### Warning
+
+<Story of={ModalDialogStories.Warning} />
+
+### Attention
+
+<Story of={ModalDialogStories.Attention} />
+
+### Overflowed Content
+
+<Story of={ModalDialogStories.Overflowed} />
+
+### Form Content
+
+<Story of={ModalDialogStories.Form} />
+
+### Image Content
+
+<Story of={ModalDialogStories.Image} />
