@@ -147,7 +147,7 @@ const TemplateImage = (args) => ({
     <button @click="updateModelValue(true)">open modal</button>
     <unnnic-modal-dialog v-bind="args" @primaryButtonClick="primaryButtonClick" @secondaryButtonClick="secondaryButtonClick" @update:modelValue="updateModelValue">
       <section style="display: flex; flex-direction: column; align-items: center; gap: 24px">
-        <img height='120' width='120' src="./src/assets/img/doris.png"/>
+        <img height='120' width='120' src="./doris.png"/>
         <section style="display: flex; flex-direction: column; justify-content: center; align-items: center">
           <h1 style="font-family: 'Lato'; font-size: 20px; font-weight: 900; line-height: 28px; padding: 0; margin: 0; color:#3B414D">Title</h1>
           <p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
