@@ -43,8 +43,10 @@
         v-if="primaryButtonText"
         :class="[
           'unnnic-modal-dialog__container__actions',
-          showActionsDivider &&
-            'unnnic-modal-dialog__container__actions--divider',
+          {
+            'unnnic-modal-dialog__container__actions--divider':
+              showActionsDivider,
+          },
         ]"
       >
         <UnnnicButton
