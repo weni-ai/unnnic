@@ -270,7 +270,7 @@ export default {
 
   &__actions {
     display: flex;
-    gap: 16px;
+    gap: $unnnic-spacing-sm;
     padding: $unnnic-spacing-md;
     flex-shrink: 0;
     > * {
