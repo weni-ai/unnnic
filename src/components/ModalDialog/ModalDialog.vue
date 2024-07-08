@@ -206,7 +206,7 @@ export default {
   border-radius: $unnnic-spacing-xs;
   box-shadow: $unnnic-shadow-level-near;
   position: fixed;
-  max-height: calc(100vh - $unnnic-spacing-md * 2);
+  max-height: calc(100vh - $unnnic-spacing-giant);
   overflow: hidden;
 
   &--sm {
