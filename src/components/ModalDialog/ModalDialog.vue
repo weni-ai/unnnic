@@ -204,7 +204,7 @@ export default {
   flex-direction: column;
   background: $unnnic-color-neutral-white;
   border-radius: $unnnic-spacing-xs;
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: $unnnic-shadow-level-near;
   position: fixed;
   max-height: calc(100vh - $unnnic-spacing-md * 2);
   overflow: hidden;
