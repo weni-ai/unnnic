@@ -159,13 +159,15 @@ export default {
   },
   watch: {
     modelValue(value) {
-      if (value) document.body.style.overflow = 'hidden';
-      else document.body.style.overflow = '';
+      this.updateBodyOverflow(value);
     },
   },
   methods: {
     close() {
       this.$emit('update:modelValue', false);
+    },
+    updateBodyOverflow(isHidden) {
+      document.body.style.overflow = isHidden ? 'hidden' : '';
     },
   },
 };
