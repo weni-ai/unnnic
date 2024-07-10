@@ -33,7 +33,7 @@ export default {
     template: `
     <div style="height: 50%; width: 30%; border: 1px solid #ccc; padding: 16px; margin: auto">
       <button @click="startTour">Start tour</button>
-      <button @click="handleTourStep(2)">Go to step 3</button>
+      <button @click="handleTourStep(3)">Go to step 3</button>
       <UnnnicCard 
         type="default"
         title="This is the title"

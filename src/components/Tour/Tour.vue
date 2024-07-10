@@ -37,13 +37,13 @@ export default {
   data() {
     return {
       isTourActive: false,
-      currentStep: 0,
+      currentStep: 1,
     };
   },
 
   computed: {
     currentStepOptions() {
-      return this.steps[this.currentStep];
+      return this.steps[this.currentStep - 1];
     },
     stepStyle() {
       const attachedElement = this.currentStepOptions.attachedElement;
@@ -77,28 +77,28 @@ export default {
   methods: {
     start() {
       this.isTourActive = true;
-      this.currentStep = 0;
+      this.currentStep = 1;
     },
     end() {
       this.isTourActive = false;
-      this.currentStep = 0;
+      this.currentStep = 1;
     },
     handleStep(step) {
-      if (this.currentStep < this.steps.length - 1) {
+      if (this.currentStep < this.steps.length) {
         this.currentStep = step;
       }
     },
     nextStep() {
       const { handleStep, steps, currentStep, end } = this;
 
-      if (currentStep + 1 === steps.length) {
+      if (currentStep === steps.length) {
         end();
       }
 
       handleStep(currentStep + 1);
     },
     resetOldStepElement(oldStep) {
-      const oldElement = this.steps[oldStep]?.attachedElement;
+      const oldElement = this.steps[oldStep - 1]?.attachedElement;
       if (!oldElement) {
         return;
       }

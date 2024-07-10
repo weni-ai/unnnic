@@ -17,7 +17,7 @@
       type="primary"
       @click="$emit('nextStep')"
     >
-      {{ i18n('understood') }} {{ currentStep + 1 }}/{{ stepsLength }}
+      {{ i18n('understood') }} {{ currentStep }}/{{ stepsLength }}
     </UnnnicButton>
   </section>
 </template>
