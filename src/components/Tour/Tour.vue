@@ -1,29 +1,29 @@
 <template>
-  <section
+  <TourMask
     v-if="isTourActive"
-    class="unnnic-tour"
-  >
-    <section
-      class="unnnic-tour__step"
-      :style="stepStyle"
-    >
-      <TourPopover
-        :step="currentStepOptions"
-        :stepsLength="steps.length"
-        :currentStep="currentStep"
-        @end="end"
-        @next-step="nextStep"
-      />
-    </section>
-  </section>
+    :maskRect="maskRect"
+  />
+
+  <TourPopover
+    v-show="isTourActive"
+    :step="currentStepOptions"
+    :stepsLength="steps.length"
+    :currentStep="currentStep"
+    :attachedElement="currentStepOptions.attachedElement"
+    @end="end"
+    @next-step="nextStep"
+  />
 </template>
 
 <script>
+import TourMask from './TourMask.vue';
 import TourPopover from './TourPopover.vue';
+
 export default {
   name: 'UnnnicTour',
 
   components: {
+    TourMask,
     TourPopover,
   },
 
@@ -38,6 +38,12 @@ export default {
     return {
       isTourActive: false,
       currentStep: 1,
+      maskRect: {
+        x: 0,
+        y: 0,
+        width: 0,
+        height: 0,
+      },
     };
   },
 
@@ -52,11 +58,6 @@ export default {
         return {};
       }
 
-      Object.assign(attachedElement.style, {
-        position: 'relative',
-        zIndex: 1000,
-      });
-
       const { top, left, width, height } =
         attachedElement.getBoundingClientRect();
       return {
@@ -69,8 +70,11 @@ export default {
   },
 
   watch: {
-    currentStep(_newStep, oldStep) {
-      this.resetOldStepElement(oldStep);
+    currentStep: {
+      immetiate: true,
+      handler() {
+        this.updateMaskRect();
+      },
     },
   },
 
@@ -93,55 +97,28 @@ export default {
 
       if (currentStep === steps.length) {
         end();
+        return;
       }
 
       handleStep(currentStep + 1);
     },
-    resetOldStepElement(oldStep) {
-      const oldElement = this.steps[oldStep - 1]?.attachedElement;
-      if (!oldElement) {
+    updateMaskRect() {
+      const attachedElement = this.currentStepOptions?.attachedElement;
+      const { padding } = this.currentStepOptions;
+
+      if (!attachedElement) {
         return;
       }
 
-      Object.assign(oldElement.style, {
-        position: 'initial',
-        zIndex: 0,
-      });
+      const { top, left, width, height } =
+        attachedElement.getBoundingClientRect();
+      this.maskRect = {
+        x: left - (padding?.horizontal || 0) / 2,
+        y: top - (padding?.vertical || 0) / 2,
+        width: width + (padding?.horizontal || 0),
+        height: height + (padding?.vertical || 0),
+      };
     },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-.unnnic-tour {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-
-  background-color: rgba(
-    $unnnic-color-neutral-black,
-    $unnnic-opacity-level-overlay
-  );
-
-  &__step {
-    position: absolute;
-
-    border-radius: $unnnic-border-radius-sm;
-    background-color: $unnnic-color-neutral-white;
-  }
-}
-</style>

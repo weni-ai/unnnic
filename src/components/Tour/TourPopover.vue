@@ -1,7 +1,8 @@
 <template>
   <section
+    ref="popover"
     :class="['unnnic-tour__popover', step.popoverPosition]"
-    :style="popoverStyle"
+    :style="style"
   >
     <header class="popover__header">
       <h1 class="header__title">{{ step.title }}</h1>
@@ -49,12 +50,17 @@ export default {
       type: Number,
       required: true,
     },
+    attachedElement: {
+      type: Element,
+      required: true,
+    },
   },
 
   emits: ['end', 'nextStep'],
 
   data() {
     return {
+      style: {},
       defaultTranslations: {
         close_tour: {
           'pt-br': 'Fechar tour',
@@ -70,34 +76,59 @@ export default {
     };
   },
 
-  computed: {
-    popoverStyle() {
-      const positionsReverseMap = {
-        top: 'bottom',
-        bottom: 'top',
-        right: 'left',
-        left: 'right',
-      };
-      const { step } = this;
-      const popoverPosition = positionsReverseMap[step.popoverPosition];
+  watch: {
+    attachedElement: {
+      immediate: true,
+      deep: true,
+      handler() {
+        this.$nextTick(() => {
+          this.updatePopoverStyle();
+        });
+      },
+    },
+  },
 
-      const popoverArrowSize = '12px';
-      const popoverArrowMargin = '2px';
+  methods: {
+    updatePopoverStyle() {
+      const { attachedElement, step } = this;
+
+      const popoverElement = this.$refs.popover;
+
+      if (!attachedElement || !popoverElement) {
+        return;
+      }
+
+      const {
+        top: attachedTop,
+        left: attachedLeft,
+        width: attachedWidth,
+        height: attachedHeight,
+      } = attachedElement.getBoundingClientRect();
+      const popoverArrowSize = 12;
+      const popoverArrowMargin = 2;
+      const popoverArrowSpacing = popoverArrowSize + popoverArrowMargin;
+      const popoverWidth = popoverElement?.offsetWidth;
+      const popoverHeight = popoverElement?.offsetHeight;
+
+      const translateXMap = {
+        top: attachedLeft - (popoverWidth - attachedWidth) / 2,
+        bottom: attachedLeft - (popoverWidth - attachedWidth) / 2,
+        right: attachedLeft + attachedWidth + popoverArrowSpacing,
+        left: attachedLeft - popoverWidth - popoverArrowSpacing,
+      };
+      const translateYMap = {
+        top: attachedTop - popoverHeight - popoverArrowSpacing,
+        bottom: attachedTop + attachedHeight + popoverArrowSpacing,
+        right: attachedTop - popoverHeight / 2 + attachedHeight / 2,
+        left: attachedTop - popoverHeight / 2 + attachedHeight / 2,
+      };
+
       let style = {
-        [popoverPosition]: `calc(100% + ${popoverArrowSize} + ${popoverArrowMargin})`,
+        transform: `translate(${translateXMap[step.popoverPosition]}px, ${translateYMap[step.popoverPosition]}px)`,
+        transition: 'transform .3s ease',
       };
 
-      // Center popover based on position
-      if (step.popoverPosition === 'right' || step.popoverPosition === 'left') {
-        style.top = '50%';
-        style.transform = 'translateY(-50%)';
-      }
-      if (step.popoverPosition === 'top' || step.popoverPosition === 'bottom') {
-        style.left = '50%';
-        style.transform = 'translateX(-50%)';
-      }
-
-      return style;
+      this.style = style;
     },
   },
 };
@@ -115,7 +146,9 @@ export default {
   display: flex;
   flex-direction: column;
   gap: $unnnic-spacing-ant;
-  position: absolute;
+  position: fixed;
+  top: 0;
+  left: 0;
 
   z-index: 1001;
 
