@@ -81,10 +81,10 @@ export default {
       const { step } = this;
       const popoverPosition = positionsReverseMap[step.popoverPosition];
 
-      const elementBeforeSize = '8px';
-      const elementBeforeMargin = '2px';
+      const popoverArrowSize = '12px';
+      const popoverArrowMargin = '2px';
       let style = {
-        [popoverPosition]: `calc(100% + ${elementBeforeSize} + ${elementBeforeMargin})`,
+        [popoverPosition]: `calc(100% + ${popoverArrowSize} + ${popoverArrowMargin})`,
       };
 
       // Center popover based on position
@@ -132,56 +132,47 @@ export default {
   font-size: $unnnic-font-size-body-gt;
   font-weight: $unnnic-font-weight-regular;
 
+  $arrowSize: $unnnic-icon-size-xs;
+  $arrowHalfSize: calc($arrowSize / 2);
+
   &::before {
     content: '';
     position: absolute;
 
-    width: 0;
-    height: 0;
+    width: $unnnic-icon-size-xs;
+    height: $unnnic-icon-size-xs;
 
-    border-style: solid;
+    border-radius: calc($unnnic-border-radius-sm / 2);
+
+    background: linear-gradient(
+      -45deg,
+      $unnnic-color-background-white 50%,
+      transparent 50%
+    );
   }
-
-  $arrowSize: 8px;
 
   &.top::before {
     left: 50%;
-    bottom: -$arrowSize;
-    transform: translateX(-50%);
-
-    border-width: $arrowSize $arrowSize 0 $arrowSize;
-    border-color: $unnnic-color-background-white transparent transparent
-      transparent;
+    bottom: -$arrowHalfSize;
+    transform: translateX(-50%) rotate(45deg);
   }
 
   &.bottom::before {
-    top: -$arrowSize;
+    top: -$arrowHalfSize;
     left: 50%;
-    transform: translateX(-50%);
-
-    border-width: 0 $arrowSize $arrowSize $arrowSize;
-    border-color: transparent transparent $unnnic-color-background-white
-      transparent;
+    transform: translateX(-50%) rotate(225deg);
   }
 
   &.left::before {
-    right: -$arrowSize;
+    right: -$arrowHalfSize;
     top: 50%;
-    transform: translateY(-50%);
-
-    border-width: $arrowSize 0 $arrowSize $arrowSize;
-    border-color: transparent transparent transparent
-      $unnnic-color-background-white;
+    transform: translateY(-50%) rotate(315deg);
   }
 
   &.right::before {
-    left: -$arrowSize;
+    left: -$arrowHalfSize;
     top: 50%;
-    transform: translateY(-50%);
-
-    border-width: $arrowSize $arrowSize $arrowSize 0;
-    border-color: transparent $unnnic-color-background-white transparent
-      transparent;
+    transform: translateY(-50%) rotate(135deg);
   }
 
   .popover__header {

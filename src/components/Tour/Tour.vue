@@ -69,12 +69,8 @@ export default {
   },
 
   watch: {
-    currentStep(newStep, oldStep) {
-      const oldElement = this.steps[oldStep]?.attachedElement;
-      if (oldElement) {
-        oldElement.style.position = 'initial';
-        oldElement.style.zIndex = 0;
-      }
+    currentStep(_newStep, oldStep) {
+      this.resetOldStepElement(oldStep);
     },
   },
 
@@ -100,6 +96,17 @@ export default {
       }
 
       handleStep(currentStep + 1);
+    },
+    resetOldStepElement(oldStep) {
+      const oldElement = this.steps[oldStep]?.attachedElement;
+      if (!oldElement) {
+        return;
+      }
+
+      Object.assign(oldElement.style, {
+        position: 'initial',
+        zIndex: 0,
+      });
     },
   },
 };
