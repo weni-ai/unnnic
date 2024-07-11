@@ -43,8 +43,10 @@
         v-if="primaryButtonText"
         :class="[
           'unnnic-modal-dialog__container__actions',
-          showActionsDivider &&
-            'unnnic-modal-dialog__container__actions--divider',
+          {
+            'unnnic-modal-dialog__container__actions--divider':
+              showActionsDivider,
+          },
         ]"
       >
         <UnnnicButton
@@ -159,13 +161,15 @@ export default {
   },
   watch: {
     modelValue(value) {
-      if (value) document.body.style.overflow = 'hidden';
-      else document.body.style.overflow = '';
+      this.updateBodyOverflow(value);
     },
   },
   methods: {
     close() {
       this.$emit('update:modelValue', false);
+    },
+    updateBodyOverflow(isHidden) {
+      document.body.style.overflow = isHidden ? 'hidden' : '';
     },
   },
 };
@@ -177,9 +181,6 @@ export default {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-body {
-  overflow: hidden;
 }
 .unnnic-modal-dialog {
   width: 100vw;
@@ -205,9 +206,9 @@ body {
   flex-direction: column;
   background: $unnnic-color-neutral-white;
   border-radius: $unnnic-spacing-xs;
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: $unnnic-shadow-level-near;
   position: fixed;
-  max-height: calc(100vh - $unnnic-spacing-md * 2);
+  max-height: calc(100vh - $unnnic-spacing-giant);
   overflow: hidden;
 
   &--sm {
@@ -271,7 +272,7 @@ body {
 
   &__actions {
     display: flex;
-    gap: 16px;
+    gap: $unnnic-spacing-sm;
     padding: $unnnic-spacing-md;
     flex-shrink: 0;
     > * {
