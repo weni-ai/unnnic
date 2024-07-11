@@ -19,6 +19,8 @@
 import TourMask from './TourMask.vue';
 import TourPopover from './TourPopover.vue';
 
+import { validateSteps } from './propsValidation';
+
 export default {
   name: 'UnnnicTour',
 
@@ -31,6 +33,7 @@ export default {
     steps: {
       required: true,
       type: Array,
+      validator: validateSteps,
     },
   },
 
