@@ -5,7 +5,7 @@
   />
 
   <TourPopover
-    v-show="isTourActive"
+    v-if="isTourActive"
     :step="currentStepOptions"
     :stepsLength="steps.length"
     :currentStep="currentStep"
@@ -70,11 +70,13 @@ export default {
   },
 
   watch: {
-    currentStep: {
-      immetiate: true,
-      handler() {
+    currentStep() {
+      this.updateMaskRect();
+    },
+    isTourActive(isTourActive) {
+      if (isTourActive) {
         this.updateMaskRect();
-      },
+      }
     },
   },
 
