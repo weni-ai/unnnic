@@ -98,3 +98,101 @@ export const Default = {
     ],
   },
 };
+
+export const WithPadding = {
+  args: {
+    steps: [
+      {
+        title: 'Step 1',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus euismod nibh vel elementum. Integer nisi lectus, hendrerit aliquet tellus nec, volutpat porttitor erat. Vivamus tincidunt sit amet ex non. ',
+        attachedElement: null,
+        popoverPosition: 'right',
+        padding: {
+          vertical: 20,
+          horizontal: 20,
+        },
+      },
+    ],
+  },
+  render: (args) => ({
+    components: {
+      UnnnicTour,
+      UnnnicCard,
+    },
+    setup() {
+      return { args };
+    },
+    methods: {
+      startTour() {
+        this.$refs.tour.start();
+      },
+    },
+    mounted() {
+      this.$nextTick(() => {
+        args.steps[0].attachedElement = this.$refs.step1.$el;
+      });
+    },
+    template: `
+    <div style="height: 50%; width: 30%; border: 1px solid #ccc; padding: 16px; margin: auto">
+      <button @click="startTour">Start tour</button>
+      <UnnnicCard 
+        type="default"
+        title="This is the title"
+        description="This is the description"
+        ref="step1"
+      />
+      <unnnic-tour v-bind="args" ref="tour" />
+    </div>
+    `,
+  }),
+};
+
+export const WithNegativePadding = {
+  args: {
+    steps: [
+      {
+        title: 'Step 1',
+        description:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus euismod nibh vel elementum. Integer nisi lectus, hendrerit aliquet tellus nec, volutpat porttitor erat. Vivamus tincidunt sit amet ex non. ',
+        attachedElement: null,
+        popoverPosition: 'right',
+        padding: {
+          vertical: -30,
+          horizontal: -10,
+        },
+      },
+    ],
+  },
+  render: (args) => ({
+    components: {
+      UnnnicTour,
+      UnnnicCard,
+    },
+    setup() {
+      return { args };
+    },
+    methods: {
+      startTour() {
+        this.$refs.tour.start();
+      },
+    },
+    mounted() {
+      this.$nextTick(() => {
+        args.steps[0].attachedElement = this.$refs.step1.$el;
+      });
+    },
+    template: `
+    <div style="height: 50%; width: 30%; border: 1px solid #ccc; padding: 16px; margin: auto">
+      <button @click="startTour">Start tour</button>
+      <UnnnicCard 
+        type="default"
+        title="This is the title"
+        description="This is the description"
+        ref="step1"
+      />
+      <unnnic-tour v-bind="args" ref="tour" />
+    </div>
+    `,
+  }),
+};
