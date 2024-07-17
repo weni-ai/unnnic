@@ -701,7 +701,6 @@ export default {
 @import '../../assets/scss/unnnic.scss';
 
 .unnnic-date-picker {
-  position: fixed;
   display: inline-flex;
   background-color: $unnnic-color-background-snow;
   border-radius: $unnnic-border-radius-sm;

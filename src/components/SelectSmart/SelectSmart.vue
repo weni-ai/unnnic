@@ -556,7 +556,8 @@ export default {
   }
 
   &__options {
-    position: fixed;
+    left: 0;
+    right: 0;
 
     margin-top: 2px;
 
