@@ -1,6 +1,7 @@
 import UnnnicModalDialog from '../components/ModalDialog/ModalDialog.vue';
 import UnnnicInput from '../components/Input/Input.vue';
 import UnnnicLabel from '../components/Label/Label.vue';
+
 import { action } from '@storybook/addon-actions';
 import iconsList from '../utils/iconList';
 import colorsList from '../utils/colorsList';
@@ -39,6 +40,8 @@ export default {
     },
     showActionsDivider: { control: 'boolean' },
     persistent: { control: 'boolean' },
+    primaryButtonProps: { control: 'object' },
+    secondaryButtonProps: { control: 'object' },
   },
   args: {
     modelValue: false,
@@ -166,30 +169,45 @@ export const Default = Template.bind({});
 Default.args = {
   title: 'Default Modal',
   type: '',
+  primaryButtonProps: {
+    text: 'Confirm',
+  },
 };
 
 export const Warning = Template.bind({});
 Warning.args = {
   title: 'Warning Modal',
   type: 'warning',
+  primaryButtonProps: {
+    text: 'Confirm',
+  },
 };
 
 export const Success = Template.bind({});
 Success.args = {
   title: 'Success Modal',
   type: 'success',
+  primaryButtonProps: {
+    text: 'Confirm',
+  },
 };
 
 export const Attention = Template.bind({});
 Attention.args = {
   title: 'Attention Modal',
   type: 'attention',
+  primaryButtonProps: {
+    text: 'Confirm',
+  },
 };
 
 export const Overflowed = TemplateOverflowed.bind({});
 Overflowed.args = {
   title: 'Overflowed Modal',
   type: '',
+  primaryButtonProps: {
+    text: 'Confirm',
+  },
 };
 
 export const Form = TemplateForm.bind({});
@@ -198,11 +216,21 @@ Form.args = {
   type: '',
   showActionsDivider: true,
   persistent: true,
+  primaryButtonProps: {
+    text: 'Confirm',
+  },
+  secondaryButtonProps: {
+    text: 'Disabled Button',
+    disabled: true,
+  },
 };
 
 export const Image = TemplateImage.bind({});
 Image.args = {
   title: '',
   type: '',
+  primaryButtonProps: {
+    text: 'Confirm',
+  },
   showActionsDivider: true,
 };

@@ -40,7 +40,7 @@
         <slot></slot>
       </section>
       <section
-        v-if="primaryButtonText"
+        v-if="primaryButtonProps.text"
         :class="[
           'unnnic-modal-dialog__container__actions',
           {
@@ -50,17 +50,21 @@
         ]"
       >
         <UnnnicButton
+          v-bind="secondaryButtonProps"
           type="tertiary"
-          :text="secondaryButtonText || i18n('cancel')"
+          :text="secondaryButtonProps.text || i18n('cancel')"
           @click.stop="
             secondaryButtonText ? $emit('secondaryButtonClick') : close()
           "
         />
         <UnnnicButton
+          v-bind="primaryButtonProps"
           :type="
-            primaryButtonType || primaryButtonTypeMapper[type] || 'primary'
+            primaryButtonProps.type ||
+            primaryButtonTypeMapper[type] ||
+            'primary'
           "
-          :text="primaryButtonText"
+          :text="primaryButtonProps.text"
           @click.stop="$emit('primaryButtonClick')"
         />
       </section>
@@ -105,7 +109,7 @@ export default {
     },
     title: {
       type: String,
-      default: 'title',
+      default: '',
     },
     icon: {
       type: String,
@@ -119,21 +123,17 @@ export default {
       type: Boolean,
       default: false,
     },
-    primaryButtonText: {
-      type: String,
-      default: '',
-    },
-    secondaryButtonText: {
-      type: String,
-      default: '',
-    },
-    primaryButtonType: {
-      type: String,
-      default: '',
-    },
     showActionsDivider: {
       type: Boolean,
       default: false,
+    },
+    primaryButtonProps: {
+      type: Object,
+      default: () => ({}),
+    },
+    secondaryButtonProps: {
+      type: Object,
+      default: () => ({}),
     },
   },
   emits: ['primaryButtonClick', 'secondaryButtonClick', 'update:modelValue'],
