@@ -54,7 +54,7 @@
           type="tertiary"
           :text="secondaryButtonProps.text || i18n('cancel')"
           @click.stop="
-            secondaryButtonText ? $emit('secondaryButtonClick') : close()
+            secondaryButtonProps.text ? $emit('secondaryButtonClick') : close()
           "
         />
         <UnnnicButton
