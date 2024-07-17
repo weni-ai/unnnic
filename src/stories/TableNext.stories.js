@@ -19,6 +19,7 @@ export default {
           headers: [
             {
               content: 'ID',
+              size: 0.3,
             },
             {
               content: 'Name',
