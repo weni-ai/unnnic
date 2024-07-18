@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added `ModalDialog` button props and remove 'buttonType' and 'buttonText' props. Now, these props must be passed together with the other
+- Added `ModalDialog` all button props support and remove 'buttonType' and 'buttonText' props. Now, all button props should come in a single object.
 
 ## 2.1.0 (2024-07-08)
 
