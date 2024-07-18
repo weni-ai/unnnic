@@ -1,7 +1,10 @@
 <template>
   <table class="unnnic-table-next">
     <thead class="unnnic-table-next__header">
-      <tr class="unnnic-table-next__header-row">
+      <tr
+        class="unnnic-table-next__header-row"
+        :style="{ gridTemplateColumns }"
+      >
         <th
           v-for="(cell, index) of headers"
           :key="cell.content + index"
@@ -28,10 +31,14 @@
           v-for="(row, index) of rows"
           :key="row.content + index"
           class="unnnic-table-next__body-row"
+          :style="{
+            gridTemplateColumns: row.link ? 'auto' : gridTemplateColumns,
+          }"
         >
           <a
             v-if="row.link"
             class="unnnic-table-next__body-row--redirect"
+            :style="{ gridTemplateColumns }"
             :href="row.link.url"
             :target="row.link.target || '_blank'"
           >
@@ -92,6 +99,7 @@ export default {
     /**
      * @typedef {Array} HeaderItem
      * @property {string} content - The content of the header cell.
+     * @property {number} size - The size of the header cell in fractions.
      * @property {boolean|undefined} isSortable - Indicates if the cell is enabled for sorting.
      */
 
@@ -156,6 +164,9 @@ export default {
   computed: {
     treatedPaginationTotal() {
       return this.rows.length === 0 ? 0 : this.paginationTotal;
+    },
+    gridTemplateColumns() {
+      return this.headers.map((header) => `${header.size || 1}fr`).join(' ');
     },
   },
 };
@@ -268,7 +279,6 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
   %base-row {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
     align-items: center;
   }
 }
