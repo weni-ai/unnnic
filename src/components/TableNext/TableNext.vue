@@ -184,6 +184,9 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
   width: 100%;
 
+  display: flex;
+  flex-direction: column;
+
   &__header {
     &-row {
       @extend %base-row;
