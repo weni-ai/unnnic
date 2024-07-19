@@ -1,11 +1,19 @@
-const validateHeader = (cell) => {
-  const isContentString = typeof cell.content !== 'string';
+const validateHeader = (header) => {
+  const isContentString = typeof header.content !== 'string';
   if (isContentString) {
     throw new Error('Each item in "headers" must have "content" as a string.');
   }
 
+  const isSizePositiveNumber =
+    'size' in header && (typeof header.size !== 'number' || header.size < 0);
+  if (isSizePositiveNumber) {
+    throw new Error(
+      'Each item in "headers" that contains "size" must assign it as positive number',
+    );
+  }
+
   const isSortableBoolean =
-    'isSortable' in cell && typeof cell.isSortable !== 'boolean';
+    'isSortable' in header && typeof header.isSortable !== 'boolean';
   if (isSortableBoolean) {
     throw new Error(
       'Each item in "headers" that contains “isSortable” must assign it as boolean',
