@@ -74,7 +74,7 @@ export default {
     },
     text: {
       type: String,
-      default: null,
+      default: '',
     },
     type: {
       type: String,
@@ -86,28 +86,29 @@ export default {
     },
     iconLeft: {
       type: String,
-      default: null,
+      default: '',
     },
     iconRight: {
       type: String,
-      default: null,
+      default: '',
     },
     iconCenter: {
       type: String,
-      default: null,
+      default: '',
     },
     next: {
       type: Boolean,
-      default: null,
+      default: false,
     },
 
     disabled: {
       type: Boolean,
-      default: null,
+      default: false,
     },
 
     loading: {
       type: Boolean,
+      default: false,
     },
   },
   computed: {
