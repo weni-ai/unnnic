@@ -3,7 +3,36 @@ import iconList from '../utils/iconList';
 
 export default {
   title: 'Form/Button',
+  parameters: {
+    docs: {
+      description: {
+        component: `Allows users to perform an action or navigate to another page. 
+          It has styles for various needs and are ideal for directing the user's attention. 
+          It is divided into 6 types: Primary, Secondary, Tertiary, Alternative, Warning, Attention.
+          Each of these types has its states.
+          <br/>
+          <br/>
+          This component has 5 variations: without icon, with icon on the left, with icon on the right, just the icon and float. 
+          Each of this variation has 4 states: default, hover, active and disabled. 
+          The component has a fixed height of 46px and variable width. However, the icon-only variation has a fixed height and width of 46px.
+          `,
+      },
+    },
+  },
   component: unnnicButton,
+  tags: ['autodocs'],
+  args: {
+    text: '',
+    type: 'primary',
+    size: 'large',
+    iconLeft: '',
+    iconCenter: '',
+    iconRight: '',
+    disabled: false,
+    loading: false,
+    float: false,
+    next: false,
+  },
   argTypes: {
     type: {
       control: { type: 'select' },
@@ -19,7 +48,6 @@ export default {
     size: {
       control: { type: 'select' },
       options: ['large', 'small'],
-      defaultValue: 'large',
     },
     text: { control: { type: 'text' } },
     iconLeft: {
@@ -37,13 +65,17 @@ export default {
     disabled: { control: { type: 'boolean' } },
     loading: { control: { type: 'boolean' } },
     float: { control: { type: 'boolean' } },
+    next: {
+      control: { type: 'boolean' },
+      description:
+        'Used to indicate whether the button icon should be converted to the new icon library',
+    },
   },
 };
 
 export const Primary = {
   args: {
     text: 'Button Text',
-    disabled: false,
   },
 };
 
@@ -51,7 +83,6 @@ export const Secondary = {
   args: {
     type: 'secondary',
     text: 'Button Text',
-    disabled: false,
   },
 };
 
@@ -59,20 +90,19 @@ export const Tertiary = {
   args: {
     type: 'tertiary',
     text: 'Button Text',
-    disabled: false,
   },
 };
 
 export const WithIcon = {
   args: {
     text: 'Button Text',
-    iconLeft: 'developer-community-github-1-1',
+    iconLeft: 'add',
   },
 };
 
 export const OnlyIcon = {
   args: {
-    iconCenter: 'add-1',
+    iconCenter: 'add',
   },
 };
 
@@ -85,9 +115,17 @@ export const Alternative = {
 };
 
 export const Warning = {
+  parameters: {
+    docs: {
+      description: {
+        story: `This variation aims to highlight actions that could be destructive or have negative consequences if taken. 
+        For example: Deleting an element.`,
+      },
+    },
+  },
   args: {
     type: 'warning',
-    iconLeft: 'add-1',
+    iconLeft: 'add',
     text: 'Text',
   },
 };
@@ -95,12 +133,21 @@ export const Warning = {
 export const Attention = {
   args: {
     type: 'attention',
-    iconLeft: 'add-1',
+    iconLeft: 'add',
     text: 'Text',
   },
 };
 
 export const Float = {
+  parameters: {
+    docs: {
+      description: {
+        story: `When there is a need to present a main action above a list of contents. <br/>
+          It is important that the component is always floating over the content and fixed to the bottom right side. <br/>
+          (Remember to add ${'`position relative`'} style to your container)`,
+      },
+    },
+  },
   argTypes: {
     size: {
       control: { type: 'select' },
@@ -115,11 +162,6 @@ export const Float = {
     },
     template: `<div style="height: 80vh; display: grid; position: relative;">
       <unnnic-button v-bind="args" />
-
-      When to use this variation: <br/>
-      When there is a need to present a main action above a list of contents. <br/>
-      It is important that the component is always floating over the content and fixed to the bottom right side. <br/>
-      (Remember to add position relative style to your container)
 
       <br/>
       <br/>
