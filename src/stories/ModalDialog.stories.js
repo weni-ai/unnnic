@@ -25,6 +25,7 @@ export default {
     title: { control: 'text' },
     showCloseIcon: { control: 'boolean' },
     primaryButtonText: { control: 'text' },
+    hideButtonText: { control: 'boolean' },
     secondaryButtonText: { control: 'text' },
     primaryButtonType: {
       control: { type: 'select' },
@@ -210,6 +211,7 @@ WithLeftSidebar.args = {
   primaryButtonProps: {
     text: 'Confirm',
   },
+  hideSecondaryButton: true,
 };
 
 export const Warning = Template.bind({});
