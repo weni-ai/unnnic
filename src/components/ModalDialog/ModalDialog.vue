@@ -13,60 +13,74 @@
         `unnnic-modal-dialog__container--${size}`,
       ]"
     >
-      <header
-        v-if="title"
-        class="unnnic-modal-dialog__container__header"
-      >
-        <section class="unnnic-modal-dialog__container__title-container">
-          <UnnnicIcon
-            v-if="icon || type"
-            class="unnnic-modal-dialog__container__title-icon"
-            :icon="icon || iconsMapper[type]?.icon"
-            :scheme="iconScheme || iconsMapper[type]?.scheme"
-            size="md"
-          />
-          <h1 class="unnnic-modal-dialog__container__title-text">
-            {{ title }}
-          </h1>
-        </section>
-        <UnnnicIcon
-          v-if="showCloseIcon"
-          icon="close"
-          clickable
-          @click="close()"
-        />
-      </header>
-      <section class="unnnic-modal-dialog__container__content">
-        <slot></slot>
-      </section>
       <section
-        v-if="primaryButtonProps.text"
-        :class="[
-          'unnnic-modal-dialog__container__actions',
-          {
-            'unnnic-modal-dialog__container__actions--divider':
-              showActionsDivider,
-          },
-        ]"
+        v-if="$slots.leftSidebar"
+        class="unnnic-modal-dialog__container__left-sidebar"
       >
-        <UnnnicButton
-          v-bind="secondaryButtonProps"
-          type="tertiary"
-          :text="secondaryButtonProps.text || i18n('cancel')"
-          @click.stop="
-            secondaryButtonProps.text ? $emit('secondaryButtonClick') : close()
-          "
-        />
-        <UnnnicButton
-          v-bind="primaryButtonProps"
-          :type="
-            primaryButtonProps.type ||
-            primaryButtonTypeMapper[type] ||
-            'primary'
-          "
-          :text="primaryButtonProps.text"
-          @click.stop="$emit('primaryButtonClick')"
-        />
+        <slot name="leftSidebar" />
+      </section>
+
+      <section class="unnnic-modal-dialog__container__body">
+        <header
+          v-if="title"
+          class="unnnic-modal-dialog__container__header"
+        >
+          <section class="unnnic-modal-dialog__container__title-container">
+            <UnnnicIcon
+              v-if="icon || type"
+              class="unnnic-modal-dialog__container__title-icon"
+              :icon="icon || iconsMapper[type]?.icon"
+              :scheme="iconScheme || iconsMapper[type]?.scheme"
+              size="md"
+            />
+            <h1 class="unnnic-modal-dialog__container__title-text">
+              {{ title }}
+            </h1>
+          </section>
+          <UnnnicIcon
+            v-if="showCloseIcon"
+            icon="close"
+            clickable
+            @click="close()"
+          />
+        </header>
+        <section class="unnnic-modal-dialog__container__content">
+          <slot></slot>
+        </section>
+        <section
+          v-if="primaryButtonProps.text"
+          :class="[
+            'unnnic-modal-dialog__container__actions',
+            {
+              'unnnic-modal-dialog__container__actions--divider':
+                showActionsDivider,
+            },
+          ]"
+        >
+          <UnnnicButton
+            v-if="!hideSecondaryButton"
+            v-bind="secondaryButtonProps"
+            type="tertiary"
+            :text="secondaryButtonProps.text || i18n('cancel')"
+            class="unnnic-modal-dialog__container__actions__secondary-button"
+            @click.stop="
+              secondaryButtonProps.text
+                ? $emit('secondaryButtonClick')
+                : close()
+            "
+          />
+          <UnnnicButton
+            v-bind="primaryButtonProps"
+            :type="
+              primaryButtonProps.type ||
+              primaryButtonTypeMapper[type] ||
+              'primary'
+            "
+            :text="primaryButtonProps.text"
+            class="unnnic-modal-dialog__container__actions__primary-button"
+            @click.stop="$emit('primaryButtonClick')"
+          />
+        </section>
       </section>
     </section>
   </section>
@@ -130,6 +144,10 @@ export default {
     primaryButtonProps: {
       type: Object,
       default: () => ({}),
+    },
+    hideSecondaryButton: {
+      type: Boolean,
+      default: false,
     },
     secondaryButtonProps: {
       type: Object,
@@ -203,7 +221,6 @@ export default {
 
 .unnnic-modal-dialog__container {
   display: flex;
-  flex-direction: column;
   background: $unnnic-color-neutral-white;
   border-radius: $unnnic-spacing-xs;
   box-shadow: $unnnic-shadow-level-near;
@@ -219,6 +236,17 @@ export default {
   }
   &--lg {
     width: 800px;
+  }
+
+  &__left-sidebar {
+    background-color: $unnnic-color-neutral-black;
+    color: $unnnic-color-neutral-white;
+  }
+
+  &__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   &__header {
@@ -271,15 +299,23 @@ export default {
   }
 
   &__actions {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'secondary-button primary-button';
     gap: $unnnic-spacing-sm;
     padding: $unnnic-spacing-md;
     flex-shrink: 0;
-    > * {
-      flex-grow: 1;
-    }
+
     &--divider {
       border-top: 1px solid $unnnic-color-neutral-soft;
+    }
+
+    &__secondary-button {
+      grid-area: secondary-button;
+    }
+
+    &__primary-button {
+      grid-area: primary-button;
     }
   }
 }

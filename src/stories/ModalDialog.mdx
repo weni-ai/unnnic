@@ -18,6 +18,24 @@ The ModalDialog was designed to inform the user about a specific task, request i
   `}
 />
 
+## Left Sidebar
+
+You can use the `leftSidebar` slot to insert a fixed sidebar area on the left.
+
+<Source
+  language='html'
+  dark
+  code={`
+<UnnnicModalDialog v-model="showModal">
+  <template #leftSidebar>
+    Hi from Left Sidebar
+  </template>
+
+  <p>Modal Content</p>
+</UnnnicModalDialog>
+  `}
+/>
+
 ---
 
 #### **Props Options:**
@@ -33,6 +51,7 @@ The ModalDialog was designed to inform the user about a specific task, request i
 | showCloseIcon       | Show close icon in title section                                                                                                              | boolean                               | false   |
 | primaryButtonProps  | Props to apply to the primary button (check button props [here](?path=/story/form-button--primary))                                           | object                                | \{}     |
 | secondaryButtonProps| Props to apply to the secondary button (check button props [here](?path=/story/form-button--primary))                                         | object                                | \{}     |
+| hideSecondaryButton | Hide the secondary button and keep the spacing to the primary button                                                                          | true \| false                         | false   |
 | showActionsDivider  | Show divider in between actions and dialog content                                                                                            | boolean                               | false   |
 
 ## Examples
@@ -41,6 +60,10 @@ Some examples of uses of the modal
 ### Default
 
 <Story of={ModalDialogStories.Default} />
+
+### With Left Sidebar
+
+<Story of={ModalDialogStories.WithLeftSidebar} />
 
 ### Warning
 
