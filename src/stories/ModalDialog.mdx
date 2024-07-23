@@ -18,6 +18,24 @@ The ModalDialog was designed to inform the user about a specific task, request i
   `}
 />
 
+## Left Sidebar
+
+You can use the `leftSidebar` slot to insert a fixed sidebar area on the left.
+
+<Source
+  language='html'
+  dark
+  code={`
+<UnnnicModalDialog v-model="showModal">
+  <template #leftSidebar>
+    Hi from Left Sidebar
+  </template>
+
+  <p>Modal Content</p>
+</UnnnicModalDialog>
+  `}
+/>
+
 ---
 
 #### **Props Options:**
@@ -41,6 +59,10 @@ Some examples of uses of the modal
 ### Default
 
 <Story of={ModalDialogStories.Default} />
+
+### With Left Sidebar
+
+<Story of={ModalDialogStories.WithLeftSidebar} />
 
 ### Warning
 
