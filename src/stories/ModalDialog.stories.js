@@ -165,9 +165,47 @@ const TemplateImage = (args) => ({
   },
 });
 
+const TemplateLeftSidebar = (args) => ({
+  components: { UnnnicModalDialog },
+  setup() {
+    const updateModelValue = (value) => {
+      action('update:modelValue')(value);
+      args.modelValue = value;
+    };
+    return { args, updateModelValue };
+  },
+  template: `
+  <div>
+    <button @click="updateModelValue(true)">Open Modal</button>
+    <unnnic-modal-dialog v-bind="args" @primaryButtonClick="primaryButtonClick" @secondaryButtonClick="secondaryButtonClick" @update:modelValue="updateModelValue">
+      <template #leftSidebar>
+        <section style="width: 250px">
+          Hi from Left Sidebar
+        </section>
+      </template>
+
+      <template v-slot>Slot content here</template>
+    </unnnic-modal-dialog>
+  </div>
+  `,
+  methods: {
+    primaryButtonClick: action('primaryButtonClick'),
+    secondaryButtonClick: action('secondaryButtonClick'),
+  },
+});
+
 export const Default = Template.bind({});
 Default.args = {
   title: 'Default Modal',
+  type: '',
+  primaryButtonProps: {
+    text: 'Confirm',
+  },
+};
+
+export const WithLeftSidebar = TemplateLeftSidebar.bind({});
+WithLeftSidebar.args = {
+  title: 'With Left Sidebar Modal',
   type: '',
   primaryButtonProps: {
     text: 'Confirm',

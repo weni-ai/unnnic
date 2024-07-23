@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.3.0 (2024-07-19)
+
+### Added
+
+- Added auto docs template to stories;
+- Usage autodocs at Button story.
+
+### Changed
+
+- Fixed button props defaults;
+- Improve Button story it.
+
+## 2.2.0 (2024-07-19)
+
+### Added
+
+- Customizing the size of each column in `TableNext` via props.
+
 ## 2.1.1 (2024-07-18)
 
 ### Added
