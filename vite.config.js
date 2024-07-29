@@ -10,6 +10,7 @@ const testExcludes = [
   '**/*.stories.js',
   '**/storybook-static/**',
   '**/assets/**',
+  '**/.storybook/**',
 ];
 
 // https://vitejs.dev/config/
