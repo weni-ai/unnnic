@@ -69,14 +69,14 @@
 </template>
 
 <script>
-import unnnicIcon from '../Icon.vue';
-import unnnicButton from '../Button/Button.vue';
+import UnnnicIcon from '../Icon.vue';
+import UnnnicButton from '../Button/Button.vue';
 
 export default {
   name: 'UnnnicDrawer',
   components: {
-    unnnicIcon,
-    unnnicButton,
+    UnnnicIcon,
+    UnnnicButton,
   },
   props: {
     title: {
