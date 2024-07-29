@@ -31,7 +31,7 @@
           </section>
           <UnnnicIcon
             class="unnnic-drawer__close"
-            icon="arrow_back"
+            :icon="closeIcon"
             size="avatar-nano"
             clickable
             @click="close"
@@ -85,6 +85,7 @@ export default {
     },
     description: {
       type: String,
+      default: '',
     },
     disabledPrimaryButton: {
       type: Boolean,
@@ -104,6 +105,7 @@ export default {
     },
     primaryButtonText: {
       type: String,
+      default: '',
     },
     primaryButtonType: {
       type: String,
@@ -111,6 +113,7 @@ export default {
     },
     secondaryButtonText: {
       type: String,
+      default: '',
     },
     wide: {
       type: Boolean,
@@ -123,6 +126,10 @@ export default {
     withoutOverlay: {
       type: Boolean,
       default: false,
+    },
+    closeIcon: {
+      type: String,
+      default: 'arrow_back',
     },
   },
   emits: ['primaryButtonClick', 'secondaryButtonClick', 'close'],
