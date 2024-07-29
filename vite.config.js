@@ -5,12 +5,17 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
+const testExcludes = [
+  '**/node_modules/**',
+  '**/*.stories.js',
+  '**/storybook-static/**',
+  '**/assets/**',
+  '**/.storybook/**',
+];
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    vue(),
-    vueJsx(),
-  ],
+  plugins: [vue(), vueJsx()],
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.js'),
@@ -28,6 +33,15 @@ export default defineConfig({
         },
       },
     },
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    coverage: {
+      exclude: testExcludes,
+      reporter: ['text', 'json', 'html'],
+    },
+    exclude: testExcludes,
   },
   resolve: {
     alias: {
