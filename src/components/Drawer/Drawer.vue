@@ -4,6 +4,7 @@
     class="unnnic-drawer"
   >
     <section
+      v-if="!withoutOverlay"
       class="unnnic-drawer__overlay"
       @click.stop="close"
     />
@@ -118,6 +119,10 @@ export default {
     modelValue: {
       type: Boolean,
       required: true,
+    },
+    withoutOverlay: {
+      type: Boolean,
+      default: false,
     },
   },
   emits: ['primaryButtonClick', 'secondaryButtonClick', 'close'],
