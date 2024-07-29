@@ -1,49 +1,77 @@
+import { action } from '@storybook/addon-actions';
 import UnnnicRadio from '../components/Radio/Radio.vue';
 
 export default {
   title: 'Form/Radio',
   component: UnnnicRadio,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `Fundamental in forms, used when we present a list of two or more mutually 
+        exclusive options, and the user needs to choose exactly one of them. When you click on 
+        an unselected radio button, it will automatically deselect any other buttons that were 
+        previously selected in the list.
+          `,
+      },
+    },
+  },
   argTypes: {
     value: { control: { type: 'text' } },
     disabled: { control: { type: 'boolean' } },
     size: { control: { type: 'select', options: ['md', 'sm'] } },
   },
+};
+
+export const Default = {
   render: (args) => ({
     components: {
       UnnnicRadio,
     },
     setup() {
-      return { args };
-    },
-    data() {
-      return {
-        insideValue: 'option 1',
+      const updateModelValue = (value) => {
+        action('update:modelValue')(value);
+        args.modelValue = value;
       };
+      return { args, updateModelValue };
     },
     template: `
       <div>
-        v-model: {{ insideValue }}
-        <br>
-
-        <unnnic-radio v-bind="args" v-model="insideValue" value="option 1">
+        <UnnnicRadio v-bind="args" @update:model-value="updateModelValue" value="option 1">
           Option 1
-        </unnnic-radio>
+        </UnnnicRadio>
 
-        <unnnic-radio v-bind="args" v-model="insideValue" value="option 2">
+        <UnnnicRadio v-bind="args" @update:model-value="updateModelValue" value="option 2">
           Option 2
-        </unnnic-radio>
+        </UnnnicRadio>
 
-        <unnnic-radio v-bind="args" v-model="insideValue" value="option 3">
+        <UnnnicRadio v-bind="args" @update:model-value="updateModelValue" value="option 3">
           Option 3
-        </unnnic-radio>
+        </UnnnicRadio>
       </div>
     `,
   }),
 };
 
-export const Default = {
+export const Selected = {
   args: {
-    disabled: false,
-    size: 'md',
+    modelValue: 'option 1',
+    value: 'option 1',
+  },
+};
+
+export const Disabled = {
+  args: {
+    modelValue: 'option 2',
+    value: 'option 1',
+    disabled: true,
+  },
+};
+
+export const DisableSelected = {
+  args: {
+    modelValue: 'option 1',
+    value: 'option 1',
+    disabled: true,
   },
 };
