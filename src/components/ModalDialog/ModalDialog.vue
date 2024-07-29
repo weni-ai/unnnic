@@ -58,9 +58,11 @@
           ]"
         >
           <UnnnicButton
+            v-if="!hideSecondaryButton"
             v-bind="secondaryButtonProps"
             type="tertiary"
             :text="secondaryButtonProps.text || i18n('cancel')"
+            class="unnnic-modal-dialog__container__actions__secondary-button"
             @click.stop="
               secondaryButtonProps.text
                 ? $emit('secondaryButtonClick')
@@ -75,6 +77,7 @@
               'primary'
             "
             :text="primaryButtonProps.text"
+            class="unnnic-modal-dialog__container__actions__primary-button"
             @click.stop="$emit('primaryButtonClick')"
           />
         </section>
@@ -141,6 +144,10 @@ export default {
     primaryButtonProps: {
       type: Object,
       default: () => ({}),
+    },
+    hideSecondaryButton: {
+      type: Boolean,
+      default: false,
     },
     secondaryButtonProps: {
       type: Object,
@@ -292,15 +299,23 @@ export default {
   }
 
   &__actions {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'secondary-button primary-button';
     gap: $unnnic-spacing-sm;
     padding: $unnnic-spacing-md;
     flex-shrink: 0;
-    > * {
-      flex-grow: 1;
-    }
+
     &--divider {
       border-top: 1px solid $unnnic-color-neutral-soft;
+    }
+
+    &__secondary-button {
+      grid-area: secondary-button;
+    }
+
+    &__primary-button {
+      grid-area: primary-button;
     }
   }
 }
