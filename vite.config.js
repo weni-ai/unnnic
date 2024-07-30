@@ -11,6 +11,11 @@ const testExcludes = [
   '**/storybook-static/**',
   '**/assets/**',
   '**/.storybook/**',
+  '**/src/App.vue',
+  '**/src/index.js',
+  '**/src/main.js',
+  '**/src/utils/**',
+  '.eslintrc.js',
 ];
 
 // https://vitejs.dev/config/
