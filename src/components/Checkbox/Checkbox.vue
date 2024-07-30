@@ -18,6 +18,7 @@
         'unnnic-checkbox__label__right',
         `unnnic-checkbox__label__${size}`,
       ]"
+      data-testid="checkbox-text-right"
     >
       {{ textRight }}
     </div>
