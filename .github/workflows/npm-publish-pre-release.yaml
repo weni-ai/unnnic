@@ -27,6 +27,7 @@ jobs:
           git config --global user.name "GitHub Actions Bot"
       - name: Create Pre Release Version
         run: |
+          git fetch --tags
           yarn version --prerelease --preid alpha
           git push origin HEAD:staging-vue3
           git push --tags

@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { afterEach, describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 import Checkbox from '../Checkbox.vue';
@@ -10,16 +10,20 @@ const createWrapper = (props) => {
 };
 
 describe('Checkbox', () => {
-  it('should render right label', () => {
-    const wrapper = createWrapper({ textRight: 'Label Test' });
-    const label = wrapper.find('.unnnic-checkbox__label__right');
-    expect(label.text()).eq('Label Test');
+  let wrapper;
 
+  afterEach(() => {
     wrapper.unmount();
   });
 
+  it('should render right label', () => {
+    wrapper = createWrapper({ textRight: 'Label Test' });
+    const label = wrapper.find('[data-testid="checkbox-text-right"]');
+    expect(label.text()).eq('Label Test');
+  });
+
   it('should checkbox emit change events', async () => {
-    const wrapper = createWrapper();
+    wrapper = createWrapper();
     const checkbox = wrapper.findComponent({ name: 'Icon' });
 
     // click false to true
@@ -36,20 +40,17 @@ describe('Checkbox', () => {
     expect(wrapper.vm.icon).eq('checkbox-less');
     await checkbox.trigger('click');
     expect(wrapper.emitted('change')[2][0]).eq(false);
-    wrapper.unmount();
   });
 
   it('should checkbox disabled', async () => {
-    const wrapper = createWrapper({ disabled: true });
+    wrapper = createWrapper({ disabled: true });
     const checkbox = wrapper.findComponent({ name: 'Icon' });
     await checkbox.trigger('click');
     expect(wrapper.emitted('change')).eq(undefined);
-
-    wrapper.unmount();
   });
 
   it('should define sizes', async () => {
-    const wrapper = createWrapper({ size: 'sm', textRight: 'Label' });
+    wrapper = createWrapper({ size: 'sm', textRight: 'Label' });
     const checkbox = wrapper.findComponent({ name: 'Icon' });
     const label = wrapper.find('.unnnic-checkbox__label');
 

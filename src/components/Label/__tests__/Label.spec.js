@@ -25,6 +25,6 @@ describe('Label', () => {
 
   it('applies the correct classes and styles', () => {
     const label = wrapper.findComponent('.unnnic-label__label');
-    expect(label.exists()).toBe(true);
+    expect(label.html()).toMatchSnapshot();
   });
 });
