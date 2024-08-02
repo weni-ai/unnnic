@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.6.0 (2024-08-02)
+
+### Added
+
+- Added Vitest
+- Added Checkbox and Label components tests
+
 ## 2.5.0 (2024-07-29)
 
 ### Added
