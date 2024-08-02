@@ -27,10 +27,10 @@ jobs:
           git config --global user.name "GitHub Actions Bot"
       - name: Create Pre Release Version
         run: |
-          git fetch --tags
           yarn version --prerelease --preid alpha
+          NEW_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
           git push origin HEAD:staging-vue3
-          git push --tags
+          git push origin $NEW_TAG
       - name: Publish Package
         run: yarn publish
         env:
