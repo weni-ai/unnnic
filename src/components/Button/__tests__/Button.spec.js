@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 import Button from '../Button.vue';
@@ -59,7 +59,7 @@ describe('Button', () => {
     expect(buttonChildren[0].classList.contains('unnnic-icon')).toBe(true);
     expect(wrapper.text()).toBe('');
 
-    await wrapper.setProps({ float: true });
+    await wrapper.setProps({ float: true, size: 'extra-large' });
 
     expect(wrapper.classes()).toContain('unnnic-button--float');
   });
@@ -88,7 +88,7 @@ describe('Button', () => {
   it('should show errors because invalid props', () => {
     const invalidSize = () => createWrapper({ size: 'invalid-size' });
     expect(invalidSize).toThrow(Error);
-    const invalidType = () => createWrapper({ size: 'invalid-type' });
+    const invalidType = () => createWrapper({ type: 'invalid-type' });
     expect(invalidType).toThrow(Error);
   });
 });
