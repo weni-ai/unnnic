@@ -13,6 +13,14 @@ import data from '@emoji-mart/data/sets/14/apple.json';
 import { Picker } from 'emoji-mart/';
 
 export default {
+  name: 'UnnnicEmojiPicker',
+  props: {
+    returnName: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  emits: ['close', 'emojiSelected'],
   computed: {
     emojiPickerPreferences() {
       return {
@@ -42,7 +50,7 @@ export default {
       });
     },
     onEmojiSelect(emoji) {
-      this.$emit('emojiSelected', emoji.native);
+      this.$emit('emojiSelected', this.returnName ? emoji.id : emoji.native);
     },
   },
 };
