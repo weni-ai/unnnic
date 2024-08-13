@@ -85,4 +85,10 @@ describe('Button', () => {
     const loadingIcon = wrapper.findComponent('[data-testid="icon-loading"]');
     expect(loadingIcon.exists()).toBe(true);
   });
+  it('should show errors because invalid props', () => {
+    const invalidSize = () => createWrapper({ size: 'invalid-size' });
+    expect(invalidSize).toThrow(Error);
+    const invalidType = () => createWrapper({ size: 'invalid-type' });
+    expect(invalidType).toThrow(Error);
+  });
 });
