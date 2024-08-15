@@ -3,8 +3,9 @@ import UnnnicDropdownItem from '../components/Dropdown/DropdownItem.vue';
 import UnnnicIcon from '../components/Icon.vue';
 
 export default {
-  title: 'Card/CardProject',
+  title: 'Data Display/CardProject',
   component: UnnnicCardProject,
+  tags: ['autodocs'],
   argTypes: {},
   render: (args) => ({
     components: {
