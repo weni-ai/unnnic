@@ -4,6 +4,7 @@
     class="unnnic-drawer"
   >
     <section
+      v-if="!withoutOverlay"
       class="unnnic-drawer__overlay"
       @click.stop="close"
     />
@@ -30,7 +31,7 @@
           </section>
           <UnnnicIcon
             class="unnnic-drawer__close"
-            icon="arrow_back"
+            :icon="closeIcon"
             size="avatar-nano"
             clickable
             @click="close"
@@ -68,14 +69,14 @@
 </template>
 
 <script>
-import unnnicIcon from '../Icon.vue';
-import unnnicButton from '../Button/Button.vue';
+import UnnnicIcon from '../Icon.vue';
+import UnnnicButton from '../Button/Button.vue';
 
 export default {
   name: 'UnnnicDrawer',
   components: {
-    unnnicIcon,
-    unnnicButton,
+    UnnnicIcon,
+    UnnnicButton,
   },
   props: {
     title: {
@@ -84,6 +85,7 @@ export default {
     },
     description: {
       type: String,
+      default: '',
     },
     disabledPrimaryButton: {
       type: Boolean,
@@ -103,6 +105,7 @@ export default {
     },
     primaryButtonText: {
       type: String,
+      default: '',
     },
     primaryButtonType: {
       type: String,
@@ -110,6 +113,7 @@ export default {
     },
     secondaryButtonText: {
       type: String,
+      default: '',
     },
     wide: {
       type: Boolean,
@@ -118,6 +122,14 @@ export default {
     modelValue: {
       type: Boolean,
       required: true,
+    },
+    withoutOverlay: {
+      type: Boolean,
+      default: false,
+    },
+    closeIcon: {
+      type: String,
+      default: 'arrow_back',
     },
   },
   emits: ['primaryButtonClick', 'secondaryButtonClick', 'close'],

@@ -28,6 +28,7 @@ export default {
     secondaryButtonText: { control: { type: 'text' } },
     modelValue: { control: { type: 'boolean' } },
     wide: { control: { type: 'boolean' } },
+    withoutOverlay: { control: { type: 'boolean' } },
   },
   render: (args) => ({
     setup() {
@@ -152,5 +153,23 @@ export const ContentVideo = {
     title: 'Title',
     description: 'Description',
     wide: true,
+  },
+};
+
+export const WithoutOverlay = {
+  parameters: {
+    docs: {
+      description: {
+        story: `It is recommended to use this variation for contexts where the drawer occupies 
+        the screen with another drawer or modal (components with overlay in general).`,
+      },
+    },
+  },
+  args: {
+    title: 'Title',
+    description: 'Description',
+    primaryButtonText: 'Confirmar',
+    secondaryButtonText: 'Cancelar',
+    withoutOverlay: true,
   },
 };

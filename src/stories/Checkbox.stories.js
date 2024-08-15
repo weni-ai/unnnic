@@ -20,6 +20,7 @@ export default {
     modelValue: { control: 'inline-radio', options: [true, false, 'less'] },
     disabled: { control: 'boolean' },
     size: { control: 'select', options: ['md', 'sm'] },
+    textRight: { control: 'text' },
   },
   render: (args) => ({
     components: {
