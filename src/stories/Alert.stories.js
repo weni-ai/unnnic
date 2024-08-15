@@ -55,6 +55,24 @@ export default {
         type: 'text',
       },
     },
+    position: {
+      if: { arg: 'version' },
+    },
+    version: {
+      control: false,
+    },
+    title: {
+      if: { arg: 'version' },
+    },
+    icon: {
+      if: { arg: 'version' },
+    },
+    closeText: {
+      if: { arg: 'version' },
+    },
+    scheme: {
+      if: { arg: 'version' },
+    },
   },
 };
 
