@@ -1,0 +1,66 @@
+import { Meta, Source, Story } from '@storybook/blocks';
+
+import * as DropAreaStories from './DropArea.stories';
+
+<Meta of={DropAreaStories}/>
+
+# DropArea
+
+The `DropArea` component is designed to provide an area for uploading files, limiting them by file type and/or size.
+
+<Source
+  language='html'
+  dark
+  code={`<UnnnicDropArea
+  v-model:currentFiles="[]"
+  subtitle=""
+  supportedFormats="*"
+  :maxFileSize="undefined"
+  :maximumUploads="1"
+  :acceptMultiple="true"
+  :shouldReplace="false"
+  @fileChange="() => {}"
+  @unsupportedFormat="() => {}"
+  @exceededTheMaximumFileSizeLimit="() => {}"
+>
+  <template #title>Title Slot</template>
+  <template #subtitle>Subtitle Slot</template>
+</UnnnicDropArea>`}
+/>
+
+
+---
+
+#### **Props Options:**
+
+| Key                              | Description                                                                   | Values      | Default                  |
+|----------------------------------|-------------------------------------------------------------------------------|-------------|--------------------------|
+| v-model:currentFiles             | `Array` of the dropped or selected `File` object predefinition                | `[File]`    | `[]`                     |
+| subtitle                         | `String` of the subtitle to replace                                           | `-`         | `Formatos suportados: *` |
+| supportedFormats                 | `String` of the supported file formats for filtering files in System Explorer | `.pdf,.png` | `*`                      |
+| maxFileSize                      | `Number` of the file size limit in megabytes                                  | `Number`    | `undefined`              |
+| maximumUploads                   | `Number` maximum of the files                                                 | `Number`    | `1`                      |
+| acceptMultiple                   | `Boolean` whether or not the user can select more than one file at a time     | `Boolean`   | `true`                   |
+| shouldReplace                    | `Boolean` whether or not the new files will replace the `currentFiles` prop   | `Boolean`   | `false`                  |
+| @fileChange                      | When files are added or replaced                                              | `Function`  | `-`                      |
+| @unsupportedFormat               | When a file has an incorrect extension and/or an unsupported format           | `Function`  | `-`                      |
+| @exceededTheMaximumFileSizeLimit | When a file exceeds the maximum file size limit set in `maxFileSize`          | `Function`  | `-`                      |
+
+#### **Slots:**
+
+| Name     | Description                         | Default                                  |
+|----------|-------------------------------------|------------------------------------------|
+| title    | Template of the title to replace    | `Arraste seu arquivo aqui, ou procure-o` |
+| subtitle | Template of the subtitle to replace | `Formatos suportados: *`                 |
+
+## Example
+Some examples of uses of the `DropArea`
+
+### Default
+
+<Story of={DropAreaStories.Default} />
+
+
+### With Title and Subtitle slots
+
+<Story of={DropAreaStories.WithTitleAndSubtitleSlots} />
