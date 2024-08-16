@@ -2,8 +2,9 @@ import UnnnicCarousel from '../components/Carousel/Carousel.vue';
 import iconList from '../utils/iconList';
 
 export default {
-  title: 'Example/Carousel',
+  title: 'Data Display/Carousel',
   component: UnnnicCarousel,
+  tags: ['autodocs'],
   argTypes: {
     type: { control: { type: 'select' }, options: ['brand'] },
     icon: { control: { type: 'select' }, options: iconList },
@@ -21,7 +22,7 @@ export default {
       };
     },
     template: `
-      <unnnic-carousel v-bind="args" v-model="selecteds" />
+      <UnnnicCarousel v-bind="args" v-model="selecteds" />
     `,
   }),
 };

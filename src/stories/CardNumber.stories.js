@@ -1,8 +1,9 @@
-import unnnicCardNumber from '../components/CardNumber/CardNumber.vue';
+import UnnnicCardNumber from '../components/CardNumber/CardNumber.vue';
 
 export default {
-  title: 'Card/CardNumber',
-  component: unnnicCardNumber,
+  title: 'Data Display/CardNumber',
+  component: UnnnicCardNumber,
+  tags: ['autodocs'],
   argTypes: {},
 };
 
