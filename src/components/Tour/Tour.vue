@@ -93,7 +93,7 @@ export default {
       this.currentStep = 1;
     },
     handleStep(step) {
-      if (this.currentStep < this.steps.length) {
+      if (this.currentStep <= this.steps.length) {
         this.currentStep = step;
       }
     },
