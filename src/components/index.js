@@ -83,6 +83,7 @@ import Drawer from './Drawer/Drawer.vue';
 import TableNext from './TableNext/TableNext.vue';
 import ModalNext from './ModalNext/ModalNext.vue';
 import ModalDialog from './ModalDialog/ModalDialog.vue';
+import Tour from './Tour/Tour.vue';
 
 export const components = {
   unnnicFormElement: formElement,
@@ -171,6 +172,7 @@ export const components = {
   unnnicDisclaimer: Disclaimer,
   unnnicDrawer: Drawer,
   unnnicTableNext: TableNext,
+  unnnicTour: Tour,
 };
 
 export const unnnicFontSize = fontSize;
@@ -260,3 +262,4 @@ export const unnnicChartFunnel = ChartFunnel;
 export const unnnicDisclaimer = Disclaimer;
 export const unnnicDrawer = Drawer;
 export const unnnicTableNext = TableNext;
+export const unnnicTour = Tour;

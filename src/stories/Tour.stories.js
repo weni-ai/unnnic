@@ -13,6 +13,11 @@ export default {
     setup() {
       return { args };
     },
+    data() {
+      return {
+        attachedElementsLoaded: false,
+      };
+    },
     methods: {
       startTour() {
         this.$refs.tour.start();
@@ -28,6 +33,7 @@ export default {
         args.steps[1].attachedElement = this.$refs.step2.$el;
         args.steps[2].attachedElement = this.$refs.step3.$el;
         args.steps[3].attachedElement = this.$refs.step4.$el;
+        this.attachedElementsLoaded = true;
       });
     },
     template: `
@@ -58,7 +64,7 @@ export default {
         description="This is the description"
         ref="step4"
       />
-      <unnnic-tour v-bind="args" ref="tour" />
+      <unnnic-tour v-if="attachedElementsLoaded" v-bind="args" ref="tour" />
     </div>
     `,
   }),
@@ -123,6 +129,11 @@ export const WithPadding = {
     setup() {
       return { args };
     },
+    data() {
+      return {
+        attachedElementsLoaded: false,
+      };
+    },
     methods: {
       startTour() {
         this.$refs.tour.start();
@@ -131,6 +142,7 @@ export const WithPadding = {
     mounted() {
       this.$nextTick(() => {
         args.steps[0].attachedElement = this.$refs.step1.$el;
+        this.attachedElementsLoaded = true;
       });
     },
     template: `
@@ -142,7 +154,7 @@ export const WithPadding = {
         description="This is the description"
         ref="step1"
       />
-      <unnnic-tour v-bind="args" ref="tour" />
+      <unnnic-tour v-if="attachedElementsLoaded" v-bind="args" ref="tour" />
     </div>
     `,
   }),
@@ -172,6 +184,11 @@ export const WithNegativePadding = {
     setup() {
       return { args };
     },
+    data() {
+      return {
+        attachedElementsLoaded: false,
+      };
+    },
     methods: {
       startTour() {
         this.$refs.tour.start();
@@ -180,6 +197,7 @@ export const WithNegativePadding = {
     mounted() {
       this.$nextTick(() => {
         args.steps[0].attachedElement = this.$refs.step1.$el;
+        this.attachedElementsLoaded = true;
       });
     },
     template: `
@@ -191,7 +209,7 @@ export const WithNegativePadding = {
         description="This is the description"
         ref="step1"
       />
-      <unnnic-tour v-bind="args" ref="tour" />
+      <unnnic-tour v-if="attachedElementsLoaded" v-bind="args" ref="tour" />
     </div>
     `,
   }),
