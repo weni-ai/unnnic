@@ -36,6 +36,7 @@ export default {
       validator: validateSteps,
     },
   },
+  emits: ['endTour', 'nextStep'],
 
   data() {
     return {
@@ -102,9 +103,10 @@ export default {
 
       if (currentStep === steps.length) {
         end();
+        this.$emit('endTour');
         return;
       }
-
+      this.$emit('nextStep', { currentStep: this.currentStep });
       handleStep(currentStep + 1);
     },
     updateMaskRect() {

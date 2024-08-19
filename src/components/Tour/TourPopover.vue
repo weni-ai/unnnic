@@ -15,6 +15,7 @@
     </header>
     <p class="popover__description">{{ step.description }}</p>
     <UnnnicButton
+      v-if="!step.hiddenNextStepButton"
       type="primary"
       @click="$emit('nextStep')"
     >
