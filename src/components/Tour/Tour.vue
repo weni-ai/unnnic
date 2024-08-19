@@ -95,9 +95,10 @@ export default {
     },
     async handleStep(step) {
       if (this.currentStep <= this.steps.length) {
-        if (this.steps[step].beforeRender) {
-          await this.steps[step].beforeRender();
-        }
+        const { beforeRender } = this.steps[step - 1]
+        
+        if (beforeRender) await beforeRender()
+        
         this.currentStep = step;
       }
     },
