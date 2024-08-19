@@ -143,7 +143,9 @@ export const InlineComponent = {
         v-if="alert"
         v-bind="alert"
         @close="alert = null"
-      />`,
+      />    
+    </div>
+      `,
   }),
 };
 
