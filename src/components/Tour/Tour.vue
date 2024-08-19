@@ -92,13 +92,14 @@ export default {
     end() {
       this.isTourActive = false;
       this.currentStep = 1;
+      this.$emit('endTour');
     },
     async handleStep(step) {
       if (this.currentStep <= this.steps.length) {
-        const { beforeRender } = this.steps[step - 1]
-        
-        if (beforeRender) await beforeRender()
-        
+        const { beforeRender } = this.steps[step - 1];
+
+        if (beforeRender) await beforeRender();
+
         this.currentStep = step;
       }
     },
@@ -107,10 +108,8 @@ export default {
 
       if (currentStep === steps.length) {
         end();
-        // this.$emit('endTour');
         return;
       }
-      // this.$emit('nextStep', { currentStep: this.currentStep });
       handleStep(currentStep + 1);
     },
     updateMaskRect() {
