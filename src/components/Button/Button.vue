@@ -47,6 +47,7 @@
       v-if="!float"
       class="unnnic-button__label"
       :style="{ visibility: loading ? 'hidden' : null }"
+      data-testid="button-label"
     >
       <slot /> {{ text }}
     </span>
@@ -59,7 +60,7 @@
       :class="{ 'unnnic-button__icon-right': hasText }"
       :style="{ visibility: loading ? 'hidden' : null }"
       :next="next"
-      data-testid="icon-loading"
+      data-testid="icon-right"
     />
   </button>
 </template>
