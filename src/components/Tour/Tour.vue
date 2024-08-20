@@ -11,6 +11,7 @@
     :currentStep="currentStep"
     :attachedElement="currentStepOptions.attachedElement"
     @end="end"
+    @close="close"
     @next-step="nextStep"
   />
 </template>
@@ -36,7 +37,7 @@ export default {
       validator: validateSteps,
     },
   },
-  emits: ['endTour', 'nextStep'],
+  emits: ['endTour', 'nextStep', 'close'],
 
   data() {
     return {
@@ -93,6 +94,9 @@ export default {
       this.isTourActive = false;
       this.currentStep = 1;
       this.$emit('endTour');
+    },
+    close() {
+      this.$emit('close');
     },
     async handleStep(step) {
       if (this.currentStep <= this.steps.length) {
