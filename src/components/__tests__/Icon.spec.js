@@ -41,7 +41,9 @@ describe('Icon', () => {
     expect(warningSpy).toHaveBeenCalled();
   });
   describe('OldMapIcon', () => {
-    let wrapper;
+    let wrapper = createWrapper({ icon: 'search-1' });
+
+    commonTests(wrapper);
 
     beforeEach(() => {
       wrapper = createWrapper({ icon: 'search-1' });
@@ -51,18 +53,12 @@ describe('Icon', () => {
       const hasOldIcon = wrapper.find('[data-testid="old-map-icons"]');
       expect(hasOldIcon.exists()).toBe(true);
     });
-
-    it('should emit click event when the icon is clicked if clickable prop its true', () => {
-      handlerIconClickTest(wrapper);
-    });
-
-    it('should emit mousedown/mouseup when doing the action with the mouse', () => {
-      handlerIconMouseDownUpTest(wrapper);
-    });
   });
 
   describe('Material Icons', () => {
-    let wrapper;
+    let wrapper = createWrapper({ icon: 'done_all' });
+
+    commonTests(wrapper);
 
     beforeEach(() => {
       wrapper = createWrapper({ icon: 'done_all' });
@@ -71,14 +67,6 @@ describe('Icon', () => {
     it('should render the icon from Material Icons', async () => {
       const hasOldIcon = wrapper.find('[data-testid="material-icon"]');
       expect(hasOldIcon.exists()).toBe(true);
-    });
-
-    it('should emit click event when the icon is clicked if clickable prop its true', () => {
-      handlerIconClickTest(wrapper);
-    });
-
-    it('should emit mousedown/mouseup when doing the action with the mouse', () => {
-      handlerIconMouseDownUpTest(wrapper);
     });
   });
 });
