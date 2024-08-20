@@ -11,6 +11,7 @@
     :currentStep="currentStep"
     :attachedElement="currentStepOptions.attachedElement"
     @end="end"
+    @close="close"
     @next-step="nextStep"
   />
 </template>
@@ -36,6 +37,7 @@ export default {
       validator: validateSteps,
     },
   },
+  emits: ['endTour', 'nextStep', 'close'],
 
   data() {
     return {
@@ -91,9 +93,17 @@ export default {
     end() {
       this.isTourActive = false;
       this.currentStep = 1;
+      this.$emit('endTour');
     },
-    handleStep(step) {
-      if (this.currentStep < this.steps.length) {
+    close() {
+      this.$emit('close');
+    },
+    async handleStep(step) {
+      if (this.currentStep <= this.steps.length) {
+        const { beforeRender } = this.steps[step - 1];
+
+        if (beforeRender) await beforeRender();
+
         this.currentStep = step;
       }
     },
@@ -104,7 +114,6 @@ export default {
         end();
         return;
       }
-
       handleStep(currentStep + 1);
     },
     updateMaskRect() {

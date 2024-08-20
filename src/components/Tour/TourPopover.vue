@@ -8,13 +8,14 @@
       <h1 class="header__title">{{ step.title }}</h1>
       <p
         class="header__close-tour"
-        @click="$emit('end')"
+        @click.stop="$emit('close')"
       >
         {{ i18n('close_tour') }}
       </p>
     </header>
     <p class="popover__description">{{ step.description }}</p>
     <UnnnicButton
+      v-if="!step.hiddenNextStepButton"
       type="primary"
       @click="$emit('nextStep')"
     >
@@ -56,7 +57,7 @@ export default {
     },
   },
 
-  emits: ['end', 'nextStep'],
+  emits: ['end', 'nextStep', 'close'],
 
   data() {
     return {
