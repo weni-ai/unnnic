@@ -1,5 +1,12 @@
 <template>
   <div class="unnnic-import-card">
+    <UnnnicIcon
+      class="unnnic-import-card__file-icon"
+      size="md"
+      scheme="weni-600"
+      :icon="fileIcon"
+    />
+
     <div class="unnnic-import-card__data">
       <div
         v-if="isImporting"
@@ -51,12 +58,13 @@
         />
       </UnnnicButton>
 
-      <UnnnicButton
+      <UnnnicIcon
         v-if="canDelete"
         class="unnnic-import-card__buttons__delete"
-        size="small"
-        :iconCenter="`close-1`"
-        type="warning"
+        size="sm"
+        scheme="neutral-cloudy"
+        icon="delete"
+        clickable
         @click="emitDeletion"
       />
     </div>
@@ -65,11 +73,13 @@
 
 <script>
 import UnnnicButton from '../Button/Button.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'ImportCard',
   components: {
     UnnnicButton,
+    UnnnicIcon,
   },
   props: {
     title: {
@@ -105,6 +115,22 @@ export default {
       default: 'upload-bottom-1',
     },
   },
+  computed: {
+    fileIcon() {
+      const extension = this.title.slice(this.title.lastIndexOf('.') + 1);
+
+      return (
+        {
+          pdf: 'picture_as_pdf',
+          txt: 'text_snippet',
+          xls: 'table',
+          xlsx: 'table',
+          doc: 'draft',
+          docx: 'draft',
+        }[extension] || 'draft'
+      );
+    },
+  },
   methods: {
     importFile() {
       this.$refs.file.click();
@@ -133,15 +159,23 @@ export default {
 
 .unnnic-import-card {
   display: flex;
+  column-gap: $unnnic-spacing-xs;
+  align-items: center;
 
   border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
-  border-radius: $unnnic-border-radius-md;
+  border-radius: $unnnic-border-radius-sm;
 
-  background-color: $unnnic-color-background-snow;
-  padding: $unnnic-squish-md;
+  background-color: $unnnic-color-neutral-white;
+  padding: $unnnic-spacing-xs - $unnnic-border-width-thinner;
+
+  &__file-icon {
+    user-select: none;
+    margin: $unnnic-spacing-xs;
+  }
 
   &__data {
     align-self: center;
+    overflow: hidden;
 
     flex: 1;
     gap: $unnnic-spacing-stack-nano;
@@ -149,10 +183,14 @@ export default {
     font-family: $unnnic-font-family-secondary;
 
     &__title {
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-neutral-dark;
       font-size: $unnnic-font-size-body-gt;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-      font-weight: $unnnic-font-weight-bold;
+      font-weight: $unnnic-font-weight-regular;
+
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     &__subtitle {
@@ -181,8 +219,9 @@ export default {
   &__buttons {
     display: flex;
     gap: $unnnic-spacing-inline-xs;
+    align-items: center;
 
-    margin-left: $unnnic-spacing-inline-xs;
+    margin-right: $unnnic-spacing-xs;
 
     align-self: center;
 
@@ -199,6 +238,10 @@ export default {
           }
         }
       }
+    }
+
+    &__delete {
+      user-select: none;
     }
   }
 }
