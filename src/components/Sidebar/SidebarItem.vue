@@ -17,6 +17,7 @@
         :scheme="active ? 'brand-weni-soft' : 'neutral-cloudy'"
         size="sm"
         :icon="icon"
+        :filled="iconFilled"
       />
       <span class="unnnic-side-bar-item__label">
         {{ text }}
@@ -45,6 +46,10 @@ export default {
     icon: {
       type: String,
       default: null,
+    },
+    iconFilled: {
+      type: Boolean,
+      default: false,
     },
     text: {
       type: String,
