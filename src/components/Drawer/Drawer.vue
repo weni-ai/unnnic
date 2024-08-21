@@ -34,7 +34,7 @@
             :icon="closeIcon"
             size="avatar-nano"
             clickable
-            @click="close"
+            @click="back"
           />
         </header>
         <section class="unnnic-drawer__content">
@@ -131,8 +131,12 @@ export default {
       type: String,
       default: 'arrow_back',
     },
+    distinctCloseBack: {
+      type: Boolean,
+      default: false,
+    },
   },
-  emits: ['primaryButtonClick', 'secondaryButtonClick', 'close'],
+  emits: ['primaryButtonClick', 'secondaryButtonClick', 'close', 'back'],
   data() {
     return {
       showDrawer: true,
@@ -144,12 +148,22 @@ export default {
     },
   },
   methods: {
-    close() {
+    transitionClose(callback) {
       this.showDrawer = false;
       setTimeout(() => {
-        this.$emit('close');
+        callback?.();
         this.showDrawer = true;
       }, 200);
+    },
+    close() {
+      this.transitionClose(() => this.$emit('close'));
+    },
+    back() {
+      if (this.distinctCloseBack) {
+        this.transitionClose(() => this.$emit('back'));
+      } else {
+        this.close();
+      }
     },
   },
 };

@@ -8,7 +8,6 @@
       :shouldReplace="shouldReplace"
       :maximumUploads="maximumUploads"
       :subtitle="subtitle"
-      rato="oi"
       @file-change="$emit('fileChange', $event)"
     />
 
