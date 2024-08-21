@@ -1,7 +1,7 @@
 <template>
   <div
     ref="pickerContainer"
-    class="emoji-picker"
+    :class="['emoji-picker', `emoji-picker--${position}`]"
     @click.stop="() => {}"
     @keypress.enter="() => {}"
   />
@@ -18,6 +18,11 @@ export default {
     returnName: {
       type: Boolean,
       default: false,
+    },
+    position: {
+      type: String,
+      default: 'top',
+      validator: (position) => ['top', 'bottom'].includes(position),
     },
   },
   emits: ['close', 'emojiSelected'],
@@ -59,10 +64,19 @@ export default {
 <style lang="scss" scoped>
 .emoji-picker {
   position: absolute;
-  bottom: 100%;
   z-index: 1;
 
-  animation: slideInUp 0.3s;
+  animation-duration: 0.3s;
+
+  &--top {
+    bottom: 100%;
+    animation-name: slideInUp;
+  }
+
+  &--bottom {
+    top: 100%;
+    animation-name: slideInDown;
+  }
 
   :deep(em-emoji-picker) {
     // Most variables don't work here
@@ -80,6 +94,17 @@ export default {
 @keyframes slideInUp {
   0% {
     transform: translateY(5%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInDown {
+  0% {
+    transform: translateY(-5%);
     opacity: 0;
   }
   100% {
