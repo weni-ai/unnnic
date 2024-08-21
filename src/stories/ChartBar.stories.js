@@ -1,8 +1,15 @@
-import unnnicChartBar from '../components/ChartBar/ChartBar.vue';
+import { action } from '@storybook/addon-actions';
+import UnnnicChartBar from '../components/ChartBar/ChartBar.vue';
 
 export default {
-  title: 'charts/ChartBar',
-  component: unnnicChartBar,
+  title: 'Charts/ChartBar',
+  component: UnnnicChartBar,
+  tags: ['autodocs'],
+  args: {
+    onUpdate: action('update'),
+    onPrevious: action('previous'),
+    onNext: action('previous'),
+  },
   argTypes: {
     update: {
       action: 'update',

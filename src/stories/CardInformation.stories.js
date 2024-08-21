@@ -1,8 +1,9 @@
-import unnnicCardInformation from '../components/CardInformation/CardInformation.vue';
+import UnnnicCardInformation from '../components/CardInformation/CardInformation.vue';
 
 export default {
-  title: 'Card/CardInformation',
-  component: unnnicCardInformation,
+  title: 'Data Display/CardInformation',
+  component: UnnnicCardInformation,
+  tags: ['autodocs'],
   argTypes: {},
 };
 
