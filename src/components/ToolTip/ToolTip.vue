@@ -2,17 +2,18 @@
   <div
     ref="tooltip"
     :class="{
-      'unnnic-tooltip': enabled,
+      'unnnic-tooltip': enabled || forceOpen,
       'force-open': forceOpen,
     }"
     @mouseover="handleResize"
   >
     <slot />
     <span
-      v-show="enabled"
+      v-show="enabled || forceOpen"
       ref="label"
       :class="['unnnic-tooltip-label', `unnnic-tooltip-label-${side}`]"
       :style="{ maxWidth: maxWidth, left: leftPos, top: topPos }"
+      data-testid="tooltip-label"
     >
       <template
         v-for="(line, index) in text.split('\n')"
@@ -23,7 +24,10 @@
       </template>
 
       <template v-if="shortcutText">
-        <span class="unnnic-tooltip-label-shortcut">
+        <span
+          class="unnnic-tooltip-label-shortcut"
+          data-testid="tooltip-label-shortcut"
+        >
           {{ shortcutText }}
         </span>
       </template>
@@ -37,7 +41,7 @@ export default {
   props: {
     text: {
       type: String,
-      default: null,
+      default: '',
     },
     enabled: {
       type: Boolean,
