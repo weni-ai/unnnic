@@ -2,6 +2,7 @@
   <div class="unnnic-switch">
     <div
       v-if="textLeft"
+      data-testid="switch-text-left"
       :class="[
         'unnnic-switch__label',
         'unnnic-switch__label__left',
@@ -19,11 +20,13 @@
       :lineHeight="iconLineHeight"
       :disabled="disabled"
       :clickable="!disabled"
+      data-testid="switch-icon"
       @click="toggleState"
     />
 
     <div
       v-if="textRight"
+      data-testid="switch-text-right"
       :class="[
         'unnnic-switch__label',
         'unnnic-switch__label__right',
@@ -51,11 +54,11 @@ export default {
     },
     textLeft: {
       type: String,
-      default: null,
+      default: '',
     },
     textRight: {
       type: String,
-      default: null,
+      default: '',
     },
     disabled: {
       type: Boolean,
@@ -69,6 +72,7 @@ export default {
       type: Boolean,
     },
   },
+  emits: ['update:model-value'],
   data() {
     return {
       isActive: false,
@@ -113,13 +117,13 @@ export default {
 
   methods: {
     toggleState() {
-      if (this.disabled) return;
-
-      if (this.useVModel) {
-        this.$emit('update:model-value', !this.isActive);
-      } else {
-        this.isActive = !this.isActive;
-        this.$emit('update:model-value', this.isActive);
+      if (!this.disabled) {
+        if (this.useVModel) {
+          this.$emit('update:model-value', !this.isActive);
+        } else {
+          this.isActive = !this.isActive;
+          this.$emit('update:model-value', this.isActive);
+        }
       }
     },
   },
