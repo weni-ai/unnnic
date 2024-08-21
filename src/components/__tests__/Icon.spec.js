@@ -1,4 +1,4 @@
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 import Icon from '../Icon.vue';
@@ -7,55 +7,66 @@ const createWrapper = (props) => {
   return mount(Icon, { props });
 };
 
+const handlerIconClickTest = async (wrapper) => {
+  await wrapper.trigger('click');
+  expect(wrapper.emitted('click')).toBeFalsy();
+  await wrapper.setProps({ clickable: true });
+  await wrapper.trigger('click');
+  expect(wrapper.emitted('click')).toBeTruthy();
+};
+
+const handlerIconMouseDownUpTest = async (wrapper) => {
+  await wrapper.trigger('mousedown');
+  await wrapper.trigger('mouseup');
+  expect(wrapper.emitted('mousedown')).toBeTruthy();
+  expect(wrapper.emitted('mouseup')).toBeTruthy();
+};
+
+const commonTests = async (wrapper) => {
+  it('should emit click event when the icon is clicked if clickable prop its true', () => {
+    handlerIconClickTest(wrapper);
+  });
+
+  it('should emit mousedown/mouseup when doing the action with the mouse', () => {
+    handlerIconMouseDownUpTest(wrapper);
+  });
+};
+
 describe('Icon', () => {
-  it('should render old icons map and trigger click events', async () => {
-    const wrapper = createWrapper({ icon: 'search-1', clickable: false });
-
-    const hasOldIcon = wrapper.find('[data-testid="old-map-icons"]');
-    expect(hasOldIcon.exists()).toBe(true);
-
-    await wrapper.trigger('click');
-    expect(wrapper.emitted('click')).toBe(undefined);
-
-    await wrapper.setProps({ clickable: true });
-    await wrapper.trigger('click');
-    expect(wrapper.emitted('click')).toBeTruthy();
-
-    await wrapper.trigger('mousedown');
-    await wrapper.trigger('mouseup');
-
-    expect(wrapper.emitted('mousedown')).toBeTruthy();
-    expect(wrapper.emitted('mouseup')).toBeTruthy();
-  });
-
-  it('should render material icons and trigger click events', async () => {
-    const wrapper = createWrapper({
-      icon: 'done_all',
-      clickable: false,
-    });
-
-    const hasMaterialIcon = wrapper.find('[data-testid="material-icon"]');
-    expect(hasMaterialIcon.exists()).toBe(true);
-
-    await wrapper.trigger('click');
-    expect(wrapper.emitted('click')).toBe(undefined);
-
-    await wrapper.setProps({ clickable: true });
-    await wrapper.trigger('click');
-    expect(wrapper.emitted('click')).toBeTruthy();
-
-    await wrapper.trigger('mousedown');
-    await wrapper.trigger('mouseup');
-
-    expect(wrapper.emitted('mousedown')).toBeTruthy();
-    expect(wrapper.emitted('mouseup')).toBeTruthy();
-  });
-
   it('should log warning because invalid props', () => {
     const warningSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
     createWrapper({ lineHeight: 'invalid' });
 
     expect(warningSpy).toHaveBeenCalled();
+  });
+  describe('OldMapIcon', () => {
+    let wrapper = createWrapper({ icon: 'search-1' });
+
+    commonTests(wrapper);
+
+    beforeEach(() => {
+      wrapper = createWrapper({ icon: 'search-1' });
+    });
+
+    it('should render the icon from OldIconsMap', async () => {
+      const hasOldIcon = wrapper.find('[data-testid="old-map-icons"]');
+      expect(hasOldIcon.exists()).toBe(true);
+    });
+  });
+
+  describe('Material Icons', () => {
+    let wrapper = createWrapper({ icon: 'done_all' });
+
+    commonTests(wrapper);
+
+    beforeEach(() => {
+      wrapper = createWrapper({ icon: 'done_all' });
+    });
+
+    it('should render the icon from Material Icons', async () => {
+      const hasOldIcon = wrapper.find('[data-testid="material-icon"]');
+      expect(hasOldIcon.exists()).toBe(true);
+    });
   });
 });
