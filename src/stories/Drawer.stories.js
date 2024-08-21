@@ -1,3 +1,5 @@
+import { action } from '@storybook/addon-actions';
+
 import UnnnicDrawer from '../components/Drawer/Drawer.vue';
 import UnnnicButton from '../components/Button/Button.vue';
 
@@ -41,18 +43,24 @@ export default {
       };
     },
     methods: {
-      primaryClick() {
-        console.log('primaryClick');
+      primaryClick: action('primaryButtonClick'),
+      secondaryClick: action('secondaryButtonClick'),
+      closeAction: action('close'),
+      backAction: action('back'),
+      close() {
+        this.closeAction();
+        this.opened = false;
       },
-      secondaryClick() {
-        console.log('secondaryClick');
+      back() {
+        this.backAction();
+        this.opened = false;
       },
     },
     template: `
       <div>
         <pre>v-model: {{ opened }}</pre>
         <button @click="opened = !opened">Change</button>
-        <unnnic-drawer v-bind="args" v-model="opened" @close="opened = false" @primaryButtonClick="primaryClick" @secondaryButtonClick="secondaryClick">
+        <unnnic-drawer v-bind="args" v-model="opened" @close="close" @back="back" @primaryButtonClick="primaryClick" @secondaryButtonClick="secondaryClick">
           <template #content>
             <p style="padding: 0; margin:0;">Conteúdo</p>
           </template>
@@ -68,6 +76,7 @@ export const Default = {
     description: 'Description',
     primaryButtonText: 'Confirmar',
     secondaryButtonText: 'Cancelar',
+    distinctCloseBack: true,
   },
 };
 
@@ -93,12 +102,8 @@ export const ContentOverflowed = {
       };
     },
     methods: {
-      primaryClick() {
-        console.log('primaryClick');
-      },
-      secondaryClick() {
-        console.log('secondaryClick');
-      },
+      primaryClick: action('primaryButtonClick'),
+      secondaryClick: action('secondaryButtonClick'),
     },
     template: `
       <div>
