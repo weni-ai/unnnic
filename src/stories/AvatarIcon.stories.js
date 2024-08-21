@@ -22,8 +22,24 @@ const schemes = [
 ];
 
 export default {
-  title: 'Example/AvatarIcon',
+  title: 'Data Display/AvatarIcon',
   component: AvatarIcon,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `Visual element used to represent a user, entity or object in digital interfaces.`,
+      },
+    },
+  },
+  args: {
+    enabled: true,
+    icon: 'graph-stats-1',
+    size: 'sm',
+    scheme: 'aux-blue',
+    filled: false,
+    opacity: false,
+  },
   argTypes: {
     enabled: { control: 'boolean' },
     icon: { control: 'select', options: iconsOptions },
@@ -32,6 +48,8 @@ export default {
       options: ['nano', 'xs', 'sm', 'lg', 'xl'],
     },
     scheme: { control: 'select', options: schemes },
+    filled: { control: 'boolean' },
+    opacity: { control: 'boolean' },
   },
 };
 

@@ -2,8 +2,9 @@ import UnnnicCardImage from '../components/CardImage/CardImage.vue';
 import UnnnicDropdownItem from '../components/Dropdown/DropdownItem.vue';
 
 export default {
-  title: 'card/CardImage',
+  title: 'Data Display/CardImage',
   component: UnnnicCardImage,
+  tags: ['autodocs'],
   argTypes: {},
   render: (args) => ({
     components: {
@@ -19,20 +20,17 @@ export default {
       };
     },
     template: `
-      <div>
-        <pre>v-model: {{ value }}</pre>
-        <unnnic-card-image v-bind="args" v-model="value">
-        <template #actions>
-          <unnnic-dropdown-item>
-            Option 1
-          </unnnic-dropdown-item>
+      <UnnnicCardImage v-bind="args" v-model="value">
+      <template #actions>
+        <unnnic-dropdown-item>
+          Option 1
+        </unnnic-dropdown-item>
 
-          <unnnic-dropdown-item>
-            Option 2
-          </unnnic-dropdown-item>
-        </template>
-        </unnnic-card-image>
-      </div>
+        <unnnic-dropdown-item>
+          Option 2
+        </unnnic-dropdown-item>
+      </template>
+      </UnnnicCardImage>
     `,
   }),
 };

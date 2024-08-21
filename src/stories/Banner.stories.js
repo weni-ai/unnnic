@@ -1,8 +1,9 @@
-import unnnicBanner from '../components/Banner/Banner.vue';
+import UnnnicBanner from '../components/Banner/Banner.vue';
 
 export default {
-  title: 'example/Banner',
-  component: unnnicBanner,
+  title: 'Data Display/Banner',
+  component: UnnnicBanner,
+  tags: ['autodocs'],
   argTypes: {
     type: {
       control: {
@@ -22,7 +23,7 @@ export default {
 
   render: (args) => ({
     components: {
-      unnnicBanner,
+      UnnnicBanner,
     },
     setup() {
       return { args };
@@ -33,7 +34,7 @@ export default {
       },
     },
     template: `
-      <unnnicBanner v-bind="args" @ratingAction="emitRatingAction" />
+      <UnnnicBanner v-bind="args" @ratingAction="emitRatingAction" />
     `,
   }),
 };

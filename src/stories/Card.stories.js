@@ -5,8 +5,9 @@ import unnnicDropdown from '../components/Dropdown/Dropdown.vue';
 import unnnicDropdownItem from '../components/Dropdown/DropdownItem.vue';
 
 export default {
-  title: 'Card/Card',
+  title: 'Data Display/Card',
   component: Card,
+  tags: ['autodocs'],
   argTypes: {
     enabled: { control: { type: 'select' }, options: [true, false] },
     infoPosition: {

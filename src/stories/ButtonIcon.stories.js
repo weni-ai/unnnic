@@ -6,6 +6,7 @@ const iconsOptions = Object.keys(icons);
 export default {
   title: 'Form/ButtonIcon',
   component: UnnnicButtonIcon,
+  tags: ['autodocs'],
   argTypes: {
     size: {
       control: {

@@ -59,9 +59,10 @@ export default {
     },
     textRight: {
       type: String,
-      default: null,
+      default: '',
     },
   },
+  emits: ['change', 'update:model-value'],
 
   computed: {
     valueName() {
@@ -96,6 +97,7 @@ export default {
     click() {
       const isChecked = ['checked', 'less'].includes(this.valueName);
       this.$emit('change', !isChecked);
+      this.$emit('update:model-value', !isChecked);
     },
   },
 };

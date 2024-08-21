@@ -1,13 +1,21 @@
-import unnnicAudioRecorder from '../components/AudioRecorder/AudioRecorder.vue';
+import UnnnicAudioRecorder from '../components/AudioRecorder/AudioRecorder.vue';
 import AudioSample from './assets/audios/audio-recorder-sample.mp3';
 
 export default {
   title: 'Form/AudioRecorder',
-  component: unnnicAudioRecorder,
+  component: UnnnicAudioRecorder,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: `Used for recording and playing audio.`,
+      },
+    },
+  },
   argTypes: {},
   render: (args) => ({
     components: {
-      unnnicAudioRecorder,
+      UnnnicAudioRecorder,
     },
     setup() {
       return { args };
@@ -25,7 +33,7 @@ export default {
       <pre>v-model: {{ audio }}</pre>
       <pre>status: {{ status }}</pre>
 
-      <unnnic-audio-recorder v-bind="args" ref="audio-recorder" v-model="audio" @status="(value) => this.status = value" />
+      <UnnnicAudioRecorder v-bind="args" ref="audio-recorder" v-model="audio" @status="(value) => this.status = value" />
     </div>
   `,
   }),
