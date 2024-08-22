@@ -30,7 +30,7 @@ describe('Switch', () => {
   });
 
   it('should render the right text (textRight) when provided', async () => {
-    await wrapper.setProps({ textRight: 'Left Text' });
+    await wrapper.setProps({ textRight: 'Right Text' });
 
     // This check ensures that the icon is placed after the switch text
     const switchChildren = wrapper.findComponent(Switch).element.children;
