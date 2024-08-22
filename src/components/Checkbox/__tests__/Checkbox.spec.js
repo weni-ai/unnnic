@@ -1,5 +1,6 @@
-import { afterEach, describe, expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
+import puppeteer from 'puppeteer';
 
 import Checkbox from '../Checkbox.vue';
 
@@ -11,10 +12,6 @@ const createWrapper = (props) => {
 
 describe('Checkbox', () => {
   let wrapper;
-
-  afterEach(() => {
-    wrapper.unmount();
-  });
 
   it('should render right label', () => {
     wrapper = createWrapper({ textRight: 'Label Test' });
@@ -62,5 +59,35 @@ describe('Checkbox', () => {
     await wrapper.setProps({ size: 'md' });
     expect(checkbox.classes()).include('unnnic-icon__size--md');
     expect(label.classes()).include('unnnic-checkbox__label__md');
+  });
+  let browser;
+  let page;
+
+  beforeAll(async () => {
+    browser = await puppeteer.launch();
+    page = await browser.newPage();
+  });
+
+  afterAll(async () => {
+    await browser.close();
+  });
+
+  afterEach(() => {
+    if (page) {
+      page.close();
+    }
+  });
+
+  it.only('should match visual snapshot', async () => {
+    const wrapper = createWrapper({ size: 'sm', textRight: 'Label Test' });
+
+    // Set the content of the page to the component's HTML
+    await page.setContent(wrapper.html());
+
+    // Capture the screenshot
+    const screenshot = await page.screenshot();
+
+    // Compare the screenshot with the saved snapshot
+    expect(screenshot).toMatchImageSnapshot();
   });
 });
