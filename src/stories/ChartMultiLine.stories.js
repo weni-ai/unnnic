@@ -1,8 +1,9 @@
-import unnnicChartMultiLine from '../components/ChartMultiLine/ChartMultiLine.vue';
+import UnnnicChartMultiLine from '../components/ChartMultiLine/ChartMultiLine.vue';
 
 export default {
   title: 'charts/ChartMultiLine',
-  component: unnnicChartMultiLine,
+  component: UnnnicChartMultiLine,
+  tags: ['autodocs'],
   argTypes: {},
 };
 

@@ -1,8 +1,9 @@
-import unnnicChartFunnel from '../components/ChartFunnel/ChartFunnel.vue';
+import UnnnicChartFunnel from '../components/ChartFunnel/ChartFunnel.vue';
 
 export default {
   title: 'Charts/ChartFunnel',
-  component: unnnicChartFunnel,
+  tags: ['autodocs'],
+  component: UnnnicChartFunnel,
   decorators: [
     () => ({ template: '<div style="width: 500px;"><story /></div>' }),
   ],
