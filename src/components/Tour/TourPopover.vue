@@ -13,7 +13,11 @@
         {{ i18n('close_tour') }}
       </p>
     </header>
-    <p class="popover__description">{{ step.description }}</p>
+    <!-- eslint-disable vue/no-v-html -->
+    <p
+      class="popover__description"
+      v-html="step.description"
+    />
     <UnnnicButton
       v-if="!step.hiddenNextStepButton"
       type="primary"

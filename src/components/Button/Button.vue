@@ -19,6 +19,7 @@
       :style="{ position: 'absolute' }"
       class="rotation"
       :next="next"
+      data-testid="icon-loading"
     />
 
     <UnnnicIcon
@@ -29,6 +30,7 @@
       :class="{ 'unnnic-button__icon-left': hasText }"
       :style="{ visibility: loading ? 'hidden' : null }"
       :next="next"
+      data-testid="icon-left"
     />
 
     <UnnnicIcon
@@ -38,12 +40,14 @@
       :style="{ visibility: loading ? 'hidden' : null }"
       :size="iconSize"
       :next="next"
+      data-testid="icon-center"
     />
 
     <span
       v-if="!float"
       class="unnnic-button__label"
       :style="{ visibility: loading ? 'hidden' : null }"
+      data-testid="button-label"
     >
       <slot /> {{ text }}
     </span>
@@ -56,6 +60,7 @@
       :class="{ 'unnnic-button__icon-right': hasText }"
       :style="{ visibility: loading ? 'hidden' : null }"
       :next="next"
+      data-testid="icon-right"
     />
   </button>
 </template>
@@ -64,6 +69,7 @@
 import UnnnicIcon from '../Icon.vue';
 
 export default {
+  name: 'UnnnicButton',
   components: {
     UnnnicIcon,
   },
