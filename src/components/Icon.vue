@@ -10,6 +10,7 @@
         'material-symbols-rounded--filled': filled,
       },
     ]"
+    data-testid="material-icon"
     @click="onClick"
     @mousedown="$emit('mousedown')"
     @mouseup="$emit('mouseup')"
@@ -27,6 +28,7 @@
       lineHeight ? `unnnic-icon__line-height--${lineHeight}` : '',
       scheme ? `unnnic-icon-scheme--${scheme}` : '',
     ]"
+    data-testid="old-map-icons"
     @click="onClick"
     @mousedown="$emit('mousedown')"
     @mouseup="$emit('mouseup')"
