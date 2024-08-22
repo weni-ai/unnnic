@@ -29,7 +29,10 @@ export default {
     primaryButtonText: { control: { type: 'text' } },
     secondaryButtonText: { control: { type: 'text' } },
     modelValue: { control: { type: 'boolean' } },
-    wide: { control: { type: 'boolean' } },
+    size: {
+      options: ['md', 'lg', 'xl'],
+      control: { type: 'select' },
+    },
     withoutOverlay: { control: { type: 'boolean' } },
   },
   render: (args) => ({
@@ -80,13 +83,23 @@ export const Default = {
   },
 };
 
-export const Wide = {
+export const Large = {
   args: {
     title: 'Title',
     description: 'Description',
     primaryButtonText: 'Confirmar',
     secondaryButtonText: 'Cancelar',
-    wide: true,
+    size: 'lg',
+  },
+};
+
+export const ExtraLarge = {
+  args: {
+    title: 'Title',
+    description: 'Description',
+    primaryButtonText: 'Confirmar',
+    secondaryButtonText: 'Cancelar',
+    size: 'xl',
   },
 };
 
@@ -127,7 +140,7 @@ export const ContentOverflowed = {
     description: 'Description',
     primaryButtonText: 'Confirmar',
     secondaryButtonText: 'Cancelar',
-    wide: true,
+    size: 'lg',
   },
 };
 
@@ -157,7 +170,7 @@ export const ContentVideo = {
   args: {
     title: 'Title',
     description: 'Description',
-    wide: true,
+    size: 'lg',
   },
 };
 

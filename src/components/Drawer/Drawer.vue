@@ -16,7 +16,7 @@
         v-if="showDrawer"
         :class="[
           'unnnic-drawer__container',
-          wide && 'unnnic-drawer__container--wide',
+          `unnnic-drawer__container--${size}`,
         ]"
       >
         <header class="unnnic-drawer__header">
@@ -114,6 +114,13 @@ export default {
     secondaryButtonText: {
       type: String,
       default: '',
+    },
+    size: {
+      type: String,
+      default: 'md',
+      validator(val) {
+        return ['md', 'lg', 'xl'].includes(val);
+      },
     },
     wide: {
       type: Boolean,
@@ -233,10 +240,17 @@ export default {
   justify-content: space-between;
   height: 100%;
   background-color: $unnnic-color-neutral-white;
-  width: calc(100% / 3);
 
-  &--wide {
+  &--md {
+    width: calc(100% / 3);
+  }
+
+  &--lg {
     width: 50%;
+  }
+
+  &--xl {
+    width: 75%;
   }
 
   .unnnic-drawer__header {
