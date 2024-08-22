@@ -1,17 +1,17 @@
-/* eslint-disable no-alert */
-import unnnicChatsHeader from '../components/ChatsHeader/ChatsHeader.vue';
-import unnnicChatsDashboardTagLive from '../components/ChatsDashboardTagLive/ChatsDashboardTagLive.vue';
+import UnnnicChatsHeader from '../components/ChatsHeader/ChatsHeader.vue';
+import UnnnicChatsDashboardTagLive from '../components/ChatsDashboardTagLive/ChatsDashboardTagLive.vue';
 import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Chats/Header',
-  component: unnnicChatsHeader,
+  component: UnnnicChatsHeader,
+  tags: ['autodocs'],
   args: {
-    onCrumbClick: action('crumb-click'),
-    back: action('back'),
-    close: action('close'),
-    titleClick: action('title-click'),
-    avatarClick: action('avatar-click'),
+    onCrumbClick: () => action('crumb-click')(),
+    back: () => action('back')(),
+    close: () => action('close')(),
+    titleClick: () => action('title-click')(),
+    avatarClick: () => action('avatar-click')(),
   },
 };
 
@@ -52,14 +52,14 @@ export const Dashboard = {
     setup() {
       return { args };
     },
-    components: { unnnicChatsHeader, unnnicChatsDashboardTagLive },
+    components: { UnnnicChatsHeader, UnnnicChatsDashboardTagLive },
     template: `
-      <unnnic-chats-header 
+      <UnnnicChatsHeader 
         v-bind="args" 
         @crumbClick="crumbClick"
       >
-        <unnnic-chats-dashboard-tag-live />
-      </unnnic-chats-header>`,
+        <UnnnicChatsDashboardTagLive />
+      </UnnnicChatsHeader>`,
   }),
 };
 

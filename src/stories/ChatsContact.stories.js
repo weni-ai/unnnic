@@ -9,6 +9,7 @@ setup((app) => {
 export default {
   title: 'Chats/Contact',
   component: unnnicChatsContact,
+  tags: ['autodocs'],
 };
 
 const defaultArgs = {
