@@ -76,7 +76,7 @@ export const Default = {
       {
         title: 'Step 1',
         description:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec dapibus euismod nibh vel elementum. Integer nisi lectus, hendrerit aliquet tellus nec, volutpat porttitor erat. Vivamus tincidunt sit amet ex non. ',
+          '<b>Lorem ipsum</b> dolor sit amet, consectetur adipiscing elit. Donec dapibus euismod nibh vel elementum. Integer nisi lectus, hendrerit aliquet tellus nec, volutpat porttitor erat. Vivamus tincidunt sit amet ex non. ',
         attachedElement: null,
         popoverPosition: 'right',
       },
