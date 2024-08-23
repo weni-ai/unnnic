@@ -77,11 +77,8 @@ const props = defineProps({
 });
 
 onMounted(() => {
-  if (
-    typeof props.active.childIndex === 'number' &&
-    props.active.childIndex >= 0 &&
-    props.active.item
-  ) {
+  const { childIndex, item } = props.active;
+  if (typeof childIndex === 'number' && childIndex >= 0 && item) {
     handleShowChildrenList();
   }
 });
