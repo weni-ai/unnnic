@@ -1,19 +1,29 @@
 <template>
-  <section :class="['unnnic-sidebar', `unnnic-sidebar--${props.position}`]">
-    <slot name="top" />
-    <ul class="unnnic-sidebar__items">
+  <nav :class="['unnnic-sidebar', `unnnic-sidebar--${props.position}`]">
+    <slot
+      class="unnnic-sidebar-top"
+      name="top"
+    />
+    <ul class="unnnic-sidebar-items">
       <li
-        v-for="item of items"
+        v-for="(item, index) of items"
         :key="item"
       >
-        <p>{{ item.label }}</p>
-        <Icon :icon="item.icon" />
+        <SidebarItem
+          :item="item"
+          :active="{
+            item: props.active.itemIndex === index,
+            childIndex: props.active.childIndex,
+          }"
+          @navigate="handleClick($event)"
+        />
       </li>
     </ul>
-
-    <!-- TODO Lista de items -->
-    <slot name="footer" />
-  </section>
+    <slot
+      class="unnnic-sidebar-footer"
+      name="footer"
+    />
+  </nav>
 </template>
 
 <script>
@@ -23,7 +33,8 @@ export default {
 </script>
 
 <script setup>
-import Icon from '../Icon.vue';
+import SidebarItem from './SidebarItem.vue';
+
 const props = defineProps({
   position: {
     type: String,
@@ -44,12 +55,18 @@ const props = defineProps({
   items: {
     type: Array,
     required: true,
-    default: () => [
-      { label: 'Item 1', icon: 'abc', children: [] },
-      { label: 'Item 2', icon: 'add' },
-    ],
+  },
+  active: {
+    type: Object,
+    default: () => ({ itemIndex: null, childIndex: null }),
   },
 });
+
+const emit = defineEmits(['navigate']);
+
+const handleClick = ({ item, child }) => {
+  emit('navigate', { item, child });
+};
 </script>
 
 <style lang="scss" scoped>
@@ -62,7 +79,7 @@ const props = defineProps({
 }
 .unnnic-sidebar {
   position: fixed;
-  background-color: red;
+  background-color: $unnnic-color-neutral-soft;
   width: v-bind('props.width');
   height: 100vh;
   padding: $unnnic-spacing-sm;
@@ -75,10 +92,11 @@ const props = defineProps({
     border-top-right-radius: $unnnic-border-radius-md;
   }
 
-  &__items {
+  &-items {
     display: flex;
     flex-direction: column;
     list-style: none;
+    gap: $unnnic-spacing-xs;
   }
 }
 </style>
