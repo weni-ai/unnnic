@@ -24,21 +24,9 @@ export default {
     iconScheme: { control: { type: 'select' }, options: ['', ...colorsList] },
     title: { control: 'text' },
     showCloseIcon: { control: 'boolean' },
-    primaryButtonText: { control: 'text' },
+
     hideButtonText: { control: 'boolean' },
-    secondaryButtonText: { control: 'text' },
-    primaryButtonType: {
-      control: { type: 'select' },
-      options: [
-        '',
-        'primary',
-        'secondary',
-        'tertiary',
-        'alternative',
-        'warning',
-        'attention',
-      ],
-    },
+
     showActionsDivider: { control: 'boolean' },
     persistent: { control: 'boolean' },
     primaryButtonProps: { control: 'object' },
@@ -50,7 +38,6 @@ export default {
     type: '',
     size: 'md',
     showCloseIcon: true,
-    primaryButtonText: 'OK',
   },
 };
 

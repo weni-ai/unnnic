@@ -25,7 +25,7 @@ describe('ToolTip', () => {
   });
 
   it('should force open the tooltip when forceOpen is true', async () => {
-    await wrapper.setProps({ forceOpen: true });
+    await wrapper.setProps({ enabled: false, forceOpen: true });
 
     const tooltipLabel = wrapper.find('[data-testid="tooltip-label"]');
     expect(tooltipLabel.isVisible()).toBe(true);
