@@ -1,3 +1,4 @@
+import { action } from '@storybook/addon-actions';
 import UnnnicSidebar from '../components/Sidebar/index.vue';
 
 const items = [
@@ -24,6 +25,31 @@ const items = [
   },
 ];
 
+const setup = (args) => {
+  const handleNavigate = action('navigate');
+  const setActiveItem = (newActive) => {
+    const itemIndex = items.findIndex(
+      (el) => el.label === newActive.item.label,
+    );
+
+    const childIndex = newActive.child
+      ? items[itemIndex].children?.findIndex(
+          (child) => child.label === newActive.child.label,
+        )
+      : null;
+
+    const updatedActive = { itemIndex, childIndex };
+
+    args.active = updatedActive;
+
+    handleNavigate(newActive);
+
+    return updatedActive;
+  };
+
+  return { args, items, setActiveItem };
+};
+
 export default {
   title: 'Example/Sidebar',
   component: UnnnicSidebar,
@@ -42,25 +68,7 @@ export default {
   },
   render: (args) => ({
     setup() {
-      const setActiveItem = (newActive) => {
-        const itemIndex = items.findIndex(
-          (el) => el.label === newActive.item.label,
-        );
-
-        const childIndex = newActive.child
-          ? items[itemIndex].children?.findIndex(
-              (child) => child.label === newActive.child.label,
-            )
-          : null;
-
-        const updatedActive = { itemIndex, childIndex };
-
-        args.active = updatedActive;
-
-        return updatedActive;
-      };
-
-      return { args, items, setActiveItem };
+      return setup(args);
     },
 
     components: { UnnnicSidebar },
@@ -82,25 +90,7 @@ export const WithTopSlot = {
   ...Default,
   render: (args) => ({
     setup() {
-      const setActiveItem = (newActive) => {
-        const itemIndex = items.findIndex(
-          (el) => el.label === newActive.item.label,
-        );
-
-        const childIndex = newActive.child
-          ? items[itemIndex].children?.findIndex(
-              (child) => child.label === newActive.child.label,
-            )
-          : null;
-
-        const updatedActive = { itemIndex, childIndex };
-
-        args.active = updatedActive;
-
-        return updatedActive;
-      };
-
-      return { args, items, setActiveItem };
+      return setup(args);
     },
 
     components: { UnnnicSidebar },
@@ -122,25 +112,7 @@ export const WithTopSlot = {
 export const WithFooterSlot = {
   render: (args) => ({
     setup() {
-      const setActiveItem = (newActive) => {
-        const itemIndex = items.findIndex(
-          (el) => el.label === newActive.item.label,
-        );
-
-        const childIndex = newActive.child
-          ? items[itemIndex].children?.findIndex(
-              (child) => child.label === newActive.child.label,
-            )
-          : null;
-
-        const updatedActive = { itemIndex, childIndex };
-
-        args.active = updatedActive;
-
-        return updatedActive;
-      };
-
-      return { args, items, setActiveItem };
+      return setup(args);
     },
 
     components: { UnnnicSidebar },
