@@ -94,7 +94,7 @@ const handleShowChildrenList = () => {
 };
 
 const isActive = (paramChildIndex = null) => {
-  const { item, childIndex } = propx.active;
+  const { item, childIndex } = props.active;
   if (!(typeof childIndex === 'number')) {
     return item;
   }
