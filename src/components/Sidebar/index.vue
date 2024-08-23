@@ -20,8 +20,8 @@
       </li>
     </ul>
     <slot
-      class="unnnic-sidebar-footer"
-      name="footer"
+      class="unnnic-sidebar-bottom"
+      name="bottom"
     />
   </nav>
 </template>
