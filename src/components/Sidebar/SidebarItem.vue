@@ -130,7 +130,18 @@ const emit = defineEmits(['navigate']);
 .slide-fade-enter-from,
 .slide-fade-leave-to {
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(-$unnnic-font-size);
+}
+
+*:is(.active) {
+  > :is(.unnnic-sidebar-item__label, .unnnic-sidebar-item-child__label) {
+    color: $unnnic-color-neutral-dark;
+    font-weight: $unnnic-font-weight-bold;
+  }
+  border-radius: $unnnic-border-radius-sm;
+  background-color: $unnnic-color-neutral-light;
+  color: $unnnic-color-neutral-dark;
+  font-weight: $unnnic-font-weight-bold;
 }
 
 .unnnic-sidebar-item {
@@ -141,28 +152,16 @@ const emit = defineEmits(['navigate']);
   padding: $unnnic-spacing-xs;
   cursor: pointer;
 
-  &.active {
-    border-radius: 4px;
-    background-color: $unnnic-color-neutral-light;
-  }
-
   &__label {
-    font-family: Lato;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 22px; /* 157.143% */
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    font-family: $unnnic-font-family-secondary;
+    font-size: $unnnic-font-size-body-gt;
+    font-weight: $unnnic-font-weight-regular;
+    line-height: $unnnic-line-height-large * 1.375;
 
     color: $unnnic-color-neutral-cloudy;
-
-    &.active {
-      font-family: Lato;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: 22px; /* 157.143% */
-      color: $unnnic-color-neutral-darkest;
-    }
   }
 
   &__arrow {
@@ -186,30 +185,16 @@ const emit = defineEmits(['navigate']);
     align-items: center;
     gap: $unnnic-spacing-xs;
 
-    &.active {
-      border-radius: 4px;
-      background-color: $unnnic-color-neutral-light;
-    }
     &__label {
-      /* Lato / Regular / Body Greater */
-      font-family: Lato;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 22px; /* 157.143% */
-      color: $unnnic-color-neutral-cloudy;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
-      &.active {
-        overflow: hidden;
-        color: $unnnic-color-neutral-dark;
-        text-overflow: ellipsis;
-        /* Lato / Bold / Body Greater */
-        font-family: Lato;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: 22px; /* 157.143% */
-      }
+      font-family: $unnnic-font-family-secondary;
+      font-size: $unnnic-font-size-body-gt;
+      font-weight: $unnnic-font-weight-regular;
+      line-height: $unnnic-line-height-large * 1.375;
+
+      color: $unnnic-color-neutral-cloudy;
     }
   }
 }
