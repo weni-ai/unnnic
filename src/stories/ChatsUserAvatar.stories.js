@@ -3,8 +3,9 @@ import UnnnicChatsUserAvatar from '../components/ChatsUserAvatar/ChatsUserAvatar
 export default {
   title: 'Chats/UserAvatar',
   component: UnnnicChatsUserAvatar,
+  tags: ['autodocs'],
   args: {
-    size: 'sm',
+    size: 'xl',
   },
   argTypes: {
     size: {

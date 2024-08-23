@@ -8,7 +8,7 @@ export default {
   args: {
     onUpdate: action('update'),
     onPrevious: action('previous'),
-    onNext: action('previous'),
+    onNext: action('next'),
   },
   argTypes: {
     update: {
