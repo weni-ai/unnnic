@@ -1,8 +1,9 @@
-import unnnicCircleProgressBar from '../components/CircleProgressBar/CircleProgressBar.vue';
+import UnnnicCircleProgressBar from '../components/CircleProgressBar/CircleProgressBar.vue';
 
 export default {
   title: 'Progress/CircleProgressBar',
-  component: unnnicCircleProgressBar,
+  component: UnnnicCircleProgressBar,
+  tags: ['autodocs'],
   argTypes: {},
 };
 
