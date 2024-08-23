@@ -58,6 +58,11 @@ export default {
       template: '<div ><story style="background: #fcfcfc !important;" /></div>',
     }),
   ],
+  args: {
+    items,
+    width: '300px',
+    active: { itemIndex: 1, childIndex: 0 },
+  },
   argTypes: {
     position: {
       options: ['left', 'right'],
