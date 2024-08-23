@@ -93,12 +93,13 @@ const handleShowChildrenList = () => {
   showChildrenList.value = !showChildrenList.value;
 };
 
-const isActive = (childIndex = null) => {
+const isActive = (paramChildIndex = null) => {
+  const { item, childIndex } = propx.active;
   if (!(typeof childIndex === 'number')) {
-    return props.active.item;
+    return item;
   }
 
-  return props.active.item && props.active.childIndex === childIndex;
+  return item && childIndex === paramChildIndex;
 };
 
 const handleEmitNavigate = () => {
