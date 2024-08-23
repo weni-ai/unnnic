@@ -77,3 +77,84 @@ export const Default = {
     active: { itemIndex: 1, childIndex: 0 },
   },
 };
+
+export const WithTopSlot = {
+  ...Default,
+  render: (args) => ({
+    setup() {
+      const setActiveItem = (newActive) => {
+        const itemIndex = items.findIndex(
+          (el) => el.label === newActive.item.label,
+        );
+
+        const childIndex = newActive.child
+          ? items[itemIndex].children?.findIndex(
+              (child) => child.label === newActive.child.label,
+            )
+          : null;
+
+        const updatedActive = { itemIndex, childIndex };
+
+        args.active = updatedActive;
+
+        return updatedActive;
+      };
+
+      return { args, items, setActiveItem };
+    },
+
+    components: { UnnnicSidebar },
+    template: `
+        <UnnnicSidebar v-bind="args" @navigate="setActiveItem($event)">
+          <template #top>
+            <p>Content top</p>
+          </template>
+        </UnnnicSidebar>
+      `,
+  }),
+  args: {
+    items: items,
+    width: '300px',
+    active: { itemIndex: 1, childIndex: 0 },
+  },
+};
+
+export const WithFooterSlot = {
+  render: (args) => ({
+    setup() {
+      const setActiveItem = (newActive) => {
+        const itemIndex = items.findIndex(
+          (el) => el.label === newActive.item.label,
+        );
+
+        const childIndex = newActive.child
+          ? items[itemIndex].children?.findIndex(
+              (child) => child.label === newActive.child.label,
+            )
+          : null;
+
+        const updatedActive = { itemIndex, childIndex };
+
+        args.active = updatedActive;
+
+        return updatedActive;
+      };
+
+      return { args, items, setActiveItem };
+    },
+
+    components: { UnnnicSidebar },
+    template: `
+        <UnnnicSidebar v-bind="args" @navigate="setActiveItem($event)">
+          <template #bottom>
+            <p>Content bottom</p>
+          </template>
+        </UnnnicSidebar>
+      `,
+  }),
+  args: {
+    items: items,
+    width: '300px',
+    active: { itemIndex: 1, childIndex: 0 },
+  },
+};
