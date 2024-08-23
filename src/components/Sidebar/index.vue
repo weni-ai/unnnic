@@ -1,21 +1,21 @@
 <template>
-  <nav :class="['unnnic-sidebar', `unnnic-sidebar--${props.position}`]">
+  <nav :class="['unnnic-sidebar', `unnnic-sidebar--${position}`]">
     <slot
       class="unnnic-sidebar-top"
       name="top"
     />
     <ul class="unnnic-sidebar-items">
       <li
-        v-for="(item, index) of items"
+        v-for="(item, itemIndex) of items"
         :key="item"
       >
         <SidebarItem
           :item="item"
           :active="{
-            item: props.active.itemIndex === index,
-            childIndex: props.active.childIndex,
+            item: active.itemIndex === itemIndex,
+            childIndex: active.childIndex,
           }"
-          @navigate="handleClick($event)"
+          @navigate="handleNavigate($event)"
         />
       </li>
     </ul>
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: 'UnnnicSidebarNext',
+  name: 'UnnnicSidebar',
 };
 </script>
 
@@ -64,7 +64,7 @@ const props = defineProps({
 
 const emit = defineEmits(['navigate']);
 
-const handleClick = ({ item, child }) => {
+const handleNavigate = ({ item, child }) => {
   emit('navigate', { item, child });
 };
 </script>
@@ -79,7 +79,7 @@ const handleClick = ({ item, child }) => {
 }
 .unnnic-sidebar {
   position: fixed;
-  background-color: $unnnic-color-neutral-soft;
+
   width: v-bind('props.width');
   height: 100vh;
   padding: $unnnic-spacing-sm;
