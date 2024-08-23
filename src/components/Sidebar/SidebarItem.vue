@@ -64,11 +64,13 @@ export default {
 <script setup>
 import { computed, onMounted, ref } from 'vue';
 import Icon from '../Icon.vue';
+import { validateItem } from './propsValidator';
 
 const props = defineProps({
   item: {
     type: Object,
     required: true,
+    validator: validateItem,
   },
   active: {
     type: Object,

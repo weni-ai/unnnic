@@ -33,6 +33,7 @@ export default {
 </script>
 
 <script setup>
+import { validateItems } from './propsValidator';
 import SidebarItem from './SidebarItem.vue';
 
 const props = defineProps({
@@ -55,6 +56,7 @@ const props = defineProps({
   items: {
     type: Array,
     required: true,
+    validator: validateItems,
   },
   active: {
     type: Object,
