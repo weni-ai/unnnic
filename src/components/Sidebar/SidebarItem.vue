@@ -10,7 +10,7 @@
       size="ant"
       :scheme="active.item ? 'weni-600' : 'neutral-cloudy'"
     />
-    <p :class="{ 'unnnic-sidebar-item__label': true, active: active.item }">
+    <p :class="{ 'unnnic-sidebar-item__label': true, active: active.item }" :title="item.label">
       {{ item.label }}
     </p>
     <Icon
@@ -47,6 +47,7 @@
             'unnnic-sidebar-item-child__label': true,
             active: isActive(childIndex),
           }"
+          :title="child.label"
         >
           {{ child.label }}
         </p>
@@ -76,6 +77,10 @@ const props = defineProps({
     type: Object,
     default: () => ({ item: false, childIndex: null }),
   },
+  autoNavigateSingleChild: {
+    type: Boolean,
+    default: false
+  }
 });
 
 onMounted(() => {
@@ -93,6 +98,11 @@ const showChildrenList = ref(false);
 
 const handleShowChildrenList = () => {
   showChildrenList.value = !showChildrenList.value;
+  
+  const isOpening = showChildrenList.value
+  if (isOpening && props.item.children?.length === 1 && props.autoNavigateSingleChild) {
+    emit('navigate', { item: props.item, child: 0 });
+  }
 };
 
 const isActive = (paramChildIndex = null) => {
@@ -155,6 +165,7 @@ const emit = defineEmits(['navigate']);
   &__label {
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
 
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-gt;
@@ -188,6 +199,7 @@ const emit = defineEmits(['navigate']);
     &__label {
       overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
 
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-gt;
