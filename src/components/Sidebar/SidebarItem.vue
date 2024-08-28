@@ -99,7 +99,7 @@ export default {
   methods: {
     handleShowChildrenList() {
       this.showChildrenList = !this.showChildrenList;
-      const isOpening = showChildrenList
+      const isOpening = this.showChildrenList
       if (isOpening && this.item.children?.length === 1 && this.autoNavigateSingleChild) {
         this.$emit('navigate', { item: this.item, child: 0 });
       }
