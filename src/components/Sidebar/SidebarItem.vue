@@ -11,7 +11,7 @@
       size="ant"
       :scheme="active.item ? 'weni-600' : 'neutral-cloudy'"
     />
-    <p :class="{ 'unnnic-sidebar-item__label': true, active: active.item }">
+    <p :class="{ 'unnnic-sidebar-item__label': true, active: active.item }" :title="item.label">
       {{ item.label }}
     </p>
     <Icon
@@ -48,6 +48,7 @@
             'unnnic-sidebar-item-child__label': true,
             active: isActive(childIndex),
           }"
+          :title="child.label"
         >
           {{ child.label }}
         </p>
@@ -74,6 +75,10 @@ export default {
       type: Object,
       default: () => ({ item: false, childIndex: null }),
     },
+    autoNavigateSingleChild: {
+      type: Boolean,
+      default: false
+    }
   },
   data() {
     return {
@@ -94,6 +99,10 @@ export default {
   methods: {
     handleShowChildrenList() {
       this.showChildrenList = !this.showChildrenList;
+      const isOpening = this.showChildrenList
+      if (isOpening && this.item.children?.length === 1 && this.autoNavigateSingleChild) {
+        this.$emit('navigate', { item: this.item, child: 0 });
+      }
     },
     isActive(paramChildIndex = null) {
       const { item, childIndex } = this.active;
@@ -155,6 +164,7 @@ export default {
   &__label {
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
 
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-gt;
@@ -188,6 +198,7 @@ export default {
     &__label {
       overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
 
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-gt;
