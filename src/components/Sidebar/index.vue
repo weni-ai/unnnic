@@ -16,6 +16,7 @@
             childIndex: active.childIndex,
           }"
           @navigate="handleNavigate($event)"
+          :autoNavigateSingleChild="autoNavigateSingleChild"
         />
       </li>
     </ul>
@@ -33,6 +34,7 @@ export default {
 </script>
 
 <script setup>
+import { validateItems } from './propsValidator';
 import SidebarItem from './SidebarItem.vue';
 
 const props = defineProps({
@@ -55,11 +57,16 @@ const props = defineProps({
   items: {
     type: Array,
     required: true,
+    validator: validateItems,
   },
   active: {
     type: Object,
     default: () => ({ itemIndex: null, childIndex: null }),
   },
+  autoNavigateSingleChild: {
+    type: Boolean,
+    default: false
+  }
 });
 
 const emit = defineEmits(['navigate']);
@@ -81,8 +88,8 @@ const handleNavigate = ({ item, child }) => {
   position: fixed;
 
   width: v-bind('props.width');
-  height: 100vh;
-  padding: $unnnic-spacing-sm;
+ 
+  height: 100%;
 
   &--left {
     border-top-left-radius: $unnnic-border-radius-md;
@@ -97,6 +104,22 @@ const handleNavigate = ({ item, child }) => {
     flex-direction: column;
     list-style: none;
     gap: $unnnic-spacing-xs;
+    overflow-y: auto;
+    height: 100%;
+
+    &::-webkit-scrollbar {
+        width: $unnnic-spacing-inline-nano;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $unnnic-color-neutral-cleanest;
+        border-radius: $unnnic-border-radius-pill;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: $unnnic-color-neutral-soft;
+        border-radius: $unnnic-border-radius-pill;
+      }
   }
 }
 </style>

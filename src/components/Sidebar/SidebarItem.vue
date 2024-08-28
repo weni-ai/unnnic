@@ -10,7 +10,7 @@
       size="ant"
       :scheme="active.item ? 'weni-600' : 'neutral-cloudy'"
     />
-    <p :class="{ 'unnnic-sidebar-item__label': true, active: active.item }">
+    <p :class="{ 'unnnic-sidebar-item__label': true, active: active.item }" :title="item.label">
       {{ item.label }}
     </p>
     <Icon
@@ -47,6 +47,7 @@
             'unnnic-sidebar-item-child__label': true,
             active: isActive(childIndex),
           }"
+          :title="child.label"
         >
           {{ child.label }}
         </p>
@@ -64,24 +65,27 @@ export default {
 <script setup>
 import { computed, onMounted, ref } from 'vue';
 import Icon from '../Icon.vue';
+import { validateItem } from './propsValidator';
 
 const props = defineProps({
   item: {
     type: Object,
     required: true,
+    validator: validateItem,
   },
   active: {
     type: Object,
     default: () => ({ item: false, childIndex: null }),
   },
+  autoNavigateSingleChild: {
+    type: Boolean,
+    default: false
+  }
 });
 
 onMounted(() => {
-  if (
-    typeof props.active.childIndex === 'number' &&
-    props.active.childIndex >= 0 &&
-    props.active.item
-  ) {
+  const { childIndex, item } = props.active;
+  if (typeof childIndex === 'number' && childIndex >= 0 && item) {
     handleShowChildrenList();
   }
 });
@@ -94,14 +98,20 @@ const showChildrenList = ref(false);
 
 const handleShowChildrenList = () => {
   showChildrenList.value = !showChildrenList.value;
+  
+  const isOpening = showChildrenList.value
+  if (isOpening && props.item.children?.length === 1 && props.autoNavigateSingleChild) {
+    emit('navigate', { item: props.item, child: 0 });
+  }
 };
 
-const isActive = (childIndex = null) => {
+const isActive = (paramChildIndex = null) => {
+  const { item, childIndex } = props.active;
   if (!(typeof childIndex === 'number')) {
-    return props.active.item;
+    return item;
   }
 
-  return props.active.item && props.active.childIndex === childIndex;
+  return item && childIndex === paramChildIndex;
 };
 
 const handleEmitNavigate = () => {
@@ -155,6 +165,7 @@ const emit = defineEmits(['navigate']);
   &__label {
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
 
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-gt;
@@ -188,6 +199,7 @@ const emit = defineEmits(['navigate']);
     &__label {
       overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
 
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-gt;
