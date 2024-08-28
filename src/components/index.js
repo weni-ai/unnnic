@@ -7,10 +7,8 @@ import inputDatePicker from './InputDatePicker/InputDatePicker.vue';
 import button from './Button/Button.vue';
 import buttonNext from './ButtonNext/ButtonNext.vue';
 import buttonIcon from './Button/ButtonIcon.vue';
-import sidebar from './Sidebar/Sidebar.vue';
+import sidebar from './Sidebar/index.vue';
 import sidebarItem from './Sidebar/SidebarItem.vue';
-import sidebarMenu from './Sidebar/SidebarMenu.vue';
-import sidebarPrimary from './Sidebar/SidebarPrimary.vue';
 import table from './Table/Table.vue';
 import tableRow from './Table/TableRow.vue';
 import dropdown from './Dropdown/Dropdown.vue';
@@ -95,8 +93,6 @@ const components = {
   unnnicButtonIcon: buttonIcon,
   unnnicSidebar: sidebar,
   unnnicSidebarItem: sidebarItem,
-  unnnicSidebarMenu: sidebarMenu,
-  unnnicSidebarPrimary: sidebarPrimary,
   unnnicTable: table,
   unnnicTableRow: tableRow,
   unnnicAvatarIcon: avatarIcon,
@@ -186,8 +182,6 @@ export const unnnicButtonNext = buttonNext;
 export const unnnicButtonIcon = buttonIcon;
 export const unnnicSidebar = sidebar;
 export const unnnicSidebarItem = sidebarItem;
-export const unnnicSidebarMenu = sidebarMenu;
-export const unnnicSidebarPrimary = sidebarPrimary;
 export const unnnicTable = table;
 export const unnnicTableRow = tableRow;
 export const unnnicDropdown = dropdown;

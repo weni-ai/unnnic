@@ -132,7 +132,7 @@ const TemplateBanner = (args, { argTypes }) => ({
       ┖ link-target  String default '_blank'
     /&gt;
     </pre>
-    </div>`
+    </div>`,
 });
 
 export const Normal = Template.bind({});
@@ -154,5 +154,5 @@ WithContainerRef.args = {
 export const Banner = TemplateBanner.bind({});
 Banner.args = {
   text: 'Text',
-  showCloseButton: false
+  showCloseButton: false,
 };
