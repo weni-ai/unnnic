@@ -8,14 +8,19 @@ const items = [
   {
     label: 'Item 2 Grouped',
     icon: 'forum',
+    children: [{ label: 'Child 1' }],
+  },
+  {
+    label: 'Item 3 Grouped',
+    icon: 'forum',
     children: [{ label: 'Child 1' }, { label: 'Child 2' }],
   },
   {
-    label: 'Item 3',
+    label: 'Item 4',
     icon: 'tune',
   },
   {
-    label: 'Item 4 Grouped icons',
+    label: 'Item 5 Grouped icons',
     icon: 'tune',
     children: [
       { label: 'Child 1', icon: 'abc' },
@@ -33,6 +38,7 @@ export default {
     },
     items: { control: { type: 'object' } },
     width: { control: { type: 'text' } },
+    autoNavigateSingleChild: { control: { type: 'boolean' } },
   },
 };
 
@@ -73,4 +79,5 @@ Default.args = {
   width: '300px',
   position: 'left',
   active: { itemIndex: 1, childIndex: 0 },
+  autoNavigateSingleChild: true,
 };

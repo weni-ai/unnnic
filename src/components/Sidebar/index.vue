@@ -16,6 +16,7 @@
             childIndex: active.childIndex,
           }"
           @navigate="handleNavigate($event)"
+          :autoNavigateSingleChild="autoNavigateSingleChild"
         />
       </li>
     </ul>
@@ -61,6 +62,10 @@ export default {
       type: Object,
       default: () => ({ itemIndex: null, childIndex: null }),
     },
+    autoNavigateSingleChild: {
+      type: Boolean,
+      default: false
+    }
   },
   methods: {
     handleNavigate({ item, child }) {
@@ -82,8 +87,7 @@ export default {
   position: fixed;
 
   width: v-bind('width');
-  height: 100vh;
-  padding: $unnnic-spacing-sm;
+  height: 100%;
 
   &--left {
     border-top-left-radius: $unnnic-border-radius-md;
@@ -98,6 +102,22 @@ export default {
     flex-direction: column;
     list-style: none;
     gap: $unnnic-spacing-xs;
+    overflow-y: auto;
+    height: 100%;
+
+    &::-webkit-scrollbar {
+        width: $unnnic-spacing-inline-nano;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $unnnic-color-neutral-cleanest;
+        border-radius: $unnnic-border-radius-pill;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: $unnnic-color-neutral-soft;
+        border-radius: $unnnic-border-radius-pill;
+      }
   }
 }
 </style>
