@@ -1,90 +1,212 @@
 <template>
-  <div
-    :class="{ 'unnnic-side-bar-item': true,
-              'unnnic-side-bar-item--active': active,
-              'unnnic--clickable': true,
-            }"
-    @click="onClick">
-    <tool-tip :enabled="enableTooltip" :text="text" side="right">
-    <u-icon
-      class="unnnic-side-bar-item__icon"
-      :scheme="active ? 'brand-weni-soft' : 'neutral-cloudy'"
-      size="sm"
-      :icon="icon"/>
-    <span class="unnnic-side-bar-item__label"> {{ text }}
-      <slot />
-      </span>
-    </tool-tip>
+  <div>
+    <section
+    :class="{ 'unnnic-sidebar-item': true, active: active.item }"
+    @click.stop="hasChildren ? handleShowChildrenList() : handleEmitNavigate()"
+  >
+    <Icon
+      v-if="item.icon"
+      class="unnnic-sidebar-item__icon"
+      :icon="item.icon"
+      size="ant"
+      :scheme="active.item ? 'weni-600' : 'neutral-cloudy'"
+    />
+    <p :class="{ 'unnnic-sidebar-item__label': true, active: active.item }" :title="item.label">
+      {{ item.label }}
+    </p>
+    <Icon
+      v-if="Array.isArray(item.children) && item.children.length"
+      class="unnnic-sidebar-item__arrow"
+      :icon="showChildrenList ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+      size="ant"
+      scheme="neutral-cloudy"
+    />
+  </section>
+  <Transition name="slide-fade">
+    <ul
+      v-if="showChildrenList"
+      class="unnnic-sidebar-item-children"
+    >
+      <li
+        v-for="(child, childIndex) in item.children"
+        :key="child.label"
+        :class="{
+          'unnnic-sidebar-item-child': true,
+          active: isActive(childIndex),
+        }"
+        @click.stop="!isActive(childIndex) && $emit('navigate', { item, child })"
+      >
+        <Icon
+          v-if="child.icon"
+          class="unnnic-sidebar-item-child__icon"
+          :icon="child.icon"
+          size="ant"
+          :scheme="isActive(childIndex) ? 'weni-600' : 'neutral-cloudy'"
+        />
+        <p
+          :class="{
+            'unnnic-sidebar-item-child__label': true,
+            active: isActive(childIndex),
+          }"
+          :title="child.label"
+        >
+          {{ child.label }}
+        </p>
+      </li>
+    </ul>
+  </Transition>
   </div>
 </template>
 
 <script>
-import UIcon from '../Icon.vue';
-import ToolTip from '../ToolTip/ToolTip.vue';
+import Icon from '../Icon.vue';
+import { validateItem } from './propsValidator';
 
 export default {
-  name: 'SidebarItem',
-  components: { UIcon, ToolTip },
+  name: 'UnnnicSidebarItem',
+  components: { Icon },
+  props: {
+    item: {
+      type: Object,
+      required: true,
+      validator: validateItem,
+    },
+    active: {
+      type: Object,
+      default: () => ({ item: false, childIndex: null }),
+    },
+    autoNavigateSingleChild: {
+      type: Boolean,
+      default: false
+    }
+  },
   data() {
     return {
-      ToolTip,
+      showChildrenList: false,
     };
   },
-  props: {
-    active: {
-      type: Boolean,
-      default: false,
-    },
-    expanded: {
-      type: Boolean,
-      default: false,
-    },
-    icon: {
-      type: String,
-      default: null,
-    },
-    text: {
-      type: String,
-      default: null,
-    },
-    enableTooltip: {
-      default: false,
+  computed: {
+    hasChildren() {
+      return this.item.children?.length;
     },
   },
+  mounted() {
+    const { childIndex, item } = this.active;
+    if (typeof childIndex === 'number' && childIndex >= 0 && item) {
+      this.handleShowChildrenList();
+    }
+  },
   methods: {
-    onClick() {
-      this.$emit('click');
+    handleShowChildrenList() {
+      this.showChildrenList = !this.showChildrenList;
+      const isOpening = showChildrenList
+      if (isOpening && this.item.children?.length === 1 && this.autoNavigateSingleChild) {
+        this.$emit('navigate', { item: this.item, child: 0 });
+      }
+    },
+    isActive(paramChildIndex = null) {
+      const { item, childIndex } = this.active;
+      if (!(typeof childIndex === 'number')) {
+        return item;
+      }
+
+      return item && childIndex === paramChildIndex;
+    },
+    handleEmitNavigate() {
+      if (!this.active.item) {
+        this.$emit('navigate', { item: this.item, child: null });
+      }
     },
   },
 };
+
 </script>
 
-<style lang="scss" >
+<style lang="scss" scoped>
 @import '../../assets/scss/unnnic.scss';
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  box-sizing: border-box;
+}
 
-    .unnnic-side-bar-item {
-        display: flex;
-        align-items: center;
-        color: $unnnic-color-neutral-darkest;
-        margin-bottom: $unnnic-spacing-stack-xs;
-        padding: $unnnic-inset-nano;
-        font-size: $unnnic-font-size-body-gt;
-        font-family: $unnnic-font-family-secondary;
-        border-radius: $unnnic-border-radius-sm;
-        line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+  transition: all 0.3s ease;
+}
 
-        &--active {
-            background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-light);
-            font-weight: $unnnic-font-weight-bold;
-        }
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  opacity: 0;
+  transform: translateY(-$unnnic-font-size);
+}
 
-        &__icon {
-           margin-right: $unnnic-inline-xs;
-           color: $unnnic-color-neutral-cloudy;
+*:is(.active) {
+  > :is(.unnnic-sidebar-item__label, .unnnic-sidebar-item-child__label) {
+    color: $unnnic-color-neutral-dark;
+    font-weight: $unnnic-font-weight-bold;
+  }
+  border-radius: $unnnic-border-radius-sm;
+  background-color: $unnnic-color-neutral-light;
+  color: $unnnic-color-neutral-dark;
+  font-weight: $unnnic-font-weight-bold;
+}
 
-           &--active {
-               color: $unnnic-color-brand-weni;
-           }
-        }
+.unnnic-sidebar-item {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: $unnnic-spacing-xs;
+  padding: $unnnic-spacing-xs;
+  cursor: pointer;
+
+  &__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font-family: $unnnic-font-family-secondary;
+    font-size: $unnnic-font-size-body-gt;
+    font-weight: $unnnic-font-weight-regular;
+    line-height: $unnnic-line-height-large * 1.375;
+
+    color: $unnnic-color-neutral-cloudy;
+  }
+
+  &__arrow {
+    display: flex;
+    margin-left: auto;
+  }
+
+  &-children {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    margin-left: $unnnic-spacing-ant;
+    margin-top: $unnnic-spacing-nano;
+    gap: $unnnic-spacing-xs;
+  }
+
+  &-child {
+    padding: $unnnic-spacing-nano $unnnic-spacing-xs;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: $unnnic-spacing-xs;
+
+    &__label {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      font-family: $unnnic-font-family-secondary;
+      font-size: $unnnic-font-size-body-gt;
+      font-weight: $unnnic-font-weight-regular;
+      line-height: $unnnic-line-height-large * 1.375;
+
+      color: $unnnic-color-neutral-cloudy;
     }
+  }
+}
 </style>

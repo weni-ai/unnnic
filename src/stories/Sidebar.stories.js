@@ -1,37 +1,83 @@
-/* eslint-disable no-multi-str */
+import UnnnicSidebar from '../components/Sidebar/index.vue';
 
-import unnnicSidebar from '../components/Sidebar/Sidebar.vue';
-import unnnicSidebarItem from '../components/Sidebar/SidebarItem.vue';
-import unnnicSidebarMenu from '../components/Sidebar/SidebarMenu.vue';
+const items = [
+  {
+    label: 'Item 1',
+    icon: 'tune',
+  },
+  {
+    label: 'Item 2 Grouped',
+    icon: 'forum',
+    children: [{ label: 'Child 1' }],
+  },
+  {
+    label: 'Item 3 Grouped',
+    icon: 'forum',
+    children: [{ label: 'Child 1' }, { label: 'Child 2' }],
+  },
+  {
+    label: 'Item 4',
+    icon: 'tune',
+  },
+  {
+    label: 'Item 5 Grouped icons',
+    icon: 'tune',
+    children: [
+      { label: 'Child 1', icon: 'abc' },
+      { label: 'Child 2', icon: 'abc' },
+    ],
+  },
+];
 
 export default {
-  title: 'Example/Sidebar',
-  component: unnnicSidebar,
+  title: 'example/Sidebar',
+  component: UnnnicSidebar,
   argTypes: {
-    expanded: { control: { type: 'select', options: [true, false] } },
+    position: {
+      control: { type: 'select', options: ['left', 'right'] },
+    },
+    items: { control: { type: 'object' } },
+    width: { control: { type: 'text' } },
+    autoNavigateSingleChild: { control: { type: 'boolean' } },
   },
 };
 
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { unnnicSidebar, unnnicSidebarItem, unnnicSidebarMenu },
-  template: '<unnnic-sidebar v-bind="$props"> \
-                <p slot="header"> Title </p> \
-                <unnnic-sidebar-item icon="expand-8-1" text="footer" slot="footer" /> \
-                <unnnic-sidebar-menu text="Submenu"> \
-                  <unnnic-sidebar-item :enable-tooltip="!expanded" text="Item1" icon="developer-community-github-1-1" :active="true" /> \
-                  <unnnic-sidebar-item :enable-tooltip="!expanded" text="Item2" icon="alarm-bell-2" /> \
-                </unnnic-sidebar-menu> \
-                <unnnic-sidebar-menu text="Submenu 2"> \
-                  <unnnic-sidebar-item :enable-tooltip="!expanded" text="Item3" icon="alarm-bell-2" /> \
-                </unnnic-sidebar-menu> \
-              </unnnic-sidebar>',
+
+  components: { UnnnicSidebar },
+
+  methods: {
+    setActiveItem(newActive) {
+      const itemIndex = items.findIndex(
+        (el) => el.label === newActive.item.label,
+      );
+
+      const childIndex = newActive.child
+        ? items[itemIndex].children?.findIndex(
+          (child) => child.label === newActive.child.label,
+        )
+        : null;
+
+      const updatedActive = { itemIndex, childIndex };
+
+      // eslint-disable-next-line no-param-reassign
+      this.$props.active = updatedActive;
+
+      return updatedActive;
+    },
+  },
+
+  // eslint-disable-next-line no-multi-str
+  template: '<UnnnicSidebar v-bind="$props" :items="items" @navigate="setActiveItem($event)" />',
 });
 
-export const Expanded = Template.bind({});
-Expanded.args = {};
+export const Default = Template.bind({});
 
-export const Contracted = Template.bind({});
-Contracted.args = {
-  expanded: false,
+Default.args = {
+  items,
+  width: '300px',
+  position: 'left',
+  active: { itemIndex: 1, childIndex: 0 },
+  autoNavigateSingleChild: true,
 };

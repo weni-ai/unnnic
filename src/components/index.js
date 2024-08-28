@@ -7,10 +7,8 @@ import inputDatePicker from './InputDatePicker/InputDatePicker.vue';
 import button from './Button/Button.vue';
 import buttonNext from './ButtonNext/ButtonNext.vue';
 import buttonIcon from './Button/ButtonIcon.vue';
-import sidebar from './Sidebar/Sidebar.vue';
+import sidebar from './Sidebar/index.vue';
 import sidebarItem from './Sidebar/SidebarItem.vue';
-import sidebarMenu from './Sidebar/SidebarMenu.vue';
-import sidebarPrimary from './Sidebar/SidebarPrimary.vue';
 import table from './Table/Table.vue';
 import tableRow from './Table/TableRow.vue';
 import dropdown from './Dropdown/Dropdown.vue';
@@ -57,6 +55,7 @@ import Switch from './Switch/Switch.vue';
 import Slider from './Slider/Slider.vue';
 import DataArea from './DataArea/DataArea.vue';
 import Pagination from './Pagination/Pagination.vue';
+import DropArea from './DropArea/DropArea.vue';
 import UploadArea from './UploadArea/UploadArea.vue';
 import ImportCard from './ImportCard/ImportCard.vue';
 import DateFilter from './DateFilter/DateFilter.vue';
@@ -94,8 +93,6 @@ const components = {
   unnnicButtonIcon: buttonIcon,
   unnnicSidebar: sidebar,
   unnnicSidebarItem: sidebarItem,
-  unnnicSidebarMenu: sidebarMenu,
-  unnnicSidebarPrimary: sidebarPrimary,
   unnnicTable: table,
   unnnicTableRow: tableRow,
   unnnicAvatarIcon: avatarIcon,
@@ -142,6 +139,7 @@ const components = {
   unnnicSlider: Slider,
   unnnicDataArea: DataArea,
   unnnicPagination: Pagination,
+  unnnicDropArea: DropArea,
   unnnicUploadArea: UploadArea,
   unnnicImportCard: ImportCard,
   unnnicDateFilter: DateFilter,
@@ -184,8 +182,6 @@ export const unnnicButtonNext = buttonNext;
 export const unnnicButtonIcon = buttonIcon;
 export const unnnicSidebar = sidebar;
 export const unnnicSidebarItem = sidebarItem;
-export const unnnicSidebarMenu = sidebarMenu;
-export const unnnicSidebarPrimary = sidebarPrimary;
 export const unnnicTable = table;
 export const unnnicTableRow = tableRow;
 export const unnnicDropdown = dropdown;
@@ -234,6 +230,7 @@ export const unnnicSwitch = Switch;
 export const unnnicSlider = Slider;
 export const unnnicDataArea = DataArea;
 export const unnnicPagination = Pagination;
+export const unnnicDropArea = DropArea;
 export const unnnicUploadArea = UploadArea;
 export const unnnicImportCard = ImportCard;
 export const unnnicDateFilter = DateFilter;
