@@ -2,7 +2,7 @@
   <div class="unnnic-switch">
     <div
       v-if="textLeft"
-      data-testid="switch-text-left"
+      data-test-id="switch-text-left"
       :class="[
         'unnnic-switch__label',
         'unnnic-switch__label__left',
@@ -20,13 +20,13 @@
       :lineHeight="iconLineHeight"
       :disabled="disabled"
       :clickable="!disabled"
-      data-testid="switch-icon"
+      data-test-id="switch-icon"
       @click="toggleState"
     />
 
     <div
       v-if="textRight"
-      data-testid="switch-text-right"
+      data-test-id="switch-text-right"
       :class="[
         'unnnic-switch__label',
         'unnnic-switch__label__right',
