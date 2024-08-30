@@ -75,10 +75,10 @@ export default {
       type: Object,
       default: () => ({ item: false, childIndex: null }),
     },
-    autoNavigateSingleChild: {
+    autoNavigateFirstChild: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
@@ -99,9 +99,9 @@ export default {
   methods: {
     handleShowChildrenList() {
       this.showChildrenList = !this.showChildrenList;
-      const isOpening = this.showChildrenList
-      if (isOpening && this.item.children?.length === 1 && this.autoNavigateSingleChild) {
-        this.$emit('navigate', { item: this.item, child: 0 });
+      const isOpening = this.showChildrenList;
+      if (isOpening && this.autoNavigateFirstChild) {
+        this.$emit('navigate', { item: this.item, child: this.item.children[0] });
       }
     },
     isActive(paramChildIndex = null) {

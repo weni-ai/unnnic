@@ -38,7 +38,7 @@ export default {
     },
     items: { control: { type: 'object' } },
     width: { control: { type: 'text' } },
-    autoNavigateSingleChild: { control: { type: 'boolean' } },
+    autoNavigateFirstChild: { control: { type: 'boolean' } },
   },
 };
 
@@ -79,5 +79,5 @@ Default.args = {
   width: '300px',
   position: 'left',
   active: { itemIndex: 1, childIndex: 0 },
-  autoNavigateSingleChild: true,
+  autoNavigateFirstChild: true,
 };
