@@ -7,16 +7,21 @@ const items = [
     icon: 'tune',
   },
   {
-    label: 'Item 2 Grouped',
+    label: 'Item 2 1 child',
+    icon: 'forum',
+    children: [{ label: 'Child 1' }],
+  },
+  {
+    label: 'Item 3 Grouped',
     icon: 'forum',
     children: [{ label: 'Child 1' }, { label: 'Child 2' }],
   },
   {
-    label: 'Item 3',
+    label: 'Item 4',
     icon: 'tune',
   },
   {
-    label: 'Item 4 Grouped icons',
+    label: 'Item 5 Grouped icons',
     icon: 'tune',
     children: [
       { label: 'Child 1', icon: 'abc' },
@@ -55,7 +60,7 @@ export default {
   component: UnnnicSidebar,
   decorators: [
     () => ({
-      template: '<div ><story style="background: #fcfcfc !important;" /></div>',
+      template: '<div ><story style="background: #fcfcfc !important; padding: 16px" /></div>',
     }),
   ],
   args: {
@@ -70,6 +75,7 @@ export default {
     },
     items: { control: 'object' },
     width: { control: 'text' },
+    autoNavigateSingleChild: { control: 'boolean' },
   },
   render: (args) => ({
     setup() {
@@ -86,8 +92,18 @@ export default {
 export const Default = {
   args: {
     items: items,
-    width: '300px',
+    width: '200px',
     active: { itemIndex: 1, childIndex: 0 },
+    autoNavigateFirstChild: true,
+  },
+};
+
+export const Overflowed = {
+  args: {
+    items: Array.from({length: 50}).map((_item, index) => ({ label: `Item ${index}`, icon: 'tune' })),
+    width: '200px',
+    active: { itemIndex: 1, childIndex: 0 },
+    autoNavigateFirstChild: true,
   },
 };
 
