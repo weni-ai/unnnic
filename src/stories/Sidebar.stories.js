@@ -38,7 +38,7 @@ export default {
     },
     items: { control: { type: 'object' } },
     width: { control: { type: 'text' } },
-    autoNavigateSingleChild: { control: { type: 'boolean' } },
+    autoNavigateFirstChild: { control: { type: 'boolean' } },
   },
 };
 
