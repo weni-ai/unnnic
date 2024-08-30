@@ -5,8 +5,9 @@ import UnnnicDropdownItem from '../components/Dropdown/DropdownItem.vue';
 import UnnnicIcon from '../components/Icon.vue';
 
 export default {
-  title: 'Example/Comment',
+  title: 'Data Display/Comment',
   component: UnnnicComment,
+  tags: ['autodocs'],
   render: (args) => ({
     components: {
       UnnnicComment,
@@ -19,37 +20,37 @@ export default {
       return { args };
     },
     template: `
-    <unnnic-comment v-bind="args">
+    <UnnnicComment v-bind="args">
       <template #avatar>
         <img src="https://images.unsplash.com/photo-1568564321589-3e581d074f9b?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NTl8fGRvZ3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&w=1000&q=80" />
       </template>
       <template #actions>
-        <unnnic-dropdown>
+        <UnnnicDropdown>
           <template #trigger>
             <unnnic-icon
               icon="navigation-menu-vertical-1"
               size="sm"
             />
           </template>
-          <unnnic-dropdown-item>
+          <UnnnicDropdownItem>
             <unnnic-button
               type="tertiary"
               iconLeft="pencil-write-1"
               text="Edit comment"
               size="small"
             />
-          </unnnic-dropdown-item>
-          <unnnic-dropdown-item>
+          </UnnnicDropdownItem>
+          <UnnnicDropdownItem>
             <unnnic-button
               type="tertiary"
               iconLeft="delete-1"
               text="Delete Comment"
               size="small"
             />
-          </unnnic-dropdown-item>
-        </unnnic-dropdown>
+          </UnnnicDropdownItem>
+        </UnnnicDropdown>
       </template>
-    </unnnic-comment>
+    </UnnnicComment>
     `,
   }),
 };

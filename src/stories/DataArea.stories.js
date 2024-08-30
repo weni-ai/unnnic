@@ -1,9 +1,11 @@
 import UnnnicDataArea from '../components/DataArea/DataArea.vue';
 import UnnnicButton from '../components/Button/Button.vue';
 import { unnnicFontSize } from '../components/config';
+import { action } from '@storybook/addon-actions';
 
 export default {
-  title: 'example/DataArea',
+  title: 'Data Display/DataArea',
+  tags: ['autodocs'],
   component: UnnnicDataArea,
   argTypes: {
     title: { control: { type: 'text' } },
@@ -21,7 +23,7 @@ export default {
     },
     methods: {
       click() {
-        console.log('clicked');
+        action('click')();
       },
     },
     data() {
@@ -38,29 +40,31 @@ export default {
     },
     template: `
       <div>
-        <unnnic-data-area v-bind="args">
+        <UnnnicDataArea v-bind="args">
           <template #links>
             <div :style="slotStyle">
-              <a href="#" :style="linkStyle">Link1</a>
-              <a href="#" :style="linkStyle">Link2</a>
+              <a href="#" @click.prevent="click" :style="linkStyle">Link1</a>
+              <a href="#" @click.prevent="click" :style="linkStyle">Link2</a>
             </div>
           </template>
   
           <template #buttons>
             <div :style="slotStyle">
-              <unnnic-button
+              <UnnnicButton
                 size="small"
                 type="secondary"
                 iconCenter="copy-paste-1"
+                @click="click"
               />
-              <unnnic-button
+              <UnnnicButton
                 size="small"
                 type="secondary"
                 iconCenter="button-refresh-arrows-1"
+                @click="click"
               />
             </div>
           </template>
-        </unnnic-data-area>
+        </UnnnicDataArea>
       </div>
     `,
   }),

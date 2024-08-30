@@ -1,9 +1,9 @@
-/* eslint-disable no-alert */
-import unnnicChatsDashboardTagLive from '../components/ChatsDashboardTagLive/ChatsDashboardTagLive.vue';
+import UnnnicChatsDashboardTagLive from '../components/ChatsDashboardTagLive/ChatsDashboardTagLive.vue';
 
 export default {
   title: 'Chats/DashboardTagLive',
-  component: unnnicChatsDashboardTagLive,
+  component: UnnnicChatsDashboardTagLive,
+  tags: ['autodocs'],
   argTypes: {
     locale: {
       control: {

@@ -1,9 +1,9 @@
-/* eslint-disable no-alert */
-import unnnicChatsNavbar from '../components/ChatsNavbar/ChatsNavbar.vue';
+import UnnnicChatsNavbar from '../components/ChatsNavbar/ChatsNavbar.vue';
 
 export default {
   title: 'Chats/Navbar',
-  component: unnnicChatsNavbar,
+  component: UnnnicChatsNavbar,
+  tags: ['autodocs'],
   argTypes: {
     links: [
       {
@@ -16,12 +16,11 @@ export default {
 
 export const Default = {
   render: (args) => ({
-    components: { unnnicChatsNavbar },
+    components: { UnnnicChatsNavbar },
     setup() {
       return { args };
     },
-    template:
-      '<unnnic-chats-navbar v-bind="args" v-model="args.selectedLink" />',
+    template: '<UnnnicChatsNavbar v-bind="args" v-model="args.selectedLink" />',
   }),
   args: {
     selectedLink: 'home',

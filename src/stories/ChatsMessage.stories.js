@@ -1,6 +1,6 @@
 import { action } from '@storybook/addon-actions';
-import unnnicChatsMessage from '../components/ChatsMessage/ChatsMessage.vue';
-import unnnicAudioRecorder from '../components/AudioRecorder/AudioRecorder.vue';
+import UnnnicChatsMessage from '../components/ChatsMessage/ChatsMessage.vue';
+import UnnnicAudioRecorder from '../components/AudioRecorder/AudioRecorder.vue';
 import AudioSample from './assets/audios/audio-recorder-sample.mp3';
 import ImageSample1 from './assets/images/un.png';
 import ImageSample2 from './assets/images/unnnic.png';
@@ -9,23 +9,41 @@ import VideoSample from './assets/videos/weni.mp4';
 
 export default {
   title: 'Chats/Message',
-  component: unnnicChatsMessage,
+  component: UnnnicChatsMessage,
+  tags: ['autodocs'],
   args: {
     time: new Date('2023-08-08T11:09:07.876230-03:00'),
     type: 'sent',
     onClick: action('click'),
     onClickImage: action('click-image'),
   },
+  argTypes: {
+    type: {
+      control: 'select',
+      options: ['sent', 'received'],
+    },
+    time: {
+      control: 'date',
+    },
+    status: {
+      control: 'select',
+      options: ['sending', 'sent', 'failed'],
+    },
+    mediaType: {
+      control: 'select',
+      options: ['audio', 'image', 'video'],
+    },
+  },
   render: (args) => ({
     setup() {
       return { args };
     },
-    components: { unnnicChatsMessage },
+    components: { UnnnicChatsMessage },
     template: `
-      <unnnic-chats-message v-bind="args">
+      <UnnnicChatsMessage v-bind="args">
         Interdum et malesuada fames ac ante ipsum primis in faucibus.
         Curabitur facilisis congue sagittis.
-      </unnnic-chats-message>
+      </UnnnicChatsMessage>
     `,
   }),
 };
@@ -43,19 +61,19 @@ export const ReceivedAndSent = {
     setup() {
       return { args };
     },
-    components: { unnnicChatsMessage },
+    components: { UnnnicChatsMessage },
     template: `
       <div style="
         display: flex;
       ">
-        <unnnic-chats-message v-bind="args" type="received">
+        <UnnnicChatsMessage v-bind="args" type="received">
           Interdum et malesuada fames ac ante ipsum primis in faucibus.
           Curabitur facilisis congue sagittis.
-        </unnnic-chats-message>
-        <unnnic-chats-message v-bind="args">
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args">
           Interdum et malesuada fames ac ante ipsum primis in faucibus.
           Curabitur facilisis congue sagittis.
-        </unnnic-chats-message>
+        </UnnnicChatsMessage>
       </div>
     `,
   }),
@@ -72,11 +90,11 @@ export const WithLink = {
     setup() {
       return { args };
     },
-    components: { unnnicChatsMessage },
+    components: { UnnnicChatsMessage },
     template: `
-      <unnnic-chats-message v-bind="args">
+      <UnnnicChatsMessage v-bind="args">
         A message with link: http://localhost:8080
-      </unnnic-chats-message>
+      </UnnnicChatsMessage>
     `,
   }),
 };
@@ -86,29 +104,29 @@ export const MultipleMessages = {
     setup() {
       return { args };
     },
-    components: { unnnicChatsMessage },
+    components: { UnnnicChatsMessage },
     template: `
       <div style="
         display: grid;
         gap: 16px;
       ">
-        <unnnic-chats-message v-bind="args">
+        <UnnnicChatsMessage v-bind="args">
           Ita.
-        </unnnic-chats-message>
-        <unnnic-chats-message v-bind="args">
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args">
           Pashca ovum 😯😉
-        </unnnic-chats-message>
-        <unnnic-chats-message v-bind="args">
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args">
           Fusce scelerisque odio sit amet eleifend.
-        </unnnic-chats-message>
-        <unnnic-chats-message v-bind="args">
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args">
           In mattis tristique massa, ornare urna porttitor faucibus. Pellentesque habitant morbi.
-        </unnnic-chats-message>
-        <unnnic-chats-message v-bind="args">
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args">
           Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
           Donec dignissim sapien ac condimentum sagittis. Cras vitae consectetur risus.
-        </unnnic-chats-message>
-        <unnnic-chats-message v-bind="args">
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args">
           Aenean vel pharetra ligula. Donec sit amet porttitor dui.
           Suspendisse lacinia mauris egestas, aliquam dui non, tristique augue. Donec at pulvinar
           leo, eget lobortis turpis. Ut hendrerit varius tortor, id mollis justo dictum eget.
@@ -116,8 +134,8 @@ export const MultipleMessages = {
           tristique. Duis in ultrices sem. Cras pharetra eleifend ligula vel commodo.
           Phasellus placerat faucibus est, nec posuere est venenatis sed. Phasellus a quam felis.
           Fusce volutpat sem eget urna sagittis laoreet non maximus quam. Mauris porta posuere commodo.
-        </unnnic-chats-message>
-        <unnnic-chats-message v-bind="args">
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args">
           Aenean vel pharetra ligula.
           Donec sit amet porttitor dui.
 
@@ -127,7 +145,7 @@ export const MultipleMessages = {
 
           Praesent finibus urna vel lacus pretium consequat. Proin imperdiet ante tempus feugiat
           tristique. Duis in ultrices sem. Cras pharetra eleifend ligula vel commodo.
-        </unnnic-chats-message>
+        </UnnnicChatsMessage>
       </div>
     `,
   }),
@@ -138,7 +156,7 @@ export const Media = {
     setup() {
       return { args };
     },
-    components: { unnnicChatsMessage, unnnicAudioRecorder },
+    components: { UnnnicChatsMessage, UnnnicAudioRecorder },
     data() {
       return {
         audio: AudioSample,
@@ -157,59 +175,59 @@ export const Media = {
           display: flex;
           gap: 16px;
         ">
-          <unnnic-chats-message v-bind="args" mediaType="audio">
+          <UnnnicChatsMessage v-bind="args" mediaType="audio">
             <unnnic-audio-recorder class="media" style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
-          </unnnic-chats-message>
-          <unnnic-chats-message v-bind="args" mediaType="audio" status="sending">
+          </UnnnicChatsMessage>
+          <UnnnicChatsMessage v-bind="args" mediaType="audio" status="sending">
             <unnnic-audio-recorder class="media" reqStatus="sending" style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
-          </unnnic-chats-message>
-          <unnnic-chats-message v-bind="args" mediaType="audio" status="failed">
+          </UnnnicChatsMessage>
+          <UnnnicChatsMessage v-bind="args" mediaType="audio" status="failed">
             <unnnic-audio-recorder class="media" reqStatus="failed" style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
-          </unnnic-chats-message>
+          </UnnnicChatsMessage>
         </div>
 
         <div  style="
           display: flex;
           gap: 16px;
         ">
-          <unnnic-chats-message v-bind="args" mediaType="video">
+          <UnnnicChatsMessage v-bind="args" mediaType="video">
           <video class="media" controls>
             <source :src="video" />
           </video>
-          </unnnic-chats-message>
-          <unnnic-chats-message v-bind="args" status="sending" mediaType="video">
+          </UnnnicChatsMessage>
+          <UnnnicChatsMessage v-bind="args" status="sending" mediaType="video">
             <video class="media" controls>
               <source :src="video" />
             </video>
-          </unnnic-chats-message>
-          <unnnic-chats-message v-bind="args" status="failed" mediaType="video">
+          </UnnnicChatsMessage>
+          <UnnnicChatsMessage v-bind="args" status="failed" mediaType="video">
             <video class="media" controls>
               <source :src="video" />
             </video>
-          </unnnic-chats-message>
+          </UnnnicChatsMessage>
         </div>
 
         <div  style="
           display: flex;
           gap: 16px;
         ">
-          <unnnic-chats-message v-bind="args" mediaType="image">
+          <UnnnicChatsMessage v-bind="args" mediaType="image">
             <img class="media" :src="image1" />
-          </unnnic-chats-message>
-          <unnnic-chats-message v-bind="args" status="sending" mediaType="image">
+          </UnnnicChatsMessage>
+          <UnnnicChatsMessage v-bind="args" status="sending" mediaType="image">
             <img class="media" :src="image1" />
-          </unnnic-chats-message>
-          <unnnic-chats-message v-bind="args" status="failed" mediaType="image">
+          </UnnnicChatsMessage>
+          <UnnnicChatsMessage v-bind="args" status="failed" mediaType="image">
             <img class="media" :src="image1" />
-          </unnnic-chats-message>
+          </UnnnicChatsMessage>
         </div>
 
-        <unnnic-chats-message v-bind="args" mediaType="image">
+        <UnnnicChatsMessage v-bind="args" mediaType="image">
           <img class="media" :src="image2" />
-        </unnnic-chats-message>
-        <unnnic-chats-message v-bind="args" mediaType="image">
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args" mediaType="image">
           <img class="media" :src="image3" />
-        </unnnic-chats-message>
+        </UnnnicChatsMessage>
       </div>
     `,
   }),
@@ -220,18 +238,18 @@ export const Document = {
     setup() {
       return { args };
     },
-    components: { unnnicChatsMessage },
+    components: { UnnnicChatsMessage },
     template: `
       <div  style="
         display: grid;
         gap: 16px;
       ">
-        <unnnic-chats-message v-bind="args" documentName="Lorem.pdf" type="received" />
-        <unnnic-chats-message v-bind="args" documentName="Lorem.pdf" />
-        <unnnic-chats-message v-bind="args" documentName="Lorem Ipsum.pdf" status="sending" />
-        <unnnic-chats-message v-bind="args" documentName="Lorem Ipsum.pdf" status="failed" />
-        <unnnic-chats-message v-bind="args" documentName="Lorem ipsum dolor sit amet consectetur adipiscing elit.docx" />
-        <unnnic-chats-message v-bind="args" documentName="Lorem ipsum dolor sit amet consectetur adipiscing elit fusce iaculis ligula fringilla consectetur tempor ex massa convallis risus ut sagittis est quam non est integer bibendum vehicula.csv" />
+        <UnnnicChatsMessage v-bind="args" documentName="Lorem.pdf" type="received" />
+        <UnnnicChatsMessage v-bind="args" documentName="Lorem.pdf" />
+        <UnnnicChatsMessage v-bind="args" documentName="Lorem Ipsum.pdf" status="sending" />
+        <UnnnicChatsMessage v-bind="args" documentName="Lorem Ipsum.pdf" status="failed" />
+        <UnnnicChatsMessage v-bind="args" documentName="Lorem ipsum dolor sit amet consectetur adipiscing elit.docx" />
+        <UnnnicChatsMessage v-bind="args" documentName="Lorem ipsum dolor sit amet consectetur adipiscing elit fusce iaculis ligula fringilla consectetur tempor ex massa convallis risus ut sagittis est quam non est integer bibendum vehicula.csv" />
       </div>
     `,
   }),

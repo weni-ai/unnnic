@@ -1,8 +1,9 @@
-import unnnicChartRainbow from '../components/ChartRainbow/ChartRainbow.vue';
+import UnnnicChartRainbow from '../components/ChartRainbow/ChartRainbow.vue';
 
 export default {
-  title: 'charts/ChartRainbow',
-  component: unnnicChartRainbow,
+  title: 'Charts/ChartRainbow',
+  component: UnnnicChartRainbow,
+  tags: ['autodocs'],
   argTypes: {
     modelValue: { control: { type: 'number', min: 0, max: 100, step: 0.1 } },
     description: { control: 'text' },
