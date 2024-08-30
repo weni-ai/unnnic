@@ -104,7 +104,6 @@ export default {
     gap: $unnnic-spacing-xs;
     overflow-y: auto;
     height: 100%;
-    padding-right: 30px;
 
     &::-webkit-scrollbar {
         width: $unnnic-spacing-inline-nano;
