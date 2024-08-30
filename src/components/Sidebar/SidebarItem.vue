@@ -77,7 +77,7 @@ const props = defineProps({
     type: Object,
     default: () => ({ item: false, childIndex: null }),
   },
-  autoNavigateSingleChild: {
+  autoNavigateFirstChild: {
     type: Boolean,
     default: false
   }
@@ -100,8 +100,8 @@ const handleShowChildrenList = () => {
   showChildrenList.value = !showChildrenList.value;
   
   const isOpening = showChildrenList.value
-  if (isOpening && props.item.children?.length === 1 && props.autoNavigateSingleChild) {
-    emit('navigate', { item: props.item, child: 0 });
+  if (isOpening  && props.autoNavigateFirstChild) {
+    emit('navigate', { item: props.item, child: props.item.children[0] });
   }
 };
 

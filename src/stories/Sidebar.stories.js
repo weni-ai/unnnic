@@ -94,7 +94,7 @@ export const Default = {
     items: items,
     width: '200px',
     active: { itemIndex: 1, childIndex: 0 },
-    autoNavigateSingleChild: true,
+    autoNavigateFirstChild: true,
   },
 };
 
@@ -103,7 +103,7 @@ export const Overflowed = {
     items: Array.from({length: 50}).map((_item, index) => ({ label: `Item ${index}`, icon: 'tune' })),
     width: '200px',
     active: { itemIndex: 1, childIndex: 0 },
-    autoNavigateSingleChild: true,
+    autoNavigateFirstChild: true,
   },
 };
 
