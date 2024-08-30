@@ -105,6 +105,7 @@ export default {
       default: 'md',
     },
   },
+  emits: ['icon-left-click', 'icon-right-click'],
   data() {
     return {
       isFocused: false,
