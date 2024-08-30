@@ -16,7 +16,7 @@
             childIndex: active.childIndex,
           }"
           @navigate="handleNavigate($event)"
-          :autoNavigateSingleChild="autoNavigateSingleChild"
+          :autoNavigateFirstChild="autoNavigateFirstChild"
         />
       </li>
     </ul>
@@ -63,7 +63,7 @@ const props = defineProps({
     type: Object,
     default: () => ({ itemIndex: null, childIndex: null }),
   },
-  autoNavigateSingleChild: {
+  autoNavigateFirstChild: {
     type: Boolean,
     default: false
   }
