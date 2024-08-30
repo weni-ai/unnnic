@@ -56,6 +56,7 @@ export default {
     },
     activeTab: {
       type: String,
+      default: '',
     },
     initialTab: {
       type: String,
@@ -66,6 +67,7 @@ export default {
       default: null,
     },
   },
+  emits: ['change'],
   data() {
     return {
       localValue: '',
