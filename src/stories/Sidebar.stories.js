@@ -79,5 +79,5 @@ Default.args = {
   width: '300px',
   position: 'left',
   active: { itemIndex: 1, childIndex: 0 },
-  autoNavigateSingleChild: true,
+  autoNavigateFirstChild: true,
 };
