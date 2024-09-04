@@ -75,6 +75,7 @@ export default {
     },
     nativeType: {
       type: String,
+      default: '',
     },
     iconLeft: {
       type: String,
