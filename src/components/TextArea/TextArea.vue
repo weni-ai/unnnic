@@ -13,7 +13,7 @@
       :maxlength="maxLength"
       :disabled="disabled"
       :value="modelValue"
-      @input="$emit('update:modelValue', $event.srcElement.value)"
+      @input="$emit('update:modelValue', $event.target.value)"
     ></textarea>
 
     <div
@@ -77,6 +77,7 @@ export default {
       default: () => [],
     },
   },
+  emits: ['update:modelValue'],
 
   methods: {
     focus() {
