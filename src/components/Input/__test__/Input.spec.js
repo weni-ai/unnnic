@@ -89,13 +89,10 @@ describe('Input.vue', () => {
       },
     });
 
-    // Verifique o valor inicial de `val`
     expect(wrapper.vm.val).toBe('initial value');
 
-    // Atualize a prop `modelValue`
     await wrapper.setProps({ modelValue: 'new value' });
 
-    // Verifique se `val` foi atualizado corretamente
     expect(wrapper.vm.val).toBe('new value');
   });
 
