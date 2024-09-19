@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TextArea.vue > matches the snapshot 1`] = `
+"<div data-v-735b3c51="" class="unnnic-text-area md normal">
+  <div data-v-735b3c51="" class="label">Description</div><textarea data-v-735b3c51="" placeholder="Enter text" maxlength="200"></textarea>
+  <div data-v-735b3c51="" class="helper">0/200</div>
+  <!--v-if-->
+</div>"
+`;

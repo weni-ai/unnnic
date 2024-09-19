@@ -23,10 +23,10 @@ describe('Switch', () => {
 
     // This check ensures that the icon is placed before the switch text
     const switchChildren = wrapper.findComponent(Switch).element.children;
-    expect(switchChildren[0].getAttribute('data-testid')).toBe(
+    expect(switchChildren[0].getAttribute('data-test-id')).toBe(
       'switch-text-left',
     );
-    expect(switchChildren[1].getAttribute('data-testid')).toBe('switch-icon');
+    expect(switchChildren[1].getAttribute('data-test-id')).toBe('switch-icon');
   });
 
   it('should render the right text (textRight) when provided', async () => {
@@ -34,8 +34,8 @@ describe('Switch', () => {
 
     // This check ensures that the icon is placed after the switch text
     const switchChildren = wrapper.findComponent(Switch).element.children;
-    expect(switchChildren[0].getAttribute('data-testid')).toBe('switch-icon');
-    expect(switchChildren[1].getAttribute('data-testid')).toBe(
+    expect(switchChildren[0].getAttribute('data-test-id')).toBe('switch-icon');
+    expect(switchChildren[1].getAttribute('data-test-id')).toBe(
       'switch-text-right',
     );
   });
@@ -85,7 +85,7 @@ describe('Switch', () => {
 
   it('should toggle isActive state and emit the correct event when toggleState is called', async () => {
     const initialIsActive = wrapper.vm.isActive;
-    const switchIcon = wrapper.findComponent('[ data-testid="switch-icon"]');
+    const switchIcon = wrapper.findComponent('[ data-test-id="switch-icon"]');
     await switchIcon.trigger('click');
     expect(wrapper.emitted('update:model-value')).toBeTruthy();
     expect(wrapper.vm.isActive).toBe(!initialIsActive);
@@ -93,7 +93,7 @@ describe('Switch', () => {
 
   it('should not change state when disabled is true', async () => {
     await wrapper.setProps({ disabled: true });
-    const switchIcon = wrapper.findComponent('[ data-testid="switch-icon"]');
+    const switchIcon = wrapper.findComponent('[ data-test-id="switch-icon"]');
     await switchIcon.trigger('click');
     expect(wrapper.emitted('update:model-value')).toBeFalsy();
     expect(wrapper.vm.isActive).toBe(false);

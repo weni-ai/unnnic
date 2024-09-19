@@ -75,6 +75,7 @@ export default {
     },
     nativeType: {
       type: String,
+      default: '',
     },
     iconLeft: {
       type: String,
@@ -105,6 +106,7 @@ export default {
       default: 'md',
     },
   },
+  emits: ['icon-left-click', 'icon-right-click'],
   data() {
     return {
       isFocused: false,

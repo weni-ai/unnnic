@@ -28,9 +28,11 @@ import UnnnicIcon from '../Icon.vue';
 const props = defineProps({
   modelValue: {
     type: [String, Number],
+    default: '',
   },
   value: {
     type: [String, Number],
+    default: '',
   },
   disabled: {
     type: Boolean,
