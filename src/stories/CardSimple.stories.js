@@ -26,16 +26,13 @@ export default {
   }),
 };
 
-const DefaultTemplate = (args) => ({
-  components: { UnnnicSimpleCard },
-  setup() {
-    return { args };
+export const Default = {
+  args: {
+     title: 'This is the title',
+    titleTooltip: 'Tooltip',
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis volutpat enim quis nisi laoreet eleifend. Nulla facilisi. Sed porttitor ut felis ut aliquam. Praesent interdum suscipit malesuada. Morbi rutrum, nunc ut aliquam fringilla, metus augue ultricies dui, vitae cursus risus purus ac nulla. Mauris dignissim bibendum eros sed congue. Praesent nec elit nec justo rhoncus tempus ut sit amet leo. Donec eu efficitur dolor.',
   },
-  template: `
-        <UnnnicSimpleCard v-bind="args">
-        </UnnnicSimpleCard>
-    `,
-});
+};
 
 const TemplateWithFooter = (args) => ({
   components: { UnnnicSimpleCard },
