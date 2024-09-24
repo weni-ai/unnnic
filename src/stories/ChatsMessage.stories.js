@@ -1,6 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import UnnnicChatsMessage from '../components/ChatsMessage/ChatsMessage.vue';
 import UnnnicAudioRecorder from '../components/AudioRecorder/AudioRecorder.vue';
+import UnnnicVideo from '../components/Video/Video.vue';
 import AudioSample from './assets/audios/audio-recorder-sample.mp3';
 import ImageSample1 from './assets/images/un.png';
 import ImageSample2 from './assets/images/unnnic.png';
@@ -156,7 +157,7 @@ export const Media = {
     setup() {
       return { args };
     },
-    components: { UnnnicChatsMessage, UnnnicAudioRecorder },
+    components: { UnnnicChatsMessage, UnnnicAudioRecorder, UnnnicVideo },
     data() {
       return {
         audio: AudioSample,
@@ -191,19 +192,13 @@ export const Media = {
           gap: 16px;
         ">
           <UnnnicChatsMessage v-bind="args" mediaType="video">
-          <video class="media" controls>
-            <source :src="video" />
-          </video>
+            <UnnnicVideo class="media" :src="video"/>
           </UnnnicChatsMessage>
           <UnnnicChatsMessage v-bind="args" status="sending" mediaType="video">
-            <video class="media" controls>
-              <source :src="video" />
-            </video>
+            <UnnnicVideo class="media" :src="video"/>
           </UnnnicChatsMessage>
           <UnnnicChatsMessage v-bind="args" status="failed" mediaType="video">
-            <video class="media" controls>
-              <source :src="video" />
-            </video>
+            <UnnnicVideo class="media" :src="video"/>
           </UnnnicChatsMessage>
         </div>
 
