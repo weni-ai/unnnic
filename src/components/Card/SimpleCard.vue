@@ -94,6 +94,14 @@ export default {
   box-sizing: border-box;
 }
 
+.unnnic-simple-card:hover {
+  box-shadow: $unnnic-shadow-level-far;
+}
+
+.unnnic-simple-card:active {
+  border: 1px solid $unnnic-color-neutral-cleanest;
+}
+
 .unnnic-simple-card {
   border: 1px solid $unnnic-color-neutral-soft;
   border-radius: $unnnic-border-radius-md;
