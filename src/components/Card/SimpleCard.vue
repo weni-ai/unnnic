@@ -10,13 +10,13 @@
       v-if="title || $slots.headerSlot"
       class="unnnic-simple-card__header"
     >
-      <section class="unnnic-simple-card__title">
-        <h1>{{ title }}</h1>
+      <section class="unnnic-simple-card-header-container">
+        <h1 class="unnnic-simple-card-header-container__title">{{ title }}</h1>
         <UnnnicToolTip
           v-if="titleTooltip"
           :text="titleTooltip"
           enabled
-          class="unnnic-simple-card__title-tooltip"
+          class="unnnic-simple-card-header-container__title-tooltip"
         >
           <UnnnicIcon
             icon="info"
@@ -120,16 +120,20 @@ export default {
   &__header-slot {
     margin-left: auto;
   }
-  &__title {
+
+  &-header-container {
     display: flex;
     gap: $unnnic-spacing-nano;
-    font-family: $unnnic-font-family-secondary;
-    font-size: v-bind(titleSize);
-    font-weight: $unnnic-font-weight-bold;
-    line-height: $unnnic-line-height-large * 1.5;
+    align-items: center;
 
-    &-tooltip {
-      margin-top: 3px; // This is necessary to align the tooltip with the text
+    &__title {
+      font-family: $unnnic-font-family-secondary;
+      font-size: v-bind(titleSize);
+      font-weight: $unnnic-font-weight-bold;
+      line-height: $unnnic-line-height-large * 1.5;
+      &-tooltip {
+        display: flex;
+      }
     }
   }
 
