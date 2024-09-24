@@ -10,7 +10,10 @@
       size="ant"
       :scheme="active.item ? 'weni-600' : 'neutral-cloudy'"
     />
-    <p :class="{ 'unnnic-sidebar-item__label': true, active: active.item }" :title="item.label">
+    <p
+      :class="{ 'unnnic-sidebar-item__label': true, active: active.item }"
+      :title="item.label"
+    >
       {{ item.label }}
     </p>
     <Icon
@@ -79,8 +82,8 @@ const props = defineProps({
   },
   autoNavigateFirstChild: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 onMounted(() => {
@@ -98,9 +101,9 @@ const showChildrenList = ref(false);
 
 const handleShowChildrenList = () => {
   showChildrenList.value = !showChildrenList.value;
-  
-  const isOpening = showChildrenList.value
-  if (isOpening  && props.autoNavigateFirstChild) {
+
+  const isOpening = showChildrenList.value;
+  if (isOpening && props.autoNavigateFirstChild) {
     emit('navigate', { item: props.item, child: props.item.children[0] });
   }
 };

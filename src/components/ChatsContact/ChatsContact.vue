@@ -99,8 +99,6 @@ export default {
     Checkbox,
   },
 
-  emits: ['click'],
-  
   mixins: [UnnnicI18n],
 
   props: {
@@ -142,6 +140,8 @@ export default {
       default: '',
     },
   },
+
+  emits: ['click'],
 
   data() {
     return {
