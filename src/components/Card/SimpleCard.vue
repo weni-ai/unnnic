@@ -34,12 +34,13 @@
       </section>
     </section>
 
-    <section
+    <p
       v-if="text"
       class="unnnic-simple-card__text"
+      :title="text"
     >
-      <p :title="text">{{ text }}</p>
-    </section>
+      {{ text }}
+    </p>
 
     <section
       v-if="$slots.footer"
