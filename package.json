@@ -75,6 +75,7 @@
     "eslint-plugin-storybook": "^0.8.0",
     "eslint-plugin-vue": "^9.25.0",
     "jsdom": "^24.1.1",
+    "prettier": "^3.3.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.62.1",
@@ -82,8 +83,5 @@
     "vite": "4.3.5",
     "vitest": "^1.6.0",
     "vue-eslint-parser": "^9.4.2"
-  },
-  "resolutions": {
-    "strip-ansi": "6.0.1"
   }
 }
