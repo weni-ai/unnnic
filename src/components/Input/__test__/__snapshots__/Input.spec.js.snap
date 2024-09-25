@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Input.vue > matches the snapshot 1`] = `
+"<div data-v-d890ad85="" class="unnnic-form md">
+  <p data-v-d890ad85="" class="unnnic-form__label">Sample Label</p>
+  <div data-v-a0d36167="" data-v-d890ad85="" class="text-input size--md has-icon-left has-icon-right unnnic-form-input" mask="####-####"><input data-v-86533b41="" data-v-a0d36167="" class="unnnic-form-input input-itself input size-md normal unnnic-form-input input-itself" placeholder="Enter text" iconleft="search" iconright="clear" iconleftclickable="true" iconrightclickable="true" hascloudycolor="false" type="text"><span data-v-26446d8e="" data-v-a0d36167="" class="material-symbols-rounded unnnic-icon-scheme--neutral-cloudy unnnic-icon-size--sm unnnic--clickable icon-left clickable" data-testid="material-icon">search</span><span data-v-26446d8e="" data-v-a0d36167="" class="material-symbols-rounded unnnic-icon-scheme--neutral-cloudy unnnic-icon-size--sm unnnic--clickable icon-right clickable" data-testid="material-icon">clear</span></div>
+  <p data-v-d890ad85="" class="unnnic-form__message">Error message</p>
+</div>"
+`;
