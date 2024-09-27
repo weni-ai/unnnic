@@ -34,6 +34,24 @@ describe('Breadcrumb', () => {
     expect(breadcrumb.text()).contains(name);
   });
 
+  const allCrumbsButLast = crumbs.slice(0, -1);
+  const lastCrumb = crumbs.at(-1);
+
+  it.each(allCrumbsButLast)(
+    '$name has not the "active" class name',
+    ({ name }) => {
+      const breadcrumb = wrapper.find(`[data-test="${name}"]`);
+
+      expect(breadcrumb.wrapperElement.className).not.contains('active');
+    },
+  );
+
+  it(`'${lastCrumb.name}' has the "active" class name`, () => {
+    const breadcrumb = wrapper.find(`[data-test="${lastCrumb.name}"]`);
+
+    expect(breadcrumb.wrapperElement.className).contains('active');
+  });
+
   describe.each(crumbs)(
     'when the user clicks on the $name breadcrumb',
     (crumb) => {
