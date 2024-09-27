@@ -51,7 +51,7 @@ describe('Pagination', () => {
           wrapper.findAll('[data-test="page-button"]').at(-2).trigger('click');
         });
 
-        it('emits @update:model-value with page number 2', () => {
+        it('emits @update:model-value with page number 4', () => {
           expect(wrapper.emitted('update:model-value')).toHaveLength(1);
           expect(wrapper.emitted('update:model-value')).toContainEqual([4]);
         });
@@ -82,7 +82,7 @@ describe('Pagination', () => {
           wrapper.find('[data-test="previous-button"]').trigger('click');
         });
 
-        it('emits @update:model-value with page number 2', () => {
+        it('emits @update:model-value with page number 1', () => {
           expect(wrapper.emitted('update:model-value')).toHaveLength(1);
           expect(wrapper.emitted('update:model-value')).toContainEqual([1]);
         });
@@ -129,7 +129,7 @@ describe('Pagination', () => {
           wrapper.findAll('[data-test="page-button"]').at(1).trigger('click');
         });
 
-        it('emits @update:model-value with page number 2', () => {
+        it('emits @update:model-value with page number 7', () => {
           expect(wrapper.emitted('update:model-value')).toHaveLength(1);
           expect(wrapper.emitted('update:model-value')).toContainEqual([7]);
         });
@@ -160,7 +160,7 @@ describe('Pagination', () => {
           wrapper.findAll('[data-test="page-button"]').at(-2).trigger('click');
         });
 
-        it('emits @update:model-value with page number 2', () => {
+        it('emits @update:model-value with page number 5', () => {
           expect(wrapper.emitted('update:model-value')).toHaveLength(1);
           expect(wrapper.emitted('update:model-value')).toContainEqual([5]);
         });
@@ -196,7 +196,7 @@ describe('Pagination', () => {
       });
 
       describe('when the user wants clicks on the previous page button', () => {
-        it('emits @update:model-value with page number 4', () => {
+        it('emits @update:model-value with page number 8', () => {
           wrapper.find('[data-test="previous-button"]').trigger('click');
 
           expect(wrapper.emitted('update:model-value')).toHaveLength(1);
