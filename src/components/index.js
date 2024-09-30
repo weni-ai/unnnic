@@ -1,6 +1,7 @@
 import { unnnicFontSize as fontSize } from './config';
 import formElement from './FormElement/FormElement.vue';
 import input from './Input/Input.vue';
+import inputNext from './InputNext/InputNext.vue';
 import inputDatePicker from './InputDatePicker/InputDatePicker.vue';
 import button from './Button/Button.vue';
 import buttonIcon from './Button/ButtonIcon.vue';
@@ -87,6 +88,7 @@ import Tour from './Tour/Tour.vue';
 export const components = {
   unnnicFormElement: formElement,
   unnnicInput: input,
+  unnnicInputNext: inputNext,
   unnnicInputDatePicker: inputDatePicker,
   unnnicButton: button,
   unnnicButtonIcon: buttonIcon,
@@ -176,6 +178,7 @@ export const components = {
 export const unnnicFontSize = fontSize;
 export const unnnicFormElement = formElement;
 export const unnnicInput = input;
+export const unnnicInputNext = inputNext;
 export const unnnicInputDatePicker = inputDatePicker;
 export const unnnicButton = button;
 export const unnnicButtonIcon = buttonIcon;
