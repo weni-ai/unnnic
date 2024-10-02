@@ -1,14 +1,5 @@
 <template>
-  <div
-    :class="[
-      'text-input',
-      `size--${size}`,
-      {
-        'has-icon-left': !!iconLeft,
-        'has-icon-right': !!iconRight || allowTogglePassword,
-      },
-    ]"
-  >
+  <div :class="['text-input', `size--${size}`]">
     <BaseInput
       v-bind="attributes"
       ref="base-input"
@@ -19,6 +10,8 @@
       "
       :type="type"
       class="input-itself"
+      :hasIconLeft="!!iconLeft"
+      :hasIconRight="!!iconRight || allowTogglePassword"
       @focus="onFocus"
       @blur="onBlur"
     />
@@ -125,7 +118,7 @@ export default {
 
     iconScheme() {
       if (this.type === 'error') {
-        return 'feedback-red';
+        return 'aux-red-500';
       }
 
       if (this.isDisabled) {
@@ -190,30 +183,17 @@ export default {
   &-left {
     position: absolute;
     top: $unnnic-spacing-ant + 0.1875 * $unnnic-font-size;
-    left: $unnnic-inline-sm;
+    left: $unnnic-inline-sm - $unnnic-border-width-thinner;
   }
 
   &-right {
     position: absolute;
     top: $unnnic-spacing-ant + 0.1875 * $unnnic-font-size;
-    right: $unnnic-inline-sm;
+    right: $unnnic-inline-sm - $unnnic-border-width-thinner;
   }
 }
 .text-input {
   position: relative;
-
-  &.size--md,
-  &.size--sm {
-    &.has-icon-left .input-itself {
-      padding-left: $unnnic-spacing-sm + $unnnic-icon-size-sm +
-        $unnnic-spacing-xs;
-    }
-
-    &.has-icon-right .input-itself {
-      padding-right: $unnnic-spacing-sm + $unnnic-icon-size-sm +
-        $unnnic-spacing-xs;
-    }
-  }
 
   &.size--sm {
     .icon-left,

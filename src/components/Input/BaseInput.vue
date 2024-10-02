@@ -46,6 +46,8 @@ export default {
       type: [String, Array],
       default: '',
     },
+    hasIconLeft: Boolean,
+    hasIconRight: Boolean,
   },
   emits: ['update:modelValue'],
   data() {
@@ -63,7 +65,15 @@ export default {
     },
 
     classes() {
-      return ['input', `size-${this.size}`, this.type];
+      return [
+        'input',
+        `size-${this.size}`,
+        this.type,
+        {
+          'input--has-icon-left': this.hasIconLeft,
+          'input--has-icon-right': this.hasIconRight,
+        },
+      ];
     },
   },
 };
@@ -74,13 +84,10 @@ export default {
 
 .input {
   background: $unnnic-color-neutral-snow;
-  border: none;
-  outline-style: solid;
-  outline-color: $unnnic-color-neutral-soft;
-  outline-width: $unnnic-border-width-thinner;
-  outline-offset: -$unnnic-border-width-thinner;
+  border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
+  outline: none;
   border-radius: $unnnic-border-radius-sm;
-  color: $unnnic-color-neutral-dark;
+  color: $unnnic-color-neutral-darkest;
   caret-color: $unnnic-color-neutral-clean;
   font-weight: $unnnic-font-weight-regular;
   font-family: $unnnic-font-family-secondary;
@@ -91,23 +98,35 @@ export default {
     &-md {
       font-size: $unnnic-font-size-body-gt;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
-      padding: $unnnic-squish-xs;
+      padding: ($unnnic-spacing-ant - $unnnic-border-width-thinner)
+        ($unnnic-spacing-sm - $unnnic-border-width-thinner);
     }
 
     &-sm {
       font-size: $unnnic-font-size-body-md;
       line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
-      padding: $unnnic-squish-nano;
+      padding: $unnnic-spacing-xs
+        ($unnnic-spacing-sm - $unnnic-border-width-thinner);
     }
   }
 
+  &.input--has-icon-left {
+    padding-left: $unnnic-spacing-sm + $unnnic-icon-size-sm + $unnnic-spacing-xs -
+      $unnnic-border-width-thinner;
+  }
+
+  &.input--has-icon-right {
+    padding-right: $unnnic-spacing-sm + $unnnic-icon-size-sm +
+      $unnnic-spacing-xs - $unnnic-border-width-thinner;
+  }
+
   &:focus {
-    outline-color: $unnnic-color-neutral-clean;
+    border-color: $unnnic-color-weni-600;
   }
 
   &.error {
-    outline-color: $unnnic-color-feedback-red;
-    color: $unnnic-color-feedback-red;
+    border-color: $unnnic-color-aux-red-500;
+    color: $unnnic-color-aux-red-500;
   }
 
   &::placeholder {
@@ -122,7 +141,7 @@ export default {
   }
 
   &:disabled {
-    outline-color: $unnnic-color-neutral-cleanest;
+    border-color: $unnnic-color-neutral-cleanest;
     background-color: $unnnic-color-neutral-lightest;
     cursor: not-allowed;
     color: $unnnic-color-neutral-cleanest;
