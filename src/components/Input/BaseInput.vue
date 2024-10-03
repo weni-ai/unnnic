@@ -81,30 +81,25 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../assets/scss/unnnic.scss';
+@import './Input.scss';
 
 .input {
-  background: $unnnic-color-neutral-snow;
-  border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
-  outline: none;
-  border-radius: $unnnic-border-radius-sm;
-  color: $unnnic-color-neutral-darkest;
-  caret-color: $unnnic-color-neutral-clean;
-  font-weight: $unnnic-font-weight-regular;
-  font-family: $unnnic-font-family-secondary;
+  @include input-base;
+
   box-sizing: border-box;
   width: 100%;
 
   &.size {
     &-md {
-      font-size: $unnnic-font-size-body-gt;
-      line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+      @include input-md-font;
+
       padding: ($unnnic-spacing-ant - $unnnic-border-width-thinner)
         ($unnnic-spacing-sm - $unnnic-border-width-thinner);
     }
 
     &-sm {
-      font-size: $unnnic-font-size-body-md;
-      line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+      @include input-sm-font;
+
       padding: $unnnic-spacing-xs
         ($unnnic-spacing-sm - $unnnic-border-width-thinner);
     }
@@ -120,36 +115,14 @@ export default {
       $unnnic-spacing-xs - $unnnic-border-width-thinner;
   }
 
-  &:focus {
-    border-color: $unnnic-color-weni-600;
-  }
-
   &.error {
-    border-color: $unnnic-color-aux-red-500;
-    color: $unnnic-color-aux-red-500;
-  }
-
-  &::placeholder {
-    color: $unnnic-color-neutral-cleanest;
-    opacity: 1; /* Firefox */
+    @include input-error;
   }
 
   &:-ms-input-placeholder,
   &::-ms-input-placeholder {
     /* Internet Explorer 10-11 */
     color: $unnnic-color-brand-sec;
-  }
-
-  &:disabled {
-    border-color: $unnnic-color-neutral-cleanest;
-    background-color: $unnnic-color-neutral-lightest;
-    cursor: not-allowed;
-    color: $unnnic-color-neutral-cleanest;
-
-    &::placeholder {
-      color: $unnnic-color-neutral-cleanest;
-      opacity: 1; /* Firefox */
-    }
   }
 }
 </style>
