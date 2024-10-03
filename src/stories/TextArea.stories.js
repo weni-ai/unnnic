@@ -4,8 +4,8 @@ export default {
   title: 'Form/TextArea',
   component: UnnnicTextArea,
   argTypes: {
-    size: { control: { type: 'select', options: ['md', 'sm'] } },
-    type: { control: { type: 'select', options: ['normal', 'error'] } },
+    size: { control: { type: 'select' }, options: ['md', 'sm'] },
+    type: { control: { type: 'select' }, options: ['normal', 'error'] },
   },
   render: (args) => ({
     setup() {
