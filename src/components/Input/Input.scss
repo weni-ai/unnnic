@@ -1,0 +1,43 @@
+@import '../../assets/scss/unnnic.scss';
+
+@mixin input-base {
+  background: $unnnic-color-neutral-white;
+  border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
+  outline: none;
+  border-radius: $unnnic-border-radius-sm;
+  color: $unnnic-color-neutral-darkest;
+  caret-color: $unnnic-color-neutral-clean;
+  font-weight: $unnnic-font-weight-regular;
+  font-family: $unnnic-font-family-secondary;
+
+  &:focus {
+    border-color: $unnnic-color-weni-600;
+  }
+
+  &::placeholder {
+    color: $unnnic-color-neutral-cleanest;
+    opacity: 1; /* Firefox */
+  }
+
+  &:disabled {
+    border-color: $unnnic-color-neutral-cleanest;
+    background-color: $unnnic-color-neutral-lightest;
+    cursor: not-allowed;
+    color: $unnnic-color-neutral-cleanest;
+  }
+}
+
+@mixin input-sm-font {
+  font-size: $unnnic-font-size-body-md;
+  line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+}
+
+@mixin input-md-font {
+  font-size: $unnnic-font-size-body-gt;
+  line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+}
+
+@mixin input-error {
+  border-color: $unnnic-color-aux-red-500;
+  color: $unnnic-color-aux-red-500;
+}

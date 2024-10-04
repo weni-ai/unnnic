@@ -74,7 +74,7 @@ describe('TextInput.vue', () => {
 
   test('computes the correct iconScheme based on various states', async () => {
     await wrapper.setProps({ type: 'error' });
-    expect(wrapper.vm.iconScheme).toBe('feedback-red');
+    expect(wrapper.vm.iconScheme).toBe('aux-red-500');
 
     await wrapper.setProps({ type: 'normal' });
     await wrapper.setData({ isDisabled: true });
