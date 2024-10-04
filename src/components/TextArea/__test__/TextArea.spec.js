@@ -29,9 +29,9 @@ describe('TextArea.vue', () => {
   });
 
   test('renders label when provided', () => {
-    const label = wrapper.find('.label');
-    expect(label.exists()).toBe(true);
-    expect(label.text()).toBe('Description');
+    expect(
+      wrapper.findComponent({ name: 'UnnnicFormElement' }).props('label'),
+    ).toBe('Description');
   });
 
   test('renders textarea with correct props', () => {
@@ -42,9 +42,7 @@ describe('TextArea.vue', () => {
   });
 
   test('renders character count when maxLength and type are normal', () => {
-    const helper = wrapper.find('.helper');
-    expect(helper.exists()).toBe(true);
-    expect(helper.text()).toBe('0/200');
+    expect(wrapper.text()).contains('0/200');
   });
 
   test('does not render character count when maxLength is not provided', async () => {
@@ -61,22 +59,25 @@ describe('TextArea.vue', () => {
 
   test('displays errors when type is error', async () => {
     await wrapper.setProps({ type: 'error', errors: ['Error 1', 'Error 2'] });
-    const errorList = wrapper.findAll('.error-list span');
-    expect(errorList.length).toBe(2);
-    expect(errorList[0].text()).toBe('Error 1');
-    expect(errorList[1].text()).toBe('Error 2');
+    expect(
+      wrapper.findComponent({ name: 'UnnnicFormElement' }).props('error'),
+    ).toBe('Error 1, Error 2');
   });
 
   test('applies disabled class and disables textarea when disabled is true', async () => {
     await wrapper.setProps({ disabled: true });
-    expect(wrapper.classes()).toContain('disabled');
+    expect(
+      wrapper.findComponent({ name: 'UnnnicFormElement' }).props('disabled'),
+    ).toBe(true);
     const textarea = wrapper.find('textarea');
     expect(textarea.element.disabled).toBe(true);
   });
 
   test('applies the correct size class', async () => {
     await wrapper.setProps({ size: 'sm' });
-    expect(wrapper.classes()).toContain('sm');
+    expect(wrapper.find('textarea').classes()).toContain(
+      'unnnic-text-area__textarea--size-sm',
+    );
   });
 
   test('focus method focuses the textarea element', () => {
@@ -97,8 +98,7 @@ describe('TextArea.vue', () => {
 
   test('updates character count on input when maxLength is provided', async () => {
     await wrapper.setProps({ modelValue: 'Hello' });
-    const helper = wrapper.find('.helper');
-    expect(helper.text()).toBe('5/200');
+    expect(wrapper.text()).contains('5/200');
   });
 
   test('does not render label when not provided', async () => {
@@ -109,7 +109,9 @@ describe('TextArea.vue', () => {
 
   test('applies correct class when type is "error"', async () => {
     await wrapper.setProps({ type: 'error' });
-    expect(wrapper.classes()).toContain('error');
+    expect(wrapper.find('textarea').classes()).toContain(
+      'unnnic-text-area__textarea--type-error',
+    );
   });
 
   test('does not emit input when disabled', async () => {
@@ -128,11 +130,15 @@ describe('TextArea.vue', () => {
 
   test('applies correct class when size is "sm"', async () => {
     await wrapper.setProps({ size: 'sm' });
-    expect(wrapper.classes()).toContain('sm');
+    expect(wrapper.find('textarea').classes()).toContain(
+      'unnnic-text-area__textarea--size-sm',
+    );
   });
 
   test('applies correct class when size is "md"', () => {
-    expect(wrapper.classes()).toContain('md');
+    expect(wrapper.find('textarea').classes()).toContain(
+      'unnnic-text-area__textarea--size-md',
+    );
   });
 
   test('validates type prop', () => {
@@ -181,11 +187,8 @@ describe('TextArea.vue', () => {
   test('renders all error messages when type is error', async () => {
     const errors = ['Error 1', 'Error 2', 'Error 3'];
     await wrapper.setProps({ type: 'error', errors });
-    const errorMessages = wrapper.findAll('.error-list span');
-    expect(errorMessages).toHaveLength(errors.length);
-    errorMessages.forEach((msg, index) => {
-      expect(msg.text()).toBe(errors[index]);
-    });
+    const formElement = wrapper.findComponent({ name: 'UnnnicFormElement' });
+    expect(formElement.props('error')).toBe('Error 1, Error 2, Error 3');
   });
 
   test('does not render error list when type is normal', () => {
@@ -195,8 +198,7 @@ describe('TextArea.vue', () => {
 
   test('updates character count correctly', async () => {
     await wrapper.setProps({ modelValue: 'Hello, world!' });
-    const helper = wrapper.find('.helper');
-    expect(helper.text()).toBe('13/200');
+    expect(wrapper.text()).contains('13/200');
   });
 
   test('focus method focuses the textarea', async () => {
