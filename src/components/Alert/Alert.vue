@@ -7,6 +7,7 @@
       :icon="icon"
       :scheme="scheme"
       size="sm"
+      data-test="unnnic-icon"
     />
     <div class="unnnic-alert__content">
       <div class="unnnic-alert__title">
@@ -29,6 +30,7 @@
       icon="close-1"
       scheme="brand-sec"
       size="xs"
+      data-test="unnnic-icon-close"
       @click="onClose"
     />
   </div>
