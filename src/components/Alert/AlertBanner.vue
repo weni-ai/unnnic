@@ -18,6 +18,7 @@
         :icon="getIconType(type)"
         size="sm"
         scheme="neutral-white"
+        data-test="unnnic-icon"
       />
       <p class="text">{{ text }}</p>
       <a
@@ -39,6 +40,7 @@
         icon="close"
         size="sm"
         scheme="neutral-white"
+        data-test="unnnic-close-icon"
       />
     </div>
   </section>
