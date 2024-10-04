@@ -91,6 +91,7 @@ export default {
       default: 'default',
     },
   },
+  emits: ['close'],
 
   mounted() {
     this.$refs.progress.addEventListener('animationend', () => {
