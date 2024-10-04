@@ -72,7 +72,6 @@ describe('AvatarIcon.vue', () => {
   });
 
   test('applies opacity class based on prop', async () => {
-    console.log('wrapper', wrapper.classes(), wrapper.vm.opacity);
     expect(wrapper.classes()).not.toContain('opacity');
 
     await wrapper.setProps({ opacity: false });
