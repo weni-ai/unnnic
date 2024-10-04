@@ -22,9 +22,8 @@
         :iconLeft="
           isAutocompleteAllowed && autocompleteIconLeft ? 'search-1' : ''
         "
-        :iconRight="active ? 'arrow-button-up-1' : 'arrow-button-down-1'"
-        :iconRightClickable="!disabled"
-        @icon-right-click="handleClickInput"
+        :iconRight="active ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+        iconRightSize="ant"
         @click.stop="handleClickInput"
         @update:model-value="searchValue = $event"
       />
@@ -46,7 +45,6 @@
               :withoutSelectsMessage="multipleWithoutSelectsMessage"
               :locale="locale"
               :translations="translations"
-              @clear-selected-options="clearSelectedOptions"
               @unselect-option="unselectOption"
             />
             <div
@@ -56,6 +54,7 @@
                 `size-${size}`,
                 {
                   'with-descriptions': hasDescriptionOptions,
+                  'with-checkboxes': !!multiple,
                 },
               ]"
             >
@@ -329,10 +328,6 @@ export default {
       );
     },
 
-    clearSelectedOptions() {
-      this.$emit('update:modelValue', []);
-    },
-
     handleSelect(option) {
       if (option) {
         if (this.multiple && this.optionIsSelected(option)) {
@@ -559,7 +554,7 @@ export default {
     left: 0;
     right: 0;
 
-    margin-top: 2px;
+    margin-top: $unnnic-spacing-nano;
 
     border-radius: $unnnic-border-radius-sm;
 
@@ -578,7 +573,7 @@ export default {
       margin-right: $unnnic-inline-xs;
       padding-right: $unnnic-inline-xs;
 
-      max-height: calc-max-height(8.5);
+      max-height: calc-max-height(9.25);
 
       overflow-y: auto;
 
@@ -597,14 +592,22 @@ export default {
       }
 
       &.with-descriptions {
-        max-height: calc-max-height(13.5);
+        max-height: calc-max-height(14.25);
+      }
+
+      &.with-checkboxes {
+        max-height: calc-max-height(11.75);
       }
 
       &.size-sm {
-        max-height: calc-max-height(8);
+        max-height: calc-max-height(8.75);
 
         &.with-descriptions {
-          max-height: calc-max-height(12);
+          max-height: calc-max-height(13.75);
+        }
+
+        &.with-checkboxes {
+          max-height: calc-max-height(10.75);
         }
       }
     }
@@ -632,43 +635,12 @@ export default {
   .unnnic-select-smart__input input {
     // entire class name to have higher priority in styles
 
-    color: $unnnic-color-neutral-dark;
-
     &:read-only {
       cursor: pointer;
-
-      &::placeholder {
-        color: $unnnic-color-neutral-cloudy;
-      }
-    }
-
-    &:not(:read-only :focus) {
-      &::placeholder {
-        color: $unnnic-color-neutral-cloudy;
-      }
-    }
-
-    &:not(:read-only) {
-      &:focus {
-        &::placeholder {
-          color: $unnnic-color-neutral-cleanest;
-        }
-      }
     }
 
     &:disabled {
-      box-shadow: inset 0 0 0 $unnnic-border-width-thinner
-        $unnnic-color-neutral-cleanest;
-
       cursor: not-allowed;
-
-      &::placeholder {
-        color: $unnnic-color-neutral-cleanest;
-      }
-
-      + .icon-right {
-        cursor: not-allowed;
-      }
     }
   }
 }
