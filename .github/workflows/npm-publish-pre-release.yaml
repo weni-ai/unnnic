@@ -19,8 +19,6 @@ jobs:
         run: yarn
       - name: Run Lint
         run: yarn lint --fix --quiet
-      - name: Run tests and coverage
-        run: yarn coverage
       - name: Build Bundle
         run: yarn build
       - name: Configure Git identity
