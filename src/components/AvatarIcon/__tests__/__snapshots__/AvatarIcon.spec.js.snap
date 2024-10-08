@@ -1,0 +1,7 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AvatarIcon.vue > matches the snapshot 1`] = `
+"<div data-v-5f185a90="" class="unnnic-avatar-icon aux-blue sm">
+  <unnnic-icon-stub data-v-5f185a90="" filled="false" next="false" icon="graph-stats-1" clickable="false" size="md" scheme="aux-blue"></unnnic-icon-stub>
+</div>"
+`;
