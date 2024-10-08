@@ -1,7 +1,7 @@
-name: Run Tests, Lint Files and Build Project
+name: CI - Code Quality and Build Process
 on: push
 jobs:
-  lint-test-build:
+  CI:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
