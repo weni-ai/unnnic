@@ -74,6 +74,7 @@ export default {
       type: Boolean,
       default: false,
     },
+    isMultiple: Boolean,
   },
 };
 </script>
@@ -87,7 +88,7 @@ export default {
   max-width: 100%;
 
   font-family: $unnnic-font-family-secondary;
-  color: $unnnic-color-neutral-dark;
+  color: $unnnic-color-neutral-darkest;
   font-weight: $unnnic-font-weight-regular;
 
   white-space: nowrap;
@@ -95,9 +96,12 @@ export default {
   overflow: hidden;
   -webkit-line-clamp: 1;
 
+  & + & {
+    margin-top: $unnnic-spacing-nano;
+  }
+
   &--selectable:hover,
-  &--focused,
-  &--active {
+  &--focused {
     border-radius: $unnnic-border-radius-sm;
 
     background-color: $unnnic-color-neutral-light;
@@ -109,6 +113,7 @@ export default {
   }
 
   &--with-checkbox {
+    padding: $unnnic-spacing-xs $unnnic-spacing-ant;
     display: flex;
     align-items: center;
     gap: $unnnic-spacing-xs;
@@ -119,13 +124,15 @@ export default {
   }
 
   &__label {
+    display: block;
+
     &--md {
       font-size: $unnnic-font-size-body-gt;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     }
     &--sm {
       font-size: $unnnic-font-size-body-md;
-      line-height: $unnnic-font-size-body-md + $unnnic-line-height-small;
+      line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
     }
   }
 
@@ -135,13 +142,10 @@ export default {
     color: $unnnic-color-neutral-cloudy;
     font-weight: $unnnic-font-weight-regular;
 
-    &--md {
+    &--md,
+    &--sm {
       font-size: $unnnic-font-size-body-md;
       line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
-    }
-    &--sm {
-      font-size: $unnnic-font-size-body-sm;
-      line-height: $unnnic-font-size-body-md + $unnnic-line-height-small;
     }
   }
 }

@@ -1,5 +1,11 @@
 <template>
-  <div :class="['text-input', `size--${size}`]">
+  <div
+    :class="[
+      'text-input',
+      `size--${size}`,
+      `text-input--icon-right-size-${iconRightSize}`,
+    ]"
+  >
     <BaseInput
       v-bind="attributes"
       ref="base-input"
@@ -30,7 +36,7 @@
       v-if="iconRightSvg"
       :scheme="iconScheme"
       :icon="iconRightSvg"
-      size="sm"
+      :size="iconRightSize"
       :clickable="iconRightClickable || allowTogglePassword"
       :class="[
         'icon-right',
@@ -86,6 +92,10 @@ export default {
       type: Boolean,
       default: null,
     },
+    iconRightSize: {
+      type: String,
+      default: 'sm',
+    },
     allowTogglePassword: {
       type: Boolean,
       default: null,
@@ -103,11 +113,14 @@ export default {
   data() {
     return {
       isFocused: false,
-      isDisabled: false,
       showPassword: false,
     };
   },
   computed: {
+    isDisabled() {
+      return this.$attrs.disabled;
+    },
+
     iconRightSvg() {
       if (this.allowTogglePassword) {
         return this.showPassword ? 'view-off-1' : 'view-1-1';
@@ -140,9 +153,7 @@ export default {
       return { ...this.$attrs, ...this.$attrs['v-bind'], ...this.$props };
     },
   },
-  mounted() {
-    this.isDisabled = !!this.$refs['base-input'].$el.disabled;
-  },
+
   methods: {
     focus() {
       this.$refs['base-input'].$el.focus();
@@ -200,6 +211,14 @@ export default {
     .icon-right {
       top: $unnnic-spacing-xs + 0.125 * $unnnic-font-size;
     }
+  }
+
+  &.size--sm.text-input--icon-right-size-ant .icon-right {
+    top: 0.5625 * $unnnic-font-size;
+  }
+
+  &.size--md.text-input--icon-right-size-ant .icon-right {
+    top: 0.8125 * $unnnic-font-size;
   }
 }
 </style>

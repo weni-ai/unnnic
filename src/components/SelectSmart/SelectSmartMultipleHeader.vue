@@ -20,13 +20,6 @@
           +{{ selectedOptions.length - multipleSelectedsTags }}
         </p>
       </div>
-      <UnnnicIcon
-        class="unnnic-select-smart__options__multiple__selecteds__clear"
-        icon="close-1"
-        size="xs"
-        clickable
-        @click="clearSelectedOptions"
-      />
     </div>
     <p
       v-if="!selectedOptions[0]"
@@ -39,14 +32,12 @@
 
 <script>
 import Tag from '../Tag/Tag.vue';
-import UnnnicIcon from '../Icon.vue';
 import UnnnicI18n from '../../mixins/i18n';
 
 export default {
   name: 'UnnnicSelectSmartMultipleHeader',
   components: {
     Tag,
-    UnnnicIcon,
   },
   mixins: [UnnnicI18n],
   props: {
@@ -85,9 +76,6 @@ export default {
     },
   },
   methods: {
-    clearSelectedOptions() {
-      this.$emit('clear-selected-options');
-    },
     unselectOption(option) {
       this.$emit('unselect-option', option);
     },
@@ -117,6 +105,10 @@ export default {
       margin: $unnnic-spacing-xs;
       margin-right: 0;
 
+      &:first-child {
+        margin-left: $unnnic-spacing-sm;
+      }
+
       &.unnnic-tag {
         outline-color: $unnnic-color-neutral-light;
         background-color: $unnnic-color-neutral-light;
@@ -144,7 +136,7 @@ export default {
     line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
     font-size: $unnnic-font-size-body-md;
 
-    padding: $unnnic-spacing-ant;
+    padding: $unnnic-spacing-ant $unnnic-spacing-sm;
   }
 }
 </style>
