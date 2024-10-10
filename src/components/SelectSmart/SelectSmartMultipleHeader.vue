@@ -32,14 +32,12 @@
 
 <script>
 import Tag from '../Tag/Tag.vue';
-import UnnnicIcon from '../Icon.vue';
 import UnnnicI18n from '../../mixins/i18n';
 
 export default {
   name: 'UnnnicSelectSmartMultipleHeader',
   components: {
     Tag,
-    UnnnicIcon,
   },
   mixins: [UnnnicI18n],
   props: {
