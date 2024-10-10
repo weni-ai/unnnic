@@ -10,6 +10,7 @@
           'unnnic-breadcrumb__container__link__active':
             index === crumbs.length - 1,
         }"
+        :data-test="crumb.name"
         @click="$emit('crumb-click', crumb)"
       >
         {{ crumb.name }}
@@ -17,6 +18,7 @@
 
       <UnnnicIcon
         v-if="index !== crumbs.length - 1"
+        data-test="right-icon"
         icon="arrow-right-1-1"
         size="xs"
         lineHeight="md"
@@ -40,6 +42,8 @@ export default {
       validator: (crumb) => crumb.every((c) => c.name !== null),
     },
   },
+
+  emits: ['crumb-click'],
 };
 </script>
 
