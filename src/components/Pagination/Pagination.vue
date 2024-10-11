@@ -6,6 +6,7 @@
       size="small"
       iconCenter="arrow-left-1-1"
       :disabled="!canPrevious || disabled"
+      data-test="previous-button"
       @click="previousPage"
     />
 
@@ -18,6 +19,7 @@
         ['left-hidden', 'right-hidden'].includes(page) ? '...' : String(page)
       "
       :disabled="disabled"
+      data-test="page-button"
       @click="selectPage(page)"
     />
 
@@ -26,6 +28,7 @@
       size="small"
       iconCenter="arrow-right-1-1"
       :disabled="!canNext || disabled"
+      data-test="next-button"
       @click="nextPage"
     />
   </div>
@@ -60,6 +63,8 @@ export default {
       default: false,
     },
   },
+
+  emits: ['update:model-value'],
 
   data() {
     return {
@@ -102,19 +107,33 @@ export default {
     },
   },
 
+  created() {
+    const pageNumber = this.modelValue;
+
+    this.selectPage(pageNumber, true);
+
+    if (!this.pages.includes(pageNumber)) {
+      this.setReference(pageNumber);
+    }
+  },
+
   methods: {
-    selectPage(page) {
+    selectPage(page, dontEmit) {
       if (page === 'left-hidden') {
         const pageNumber =
           this.pages[this.pages.indexOf('left-hidden') + 1] - 1;
 
-        this.$emit('update:model-value', pageNumber);
+        if (!dontEmit) {
+          this.$emit('update:model-value', pageNumber);
+        }
         this.setReference(pageNumber);
       } else if (page === 'right-hidden') {
         const pageNumber =
           this.pages[this.pages.indexOf('right-hidden') - 1] + 1;
 
-        this.$emit('update:model-value', pageNumber);
+        if (!dontEmit) {
+          this.$emit('update:model-value', pageNumber);
+        }
 
         if (this.pages.includes('left-hidden')) {
           this.setReference(
@@ -123,7 +142,7 @@ export default {
         } else {
           this.setReference(4);
         }
-      } else {
+      } else if (!dontEmit) {
         this.$emit('update:model-value', page);
       }
     },
