@@ -1,3 +1,4 @@
+import unnnicFormElement from '../components/FormElement/FormElement.vue';
 import unnnicSelectSmart from '../components/SelectSmart/SelectSmart.vue';
 
 export default {
@@ -6,6 +7,7 @@ export default {
   argTypes: {},
   render: (args) => ({
     components: {
+      unnnicFormElement,
       unnnicSelectSmart,
     },
     setup() {
@@ -17,10 +19,60 @@ export default {
       };
     },
     template: `
-      <unnnicSelectSmart v-bind="args" v-model="exampleValue"/>
+      <unnnicFormElement label="Label" message="Helper text">
+        <unnnicSelectSmart v-bind="args" v-model="exampleValue"/>
+      </unnnicFormElement>
     `,
   }),
 };
+
+const TemplateError = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+
+  components: {
+    unnnicFormElement,
+    unnnicSelectSmart,
+  },
+
+  setup() {
+    return { args };
+  },
+  data() {
+    return {
+      exampleValue: [],
+    };
+  },
+
+  template: `
+    <unnnicFormElement label="Label" error="Error text">
+      <unnnicSelectSmart v-bind="args" v-model="exampleValue"/>
+    </unnnicFormElement>
+  `,
+});
+
+const TemplateDisabled = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+
+  components: {
+    unnnicFormElement,
+    unnnicSelectSmart,
+  },
+
+  setup() {
+    return { args };
+  },
+  data() {
+    return {
+      exampleValue: [],
+    };
+  },
+
+  template: `
+    <unnnicFormElement label="Label" message="Helper text" disabled>
+      <unnnicSelectSmart v-bind="args" v-model="exampleValue"/>
+    </unnnicFormElement>
+  `,
+});
 
 export const Default = {
   args: {
@@ -62,11 +114,25 @@ export const OrderedByIndex = {
   },
 };
 
-export const Disabled = {
-  args: {
-    options: [{ value: '', label: 'Select some option' }],
-    disabled: true,
-  },
+export const Error = TemplateError.bind({});
+Error.args = {
+  type: 'error',
+  options: [
+    { value: '', label: 'Select some option' },
+    { value: '5', label: 'Option 5' },
+    { value: '3', label: 'Option 3' },
+    { value: '1', label: 'Option 1' },
+    { value: '4', label: 'Option 4' },
+    { value: '2', label: 'Option 2' },
+    { value: '6', label: 'Option 6' },
+    { value: '7', label: 'Option 7' },
+  ],
+};
+
+export const Disabled = TemplateDisabled.bind({});
+Disabled.args = {
+  options: [{ value: '', label: 'Select some option' }],
+  disabled: true,
 };
 
 export const WithDescriptions = {

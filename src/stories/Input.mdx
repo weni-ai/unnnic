@@ -1,0 +1,76 @@
+import { Meta, Source, Story } from '@storybook/blocks';
+
+import * as InputStories from './Input.stories';
+
+<Meta of={InputStories}/>
+
+# Input
+
+The `Input` component is designed to provide an input field for users to enter texts or passwords.
+
+<Source
+  language='html'
+  dark
+  code={`<UnnnicFormElement
+  label="Label"
+  message="Helper text" | error="Error text"
+  :disabled="false | true"
+>
+  <UnnnicInput
+    v-model="value"
+    size="md"
+    type="normal"
+    nativeType="normal"
+    placeholder="Placeholder"
+    iconLeft="storefront"
+    iconRight="storefront"
+  />
+</UnnnicFormElement>`}
+/>
+
+
+---
+
+#### **Props Options:**
+
+| Key         | Description                              | Values                   | Default     |
+|-------------|------------------------------------------|--------------------------|-------------|
+| v-model     | `String` of the input content            | `''`                     | `''`        |
+| size        | `String` of the size                     | `'md'` \| `'sm'`         | `md`        |
+| type        | `String` of the input type               | `'normal'` \| `'error'`  | `'normal'`  |
+| nativeType  | `String` of the native input type        | `'text'` \| `'password'` | `'text'`    |
+| placeholder | `String` of the native input placeholder | `String`                 | `''`        |
+| iconLeft    | `String` of the left icon                | `String`                 | `undefined` |
+| iconRight   | `String` of the right icon               | `String`                 | `false`     |
+
+## Example
+Some examples of uses of the `UnnnicInput`
+
+### Normal
+
+<Story of={InputStories.Normal} />
+
+
+### Error
+
+<Story of={InputStories.Error} />
+
+
+### Disabled
+
+<Story of={InputStories.Disabled} />
+
+
+### Normal (small size)
+
+<Story of={InputStories.NormalSm} />
+
+
+### Error (small size)
+
+<Story of={InputStories.ErrorSm} />
+
+
+### Disabled (small size)
+
+<Story of={InputStories.DisabledSm} />

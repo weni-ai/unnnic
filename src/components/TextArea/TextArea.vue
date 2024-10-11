@@ -98,10 +98,7 @@ export default {
   &__textarea {
     @include input-base;
 
-    $textarea-height: 5 * $unnnic-font-size;
-
     display: block;
-    min-height: $textarea-height;
     width: 100%;
     resize: vertical;
     box-sizing: border-box;
@@ -111,6 +108,7 @@ export default {
     &--size-md {
       @include input-md-font;
 
+      min-height: 6.25 * $unnnic-font-size;
       padding: ($unnnic-spacing-ant - $unnnic-border-width-thinner)
         ($unnnic-spacing-sm - $unnnic-border-width-thinner);
     }
@@ -118,6 +116,7 @@ export default {
     &--size-sm {
       @include input-sm-font;
 
+      min-height: 5 * $unnnic-font-size;
       padding: ($unnnic-spacing-xs)
         ($unnnic-spacing-sm - $unnnic-border-width-thinner);
     }
