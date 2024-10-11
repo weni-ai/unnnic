@@ -18,23 +18,39 @@
     <slot></slot>
 
     <p
-      v-if="error && error !== true"
+      v-if="shouldShowErrorSection"
       class="unnnic-form-element__error"
     >
-      <UnnnicIcon
-        size="sm"
-        icon="warning"
-        scheme="aux-red-500"
-      />
+      <template v-if="error !== true">
+        <UnnnicIcon
+          size="sm"
+          icon="warning"
+          scheme="aux-red-500"
+        />
 
-      {{ error }}
+        {{ error }}
+      </template>
+
+      <span
+        v-if="!!$slots.rightMessage"
+        class="unnnic-form-element__right-message"
+      >
+        <slot name="rightMessage"></slot>
+      </span>
     </p>
 
     <p
-      v-if="message"
+      v-if="message || !!$slots.rightMessage"
       class="unnnic-form-element__message"
     >
       {{ message }}
+
+      <span
+        v-if="!shouldShowErrorSection && !!$slots.rightMessage"
+        class="unnnic-form-element__right-message"
+      >
+        <slot name="rightMessage"></slot>
+      </span>
     </p>
   </section>
 </template>
@@ -70,6 +86,12 @@ export default {
 
   data() {
     return {};
+  },
+
+  computed: {
+    shouldShowErrorSection() {
+      return this.error && (this.error !== true || !!this.$slots.rightMessage);
+    },
   },
 };
 </script>
@@ -123,6 +145,15 @@ export default {
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-md;
     line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+  }
+
+  &__message {
+    display: flex;
+    column-gap: $unnnic-spacing-nano;
+  }
+
+  &__right-message {
+    margin-left: auto;
   }
 
   &__error {
