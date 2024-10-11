@@ -78,7 +78,7 @@ describe('TextInput.vue', () => {
 
     await wrapper.setProps({ type: 'normal' });
     await wrapper.setData({ isDisabled: true });
-    expect(wrapper.vm.iconScheme).toBe('neutral-cleanest');
+    expect(wrapper.vm.iconScheme).toBe('neutral-cloudy');
 
     await wrapper.setData({ isDisabled: false });
     await wrapper.setProps({ modelValue: 'text' });
