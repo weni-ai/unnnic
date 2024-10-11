@@ -46,6 +46,8 @@ export default {
       type: [String, Array],
       default: '',
     },
+    hasIconLeft: Boolean,
+    hasIconRight: Boolean,
   },
   emits: ['update:modelValue'],
   data() {
@@ -63,7 +65,15 @@ export default {
     },
 
     classes() {
-      return ['input', `size-${this.size}`, this.type];
+      return [
+        'input',
+        `size-${this.size}`,
+        this.type,
+        {
+          'input--has-icon-left': this.hasIconLeft,
+          'input--has-icon-right': this.hasIconRight,
+        },
+      ];
     },
   },
 };
@@ -71,66 +81,48 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../assets/scss/unnnic.scss';
+@import './Input.scss';
 
 .input {
-  background: $unnnic-color-neutral-snow;
-  border: none;
-  outline-style: solid;
-  outline-color: $unnnic-color-neutral-soft;
-  outline-width: $unnnic-border-width-thinner;
-  outline-offset: -$unnnic-border-width-thinner;
-  border-radius: $unnnic-border-radius-sm;
-  color: $unnnic-color-neutral-dark;
-  caret-color: $unnnic-color-neutral-clean;
-  font-weight: $unnnic-font-weight-regular;
-  font-family: $unnnic-font-family-secondary;
+  @include input-base;
+
   box-sizing: border-box;
   width: 100%;
 
   &.size {
     &-md {
-      font-size: $unnnic-font-size-body-gt;
-      line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
-      padding: $unnnic-squish-xs;
+      @include input-md-font;
+
+      padding: ($unnnic-spacing-ant - $unnnic-border-width-thinner)
+        ($unnnic-spacing-sm - $unnnic-border-width-thinner);
     }
 
     &-sm {
-      font-size: $unnnic-font-size-body-md;
-      line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
-      padding: $unnnic-squish-nano;
+      @include input-sm-font;
+
+      padding: $unnnic-spacing-xs
+        ($unnnic-spacing-sm - $unnnic-border-width-thinner);
     }
   }
 
-  &:focus {
-    outline-color: $unnnic-color-neutral-clean;
+  &.input--has-icon-left {
+    padding-left: $unnnic-spacing-sm + $unnnic-icon-size-sm + $unnnic-spacing-xs -
+      $unnnic-border-width-thinner;
+  }
+
+  &.input--has-icon-right {
+    padding-right: $unnnic-spacing-sm + $unnnic-icon-size-sm +
+      $unnnic-spacing-xs - $unnnic-border-width-thinner;
   }
 
   &.error {
-    outline-color: $unnnic-color-feedback-red;
-    color: $unnnic-color-feedback-red;
-  }
-
-  &::placeholder {
-    color: $unnnic-color-neutral-cleanest;
-    opacity: 1; /* Firefox */
+    @include input-error;
   }
 
   &:-ms-input-placeholder,
   &::-ms-input-placeholder {
     /* Internet Explorer 10-11 */
     color: $unnnic-color-brand-sec;
-  }
-
-  &:disabled {
-    outline-color: $unnnic-color-neutral-cleanest;
-    background-color: $unnnic-color-neutral-lightest;
-    cursor: not-allowed;
-    color: $unnnic-color-neutral-cleanest;
-
-    &::placeholder {
-      color: $unnnic-color-neutral-cleanest;
-      opacity: 1; /* Firefox */
-    }
   }
 }
 </style>
