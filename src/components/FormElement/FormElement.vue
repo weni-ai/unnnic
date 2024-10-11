@@ -1,39 +1,52 @@
 <template>
-  <div class="unnnic-form-element">
-    <div
+  <section
+    class="unnnic-form-element"
+    :class="{ 'unnnic-form-element--disabled': disabled }"
+  >
+    <p
       v-if="label"
       :class="[
-        'label unnnic-font secondary color-neutral-cloudy',
+        'unnnic-form-element__label',
         {
-          'body-md': size === 'sm',
-          'body-gt': size == 'md',
-          'label--fixed': fixedLabel,
+          'unnnic-form-element__label--fixed': fixedLabel,
         },
       ]"
     >
       {{ label }}
-    </div>
+    </p>
 
     <slot></slot>
 
-    <div
+    <p
       v-if="error && error !== true"
-      class="message unnnic-font secondary body-md color-feedback-red"
+      class="unnnic-form-element__error"
     >
-      {{ error }}
-    </div>
+      <UnnnicIcon
+        size="sm"
+        icon="warning"
+        scheme="aux-red-500"
+      />
 
-    <div
+      {{ error }}
+    </p>
+
+    <p
       v-if="message"
-      class="message unnnic-font secondary body-md color-neutral-cloudy"
+      class="unnnic-form-element__message"
     >
       {{ message }}
-    </div>
-  </div>
+    </p>
+  </section>
 </template>
 
 <script>
+import UnnnicIcon from '../../components/Icon.vue';
+
 export default {
+  components: {
+    UnnnicIcon,
+  },
+
   props: {
     size: {
       type: String,
@@ -45,9 +58,14 @@ export default {
 
     fixedLabel: Boolean,
 
-    error: [Boolean, String],
+    error: {
+      type: [Boolean, String],
+      default: false,
+    },
 
     message: String,
+
+    disabled: Boolean,
   },
 
   data() {
@@ -60,17 +78,19 @@ export default {
 @import '../../assets/scss/unnnic.scss';
 
 .unnnic-form-element {
-  .label {
-    margin-bottom: $unnnic-spacing-xs;
+  &__label {
+    margin: 0;
+    margin-bottom: $unnnic-spacing-nano;
+
+    color: $unnnic-color-neutral-cloudy;
+    font-family: $unnnic-font-family-secondary;
+    font-weight: $unnnic-font-weight-regular;
+    font-size: $unnnic-font-size-body-gt;
+    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
 
     $label-bottom-spacing: 3px;
 
-    &--fixed.unnnic-font.body-md {
-      margin-top: -$unnnic-font-size-body-md - $unnnic-line-height-md +
-        $label-bottom-spacing;
-    }
-
-    &--fixed.unnnic-font.body-gt {
+    &--fixed {
       margin-top: -$unnnic-font-size-body-gt - $unnnic-line-height-md +
         $label-bottom-spacing;
     }
@@ -93,8 +113,30 @@ export default {
     }
   }
 
-  .message {
+  &__error,
+  &__message {
+    margin: 0;
     margin-top: $unnnic-spacing-stack-nano;
+
+    color: $unnnic-color-neutral-cloudy;
+    font-family: $unnnic-font-family-secondary;
+    font-weight: $unnnic-font-weight-regular;
+    font-size: $unnnic-font-size-body-md;
+    line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+  }
+
+  &__error {
+    display: flex;
+    column-gap: $unnnic-spacing-nano;
+    align-items: center;
+
+    color: $unnnic-color-aux-red-500;
+  }
+
+  &--disabled .unnnic-form-element__label,
+  &--disabled .unnnic-form-element__message {
+    user-select: none;
+    color: $unnnic-color-neutral-cleanest;
   }
 }
 </style>
