@@ -16,6 +16,8 @@ jobs:
         run: yarn lint --fix --quiet
       - name: Run tests and coverage
         run: yarn coverage
+        env:
+          FORCE_COLOR: true
       - name: Upload results to Codecov
         uses: codecov/codecov-action@v4
         with:
