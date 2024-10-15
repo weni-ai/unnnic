@@ -3,10 +3,7 @@
     :class="[
       'text-input',
       `size--${size}`,
-      {
-        'has-icon-left': !!iconLeft,
-        'has-icon-right': !!iconRight || allowTogglePassword,
-      },
+      `text-input--icon-right-size-${iconRightSize}`,
     ]"
   >
     <BaseInput
@@ -19,6 +16,8 @@
       "
       :type="type"
       class="input-itself"
+      :hasIconLeft="!!iconLeft"
+      :hasIconRight="!!iconRight || allowTogglePassword"
       @focus="onFocus"
       @blur="onBlur"
     />
@@ -37,7 +36,7 @@
       v-if="iconRightSvg"
       :scheme="iconScheme"
       :icon="iconRightSvg"
-      size="sm"
+      :size="iconRightSize"
       :clickable="iconRightClickable || allowTogglePassword"
       :class="[
         'icon-right',
@@ -93,6 +92,10 @@ export default {
       type: Boolean,
       default: null,
     },
+    iconRightSize: {
+      type: String,
+      default: 'sm',
+    },
     allowTogglePassword: {
       type: Boolean,
       default: null,
@@ -110,11 +113,14 @@ export default {
   data() {
     return {
       isFocused: false,
-      isDisabled: false,
       showPassword: false,
     };
   },
   computed: {
+    isDisabled() {
+      return this.$attrs.disabled;
+    },
+
     iconRightSvg() {
       if (this.allowTogglePassword) {
         return this.showPassword ? 'view-off-1' : 'view-1-1';
@@ -125,7 +131,7 @@ export default {
 
     iconScheme() {
       if (this.type === 'error') {
-        return 'feedback-red';
+        return 'aux-red-500';
       }
 
       if (this.isDisabled) {
@@ -147,9 +153,7 @@ export default {
       return { ...this.$attrs, ...this.$attrs['v-bind'], ...this.$props };
     },
   },
-  mounted() {
-    this.isDisabled = !!this.$refs['base-input'].$el.disabled;
-  },
+
   methods: {
     focus() {
       this.$refs['base-input'].$el.focus();
@@ -190,36 +194,31 @@ export default {
   &-left {
     position: absolute;
     top: $unnnic-spacing-ant + 0.1875 * $unnnic-font-size;
-    left: $unnnic-inline-sm;
+    left: $unnnic-inline-sm - $unnnic-border-width-thinner;
   }
 
   &-right {
     position: absolute;
     top: $unnnic-spacing-ant + 0.1875 * $unnnic-font-size;
-    right: $unnnic-inline-sm;
+    right: $unnnic-inline-sm - $unnnic-border-width-thinner;
   }
 }
 .text-input {
   position: relative;
-
-  &.size--md,
-  &.size--sm {
-    &.has-icon-left .input-itself {
-      padding-left: $unnnic-spacing-sm + $unnnic-icon-size-sm +
-        $unnnic-spacing-xs;
-    }
-
-    &.has-icon-right .input-itself {
-      padding-right: $unnnic-spacing-sm + $unnnic-icon-size-sm +
-        $unnnic-spacing-xs;
-    }
-  }
 
   &.size--sm {
     .icon-left,
     .icon-right {
       top: $unnnic-spacing-xs + 0.125 * $unnnic-font-size;
     }
+  }
+
+  &.size--sm.text-input--icon-right-size-ant .icon-right {
+    top: 0.5625 * $unnnic-font-size;
+  }
+
+  &.size--md.text-input--icon-right-size-ant .icon-right {
+    top: 0.8125 * $unnnic-font-size;
   }
 }
 </style>

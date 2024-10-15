@@ -1,4 +1,4 @@
-name: CI - Code Quality and Build Process
+name: CI
 on: push
 jobs:
   CI:

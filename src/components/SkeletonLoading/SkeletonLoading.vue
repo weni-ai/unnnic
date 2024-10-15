@@ -1,7 +1,14 @@
 <template>
   <component
     :is="tag"
-    v-if="showLoading"
+    v-if="direct"
+    :class="classes"
+    :style="styles"
+  ></component>
+
+  <component
+    :is="tag"
+    v-else-if="showLoading"
   >
     <span
       v-for="(element, index) in elements"
@@ -47,6 +54,9 @@ export default {
       type: Boolean,
       default: undefined,
     },
+    direct: {
+      type: Boolean,
+    },
   },
   setup() {
     const themeStyle = inject('_themeStyle', ref(SkeletonStyle));
@@ -58,11 +68,6 @@ export default {
     };
   },
   computed: {
-    isLoading() {
-      return typeof this.theme.loading !== 'undefined'
-        ? this.theme.loading
-        : this.loading;
-    },
     classes() {
       return [`${this.prefix}-skeleton`];
     },
@@ -86,21 +91,22 @@ export default {
       return elements;
     },
     showLoading() {
-      return typeof this.isLoading !== 'undefined'
-        ? this.isLoading
+      return typeof this.loading !== 'undefined'
+        ? this.loading
         : this.isEmptyVNode(this.$slots.default);
     },
   },
   methods: {
     isEmptyVNode(children) {
       if (!children) return true;
-      const [firstNode] = children;
-      let str = firstNode.text;
+      const [firstNode] = children();
+      let str = firstNode.children;
+
       if (str) {
         // remove all line-break and space character
         str = str.replace(/(\n|\r\n|\s)/g, '');
       }
-      return typeof firstNode.tag === 'undefined' && !str;
+      return !str;
     },
   },
 };

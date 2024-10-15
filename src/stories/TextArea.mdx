@@ -1,0 +1,68 @@
+import { Meta, Source, Story } from '@storybook/blocks';
+
+import * as TextAreaStories from './TextArea.stories';
+
+<Meta of={TextAreaStories}/>
+
+# TextArea
+
+The `TextArea` component is designed to provide a textarea field for users to enter texts.
+
+<Source
+  language='html'
+  dark
+  code={`<UnnnicTextArea
+  label="Label"
+  message="Helper text" | error="Error text"
+  :disabled="false | true"
+  v-model="value"
+  size="md"
+  type="normal"
+/>`}
+/>
+
+
+---
+
+#### **Props Options:**
+
+| Key     | Description                               | Values                  | Default     |
+|---------|-------------------------------------------|-------------------------|-------------|
+| label   | `String` of the textarea label            | `String`                | `undefined` |
+| message | `String` of the helper text, when applied | `String`                | `undefined` |
+| error   | `String` of the error text, when applied  | `String`                | `undefined` |
+| v-model | `String` of the textarea content          | `''`                    | `''`        |
+| size    | `String` of the size                      | `'md'` \| `'sm'`        | `md`        |
+| type    | `String` of the textarea type             | `'normal'` \| `'error'` | `'normal'`  |
+
+## Example
+Some examples of uses of the `UnnnicTextArea`
+
+### Default
+
+<Story of={TextAreaStories.Default} />
+
+
+### Error
+
+<Story of={TextAreaStories.Error} />
+
+
+### Disabled
+
+<Story of={TextAreaStories.Disabled} />
+
+
+### Default (small size)
+
+<Story of={TextAreaStories.DefaultSm} />
+
+
+### Error (small size)
+
+<Story of={TextAreaStories.ErrorSm} />
+
+
+### Disabled (small size)
+
+<Story of={TextAreaStories.DisabledSm} />
