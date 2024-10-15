@@ -11,7 +11,7 @@ jobs:
       - name: Install Dependencies
         run: |
               npm install -g yarn
-              yarn install --frozen-lockfile
+              yarn install
       - name: Run Lint
         run: yarn lint --fix --quiet
       - name: Run tests and coverage
