@@ -165,7 +165,8 @@ export default {
         }
 
         this.audio = new Audio();
-        this.audio.setAttribute('src', this.src);
+        this.audio.src = this.src;
+        this.duration = await this.getBlobDuration(this.src);
 
         this.addAudioEventListeners();
       },
@@ -176,6 +177,34 @@ export default {
   },
 
   methods: {
+    getBlobDuration(blob) {
+      const tempAudioEl = document.createElement('audio');
+
+      const durationPromisse = new Promise((resolve, reject) => {
+        tempAudioEl.addEventListener('loadedmetadata', () => {
+          // Chrome bug: https://bugs.chromium.org/p/chromium/issues/detail?id=642012
+          if (tempAudioEl.duration === Infinity) {
+            tempAudioEl.currentTime = Number.MAX_SAFE_INTEGER;
+            tempAudioEl.ontimeupdate = () => {
+              tempAudioEl.ontimeupdate = null;
+              resolve(tempAudioEl.duration);
+              tempAudioEl.currentTime = 0;
+            };
+          }
+          // Normal behavior
+          else resolve(tempAudioEl.duration);
+        });
+        tempAudioEl.onerror = (event) => reject(event.target.error);
+      });
+
+      tempAudioEl.src =
+        typeof blob === 'string' || blob instanceof String
+          ? blob
+          : window.URL.createObjectURL(blob);
+
+      return durationPromisse;
+    },
+
     // entry point; accessed by external components
     async record() {
       if (this.hasInUseRecordDevice()) return;
