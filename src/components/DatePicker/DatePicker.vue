@@ -204,6 +204,7 @@
 </template>
 
 <script>
+import {} from 'date-fns';
 import {
   months as translationMonths,
   days as translationDays,
@@ -242,10 +243,12 @@ export default {
 
     clearLabel: {
       type: String,
+      default: '',
     },
 
     actionLabel: {
       type: String,
+      default: '',
     },
 
     months: {
@@ -357,7 +360,7 @@ export default {
     },
 
     getDate(date) {
-      return new Date(date.toString()).getDate();
+      return date.toString().split(' ')[1];
     },
 
     getMonth(date) {
