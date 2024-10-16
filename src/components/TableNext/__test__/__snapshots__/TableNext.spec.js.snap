@@ -1,0 +1,59 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`TableNext.vue > matches the snapshot 1`] = `
+"<table data-v-2143c794="" class="unnnic-table-next">
+  <thead data-v-2143c794="" class="unnnic-table-next__header">
+    <tr data-v-2143c794="" class="unnnic-table-next__header-row" data-testid="header-row" style="grid-template-columns: 1fr 2fr;">
+      <th data-v-2143c794="" class="unnnic-table-next__header-cell" data-testid="header-cell">Header 1</th>
+      <th data-v-2143c794="" class="unnnic-table-next__header-cell" data-testid="header-cell">Header 2</th>
+    </tr>
+  </thead>
+  <tbody data-v-2143c794="" class="unnnic-table-next__body">
+    <tr data-v-2143c794="" class="unnnic-table-next__body-row" data-testid="body-row" style="grid-template-columns: 1fr 2fr;">
+      <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell" data-testid="body-cell">
+        <p data-v-fd58013b="" class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">Row 1 Col 1</p>
+      </td>
+      <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell" data-testid="body-cell">
+        <p data-v-fd58013b="" class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">Row 1 Col 2</p>
+      </td>
+    </tr>
+    <tr data-v-2143c794="" class="unnnic-table-next__body-row" data-testid="body-row" style="grid-template-columns: auto;"><a data-v-2143c794="" class="unnnic-table-next__body-row--redirect" data-testid="body-row-redirect" style="grid-template-columns: 1fr 2fr;" href="#" target="_blank">
+        <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell" data-testid="body-cell">
+          <p data-v-fd58013b="" class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">Row 2 Col 1</p>
+        </td>
+        <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell" data-testid="body-cell">
+          <p data-v-fd58013b="" class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">Row 2 Col 2</p>
+        </td>
+      </a></tr>
+    <tr data-v-2143c794="" class="unnnic-table-next__body-row" data-testid="body-row" style="grid-template-columns: auto;"><a data-v-2143c794="" class="unnnic-table-next__body-row--redirect" data-testid="body-row-redirect" style="grid-template-columns: 1fr 2fr;" href="#" target="_self">
+        <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell" data-testid="body-cell">
+          <p data-v-fd58013b="" class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">Row 3 Col 1</p>
+        </td>
+        <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell" data-testid="body-cell">
+          <p data-v-fd58013b="" class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">Row 3 Col 2</p>
+        </td>
+      </a></tr>
+  </tbody>
+  <section data-v-e29458bb="" data-v-2143c794="" class="table-pagination">
+    <p data-v-e29458bb="" class="table-pagination__count" data-testid="count">1 - 1 of 1</p>
+    <div data-v-0eeff8cb="" data-v-e29458bb="" class="pagination"><button data-v-ceff2a60="" data-v-0eeff8cb="" data-test="previous-button" disabled="" class="unnnic-button unnnic-button--size-small unnnic-button--tertiary unnnic-button--icon-on-center">
+        <!--v-if-->
+        <!--v-if--><svg data-v-26446d8e="" data-v-ceff2a60="" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="unnnic-icon unnnic-icon__size--sm unnnic-icon-scheme--neutral-clean" data-testid="icon-center">
+          <path d="M26.8368 35.0005C26.5868 35.0005 26.3506 34.903 26.1743 34.7255L12.7743 21.3255C12.4206 20.9717 12.2256 20.5017 12.2256 20.0017C12.2256 19.5017 12.4193 19.0305 12.7731 18.6767L26.1743 5.27549C26.3506 5.09799 26.5868 5.00049 26.8368 5.00049C27.0868 5.00049 27.3231 5.09799 27.4993 5.27549C27.6768 5.45174 27.7743 5.68799 27.7743 5.93799C27.7743 6.18799 27.6768 6.42424 27.4993 6.60049L14.0993 20.0005L27.4993 33.4005C27.6768 33.578 27.7743 33.813 27.7743 34.063C27.7743 34.313 27.6768 34.5492 27.4993 34.7255C27.3218 34.9017 27.0868 35.0005 26.8368 35.0005Z" fill="#3B414D" class="primary"></path>
+        </svg><span data-v-ceff2a60="" class="unnnic-button__label" data-testid="button-label"> </span>
+        <!--v-if-->
+      </button><button data-v-ceff2a60="" data-v-0eeff8cb="" data-test="page-button" class="unnnic-button unnnic-button--size-small unnnic-button--secondary">
+        <!--v-if-->
+        <!--v-if-->
+        <!--v-if--><span data-v-ceff2a60="" class="unnnic-button__label" data-testid="button-label"> 1</span>
+        <!--v-if-->
+      </button><button data-v-ceff2a60="" data-v-0eeff8cb="" data-test="next-button" disabled="" class="unnnic-button unnnic-button--size-small unnnic-button--tertiary unnnic-button--icon-on-center">
+        <!--v-if-->
+        <!--v-if--><svg data-v-26446d8e="" data-v-ceff2a60="" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" class="unnnic-icon unnnic-icon__size--sm unnnic-icon-scheme--neutral-clean" data-testid="icon-center">
+          <path d="M13.1635 35.0005C12.9135 35.0005 12.6772 34.903 12.501 34.7255C12.136 34.3605 12.136 33.7655 12.501 33.3992L25.901 20.0005L12.501 6.60049C12.3235 6.42424 12.226 6.18799 12.226 5.93799C12.226 5.68799 12.3235 5.45174 12.501 5.27549C12.6772 5.09799 12.9135 5.00049 13.1635 5.00049C13.4135 5.00049 13.6497 5.09799 13.826 5.27549L27.226 18.6755C27.956 19.4055 27.9572 20.5942 27.2272 21.3242L13.826 34.7255C13.6497 34.903 13.4135 35.0005 13.1635 35.0005Z" fill="#3B414D" class="primary"></path>
+        </svg><span data-v-ceff2a60="" class="unnnic-button__label" data-testid="button-label"> </span>
+        <!--v-if-->
+      </button></div>
+  </section>
+</table>"
+`;
