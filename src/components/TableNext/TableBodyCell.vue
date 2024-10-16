@@ -8,7 +8,7 @@
       />
     </template>
     <template v-else>
-      <p class="unnnic-table-next__body-cell-text">{{ cell }}</p>
+      <p class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">{{ cell }}</p>
     </template>
   </td>
 </template>

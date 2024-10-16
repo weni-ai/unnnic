@@ -1,4 +1,5 @@
 import { get } from 'lodash';
+import i18n from '@/utils/plugins/i18n';
 
 export default {
   props: {
@@ -14,20 +15,20 @@ export default {
     i18n(...args) {
       const [key, defaults] = args;
 
-      const validLocaleValues = Object.keys(this.$i18n.messages);
+      const validLocaleValues = Object.keys(i18n.global.messages);
 
       let { locale } = this;
 
       const treatedSelectedLocale =
-        get(this, '$i18n.locale') === 'en-us'
+        get(i18n, 'global.locale') === 'en-us'
           ? 'en'
-          : get(this, '$i18n.locale');
+          : get(i18n, 'global.locale');
 
       locale = validLocaleValues.includes(locale)
         ? locale
         : treatedSelectedLocale;
 
-      locale = locale.toLowerCase();
+      locale = locale?.toLowerCase();
 
       let text = get(
         this.translations,
