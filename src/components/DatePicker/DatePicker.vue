@@ -360,6 +360,7 @@ export default {
     },
 
     getDate(date) {
+      console.log(date.toString());
       return date.toString().split(' ')[1];
     },
 
