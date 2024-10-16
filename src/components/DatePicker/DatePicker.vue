@@ -670,7 +670,6 @@ export default {
           this.endDate = date.toString();
         }
       }
-      console.log({ s: this.startDate, e: this.endDate });
     },
 
     clear() {
