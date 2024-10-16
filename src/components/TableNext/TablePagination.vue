@@ -1,6 +1,9 @@
 <template>
   <section class="table-pagination">
-    <p class="table-pagination__count">
+    <p
+      class="table-pagination__count"
+      data-testid="count"
+    >
       {{ tablePagination }}
     </p>
 
@@ -34,12 +37,15 @@ export default {
     total: {
       type: Number,
       required: false,
+      default: 0,
     },
     interval: {
       type: Number,
       required: true,
     },
   },
+
+  emits: ['update:model-value'],
 
   data() {
     return {
