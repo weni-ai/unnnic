@@ -204,7 +204,6 @@
 </template>
 
 <script>
-import {} from 'date-fns';
 import {
   months as translationMonths,
   days as translationDays,
