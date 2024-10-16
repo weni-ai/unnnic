@@ -116,7 +116,7 @@ export default {
      */
     headers: {
       type: Array,
-      default: () => [],
+      required: true,
       validator: validateHeaders,
     },
 
@@ -132,7 +132,7 @@ export default {
      */
     rows: {
       type: Array,
-      default: () => [],
+      required: true,
       validator: validateRows,
     },
 

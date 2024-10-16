@@ -73,9 +73,6 @@ export default {
     pages() {
       return Math.ceil(this.total / this.interval);
     },
-    showTotal() {
-      return typeof this.total === 'number';
-    },
   },
 };
 </script>

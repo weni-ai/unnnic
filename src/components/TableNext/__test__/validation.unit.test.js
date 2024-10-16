@@ -30,7 +30,7 @@ describe('TableNext props validations', () => {
     });
 
     it('should throw an error if a header has "isSortable" that is not a boolean', () => {
-      const invalidHeaders = [{ content: 'Header 1', isSortable: 'true' }];
+      const invalidHeaders = [{ content: 'Header 1', isSortable: 123 }];
       expect(() => validateHeaders(invalidHeaders)).toThrow(
         'Each item in "headers" that contains “isSortable” must assign it as boolean',
       );
@@ -71,6 +71,11 @@ describe('TableNext props validations', () => {
       expect(() => validateRows(invalidRows)).toThrow(
         'Each item in "rows" with "link" must contain "url".',
       );
+    });
+
+    it('should throw an error if a row has "link" is undefined', () => {
+      const invalidRows = [{ content: ['Row 1 Col 1', 'Row 1 Col 2'] }];
+      expect(() => validateRows(invalidRows)).not.toThrow();
     });
 
     it('should pass validation for valid rows', () => {
