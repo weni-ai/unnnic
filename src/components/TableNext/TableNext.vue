@@ -3,12 +3,14 @@
     <thead class="unnnic-table-next__header">
       <tr
         class="unnnic-table-next__header-row"
+        data-testid="header-row"
         :style="{ gridTemplateColumns }"
       >
         <th
           v-for="(cell, index) of headers"
           :key="cell.content + index"
           class="unnnic-table-next__header-cell"
+          data-testid="header-cell"
         >
           {{ cell.content }}
         </th>
@@ -22,6 +24,7 @@
       >
         <img
           class="unnnic-table-next__body-cell--loading"
+          data-testid="body-row-loading"
           src="../../assets/icons/weni-loading.svg"
           height="40"
         />
@@ -31,6 +34,7 @@
           v-for="(row, index) of rows"
           :key="row.content + index"
           class="unnnic-table-next__body-row"
+          data-testid="body-row"
           :style="{
             gridTemplateColumns: row.link ? 'auto' : gridTemplateColumns,
           }"
@@ -38,6 +42,7 @@
           <a
             v-if="row.link"
             class="unnnic-table-next__body-row--redirect"
+            data-testid="body-row-redirect"
             :style="{ gridTemplateColumns }"
             :href="row.link.url"
             :target="row.link.target || '_blank'"
@@ -46,6 +51,7 @@
               v-for="cell of row.content"
               :key="cell + index"
               class="unnnic-table-next__body-cell"
+              data-testid="body-cell"
               :cell="cell"
             />
           </a>
@@ -54,6 +60,7 @@
               v-for="cell of row.content"
               :key="cell + index"
               class="unnnic-table-next__body-cell"
+              data-testid="body-cell"
               :cell="cell"
             />
           </template>
@@ -63,8 +70,8 @@
         v-else
         class="unnnic-table-next__body-row"
       >
-        <td class="unnnic-table-next__body-cell">
-          <p class="unnnic-table-next__body-cell-text">
+        <td class="unnnic-table-next__body-cell" data-testid="body-cell">
+          <p class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">
             {{ i18n('without_results') }}
           </p>
         </td>
@@ -109,7 +116,7 @@ export default {
      */
     headers: {
       type: Array,
-      default: () => [],
+      required: true,
       validator: validateHeaders,
     },
 
@@ -125,7 +132,7 @@ export default {
      */
     rows: {
       type: Array,
-      default: () => [],
+      required: true,
       validator: validateRows,
     },
 
