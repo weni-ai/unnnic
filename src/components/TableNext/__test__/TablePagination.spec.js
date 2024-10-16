@@ -47,6 +47,11 @@ describe('TablePagination.vue', () => {
     expect(findCountElement().text()).toContain('1 - 10 of 95');
   });
 
+  it('renders correct 5 pagination buttons', async () => {
+    const pageButtons = wrapper.findAll('[data-test="page-button"]');
+    expect(pageButtons.length).toBe(5);
+  });
+
   it('emits update:model-value event when pagination changes', async () => {
     await wrapper.findComponent(Pagination).vm.$emit('update:model-value', 2);
 
