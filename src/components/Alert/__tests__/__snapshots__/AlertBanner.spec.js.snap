@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`AlertBanner.vue > matches the snapshot 1`] = `
+"<section data-v-e8e4d051="" class="banner-alert banner-alert--banner-danger">
+  <header data-v-e8e4d051="" class="banner-alert__container-text"><span data-v-26446d8e="" data-v-e8e4d051="" class="material-symbols-rounded unnnic-icon-scheme--neutral-white unnnic-icon-size--sm banner-alert__textIcon" data-testid="material-icon" data-test="unnnic-icon">block</span>
+    <p data-v-e8e4d051="" class="text">This is a banner alert</p><a data-v-e8e4d051="" class="banner-alert__link" href="https://example.com" target="_self">Learn more</a>
+  </header>
+  <div data-v-e8e4d051="" class="banner-alert__close"><span data-v-26446d8e="" data-v-e8e4d051="" class="material-symbols-rounded unnnic-icon-scheme--neutral-white unnnic-icon-size--sm" data-testid="material-icon" data-test="unnnic-close-icon">close</span></div>
+</section>"
+`;

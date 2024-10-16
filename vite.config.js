@@ -43,6 +43,8 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     coverage: {
+      all: true,
+      provider: 'istanbul',
       exclude: testExcludes,
       reporter: ['text', 'json', 'html'],
     },

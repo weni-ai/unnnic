@@ -99,7 +99,7 @@ export default {
     });
 
     this.$refs.alertContainer.addEventListener('animationend', (event) => {
-      if (event.animationName.startsWith('slideDown')) {
+      if (event.animationName?.startsWith('slideDown')) {
         this.emitClose();
       }
     });
