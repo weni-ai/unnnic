@@ -708,7 +708,7 @@ export default {
       if (this.endDate) {
         const secondMonth = this.addMonth(this.referenceDate, 1);
         const firstDateOfEndDate = `${
-          this.getMonth(this.endDate) + 1
+          Number(this.getMonth(this.endDate)) + 1
         } 1 ${this.getFullYear(this.endDate)}`;
 
         if (![this.referenceDate, secondMonth].includes(firstDateOfEndDate)) {
