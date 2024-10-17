@@ -242,10 +242,12 @@ export default {
 
     clearLabel: {
       type: String,
+      default: '',
     },
 
     actionLabel: {
       type: String,
+      default: '',
     },
 
     months: {
@@ -353,23 +355,27 @@ export default {
     },
 
     stringToTime(date) {
-      return new Date(date).getTime();
+      const [month, day, year] = date.split(' ');
+      return new Date(year, Number(month) - 1, day).getTime();
     },
 
     getDate(date) {
-      return new Date(date.toString()).getDate();
+      return date.toString().split(' ')[1];
     },
 
     getMonth(date) {
-      return new Date(date).getMonth();
+      return date.toString().split(' ')[0];
     },
 
     getFullYear(date) {
-      return new Date(date).getFullYear();
+      const [month, day, year] = date.split(' ');
+      return new Date(year, Number(month) - 1, day).getFullYear();
     },
 
     addMonth(referenceDate, quantity) {
-      const date = new Date(referenceDate);
+      const [month, day, year] = referenceDate.split(' ');
+
+      const date = new Date(year, Number(month) - 1, day);
 
       date.setMonth(date.getMonth() + quantity);
 
@@ -400,7 +406,8 @@ export default {
     },
 
     isDateBetweenMonth(internalDate) {
-      const startDate = new Date(this.startDate);
+      const [month, day, year] = internalDate.split(' ');
+      const startDate = new Date(year, Number(month) - 1, day);
       startDate.setDate(1);
       const startDateTime = startDate.getTime();
 
@@ -424,7 +431,8 @@ export default {
     },
 
     isDateBetweenYear(internalDate) {
-      const startDate = new Date(this.startDate);
+      const [month, day, year] = internalDate.split(' ');
+      const startDate = new Date(year, Number(month) - 1, day);
       startDate.setDate(1);
       startDate.setMonth(0);
       const startDateTime = startDate.getTime();
@@ -449,7 +457,10 @@ export default {
     },
 
     getDatesOfTheMonth(referenceDate) {
-      const date = new Date(referenceDate);
+      const [month, day, year] = referenceDate.split(' ');
+
+      const date = new Date(year, Number(month) - 1, day);
+
       const currentMonth = date.getMonth();
       const oneDayInSeconds = 86400;
 
@@ -504,7 +515,9 @@ export default {
     },
 
     getMonthsOfTheYear(referenceDate) {
-      const date = new Date(referenceDate);
+      const [month, day, year] = referenceDate.split(' ');
+
+      const date = new Date(year, Number(month) - 1, day);
 
       date.setMonth(0);
 
@@ -564,7 +577,9 @@ export default {
     },
 
     getYears(referenceDate) {
-      const date = new Date(referenceDate);
+      const [month, day, year] = referenceDate.split(' ');
+
+      const date = new Date(year, Number(month) - 1, day);
 
       date.setMonth(0);
 
@@ -577,8 +592,20 @@ export default {
         properties.push('inside month');
 
         const dateInTime = this.stringToTime(this.dateToString(date));
-        let yearBefore = new Date(dateInTime);
-        let yearAfter = new Date(dateInTime);
+
+        const [dateInTimeMonth, dateInTimeDay, dateInTimeYear] =
+          referenceDate.split(' ');
+
+        let yearBefore = new Date(
+          dateInTimeYear,
+          Number(dateInTimeMonth) - 1,
+          dateInTimeDay,
+        );
+        let yearAfter = new Date(
+          dateInTimeYear,
+          Number(dateInTimeMonth) - 1,
+          dateInTimeDay,
+        );
 
         yearBefore.setMonth(yearBefore.getMonth() - 12);
         yearAfter.setMonth(yearAfter.getMonth() + 12);
