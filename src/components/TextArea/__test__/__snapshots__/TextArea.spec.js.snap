@@ -2,7 +2,7 @@
 
 exports[`TextArea.vue > matches the snapshot 1`] = `
 "<section data-v-9f8d6c86="" data-v-735b3c51="" class="unnnic-form-element">
-  <p data-v-9f8d6c86="" class="unnnic-form-element__label">Description</p><textarea data-v-735b3c51="" class="unnnic-text-area__textarea unnnic-text-area__textarea--size-md unnnic-text-area__textarea--type-normal" placeholder="Enter text" maxlength="200" value=""></textarea>
+  <p data-v-9f8d6c86="" class="unnnic-form-element__label">Description</p><textarea data-v-735b3c51="" class="unnnic-text-area__textarea unnnic-text-area__textarea--size-md unnnic-text-area__textarea--type-normal" placeholder="Enter text" maxlength="200"></textarea>
   <!--v-if-->
   <p data-v-9f8d6c86="" class="unnnic-form-element__message"> <span data-v-9f8d6c86="" class="unnnic-form-element__right-message">0/200</span></p>
 </section>"
