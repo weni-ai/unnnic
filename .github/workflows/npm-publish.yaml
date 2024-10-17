@@ -3,7 +3,7 @@ name: Publish Package to npmjs
 on:
   push:
     branches:    
-      - 'main-vue3'
+      - 'main'
     paths:
       - 'package.json'
 
