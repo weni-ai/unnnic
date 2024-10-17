@@ -11,6 +11,7 @@
           'unnnic-navigator-pages__page--current': activePage == page,
         },
       ]"
+      data-testid="navigator-page"
     >
       <span class="unnnic-navigator-pages__page-progress"></span>
 
@@ -21,6 +22,7 @@
             'unnnic-navigator-pages__page-title--active': activePage === page,
           },
         ]"
+        data-testid="navigator-page-title"
       >
         {{ page }}
       </p>
