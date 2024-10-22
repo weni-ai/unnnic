@@ -1,6 +1,10 @@
 <template>
   <table class="unnnic-table-next">
-    <thead class="unnnic-table-next__header">
+    <thead
+      v-if="!hideHeaders"
+      class="unnnic-table-next__header"
+      data-testid="header"
+    >
       <tr
         class="unnnic-table-next__header-row"
         data-testid="header-row"
@@ -17,7 +21,13 @@
       </tr>
     </thead>
 
-    <tbody class="unnnic-table-next__body">
+    <tbody
+      :class="{
+        'unnnic-table-next__body': true,
+        'unnnic-table-next__body--hide-headers': hideHeaders,
+      }"
+      data-testid="body"
+    >
       <tr
         v-if="isLoading"
         class="unnnic-table-next__body-row"
@@ -50,7 +60,10 @@
             <TableBodyCell
               v-for="cell of row.content"
               :key="cell + index"
-              class="unnnic-table-next__body-cell"
+              :class="[
+                'unnnic-table-next__body-cell',
+                `unnnic-table-next__body-cell--${size}`,
+              ]"
               data-testid="body-cell"
               :cell="cell"
             />
@@ -59,7 +72,10 @@
             <TableBodyCell
               v-for="cell of row.content"
               :key="cell + index"
-              class="unnnic-table-next__body-cell"
+              :class="[
+                'unnnic-table-next__body-cell',
+                `unnnic-table-next__body-cell--${size}`,
+              ]"
               data-testid="body-cell"
               :cell="cell"
             />
@@ -70,8 +86,17 @@
         v-else
         class="unnnic-table-next__body-row"
       >
-        <td class="unnnic-table-next__body-cell" data-testid="body-cell">
-          <p class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">
+        <td
+          :class="[
+            'unnnic-table-next__body-cell',
+            `unnnic-table-next__body-cell--${size}`,
+          ]"
+          data-testid="body-cell"
+        >
+          <p
+            class="unnnic-table-next__body-cell-text"
+            data-testid="body-cell-text"
+          >
             {{ i18n('without_results') }}
           </p>
         </td>
@@ -134,6 +159,17 @@ export default {
       type: Array,
       required: true,
       validator: validateRows,
+    },
+
+    size: {
+      type: String,
+      default: 'sm',
+      validator: (value) => ['md', 'sm'].includes(value),
+    },
+
+    hideHeaders: {
+      type: Boolean,
+      default: false,
     },
 
     pagination: {
@@ -225,8 +261,17 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
   }
 
   &__body {
+    &--hide-headers {
+      .unnnic-table-next__body-row:first-of-type {
+        border-radius: $unnnic-border-radius-sm $unnnic-border-radius-sm 0 0;
+        border-top: $tableBorder;
+      }
+    }
+
     &-row {
       @extend %base-row;
+
+      overflow: hidden;
 
       border: $tableBorder;
       border-collapse: collapse;
@@ -261,6 +306,11 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
         text-overflow: ellipsis;
       }
     }
+
+    td.unnnic-table-next__body-cell--sm {
+      padding: $unnnic-spacing-ant $unnnic-spacing-sm;
+    }
+
     &-cell--loading {
       margin: $unnnic-spacing-xl 0;
       padding: 0;
@@ -274,7 +324,7 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
   %base-cell {
     border-collapse: collapse;
 
-    padding: $unnnic-spacing-ant $unnnic-spacing-sm;
+    padding: $unnnic-spacing-sm $unnnic-spacing-sm;
 
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-gt;
