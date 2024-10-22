@@ -11,6 +11,7 @@
       },
     ]"
     data-testid="material-icon"
+    translate="no"
     @click="onClick"
     @mousedown="$emit('mousedown')"
     @mouseup="$emit('mouseup')"
