@@ -1,6 +1,10 @@
 <template>
   <table class="unnnic-table-next">
-    <thead class="unnnic-table-next__header">
+    <thead
+      v-if="!hideHeaders"
+      class="unnnic-table-next__header"
+      data-testid="header"
+    >
       <tr
         class="unnnic-table-next__header-row"
         data-testid="header-row"
@@ -17,7 +21,13 @@
       </tr>
     </thead>
 
-    <tbody class="unnnic-table-next__body">
+    <tbody
+      :class="{
+        'unnnic-table-next__body': true,
+        'unnnic-table-next__body--hide-headers': hideHeaders,
+      }"
+      data-testid="body"
+    >
       <tr
         v-if="isLoading"
         class="unnnic-table-next__body-row"
@@ -157,6 +167,11 @@ export default {
       validator: (value) => ['md', 'sm'].includes(value),
     },
 
+    hideHeaders: {
+      type: Boolean,
+      default: false,
+    },
+
     pagination: {
       type: Number,
       default: 1,
@@ -246,8 +261,17 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
   }
 
   &__body {
+    &--hide-headers {
+      .unnnic-table-next__body-row:first-of-type {
+        border-radius: $unnnic-border-radius-sm $unnnic-border-radius-sm 0 0;
+        border-top: $tableBorder;
+      }
+    }
+
     &-row {
       @extend %base-row;
+
+      overflow: hidden;
 
       border: $tableBorder;
       border-collapse: collapse;

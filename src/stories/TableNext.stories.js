@@ -5,7 +5,43 @@ export default {
   title: 'Data Display/TableNext',
   component: UnnnicTableNext,
   tags: ['autodocs'],
-  argTypes: {},
+  argTypes: {
+    headers: {
+      description:
+        'Array of header items defining the structure of the table header.',
+      control: 'object',
+    },
+    rows: {
+      description: 'Array of row items defining the content of the table rows.',
+      control: 'object',
+    },
+    size: {
+      description:
+        'The size of the table. Options are `sm` for small and `md` for medium.',
+      control: { type: 'select' },
+      options: ['sm', 'md'],
+    },
+    pagination: {
+      description: 'The current page number for pagination.',
+      control: 'number',
+    },
+    paginationTotal: {
+      description: 'The total number of pages available for pagination.',
+      control: 'number',
+    },
+    paginationInterval: {
+      description: 'The number of items displayed per page.',
+      control: 'number',
+    },
+    isLoading: {
+      description: 'Indicates whether the table data is loading.',
+      control: 'boolean',
+    },
+    hideHeaders: {
+      description: 'Determines if the table headers should be hidden.',
+      control: 'boolean',
+    },
+  },
   render: (args) => ({
     components: {
       UnnnicTableNext,
@@ -103,6 +139,13 @@ export const Medium = {
   args: {
     rows,
     size: 'md',
+  },
+};
+
+export const HideHeaders = {
+  args: {
+    rows,
+    hideHeaders: true,
   },
 };
 

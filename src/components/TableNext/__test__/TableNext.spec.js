@@ -45,6 +45,16 @@ describe('TableNext.vue', () => {
       // The first column uses the default size of 1fr,
       // and the second column is set to 2fr as specified in the header configuration.
     });
+
+    it('do not render the header if it has the hideHeaders prop', async () => {
+      await wrapper.setProps({ headers, hideHeaders: true });
+
+      const header = wrapper.find('[data-testid="header"]');
+      expect(header.exists()).toBe(false);
+
+      const body = wrapper.find('[data-testid="body"]');
+      expect(body.classes()).toContain('unnnic-table-next__body--hide-headers');
+    });
   });
 
   describe('Row rendering and behaviors', () => {
