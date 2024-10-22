@@ -19,7 +19,7 @@
             />
 
             <div :class="['label', `label--${size}`]">
-              {{ monthsLocale[getMonth(openMonth)] }}
+              {{ monthsLocale[Number(getMonth(openMonth)) - 1] }}
               {{ getFullYear(openMonth) }}
             </div>
           </div>
@@ -378,7 +378,7 @@ export default {
       const date = new Date(year, Number(month) - 1, day);
 
       date.setMonth(date.getMonth() + quantity);
-
+      
       return this.dateToString(date);
     },
 
@@ -670,7 +670,6 @@ export default {
           this.endDate = date.toString();
         }
       }
-      console.log({ s: this.startDate, e: this.endDate });
     },
 
     clear() {
@@ -708,8 +707,9 @@ export default {
 
       if (this.endDate) {
         const secondMonth = this.addMonth(this.referenceDate, 1);
+        
         const firstDateOfEndDate = `${
-          this.getMonth(this.endDate) + 1
+          Number(this.getMonth(this.endDate))
         } 1 ${this.getFullYear(this.endDate)}`;
 
         if (![this.referenceDate, secondMonth].includes(firstDateOfEndDate)) {

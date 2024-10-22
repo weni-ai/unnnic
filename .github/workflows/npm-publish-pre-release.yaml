@@ -29,7 +29,7 @@ jobs:
         run: |
           yarn version --prerelease --preid alpha
           NEW_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
-          git push origin HEAD:staging-vue3
+          git push origin HEAD:staging
           git push origin $NEW_TAG
       - name: Publish Package
         run: yarn publish
