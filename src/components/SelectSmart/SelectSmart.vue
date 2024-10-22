@@ -470,7 +470,12 @@ export default {
         }
       });
 
-      if (this.isAutocompleteAllowed && !this.multiple && newOption?.label) {
+      if (
+        this.isAutocompleteAllowed &&
+        !this.multiple &&
+        newOption &&
+        newOption.label
+      ) {
         this.searchValue = newOption.label;
         return;
       }
