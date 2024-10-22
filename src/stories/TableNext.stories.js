@@ -2,8 +2,9 @@ import UnnnicTableNext from '../components/TableNext/TableNext.vue';
 import UnnnicButton from '../components/Button/Button.vue';
 
 export default {
-  title: 'example/TableNext',
+  title: 'Data Display/TableNext',
   component: UnnnicTableNext,
+  tags: ['autodocs'],
   argTypes: {},
   render: (args) => ({
     components: {
@@ -67,32 +68,41 @@ const addButton = {
   },
 };
 
+const rows = [
+  {
+    content: ['1', 'Alice', '30', 'USA', addButton],
+    link: {
+      url: 'https://weni.ai/',
+      target: '_blank',
+    },
+  },
+  {
+    content: ['2', 'Bob', '25', 'Canada', addButton],
+    link: {
+      url: 'https://weni.ai/',
+    },
+  },
+  {
+    content: ['3', 'Charlie', '35', 'UK', addButton],
+  },
+  {
+    content: ['4', 'Diana', '28', 'Australia', addButton],
+  },
+  {
+    content: ['5', 'Ethan', '22', 'New Zealand', addButton],
+  },
+];
+
 export const Default = {
   args: {
-    rows: [
-      {
-        content: ['1', 'Alice', '30', 'USA', addButton],
-        link: {
-          url: 'https://weni.ai/',
-          target: '_blank',
-        },
-      },
-      {
-        content: ['2', 'Bob', '25', 'Canada', addButton],
-        link: {
-          url: 'https://weni.ai/',
-        },
-      },
-      {
-        content: ['3', 'Charlie', '35', 'UK', addButton],
-      },
-      {
-        content: ['4', 'Diana', '28', 'Australia', addButton],
-      },
-      {
-        content: ['5', 'Ethan', '22', 'New Zealand', addButton],
-      },
-    ],
+    rows,
+  },
+};
+
+export const Medium = {
+  args: {
+    rows,
+    size: 'md',
   },
 };
 

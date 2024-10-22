@@ -50,7 +50,10 @@
             <TableBodyCell
               v-for="cell of row.content"
               :key="cell + index"
-              class="unnnic-table-next__body-cell"
+              :class="[
+                'unnnic-table-next__body-cell',
+                `unnnic-table-next__body-cell--${size}`,
+              ]"
               data-testid="body-cell"
               :cell="cell"
             />
@@ -59,7 +62,10 @@
             <TableBodyCell
               v-for="cell of row.content"
               :key="cell + index"
-              class="unnnic-table-next__body-cell"
+              :class="[
+                'unnnic-table-next__body-cell',
+                `unnnic-table-next__body-cell--${size}`,
+              ]"
               data-testid="body-cell"
               :cell="cell"
             />
@@ -70,8 +76,17 @@
         v-else
         class="unnnic-table-next__body-row"
       >
-        <td class="unnnic-table-next__body-cell" data-testid="body-cell">
-          <p class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">
+        <td
+          :class="[
+            'unnnic-table-next__body-cell',
+            `unnnic-table-next__body-cell--${size}`,
+          ]"
+          data-testid="body-cell"
+        >
+          <p
+            class="unnnic-table-next__body-cell-text"
+            data-testid="body-cell-text"
+          >
             {{ i18n('without_results') }}
           </p>
         </td>
@@ -134,6 +149,12 @@ export default {
       type: Array,
       required: true,
       validator: validateRows,
+    },
+
+    size: {
+      type: String,
+      default: 'sm',
+      validator: (value) => ['md', 'sm'].includes(value),
     },
 
     pagination: {
@@ -261,6 +282,11 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
         text-overflow: ellipsis;
       }
     }
+
+    td.unnnic-table-next__body-cell--sm {
+      padding: $unnnic-spacing-ant $unnnic-spacing-sm;
+    }
+
     &-cell--loading {
       margin: $unnnic-spacing-xl 0;
       padding: 0;
@@ -274,7 +300,7 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
   %base-cell {
     border-collapse: collapse;
 
-    padding: $unnnic-spacing-ant $unnnic-spacing-sm;
+    padding: $unnnic-spacing-sm $unnnic-spacing-sm;
 
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-gt;
