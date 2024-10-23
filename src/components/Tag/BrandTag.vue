@@ -37,10 +37,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    icon: {
-      type: String,
-      default: null,
-    },
   },
   methods: {
     closeClicked() {
