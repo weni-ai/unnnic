@@ -26,10 +26,6 @@ export const validateHeaders = (headers) => {
     throw new Error('Property headers needs to be an array.');
   }
 
-  if (headers.length === 0) {
-    throw new Error('Property headers must not to be an empty array.');
-  }
-
   headers.forEach(validateHeader);
 
   return true;
