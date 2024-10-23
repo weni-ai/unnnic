@@ -46,6 +46,17 @@ describe('TableNext.vue', () => {
       // and the second column is set to 2fr as specified in the header configuration.
     });
 
+    it('renders rows with default 1fr when no headers are provided', async () => {
+      wrapper = mount(TableNext, {
+        props: { rows },
+      });
+
+      const rowElement = wrapper.find('[data-testid="body-row"]');
+      const gridTemplateColumns = rowElement.attributes('style');
+      expect(gridTemplateColumns).toContain('1fr 1fr');
+      // Since headers are absent, each row column should default to 1fr as per the logic in `gridTemplateColumns`.
+    });
+
     it('do not render the header if it has the hideHeaders prop', async () => {
       await wrapper.setProps({ headers, hideHeaders: true });
 
@@ -87,8 +98,10 @@ describe('TableNext.vue', () => {
       expect(secondLink.attributes('target')).toBe('_self');
     });
 
-    it('renders "no matching results" message when there are no rows', async () => {
-      await wrapper.setProps({ headers, rows: [] });
+    it('renders "no matching results" message when there are no rows', () => {
+      wrapper = mount(TableNext, {
+        props: { headers },
+      });
 
       const noResultsMessage = wrapper.find('[data-testid="body-cell-text"]');
       expect(noResultsMessage.text()).toBe('No matching results');

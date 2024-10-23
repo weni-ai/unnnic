@@ -9,12 +9,6 @@ describe('TableNext props validations', () => {
       );
     });
 
-    it('should throw an error if headers is an empty array', () => {
-      expect(() => validateHeaders([])).toThrow(
-        'Property headers must not to be an empty array.',
-      );
-    });
-
     it('should throw an error if a header does not have "content" as a string', () => {
       const invalidHeaders = [{ content: 123 }];
       expect(() => validateHeaders(invalidHeaders)).toThrow(

@@ -1,7 +1,7 @@
 <template>
   <table class="unnnic-table-next">
     <thead
-      v-if="!hideHeaders"
+      v-if="!shouldHideHeaders"
       class="unnnic-table-next__header"
       data-testid="header"
     >
@@ -24,7 +24,7 @@
     <tbody
       :class="{
         'unnnic-table-next__body': true,
-        'unnnic-table-next__body--hide-headers': hideHeaders,
+        'unnnic-table-next__body--hide-headers': shouldHideHeaders,
       }"
       data-testid="body"
     >
@@ -141,7 +141,7 @@ export default {
      */
     headers: {
       type: Array,
-      required: true,
+      default: () => [],
       validator: validateHeaders,
     },
 
@@ -157,7 +157,7 @@ export default {
      */
     rows: {
       type: Array,
-      required: true,
+      default: () => [],
       validator: validateRows,
     },
 
@@ -209,7 +209,12 @@ export default {
       return this.rows.length === 0 ? 0 : this.paginationTotal;
     },
     gridTemplateColumns() {
-      return this.headers.map((header) => `${header.size || 1}fr`).join(' ');
+      return this.headers.length
+        ? this.headers.map((header) => `${header.size || 1}fr`).join(' ')
+        : this.rows[0].content.map(() => `1fr`).join(' ');
+    },
+    shouldHideHeaders() {
+      return this.hideHeaders || !this.headers.length;
     },
   },
 };
