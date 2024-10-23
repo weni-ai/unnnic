@@ -1,9 +1,10 @@
-import unnnicTag from '../components/Tag/Tag.vue';
+import UnnnicTag from '../components/Tag/Tag.vue';
 import colorsList from '../utils/colorsList';
 
 export default {
-  title: 'Example/Tag',
-  component: unnnicTag,
+  title: 'Data Display/Tag',
+  component: UnnnicTag,
+  tags: ['autodocs'],
   argTypes: {
     text: { control: { type: 'text' } },
     type: {
@@ -22,6 +23,30 @@ export const Default = {
   args: {
     text: 'Label',
     type: 'default',
+  },
+};
+
+export const LeftIcon = {
+  args: {
+    text: 'Label',
+    type: 'default',
+    leftIcon: 'check_circle',
+  },
+};
+
+export const RightIcon = {
+  args: {
+    text: 'Label',
+    type: 'default',
+    rightIcon: 'check_circle',
+  },
+};
+
+export const CloseIcon = {
+  args: {
+    text: 'Label',
+    type: 'default',
+    hasCloseIcon: true,
   },
 };
 

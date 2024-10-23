@@ -12,7 +12,8 @@
     :clickable="clickable"
     :tooltipText="tooltipText"
     :enableTooltip="enableTooltip"
-    :icon="icon"
+    :leftIcon="leftIcon"
+    :rightIcon="rightIcon"
   />
 </template>
 
@@ -67,9 +68,13 @@ export default {
       type: Boolean,
       default: false,
     },
-    icon: {
+    leftIcon: {
       type: String,
-      default: null,
+      default: '',
+    },
+    rightIcon: {
+      type: String,
+      default: '',
     },
   },
   computed: {
