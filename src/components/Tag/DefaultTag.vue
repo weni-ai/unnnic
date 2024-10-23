@@ -22,7 +22,7 @@
     <section
       v-if="rightIcon || hasCloseIcon"
       :class="{ 'unnnic-tag__icon': true, clickable: !rightIcon }"
-      @click.stop="hasCloseIcon ? emitClose : () => {}"
+      @click.stop="hasCloseIcon ? emitClose() : () => {}"
     >
       <UnnnicIcon
         :icon="rightIcon || 'close'"
@@ -101,6 +101,7 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: $unnnic-border-radius-pill;
+  padding: 0 $unnnic-spacing-xs;
 
   &--disabled {
     background-color: $unnnic-color-background-sky;
