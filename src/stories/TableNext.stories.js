@@ -56,7 +56,7 @@ export default {
           headers: [
             {
               content: 'ID',
-              size: 0.3,
+              size: 'auto',
             },
             {
               content: 'Name',
@@ -69,6 +69,7 @@ export default {
             },
             {
               content: 'Add with friend',
+              size: 0.5,
             },
           ],
           rows: [],

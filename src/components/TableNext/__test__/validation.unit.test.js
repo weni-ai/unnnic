@@ -19,7 +19,14 @@ describe('TableNext props validations', () => {
     it('should throw an error if a header has "size" that is not a positive number', () => {
       const invalidHeaders = [{ content: 'Header 1', size: -1 }];
       expect(() => validateHeaders(invalidHeaders)).toThrow(
-        'Each item in "headers" that contains "size" must assign it as positive number',
+        'Each item in "headers" that contains "size" must assign it as positive number or equals to "auto"',
+      );
+    });
+
+    it('should throw an error if a header has "size" that is a string not equal to "auto"', () => {
+      const invalidHeaders = [{ content: 'Header 1', size: 'invalid' }];
+      expect(() => validateHeaders(invalidHeaders)).toThrow(
+        'Each item in "headers" that contains "size" must assign it as positive number or equals to "auto"',
       );
     });
 
