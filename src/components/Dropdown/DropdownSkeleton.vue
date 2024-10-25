@@ -1,11 +1,13 @@
 <template>
   <span
     ref="dropdown"
+    data-testid="dropdown-skeleton"
     :class="['dropdown', { active }]"
   >
     <slot> </slot>
     <div
       ref="dropdown-data"
+      data-testid="dropdown-data"
       class="dropdown-data"
       :style="{ position: 'fixed', ...positions }"
     >
