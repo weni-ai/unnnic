@@ -27,6 +27,7 @@ jobs:
           git config --global user.name "GitHub Actions Bot"
       - name: Create Pre Release Version
         run: |
+          git pull origin staging
           yarn version --prerelease --preid alpha
           NEW_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
           git push origin HEAD:staging
