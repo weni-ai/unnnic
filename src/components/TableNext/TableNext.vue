@@ -131,7 +131,7 @@ export default {
     /**
      * @typedef {Array} HeaderItem
      * @property {string} content - The content of the header cell.
-     * @property {number} size - The size of the header cell in fractions.
+     * @property {number|string} size - The size of the header cell, either as a fraction (number) or 'auto'.
      * @property {boolean|undefined} isSortable - Indicates if the cell is enabled for sorting.
      */
 
@@ -209,9 +209,17 @@ export default {
       return this.rows.length === 0 ? 0 : this.paginationTotal;
     },
     gridTemplateColumns() {
-      return this.headers.length
-        ? this.headers.map((header) => `${header.size || 1}fr`).join(' ')
-        : this.rows[0].content.map(() => `1fr`).join(' ');
+      const defaultSize = '1fr';
+      const getHeaderColumnSize = (header) =>
+        typeof header.size === 'number'
+          ? `${header.size || 1}fr`
+          : header.size || defaultSize;
+
+      const columnSizes = this.headers.length
+        ? this.headers.map(getHeaderColumnSize)
+        : this.rows[0].content.map(() => defaultSize);
+
+      return columnSizes.join(' ');
     },
     shouldHideHeaders() {
       return this.hideHeaders || !this.headers.length;

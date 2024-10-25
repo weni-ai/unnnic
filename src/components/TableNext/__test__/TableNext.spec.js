@@ -66,6 +66,26 @@ describe('TableNext.vue', () => {
       const body = wrapper.find('[data-testid="body"]');
       expect(body.classes()).toContain('unnnic-table-next__body--hide-headers');
     });
+
+    it('renders headers with mixed sizes (number and string)', () => {
+      wrapper = mount(TableNext, {
+        props: {
+          headers: [
+            { content: 'ID', size: 1 },
+            { content: 'Name', size: 'auto' },
+            { content: 'Age', size: 2 },
+          ],
+          rows,
+        },
+      });
+
+      const headerRow = wrapper.find('[data-testid="header-row"]');
+      const gridTemplateColumns = headerRow.attributes('style');
+
+      expect(gridTemplateColumns).toContain(
+        'grid-template-columns: 1fr auto 2fr',
+      );
+    });
   });
 
   describe('Row rendering and behaviors', () => {
