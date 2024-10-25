@@ -1,6 +1,7 @@
-import { mount } from '@vue/test-utils';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { flushPromises, mount } from '@vue/test-utils';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import Drawer from '../Drawer.vue';
+import { nextTick } from 'vue';
 
 describe('Drawer.vue', () => {
   let wrapper;
@@ -20,138 +21,140 @@ describe('Drawer.vue', () => {
     });
   });
 
+  const element = (id) => wrapper.find(`[data-testid="${id}"]`);
+  const component = (id) => wrapper.findComponent(`[data-testid="${id}"]`);
+  const drawer = () => element('drawer');
+  const overlay = () => element('overlay');
+  const title = () => element('drawer-title');
+  const description = () => element('drawer-description');
+  const primaryButton = () => component('primary-button');
+  const secondaryButton = () => component('secondary-button');
+  const footer = () => element('footer');
+  const closeIcon = () => component('close-icon');
+  const drawerContainer = () => element('drawer-container');
+
   describe('Component Rendering', () => {
-    it('should render the drawer when modelValue is true', () => {
-      expect(wrapper.find('[data-testid="drawer"]').exists()).toBe(true);
-    });
-
-    it('should not render the drawer when modelValue is false', async () => {
-      await wrapper.setProps({ modelValue: false });
-      expect(wrapper.find('[data-testid="drawer"]').exists()).toBe(false);
-    });
-
-    it('should render the overlay when withoutOverlay is false', () => {
-      expect(wrapper.find('[data-testid="overlay"]').exists()).toBe(true);
-    });
-
-    it('should not render the overlay when withoutOverlay is true', async () => {
-      await wrapper.setProps({ withoutOverlay: true });
-      expect(wrapper.find('[data-testid="overlay"]').exists()).toBe(false);
-    });
-
-    it('should display the title and description correctly', () => {
-      expect(wrapper.find('[data-testid="drawer-title"]').text()).toBe(
-        'Test Title',
-      );
-      expect(wrapper.find('[data-testid="drawer-description"]').text()).toBe(
-        'Test Description',
-      );
-    });
-
-    it('should not display the description when not provided', async () => {
-      await wrapper.setProps({ description: '' });
-      expect(wrapper.find('[data-testid="drawer-description"]').exists()).toBe(
-        false,
-      );
-    });
-
-    it('should render the slot content correctly', () => {
-      wrapper = mount(Drawer, {
-        props: {
-          modelValue: true,
-          title: 'Test Title',
-        },
-        slots: {
-          content: '<div data-testid="slot-content">Slot Content</div>',
-        },
+    describe('Component Rendering', () => {
+      it('matches the snapshot', () => {
+        expect(wrapper.html()).toMatchSnapshot();
       });
-      expect(wrapper.find('[data-testid="slot-content"]').exists()).toBe(true);
-      expect(wrapper.find('[data-testid="slot-content"]').text()).toBe(
-        'Slot Content',
-      );
+
+      it('should render the drawer when modelValue is true', () => {
+        expect(drawer().exists()).toBe(true);
+      });
+
+      it('should not render the drawer when modelValue is false', async () => {
+        await wrapper.setProps({ modelValue: false });
+        expect(drawer().exists()).toBe(false);
+      });
+
+      it('should render the overlay when withoutOverlay is false', () => {
+        expect(overlay().exists()).toBe(true);
+      });
+
+      it('should not render the overlay when withoutOverlay is true', async () => {
+        await wrapper.setProps({ withoutOverlay: true });
+        expect(overlay().exists()).toBe(false);
+      });
+
+      it('should display the title and description correctly', () => {
+        expect(title().text()).toBe('Test Title');
+        expect(description().text()).toBe('Test Description');
+      });
+
+      it('should not display the description when not provided', async () => {
+        await wrapper.setProps({ description: '' });
+        expect(description().exists()).toBe(false);
+      });
+
+      it('should render the slot content correctly', () => {
+        wrapper = mount(Drawer, {
+          props: {
+            modelValue: true,
+            title: 'Test Title',
+          },
+          slots: {
+            content: '<div data-testid="slot-content">Slot Content</div>',
+          },
+        });
+        expect(wrapper.find('[data-testid="slot-content"]').exists()).toBe(
+          true,
+        );
+        expect(wrapper.find('[data-testid="slot-content"]').text()).toBe(
+          'Slot Content',
+        );
+      });
     });
   });
 
   describe('Button Behavior', () => {
     it('should emit the primaryButtonClick event when the primary button is clicked', async () => {
-      await wrapper
-        .findComponent('[data-testid="primary-button"]')
-        .trigger('click');
+      await primaryButton().trigger('click');
       expect(wrapper.emitted('primaryButtonClick')).toBeTruthy();
     });
 
     it('should disable the primary button when disabledPrimaryButton is true', async () => {
       await wrapper.setProps({ disabledPrimaryButton: true });
-      expect(
-        wrapper.find('[data-testid="primary-button"]').attributes('disabled'),
-      ).toBeDefined();
+      expect(primaryButton().attributes('disabled')).toBeDefined();
     });
 
     it('should display the correct text on the primary button', () => {
-      expect(
-        wrapper.findComponent('[data-testid="primary-button"]').props('text'),
-      ).toBe('Primary Action');
+      expect(primaryButton().props('text')).toBe('Primary Action');
     });
 
     it('should emit the secondaryButtonClick event when the secondary button is clicked', async () => {
-      await wrapper
-        .findComponent('[data-testid="secondary-button"]')
-        .trigger('click');
+      await secondaryButton().trigger('click');
       expect(wrapper.emitted('secondaryButtonClick')).toBeTruthy();
     });
 
     it('should disable the secondary button when disabledSecondaryButton is true', async () => {
       await wrapper.setProps({ disabledSecondaryButton: true });
-      expect(
-        wrapper
-          .findComponent('[data-testid="secondary-button"]')
-          .attributes('disabled'),
-      ).toBeDefined();
+      expect(secondaryButton().attributes('disabled')).toBeDefined();
     });
 
     it('should display the correct text on the secondary button', () => {
-      expect(
-        wrapper.findComponent('[data-testid="secondary-button"]').props('text'),
-      ).toBe('Secondary Action');
+      expect(secondaryButton().props('text')).toBe('Secondary Action');
     });
 
     it('should render the footer only if showFooter is true', async () => {
-      expect(wrapper.find('[data-testid="footer"]').exists()).toBe(true);
+      expect(footer().exists()).toBe(true);
 
       await wrapper.setProps({
         primaryButtonText: '',
         secondaryButtonText: '',
       });
 
-      expect(wrapper.find('[data-testid="footer"]').exists()).toBe(false);
+      expect(footer().exists()).toBe(false);
     });
   });
 
   describe('Interactions and Transitions', () => {
-    it('should close the drawer when the close icon is clicked', async () => {
-      await wrapper
-        .findComponent('[data-testid="close-icon"]')
-        .trigger('click');
+    beforeEach(() => {
+      vi.useFakeTimers();
+    });
+    afterEach(() => {
+      vi.clearAllTimers();
+    });
 
-      setTimeout(() => {
-        expect(wrapper.emitted('close')).toBeTruthy();
-        expect(wrapper.vm.showDrawer).toBe(false);
-      }, 200); // Transition time
+    it('should close the drawer when the close icon is clicked', async () => {
+      await closeIcon().trigger('click');
+
+      vi.advanceTimersByTime(200);
+
+      expect(wrapper.emitted('close')).toBeTruthy();
     });
 
     it('should call back method when back icon is clicked and distinctCloseBack is true', async () => {
       await wrapper.setProps({ distinctCloseBack: true });
-      await wrapper
-        .findComponent('[data-testid="close-icon"]')
-        .trigger('click');
+      await closeIcon().trigger('click');
 
-      setTimeout(() => {
-        expect(wrapper.emitted('back')).toBeTruthy();
-      }, 200); // Transition time
+      vi.advanceTimersByTime(200);
+
+      expect(wrapper.emitted('back')).toBeTruthy();
     });
 
     it('should not emit back event when back icon is clicked and distinctCloseBack is false', async () => {
-      await wrapper.find('[data-testid="close-icon"]').trigger('click');
+      await closeIcon().trigger('click');
       expect(wrapper.emitted('back')).toBeUndefined();
     });
 
@@ -160,40 +163,53 @@ describe('Drawer.vue', () => {
       expect(wrapper.vm.showDrawer).toBe(false);
 
       setTimeout(() => {
-        expect(wrapper.find('[data-testid="drawer"]').exists()).toBe(false);
-      }, 200); // Transition time
+        expect(drawer().exists()).toBe(false);
+      }, 200);
     });
 
     it('should handle overlay clicks to close the drawer when withoutOverlay is false', async () => {
-      expect(wrapper.find('[data-testid="overlay"]').exists()).toBe(true);
-      await wrapper.find('[data-testid="overlay"]').trigger('click');
-      setTimeout(() => {
-        expect(wrapper.emitted('close')).toBeTruthy();
-      }, 200); // Transition time
+      expect(overlay().exists()).toBe(true);
+      await overlay().trigger('click');
+
+      vi.advanceTimersByTime(200);
+
+      expect(wrapper.emitted('close')).toBeTruthy();
+    });
+
+    it('should execute the callback after 200ms timeout and reset showDrawer', async () => {
+      const callbackMock = vi.fn();
+      wrapper.vm.transitionClose(callbackMock);
+
+      expect(wrapper.vm.showDrawer).toBe(false);
+
+      vi.advanceTimersByTime(200);
+
+      expect(callbackMock).toHaveBeenCalled();
+      expect(wrapper.vm.showDrawer).toBe(true);
     });
   });
 
   describe('Props and Computed Properties', () => {
     it('should render the correct size class based on size prop', async () => {
       await wrapper.setProps({ size: 'lg' });
-      expect(
-        wrapper.find('[data-testid="drawer-container"]').classes(),
-      ).toContain('unnnic-drawer__container--lg');
+      expect(drawerContainer().classes()).toContain(
+        'unnnic-drawer__container--lg',
+      );
 
       await wrapper.setProps({ size: 'xl' });
-      expect(
-        wrapper.find('[data-testid="drawer-container"]').classes(),
-      ).toContain('unnnic-drawer__container--xl');
+      expect(drawerContainer().classes()).toContain(
+        'unnnic-drawer__container--xl',
+      );
     });
 
     it('should display footer if either primaryButtonText or secondaryButtonText is provided', async () => {
-      expect(wrapper.find('[data-testid="footer"]').exists()).toBe(true);
+      expect(footer().exists()).toBe(true);
 
       await wrapper.setProps({
         primaryButtonText: '',
         secondaryButtonText: 'Secondary Button',
       });
-      expect(wrapper.find('[data-testid="footer"]').exists()).toBe(true);
+      expect(footer().exists()).toBe(true);
     });
 
     it('should not display footer if both primaryButtonText and secondaryButtonText are not provided', async () => {
@@ -202,7 +218,7 @@ describe('Drawer.vue', () => {
         secondaryButtonText: '',
       });
 
-      expect(wrapper.find('[data-testid="footer"]').exists()).toBe(false);
+      expect(footer().exists()).toBe(false);
     });
 
     it('should disable primary button when disabledPrimaryButton prop is true', async () => {
@@ -210,9 +226,7 @@ describe('Drawer.vue', () => {
         primaryButtonText: 'Primary Button',
         disabledPrimaryButton: true,
       });
-      expect(
-        wrapper.find('[data-testid="primary-button"]').attributes('disabled'),
-      ).toBe('true');
+      expect(primaryButton().attributes('disabled')).toBe('true');
     });
 
     it('should disable secondary button when disabledSecondaryButton prop is true', async () => {
@@ -220,15 +234,12 @@ describe('Drawer.vue', () => {
         secondaryButtonText: 'Secondary Button',
         disabledSecondaryButton: true,
       });
-      expect(
-        wrapper.find('[data-testid="secondary-button"]').attributes('disabled'),
-      ).toBe('true');
+      expect(secondaryButton().attributes('disabled')).toBe('true');
     });
 
     it('should use correct icon for close button based on closeIcon prop', async () => {
       await wrapper.setProps({ closeIcon: 'custom_close_icon' });
-      const closeIcon = wrapper.findComponent('[data-testid="close-icon"]');
-      expect(closeIcon.props('icon')).toBe('custom_close_icon');
+      expect(closeIcon().props('icon')).toBe('custom_close_icon');
     });
 
     it('should validate size prop to accept only md, lg, or xl values', async () => {
@@ -236,7 +247,7 @@ describe('Drawer.vue', () => {
       expect(validator('md')).toBe(true);
       expect(validator('lg')).toBe(true);
       expect(validator('xl')).toBe(true);
-      expect(validator('sm')).toBe(false); // Should not be valid
+      expect(validator('sm')).toBe(false);
     });
   });
 });
