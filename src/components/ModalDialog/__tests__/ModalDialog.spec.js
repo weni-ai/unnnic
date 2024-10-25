@@ -22,6 +22,10 @@ describe('ModalDialog.vue', () => {
   });
 
   describe('Elements rendering', () => {
+    it('matches the snapshot', () => {
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+
     it('should render correctly when modelValue is true', () => {
       const modal = wrapper.find('[data-testid="modal-dialog"]');
       expect(modal.exists()).toBe(true);
