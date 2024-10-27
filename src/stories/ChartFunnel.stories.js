@@ -4,8 +4,13 @@ export default {
   title: 'Charts/ChartFunnel',
   tags: ['autodocs'],
   component: UnnnicChartFunnel,
+  argTypes: {
+    type: { control: { type: 'select' }, options: ['default', 'basic'] }
+  },
   decorators: [
-    () => ({ template: '<div style="width: 500px;"><story /></div>' }),
+    () => ({
+      template: '<div style="width: 500px; height: 500px;"><story /></div>',
+    }),
   ],
 };
 
@@ -13,16 +18,22 @@ export const ThreeRows = {
   args: {
     data: [
       {
-        title: '100% (18.621)',
-        description: 'Execução de fluxo',
+        title: '100%',
+        description: 'Clicou em comprar',
+        value: '18.621',
+        color: '#F6E05E'
       },
       {
-        title: '67% (12.476)',
-        description: 'Execução de fluxo',
+        title: '67%',
+        description: 'Informou entrega',
+        value: '12.476',
+        color: '#F6AD55'
       },
       {
-        title: '12% (2.234)',
-        description: 'Execução de fluxo',
+        title: '24%',
+        description: 'Selecionou Itens',
+        value: '4.469',
+        color: '#B794F4'
       },
     ],
   },
@@ -32,20 +43,28 @@ export const FourRows = {
   args: {
     data: [
       {
-        title: '100% (18.621)',
-        description: 'Execução de fluxo',
+        title: '100%',
+        description: 'Clicou em comprar',
+        value: '18.621',
+        color: '#F6E05E'
       },
       {
-        title: '67% (12.476)',
-        description: 'Execução de fluxo',
+        title: '67%',
+        description: 'Informou entrega',
+        value: '12.476',
+        color: '#F6AD55'
       },
       {
-        title: '12% (2.234)',
-        description: 'Execução de fluxo',
+        title: '24%',
+        description: 'Selecionou Itens',
+        value: '4.469',
+        color: '#B794F4'
       },
       {
-        title: '5% (931)',
-        description: 'Execução de fluxo',
+        title: '12%',
+        description: 'Foi para checkout',
+        value: '2.234',
+        color: '#63B3ED'
       },
     ],
   },
@@ -55,24 +74,34 @@ export const FiveRows = {
   args: {
     data: [
       {
-        title: '100% (18.621)',
-        description: 'Execução de fluxo',
+        title: '100%',
+        description: 'Clicou em comprar',
+        value: '18.621',
+        color: '#F6E05E'
       },
       {
-        title: '67% (12.476)',
-        description: 'Execução de fluxo',
+        title: '67%',
+        description: 'Informou entrega',
+        value: '12.476',
+        color: '#F6AD55'
       },
       {
-        title: '12% (2.234)',
-        description: 'Execução de fluxo',
+        title: '24%',
+        description: 'Selecionou Itens',
+        value: '4.469',
+        color: '#B794F4'
       },
       {
-        title: '5% (931)',
-        description: 'Execução de fluxo',
+        title: '12%',
+        description: 'Foi para checkout',
+        value: '2.234',
+        color: '#63B3ED'
       },
       {
-        title: '2% (372)',
-        description: 'Execução de fluxo',
+        title: '5%',
+        description: 'Finalizou a compra',
+        value: '931',
+        color: '#68D391'
       },
     ],
   },
