@@ -3,7 +3,7 @@ module.exports = {
   env: {
     node: true,
   },
-  extends: ['@weni/eslint-config/vue3', '@vue/typescript/recommended'],
+  extends: ['@weni/eslint-config/vue3'],
   plugins: ['@typescript-eslint'],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
