@@ -1,27 +1,36 @@
 <template>
-  <div
+  <section
     :class="`unnnic-tag
         ${!disabled ? `unnnic-tag-scheme--${scheme}` : `unnnic-tag--disabled`}
         ${clickable ? 'unnnic-tag--clickable' : ''}`"
   >
+    <section
+      v-if="leftIcon"
+      class="unnnic-tag__icon"
+    >
+      <UnnnicIcon
+        :icon="leftIcon"
+        :scheme="scheme"
+        size="sm"
+      />
+    </section>
     <span
       :class="`unnnic-tag__label
-      ${hasCloseIcon ? 'unnnic-tag__label--hasIcon' : ''}
       ${disabled ? 'unnnic-tag__label--disabled' : ''}`"
       >{{ text }}</span
     >
-    <div
-      v-if="hasCloseIcon"
-      class="unnnic-tag__icon"
-      @click.stop="emitClose"
+    <section
+      v-if="rightIcon || hasCloseIcon"
+      :class="{ 'unnnic-tag__icon': true, clickable: !rightIcon }"
+      @click.stop="hasCloseIcon ? emitClose() : () => {}"
     >
       <UnnnicIcon
-        icon="close-1"
-        scheme="neutral-darkest"
-        size="xs"
+        :icon="rightIcon || 'close'"
+        :scheme="rightIcon ? scheme : 'neutral-darkest'"
+        size="sm"
       />
-    </div>
-  </div>
+    </section>
+  </section>
 </template>
 
 <script>
@@ -52,6 +61,14 @@ export default {
     scheme: {
       type: String,
       default: 'aux-purple',
+    },
+    leftIcon: {
+      type: String,
+      default: null,
+    },
+    rightIcon: {
+      type: String,
+      default: null,
     },
   },
   methods: {
@@ -84,6 +101,7 @@ export default {
   align-items: center;
   justify-content: center;
   border-radius: $unnnic-border-radius-pill;
+  padding: 0 $unnnic-spacing-xs;
 
   &--disabled {
     background-color: $unnnic-color-background-sky;
@@ -107,22 +125,19 @@ export default {
     font-size: $unnnic-font-size-body-md;
     font-weight: $unnnic-font-weight-regular;
     line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
-    padding: $unnnic-spacing-stack-nano $unnnic-inline-ant;
+    padding: $unnnic-spacing-stack-nano;
     color: $unnnic-color-neutral-darkest;
 
     &--disabled {
       color: $unnnic-color-neutral-cloudy;
     }
-
-    &--hasIcon {
-      padding-left: $unnnic-inline-ant;
-      padding-right: $unnnic-spacing-stack-nano;
-    }
   }
 
   &__icon {
     display: flex;
-    margin-right: $unnnic-inline-ant;
+  }
+
+  .clickable {
     cursor: pointer;
   }
 }
