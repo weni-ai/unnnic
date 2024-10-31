@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.15.0 (2024-10-31)
+
+### Added
+
+- Tag: `leftIcon` and `rightIcon` props;
+- TableNext: `hideHeaders` and `size` props;
+- TableNext: Added the possibility of column sizes being `'auto'`;
+- TableNext: Removed the requirement to pass the headers prop.
+
 ## 2.14.2 (2024-10-22)
 
 ### Fixed
