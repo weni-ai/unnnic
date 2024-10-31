@@ -2,34 +2,34 @@
 
 exports[`TableNext.vue > matches the snapshot 1`] = `
 "<table data-v-2143c794="" class="unnnic-table-next">
-  <thead data-v-2143c794="" class="unnnic-table-next__header">
+  <thead data-v-2143c794="" class="unnnic-table-next__header" data-testid="header">
     <tr data-v-2143c794="" class="unnnic-table-next__header-row" data-testid="header-row" style="grid-template-columns: 1fr 2fr;">
       <th data-v-2143c794="" class="unnnic-table-next__header-cell" data-testid="header-cell">Header 1</th>
       <th data-v-2143c794="" class="unnnic-table-next__header-cell" data-testid="header-cell">Header 2</th>
     </tr>
   </thead>
-  <tbody data-v-2143c794="" class="unnnic-table-next__body">
+  <tbody data-v-2143c794="" class="unnnic-table-next__body" data-testid="body">
     <tr data-v-2143c794="" class="unnnic-table-next__body-row" data-testid="body-row" style="grid-template-columns: 1fr 2fr;">
-      <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell" data-testid="body-cell">
+      <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell unnnic-table-next__body-cell unnnic-table-next__body-cell--sm" data-testid="body-cell">
         <p data-v-fd58013b="" class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">Row 1 Col 1</p>
       </td>
-      <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell" data-testid="body-cell">
+      <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell unnnic-table-next__body-cell unnnic-table-next__body-cell--sm" data-testid="body-cell">
         <p data-v-fd58013b="" class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">Row 1 Col 2</p>
       </td>
     </tr>
     <tr data-v-2143c794="" class="unnnic-table-next__body-row" data-testid="body-row" style="grid-template-columns: auto;"><a data-v-2143c794="" class="unnnic-table-next__body-row--redirect" data-testid="body-row-redirect" style="grid-template-columns: 1fr 2fr;" href="#" target="_blank">
-        <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell" data-testid="body-cell">
+        <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell unnnic-table-next__body-cell unnnic-table-next__body-cell--sm" data-testid="body-cell">
           <p data-v-fd58013b="" class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">Row 2 Col 1</p>
         </td>
-        <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell" data-testid="body-cell">
+        <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell unnnic-table-next__body-cell unnnic-table-next__body-cell--sm" data-testid="body-cell">
           <p data-v-fd58013b="" class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">Row 2 Col 2</p>
         </td>
       </a></tr>
     <tr data-v-2143c794="" class="unnnic-table-next__body-row" data-testid="body-row" style="grid-template-columns: auto;"><a data-v-2143c794="" class="unnnic-table-next__body-row--redirect" data-testid="body-row-redirect" style="grid-template-columns: 1fr 2fr;" href="#" target="_self">
-        <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell" data-testid="body-cell">
+        <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell unnnic-table-next__body-cell unnnic-table-next__body-cell--sm" data-testid="body-cell">
           <p data-v-fd58013b="" class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">Row 3 Col 1</p>
         </td>
-        <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell" data-testid="body-cell">
+        <td data-v-fd58013b="" data-v-2143c794="" class="unnnic-table-next__body-cell unnnic-table-next__body-cell unnnic-table-next__body-cell--sm" data-testid="body-cell">
           <p data-v-fd58013b="" class="unnnic-table-next__body-cell-text" data-testid="body-cell-text">Row 3 Col 2</p>
         </td>
       </a></tr>

@@ -4,11 +4,13 @@ const validateHeader = (header) => {
     throw new Error('Each item in "headers" must have "content" as a string.');
   }
 
-  const isSizePositiveNumber =
-    'size' in header && (typeof header.size !== 'number' || header.size < 0);
-  if (isSizePositiveNumber) {
+  const isSizeInvalid =
+    'size' in header &&
+    ((header.size !== 'auto' && typeof header.size !== 'number') ||
+      header.size < 0);
+  if (isSizeInvalid) {
     throw new Error(
-      'Each item in "headers" that contains "size" must assign it as positive number',
+      'Each item in "headers" that contains "size" must assign it as positive number or equals to "auto"',
     );
   }
 
@@ -24,10 +26,6 @@ const validateHeader = (header) => {
 export const validateHeaders = (headers) => {
   if (!Array.isArray(headers)) {
     throw new Error('Property headers needs to be an array.');
-  }
-
-  if (headers.length === 0) {
-    throw new Error('Property headers must not to be an empty array.');
   }
 
   headers.forEach(validateHeader);
