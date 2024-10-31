@@ -80,7 +80,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnnic.scss';
+@import '../../../assets/scss/unnnic.scss';
 
 .unnnic-chart-funnel-five-rows {
   [class$='row']:nth-child(1) {
