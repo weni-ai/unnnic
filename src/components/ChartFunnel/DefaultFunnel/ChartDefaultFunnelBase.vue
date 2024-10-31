@@ -81,7 +81,7 @@ defineProps<{
       bottom: -1px;
       width: 100%;
       height: 1px;
-      background-color: #cccccc;
+      background-color: $unnnic-color-neutral-soft;
       z-index: -1;
     }
   }
@@ -100,7 +100,7 @@ defineProps<{
       bottom: -1px;
       width: 100%;
       height: 1px;
-      background-color: #cccccc;
+      background-color: $unnnic-color-neutral-soft;
       z-index: -1;
     }
 
