@@ -8,14 +8,25 @@
         { 'first-item': index === 0, 'last-item': index === data.length - 1 },
       ]"
     >
-      <section
-        :class="['unnnic-chart-funnel-base-item__card', step.widthClass]"
-        :style="{ backgroundColor: step.color }"
-      ></section>
+      <section class="unnnic-chart-funnel-base-item__card">
+        <svg
+          :width="getSvgWidth(index)"
+          height="92.4"
+          :viewBox="`0 0 ${getSvgWidth(index)} 92.4`"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="funnel-svg"
+        >
+          <path
+            :d="getSvgPath(index)"
+            :fill="step.color"
+          />
+        </svg>
+      </section>
       <section class="unnnic-chart-funnel-base-item__text">
         <section class="unnnic-chart-funnel-base-item__text__values">
           <p class="unnnic-chart-funnel-base-item__text__values-title">
-            {{ step.percentage }}%
+            {{ step.percentage }}
           </p>
           <p class="unnnic-chart-funnel-base-item__text__values-sub-title">
             &nbsp; | {{ step.value }}
@@ -34,48 +45,75 @@ interface FunnelStep {
   percentage: number | string;
   value: number | string;
   description: string;
-  widthClass: string;
   color: string;
 }
 
 defineProps<{
-  data: FunnelStep[]
+  data: FunnelStep[];
 }>();
+
+const svgPaths = [
+  'M218.999 0H8C3.58172 0 0 3.58173 0 8.00001V92.4H201.798C205.539 92.4 208.781 89.8071 209.602 86.1572L226.803 9.75715C227.929 4.75524 224.126 0 218.999 0Z',
+  'M192 0.399902H0L1.04385e-05 92.7999H163.476C167.174 92.7999 170.39 90.2656 171.254 86.6703L192 0.399902Z',
+  'M152 0.800049H2.59253e-05L0 93.2001H123.948C127.661 93.2001 130.886 90.645 131.736 87.0302L152 0.800049Z',
+  'M117 0.199951H0L2.21175e-05 92.6H86.3723C90.0018 92.6 93.1765 90.1566 94.1057 86.648L117 0.199951Z',
+  'M79 0.600098H0L3.72103e-05 85.0001C3.91582e-05 89.4184 3.58177 93.0001 8.00004 93.0001H46.3116C49.8754 93.0001 53.0095 90.6427 53.9978 87.2187L79 0.600098Z',
+];
+
+const svgWidths = [227, 192, 152, 117, 79];
+
+const getSvgPath = (index: number) => svgPaths[index] || svgPaths[0];
+const getSvgWidth = (index: number) => svgWidths[index] || svgWidths[0];
 </script>
 
 <style lang="scss" scoped>
 @import '../../../assets/scss/unnnic.scss';
 
 .unnnic-chart-funnel-base-container {
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .unnnic-chart-funnel-base-item {
   display: flex;
-  align-items: center;
   justify-content: flex-start;
-  flex-grow: 1;
 
   &__card {
-    height: 100%;
-    margin-right: 1rem;
-    transition: background-color 0.3s ease;
-    clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
-  }
+    position: relative;
+    max-height: 91px;
 
-  &.first-item &__card {
-    border-radius: 8px 8px 0 0;
-  }
-
-  &.last-item &__card {
-    border-radius: 0 0 0 8px;
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 100%;
+      height: 1px;
+      background-color: #cccccc;
+      z-index: -1;
+    }
   }
 
   &__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding-left: 1rem;
+    max-height: 91px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 100%;
+      height: 1px;
+      background-color: #cccccc;
+      z-index: -1;
+    }
+
     &-description {
       margin: 0;
       color: $unnnic-color-neutral-dark;
@@ -114,21 +152,9 @@ defineProps<{
       }
     }
   }
-}
-
-.w-60 {
-  width: 60%;
-}
-.w-50 {
-  width: 50%;
-}
-.w-40 {
-  width: 40%;
-}
-.w-30 {
-  width: 30%;
-}
-.w-20 {
-  width: 20%;
+  &:last-child .unnnic-chart-funnel-base-item__card::after,
+  &:last-child .unnnic-chart-funnel-base-item__text::after {
+    content: none;
+  }
 }
 </style>
