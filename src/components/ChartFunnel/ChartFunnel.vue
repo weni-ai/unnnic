@@ -9,7 +9,9 @@
 import ChartFunnelThreeRows from './SvgFunnel/ChartFunnelThreeRows.vue';
 import ChartFunnelFourRows from './SvgFunnel/ChartFunnelFourRows.vue';
 import ChartFunnelFiveRows from './SvgFunnel/ChartFunnelFiveRows.vue';
-import ChartDefaultFunnelBase from './DefaultFunnel/ChartDefaultFunnelBase.vue';
+import ChartDefaultFunnelThreeRows from './DefaultFunnel/ChartDefaultFunnelThreeRows.vue';
+import ChartDefaultFunnelFourRows from './DefaultFunnel/ChartDefaultFunnelFourRows.vue';
+import ChartDefaultFunnelFiveRows from './DefaultFunnel/ChartDefaultFunnelFiveRows.vue';
 
 export default {
   name: 'UnnnicChartFunnel',
@@ -18,7 +20,9 @@ export default {
     ChartFunnelThreeRows,
     ChartFunnelFourRows,
     ChartFunnelFiveRows,
-    ChartDefaultFunnelBase,
+    ChartDefaultFunnelFiveRows,
+    ChartDefaultFunnelThreeRows,
+    ChartDefaultFunnelFourRows,
   },
 
   props: {
@@ -36,9 +40,9 @@ export default {
     chartComponent() {
       const componentMap = {
         default: {
-          3: ChartDefaultFunnelBase,
-          4: ChartDefaultFunnelBase,
-          5: ChartDefaultFunnelBase,
+          3: ChartDefaultFunnelThreeRows,
+          4: ChartDefaultFunnelFourRows,
+          5: ChartDefaultFunnelFiveRows,
         },
         basic: {
           3: 'ChartFunnelThreeRows',
@@ -49,7 +53,7 @@ export default {
       return componentMap[this.type][this.data.length] || null;
     },
     chartData() {
-      const classIndex = ['w-60', 'w-50', 'w-40', 'w-30', 'w-20']
+      const classIndex = ['w-60', 'w-50', 'w-40', 'w-30', 'w-20'];
       if (this.type === 'default')
         return this.data.map((e, index) => ({
           percentage: e.title,
