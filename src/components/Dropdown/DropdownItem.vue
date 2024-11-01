@@ -1,5 +1,8 @@
 <template>
-  <a class="unnnic-dropdown-item unnnic--clickable">
+  <a
+    class="unnnic-dropdown-item unnnic--clickable"
+    data-testid="dropdown-item"
+  >
     <slot />
   </a>
 </template>
