@@ -1,14 +1,17 @@
 <template>
   <component
     :is="chartComponent"
-    :data="data"
+    :data="chartData"
   />
 </template>
 
 <script>
-import ChartFunnelThreeRows from './ChartFunnelThreeRows.vue';
-import ChartFunnelFourRows from './ChartFunnelFourRows.vue';
-import ChartFunnelFiveRows from './ChartFunnelFiveRows.vue';
+import ChartFunnelThreeRows from './SvgFunnel/ChartFunnelThreeRows.vue';
+import ChartFunnelFourRows from './SvgFunnel/ChartFunnelFourRows.vue';
+import ChartFunnelFiveRows from './SvgFunnel/ChartFunnelFiveRows.vue';
+import ChartDefaultFunnelThreeRows from './DefaultFunnel/ChartDefaultFunnelThreeRows.vue';
+import ChartDefaultFunnelFourRows from './DefaultFunnel/ChartDefaultFunnelFourRows.vue';
+import ChartDefaultFunnelFiveRows from './DefaultFunnel/ChartDefaultFunnelFiveRows.vue';
 
 export default {
   name: 'UnnnicChartFunnel',
@@ -17,6 +20,9 @@ export default {
     ChartFunnelThreeRows,
     ChartFunnelFourRows,
     ChartFunnelFiveRows,
+    ChartDefaultFunnelFiveRows,
+    ChartDefaultFunnelThreeRows,
+    ChartDefaultFunnelFourRows,
   },
 
   props: {
@@ -24,16 +30,40 @@ export default {
       type: Array,
       required: true,
     },
+    type: {
+      type: String,
+      default: 'default',
+    },
   },
 
   computed: {
     chartComponent() {
       const componentMap = {
-        3: 'ChartFunnelThreeRows',
-        4: 'ChartFunnelFourRows',
-        5: 'ChartFunnelFiveRows',
+        default: {
+          3: ChartDefaultFunnelThreeRows,
+          4: ChartDefaultFunnelFourRows,
+          5: ChartDefaultFunnelFiveRows,
+        },
+        basic: {
+          3: 'ChartFunnelThreeRows',
+          4: 'ChartFunnelFourRows',
+          5: 'ChartFunnelFiveRows',
+        },
       };
-      return componentMap[this.data.length] || null;
+      return componentMap[this.type][this.data.length] || null;
+    },
+    chartData() {
+      const classIndex = ['w-60', 'w-50', 'w-40', 'w-30', 'w-20'];
+      if (this.type === 'default')
+        return this.data.map((e, index) => ({
+          percentage: e.title,
+          value: e.value,
+          description: e.description,
+          widthClass: classIndex[index],
+          color: e.color,
+        }));
+
+      return this.data;
     },
   },
 };

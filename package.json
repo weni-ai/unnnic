@@ -61,6 +61,8 @@
     "@storybook/testing-library": "^0.2.2",
     "@storybook/vue3": "^8.0.10",
     "@storybook/vue3-vite": "^8.0.10",
+    "@typescript-eslint/eslint-plugin": "^8.11.0",
+    "@typescript-eslint/parser": "^8.11.0",
     "@vitejs/plugin-vue": "^4.2.3",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "@vitest/coverage-istanbul": "^1.6.0",
@@ -79,6 +81,7 @@
     "react-dom": "^18.2.0",
     "sass": "^1.62.1",
     "storybook": "^8.0.10",
+    "typescript": "^5.6.3",
     "vite": "4.3.5",
     "vitest": "^1.6.0",
     "vue-eslint-parser": "^9.4.2"

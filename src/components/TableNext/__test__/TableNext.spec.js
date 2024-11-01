@@ -126,6 +126,13 @@ describe('TableNext.vue', () => {
       const noResultsMessage = wrapper.find('[data-testid="body-cell-text"]');
       expect(noResultsMessage.text()).toBe('No matching results');
     });
+
+    it('should emit row-click when clicking on a row', async () => {
+      const row = wrapper.find('[data-testid="body-row"]');
+      await row.trigger('click');      
+      
+      expect(wrapper.emitted()['row-click'][0][0]).toEqual(rows[0]);
+    });
   });
 
   describe('Loading state', () => {

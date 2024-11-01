@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@import '../../../assets/scss/unnnic.scss';
 
 .unnnic-chart-funnel-base-rows {
   width: 100%;
