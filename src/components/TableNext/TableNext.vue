@@ -48,6 +48,7 @@
           :style="{
             gridTemplateColumns: row.link ? 'auto' : gridTemplateColumns,
           }"
+          @click="$emit('row-click', row)"
         >
           <a
             v-if="row.link"
@@ -190,7 +191,7 @@ export default {
     },
   },
 
-  emits: ['update:pagination'],
+  emits: ['update:pagination', 'row-click'],
 
   data() {
     return {

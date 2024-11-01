@@ -1,10 +1,14 @@
 import UnnnicTableNext from '../components/TableNext/TableNext.vue';
 import UnnnicButton from '../components/Button/Button.vue';
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Data Display/TableNext',
   component: UnnnicTableNext,
   tags: ['autodocs'],
+  args: {
+    onRowClick: action('row-click'),
+  },
   argTypes: {
     headers: {
       description:
@@ -108,6 +112,7 @@ const addButton = {
 const rows = [
   {
     content: ['1', 'Alice', '30', 'USA', addButton],
+    uuid: '1',
     link: {
       url: 'https://weni.ai/',
       target: '_blank',
@@ -115,18 +120,22 @@ const rows = [
   },
   {
     content: ['2', 'Bob', '25', 'Canada', addButton],
+    uuid: '2',
     link: {
       url: 'https://weni.ai/',
     },
   },
   {
     content: ['3', 'Charlie', '35', 'UK', addButton],
+    uuid: '3',
   },
   {
     content: ['4', 'Diana', '28', 'Australia', addButton],
+    uuid: '4',
   },
   {
     content: ['5', 'Ethan', '22', 'New Zealand', addButton],
+    uuid: '5',
   },
 ];
 
