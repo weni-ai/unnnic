@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SelectSmartOption.vue > Initial rendering > matches the snapshot 1`] = `
+"<div class="unnnic-select-smart-option unnnic--clickable unnnic-select-smart-option--selectable" title="Test Option" data-testid="select-smart-option">
+  <!--v-if-->
+  <div><span class="unnnic-select-smart-option__label unnnic-select-smart-option__label--" data-testid="label">Test Option</span>
+    <!--v-if-->
+  </div>
+</div>"
+`;
