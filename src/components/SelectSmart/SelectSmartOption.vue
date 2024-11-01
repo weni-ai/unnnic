@@ -9,10 +9,12 @@
       'unnnic-select-smart-option--with-checkbox': allowCheckbox,
     }"
     :title="label"
+    data-testid="select-smart-option"
   >
     <UnnnicCheckbox
       v-if="allowCheckbox"
       ref="checkbox"
+      data-testid="checkbox"
       :modelValue="active"
       :size="size"
     />
@@ -22,10 +24,12 @@
           'unnnic-select-smart-option__label',
           `unnnic-select-smart-option__label--${size}`,
         ]"
+        data-testid="label"
         >{{ label }}</span
       >
       <p
         v-if="description"
+        data-testid="description"
         :class="[
           'unnnic-select-smart-option__description',
           `unnnic-select-smart-option__description--${size}`,

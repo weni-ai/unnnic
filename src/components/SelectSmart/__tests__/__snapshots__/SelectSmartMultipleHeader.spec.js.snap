@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SelectSmartMultipleHeader.vue > initial rendering > matches the snapshot 1`] = `
+"<div data-v-4950cf71="" class="unnnic-select-smart__options__multiple">
+  <!--v-if-->
+  <p data-v-4950cf71="" class="unnnic-select-smart__options__multiple--without-multiples" data-testid="without-selects-message">No option selected</p>
+</div>"
+`;
