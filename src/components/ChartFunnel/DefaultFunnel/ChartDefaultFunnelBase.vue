@@ -3,24 +3,29 @@
     <section
       v-for="(step, index) in data"
       :key="index"
-      :class="[
-        'unnnic-chart-funnel-base-item',
-        { 'first-item': index === 0, 'last-item': index === data.length - 1 },
-      ]"
+      class="unnnic-chart-funnel-base-item"
     >
+    <section 
+      :class="[
+        'overflow-hidden', 
+         step.widthClass,
+        { 'first-item': index === 0, 'last-item': index === data.length - 1 }
+      ]">
       <section
-        :class="['unnnic-chart-funnel-base-item__card', step.widthClass]"
+        :class="['unnnic-chart-funnel-base-item__card',  { 'first-item': index === 0}]"
         :style="{ backgroundColor: step.color }"
       ></section>
-      <section class="unnnic-chart-funnel-base-item__text">
-        <section class="unnnic-chart-funnel-base-item__text__values">
-          <p class="unnnic-chart-funnel-base-item__text__values-title">
-            {{ step.percentage }}%
-          </p>
-          <p class="unnnic-chart-funnel-base-item__text__values-sub-title">
-            &nbsp; | {{ step.value }}
-          </p>
-        </section>
+    </section>
+
+    <section :class="['unnnic-chart-funnel-base-item__text', { 'last-item': index === data.length - 1 }]">
+      <section class="unnnic-chart-funnel-base-item__text__values">
+        <p class="unnnic-chart-funnel-base-item__text__values-title">
+          {{ step.percentage }}
+        </p>
+        <p class="unnnic-chart-funnel-base-item__text__values-sub-title">
+          &nbsp; | {{ step.value }}
+        </p>
+      </section>
         <p class="unnnic-chart-funnel-base-item__text-description">
           {{ step.description }}
         </p>
@@ -62,20 +67,39 @@ defineProps<{
 
   &__card {
     height: 100%;
-    margin-right: 1rem;
     transition: background-color 0.3s ease;
-    clip-path: polygon(0 0, 100% 0, 88% 100%, 0 100%);
-  }
+    transform: skew(-12deg, 0deg) translateX(-20px);
+    border-radius: 0 0 $unnnic-spacing-xs 0;
 
-  &.first-item &__card {
-    border-radius: 8px 8px 0 0;
-  }
-
-  &.last-item &__card {
-    border-radius: 0 0 0 8px;
+    &.first-item {
+    border-radius: $unnnic-spacing-xs $unnnic-spacing-xs $unnnic-spacing-xs 0;
+    }
   }
 
   &__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    padding-left: $unnnic-spacing-sm;
+    padding-right: $unnnic-spacing-sm;
+    height: 100%;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0px;
+      width: 100%;
+      height: 1px;
+      background-color: $unnnic-color-neutral-soft;
+      z-index: -1;
+    }
+
+    &.last-item::after {
+      display: none;
+    }
+    
     &-description {
       margin: 0;
       color: $unnnic-color-neutral-dark;
@@ -130,5 +154,33 @@ defineProps<{
 }
 .w-20 {
   width: 20%;
+}
+.overflow-hidden {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+
+  &.first-item {
+    border-radius: $unnnic-spacing-xs $unnnic-spacing-xs 0px 0;
+    }
+
+  &.last-item {
+    border-radius: 0 0 $unnnic-spacing-xs $unnnic-spacing-xs;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 2px;
+    background-color: $unnnic-color-neutral-soft;
+    z-index: -1;
+  }
+
+  &.last-item::after {
+    display: none;
+  }
 }
 </style>
