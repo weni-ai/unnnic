@@ -8,6 +8,7 @@
       <div
         v-if="active"
         v-on-click-outside="onClickOutside"
+        data-testid="dropdown-content"
         :class="[
           'unnnic-dropdown__content',
           active ? '' : 'unnnic-dropdown__content--hidden',

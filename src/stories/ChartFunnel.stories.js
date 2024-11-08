@@ -5,7 +5,7 @@ export default {
   tags: ['autodocs'],
   component: UnnnicChartFunnel,
   argTypes: {
-    type: { control: { type: 'select' }, options: ['default', 'basic'] }
+    type: { control: { type: 'select' }, options: ['default', 'basic'] },
   },
   decorators: [
     () => ({
@@ -21,19 +21,19 @@ export const ThreeRows = {
         title: '100%',
         description: 'Clicou em comprar',
         value: '18.621',
-        color: '#F6E05E'
+        color: '#F6E05E',
       },
       {
         title: '67%',
         description: 'Informou entrega',
         value: '12.476',
-        color: '#F6AD55'
+        color: '#F6AD55',
       },
       {
         title: '24%',
         description: 'Selecionou Itens',
         value: '4.469',
-        color: '#B794F4'
+        color: '#B794F4',
       },
     ],
   },
@@ -46,25 +46,25 @@ export const FourRows = {
         title: '100%',
         description: 'Clicou em comprar',
         value: '18.621',
-        color: '#F6E05E'
+        color: '#F6E05E',
       },
       {
         title: '67%',
         description: 'Informou entrega',
         value: '12.476',
-        color: '#F6AD55'
+        color: '#F6AD55',
       },
       {
         title: '24%',
         description: 'Selecionou Itens',
         value: '4.469',
-        color: '#B794F4'
+        color: '#B794F4',
       },
       {
         title: '12%',
         description: 'Foi para checkout',
         value: '2.234',
-        color: '#63B3ED'
+        color: '#63B3ED',
       },
     ],
   },
@@ -77,31 +77,31 @@ export const FiveRows = {
         title: '100%',
         description: 'Clicou em comprar',
         value: '18.621',
-        color: '#F6E05E'
+        color: '#F6E05E',
       },
       {
         title: '67%',
         description: 'Informou entrega',
         value: '12.476',
-        color: '#F6AD55'
+        color: '#F6AD55',
       },
       {
         title: '24%',
         description: 'Selecionou Itens',
         value: '4.469',
-        color: '#B794F4'
+        color: '#B794F4',
       },
       {
         title: '12%',
         description: 'Foi para checkout',
         value: '2.234',
-        color: '#63B3ED'
+        color: '#63B3ED',
       },
       {
         title: '5%',
         description: 'Finalizou a compra',
         value: '931',
-        color: '#68D391'
+        color: '#68D391',
       },
     ],
   },

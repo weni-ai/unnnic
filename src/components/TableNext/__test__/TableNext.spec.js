@@ -45,6 +45,47 @@ describe('TableNext.vue', () => {
       // The first column uses the default size of 1fr,
       // and the second column is set to 2fr as specified in the header configuration.
     });
+
+    it('renders rows with default 1fr when no headers are provided', async () => {
+      wrapper = mount(TableNext, {
+        props: { rows },
+      });
+
+      const rowElement = wrapper.find('[data-testid="body-row"]');
+      const gridTemplateColumns = rowElement.attributes('style');
+      expect(gridTemplateColumns).toContain('1fr 1fr');
+      // Since headers are absent, each row column should default to 1fr as per the logic in `gridTemplateColumns`.
+    });
+
+    it('do not render the header if it has the hideHeaders prop', async () => {
+      await wrapper.setProps({ headers, hideHeaders: true });
+
+      const header = wrapper.find('[data-testid="header"]');
+      expect(header.exists()).toBe(false);
+
+      const body = wrapper.find('[data-testid="body"]');
+      expect(body.classes()).toContain('unnnic-table-next__body--hide-headers');
+    });
+
+    it('renders headers with mixed sizes (number and string)', () => {
+      wrapper = mount(TableNext, {
+        props: {
+          headers: [
+            { content: 'ID', size: 1 },
+            { content: 'Name', size: 'auto' },
+            { content: 'Age', size: 2 },
+          ],
+          rows,
+        },
+      });
+
+      const headerRow = wrapper.find('[data-testid="header-row"]');
+      const gridTemplateColumns = headerRow.attributes('style');
+
+      expect(gridTemplateColumns).toContain(
+        'grid-template-columns: 1fr auto 2fr',
+      );
+    });
   });
 
   describe('Row rendering and behaviors', () => {
@@ -77,8 +118,10 @@ describe('TableNext.vue', () => {
       expect(secondLink.attributes('target')).toBe('_self');
     });
 
-    it('renders "no matching results" message when there are no rows', async () => {
-      await wrapper.setProps({ headers, rows: [] });
+    it('renders "no matching results" message when there are no rows', () => {
+      wrapper = mount(TableNext, {
+        props: { headers },
+      });
 
       const noResultsMessage = wrapper.find('[data-testid="body-cell-text"]');
       expect(noResultsMessage.text()).toBe('No matching results');

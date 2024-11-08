@@ -16,6 +16,7 @@
         <p
           v-if="selectedOptions.length > multipleSelectedsTags"
           class="unnnic-select-smart__options__multiple__selecteds__remaining"
+          data-testid="remaining-count"
         >
           +{{ selectedOptions.length - multipleSelectedsTags }}
         </p>
@@ -24,6 +25,7 @@
     <p
       v-if="!selectedOptions[0]"
       class="unnnic-select-smart__options__multiple--without-multiples"
+      data-testid="without-selects-message"
     >
       {{ withoutSelectsMessage || i18n('without_multiple_selected') }}
     </p>

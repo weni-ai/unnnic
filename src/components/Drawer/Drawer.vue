@@ -2,10 +2,12 @@
   <aside
     v-if="modelValue"
     class="unnnic-drawer"
+    data-testid="drawer"
   >
     <section
       v-if="!withoutOverlay"
       class="unnnic-drawer__overlay"
+      data-testid="overlay"
       @click.stop="close"
     />
     <Transition
@@ -14,6 +16,7 @@
     >
       <section
         v-if="showDrawer"
+        data-testid="drawer-container"
         :class="[
           'unnnic-drawer__container',
           `unnnic-drawer__container--${size}`,
@@ -21,16 +24,23 @@
       >
         <header class="unnnic-drawer__header">
           <section class="unnnic-drawer__title-container">
-            <h1 class="unnnic-drawer__title">{{ title }}</h1>
+            <h1
+              class="unnnic-drawer__title"
+              data-testid="drawer-title"
+            >
+              {{ title }}
+            </h1>
             <p
               v-if="description"
               class="unnnic-drawer__description"
+              data-testid="drawer-description"
             >
               {{ description }}
             </p>
           </section>
           <UnnnicIcon
             class="unnnic-drawer__close"
+            data-testid="close-icon"
             :icon="closeIcon"
             size="avatar-nano"
             clickable
@@ -43,9 +53,11 @@
         <footer
           v-if="showFooter"
           class="unnnic-drawer__footer"
+          data-testid="footer"
         >
           <UnnnicButton
             v-if="secondaryButtonText"
+            data-testid="secondary-button"
             size="large"
             type="tertiary"
             :disabled="disabledSecondaryButton"
@@ -55,6 +67,7 @@
           />
           <UnnnicButton
             v-if="primaryButtonText"
+            data-testid="primary-button"
             size="large"
             :disabled="disabledPrimaryButton"
             :loading="loadingPrimaryButton"

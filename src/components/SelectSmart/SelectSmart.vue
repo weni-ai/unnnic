@@ -2,6 +2,7 @@
   <div
     v-on-click-outside="onClickOutside"
     class="unnnic-select-smart"
+    data-testid="select-smart"
     @keydown="onKeyDownSelect"
   >
     <DropdownSkeleton
@@ -13,6 +14,7 @@
       <TextInput
         ref="selectSmartInput"
         class="unnnic-select-smart__input"
+        data-testid="select-smart-input"
         :modelValue="inputValue"
         :placeholder="placeholder || autocompletePlaceholder || selectedLabel"
         :type="type"
@@ -37,6 +39,7 @@
             active: active,
             inactive: !active,
           }"
+          data-testid="options-container"
         >
           <div :style="{ overflow: 'auto' }">
             <SelectSmartMultipleHeader
@@ -49,6 +52,7 @@
             />
             <div
               ref="selectSmartOptionsScrollArea"
+              data-testid="options-scroll-area"
               :class="[
                 'unnnic-select-smart__options__scroll-area',
                 `size-${size}`,
@@ -61,6 +65,7 @@
               <SelectSmartOption
                 v-for="(option, index) in filterOptions(options)"
                 :key="option.value"
+                data-testid="option"
                 :label="option.label"
                 :description="option.description"
                 :tabindex="index"

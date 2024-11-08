@@ -2,9 +2,11 @@
   <section
     v-if="modelValue"
     class="unnnic-modal-dialog"
+    data-testid="modal-dialog"
   >
     <section
       class="unnnic-modal-dialog__overlay"
+      data-testid="modal-overlay"
       @click.stop="!persistent && close()"
     />
     <section
@@ -12,6 +14,7 @@
         'unnnic-modal-dialog__container',
         `unnnic-modal-dialog__container--${size}`,
       ]"
+      data-testid="modal-container"
     >
       <section
         v-if="$slots.leftSidebar"
@@ -28,17 +31,22 @@
           <section class="unnnic-modal-dialog__container__title-container">
             <UnnnicIcon
               v-if="icon || type"
+              data-testid="title-icon"
               class="unnnic-modal-dialog__container__title-icon"
               :icon="icon || iconsMapper[type]?.icon"
               :scheme="iconScheme || iconsMapper[type]?.scheme"
               size="md"
             />
-            <h1 class="unnnic-modal-dialog__container__title-text">
+            <h1
+              class="unnnic-modal-dialog__container__title-text"
+              data-testid="title-text"
+            >
               {{ title }}
             </h1>
           </section>
           <UnnnicIcon
             v-if="showCloseIcon"
+            data-testid="close-icon"
             icon="close"
             clickable
             @click="close()"
@@ -49,6 +57,7 @@
         </section>
         <section
           v-if="primaryButtonProps.text"
+          data-testid="actions-section"
           :class="[
             'unnnic-modal-dialog__container__actions',
             {
@@ -60,6 +69,7 @@
           <UnnnicButton
             v-if="!hideSecondaryButton"
             v-bind="secondaryButtonProps"
+            data-testid="secondary-button"
             type="tertiary"
             :text="secondaryButtonProps.text || i18n('cancel')"
             class="unnnic-modal-dialog__container__actions__secondary-button"
@@ -71,6 +81,7 @@
           />
           <UnnnicButton
             v-bind="primaryButtonProps"
+            data-testid="primary-button"
             :type="
               primaryButtonProps.type ||
               primaryButtonTypeMapper[type] ||

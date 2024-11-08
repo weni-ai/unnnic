@@ -44,7 +44,7 @@ interface FunnelStep {
 }
 
 defineProps<{
-  data: FunnelStep[]
+  data: FunnelStep[];
 }>();
 </script>
 
@@ -52,18 +52,14 @@ defineProps<{
 @import '../../../assets/scss/unnnic.scss';
 
 .unnnic-chart-funnel-base-container {
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .unnnic-chart-funnel-base-item {
   display: flex;
-  align-items: center;
   justify-content: flex-start;
-  flex-grow: 1;
 
   &__card {
     height: 100%;
@@ -138,22 +134,10 @@ defineProps<{
       }
     }
   }
-}
-
-.w-60 {
-  width: 60%;
-}
-.w-50 {
-  width: 50%;
-}
-.w-40 {
-  width: 40%;
-}
-.w-30 {
-  width: 30%;
-}
-.w-20 {
-  width: 20%;
+  &:last-child .unnnic-chart-funnel-base-item__card::after,
+  &:last-child .unnnic-chart-funnel-base-item__text::after {
+    content: none;
+  }
 }
 .overflow-hidden {
   height: 100%;

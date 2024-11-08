@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div
+    data-testid="collapse"
     :class="[
       'unnnic-collapse',
       `unnnic-collapse--size-${size}`,
@@ -12,6 +13,7 @@
     ]"
   >
     <div
+      data-testid="collapse-header"
       class="unnnic-collapse__header"
       @click="localActive = !localActive"
     >
