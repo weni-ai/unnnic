@@ -3,35 +3,29 @@
     <section
       v-for="(step, index) in data"
       :key="index"
-      :class="[
-        'unnnic-chart-funnel-base-item',
-        { 'first-item': index === 0, 'last-item': index === data.length - 1 },
-      ]"
+      class="unnnic-chart-funnel-base-item"
     >
-      <section class="unnnic-chart-funnel-base-item__card">
-        <svg
-          :width="step.svgWidth"
-          :height="step.svgHeight"
-          :viewBox="`0 0 ${step.svgWidth} ${step.svgHeight}`"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          class="funnel-svg"
-        >
-          <path
-            :d="step.svgPath"
-            :fill="step.color"
-          />
-        </svg>
+    <section 
+      :class="[
+        'overflow-hidden', 
+         step.widthClass,
+        { 'first-item': index === 0, 'last-item': index === data.length - 1 }
+      ]">
+      <section
+        :class="['unnnic-chart-funnel-base-item__card',  { 'first-item': index === 0}]"
+        :style="{ backgroundColor: step.color }"
+      ></section>
+    </section>
+
+    <section :class="['unnnic-chart-funnel-base-item__text', { 'last-item': index === data.length - 1 }]">
+      <section class="unnnic-chart-funnel-base-item__text__values">
+        <p class="unnnic-chart-funnel-base-item__text__values-title">
+          {{ step.percentage }}
+        </p>
+        <p class="unnnic-chart-funnel-base-item__text__values-sub-title">
+          &nbsp; | {{ step.value }}
+        </p>
       </section>
-      <section class="unnnic-chart-funnel-base-item__text">
-        <section class="unnnic-chart-funnel-base-item__text__values">
-          <p class="unnnic-chart-funnel-base-item__text__values-title">
-            {{ step.percentage }}
-          </p>
-          <p class="unnnic-chart-funnel-base-item__text__values-sub-title">
-            &nbsp; | {{ step.value }}
-          </p>
-        </section>
         <p class="unnnic-chart-funnel-base-item__text-description">
           {{ step.description }}
         </p>
@@ -45,14 +39,12 @@ interface FunnelStep {
   percentage: number | string;
   value: number | string;
   description: string;
+  widthClass: string;
   color: string;
-  svgPath: string;
-  svgWidth: number;
-  svgHeight: number;
 }
 
 defineProps<{
-  data: FunnelStep[];
+  data: FunnelStep[]
 }>();
 </script>
 
@@ -60,29 +52,27 @@ defineProps<{
 @import '../../../assets/scss/unnnic.scss';
 
 .unnnic-chart-funnel-base-container {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .unnnic-chart-funnel-base-item {
   display: flex;
+  align-items: center;
   justify-content: flex-start;
+  flex-grow: 1;
 
   &__card {
-    position: relative;
-    display: flex;
-    align-items: center;
+    height: 100%;
+    transition: background-color 0.3s ease;
+    transform: skew(-12deg, 0deg) translateX(-20px);
+    border-radius: 0 0 $unnnic-spacing-xs 0;
 
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -1px;
-      width: 100%;
-      height: 1px;
-      background-color: $unnnic-color-neutral-soft;
-      z-index: -1;
+    &.first-item {
+    border-radius: $unnnic-spacing-xs $unnnic-spacing-xs $unnnic-spacing-xs 0;
     }
   }
 
@@ -91,19 +81,25 @@ defineProps<{
     flex-direction: column;
     justify-content: center;
     position: relative;
-    padding-left: 1rem;
+    padding-left: $unnnic-spacing-sm;
+    padding-right: $unnnic-spacing-sm;
+    height: 100%;
 
     &::after {
       content: '';
       position: absolute;
       left: 0;
-      bottom: -1px;
+      bottom: 0px;
       width: 100%;
       height: 1px;
       background-color: $unnnic-color-neutral-soft;
       z-index: -1;
     }
 
+    &.last-item::after {
+      display: none;
+    }
+    
     &-description {
       margin: 0;
       color: $unnnic-color-neutral-dark;
@@ -142,9 +138,49 @@ defineProps<{
       }
     }
   }
-  &:last-child .unnnic-chart-funnel-base-item__card::after,
-  &:last-child .unnnic-chart-funnel-base-item__text::after {
-    content: none;
+}
+
+.w-60 {
+  width: 60%;
+}
+.w-50 {
+  width: 50%;
+}
+.w-40 {
+  width: 40%;
+}
+.w-30 {
+  width: 30%;
+}
+.w-20 {
+  width: 20%;
+}
+.overflow-hidden {
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+
+  &.first-item {
+    border-radius: $unnnic-spacing-xs $unnnic-spacing-xs 0px 0;
+    }
+
+  &.last-item {
+    border-radius: 0 0 $unnnic-spacing-xs $unnnic-spacing-xs;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: 100%;
+    height: 2px;
+    background-color: $unnnic-color-neutral-soft;
+    z-index: -1;
+  }
+
+  &.last-item::after {
+    display: none;
   }
 }
 </style>
