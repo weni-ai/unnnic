@@ -42,7 +42,10 @@ export default {
       required: true,
     },
 
-    viewBox: String,
+    viewBox: {
+      type: String,
+      required: true,
+    },
   },
 };
 </script>

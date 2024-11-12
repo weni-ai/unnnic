@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ChartFunnelBaseRow.vue > matches snapshot 1`] = `
+"<svg data-v-38919cea="" class="unnnic-chart-funnel-base-rows" viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <g data-v-38919cea="" class="unnnic-chart-funnel-base-rows__row">
+    <path data-v-38919cea="" class="row__path" d="M0 0 L100 0 L80 50 L20 50 Z"></path><text data-v-38919cea="" x="50%" y="20" class="row__title">100%</text><text data-v-38919cea="" x="50%" y="35" class="row__description">First Level</text>
+  </g>
+  <g data-v-38919cea="" class="unnnic-chart-funnel-base-rows__row">
+    <path data-v-38919cea="" class="row__path" d="M20 50 L80 50 L60 100 L40 100 Z"></path><text data-v-38919cea="" x="50%" y="70" class="row__title">75%</text><text data-v-38919cea="" x="50%" y="85" class="row__description">Second Level</text>
+  </g>
+  <g data-v-38919cea="" class="unnnic-chart-funnel-base-rows__row">
+    <path data-v-38919cea="" class="row__path" d="M40 100 L60 100 L50 150 L50 150 Z"></path><text data-v-38919cea="" x="50%" y="120" class="row__title">50%</text><text data-v-38919cea="" x="50%" y="135" class="row__description">Third Level</text>
+  </g>
+</svg>"
+`;

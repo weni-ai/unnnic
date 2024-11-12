@@ -49,7 +49,7 @@ export default {
       return componentMap[this.type][this.data.length] || null;
     },
     chartData() {
-      const classIndex = ['w-60', 'w-50', 'w-40', 'w-30', 'w-20']
+      const classIndex = ['w-60', 'w-50', 'w-40', 'w-30', 'w-20'];
       if (this.type === 'default')
         return this.data.map((e, index) => ({
           percentage: e.title,

@@ -1,0 +1,66 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`ChartDefaultFunnelBase.vue > matches the snapshot 1`] = `
+"<section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-container">
+  <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item">
+    <section data-v-b3eefbe4="" class="overflow-hidden w-60 first-item">
+      <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__card first-item" style="background-color: rgb(0, 119, 182);"></section>
+    </section>
+    <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text">
+      <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text__values">
+        <p data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text__values-title">90%</p>
+        <p data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text__values-sub-title"> &nbsp; | 900</p>
+      </section>
+      <p data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text-description">Viewed the landing page</p>
+    </section>
+  </section>
+  <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item">
+    <section data-v-b3eefbe4="" class="overflow-hidden w-50">
+      <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__card" style="background-color: rgb(0, 168, 232);"></section>
+    </section>
+    <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text">
+      <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text__values">
+        <p data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text__values-title">80%</p>
+        <p data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text__values-sub-title"> &nbsp; | 800</p>
+      </section>
+      <p data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text-description">Clicked on the CTA</p>
+    </section>
+  </section>
+  <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item">
+    <section data-v-b3eefbe4="" class="overflow-hidden w-40">
+      <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__card" style="background-color: rgb(0, 191, 255);"></section>
+    </section>
+    <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text">
+      <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text__values">
+        <p data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text__values-title">70%</p>
+        <p data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text__values-sub-title"> &nbsp; | 700</p>
+      </section>
+      <p data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text-description">Signed up for the trial</p>
+    </section>
+  </section>
+  <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item">
+    <section data-v-b3eefbe4="" class="overflow-hidden w-30">
+      <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__card" style="background-color: rgb(135, 206, 235);"></section>
+    </section>
+    <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text">
+      <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text__values">
+        <p data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text__values-title">60%</p>
+        <p data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text__values-sub-title"> &nbsp; | 600</p>
+      </section>
+      <p data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text-description">Completed the onboarding</p>
+    </section>
+  </section>
+  <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item">
+    <section data-v-b3eefbe4="" class="overflow-hidden w-20 last-item">
+      <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__card" style="background-color: rgb(173, 216, 230);"></section>
+    </section>
+    <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text last-item">
+      <section data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text__values">
+        <p data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text__values-title">50%</p>
+        <p data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text__values-sub-title"> &nbsp; | 500</p>
+      </section>
+      <p data-v-b3eefbe4="" class="unnnic-chart-funnel-base-item__text-description">Became a paying customer</p>
+    </section>
+  </section>
+</section>"
+`;
