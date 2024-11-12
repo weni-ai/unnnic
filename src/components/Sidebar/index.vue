@@ -15,8 +15,8 @@
             item: active.itemIndex === itemIndex,
             childIndex: active.childIndex,
           }"
-          @navigate="handleNavigate($event)"
           :autoNavigateFirstChild="autoNavigateFirstChild"
+          @navigate="handleNavigate($event)"
         />
       </li>
     </ul>
@@ -65,8 +65,8 @@ const props = defineProps({
   },
   autoNavigateFirstChild: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 const emit = defineEmits(['navigate']);
@@ -88,7 +88,7 @@ const handleNavigate = ({ item, child }) => {
   position: fixed;
 
   width: v-bind('props.width');
- 
+
   height: 100%;
 
   &--left {
@@ -108,18 +108,18 @@ const handleNavigate = ({ item, child }) => {
     height: 100%;
 
     &::-webkit-scrollbar {
-        width: $unnnic-spacing-inline-nano;
-      }
+      width: $unnnic-spacing-inline-nano;
+    }
 
-      &::-webkit-scrollbar-thumb {
-        background: $unnnic-color-neutral-cleanest;
-        border-radius: $unnnic-border-radius-pill;
-      }
+    &::-webkit-scrollbar-thumb {
+      background: $unnnic-color-neutral-cleanest;
+      border-radius: $unnnic-border-radius-pill;
+    }
 
-      &::-webkit-scrollbar-track {
-        background: $unnnic-color-neutral-soft;
-        border-radius: $unnnic-border-radius-pill;
-      }
+    &::-webkit-scrollbar-track {
+      background: $unnnic-color-neutral-soft;
+      border-radius: $unnnic-border-radius-pill;
+    }
   }
 }
 </style>

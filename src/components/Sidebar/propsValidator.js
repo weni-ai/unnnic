@@ -1,6 +1,7 @@
 export const validateItem = (item) => {
   const { label, children } = item;
   const hasObrigatoryProps = !!label.trim();
+
   if (!hasObrigatoryProps) {
     throw new Error('Each item in "items" must have "label".');
   }
@@ -8,6 +9,8 @@ export const validateItem = (item) => {
   if (children && Array.isArray(children)) {
     children.forEach(validateItem);
   }
+
+  return true;
 };
 
 export const validateItems = (items) => {
