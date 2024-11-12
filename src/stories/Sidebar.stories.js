@@ -60,7 +60,8 @@ export default {
   component: UnnnicSidebar,
   decorators: [
     () => ({
-      template: '<div ><story style="background: #fcfcfc !important; padding: 16px" /></div>',
+      template:
+        '<div ><story style="background: #fcfcfc !important; padding: 16px" /></div>',
     }),
   ],
   args: {
@@ -100,7 +101,10 @@ export const Default = {
 
 export const Overflowed = {
   args: {
-    items: Array.from({length: 50}).map((_item, index) => ({ label: `Item ${index}`, icon: 'tune' })),
+    items: Array.from({ length: 50 }).map((_item, index) => ({
+      label: `Item ${index}`,
+      icon: 'tune',
+    })),
     width: '200px',
     active: { itemIndex: 1, childIndex: 0 },
     autoNavigateFirstChild: true,

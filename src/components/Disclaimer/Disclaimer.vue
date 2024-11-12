@@ -5,8 +5,14 @@
       size="avatar-nano"
       :icon="icon"
       :scheme="iconColor"
+      data-testid="disclaimer-icon"
     />
-    <p class="unnnic-disclaimer__text">{{ text }}</p>
+    <p
+      class="unnnic-disclaimer__text"
+      data-testid="disclaimer-text"
+    >
+      {{ text }}
+    </p>
   </section>
 </template>
 
@@ -33,6 +39,7 @@ export default {
     },
     iconColor: {
       type: String,
+      default: 'neutral-darkest',
       validator(value) {
         return colors.includes(value);
       },
