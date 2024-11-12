@@ -5,27 +5,36 @@
       :key="index"
       class="unnnic-chart-funnel-base-item"
     >
-    <section 
-      :class="[
-        'overflow-hidden', 
-         step.widthClass,
-        { 'first-item': index === 0, 'last-item': index === data.length - 1 }
-      ]">
       <section
-        :class="['unnnic-chart-funnel-base-item__card',  { 'first-item': index === 0}]"
-        :style="{ backgroundColor: step.color }"
-      ></section>
-    </section>
-
-    <section :class="['unnnic-chart-funnel-base-item__text', { 'last-item': index === data.length - 1 }]">
-      <section class="unnnic-chart-funnel-base-item__text__values">
-        <p class="unnnic-chart-funnel-base-item__text__values-title">
-          {{ step.percentage }}
-        </p>
-        <p class="unnnic-chart-funnel-base-item__text__values-sub-title">
-          &nbsp; | {{ step.value }}
-        </p>
+        :class="[
+          'overflow-hidden',
+          step.widthClass,
+          { 'first-item': index === 0, 'last-item': index === data.length - 1 },
+        ]"
+      >
+        <section
+          :class="[
+            'unnnic-chart-funnel-base-item__card',
+            { 'first-item': index === 0 },
+          ]"
+          :style="{ backgroundColor: step.color }"
+        ></section>
       </section>
+
+      <section
+        :class="[
+          'unnnic-chart-funnel-base-item__text',
+          { 'last-item': index === data.length - 1 },
+        ]"
+      >
+        <section class="unnnic-chart-funnel-base-item__text__values">
+          <p class="unnnic-chart-funnel-base-item__text__values-title">
+            {{ step.percentage }}
+          </p>
+          <p class="unnnic-chart-funnel-base-item__text__values-sub-title">
+            &nbsp; | {{ step.value }}
+          </p>
+        </section>
         <p class="unnnic-chart-funnel-base-item__text-description">
           {{ step.description }}
         </p>
@@ -44,7 +53,7 @@ interface FunnelStep {
 }
 
 defineProps<{
-  data: FunnelStep[]
+  data: FunnelStep[];
 }>();
 </script>
 
@@ -72,7 +81,7 @@ defineProps<{
     border-radius: 0 0 $unnnic-spacing-xs 0;
 
     &.first-item {
-    border-radius: $unnnic-spacing-xs $unnnic-spacing-xs $unnnic-spacing-xs 0;
+      border-radius: $unnnic-spacing-xs $unnnic-spacing-xs $unnnic-spacing-xs 0;
     }
   }
 
@@ -99,7 +108,7 @@ defineProps<{
     &.last-item::after {
       display: none;
     }
-    
+
     &-description {
       margin: 0;
       color: $unnnic-color-neutral-dark;
@@ -161,8 +170,8 @@ defineProps<{
   position: relative;
 
   &.first-item {
-    border-radius: $unnnic-spacing-xs $unnnic-spacing-xs 0px 0;
-    }
+    border-radius: $unnnic-spacing-xs $unnnic-spacing-xs 0 0;
+  }
 
   &.last-item {
     border-radius: 0 0 $unnnic-spacing-xs $unnnic-spacing-xs;
