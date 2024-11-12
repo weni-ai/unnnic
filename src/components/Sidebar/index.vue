@@ -16,6 +16,7 @@
             childIndex: active.childIndex,
           }"
           :autoNavigateFirstChild="autoNavigateFirstChild"
+          data-testid="sidebar-item"
           @navigate="handleNavigate($event)"
         />
       </li>
