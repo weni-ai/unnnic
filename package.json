@@ -15,7 +15,8 @@
       "require": "./dist/unnnic.umd.js"
     },
     "./dist/style.css": "./dist/style.css",
-    "./src/assets/scss/unnnic.scss": "./src/assets/scss/unnnic.scss"
+    "./src/assets/scss/unnnic.scss": "./src/assets/scss/unnnic.scss",
+    "./package.json": "./package.json"
   },
   "scripts": {
     "dev": "vite",
