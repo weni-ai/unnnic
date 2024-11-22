@@ -1,7 +1,8 @@
 <template>
   <section
+    data-testid="sidebar-item"
     :class="{ 'unnnic-sidebar-item': true, active: active.item }"
-    @click.stop="hasChildren ? handleShowChildrenList() : handleEmitNavigate()"
+    @click.stop="handleClick"
   >
     <Icon
       v-if="item.icon"
@@ -9,8 +10,12 @@
       :icon="item.icon"
       size="ant"
       :scheme="active.item ? 'weni-600' : 'neutral-cloudy'"
+      data-testid="item-icon"
     />
-    <p :class="{ 'unnnic-sidebar-item__label': true, active: active.item }" :title="item.label">
+    <p
+      :class="{ 'unnnic-sidebar-item__label': true, active: active.item }"
+      :title="item.label"
+    >
       {{ item.label }}
     </p>
     <Icon
@@ -19,6 +24,7 @@
       :icon="showChildrenList ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
       size="ant"
       scheme="neutral-cloudy"
+      data-testid="arrow-icon"
     />
   </section>
   <Transition name="slide-fade">
@@ -33,6 +39,7 @@
           'unnnic-sidebar-item-child': true,
           active: isActive(childIndex),
         }"
+        data-testid="sidebar-item-child"
         @click.stop="!isActive(childIndex) && emit('navigate', { item, child })"
       >
         <Icon
@@ -79,8 +86,8 @@ const props = defineProps({
   },
   autoNavigateFirstChild: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 });
 
 onMounted(() => {
@@ -91,27 +98,31 @@ onMounted(() => {
 });
 
 const hasChildren = computed(() => {
-  return props.item.children?.length;
+  return !!props.item.children?.length;
 });
 
 const showChildrenList = ref(false);
 
 const handleShowChildrenList = () => {
   showChildrenList.value = !showChildrenList.value;
-  
-  const isOpening = showChildrenList.value
-  if (isOpening  && props.autoNavigateFirstChild) {
+
+  const isOpening = showChildrenList.value;
+  if (isOpening && props.autoNavigateFirstChild) {
     emit('navigate', { item: props.item, child: props.item.children[0] });
   }
 };
 
-const isActive = (paramChildIndex = null) => {
+const isActive = (paramChildIndex) => {
   const { item, childIndex } = props.active;
   if (!(typeof childIndex === 'number')) {
     return item;
   }
 
   return item && childIndex === paramChildIndex;
+};
+
+const handleClick = () => {
+  hasChildren.value ? handleShowChildrenList() : handleEmitNavigate();
 };
 
 const handleEmitNavigate = () => {

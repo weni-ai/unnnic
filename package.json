@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "2.16.1-alpha.2",
+  "version": "2.16.2-alpha.0",
   "type": "commonjs",
   "files": [
     "dist",
@@ -15,7 +15,8 @@
       "require": "./dist/unnnic.umd.js"
     },
     "./dist/style.css": "./dist/style.css",
-    "./src/assets/scss/unnnic.scss": "./src/assets/scss/unnnic.scss"
+    "./src/assets/scss/unnnic.scss": "./src/assets/scss/unnnic.scss",
+    "./package.json": "./package.json"
   },
   "scripts": {
     "dev": "vite",

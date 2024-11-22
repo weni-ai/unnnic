@@ -9,9 +9,7 @@
 import ChartFunnelThreeRows from './SvgFunnel/ChartFunnelThreeRows.vue';
 import ChartFunnelFourRows from './SvgFunnel/ChartFunnelFourRows.vue';
 import ChartFunnelFiveRows from './SvgFunnel/ChartFunnelFiveRows.vue';
-import ChartDefaultFunnelThreeRows from './DefaultFunnel/ChartDefaultFunnelThreeRows.vue';
-import ChartDefaultFunnelFourRows from './DefaultFunnel/ChartDefaultFunnelFourRows.vue';
-import ChartDefaultFunnelFiveRows from './DefaultFunnel/ChartDefaultFunnelFiveRows.vue';
+import ChartDefaultFunnelBase from './DefaultFunnel/ChartDefaultFunnelBase.vue';
 
 export default {
   name: 'UnnnicChartFunnel',
@@ -20,9 +18,7 @@ export default {
     ChartFunnelThreeRows,
     ChartFunnelFourRows,
     ChartFunnelFiveRows,
-    ChartDefaultFunnelFiveRows,
-    ChartDefaultFunnelThreeRows,
-    ChartDefaultFunnelFourRows,
+    ChartDefaultFunnelBase,
   },
 
   props: {
@@ -40,9 +36,9 @@ export default {
     chartComponent() {
       const componentMap = {
         default: {
-          3: ChartDefaultFunnelThreeRows,
-          4: ChartDefaultFunnelFourRows,
-          5: ChartDefaultFunnelFiveRows,
+          3: ChartDefaultFunnelBase,
+          4: ChartDefaultFunnelBase,
+          5: ChartDefaultFunnelBase,
         },
         basic: {
           3: 'ChartFunnelThreeRows',
