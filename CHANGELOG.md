@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Support to HTML in ToolTip component
+- ToolTip: Added Support to HTML
 
 ## 2.18.0 (2024-11-27)
 
