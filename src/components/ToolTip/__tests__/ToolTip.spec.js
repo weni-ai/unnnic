@@ -92,4 +92,13 @@ describe('ToolTip', () => {
     await wrapper.trigger('mouseover');
     expect(handlResizeSpy).toHaveBeenCalled();
   });
+
+  it('should render html link variation', async () => {
+    await wrapper.setProps({
+      enableHtml: true,
+      text: 'tooltip with <a data-testid="weni-link" href="https://weni.ai/" target="_blank" style="color: white;">weni</a> link',
+    });
+    const link = wrapper.find('a[data-testid="weni-link"]');
+    expect(link.exists()).toBeTruthy();
+  });
 });

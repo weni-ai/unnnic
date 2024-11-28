@@ -15,8 +15,13 @@
       :style="{ maxWidth: maxWidth, left: leftPos, top: topPos }"
       data-testid="tooltip-label"
     >
+      <template v-if="enableHtml">
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <section v-html="text"></section>
+      </template>
       <template
         v-for="(line, index) in text.split('\n')"
+        v-else
         :key="index"
       >
         {{ line }}
@@ -60,10 +65,15 @@ export default {
     },
     maxWidth: {
       type: String,
+      default: '',
     },
     shortcutText: {
       type: String,
       default: null,
+    },
+    enableHtml: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
