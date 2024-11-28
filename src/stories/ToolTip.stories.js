@@ -11,6 +11,7 @@ export default {
     },
     maxWidth: { control: { type: 'text' } },
     forceOpen: { control: { type: 'boolean' } },
+    enableHtml: { control: { type: 'boolean' } },
   },
   render: (args) => ({
     components: {
@@ -31,5 +32,15 @@ export const Normal = {
     enabled: true,
     maxWidth: `${15 * unnnicFontSize}px`,
     side: 'bottom',
+  },
+};
+
+export const withLink = {
+  args: {
+    text: 'tooltip with <a href="https://weni.ai/" target="_blank" style="color: white;">weni</a> link',
+    enabled: true,
+    maxWidth: `${15 * unnnicFontSize}px`,
+    side: 'right',
+    enableHtml: true,
   },
 };
