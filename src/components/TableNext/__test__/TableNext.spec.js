@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect, beforeEach, vi } from 'vitest';
 import TableNext from '../TableNext.vue';
 import TablePagination from '../TablePagination.vue';
 
@@ -88,6 +88,51 @@ describe('TableNext.vue', () => {
     });
   });
 
+  describe('Header sorting', () => {
+    it('render sort icon', async () => {
+      wrapper = mount(TableNext, {
+        props: {
+          headers: [
+            { content: 'ID', size: 1, isSortable: true },
+            { content: 'Name', size: 'auto' },
+            { content: 'Age', size: 2 },
+          ],
+          rows,
+        },
+      });
+      expect(wrapper.find('[data-testid="arrow-default-icon"]').exists()).toBe(
+        true,
+      );
+    });
+    it('change sorting and emit sort event', async () => {
+      wrapper = mount(TableNext, {
+        props: {
+          headers: [
+            { content: 'ID', size: 1, isSortable: true },
+            { content: 'Name', size: 'auto' },
+            { content: 'Age', size: 2 },
+          ],
+          rows,
+        },
+      });
+      const handlerSortSpy = vi.spyOn(wrapper.vm, 'handleSort');
+
+      const [headerCell, unsortableHeaderCell] = wrapper.findAll(
+        '[data-testid="header-cell"]',
+      );
+
+      await unsortableHeaderCell.trigger('click');
+      expect(handlerSortSpy).not.toHaveBeenCalled();
+
+      await headerCell.trigger('click');
+      expect(handlerSortSpy).toHaveBeenCalledWith('ID', 'asc');
+      await headerCell.trigger('click');
+      expect(handlerSortSpy).toHaveBeenCalledWith('ID', 'desc');
+      await headerCell.trigger('click');
+      expect(handlerSortSpy).toHaveBeenCalledWith('', '');
+    });
+  });
+
   describe('Row rendering and behaviors', () => {
     it('renders rows correctly', () => {
       const bodyRows = wrapper.findAll('[data-testid="body-row"]');
@@ -129,8 +174,8 @@ describe('TableNext.vue', () => {
 
     it('should emit row-click when clicking on a row', async () => {
       const row = wrapper.find('[data-testid="body-row"]');
-      await row.trigger('click');      
-      
+      await row.trigger('click');
+
       expect(wrapper.emitted()['row-click'][0][0]).toEqual(rows[0]);
     });
   });

@@ -4,8 +4,12 @@ exports[`TableNext.vue > matches the snapshot 1`] = `
 "<table data-v-2143c794="" class="unnnic-table-next">
   <thead data-v-2143c794="" class="unnnic-table-next__header" data-testid="header">
     <tr data-v-2143c794="" class="unnnic-table-next__header-row" data-testid="header-row" style="grid-template-columns: 1fr 2fr;">
-      <th data-v-2143c794="" class="unnnic-table-next__header-cell" data-testid="header-cell">Header 1</th>
-      <th data-v-2143c794="" class="unnnic-table-next__header-cell" data-testid="header-cell">Header 2</th>
+      <th data-v-2143c794="" class="unnnic-table-next__header-cell" data-testid="header-cell">Header 1
+        <!--v-if-->
+      </th>
+      <th data-v-2143c794="" class="unnnic-table-next__header-cell" data-testid="header-cell">Header 2
+        <!--v-if-->
+      </th>
     </tr>
   </thead>
   <tbody data-v-2143c794="" class="unnnic-table-next__body" data-testid="body">

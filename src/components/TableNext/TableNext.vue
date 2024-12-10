@@ -27,6 +27,7 @@
             <IconArrowsDefault
               v-if="sort.header !== cell.content"
               class="order-default-icon"
+              data-testid="arrow-default-icon"
             />
             <Icon
               v-else-if="sort.order === 'asc'"
@@ -34,6 +35,7 @@
               size="ant"
               :icon="'switch_left'"
               style="transform: rotate(-90deg)"
+              data-testid="arrow-asc-icon"
             />
             <Icon
               v-else-if="sort.order === 'desc'"
@@ -41,6 +43,7 @@
               size="ant"
               :icon="'switch_left'"
               style="transform: rotate(90deg)"
+              data-testid="arrow-desc-icon"
             />
           </template>
         </th>
