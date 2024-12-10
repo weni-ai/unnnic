@@ -13,10 +13,39 @@
         <th
           v-for="(cell, index) of headers"
           :key="cell.content + index"
-          class="unnnic-table-next__header-cell"
+          :class="{
+            'unnnic-table-next__header-cell': true,
+            'unnnic-table-next__header-cell--clickable': cell.isSortable,
+            'unnnic-table-next__header-cell--sorting':
+              sort.header === cell.content && sort.order !== '',
+          }"
           data-testid="header-cell"
+          @click.stop="handleClickHeader(cell)"
         >
           {{ cell.content }}
+          <template v-if="cell.isSortable">
+            <IconArrowsDefault
+              v-if="sort.header !== cell.content"
+              class="order-default-icon"
+              data-testid="arrow-default-icon"
+            />
+            <Icon
+              v-else-if="sort.order === 'asc'"
+              clickable
+              size="ant"
+              :icon="'switch_left'"
+              style="transform: rotate(-90deg)"
+              data-testid="arrow-asc-icon"
+            />
+            <Icon
+              v-else-if="sort.order === 'desc'"
+              clickable
+              size="ant"
+              :icon="'switch_left'"
+              style="transform: rotate(90deg)"
+              data-testid="arrow-desc-icon"
+            />
+          </template>
         </th>
       </tr>
     </thead>
@@ -117,6 +146,8 @@ import { validateHeaders, validateRows } from './validation';
 import TableBodyCell from './TableBodyCell.vue';
 import TablePagination from './TablePagination.vue';
 import UnnnicI18n from '../../mixins/i18n';
+import Icon from '../Icon.vue';
+import IconArrowsDefault from '../icons/iconArrowsDefault.vue';
 
 export default {
   name: 'UnnnicTableNext',
@@ -124,6 +155,8 @@ export default {
   components: {
     TableBodyCell,
     TablePagination,
+    Icon,
+    IconArrowsDefault,
   },
 
   mixins: [UnnnicI18n],
@@ -191,7 +224,7 @@ export default {
     },
   },
 
-  emits: ['update:pagination', 'row-click'],
+  emits: ['update:pagination', 'row-click', 'sort'],
 
   data() {
     return {
@@ -202,6 +235,7 @@ export default {
           es: 'No hay resultados coincidentes',
         },
       },
+      sort: { header: '', order: '' },
     };
   },
 
@@ -224,6 +258,28 @@ export default {
     },
     shouldHideHeaders() {
       return this.hideHeaders || !this.headers.length;
+    },
+  },
+  methods: {
+    handleClickHeader(header) {
+      if (!header.isSortable) return;
+
+      const nextSortOrderMapper = {
+        asc: 'desc',
+        desc: '',
+        '': 'asc',
+      };
+
+      const nextSort =
+        header.content !== this.sort.header
+          ? 'asc'
+          : nextSortOrderMapper[this.sort.order];
+
+      this.handleSort(nextSort === '' ? '' : header.content, nextSort);
+    },
+    handleSort(key, order) {
+      this.sort = { header: key, order };
+      this.$emit('sort', this.sort);
     },
   },
 };
@@ -260,6 +316,8 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
       font-weight: $unnnic-font-weight-bold;
 
+      display: flex;
+
       &:first-of-type {
         border-radius: $unnnic-border-radius-sm 0 0 0;
       }
@@ -270,6 +328,17 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
       &:last-of-type {
         border-radius: 0 $unnnic-border-radius-sm 0 0;
+      }
+
+      &--sorting {
+        background-color: $unnnic-color-neutral-soft;
+      }
+
+      &--clickable {
+        &:hover {
+          cursor: pointer;
+          background-color: $unnnic-color-neutral-soft;
+        }
       }
     }
   }
