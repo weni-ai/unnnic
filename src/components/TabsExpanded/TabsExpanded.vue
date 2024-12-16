@@ -2,6 +2,7 @@
   <div class="unnnic-tabs-expanded">
     <div
       class="back-container"
+      data-testid="back"
       @click="$emit('back')"
     >
       <UnnnicIcon
@@ -14,6 +15,7 @@
       v-for="item in items"
       :key="item.value"
       class="tab"
+      data-testid="tab"
       @click="$emit('update:model-value', item.value)"
     >
       <div>
@@ -24,11 +26,15 @@
               ? 'color-brand-weni-soft'
               : 'color-neutral-cloudy',
           ]"
+          data-testid="tab-title"
         >
           {{ item.title }}
         </div>
 
-        <div class="u font secondary body-sm color-neutral-cloudy">
+        <div
+          data-testid="tab-description"
+          class="u font secondary body-sm color-neutral-cloudy"
+        >
           {{ item.description }}
         </div>
       </div>
@@ -42,6 +48,7 @@
           size="xs"
           clickable
           scheme="neutral-cloudy"
+          data-testid="tab-close-icon"
           @click.stop="$emit('close-tab', item)"
         />
       </div>
@@ -49,6 +56,7 @@
 
     <div
       class="add-container"
+      data-testid="tab-add"
       @click="$emit('add')"
     >
       <UnnnicIcon
@@ -71,12 +79,15 @@ export default {
   props: {
     modelValue: {
       type: [String, Number],
+      required: true,
     },
 
     items: {
       type: Array,
+      required: true,
     },
   },
+  emits: ['back', 'update:model-value', 'close-tab', 'add'],
 };
 </script>
 
