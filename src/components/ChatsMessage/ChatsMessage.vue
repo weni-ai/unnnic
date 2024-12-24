@@ -221,7 +221,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
   border-radius: $unnnic-border-radius-md;
 
-  padding: $unnnic-spacing-xs;
+  padding: $unnnic-spacing-xs $unnnic-spacing-ant;
 
   background-color: $unnnic-color-neutral-white;
 
