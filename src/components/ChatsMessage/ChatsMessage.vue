@@ -247,7 +247,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    gap: $unnnic-spacing-xs;
+    gap: $unnnic-spacing-sm;
 
     & > * {
       margin: 0;
@@ -327,7 +327,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
   &__status-time {
     display: flex;
-    align-items: end;
+    align-items: center;
     gap: $unnnic-spacing-nano;
   }
 
