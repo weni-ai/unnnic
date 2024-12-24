@@ -51,7 +51,12 @@ export default {
       UnnnicTableNext,
     },
     setup() {
-      return { args };
+      const sort = ({ order }) => {
+        if (order === 'asc') return;
+        if (order === 'desc') args.rows === args.rows.reverse();
+        else args.rows === args.rows.reverse();
+      };
+      return { args, sort };
     },
     data() {
       return {
@@ -61,6 +66,7 @@ export default {
             {
               content: 'ID',
               size: 'auto',
+              isSortable: true,
             },
             {
               content: 'Name',
@@ -88,6 +94,7 @@ export default {
       v-model:pagination="pagination"
       :paginationTotal="125"
       :paginationInterval="5"
+      @sort="sort"
     />
     `,
   }),

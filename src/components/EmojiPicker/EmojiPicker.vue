@@ -2,8 +2,8 @@
   <div
     ref="pickerContainer"
     :class="['emoji-picker', `emoji-picker--${position}`]"
-    @click.stop="() => {}"
-    @keypress.enter="() => {}"
+    @click.stop
+    @keypress.enter.stop
   />
 </template>
 
