@@ -63,13 +63,27 @@
       </div>
     </div>
 
-    <span
+    <section
       v-if="!selected && unreadMessages"
-      class="chats-contact__infos__unread-messages"
-      :title="i18n('unread_messages', unreadMessages, { unreadMessages })"
+      class="chats-contact__infos__unread-messages-container"
     >
-      {{ unreadMessages }}
-    </span>
+      <p
+        v-if="lastInteractionTime"
+        :class="{
+          'chats-contact__infos__message-time': true,
+          'chats-contact__infos__message-time--active': unreadMessages,
+        }"
+      >
+        {{ formattedLastInteraction }}
+      </p>
+      <p
+        class="chats-contact__infos__unread-messages"
+        :title="i18n('unread_messages', unreadMessages, { unreadMessages })"
+      >
+        {{ unreadMessages }}
+      </p>
+    </section>
+
     <Checkbox
       v-else-if="selected && checkboxWhenSelect"
       class="chats-contact__infos__checkbox"
@@ -89,6 +103,10 @@ import TransitionRipple from '../TransitionRipple/TransitionRipple.vue';
 import UnnnicI18n from '../../mixins/i18n';
 import Checkbox from '../Checkbox/Checkbox.vue';
 
+import('moment/dist/locale/es.js');
+import('moment/dist/locale/pt-br.js');
+import moment from 'moment';
+
 export default {
   name: 'ChatsContact',
 
@@ -99,11 +117,13 @@ export default {
     Checkbox,
   },
 
-  emits: ['click'],
-  
   mixins: [UnnnicI18n],
 
   props: {
+    locale: {
+      type: String,
+      default: 'en',
+    },
     title: {
       type: String,
       default: '',
@@ -112,6 +132,10 @@ export default {
     lastMessage: {
       type: String,
       default: '',
+    },
+    lastInteractionTime: {
+      type: String,
+      default: '2024-12-29T11:39:32.413041-03:00',
     },
     userPhoto: {
       type: String,
@@ -143,6 +167,8 @@ export default {
     },
   },
 
+  emits: ['click'],
+
   data() {
     return {
       isHovered: false,
@@ -169,6 +195,30 @@ export default {
   },
 
   computed: {
+    formattedLastInteraction() {
+      if (!this.lastInteractionTime) return '';
+
+      const yesterdayTranslationsMapper = {
+        en: 'Yesterday',
+        'pt-br': 'Ontem',
+        ayer: 'Ayer',
+      };
+
+      moment.locale(this.locale);
+
+      const now = moment();
+      const lastInteractionMoment = moment(this.lastInteractionTime);
+
+      if (now.diff(lastInteractionMoment, 'hours') > 48) {
+        return lastInteractionMoment.format('L');
+      }
+
+      if (now.diff(lastInteractionMoment, 'days') === 1) {
+        return yesterdayTranslationsMapper[this.locale || 'en'];
+      }
+
+      return lastInteractionMoment.format('HH:mm');
+    },
     subtitle() {
       const { discussionGoal, lastMessage } = this;
       return discussionGoal
@@ -189,7 +239,8 @@ export default {
   gap: $unnnic-spacing-xs;
 
   background-color: $unnnic-color-background-white;
-  border-radius: $unnnic-border-radius-sm;
+  border: 1px solid $unnnic-color-neutral-soft;
+
   font-family: $unnnic-font-family-secondary;
 
   padding: $unnnic-spacing-xs;
@@ -207,7 +258,7 @@ export default {
   }
 
   &.selected {
-    background-color: $unnnic-color-weni-50;
+    background-color: $unnnic-color-neutral-light;
   }
 
   &.waiting {
@@ -282,6 +333,7 @@ export default {
 
     width: 100%;
     overflow: hidden;
+    gap: $unnnic-spacing-nano;
 
     &__title,
     &__additional-information {
@@ -300,13 +352,34 @@ export default {
       color: $unnnic-color-neutral-cloudy;
     }
 
+    &__unread-messages-container {
+      min-width: max-content;
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      justify-content: center;
+      gap: $unnnic-spacing-nano;
+    }
+
+    &__message-time {
+      color: $unnnic-color-neutral-dark;
+      font-family: $unnnic-font-family-secondary;
+      font-size: 10px;
+      line-height: $unnnic-font-size-body-lg;
+
+      &--active {
+        color: $unnnic-color-weni-700;
+        font-weight: $unnnic-font-weight-bold;
+      }
+    }
+
     &__unread-messages {
       display: flex;
       justify-content: center;
       align-items: center;
 
       border-radius: 50%;
-      background: $unnnic-color-background-grass;
+      background: $unnnic-color-weni-50;
 
       width: 1.25rem;
       min-width: 1.25rem;
@@ -315,7 +388,7 @@ export default {
       font-size: $unnnic-font-size-body-md;
       font-weight: $unnnic-font-weight-bold;
       line-height: $unnnic-line-height-small;
-      color: $unnnic-color-weni-800;
+      color: $unnnic-color-weni-700;
     }
 
     .ellipsis {
