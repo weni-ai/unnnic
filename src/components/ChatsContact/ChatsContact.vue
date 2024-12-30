@@ -135,7 +135,7 @@ export default {
     },
     lastInteractionTime: {
       type: String,
-      default: '2024-12-29T11:39:32.413041-03:00',
+      default: '',
     },
     userPhoto: {
       type: String,
