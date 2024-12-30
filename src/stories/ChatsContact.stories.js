@@ -86,7 +86,7 @@ export const ContactList = {
       };
     },
     template: `
-    <div style="display: grid; gap: 5px;">
+    <div style="display: grid;">
       <unnnic-chats-contact v-for="index in 5" v-bind="args" @click="selectedContact = index" :selected="selectedContact === index"/>
     </div>
   `,
