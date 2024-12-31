@@ -64,7 +64,7 @@
     </div>
 
     <section
-      v-if="!selected"
+      v-if="!checkboxWhenSelect"
       class="chats-contact__infos__unread-messages-container"
     >
       <p
@@ -77,7 +77,7 @@
         {{ formattedLastInteraction }}
       </p>
       <p
-        v-if="unreadMessages"
+        v-if="unreadMessages && !selected"
         class="chats-contact__infos__unread-messages"
         :title="i18n('unread_messages', unreadMessages, { unreadMessages })"
       >
@@ -196,6 +196,12 @@ export default {
   },
 
   computed: {
+    messageInfoAlign() {
+      return this.unreadMessages ? 'center' : 'flex-start';
+    },
+    messageInfoMarginTop() {
+      return this.unreadMessages ? '0px' : '4px';
+    },
     formattedLastInteraction() {
       if (!this.lastInteractionTime) return '';
 
@@ -365,9 +371,9 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: end;
-      justify-content: center;
+      justify-content: v-bind(messageInfoAlign);
       gap: $unnnic-spacing-nano;
-      margin-top: 0;
+      margin-top: v-bind(messageInfoMarginTop);
     }
 
     &__message-time {
