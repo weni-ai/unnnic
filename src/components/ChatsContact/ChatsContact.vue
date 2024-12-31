@@ -209,12 +209,12 @@ export default {
       const now = moment();
       const lastInteractionMoment = moment(this.lastInteractionTime);
 
-      if (now.diff(lastInteractionMoment, 'hours') > 48) {
-        return lastInteractionMoment.format('L');
+      if (now.subtract(1, 'day').isSame(lastInteractionMoment, 'day')) {
+        return yesterdayTranslationsMapper[this.locale || 'en'];
       }
 
-      if (now.diff(lastInteractionMoment, 'days') === 1) {
-        return yesterdayTranslationsMapper[this.locale || 'en'];
+      if (now.diff(lastInteractionMoment, 'hours') > 0) {
+        return lastInteractionMoment.format('L');
       }
 
       return lastInteractionMoment.format('HH:mm');
