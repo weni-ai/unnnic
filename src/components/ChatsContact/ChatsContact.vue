@@ -239,7 +239,6 @@ export default {
   gap: $unnnic-spacing-xs;
 
   background-color: $unnnic-color-background-white;
-  border: 1px solid $unnnic-color-neutral-soft;
 
   font-family: $unnnic-font-family-secondary;
 
@@ -259,6 +258,7 @@ export default {
 
   &.selected {
     background-color: $unnnic-color-neutral-light;
+    border: 1px solid $unnnic-color-neutral-soft;
   }
 
   &.waiting {
