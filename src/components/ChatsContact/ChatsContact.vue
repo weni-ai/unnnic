@@ -197,10 +197,10 @@ export default {
 
   computed: {
     messageInfoAlign() {
-      return this.unreadMessages ? 'center' : 'flex-start';
+      return this.unreadMessages && this.selected ? 'center' : 'flex-start';
     },
     messageInfoMarginTop() {
-      return this.unreadMessages ? '0px' : '4px';
+      return this.unreadMessages && this.selected ? '0px' : '4px';
     },
     formattedLastInteraction() {
       if (!this.lastInteractionTime) return '';
