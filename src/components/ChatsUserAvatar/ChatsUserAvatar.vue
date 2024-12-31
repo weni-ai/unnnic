@@ -107,7 +107,7 @@ $avatar-sizes:
   color: $unnnic-color-aux-purple-500;
 
   &.active {
-    // background: $unnnic-color-weni-100;
+    background: $unnnic-color-neutral-white;
   }
 
   &.disabled {

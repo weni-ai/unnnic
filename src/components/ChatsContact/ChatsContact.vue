@@ -91,7 +91,7 @@
     />
     <TransitionRipple
       ref="transitionRipple"
-      color="weni-500"
+      color="neutral-cleanest"
     />
   </div>
 </template>
@@ -240,11 +240,17 @@ export default {
 
   background-color: $unnnic-color-background-white;
 
+  border: 1px solid $unnnic-color-neutral-soft;
+
   font-family: $unnnic-font-family-secondary;
 
   padding: $unnnic-spacing-xs;
 
   cursor: pointer;
+
+  &:active {
+    border: 1px solid $unnnic-color-neutral-cleanest;
+  }
 
   &:focus-visible {
     outline-color: $unnnic-color-weni-600;
