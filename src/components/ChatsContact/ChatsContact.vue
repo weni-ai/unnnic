@@ -196,9 +196,6 @@ export default {
   },
 
   computed: {
-    gridAlign() {
-      return this.lastInteractionTime ? 'flex-end' : 'center';
-    },
     formattedLastInteraction() {
       if (!this.lastInteractionTime) return '';
 
@@ -239,7 +236,7 @@ export default {
 .chats-contact {
   display: grid;
   grid-template-columns: max-content 1fr min-content;
-  align-items: v-bind(gridAlign);
+  align-items: center;
   gap: $unnnic-spacing-xs;
 
   background-color: $unnnic-color-background-white;
@@ -363,10 +360,12 @@ export default {
     }
 
     &__unread-messages-container {
+      height: 100%;
       min-width: max-content;
       display: flex;
       flex-direction: column;
       align-items: end;
+      justify-content: center;
       gap: $unnnic-spacing-nano;
       margin-top: 0;
     }
