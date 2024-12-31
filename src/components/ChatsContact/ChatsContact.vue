@@ -77,7 +77,7 @@
         {{ formattedLastInteraction }}
       </p>
       <p
-        v-show="unreadMessages"
+        v-if="unreadMessages"
         class="chats-contact__infos__unread-messages"
         :title="i18n('unread_messages', unreadMessages, { unreadMessages })"
       >
