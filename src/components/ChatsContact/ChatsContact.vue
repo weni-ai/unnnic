@@ -64,7 +64,7 @@
     </div>
 
     <section
-      v-if="!selected && unreadMessages"
+      v-if="!selected"
       class="chats-contact__infos__unread-messages-container"
     >
       <p
@@ -77,6 +77,7 @@
         {{ formattedLastInteraction }}
       </p>
       <p
+        v-show="unreadMessages"
         class="chats-contact__infos__unread-messages"
         :title="i18n('unread_messages', unreadMessages, { unreadMessages })"
       >
@@ -195,6 +196,9 @@ export default {
   },
 
   computed: {
+    gridAlign() {
+      return this.lastInteractionTime ? 'flex-end' : 'center';
+    },
     formattedLastInteraction() {
       if (!this.lastInteractionTime) return '';
 
@@ -235,7 +239,7 @@ export default {
 .chats-contact {
   display: grid;
   grid-template-columns: max-content 1fr min-content;
-  align-items: center;
+  align-items: v-bind(gridAlign);
   gap: $unnnic-spacing-xs;
 
   background-color: $unnnic-color-background-white;
@@ -363,8 +367,8 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: end;
-      justify-content: center;
       gap: $unnnic-spacing-nano;
+      margin-top: 0;
     }
 
     &__message-time {
