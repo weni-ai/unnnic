@@ -64,7 +64,7 @@
     </div>
 
     <section
-      v-if="!selected && unreadMessages"
+      v-if="!selected"
       class="chats-contact__infos__unread-messages-container"
     >
       <p
@@ -77,6 +77,7 @@
         {{ formattedLastInteraction }}
       </p>
       <p
+        v-if="unreadMessages"
         class="chats-contact__infos__unread-messages"
         :title="i18n('unread_messages', unreadMessages, { unreadMessages })"
       >
@@ -195,6 +196,9 @@ export default {
   },
 
   computed: {
+    gridAlign() {
+      return this.lastInteractionTime ? 'flex-end' : 'center';
+    },
     formattedLastInteraction() {
       if (!this.lastInteractionTime) return '';
 
@@ -209,12 +213,12 @@ export default {
       const now = moment();
       const lastInteractionMoment = moment(this.lastInteractionTime);
 
-      if (now.diff(lastInteractionMoment, 'hours') > 48) {
-        return lastInteractionMoment.format('L');
+      if (now.subtract(1, 'day').isSame(lastInteractionMoment, 'day')) {
+        return yesterdayTranslationsMapper[this.locale || 'en'];
       }
 
-      if (now.diff(lastInteractionMoment, 'days') === 1) {
-        return yesterdayTranslationsMapper[this.locale || 'en'];
+      if (now.diff(lastInteractionMoment, 'hours') > 0) {
+        return lastInteractionMoment.format('L');
       }
 
       return lastInteractionMoment.format('HH:mm');
@@ -235,7 +239,7 @@ export default {
 .chats-contact {
   display: grid;
   grid-template-columns: max-content 1fr min-content;
-  align-items: center;
+  align-items: v-bind(gridAlign);
   gap: $unnnic-spacing-xs;
 
   background-color: $unnnic-color-background-white;
@@ -363,8 +367,8 @@ export default {
       display: flex;
       flex-direction: column;
       align-items: end;
-      justify-content: center;
       gap: $unnnic-spacing-nano;
+      margin-top: 0;
     }
 
     &__message-time {
