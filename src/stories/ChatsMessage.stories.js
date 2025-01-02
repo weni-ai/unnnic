@@ -12,7 +12,7 @@ export default {
   component: UnnnicChatsMessage,
   tags: ['autodocs'],
   args: {
-    time: new Date('2023-08-08T11:09:07.876230-03:00'),
+    time: new Date(),
     type: 'sent',
     onClick: action('click'),
     onClickImage: action('click-image'),
@@ -53,6 +53,12 @@ export const Default = { args: {} };
 export const Sending = {
   args: {
     status: 'sending',
+  },
+};
+
+export const WithReply = {
+  args: {
+    enableReply: true,
   },
 };
 
