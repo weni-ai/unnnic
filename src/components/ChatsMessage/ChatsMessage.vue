@@ -1,5 +1,5 @@
 <template>
-  <div
+  <section
     class="unnnic-chats-message"
     :class="{
       sent: type === 'sent',
@@ -9,6 +9,8 @@
       'is-image': isImage,
       'is-video': isVideo,
     }"
+    @mouseover="isHovering = true"
+    @mouseleave="isHovering = false"
   >
     <p
       v-if="signature"
@@ -75,6 +77,24 @@
         size="avatar-nano"
         scheme="neutral-dark"
       />
+      <UnnnicTooltip
+        v-if="
+          enableReply && isHovering && !['sending', 'failed'].includes(status)
+        "
+        enabled
+        size="right"
+        :text="i18n('reply')"
+        :side="type === 'sent' ? 'bottom' : 'right'"
+      >
+        <UnnnicIcon
+          icon="reply"
+          clickable
+          scheme="neutral-dark"
+          size="avatar-nano"
+          data-testid="reply-icon"
+          @click.stop="$emit('reply')"
+        />
+      </UnnnicTooltip>
       <section
         v-else
         class="unnnic-chats-message__status-time"
@@ -83,14 +103,14 @@
           {{ formattedTime }}
         </p>
         <UnnnicIcon
-          v-if="type === 'sent'"
+          v-if="type === 'sent' && !['sending', 'failed'].includes(status)"
           :icon="messageStatusIcon"
           size="sm"
           :scheme="status === 'readed' ? 'aux-blue-500' : 'neutral-clean'"
         />
       </section>
     </main>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -98,6 +118,8 @@ import UnnnicChatsMessageStatusBackdrop from './ChatsMessageStatusBackdrop.vue';
 import UnnnicChatsMessageText from './ChatsMessageText.vue';
 import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import UnnnicIcon from '../Icon.vue';
+import UnnnicTooltip from '../ToolTip/ToolTip.vue';
+import UnnnicI18n from '../../mixins/i18n';
 
 export default {
   name: 'UnnnicChatsMessage',
@@ -106,8 +128,14 @@ export default {
     UnnnicChatsMessageStatusBackdrop,
     UnnnicIconLoading,
     UnnnicIcon,
+    UnnnicTooltip,
   },
+  mixins: [UnnnicI18n],
   props: {
+    enableReply: {
+      type: Boolean,
+      default: false,
+    },
     type: {
       type: String,
       default: 'received',
@@ -117,13 +145,11 @@ export default {
     },
     time: {
       type: Date,
-      default: null,
       required: true,
     },
     signature: {
       type: String,
       default: '',
-      required: false,
     },
     documentName: {
       type: String,
@@ -146,7 +172,21 @@ export default {
       },
     },
   },
-  emits: ['click', 'click-image'],
+
+  emits: ['click', 'click-image', 'reply'],
+
+  data() {
+    return {
+      isHovering: false,
+      defaultTranslations: {
+        reply: {
+          'pt-br': 'Responder',
+          en: 'Reply',
+          es: 'Responder',
+        },
+      },
+    };
+  },
 
   computed: {
     formattedTime() {
