@@ -62,6 +62,29 @@ export const WithReply = {
   },
 };
 
+export const WithRepliedMessage = {
+  args: {
+    replyMessage: {
+      uuid: '34fbcce3-a8fb-4097-9cb3-b9ff274a46c0',
+      user: null,
+      contact: {
+        name: 'Weni',
+      },
+      text: '',
+      seen: true,
+      media: [
+        {
+          content_type: 'video/mp4',
+          message: '34fbcce3-a8fb-4097-9cb3-b9ff274a46c0',
+          url: VideoSample,
+          created_on: '2025-01-15T12:57:46.170003-03:00',
+        },
+      ],
+      created_on: '2025-01-15T12:57:46.164636-03:00',
+    },
+  },
+};
+
 export const ReceivedAndSent = {
   render: (args) => ({
     setup() {

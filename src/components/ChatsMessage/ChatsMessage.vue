@@ -12,6 +12,11 @@
     @mouseover="isHovering = true"
     @mouseleave="isHovering = false"
   >
+    <ReplyMessage
+      v-if="replyMessage"
+      :replyMessage="replyMessage"
+      :messageType="type"
+    />
     <p
       v-if="signature"
       class="unnnic-chats-message__signature"
@@ -120,6 +125,7 @@ import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import UnnnicIcon from '../Icon.vue';
 import UnnnicTooltip from '../ToolTip/ToolTip.vue';
 import UnnnicI18n from '../../mixins/i18n';
+import ReplyMessage from './ReplyMessage.vue';
 
 export default {
   name: 'UnnnicChatsMessage',
@@ -129,12 +135,17 @@ export default {
     UnnnicIconLoading,
     UnnnicIcon,
     UnnnicTooltip,
+    ReplyMessage,
   },
   mixins: [UnnnicI18n],
   props: {
     enableReply: {
       type: Boolean,
       default: false,
+    },
+    replyMessage: {
+      type: [Object, null],
+      default: null,
     },
     type: {
       type: String,
@@ -270,7 +281,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
 
   &.sent {
-    background-color: $unnnic-color-weni-50;
+    background-color: #cff8f4;
   }
 
   &.sending {
