@@ -63,13 +63,28 @@
       </div>
     </div>
 
-    <span
-      v-if="!selected && unreadMessages"
-      class="chats-contact__infos__unread-messages"
-      :title="i18n('unread_messages', unreadMessages, { unreadMessages })"
+    <section
+      v-if="!checkboxWhenSelect"
+      class="chats-contact__infos__unread-messages-container"
     >
-      {{ unreadMessages }}
-    </span>
+      <p
+        v-if="lastInteractionTime"
+        :class="{
+          'chats-contact__infos__message-time': true,
+          'chats-contact__infos__message-time--active': unreadMessages,
+        }"
+      >
+        {{ formattedLastInteraction }}
+      </p>
+      <p
+        v-if="unreadMessages && !selected"
+        class="chats-contact__infos__unread-messages"
+        :title="i18n('unread_messages', unreadMessages, { unreadMessages })"
+      >
+        {{ unreadMessages }}
+      </p>
+    </section>
+
     <Checkbox
       v-else-if="selected && checkboxWhenSelect"
       class="chats-contact__infos__checkbox"
@@ -77,7 +92,7 @@
     />
     <TransitionRipple
       ref="transitionRipple"
-      color="weni-500"
+      color="neutral-cleanest"
     />
   </div>
 </template>
@@ -89,6 +104,10 @@ import TransitionRipple from '../TransitionRipple/TransitionRipple.vue';
 import UnnnicI18n from '../../mixins/i18n';
 import Checkbox from '../Checkbox/Checkbox.vue';
 
+import('moment/dist/locale/es.js');
+import('moment/dist/locale/pt-br.js');
+import moment from 'moment';
+
 export default {
   name: 'ChatsContact',
 
@@ -99,17 +118,23 @@ export default {
     Checkbox,
   },
 
-  emits: ['click'],
-  
   mixins: [UnnnicI18n],
 
   props: {
+    locale: {
+      type: String,
+      default: 'en',
+    },
     title: {
       type: String,
       default: '',
       required: true,
     },
     lastMessage: {
+      type: String,
+      default: '',
+    },
+    lastInteractionTime: {
       type: String,
       default: '',
     },
@@ -143,6 +168,8 @@ export default {
     },
   },
 
+  emits: ['click'],
+
   data() {
     return {
       isHovered: false,
@@ -169,6 +196,36 @@ export default {
   },
 
   computed: {
+    messageInfoAlign() {
+      return this.unreadMessages && this.selected ? 'center' : 'flex-start';
+    },
+    messageInfoMarginTop() {
+      return this.unreadMessages && this.selected ? '0px' : '4px';
+    },
+    formattedLastInteraction() {
+      if (!this.lastInteractionTime) return '';
+
+      const yesterdayTranslationsMapper = {
+        en: 'Yesterday',
+        'pt-br': 'Ontem',
+        ayer: 'Ayer',
+      };
+
+      moment.locale(this.locale);
+
+      const now = moment();
+      const lastInteractionMoment = moment(this.lastInteractionTime);
+
+      if (now.subtract(1, 'day').isSame(lastInteractionMoment, 'day')) {
+        return yesterdayTranslationsMapper[this.locale || 'en'];
+      }
+
+      if (now.diff(lastInteractionMoment, 'hours') > 0) {
+        return lastInteractionMoment.format('L');
+      }
+
+      return lastInteractionMoment.format('HH:mm');
+    },
     subtitle() {
       const { discussionGoal, lastMessage } = this;
       return discussionGoal
@@ -189,12 +246,18 @@ export default {
   gap: $unnnic-spacing-xs;
 
   background-color: $unnnic-color-background-white;
-  border-radius: $unnnic-border-radius-sm;
+
+  border: 1px solid $unnnic-color-neutral-soft;
+
   font-family: $unnnic-font-family-secondary;
 
   padding: $unnnic-spacing-xs;
 
   cursor: pointer;
+
+  &:active {
+    border: 1px solid $unnnic-color-neutral-cleanest;
+  }
 
   &:focus-visible {
     outline-color: $unnnic-color-weni-600;
@@ -207,7 +270,8 @@ export default {
   }
 
   &.selected {
-    background-color: $unnnic-color-weni-50;
+    background-color: $unnnic-color-neutral-light;
+    border: 1px solid $unnnic-color-neutral-soft;
   }
 
   &.waiting {
@@ -282,6 +346,7 @@ export default {
 
     width: 100%;
     overflow: hidden;
+    gap: $unnnic-spacing-nano;
 
     &__title,
     &__additional-information {
@@ -300,13 +365,36 @@ export default {
       color: $unnnic-color-neutral-cloudy;
     }
 
+    &__unread-messages-container {
+      height: 100%;
+      min-width: max-content;
+      display: flex;
+      flex-direction: column;
+      align-items: end;
+      justify-content: v-bind(messageInfoAlign);
+      gap: $unnnic-spacing-nano;
+      margin-top: v-bind(messageInfoMarginTop);
+    }
+
+    &__message-time {
+      color: $unnnic-color-neutral-dark;
+      font-family: $unnnic-font-family-secondary;
+      font-size: 10px;
+      line-height: $unnnic-font-size-body-lg;
+
+      &--active {
+        color: $unnnic-color-weni-700;
+        font-weight: $unnnic-font-weight-bold;
+      }
+    }
+
     &__unread-messages {
       display: flex;
       justify-content: center;
       align-items: center;
 
       border-radius: 50%;
-      background: $unnnic-color-background-grass;
+      background: $unnnic-color-weni-50;
 
       width: 1.25rem;
       min-width: 1.25rem;
@@ -315,7 +403,7 @@ export default {
       font-size: $unnnic-font-size-body-md;
       font-weight: $unnnic-font-weight-bold;
       line-height: $unnnic-line-height-small;
-      color: $unnnic-color-weni-800;
+      color: $unnnic-color-weni-700;
     }
 
     .ellipsis {

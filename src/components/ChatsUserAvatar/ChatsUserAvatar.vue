@@ -1,5 +1,5 @@
 <template>
-  <span
+  <section
     class="user-avatar"
     :class="{
       active,
@@ -30,7 +30,7 @@
     <span v-else>
       {{ getUsernameFirstCharacter }}
     </span>
-  </span>
+  </section>
 </template>
 
 <script>
@@ -69,6 +69,7 @@ export default {
       default: '',
     },
   },
+  emits: ['click'],
 
   computed: {
     getUsernameFirstCharacter() {
@@ -102,11 +103,11 @@ $avatar-sizes:
   justify-content: center;
   border-radius: $unnnic-border-radius-sm;
 
-  background: $unnnic-color-weni-50;
+  border: 1px solid $unnnic-color-aux-purple-100;
   color: $unnnic-color-aux-purple-500;
 
   &.active {
-    background: $unnnic-color-weni-100;
+    background: $unnnic-color-neutral-white;
   }
 
   &.disabled {
