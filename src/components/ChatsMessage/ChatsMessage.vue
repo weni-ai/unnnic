@@ -14,6 +14,7 @@
   >
     <ReplyMessage
       v-if="replyMessage"
+      class="unnnic-chats-message__reply-message"
       :replyMessage="replyMessage"
       :messageType="type"
     />
@@ -264,6 +265,13 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   background-color: $unnnic-color-neutral-white;
 
   font-family: $unnnic-font-family-secondary;
+
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+
+  &__reply-message {
+    margin: (-$unnnic-spacing-nano) (-$unnnic-spacing-nano) 0
+      (-$unnnic-spacing-nano);
+  }
 
   &.sent {
     background-color: #cff8f4;
