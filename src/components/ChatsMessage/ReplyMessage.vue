@@ -139,6 +139,8 @@ const contentType = computed(() => {
 
   const contentType = props.replyMessage.media[0].content_type.split('/')[0];
 
+  if (contentType === 'get') return 'text';
+
   if (['audio', 'video', 'image'].includes(contentType)) return contentType;
 
   return 'attachment';
