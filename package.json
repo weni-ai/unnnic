@@ -19,9 +19,9 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --port 3003",
     "build": "vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --port 3003",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "format": "prettier --write src/",
     "storybook": "storybook dev -p 6006",
@@ -54,6 +54,7 @@
     "vue-the-mask": "^0.11.1"
   },
   "devDependencies": {
+    "@module-federation/vite": "^1.1.7",
     "@storybook/addon-actions": "^8.0.10",
     "@storybook/addon-essentials": "^8.0.10",
     "@storybook/addon-interactions": "^8.0.10",
