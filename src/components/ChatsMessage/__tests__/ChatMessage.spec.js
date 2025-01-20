@@ -29,4 +29,19 @@ describe('ChatsMessage', () => {
     await wrapper.trigger('mouseleave');
     expect(wrapper.vm.isHovering).toBe(false);
   });
+
+  it('should show replied message', async () => [
+    await wrapper.setProps({
+      replyMessage: {
+        uuid: '1',
+        user: null,
+        room: '1',
+        contact: { name: 'Contact' },
+        text: 'text message',
+        media: [],
+        content_type: 'text',
+      },
+    }),
+    expect(wrapper.find('[data-testid="reply-message"]').exists()).toBe(true),
+  ]);
 });

@@ -63,26 +63,101 @@ export const WithReply = {
 };
 
 export const WithRepliedMessage = {
-  args: {
-    replyMessage: {
-      uuid: '34fbcce3-a8fb-4097-9cb3-b9ff274a46c0',
-      user: null,
-      contact: {
-        name: 'Weni',
-      },
-      text: '',
-      seen: true,
-      media: [
-        {
-          content_type: 'video/mp4',
-          message: '34fbcce3-a8fb-4097-9cb3-b9ff274a46c0',
-          url: VideoSample,
-          created_on: '2025-01-15T12:57:46.170003-03:00',
+  render: (args) => ({
+    setup() {
+      const baseReplyMessage = {
+        uuid: '34fbcce3-a8fb-4097-9cb3-b9ff274a46c0',
+        user: null,
+        contact: {
+          name: 'Weni',
         },
-      ],
-      created_on: '2025-01-15T12:57:46.164636-03:00',
+        created_on: '2025-01-15T12:57:46.164636-03:00',
+      };
+      const baseMedia = {
+        content_type: 'video/mp4',
+        message: '34fbcce3-a8fb-4097-9cb3-b9ff274a46c0',
+        url: VideoSample,
+        created_on: '2025-01-15T12:57:46.170003-03:00',
+      };
+
+      const replyMessage = {
+        video: { ...baseReplyMessage, media: [{ ...baseMedia }] },
+        document: {
+          ...baseReplyMessage,
+          media: [
+            {
+              ...baseMedia,
+              content_type: 'application/pdf',
+              url: 'http://example.com/file.pdf',
+            },
+          ],
+        },
+        audio: {
+          ...baseReplyMessage,
+          media: [
+            { ...baseMedia, content_type: 'audio/mp3', url: AudioSample },
+          ],
+        },
+        image: {
+          ...baseReplyMessage,
+          media: [
+            { ...baseMedia, content_type: 'image/png', url: ImageSample2 },
+          ],
+        },
+        geo: {
+          ...baseReplyMessage,
+          media: [
+            {
+              ...baseMedia,
+              content_type: 'geo',
+              url: '-1,111111111,-2,222222222',
+            },
+          ],
+          text: '-1,111111111,-2,222222222',
+        },
+        text: {
+          ...baseReplyMessage,
+          media: [],
+          text: 'Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur facilisis congue sagittis',
+        },
+      };
+
+      return { args, replyMessage };
     },
-  },
+    components: { UnnnicChatsMessage },
+    template: `
+      <div style="
+        display: flex;
+        gap: 12px;
+        flex-direction: column
+      ">
+        <UnnnicChatsMessage v-bind="args" :replyMessage="replyMessage.video" type="received">
+          Interdum et malesuada fames ac ante ipsum primis in faucibus.
+          Curabitur facilisis congue sagittis.
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args" :replyMessage="replyMessage.audio">
+          Interdum et malesuada fames ac ante ipsum primis in faucibus.
+          Curabitur facilisis congue sagittis.
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args" :replyMessage="replyMessage.image">
+          Interdum et malesuada fames ac ante ipsum primis in faucibus.
+          Curabitur facilisis congue sagittis.
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args" :replyMessage="replyMessage.document">
+          Interdum et malesuada fames ac ante ipsum primis in faucibus.
+          Curabitur facilisis congue sagittis.
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args" :replyMessage="replyMessage.geo" type="received">
+          Interdum et malesuada fames ac ante ipsum primis in faucibus.
+          Curabitur facilisis congue sagittis.
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args" :replyMessage="replyMessage.text" type="received">
+          Interdum et malesuada fames ac ante ipsum primis in faucibus.
+          Curabitur facilisis congue sagittis.
+        </UnnnicChatsMessage>
+      </div>
+    `,
+  }),
 };
 
 export const ReceivedAndSent = {

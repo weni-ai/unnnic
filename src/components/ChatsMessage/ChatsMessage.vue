@@ -17,6 +17,7 @@
       class="unnnic-chats-message__reply-message"
       :replyMessage="replyMessage"
       :messageType="type"
+      data-testid="reply-message"
     />
     <p
       v-if="signature"
