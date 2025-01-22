@@ -33,7 +33,7 @@
 
 <script>
 import UnnnicIcon from '../Icon.vue';
-import { escapeHtml } from '../../utils/sanitize';
+import { sanitizeHtml } from '../../utils/sanitize';
 
 export default {
   components: {
@@ -64,7 +64,7 @@ export default {
 
   computed: {
     sanitizedTitle() {
-      return escapeHtml(this.title);
+      return sanitizeHtml(this.title, ['b', 'i', 'u'], 500);
     },
   },
 
