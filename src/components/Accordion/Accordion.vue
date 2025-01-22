@@ -11,7 +11,7 @@
         size="md"
       />
 
-      <div :class="['title', { open }]">{{ title }}</div>
+      <div :class="['title', { open }]">{{ sanitizedTitle }}</div>
 
       <div
         v-show="open"
@@ -33,6 +33,7 @@
 
 <script>
 import UnnnicIcon from '../Icon.vue';
+import { escapeHtml } from '../../utils/sanitize';
 
 export default {
   components: {
@@ -47,6 +48,10 @@ export default {
 
     title: {
       type: String,
+      default: '',
+      validator(value) {
+        return typeof value === 'string';
+      },
     },
   },
 
@@ -55,6 +60,12 @@ export default {
       height: 0,
       setHeightToNull: null,
     };
+  },
+
+  computed: {
+    sanitizedTitle() {
+      return escapeHtml(this.title);
+    },
   },
 
   watch: {
