@@ -2,16 +2,16 @@
   <div
     :class="[
       'unnnic-avatar-icon',
-      scheme,
-      size,
+      sanitizedScheme,
+      sanitizedSize,
       { disabled: !enabled },
       filled,
       { opacity: !opacity },
     ]"
   >
     <UnnnicIcon
-      :icon="icon"
-      :scheme="enabled ? scheme : 'neutral-cloudy'"
+      :icon="sanitizedIcon"
+      :scheme="enabled ? sanitizedScheme : 'neutral-cloudy'"
       :size="iconSize"
       :filled="filled"
     />
@@ -20,6 +20,7 @@
 
 <script>
 import UnnnicIcon from '../Icon.vue';
+import { sanitizeHtml } from '../../utils/sanitize';
 
 export default {
   components: {
@@ -41,7 +42,7 @@ export default {
       type: String,
       default: 'sm',
       validator(value) {
-        return ['nano', 'xs', 'sm', 'lg', 'xl'].indexOf(value) !== -1;
+        return ['nano', 'xs', 'sm', 'lg', 'xl'].includes(value);
       },
     },
 
@@ -49,10 +50,12 @@ export default {
       type: String,
       default: 'aux-blue',
     },
+
     filled: {
       type: Boolean,
       default: false,
     },
+
     opacity: {
       type: Boolean,
       default: true,
@@ -67,7 +70,16 @@ export default {
         sm: 'md',
         lg: 'lg',
         xl: 'xl',
-      }[this.size];
+      }[this.sanitizedSize];
+    },
+    sanitizedIcon() {
+      return sanitizeHtml(this.icon, [], 50);
+    },
+    sanitizedScheme() {
+      return sanitizeHtml(this.scheme, [], 50);
+    },
+    sanitizedSize() {
+      return ['nano', 'xs', 'sm', 'lg', 'xl'].includes(this.size) ? this.size : 'sm';
     },
   },
 };
