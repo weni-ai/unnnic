@@ -9,7 +9,7 @@
     ]"
   >
     <header
-      v-show="text"
+      v-show="sanitizedText"
       class="banner-alert__container-text"
     >
       <UnnnicIcon
@@ -20,14 +20,14 @@
         scheme="neutral-white"
         data-test="unnnic-icon"
       />
-      <p class="text">{{ text }}</p>
+      <p class="text">{{ sanitizedText }}</p>
       <a
-        v-if="linkHref"
+        v-if="sanitizedLinkHref"
         class="banner-alert__link"
-        :href="linkHref"
-        :target="linkTarget"
+        :href="sanitizedLinkHref"
+        :target="sanitizedLinkTarget"
       >
-        {{ linkText }}
+        {{ sanitizedLinkText }}
       </a>
     </header>
 
@@ -48,6 +48,7 @@
 
 <script>
 import UnnnicIcon from '../Icon.vue';
+import { sanitizeHtml } from '../../utils/sanitize';
 
 export default {
   components: {
@@ -81,6 +82,20 @@ export default {
     type: {
       type: String,
       default: 'info',
+    },
+  },
+  computed: {
+    sanitizedText() {
+      return sanitizeHtml(this.text, ['b', 'i', 'u'], 500);
+    },
+    sanitizedLinkHref() {
+      return sanitizeHtml(this.linkHref, [], 100);
+    },
+    sanitizedLinkTarget() {
+      return sanitizeHtml(this.linkTarget, [], 50);
+    },
+    sanitizedLinkText() {
+      return sanitizeHtml(this.linkText, [], 100);
     },
   },
   methods: {

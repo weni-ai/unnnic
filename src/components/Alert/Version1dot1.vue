@@ -1,4 +1,3 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div
     ref="alertContainer"
@@ -21,19 +20,19 @@
       ></div>
 
       <div
-        v-show="text"
+        v-show="sanitizedText"
         class="alert__text"
       >
-        {{ text }}
+        {{ sanitizedText }}
       </div>
 
       <a
-        v-if="linkHref"
+        v-if="sanitizedLinkHref"
         class="alert__link"
-        :href="linkHref"
-        :target="linkTarget"
+        :href="sanitizedLinkHref"
+        :target="sanitizedLinkTarget"
       >
-        {{ linkText }}
+        {{ sanitizedLinkText }}
       </a>
 
       <div
@@ -52,6 +51,7 @@
 
 <script>
 import UnnnicIcon from '../Icon.vue';
+import { sanitizeHtml } from '../../utils/sanitize';
 
 export default {
   components: {
@@ -92,6 +92,21 @@ export default {
     },
   },
   emits: ['close'],
+
+  computed: {
+    sanitizedText() {
+      return sanitizeHtml(this.text, ['b', 'i', 'u'], 500);
+    },
+    sanitizedLinkHref() {
+      return sanitizeHtml(this.linkHref, [], 100);
+    },
+    sanitizedLinkTarget() {
+      return sanitizeHtml(this.linkTarget, [], 50);
+    },
+    sanitizedLinkText() {
+      return sanitizeHtml(this.linkText, [], 100);
+    },
+  },
 
   mounted() {
     this.$refs.progress.addEventListener('animationend', () => {

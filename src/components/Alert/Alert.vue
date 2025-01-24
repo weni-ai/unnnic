@@ -11,10 +11,10 @@
     />
     <div class="unnnic-alert__content">
       <div class="unnnic-alert__title">
-        {{ title.toUpperCase() }}
+        {{ sanitizedTitle }}
       </div>
       <div class="unnnic-alert__text">
-        {{ text }}
+        {{ sanitizedText }}
       </div>
     </div>
     <div
@@ -22,7 +22,7 @@
       class="unnnic-alert__close-text unnnic--clickable"
       @click="onClose()"
     >
-      {{ closeText.toUpperCase() }}
+      {{ sanitizedCloseText }}
     </div>
     <UnnnicIcon
       v-else
@@ -45,6 +45,7 @@
 <script>
 import UnnnicIcon from '../Icon.vue';
 import Version1dot1 from './Version1dot1.vue';
+import { sanitizeHtml } from '../../utils/sanitize';
 
 export default {
   name: 'UnnnicAlert',
@@ -103,6 +104,20 @@ export default {
       default: '',
     },
   },
+  computed: {
+  sanitizedTitle() {
+    const sanitized = sanitizeHtml(this.title, ['b', 'i', 'u'], 500);
+    return sanitized.toUpperCase();
+  },
+  sanitizedText() {
+    return sanitizeHtml(this.text, ['b', 'i', 'u'], 1000);
+  },
+  sanitizedCloseText() {
+    const sanitized = sanitizeHtml(this.closeText, [], 100);
+    return sanitized.toUpperCase();
+  },
+},
+
 };
 </script>
 
