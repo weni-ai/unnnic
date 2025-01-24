@@ -3,19 +3,20 @@
     :is="currentComponent"
     class="unnnic-banner-component"
     v-bind="$attrs"
-    :firstTitle="firstTitle"
-    :secondTitle="secondTitle"
-    :thirdTitle="thirdTitle"
-    :firstDescription="firstDescription"
-    :secondDescription="secondDescription"
-    :thirdDescription="thirdDescription"
-    :subtitle="subtitle"
-    :rating="rating"
+    :firstTitle="sanitizedFirstTitle"
+    :secondTitle="sanitizedSecondTitle"
+    :thirdTitle="sanitizedThirdTitle"
+    :firstDescription="sanitizedFirstDescription"
+    :secondDescription="sanitizedSecondDescription"
+    :thirdDescription="sanitizedThirdDescription"
+    :subtitle="sanitizedSubtitle"
+    :rating="sanitizedRating"
   />
 </template>
 
 <script>
 import InfoBanner from './InfoBanner.vue';
+import { sanitizeHtml } from '../../utils/sanitize';
 
 export default {
   name: 'UnnnicBanner',
@@ -64,6 +65,30 @@ export default {
     currentComponent() {
       if (this.type === 'info') return InfoBanner;
       return InfoBanner;
+    },
+    sanitizedFirstTitle() {
+      return sanitizeHtml(this.firstTitle, [], 100);
+    },
+    sanitizedSecondTitle() {
+      return sanitizeHtml(this.secondTitle, [], 100);
+    },
+    sanitizedThirdTitle() {
+      return sanitizeHtml(this.thirdTitle, [], 100);
+    },
+    sanitizedFirstDescription() {
+      return sanitizeHtml(this.firstDescription, [], 200);
+    },
+    sanitizedSecondDescription() {
+      return sanitizeHtml(this.secondDescription, [], 200);
+    },
+    sanitizedThirdDescription() {
+      return sanitizeHtml(this.thirdDescription, [], 200);
+    },
+    sanitizedSubtitle() {
+      return sanitizeHtml(this.subtitle, [], 150);
+    },
+    sanitizedRating() {
+      return Math.max(0, Math.min(this.rating, 5));
     },
   },
   methods: {

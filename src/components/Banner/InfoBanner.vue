@@ -1,19 +1,19 @@
 <template>
   <div class="unnnic-banner-info">
     <section class="unnnic-banner-info__section">
-      <div class="unnnic-banner-info__title">{{ firstTitle }}</div>
-      <div class="unnnic-banner-info__description">{{ firstDescription }}</div>
+      <div class="unnnic-banner-info__title">{{ sanitizedFirstTitle }}</div>
+      <div class="unnnic-banner-info__description">{{ sanitizedFirstDescription }}</div>
     </section>
     <div class="unnnic-banner-info__divider" />
     <section class="unnnic-banner-info__section">
-      <div class="unnnic-banner-info__title">{{ secondTitle }}</div>
-      <div class="unnnic-banner-info__description">{{ secondDescription }}</div>
-      <div class="unnnic-banner-info__subtitle">{{ subtitle }}</div>
+      <div class="unnnic-banner-info__title">{{ sanitizedSecondTitle }}</div>
+      <div class="unnnic-banner-info__description">{{ sanitizedSecondDescription }}</div>
+      <div class="unnnic-banner-info__subtitle">{{ sanitizedSubtitle }}</div>
     </section>
     <div class="unnnic-banner-info__divider" />
     <section class="unnnic-banner-info__section">
-      <div class="unnnic-banner-info__title">{{ thirdTitle }}</div>
-      <div class="unnnic-banner-info__description">{{ thirdDescription }}</div>
+      <div class="unnnic-banner-info__title">{{ sanitizedThirdTitle }}</div>
+      <div class="unnnic-banner-info__description">{{ sanitizedThirdDescription }}</div>
       <div class="unnnic-banner-info__rating">
         <UnnnicIcon
           v-for="index in 5"
@@ -36,9 +36,10 @@
 
 <script>
 import UnnnicIcon from '../Icon.vue';
+import { sanitizeHtml } from '../../utils/sanitize';
 
 export default {
-  name: 'UnnnicBanner',
+  name: 'UnnnicBannerInfo',
   components: { UnnnicIcon },
   props: {
     firstTitle: {
@@ -79,6 +80,29 @@ export default {
       tempRating: null,
       baseRating: this.rating,
     };
+  },
+  computed: {
+    sanitizedFirstTitle() {
+      return sanitizeHtml(this.firstTitle, [], 100);
+    },
+    sanitizedSecondTitle() {
+      return sanitizeHtml(this.secondTitle, [], 100);
+    },
+    sanitizedThirdTitle() {
+      return sanitizeHtml(this.thirdTitle, [], 100);
+    },
+    sanitizedFirstDescription() {
+      return sanitizeHtml(this.firstDescription, [], 200);
+    },
+    sanitizedSecondDescription() {
+      return sanitizeHtml(this.secondDescription, [], 200);
+    },
+    sanitizedThirdDescription() {
+      return sanitizeHtml(this.thirdDescription, [], 200);
+    },
+    sanitizedSubtitle() {
+      return sanitizeHtml(this.subtitle, [], 150);
+    },
   },
   methods: {
     emitRatingAction(star) {
