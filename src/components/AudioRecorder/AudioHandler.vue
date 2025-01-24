@@ -2,7 +2,7 @@
   <div class="audio-handler">
     <div>
       <span class="audio-handler__time">
-        {{ time }}
+        {{ sanitizedTime }}
       </span>
 
       <UnnnicIcon
@@ -35,6 +35,7 @@
 <script>
 import UnnnicIcon from '../Icon.vue';
 import UnnnicToolTip from '../ToolTip/ToolTip.vue';
+import { sanitizeHtml } from '../../utils/sanitize';
 
 export default {
   components: {
@@ -53,6 +54,12 @@ export default {
     },
   },
   emits: ['save'],
+
+  computed: {
+    sanitizedTime() {
+      return sanitizeHtml(this.time, [], 50);
+    },
+  },
 
   methods: {
     save() {

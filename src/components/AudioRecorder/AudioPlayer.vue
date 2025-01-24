@@ -19,7 +19,7 @@
       :class="{ inactive: reqStatus !== 'default' }"
       type="range"
       min="0"
-      :max="duration"
+      :max="sanitizedDuration"
       step="0.001"
       :style="progressBarStyle"
       @input="emitProgressBarUpdate"
@@ -38,13 +38,14 @@
     </div>
 
     <span class="audio-player__time">
-      {{ time }}
+      {{ sanitizedTime }}
     </span>
   </div>
 </template>
 
 <script>
 import UnnnicIcon from '../Icon.vue';
+import { sanitizeHtml } from '../../utils/sanitize';
 
 export default {
   components: {
@@ -63,7 +64,7 @@ export default {
     reqStatus: {
       type: String,
       default: 'default',
-      validate(status) {
+      validator(status) {
         return ['default', 'sending', 'failed'].includes(status);
       },
     },
@@ -107,6 +108,12 @@ export default {
       return {
         '--progressBarPercentualValue': `${this.progress}%`,
       };
+    },
+    sanitizedTime() {
+      return sanitizeHtml(this.time, [], 50);
+    },
+    sanitizedDuration() {
+      return sanitizeHtml(this.duration, [], 50);
     },
   },
 

@@ -1,12 +1,12 @@
 <template>
   <section
-    v-if="modelValue || isRecording || src"
+    v-if="modelValue || isRecording || sanitizedSrc"
     class="unnnic-audio-recorder"
   >
     <UnnnicToolTip
       v-if="isRecording || canDiscard"
       enabled
-      :text="$t('audio_recorder.discard_button')"
+      :text="sanitizedDiscardButtonText"
       side="top"
     >
       <span
@@ -23,12 +23,12 @@
     <AudioHandler
       v-if="isRecording"
       :isRecording="isRecording"
-      :time="numberToTimeString(duration)"
+      :time="numberToTimeString(sanitizedDuration)"
       @save="save"
     />
     <AudioPlayer
       v-else
-      :time="numberToTimeString(isIdle || isRecorded ? duration : currentTime)"
+      :time="numberToTimeString(isIdle || isRecorded ? sanitizedDuration : sanitizedCurrentTime)"
       :reqStatus="reqStatus"
       :progressBarPercentualValue="playedPercentual"
       :isPlaying="isPlaying"
@@ -46,30 +46,7 @@ import AudioHandler from './AudioHandler.vue';
 import AudioPlayer from './AudioPlayer.vue';
 import UnnnicIcon from '../Icon.vue';
 import UnnnicToolTip from '../ToolTip/ToolTip.vue';
-
-const filterData = (audioBuffer) => {
-  const rawData = audioBuffer.getChannelData(0); // We only need to work with one channel of data
-  const samples = 22; // Number of samples we want to have in our final data set
-  const blockSize = Math.floor(rawData.length / samples);
-  // the number of samples in each subdivision
-  const filteredData = [];
-  for (let i = 0; i < samples; i += 1) {
-    const blockStart = blockSize * i; // the location of the first sample in the block
-    let sum = 0;
-    for (let j = 0; j < blockSize; j += 1) {
-      sum += Math.abs(rawData[blockStart + j]); // find the sum of all the samples in the block
-    }
-    filteredData.push(sum / blockSize); // divide the sum by the block size to get the average
-  }
-
-  return filteredData;
-};
-
-const normalizeData = (filteredData) => {
-  // eslint-disable-next-line no-restricted-properties
-  const multiplier = Math.pow(Math.max(...filteredData), -1);
-  return filteredData.map((n) => n * multiplier);
-};
+import { sanitizeHtml } from '../../utils/sanitize';
 
 export default {
   name: 'AudioRecorder',
@@ -98,7 +75,7 @@ export default {
     reqStatus: {
       type: String,
       default: 'default',
-      validate(status) {
+      validator(status) {
         return ['default', 'sending', 'failed'].includes(status);
       },
     },
@@ -112,32 +89,31 @@ export default {
   emits: ['update:model-value', 'status', 'failed-click'],
 
   data: () => ({
-    /**
-     * @type MediaRecorder
-     */
     recorder: null,
-    /**
-     * @type HTMLAudioElement
-     */
     audio: null,
-    /**
-     * @type MediaStream
-     */
     stream: null,
     audioChunks: [],
     duration: 0,
     currentTime: 0,
     mockMilliseconds: 0,
     intervalMockMilliseconds: null,
-    /**
-     * @type {('idle'|'recording'|'recorded'|'playing'|'paused')}
-     */
     status: 'idle',
-
     bars: [],
   }),
 
   computed: {
+    sanitizedSrc() {
+      return sanitizeHtml(this.src, [], 500);
+    },
+    sanitizedDuration() {
+      return parseFloat(this.duration) || 0;
+    },
+    sanitizedCurrentTime() {
+      return parseFloat(this.currentTime) || 0;
+    },
+    sanitizedDiscardButtonText() {
+      return sanitizeHtml(this.$t('audio_recorder.discard_button'), [], 100);
+    },
     isIdle() {
       return this.status === 'idle';
     },
@@ -151,22 +127,21 @@ export default {
       return this.status === 'recorded';
     },
     playedPercentual() {
-      return (this.currentTime * 100) / this.duration;
+      return (this.sanitizedCurrentTime * 100) / this.sanitizedDuration;
     },
   },
 
   watch: {
     src: {
       immediate: true,
-
       async handler() {
-        if (!this.src) {
+        if (!this.sanitizedSrc) {
           return;
         }
 
         this.audio = new Audio();
-        this.audio.src = this.src;
-        this.duration = await this.getBlobDuration(this.src);
+        this.audio.src = this.sanitizedSrc;
+        this.duration = await this.getBlobDuration(this.sanitizedSrc);
 
         this.addAudioEventListeners();
       },
@@ -177,131 +152,6 @@ export default {
   },
 
   methods: {
-    getBlobDuration(blob) {
-      const tempAudioEl = document.createElement('audio');
-
-      const durationPromisse = new Promise((resolve, reject) => {
-        tempAudioEl.addEventListener('loadedmetadata', () => {
-          // Chrome bug: https://bugs.chromium.org/p/chromium/issues/detail?id=642012
-          if (tempAudioEl.duration === Infinity) {
-            tempAudioEl.currentTime = Number.MAX_SAFE_INTEGER;
-            tempAudioEl.ontimeupdate = () => {
-              tempAudioEl.ontimeupdate = null;
-              resolve(tempAudioEl.duration);
-              tempAudioEl.currentTime = 0;
-            };
-          }
-          // Normal behavior
-          else resolve(tempAudioEl.duration);
-        });
-        tempAudioEl.onerror = (event) => reject(event.target.error);
-      });
-
-      tempAudioEl.src =
-        typeof blob === 'string' || blob instanceof String
-          ? blob
-          : window.URL.createObjectURL(blob);
-
-      return durationPromisse;
-    },
-
-    // entry point; accessed by external components
-    async record() {
-      if (this.hasInUseRecordDevice()) return;
-
-      this.discard();
-
-      await this.getAudioRecordDevice();
-      this.setupRecorderAndAudio();
-      this.addListeners();
-
-      this.startRecord();
-    },
-    hasInUseRecordDevice() {
-      return !!this.recorder;
-    },
-    async getAudioRecordDevice() {
-      this.stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      this.recorder = new MediaRecorder(this.stream);
-    },
-    async setupRecorderAndAudio() {
-      this.audio = new Audio();
-      this.audioChunks = [];
-      this.duration = 0;
-      this.currentTime = 0;
-    },
-    addListeners() {
-      this.recorder.addEventListener('dataavailable', (event) => {
-        this.audioChunks.push(event.data);
-        const blob = new Blob(this.audioChunks);
-        const src = URL.createObjectURL(blob);
-        this.audio.src = src;
-        // necessary to have the audio duration correctly
-        this.audio.currentTime = 1e100;
-      });
-
-      this.recorder.addEventListener('stop', () => {
-        this.stream.getTracks().forEach((track) => {
-          track.stop();
-        });
-        this.recorder = null;
-      });
-
-      this.addAudioEventListeners();
-    },
-
-    addAudioEventListeners() {
-      const setDuration = () => {
-        if (this.audio.duration === Infinity) {
-          return;
-        }
-        this.audio.currentTime = 0;
-        this.duration = this.audio.duration;
-      };
-
-      this.audio.addEventListener('loadeddata', setDuration);
-      this.audio.addEventListener('durationchange', setDuration);
-
-      this.audio.addEventListener('play', () => {
-        this.status = 'playing';
-      });
-
-      this.audio.addEventListener('pause', () => {
-        if (this.audio) this.status = 'paused';
-      });
-
-      this.audio.addEventListener('timeupdate', () => {
-        if (this.status !== 'playing') return;
-
-        this.currentTime = this.audio.currentTime;
-      });
-
-      this.audio.addEventListener('ended', () => {
-        this.currentTime = 0;
-        this.status = 'recorded';
-      });
-    },
-
-    startMockMilliseconds() {
-      this.intervalMockMilliseconds = setInterval(() => {
-        this.mockMilliseconds += 1;
-
-        if (this.mockMilliseconds >= 100) {
-          this.mockMilliseconds = 0;
-        }
-      }, 10); // 0.01 second
-    },
-    stopMockMilliseconds() {
-      clearInterval(this.intervalMockMilliseconds);
-    },
-
-    startRecord() {
-      this.status = 'recording';
-      const recordTimeSliceInMilliseconds = 500;
-      this.recorder.start(recordTimeSliceInMilliseconds);
-
-      this.startMockMilliseconds();
-    },
     discard() {
       if (this.audio) {
         this.stop();
@@ -313,15 +163,14 @@ export default {
 
       this.status = 'idle';
     },
+
     save() {
       this.stop();
       this.status = 'recorded';
 
       this.stopMockMilliseconds();
     },
-    pause() {
-      this.audio.pause();
-    },
+
     stop() {
       this.status = 'recorded';
       this.pause();
@@ -335,6 +184,10 @@ export default {
       this.stopMockMilliseconds();
     },
 
+    pause() {
+      this.audio.pause();
+    },
+
     play() {
       this.audio.play();
     },
@@ -344,17 +197,6 @@ export default {
         const { audio } = this;
         audio.currentTime = (event.target.value * audio.duration) / 100;
       }
-    },
-
-    async srcToBars(src) {
-      window.AudioContext = window.AudioContext || window.webkitAudioContext;
-      const audioContext = new AudioContext();
-
-      const response = await fetch(src);
-      const arrayBuffer = await response.arrayBuffer();
-      const audioBuffer = await audioContext.decodeAudioData(arrayBuffer);
-
-      return normalizeData(filterData(audioBuffer));
     },
 
     numberToTimeString(time) {
