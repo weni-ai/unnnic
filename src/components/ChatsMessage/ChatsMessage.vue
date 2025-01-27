@@ -84,24 +84,29 @@
         size="avatar-nano"
         scheme="neutral-dark"
       />
-      <UnnnicTooltip
+
+      <section
         v-if="
           enableReply && isHovering && !['sending', 'failed'].includes(status)
         "
-        enabled
-        size="right"
-        :text="i18n('reply')"
-        :side="type === 'sent' ? 'bottom' : 'right'"
+        class="unnnic-chats-message__tooltip"
       >
-        <UnnnicIcon
-          icon="reply"
-          clickable
-          scheme="neutral-dark"
-          size="avatar-nano"
-          data-testid="reply-icon"
-          @click.stop="$emit('reply')"
-        />
-      </UnnnicTooltip>
+        <UnnnicTooltip
+          enabled
+          size="right"
+          :text="i18n('reply')"
+          :side="type === 'sent' ? 'bottom' : 'right'"
+        >
+          <UnnnicIcon
+            icon="reply"
+            clickable
+            scheme="neutral-dark"
+            size="avatar-nano"
+            data-testid="reply-icon"
+            @click.stop="$emit('reply')"
+          />
+        </UnnnicTooltip>
+      </section>
       <section
         v-else
         class="unnnic-chats-message__status-time"
@@ -281,6 +286,12 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   font-family: $unnnic-font-family-secondary;
 
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+
+  &__tooltip {
+    display: flex;
+    min-width: 50px;
+    justify-content: end;
+  }
 
   &__reply-message {
     margin: (-$unnnic-spacing-nano) (-$unnnic-spacing-xs) 0
