@@ -329,6 +329,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     display: flex;
     align-items: center;
     gap: $unnnic-spacing-nano;
+    min-width: 51px;
   }
 
   &__time {
