@@ -7,6 +7,59 @@ import ImageSample2 from './assets/images/unnnic.png';
 import ImageSample3 from './assets/images/unnnicPortrait.png';
 import VideoSample from './assets/videos/weni.mp4';
 
+const baseReplyMessage = {
+  uuid: '34fbcce3-a8fb-4097-9cb3-b9ff274a46c0',
+  user: null,
+  contact: {
+    name: 'Weni',
+  },
+  created_on: '2025-01-15T12:57:46.164636-03:00',
+};
+const baseMedia = {
+  content_type: 'video/mp4',
+  message: '34fbcce3-a8fb-4097-9cb3-b9ff274a46c0',
+  url: VideoSample,
+  created_on: '2025-01-15T12:57:46.170003-03:00',
+};
+
+const replyMessage = {
+  video: { ...baseReplyMessage, media: [{ ...baseMedia }] },
+  document: {
+    ...baseReplyMessage,
+    media: [
+      {
+        ...baseMedia,
+        content_type: 'application/pdf',
+        url: 'http://example.com/file.pdf',
+      },
+    ],
+  },
+  audio: {
+    ...baseReplyMessage,
+    media: [{ ...baseMedia, content_type: 'audio/mp3', url: AudioSample }],
+  },
+  image: {
+    ...baseReplyMessage,
+    media: [{ ...baseMedia, content_type: 'image/png', url: ImageSample2 }],
+  },
+  geo: {
+    ...baseReplyMessage,
+    media: [
+      {
+        ...baseMedia,
+        content_type: 'geo',
+        url: '-1,111111111,-2,222222222',
+      },
+    ],
+    text: '-1,111111111,-2,222222222',
+  },
+  text: {
+    ...baseReplyMessage,
+    media: [],
+    text: 'Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur facilisis congue sagittis',
+  },
+};
+
 export default {
   title: 'Chats/Message',
   component: UnnnicChatsMessage,
@@ -65,63 +118,6 @@ export const WithReply = {
 export const WithRepliedMessage = {
   render: (args) => ({
     setup() {
-      const baseReplyMessage = {
-        uuid: '34fbcce3-a8fb-4097-9cb3-b9ff274a46c0',
-        user: null,
-        contact: {
-          name: 'Weni',
-        },
-        created_on: '2025-01-15T12:57:46.164636-03:00',
-      };
-      const baseMedia = {
-        content_type: 'video/mp4',
-        message: '34fbcce3-a8fb-4097-9cb3-b9ff274a46c0',
-        url: VideoSample,
-        created_on: '2025-01-15T12:57:46.170003-03:00',
-      };
-
-      const replyMessage = {
-        video: { ...baseReplyMessage, media: [{ ...baseMedia }] },
-        document: {
-          ...baseReplyMessage,
-          media: [
-            {
-              ...baseMedia,
-              content_type: 'application/pdf',
-              url: 'http://example.com/file.pdf',
-            },
-          ],
-        },
-        audio: {
-          ...baseReplyMessage,
-          media: [
-            { ...baseMedia, content_type: 'audio/mp3', url: AudioSample },
-          ],
-        },
-        image: {
-          ...baseReplyMessage,
-          media: [
-            { ...baseMedia, content_type: 'image/png', url: ImageSample2 },
-          ],
-        },
-        geo: {
-          ...baseReplyMessage,
-          media: [
-            {
-              ...baseMedia,
-              content_type: 'geo',
-              url: '-1,111111111,-2,222222222',
-            },
-          ],
-          text: '-1,111111111,-2,222222222',
-        },
-        text: {
-          ...baseReplyMessage,
-          media: [],
-          text: 'Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur facilisis congue sagittis',
-        },
-      };
-
       return { args, replyMessage };
     },
     components: { UnnnicChatsMessage },
@@ -258,7 +254,7 @@ export const MultipleMessages = {
 export const Media = {
   render: (args) => ({
     setup() {
-      return { args };
+      return { args, replyMessage };
     },
     components: { UnnnicChatsMessage, UnnnicAudioRecorder },
     data() {
@@ -279,7 +275,7 @@ export const Media = {
           display: flex;
           gap: 16px;
         ">
-          <UnnnicChatsMessage v-bind="args" mediaType="audio">
+          <UnnnicChatsMessage v-bind="args" mediaType="audio" :replyMessage="replyMessage.audio">
             <unnnic-audio-recorder class="media" style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
           </UnnnicChatsMessage>
           <UnnnicChatsMessage v-bind="args" mediaType="audio" status="sending">
@@ -294,7 +290,7 @@ export const Media = {
           display: flex;
           gap: 16px;
         ">
-          <UnnnicChatsMessage v-bind="args" mediaType="video">
+          <UnnnicChatsMessage v-bind="args" mediaType="video"  :replyMessage="replyMessage.audio">
           <video class="media" controls>
             <source :src="video" />
           </video>
