@@ -294,8 +294,8 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   }
 
   &__reply-message {
-    margin: (-$unnnic-spacing-nano) (-$unnnic-spacing-xs) 0
-      (-$unnnic-spacing-xs);
+    margin: (-$unnnic-spacing-nano) (-$unnnic-spacing-nano) 0px
+      (-$unnnic-spacing-nano);
   }
 
   &.sent {
