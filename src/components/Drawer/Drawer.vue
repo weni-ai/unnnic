@@ -40,7 +40,6 @@
               >
                 {{ description }}
               </p>
-
             </template>
           </section>
           <UnnnicIcon
@@ -137,7 +136,7 @@ export default {
       type: String,
       default: 'md',
       validator(val) {
-        return ['md', 'lg', 'xl'].includes(val);
+        return ['md', 'lg', 'xl', 'gt'].includes(val);
       },
     },
     wide: {
@@ -268,6 +267,10 @@ export default {
   }
 
   &--xl {
+    width: 66%;
+  }
+
+  &--gt {
     width: 75%;
   }
 

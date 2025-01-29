@@ -31,7 +31,7 @@ export default {
     secondaryButtonText: { control: { type: 'text' } },
     modelValue: { control: { type: 'boolean' } },
     size: {
-      options: ['md', 'lg', 'xl'],
+      options: ['md', 'lg', 'xl', 'gt'],
       control: { type: 'select' },
     },
     withoutOverlay: { control: { type: 'boolean' } },
@@ -101,6 +101,16 @@ export const ExtraLarge = {
     primaryButtonText: 'Confirmar',
     secondaryButtonText: 'Cancelar',
     size: 'xl',
+  },
+};
+
+export const Giant = {
+  args: {
+    title: 'Title',
+    description: 'Description',
+    primaryButtonText: 'Confirmar',
+    secondaryButtonText: 'Cancelar',
+    size: 'gt',
   },
 };
 
