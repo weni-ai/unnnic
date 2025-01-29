@@ -100,6 +100,14 @@ export const WithIcon = {
   },
 };
 
+export const FilledIcon = {
+  args: {
+    text: 'Button Text',
+    iconLeft: 'play_arrow',
+    iconsFilled: true, 
+  },
+};
+
 export const OnlyIcon = {
   args: {
     iconCenter: 'add',
