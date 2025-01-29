@@ -24,19 +24,24 @@
       >
         <header class="unnnic-drawer__header">
           <section class="unnnic-drawer__title-container">
-            <h1
-              class="unnnic-drawer__title"
-              data-testid="drawer-title"
-            >
-              {{ title }}
-            </h1>
-            <p
-              v-if="description"
-              class="unnnic-drawer__description"
-              data-testid="drawer-description"
-            >
-              {{ description }}
-            </p>
+            <slot v-if="$slots.title" name="title"/>
+
+            <template v-else>
+              <h1
+                class="unnnic-drawer__title"
+                data-testid="drawer-title"
+              >
+                {{ title }}
+              </h1>
+              <p
+                v-if="description"
+                class="unnnic-drawer__description"
+                data-testid="drawer-description"
+              >
+                {{ description }}
+              </p>
+
+            </template>
           </section>
           <UnnnicIcon
             class="unnnic-drawer__close"
