@@ -14,8 +14,8 @@ exports[`Drawer.vue > Component Rendering > Component Rendering > matches the sn
       </header>
       <section data-v-196de012="" class="unnnic-drawer__content"></section>
       <footer data-v-196de012="" class="unnnic-drawer__footer" data-testid="footer">
-        <unnnic-button-stub data-v-196de012="" size="large" text="Secondary Action" type="tertiary" float="false" iconleft="" iconright="" iconcenter="" next="false" disabled="false" loading="false" data-testid="secondary-button"></unnnic-button-stub>
-        <unnnic-button-stub data-v-196de012="" size="large" text="Primary Action" type="primary" float="false" iconleft="" iconright="" iconcenter="" next="false" disabled="false" loading="false" data-testid="primary-button"></unnnic-button-stub>
+        <unnnic-button-stub data-v-196de012="" size="large" text="Secondary Action" type="tertiary" float="false" iconleft="" iconright="" iconcenter="" iconsfilled="false" next="false" disabled="false" loading="false" data-testid="secondary-button"></unnnic-button-stub>
+        <unnnic-button-stub data-v-196de012="" size="large" text="Primary Action" type="primary" float="false" iconleft="" iconright="" iconcenter="" iconsfilled="false" next="false" disabled="false" loading="false" data-testid="primary-button"></unnnic-button-stub>
       </footer>
     </section>
   </transition-stub>
