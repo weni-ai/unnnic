@@ -198,7 +198,7 @@ export default {
       this.$emit('update:modelValue', false);
     },
     updateBodyOverflow(isHidden) {
-      document.body.style.overflow = isHidden ? 'hidden' : '';
+      document.body?.style.overflow = isHidden ? 'hidden' : '';
     },
   },
 };
