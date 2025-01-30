@@ -38,8 +38,8 @@ export default {
     const { transitionContainer } = this.$parent.$refs;
 
     if (transitionContainer) {
-      this.$parent.$refs.transitionContainer?.style.position = 'relative';
-      this.$parent.$refs.transitionContainer?.style.overflow = 'hidden';
+      this.$parent.$refs.transitionContainer.style.position = 'relative';
+      this.$parent.$refs.transitionContainer.style.overflow = 'hidden';
     }
 
     const width = transitionContainer.offsetWidth;
