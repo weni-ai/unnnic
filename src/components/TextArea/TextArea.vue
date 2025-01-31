@@ -1,9 +1,9 @@
 <template>
   <UnnnicFormElement
-    :label="label"
+    :label="sanitizedLabel"
     :size="size"
     :disabled="disabled"
-    :message="message"
+    :message="sanitizedMessage"
     :error="errors.join(', ') || type === 'error'"
   >
     <textarea
@@ -13,23 +13,22 @@
         `unnnic-text-area__textarea--size-${size}`,
         `unnnic-text-area__textarea--type-${type}`,
       ]"
-      :placeholder="placeholder"
+      :placeholder="sanitizedPlaceholder"
       :maxlength="maxLength"
       :disabled="disabled"
-      :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
+      v-model="decodedModelValue"
+      @input="$emit('update:modelValue', sanitizedModelValue)"
     ></textarea>
 
-    <template
-      v-if="maxLength"
-      #rightMessage
-      >{{ modelValue.length }}/{{ maxLength }}</template
-    >
+    <template v-if="maxLength" #rightMessage>
+      {{ sanitizedModelValue.length }}/{{ maxLength }}
+    </template>
   </UnnnicFormElement>
 </template>
 
 <script>
 import UnnnicFormElement from '../FormElement/FormElement.vue';
+import { sanitizeHtml } from '../../utils/sanitize';
 
 export default {
   components: {
@@ -71,7 +70,7 @@ export default {
       type: String,
       default: 'normal',
       validator(value) {
-        return ['normal', 'error'].indexOf(value) !== -1;
+        return ['normal', 'error'].includes(value);
       },
     },
 
@@ -81,6 +80,29 @@ export default {
     },
   },
   emits: ['update:modelValue'],
+
+  computed: {
+    sanitizedLabel() {
+      return sanitizeHtml(this.label, [], 100);
+    },
+    sanitizedPlaceholder() {
+      return sanitizeHtml(this.placeholder, [], 100);
+    },
+    sanitizedModelValue() {
+      return sanitizeHtml(this.modelValue, [], this.maxLength || 500);
+    },
+    sanitizedMessage() {
+      return sanitizeHtml(this.message, [], 200);
+    },
+    decodedModelValue: {
+      get() {
+        return this.sanitizedModelValue.replace(/&lt;/g, '<').replace(/&gt;/g, '>');
+      },
+      set(value) {
+        this.$emit('update:modelValue', value);
+      }
+    }
+  },
 
   methods: {
     focus() {
