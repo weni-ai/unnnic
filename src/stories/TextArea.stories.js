@@ -29,8 +29,8 @@ export default {
 
 export const Default = {
   args: {
-    label: 'Label <div> aaaa',
-    placeholder: 'Placeholder <div> aaaa',
+    label: 'Label',
+    placeholder: 'Placeholder',
     maxLength: 150,
     disabled: false,
     type: 'normal',
