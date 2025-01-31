@@ -3,7 +3,7 @@
     v-if="mask"
     v-mask="mask"
     v-bind="attributes"
-    :value="sanitizedValue(modelValue)"
+    :value="fullySanitize(modelValue)"
     :class="classes"
     :type="nativeType"
   />
@@ -11,7 +11,7 @@
   <input
     v-else
     v-bind="attributes"
-    :value="sanitizedValue(modelValue)"
+    :value="fullySanitize(modelValue)"
     :class="classes"
     :type="nativeType"
   />
@@ -19,7 +19,7 @@
 
 <script>
 import { mask } from 'vue-the-mask';
-import { escapeHtml } from '../../utils/sanitize';
+import { fullySanitize } from '../../utils/sanitize';
 
 export default {
   directives: { mask },
@@ -78,9 +78,7 @@ export default {
     },
   },
   methods: {
-    sanitizedValue(value) {
-      return escapeHtml(value);
-    }
+    fullySanitize
   }
 };
 </script>

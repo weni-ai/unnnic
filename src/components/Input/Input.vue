@@ -5,7 +5,7 @@
     </p>
 
     <p v-else-if="label" class="unnnic-form__label">
-      {{ validateInput(label) }}
+      {{ fullySanitize(label) }}
     </p>
 
     <TextInput v-bind="$attrs" v-model="val" class="unnnic-form-input" :placeholder="placeholder" :iconLeft="iconLeft"
@@ -14,13 +14,13 @@
       :nativeType="nativeType" />
 
     <p v-if="message" class="unnnic-form__message">
-      {{ validateInput(message) }}
+      {{ fullySanitize(message) }}
     </p>
   </div>
 </template>
 
 <script>
-import { validateInput } from '../../utils/sanitize';
+import { fullySanitize } from '../../utils/sanitize';
 import TextInput from './TextInput.vue';
 
 export default {
@@ -98,9 +98,12 @@ export default {
       return !!this.$slots.label;
     },
   },
+  methods:{
+    fullySanitize,
+  },
   watch: {
     val() {
-      this.$emit('update:modelValue', validateInput(this.val));
+      this.$emit('update:modelValue', fullySanitize(this.val));
     },
     modelValue() {
       this.val = this.modelValue;

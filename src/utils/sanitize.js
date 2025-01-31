@@ -1,31 +1,17 @@
 /**
- * Removes all HTML tags while preserving plain text content.
+ * Decodes HTML entities (`&lt;` → `<`, `&gt;` → `>`, etc.)
  * @param {string} input
  * @returns {string}
  */
 export function escapeHtml(input) {
     if (typeof input !== 'string') return '';
-
-    // Remove all HTML tags while keeping the text content
-    return input.replace(/<[^>]*>/g, '');
+    // return decodedInput;
+    return input.replace(/<\/?[a-zA-Z]+\b[^>]*>/g, '');
 }
 
-/**
- * Checks if a URL is safe (http, https, mailto).
- * @param {string} url
- * @returns {boolean}
- */
-function isSafeUrl(url) {
-    try {
-        const parsedUrl = new URL(url);
-        return ['http:', 'https:', 'mailto:'].includes(parsedUrl.protocol);
-    } catch (e) {
-        return false;
-    }
-}
 
 /**
- * Sanitizes HTML by allowing only certain tags and removing dangerous attributes.
+ * Sanitizes HTML by removing disallowed tags and unsafe attributes.
  * @param {string} input
  * @param {Array<string>} allowedTags
  * @param {number} maxLength
@@ -33,40 +19,44 @@ function isSafeUrl(url) {
  */
 export function sanitizeHtml(input, allowedTags = [], maxLength = 1000) {
     if (typeof input !== 'string') return '';
+    console.log('chegou no saitizehtml assim: ', input)
 
-    // Limit text length
+    // Limita o tamanho do texto
     if (input.length > maxLength) {
         input = input.substring(0, maxLength);
     }
 
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = input;
+    // Decodifica entidades HTML (&lt;, &gt;, &amp;)
+    input = escapeHtml(input);
 
-    const elements = tempDiv.getElementsByTagName('*');
-    for (let i = elements.length - 1; i >= 0; i--) {
-        const el = elements[i];
+    // Remove **somente** tags HTML reais
+    input = input.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, (match, tagName) => {
+        return allowedTags.includes(tagName.toLowerCase()) ? match : '';  
+    });
 
-        // Remove disallowed tags
-        if (!allowedTags.includes(el.nodeName.toLowerCase())) {
-            el.parentNode.removeChild(el);
-            continue;
-        }
+    console.log("DEBUG: Sanitized Output:", input);
 
-        // Remove dangerous attributes
-        const attributes = el.attributes;
-        for (let j = attributes.length - 1; j >= 0; j--) {
-            const attrName = attributes[j].name.toLowerCase();
-            const attrValue = attributes[j].value;
+    return input;
+}
 
-            if (attrName.startsWith('on') || attrName === 'srcdoc') {
-                el.removeAttribute(attrName);
-            } else if (['href', 'src'].includes(attrName) && !isSafeUrl(attrValue)) {
-                el.removeAttribute(attrName);
-            }
-        }
-    }
+/**
+ * Fully sanitizes a string by applying multiple layers of security:
+ * 1. `sanitizeHtml` removes disallowed tags and attributes.
+ * 2. `escapeHtml` ensures no encoded characters remain and removes any remaining tags.
+ *
+ * @param {string} input
+ * @param {Array<string>} allowedTags
+ * @param {number} maxLength
+ * @returns {string}
+ */
+export function fullySanitize(input, allowedTags = [], maxLength = 1000) {
+    if (typeof input !== 'string') return '';
+    console.log('chegou assim: ', input)
 
-    return tempDiv.innerHTML;
+    let sanitizedInput = sanitizeHtml(input, allowedTags, maxLength);
+    console.log( 'sanitized', sanitizedInput);
+
+    return escapeHtml(sanitizedInput);
 }
 
 /**
@@ -79,22 +69,18 @@ export function sanitizeHtml(input, allowedTags = [], maxLength = 1000) {
 export function validateInput(input, allowedTags = [], maxLength = 1000) {
     const errors = [];
 
-    // Check if input is a string
     if (typeof input !== 'string') {
         errors.push('Input must be a string.');
         return { isValid: false, sanitized: '', errors };
     }
 
-    // Check length limit
     if (input.length > maxLength) {
         errors.push(`Input exceeds maximum length of ${maxLength} characters.`);
         input = input.substring(0, maxLength);
     }
 
-    // Escape and sanitize input
-    const sanitized = sanitizeHtml(input, allowedTags, maxLength);
+    const sanitized = fullySanitize(input, allowedTags, maxLength);
 
-    // Check if any tags were removed
     if (sanitized !== input) {
         errors.push('Some HTML tags or attributes were removed for security reasons.');
     }
@@ -105,4 +91,3 @@ export function validateInput(input, allowedTags = [], maxLength = 1000) {
         errors,
     };
 }
-
