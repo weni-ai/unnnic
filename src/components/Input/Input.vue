@@ -8,39 +8,40 @@
     </p>
 
     <p
-      v-else-if="label"
+      v-else-if="sanitizedLabel"
       class="unnnic-form__label"
     >
-      {{ label }}
+      {{ sanitizedLabel }}
     </p>
 
     <TextInput
       v-bind="$attrs"
       v-model="val"
       class="unnnic-form-input"
-      :placeholder="placeholder"
-      :iconLeft="iconLeft"
-      :iconRight="iconRight"
+      :placeholder="sanitizedPlaceholder"
+      :iconLeft="sanitizedIconLeft"
+      :iconRight="sanitizedIconRight"
       :type="type"
       :iconLeftClickable="iconLeftClickable"
       :iconRightClickable="iconRightClickable"
       :hasCloudyColor="hasCloudyColor"
       :size="size"
-      :mask="mask"
-      :nativeType="nativeType"
+      :mask="sanitizedMask"
+      :nativeType="sanitizedNativeType"
     />
 
     <p
-      v-if="message"
+      v-if="sanitizedMessage"
       class="unnnic-form__message"
     >
-      {{ message }}
+      {{ sanitizedMessage }}
     </p>
   </div>
 </template>
 
 <script>
 import TextInput from './TextInput.vue';
+import { sanitizeHtml } from '../../utils/sanitize';
 
 export default {
   name: 'UnnnicInput',
@@ -54,7 +55,7 @@ export default {
       type: String,
       default: 'normal',
       validator(value) {
-        return ['normal', 'error'].indexOf(value) !== -1;
+        return ['normal', 'error'].includes(value);
       },
     },
     modelValue: {
@@ -80,10 +81,6 @@ export default {
     iconRight: {
       type: String,
       default: null,
-    },
-    allowTogglePassword: {
-      type: Boolean,
-      default: false,
     },
     iconLeftClickable: {
       type: Boolean,
@@ -115,6 +112,32 @@ export default {
   computed: {
     hasLabelSlot() {
       return !!this.$slots.label;
+    },
+    sanitizedPlaceholder() {
+      return sanitizeHtml(this.placeholder, [], 100);
+    },
+    sanitizedMessage() {
+      return sanitizeHtml(this.message, [], 200);
+    },
+    sanitizedLabel() {
+      return sanitizeHtml(this.label, [], 100);
+    },
+    sanitizedIconLeft() {
+      return sanitizeHtml(this.iconLeft, [], 50);
+    },
+    sanitizedIconRight() {
+      return sanitizeHtml(this.iconRight, [], 50);
+    },
+    sanitizedMask() {
+      if (Array.isArray(this.mask)) {
+        return this.mask.map((m) => sanitizeHtml(m, [], 50));
+      }
+      return sanitizeHtml(this.mask, [], 50);
+    },
+    sanitizedNativeType() {
+      return ['text', 'password', 'email', 'number'].includes(this.nativeType)
+        ? this.nativeType
+        : 'text';
     },
   },
   watch: {
