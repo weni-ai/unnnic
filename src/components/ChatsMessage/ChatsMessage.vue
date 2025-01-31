@@ -1,5 +1,5 @@
 <template>
-  <div
+  <section
     class="unnnic-chats-message"
     :class="{
       sent: type === 'sent',
@@ -9,7 +9,16 @@
       'is-image': isImage,
       'is-video': isVideo,
     }"
+    @mouseover="isHovering = true"
+    @mouseleave="isHovering = false"
   >
+    <ReplyMessage
+      v-if="replyMessage"
+      class="unnnic-chats-message__reply-message"
+      :replyMessage="replyMessage"
+      :messageType="type"
+      data-testid="reply-message"
+    />
     <p
       v-if="signature"
       class="unnnic-chats-message__signature"
@@ -75,6 +84,30 @@
         size="avatar-nano"
         scheme="neutral-dark"
       />
+
+      <section
+        v-if="
+          enableReply && isHovering && !['sending', 'failed'].includes(status)
+        "
+        class="unnnic-chats-message__tooltip"
+      >
+        <UnnnicTooltip
+          enabled
+          size="right"
+          :text="i18n('reply')"
+          :side="type === 'sent' ? 'bottom' : 'right'"
+        >
+          <UnnnicIcon
+            icon="reply"
+            clickable
+            scheme="neutral-dark"
+            size="avatar-nano"
+            data-testid="reply-icon"
+            @click.stop="$emit('reply')"
+          />
+        </UnnnicTooltip>
+      </section>
+
       <p
         v-else
         class="unnnic-chats-message__time"
@@ -82,7 +115,7 @@
         {{ formattedTime }}
       </p>
     </main>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -90,6 +123,9 @@ import UnnnicChatsMessageStatusBackdrop from './ChatsMessageStatusBackdrop.vue';
 import UnnnicChatsMessageText from './ChatsMessageText.vue';
 import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import UnnnicIcon from '../Icon.vue';
+import UnnnicTooltip from '../ToolTip/ToolTip.vue';
+import UnnnicI18n from '../../mixins/i18n';
+import ReplyMessage from './ReplyMessage.vue';
 
 export default {
   name: 'UnnnicChatsMessage',
@@ -98,8 +134,19 @@ export default {
     UnnnicChatsMessageStatusBackdrop,
     UnnnicIconLoading,
     UnnnicIcon,
+    UnnnicTooltip,
+    ReplyMessage,
   },
+  mixins: [UnnnicI18n],
   props: {
+    enableReply: {
+      type: Boolean,
+      default: false,
+    },
+    replyMessage: {
+      type: [Object, null],
+      default: null,
+    },
     type: {
       type: String,
       default: 'received',
@@ -109,13 +156,11 @@ export default {
     },
     time: {
       type: Date,
-      default: null,
       required: true,
     },
     signature: {
       type: String,
       default: '',
-      required: false,
     },
     documentName: {
       type: String,
@@ -136,7 +181,21 @@ export default {
       },
     },
   },
-  emits: ['click', 'click-image'],
+
+  emits: ['click', 'click-image', 'reply'],
+
+  data() {
+    return {
+      isHovering: false,
+      defaultTranslations: {
+        reply: {
+          'pt-br': 'Responder',
+          en: 'Reply',
+          es: 'Responder',
+        },
+      },
+    };
+  },
 
   computed: {
     formattedTime() {
@@ -196,6 +255,11 @@ export default {
 
 $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
+.is-media .unnnic-chats-message__reply-message {
+  margin: (-$unnnic-spacing-nano) (-$unnnic-spacing-nano) 0px
+    (-$unnnic-spacing-nano);
+}
+
 .unnnic-chats-message {
   width: fit-content;
   min-width: 70px;
@@ -212,8 +276,21 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
   font-family: $unnnic-font-family-secondary;
 
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
+
+  &__tooltip {
+    display: flex;
+    min-width: 51px;
+    justify-content: end;
+  }
+
+  &__reply-message {
+    margin: (-$unnnic-spacing-nano) (-$unnnic-spacing-xs) 0px
+      (-$unnnic-spacing-xs);
+  }
+
   &.sent {
-    background-color: $unnnic-color-weni-50;
+    background-color: #cff8f4;
   }
 
   &.sending {
