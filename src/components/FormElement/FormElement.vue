@@ -12,7 +12,7 @@
         },
       ]"
     >
-      {{ label }}
+      {{ sanitizedValue(label) }}
     </p>
 
     <slot></slot>
@@ -28,7 +28,7 @@
           scheme="aux-red-500"
         />
 
-        {{ error }}
+        {{ sanitizedValue(error) }}
       </template>
 
       <span
@@ -43,7 +43,7 @@
       v-if="message || !!$slots.rightMessage"
       class="unnnic-form-element__message"
     >
-      {{ message }}
+      {{ sanitizedValue(message) }}
 
       <span
         v-if="!shouldShowErrorSection && !!$slots.rightMessage"
@@ -57,7 +57,7 @@
 
 <script>
 import UnnnicIcon from '../../components/Icon.vue';
-
+import { escapeHtml } from '../../utils/sanitize';
 export default {
   components: {
     UnnnicIcon,
@@ -93,6 +93,11 @@ export default {
       return this.error && (this.error !== true || !!this.$slots.rightMessage);
     },
   },
+  methods: {
+    sanitizedValue(value) {
+      return escapeHtml(value);
+    }
+  }
 };
 </script>
 
