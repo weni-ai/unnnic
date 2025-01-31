@@ -18,7 +18,7 @@
       v-bind="$attrs"
       v-model="val"
       class="unnnic-form-input"
-      :placeholder="placeholder"
+      :placeholder="sanitizedPlaceholder"
       :iconLeft="iconLeft"
       :iconRight="iconRight"
       :type="type"
@@ -122,6 +122,9 @@ export default {
     },
     sanitizedMessage(){
       return escapeHtml(this.message)
+    },
+    sanitizedPlaceholder(){
+      return escapeHtml(this.placeholder)
     }
   },
   watch: {
