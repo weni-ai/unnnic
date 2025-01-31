@@ -1,31 +1,17 @@
-// src/utils/sanitize.js
-
 /**
- * Escapa caracteres perigosos no HTML para evitar XSS.
+ * Removes all HTML tags while preserving plain text content.
  * @param {string} input
  * @returns {string}
  */
 export function escapeHtml(input) {
     if (typeof input !== 'string') return '';
 
-    // Remove todas as tags HTML, preservando o conteúdo de texto puro
+    // Remove all HTML tags while keeping the text content
     return input.replace(/<[^>]*>/g, '');
 }
 
 /**
- * Remove todas as tags HTML para retornar texto puro.
- * @param {string} input
- * @returns {string}
- */
-export function stripHtml(input) {
-    if (typeof input !== 'string') return '';
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = input;
-    return tempDiv.textContent || '';
-}
-
-/**
- * Verifica se uma URL é segura (http, https, mailto).
+ * Checks if a URL is safe (http, https, mailto).
  * @param {string} url
  * @returns {boolean}
  */
@@ -39,7 +25,7 @@ function isSafeUrl(url) {
 }
 
 /**
- * Sanitiza o HTML permitindo apenas certas tags e removendo atributos perigosos.
+ * Sanitizes HTML by allowing only certain tags and removing dangerous attributes.
  * @param {string} input
  * @param {Array<string>} allowedTags
  * @param {number} maxLength
@@ -48,7 +34,7 @@ function isSafeUrl(url) {
 export function sanitizeHtml(input, allowedTags = [], maxLength = 1000) {
     if (typeof input !== 'string') return '';
 
-    // Limitar o tamanho do texto
+    // Limit text length
     if (input.length > maxLength) {
         input = input.substring(0, maxLength);
     }
@@ -60,13 +46,13 @@ export function sanitizeHtml(input, allowedTags = [], maxLength = 1000) {
     for (let i = elements.length - 1; i >= 0; i--) {
         const el = elements[i];
 
-        // Remover tags não permitidas
+        // Remove disallowed tags
         if (!allowedTags.includes(el.nodeName.toLowerCase())) {
             el.parentNode.removeChild(el);
             continue;
         }
 
-        // Remover atributos perigosos
+        // Remove dangerous attributes
         const attributes = el.attributes;
         for (let j = attributes.length - 1; j >= 0; j--) {
             const attrName = attributes[j].name.toLowerCase();
