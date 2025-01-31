@@ -1,35 +1,33 @@
 /**
- * Decodes HTML entities (`&lt;` → `<`, `&gt;` → `>`, etc.)
+ * Decodes HTML entities (`&lt;` → `<`, `&gt;` → `>`, etc.).
  * @param {string} input
  * @returns {string}
  */
 export function escapeHtml(input) {
     if (typeof input !== 'string') return '';
-    // return decodedInput;
     return input.replace(/<\/?[a-zA-Z]+\b[^>]*>/g, '');
 }
-
 
 /**
  * Sanitizes HTML by removing disallowed tags and unsafe attributes.
  * @param {string} input
- * @param {Array<string>} allowedTags
- * @param {number} maxLength
+ * @param {Array<string>} allowedTags - List of allowed HTML tags.
+ * @param {number} maxLength - Maximum length of the sanitized string.
  * @returns {string}
  */
 export function sanitizeHtml(input, allowedTags = [], maxLength = 1000) {
     if (typeof input !== 'string') return '';
-    console.log('chegou no saitizehtml assim: ', input)
+    console.log('Arrived in sanitizeHtml as: ', input);
 
-    // Limita o tamanho do texto
+    // Limits text length
     if (input.length > maxLength) {
         input = input.substring(0, maxLength);
     }
 
-    // Decodifica entidades HTML (&lt;, &gt;, &amp;)
+    // Decodes HTML entities (&lt;, &gt;, &amp;)
     input = escapeHtml(input);
 
-    // Remove **somente** tags HTML reais
+    // Removes **only** real HTML tags
     input = input.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, (match, tagName) => {
         return allowedTags.includes(tagName.toLowerCase()) ? match : '';  
     });
@@ -45,16 +43,16 @@ export function sanitizeHtml(input, allowedTags = [], maxLength = 1000) {
  * 2. `escapeHtml` ensures no encoded characters remain and removes any remaining tags.
  *
  * @param {string} input
- * @param {Array<string>} allowedTags
- * @param {number} maxLength
+ * @param {Array<string>} allowedTags - List of allowed HTML tags.
+ * @param {number} maxLength - Maximum length of the sanitized string.
  * @returns {string}
  */
 export function fullySanitize(input, allowedTags = [], maxLength = 1000) {
     if (typeof input !== 'string') return '';
-    console.log('chegou assim: ', input)
+    console.log('Arrived as: ', input);
 
     let sanitizedInput = sanitizeHtml(input, allowedTags, maxLength);
-    console.log( 'sanitized', sanitizedInput);
+    console.log('Sanitized:', sanitizedInput);
 
     return escapeHtml(sanitizedInput);
 }
@@ -75,7 +73,7 @@ export function validateInput(input, allowedTags = [], maxLength = 1000) {
     }
 
     if (input.length > maxLength) {
-        errors.push(`Input exceeds maximum length of ${maxLength} characters.`);
+        errors.push(`Input exceeds the maximum length of ${maxLength} characters.`);
         input = input.substring(0, maxLength);
     }
 
