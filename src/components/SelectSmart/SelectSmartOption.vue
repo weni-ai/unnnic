@@ -25,7 +25,7 @@
           `unnnic-select-smart-option__label--${size}`,
         ]"
         data-testid="label"
-        >{{ label }}</span
+        >{{ sanitizedValue(label) }}</span
       >
       <p
         v-if="description"
@@ -35,7 +35,7 @@
           `unnnic-select-smart-option__description--${size}`,
         ]"
       >
-        {{ description }}
+        {{ sanitizedValue(description) }}
       </p>
     </div>
   </div>
@@ -43,6 +43,7 @@
 
 <script>
 import UnnnicCheckbox from '../Checkbox/Checkbox.vue';
+import { escapeHtml } from '../../utils/sanitize'
 
 export default {
   name: 'UnnnicSelectSmartOption',
@@ -80,6 +81,11 @@ export default {
     },
     isMultiple: Boolean,
   },
+  methods: {
+    sanitizedValue(value) {
+      return escapeHtml(value);
+    }
+  }
 };
 </script>
 
