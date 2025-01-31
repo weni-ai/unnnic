@@ -1,40 +1,20 @@
 <template>
   <div :class="['unnnic-form', size]">
-    <p
-      v-if="hasLabelSlot"
-      class="unnnic-form__label"
-    >
+    <p v-if="hasLabelSlot" class="unnnic-form__label">
       <slot name="label" />
     </p>
 
-    <p
-      v-else-if="label"
-      class="unnnic-form__label"
-    >
-      {{ sanitizedLabel }}
+    <p v-else-if="label" class="unnnic-form__label">
+      {{ sanitizedValue(label) }}
     </p>
 
-    <TextInput
-      v-bind="$attrs"
-      v-model="val"
-      class="unnnic-form-input"
-      :placeholder="placeholder"
-      :iconLeft="iconLeft"
-      :iconRight="iconRight"
-      :type="type"
-      :iconLeftClickable="iconLeftClickable"
-      :iconRightClickable="iconRightClickable"
-      :hasCloudyColor="hasCloudyColor"
-      :size="size"
-      :mask="mask"
-      :nativeType="nativeType"
-    />
+    <TextInput v-bind="$attrs" v-model="val" class="unnnic-form-input" :placeholder="placeholder" :iconLeft="iconLeft"
+      :iconRight="iconRight" :type="type" :iconLeftClickable="iconLeftClickable"
+      :iconRightClickable="iconRightClickable" :hasCloudyColor="hasCloudyColor" :size="size" :mask="mask"
+      :nativeType="nativeType" />
 
-    <p
-      v-if="message"
-      class="unnnic-form__message"
-    >
-      {{ sanitizedMessage }}
+    <p v-if="message" class="unnnic-form__message">
+      {{ sanitizedValue(message) }}
     </p>
   </div>
 </template>
@@ -117,17 +97,15 @@ export default {
     hasLabelSlot() {
       return !!this.$slots.label;
     },
-    sanitizedLabel(){
-      return escapeHtml(this.label)
-    },
-    sanitizedMessage(){
-      return escapeHtml(this.message)
-    },
+  },
+  methods: {
+    sanitizedValue(value) {
+      return escapeHtml(value)
+    }
   },
   watch: {
     val() {
-      const sanitizedVal = escapeHtml(this.val)
-      this.$emit('update:modelValue', sanitizedVal);
+      this.$emit('update:modelValue', this.sanitizedValue(this.val));
     },
     modelValue() {
       this.val = this.modelValue;
