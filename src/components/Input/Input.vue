@@ -11,7 +11,7 @@
       v-else-if="label"
       class="unnnic-form__label"
     >
-      {{ label }}
+      {{ sanitizedLabel }}
     </p>
 
     <TextInput
@@ -34,12 +34,13 @@
       v-if="message"
       class="unnnic-form__message"
     >
-      {{ message }}
+      {{ sanitizedMessage }}
     </p>
   </div>
 </template>
 
 <script>
+import { escapeHtml } from '../../utils/sanitize';
 import TextInput from './TextInput.vue';
 
 export default {
@@ -116,10 +117,17 @@ export default {
     hasLabelSlot() {
       return !!this.$slots.label;
     },
+    sanitizedLabel(){
+      return escapeHtml(this.label)
+    },
+    sanitizedMessage(){
+      return escapeHtml(this.message)
+    }
   },
   watch: {
     val() {
-      this.$emit('update:modelValue', this.val);
+      const sanitizedVal = escapeHtml(this.val)
+      this.$emit('update:modelValue', sanitizedVal);
     },
     modelValue() {
       this.val = this.modelValue;
