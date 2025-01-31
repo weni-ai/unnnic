@@ -10,7 +10,7 @@
       type="manual"
       :modelValue="active || null"
       position="bottom"
-    >
+    > swdwed{{ searchValue }} - {{ inputValue }}
       <TextInput
         ref="selectSmartInput"
         class="unnnic-select-smart__input"
@@ -99,6 +99,7 @@ import SelectSmartMultipleHeader from './SelectSmartMultipleHeader.vue';
 import TextInput from '../Input/TextInput.vue';
 import DropdownSkeleton from '../Dropdown/DropdownSkeleton.vue';
 import UnnnicI18n from '../../mixins/i18n';
+import { sanitizeHtml } from '../../utils/sanitize';
 
 export default {
   name: 'UnnnicSelectSmart',
@@ -254,7 +255,11 @@ export default {
       const { isAutocompleteAllowed, searchValue, multiple, modelValue } = this;
 
       if (isAutocompleteAllowed || multiple) {
-        return searchValue;
+        if(searchValue){
+          return sanitizeHtml(searchValue);
+        }else{
+          return ''
+        }
       }
       if (!multiple && modelValue.length !== 0) {
         return modelValue?.[0].label;
