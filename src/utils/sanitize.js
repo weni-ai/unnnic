@@ -68,3 +68,41 @@ export function sanitizeHtml(input, allowedTags = [], maxLength = 1000) {
 
     return tempDiv.innerHTML;
 }
+
+/**
+ * Validates and sanitizes input text.
+ * @param {string} input - The input string to validate.
+ * @param {Array<string>} allowedTags - List of allowed HTML tags.
+ * @param {number} maxLength - Maximum length of the sanitized string.
+ * @returns {{ isValid: boolean, sanitized: string, errors: string[] }} - Validation result.
+ */
+export function validateInput(input, allowedTags = [], maxLength = 1000) {
+    const errors = [];
+
+    // Check if input is a string
+    if (typeof input !== 'string') {
+        errors.push('Input must be a string.');
+        return { isValid: false, sanitized: '', errors };
+    }
+
+    // Check length limit
+    if (input.length > maxLength) {
+        errors.push(`Input exceeds maximum length of ${maxLength} characters.`);
+        input = input.substring(0, maxLength);
+    }
+
+    // Escape and sanitize input
+    const sanitized = sanitizeHtml(input, allowedTags, maxLength);
+
+    // Check if any tags were removed
+    if (sanitized !== input) {
+        errors.push('Some HTML tags or attributes were removed for security reasons.');
+    }
+
+    return {
+        isValid: errors.length === 0,
+        sanitized,
+        errors,
+    };
+}
+
