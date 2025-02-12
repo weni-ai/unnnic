@@ -1,0 +1,11 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UnnnicFormElement.vue > matches the snapshot 1`] = `
+"<section data-v-9f8d6c86="" class="unnnic-form-element">
+  <p data-v-9f8d6c86="" class="unnnic-form-element__label">Snapshot Test Label</p>
+  <p data-v-9f8d6c86="" class="unnnic-form-element__error"><span data-v-26446d8e="" data-v-9f8d6c86="" class="material-symbols-rounded unnnic-icon-scheme--aux-red-500 unnnic-icon-size--sm" data-testid="material-icon" translate="no">warning</span> Snapshot Error<span data-v-9f8d6c86="" class="unnnic-form-element__right-message"><span>Right Message</span></span></p>
+  <p data-v-9f8d6c86="" class="unnnic-form-element__message">Snapshot Message
+    <!--v-if-->
+  </p>
+</section>"
+`;

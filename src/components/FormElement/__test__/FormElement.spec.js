@@ -14,6 +14,22 @@ describe('UnnnicFormElement.vue', () => {
         expect(wrapper.exists()).toBe(true);
     });
 
+    it('matches the snapshot', () => {
+        const wrapper = mount(UnnnicFormElement, {
+            props: {
+                label: 'Snapshot Test Label',
+                error: 'Snapshot Error',
+                message: 'Snapshot Message',
+                disabled: false,
+            },
+            slots: {
+                rightMessage: '<span>Right Message</span>',
+            },
+        });
+
+        expect(wrapper.html()).toMatchSnapshot();
+    });
+
     it('renders the label when provided', () => {
         const label = 'Test Label';
         const wrapper = mount(UnnnicFormElement, {
