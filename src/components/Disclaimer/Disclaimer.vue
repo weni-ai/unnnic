@@ -10,9 +10,8 @@
     <p
       class="unnnic-disclaimer__text"
       data-testid="disclaimer-text"
-    >
-      {{ text }}
-    </p>
+      v-html="text"
+    />
   </section>
 </template>
 
