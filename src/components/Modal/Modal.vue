@@ -201,7 +201,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic';
+@use '@/assets/scss/unnnic' as *;
 
 .unnnic-modal {
   position: fixed;

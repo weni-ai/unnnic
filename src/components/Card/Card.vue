@@ -192,7 +192,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 $scheme-colors:
   'feedback-red' $unnnic-color-feedback-red,
