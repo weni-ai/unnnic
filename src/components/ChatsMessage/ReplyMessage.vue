@@ -15,14 +15,20 @@
         }}
       </p>
       <section class="reply-message__content">
-        <p
-          v-if="contentType === 'text'"
-          class="reply-message__content-text"
-          data-testid="content-text"
-        >
-          {{ props.replyMessage.text }}
-        </p>
-
+        <template v-if="contentType === 'text' || contentType === 'geo'">
+          <UnnnicIcon
+            v-if="contentType === 'geo'"
+            icon="location_on"
+            size="avatar-nano"
+            data-testid="content-geo-icon"
+          />
+          <p
+            class="reply-message__content-text"
+            data-testid="content-text"
+          >
+            {{ props.replyMessage.text }}
+          </p>
+        </template>
         <template v-if="contentType === 'attachment'">
           <UnnnicIcon
             icon="article"
@@ -139,9 +145,9 @@ const contentType = computed(() => {
 
   const contentType = props.replyMessage.media[0].content_type.split('/')[0];
 
-  if (contentType === 'geo') return 'text';
-
-  if (['audio', 'video', 'image'].includes(contentType)) return contentType;
+  if (['audio', 'video', 'image', 'geo'].includes(contentType)) {
+    return contentType;
+  }
 
   return 'attachment';
 });
