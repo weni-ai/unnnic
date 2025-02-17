@@ -8,6 +8,7 @@
       'is-media': isMedia,
       'is-image': isImage,
       'is-video': isVideo,
+      'is-geo': isGeolocation,
     }"
   >
     <p
@@ -23,8 +24,13 @@
         'is-media': isMedia,
         'is-image': isImage,
         'is-video': isVideo,
+        'is-geo': isGeolocation,
       }"
     >
+      <UnnnicIcon
+        v-if="isGeolocation"
+        icon="location_on"
+      />
       <UnnnicChatsMessageText
         v-if="isText"
         :text="slotText"
@@ -132,7 +138,7 @@ export default {
       type: String,
       default: '',
       validate(status) {
-        return ['audio', 'image', 'video'].includes(status);
+        return ['audio', 'image', 'video', 'geo'].includes(status);
       },
     },
   },
@@ -165,6 +171,9 @@ export default {
     },
     isVideo() {
       return this.isMedia && this.mediaType === 'video';
+    },
+    isGeolocation() {
+      return this.isMedia && this.mediaType === 'geo';
     },
     slotText() {
       return (
