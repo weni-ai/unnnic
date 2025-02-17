@@ -73,6 +73,7 @@
           'chats-contact__infos__message-time': true,
           'chats-contact__infos__message-time--active': unreadMessages,
         }"
+        data-testid="last-interaction-time"
       >
         {{ formattedLastInteraction }}
       </p>
@@ -106,6 +107,7 @@ import Checkbox from '../Checkbox/Checkbox.vue';
 
 import('moment/dist/locale/es.js');
 import('moment/dist/locale/pt-br.js');
+
 import moment from 'moment';
 
 export default {

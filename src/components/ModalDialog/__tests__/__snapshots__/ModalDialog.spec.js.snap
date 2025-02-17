@@ -15,8 +15,8 @@ exports[`ModalDialog.vue > Elements rendering > matches the snapshot 1`] = `
       </header>
       <section data-v-68ebadeb="" class="unnnic-modal-dialog__container__content"></section>
       <section data-v-68ebadeb="" data-testid="actions-section" class="unnnic-modal-dialog__container__actions">
-        <unnnic-button-stub data-v-68ebadeb="" size="large" text="Cancel" type="tertiary" float="false" iconleft="" iconright="" iconcenter="" next="false" disabled="false" loading="false" data-testid="secondary-button" class="unnnic-modal-dialog__container__actions__secondary-button"></unnnic-button-stub>
-        <unnnic-button-stub data-v-68ebadeb="" size="large" text="Confirm" type="primary" float="false" iconleft="" iconright="" iconcenter="" next="false" disabled="false" loading="false" data-testid="primary-button" class="unnnic-modal-dialog__container__actions__primary-button"></unnnic-button-stub>
+        <unnnic-button-stub data-v-68ebadeb="" size="large" text="Cancel" type="tertiary" float="false" iconleft="" iconright="" iconcenter="" iconsfilled="false" next="false" disabled="false" loading="false" data-testid="secondary-button" class="unnnic-modal-dialog__container__actions__secondary-button"></unnnic-button-stub>
+        <unnnic-button-stub data-v-68ebadeb="" size="large" text="Confirm" type="primary" float="false" iconleft="" iconright="" iconcenter="" iconsfilled="false" next="false" disabled="false" loading="false" data-testid="primary-button" class="unnnic-modal-dialog__container__actions__primary-button"></unnnic-button-stub>
       </section>
     </section>
   </section>

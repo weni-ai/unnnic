@@ -2,6 +2,7 @@ import { action } from '@storybook/addon-actions';
 
 import UnnnicDrawer from '../components/Drawer/Drawer.vue';
 import UnnnicButton from '../components/Button/Button.vue';
+import UnnnicAvatarIcon from '../components/AvatarIcon/AvatarIcon.vue';
 
 const primaryButtonTypeOptions = [
   'primary',
@@ -30,7 +31,7 @@ export default {
     secondaryButtonText: { control: { type: 'text' } },
     modelValue: { control: { type: 'boolean' } },
     size: {
-      options: ['md', 'lg', 'xl'],
+      options: ['md', 'lg', 'xl', 'gt'],
       control: { type: 'select' },
     },
     withoutOverlay: { control: { type: 'boolean' } },
@@ -100,6 +101,16 @@ export const ExtraLarge = {
     primaryButtonText: 'Confirmar',
     secondaryButtonText: 'Cancelar',
     size: 'xl',
+  },
+};
+
+export const Giant = {
+  args: {
+    title: 'Title',
+    description: 'Description',
+    primaryButtonText: 'Confirmar',
+    secondaryButtonText: 'Cancelar',
+    size: 'gt',
   },
 };
 
@@ -189,5 +200,42 @@ export const WithoutOverlay = {
     primaryButtonText: 'Confirmar',
     secondaryButtonText: 'Cancelar',
     withoutOverlay: true,
+  },
+};
+
+export const TitleModified = {
+  render: (args) => ({
+    components: { UnnnicDrawer, UnnnicAvatarIcon },
+    setup() {
+      return { args };
+    },
+    data() {
+      return {
+        opened: false,
+      };
+    },
+    template: `
+      <div>
+        <pre>v-model: {{ opened }}</pre>
+        <button @click="opened = !opened">Change</button>
+        <unnnic-drawer v-bind="args" v-model="opened" @close="opened = false">
+          <template #title>
+            <section style="display: flex; align-items: center; gap: 8px;">
+              <UnnnicAvatarIcon
+                size="sm"
+                icon="bolt"
+                scheme="aux-blue"
+              />
+              <h1 style="fontSize: 20px; margin: 0;">Modified Title</h1>
+            </section>
+          </template>
+        </unnnic-drawer>
+      </div>
+    `,
+  }),
+  args: {
+    title: 'Title',
+    description: 'Description',
+    size: 'lg',
   },
 };
