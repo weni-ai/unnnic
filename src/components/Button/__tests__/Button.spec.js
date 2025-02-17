@@ -89,4 +89,18 @@ describe('Button', () => {
     const invalidType = () => createWrapper({ type: 'invalid-type' });
     expect(invalidType).toThrow(Error);
   });
+
+  it('should render filled icons when iconsFilled prop is true', async () => {
+    const wrapper = createWrapper({ 
+      iconLeft: 'search-1',
+      iconRight: 'search-1',
+      iconsFilled: true 
+    });
+
+    const leftIcon = wrapper.findComponent('[data-testid="icon-left"]');
+    const rightIcon = wrapper.findComponent('[data-testid="icon-right"]');
+
+    expect(leftIcon.props('filled')).toBe(true);
+    expect(rightIcon.props('filled')).toBe(true);
+  });
 });

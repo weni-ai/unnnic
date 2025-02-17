@@ -16,6 +16,7 @@
       icon="loading-circle-1"
       :scheme="iconScheme"
       :size="iconSize"
+      :filled="iconsFilled"
       :style="{ position: 'absolute' }"
       class="rotation"
       :next="next"
@@ -27,6 +28,7 @@
       :icon="iconLeft"
       :scheme="iconScheme"
       :size="iconSize"
+      :filled="iconsFilled"
       :class="{ 'unnnic-button__icon-left': hasText }"
       :style="{ visibility: loading ? 'hidden' : null }"
       :next="next"
@@ -39,6 +41,7 @@
       :scheme="iconScheme"
       :style="{ visibility: loading ? 'hidden' : null }"
       :size="iconSize"
+      :filled="iconsFilled"
       :next="next"
       data-testid="icon-center"
     />
@@ -57,6 +60,7 @@
       :icon="iconRight"
       :scheme="iconScheme"
       :size="iconSize"
+      :filled="iconsFilled"
       :class="{ 'unnnic-button__icon-right': hasText }"
       :style="{ visibility: loading ? 'hidden' : null }"
       :next="next"
@@ -101,6 +105,10 @@ export default {
     iconCenter: {
       type: String,
       default: '',
+    },
+    iconsFilled: {
+      type: Boolean,
+      default: false,
     },
     next: {
       type: Boolean,

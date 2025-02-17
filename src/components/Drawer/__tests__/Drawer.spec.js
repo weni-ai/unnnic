@@ -1,7 +1,6 @@
-import { flushPromises, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import Drawer from '../Drawer.vue';
-import { nextTick } from 'vue';
 
 describe('Drawer.vue', () => {
   let wrapper;
@@ -83,6 +82,37 @@ describe('Drawer.vue', () => {
         expect(wrapper.find('[data-testid="slot-content"]').text()).toBe(
           'Slot Content',
         );
+      });
+
+      it('should render custom title content when using title slot', () => {
+        wrapper = mount(Drawer, {
+          props: {
+            modelValue: true,
+            title: 'Default Title',
+          },
+          slots: {
+            title: '<h2 data-testid="custom-title">Custom Title Content</h2>',
+          },
+        });
+
+        expect(title().exists()).toBe(false);
+        expect(wrapper.find('[data-testid="custom-title"]').exists()).toBe(true);
+        expect(wrapper.find('[data-testid="custom-title"]').text()).toBe('Custom Title Content');
+      });
+
+      it('should prioritize title slot over title prop', () => {
+        wrapper = mount(Drawer, {
+          props: {
+            modelValue: true,
+            title: 'Prop Title',
+          },
+          slots: {
+            title: '<div data-testid="custom-title">Slot Title</div>',
+          },
+        });
+
+        expect(title().exists()).toBe(false);
+        expect(wrapper.find('[data-testid="custom-title"]').text()).toBe('Slot Title');
       });
     });
   });
@@ -242,12 +272,14 @@ describe('Drawer.vue', () => {
       expect(closeIcon().props('icon')).toBe('custom_close_icon');
     });
 
-    it('should validate size prop to accept only md, lg, or xl values', async () => {
+    it('should validate all size prop values correctly', () => {
       const validator = Drawer.props.size.validator;
       expect(validator('md')).toBe(true);
       expect(validator('lg')).toBe(true);
       expect(validator('xl')).toBe(true);
+      expect(validator('gt')).toBe(true);
       expect(validator('sm')).toBe(false);
+      expect(validator('invalid')).toBe(false);
     });
   });
 });
