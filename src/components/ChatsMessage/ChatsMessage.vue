@@ -29,7 +29,9 @@
     >
       <UnnnicIcon
         v-if="isGeolocation"
+        class="geolocation-icon"
         icon="location_on"
+        size="avatar-nano"
       />
       <UnnnicChatsMessageText
         v-if="isText"
@@ -64,7 +66,7 @@
         </p>
       </div>
       <div
-        v-else-if="isMedia"
+        v-else-if="isMedia && !isGeolocation"
         class="unnnic-chats-message__media__container"
         :class="{ failed: failedToSendMedia }"
         @click="onClickMedia"
@@ -164,7 +166,8 @@ export default {
       return !!this.documentName;
     },
     isText() {
-      return !this.isMedia && !this.isDocument;
+      const validText = !this.isMedia || this.isGeolocation;
+      return validText && !this.isDocument;
     },
     isImage() {
       return this.isMedia && this.mediaType === 'image';
@@ -331,6 +334,9 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     &.failed {
       cursor: pointer;
     }
+  }
+  .geolocation-icon {
+    align-self: center;
   }
 }
 </style>
