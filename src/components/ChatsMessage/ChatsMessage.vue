@@ -8,6 +8,7 @@
       'is-media': isMedia,
       'is-image': isImage,
       'is-video': isVideo,
+      'is-geo': isGeolocation,
     }"
     @mouseover="isHovering = true"
     @mouseleave="isHovering = false"
@@ -32,8 +33,15 @@
         'is-media': isMedia,
         'is-image': isImage,
         'is-video': isVideo,
+        'is-geo': isGeolocation,
       }"
     >
+      <UnnnicIcon
+        v-if="isGeolocation"
+        class="geolocation-icon"
+        icon="location_on"
+        size="avatar-nano"
+      />
       <UnnnicChatsMessageText
         v-if="isText"
         :text="slotText"
@@ -67,7 +75,7 @@
         </p>
       </div>
       <div
-        v-else-if="isMedia"
+        v-else-if="isMedia && !isGeolocation"
         class="unnnic-chats-message__media__container"
         :class="{ failed: failedToSendMedia }"
         @click="onClickMedia"
@@ -177,7 +185,7 @@ export default {
       type: String,
       default: '',
       validate(status) {
-        return ['audio', 'image', 'video'].includes(status);
+        return ['audio', 'image', 'video', 'geo'].includes(status);
       },
     },
   },
@@ -217,13 +225,17 @@ export default {
       return !!this.documentName;
     },
     isText() {
-      return !this.isMedia && !this.isDocument;
+      const validText = !this.isMedia || this.isGeolocation;
+      return validText && !this.isDocument;
     },
     isImage() {
       return this.isMedia && this.mediaType === 'image';
     },
     isVideo() {
       return this.isMedia && this.mediaType === 'video';
+    },
+    isGeolocation() {
+      return this.isMedia && this.mediaType === 'geo';
     },
     slotText() {
       return (
@@ -399,6 +411,9 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     &.failed {
       cursor: pointer;
     }
+  }
+  .geolocation-icon {
+    align-self: center;
   }
 }
 </style>

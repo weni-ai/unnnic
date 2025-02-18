@@ -328,6 +328,10 @@ export const Media = {
         <UnnnicChatsMessage v-bind="args" mediaType="image">
           <img class="media" :src="image3" />
         </UnnnicChatsMessage>
+
+         <UnnnicChatsMessage v-bind="args" mediaType="geo">
+          -1.11111, -1.11111
+        </UnnnicChatsMessage>
       </div>
     `,
   }),
