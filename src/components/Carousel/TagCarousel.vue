@@ -160,6 +160,12 @@ export default {
   }
 
   &__button {
+    z-index: 1;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     &__icon {
       height: $unnnic-inline-lg;
       display: flex;
@@ -167,11 +173,7 @@ export default {
       align-items: center;
       background-color: $unnnic-color-background-snow;
     }
-    z-index: 1;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
     &__blur {
       width: $unnnic-inline-giant;
       height: $unnnic-inline-lg;

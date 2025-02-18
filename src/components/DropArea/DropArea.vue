@@ -282,10 +282,11 @@ function addFiles(files) {
 
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
+@use 'sass:string';
 
 @function borderDashed($color) {
-  $colorString: unquote('' + $color);
-  $cleanColor: str-slice($colorString, 2);
+  $colorString: string.unquote('' + $color);
+  $cleanColor: string.slice($colorString, 2);
   @return url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='8' ry='8' stroke='%23#{$cleanColor}' stroke-width='1' stroke-dasharray='4%2c 4' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
 }
 

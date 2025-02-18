@@ -270,6 +270,12 @@ export default {
         &-description {
           width: 100%;
           text-align: center;
+          overflow: auto;
+          font-family: $unnnic-font-family-secondary;
+          color: $unnnic-color-neutral-cloudy;
+          font-weight: $unnnic-font-weight-regular;
+          font-size: $unnnic-font-size-body-lg;
+          line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
 
           &-container {
             background-color: $unnnic-color-background-carpet;
@@ -279,14 +285,6 @@ export default {
             overflow: hidden;
             padding-bottom: $unnnic-spacing-stack-giant;
           }
-
-          overflow: auto;
-
-          font-family: $unnnic-font-family-secondary;
-          color: $unnnic-color-neutral-cloudy;
-          font-weight: $unnnic-font-weight-regular;
-          font-size: $unnnic-font-size-body-lg;
-          line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
         }
       }
 

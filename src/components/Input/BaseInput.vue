@@ -81,7 +81,7 @@ export default {
 
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
-@import './Input.scss';
+@use './Input.scss' as *;
 
 .input {
   @include input-base;

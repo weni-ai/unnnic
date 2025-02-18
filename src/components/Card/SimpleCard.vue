@@ -153,15 +153,14 @@ export default {
   }
 
   &__footer {
+    border-top: 1px solid $unnnic-color-neutral-light;
+    padding-top: $unnnic-spacing-ant;
+    font-family: $unnnic-font-family-secondary;
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
-    border-top: 1px solid $unnnic-color-neutral-light;
-    padding-top: $unnnic-spacing-ant;
-    font-family: $unnnic-font-family-secondary;
   }
 }
 </style>
