@@ -70,10 +70,10 @@ export default {
   align-items: center;
   gap: $unnnic-spacing-stack-xs;
 
-  .unnnic-icon.is-recording ::v-deep {
+  .unnnic-icon.is-recording {
     margin-left: $unnnic-spacing-inline-nano;
 
-    .primary {
+    :deep(.primary) {
       animation: ease-in-out pulse 2s infinite;
     }
   }
