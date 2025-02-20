@@ -139,8 +139,8 @@ export default {
   },
   methods: {
     mobileAnimateReset() {
-      this.$refs.modalContainer.style.transition = null;
-      this.$refs.modal.style.transition = null;
+      this.$refs.modalContainer?.style.transition = null;
+      this.$refs.modal?.style.transition = null;
     },
 
     mobileAnimateOpen() {
