@@ -437,7 +437,7 @@ export default {
         const optionElement = elementScroll.childNodes[optionIndex];
 
         if (optionElement instanceof HTMLElement) {
-          optionElement.scrollIntoView({ block: scrollBlock });
+          optionElement?.scrollIntoView({ block: scrollBlock });
         }
       }
     },
