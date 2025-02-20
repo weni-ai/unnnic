@@ -42,12 +42,6 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    transformMode: {
-      web: [/\.vue$/],
-    },
-    transform: {
-      '^.+\\.js$': 'babel-jest',
-    },
     coverage: {
       all: true,
       provider: 'istanbul',

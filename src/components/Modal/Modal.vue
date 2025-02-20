@@ -139,23 +139,34 @@ export default {
   },
   methods: {
     mobileAnimateReset() {
-      this.$refs.modalContainer?.style.transition = null;
-      this.$refs.modal?.style.transition = null;
+      if (this.$refs.modalContainer) {
+        this.$refs.modalContainer.style.transition = null;
+      }
+      if (this.$refs.modal) {
+        this.$refs.modal.style.transition = null;
+      }
     },
 
     mobileAnimateOpen() {
       this.$nextTick(() => {
-        this.$refs.modalContainer?.style.transition = 'none';
-        this.$refs.modalContainer?.style.backgroundColor = 'transparent';
-        this.$refs.modal?.style.transition = 'none';
-        this.$refs.modal?.style.marginBottom = `${-this.$refs.modal
-          .offsetHeight}px`;
+        if (this.$refs.modalContainer) {
+          this.$refs.modalContainer.style.transition = 'none';
+          this.$refs.modalContainer.style.backgroundColor = 'transparent';
+        }
+        if (this.$refs.modal) {
+          this.$refs.modal.style.transition = 'none';
+          this.$refs.modal.style.marginBottom = `${-this.$refs.modal.offsetHeight}px`;
+        }
 
         setTimeout(() => {
-          this.$refs.modalContainer?.style.transition = 'background-color 0.2s';
-          this.$refs.modalContainer?.style.backgroundColor = null;
-          this.$refs.modal?.style.transition = 'margin-bottom 0.2s';
-          this.$refs.modal?.style.marginBottom = null;
+          if (this.$refs.modalContainer) {
+            this.$refs.modalContainer.style.transition = 'background-color 0.2s';
+            this.$refs.modalContainer.style.backgroundColor = null;
+          }
+          if (this.$refs.modal) {
+            this.$refs.modal.style.transition = 'margin-bottom 0.2s';
+            this.$refs.modal.style.marginBottom = null;
+          }
 
           setTimeout(() => {
             this.mobileAnimateReset();
@@ -166,11 +177,14 @@ export default {
 
     mobileAnimateClose() {
       return new Promise((resolve) => {
-        this.$refs.modalContainer?.style.transition = 'background-color 0.2s';
-        this.$refs.modalContainer?.style.backgroundColor = 'transparent';
-        this.$refs.modal?.style.transition = 'margin-bottom 0.2s';
-        this.$refs.modal?.style.marginBottom = `${-this.$refs.modal
-          .offsetHeight}px`;
+        if (this.$refs.modalContainer) {
+          this.$refs.modalContainer.style.transition = 'background-color 0.2s';
+          this.$refs.modalContainer.style.backgroundColor = 'transparent';
+        }
+        if (this.$refs.modal) {
+          this.$refs.modal.style.transition = 'margin-bottom 0.2s';
+          this.$refs.modal.style.marginBottom = `${-this.$refs.modal.offsetHeight}px`;
+        }
 
         setTimeout(() => {
           this.mobileAnimateReset();
