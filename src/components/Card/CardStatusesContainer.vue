@@ -138,7 +138,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 $calculated-width: 6 * $unnnic-font-size;
 

@@ -116,7 +116,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 .unnnic-icon :deep(svg) {
   position: absolute;
@@ -126,7 +126,7 @@ export default {
 </style>
 
 <style lang="scss">
-@import '../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 $scheme-colors:
   'background-solo' $unnnic-color-background-solo,

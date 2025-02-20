@@ -237,7 +237,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 .value-input {
   display: flex;
@@ -285,7 +285,7 @@ export default {
 </style>
 
 <style lang="scss">
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 .unnnic-label {
   display: flex;

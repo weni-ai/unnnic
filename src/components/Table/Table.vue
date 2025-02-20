@@ -50,7 +50,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 $scroll-size: 4px;
 
@@ -91,7 +91,7 @@ $scroll-size: 4px;
   .header {
     background-color: $unnnic-color-background-carpet;
 
-    ::v-deep .col {
+    :deep(.col) {
       font-family: $unnnic-font-family-secondary;
       color: $unnnic-color-neutral-cloudy;
       font-weight: $unnnic-font-weight-regular;
