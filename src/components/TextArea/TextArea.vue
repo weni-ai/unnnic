@@ -13,11 +13,11 @@
         `unnnic-text-area__textarea--size-${size}`,
         `unnnic-text-area__textarea--type-${type}`,
       ]"
-      :placeholder="placeholder"
+      :placeholder="fullySanitize(placeholder)"
       :maxlength="maxLength"
       :disabled="disabled"
       :value="modelValue"
-      @input="$emit('update:modelValue', $event.target.value)"
+      @input="$emit('update:modelValue', fullySanitize($event.target.value))"
     ></textarea>
 
     <template
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { fullySanitize } from '../../utils/sanitize';
 import UnnnicFormElement from '../FormElement/FormElement.vue';
 
 export default {
@@ -83,6 +84,7 @@ export default {
   emits: ['update:modelValue'],
 
   methods: {
+    fullySanitize,
     focus() {
       this.$refs.textarea.focus();
     },
