@@ -1,4 +1,4 @@
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 @mixin input-base {
   background: $unnnic-color-neutral-white;

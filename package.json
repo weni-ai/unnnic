@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "2.21.1-alpha.3",
+  "version": "2.22.0",
   "type": "commonjs",
   "files": [
     "dist",
@@ -80,7 +80,7 @@
     "jsdom": "^24.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "sass": "^1.62.1",
+    "sass": "^1.63.0",
     "storybook": "^8.0.10",
     "typescript": "^5.6.3",
     "vite": "4.3.5",

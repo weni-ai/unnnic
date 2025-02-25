@@ -437,7 +437,7 @@ export default {
         const optionElement = elementScroll.childNodes[optionIndex];
 
         if (optionElement instanceof HTMLElement) {
-          optionElement.scrollIntoView({ block: scrollBlock });
+          optionElement?.scrollIntoView({ block: scrollBlock });
         }
       }
     },
@@ -547,7 +547,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 .unnnic-select-smart {
   position: relative;
 

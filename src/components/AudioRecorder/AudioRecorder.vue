@@ -377,7 +377,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 .unnnic-audio-recorder {
   position: relative;
@@ -389,8 +389,8 @@ export default {
 
   width: 100%;
 
-  ::v-deep .audio-player__time,
-  ::v-deep .audio-handler__time {
+  :deep(.audio-player__time),
+  :deep(.audio-handler__time) {
     font-family: $unnnic-font-family-secondary;
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-md;

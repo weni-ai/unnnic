@@ -84,7 +84,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 .unnnic-select-smart-option {
   background-color: $unnnic-color-background-snow;
   padding: $unnnic-spacing-stack-nano $unnnic-inline-xs;

@@ -286,7 +286,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 

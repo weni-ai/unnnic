@@ -277,7 +277,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
