@@ -1,7 +1,10 @@
 <template>
   <div
     v-on-click-outside="onClickOutside"
-    class="unnnic-select-smart"
+    :class="[
+      'unnnic-select-smart',
+      { 'unnnic-select-smart--secondary': type === 'secondary' },
+    ]"
     data-testid="select-smart"
     @keydown="onKeyDownSelect"
   >
@@ -13,7 +16,10 @@
     >
       <TextInput
         ref="selectSmartInput"
-        class="unnnic-select-smart__input"
+        :class="[
+          'unnnic-select-smart__input',
+          { 'unnnic-select-smart__input--secondary': type === 'secondary' },
+        ]"
         data-testid="select-smart-input"
         :modelValue="inputValue"
         :placeholder="placeholder || autocompletePlaceholder || selectedLabel"
@@ -140,7 +146,7 @@ export default {
       type: String,
       default: 'normal',
       validator(value) {
-        return ['normal', 'error'].indexOf(value) !== -1;
+        return ['normal', 'error', 'secondary'].indexOf(value) !== -1;
       },
     },
     disabled: {
@@ -640,11 +646,27 @@ export default {
       display: block;
       z-index: 2;
     }
+
+    .unnnic-select-smart--secondary & {
+      border-radius: 0.25rem;
+      margin-top: -1px;
+      box-shadow: $unnnic-shadow-level-near;
+    }
+  }
+
+  &--secondary {
+    .unnnic-select-smart__input {
+      .unnnic-input {
+        border-radius: $unnnic-border-radius-sm $unnnic-border-radius-sm 0 0;
+      }
+
+      &.active .unnnic-input {
+        border-bottom-color: transparent;
+      }
+    }
   }
 
   .unnnic-select-smart__input input {
-    // entire class name to have higher priority in styles
-
     &:read-only {
       cursor: pointer;
     }
@@ -652,6 +674,12 @@ export default {
     &:disabled {
       cursor: not-allowed;
     }
+  }
+
+  .unnnic-select-smart__input--secondary input {
+    border: none;
+    color: $unnnic-color-neutral-darkest;
+    font-family: $unnnic-font-family-secondary;
   }
 }
 
