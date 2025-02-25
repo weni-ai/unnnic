@@ -237,4 +237,32 @@ describe('SelectSmart.vue', () => {
       expect(wrapper.emitted('update:modelValue')[0][0]).toEqual([options[1]]);
     });
   });
+
+  describe('Secondary Type', () => {
+    beforeEach(() => {
+      mountWrapper({
+        type: 'secondary',
+      });
+    });
+
+    it('should apply secondary class to root element when type is secondary', () => {
+      expect(selectSmart().classes()).toContain(
+        'unnnic-select-smart--secondary',
+      );
+    });
+
+    it('should apply secondary class to input when type is secondary', () => {
+      expect(input().classes()).toContain(
+        'unnnic-select-smart__input--secondary',
+      );
+    });
+
+    it('should maintain secondary styling when dropdown is opened', async () => {
+      await input().trigger('click');
+      expect(selectSmart().classes()).toContain(
+        'unnnic-select-smart--secondary',
+      );
+      expect(optionsContainer().exists()).toBe(true);
+    });
+  });
 });
