@@ -111,4 +111,29 @@ describe('SelectSmartOption.vue', () => {
       );
     });
   });
+
+  describe('Active color variants', () => {
+    it('uses primary color by default when active', async () => {
+      await wrapper.setProps({
+        active: true,
+        allowCheckbox: false,
+      });
+      expect(wrapper.classes()).toContain('unnnic-select-smart-option--active');
+      expect(wrapper.classes()).not.toContain(
+        'unnnic-select-smart-option--active-secondary',
+      );
+    });
+
+    it('uses secondary color when activeColor is secondary', async () => {
+      await wrapper.setProps({
+        active: true,
+        activeColor: 'secondary',
+        allowCheckbox: false,
+      });
+      expect(wrapper.classes()).toContain('unnnic-select-smart-option--active');
+      expect(wrapper.classes()).toContain(
+        'unnnic-select-smart-option--active-secondary',
+      );
+    });
+  });
 });
