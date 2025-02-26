@@ -265,4 +265,42 @@ describe('SelectSmart.vue', () => {
       expect(optionsContainer().exists()).toBe(true);
     });
   });
+
+  describe('SelectSmartOption activeColor', () => {
+    beforeEach(async () => {
+      mountWrapper({
+        options: [
+          { label: 'Apple', value: 'apple' },
+          { label: 'Banana', value: 'banana' },
+          { label: 'Orange', value: 'orange' },
+        ],
+      });
+    });
+
+    it('passes primary activeColor by default', async () => {
+      wrapper.vm.active = true;
+      await nextTick();
+
+      const option = wrapper.findComponent('[data-testid="option"]');
+      expect(option.props('activeColor')).toBe('primary');
+    });
+
+    it('passes secondary activeColor when type is secondary', async () => {
+      await wrapper.setProps({ type: 'secondary' });
+      wrapper.vm.active = true;
+      await nextTick();
+
+      const option = wrapper.findComponent('[data-testid="option"]');
+      expect(option.props('activeColor')).toBe('secondary');
+    });
+
+    it('maintains primary activeColor for error type', async () => {
+      await wrapper.setProps({ type: 'error' });
+      wrapper.vm.active = true;
+      await nextTick();
+
+      const option = wrapper.findComponent('[data-testid="option"]');
+      expect(option.props('activeColor')).toBe('primary');
+    });
+  });
 });
