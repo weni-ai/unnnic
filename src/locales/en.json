@@ -13,6 +13,14 @@
     "importing": "Importing"
   },
   "audio_recorder": {
-    "discard_button" : "Discard"
+    "discard_button": "Discard"
+  },
+  "chat_message": {
+    "reply_message": {
+      "you": "You",
+      "video": "Video",
+      "image": "Image",
+      "audio": "Audio message"
+    }
   }
 }
