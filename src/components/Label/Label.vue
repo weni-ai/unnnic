@@ -1,8 +1,9 @@
 <template>
-  <p class="unnnic-label__label">{{ label }}</p>
+  <p class="unnnic-label__label">{{ fullySanitize(label) }}</p>
 </template>
 
 <script>
+import { fullySanitize } from '../../utils/sanitize';
 export default {
   name: 'UnnnicLabel',
   props: {
@@ -11,6 +12,9 @@ export default {
       default: null,
     },
   },
+  methods: {
+    fullySanitize
+  }
 };
 </script>
 
