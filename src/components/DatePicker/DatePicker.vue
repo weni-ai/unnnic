@@ -309,7 +309,7 @@ export default {
 
   computed: {
     openMonths() {
-      return [this.referenceDate, this.addMonth(this.referenceDate, 1)];
+      return [this.addMonth(this.referenceDate, -1), this.referenceDate];
     },
 
     value() {
