@@ -34,7 +34,7 @@ export default {
     },
     template: `
       <div>
-        <!--<pre>v-model: {{ dates }}</pre>-->
+        <pre>v-model: {{ dates }}</pre>
         <unnnic-input-date-picker v-bind="args" v-model="dates" />
       </div>
     `,
