@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 .unnnic-card-number {
   background-color: $unnnic-color-background-carpet;

@@ -73,7 +73,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 .ripples {
   position: absolute;

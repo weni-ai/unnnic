@@ -14,7 +14,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 .unnnic-dropdown-item {
   color: $unnnic-color-neutral-dark;
   text-decoration: none;

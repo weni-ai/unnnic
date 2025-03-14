@@ -50,6 +50,14 @@ export const CloseIcon = {
   },
 };
 
+export const Next = {
+  args: {
+    text: 'Label',
+    type: 'next',
+    scheme: 'weni',
+  },
+};
+
 export const Indicator = {
   args: {
     text: 'Tag Name',

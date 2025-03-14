@@ -93,8 +93,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
-@import '../Input/Input.scss';
+@use '@/assets/scss/unnnic' as *;
+@use '@/components/Input/Input' as *;
 
 .unnnic-text-area {
   &__textarea {

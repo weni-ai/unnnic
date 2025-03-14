@@ -26,18 +26,22 @@
 
           <div :class="['days', `days--${size}`]">
             <div
-              v-for="(day, index) in daysLocale"
-              :key="index"
+              v-for="(day, dayIndex) in daysLocale"
+              :key="dayIndex"
               class="name"
             >
               {{ day }}
             </div>
             <div
-              v-for="(date, index) in getDatesOfTheMonth(openMonth)"
-              :key="`${openMonth}-${index}`"
+              v-for="(date, dateIndex) in getDatesOfTheMonth(openMonth)"
+              :key="`${openMonth}-${dateIndex}`"
               :class="{
-                disabled: !date.properties.includes('inside month'),
-                selectable: date.properties.includes('inside month'),
+                disabled:
+                  !date.properties.includes('inside month') ||
+                  date.properties.includes('out of range'),
+                selectable:
+                  date.properties.includes('inside month') &&
+                  !date.properties.includes('out of range'),
                 today: date.properties.includes('today'),
                 selected: date.properties.includes('selected'),
                 highlighted: date.properties.includes('highlighted'),
@@ -45,7 +49,9 @@
                 right: date.properties.includes('right-highlighted'),
               }"
               @click="
-                date.properties.includes('inside month') && selectDate(date)
+                date.properties.includes('inside month') &&
+                  !date.properties.includes('out of range') &&
+                  selectDate(date)
               "
             >
               {{ getDate(date) }}
@@ -221,8 +227,11 @@ export default {
   mixins: [UnnnicI18n],
 
   props: {
-    initialStartDate: String,
-    initialEndDate: String,
+    initialStartDate: { type: String, default: '' },
+    initialEndDate: { type: String, default: '' },
+
+    minDate: { type: String, default: '' },
+    maxDate: { type: String, default: '' },
 
     type: {
       type: String,
@@ -272,6 +281,8 @@ export default {
     },
   },
 
+  emits: ['change', 'submit'],
+
   data() {
     const today = new Date();
     const referenceDate = `${today.getMonth() + 1} 1 ${today.getFullYear()}`;
@@ -298,7 +309,7 @@ export default {
 
   computed: {
     openMonths() {
-      return [this.referenceDate, this.addMonth(this.referenceDate, 1)];
+      return [this.addMonth(this.referenceDate, -1), this.referenceDate];
     },
 
     value() {
@@ -378,7 +389,7 @@ export default {
       const date = new Date(year, Number(month) - 1, day);
 
       date.setMonth(date.getMonth() + quantity);
-      
+
       return this.dateToString(date);
     },
 
@@ -471,6 +482,32 @@ export default {
       for (let i = 0; i < 6 * 7; i += 1) {
         const dateString = this.dateToString(date);
         const properties = [];
+
+        if (this.minDate) {
+          const [minDateYear, minDateMonth, minDateDay] =
+            this.minDate.split('-');
+
+          const formatedMinDate = new Date(
+            minDateYear,
+            Number(minDateMonth) - 1,
+            minDateDay,
+          );
+
+          if (date < formatedMinDate) properties.push('out of range');
+        }
+
+        if (this.maxDate) {
+          const [maxDateYear, maxDateMonth, maxDateDay] =
+            this.maxDate.split('-');
+
+          const formatedMaxDate = new Date(
+            maxDateYear,
+            Number(maxDateMonth) - 1,
+            maxDateDay,
+          );
+
+          if (date > formatedMaxDate) properties.push('out of range');
+        }
 
         if (currentMonth === date.getMonth()) {
           properties.push('inside month');
@@ -654,10 +691,14 @@ export default {
         this.endDate = this.startDate;
       } else {
         const self = this.stringToTime(date.toString());
+
         const startDate = this.stringToTime(this.startDate);
         const endDate = this.stringToTime(this.endDate);
 
-        if (self > endDate) {
+        if (startDate !== endDate) {
+          this.startDate = date.toString();
+          this.endDate = this.startDate;
+        } else if (self > endDate) {
           this.endDate = date.toString();
         } else if (self < startDate) {
           this.startDate = date.toString();
@@ -707,10 +748,10 @@ export default {
 
       if (this.endDate) {
         const secondMonth = this.addMonth(this.referenceDate, 1);
-        
-        const firstDateOfEndDate = `${
-          Number(this.getMonth(this.endDate))
-        } 1 ${this.getFullYear(this.endDate)}`;
+
+        const firstDateOfEndDate = `${Number(
+          this.getMonth(this.endDate),
+        )} 1 ${this.getFullYear(this.endDate)}`;
 
         if (![this.referenceDate, secondMonth].includes(firstDateOfEndDate)) {
           this.referenceDate = firstDateOfEndDate;
@@ -726,7 +767,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 .unnnic-date-picker {
   display: inline-flex;
