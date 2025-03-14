@@ -1,16 +1,18 @@
 <template>
   <div
     ref="dropdown"
-    :class="['dropdown', { active: showCalendarFilter }]"
+    :class="['dropdown', { active: showCalendarFilter, 'fill-w': fillW }]"
   >
     <UnnnicInput
-      class="input"
+      :class="['input', { 'date-picker-input-next': next }]"
       :size="size"
-      iconLeft="notes-1"
+      :iconLeft="iconPosition === 'left' && 'calendar_month'"
+      :iconRight="iconPosition === 'right' && 'calendar_month'"
+      hasCloudyColor
       readonly
       :modelValue="filterText"
       @focus="showCalendarFilter = true"
-    ></UnnnicInput>
+    />
 
     <div
       class="dropdown-data"
@@ -26,6 +28,8 @@
         :options="options"
         :initialStartDate="initialStartDate"
         :initialEndDate="initialEndDate"
+        :minDate="minDate"
+        :maxDate="maxDate"
         @submit="changeDate"
       />
     </div>
@@ -49,6 +53,23 @@ export default {
   props: {
     modelValue: {
       type: Object,
+      required: true,
+    },
+
+    iconPosition: {
+      type: String,
+      default: 'left',
+      validator(position) {
+        return ['left', 'right'].includes(position);
+      },
+    },
+
+    minDate: { type: String, default: '' },
+    maxDate: { type: String, default: '' },
+
+    fillW: {
+      type: Boolean,
+      default: false,
     },
 
     type: {
@@ -73,14 +94,22 @@ export default {
 
     months: {
       type: Array,
+      default: () => [],
     },
 
     days: {
       type: Array,
+      default: () => [],
     },
 
     options: {
       type: Array,
+      default: () => [],
+    },
+
+    next: {
+      type: Boolean,
+      default: false,
     },
 
     format: {
@@ -98,6 +127,8 @@ export default {
       default: 'left',
     },
   },
+
+  emits: ['update:model-value'],
 
   data() {
     return {
@@ -122,7 +153,7 @@ export default {
       }
 
       if (!dates.length) {
-        return '—';
+        return String(this.inputFormat).replaceAll('-', '/').toLowerCase();
       }
 
       return dates.join(' ~ ');
@@ -180,8 +211,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
-
+@use '@/assets/scss/unnnic' as *;
+.fill-w {
+  width: 100%;
+}
 .dropdown {
   position: relative;
   display: inline-block;
@@ -203,6 +236,14 @@ export default {
 
   .input {
     display: inline-block;
+  }
+
+  :deep(.date-picker-input-next) {
+    width: 100%;
+    & input {
+      border: 1px solid $unnnic-color-neutral-soft;
+      color: $unnnic-color-neutral-cloudy;
+    }
   }
 }
 </style>

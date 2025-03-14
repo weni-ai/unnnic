@@ -21,6 +21,7 @@
 import DefaultTag from './DefaultTag.vue';
 import IndicatorTag from './IndicatorTag.vue';
 import BrandTag from './BrandTag.vue';
+import TagNext from './TagNext.vue';
 
 export default {
   name: 'UnnnicTag',
@@ -29,7 +30,7 @@ export default {
       type: String,
       default: 'default',
       validator(value) {
-        return ['default', 'indicator', 'brand'].indexOf(value) !== -1;
+        return ['default', 'indicator', 'brand', 'next'].indexOf(value) !== -1;
       },
     },
     text: {
@@ -81,6 +82,7 @@ export default {
     currentComponent() {
       if (this.type === 'indicator') return IndicatorTag;
       if (this.type === 'brand') return BrandTag;
+      if (this.type === 'next') return TagNext;
       return DefaultTag;
     },
   },

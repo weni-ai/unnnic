@@ -90,7 +90,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 .unnnic-card-marketplace__config {
   opacity: $unnnic-opacity-level-dark;
