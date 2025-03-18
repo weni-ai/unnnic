@@ -4,8 +4,8 @@
  * @returns {string}
  */
 export function escapeHtml(input) {
-    if (typeof input !== 'string') return '';
-    return input.replace(/<\/?[a-zA-Z]+\b[^>]*>/g, '');
+  if (typeof input !== 'string') return '';
+  return input.replace(/<\/?[a-zA-Z]+\b[^>]*>/g, '');
 }
 
 /**
@@ -16,25 +16,22 @@ export function escapeHtml(input) {
  * @returns {string}
  */
 export function sanitizeHtml(input, allowedTags = [], maxLength = 1000) {
-    if (typeof input !== 'string') return '';
-    console.log('Arrived in sanitizeHtml as: ', input);
+  if (typeof input !== 'string') return '';
 
-    // Limits text length
-    if (input.length > maxLength) {
-        input = input.substring(0, maxLength);
-    }
+  // Limits text length
+  if (input.length > maxLength) {
+    input = input.substring(0, maxLength);
+  }
 
-    // Decodes HTML entities (&lt;, &gt;, &amp;)
-    input = escapeHtml(input);
+  // Decodes HTML entities (&lt;, &gt;, &amp;)
+  input = escapeHtml(input);
 
-    // Removes **only** real HTML tags
-    input = input.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, (match, tagName) => {
-        return allowedTags.includes(tagName.toLowerCase()) ? match : '';  
-    });
+  // Removes **only** real HTML tags
+  input = input.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, (match, tagName) => {
+    return allowedTags.includes(tagName.toLowerCase()) ? match : '';
+  });
 
-    console.log("DEBUG: Sanitized Output:", input);
-
-    return input;
+  return input;
 }
 
 /**
@@ -48,13 +45,11 @@ export function sanitizeHtml(input, allowedTags = [], maxLength = 1000) {
  * @returns {string}
  */
 export function fullySanitize(input, allowedTags = [], maxLength = 1000) {
-    if (typeof input !== 'string') return '';
-    console.log('Arrived as: ', input);
+  if (typeof input !== 'string') return '';
 
-    let sanitizedInput = sanitizeHtml(input, allowedTags, maxLength);
-    console.log('Sanitized:', sanitizedInput);
+  let sanitizedInput = sanitizeHtml(input, allowedTags, maxLength);
 
-    return escapeHtml(sanitizedInput);
+  return escapeHtml(sanitizedInput);
 }
 
 /**
@@ -65,27 +60,29 @@ export function fullySanitize(input, allowedTags = [], maxLength = 1000) {
  * @returns {{ isValid: boolean, sanitized: string, errors: string[] }} - Validation result.
  */
 export function validateInput(input, allowedTags = [], maxLength = 1000) {
-    const errors = [];
+  const errors = [];
 
-    if (typeof input !== 'string') {
-        errors.push('Input must be a string.');
-        return { isValid: false, sanitized: '', errors };
-    }
+  if (typeof input !== 'string') {
+    errors.push('Input must be a string.');
+    return { isValid: false, sanitized: '', errors };
+  }
 
-    if (input.length > maxLength) {
-        errors.push(`Input exceeds the maximum length of ${maxLength} characters.`);
-        input = input.substring(0, maxLength);
-    }
+  if (input.length > maxLength) {
+    errors.push(`Input exceeds the maximum length of ${maxLength} characters.`);
+    input = input.substring(0, maxLength);
+  }
 
-    const sanitized = fullySanitize(input, allowedTags, maxLength);
+  const sanitized = fullySanitize(input, allowedTags, maxLength);
 
-    if (sanitized !== input) {
-        errors.push('Some HTML tags or attributes were removed for security reasons.');
-    }
+  if (sanitized !== input) {
+    errors.push(
+      'Some HTML tags or attributes were removed for security reasons.',
+    );
+  }
 
-    return {
-        isValid: errors.length === 0,
-        sanitized,
-        errors,
-    };
+  return {
+    isValid: errors.length === 0,
+    sanitized,
+    errors,
+  };
 }
