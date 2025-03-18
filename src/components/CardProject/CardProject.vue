@@ -127,7 +127,7 @@ export default {
     return {
       defaultTranslations: {
         'in-test': {
-          'pt-br': 'Em test',
+          'pt-br': 'Em teste',
           en: 'In test',
           es: 'En prueba',
         },
