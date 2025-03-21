@@ -236,6 +236,8 @@ export default {
     font-size: $unnnic-font-size-body-gt;
     font-weight: $unnnic-font-weight-regular;
     line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+    white-space: pre-line;
+    min-height: 44px;
 
     &--inactive {
       color: $unnnic-color-neutral-clean;
