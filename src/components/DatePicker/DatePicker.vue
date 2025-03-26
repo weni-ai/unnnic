@@ -192,6 +192,7 @@
 
       <div class="actions">
         <UnnnicButton
+          v-if="!disableClear"
           size="small"
           :text="clearText"
           type="tertiary"
@@ -278,6 +279,11 @@ export default {
     options: {
       type: Array,
       default: () => [],
+    },
+
+    disableClear: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -924,7 +930,10 @@ export default {
 
     .actions {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
+      &:has(:nth-child(2)) {
+        grid-template-columns: 1fr 1fr;
+      }
       gap: $unnnic-spacing-inline-xs;
       padding: $unnnic-spacing-stack-xs $unnnic-spacing-inline-sm;
     }
