@@ -188,6 +188,8 @@ export default {
     },
   },
 
+  emits: ['update:searchValue', 'onChange', 'update:modelValue'],
+
   data() {
     return {
       active: false,
@@ -290,6 +292,8 @@ export default {
       this.focusedOption = null;
 
       if (!this.active && oldSearchValue) this.active = true;
+
+      this.$emit('update:searchValue', newSearchValue);
     },
 
     modelValue: {
