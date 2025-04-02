@@ -68,8 +68,15 @@
                 },
               ]"
             >
+              <UnnnicIconLoading
+                v-if="isLoading"
+                class="unnnic-select-smart__options-loading"
+                scheme="neutral-dark"
+                size="sm"
+              />
               <SelectSmartOption
                 v-for="(option, index) in filterOptions(options)"
+                v-else
                 :key="option.value"
                 data-testid="option"
                 :label="option.label"
@@ -85,7 +92,7 @@
                 @click="handleSelect(option)"
               />
               <p
-                v-if="filterOptions(options).length === 0"
+                v-if="filterOptions(options).length === 0 && !isLoading"
                 class="unnnic-select-smart__options--no-results"
               >
                 {{ i18n('without_results') }}
@@ -105,6 +112,7 @@ import SelectSmartOption from './SelectSmartOption.vue';
 import SelectSmartMultipleHeader from './SelectSmartMultipleHeader.vue';
 import TextInput from '../Input/TextInput.vue';
 import DropdownSkeleton from '../Dropdown/DropdownSkeleton.vue';
+import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import UnnnicI18n from '../../mixins/i18n';
 
 export default {
@@ -114,6 +122,7 @@ export default {
     SelectSmartOption,
     SelectSmartMultipleHeader,
     DropdownSkeleton,
+    UnnnicIconLoading,
   },
 
   directives: {
@@ -185,6 +194,10 @@ export default {
     placeholder: {
       type: String,
       default: null,
+    },
+    isLoading: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -585,10 +598,16 @@ export default {
 
     cursor: default;
 
+    &-loading {
+      justify-self: center;
+    }
+
     &__scroll-area {
       @function calc-max-height($value) {
         @return ($value * $unnnic-font-size) - ($unnnic-spacing-xs * 2);
       }
+
+      display: grid;
 
       margin: $unnnic-spacing-xs;
       margin-right: $unnnic-inline-xs;
