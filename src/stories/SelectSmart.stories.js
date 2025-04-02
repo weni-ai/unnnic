@@ -101,6 +101,22 @@ export const Default = {
   },
 };
 
+export const Loading = {
+  args: {
+    isLoading: true,
+    options: [
+      { value: '', label: 'Select some option' },
+      { value: '5', label: 'Option 5' },
+      { value: '3', label: 'Option 3' },
+      { value: '1', label: 'Option 1' },
+      { value: '4', label: 'Option 4' },
+      { value: '2', label: 'Option 2' },
+      { value: '6', label: 'Option 6' },
+      { value: '7', label: 'Option 7' },
+    ],
+  },
+};
+
 export const FirstSelected = {
   args: {
     options: [
