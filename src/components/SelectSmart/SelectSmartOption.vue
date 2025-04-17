@@ -4,6 +4,8 @@
       'unnnic-select-smart-option': true,
       'unnnic-select-smart-option--focused': focused,
       'unnnic-select-smart-option--active': active,
+      'unnnic-select-smart-option--active-secondary':
+        active && activeColor === 'secondary',
       'unnnic--clickable': selectable,
       'unnnic-select-smart-option--selectable': selectable,
       'unnnic-select-smart-option--with-checkbox': allowCheckbox,
@@ -25,7 +27,7 @@
           `unnnic-select-smart-option__label--${size}`,
         ]"
         data-testid="label"
-        >{{ label }}</span
+        >{{ fullySanitize(label) }}</span
       >
       <p
         v-if="description"
@@ -35,7 +37,7 @@
           `unnnic-select-smart-option__description--${size}`,
         ]"
       >
-        {{ description }}
+        {{ fullySanitize(description) }}
       </p>
     </div>
   </div>
@@ -43,6 +45,7 @@
 
 <script>
 import UnnnicCheckbox from '../Checkbox/Checkbox.vue';
+import { fullySanitize } from '../../utils/sanitize'
 
 export default {
   name: 'UnnnicSelectSmartOption',
@@ -79,12 +82,22 @@ export default {
       default: false,
     },
     isMultiple: Boolean,
+    activeColor: {
+      type: String,
+      default: 'primary',
+      validator(value) {
+        return ['primary', 'secondary'].indexOf(value) !== -1;
+      },
+    },
   },
+  methods: {
+    fullySanitize,
+  }
 };
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 .unnnic-select-smart-option {
   background-color: $unnnic-color-background-snow;
   padding: $unnnic-spacing-stack-nano $unnnic-inline-xs;
@@ -114,6 +127,10 @@ export default {
   &--active:not(&--with-checkbox) {
     color: $unnnic-color-weni-600;
     font-weight: $unnnic-font-weight-bold;
+
+    &.unnnic-select-smart-option--active-secondary {
+      color: $unnnic-color-neutral-darkest;
+    }
   }
 
   &--with-checkbox {

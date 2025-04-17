@@ -5,6 +5,63 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.28.0 (2025-04-04)
+
+### Added
+
+- Added XSS security to form components
+
+## 2.27.0 (2025-04-03)
+
+### Added
+
+- Add SelectSmart update:searchValue event
+- Add SelectSmart loading variation
+
+## 2.26.0 (2025-03-27)
+
+### Added
+
+- Add DatePicker disableClear prop to ocult clear button
+
+### Fixed
+
+- InputDatePicker mouseover cursor pointer
+
+## 2.25.0 (2025-03-12)
+
+### Added
+
+- Add InputDatePicker next, fillW, minDate and maxDate props
+
+- Add InputDatePicker new visual (to this, use next prop)
+
+### Fixed
+
+- InputDatePicker select dates logic improvements
+
+
+## 2.24.0 (2025-02-27)
+
+### Added
+
+- Add new initial 'next' type to UnnnicTag component
+
+## 2.23.0 (2025-02-27)
+
+### Added
+
+- Add SelectSmart secondary variation
+
+## 2.22.0 (2025-02-17)
+
+### Added
+
+- Add verify to fix style-errors in Modal
+- Upgrade and migrate imports sass to fix warnings
+- Fix witdh calculator in CardStatusesContainer
+- Add ? to SelectSmart scrollIntoView
+
 ## 2.21.2 (2025-02-17)
 
 ### Added

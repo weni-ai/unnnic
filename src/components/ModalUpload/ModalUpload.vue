@@ -136,7 +136,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 .modal-upload {
   background-color: $unnnic-color-background-carpet;

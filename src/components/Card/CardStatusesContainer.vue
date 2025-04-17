@@ -138,7 +138,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
+
+$calculated-width: 6 * $unnnic-font-size;
 
 .unnnic-card-container {
   padding: $unnnic-inset-sm;
@@ -165,7 +167,7 @@ export default {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      width: calc(100% - #{5 * $unnnic-font-size});
+      width: calc(100% - #{$calculated-width});
       margin-right: $unnnic-spacing-inline-xs;
 
       .name {

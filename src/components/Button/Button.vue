@@ -219,7 +219,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 .unnnic-button {
   display: inline-flex;
@@ -405,7 +405,7 @@ export default {
 </style>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 .unnnic-button--icon-on-center {
   min-width: auto;
