@@ -71,8 +71,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../../assets/scss/unnnic.scss';
-
+@use '@/assets/scss/unnnic' as *;
 .unnnic-chart-funnel-four-rows {
   [class$='row']:nth-child(1) {
     fill: $unnnic-color-weni-950;

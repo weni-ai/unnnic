@@ -86,7 +86,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 .unnnic-select-smart__options__multiple {
   border-bottom: 1px solid $unnnic-color-neutral-soft;

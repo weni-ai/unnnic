@@ -3,7 +3,7 @@
     v-if="mask"
     v-mask="mask"
     v-bind="attributes"
-    :value="modelValue"
+    :value="fullySanitize(modelValue)"
     :class="classes"
     :type="nativeType"
   />
@@ -11,7 +11,7 @@
   <input
     v-else
     v-bind="attributes"
-    :value="modelValue"
+    :value="fullySanitize(modelValue)"
     :class="classes"
     :type="nativeType"
   />
@@ -19,6 +19,7 @@
 
 <script>
 import { mask } from 'vue-the-mask';
+import { fullySanitize } from '../../utils/sanitize';
 
 export default {
   directives: { mask },
@@ -76,12 +77,15 @@ export default {
       ];
     },
   },
+  methods: {
+    fullySanitize
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
-@import './Input.scss';
+@use '@/assets/scss/unnnic' as *;
+@use './Input.scss' as *;
 
 .input {
   @include input-base;

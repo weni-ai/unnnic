@@ -1,45 +1,26 @@
 <template>
   <div :class="['unnnic-form', size]">
-    <p
-      v-if="hasLabelSlot"
-      class="unnnic-form__label"
-    >
+    <p v-if="hasLabelSlot" class="unnnic-form__label">
       <slot name="label" />
     </p>
 
-    <p
-      v-else-if="label"
-      class="unnnic-form__label"
-    >
-      {{ label }}
+    <p v-else-if="label" class="unnnic-form__label">
+      {{ fullySanitize(label) }}
     </p>
 
-    <TextInput
-      v-bind="$attrs"
-      v-model="val"
-      class="unnnic-form-input"
-      :placeholder="placeholder"
-      :iconLeft="iconLeft"
-      :iconRight="iconRight"
-      :type="type"
-      :iconLeftClickable="iconLeftClickable"
-      :iconRightClickable="iconRightClickable"
-      :hasCloudyColor="hasCloudyColor"
-      :size="size"
-      :mask="mask"
-      :nativeType="nativeType"
-    />
+    <TextInput v-bind="$attrs" v-model="val" class="unnnic-form-input" :placeholder="placeholder" :iconLeft="iconLeft"
+      :iconRight="iconRight" :type="type" :iconLeftClickable="iconLeftClickable"
+      :iconRightClickable="iconRightClickable" :hasCloudyColor="hasCloudyColor" :size="size" :mask="mask"
+      :nativeType="nativeType" />
 
-    <p
-      v-if="message"
-      class="unnnic-form__message"
-    >
-      {{ message }}
+    <p v-if="message" class="unnnic-form__message">
+      {{ fullySanitize(message) }}
     </p>
   </div>
 </template>
 
 <script>
+import { fullySanitize } from '../../utils/sanitize';
 import TextInput from './TextInput.vue';
 
 export default {
@@ -117,9 +98,12 @@ export default {
       return !!this.$slots.label;
     },
   },
+  methods:{
+    fullySanitize,
+  },
   watch: {
     val() {
-      this.$emit('update:modelValue', this.val);
+      this.$emit('update:modelValue', fullySanitize(this.val));
     },
     modelValue() {
       this.val = this.modelValue;
@@ -132,7 +116,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 
 .unnnic-form {
   font-family: $unnnic-font-family-secondary;

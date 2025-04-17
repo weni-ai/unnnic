@@ -1,7 +1,12 @@
-@import './colors.scss';
-@import './fonts.scss';
-@import './spacing.scss';
-@import './grid.scss';
+@forward './colors';
+@forward './fonts';
+@forward './spacing';
+@forward './grid';
+
+@use './colors' as *;
+@use './fonts' as *;
+@use './spacing' as *;
+@use './grid' as *;
 
 .unnnic {
     &--clickable {

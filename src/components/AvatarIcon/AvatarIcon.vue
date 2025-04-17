@@ -74,7 +74,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../assets/scss/unnnic';
+@use '@/assets/scss/unnnic' as *;
 
 @each $name, $color in $scheme-colors {
   .unnnic-avatar-icon {

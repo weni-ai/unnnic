@@ -237,4 +237,70 @@ describe('SelectSmart.vue', () => {
       expect(wrapper.emitted('update:modelValue')[0][0]).toEqual([options[1]]);
     });
   });
+
+  describe('Secondary Type', () => {
+    beforeEach(() => {
+      mountWrapper({
+        type: 'secondary',
+      });
+    });
+
+    it('should apply secondary class to root element when type is secondary', () => {
+      expect(selectSmart().classes()).toContain(
+        'unnnic-select-smart--secondary',
+      );
+    });
+
+    it('should apply secondary class to input when type is secondary', () => {
+      expect(input().classes()).toContain(
+        'unnnic-select-smart__input--secondary',
+      );
+    });
+
+    it('should maintain secondary styling when dropdown is opened', async () => {
+      await input().trigger('click');
+      expect(selectSmart().classes()).toContain(
+        'unnnic-select-smart--secondary',
+      );
+      expect(optionsContainer().exists()).toBe(true);
+    });
+  });
+
+  describe('SelectSmartOption activeColor', () => {
+    beforeEach(async () => {
+      mountWrapper({
+        options: [
+          { label: 'Apple', value: 'apple' },
+          { label: 'Banana', value: 'banana' },
+          { label: 'Orange', value: 'orange' },
+        ],
+      });
+    });
+
+    it('passes primary activeColor by default', async () => {
+      wrapper.vm.active = true;
+      await nextTick();
+
+      const option = wrapper.findComponent('[data-testid="option"]');
+      expect(option.props('activeColor')).toBe('primary');
+    });
+
+    it('passes secondary activeColor when type is secondary', async () => {
+      await wrapper.setProps({ type: 'secondary' });
+      wrapper.vm.active = true;
+      await nextTick();
+
+      const option = wrapper.findComponent('[data-testid="option"]');
+      expect(option.props('activeColor')).toBe('secondary');
+    });
+
+    it('maintains primary activeColor for error type', async () => {
+      await wrapper.setProps({ type: 'error' });
+      wrapper.vm.active = true;
+      await nextTick();
+
+      const option = wrapper.findComponent('[data-testid="option"]');
+      expect(option.props('activeColor')).toBe('primary');
+    });
+  });
 });

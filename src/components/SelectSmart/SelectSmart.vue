@@ -1,7 +1,10 @@
 <template>
   <div
     v-on-click-outside="onClickOutside"
-    class="unnnic-select-smart"
+    :class="[
+      'unnnic-select-smart',
+      { 'unnnic-select-smart--secondary': type === 'secondary' },
+    ]"
     data-testid="select-smart"
     @keydown="onKeyDownSelect"
   >
@@ -13,7 +16,10 @@
     >
       <TextInput
         ref="selectSmartInput"
-        class="unnnic-select-smart__input"
+        :class="[
+          'unnnic-select-smart__input',
+          { 'unnnic-select-smart__input--secondary': type === 'secondary' },
+        ]"
         data-testid="select-smart-input"
         :modelValue="inputValue"
         :placeholder="placeholder || autocompletePlaceholder || selectedLabel"
@@ -62,8 +68,15 @@
                 },
               ]"
             >
+              <UnnnicIconLoading
+                v-if="isLoading"
+                class="unnnic-select-smart__options-loading"
+                scheme="neutral-dark"
+                size="sm"
+              />
               <SelectSmartOption
                 v-for="(option, index) in filterOptions(options)"
+                v-else
                 :key="option.value"
                 data-testid="option"
                 :label="option.label"
@@ -75,10 +88,11 @@
                 "
                 :focused="focusedOption && focusedOption.value === option.value"
                 :allowCheckbox="!!multiple"
+                :activeColor="type === 'secondary' ? 'secondary' : 'primary'"
                 @click="handleSelect(option)"
               />
               <p
-                v-if="filterOptions(options).length === 0"
+                v-if="filterOptions(options).length === 0 && !isLoading"
                 class="unnnic-select-smart__options--no-results"
               >
                 {{ i18n('without_results') }}
@@ -98,6 +112,7 @@ import SelectSmartOption from './SelectSmartOption.vue';
 import SelectSmartMultipleHeader from './SelectSmartMultipleHeader.vue';
 import TextInput from '../Input/TextInput.vue';
 import DropdownSkeleton from '../Dropdown/DropdownSkeleton.vue';
+import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import UnnnicI18n from '../../mixins/i18n';
 
 export default {
@@ -107,6 +122,7 @@ export default {
     SelectSmartOption,
     SelectSmartMultipleHeader,
     DropdownSkeleton,
+    UnnnicIconLoading,
   },
 
   directives: {
@@ -140,7 +156,7 @@ export default {
       type: String,
       default: 'normal',
       validator(value) {
-        return ['normal', 'error'].indexOf(value) !== -1;
+        return ['normal', 'error', 'secondary'].indexOf(value) !== -1;
       },
     },
     disabled: {
@@ -179,7 +195,13 @@ export default {
       type: String,
       default: null,
     },
+    isLoading: {
+      type: Boolean,
+      default: false,
+    },
   },
+
+  emits: ['update:searchValue', 'onChange', 'update:modelValue'],
 
   data() {
     return {
@@ -283,6 +305,8 @@ export default {
       this.focusedOption = null;
 
       if (!this.active && oldSearchValue) this.active = true;
+
+      this.$emit('update:searchValue', newSearchValue);
     },
 
     modelValue: {
@@ -437,7 +461,7 @@ export default {
         const optionElement = elementScroll.childNodes[optionIndex];
 
         if (optionElement instanceof HTMLElement) {
-          optionElement.scrollIntoView({ block: scrollBlock });
+          optionElement?.scrollIntoView({ block: scrollBlock });
         }
       }
     },
@@ -547,7 +571,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 .unnnic-select-smart {
   position: relative;
 
@@ -574,10 +598,16 @@ export default {
 
     cursor: default;
 
+    &-loading {
+      justify-self: center;
+    }
+
     &__scroll-area {
       @function calc-max-height($value) {
         @return ($value * $unnnic-font-size) - ($unnnic-spacing-xs * 2);
       }
+
+      display: grid;
 
       margin: $unnnic-spacing-xs;
       margin-right: $unnnic-inline-xs;
@@ -640,11 +670,27 @@ export default {
       display: block;
       z-index: 2;
     }
+
+    .unnnic-select-smart--secondary & {
+      border-radius: 0.25rem;
+      margin-top: -1px;
+      box-shadow: $unnnic-shadow-level-near;
+    }
+  }
+
+  &--secondary {
+    .unnnic-select-smart__input {
+      .unnnic-input {
+        border-radius: $unnnic-border-radius-sm $unnnic-border-radius-sm 0 0;
+      }
+
+      &.active .unnnic-input {
+        border-bottom-color: transparent;
+      }
+    }
   }
 
   .unnnic-select-smart__input input {
-    // entire class name to have higher priority in styles
-
     &:read-only {
       cursor: pointer;
     }
@@ -652,6 +698,14 @@ export default {
     &:disabled {
       cursor: not-allowed;
     }
+  }
+
+  .unnnic-select-smart__input--secondary input {
+    border: none;
+    color: $unnnic-color-neutral-darkest;
+    font-family: $unnnic-font-family-secondary;
+    font-size: $unnnic-font-size-body-gt;
+    line-height: $unnnic-line-height-md + $unnnic-font-size-body-gt;
   }
 }
 

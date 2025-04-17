@@ -45,7 +45,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 .unnnic-select-item {
   background-color: $unnnic-color-background-snow;
   padding: $unnnic-spacing-stack-nano $unnnic-inline-xs;

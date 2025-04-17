@@ -74,8 +74,36 @@ const TemplateDisabled = (args, { argTypes }) => ({
   `,
 });
 
+const TemplateSecondary = (args, { argTypes }) => ({
+  props: Object.keys(argTypes),
+  components: { unnnicSelectSmart },
+  setup() {
+    return { args };
+  },
+  data() {
+    return { exampleValue: [] };
+  },
+  template: `<unnnicSelectSmart v-bind="args" v-model="exampleValue"/>`,
+});
+
 export const Default = {
   args: {
+    options: [
+      { value: '', label: 'Select some option' },
+      { value: '5', label: 'Option 5' },
+      { value: '3', label: 'Option 3' },
+      { value: '1', label: 'Option 1' },
+      { value: '4', label: 'Option 4' },
+      { value: '2', label: 'Option 2' },
+      { value: '6', label: 'Option 6' },
+      { value: '7', label: 'Option 7' },
+    ],
+  },
+};
+
+export const Loading = {
+  args: {
+    isLoading: true,
     options: [
       { value: '', label: 'Select some option' },
       { value: '5', label: 'Option 5' },
@@ -227,4 +255,19 @@ export const Multiple = {
     multiple: true,
     multipleWithoutSelectsMessage: 'No country selected yet :(',
   },
+};
+
+export const Secondary = TemplateSecondary.bind({});
+Secondary.args = {
+  type: 'secondary',
+  options: [
+    { value: '', label: 'Select some option' },
+    { value: '5', label: 'Option 5' },
+    { value: '3', label: 'Option 3' },
+    { value: '1', label: 'Option 1' },
+    { value: '4', label: 'Option 4' },
+    { value: '2', label: 'Option 2' },
+    { value: '6', label: 'Option 6' },
+    { value: '7', label: 'Option 7' },
+  ],
 };

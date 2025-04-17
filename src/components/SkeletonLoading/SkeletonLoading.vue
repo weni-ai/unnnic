@@ -113,7 +113,7 @@ export default {
 </script>
 
 <style lang="scss">
-@import '../../assets/scss/unnnic.scss';
+@use '@/assets/scss/unnnic' as *;
 .unnnic-skeleton {
   background-size: 500px 100%;
   background-repeat: no-repeat;
