@@ -172,7 +172,6 @@ export default {
       // send button to handling open in new tab project
       // button 0 = left
       // button 1 = scroll (or ctrl + click)
-      console.log(event);
       this.$emit('click', { button: event?.button });
     },
   },
