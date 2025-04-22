@@ -30,6 +30,7 @@
         :initialEndDate="initialEndDate"
         :minDate="minDate"
         :maxDate="maxDate"
+        :disableClear="disableClear"
         @submit="changeDate"
       />
     </div>
@@ -125,6 +126,10 @@ export default {
     position: {
       type: String,
       default: 'left',
+    },
+    disableClear: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -241,6 +246,7 @@ export default {
   :deep(.date-picker-input-next) {
     width: 100%;
     & input {
+      cursor: pointer;
       border: 1px solid $unnnic-color-neutral-soft;
       color: $unnnic-color-neutral-cloudy;
     }
