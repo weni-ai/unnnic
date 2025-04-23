@@ -45,7 +45,7 @@ const args = {
   name: 'Nome do Projeto',
   description:
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum cursus finibus. Sed consectetur aliquet ipsum, eu blandit lorem imperdiet non. Donec sodales eros nec orci placerat, eget condimentum mauris fermentum. Curabitur ullamcorper maximus elit, id lacinia nisl consequat non. Maecenas porttitor vitae arcu id eleifend. Etiam libero nisi, volutpat vitae ultricies nec, convallis sed libero. Donec pulvinar ligula augue. Pellentesque felis augue, viverra eget ex a, dictum porttitor enim. Phasellus tincidunt massa sit amet eros interdum elementum',
-  status: 'active',
+  status: 'ACTIVE',
   canUpdateStatus: false,
 };
 
@@ -54,11 +54,11 @@ export const Active = {
 };
 
 export const Inactive = {
-  args: { ...args, status: 'inactive' },
+  args: { ...args, status: 'INACTIVE' },
 };
 
 export const InTest = {
-  args: { ...args, status: 'in-test' },
+  args: { ...args, status: 'IN_TEST' },
 };
 
 export const CanUpdateStatus = {

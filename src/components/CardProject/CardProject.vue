@@ -3,7 +3,7 @@
     :class="{
       'unnnic-card-project': true,
       'unnnic-card-project--clickable': clickable,
-      'unnnic-card-project--inactive': status === 'inactive',
+      'unnnic-card-project--inactive': status === 'INACTIVE',
     }"
     @click.left.exact="emitClick"
     @click.middle.exact.prevent="emitClick"
@@ -14,7 +14,7 @@
         :title="name"
         :class="{
           'unnnic-card-project__title': true,
-          'unnnic-card-project__title--inactive': status === 'inactive',
+          'unnnic-card-project__title--inactive': status === 'INACTIVE',
         }"
       >
         {{ name }}
@@ -40,7 +40,7 @@
         :title="description"
         :class="{
           'unnnic-card-project__description': true,
-          'unnnic-card-project__description--inactive': status === 'inactive',
+          'unnnic-card-project__description--inactive': status === 'INACTIVE',
         }"
       >
         {{ description }}
@@ -126,17 +126,17 @@ export default {
   data() {
     return {
       defaultTranslations: {
-        'in-test': {
+        IN_TEST: {
           'pt-br': 'Em teste',
           en: 'In test',
           es: 'En prueba',
         },
-        active: {
+        ACTIVE: {
           'pt-br': 'Ativo',
           en: 'Active',
           es: 'Activo',
         },
-        inactive: {
+        INACTIVE: {
           'pt-br': 'Inativo',
           en: 'Inactive',
           es: 'Inactivo',
@@ -259,23 +259,20 @@ export default {
       display: flex;
     }
 
-    &--active {
+    &--ACTIVE {
       background-color: $unnnic-color-aux-green-100;
       color: $unnnic-color-aux-green-900;
     }
 
-    &--in-test {
+    &--IN_TEST {
       background-color: $unnnic-color-aux-orange-100;
       color: $unnnic-color-aux-orange-500;
     }
 
-    &--inactive {
+    &--INACTIVE {
       background-color: $unnnic-color-neutral-soft;
       color: $unnnic-color-neutral-cloudy;
     }
   }
 }
-// .unnnic-card-project--inactive {
-//   background-color: grey;
-// }
 </style>
