@@ -296,7 +296,7 @@ export default {
       const { discussionGoal, lastMessage } = this;
       return discussionGoal
         ? this.i18n('discussion_about', discussionGoal, { discussionGoal })
-        : lastMessage;
+        : lastMessage?.text;
     },
   },
 };
