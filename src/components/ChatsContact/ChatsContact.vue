@@ -215,7 +215,7 @@ export default {
         },
         image_message: {
           'pt-br': 'Imagem',
-          en: 'Imagem',
+          en: 'Image',
           es: 'Imagen',
         },
         video_message: {
