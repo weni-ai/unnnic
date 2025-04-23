@@ -152,15 +152,15 @@ export default {
     },
     colorStatus() {
       const colorStatusMapper = {
-        active: 'aux-green-900',
-        inactive: 'neutral-cloudy',
-        'in-test': 'aux-orange-500',
+        ACTIVE: 'aux-green-900',
+        INACTIVE: 'neutral-cloudy',
+        IN_TEST: 'aux-orange-500',
       };
 
       return colorStatusMapper[this.status] || '';
     },
     statusOptions() {
-      return ['active', 'in-test', 'inactive'].filter(
+      return ['ACTIVE', 'INACTIVE', 'IN_TEST'].filter(
         (option) => option !== this.status,
       );
     },
