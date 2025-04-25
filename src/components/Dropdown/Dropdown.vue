@@ -6,12 +6,12 @@
     <div class="unnnic-dropdown__trigger">
       <slot name="trigger" />
       <div
-        v-if="active"
+        v-if="useOpenProp ? open : active"
         v-on-click-outside="onClickOutside"
         data-testid="dropdown-content"
         :class="[
           'unnnic-dropdown__content',
-          active ? '' : 'unnnic-dropdown__content--hidden',
+          useOpenProp ? open : active ? '' : 'unnnic-dropdown__content--hidden',
           `unnnic-dropdown__content__position-${position}`,
         ]"
       >
@@ -30,6 +30,10 @@ export default {
     onClickOutside: vOnClickOutside,
   },
   props: {
+    useOpenProp: {
+      type: Boolean,
+      default: false,
+    },
     open: {
       type: Boolean,
       default: false,
@@ -50,14 +54,18 @@ export default {
       },
     },
   },
+  emits: ['update:open'],
   data() {
     return {
       active: false,
     };
   },
   watch: {
-    open() {
-      this.active = this.open;
+    open: {
+      handler() {
+        this.active = this.open;
+      },
+      immediate: true,
     },
     active() {
       this.$emit('update:open', this.active);
@@ -65,9 +73,15 @@ export default {
   },
   methods: {
     onClickTrigger() {
-      this.active = !this.active;
+      if (this.useOpenProp) this.$emit('update:open', !this.open);
+      else this.active = !this.active;
     },
     onClickOutside() {
+      if (this.useOpenProp && this.open) {
+        this.$emit('update:open', false);
+        return;
+      }
+
       if (!this.active) return;
       this.active = false;
     },
