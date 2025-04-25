@@ -45,8 +45,8 @@ export default {
         return (
           [
             'top-left',
+            'top-right',
             'none',
-            'bottom-left',
             'bottom-left',
             'bottom-right',
           ].indexOf(value) !== -1
