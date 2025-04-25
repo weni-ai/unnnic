@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.30.0 (2025-04-24)
+
+### Added
+
+- Add contact last message media support
+
+## 2.29.0 (2025-04-23)
+
+### Added
+
+- New CardProject component
+
 ## 2.28.0 (2025-04-04)
 
 ### Added
@@ -39,7 +51,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - InputDatePicker select dates logic improvements
-
 
 ## 2.24.0 (2025-02-27)
 
@@ -260,6 +271,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added Drawer without overlay variation and its story.
 
 ### Fixed
+
 - Fixed close icon of Drawer to be dynamic.
 
 ## 2.4.0 (2024-07-23)
@@ -373,5 +385,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Node version of Dockerfile to `20.14.0`.
-
-
