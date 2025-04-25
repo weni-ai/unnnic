@@ -69,13 +69,16 @@
           useOpenProp
           @update:open="openDropdown = $event"
         >
-          <UnnnicDropdownItem
-            v-for="option in statusOptions"
-            :key="option"
-            @click="handlerClickDropdownItem(option)"
-          >
-            {{ i18n(option) }}
-          </UnnnicDropdownItem>
+          <section class="unnnic-card-project__status-options-container">
+            <UnnnicDropdownItem
+              v-for="option in statusOptions"
+              :key="option"
+              class="status-option"
+              @click="handlerClickDropdownItem(option)"
+            >
+              {{ i18n(option) }}
+            </UnnnicDropdownItem>
+          </section>
         </UnnnicDropdown>
       </section>
     </section>
@@ -205,6 +208,23 @@ export default {
   border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
   border-radius: $unnnic-border-radius-md;
 
+  :deep(.unnnic-dropdown__content) {
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.08);
+    width: 78px;
+    padding: $unnnic-spacing-nano;
+
+    .unnnic-dropdown-item {
+      padding: 0px $unnnic-spacing-nano;
+      &:hover {
+        border-radius: $unnnic-border-radius-sm;
+        background: $unnnic-color-neutral-lightest;
+      }
+    }
+    .unnnic-dropdown-item::before {
+      content: none;
+    }
+  }
+
   &--inactive {
     background-color: $unnnic-color-neutral-lightest;
   }
@@ -252,6 +272,11 @@ export default {
     &--inactive {
       color: $unnnic-color-neutral-clean;
     }
+  }
+
+  &__status-options-container {
+    display: grid;
+    gap: $unnnic-spacing-nano;
   }
 
   &__status-chip {
