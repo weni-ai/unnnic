@@ -52,24 +52,27 @@
           'unnnic-card-project__status-chip',
           `unnnic-card-project__status-chip--${status}`,
         ]"
+        @click.stop="handlerDropdownOpen()"
       >
         <p>
           {{ i18n(status) }}
         </p>
-        <UnnnicDropdown v-if="canUpdateStatus">
-          <template #trigger>
-            <UnnnicIcon
-              icon="keyboard_arrow_down"
-              size="sm"
-              clickable
-              :scheme="colorStatus"
-            />
-          </template>
-
+        <UnnnicIcon
+          v-if="canUpdateStatus"
+          icon="keyboard_arrow_down"
+          size="sm"
+          clickable
+          :scheme="colorStatus"
+        />
+        <UnnnicDropdown
+          :open="openDropdown"
+          useOpenProp
+          @update:open="openDropdown = $event"
+        >
           <UnnnicDropdownItem
             v-for="option in statusOptions"
             :key="option"
-            @click="$emit('changeProjectStatus', option)"
+            @click="handlerClickDropdownItem(option)"
           >
             {{ i18n(option) }}
           </UnnnicDropdownItem>
@@ -125,6 +128,7 @@ export default {
 
   data() {
     return {
+      openDropdown: false,
       defaultTranslations: {
         IN_TEST: {
           'pt-br': 'Em teste',
@@ -173,6 +177,13 @@ export default {
       // button 0 = left
       // button 1 = scroll (or ctrl + click)
       this.$emit('click', { button: event?.button });
+    },
+    handlerDropdownOpen() {
+      if (!this.canUpdateStatus) return;
+      this.openDropdown = !this.openDropdown;
+    },
+    handlerClickDropdownItem(option) {
+      this.$emit('changeProjectStatus', option);
     },
   },
 };
@@ -254,6 +265,8 @@ export default {
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-md;
     line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+
+    cursor: pointer;
 
     :deep(.unnnic-dropdown__trigger) {
       display: flex;
