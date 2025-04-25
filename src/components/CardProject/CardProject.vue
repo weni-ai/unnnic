@@ -210,7 +210,6 @@ export default {
 
   :deep(.unnnic-dropdown__content) {
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.08);
-    width: 78px;
     padding: $unnnic-spacing-nano;
 
     .unnnic-dropdown-item {
