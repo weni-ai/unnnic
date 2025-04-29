@@ -68,7 +68,7 @@ export default {
       immediate: true,
     },
     active() {
-      this.$emit('update:open', this.active);
+      if (!this.useOpenProp) this.$emit('update:open', this.active);
     },
   },
   methods: {
