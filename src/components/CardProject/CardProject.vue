@@ -5,6 +5,7 @@
       'unnnic-card-project--clickable': clickable,
       'unnnic-card-project--inactive': status === 'INACTIVE',
     }"
+    data-testid="unnnic-card-project"
     @click.left.exact="emitClick"
     @click.middle.exact.prevent="emitClick"
     @click.ctrl="emitClick({ button: 1 })"
@@ -16,12 +17,14 @@
           'unnnic-card-project__title': true,
           'unnnic-card-project__title--inactive': status === 'INACTIVE',
         }"
+        data-testid="card-project-title"
       >
         {{ name }}
       </h1>
       <UnnnicDropdown
         v-if="showActions"
         position="bottom-left"
+        data-testid="dropdown-actions"
       >
         <template #trigger>
           <UnnnicIcon
@@ -52,6 +55,7 @@
           'unnnic-card-project__status-chip',
           `unnnic-card-project__status-chip--${status}`,
         ]"
+        data-testid="project-status-chip"
         @click.stop="handlerDropdownOpen()"
       >
         <p>
@@ -67,6 +71,7 @@
         <UnnnicDropdown
           :open="openDropdown"
           useOpenProp
+          data-testid="status-dropdown"
           @update:open="openDropdown = $event"
         >
           <section class="unnnic-card-project__status-options-container">
@@ -155,7 +160,7 @@ export default {
   computed: {
     showActions() {
       const actions = this.$slots.actions?.();
-      return !!actions.length;
+      return !!actions?.length;
     },
     colorStatus() {
       const colorStatusMapper = {
@@ -164,7 +169,7 @@ export default {
         IN_TEST: 'aux-orange-500',
       };
 
-      return colorStatusMapper[this.status] || '';
+      return colorStatusMapper[this.status];
     },
     statusOptions() {
       return ['ACTIVE', 'INACTIVE', 'IN_TEST'].filter(
