@@ -53,6 +53,21 @@
         >
           {{ i18n('waiting_for', waitingTime, { waitingTime }) }}
         </p>
+        <template v-else-if="lastMessageMedia.isMedia">
+          <section class="chats-contact__infos__media">
+            <UnnnicIcon
+              :icon="lastMessageMedia.mediaIcon"
+              scheme="neutral-cloudy"
+              size="sm"
+            />
+            <p
+              :title="lastMessageMedia.mediaText"
+              class="ellipsis"
+            >
+              {{ lastMessageMedia.mediaText }}
+            </p>
+          </section>
+        </template>
         <p
           v-else-if="subtitle"
           class="ellipsis"
@@ -133,7 +148,7 @@ export default {
       required: true,
     },
     lastMessage: {
-      type: String,
+      type: String || Object,
       default: '',
     },
     lastInteractionTime: {
@@ -193,6 +208,21 @@ export default {
           en: 'Discussion about {discussionGoal}',
           es: 'Discusión sobre {discussionGoal}',
         },
+        audio_message: {
+          'pt-br': 'Mensagem de áudio',
+          en: 'Audio message',
+          es: 'Mensaje de audio',
+        },
+        image_message: {
+          'pt-br': 'Imagem',
+          en: 'Image',
+          es: 'Imagen',
+        },
+        video_message: {
+          'pt-br': 'Vídeo',
+          en: 'Video',
+          es: 'Video',
+        },
       },
     };
   },
@@ -228,11 +258,45 @@ export default {
 
       return lastInteractionMoment.format('HH:mm');
     },
+
+    lastMessageMedia() {
+      const { lastMessage } = this;
+
+      const isMedia =
+        typeof lastMessage === 'object' && lastMessage?.media?.[0];
+
+      if (!isMedia) return { isMedia };
+
+      const contentType =
+        lastMessage?.media?.[0]?.content_type?.split('/')?.[0];
+
+      const mediaIconMapper = {
+        audio: 'mic',
+        image: 'image',
+        video: 'videocam',
+        application: 'article',
+        geo: 'location_on',
+      };
+
+      const mediaIcon = mediaIconMapper[contentType];
+
+      const mediaTextMapper = {
+        audio: this.i18n('audio_message'),
+        image: this.i18n('image_message'),
+        video: this.i18n('video_message'),
+        application: lastMessage.media[0].url.split('/').at(-1),
+        geo: lastMessage.text,
+      };
+
+      const mediaText = mediaTextMapper[contentType];
+
+      return { isMedia, contentType, lastMessage, mediaIcon, mediaText };
+    },
     subtitle() {
       const { discussionGoal, lastMessage } = this;
       return discussionGoal
         ? this.i18n('discussion_about', discussionGoal, { discussionGoal })
-        : lastMessage;
+        : lastMessage?.text;
     },
   },
 };
@@ -349,6 +413,12 @@ export default {
     width: 100%;
     overflow: hidden;
     gap: $unnnic-spacing-nano;
+
+    &__media {
+      display: flex;
+      align-items: center;
+      gap: $unnnic-spacing-nano;
+    }
 
     &__title,
     &__additional-information {
