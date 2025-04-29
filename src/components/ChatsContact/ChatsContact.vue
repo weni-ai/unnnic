@@ -36,13 +36,22 @@
     />
 
     <div class="chats-contact__infos">
-      <h1
-        class="chats-contact__infos__title ellipsis"
-        :title="title"
-        :class="{ bold: unreadMessages }"
-      >
-        {{ title }}
-      </h1>
+      <section class="chats-contact__infos__title-container">
+        <h1
+          class="chats-contact__infos__title ellipsis"
+          :title="title"
+          :class="{ bold: unreadMessages }"
+        >
+          {{ title }}
+        </h1>
+
+        <UnnnicTag
+          v-if="projectName"
+          class="chats-contact__infos__project-tag"
+          :text="projectName"
+          scheme="neutral-white"
+        />
+      </section>
       <div
         class="chats-contact__infos__additional-information"
         :class="{ bold: unreadMessages || (checkboxWhenSelect && selected) }"
@@ -77,7 +86,6 @@
         </p>
       </div>
     </div>
-
     <section
       v-if="!checkboxWhenSelect"
       class="chats-contact__infos__unread-messages-container"
@@ -100,7 +108,6 @@
         {{ unreadMessages }}
       </p>
     </section>
-
     <Checkbox
       v-else-if="selected && checkboxWhenSelect"
       class="chats-contact__infos__checkbox"
@@ -119,6 +126,7 @@ import UnnnicIcon from '../Icon.vue';
 import TransitionRipple from '../TransitionRipple/TransitionRipple.vue';
 import UnnnicI18n from '../../mixins/i18n';
 import Checkbox from '../Checkbox/Checkbox.vue';
+import UnnnicTag from '../Tag/Tag.vue';
 
 import('moment/dist/locale/es.js');
 import('moment/dist/locale/pt-br.js');
@@ -133,6 +141,7 @@ export default {
     UnnnicIcon,
     TransitionRipple,
     Checkbox,
+    UnnnicTag,
   },
 
   mixins: [UnnnicI18n],
@@ -148,8 +157,8 @@ export default {
       required: true,
     },
     lastMessage: {
-      type: String || Object,
-      default: '',
+      type: Object,
+      default: () => ({}),
     },
     lastInteractionTime: {
       type: String,
@@ -180,6 +189,10 @@ export default {
       default: false,
     },
     discussionGoal: {
+      type: String,
+      default: '',
+    },
+    projectName: {
       type: String,
       default: '',
     },
@@ -414,6 +427,21 @@ export default {
     overflow: hidden;
     gap: $unnnic-spacing-nano;
 
+    &__title-container {
+      display: flex;
+      align-items: center;
+      gap: $unnnic-spacing-xs;
+      justify-content: flex-start;
+      white-space: nowrap;
+      width: 100%;
+    }
+
+    &__project-tag {
+      display: block;
+      flex-shrink: 1;
+      border: 1px solid $unnnic-color-neutral-cleanest;
+    }
+
     &__media {
       display: flex;
       align-items: center;
@@ -479,8 +507,6 @@ export default {
     }
 
     .ellipsis {
-      width: 100%;
-
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
