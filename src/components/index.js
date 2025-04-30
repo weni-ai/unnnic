@@ -73,6 +73,7 @@ import ChatsContact from './ChatsContact/ChatsContact.vue';
 import ChatsDashboardTagLive from './ChatsDashboardTagLive/ChatsDashboardTagLive.vue';
 import ChatsHeader from './ChatsHeader/ChatsHeader.vue';
 import ChatsMessage from './ChatsMessage/ChatsMessage.vue';
+import ReplyMessage from './ChatsMessage/ReplyMessage.vue';
 import ChatsNavbar from './ChatsNavbar/ChatsNavbar.vue';
 import ChatsUserAvatar from './ChatsUserAvatar/ChatsUserAvatar.vue';
 import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
@@ -165,6 +166,7 @@ export const components = {
   unnnicChatsDashboardTagLive: ChatsDashboardTagLive,
   unnnicChatsHeader: ChatsHeader,
   unnnicChatsMessage: ChatsMessage,
+  unnnicReplyMessage: ReplyMessage,
   unnnicChatsNavbar: ChatsNavbar,
   unnnicChatsUserAvatar: ChatsUserAvatar,
   unnnicChartMultiLine: ChartMultiLine,
@@ -256,6 +258,7 @@ export const unnnicChatsContact = ChatsContact;
 export const unnnicChatsDashboardTagLive = ChatsDashboardTagLive;
 export const unnnicChatsHeader = ChatsHeader;
 export const unnnicChatsMessage = ChatsMessage;
+export const unnnicReplyMessage = ReplyMessage;
 export const unnnicChatsNavbar = ChatsNavbar;
 export const unnnicChatsUserAvatar = ChatsUserAvatar;
 export const unnnicChartMultiLine = ChartMultiLine;
