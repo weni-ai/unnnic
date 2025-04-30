@@ -292,7 +292,6 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
   &__tooltip {
     display: flex;
-    min-width: 51px;
     justify-content: end;
   }
 
