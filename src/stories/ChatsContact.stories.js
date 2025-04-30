@@ -68,8 +68,9 @@ export default {
 
 const defaultArgs = {
   title: 'John Doe',
-  lastMessage:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel.',
+  lastMessage: {
+    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel.',
+  },
 };
 const unreadMessages = 5;
 const waitingTime = 10;
@@ -142,6 +143,23 @@ export const ContactList = {
     template: `
     <div style="display: grid;">
       <unnnic-chats-contact v-for="index in 5" v-bind="args" @click="selectedContact = index" :selected="selectedContact === index"/>
+    </div>
+  `,
+  }),
+};
+
+export const WithProjectInfo = {
+  args: {
+    ...defaultArgs,
+  },
+  render: (args) => ({
+    setup() {
+      return { args };
+    },
+    components: { unnnicChatsContact },
+    template: `
+    <div style="display: grid;">
+      <unnnic-chats-contact v-for="(project, index) in ['Project A', 'Project B', 'Project C']" v-bind="args" :projectName="project" />
     </div>
   `,
   }),
