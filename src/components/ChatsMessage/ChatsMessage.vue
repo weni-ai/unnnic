@@ -261,6 +261,8 @@ export default {
       return (this.isImage || this.isVideo) && this.status === 'failed';
     },
     messageStatusIcon() {
+      if (this.status === 'sending') return 'history';
+
       return this.status === 'received' || this.status === 'readed'
         ? 'done_all'
         : 'done';
@@ -308,7 +310,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   &__tooltip {
     display: flex;
     justify-content: end;
-    min-width: 46.88px;
+    min-width: 50.88px;
   }
 
   &__reply-message {
@@ -430,6 +432,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     &-container {
       display: flex;
       align-items: center;
+      gap: $unnnic-spacing-nano;
     }
   }
 

@@ -294,8 +294,10 @@ export const Media = {
         gap: 16px;
       ">
         <div  style="
-          display: flex;
+          display: grid;
           gap: 16px;
+          grid-template-columns: 1fr 1fr 1fr;
+          align-items: start;
         ">
           <UnnnicChatsMessage v-bind="args" mediaType="audio" :replyMessage="replyMessage.audio">
             <unnnic-audio-recorder class="media" style="padding: 8px; margin: 4px 0;" ref="audio-recorder" :src="audio" :canDiscard="false" />
@@ -309,8 +311,10 @@ export const Media = {
         </div>
 
         <div  style="
-          display: flex;
+          display: grid;
           gap: 16px;
+          grid-template-columns: 1fr 1fr 1fr;
+          align-items: start;
         ">
           <UnnnicChatsMessage v-bind="args" mediaType="video"  :replyMessage="replyMessage.audio">
           <video class="media" controls>
