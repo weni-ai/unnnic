@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.32.0 (2025-04-30)
+
+### Added
+
+- Added support for viewing replied messages in the ChatsMessage component
+- Added reply event to ChatsMessage component
+
+## 2.31.0 (2025-04-29)
+
+### Added
+
+- Add project info to ChatsContact component
+
+## 2.30.1 (2025-04-28)
+
+### Added
+
+- Add useOpenProp to dropdown component (Use this if you want to control your state by the prop instead of the internal variable)
+
+### Fixed
+
+- Fix dropdown not open when click project status chip in ProjectCard
+
 ## 2.30.0 (2025-04-24)
 
 ### Added

@@ -5,6 +5,7 @@
       'unnnic-card-project--clickable': clickable,
       'unnnic-card-project--inactive': status === 'INACTIVE',
     }"
+    data-testid="unnnic-card-project"
     @click.left.exact="emitClick"
     @click.middle.exact.prevent="emitClick"
     @click.ctrl="emitClick({ button: 1 })"
@@ -16,12 +17,14 @@
           'unnnic-card-project__title': true,
           'unnnic-card-project__title--inactive': status === 'INACTIVE',
         }"
+        data-testid="card-project-title"
       >
         {{ name }}
       </h1>
       <UnnnicDropdown
         v-if="showActions"
         position="bottom-left"
+        data-testid="dropdown-actions"
       >
         <template #trigger>
           <UnnnicIcon
@@ -52,27 +55,35 @@
           'unnnic-card-project__status-chip',
           `unnnic-card-project__status-chip--${status}`,
         ]"
+        data-testid="project-status-chip"
+        @click.stop="handlerDropdownOpen()"
       >
         <p>
           {{ i18n(status) }}
         </p>
-        <UnnnicDropdown v-if="canUpdateStatus">
-          <template #trigger>
-            <UnnnicIcon
-              icon="keyboard_arrow_down"
-              size="sm"
-              clickable
-              :scheme="colorStatus"
-            />
-          </template>
-
-          <UnnnicDropdownItem
-            v-for="option in statusOptions"
-            :key="option"
-            @click="$emit('changeProjectStatus', option)"
-          >
-            {{ i18n(option) }}
-          </UnnnicDropdownItem>
+        <UnnnicIcon
+          v-if="canUpdateStatus"
+          icon="keyboard_arrow_down"
+          size="sm"
+          clickable
+          :scheme="colorStatus"
+        />
+        <UnnnicDropdown
+          :open="openDropdown"
+          useOpenProp
+          data-testid="status-dropdown"
+          @update:open="openDropdown = $event"
+        >
+          <section class="unnnic-card-project__status-options-container">
+            <UnnnicDropdownItem
+              v-for="option in statusOptions"
+              :key="option"
+              class="status-option"
+              @click="handlerClickDropdownItem(option)"
+            >
+              {{ i18n(option) }}
+            </UnnnicDropdownItem>
+          </section>
         </UnnnicDropdown>
       </section>
     </section>
@@ -125,6 +136,7 @@ export default {
 
   data() {
     return {
+      openDropdown: false,
       defaultTranslations: {
         IN_TEST: {
           'pt-br': 'Em teste',
@@ -148,7 +160,7 @@ export default {
   computed: {
     showActions() {
       const actions = this.$slots.actions?.();
-      return !!actions.length;
+      return !!actions?.length;
     },
     colorStatus() {
       const colorStatusMapper = {
@@ -157,7 +169,7 @@ export default {
         IN_TEST: 'aux-orange-500',
       };
 
-      return colorStatusMapper[this.status] || '';
+      return colorStatusMapper[this.status];
     },
     statusOptions() {
       return ['ACTIVE', 'INACTIVE', 'IN_TEST'].filter(
@@ -173,6 +185,13 @@ export default {
       // button 0 = left
       // button 1 = scroll (or ctrl + click)
       this.$emit('click', { button: event?.button });
+    },
+    handlerDropdownOpen() {
+      if (!this.canUpdateStatus) return;
+      this.openDropdown = !this.openDropdown;
+    },
+    handlerClickDropdownItem(option) {
+      this.$emit('changeProjectStatus', option);
     },
   },
 };
@@ -193,6 +212,22 @@ export default {
   padding: $unnnic-inset-sm;
   border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
   border-radius: $unnnic-border-radius-md;
+
+  :deep(.unnnic-dropdown__content) {
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.08);
+    padding: $unnnic-spacing-nano;
+
+    .unnnic-dropdown-item {
+      padding: 0px $unnnic-spacing-nano;
+      &:hover {
+        border-radius: $unnnic-border-radius-sm;
+        background: $unnnic-color-neutral-lightest;
+      }
+    }
+    .unnnic-dropdown-item::before {
+      content: none;
+    }
+  }
 
   &--inactive {
     background-color: $unnnic-color-neutral-lightest;
@@ -243,6 +278,11 @@ export default {
     }
   }
 
+  &__status-options-container {
+    display: grid;
+    gap: $unnnic-spacing-nano;
+  }
+
   &__status-chip {
     display: flex;
     align-items: center;
@@ -254,6 +294,8 @@ export default {
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-md;
     line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+
+    cursor: pointer;
 
     :deep(.unnnic-dropdown__trigger) {
       display: flex;

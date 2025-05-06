@@ -1,5 +1,5 @@
 <template>
-  <div
+  <section
     class="unnnic-chats-message"
     :class="{
       sent: type === 'sent',
@@ -10,7 +10,16 @@
       'is-video': isVideo,
       'is-geo': isGeolocation,
     }"
+    @mouseover="isHovering = true"
+    @mouseleave="isHovering = false"
   >
+    <ReplyMessage
+      v-if="replyMessage"
+      class="unnnic-chats-message__reply-message"
+      :replyMessage="replyMessage"
+      :messageType="type"
+      data-testid="reply-message"
+    />
     <p
       v-if="signature"
       class="unnnic-chats-message__signature"
@@ -78,14 +87,38 @@
           @click.stop="status === 'failed' ? $emit('click') : () => {}"
         />
       </div>
+
       <UnnnicIconLoading
         v-if="sendingMedia"
         size="avatar-nano"
         scheme="neutral-dark"
       />
+
+      <section
+        v-if="
+          enableReply && isHovering && !['sending', 'failed'].includes(status)
+        "
+        class="unnnic-chats-message__tooltip"
+      >
+        <UnnnicTooltip
+          enabled
+          size="right"
+          :text="i18n('reply')"
+          :side="type === 'sent' ? 'bottom' : 'right'"
+        >
+          <UnnnicIcon
+            icon="reply"
+            clickable
+            scheme="neutral-dark"
+            size="avatar-nano"
+            data-testid="reply-icon"
+            @click.stop="$emit('reply')"
+          />
+        </UnnnicTooltip>
+      </section>
       <section
         v-else
-        class="unnnic-chats-message__status-time"
+        class="unnnic-chats-message__time-container"
       >
         <p class="unnnic-chats-message__time">
           {{ formattedTime }}
@@ -98,7 +131,7 @@
         />
       </section>
     </main>
-  </div>
+  </section>
 </template>
 
 <script>
@@ -106,6 +139,9 @@ import UnnnicChatsMessageStatusBackdrop from './ChatsMessageStatusBackdrop.vue';
 import UnnnicChatsMessageText from './ChatsMessageText.vue';
 import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import UnnnicIcon from '../Icon.vue';
+import UnnnicTooltip from '../ToolTip/ToolTip.vue';
+import UnnnicI18n from '../../mixins/i18n';
+import ReplyMessage from './ReplyMessage.vue';
 
 export default {
   name: 'UnnnicChatsMessage',
@@ -114,8 +150,19 @@ export default {
     UnnnicChatsMessageStatusBackdrop,
     UnnnicIconLoading,
     UnnnicIcon,
+    UnnnicTooltip,
+    ReplyMessage,
   },
+  mixins: [UnnnicI18n],
   props: {
+    enableReply: {
+      type: Boolean,
+      default: false,
+    },
+    replyMessage: {
+      type: [Object, null],
+      default: null,
+    },
     type: {
       type: String,
       default: 'received',
@@ -125,13 +172,11 @@ export default {
     },
     time: {
       type: Date,
-      default: null,
       required: true,
     },
     signature: {
       type: String,
       default: '',
-      required: false,
     },
     documentName: {
       type: String,
@@ -154,7 +199,21 @@ export default {
       },
     },
   },
-  emits: ['click', 'click-image'],
+
+  emits: ['click', 'click-image', 'reply'],
+
+  data() {
+    return {
+      isHovering: false,
+      defaultTranslations: {
+        reply: {
+          'pt-br': 'Responder',
+          en: 'Reply',
+          es: 'Responder',
+        },
+      },
+    };
+  },
 
   computed: {
     formattedTime() {
@@ -223,6 +282,11 @@ export default {
 
 $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
+.is-media .unnnic-chats-message__reply-message {
+  margin: (-$unnnic-spacing-nano) (-$unnnic-spacing-nano) 0px
+    (-$unnnic-spacing-nano);
+}
+
 .unnnic-chats-message {
   width: fit-content;
   min-width: 70px;
@@ -241,8 +305,19 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
 
+  &__tooltip {
+    display: flex;
+    justify-content: end;
+    min-width: 46.88px;
+  }
+
+  &__reply-message {
+    margin: (-$unnnic-spacing-nano) (-$unnnic-spacing-xs) 0px
+      (-$unnnic-spacing-xs);
+  }
+
   &.sent {
-    background-color: $unnnic-color-weni-50;
+    background-color: #cff8f4;
   }
 
   &.sending {
@@ -351,6 +426,11 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     color: $unnnic-color-neutral-clean;
     margin: 0;
     padding: 0;
+
+    &-container {
+      display: flex;
+      align-items: center;
+    }
   }
 
   &__media__container {
