@@ -87,6 +87,7 @@
           @click.stop="status === 'failed' ? $emit('click') : () => {}"
         />
       </div>
+
       <UnnnicIconLoading
         v-if="sendingMedia"
         size="avatar-nano"
@@ -115,13 +116,20 @@
           />
         </UnnnicTooltip>
       </section>
-
-      <p
+      <section
         v-else
-        class="unnnic-chats-message__time"
+        class="unnnic-chats-message__time-container"
       >
-        {{ formattedTime }}
-      </p>
+        <p class="unnnic-chats-message__time">
+          {{ formattedTime }}
+        </p>
+        <UnnnicIcon
+          v-if="type === 'sent'"
+          :icon="messageStatusIcon"
+          size="sm"
+          :scheme="status === 'readed' ? 'aux-blue-500' : 'neutral-clean'"
+        />
+      </section>
     </main>
   </section>
 </template>
@@ -178,7 +186,9 @@ export default {
       type: String,
       default: 'sent',
       validate(status) {
-        return ['sending', 'sent', 'failed'].includes(status);
+        return ['sending', 'sent', 'failed', 'received', 'readed'].includes(
+          status,
+        );
       },
     },
     mediaType: {
@@ -250,6 +260,13 @@ export default {
     failedToSendMedia() {
       return (this.isImage || this.isVideo) && this.status === 'failed';
     },
+    messageStatusIcon() {
+      if (this.status === 'sending') return 'history';
+
+      return this.status === 'received' || this.status === 'readed'
+        ? 'done_all'
+        : 'done';
+    },
   },
 
   methods: {
@@ -282,7 +299,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
   border-radius: $unnnic-border-radius-md;
 
-  padding: $unnnic-spacing-xs;
+  padding: $unnnic-spacing-xs $unnnic-spacing-ant;
 
   background-color: $unnnic-color-neutral-white;
 
@@ -293,12 +310,12 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   &__tooltip {
     display: flex;
     justify-content: end;
-    min-width: 30px;
+    min-width: 50.88px;
   }
 
   &__reply-message {
-    margin: (-$unnnic-spacing-nano) (-$unnnic-spacing-nano) 0px
-      (-$unnnic-spacing-nano);
+    margin: (-$unnnic-spacing-nano) (-$unnnic-spacing-xs) 0px
+      (-$unnnic-spacing-xs);
   }
 
   &.sent {
@@ -319,7 +336,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    gap: $unnnic-spacing-xs;
+    gap: $unnnic-spacing-sm;
 
     & > * {
       margin: 0;
@@ -397,10 +414,26 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     font-weight: $unnnic-font-weight-bold;
   }
 
+  &__status-time {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: $unnnic-spacing-nano;
+    min-width: 51px;
+  }
+
   &__time {
     font-size: $unnnic-font-size-body-md;
     line-height: $defaultLineHeight;
     color: $unnnic-color-neutral-clean;
+    margin: 0;
+    padding: 0;
+
+    &-container {
+      display: flex;
+      align-items: center;
+      gap: $unnnic-spacing-nano;
+    }
   }
 
   &__media__container {
