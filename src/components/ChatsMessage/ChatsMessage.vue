@@ -127,7 +127,7 @@
           v-if="type === 'sent'"
           :icon="messageStatusIcon"
           size="sm"
-          :scheme="status === 'readed' ? 'aux-blue-500' : 'neutral-clean'"
+          :scheme="status === 'read' ? 'aux-blue-500' : 'neutral-clean'"
         />
       </section>
     </main>
@@ -186,7 +186,7 @@ export default {
       type: String,
       default: 'sent',
       validate(status) {
-        return ['sending', 'sent', 'failed', 'received', 'readed'].includes(
+        return ['sending', 'sent', 'failed', 'received', 'read'].includes(
           status,
         );
       },
@@ -263,7 +263,7 @@ export default {
     messageStatusIcon() {
       if (this.status === 'sending') return 'history';
 
-      return this.status === 'received' || this.status === 'readed'
+      return this.status === 'received' || this.status === 'read'
         ? 'done_all'
         : 'done';
     },

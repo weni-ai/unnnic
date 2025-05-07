@@ -193,8 +193,8 @@ export const MessageStatus = {
         <UnnnicChatsMessage v-bind="args" status="received">
           Received status
         </UnnnicChatsMessage>
-        <UnnnicChatsMessage v-bind="args" status="readed">
-          Readed status
+        <UnnnicChatsMessage v-bind="args" status="read">
+          Read status
         </UnnnicChatsMessage>
       </div>
     `,
