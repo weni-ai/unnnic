@@ -227,6 +227,38 @@ export const Autocomplete = {
   },
 };
 
+export const EnableSearchByValue = {
+  args: {
+    options: [
+      { value: '', label: 'Select some option' },
+      { value: 'united_states', label: 'Estados Unidos' },
+      { value: 'brazil', label: 'Brasil' },
+      { value: 'china', label: 'China' },
+      { value: 'india', label: 'Índia' },
+      { value: 'russia', label: 'Rússia' },
+      { value: 'japan', label: 'Japão' },
+      { value: 'germany', label: 'Alemanha' },
+      { value: 'france', label: 'França' },
+      { value: 'canada', label: 'Canadá' },
+      { value: 'australia', label: 'Austrália' },
+      { value: 'south_korea', label: 'Coreia do Sul' },
+      { value: 'mexico', label: 'México' },
+      { value: 'egypt', label: 'Egito' },
+      { value: 'south_africa', label: 'África do Sul' },
+      { value: 'turkey', label: 'Turquia' },
+      { value: 'nigeria', label: 'Nigéria' },
+      { value: 'argentina', label: 'Argentina' },
+      { value: 'italy', label: 'Itália' },
+      { value: 'spain', label: 'Espanha' },
+      { value: 'saudi_arabia', label: 'Arábia Saudita' },
+    ],
+    enableSearchByValue: true,
+    autocomplete: true,
+    autocompleteClearOnFocus: true,
+    autocompleteIconLeft: true,
+  },
+};
+
 export const Multiple = {
   args: {
     options: [
