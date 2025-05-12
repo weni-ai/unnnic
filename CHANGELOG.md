@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.33.0 (2025-05-12)
+
+### Added
+
+- Added SelectSmart `enableSearchByValue` prop. This allows you to search for items by the value field
+
 ## 2.32.0 (2025-04-30)
 
 ### Added
