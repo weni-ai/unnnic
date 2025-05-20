@@ -31,6 +31,7 @@
         :minDate="minDate"
         :maxDate="maxDate"
         :disableClear="disableClear"
+        @change="emitSelectDate"
         @submit="changeDate"
       />
     </div>
@@ -133,7 +134,7 @@ export default {
     },
   },
 
-  emits: ['update:model-value'],
+  emits: ['update:model-value', 'selectDate'],
 
   data() {
     return {
@@ -186,6 +187,14 @@ export default {
   },
 
   methods: {
+    emitSelectDate(date) {
+      const { startDate, endDate } = date;
+      const formattedDates = {
+        start: moment(startDate, 'MM-DD-YYYY').format(this.format),
+        end: moment(endDate, 'MM-DD-YYYY').format(this.format),
+      };
+      this.$emit('selectDate', formattedDates);
+    },
     mouseout(event) {
       if (this.$refs.dropdown?.contains(event.target)) {
         return;
