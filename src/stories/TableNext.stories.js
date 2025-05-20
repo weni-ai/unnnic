@@ -52,9 +52,10 @@ export default {
     },
     setup() {
       const sort = ({ order }) => {
-        if (order === 'asc') return;
-        if (order === 'desc') args.rows === args.rows.reverse();
-        else args.rows === args.rows.reverse();
+        if (order === 'asc')
+          args.rows = args.rows.sort((a, b) => a.uuid - b.uuid);
+        if (order === 'desc')
+          args.rows = args.rows.sort((a, b) => b.uuid - a.uuid);
       };
       return { args, sort };
     },

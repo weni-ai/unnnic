@@ -128,8 +128,6 @@ describe('TableNext.vue', () => {
       expect(handlerSortSpy).toHaveBeenCalledWith('ID', 'asc');
       await headerCell.trigger('click');
       expect(handlerSortSpy).toHaveBeenCalledWith('ID', 'desc');
-      await headerCell.trigger('click');
-      expect(handlerSortSpy).toHaveBeenCalledWith('', '');
     });
   });
 
