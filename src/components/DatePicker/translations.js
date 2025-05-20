@@ -21,6 +21,7 @@ const englishPeriods = [
   { name: 'Last 30 days', id: 'last-30-days' },
   { name: 'Last 12 months', id: 'last-12-months' },
   { name: 'Current month', id: 'current-month' },
+  { name: 'Previous month', id: 'previous-month' },
   { name: 'Custom', id: 'custom' },
 ];
 
@@ -87,6 +88,10 @@ export const periods = {
       id: 'current-month',
     },
     {
+      name: 'Mês Anterior',
+      id: 'previous-month',
+    },
+    {
       name: 'Personalizar',
       id: 'custom',
     },
@@ -113,6 +118,10 @@ export const periods = {
     {
       name: 'Mes actual',
       id: 'current-month',
+    },
+    {
+      name: 'Mes anterior',
+      id: 'previous-month',
     },
     {
       name: 'Personalizar',
