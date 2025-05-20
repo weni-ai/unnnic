@@ -750,6 +750,13 @@ export default {
         today.setMonth(today.getMonth() + 1);
         today.setDate(0);
         this.endDate = this.dateToString(today);
+      } else if (method === 'previous-month') {
+        today.setDate(1);
+        today.setMonth(today.getMonth() - 1);
+        this.startDate = this.dateToString(today);
+        today.setMonth(today.getMonth() + 1);
+        today.setDate(0);
+        this.endDate = this.dateToString(today);
       }
 
       if (this.endDate) {
