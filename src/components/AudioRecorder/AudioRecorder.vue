@@ -202,7 +202,7 @@ export default {
           ? blob
           : window.URL.createObjectURL(blob);
 
-      return durationPromisse;
+      return durationPromisse.catch(() => 0); // Return 0 if there's an error
     },
 
     // entry point; accessed by external components
@@ -256,7 +256,7 @@ export default {
           return;
         }
         this.audio.currentTime = 0;
-        this.duration = this.audio.duration;
+        this.duration = isNaN(this.audio.duration) ? 0 : this.audio.duration;
       };
 
       this.audio.addEventListener('loadeddata', setDuration);
@@ -273,7 +273,7 @@ export default {
       this.audio.addEventListener('timeupdate', () => {
         if (this.status !== 'playing') return;
 
-        this.currentTime = this.audio.currentTime;
+        this.currentTime = isNaN(this.audio.currentTime) ? 0 : this.audio.currentTime;
       });
 
       this.audio.addEventListener('ended', () => {
@@ -359,6 +359,10 @@ export default {
 
     numberToTimeString(time) {
       const { isRecording } = this;
+
+      if (isNaN(time)) {
+        return isRecording ? '00:00:00' : '00:00';
+      }
 
       function formatNumber(number, decimals = 2) {
         return number.toString().padStart(decimals, '0');

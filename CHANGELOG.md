@@ -5,6 +5,29 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.33.2 (2025-05-22)
+
+### Fix
+
+- AudioRecorder: Added corrections for NaN values
+
+## 2.33.1 (2025-05-20)
+
+### Fix
+
+- TableNext: Added default case prevention without ordering
+
+### Added
+
+- DatePicker: Added previous month shortcut
+- DatePicker: Added emitter to send the selected date
+
+## 2.33.0 (2025-05-12)
+
+### Added
+
+- Added SelectSmart `enableSearchByValue` prop. This allows you to search for items by the value field
+
 ## 2.32.0 (2025-04-30)
 
 ### Added

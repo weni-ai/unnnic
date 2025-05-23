@@ -266,7 +266,7 @@ export default {
 
       const nextSortOrderMapper = {
         asc: 'desc',
-        desc: '',
+        desc: 'asc',
         '': 'asc',
       };
 

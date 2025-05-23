@@ -199,6 +199,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    enableSearchByValue: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: ['update:searchValue', 'onChange', 'update:modelValue'],
@@ -383,6 +387,7 @@ export default {
 
     filterOptions(options) {
       const searchValue = this.searchValue.toLowerCase();
+
       const searchTerms = searchValue
         .normalize('NFD')
         .replace(/[\u0300-\u036f]/g, '')
@@ -400,11 +405,18 @@ export default {
       const filteredOptions = options.filter(
         ({ value, label }, index, self) => {
           const labelWithoutAccents = normalizeLabel(label);
+
           const isValueUnique =
             self.findIndex((option) => option.value === value) === index;
-          const matchesSearchTerms = searchTerms.every((term) =>
-            labelWithoutAccents.includes(term),
-          );
+
+          const matchesSearchTerms = searchTerms.every((term) => {
+            const validLabel = labelWithoutAccents.includes(term);
+            const validValue = value.includes(term);
+
+            return this.enableSearchByValue
+              ? validLabel || validValue
+              : validLabel;
+          });
 
           return isValueUnique && matchesSearchTerms && value;
         },
