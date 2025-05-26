@@ -19,6 +19,7 @@
       :replyMessage="replyMessage"
       :messageType="type"
       data-testid="reply-message"
+      @click="$emit('click-reply-message')"
     />
     <p
       v-if="signature"
@@ -200,7 +201,7 @@ export default {
     },
   },
 
-  emits: ['click', 'click-image', 'reply'],
+  emits: ['click', 'click-image', 'reply', 'click-reply-message'],
 
   data() {
     return {
@@ -284,11 +285,6 @@ export default {
 
 $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
-.is-media .unnnic-chats-message__reply-message {
-  margin: (-$unnnic-spacing-nano) (-$unnnic-spacing-nano) 0px
-    (-$unnnic-spacing-nano);
-}
-
 .unnnic-chats-message {
   width: fit-content;
   min-width: 70px;
@@ -314,8 +310,9 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   }
 
   &__reply-message {
-    margin: (-$unnnic-spacing-nano) (-$unnnic-spacing-xs) 0px
-      (-$unnnic-spacing-xs);
+    cursor: pointer;
+    margin: (-$unnnic-spacing-nano) (-$unnnic-spacing-nano) 0px
+      (-$unnnic-spacing-nano);
   }
 
   &.sent {
