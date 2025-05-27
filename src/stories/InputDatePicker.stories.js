@@ -44,6 +44,7 @@ export default {
 export const Default = {
   args: {
     size: 'sm',
+    maxDate: moment().format('YYYY-MM-DD'),
   },
 };
 
