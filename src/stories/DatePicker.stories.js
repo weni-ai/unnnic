@@ -1,3 +1,4 @@
+import moment from 'moment';
 import UnnnicDatePicker from '../components/DatePicker/DatePicker.vue';
 
 export default {
@@ -27,6 +28,7 @@ export default {
 export const Default = {
   args: {
     size: 'large',
+    maxDate: moment().format('YYYY-MM-DD'),
     initialStartDate: '12-01-2021',
     initialEndDate: '12-01-2021',
   },
