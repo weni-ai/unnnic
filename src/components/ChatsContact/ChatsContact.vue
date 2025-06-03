@@ -104,11 +104,13 @@
         class="chats-contact__infos__unread-messages-container__pin-container"
       >
         <section
-          v-if="pinned"
+          v-if="isRenderPin"
           class="chats-contact__infos__unread-messages-container__pin"
+          @click.stop="$emit('clickPin', $event)"
         >
           <UnnnicIcon
-            icon="pin"
+            :icon="isUnpinned ? 'unpin' : 'pin'"
+            size="ant"
             :scheme="schemePin"
           />
         </section>
@@ -223,7 +225,7 @@ export default {
     },
   },
 
-  emits: ['click'],
+  emits: ['click', 'clickPin'],
 
   data() {
     return {
@@ -278,6 +280,7 @@ export default {
       const yesterdayTranslationsMapper = {
         en: 'Yesterday',
         'pt-br': 'Ontem',
+        es: 'Ayer',
         ayer: 'Ayer',
       };
 
@@ -335,6 +338,13 @@ export default {
       return discussionGoal
         ? this.i18n('discussion_about', discussionGoal, { discussionGoal })
         : lastMessage?.text;
+    },
+    isUnpinned() {
+      return this.pinned && this.isHovered;
+    },
+    isRenderPin() {
+      const isHover = this.isHovered;
+      return (this.activePin && isHover) || this.pinned;
     },
   },
 };
@@ -503,6 +513,8 @@ export default {
       &__pin-container {
         display: flex;
         align-items: center;
+        max-width: $unnnic-icon-size-ant;
+        max-height: $unnnic-icon-size-ant;
       }
     }
 
