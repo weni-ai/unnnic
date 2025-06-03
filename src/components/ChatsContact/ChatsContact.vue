@@ -100,13 +100,26 @@
       >
         {{ formattedLastInteraction }}
       </p>
-      <p
-        v-if="unreadMessages && !selected"
-        class="chats-contact__infos__unread-messages"
-        :title="i18n('unread_messages', unreadMessages, { unreadMessages })"
+      <section
+        class="chats-contact__infos__unread-messages-container__pin-container"
       >
-        {{ unreadMessages }}
-      </p>
+        <section
+          v-if="pinned"
+          class="chats-contact__infos__unread-messages-container__pin"
+        >
+          <UnnnicIcon
+            icon="pin"
+            :scheme="schemePin"
+          />
+        </section>
+        <p
+          v-else-if="unreadMessages && !selected"
+          class="chats-contact__infos__unread-messages"
+          :title="i18n('unread_messages', unreadMessages, { unreadMessages })"
+        >
+          {{ unreadMessages }}
+        </p>
+      </section>
     </section>
     <Checkbox
       v-else-if="selected && checkboxWhenSelect"
@@ -195,6 +208,18 @@ export default {
     projectName: {
       type: String,
       default: '',
+    },
+    pinned: {
+      type: Boolean,
+      default: false,
+    },
+    activePin: {
+      type: Boolean,
+      default: false,
+    },
+    schemePin: {
+      type: String,
+      default: ' neutral-cloudy',
     },
   },
 
@@ -474,6 +499,11 @@ export default {
       justify-content: v-bind(messageInfoAlign);
       gap: $unnnic-spacing-nano;
       margin-top: v-bind(messageInfoMarginTop);
+
+      &__pin-container {
+        display: flex;
+        align-items: center;
+      }
     }
 
     &__message-time {
