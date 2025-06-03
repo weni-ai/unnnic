@@ -745,10 +745,11 @@ export default {
         today.setMonth(today.getMonth() - howMuch);
         this.startDate = this.dateToString(today);
       } else if (method === 'current-month') {
+        const referenceDate = new Date();
         today.setDate(1);
         this.startDate = this.dateToString(today);
-        today.setMonth(today.getMonth() + 1);
-        today.setDate(0);
+        const referenceDay = referenceDate.getDate();
+        today.setDate(referenceDay);
         this.endDate = this.dateToString(today);
       } else if (method === 'previous-month') {
         today.setDate(1);
