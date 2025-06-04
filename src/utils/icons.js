@@ -176,6 +176,8 @@ import Messages from '../assets/icons/Messages.vue';
 import TransferMessage from '../assets/icons/TransferMessage.vue';
 import BookmarkTag1 from '../assets/icons/bookmarkTag1.vue';
 import MoveExpandVertical1 from '../assets/icons/moveExpandVertical1.vue';
+import Pin from '../assets/icons/Pin.vue';
+import Unpin from '../assets/icons/Unpin.vue';
 
 export default {
   'add-1': Add1,
@@ -355,4 +357,6 @@ export default {
   'transfer-message': TransferMessage,
   'bookmark-tag-1': BookmarkTag1,
   'move-expand-vertical-1': MoveExpandVertical1,
+  pin: Pin,
+  unpin: Unpin,
 };

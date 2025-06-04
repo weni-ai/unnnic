@@ -9,8 +9,8 @@
       waiting: waitingTime && !discussionGoal,
     }"
     :tabindex="0"
-    @click.stop="$emit('click', $event)"
-    @keypress.enter="$emit('click')"
+    @click.stop="handleContactClick"
+    @keypress.enter="handleContactKeypress"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
     @mousedown="
@@ -100,13 +100,32 @@
       >
         {{ formattedLastInteraction }}
       </p>
-      <p
-        v-if="unreadMessages && !selected"
-        class="chats-contact__infos__unread-messages"
-        :title="i18n('unread_messages', unreadMessages, { unreadMessages })"
+      <section
+        class="chats-contact__infos__unread-messages-container__pin-container"
       >
-        {{ unreadMessages }}
-      </p>
+        <button
+          v-if="isRenderPin"
+          data-testid="pin-button"
+          class="chats-contact__infos__unread-messages-container__pin"
+          type="button"
+          @click.stop.prevent="handlePinClick"
+          @mousedown.stop.prevent="handlePinMouseDown"
+        >
+          <UnnnicIcon
+            data-testid="pin-icon"
+            :icon="isUnpinned ? 'unpin' : 'pin'"
+            size="ant"
+            :scheme="schemePin"
+          />
+        </button>
+        <p
+          v-else-if="unreadMessages && !selected"
+          class="chats-contact__infos__unread-messages"
+          :title="i18n('unread_messages', unreadMessages, { unreadMessages })"
+        >
+          {{ unreadMessages }}
+        </p>
+      </section>
     </section>
     <Checkbox
       v-else-if="selected && checkboxWhenSelect"
@@ -196,9 +215,21 @@ export default {
       type: String,
       default: '',
     },
+    pinned: {
+      type: Boolean,
+      default: false,
+    },
+    activePin: {
+      type: Boolean,
+      default: false,
+    },
+    schemePin: {
+      type: String,
+      default: ' neutral-cloudy',
+    },
   },
 
-  emits: ['click'],
+  emits: ['click', 'clickPin'],
 
   data() {
     return {
@@ -253,6 +284,7 @@ export default {
       const yesterdayTranslationsMapper = {
         en: 'Yesterday',
         'pt-br': 'Ontem',
+        es: 'Ayer',
         ayer: 'Ayer',
       };
 
@@ -310,6 +342,35 @@ export default {
       return discussionGoal
         ? this.i18n('discussion_about', discussionGoal, { discussionGoal })
         : lastMessage?.text;
+    },
+    isUnpinned() {
+      return this.pinned && this.isHovered;
+    },
+    isRenderPin() {
+      const isHover = this.isHovered;
+      return (this.activePin && isHover) || this.pinned;
+    },
+  },
+
+  methods: {
+    handleContactClick(event) {
+      this.$emit('click', event);
+    },
+
+    handleContactKeypress() {
+      this.$emit('click');
+    },
+
+    handlePinClick(event) {
+      event.stopPropagation();
+      event.preventDefault();
+
+      this.$emit('clickPin', this.isUnpinned ? 'unpin' : 'pin');
+    },
+
+    handlePinMouseDown(event) {
+      event.stopPropagation();
+      event.preventDefault();
     },
   },
 };
@@ -474,6 +535,35 @@ export default {
       justify-content: v-bind(messageInfoAlign);
       gap: $unnnic-spacing-nano;
       margin-top: v-bind(messageInfoMarginTop);
+
+      &__pin-container {
+        display: flex;
+        align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+
+      &__pin {
+        max-width: $unnnic-icon-size-ant;
+        max-height: $unnnic-icon-size-ant;
+        cursor: pointer;
+        position: relative;
+        z-index: 10;
+
+        border: none;
+        background: none;
+        padding: 0;
+        margin: 0;
+        font: inherit;
+        color: inherit;
+        text-decoration: none;
+        outline: none;
+
+        :deep(*) {
+          pointer-events: none;
+          cursor: pointer;
+        }
+      }
     }
 
     &__message-time {

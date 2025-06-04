@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.33.5 (2025-06-04)
+
+- ChatsContact: Add new pin variant
+
+## 2.33.4 (2025-05-27)
+
+### Fixed
+
+- DatePicker: Fixed current month selection
+
 ## 2.33.3 (2025-05-26)
 
 ### Added
