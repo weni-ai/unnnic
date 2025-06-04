@@ -179,9 +179,7 @@ describe('UnnnicChatsContact', () => {
       });
       await wrapper.setData({ isHovered: true });
 
-      const pinElement = wrapper.find(
-        '.chats-contact__infos__unread-messages-container__pin',
-      );
+      const pinElement = wrapper.find('[data-testid="pin-button"]');
       expect(pinElement.exists()).toBe(true);
 
       await pinElement.trigger('click');
@@ -197,9 +195,7 @@ describe('UnnnicChatsContact', () => {
       });
       await wrapper.setData({ isHovered: true });
 
-      const pinElement = wrapper.find(
-        '.chats-contact__infos__unread-messages-container__pin',
-      );
+      const pinElement = wrapper.find('[data-testid="pin-button"]');
       expect(pinElement.exists()).toBe(true);
 
       // Clear any previous emissions
@@ -227,9 +223,7 @@ describe('UnnnicChatsContact', () => {
       await wrapper.setProps({ pinned: true });
       await wrapper.setData({ isHovered: true });
 
-      const pinElement = wrapper.find(
-        '.chats-contact__infos__unread-messages-container__pin',
-      );
+      const pinElement = wrapper.find('[data-testid="pin-button"]');
       const iconElement = pinElement.findComponent('[data-testid="pin-icon"]');
 
       expect(pinElement.exists()).toBe(true);
@@ -244,9 +238,7 @@ describe('UnnnicChatsContact', () => {
       });
       await wrapper.setData({ isHovered: true });
 
-      const pinElement = wrapper.find(
-        '.chats-contact__infos__unread-messages-container__pin',
-      );
+      const pinElement = wrapper.find('[data-testid="pin-button"]');
       expect(pinElement.exists()).toBe(true);
     });
 
@@ -257,9 +249,7 @@ describe('UnnnicChatsContact', () => {
       });
       await wrapper.setData({ isHovered: false });
 
-      const pinElement = wrapper.find(
-        '.chats-contact__infos__unread-messages-container__pin',
-      );
+      const pinElement = wrapper.find('[data-testid="pin-button"]');
       expect(pinElement.exists()).toBe(false);
     });
   });

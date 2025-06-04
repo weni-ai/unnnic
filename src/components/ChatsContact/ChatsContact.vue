@@ -9,8 +9,8 @@
       waiting: waitingTime && !discussionGoal,
     }"
     :tabindex="0"
-    @click.stop="$emit('click', $event)"
-    @keypress.enter="$emit('click')"
+    @click.stop="handleContactClick"
+    @keypress.enter="handleContactKeypress"
     @mouseenter="isHovered = true"
     @mouseleave="isHovered = false"
     @mousedown="
@@ -103,17 +103,21 @@
       <section
         class="chats-contact__infos__unread-messages-container__pin-container"
       >
-        <section
+        <button
           v-if="isRenderPin"
+          data-testid="pin-button"
           class="chats-contact__infos__unread-messages-container__pin"
-          @click.stop="$emit('clickPin', $event)"
+          type="button"
+          @click.stop.prevent="handlePinClick"
+          @mousedown.stop.prevent="handlePinMouseDown"
         >
           <UnnnicIcon
+            data-testid="pin-icon"
             :icon="isUnpinned ? 'unpin' : 'pin'"
             size="ant"
             :scheme="schemePin"
           />
-        </section>
+        </button>
         <p
           v-else-if="unreadMessages && !selected"
           class="chats-contact__infos__unread-messages"
@@ -347,6 +351,28 @@ export default {
       return (this.activePin && isHover) || this.pinned;
     },
   },
+
+  methods: {
+    handleContactClick(event) {
+      this.$emit('click', event);
+    },
+
+    handleContactKeypress() {
+      this.$emit('click');
+    },
+
+    handlePinClick(event) {
+      event.stopPropagation();
+      event.preventDefault();
+
+      this.$emit('clickPin', this.isUnpinned ? 'unpin' : 'pin');
+    },
+
+    handlePinMouseDown(event) {
+      event.stopPropagation();
+      event.preventDefault();
+    },
+  },
 };
 </script>
 
@@ -513,8 +539,30 @@ export default {
       &__pin-container {
         display: flex;
         align-items: center;
+        position: relative;
+        z-index: 10;
+      }
+
+      &__pin {
         max-width: $unnnic-icon-size-ant;
         max-height: $unnnic-icon-size-ant;
+        cursor: pointer;
+        position: relative;
+        z-index: 10;
+
+        border: none;
+        background: none;
+        padding: 0;
+        margin: 0;
+        font: inherit;
+        color: inherit;
+        text-decoration: none;
+        outline: none;
+
+        :deep(*) {
+          pointer-events: none;
+          cursor: pointer;
+        }
       }
     }
 
