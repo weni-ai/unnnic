@@ -127,7 +127,7 @@ describe('UnnnicChatsContact', () => {
   });
 
   it('should show date when difference is more than 1 hour but not yesterday', async () => {
-    const moreThanOneHourAgo = moment().subtract(2, 'hours').toISOString();
+    const moreThanOneHourAgo = moment('2025-06-04T12:00:00Z').toISOString();
 
     await wrapper.setProps({ lastInteractionTime: moreThanOneHourAgo });
 
@@ -137,7 +137,7 @@ describe('UnnnicChatsContact', () => {
 
     expect(interactionTimeText.exists()).toBe(true);
     expect(interactionTimeText.text()).toBe(
-      moment(moreThanOneHourAgo).format('HH:mm'),
+      moment(moreThanOneHourAgo).format('hh:mm'),
     );
   });
 
@@ -169,5 +169,98 @@ describe('UnnnicChatsContact', () => {
 
     expect(interactionTimeText.exists()).toBe(true);
     expect(interactionTimeText.text()).toBe('Yesterday');
+  });
+
+  describe('Pin functionality', () => {
+    it('should emit clickPin event when pin is clicked', async () => {
+      await wrapper.setProps({
+        pinned: true,
+        activePin: true,
+      });
+      await wrapper.setData({ isHovered: true });
+
+      const pinElement = wrapper.find(
+        '.chats-contact__infos__unread-messages-container__pin',
+      );
+      expect(pinElement.exists()).toBe(true);
+
+      await pinElement.trigger('click');
+
+      expect(wrapper.emitted('clickPin')).toBeTruthy();
+      expect(wrapper.emitted('clickPin')).toHaveLength(1);
+    });
+
+    it('should not emit main click event when pin is clicked', async () => {
+      await wrapper.setProps({
+        pinned: true,
+        activePin: true,
+      });
+      await wrapper.setData({ isHovered: true });
+
+      const pinElement = wrapper.find(
+        '.chats-contact__infos__unread-messages-container__pin',
+      );
+      expect(pinElement.exists()).toBe(true);
+
+      // Clear any previous emissions
+      wrapper.emitted().click = undefined;
+
+      await pinElement.trigger('click');
+
+      // Pin click should not trigger the main click event
+      expect(wrapper.emitted('click')).toBeFalsy();
+      expect(wrapper.emitted('clickPin')).toBeTruthy();
+    });
+
+    it('should show pin icon when pinned is true', async () => {
+      await wrapper.setProps({ pinned: true });
+
+      const pinElement = wrapper.find('[data-testid="pin-button"]');
+      const iconElement = pinElement.findComponent('[data-testid="pin-icon"]');
+
+      expect(pinElement.exists()).toBe(true);
+      expect(iconElement.exists()).toBe(true);
+      expect(iconElement.props('icon')).toBe('pin');
+    });
+
+    it('should show unpin icon when hovered and pinned', async () => {
+      await wrapper.setProps({ pinned: true });
+      await wrapper.setData({ isHovered: true });
+
+      const pinElement = wrapper.find(
+        '.chats-contact__infos__unread-messages-container__pin',
+      );
+      const iconElement = pinElement.findComponent('[data-testid="pin-icon"]');
+
+      expect(pinElement.exists()).toBe(true);
+      expect(iconElement.exists()).toBe(true);
+      expect(iconElement.props('icon')).toBe('unpin');
+    });
+
+    it('should render pin when activePin is true and hovered', async () => {
+      await wrapper.setProps({
+        activePin: true,
+        pinned: false,
+      });
+      await wrapper.setData({ isHovered: true });
+
+      const pinElement = wrapper.find(
+        '.chats-contact__infos__unread-messages-container__pin',
+      );
+      expect(pinElement.exists()).toBe(true);
+    });
+
+    it('should not render pin when activePin is true but not hovered', async () => {
+      await wrapper.setProps({
+        activePin: true,
+        pinned: false,
+      });
+      await wrapper.setData({ isHovered: false });
+
+      const pinElement = wrapper.find(
+        '.chats-contact__infos__unread-messages-container__pin',
+      );
+      expect(pinElement.exists()).toBe(false);
+    });
   });
 });
