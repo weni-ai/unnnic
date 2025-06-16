@@ -187,8 +187,8 @@ export const MessageStatus = {
     components: { UnnnicChatsMessage },
     template: `
       <div style="display: flex; flex-direction: column; gap: 12px">
-        <UnnnicChatsMessage v-bind="args" status="send">
-          Send status
+        <UnnnicChatsMessage v-bind="args" status="sent">
+          Sent status
         </UnnnicChatsMessage>
         <UnnnicChatsMessage v-bind="args" status="received">
           Received status
