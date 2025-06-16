@@ -127,7 +127,10 @@ describe('UnnnicChatsContact', () => {
   });
 
   it('should show date when difference is more than 1 hour but not yesterday', async () => {
+    const mockNow = new Date('2025-06-06T15:00:00Z');
     const moreThanOneHourAgo = moment('2025-06-04T12:00:00Z').toISOString();
+
+    vi.setSystemTime(mockNow);
 
     await wrapper.setProps({ lastInteractionTime: moreThanOneHourAgo });
 
@@ -137,8 +140,10 @@ describe('UnnnicChatsContact', () => {
 
     expect(interactionTimeText.exists()).toBe(true);
     expect(interactionTimeText.text()).toBe(
-      moment(moreThanOneHourAgo).format('hh:mm'),
+      moment(moreThanOneHourAgo).format('L'),
     );
+
+    vi.useRealTimers();
   });
 
   it('should not show time when lastInteractionTime is empty', async () => {

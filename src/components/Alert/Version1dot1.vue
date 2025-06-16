@@ -125,6 +125,7 @@ export default {
   width: 100%;
   text-align: center;
   animation: slideUp 200ms ease;
+  pointer-events: none;
 
   @keyframes slideUp {
     from {
@@ -170,6 +171,7 @@ export default {
   z-index: 9999;
 
   overflow: hidden;
+  pointer-events: auto;
 
   @keyframes progress {
     from {
