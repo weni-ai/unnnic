@@ -183,8 +183,8 @@
         <div
           v-for="(option, index) in periodsLocale"
           :key="index"
-          :class="['option', { selected: optionSelected === option.id }]"
-          @click="autoSelect(option.id)"
+          :class="['option', { selectable: option.id !== 'custom', selected: optionSelected === option.id }]"
+          @click="option.id === 'custom' ? null : autoSelect(option.id)"
         >
           {{ option.name }}
         </div>
@@ -970,9 +970,15 @@ export default {
 
         padding: $unnnic-spacing-stack-xs $unnnic-spacing-inline-sm;
         user-select: none;
-        cursor: pointer;
 
-        &:hover,
+        &.selectable {
+          cursor: pointer;
+
+          &:hover {
+            background-color: $unnnic-color-background-sky;
+          }
+        }
+
         &.selected {
           background-color: $unnnic-color-background-sky;
         }
