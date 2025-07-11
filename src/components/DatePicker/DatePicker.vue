@@ -9,7 +9,7 @@
           <div :class="['header', `header--${size}`]">
             <UnnnicButton
               size="small"
-              :iconCenter="`arrow-${index === 0 ? 'left' : 'right'}-1-1`"
+              :iconCenter="`keyboard_arrow_${index === 0 ? 'left' : 'right'}`"
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: `${index === 0 ? 'left' : 'right'}-button` }"
@@ -72,7 +72,7 @@
           <div :class="['header', `header--${size}`]">
             <UnnnicButton
               size="small"
-              iconCenter="arrow-left-1-1"
+              iconCenter="keyboard_arrow_left"
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'left-button' }"
@@ -85,7 +85,7 @@
 
             <UnnnicButton
               size="small"
-              iconCenter="arrow-right-1-1"
+              iconCenter="keyboard_arrow_right"
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'right-button' }"
