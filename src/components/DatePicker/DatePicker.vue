@@ -215,6 +215,7 @@ import {
   months as translationMonths,
   days as translationDays,
   periods as translationPeriods,
+  buttons as translationButtons,
 } from './translations.js';
 
 import UnnnicI18n from '../../mixins/i18n';
@@ -343,10 +344,10 @@ export default {
     },
 
     clearText() {
-      return this.clearLabel || this.i18n('clean');
+      return this.clearLabel || translationButtons[this.i18nLocale].clear;
     },
     filterText() {
-      return this.actionLabel || this.i18n('filter');
+      return this.actionLabel || translationButtons[this.i18nLocale].filter;
     },
   },
 
