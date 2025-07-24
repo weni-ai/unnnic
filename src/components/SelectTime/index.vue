@@ -7,7 +7,8 @@
       ref="dropdown-skeleton"
       type="manual"
       :modelValue="active"
-      position="bottom"
+      position=""
+      useAbsolutePosition
     >
       <TextInput
         :modelValue="modelValue"
