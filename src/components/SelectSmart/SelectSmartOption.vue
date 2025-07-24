@@ -45,7 +45,7 @@
 
 <script>
 import UnnnicCheckbox from '../Checkbox/Checkbox.vue';
-import { fullySanitize } from '../../utils/sanitize'
+import { fullySanitize } from '../../utils/sanitize';
 
 export default {
   name: 'UnnnicSelectSmartOption',
@@ -92,7 +92,7 @@ export default {
   },
   methods: {
     fullySanitize,
-  }
+  },
 };
 </script>
 

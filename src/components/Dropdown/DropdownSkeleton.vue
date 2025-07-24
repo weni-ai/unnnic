@@ -9,7 +9,10 @@
       ref="dropdown-data"
       data-testid="dropdown-data"
       class="dropdown-data"
-      :style="{ position: 'fixed', ...positions }"
+      :style="{
+        position: useAbsolutePosition ? 'absolute' : 'fixed',
+        ...positions,
+      }"
     >
       <slot
         name="inside"
@@ -33,6 +36,10 @@ export default {
     position: {
       type: String,
       default: 'bottom-left',
+    },
+    useAbsolutePosition: {
+      type: Boolean,
+      default: false,
     },
   },
 

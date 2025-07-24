@@ -78,8 +78,8 @@ export default {
     },
   },
   methods: {
-    fullySanitize
-  }
+    fullySanitize,
+  },
 };
 </script>
 
