@@ -9,7 +9,7 @@
           <div :class="['header', `header--${size}`]">
             <UnnnicButton
               size="small"
-              :iconCenter="`arrow-${index === 0 ? 'left' : 'right'}-1-1`"
+              :iconCenter="`keyboard_arrow_${index === 0 ? 'left' : 'right'}`"
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: `${index === 0 ? 'left' : 'right'}-button` }"
@@ -72,7 +72,7 @@
           <div :class="['header', `header--${size}`]">
             <UnnnicButton
               size="small"
-              iconCenter="arrow-left-1-1"
+              iconCenter="keyboard_arrow_left"
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'left-button' }"
@@ -85,7 +85,7 @@
 
             <UnnnicButton
               size="small"
-              iconCenter="arrow-right-1-1"
+              iconCenter="keyboard_arrow_right"
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'right-button' }"
@@ -183,8 +183,8 @@
         <div
           v-for="(option, index) in periodsLocale"
           :key="index"
-          :class="['option', { selected: optionSelected === option.id }]"
-          @click="autoSelect(option.id)"
+          :class="['option', { selectable: option.id !== 'custom', selected: optionSelected === option.id }]"
+          @click="option.id === 'custom' ? null : autoSelect(option.id)"
         >
           {{ option.name }}
         </div>
@@ -203,7 +203,7 @@
           size="small"
           :text="filterText"
           type="secondary"
-          @click="$emit('submit', value)"
+          @click="submit"
         />
       </div>
     </div>
@@ -215,6 +215,7 @@ import {
   months as translationMonths,
   days as translationDays,
   periods as translationPeriods,
+  buttons as translationButtons,
 } from './translations.js';
 
 import UnnnicI18n from '../../mixins/i18n';
@@ -233,6 +234,8 @@ export default {
 
     minDate: { type: String, default: '' },
     maxDate: { type: String, default: '' },
+
+    equivalentOption: { type: String, default: '' },
 
     type: {
       type: String,
@@ -287,7 +290,7 @@ export default {
     },
   },
 
-  emits: ['change', 'submit'],
+  emits: ['change', 'submit', 'update:equivalentOption'],
 
   data() {
     const today = new Date();
@@ -311,6 +314,10 @@ export default {
         },
       },
     };
+  },
+
+  mounted() {
+    this.updateOptionSelected();
   },
 
   computed: {
@@ -343,22 +350,51 @@ export default {
     },
 
     clearText() {
-      return this.clearLabel || this.i18n('clean');
+      return this.clearLabel || translationButtons[this.i18nLocale].clear;
     },
     filterText() {
-      return this.actionLabel || this.i18n('filter');
+      return this.actionLabel || translationButtons[this.i18nLocale].filter;
     },
   },
 
   watch: {
-    value({ startDate, endDate }) {
-      this.optionSelected = startDate || endDate ? 'custom' : '';
+    value() {
+      this.updateOptionSelected();
 
       this.$emit('change', this.value);
     },
   },
 
   methods: {
+    submit() {
+      this.$emit('submit', this.value);
+
+      if (this.optionSelected === 'custom') {
+        this.$emit('update:equivalentOption', '');
+      } else {
+        this.$emit('update:equivalentOption', this.periodsLocale.find(({ id: periodId }) => periodId === this.optionSelected)?.name || '');
+      }
+    },
+
+    updateOptionSelected() {
+      const { startDate, endDate } = this.value;
+
+      function isSameTime(date1, date2) {
+        return new Date(date1).getTime() === new Date(date2).getTime();
+      }
+      
+      const period = this.periodsLocale.find(({ id: periodId }) => {
+        const {
+          startDate: periodStartDate,
+          endDate: periodEndDate,
+        } = this.getStartAndEndDateByPeriod(periodId);
+
+        return isSameTime(startDate, periodStartDate) && isSameTime(endDate, periodEndDate);
+      });
+
+      this.optionSelected = startDate || endDate ? period ? period.id : 'custom' : '';
+    },
+    
     dateToString(date) {
       return `${date.getMonth() + 1} ${date.getDate()} ${date.getFullYear()}`;
     },
@@ -725,40 +761,52 @@ export default {
       this.optionSelected = '';
     },
 
-    autoSelect(method) {
+    getStartAndEndDateByPeriod(period) {
+      let startDate;
+      let endDate;
+
       const today = new Date();
 
-      const days = method.match(/^last-(\d+)-days$/);
-      const months = method.match(/^last-(\d+)-months$/);
+      const days = period.match(/^last-(\d+)-days$/);
+      const months = period.match(/^last-(\d+)-months$/);
 
       if (days) {
         const howMuch = Number(days[1]);
 
-        this.endDate = this.dateToString(today);
+        endDate = this.dateToString(today);
         today.setDate(today.getDate() - howMuch + 1);
-        this.startDate = this.dateToString(today);
+        startDate = this.dateToString(today);
       } else if (months) {
         const howMuch = Number(months[1]);
 
-        this.endDate = this.dateToString(today);
+        endDate = this.dateToString(today);
         today.setDate(today.getDate() + 1);
         today.setMonth(today.getMonth() - howMuch);
-        this.startDate = this.dateToString(today);
-      } else if (method === 'current-month') {
+        startDate = this.dateToString(today);
+      } else if (period === 'current-month') {
         const referenceDate = new Date();
         today.setDate(1);
-        this.startDate = this.dateToString(today);
+        startDate = this.dateToString(today);
         const referenceDay = referenceDate.getDate();
         today.setDate(referenceDay);
-        this.endDate = this.dateToString(today);
-      } else if (method === 'previous-month') {
+        endDate = this.dateToString(today);
+      } else if (period === 'previous-month') {
         today.setDate(1);
         today.setMonth(today.getMonth() - 1);
-        this.startDate = this.dateToString(today);
+        startDate = this.dateToString(today);
         today.setMonth(today.getMonth() + 1);
         today.setDate(0);
-        this.endDate = this.dateToString(today);
+        endDate = this.dateToString(today);
       }
+
+      return { startDate, endDate };
+    },
+
+    autoSelect(method) {
+      const { startDate, endDate } = this.getStartAndEndDateByPeriod(method);
+
+      this.startDate = startDate;
+      this.endDate = endDate;
 
       if (this.endDate) {
         const secondMonth = this.addMonth(this.referenceDate, 1);
@@ -922,9 +970,15 @@ export default {
 
         padding: $unnnic-spacing-stack-xs $unnnic-spacing-inline-sm;
         user-select: none;
-        cursor: pointer;
 
-        &:hover,
+        &.selectable {
+          cursor: pointer;
+
+          &:hover {
+            background-color: $unnnic-color-background-sky;
+          }
+        }
+
         &.selected {
           background-color: $unnnic-color-background-sky;
         }

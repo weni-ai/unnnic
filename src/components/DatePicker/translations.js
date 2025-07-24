@@ -65,6 +65,23 @@ export const days = {
   es: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
 };
 
+export const buttons = {
+  'pt-br': {
+    clear: 'Limpar',
+    filter: 'Filtrar',
+  },
+  'en-us': {
+    clear: 'Clear',
+    filter: 'Filter',
+  },
+  es: {
+    clear: 'Limpiar',
+    filter: 'Filtrar',
+  },
+};
+
+buttons.en = buttons['en-us'];
+
 export const periods = {
   'pt-br': [
     {
