@@ -12,6 +12,8 @@
       <TextInput
         :modelValue="modelValue"
         :iconRight="active ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+        nativeType="time"
+        class="unnnic-select-time__input"
         @focus="active = true"
         @blur="handleBlur"
         @update:model-value="handleInput"
@@ -24,7 +26,7 @@
           class="unnnic-select-time__options"
         >
           <section
-            v-for="hour in hoursTimes"
+            v-for="hour in options"
             :ref="`hour-${hour.value}`"
             :key="hour.value"
             :class="{
@@ -47,7 +49,8 @@ import { vOnClickOutside } from '@vueuse/components';
 
 import DropdownSkeleton from '../Dropdown/DropdownSkeleton.vue';
 import TextInput from '../Input/TextInput.vue';
-import { hoursTimes } from '../../utils/hours';
+
+import { hoursTimesOptions } from '../../utils/hours';
 
 export default {
   name: 'SelectTime',
@@ -64,18 +67,21 @@ export default {
       type: String,
       default: '',
     },
+    options: {
+      type: Array,
+      default: () => hoursTimesOptions,
+    },
   },
   emits: ['update:modelValue'],
   data() {
     return {
       active: false,
-      hoursTimes,
     };
   },
   methods: {
     handleInput(text) {
       const { value } =
-        this.hoursTimes.find((hour) => hour.value.includes(text)) || {};
+        this.options.find((hour) => hour.value.includes(text)) || {};
 
       if (value) {
         const hourRef = this.$refs[`hour-${value}`][0];
@@ -138,6 +144,14 @@ export default {
 
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
+
+:deep(.unnnic-select-time__input) {
+  &::-webkit-calendar-picker-indicator {
+    background: none;
+    display: none;
+  }
+}
+
 .unnnic-select-time {
   &__options {
     @function calc-max-height($value) {
