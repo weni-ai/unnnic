@@ -13,6 +13,8 @@
         :modelValue="modelValue"
         :iconRight="active ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
         nativeType="time"
+        :placeholder="placeholder"
+        :disabled="disabled"
         class="unnnic-select-time__input"
         @focus="active = true"
         @blur="handleBlur"
@@ -70,6 +72,14 @@ export default {
     options: {
       type: Array,
       default: () => hoursTimesOptions,
+    },
+    placeholder: {
+      type: String,
+      default: '',
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   emits: ['update:modelValue'],
