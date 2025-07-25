@@ -36,83 +36,56 @@
   />
 </template>
 
-<script>
-import icons from '../utils/icons';
+<script setup lang="ts">
+import { computed, type PropType } from 'vue';
+import icons from '@/utils/icons';
 import OldIconsMap from './Icon/OldIconsMap.json';
-/* eslint-disable vue/multi-word-component-names */
-export default {
-  name: 'Icon',
-  props: {
-    filled: {
-      type: Boolean,
-    },
-    next: {
-      type: Boolean,
-    },
-    icon: {
-      type: String,
-      default: null,
-    },
-    clickable: {
-      type: Boolean,
-      default: false,
-    },
-    size: {
-      type: String,
-      default: 'md',
-      validator(value) {
-        return (
-          [
-            'nano',
-            'xs',
-            'sm',
-            'ant',
-            'md',
-            'lg',
-            'xl',
-            'avatar-lg',
-            'avatar-md',
-            'avatar-sm',
-            'avatar-xs',
-            'avatar-nano',
-          ].indexOf(value) !== -1
-        );
-      },
-    },
-    lineHeight: {
-      type: String,
-      default: null,
-      validator(value) {
-        return !value || ['sm', 'md', 'lg'].indexOf(value) !== -1;
-      },
-    },
-    scheme: {
-      type: String,
-      default: 'neutral-darkest',
-    },
-  },
-  emits: ['click', 'mousedown', 'mouseup'],
-  computed: {
-    svg() {
-      return icons[this.icon];
-    },
+import type { IconSize, LineHeight } from './Icon/types';
 
-    materialSymbolsName() {
-      if (Object.keys(icons).includes(this.icon) && !this.next) {
-        return null;
-      }
+const props = defineProps({
+  filled: {
+    type: Boolean,
+  },
+  next: {
+    type: Boolean,
+  },
+  icon: {
+    type: String,
+    default: null,
+  },
+  clickable: {
+    type: Boolean,
+    default: false,
+  },
+  size: {
+    type: String as PropType<IconSize>,
+    default: 'md',
+  },
+  lineHeight: {
+    type: String as PropType<LineHeight>,
+    default: null,
+  },
+  scheme: {
+    type: String,
+    default: 'neutral-darkest',
+  },
+});
 
-      return OldIconsMap[this.icon] || this.icon;
-    },
-  },
-  mounted() {},
-  methods: {
-    onClick($event) {
-      if (!this.clickable) return;
-      this.$emit('click', $event);
-    },
-  },
-};
+const emit = defineEmits(['click', 'mousedown', 'mouseup']);
+
+const svg = computed(() => icons[props.icon as keyof typeof icons]);
+
+const materialSymbolsName = computed(() => {
+  if (Object.keys(icons).includes(props.icon) && !props.next) {
+    return null;
+  }
+
+  return OldIconsMap[props.icon as keyof typeof OldIconsMap] || props.icon;
+});
+function onClick($event: Event) {
+  if (!props.clickable) return;
+  emit('click', $event);
+}
 </script>
 
 <style lang="scss" scoped>
