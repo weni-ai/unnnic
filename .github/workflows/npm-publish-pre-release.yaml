@@ -3,7 +3,7 @@ name: Publish Pre Release Package to npmjs
 on:
   push:
     tags:
-      - '*.*.*-staging'
+      - "*.*.*-staging"
 
 jobs:
   publish-npm-pre-release:
@@ -12,9 +12,9 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 22
           registry-url: https://registry.npmjs.org/
-          scope: '@weni'
+          scope: "@weni"
       - name: Install Dependencies
         run: yarn
       - name: Run Lint
