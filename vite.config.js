@@ -1,9 +1,18 @@
-import { fileURLToPath, URL } from 'node:url';
-import { resolve } from 'path';
-
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
-import vueJsx from '@vitejs/plugin-vue-jsx';
+import dts from 'vite-plugin-dts';
+import path from 'path';
+import { glob } from 'glob';
+
+const projectRootDir = path.resolve(__dirname);
+const componentsDir = path.resolve(projectRootDir, 'src', 'components');
+
+const componentEntries = glob.sync(`${componentsDir}/**/*.vue`)
+  .map(file => {
+    const componentName = path.basename(file, '.vue');
+    return { [componentName]: file };
+  })
+  .reduce((acc, obj) => ({ ...acc, ...obj }), {});
 
 const testExcludes = [
   '**/node_modules/**',
@@ -18,19 +27,23 @@ const testExcludes = [
   '.eslintrc.js',
 ];
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue(), vueJsx()],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.js'),
-      name: 'Unnnic',
-      fileName: 'unnnic',
+      entry: {
+        ...componentEntries,
+        index: path.resolve(projectRootDir, 'src', 'index.ts'),
+      },
+      name: 'unnnic',
+      fileName: (format, entryName) => {
+        if (entryName === 'index') {
+          return `unnnic.${format}.js`;
+        }
+        return `components/${entryName}/index.${format}.js`;
+      },
+      formats: ['es', 'cjs'],
     },
     rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'src/index.js'),
-      },
       external: ['vue'],
       output: {
         globals: {
@@ -39,6 +52,14 @@ export default defineConfig({
       },
     },
   },
+  plugins: [
+    vue(),
+    dts({
+      insertTypesEntry: true,
+      outputDir: 'dist',
+      copyDtsFiles: true,
+    }),
+  ],
   test: {
     globals: true,
     environment: 'jsdom',
@@ -52,7 +73,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@': path.resolve(projectRootDir, 'src'),
     },
   },
 });
