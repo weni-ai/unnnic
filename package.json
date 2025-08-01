@@ -28,7 +28,8 @@
     "build-storybook": "storybook build",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "coverage": "vitest --coverage"
+    "coverage": "vitest --coverage",
+    "style-dictionary:generate": "style-dictionary build --config styleDictionary.config.js"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
