@@ -19,11 +19,11 @@
 import icons from '../../utils/iconList';
 import colors from '../../utils/colorsList';
 
-import unnnicIcon from '../Icon.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'UnnnicDisclaimer',
-  components: { unnnicIcon },
+  components: { UnnnicIcon },
   props: {
     text: {
       type: String,
