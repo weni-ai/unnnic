@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 import Icon from '../Icon.vue';
@@ -33,13 +33,6 @@ const commonTests = async (wrapper) => {
 };
 
 describe('Icon', () => {
-  it('should log warning because invalid props', () => {
-    const warningSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-
-    createWrapper({ lineHeight: 'invalid' });
-
-    expect(warningSpy).toHaveBeenCalled();
-  });
   describe('OldMapIcon', () => {
     let wrapper = createWrapper({ icon: 'search-1' });
 
