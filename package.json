@@ -13,7 +13,13 @@
   "exports": {
     ".": {
       "import": "./dist/unnnic.mjs",
-      "require": "./dist/unnnic.umd.js"
+      "require": "./dist/unnnic.umd.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./types": {
+      "import": "./dist/types/index.d.ts",
+      "require": "./dist/types/index.d.ts",
+      "types": "./dist/types/index.d.ts"
     },
     "./dist/style.css": "./dist/style.css",
     "./src/assets/scss/unnnic.scss": "./src/assets/scss/unnnic.scss",
