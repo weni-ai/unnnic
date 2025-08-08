@@ -58,6 +58,10 @@ export default defineConfig({
       insertTypesEntry: true,
       outputDir: 'dist',
       copyDtsFiles: true,
+      include: ['src/**/*.ts', 'src/**/*.vue'],
+      exclude: ['src/**/*.spec.ts', 'src/**/*.test.ts', 'src/**/*.stories.ts'],
+      rollupTypes: true,
+      staticImport: true,
     }),
   ],
   test: {
