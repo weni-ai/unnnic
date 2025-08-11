@@ -1,3 +1,4 @@
+import type { Component } from 'vue';
 import { unnnicFontSize as fontSize } from './config';
 import formElement from './FormElement/FormElement.vue';
 import input from './Input/Input.vue';
@@ -88,7 +89,15 @@ import Tour from './Tour/Tour.vue';
 import Navigator from './Navigator/index.vue';
 import SelectTime from './SelectTime/index.vue';
 
-export const components = {
+// Tipos para componentes Vue
+type VueComponent = Component;
+
+// Interface para o objeto components
+export interface ComponentsMap {
+  [key: string]: VueComponent | Function;
+}
+
+export const components: ComponentsMap = {
   unnnicFormElement: formElement,
   unnnicInput: input,
   unnnicInputNext: inputNext,
@@ -181,6 +190,7 @@ export const components = {
   unnnicSelectTime: SelectTime,
 };
 
+// Exports individuais tipados
 export const unnnicFontSize = fontSize;
 export const unnnicFormElement = formElement;
 export const unnnicInput = input;
@@ -192,7 +202,7 @@ export const unnnicSidebar = sidebar;
 export const unnnicSidebarItem = sidebarItem;
 export const unnnicTable = table;
 export const unnnicTableRow = tableRow;
-export const unnnicDropdown = dropdown;
+export const unnnicDropdown = dropdown as VueComponent;
 export const unnnicDropdownItem = dropdownItem;
 export const unnnicAvatarIcon = avatarIcon;
 export const unnnicIcon = icon;
@@ -203,26 +213,26 @@ export const unnnicCard = card;
 export const unnnicSimpleCard = cardSimple;
 export const unnnicCardCompany = cardCompany;
 export const unnnicCardData = cardData;
-export const unnnicCardImage = cardImage;
+export const unnnicCardImage = cardImage as VueComponent;
 // export const unnnicCardFlow = cardFlow;
-export const unnnicCardProject = cardProject;
+export const unnnicCardProject = cardProject as VueComponent;
 export const unnnicCardInformation = cardInformation;
 export const unnnicCheckbox = checkbox;
 export const unnnicCollapse = collapse;
 export const unnnicRadio = radio;
-export const unnniclanguageSelect = languageSelect;
+export const unnniclanguageSelect = languageSelect as VueComponent;
 export const unnnicModal = modal;
 export const unnnicModalDialog = ModalDialog;
 export const unnnicModalNext = ModalNext;
 export const unnnicModalUpload = modalUpload;
-export const unnnicSelectSmart = selectSmart;
+export const unnnicSelectSmart = selectSmart as VueComponent;
 // export const unnnicSelect = select;
 export const unnnicSelectItem = selectItem;
 // export const unnnicSelectListItem = selectListItem;
-export const unnnicMultiSelect = multiSelect;
+export const unnnicMultiSelect = multiSelect as VueComponent;
 export const unnnicAlert = alert;
-export const unnnicCallAlert = (props) => callAlert(props);
-export const unnnicCallModal = (props) => callModal(props);
+export const unnnicCallAlert = (props: any) => callAlert(props);
+export const unnnicCallModal = (props: any) => callModal(props);
 // export const unnnicAutocomplete = autocomplete;
 // export const unnnicAutocompleteSelect = autocompleteSelect;
 export const unnnicTag = tag;
@@ -265,10 +275,10 @@ export const unnnicChatsNavbar = ChatsNavbar;
 export const unnnicChatsUserAvatar = ChatsUserAvatar;
 export const unnnicChartMultiLine = ChartMultiLine;
 export const unnnicEmojiPicker = EmojiPicker;
-export const unnnicChartFunnel = ChartFunnel;
+export const unnnicChartFunnel = ChartFunnel as VueComponent;
 export const unnnicDisclaimer = Disclaimer;
 export const unnnicDrawer = Drawer;
 export const unnnicTableNext = TableNext;
 export const unnnicTour = Tour;
 export const unnnicNavigator = Navigator;
-export const unnnicSelectTime = SelectTime;
+export const unnnicSelectTime = SelectTime as VueComponent; 
