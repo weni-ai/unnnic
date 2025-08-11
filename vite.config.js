@@ -13,8 +13,8 @@ const testExcludes = [
   '**/assets/**',
   '**/.storybook/**',
   '**/src/App.vue',
-  '**/src/index.js',
-  '**/src/main.js',
+  '**/src/index.ts',
+  '**/src/main.ts',
   '**/src/utils/**',
   '.eslintrc.js',
 ];
