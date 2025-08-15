@@ -1,23 +1,18 @@
 import type { App, Component } from 'vue';
 
-// Importar tipos específicos dos componentes
 export type { IconProps } from '../components/Icon.vue';
 
-// Interface para o plugin principal
 export interface UnnnicPlugin {
   install(app: App): void;
   [key: string]: any;
 }
 
-// Interface para o mapa de componentes
 export interface ComponentsMap {
   [key: string]: Component | Function;
 }
 
-// Export dos principais componentes e utilitários
 export declare const components: ComponentsMap;
 
-// Export individual dos componentes principais
 export declare const unnnicButton: Component;
 export declare const unnnicInput: Component;
 export declare const unnnicCard: Component;
@@ -47,13 +42,10 @@ export declare const unnnicDrawer: Component;
 export declare const unnnicProgressBar: Component;
 export declare const unnnicSkeletonLoading: Component;
 
-// Export de funções
 export declare const unnnicCallAlert: (props: any) => void;
 export declare const unnnicCallModal: (props: any) => void;
 
-// Export de configurações
 export declare const unnnicFontSize: any;
 
-// Export principal
 declare const Unnnic: UnnnicPlugin;
 export default Unnnic; 
