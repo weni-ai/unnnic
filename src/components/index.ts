@@ -89,10 +89,8 @@ import Tour from './Tour/Tour.vue';
 import Navigator from './Navigator/index.vue';
 import SelectTime from './SelectTime/index.vue';
 
-// Tipos para componentes Vue
 type VueComponent = Component;
 
-// Interface para o objeto components
 export interface ComponentsMap {
   [key: string]: VueComponent | Function;
 }
@@ -190,7 +188,6 @@ export const components: ComponentsMap = {
   unnnicSelectTime: SelectTime,
 };
 
-// Exports individuais tipados
 export const unnnicFontSize = fontSize;
 export const unnnicFormElement = formElement;
 export const unnnicInput = input;
