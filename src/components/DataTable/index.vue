@@ -1,7 +1,10 @@
 <template>
-  <table class="unnnic-data-table">
+  <table
+    class="unnnic-data-table"
+    :style="props.fixedHeaders ? {} : heightStyles"
+  >
     <thead
-      v-if="!props.hideHeaders"
+      v-if="!shouldHideHeaders"
       class="unnnic-data-table__header"
     >
       <tr class="unnnic-data-table__header-row">
@@ -57,6 +60,7 @@
         'unnnic-data-table__body',
         { 'unnnic-data-table__body--hide-headers': props.hideHeaders },
       ]"
+      :style="props.fixedHeaders ? heightStyles : {}"
     >
       <tr
         v-if="isLoading"
@@ -76,21 +80,28 @@
         <tr
           v-for="(item, index) in props.items"
           :key="index"
-          class="unnnic-data-table__body-row"
+          :class="[
+            'unnnic-data-table__body-row',
+            { 'unnnic-data-table__body-row--clickable': props.clickable },
+          ]"
+          @click="handleClickRow(item)"
         >
           <template
             v-for="key in headersItemsKeys"
             :key="key"
           >
-            <slot
+            <td
               v-if="slots[`body-${key}`]"
-              :name="`body-${key}`"
               :class="[
                 'unnnic-data-table__body-cell',
                 `unnnic-data-table__body-cell--${size}`,
               ]"
-              :item="item"
-            />
+            >
+              <slot
+                :name="`body-${key}`"
+                :item="item"
+              />
+            </td>
             <td
               v-else
               :class="[
@@ -103,7 +114,43 @@
           </template>
         </tr>
       </template>
+      <tr
+        v-else
+        class="unnnic-data-table__body-row"
+      >
+        <td
+          v-if="slots['without-results']"
+          :class="[
+            'unnnic-data-table__body-cell',
+            `unnnic-data-table__body-cell--${size}`,
+          ]"
+        >
+          <slot name="without-results" />
+        </td>
+        <td
+          v-else
+          :class="[
+            'unnnic-data-table__body-cell',
+            `unnnic-data-table__body-cell--${size}`,
+          ]"
+          data-testid="body-cell"
+        >
+          <p
+            class="unnnic-data-table__body-cell-text"
+            data-testid="body-cell-text"
+          >
+            {{ defaultTranslations.without_results[props.locale || 'en'] }}
+          </p>
+        </td>
+      </tr>
     </tbody>
+    <TablePagination
+      v-if="!props.hidePagination"
+      :modelValue="props.page"
+      :total="props.pageTotal"
+      :interval="props.pageInterval"
+      @update:model-value="$emit('update:page', $event)"
+    />
   </table>
 </template>
 
@@ -118,8 +165,7 @@ import { computed, ref, useSlots } from 'vue';
 
 import Icon from '../Icon.vue';
 import IconArrowsDefault from '../icons/iconArrowsDefault.vue';
-
-const slots = useSlots();
+import TablePagination from '../TableNext/TablePagination.vue';
 
 type DataTableHeader = {
   title: string;
@@ -133,8 +179,12 @@ type DataTableItem = {
   [key: string]: any;
 };
 
+const slots = useSlots();
+
 const emit = defineEmits<{
-  sort: [sort: { header: string; order: string }];
+  'update:sort': [sort: { header: string; order: string }];
+  itemClick: [item: DataTableItem];
+  'update:page': [page: number];
 }>();
 
 const props = defineProps<{
@@ -155,10 +205,18 @@ const props = defineProps<{
     default: 'md';
   };
   height: {
-    type: String | Number;
+    type: String;
+    default: '';
+  };
+  maxHeight: {
+    type: String;
     default: '';
   };
   clickable: {
+    type: Boolean;
+    default: false;
+  };
+  fixedHeaders: {
     type: Boolean;
     default: false;
   };
@@ -166,23 +224,47 @@ const props = defineProps<{
     type: Boolean;
     default: false;
   };
-  pagination: {
-    type: Number;
-    default: 1;
-  };
-  paginationTotal: {
-    type: Number;
-    default: 1;
-  };
-  paginationInterval: {
-    type: Number;
-    default: 1;
-  };
-  fixedHeader: {
+  hidePagination: {
     type: Boolean;
     default: false;
   };
+  page: {
+    type: Number;
+    default: 1;
+  };
+  pageTotal: {
+    type: Number;
+    default: 0;
+  };
+  pageInterval: {
+    type: Number;
+    default: 5;
+  };
+  locale: {
+    type: string;
+    default: 'en';
+  };
 }>();
+
+const defaultTranslations = {
+  without_results: {
+    'pt-br': 'Nenhum resultado correspondente',
+    en: 'No matching results',
+    es: 'No hay resultados coincidentes',
+  },
+};
+
+const heightStyles = computed(() => {
+  return {
+    height: props.height || 'unset',
+    'max-height': props.maxHeight || 'unset',
+    overflow: props.height || props.maxHeight ? 'auto' : 'unset',
+  };
+});
+
+const shouldHideHeaders = computed(() => {
+  return props.hideHeaders || !props.headers.length;
+});
 
 const headersItemsKeys: string[] = computed(() => {
   return props.headers.map((header) => header.itemKey);
@@ -209,7 +291,7 @@ const gridTemplateColumns: string = computed(() => {
 
 const handleSort = (key: string, order: string) => {
   sort.value = { header: key, order };
-  emit('sort', sort.value);
+  emit('update:sort', sort.value);
 };
 
 const handleClickHeader = (header: DataTableHeader) => {
@@ -228,6 +310,12 @@ const handleClickHeader = (header: DataTableHeader) => {
 
   handleSort(nextSort === '' ? '' : header.title, nextSort);
 };
+
+const handleClickRow = (item: DataTableItem) => {
+  if (!props.clickable) return;
+
+  emit('itemClick', item);
+};
 </script>
 
 <style scoped lang="scss">
@@ -244,6 +332,20 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
   display: flex;
   flex-direction: column;
+
+  &::-webkit-scrollbar {
+    width: $unnnic-spacing-inline-nano;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $unnnic-color-neutral-cleanest;
+    border-radius: $unnnic-border-radius-pill;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $unnnic-color-neutral-soft;
+    border-radius: $unnnic-border-radius-pill;
+  }
 
   &__header {
     &-row {
@@ -291,6 +393,20 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
   }
 
   &__body {
+    &::-webkit-scrollbar {
+      width: $unnnic-spacing-inline-nano;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $unnnic-color-neutral-cleanest;
+      border-radius: $unnnic-border-radius-pill;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $unnnic-color-neutral-soft;
+      border-radius: $unnnic-border-radius-pill;
+    }
+
     &--hide-headers {
       .unnnic-data-table__body-row:first-of-type {
         border-radius: $unnnic-border-radius-sm $unnnic-border-radius-sm 0 0;
@@ -311,6 +427,15 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
       &--loading {
         grid-template-columns: 1fr;
+      }
+
+      &--clickable {
+        text-decoration: none;
+
+        &:hover {
+          cursor: pointer;
+          background-color: $unnnic-color-neutral-lightest;
+        }
       }
 
       &:last-of-type {
