@@ -10,7 +10,7 @@
       :iconRight="iconPosition === 'right' && 'calendar_month'"
       hasCloudyColor
       readonly
-      :modelValue="filterText"
+      :modelValue="overwrittenValue || filterText"
       @focus="showCalendarFilter = true"
     />
 
@@ -31,6 +31,7 @@
         :minDate="minDate"
         :maxDate="maxDate"
         :disableClear="disableClear"
+        v-model:equivalentOption="overwrittenValue"
         @change="emitSelectDate"
         @submit="changeDate"
       />
@@ -139,6 +140,7 @@ export default {
   data() {
     return {
       showCalendarFilter: false,
+      overwrittenValue: '',
     };
   },
 
