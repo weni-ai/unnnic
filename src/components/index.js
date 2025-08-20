@@ -87,6 +87,7 @@ import ModalDialog from './ModalDialog/ModalDialog.vue';
 import Tour from './Tour/Tour.vue';
 import Navigator from './Navigator/index.vue';
 import SelectTime from './SelectTime/index.vue';
+import DataTable from './DataTable/index.vue';
 
 export const components = {
   unnnicFormElement: formElement,
@@ -179,6 +180,7 @@ export const components = {
   unnnicTour: Tour,
   unnnicNavigator: Navigator,
   unnnicSelectTime: SelectTime,
+  unnnicDataTable: DataTable,
 };
 
 export const unnnicFontSize = fontSize;
@@ -272,3 +274,4 @@ export const unnnicTableNext = TableNext;
 export const unnnicTour = Tour;
 export const unnnicNavigator = Navigator;
 export const unnnicSelectTime = SelectTime;
+export const unnnicDataTable = DataTable;
