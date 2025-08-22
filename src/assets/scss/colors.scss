@@ -10,6 +10,19 @@ $unnnic-color-weni-800: #086766;
 $unnnic-color-weni-900: #0C5554;
 $unnnic-color-weni-950: #003234;
 
+$unnnic-color-teal-50: #EEFFFC;
+$unnnic-color-teal-100: #C6FFF7;
+$unnnic-color-teal-200: #8EFFF1;
+$unnnic-color-teal-300: #4DFBEA;
+$unnnic-color-teal-400: #19E8DA;
+$unnnic-color-teal-500: #00DED2;
+$unnnic-color-teal-600: #00A49F;
+$unnnic-color-teal-700: #028380;
+$unnnic-color-teal-800: #086766;
+$unnnic-color-teal-900: #0C5554;
+$unnnic-color-teal-950: #003234;
+
+
 $unnnic-color-neutral-black: #272B33;
 $unnnic-color-neutral-darkest: #3B414D;
 $unnnic-color-neutral-dark: #4E5666;
@@ -26,6 +39,7 @@ $unnnic-color-background-sky: $unnnic-color-neutral-light;
 $unnnic-color-background-grass: #F5F6F6;
 $unnnic-color-background-lightest: $unnnic-color-neutral-lightest;
 $unnnic-color-background-white: $unnnic-color-neutral-white;
+$unnnic-color-background-soft: #1A1A1A;
 
 $unnnic-color-aux-green-100: #C6F6D5;
 $unnnic-color-aux-green-300: #68D391;
@@ -208,6 +222,18 @@ $scheme-colors:
   "weni-800" $unnnic-color-weni-800,
   "weni-900" $unnnic-color-weni-900,
   "weni-950" $unnnic-color-weni-950,
+
+  "teal-50" $unnnic-color-teal-50,
+  "teal-100" $unnnic-color-teal-100,
+  "teal-200" $unnnic-color-teal-200,
+  "teal-300" $unnnic-color-teal-300,
+  "teal-400" $unnnic-color-teal-400,
+  "teal-500" $unnnic-color-teal-500,
+  "teal-600" $unnnic-color-teal-600,
+  "teal-700" $unnnic-color-teal-700,
+  "teal-800" $unnnic-color-teal-800,
+  "teal-900" $unnnic-color-teal-900,
+  "teal-950" $unnnic-color-teal-950,
 
   "brand-weni" $unnnic-color-brand-weni,
   "brand-weni-dark" $unnnic-color-brand-weni-dark,
