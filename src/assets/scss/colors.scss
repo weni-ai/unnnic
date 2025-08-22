@@ -61,11 +61,17 @@ $unnnic-color-aux-green-500: #38A169;
 $unnnic-color-aux-green-700: #276749;
 $unnnic-color-aux-green-900: #1C4532;
 
-$unnnic-color-aux-blue-100: #BEE3F8;
-$unnnic-color-aux-blue-300: #63B3ED;
+$unnnic-color-aux-blue-50: #F2F7FD;
+$unnnic-color-aux-blue-100: #E5EEF9;
+$unnnic-color-aux-blue-200: #C4DBF3;
+$unnnic-color-aux-blue-300: #90BDE9;
+$unnnic-color-aux-blue-400: #559BDB;
 $unnnic-color-aux-blue-500: #3182CE;
-$unnnic-color-aux-blue-700: #2C5282;
-$unnnic-color-aux-blue-900: #1A365D;
+$unnnic-color-aux-blue-600: #3182CE;
+$unnnic-color-aux-blue-700: #1B4F89;
+$unnnic-color-aux-blue-800: #1A4472;
+$unnnic-color-aux-blue-900: #1B3A5F;
+$unnnic-color-aux-blue-950: #12253F;
 
 $unnnic-color-aux-purple-50: #F6F5FD;
 $unnnic-color-aux-purple-100: #EEECFB;
@@ -210,11 +216,17 @@ $scheme-colors:
   "aux-green-700" $unnnic-color-aux-green-700,
   "aux-green-900" $unnnic-color-aux-green-900,
 
+  "aux-blue-50" $unnnic-color-aux-blue-50,
   "aux-blue-100" $unnnic-color-aux-blue-100,
+  "aux-blue-200" $unnnic-color-aux-blue-200,
   "aux-blue-300" $unnnic-color-aux-blue-300,
+  "aux-blue-400" $unnnic-color-aux-blue-400,
   "aux-blue-500" $unnnic-color-aux-blue-500,
+  "aux-blue-600" $unnnic-color-aux-blue-600,
   "aux-blue-700" $unnnic-color-aux-blue-700,
+  "aux-blue-800" $unnnic-color-aux-blue-800,
   "aux-blue-900" $unnnic-color-aux-blue-900,
+  "aux-blue-950" $unnnic-color-aux-blue-950,
 
   "aux-purple-50" $unnnic-color-aux-purple-50,
   "aux-purple-100" $unnnic-color-aux-purple-100,
