@@ -85,11 +85,17 @@ $unnnic-color-aux-orange-500: #DD6B20;
 $unnnic-color-aux-orange-700: #9C4221;
 $unnnic-color-aux-orange-900: #652B19;
 
-$unnnic-color-aux-yellow-100: #FEFCBF;
-$unnnic-color-aux-yellow-300: #F6E05E;
-$unnnic-color-aux-yellow-500: #D69E2E;
-$unnnic-color-aux-yellow-700: #975A16;
-$unnnic-color-aux-yellow-900: #5F370E;
+$unnnic-color-aux-yellow-50: #FBF7EB;
+$unnnic-color-aux-yellow-100: #F5EDCC;
+$unnnic-color-aux-yellow-200: #EDD89B;
+$unnnic-color-aux-yellow-300: #E2BC62;
+$unnnic-color-aux-yellow-400: #D69E2E;
+$unnnic-color-aux-yellow-500: #C88D2A;
+$unnnic-color-aux-yellow-600: #AC6E22;
+$unnnic-color-aux-yellow-700: #8A501E;
+$unnnic-color-aux-yellow-800: #734120;
+$unnnic-color-aux-yellow-900: #633720;
+$unnnic-color-aux-yellow-950: #391B0F;
 
 $unnnic-color-floweditor-blue: #0080A3;
 $unnnic-color-floweditor-purple: #7A00A3;
@@ -210,11 +216,17 @@ $scheme-colors:
   "aux-orange-700" $unnnic-color-aux-orange-700,
   "aux-orange-900" $unnnic-color-aux-orange-900,
 
+  "aux-yellow-50" $unnnic-color-aux-yellow-50,
   "aux-yellow-100" $unnnic-color-aux-yellow-100,
+  "aux-yellow-200" $unnnic-color-aux-yellow-200,
   "aux-yellow-300" $unnnic-color-aux-yellow-300,
+  "aux-yellow-400" $unnnic-color-aux-yellow-400,
   "aux-yellow-500" $unnnic-color-aux-yellow-500,
+  "aux-yellow-600" $unnnic-color-aux-yellow-600,
   "aux-yellow-700" $unnnic-color-aux-yellow-700,
+  "aux-yellow-800" $unnnic-color-aux-yellow-800,
   "aux-yellow-900" $unnnic-color-aux-yellow-900,
+  "aux-yellow-950" $unnnic-color-aux-yellow-950,
 
   "floweditor-blue" $unnnic-color-floweditor-blue,
   "floweditor-purple" $unnnic-color-floweditor-purple,
