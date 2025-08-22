@@ -338,7 +338,36 @@ $scheme-colors:
   "brand-weni-soft" $unnnic-color-brand-weni-soft,
   "brand-sec-dark" $unnnic-color-brand-sec-dark,
   "brand-sec-soft" $unnnic-color-brand-sec-soft,
-  "brand-sec" $unnnic-color-brand-sec;
+  "brand-sec" $unnnic-color-brand-sec,
+  
+  // Background semantic colors
+  "bg-base" $unnnic-color-white,
+  "bg-soft" $unnnic-color-gray-50,
+  "bg-muted" $unnnic-color-gray-200,
+  "bg-info" $unnnic-color-aux-blue-50,
+  "bg-success" $unnnic-color-aux-green-50,
+  "bg-warning" $unnnic-color-aux-yellow-50,
+  "bg-critical" $unnnic-color-aux-red-50,
+  
+  // Text semantic colors
+  "text-base" $unnnic-color-gray-900,
+  "text-muted" $unnnic-color-gray-500,
+  "text-emphasized" $unnnic-color-gray-950,
+  "text-inverted" $unnnic-color-teal-500,
+  "text-info" $unnnic-color-aux-blue-500,
+  "text-success" $unnnic-color-aux-green-500,
+  "text-warning" $unnnic-color-aux-yellow-600,
+  "text-critical" $unnnic-color-aux-red-500,
+  
+  // Border semantic colors
+  "border-base" $unnnic-color-gray-200,
+  "border-soft" $unnnic-color-gray-100,
+  "border-muted" $unnnic-color-gray-300,
+  "border-emphasized" $unnnic-color-gray-400,
+  "border-info" $unnnic-color-aux-blue-300,
+  "border-success" $unnnic-color-aux-green-300,
+  "border-warning" $unnnic-color-aux-yellow-300,
+  "border-critical" $unnnic-color-aux-red-300;
 
 
 @each $name, $color in $scheme-colors {
