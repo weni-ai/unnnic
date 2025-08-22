@@ -79,11 +79,17 @@ $unnnic-color-aux-red-500: #E53E3E;
 $unnnic-color-aux-red-700: #9B2C2C;
 $unnnic-color-aux-red-900: #63171B;
 
-$unnnic-color-aux-orange-100: #FEEBC8;
-$unnnic-color-aux-orange-300: #F6AD55;
-$unnnic-color-aux-orange-500: #DD6B20;
-$unnnic-color-aux-orange-700: #9C4221;
-$unnnic-color-aux-orange-900: #652B19;
+$unnnic-color-aux-orange-50: #FDF8EF;
+$unnnic-color-aux-orange-100: #FBEED9;
+$unnnic-color-aux-orange-200: #F7DAB1;
+$unnnic-color-aux-orange-300: #F1C080;
+$unnnic-color-aux-orange-400: #EB9D4C;
+$unnnic-color-aux-orange-500: #E5812A;
+$unnnic-color-aux-orange-600: #DD6B20;
+$unnnic-color-aux-orange-700: #B2501C;
+$unnnic-color-aux-orange-800: #8E401E;
+$unnnic-color-aux-orange-900: #73361B;
+$unnnic-color-aux-orange-950: #3E1A0C;
 
 $unnnic-color-aux-yellow-50: #FBF7EB;
 $unnnic-color-aux-yellow-100: #F5EDCC;
@@ -210,11 +216,17 @@ $scheme-colors:
   "aux-red-700" $unnnic-color-aux-red-700,
   "aux-red-900" $unnnic-color-aux-red-900,
 
+  "aux-orange-50" $unnnic-color-aux-orange-50,
   "aux-orange-100" $unnnic-color-aux-orange-100,
+  "aux-orange-200" $unnnic-color-aux-orange-200,
   "aux-orange-300" $unnnic-color-aux-orange-300,
+  "aux-orange-400" $unnnic-color-aux-orange-400,
   "aux-orange-500" $unnnic-color-aux-orange-500,
+  "aux-orange-600" $unnnic-color-aux-orange-600,
   "aux-orange-700" $unnnic-color-aux-orange-700,
+  "aux-orange-800" $unnnic-color-aux-orange-800,
   "aux-orange-900" $unnnic-color-aux-orange-900,
+  "aux-orange-950" $unnnic-color-aux-orange-950,
 
   "aux-yellow-50" $unnnic-color-aux-yellow-50,
   "aux-yellow-100" $unnnic-color-aux-yellow-100,
