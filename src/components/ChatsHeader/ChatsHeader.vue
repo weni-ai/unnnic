@@ -68,8 +68,9 @@
           <slot />
         </div>
       </main>
+      <slot v-if="slots['right']" name="right" />
       <UnnnicButton
-        v-if="close"
+        v-else-if="close"
         class="unnnic-chats-header__close--sm"
         type="tertiary"
         iconCenter="close-1"
@@ -79,80 +80,59 @@
     </header>
   </div>
 </template>
-<script>
-import UnnnicI18n from '../../mixins/i18n';
+
+<script lang="ts" setup>
+import { useSlots } from 'vue';
+import type { UnnnicColorToken } from '../../types/unnnic-utils';
 
 import UnnnicButton from '../Button/Button.vue';
 import UnnnicAvatarIcon from '../AvatarIcon/AvatarIcon.vue';
 import UnnnicChatsUserAvatar from '../ChatsUserAvatar/ChatsUserAvatar.vue';
 import UnnnicBreadcrumb from '../Breadcrumb/Breadcrumb.vue';
 
-export default {
+defineOptions({
   name: 'UnnnicChatsHeader',
+});
 
-  components: {
-    UnnnicButton,
-    UnnnicAvatarIcon,
-    UnnnicChatsUserAvatar,
-    UnnnicBreadcrumb,
-  },
+interface Props {
+  title?: string;
+  subtitle?: string;
+  sectionIconScheme?: UnnnicColorToken;
+  avatarIcon?: string;
+  avatarName?: string;
+  back?: () => void;
+  close?: () => void;
+  avatarClick?: () => void;
+  titleClick?: () => void;
+  crumbs?: Array<{ name: string; path: string }>;
+  size?: 'auto' | 'small' | 'large';
+}
 
-  mixins: [UnnnicI18n],
+withDefaults(defineProps<Props>(), {
+  title: '',
+  subtitle: '',
+  sectionIconScheme: 'aux-purple',
+  avatarIcon: '',
+  avatarName: '',
+  back: () => {},
+  close: () => {},
+  avatarClick: () => {},
+  titleClick: () => {},
+  crumbs: () => [],
+  size: 'auto',
+});
 
-  props: {
-    title: {
-      type: String,
-      required: true,
-      default: '',
-    },
-    subtitle: {
-      type: String,
-      default: '',
-    },
-    sectionIconScheme: {
-      type: String,
-      default: 'aux-purple',
-    },
-    avatarIcon: {
-      type: String,
-      default: '',
-    },
-    avatarName: {
-      type: String,
-      default: '',
-    },
-    back: {
-      type: Function,
-      required: false,
-    },
-    close: {
-      type: Function,
-      required: false,
-    },
-    avatarClick: {
-      type: Function,
-      required: false,
-    },
-    titleClick: {
-      type: Function,
-      required: false,
-    },
-    crumbs: {
-      type: Array,
-      default: () => [],
-    },
-    size: {
-      type: String,
-      default: 'auto',
-      validator(size) {
-        return ['auto', 'small', 'large'].includes(size);
-      },
-    },
-  },
-};
+const slots = useSlots();
+
+defineEmits<{
+  crumbClick: [crumb: { name: string; path: string }];
+}>();
+
 </script>
+
 <style lang="scss">
 @use '@/assets/scss/unnnic' as *;
+
 .unnnic-chats-header {
   padding: $unnnic-spacing-sm;
 
