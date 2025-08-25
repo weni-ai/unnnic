@@ -32,6 +32,27 @@ export const ContactInfos = {
   },
 };
 
+export const ContactRightSlot = {
+  args: {
+    title: 'John Doe',
+    avatarName: 'John Doe',
+  },
+  render: (args) => ({
+    setup() {
+      return { args };
+    },
+    components: { UnnnicChatsHeader },
+    template: `
+      <UnnnicChatsHeader 
+        v-bind="args" 
+      >
+        <template #right>
+          right slot
+        </template>
+      </UnnnicChatsHeader>`,
+  }),
+}
+
 export const Dashboard = {
   args: {
     title: size === 'large' ? 'Lorem Ipsum Inc.' : 'Dashboard',

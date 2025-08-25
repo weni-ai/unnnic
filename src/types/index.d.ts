@@ -1,6 +1,6 @@
-import type { App, Component } from 'vue';
+import type { App, Component } from "vue";
 
-export type { IconProps } from '../components/Icon.vue';
+export type { IconProps } from "../components/Icon.vue";
 
 export interface UnnnicPlugin {
   install(app: App): void;
@@ -48,4 +48,4 @@ export declare const unnnicCallModal: (props: any) => void;
 export declare const unnnicFontSize: any;
 
 declare const Unnnic: UnnnicPlugin;
-export default Unnnic; 
+export default Unnnic;
