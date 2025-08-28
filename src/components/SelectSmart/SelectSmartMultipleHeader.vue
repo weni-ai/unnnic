@@ -10,7 +10,7 @@
           :key="option.value"
           class="unnnic-select-smart__options__multiple__selecteds__option"
           :text="option.label"
-          hasCloseIcon
+          :hasCloseIcon="!option.disableRemove"
           @close="unselectOption(option)"
         />
         <p
