@@ -19,6 +19,7 @@
       data-testid="checkbox"
       :modelValue="active"
       :size="size"
+      :disabled="disabled"
     />
     <div>
       <span
@@ -76,6 +77,10 @@ export default {
     active: {
       type: Boolean,
       default: null,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
     allowCheckbox: {
       type: Boolean,
