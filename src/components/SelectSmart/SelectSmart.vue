@@ -86,6 +86,7 @@
                 :active="
                   option.value === modelValue || optionIsSelected(option)
                 "
+                :disabled="optionIsSelected(option) && option.disableRemove"
                 :focused="focusedOption && focusedOption.value === option.value"
                 :allowCheckbox="!!multiple"
                 :activeColor="type === 'secondary' ? 'secondary' : 'primary'"
@@ -141,6 +142,10 @@ export default {
         {
           value: 'option1',
           label: 'Option1',
+        },
+        {
+          value: 'option2',
+          label: 'Option2',
         },
       ],
     },
@@ -202,6 +207,10 @@ export default {
     enableSearchByValue: {
       type: Boolean,
       default: false,
+    },
+    multipleLimit: {
+      type: [Number, null],
+      default: null,
     },
   },
 
@@ -363,8 +372,20 @@ export default {
 
     handleSelect(option) {
       if (option) {
-        if (this.multiple && this.optionIsSelected(option)) {
+        if (
+          this.multiple &&
+          this.optionIsSelected(option) &&
+          !option.disableRemove
+        ) {
           this.unselectOption(option);
+          return;
+        }
+
+        if(this.multiple && option.disableRemove && this.optionIsSelected(option)) {
+          return;
+        }
+
+        if (this.multipleLimit && this.modelValue.length >= this.multipleLimit) {
           return;
         }
 

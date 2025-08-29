@@ -90,6 +90,7 @@ import Navigator from "./Navigator/index.vue";
 import SelectTime from "./SelectTime/index.vue";
 import TemplatePreview from "./TemplatePreview/TemplatePreview.vue";
 import TemplatePreviewModal from "./TemplatePreview/TemplatePreviewModal.vue";
+import DataTable from "./DataTable/index.vue";
 
 type VueComponent = Component;
 
@@ -190,6 +191,7 @@ export const components: ComponentsMap = {
   unnnicSelectTime: SelectTime,
   unnnicTemplatePreview: TemplatePreview,
   unnnicTemplatePreviewModal: TemplatePreviewModal,
+  unnnicDataTable: DataTable,
 };
 
 export const unnnicFontSize = fontSize;
@@ -282,6 +284,7 @@ export const unnnicDrawer = Drawer;
 export const unnnicTableNext = TableNext;
 export const unnnicTour = Tour;
 export const unnnicNavigator = Navigator;
+export const unnnicDataTable = DataTable as VueComponent;
 export const unnnicSelectTime = SelectTime as VueComponent;
 export const unnnicTemplatePreview = TemplatePreview as VueComponent;
 export const unnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
