@@ -88,6 +88,7 @@ import ModalDialog from "./ModalDialog/ModalDialog.vue";
 import Tour from "./Tour/Tour.vue";
 import Navigator from "./Navigator/index.vue";
 import SelectTime from "./SelectTime/index.vue";
+import DataTable from "./DataTable/index.vue";
 
 type VueComponent = Component;
 
@@ -186,6 +187,7 @@ export const components: ComponentsMap = {
   unnnicTour: Tour,
   unnnicNavigator: Navigator,
   unnnicSelectTime: SelectTime,
+  unnnicDataTable: DataTable,
 };
 
 export const unnnicFontSize = fontSize;
@@ -278,4 +280,5 @@ export const unnnicDrawer = Drawer;
 export const unnnicTableNext = TableNext;
 export const unnnicTour = Tour;
 export const unnnicNavigator = Navigator;
+export const unnnicDataTable = DataTable as VueComponent;
 export const unnnicSelectTime = SelectTime as VueComponent;
