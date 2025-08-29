@@ -5,7 +5,46 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 3.0.0 (2025-01-15)
+## 3.0.4 (2025-01-27)
+
+### Added
+
+- **Semantic Color Tokens**: Added new active state semantic color tokens:
+  - `bg-active`: Background color for active states using teal-600
+  - `fg-active`: Foreground/text color for active states using teal-600  
+  - `border-active`: Border color for active states using teal-600
+
+## 3.0.3 (2025-08-25)
+
+### Added
+
+- **Chats Header**: Add right content slot
+
+## 3.0.2 (2025-08-25)
+
+### Changed
+
+- **Red Color Tokens**: Updated red color token values for improved design consistency
+
+## 3.0.1 (2025-08-25)
+
+### Added
+
+- **Design Tokens**: New spacing, icon size, border radius, and shadow level tokens
+- **Typography Tokens**: New typography tokens and line heights for better consistency
+- **Color System**: Complete expansion of the color system with new tokens:
+  - Added teal color tokens to the design system
+  - Expanded tokens for yellow, orange, red, purple, blue, green, and gray
+  - New semantic color tokens for improved design consistency
+- **Weni Colors**: Restoration and redefinition of weni color tokens
+
+### Changed
+
+- **Color Migration**: Updated color tokens to use teal instead of weni where appropriate
+- **Color Consolidation**: Consolidated color tokens for enhanced design consistency
+- **Semantic Colors**: Improved semantic color tokens, including bg-muted color token adjustment
+
+## 3.0.0 (2025-08-15)
 
 ### Added
 
