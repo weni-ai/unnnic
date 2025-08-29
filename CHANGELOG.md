@@ -5,6 +5,73 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 3.0.4 (2025-01-27)
+
+### Added
+
+- **Semantic Color Tokens**: Added new active state semantic color tokens:
+  - `bg-active`: Background color for active states using teal-600
+  - `fg-active`: Foreground/text color for active states using teal-600  
+  - `border-active`: Border color for active states using teal-600
+
+## 3.0.3 (2025-08-25)
+
+### Added
+
+- **Chats Header**: Add right content slot
+
+## 3.0.2 (2025-08-25)
+
+### Changed
+
+- **Red Color Tokens**: Updated red color token values for improved design consistency
+
+## 3.0.1 (2025-08-25)
+
+### Added
+
+- **Design Tokens**: New spacing, icon size, border radius, and shadow level tokens
+- **Typography Tokens**: New typography tokens and line heights for better consistency
+- **Color System**: Complete expansion of the color system with new tokens:
+  - Added teal color tokens to the design system
+  - Expanded tokens for yellow, orange, red, purple, blue, green, and gray
+  - New semantic color tokens for improved design consistency
+- **Weni Colors**: Restoration and redefinition of weni color tokens
+
+### Changed
+
+- **Color Migration**: Updated color tokens to use teal instead of weni where appropriate
+- **Color Consolidation**: Consolidated color tokens for enhanced design consistency
+- **Semantic Colors**: Improved semantic color tokens, including bg-muted color token adjustment
+
+## 3.0.0 (2025-08-15)
+
+### Added
+
+- **TypeScript Support**: Full TypeScript integration with complete type definitions
+- **Type Exports**: All component types are now exported for external use
+- **IntelliSense**: Complete autocomplete support for props, events, and component configuration
+- **Backward Compatibility**: 100% compatible with existing JavaScript projects
+- **Build System**: Updated Vite configuration with TypeScript support and automatic type generation
+- **Component Types**: Comprehensive type definitions for all components starting with Icon component
+- **Type Safety**: Runtime type validation and development-time type checking
+
+### Changed
+
+- **BREAKING**: Migrated core files from JavaScript to TypeScript (`src/index.js` → `src/index.ts`, `src/components/index.js` → `src/components/index.ts`)
+- **Build Process**: Enhanced build pipeline with TypeScript compilation and type generation
+- **Package Exports**: Updated package.json exports to include TypeScript declaration files
+
+## 2.36.0 (2025-07-24)
+
+### Added
+
+- SelectTime: add component.
+
+## 2.35.0 (2025-07-24)
+
+- DatePicker: updates icons, fixes buttons translations, selects the equivalent dates automatically on menu option, prevents the custom option to be selectable.
+
 ## 2.34.0 (2025-06-16)
 
 - ChatMessage: Added message status
