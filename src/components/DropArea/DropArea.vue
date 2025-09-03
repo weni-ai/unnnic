@@ -111,6 +111,11 @@ const props = defineProps({
     type: String,
     default: '',
   },
+
+  disabled: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 const emit = defineEmits([
@@ -135,15 +140,21 @@ const formattedSupportedFormats = computed(() => {
 });
 
 function dragenter() {
+  if (props.disabled) return;
+
   dragEnterCounter.value += 1;
   isDragging.value = true;
 }
 
 function dragover() {
+  if (props.disabled) return;
+
   isDragging.value = true;
 }
 
 function dragleave() {
+  if (props.disabled) return;
+
   dragEnterCounter.value -= 1;
   if (dragEnterCounter.value === 0) {
     isDragging.value = false;
@@ -151,10 +162,14 @@ function dragleave() {
 }
 
 function dragend() {
+  if (props.disabled) return;
+
   isDragging.value = false;
 }
 
 function drop(event) {
+  if (props.disabled) return;
+
   isDragging.value = false;
 
   const { files } = event.dataTransfer;
@@ -165,6 +180,8 @@ function drop(event) {
 }
 
 function handleFileChange(event) {
+  if (props.disabled) return;
+
   const { files } = event.target;
 
   if (validateFiles(files)) {
