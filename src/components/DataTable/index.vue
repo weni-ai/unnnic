@@ -154,14 +154,8 @@
   </table>
 </template>
 
-<script lang="ts">
-export default {
-  name: 'UnnnicDataTable',
-};
-</script>
-
 <script setup lang="ts">
-import { computed, ref, useSlots } from 'vue';
+import { computed, ComputedRef, ref, useSlots } from 'vue';
 
 import Icon from '../Icon.vue';
 import IconArrowsDefault from '../icons/iconArrowsDefault.vue';
@@ -179,6 +173,27 @@ type DataTableItem = {
   [key: string]: any;
 };
 
+interface Props {
+  headers: DataTableHeader[];
+  items: DataTableItem[];
+  isLoading?: boolean;
+  size?: 'sm' | 'md';
+  height?: string;
+  maxHeight?: string;
+  clickable?: boolean;
+  fixedHeaders?: boolean;
+  hideHeaders?: boolean;
+  hidePagination?: boolean;
+  page?: number;
+  pageTotal?: number;
+  pageInterval?: number;
+  locale?: string;
+}
+
+defineOptions({
+  name: 'UnnnicDataTable',
+});
+
 const slots = useSlots();
 
 const emit = defineEmits<{
@@ -187,64 +202,22 @@ const emit = defineEmits<{
   'update:page': [page: number];
 }>();
 
-const props = defineProps<{
-  headers: {
-    type: DataTableHeader[];
-    required: true;
-  };
-  items: {
-    type: DataTableItem[];
-    required: true;
-  };
-  isLoading: {
-    type: Boolean;
-    default: false;
-  };
-  size: {
-    type: 'sm' | 'md';
-    default: 'md';
-  };
-  height: {
-    type: String;
-    default: '';
-  };
-  maxHeight: {
-    type: String;
-    default: '';
-  };
-  clickable: {
-    type: Boolean;
-    default: false;
-  };
-  fixedHeaders: {
-    type: Boolean;
-    default: false;
-  };
-  hideHeaders: {
-    type: Boolean;
-    default: false;
-  };
-  hidePagination: {
-    type: Boolean;
-    default: false;
-  };
-  page: {
-    type: Number;
-    default: 1;
-  };
-  pageTotal: {
-    type: Number;
-    default: 0;
-  };
-  pageInterval: {
-    type: Number;
-    default: 5;
-  };
-  locale: {
-    type: string;
-    default: 'en';
-  };
-}>();
+
+
+const props = withDefaults(defineProps<Props>(), {
+  isLoading: false,
+  size: 'md',
+  height: '',
+  maxHeight: '',
+  clickable: false,
+  fixedHeaders: false,
+  hideHeaders: false,
+  hidePagination: false,
+  page: 1,
+  pageTotal: 0,
+  pageInterval: 5,
+  locale: 'en',
+});
 
 const defaultTranslations = {
   without_results: {
@@ -266,7 +239,7 @@ const shouldHideHeaders = computed(() => {
   return props.hideHeaders || !props.headers.length;
 });
 
-const headersItemsKeys: string[] = computed(() => {
+const headersItemsKeys: ComputedRef<string[]> = computed(() => {
   return props.headers.map((header) => header.itemKey);
 });
 
@@ -281,7 +254,7 @@ const getHeaderColumnSize = (header: DataTableHeader): string => {
     : header.size || '1fr';
 };
 
-const gridTemplateColumns: string = computed(() => {
+const gridTemplateColumns: ComputedRef<string> = computed(() => {
   const columnSizes = props.headers.length
     ? props.headers.map(getHeaderColumnSize)
     : props.items[0].content.map(() => '1fr');
