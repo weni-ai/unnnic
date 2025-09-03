@@ -11,7 +11,7 @@
     @dragleave.stop.prevent="dragleave"
     @dragend.stop.prevent="dragend"
     @drop.stop.prevent="drop"
-    @click="() => $refs.file.click()"
+    @click="handleDropzoneClick"
   >
     <UnnnicIcon
       class="unnnic-upload-area__dropzone__icon"
@@ -64,7 +64,7 @@
 </template>
 
 <script setup>
-import { ref, computed, getCurrentInstance } from 'vue';
+import { ref, computed, getCurrentInstance, useTemplateRef } from 'vue';
 import mime from 'mime';
 
 import UnnnicIcon from '../Icon.vue';
@@ -73,6 +73,7 @@ const isDragging = ref(false);
 const hasError = ref(false);
 const dragEnterCounter = ref(0);
 const file = ref();
+const fileRef = useTemplateRef('file');
 
 const props = defineProps({
   acceptMultiple: {
@@ -177,6 +178,12 @@ function drop(event) {
   if (validateFiles(files)) {
     addFiles(files);
   }
+}
+
+function handleDropzoneClick() {
+  if (props.disabled) return;
+
+  fileRef.value.click();
 }
 
 function handleFileChange(event) {
