@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="emojiPickerRef"
     :class="['emoji-picker', `emoji-picker--${position}`]"
     @click.stop
     @keypress.enter.stop
@@ -15,13 +16,12 @@
       :max-frequent-rows="3"
       :i18n="translations"
       @select="onEmojiSelect"
-      @click-outside="$emit('close')"
     />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, onMounted, onUnmounted } from 'vue'
 import i18n from '../../utils/plugins/i18n'
 import { Picker, EmojiIndex } from 'emoji-mart-vue-fast/src'
 import data from 'emoji-mart-vue-fast/data/all.json'
@@ -47,26 +47,44 @@ const emit = defineEmits<{
   emojiSelected: [emoji: string]
 }>()
 
-const emojiIndex = computed(() => new EmojiIndex(data))
+const emojiPickerRef = ref<HTMLElement>()
+const emojiIndex = computed(() => new EmojiIndex(data));
+
+// @ts-expect-error: Type instantiation is excessively deep and possibly infinite
+const translation = (key: string) => i18n.global.t(key) as string;
 
 const translations = computed(() => ({
-  search: i18n.global.t('emoji_picker.search'),
-  notfound: i18n.global.t('emoji_picker.notfound'),
+  search: translation('emoji_picker.search'),
+  notfound: translation('emoji_picker.notfound'),
   categories: {
-    search: i18n.global.t('emoji_picker.categories.search'),
-    recent: i18n.global.t('emoji_picker.categories.recent'),
-    smileys: i18n.global.t('emoji_picker.categories.smileys'),
-    people: i18n.global.t('emoji_picker.categories.people'),
-    nature: i18n.global.t('emoji_picker.categories.nature'),
-    foods: i18n.global.t('emoji_picker.categories.foods'),
-    activity: i18n.global.t('emoji_picker.categories.activity'),
-    places: i18n.global.t('emoji_picker.categories.places'),
-    objects: i18n.global.t('emoji_picker.categories.objects'),
-    symbols: i18n.global.t('emoji_picker.categories.symbols'),
-    flags: i18n.global.t('emoji_picker.categories.flags'),
-    custom: i18n.global.t('emoji_picker.categories.custom')
+    search: translation('emoji_picker.categories.search'),
+    recent: translation('emoji_picker.categories.recent'),
+    smileys: translation('emoji_picker.categories.smileys'),
+    people: translation('emoji_picker.categories.people'),
+    nature: translation('emoji_picker.categories.nature'),
+    foods: translation('emoji_picker.categories.foods'),
+    activity: translation('emoji_picker.categories.activity'),
+    places: translation('emoji_picker.categories.places'),
+    objects: translation('emoji_picker.categories.objects'),
+    symbols: translation('emoji_picker.categories.symbols'),
+    flags: translation('emoji_picker.categories.flags'),
+    custom: translation('emoji_picker.categories.custom')
   }
 }))
+
+const handleClickOutside = (event: Event) => {
+  if (emojiPickerRef.value && !emojiPickerRef.value.contains(event.target as Node)) {
+    emit('close')
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+  document.removeEventListener('click', handleClickOutside)
+})
 
 const onEmojiSelect = (emoji: Emoji) => {
   emit('emojiSelected', props.returnName ? emoji.id : emoji.native)
@@ -98,12 +116,20 @@ const onEmojiSelect = (emoji: Emoji) => {
     cursor: default;
   }
 
-  :deep(.emoji-mart-category-emoji) {
+  :deep(.emoji-mart-emoji) {
     cursor: pointer;
   }
 
-  :deep(.emoji-mart-category-emoji:hover) {
-    background: rgba(0, 164, 159, 0.1); // $unnnic-color-weni-600 with opacity
+  :deep(.emoji-mart-category .emoji-mart-emoji span) {
+    cursor: pointer;
+  }
+
+  :deep(.emoji-mart-anchor) {
+    cursor: pointer;
+  }
+
+  :deep(.emoji-mart-anchor:hover) {
+    color: rgb(59, 65, 77) // $unnnic-color-weni-600 with opacity
   }
 }
 
