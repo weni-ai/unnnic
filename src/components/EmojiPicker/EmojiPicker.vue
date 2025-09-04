@@ -1,64 +1,76 @@
 <template>
   <div
-    ref="pickerContainer"
     :class="['emoji-picker', `emoji-picker--${position}`]"
     @click.stop
     @keypress.enter.stop
-  />
+  >
+    <Picker
+      :data="emojiIndex"
+      set="apple"
+      theme="light"
+      :preview="false"
+      :search="true"
+      nav-position="bottom"
+      no-results-emoji="cry"
+      :max-frequent-rows="3"
+      :i18n="translations"
+      @select="onEmojiSelect"
+      @click-outside="$emit('close')"
+    />
+  </div>
 </template>
 
-<script>
-import i18n from '@emoji-mart/data/i18n/pt.json';
-import data from '@emoji-mart/data/sets/14/apple.json';
-import { Picker } from 'emoji-mart/';
+<script setup lang="ts">
+import { computed } from 'vue'
+import i18n from '../../utils/plugins/i18n'
+import { Picker, EmojiIndex } from 'emoji-mart-vue-fast/src'
+import data from 'emoji-mart-vue-fast/data/all.json'
+import 'emoji-mart-vue-fast/css/emoji-mart.css'
 
-export default {
-  name: 'UnnnicEmojiPicker',
-  props: {
-    returnName: {
-      type: Boolean,
-      default: false,
-    },
-    position: {
-      type: String,
-      default: 'top',
-      validator: (position) => ['top', 'bottom'].includes(position),
-    },
-  },
-  emits: ['close', 'emojiSelected'],
-  computed: {
-    emojiPickerPreferences() {
-      return {
-        data,
-        set: 'apple',
-        theme: 'light',
-        previewPosition: 'none',
-        searchPosition: 'none',
-        navPosition: 'bottom',
-        noResultsEmoji: 'cry',
-        maxFrequentRows: 3,
-      };
-    },
-  },
-  mounted() {
-    this.initPicker();
-  },
-  methods: {
-    initPicker() {
-      // eslint-disable-next-line no-new
-      new Picker({
-        i18n,
-        parent: this.$refs.pickerContainer,
-        onEmojiSelect: this.onEmojiSelect,
-        onClickOutside: () => this.$emit('close'),
-        ...this.emojiPickerPreferences,
-      });
-    },
-    onEmojiSelect(emoji) {
-      this.$emit('emojiSelected', this.returnName ? emoji.id : emoji.native);
-    },
-  },
-};
+interface Emoji {
+  id: string
+  native: string
+}
+
+export interface Props {
+  returnName?: boolean
+  position?: 'top' | 'bottom'
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  returnName: false,
+  position: 'top'
+})
+
+const emit = defineEmits<{
+  close: []
+  emojiSelected: [emoji: string]
+}>()
+
+const emojiIndex = computed(() => new EmojiIndex(data))
+
+const translations = computed(() => ({
+  search: i18n.global.t('emoji_picker.search'),
+  notfound: i18n.global.t('emoji_picker.notfound'),
+  categories: {
+    search: i18n.global.t('emoji_picker.categories.search'),
+    recent: i18n.global.t('emoji_picker.categories.recent'),
+    smileys: i18n.global.t('emoji_picker.categories.smileys'),
+    people: i18n.global.t('emoji_picker.categories.people'),
+    nature: i18n.global.t('emoji_picker.categories.nature'),
+    foods: i18n.global.t('emoji_picker.categories.foods'),
+    activity: i18n.global.t('emoji_picker.categories.activity'),
+    places: i18n.global.t('emoji_picker.categories.places'),
+    objects: i18n.global.t('emoji_picker.categories.objects'),
+    symbols: i18n.global.t('emoji_picker.categories.symbols'),
+    flags: i18n.global.t('emoji_picker.categories.flags'),
+    custom: i18n.global.t('emoji_picker.categories.custom')
+  }
+}))
+
+const onEmojiSelect = (emoji: Emoji) => {
+  emit('emojiSelected', props.returnName ? emoji.id : emoji.native)
+}
 </script>
 
 <style lang="scss" scoped>
@@ -78,16 +90,20 @@ export default {
     animation-name: slideInDown;
   }
 
-  :deep(em-emoji-picker) {
-    // Most variables don't work here
-    --border-radius: 16px;
-    --font-family: Lato, sans-serif; // $unnnic-font-family
-    --rgb-accent: 0, 164, 159; // $unnnic-color-weni-600
-    --rgb-color: 59, 65, 77; // $unnnic-color-neutral-darkest
-    --color-border: rgb(244, 246, 248);
-    --shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
-
+  :deep(.emoji-mart) {
+    border-radius: 16px;
+    font-family: Lato, sans-serif; // $unnnic-font-family
+    border: 1px solid rgb(244, 246, 248);
+    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
     cursor: default;
+  }
+
+  :deep(.emoji-mart-category-emoji) {
+    cursor: pointer;
+  }
+
+  :deep(.emoji-mart-category-emoji:hover) {
+    background: rgba(0, 164, 159, 0.1); // $unnnic-color-weni-600 with opacity
   }
 }
 
