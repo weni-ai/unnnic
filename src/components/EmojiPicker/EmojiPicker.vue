@@ -15,6 +15,7 @@
       no-results-emoji="cry"
       :max-frequent-rows="3"
       :i18n="translations"
+      :color="accentColor"
       @select="onEmojiSelect"
     />
   </div>
@@ -48,7 +49,9 @@ const emit = defineEmits<{
 }>()
 
 const emojiPickerRef = ref<HTMLElement>()
-const emojiIndex = computed(() => new EmojiIndex(data));
+const emojiIndex = computed(() => new EmojiIndex(data))
+
+const accentColor = '#00A49F' // $unnnic-color-weni-600
 
 // @ts-expect-error: Type instantiation is excessively deep and possibly infinite
 const translation = (key: string) => i18n.global.t(key) as string;
@@ -114,6 +117,7 @@ const onEmojiSelect = (emoji: Emoji) => {
     border: 1px solid rgb(244, 246, 248);
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
     cursor: default;
+    color: #3B4151; // $unnnic-color-neutral-darkest
   }
 
   :deep(.emoji-mart-emoji) {
@@ -126,10 +130,21 @@ const onEmojiSelect = (emoji: Emoji) => {
 
   :deep(.emoji-mart-anchor) {
     cursor: pointer;
+    color: #858585;
   }
 
-  :deep(.emoji-mart-anchor:hover) {
-    color: rgb(59, 65, 77) // $unnnic-color-weni-600 with opacity
+  :deep(.emoji-mart-anchor:hover),
+  :deep(.emoji-mart-anchor-selected) {
+    color: #00A49F; // $unnnic-color-weni-600
+  }
+
+  :deep(.emoji-mart-anchor-bar) {
+    background-color: #00A49F; // $unnnic-color-weni-600
+  }
+
+  :deep(.emoji-mart-category .emoji-mart-emoji:hover:before),
+  :deep(.emoji-mart-emoji-selected:before) {
+    background-color: #3B4151  // $unnnic-color-neutral-darkest
   }
 }
 
