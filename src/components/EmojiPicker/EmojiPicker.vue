@@ -26,7 +26,7 @@ import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { get } from 'lodash'
 import i18n from '../../utils/plugins/i18n'
 import { Picker, EmojiIndex } from 'emoji-mart-vue-fast/src'
-import data from 'emoji-mart-vue-fast/data/all.json'
+import data from 'emoji-mart-vue-fast/data/apple.json'
 import 'emoji-mart-vue-fast/css/emoji-mart.css'
 import UnnnicI18n from '../../mixins/i18n'
 
