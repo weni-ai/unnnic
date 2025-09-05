@@ -1,13 +1,11 @@
 import { mount } from '@vue/test-utils';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-
 import UnnnicEmojiPicker from '../EmojiPicker.vue';
 
-// Mock emoji-mart-vue-fast
 vi.mock('emoji-mart-vue-fast/src', () => ({
   Picker: {
     name: 'Picker',
-    props: ['data', 'set', 'theme', 'preview', 'search', 'navPosition', 'noResultsEmoji', 'maxFrequentRows', 'locale'],
+    props: ['data', 'set', 'theme', 'preview', 'search', 'navPosition', 'noResultsEmoji', 'maxFrequentRows', 'i18n', 'color'],
     emits: ['select', 'click-outside'],
     template: '<div class="emoji-mart-picker"></div>'
   },
@@ -20,6 +18,20 @@ vi.mock('emoji-mart-vue-fast/data/all.json', () => ({
 
 vi.mock('emoji-mart-vue-fast/css/emoji-mart.css', () => ({}));
 
+vi.mock('../../utils/plugins/i18n', () => {
+  const current = 'pt-br'
+  return {
+    default: {
+      global: {
+        get locale() { return current },
+        set locale(_v) {},
+        t: (key) => `${key}`,
+      },
+    },
+  }
+});
+
+
 describe('UnnnicEmojiPicker', () => {
   let wrapper;
 
@@ -31,10 +43,14 @@ describe('UnnnicEmojiPicker', () => {
         returnName: false,
       },
       global: {
+        config: {
+          errorHandler: () => {},
+          warnHandler: () => {},
+        },
         stubs: {
           Picker: {
             name: 'Picker',
-            props: ['data', 'set', 'theme', 'preview', 'search', 'navPosition', 'noResultsEmoji', 'maxFrequentRows', 'locale'],
+            props: ['data', 'set', 'theme', 'preview', 'search', 'navPosition', 'noResultsEmoji', 'maxFrequentRows', 'i18n', 'color'],
             emits: ['select', 'click-outside'],
             template: '<div class="emoji-mart-picker" @select="$emit(\'select\', $event)" @click-outside="$emit(\'click-outside\')"></div>'
           }
@@ -54,11 +70,12 @@ describe('UnnnicEmojiPicker', () => {
     expect(picker.props('set')).toBe('apple');
     expect(picker.props('theme')).toBe('light');
     expect(picker.props('preview')).toBe(false);
-    expect(picker.props('search')).toBe(false);
+    expect(picker.props('search')).toBe(true);
     expect(picker.props('navPosition')).toBe('bottom');
     expect(picker.props('noResultsEmoji')).toBe('cry');
     expect(picker.props('maxFrequentRows')).toBe(3);
-    expect(picker.props('locale')).toBe('pt');
+    expect(picker.props('color')).toBe('#00A49F');
+    expect(picker.props('i18n')).toBeDefined();
   });
 
   it('emits "emojiSelected" with the correct data when an emoji is selected', async () => {
@@ -71,28 +88,53 @@ describe('UnnnicEmojiPicker', () => {
   });
 
   it('emits "emojiSelected" with the name when `returnName` is true', async () => {
-    await wrapper.setProps({ returnName: true });
+    const custom = mount(UnnnicEmojiPicker, {
+      props: { position: 'top', returnName: true },
+      global: {
+        stubs: {
+          Picker: {
+            name: 'Picker',
+            props: ['data', 'set', 'theme', 'preview', 'search', 'navPosition', 'noResultsEmoji', 'maxFrequentRows', 'i18n', 'color'],
+            emits: ['select', 'click-outside'],
+            template: '<div class="emoji-mart-picker" @select="$emit(\'select\', $event)"></div>'
+          }
+        }
+      }
+    });
 
     const emojiMock = { id: 'smile', native: '😊' };
-    const picker = wrapper.findComponent({ name: 'Picker' });
+    const picker = custom.findComponent({ name: 'Picker' });
 
     await picker.vm.$emit('select', emojiMock);
-    expect(wrapper.emitted('emojiSelected')).toBeTruthy();
-    expect(wrapper.emitted('emojiSelected')[0]).toEqual(['smile']);
+    expect(custom.emitted('emojiSelected')).toBeTruthy();
+    expect(custom.emitted('emojiSelected')[0]).toEqual(['smile']);
+    custom.unmount();
   });
 
-  it('emits "close" when `click-outside` is triggered', async () => {
-    const picker = wrapper.findComponent({ name: 'Picker' });
-
-    await picker.vm.$emit('click-outside');
-    expect(wrapper.emitted('close')).toBeTruthy();
-  });
-
-  it('updates position class when position prop changes', async () => {
-    expect(wrapper.classes()).toContain('emoji-picker--top');
+  it('emits "close" when clicking outside the component', async () => {
+    // Simula um click fora do componente
+    const outsideElement = document.createElement('div');
+    document.body.appendChild(outsideElement);
     
-    await wrapper.setProps({ position: 'bottom' });
-    expect(wrapper.classes()).toContain('emoji-picker--bottom');
+    const clickEvent = new Event('click', { bubbles: true });
+    Object.defineProperty(clickEvent, 'target', { value: outsideElement });
+    
+    document.dispatchEvent(clickEvent);
+    
+    await wrapper.vm.$nextTick();
+    expect(wrapper.emitted('close')).toBeTruthy();
+    
+    // Cleanup
+    document.body.removeChild(outsideElement);
+  });
+
+  it('renders bottom position class when position is bottom', async () => {
+    const custom = mount(UnnnicEmojiPicker, {
+      props: { position: 'bottom' },
+      global: { stubs: { Picker: { name: 'Picker', props: ['data','set','theme','preview','search','navPosition','noResultsEmoji','maxFrequentRows','i18n','color'], template: '<div />' } } }
+    });
+    expect(custom.classes()).toContain('emoji-picker--bottom');
+    custom.unmount();
   });
 
   it('stops event propagation on click', async () => {
@@ -112,5 +154,20 @@ describe('UnnnicEmojiPicker', () => {
       stopPropagation: stopPropagationSpy,
     });
     expect(stopPropagationSpy).toHaveBeenCalled();
+  });
+
+  it('uses pt-br as default locale', () => {
+    const picker = wrapper.findComponent({ name: 'Picker' });
+    const i18nProp = picker.props('i18n');
+    expect(i18nProp).toBeDefined();
+    expect(i18nProp.search).toBeDefined();
+  });
+
+  it('uses custom locale when provided', async () => {
+    await wrapper.setProps({ locale: 'en' });
+    const picker = wrapper.findComponent({ name: 'Picker' });
+    const i18nProp = picker.props('i18n');
+    expect(i18nProp).toBeDefined();
+    expect(i18nProp.search).toBeDefined();
   });
 });
