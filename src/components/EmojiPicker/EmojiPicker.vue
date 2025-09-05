@@ -156,6 +156,16 @@ const onEmojiSelect = (emoji: Emoji) => {
   :deep(.emoji-mart-anchor-bar) {
     background-color: #00A49F; // $unnnic-color-weni-600
   }
+
+  :deep(.emoji-type-image.emoji-set-apple) {
+    background-image: url('/apple-64.png');
+  }
+
+  :deep(.emoji-type-image.emoji-set-facebook),
+  :deep(.emoji-type-image.emoji-set-google),
+  :deep(.emoji-type-image.emoji-set-twitter) {
+    background-image: none;
+  }
 }
 
 @keyframes slideInUp {
