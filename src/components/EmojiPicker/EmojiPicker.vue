@@ -158,13 +158,13 @@ const onEmojiSelect = (emoji: Emoji) => {
   }
 
   :deep(.emoji-type-image.emoji-set-apple) {
-    background-image: url('/apple-64.png');
+    background-image: url('/apple-64.png') !important;
   }
 
   :deep(.emoji-type-image.emoji-set-facebook),
   :deep(.emoji-type-image.emoji-set-google),
   :deep(.emoji-type-image.emoji-set-twitter) {
-    background-image: none;
+    background-image: none !important;
   }
 }
 
