@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+# 3.1.4 (2025-09-05)
+
+- **EmojiPicker Refactoring**: Complete modernization of EmojiPicker component:
+  - **Security Enhancement**: Local emoji sprite sheets to eliminate external CDN requests (CORS/CSP compliance)
+
+### Fixed
+
+- **Security**: Eliminated external requests to unpkg.com for emoji sprite sheets
+- **CSP Compliance**: EmojiPicker now works with strict Content Security Policy headers
+- **Performance**: Reduced bundle size and improved loading times
+
 # 3.1.3 (2025-09-05)
 
 ### Added

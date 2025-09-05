@@ -9,7 +9,10 @@
       :data="emojiIndex"
       set="apple"
       theme="light"
-      :preview="false"
+      emoji="point_up"
+      :title="title"
+      :showPreview="true"
+      showSkinTones
       :search="true"
       nav-position="bottom"
       no-results-emoji="cry"
@@ -70,6 +73,8 @@ const translation = (key: string) => {
   const enMsgs = messages?.['en']
   return get(localeMsgs, key) || get(enMsgs, key) || key
 }
+
+const title = computed(() => translation('emoji_picker.title'))
 
 const translations = computed(() => ({
   search: translation('emoji_picker.search'),
@@ -155,6 +160,16 @@ const onEmojiSelect = (emoji: Emoji) => {
 
   :deep(.emoji-mart-anchor-bar) {
     background-color: #00A49F; // $unnnic-color-weni-600
+  }
+
+  :deep(.emoji-type-image.emoji-set-apple) {
+    background-image: url('./apple-64.png') !important;
+  }
+
+  :deep(.emoji-type-image.emoji-set-facebook),
+  :deep(.emoji-type-image.emoji-set-google),
+  :deep(.emoji-type-image.emoji-set-twitter) {
+    background-image: none !important;
   }
 }
 
