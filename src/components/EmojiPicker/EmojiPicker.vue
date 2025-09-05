@@ -9,7 +9,10 @@
       :data="emojiIndex"
       set="apple"
       theme="light"
-      :preview="false"
+      emoji="point_up"
+      :title="title"
+      :showPreview="true"
+      showSkinTones
       :search="true"
       nav-position="bottom"
       no-results-emoji="cry"
@@ -70,6 +73,8 @@ const translation = (key: string) => {
   const enMsgs = messages?.['en']
   return get(localeMsgs, key) || get(enMsgs, key) || key
 }
+
+const title = computed(() => translation('emoji_picker.title'))
 
 const translations = computed(() => ({
   search: translation('emoji_picker.search'),
