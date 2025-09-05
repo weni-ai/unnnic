@@ -2,11 +2,13 @@
 @forward './fonts';
 @forward './spacing';
 @forward './grid';
+@forward './texts';
 
 @use './colors' as *;
 @use './fonts' as *;
 @use './spacing' as *;
 @use './grid' as *;
+@use './texts' as *;
 
 .unnnic {
     &--clickable {
