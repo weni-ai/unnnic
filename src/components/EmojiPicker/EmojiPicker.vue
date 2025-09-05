@@ -27,6 +27,11 @@ import i18n from '../../utils/plugins/i18n'
 import { Picker, EmojiIndex } from 'emoji-mart-vue-fast/src'
 import data from 'emoji-mart-vue-fast/data/all.json'
 import 'emoji-mart-vue-fast/css/emoji-mart.css'
+import UnnnicI18n from '../../mixins/i18n'
+
+defineOptions({
+  mixins: [UnnnicI18n],
+})
 
 interface Emoji {
   id: string
@@ -36,11 +41,13 @@ interface Emoji {
 export interface Props {
   returnName?: boolean
   position?: 'top' | 'bottom'
+  locale?: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   returnName: false,
-  position: 'top'
+  position: 'top',
+  locale: 'pt-br'
 })
 
 const emit = defineEmits<{
@@ -53,8 +60,22 @@ const emojiIndex = computed(() => new EmojiIndex(data))
 
 const accentColor = '#00A49F' // $unnnic-color-weni-600
 
-// @ts-expect-error: Type instantiation is excessively deep and possibly infinite
-const translation = (key: string) => i18n.global.t(key) as string;
+const currentLocale = computed(() => props.locale || 'pt-br')
+
+const translation = (key: string) => {
+  const originalLocale = i18n.global.locale as unknown as string
+  const nextLocale = currentLocale.value || 'pt-br'
+
+  if (originalLocale === nextLocale) {
+    // @ts-expect-error: Type instantiation is excessively deep and possibly infinite
+    return i18n.global.t(key) as string
+  }
+
+  i18n.global.locale = nextLocale
+  const result = i18n.global.t(key) as string
+  i18n.global.locale = originalLocale
+  return result
+}
 
 const translations = computed(() => ({
   search: translation('emoji_picker.search'),
@@ -140,11 +161,6 @@ const onEmojiSelect = (emoji: Emoji) => {
 
   :deep(.emoji-mart-anchor-bar) {
     background-color: #00A49F; // $unnnic-color-weni-600
-  }
-
-  :deep(.emoji-mart-category .emoji-mart-emoji:hover:before),
-  :deep(.emoji-mart-emoji-selected:before) {
-    background-color: #3B4151  // $unnnic-color-neutral-darkest
   }
 }
 
