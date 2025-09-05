@@ -26,7 +26,7 @@ import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { get } from 'lodash'
 import i18n from '../../utils/plugins/i18n'
 import { Picker, EmojiIndex } from 'emoji-mart-vue-fast/src'
-import data from 'emoji-mart-vue-fast/data/all.json'
+import data from 'emoji-mart-vue-fast/data/apple.json'
 import 'emoji-mart-vue-fast/css/emoji-mart.css'
 import UnnnicI18n from '../../mixins/i18n'
 
@@ -155,6 +155,16 @@ const onEmojiSelect = (emoji: Emoji) => {
 
   :deep(.emoji-mart-anchor-bar) {
     background-color: #00A49F; // $unnnic-color-weni-600
+  }
+
+  :deep(.emoji-type-image.emoji-set-apple) {
+    background-image: url('/apple-64.png') !important;
+  }
+
+  :deep(.emoji-type-image.emoji-set-facebook),
+  :deep(.emoji-type-image.emoji-set-google),
+  :deep(.emoji-type-image.emoji-set-twitter) {
+    background-image: none !important;
   }
 }
 
