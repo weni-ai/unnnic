@@ -50,9 +50,8 @@
     "vue": "^3.4.8"
   },
   "dependencies": {
-    "@emoji-mart/data": "^1.1.2",
     "@vueuse/components": "^10.4.1",
-    "emoji-mart": "^5.5.2",
+    "emoji-mart-vue-fast": "^15.0.5",
     "lodash": "^4.17.21",
     "mime": "^4.0.1",
     "mitt": "^3.0.1",
