@@ -23,6 +23,7 @@
 
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from 'vue'
+import { get } from 'lodash'
 import i18n from '../../utils/plugins/i18n'
 import { Picker, EmojiIndex } from 'emoji-mart-vue-fast/src'
 import data from 'emoji-mart-vue-fast/data/all.json'
@@ -63,18 +64,11 @@ const accentColor = '#00A49F' // $unnnic-color-weni-600
 const currentLocale = computed(() => props.locale || 'pt-br')
 
 const translation = (key: string) => {
-  const originalLocale = i18n.global.locale as unknown as string
-  const nextLocale = currentLocale.value || 'pt-br'
-
-  if (originalLocale === nextLocale) {
-    // @ts-expect-error: Type instantiation is excessively deep and possibly infinite
-    return i18n.global.t(key) as string
-  }
-
-  i18n.global.locale = nextLocale
-  const result = i18n.global.t(key) as string
-  i18n.global.locale = originalLocale
-  return result
+  const messages: Record<string, unknown> = i18n.global.messages as Record<string, unknown>
+  const loc = currentLocale.value
+  const localeMsgs = messages?.[loc] || messages?.[loc?.toLowerCase?.()] || messages?.[loc?.toUpperCase?.()]
+  const enMsgs = messages?.['en']
+  return get(localeMsgs, key) || get(enMsgs, key) || key
 }
 
 const translations = computed(() => ({
