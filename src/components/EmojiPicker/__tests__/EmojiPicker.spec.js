@@ -12,7 +12,7 @@ vi.mock('emoji-mart-vue-fast/src', () => ({
   EmojiIndex: vi.fn().mockImplementation(() => ({}))
 }));
 
-vi.mock('emoji-mart-vue-fast/data/apple.json', () => ({
+vi.mock('emoji-mart-vue-fast/data/all.json', () => ({
   default: {}
 }));
 
