@@ -9,7 +9,10 @@
       :data="emojiIndex"
       set="apple"
       theme="light"
-      :preview="false"
+      emoji="point_up"
+      :title="title"
+      :showPreview="true"
+      showSkinTones
       :search="true"
       nav-position="bottom"
       no-results-emoji="cry"
@@ -26,7 +29,7 @@ import { computed, ref, onMounted, onUnmounted } from 'vue'
 import { get } from 'lodash'
 import i18n from '../../utils/plugins/i18n'
 import { Picker, EmojiIndex } from 'emoji-mart-vue-fast/src'
-import data from 'emoji-mart-vue-fast/data/apple.json'
+import data from 'emoji-mart-vue-fast/data/all.json'
 import 'emoji-mart-vue-fast/css/emoji-mart.css'
 import UnnnicI18n from '../../mixins/i18n'
 
@@ -70,6 +73,8 @@ const translation = (key: string) => {
   const enMsgs = messages?.['en']
   return get(localeMsgs, key) || get(enMsgs, key) || key
 }
+
+const title = computed(() => translation('emoji_picker.title'))
 
 const translations = computed(() => ({
   search: translation('emoji_picker.search'),
@@ -158,7 +163,7 @@ const onEmojiSelect = (emoji: Emoji) => {
   }
 
   :deep(.emoji-type-image.emoji-set-apple) {
-    background-image: url('/apple-64.png') !important;
+    background-image: url('./apple-64.png') !important;
   }
 
   :deep(.emoji-type-image.emoji-set-facebook),

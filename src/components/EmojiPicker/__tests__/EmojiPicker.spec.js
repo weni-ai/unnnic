@@ -12,7 +12,7 @@ vi.mock('emoji-mart-vue-fast/src', () => ({
   EmojiIndex: vi.fn().mockImplementation(() => ({}))
 }));
 
-vi.mock('emoji-mart-vue-fast/data/apple.json', () => ({
+vi.mock('emoji-mart-vue-fast/data/all.json', () => ({
   default: {}
 }));
 
@@ -50,7 +50,7 @@ describe('UnnnicEmojiPicker', () => {
         stubs: {
           Picker: {
             name: 'Picker',
-            props: ['data', 'set', 'theme', 'preview', 'search', 'navPosition', 'noResultsEmoji', 'maxFrequentRows', 'i18n', 'color'],
+            props: ['data', 'set', 'theme', 'emoji', 'title', 'showPreview', 'search', 'navPosition', 'noResultsEmoji', 'maxFrequentRows', 'i18n', 'color'],
             emits: ['select', 'click-outside'],
             template: '<div class="emoji-mart-picker" @select="$emit(\'select\', $event)" @click-outside="$emit(\'click-outside\')"></div>'
           }
@@ -69,7 +69,9 @@ describe('UnnnicEmojiPicker', () => {
     expect(picker.exists()).toBe(true);
     expect(picker.props('set')).toBe('apple');
     expect(picker.props('theme')).toBe('light');
-    expect(picker.props('preview')).toBe(false);
+    expect(picker.props('emoji')).toBe('point_up');
+    expect(picker.props('title')).toBe('Escolha seu emoji...');
+    expect(picker.props('showPreview')).toBe(true);
     expect(picker.props('search')).toBe(true);
     expect(picker.props('navPosition')).toBe('bottom');
     expect(picker.props('noResultsEmoji')).toBe('cry');
@@ -94,7 +96,7 @@ describe('UnnnicEmojiPicker', () => {
         stubs: {
           Picker: {
             name: 'Picker',
-            props: ['data', 'set', 'theme', 'preview', 'search', 'navPosition', 'noResultsEmoji', 'maxFrequentRows', 'i18n', 'color'],
+            props: ['data', 'set', 'theme', 'emoji', 'title', 'showPreview', 'search', 'navPosition', 'noResultsEmoji', 'maxFrequentRows', 'i18n', 'color'],
             emits: ['select', 'click-outside'],
             template: '<div class="emoji-mart-picker" @select="$emit(\'select\', $event)"></div>'
           }
@@ -131,7 +133,7 @@ describe('UnnnicEmojiPicker', () => {
   it('renders bottom position class when position is bottom', async () => {
     const custom = mount(UnnnicEmojiPicker, {
       props: { position: 'bottom' },
-      global: { stubs: { Picker: { name: 'Picker', props: ['data','set','theme','preview','search','navPosition','noResultsEmoji','maxFrequentRows','i18n','color'], template: '<div />' } } }
+      global: { stubs: { Picker: { name: 'Picker', props: ['data','set','theme','emoji','title','showPreview','search','navPosition','noResultsEmoji','maxFrequentRows','i18n','color'], template: '<div />' } } }
     });
     expect(custom.classes()).toContain('emoji-picker--bottom');
     custom.unmount();

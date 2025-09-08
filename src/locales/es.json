@@ -24,6 +24,7 @@
     }
   },
   "emoji_picker": {
+    "title": "Elige tu emoji...",
     "search": "Buscar",
     "notfound": "No se encontró ningún emoji",
     "categories": {
