@@ -1,18 +1,45 @@
 <template>
-  <p
-    class="unnnic-chats-message__text"
-    v-html="formattedText"
-  />
+  <section class="unnnic-chats-message__text__container">
+    <p
+      class="unnnic-chats-message__text"
+      v-html="formattedText"
+    />
+    <p v-if="isAutomatic" class="unnnic-chats-message__text--automatic">
+      {{ i18n('automatic_message') }}
+    </p>
+  </section>
 </template>
 
 <script>
+import UnnnicI18n from '../../mixins/i18n';
+
 export default {
   name: 'ChatsMessageText',
+  mixins: [UnnnicI18n],
   props: {
+    locale: {
+      type: String,
+      default: 'en',
+    },
     text: {
       type: String,
       required: true,
     },
+    isAutomatic: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      defaultTranslations: {
+        automatic_message: {
+          'pt-br': 'Mensagem de abertura automática',
+          en: 'Automatic Opening Message',
+          es: 'Mensaje de apertura automático',
+        },
+      },
+    };
   },
   computed: {
     formattedText() {
@@ -78,3 +105,30 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@use '@/assets/scss/unnnic' as *;
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.unnnic-chats-message__text {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: $unnnic-spacing-sm;
+    padding: $unnnic-spacing-nano 0;
+    font-size: $unnnic-font-size-body-gt;
+    color: $unnnic-color-neutral-dark;
+    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+    word-break: break-word;
+  }
+  &--automatic {
+    font-size: $unnnic-font-size-body-md;
+    line-height: $unnnic-line-height-caption-1;
+    color: $unnnic-color-aux-blue-500;
+  }
+}
+</style>
