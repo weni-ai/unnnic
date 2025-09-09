@@ -3,12 +3,20 @@
 @forward './spacing';
 @forward './grid';
 @forward './texts';
+@forward './radii';
+@forward './shadows';
+@forward './spaces';
+@forward './icon-sizes';
 
 @use './colors' as *;
 @use './fonts' as *;
 @use './spacing' as *;
 @use './grid' as *;
 @use './texts' as *;
+@use './radii' as *;
+@use './shadows' as *;
+@use './spaces' as *;
+@use './icon-sizes' as *;
 
 .unnnic {
     &--clickable {
