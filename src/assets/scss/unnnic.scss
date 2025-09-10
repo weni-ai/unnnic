@@ -1,7 +1,7 @@
-@forward './colors';
-@forward './fonts';
-@forward './spacing';
-@forward './grid';
+@forward './deprecated/colors';
+@forward './deprecated/fonts';
+@forward './deprecated/spacing';
+@forward './deprecated/grid';
 @forward './texts';
 @forward './radii';
 @forward './shadows';
@@ -9,10 +9,10 @@
 @forward './icon-sizes';
 @forward './radii-mixins';
 
-@use './colors' as *;
-@use './fonts' as *;
-@use './spacing' as *;
-@use './grid' as *;
+@use './deprecated/colors' as *;
+@use './deprecated/fonts' as *;
+@use './deprecated/spacing' as *;
+@use './deprecated/grid' as *;
 @use './texts' as *;
 @use './radii' as *;
 @use './shadows' as *;
