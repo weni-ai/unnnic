@@ -71,6 +71,11 @@ module.exports = {
         },
         {
           destination: 'shadows.scss',
+          format: 'scss/variables',
+          filter: 'shadows',
+        },
+        {
+          destination: 'shadows-mixins.scss',
           format: 'scss/mixin',
           filter: 'shadows',
         },
