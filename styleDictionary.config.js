@@ -1,27 +1,10 @@
-const StyleDictionary = require('style-dictionary');
-
-StyleDictionary.default.registerFormat({
-  name: 'scss/mixin',
-  format: function(options) {
-    let mixin = '';
-
-    options.allTokens.forEach(({ name, value, mixin: mixinValue }) => {
-      mixin += `@mixin ${name} {\n`;
-      mixin += `  ${mixinValue || value}\n`;
-      mixin += '}\n';
-    });
-
-    return mixin;
-  }
-});
-
 module.exports = {
   source: ['./src/assets/tokens/**/*.json'],
   hooks: {
     filters: {
-      texts: (token) => {
-        const isText = token.path.at(0) === 'text';
-        return isText;
+      fonts: (token) => {
+        const isFont = token.path.at(0) === 'font';
+        return isFont;
       },
       spaces: (token) => {
         const isSpace = token.path.at(0) === 'space';
@@ -50,9 +33,9 @@ module.exports = {
       prefix: 'unnnic',
       files: [
         {
-          destination: 'texts.scss',
-          format: 'scss/mixin',
-          filter: 'texts',
+          destination: 'fonts.scss',
+          format: 'scss/variables',
+          filter: 'fonts',
         },
         {
           destination: 'spaces.scss',
@@ -65,18 +48,8 @@ module.exports = {
           filter: 'radii',
         },
         {
-          destination: 'radii-mixins.scss',
-          format: 'scss/mixin',
-          filter: 'radii',
-        },
-        {
           destination: 'shadows.scss',
           format: 'scss/variables',
-          filter: 'shadows',
-        },
-        {
-          destination: 'shadows-mixins.scss',
-          format: 'scss/mixin',
           filter: 'shadows',
         },
         {

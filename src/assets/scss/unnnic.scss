@@ -2,24 +2,21 @@
 @forward './deprecated/fonts';
 @forward './deprecated/spacing';
 @forward './deprecated/grid';
-@forward './texts';
+@forward './fonts';
 @forward './radii';
 @forward './shadows';
 @forward './spaces';
 @forward './icon-sizes';
-@forward './radii-mixins';
 
 @use './deprecated/colors' as *;
 @use './deprecated/fonts' as *;
 @use './deprecated/spacing' as *;
 @use './deprecated/grid' as *;
-@use './texts' as *;
+@use './fonts' as *;
 @use './radii' as *;
 @use './shadows' as *;
 @use './spaces' as *;
 @use './icon-sizes' as *;
-
-@use './radii-mixins' as *;
 
 .unnnic {
     &--clickable {
