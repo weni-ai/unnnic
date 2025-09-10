@@ -5,9 +5,9 @@ StyleDictionary.default.registerFormat({
   format: function(options) {
     let mixin = '';
 
-    options.allTokens.forEach(({ name, value }) => {
+    options.allTokens.forEach(({ name, value, mixin: mixinValue }) => {
       mixin += `@mixin ${name} {\n`;
-      mixin += `  ${value}\n`;
+      mixin += `  ${mixinValue || value}\n`;
       mixin += '}\n';
     });
 
@@ -61,6 +61,11 @@ module.exports = {
         },
         {
           destination: 'radii.scss',
+          format: 'scss/variables',
+          filter: 'radii',
+        },
+        {
+          destination: 'radii-mixins.scss',
           format: 'scss/mixin',
           filter: 'radii',
         },
