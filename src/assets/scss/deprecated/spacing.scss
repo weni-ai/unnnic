@@ -1,0 +1,103 @@
+// Icon size
+$unnnic-icon-size-xl: 2.5 * 16px;
+$unnnic-icon-size-lg: 2 * 16px;
+$unnnic-icon-size-md: 1.5 * 16px;
+$unnnic-icon-size-ant: 1.25 * 16px;
+$unnnic-icon-size-sm: 1 * 16px;
+$unnnic-icon-size-xs: 0.75 * 16px;
+
+// Avatar size
+$unnnic-avatar-size-lg: 6.5 * 16px;
+$unnnic-avatar-size-md: 4.5 * 16px;
+$unnnic-avatar-size-sm: 2.5 * 16px;
+$unnnic-avatar-size-xs: 2 * 16px;
+$unnnic-avatar-size-nano: 1.25 * 16px;
+
+// Border radius
+$unnnic-border-radius-sm: 0.25 * 16px;
+$unnnic-border-radius-md: 0.5 * 16px;
+$unnnic-border-radius-lg: 1 * 16px;
+$unnnic-border-radius-pill: 37.5 * 16px;
+
+// Border width
+$unnnic-border-width-thinner: 0.0625 * 16px;
+$unnnic-border-width-thin: 0.125 * 16px;
+$unnnic-border-width-thick: 0.25 * 16px;
+
+// Shadow levels
+$unnnic-shadow-level-near: 0 * 16px 0.25 * 16px 8px rgba(0, 0, 0, .12);
+$unnnic-shadow-level-separated: 0px 8px 16px rgba(0, 0, 0, .08);
+$unnnic-shadow-level-far: 0px 12px 32px rgba(0, 0, 0, .04);
+$unnnic-shadow-level-distant: 0px 20px 40px rgba(0, 0, 0, .06);
+
+// Opacity levels
+$unnnic-opacity-level-darkest: 0.8;
+$unnnic-opacity-level-dark: 0.64;
+$unnnic-opacity-level-clarifying: 0.48;
+$unnnic-opacity-level-overlay: 0.4;
+$unnnic-opacity-level-clear: 0.32;
+$unnnic-opacity-level-light: 0.16;
+$unnnic-opacity-level-extra-light: 0.08;
+
+// Spacing
+$unnnic-spacing-nano: 0.25 * 16px;
+$unnnic-spacing-xs: 0.5 * 16px;
+$unnnic-spacing-ant: 0.75 * 16px;
+$unnnic-spacing-sm: 16px;
+$unnnic-spacing-md: 1.5 * 16px;
+$unnnic-spacing-lg: 2 * 16px;
+$unnnic-spacing-xl: 2.5 * 16px;
+$unnnic-spacing-giant: 3 * 16px;
+$unnnic-spacing-xgiant: 4 * 16px;
+$unnnic-spacing-awesome: 5 * 16px;
+
+$unnnic-inset-nano: $unnnic-spacing-xs;
+$unnnic-inset-xs: $unnnic-spacing-ant;
+$unnnic-inset-sm: $unnnic-spacing-sm;
+$unnnic-inset-md: $unnnic-spacing-md;
+$unnnic-inset-lg: $unnnic-spacing-lg;
+$unnnic-spacing-inset-nano: $unnnic-inset-nano;
+$unnnic-spacing-inset-xs: $unnnic-inset-xs;
+$unnnic-spacing-inset-sm: $unnnic-inset-sm;
+$unnnic-spacing-inset-md: $unnnic-inset-md;
+$unnnic-spacing-inset-lg: $unnnic-inset-lg;
+
+// Squish
+$unnnic-squish-nano: $unnnic-spacing-xs $unnnic-spacing-sm;
+$unnnic-squish-xs: $unnnic-spacing-ant $unnnic-spacing-sm;
+$unnnic-squish-sm: $unnnic-spacing-ant $unnnic-spacing-md;
+$unnnic-squish-md: $unnnic-spacing-sm $unnnic-spacing-md;
+$unnnic-squish-lg: $unnnic-spacing-md $unnnic-spacing-lg;
+
+// Inline
+$unnnic-inline-nano: $unnnic-spacing-nano;
+$unnnic-inline-xs: $unnnic-spacing-xs;
+$unnnic-inline-ant: $unnnic-spacing-ant;
+$unnnic-inline-sm: $unnnic-spacing-sm;
+$unnnic-inline-md: $unnnic-spacing-md;
+$unnnic-inline-lg: $unnnic-spacing-lg;
+$unnnic-inline-xl: $unnnic-spacing-xl;
+$unnnic-inline-giant: $unnnic-spacing-giant;
+$unnnic-inline-xgiant: $unnnic-spacing-xgiant;
+$unnnic-inline-awesome: $unnnic-spacing-awesome;
+$unnnic-spacing-inline-nano: $unnnic-inline-nano;
+$unnnic-spacing-inline-xs: $unnnic-inline-xs;
+$unnnic-spacing-inline-ant: $unnnic-inline-ant;
+$unnnic-spacing-inline-sm: $unnnic-inline-sm;
+$unnnic-spacing-inline-md: $unnnic-inline-md;
+$unnnic-spacing-inline-lg: $unnnic-inline-lg;
+$unnnic-spacing-inline-xl: $unnnic-inline-xl;
+$unnnic-spacing-inline-giant: $unnnic-inline-giant;
+$unnnic-spacing-inline-xgiant: $unnnic-inline-xgiant;
+$unnnic-spacing-inline-awesome: $unnnic-inline-awesome;
+
+// Stack
+$unnnic-spacing-stack-nano: $unnnic-spacing-nano;
+$unnnic-spacing-stack-xs: $unnnic-spacing-xs;
+$unnnic-spacing-stack-sm: $unnnic-spacing-sm;
+$unnnic-spacing-stack-md: $unnnic-spacing-md;
+$unnnic-spacing-stack-lg: $unnnic-spacing-lg;
+$unnnic-spacing-stack-xl: $unnnic-spacing-xl;
+$unnnic-spacing-stack-giant: $unnnic-spacing-giant;
+$unnnic-spacing-stack-xgiant: $unnnic-spacing-xgiant;
+$unnnic-spacing-stack-awesome: $unnnic-spacing-awesome;

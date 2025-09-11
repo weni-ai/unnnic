@@ -1,0 +1,52 @@
+{
+  "font": {
+    "size": {
+      "value": "16px"
+    },
+    "family": {
+      "value": "Lato"
+    },
+    "weight": {
+      "bold": {
+        "value": "700"
+      },
+      "medium": {
+        "value": "500"
+      },
+      "regular": {
+        "value": "400"
+      }
+    },
+    "display": {
+      "1": {
+        "value": "{font.family} 1.5 * {font.size} /* 24px */ {font.weight.bold} 2 * {font.size} /* 32px */"
+      },
+      "2": {
+        "value": "{font.family} 1.25 * {font.size} /* 20px */ {font.weight.bold} 1.6875 * {font.size} /* 27px */"
+      },
+      "3": {
+        "value": "{font.family} 1 * {font.size} /* 16px */ {font.weight.bold} 1.375 * {font.size} /* 22px */"
+      },
+      "4": {
+        "value": "{font.family} 1 * {font.size} /* 16px */ {font.weight.regular} 1.375 * {font.size} /* 22px */"
+      }
+    },
+    "body": {
+      "value": "{font.family} 0.875 * {font.size} /* 14px */ {font.weight.regular} 1.3125 * {font.size} /* 21px */"
+    },
+    "emphasis": {
+      "value": "{font.family} 0.875 * {font.size} /* 14px */ {font.weight.medium} 1.3125 * {font.size} /* 21px */"
+    },
+    "action": {
+      "value": "{font.family} 0.875 * {font.size} /* 14px */ {font.weight.bold} 1.3125 * {font.size} /* 21px */"
+    },
+    "caption": {
+      "1": {
+        "value": "{font.family} 0.75 * {font.size} /* 12px */ {font.weight.medium} 1.125 * {font.size} /* 18px */"
+      },
+      "2": {
+        "value": "{font.family} 0.75 * {font.size} /* 12px */ {font.weight.regular} 1.125 * {font.size} /* 18px */"
+      }
+    }
+  }
+}

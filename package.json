@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "3.1.4",
+  "version": "3.2.0",
   "type": "commonjs",
   "files": [
     "dist",
@@ -37,7 +37,8 @@
     "build-storybook": "storybook build",
     "test": "vitest",
     "test:ui": "vitest --ui",
-    "coverage": "vitest --coverage"
+    "coverage": "vitest --coverage",
+    "style-dictionary:generate": "style-dictionary build --config styleDictionary.config.js"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -91,6 +92,7 @@
     "react-dom": "^18.2.0",
     "sass": "^1.63.0",
     "storybook": "^8.0.10",
+    "style-dictionary": "^5.0.1",
     "typescript": "^5.9.2",
     "vite": "4.3.5",
     "vite-plugin-dts": "^4.5.4",
