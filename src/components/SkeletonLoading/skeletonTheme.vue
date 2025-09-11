@@ -12,7 +12,7 @@
 
 <script>
 import { ref, provide } from 'vue';
-import colors from '@/assets/scss/colors.scss?inline';
+import colors from '@/assets/scss/deprecated/colors.scss?inline';
 
 // eslint-disable-next-line no-useless-escape
 const backgroundValueRegex = /unnnicColorBackgroundSolo:\s*(.*)\;/;

@@ -1,22 +1,28 @@
 {
     "radius": {
         "0": {
-            "value": "border-radius: 0 /* 0px */;"
+            "value": "0 /* 0px */",
+            "type": "size"
         },
         "1": {
-            "value": "border-radius: 0.25 * {font.size} /* 4px */;"
+            "value": "0.25 * {font.size} /* 4px */",
+            "type": "size"
         },
         "2": {
-            "value": "border-radius: 0.5 * {font.size} /* 8px */;"
+            "value": "0.5 * {font.size} /* 8px */",
+            "type": "size"
         },
         "3": {
-            "value": "border-radius: 0.75 * {font.size} /* 12px */;"
+            "value": "0.75 * {font.size} /* 12px */",
+            "type": "size"
         },
         "4": {
-            "value": "border-radius: 1 * {font.size} /* 16px */;"
+            "value": "1 * {font.size} /* 16px */",
+            "type": "size"
         },
         "full": {
-            "value": "border-radius: 100%;"
+            "value": "100%",
+            "type": "size"
         }
     }
 }
