@@ -5,7 +5,59 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 3.0.4 (2025-01-27)
+
+# 3.1.4 (2025-09-05)
+
+- **EmojiPicker Refactoring**: Complete modernization of EmojiPicker component:
+  - **Security Enhancement**: Local emoji sprite sheets to eliminate external CDN requests (CORS/CSP compliance)
+
+### Fixed
+
+- **Security**: Eliminated external requests to unpkg.com for emoji sprite sheets
+- **CSP Compliance**: EmojiPicker now works with strict Content Security Policy headers
+- **Performance**: Reduced bundle size and improved loading times
+
+# 3.1.3 (2025-09-05)
+
+### Added
+
+- Dependency: Added `emoji-mart-vue-fast` as the new emoji provider
+
+### Removed
+
+- Dependencies: Removed `emoji-mart` and `@emoji-mart/data`
+
+### Changed
+
+- EmojiPicker: Refactored to use `emoji-mart-vue-fast` while preserving backward compatibility (public props, events, and slots remain unchanged)
+
+## 3.1.2 (2025-09-03)
+
+### Added
+
+- **Semantic Color Tokens**: Added comprehensive semantic color token system with dedicated `$unnnic-color-` variables:
+  - **Background Semantic Tokens**: `$unnnic-color-bg-base`, `$unnnic-color-bg-soft`, `$unnnic-color-bg-muted`, `$unnnic-color-bg-active`, `$unnnic-color-bg-info`, `$unnnic-color-bg-success`, `$unnnic-color-bg-warning`, `$unnnic-color-bg-critical`
+  - **Text Semantic Tokens**: `$unnnic-color-fg-base`, `$unnnic-color-fg-muted`, `$unnnic-color-fg-emphasized`, `$unnnic-color-fg-inverted`, `$unnnic-color-fg-active`, `$unnnic-color-fg-info`, `$unnnic-color-fg-success`, `$unnnic-color-fg-warning`, `$unnnic-color-fg-critical`
+  - **Border Semantic Tokens**: `$unnnic-color-border-base`, `$unnnic-color-border-soft`, `$unnnic-color-border-muted`, `$unnnic-color-border-emphasized`, `$unnnic-color-border-active`, `$unnnic-color-border-info`, `$unnnic-color-border-success`, `$unnnic-color-border-warning`, `$unnnic-color-border-critical`
+
+### Changed
+
+- **Color System Refactoring**: Updated `$scheme-colors` map to reference the new semantic tokens instead of direct color values for improved maintainability and consistency
+
+## 3.1.1 (2025-08-29)
+
+### Added
+
+- **SelectSmart**: Added `multipleLimit` props to limit items selection
+- **SelectSmart**: Added `disableRemove` option attribute to disable remove selected items
+
+## 3.1.0 (2025-08-29)
+
+### Added
+
+- **DataTable**: Added new component
+
+## 3.0.4 (2025-08-27)
 
 ### Added
 
