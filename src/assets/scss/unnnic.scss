@@ -1,12 +1,22 @@
-@forward './colors';
+@forward './deprecated/colors';
+@forward './deprecated/fonts';
+@forward './deprecated/spacing';
+@forward './deprecated/grid';
 @forward './fonts';
-@forward './spacing';
-@forward './grid';
+@forward './radii';
+@forward './shadows';
+@forward './spaces';
+@forward './icon-sizes';
 
-@use './colors' as *;
+@use './deprecated/colors' as *;
+@use './deprecated/fonts' as *;
+@use './deprecated/spacing' as *;
+@use './deprecated/grid' as *;
 @use './fonts' as *;
-@use './spacing' as *;
-@use './grid' as *;
+@use './radii' as *;
+@use './shadows' as *;
+@use './spaces' as *;
+@use './icon-sizes' as *;
 
 .unnnic {
     &--clickable {
