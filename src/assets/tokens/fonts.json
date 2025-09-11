@@ -19,33 +19,33 @@
     },
     "display": {
       "1": {
-        "value": "{font.family} 1.5 * {font.size} /* 24px */ {font.weight.bold} 2 * {font.size} /* 32px */"
+        "value": "{font.weight.bold} calc(1.5 * {font.size}) /* 24px */ / calc(2 * {font.size}) /* 32px */ {font.family}"
       },
       "2": {
-        "value": "{font.family} 1.25 * {font.size} /* 20px */ {font.weight.bold} 1.6875 * {font.size} /* 27px */"
+        "value": "{font.weight.bold} calc(1.25 * {font.size}) /* 20px */ / calc(1.6875 * {font.size}) /* 27px */ {font.family}"
       },
       "3": {
-        "value": "{font.family} 1 * {font.size} /* 16px */ {font.weight.bold} 1.375 * {font.size} /* 22px */"
+        "value": "{font.weight.bold} calc(1 * {font.size}) /* 16px */ / calc(1.375 * {font.size}) /* 22px */ {font.family}"
       },
       "4": {
-        "value": "{font.family} 1 * {font.size} /* 16px */ {font.weight.regular} 1.375 * {font.size} /* 22px */"
+        "value": "{font.weight.regular} calc(1 * {font.size}) /* 16px */ / calc(1.375 * {font.size}) /* 22px */ {font.family}"
       }
     },
     "body": {
-      "value": "{font.family} 0.875 * {font.size} /* 14px */ {font.weight.regular} 1.3125 * {font.size} /* 21px */"
+      "value": "{font.weight.regular} calc(0.875 * {font.size}) /* 14px */ / calc(1.3125 * {font.size}) /* 21px */ {font.family}"
     },
     "emphasis": {
-      "value": "{font.family} 0.875 * {font.size} /* 14px */ {font.weight.medium} 1.3125 * {font.size} /* 21px */"
+      "value": "{font.weight.medium} calc(0.875 * {font.size}) /* 14px */ / calc(1.3125 * {font.size}) /* 21px */ {font.family}"
     },
     "action": {
-      "value": "{font.family} 0.875 * {font.size} /* 14px */ {font.weight.bold} 1.3125 * {font.size} /* 21px */"
+      "value": "{font.weight.bold} calc(0.875 * {font.size}) /* 14px */ / calc(1.3125 * {font.size}) /* 21px */ {font.family}"
     },
     "caption": {
       "1": {
-        "value": "{font.family} 0.75 * {font.size} /* 12px */ {font.weight.medium} 1.125 * {font.size} /* 18px */"
+        "value": "{font.weight.medium} calc(0.75 * {font.size}) /* 12px */ / calc(1.125 * {font.size}) /* 18px */ {font.family}"
       },
       "2": {
-        "value": "{font.family} 0.75 * {font.size} /* 12px */ {font.weight.regular} 1.125 * {font.size} /* 18px */"
+        "value": "{font.weight.regular} calc(0.75 * {font.size}) /* 12px */ / calc(1.125 * {font.size}) /* 18px */ {font.family}"
       }
     }
   }
