@@ -169,6 +169,38 @@ $unnnic-color-brand-sec-dark: $unnnic-color-neutral-black;
 $unnnic-color-brand-sec-soft: $unnnic-color-neutral-dark;
 $unnnic-color-brand-sec: $unnnic-color-neutral-cleanest;
 
+/* Semantic Background Colors */
+$unnnic-color-bg-base: $unnnic-color-white;
+$unnnic-color-bg-soft: $unnnic-color-gray-50;
+$unnnic-color-bg-muted: $unnnic-color-gray-100;
+$unnnic-color-bg-active: $unnnic-color-teal-600;
+$unnnic-color-bg-info: $unnnic-color-aux-blue-100;
+$unnnic-color-bg-success: $unnnic-color-aux-green-100;
+$unnnic-color-bg-warning: $unnnic-color-aux-yellow-50;
+$unnnic-color-bg-critical: $unnnic-color-aux-red-50;
+
+/* Semantic Text Colors */
+$unnnic-color-fg-base: $unnnic-color-gray-500;
+$unnnic-color-fg-muted: $unnnic-color-gray-300;
+$unnnic-color-fg-emphasized: $unnnic-color-gray-900;
+$unnnic-color-fg-inverted: $unnnic-color-white;
+$unnnic-color-fg-active: $unnnic-color-teal-600;
+$unnnic-color-fg-info: $unnnic-color-aux-blue-500;
+$unnnic-color-fg-success: $unnnic-color-aux-green-500;
+$unnnic-color-fg-warning: $unnnic-color-aux-yellow-500;
+$unnnic-color-fg-critical: $unnnic-color-aux-red-500;
+
+/* Semantic Border Colors */
+$unnnic-color-border-base: $unnnic-color-gray-200;
+$unnnic-color-border-soft: $unnnic-color-gray-100;
+$unnnic-color-border-muted: $unnnic-color-gray-200;
+$unnnic-color-border-emphasized: $unnnic-color-gray-400;
+$unnnic-color-border-active: $unnnic-color-teal-600;
+$unnnic-color-border-info: $unnnic-color-aux-blue-300;
+$unnnic-color-border-success: $unnnic-color-aux-green-300;
+$unnnic-color-border-warning: $unnnic-color-aux-yellow-300;
+$unnnic-color-border-critical: $unnnic-color-aux-red-300;
+
 :export{
     unnnicColorBackgroundSolo: $unnnic-color-background-solo;
 }
@@ -340,36 +372,36 @@ $scheme-colors:
   "brand-sec" $unnnic-color-brand-sec,
   
   // Background semantic colors
-  "bg-base" $unnnic-color-white,
-  "bg-soft" $unnnic-color-gray-50,
-  "bg-muted" $unnnic-color-gray-100,
-  "bg-active" $unnnic-color-teal-600,
-  "bg-info" $unnnic-color-aux-blue-100,
-  "bg-success" $unnnic-color-aux-green-100,
-  "bg-warning" $unnnic-color-aux-yellow-50,
-  "bg-critical" $unnnic-color-aux-red-50,
+  "bg-base" $unnnic-color-bg-base,
+  "bg-soft" $unnnic-color-bg-soft,
+  "bg-muted" $unnnic-color-bg-muted,
+  "bg-active" $unnnic-color-bg-active,
+  "bg-info" $unnnic-color-bg-info,
+  "bg-success" $unnnic-color-bg-success,
+  "bg-warning" $unnnic-color-bg-warning,
+  "bg-critical" $unnnic-color-bg-critical,
   
   // Text semantic colors
-  "fg-base" $unnnic-color-gray-500,
-  "fg-muted" $unnnic-color-gray-300,
-  "fg-emphasized" $unnnic-color-gray-900,
-  "fg-inverted" $unnnic-color-white,
-  "fg-active" $unnnic-color-teal-600,
-  "fg-info" $unnnic-color-aux-blue-500,
-  "fg-success" $unnnic-color-aux-green-500,
-  "fg-warning" $unnnic-color-aux-yellow-500,
-  "fg-critical" $unnnic-color-aux-red-500,
+  "fg-base" $unnnic-color-fg-base,
+  "fg-muted" $unnnic-color-fg-muted,
+  "fg-emphasized" $unnnic-color-fg-emphasized,
+  "fg-inverted" $unnnic-color-fg-inverted,
+  "fg-active" $unnnic-color-fg-active,
+  "fg-info" $unnnic-color-fg-info,
+  "fg-success" $unnnic-color-fg-success,
+  "fg-warning" $unnnic-color-fg-warning,
+  "fg-critical" $unnnic-color-fg-critical,
   
   // Border semantic colors
-  "border-base" $unnnic-color-gray-200,
-  "border-soft" $unnnic-color-gray-100,
-  "border-muted" $unnnic-color-gray-200,
-  "border-emphasized" $unnnic-color-gray-400,
-  "border-active" $unnnic-color-teal-600,
-  "border-info" $unnnic-color-aux-blue-300,
-  "border-success" $unnnic-color-aux-green-300,
-  "border-warning" $unnnic-color-aux-yellow-300,
-  "border-critical" $unnnic-color-aux-red-300;
+  "border-base" $unnnic-color-border-base,
+  "border-soft" $unnnic-color-border-soft,
+  "border-muted" $unnnic-color-border-muted,
+  "border-emphasized" $unnnic-color-border-emphasized,
+  "border-active" $unnnic-color-border-active,
+  "border-info" $unnnic-color-border-info,
+  "border-success" $unnnic-color-border-success,
+  "border-warning" $unnnic-color-border-warning,
+  "border-critical" $unnnic-color-border-critical;
 
 
 @each $name, $color in $scheme-colors {
