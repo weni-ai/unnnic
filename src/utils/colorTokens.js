@@ -1,2 +1,2 @@
-import colors from '@/assets/scss/colors.scss?inline';
+import colors from '@/assets/scss/deprecated/colors.scss?inline';
 export default colors;

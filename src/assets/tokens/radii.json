@@ -1,0 +1,28 @@
+{
+    "radius": {
+        "0": {
+            "value": "0 /* 0px */",
+            "type": "size"
+        },
+        "1": {
+            "value": "0.25 * {font.size} /* 4px */",
+            "type": "size"
+        },
+        "2": {
+            "value": "0.5 * {font.size} /* 8px */",
+            "type": "size"
+        },
+        "3": {
+            "value": "0.75 * {font.size} /* 12px */",
+            "type": "size"
+        },
+        "4": {
+            "value": "1 * {font.size} /* 16px */",
+            "type": "size"
+        },
+        "full": {
+            "value": "100%",
+            "type": "size"
+        }
+    }
+}
