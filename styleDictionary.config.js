@@ -2,6 +2,10 @@ module.exports = {
   source: ['./src/assets/tokens/**/*.json'],
   hooks: {
     filters: {
+      colors: (token) => {
+        const isColor = token.path.at(0) === 'color';
+        return isColor;
+      },
       fonts: (token) => {
         const isFont = token.path.at(0) === 'font';
         return isFont;
@@ -32,6 +36,11 @@ module.exports = {
       buildPath: './src/assets/scss/',
       prefix: 'unnnic',
       files: [
+        {
+          destination: 'colors.scss',
+          format: 'scss/variables',
+          filter: 'colors',
+        },
         {
           destination: 'fonts.scss',
           format: 'scss/variables',

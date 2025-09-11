@@ -1,57 +1,31 @@
-$unnnic-color-teal-50: #EFFEFC;
-$unnnic-color-teal-100: #C7FFF7;
-$unnnic-color-teal-200: #90FFEF;
-$unnnic-color-teal-300: #51F7E7;
-$unnnic-color-teal-400: #1DE4D7;
-$unnnic-color-teal-500: #04C8BD;
-$unnnic-color-teal-600: #00A49F;
-$unnnic-color-teal-700: #05807D;
-$unnnic-color-teal-800: #0A6564;
-$unnnic-color-teal-900: #0D5453;
-$unnnic-color-teal-950: #003133;
+$unnnic-color-weni-50: #EFFEFC;
+$unnnic-color-weni-100: #C7FFF7;
+$unnnic-color-weni-200: #90FFEF;
+$unnnic-color-weni-300: #51F7E7;
+$unnnic-color-weni-400: #1DE4D7;
+$unnnic-color-weni-500: #04C8BD;
+$unnnic-color-weni-600: #00A49F;
+$unnnic-color-weni-700: #05807D;
+$unnnic-color-weni-800: #0A6564;
+$unnnic-color-weni-900: #0D5453;
+$unnnic-color-weni-950: #003133;
 
-$unnnic-color-gray-950: #23262E;
-$unnnic-color-gray-900: #353945;
-$unnnic-color-gray-800: #3B4151;
-$unnnic-color-gray-700: #454D5F;
-$unnnic-color-gray-600: #545E75;
-$unnnic-color-gray-500: #67738B;
-$unnnic-color-gray-400: #8893A8;
-$unnnic-color-gray-300: #B2B9C7;
-$unnnic-color-gray-200: #D6D9E1;
-$unnnic-color-gray-100: #ECEEF2;
-$unnnic-color-gray-50: #F6F7F9;
+$unnnic-color-neutral-black: #353945;
+$unnnic-color-neutral-darkest: #3B4151;
+$unnnic-color-neutral-dark: #454D5F;
+$unnnic-color-neutral-cloudy: #67738B;
+$unnnic-color-neutral-clean: #B2B9C7;
+$unnnic-color-neutral-cleanest: #D6D9E1;
+$unnnic-color-neutral-soft: #ECEEF2;
+$unnnic-color-neutral-light: #F6F7F9;
+$unnnic-color-neutral-lightest: #F6F7F9;
+$unnnic-color-neutral-white: #FFFFFF;
 
-$unnnic-color-white: #FFFFFF;
-
-$unnnic-color-weni-50: $unnnic-color-teal-50;
-$unnnic-color-weni-100: $unnnic-color-teal-100;
-$unnnic-color-weni-200: $unnnic-color-teal-200;
-$unnnic-color-weni-300: $unnnic-color-teal-300;
-$unnnic-color-weni-400: $unnnic-color-teal-400;
-$unnnic-color-weni-500: $unnnic-color-teal-500;
-$unnnic-color-weni-600: $unnnic-color-teal-600;
-$unnnic-color-weni-700: $unnnic-color-teal-700;
-$unnnic-color-weni-800: $unnnic-color-teal-800;
-$unnnic-color-weni-900: $unnnic-color-teal-900;
-$unnnic-color-weni-950: $unnnic-color-teal-950;
-
-$unnnic-color-neutral-black: $unnnic-color-gray-900;
-$unnnic-color-neutral-darkest: $unnnic-color-gray-800;
-$unnnic-color-neutral-dark: $unnnic-color-gray-700;
-$unnnic-color-neutral-cloudy: $unnnic-color-gray-500;
-$unnnic-color-neutral-clean: $unnnic-color-gray-300;
-$unnnic-color-neutral-cleanest: $unnnic-color-gray-200;
-$unnnic-color-neutral-soft: $unnnic-color-gray-100;
-$unnnic-color-neutral-light: $unnnic-color-gray-50;
-$unnnic-color-neutral-lightest: $unnnic-color-gray-50;
-$unnnic-color-neutral-white: $unnnic-color-white;
-
-$unnnic-color-background-solo: $unnnic-color-teal-50;
-$unnnic-color-background-sky: $unnnic-color-gray-50;
-$unnnic-color-background-grass: $unnnic-color-gray-50;
-$unnnic-color-background-lightest: $unnnic-color-gray-50;
-$unnnic-color-background-white: $unnnic-color-white;
+$unnnic-color-background-solo: $unnnic-color-weni-50;
+$unnnic-color-background-sky: $unnnic-color-neutral-lightest;
+$unnnic-color-background-grass: $unnnic-color-neutral-lightest;
+$unnnic-color-background-lightest: $unnnic-color-neutral-lightest;
+$unnnic-color-background-white: $unnnic-color-neutral-white;
 $unnnic-color-background-soft: #1A1A1A;
 
 $unnnic-color-aux-green-50: #F0F9F3;
@@ -131,7 +105,7 @@ $unnnic-color-floweditor-purple: #7A00A3;
 $unnnic-color-floweditor-wine: #A3006A;
 $unnnic-color-floweditor-orange: #F99707;
 $unnnic-color-floweditor-pink: #DE16BA;
-$unnnic-color-floweditor-turquoise: $unnnic-color-teal-500;
+$unnnic-color-floweditor-turquoise: $unnnic-color-weni-500;
 $unnnic-color-floweditor-green: #00A339;
 
 /* Background */
@@ -162,44 +136,12 @@ $unnnic-color-aux-baby-green: #B2FCA6;
 $unnnic-color-aux-baby-pink: #FFCBF6;
 
 /* Brand */
-$unnnic-color-brand-weni: $unnnic-color-teal-600;
-$unnnic-color-brand-weni-dark: $unnnic-color-teal-800;
-$unnnic-color-brand-weni-soft: $unnnic-color-teal-600; 
+$unnnic-color-brand-weni: $unnnic-color-weni-600;
+$unnnic-color-brand-weni-dark: $unnnic-color-weni-800;
+$unnnic-color-brand-weni-soft: $unnnic-color-weni-600; 
 $unnnic-color-brand-sec-dark: $unnnic-color-neutral-black;
 $unnnic-color-brand-sec-soft: $unnnic-color-neutral-dark;
 $unnnic-color-brand-sec: $unnnic-color-neutral-cleanest;
-
-/* Semantic Background Colors */
-$unnnic-color-bg-base: $unnnic-color-white;
-$unnnic-color-bg-soft: $unnnic-color-gray-50;
-$unnnic-color-bg-muted: $unnnic-color-gray-100;
-$unnnic-color-bg-active: $unnnic-color-teal-600;
-$unnnic-color-bg-info: $unnnic-color-aux-blue-100;
-$unnnic-color-bg-success: $unnnic-color-aux-green-100;
-$unnnic-color-bg-warning: $unnnic-color-aux-yellow-50;
-$unnnic-color-bg-critical: $unnnic-color-aux-red-50;
-
-/* Semantic Text Colors */
-$unnnic-color-fg-base: $unnnic-color-gray-500;
-$unnnic-color-fg-muted: $unnnic-color-gray-300;
-$unnnic-color-fg-emphasized: $unnnic-color-gray-900;
-$unnnic-color-fg-inverted: $unnnic-color-white;
-$unnnic-color-fg-active: $unnnic-color-teal-600;
-$unnnic-color-fg-info: $unnnic-color-aux-blue-500;
-$unnnic-color-fg-success: $unnnic-color-aux-green-500;
-$unnnic-color-fg-warning: $unnnic-color-aux-yellow-500;
-$unnnic-color-fg-critical: $unnnic-color-aux-red-500;
-
-/* Semantic Border Colors */
-$unnnic-color-border-base: $unnnic-color-gray-200;
-$unnnic-color-border-soft: $unnnic-color-gray-100;
-$unnnic-color-border-muted: $unnnic-color-gray-200;
-$unnnic-color-border-emphasized: $unnnic-color-gray-400;
-$unnnic-color-border-active: $unnnic-color-teal-600;
-$unnnic-color-border-info: $unnnic-color-aux-blue-300;
-$unnnic-color-border-success: $unnnic-color-aux-green-300;
-$unnnic-color-border-warning: $unnnic-color-aux-yellow-300;
-$unnnic-color-border-critical: $unnnic-color-aux-red-300;
 
 :export{
     unnnicColorBackgroundSolo: $unnnic-color-background-solo;
@@ -340,68 +282,12 @@ $scheme-colors:
   "weni-900" $unnnic-color-weni-900,
   "weni-950" $unnnic-color-weni-950,
 
-  "teal-50" $unnnic-color-teal-50,
-  "teal-100" $unnnic-color-teal-100,
-  "teal-200" $unnnic-color-teal-200,
-  "teal-300" $unnnic-color-teal-300,
-  "teal-400" $unnnic-color-teal-400,
-  "teal-500" $unnnic-color-teal-500,
-  "teal-600" $unnnic-color-teal-600,
-  "teal-700" $unnnic-color-teal-700,
-  "teal-800" $unnnic-color-teal-800,
-  "teal-900" $unnnic-color-teal-900,
-  "teal-950" $unnnic-color-teal-950,
-  
-  "gray-50" $unnnic-color-gray-50,
-  "gray-100" $unnnic-color-gray-100,
-  "gray-200" $unnnic-color-gray-200,
-  "gray-300" $unnnic-color-gray-300,
-  "gray-400" $unnnic-color-gray-400,
-  "gray-500" $unnnic-color-gray-500,
-  "gray-600" $unnnic-color-gray-600,
-  "gray-700" $unnnic-color-gray-700,
-  "gray-800" $unnnic-color-gray-800,
-  "gray-900" $unnnic-color-gray-900,
-  "gray-950" $unnnic-color-gray-950,
-
   "brand-weni" $unnnic-color-brand-weni,
   "brand-weni-dark" $unnnic-color-brand-weni-dark,
   "brand-weni-soft" $unnnic-color-brand-weni-soft,
   "brand-sec-dark" $unnnic-color-brand-sec-dark,
   "brand-sec-soft" $unnnic-color-brand-sec-soft,
-  "brand-sec" $unnnic-color-brand-sec,
-  
-  // Background semantic colors
-  "bg-base" $unnnic-color-bg-base,
-  "bg-soft" $unnnic-color-bg-soft,
-  "bg-muted" $unnnic-color-bg-muted,
-  "bg-active" $unnnic-color-bg-active,
-  "bg-info" $unnnic-color-bg-info,
-  "bg-success" $unnnic-color-bg-success,
-  "bg-warning" $unnnic-color-bg-warning,
-  "bg-critical" $unnnic-color-bg-critical,
-  
-  // Text semantic colors
-  "fg-base" $unnnic-color-fg-base,
-  "fg-muted" $unnnic-color-fg-muted,
-  "fg-emphasized" $unnnic-color-fg-emphasized,
-  "fg-inverted" $unnnic-color-fg-inverted,
-  "fg-active" $unnnic-color-fg-active,
-  "fg-info" $unnnic-color-fg-info,
-  "fg-success" $unnnic-color-fg-success,
-  "fg-warning" $unnnic-color-fg-warning,
-  "fg-critical" $unnnic-color-fg-critical,
-  
-  // Border semantic colors
-  "border-base" $unnnic-color-border-base,
-  "border-soft" $unnnic-color-border-soft,
-  "border-muted" $unnnic-color-border-muted,
-  "border-emphasized" $unnnic-color-border-emphasized,
-  "border-active" $unnnic-color-border-active,
-  "border-info" $unnnic-color-border-info,
-  "border-success" $unnnic-color-border-success,
-  "border-warning" $unnnic-color-border-warning,
-  "border-critical" $unnnic-color-border-critical;
+  "brand-sec" $unnnic-color-brand-sec;
 
 
 @each $name, $color in $scheme-colors {
