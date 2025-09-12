@@ -13,8 +13,8 @@
     data-testid="material-icon"
     translate="no"
     @click="onClick"
-    @mousedown="$emit('mousedown')"
-    @mouseup="$emit('mouseup')"
+    @mousedown="(event) => $emit('mousedown', event)"
+    @mouseup="(event) => $emit('mouseup', event)"
   >
     {{ materialSymbolsName }}
   </span>
@@ -31,87 +31,54 @@
     ]"
     data-testid="old-map-icons"
     @click="onClick"
-    @mousedown="$emit('mousedown')"
-    @mouseup="$emit('mouseup')"
+    @mousedown="(event) => $emit('mousedown', event)"
+    @mouseup="(event) => $emit('mouseup', event)"
   />
 </template>
 
-<script>
+<script setup lang="ts">
+import { computed } from 'vue';
 import icons from '../utils/icons';
 import OldIconsMap from './Icon/OldIconsMap.json';
-/* eslint-disable vue/multi-word-component-names */
-export default {
-  name: 'Icon',
-  props: {
-    filled: {
-      type: Boolean,
-    },
-    next: {
-      type: Boolean,
-    },
-    icon: {
-      type: String,
-      default: null,
-    },
-    clickable: {
-      type: Boolean,
-      default: false,
-    },
-    size: {
-      type: String,
-      default: 'md',
-      validator(value) {
-        return (
-          [
-            'nano',
-            'xs',
-            'sm',
-            'ant',
-            'md',
-            'lg',
-            'xl',
-            'avatar-lg',
-            'avatar-md',
-            'avatar-sm',
-            'avatar-xs',
-            'avatar-nano',
-          ].indexOf(value) !== -1
-        );
-      },
-    },
-    lineHeight: {
-      type: String,
-      default: null,
-      validator(value) {
-        return !value || ['sm', 'md', 'lg'].indexOf(value) !== -1;
-      },
-    },
-    scheme: {
-      type: String,
-      default: 'neutral-darkest',
-    },
-  },
-  emits: ['click', 'mousedown', 'mouseup'],
-  computed: {
-    svg() {
-      return icons[this.icon];
-    },
+import type { IconProps, IconSize, LineHeight, SchemeColor } from './Icon/types';
 
-    materialSymbolsName() {
-      if (Object.keys(icons).includes(this.icon) && !this.next) {
-        return null;
-      }
+defineOptions({
+  name: 'UnnnicIcon',
+});
 
-      return OldIconsMap[this.icon] || this.icon;
-    },
-  },
-  mounted() {},
-  methods: {
-    onClick($event) {
-      if (!this.clickable) return;
-      this.$emit('click', $event);
-    },
-  },
+export type { IconProps, IconSize, LineHeight, SchemeColor };
+
+const props = withDefaults(defineProps<IconProps>(), {
+  filled: false,
+  next: false,
+  icon: null,
+  clickable: false,
+  size: 'md',
+  lineHeight: null,
+  scheme: 'neutral-darkest',
+});
+
+const emit = defineEmits<{
+  click: [event: Event];
+  mousedown: [event: Event];
+  mouseup: [event: Event];
+}>();
+
+const svg = computed(() => {
+  return icons[props.icon as string];
+});
+
+const materialSymbolsName = computed(() => {
+  if (Object.keys(icons).includes(props.icon as string) && !props.next) {
+    return null;
+  }
+
+  return (OldIconsMap as Record<string, string>)[props.icon as string] || props.icon;
+});
+
+const onClick = (event: Event) => {
+  if (!props.clickable) return;
+  emit('click', event);
 };
 </script>
 
@@ -258,6 +225,7 @@ $icon-sizes:
   white-space: nowrap;
   word-wrap: normal;
   direction: ltr;
+  font-feature-settings: 'liga';
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 
