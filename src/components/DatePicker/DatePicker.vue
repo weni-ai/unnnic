@@ -50,8 +50,8 @@
               }"
               @click="
                 date.properties.includes('inside month') &&
-                  !date.properties.includes('out of range') &&
-                  selectDate(date)
+                !date.properties.includes('out of range') &&
+                selectDate(date)
               "
             >
               {{ getDate(date) }}
@@ -183,7 +183,13 @@
         <div
           v-for="(option, index) in periodsLocale"
           :key="index"
-          :class="['option', { selectable: option.id !== 'custom', selected: optionSelected === option.id }]"
+          :class="[
+            'option',
+            {
+              selectable: option.id !== 'custom',
+              selected: optionSelected === option.id,
+            },
+          ]"
           @click="option.id === 'custom' ? null : autoSelect(option.id)"
         >
           {{ option.name }}
@@ -316,10 +322,6 @@ export default {
     };
   },
 
-  mounted() {
-    this.updateOptionSelected();
-  },
-
   computed: {
     openMonths() {
       return [this.addMonth(this.referenceDate, -1), this.referenceDate];
@@ -365,6 +367,10 @@ export default {
     },
   },
 
+  mounted() {
+    this.updateOptionSelected();
+  },
+
   methods: {
     submit() {
       this.$emit('submit', this.value);
@@ -372,7 +378,12 @@ export default {
       if (this.optionSelected === 'custom') {
         this.$emit('update:equivalentOption', '');
       } else {
-        this.$emit('update:equivalentOption', this.periodsLocale.find(({ id: periodId }) => periodId === this.optionSelected)?.name || '');
+        this.$emit(
+          'update:equivalentOption',
+          this.periodsLocale.find(
+            ({ id: periodId }) => periodId === this.optionSelected,
+          )?.name || '',
+        );
       }
     },
 
@@ -382,19 +393,21 @@ export default {
       function isSameTime(date1, date2) {
         return new Date(date1).getTime() === new Date(date2).getTime();
       }
-      
-      const period = this.periodsLocale.find(({ id: periodId }) => {
-        const {
-          startDate: periodStartDate,
-          endDate: periodEndDate,
-        } = this.getStartAndEndDateByPeriod(periodId);
 
-        return isSameTime(startDate, periodStartDate) && isSameTime(endDate, periodEndDate);
+      const period = this.periodsLocale.find(({ id: periodId }) => {
+        const { startDate: periodStartDate, endDate: periodEndDate } =
+          this.getStartAndEndDateByPeriod(periodId);
+
+        return (
+          isSameTime(startDate, periodStartDate) &&
+          isSameTime(endDate, periodEndDate)
+        );
       });
 
-      this.optionSelected = startDate || endDate ? period ? period.id : 'custom' : '';
+      this.optionSelected =
+        startDate || endDate ? (period ? period.id : 'custom') : '';
     },
-    
+
     dateToString(date) {
       return `${date.getMonth() + 1} ${date.getDate()} ${date.getFullYear()}`;
     },

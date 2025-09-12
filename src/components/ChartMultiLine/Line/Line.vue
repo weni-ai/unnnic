@@ -124,7 +124,8 @@ export default {
 </script>
 
 <style lang="scss">
-@use '@/assets/scss/unnnic' as *;.chart {
+@use '@/assets/scss/unnnic' as *;
+.chart {
   width: 100%;
   height: 100%;
   background-repeat: no-repeat;

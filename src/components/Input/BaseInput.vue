@@ -110,8 +110,8 @@ export default {
   }
 
   &.input--has-icon-left {
-    padding-left: $unnnic-spacing-sm + $unnnic-icon-size-sm + $unnnic-spacing-xs -
-      $unnnic-border-width-thinner;
+    padding-left: $unnnic-spacing-sm + $unnnic-icon-size-sm +
+      $unnnic-spacing-xs - $unnnic-border-width-thinner;
   }
 
   &.input--has-icon-right {
