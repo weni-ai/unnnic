@@ -96,8 +96,12 @@ describe('Drawer.vue', () => {
         });
 
         expect(title().exists()).toBe(false);
-        expect(wrapper.find('[data-testid="custom-title"]').exists()).toBe(true);
-        expect(wrapper.find('[data-testid="custom-title"]').text()).toBe('Custom Title Content');
+        expect(wrapper.find('[data-testid="custom-title"]').exists()).toBe(
+          true,
+        );
+        expect(wrapper.find('[data-testid="custom-title"]').text()).toBe(
+          'Custom Title Content',
+        );
       });
 
       it('should prioritize title slot over title prop', () => {
@@ -112,7 +116,9 @@ describe('Drawer.vue', () => {
         });
 
         expect(title().exists()).toBe(false);
-        expect(wrapper.find('[data-testid="custom-title"]').text()).toBe('Slot Title');
+        expect(wrapper.find('[data-testid="custom-title"]').text()).toBe(
+          'Slot Title',
+        );
       });
     });
   });

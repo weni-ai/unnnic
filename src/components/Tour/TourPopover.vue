@@ -128,7 +128,7 @@ export default {
         left: attachedTop - popoverHeight / 2 + attachedHeight / 2,
       };
 
-      let style = {
+      const style = {
         transform: `translate(${translateXMap[step.popoverPosition]}px, ${translateYMap[step.popoverPosition]}px)`,
         transition: 'transform .3s ease',
       };

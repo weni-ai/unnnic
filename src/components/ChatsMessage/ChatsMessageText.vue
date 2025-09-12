@@ -4,7 +4,10 @@
       class="unnnic-chats-message__text"
       v-html="formattedText"
     />
-    <p v-if="isAutomatic" class="unnnic-chats-message__text--automatic">
+    <p
+      v-if="isAutomatic"
+      class="unnnic-chats-message__text--automatic"
+    >
       {{ i18n('automatic_message') }}
     </p>
   </section>
@@ -49,14 +52,12 @@ export default {
       }
 
       function removeHtmlDangerousContent(text) {
-        // eslint-disable-next-line default-param-last
         return text.replace(
           /<(\/)?([^> ]+)( [^>]+)?>/gi,
           ($1, $2 = '', $3, $4 = '') => {
             if (['b', 'i', 'u', 'ul', 'li', 'br', 'div'].includes($3)) {
               const complements = [];
 
-              // eslint-disable-next-line no-restricted-syntax
               for (const i of $4.matchAll(
                 /((?<name1>[^ =]+)="(?<value1>[^"]*)"|(?<name2>[^ =]+)='(?<value2>[^"]*)')/g,
               )) {
@@ -66,7 +67,6 @@ export default {
                 if (name === 'style') {
                   const styles = [];
 
-                  // eslint-disable-next-line no-restricted-syntax
                   for (const j of value.matchAll(
                     /(?<propertyName>[^:]+):(?<propertyValue>[^;]+);?/g,
                   )) {

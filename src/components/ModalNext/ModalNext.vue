@@ -90,7 +90,7 @@
               v-if="$slots.description?.().length"
               name="description"
             >
-          </slot>
+            </slot>
 
             <template v-else>{{ description }}</template>
           </div>
@@ -158,7 +158,7 @@ import UnnnicInput from '../Input/Input.vue';
 import UnnnicButton from '../Button/Button.vue';
 
 export default {
-  name: "UnnnicModalNext",
+  name: 'UnnnicModalNext',
   components: {
     UnnnicIcon,
     UnnnicInput,

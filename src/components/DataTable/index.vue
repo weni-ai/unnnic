@@ -202,8 +202,6 @@ const emit = defineEmits<{
   'update:page': [page: number];
 }>();
 
-
-
 const props = withDefaults(defineProps<Props>(), {
   isLoading: false,
   size: 'md',

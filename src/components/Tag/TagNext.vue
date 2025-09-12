@@ -1,10 +1,5 @@
 <template>
-  <section 
-    :class="[
-      'unnnic-tag-next',
-      `unnnic-tag-next--${scheme}`
-    ]"
-  >
+  <section :class="['unnnic-tag-next', `unnnic-tag-next--${scheme}`]">
     <p class="unnnic-tag-next__text">
       {{ text }}
     </p>
@@ -61,6 +56,5 @@ export default {
     background-color: $unnnic-color-weni-100;
     color: $unnnic-color-weni-600;
   }
-
 }
-</style> 
+</style>

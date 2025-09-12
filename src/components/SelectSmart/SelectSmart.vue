@@ -381,11 +381,18 @@ export default {
           return;
         }
 
-        if(this.multiple && option.disableRemove && this.optionIsSelected(option)) {
+        if (
+          this.multiple &&
+          option.disableRemove &&
+          this.optionIsSelected(option)
+        ) {
           return;
         }
 
-        if (this.multipleLimit && this.modelValue.length >= this.multipleLimit) {
+        if (
+          this.multipleLimit &&
+          this.modelValue.length >= this.multipleLimit
+        ) {
           return;
         }
 
@@ -559,7 +566,6 @@ export default {
         const focusedOptionIndex = this.getOptionIndex('focused');
         let newIndex;
 
-        // eslint-disable-next-line default-case
         switch (key) {
           case 'Escape':
             this.active = false;

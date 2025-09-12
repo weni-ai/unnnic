@@ -24,7 +24,10 @@
       >
         <header class="unnnic-drawer__header">
           <section class="unnnic-drawer__title-container">
-            <slot v-if="$slots.title" name="title"/>
+            <slot
+              v-if="$slots.title"
+              name="title"
+            />
 
             <template v-else>
               <h1
