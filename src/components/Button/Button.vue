@@ -30,7 +30,7 @@
       :size="iconSize"
       :filled="iconsFilled"
       :class="{ 'unnnic-button__icon-left': hasText }"
-      :style="{ visibility: loading ? 'hidden' : null }"
+      :style="{ visibility: loading ? 'hidden' : 'visible' }"
       :next="next"
       data-testid="icon-left"
     />
@@ -39,7 +39,7 @@
       v-if="iconCenter"
       :icon="iconCenter"
       :scheme="iconScheme"
-      :style="{ visibility: loading ? 'hidden' : null }"
+      :style="{ visibility: loading ? 'hidden' : 'visible' }"
       :size="iconSize"
       :filled="iconsFilled"
       :next="next"
@@ -49,7 +49,7 @@
     <span
       v-if="!float"
       class="unnnic-button__label"
-      :style="{ visibility: loading ? 'hidden' : null }"
+      :style="{ visibility: loading ? 'hidden' : 'visible' }"
       data-testid="button-label"
     >
       <slot /> {{ text }}
@@ -62,145 +62,116 @@
       :size="iconSize"
       :filled="iconsFilled"
       :class="{ 'unnnic-button__icon-right': hasText }"
-      :style="{ visibility: loading ? 'hidden' : null }"
+      :style="{ visibility: loading ? 'hidden' : 'visible' }"
       :next="next"
       data-testid="icon-right"
     />
   </button>
 </template>
 
-<script>
+<script setup lang="ts">
+import { computed, watch, useSlots } from 'vue';
 import UnnnicIcon from '../Icon.vue';
+import type { ButtonProps, ButtonSize, ButtonType } from './types';
+import type { SchemeColor } from '../Icon/types';
 
-export default {
+defineOptions({
   name: 'UnnnicButton',
-  components: {
-    UnnnicIcon,
-  },
-  props: {
-    size: {
-      type: String,
-      default: 'large',
-    },
-    text: {
-      type: String,
-      default: '',
-    },
-    type: {
-      type: String,
-      default: 'primary',
-    },
-    float: {
-      type: Boolean,
-      default: false,
-    },
-    iconLeft: {
-      type: String,
-      default: '',
-    },
-    iconRight: {
-      type: String,
-      default: '',
-    },
-    iconCenter: {
-      type: String,
-      default: '',
-    },
-    iconsFilled: {
-      type: Boolean,
-      default: false,
-    },
-    next: {
-      type: Boolean,
-      default: false,
-    },
+});
 
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
+export type { ButtonProps, ButtonSize, ButtonType };
 
-    loading: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  computed: {
-    buttonDisabled() {
-      return this.disabled || this.loading;
-    },
+const props = withDefaults(defineProps<ButtonProps>(), {
+  size: 'large',
+  text: '',
+  type: 'primary',
+  float: false,
+  iconLeft: '',
+  iconRight: '',
+  iconCenter: '',
+  iconsFilled: false,
+  next: false,
+  disabled: false,
+  loading: false,
+});
 
-    iconSize() {
-      if (this.size === 'small') return 'sm';
-      return 'md';
-    },
-    hasText() {
-      if (this.$slots.default) return true;
-      return this.text && this.text.length > 0;
-    },
-    iconScheme() {
-      if (this.buttonDisabled) {
-        return 'neutral-clean';
-      }
+const slots = useSlots();
 
-      const typeToSchemeMap = {
-        primary: 'neutral-white',
-        secondary: 'neutral-dark',
-        tertiary: 'neutral-dark',
-        warning: 'neutral-white',
-        attention: 'neutral-white',
-      };
+const buttonDisabled = computed(() => {
+  return props.disabled || props.loading;
+});
 
-      return typeToSchemeMap[this.type] || '';
-    },
+const iconSize = computed(() => {
+  if (props.size === 'small') return 'sm';
+  return 'md';
+});
 
-    isSizePropValid() {
-      return (
-        this.size === 'large' ||
-        (!this.float && this.size === 'small') ||
-        (this.float && this.size === 'extra-large')
-      );
-    },
-    isTypePropValid() {
-      const validTypes = [
-        'primary',
-        'secondary',
-        'tertiary',
-        'alternative',
-        'warning',
-        'attention',
-      ];
-      return validTypes.includes(this.type);
-    },
-  },
-  watch: {
-    $props: {
-      deep: true,
-      immediate: true,
-      handler() {
-        this.validateProps();
-      },
-    },
-  },
-  methods: {
-    validateProps() {
-      if (!this.isSizePropValid || !this.isTypePropValid) {
-        let errorMessage = 'TypeError:';
+const hasText = computed(() => {
+  if (slots.default) return true;
+  return props.text && props.text.length > 0;
+});
 
-        if (!this.isSizePropValid) {
-          errorMessage += ' Invalid size prop.';
-          errorMessage += ` Please provide 'large', 'small' (only if float prop is false), or 'extra-large' (only if float prop is true).`;
-        }
+const iconScheme = computed((): SchemeColor => {
+  if (buttonDisabled.value) {
+    return 'neutral-clean';
+  }
 
-        if (!this.isTypePropValid) {
-          errorMessage += ' Invalid type prop.';
-        }
+  const typeToSchemeMap: Record<ButtonType, SchemeColor> = {
+    primary: 'neutral-white',
+    secondary: 'neutral-dark',
+    tertiary: 'neutral-dark',
+    alternative: 'neutral-white',
+    warning: 'neutral-white',
+    attention: 'neutral-white',
+  };
 
-        throw new Error(errorMessage);
-      }
-    },
-  },
+  return typeToSchemeMap[props.type] || 'neutral-white';
+});
+
+const isSizePropValid = computed(() => {
+  return (
+    props.size === 'large' ||
+    (!props.float && props.size === 'small') ||
+    (props.float && props.size === 'extra-large')
+  );
+});
+
+const isTypePropValid = computed(() => {
+  const validTypes: ButtonType[] = [
+    'primary',
+    'secondary',
+    'tertiary',
+    'alternative',
+    'warning',
+    'attention',
+  ];
+  return validTypes.includes(props.type);
+});
+
+const validateProps = () => {
+  if (!isSizePropValid.value || !isTypePropValid.value) {
+    let errorMessage = 'TypeError:';
+
+    if (!isSizePropValid.value) {
+      errorMessage += ' Invalid size prop.';
+      errorMessage += ` Please provide 'large', 'small' (only if float prop is false), or 'extra-large' (only if float prop is true).`;
+    }
+
+    if (!isTypePropValid.value) {
+      errorMessage += ' Invalid type prop.';
+    }
+
+    throw new Error(errorMessage);
+  }
 };
+
+watch(
+  () => props,
+  () => {
+    validateProps();
+  },
+  { deep: true, immediate: true }
+);
 </script>
 
 <style lang="scss" scoped>
