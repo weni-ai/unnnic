@@ -1,146 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Aleo:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+// Do not edit directly, this file was auto-generated.
 
 $unnnic-font-size: 16px;
-
-// Font family
-$unnnic-font-family-primary: 'Aleo', serif;
-$unnnic-font-family-secondary: Lato;
-
-// Font weight
-$unnnic-font-weight-black: 900;
+$unnnic-font-family: Lato;
 $unnnic-font-weight-bold: 700;
 $unnnic-font-weight-medium: 500;
 $unnnic-font-weight-regular: 400;
-$unnnic-font-weight-light: 300;
-
-// Font size
-$unnnic-font-size-body-sm: 0.5 * $unnnic-font-size;
-$unnnic-font-size-body-md: 0.75 * $unnnic-font-size;
-$unnnic-font-size-body-gt: 0.875 * $unnnic-font-size;
-$unnnic-font-size-body-lg: 1 * $unnnic-font-size;
-
-$unnnic-font-size-title-sm: 1.25 * $unnnic-font-size;
-$unnnic-font-size-title-md: 1.5 * $unnnic-font-size;
-$unnnic-font-size-title-lg: 2 * $unnnic-font-size;
-
-$unnnic-font-size-h4: 2.5 * $unnnic-font-size;
-$unnnic-font-size-h3: 3 * $unnnic-font-size;
-$unnnic-font-size-h2: 3.5 * $unnnic-font-size;
-$unnnic-font-size-h1: 4.5 * $unnnic-font-size;
-
-// Line height
-// Add this to font size when using
-$unnnic-line-height-small: 0.25 * $unnnic-font-size;
-$unnnic-line-height-medium: 0.5 * $unnnic-font-size;
-$unnnic-line-height-md: $unnnic-line-height-medium;
-$unnnic-line-height-large: 1 * $unnnic-font-size;
-
-// New typography tokens
-$unnnic-text-display-1: 1.5 * $unnnic-font-size;    // 24px
-$unnnic-text-display-2: 1.25 * $unnnic-font-size;   // 20px
-$unnnic-text-display-3: 1 * $unnnic-font-size;      // 16px
-$unnnic-text-display-4: 1 * $unnnic-font-size;      // 16px
-$unnnic-text-body: 0.875 * $unnnic-font-size;       // 14px
-$unnnic-text-emphasis: 0.875 * $unnnic-font-size;   // 14px
-$unnnic-text-action: 0.875 * $unnnic-font-size;     // 14px
-$unnnic-text-caption-1: 0.75 * $unnnic-font-size;   // 12px
-$unnnic-text-caption-2: 0.75 * $unnnic-font-size;   // 12px
-
-// Typography line heights
-$unnnic-line-height-display-1: 2 * $unnnic-font-size;     // 32px
-$unnnic-line-height-display-2: 1.6875 * $unnnic-font-size; // 27px
-$unnnic-line-height-display-3: 1.375 * $unnnic-font-size;  // 22px
-$unnnic-line-height-display-4: 1.375 * $unnnic-font-size;  // 22px
-$unnnic-line-height-body: 1.3125 * $unnnic-font-size;      // 21px
-$unnnic-line-height-emphasis: 1.3125 * $unnnic-font-size;  // 21px
-$unnnic-line-height-action: 1.3125 * $unnnic-font-size;    // 21px
-$unnnic-line-height-caption-1: 1.125 * $unnnic-font-size;  // 18px
-$unnnic-line-height-caption-2: 1.125 * $unnnic-font-size;  // 18px
-
-.unnnic-font {
-  font-weight: $unnnic-font-weight-regular;
-  font-family: $unnnic-font-family-primary;
-
-  $font-sizes:
-    "body-sm" $unnnic-font-size-body-sm,
-    "body-md" $unnnic-font-size-body-md,
-    "body-gt" $unnnic-font-size-body-gt,
-    "body-lg" $unnnic-font-size-body-lg,
-
-    "title-sm" $unnnic-font-size-title-sm,
-    "title-md" $unnnic-font-size-title-md,
-    "title-lg" $unnnic-font-size-title-lg,
-
-    "h4" $unnnic-font-size-h4,
-    "h3" $unnnic-font-size-h3,
-    "h2" $unnnic-font-size-h2,
-    "h1" $unnnic-font-size-h1;
-
-  $font-weights:
-    "black" $unnnic-font-weight-black,
-    "bold" $unnnic-font-weight-bold,
-    "light" $unnnic-font-weight-light;
-
-  &.secondary {
-    font-family: $unnnic-font-family-secondary;
-  }
-
-  @each $name, $size in $font-sizes {
-    &.#{$name} {
-      font-size: $size;
-      line-height: $size + $unnnic-line-height-md;
-    }
-  }
-
-  @each $name, $weight in $font-weights {
-    &.#{$name} {
-      font-weight: $weight;
-    }
-  }
-}
-
-
-.u {
-  &.font {
-    font-weight: $unnnic-font-weight-regular;
-    font-family: $unnnic-font-family-primary;
-
-    $font-sizes:
-      "body-sm" $unnnic-font-size-body-sm,
-      "body-md" $unnnic-font-size-body-md,
-      "body-gt" $unnnic-font-size-body-gt,
-      "body-lg" $unnnic-font-size-body-lg,
-
-      "title-sm" $unnnic-font-size-title-sm,
-      "title-md" $unnnic-font-size-title-md,
-      "title-lg" $unnnic-font-size-title-lg,
-
-      "h4" $unnnic-font-size-h4,
-      "h3" $unnnic-font-size-h3,
-      "h2" $unnnic-font-size-h2,
-      "h1" $unnnic-font-size-h1;
-
-    $font-weights:
-      "black" $unnnic-font-weight-black,
-      "bold" $unnnic-font-weight-bold,
-      "light" $unnnic-font-weight-light;
-
-    &.secondary {
-      font-family: $unnnic-font-family-secondary;
-    }
-
-    @each $name, $size in $font-sizes {
-      &.#{$name} {
-        font-size: $size;
-        line-height: $size + $unnnic-line-height-md;
-      }
-    }
-
-    @each $name, $weight in $font-weights {
-      &.#{$name} {
-        font-weight: $weight;
-      }
-    }
-  }
-}
+$unnnic-font-display-1: 700 calc(1.5 * 16px) /* 24px */ / calc(2 * 16px) /* 32px */ Lato;
+$unnnic-font-display-2: 700 calc(1.25 * 16px) /* 20px */ / calc(1.6875 * 16px) /* 27px */ Lato;
+$unnnic-font-display-3: 700 calc(1 * 16px) /* 16px */ / calc(1.375 * 16px) /* 22px */ Lato;
+$unnnic-font-display-4: 400 calc(1 * 16px) /* 16px */ / calc(1.375 * 16px) /* 22px */ Lato;
+$unnnic-font-body: 400 calc(0.875 * 16px) /* 14px */ / calc(1.3125 * 16px) /* 21px */ Lato;
+$unnnic-font-emphasis: 500 calc(0.875 * 16px) /* 14px */ / calc(1.3125 * 16px) /* 21px */ Lato;
+$unnnic-font-action: 700 calc(0.875 * 16px) /* 14px */ / calc(1.3125 * 16px) /* 21px */ Lato;
+$unnnic-font-caption-1: 500 calc(0.75 * 16px) /* 12px */ / calc(1.125 * 16px) /* 18px */ Lato;
+$unnnic-font-caption-2: 400 calc(0.75 * 16px) /* 12px */ / calc(1.125 * 16px) /* 18px */ Lato;

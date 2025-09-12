@@ -1,0 +1,46 @@
+{
+  "space": {
+    "0": {
+      "value": "0 /* 0px */"
+    },
+    "05": {
+      "value": "0.125 * {font.size} /* 2px */"
+    },
+    "1": {
+      "value": "0.25 * {font.size} /* 4px */"
+    },
+    "2": {
+      "value": "0.5 * {font.size} /* 8px */"
+    },
+    "3": {
+      "value": "0.75 * {font.size} /* 12px */"
+    },
+    "4": {
+      "value": "1 * {font.size} /* 16px */"
+    },
+    "5": {
+      "value": "1.25 * {font.size} /* 20px */"
+    },
+    "6": {
+      "value": "1.5 * {font.size} /* 24px */"
+    },
+    "7": {
+      "value": "1.75 * {font.size} /* 28px */"
+    },
+    "8": {
+      "value": "2 * {font.size} /* 32px */"
+    },
+    "10": {
+      "value": "2.5 * {font.size} /* 40px */"
+    },
+    "12": {
+      "value": "3 * {font.size} /* 48px */"
+    },
+    "16": {
+      "value": "4 * {font.size} /* 64px */"
+    },
+    "20": {
+      "value": "5 * {font.size} /* 80px */"
+    }
+  }
+}
