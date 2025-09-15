@@ -24,7 +24,7 @@ describe('Checkbox', () => {
 
   it('should checkbox emit change events', async () => {
     wrapper = createWrapper();
-    const checkbox = wrapper.findComponent({ name: 'Icon' });
+    const checkbox = wrapper.findComponent({ name: 'UnnnicIcon' });
 
     // click false to true
     await checkbox.trigger('click');
@@ -44,14 +44,14 @@ describe('Checkbox', () => {
 
   it('should checkbox disabled', async () => {
     wrapper = createWrapper({ disabled: true });
-    const checkbox = wrapper.findComponent({ name: 'Icon' });
+    const checkbox = wrapper.findComponent({ name: 'UnnnicIcon' });
     await checkbox.trigger('click');
     expect(wrapper.emitted('change')).eq(undefined);
   });
 
   it('should define sizes', async () => {
     wrapper = createWrapper({ size: 'sm', textRight: 'Label' });
-    const checkbox = wrapper.findComponent({ name: 'Icon' });
+    const checkbox = wrapper.findComponent({ name: 'UnnnicIcon' });
     const label = wrapper.find('.unnnic-checkbox__label');
 
     // sm

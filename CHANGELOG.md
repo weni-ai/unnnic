@@ -5,6 +5,55 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.2.4 (2025-09-15)
+
+### Added
+
+- **ChatsContact**: Added `forceShowUnreadMessages` prop to always keep the number of unread messages visible.
+
+# 3.2.3 (2025-09-12)
+
+### Added
+
+- **TypeScript Composition API Migration**: Migrated Icon, Button, and Disclaimer components from Options API to Composition API with full TypeScript support
+- **Component Renaming**: Renamed `Icon` component to `UnnnicIcon` for Pascal Case consistency
+- **Type Definitions**: Added comprehensive TypeScript interfaces and types:
+  - `IconSize`, `LineHeight`, `SchemeColor`, `IconProps` for Icon component
+  - `ButtonSize`, `ButtonType`, `ButtonProps` for Button component  
+  - `DisclaimerProps` for Disclaimer component
+- **Type Safety**: Full compile-time type validation for all component props
+- **Modular Types**: Separate type definition files for each component (`types.ts`)
+
+### Changed
+
+- **BREAKING**: Icon component name changed from `Icon` to `UnnnicIcon`
+- **BREAKING**: Components migrated to `<script setup lang="ts">` syntax
+- **Test Updates**: Updated all component tests to work with new TypeScript structure
+- **Prop Validation**: Replaced runtime validators with TypeScript compile-time validation
+
+### Fixed
+
+- CSS warning for `font-feature-settings` compatibility in Icon component
+- Style property typing issues in Button component
+
+
+# 3.2.2 (2025-09-12)
+
+### Added
+- **ChatsMessage**: Added automatic message variation
+
+# 3.2.1 (2025-09-11)
+
+### Fixed
+- Adjusted the formatting of font tokens to conform to the css font attribute
+
+# 3.2.0 (2025-09-11)
+
+### Added
+- Support for **Node.js v22**
+- Introduced **Style Dictionary**:
+  - Added the Style Dictionary package
+  - Migrated all SCSS tokens to Style Dictionary exports
 
 # 3.1.4 (2025-09-05)
 

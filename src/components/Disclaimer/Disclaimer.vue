@@ -15,36 +15,38 @@
   </section>
 </template>
 
-<script>
+<script setup lang="ts">
 import icons from '../../utils/iconList';
 import colors from '../../utils/colorsList';
+import UnnnicIcon from '../Icon.vue';
+import type { DisclaimerProps } from './types';
 
-import unnnicIcon from '../Icon.vue';
-
-export default {
+defineOptions({
   name: 'UnnnicDisclaimer',
-  components: { unnnicIcon },
-  props: {
-    text: {
-      type: String,
-      required: true,
-    },
-    icon: {
-      type: String,
-      default: 'alert-circle-1-1',
-      validator(value) {
-        return icons.includes(value);
-      },
-    },
-    iconColor: {
-      type: String,
-      default: 'neutral-darkest',
-      validator(value) {
-        return colors.includes(value);
-      },
-    },
-  },
+});
+
+export type { DisclaimerProps };
+
+const props = withDefaults(defineProps<DisclaimerProps>(), {
+  icon: 'alert-circle-1-1',
+  iconColor: 'neutral-darkest',
+});
+
+const validateIcon = (value: string): boolean => {
+  return icons.includes(value);
 };
+
+const validateIconColor = (value: string): boolean => {
+  return colors.includes(value);
+};
+
+if (!validateIcon(props.icon as string)) {
+  console.warn(`Invalid icon prop: ${props.icon}`);
+}
+
+if (!validateIconColor(props.iconColor as string)) {
+  console.warn(`Invalid iconColor prop: ${props.iconColor}`);
+}
 </script>
 
 <style lang="scss" scoped>
