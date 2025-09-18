@@ -4,7 +4,6 @@ export type ButtonType =
   | 'primary'
   | 'secondary'
   | 'tertiary'
-  | 'alternative'
   | 'warning'
   | 'attention';
 
