@@ -6,20 +6,16 @@
     :class="[
       'unnnic-button',
       `unnnic-button--size-${size}`,
-      `unnnic-button--${type}`,
+      `unnnic-button--${buttonType}`,
       iconCenter ? `unnnic-button--icon-on-center` : null,
       float ? `unnnic-button--float` : null,
     ]"
   >
-    <UnnnicIcon
+    <UnnnicIconLoading
       v-if="loading"
-      icon="loading-circle-1"
       :scheme="iconScheme"
       :size="iconSize"
-      :filled="iconsFilled"
       :style="{ position: 'absolute' }"
-      class="rotation"
-      :next="next"
       data-testid="icon-loading"
     />
 
@@ -72,6 +68,7 @@
 <script setup lang="ts">
 import { computed, watch, useSlots } from 'vue';
 import UnnnicIcon from '../Icon.vue';
+import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import type { ButtonProps, ButtonSize, ButtonType } from './types';
 import type { SchemeColor } from '../Icon/types';
 
@@ -102,8 +99,8 @@ const buttonDisabled = computed(() => {
 });
 
 const iconSize = computed(() => {
-  if (props.size === 'small') return 'sm';
-  return 'md';
+  if (props.size === 'extra-large') return 'lg';
+  return 'ant';
 });
 
 const hasText = computed(() => {
@@ -120,12 +117,11 @@ const iconScheme = computed((): SchemeColor => {
     primary: 'neutral-white',
     secondary: 'neutral-dark',
     tertiary: 'neutral-dark',
-    alternative: 'neutral-white',
     warning: 'neutral-white',
     attention: 'neutral-white',
   };
 
-  return typeToSchemeMap[props.type] || 'neutral-white';
+  return typeToSchemeMap[buttonType.value] || 'neutral-white';
 });
 
 const isSizePropValid = computed(() => {
@@ -136,16 +132,21 @@ const isSizePropValid = computed(() => {
   );
 });
 
+const buttonType = computed(() => {
+  return {
+    'alternative': 'tertiary',
+  }[props.type] || props.type;
+});
+
 const isTypePropValid = computed(() => {
   const validTypes: ButtonType[] = [
     'primary',
     'secondary',
     'tertiary',
-    'alternative',
     'warning',
     'attention',
   ];
-  return validTypes.includes(props.type);
+  return validTypes.includes(buttonType.value);
 });
 
 const validateProps = () => {
@@ -159,6 +160,7 @@ const validateProps = () => {
 
     if (!isTypePropValid.value) {
       errorMessage += ' Invalid type prop.';
+      errorMessage += ' Please provide one of the following types: primary, secondary, tertiary, warning, attention. Alternative is discontinued and it was forced renamed to tertiary.';
     }
 
     throw new Error(errorMessage);
@@ -196,13 +198,12 @@ watch(
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: $unnnic-border-radius-sm;
+  border-radius: $unnnic-radius-2;
   border: 0;
   outline: none;
   overflow: hidden;
   white-space: nowrap;
-  font-weight: $unnnic-font-weight-regular;
-  font-family: $unnnic-font-family-secondary;
+  font: $unnnic-font-action;
   cursor: pointer;
   position: relative;
 
@@ -216,129 +217,91 @@ watch(
     }
   }
 
+  &--primary,
+  &--warning,
+  &--attention {
+    color: $unnnic-color-fg-inverted;
+  }
+
+  &--secondary,
+  &--tertiary {
+    color: $unnnic-color-fg-emphasized;
+  }
+
   &--primary {
-    background-color: $unnnic-color-weni-600;
-    color: $unnnic-color-neutral-white;
+    background-color: $unnnic-color-bg-active;
 
     &:hover:enabled {
-      background-color: $unnnic-color-weni-700;
+      background-color: $unnnic-color-teal-700;
     }
 
     &:active:enabled {
-      background-color: $unnnic-color-weni-800;
+      background-color: $unnnic-color-teal-800;
     }
   }
 
   &--secondary {
-    background-color: $unnnic-color-neutral-white;
-    color: $unnnic-color-neutral-dark;
+    background-color: $unnnic-color-bg-base;
     box-shadow: inset 0 0 0 $unnnic-border-width-thinner
-      $unnnic-color-neutral-cleanest;
+      $unnnic-color-border-base;
 
     &:hover:enabled {
-      background-color: $unnnic-color-neutral-light;
+      background-color: $unnnic-color-gray-50;
+    }
+
+    &:active:enabled {
+      background-color: $unnnic-color-gray-100;
     }
 
     &:disabled {
       box-shadow: none;
     }
-
-    &:active:enabled {
-      background-color: $unnnic-color-neutral-soft;
-    }
   }
 
   &--tertiary {
     background-color: transparent;
-    color: $unnnic-color-neutral-dark;
 
     &:hover:enabled {
-      background-color: $unnnic-color-neutral-light;
-    }
-
-    &:disabled {
-      color: $unnnic-color-neutral-clean;
-      cursor: not-allowed;
+      background-color: rgba($unnnic-color-gray-400, 0.1);
     }
 
     &:active:enabled {
-      background-color: $unnnic-color-neutral-soft;
-    }
-  }
-
-  &--alternative {
-    background-color: $unnnic-color-weni-50;
-    color: $unnnic-color-weni-800;
-
-    :deep(svg .primary) {
-      fill: $unnnic-color-weni-800;
-    }
-
-    :deep(svg .primary-stroke) {
-      stroke: $unnnic-color-weni-800;
-    }
-
-    &:hover:enabled {
-      background-color: $unnnic-color-weni-100;
-    }
-
-    &:disabled {
-      :deep(svg .primary) {
-        fill: $unnnic-color-neutral-clean;
-      }
-
-      :deep(svg .primary-stroke) {
-        stroke: $unnnic-color-neutral-clean;
-      }
-    }
-
-    &:active:enabled {
-      background-color: $unnnic-color-weni-200;
-      color: $unnnic-color-weni-900;
-
-      :deep(svg .primary) {
-        fill: $unnnic-color-weni-900;
-      }
-
-      :deep(svg .primary-stroke) {
-        stroke: $unnnic-color-weni-900;
-      }
+      background-color: rgba($unnnic-color-gray-400, 0.2);
     }
   }
 
   &--warning {
-    background-color: $unnnic-color-aux-red-500;
+    background-color: $unnnic-color-red-500;
     color: $unnnic-color-neutral-white;
 
     &:hover:enabled {
-      background-color: $unnnic-color-aux-red-700;
+      background-color: $unnnic-color-red-600;
     }
 
     &:active:enabled {
-      background-color: $unnnic-color-aux-red-900;
+      background-color: $unnnic-color-red-700;
     }
   }
 
   &--attention {
-    background-color: $unnnic-color-aux-yellow-500;
-    color: $unnnic-color-neutral-white;
+    background-color: $unnnic-color-yellow-500;
 
     &:hover:enabled {
-      background-color: $unnnic-color-aux-yellow-700;
+      background-color: $unnnic-color-yellow-600;
     }
 
     &:active:enabled {
-      background-color: $unnnic-color-aux-yellow-900;
+      background-color: $unnnic-color-yellow-700;
     }
   }
 
   &--primary:disabled,
   &--secondary:disabled,
-  &--alternative:disabled,
+  &--tertiary:disabled,
   &--warning:disabled,
   &--attention:disabled {
-    background-color: $unnnic-color-neutral-soft;
-    color: $unnnic-color-neutral-clean;
+    background-color: $unnnic-color-bg-muted;
+    color: $unnnic-color-fg-muted;
     cursor: not-allowed;
   }
 
@@ -351,26 +314,12 @@ watch(
     box-shadow: $unnnic-shadow-level-near;
   }
 
-  &--size {
-    &-extra-large,
-    &-large,
-    &-small {
-      padding: $unnnic-squish-xs;
-      font-size: $unnnic-font-size-body-gt;
-      line-height: ($unnnic-font-size-body-gt + $unnnic-line-height-medium);
-    }
+  &--size-large {
+    padding: $unnnic-space-3 $unnnic-space-4;
+  }
 
-    &-extra-large {
-      height: 58px;
-    }
-
-    &-large {
-      height: 46px;
-    }
-
-    &-small {
-      height: 38px;
-    }
+  &--size-small {
+    padding: $unnnic-space-2 $unnnic-space-4;
   }
 }
 </style>
@@ -388,8 +337,8 @@ watch(
     }
 
     &-large {
-      height: 46px;
-      width: 46px;
+      height: 45px;
+      width: 45px;
     }
 
     &-large,
@@ -404,8 +353,8 @@ watch(
 
     &-small {
       padding: $unnnic-inset-nano;
-      height: 38px;
-      width: 38px;
+      height: 37px;
+      width: 37px;
 
       .unnnic-icon {
         width: $unnnic-icon-size-ant;
