@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.2.5 (2025-09-19)
+
+### Added
+
+- **Chip Component**: New compact element component for displaying information, attributes, or actions:
+  - **Core Features**: Support for text, count badges, and icons in a single component
+  - **Teal Variations**: Complete support for all 11 teal color variations (teal-50 through teal-950) with automatic active styling
+  - **Smart Border Logic**: Automatic border application for `bg-base` and `bg-soft` schemes only
+  - **Icon Integration**: Seamless UnnnicIcon integration with coordinated color schemes
+  - **TypeScript Support**: Full TypeScript integration with dedicated type definitions (`ChipProps`, `ChipScheme`, `TealVariations`)
+  - **Storybook Documentation**: Complete documentation with 7+ interactive examples showcasing all features
+  - **Comprehensive Testing**: 36 unit tests covering all functionality, edge cases, and scheme variations
+
 # 3.2.4 (2025-09-15)
 
 ### Added
