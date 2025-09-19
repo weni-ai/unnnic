@@ -35,9 +35,7 @@ export default {
       },
     },
     template: `
-      <unnnic-form-element label="Label" message="Helper text">
-        <unnnic-input v-model="value" @icon-right-click="click" v-bind="args" />
-      </unnnic-form-element>
+        <unnnic-input v-model="value" @icon-right-click="click" v-bind="args" label="Label" />
     `,
   }),
 };
@@ -155,5 +153,21 @@ export const Mask = {
     label: 'CPF or CNPJ',
     placeholder: 'Text',
     mask: ['###.###.###-##', '##.###.###/####-##'],
+  },
+
+};
+
+export const LimitMaxLength = {
+  args: {
+    placeholder: 'Text',
+    maxlength: 10,
+    showMaxlengthCounter: true,
+  },
+};
+
+export const WithTooltip = {
+  args: {
+    placeholder: 'Text',
+    tooltip: 'Tooltip',
   },
 };

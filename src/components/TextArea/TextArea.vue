@@ -18,13 +18,14 @@
       :disabled="disabled"
       :value="modelValue"
       @input="$emit('update:modelValue', fullySanitize($event.target.value))"
-    ></textarea>
+    />
 
     <template
       v-if="maxLength"
       #rightMessage
-      >{{ modelValue.length }}/{{ maxLength }}</template
     >
+      {{ modelValue.length }}/{{ maxLength }}
+    </template>
   </UnnnicFormElement>
 </template>
 
@@ -96,6 +97,12 @@ export default {
 @use '@/assets/scss/unnnic' as *;
 @use '@/components/Input/Input' as *;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .unnnic-text-area {
   &__textarea {
     @include input-base;
@@ -103,24 +110,22 @@ export default {
     display: block;
     width: 100%;
     resize: vertical;
-    box-sizing: border-box;
 
     scrollbar-width: thin;
+
+    padding: $unnnic-space-3 $unnnic-space-4;
 
     &--size-md {
       @include input-md-font;
 
-      min-height: 6.25 * $unnnic-font-size;
-      padding: ($unnnic-spacing-ant - $unnnic-border-width-thinner)
-        ($unnnic-spacing-sm - $unnnic-border-width-thinner);
+      min-height: 100px;
+      
     }
 
     &--size-sm {
       @include input-sm-font;
 
-      min-height: 5 * $unnnic-font-size;
-      padding: ($unnnic-spacing-xs)
-        ($unnnic-spacing-sm - $unnnic-border-width-thinner);
+      min-height: $unnnic-space-20;
     }
 
     &.unnnic-text-area__textarea--type-error {
