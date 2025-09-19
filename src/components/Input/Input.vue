@@ -40,6 +40,7 @@
     <section class="unnnic-form__hints-container">
       <section class="unnnic-form__message-container">
         <p
+          v-if="message"
           class="unnnic-form__message"
         >
           {{ fullySanitize(message) }}

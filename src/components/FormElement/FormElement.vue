@@ -17,51 +17,28 @@
 
     <slot></slot>
 
-    <p
-      v-if="shouldShowErrorSection"
-      class="unnnic-form-element__error"
-    >
-      <template v-if="error !== true">
-        <UnnnicIcon
-          size="sm"
-          icon="warning"
-          scheme="aux-red-500"
-        />
-
-        {{ fullySanitize(error) }}
-      </template>
-
-      <span
-        v-if="!!$slots.rightMessage"
-        class="unnnic-form-element__right-message"
-      >
+    <section class="unnnic-form-element__hints-container">
+      <section class="unnnic-form-element__message-container">
+        <p
+          v-if="message"
+          class="unnnic-form-element__message"
+        >
+          {{ fullySanitize(message) }}
+        </p>
+        <p v-if="!!error.length" class="unnnic-form-element__message error">
+          {{ Array.isArray(error) ? error.join(', ') : error }}
+        </p>
+      </section>
+      <p v-if="!!$slots.rightMessage">
         <slot name="rightMessage"></slot>
-      </span>
-    </p>
-
-    <p
-      v-if="message || !!$slots.rightMessage"
-      class="unnnic-form-element__message"
-    >
-      {{ fullySanitize(message) }}
-
-      <span
-        v-if="!shouldShowErrorSection && !!$slots.rightMessage"
-        class="unnnic-form-element__right-message"
-      >
-        <slot name="rightMessage"></slot>
-      </span>
-    </p>
+      </p>
+    </section>
   </section>
 </template>
 
 <script>
-import UnnnicIcon from '../../components/Icon.vue';
 import { fullySanitize } from '../../utils/sanitize';
 export default {
-  components: {
-    UnnnicIcon,
-  },
 
   props: {
     size: {
@@ -70,28 +47,18 @@ export default {
       validator: (size) => ['md', 'sm'].includes(size),
     },
 
-    label: String,
+    label: { type: String, default: '' },
 
-    fixedLabel: Boolean,
+    fixedLabel: { type: Boolean, default: false },
 
     error: {
       type: [Boolean, String],
       default: false,
     },
 
-    message: String,
+    message: { type: String, default: '' },
 
-    disabled: Boolean,
-  },
-
-  data() {
-    return {};
-  },
-
-  computed: {
-    shouldShowErrorSection() {
-      return this.error && (this.error !== true || !!this.$slots.rightMessage);
-    },
+    disabled: { type: Boolean, default: false },
   },
   methods: {
     fullySanitize,
@@ -101,6 +68,12 @@ export default {
 
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 .unnnic-form-element {
   &__label {
@@ -138,39 +111,30 @@ export default {
     }
   }
 
-  &__error,
   &__message {
-    margin: 0;
-    margin-top: $unnnic-spacing-stack-nano;
-
-    color: $unnnic-color-neutral-cloudy;
-    font-family: $unnnic-font-family-secondary;
-    font-weight: $unnnic-font-weight-regular;
-    font-size: $unnnic-font-size-body-md;
-    line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+    &.error {
+      color: $unnnic-color-fg-critical;
+    }
   }
 
-  &__message {
+  &__hints-container {
     display: flex;
-    column-gap: $unnnic-spacing-nano;
+    justify-content: space-between;
+    margin-top: $unnnic-space-1;
+    font: $unnnic-font-caption-2;
+    color: $unnnic-color-fg-base;
   }
 
-  &__right-message {
-    margin-left: auto;
-  }
-
-  &__error {
+  &__message-container {
     display: flex;
-    column-gap: $unnnic-spacing-nano;
-    align-items: center;
-
-    color: $unnnic-color-aux-red-500;
+    flex-direction: column;
+    gap: $unnnic-space-1;
   }
+
 
   &--disabled .unnnic-form-element__label,
   &--disabled .unnnic-form-element__message {
     user-select: none;
-    color: $unnnic-color-neutral-cleanest;
   }
 }
 </style>
