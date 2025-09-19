@@ -17,51 +17,28 @@
 
     <slot></slot>
 
-    <p
-      v-if="shouldShowErrorSection"
-      class="unnnic-form-element__error"
-    >
-      <template v-if="error !== true">
-        <UnnnicIcon
-          size="sm"
-          icon="warning"
-          scheme="aux-red-500"
-        />
-
-        {{ fullySanitize(error) }}
-      </template>
-
-      <span
-        v-if="!!$slots.rightMessage"
-        class="unnnic-form-element__right-message"
-      >
+    <section class="unnnic-form-element__hints-container">
+      <section class="unnnic-form-element__message-container">
+        <p
+          v-if="message"
+          class="unnnic-form-element__message"
+        >
+          {{ fullySanitize(message) }}
+        </p>
+        <p v-if="!!error.length" class="unnnic-form-element__message error">
+          {{ Array.isArray(error) ? error.join(', ') : error }}
+        </p>
+      </section>
+      <p v-if="!!$slots.rightMessage">
         <slot name="rightMessage"></slot>
-      </span>
-    </p>
-
-    <p
-      v-if="message || !!$slots.rightMessage"
-      class="unnnic-form-element__message"
-    >
-      {{ fullySanitize(message) }}
-
-      <span
-        v-if="!shouldShowErrorSection && !!$slots.rightMessage"
-        class="unnnic-form-element__right-message"
-      >
-        <slot name="rightMessage"></slot>
-      </span>
-    </p>
+      </p>
+    </section>
   </section>
 </template>
 
 <script>
-import UnnnicIcon from '../../components/Icon.vue';
 import { fullySanitize } from '../../utils/sanitize';
 export default {
-  components: {
-    UnnnicIcon,
-  },
 
   props: {
     size: {
@@ -70,28 +47,18 @@ export default {
       validator: (size) => ['md', 'sm'].includes(size),
     },
 
-    label: String,
+    label: { type: String, default: '' },
 
-    fixedLabel: Boolean,
+    fixedLabel: { type: Boolean, default: false },
 
     error: {
       type: [Boolean, String],
       default: false,
     },
 
-    message: String,
+    message: { type: String, default: '' },
 
-    disabled: Boolean,
-  },
-
-  data() {
-    return {};
-  },
-
-  computed: {
-    shouldShowErrorSection() {
-      return this.error && (this.error !== true || !!this.$slots.rightMessage);
-    },
+    disabled: { type: Boolean, default: false },
   },
   methods: {
     fullySanitize,
@@ -102,75 +69,68 @@ export default {
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
+* {
+  margin: $unnnic-space-0;
+  padding: $unnnic-space-0;
+  box-sizing: border-box;
+}
+
 .unnnic-form-element {
   &__label {
-    margin: 0;
-    margin-bottom: $unnnic-spacing-nano;
-
+    font: $unnnic-font-body;
     color: $unnnic-color-neutral-cloudy;
-    font-family: $unnnic-font-family-secondary;
-    font-weight: $unnnic-font-weight-regular;
-    font-size: $unnnic-font-size-body-gt;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-
-    $label-bottom-spacing: 3px;
+    margin-bottom: $unnnic-space-1;
+    display: flex;
+    align-items: center;
+    gap: $unnnic-space-2;
 
     &--fixed {
-      margin-top: -$unnnic-font-size-body-gt - $unnnic-line-height-md +
-        $label-bottom-spacing;
+      margin-top: -$unnnic-font-size-body-gt - $unnnic-space-2 +
+        $unnnic-space-1;
     }
 
     &--fixed {
-      margin-bottom: 0;
+      margin-bottom: $unnnic-space-0;
       position: absolute;
-      padding: 0 $unnnic-spacing-nano;
-      margin-left: $unnnic-spacing-xs;
+      padding: $unnnic-space-0 $unnnic-space-1;
+      margin-left: $unnnic-space-2;
 
       &:after {
         content: ' ';
         position: absolute;
-        left: 0;
-        bottom: $label-bottom-spacing - $unnnic-border-width-thinner;
+        left: $unnnic-space-0;
+        bottom: $unnnic-space-1 - $unnnic-border-width-thinner;
         width: 100%;
         height: $unnnic-border-width-thinner;
-        background-color: $unnnic-color-neutral-white;
+        background-color: $unnnic-color-white;
       }
     }
   }
 
-  &__error,
   &__message {
-    margin: 0;
-    margin-top: $unnnic-spacing-stack-nano;
-
-    color: $unnnic-color-neutral-cloudy;
-    font-family: $unnnic-font-family-secondary;
-    font-weight: $unnnic-font-weight-regular;
-    font-size: $unnnic-font-size-body-md;
-    line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+    &.error {
+      color: $unnnic-color-fg-critical;
+    }
   }
 
-  &__message {
+  &__hints-container {
     display: flex;
-    column-gap: $unnnic-spacing-nano;
+    justify-content: space-between;
+    margin-top: $unnnic-space-1;
+    font: $unnnic-font-caption-2;
+    color: $unnnic-color-fg-base;
   }
 
-  &__right-message {
-    margin-left: auto;
-  }
-
-  &__error {
+  &__message-container {
     display: flex;
-    column-gap: $unnnic-spacing-nano;
-    align-items: center;
-
-    color: $unnnic-color-aux-red-500;
+    flex-direction: column;
+    gap: $unnnic-space-1;
   }
+
 
   &--disabled .unnnic-form-element__label,
   &--disabled .unnnic-form-element__message {
     user-select: none;
-    color: $unnnic-color-neutral-cleanest;
   }
 }
 </style>

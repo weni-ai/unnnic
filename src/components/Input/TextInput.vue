@@ -3,7 +3,6 @@
     :class="[
       'text-input',
       `size--${size}`,
-      `text-input--icon-right-size-${iconRightSize}`,
     ]"
   >
     <BaseInput
@@ -18,6 +17,7 @@
       class="input-itself"
       :hasIconLeft="!!iconLeft"
       :hasIconRight="!!iconRight || allowTogglePassword"
+      :maxlength="maxlength"
       @focus="onFocus"
       @blur="onBlur"
     />
@@ -26,7 +26,7 @@
       v-if="iconLeft"
       :scheme="iconScheme"
       :icon="iconLeft"
-      size="sm"
+      size="ant"
       :clickable="iconLeftClickable"
       :class="['icon-left', { clickable: iconLeftClickable }]"
       @click="onIconLeftClick"
@@ -36,7 +36,7 @@
       v-if="iconRightSvg"
       :scheme="iconScheme"
       :icon="iconRightSvg"
-      :size="iconRightSize"
+      size="ant"
       :clickable="iconRightClickable || allowTogglePassword"
       :class="[
         'icon-right',
@@ -92,10 +92,6 @@ export default {
       type: Boolean,
       default: null,
     },
-    iconRightSize: {
-      type: String,
-      default: 'sm',
-    },
     allowTogglePassword: {
       type: Boolean,
       default: null,
@@ -108,6 +104,14 @@ export default {
       type: String,
       default: 'md',
     },
+    maxlength: {
+      type: Number,
+      default: null,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['icon-left-click', 'icon-right-click'],
   data() {
@@ -118,7 +122,7 @@ export default {
   },
   computed: {
     isDisabled() {
-      return this.$attrs.disabled;
+      return this.$attrs.disabled || this.disabled;
     },
 
     iconRightSvg() {
@@ -131,22 +135,22 @@ export default {
 
     iconScheme() {
       if (this.type === 'error') {
-        return 'aux-red-500';
+        return 'fg-critical';
       }
 
       if (this.isDisabled) {
-        return 'neutral-cleanest';
+        return 'fg-muted';
       }
 
       if (this.modelValue || this.isFocused) {
-        return 'neutral-dark';
+        return 'color-gray-700';
       }
 
       if (this.hasCloudyColor) {
-        return 'neutral-cloudy';
+        return 'fg-base';
       }
 
-      return 'neutral-cloudy';
+      return 'fg-base';
     },
 
     attributes() {
@@ -183,6 +187,10 @@ export default {
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
+.text-input {
+  position: relative;
+}
+
 .icon {
   &-left,
   &-right {
@@ -193,32 +201,16 @@ export default {
 
   &-left {
     position: absolute;
-    top: $unnnic-spacing-ant + 0.1875 * $unnnic-font-size;
-    left: $unnnic-inline-sm - $unnnic-border-width-thinner;
+    top: 50%;
+    transform: translateY(-50%);
+    left: $unnnic-space-4;
   }
 
   &-right {
     position: absolute;
-    top: $unnnic-spacing-ant + 0.1875 * $unnnic-font-size;
-    right: $unnnic-inline-sm - $unnnic-border-width-thinner;
-  }
-}
-.text-input {
-  position: relative;
-
-  &.size--sm {
-    .icon-left,
-    .icon-right {
-      top: $unnnic-spacing-xs + 0.125 * $unnnic-font-size;
-    }
-  }
-
-  &.size--sm.text-input--icon-right-size-ant .icon-right {
-    top: 0.5625 * $unnnic-font-size;
-  }
-
-  &.size--md.text-input--icon-right-size-ant .icon-right {
-    top: 0.8125 * $unnnic-font-size;
+    top: 50%;
+    transform: translateY(-50%);
+    right: $unnnic-space-4;
   }
 }
 </style>
