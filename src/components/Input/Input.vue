@@ -82,19 +82,19 @@ export default {
     },
     message: {
       type: String,
-      default: null,
+      default: '',
     },
     label: {
       type: String,
-      default: null,
+      default: '',
     },
     iconLeft: {
       type: String,
-      default: null,
+      default: '',
     },
     iconRight: {
       type: String,
-      default: null,
+      default: '',
     },
     allowTogglePassword: {
       type: Boolean,
@@ -102,11 +102,11 @@ export default {
     },
     iconLeftClickable: {
       type: Boolean,
-      default: null,
+      default: false,
     },
     iconRightClickable: {
       type: Boolean,
-      default: null,
+      default: false,
     },
     hasCloudyColor: {
       type: Boolean,
@@ -122,10 +122,10 @@ export default {
     },
     tooltip: {
       type: String,
-      default: null,
+      default: '',
     },
     maxlength: {
-      type: Number,
+      type: [Number, null],
       default: null,
     },
     showMaxlengthCounter: {
