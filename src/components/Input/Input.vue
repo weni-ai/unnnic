@@ -38,12 +38,16 @@
     />
 
     <section class="unnnic-form__hints-container">
-      <p
-        class="unnnic-form__message"
-        :class="{ error: type === 'error' }"
-      >
-        {{ fullySanitize(message) }}
-      </p>
+      <section class="unnnic-form__message-container">
+        <p
+          class="unnnic-form__message"
+        >
+          {{ fullySanitize(message) }}
+        </p>
+        <p v-if="!!errors.length" class="unnnic-form__message error">
+          {{ Array.isArray(errors) ? errors.join(', ') : errors }}
+        </p>
+      </section>
       <p v-if="maxlength && showMaxlengthCounter">
         {{ (val || '').length }} / {{ maxlength }}
       </p>
@@ -82,6 +86,10 @@ export default {
     },
     message: {
       type: String,
+      default: '',
+    },
+    errors: {
+      type: [String, Array],
       default: '',
     },
     label: {
@@ -202,6 +210,12 @@ export default {
     margin-top: $unnnic-space-1;
     font: $unnnic-font-caption-2;
     color: $unnnic-color-fg-base;
+  }
+
+  &__message-container {
+    display: flex;
+    flex-direction: column;
+    gap: $unnnic-space-1;
   }
 }
 </style>
