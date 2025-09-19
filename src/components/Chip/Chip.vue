@@ -43,9 +43,7 @@ const iconScheme = computed((): SchemeColor => {
   if (isTealVariation.value) {
     return 'weni-600';
   }
-  if (scheme.value === 'default') {
-    return 'neutral-darkest';
-  }
+
   if (scheme.value === 'bg-base' || scheme.value === 'bg-soft') {
     return 'neutral-darkest';
   }
