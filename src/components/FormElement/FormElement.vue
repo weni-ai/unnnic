@@ -70,43 +70,39 @@ export default {
 @use '@/assets/scss/unnnic' as *;
 
 * {
-  margin: 0;
-  padding: 0;
+  margin: $unnnic-space-0;
+  padding: $unnnic-space-0;
   box-sizing: border-box;
 }
 
 .unnnic-form-element {
   &__label {
-    margin: 0;
-    margin-bottom: $unnnic-spacing-nano;
-
+    font: $unnnic-font-body;
     color: $unnnic-color-neutral-cloudy;
-    font-family: $unnnic-font-family-secondary;
-    font-weight: $unnnic-font-weight-regular;
-    font-size: $unnnic-font-size-body-gt;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-
-    $label-bottom-spacing: 3px;
+    margin-bottom: $unnnic-space-1;
+    display: flex;
+    align-items: center;
+    gap: $unnnic-space-2;
 
     &--fixed {
-      margin-top: -$unnnic-font-size-body-gt - $unnnic-line-height-md +
-        $label-bottom-spacing;
+      margin-top: -$unnnic-font-size-body-gt - $unnnic-space-2 +
+        $unnnic-space-1;
     }
 
     &--fixed {
-      margin-bottom: 0;
+      margin-bottom: $unnnic-space-0;
       position: absolute;
-      padding: 0 $unnnic-spacing-nano;
-      margin-left: $unnnic-spacing-xs;
+      padding: $unnnic-space-0 $unnnic-space-1;
+      margin-left: $unnnic-space-2;
 
       &:after {
         content: ' ';
         position: absolute;
-        left: 0;
-        bottom: $label-bottom-spacing - $unnnic-border-width-thinner;
+        left: $unnnic-space-0;
+        bottom: $unnnic-space-1 - $unnnic-border-width-thinner;
         width: 100%;
         height: $unnnic-border-width-thinner;
-        background-color: $unnnic-color-neutral-white;
+        background-color: $unnnic-color-white;
       }
     }
   }
