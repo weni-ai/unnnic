@@ -6,13 +6,18 @@
     >
       <slot name="label" />
     </p>
-
-    <p
+    <section 
       v-else-if="label"
       class="unnnic-form__label"
     >
-      {{ fullySanitize(label) }}
-    </p>
+      <p>
+        {{ fullySanitize(label) }}
+      </p>
+      <UnnnicToolTip v-if="tooltip" enabled :text="tooltip">
+        <UnnnicIcon icon="help" size="sm" scheme="fg-base" />
+      </UnnnicToolTip>
+    </section>
+    
 
     <TextInput
       v-bind="$attrs"
@@ -28,24 +33,34 @@
       :size="size"
       :mask="mask"
       :nativeType="nativeType"
+      :maxlength="maxlength"
+      :disabled="disabled"
     />
 
-    <p
-      v-if="message"
-      class="unnnic-form__message"
-    >
-      {{ fullySanitize(message) }}
-    </p>
+    <section class="unnnic-form__hints-container">
+      <p
+        v-if="message"
+        class="unnnic-form__message"
+        :class="{ error: type === 'error' }"
+      >
+        {{ fullySanitize(message) }}
+      </p>
+      <p v-if="maxlength && showMaxlengthCounter">
+        {{ (val || '').length }} / {{ maxlength }}
+      </p>
+    </section>
   </div>
 </template>
 
 <script>
 import { fullySanitize } from '../../utils/sanitize';
 import TextInput from './TextInput.vue';
+import UnnnicToolTip from '../ToolTip/ToolTip.vue';
+import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'UnnnicInput',
-  components: { TextInput },
+  components: { TextInput, UnnnicToolTip, UnnnicIcon },
   props: {
     placeholder: {
       type: String,
@@ -106,6 +121,22 @@ export default {
       type: [String, Array],
       default: '',
     },
+    tooltip: {
+      type: String,
+      default: null,
+    },
+    maxlength: {
+      type: Number,
+      default: null,
+    },
+    showMaxlengthCounter: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['update:modelValue'],
   data() {
@@ -138,27 +169,40 @@ export default {
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .unnnic-form {
-  font-family: $unnnic-font-family-secondary;
   position: relative;
 
   &__message {
-    font-size: $unnnic-font-size-body-md;
-    margin: $unnnic-spacing-stack-nano 0;
-    color: $unnnic-color-feedback-red;
+    &.error {
+      color: $unnnic-color-fg-critical;
+    }
   }
 
   &__label {
-    font-weight: $unnnic-font-weight-regular;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
-    font-size: $unnnic-font-size-body-gt;
+    font: $unnnic-font-body;
     color: $unnnic-color-neutral-cloudy;
-    margin: $unnnic-spacing-stack-xs 0;
+    margin-bottom: $unnnic-space-1;
+    display: flex;
+    align-items: center;
+    gap: $unnnic-space-2;
+
+    :deep(.unnnic-tooltip) {
+      display: flex;
+    }
   }
 
-  &.sm &__label {
-    font-size: $unnnic-font-size-body-md;
-    line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+  &__hints-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: $unnnic-space-1;
+    font: $unnnic-font-caption-2;
+    color: $unnnic-color-fg-base;
   }
 }
 </style>

@@ -35,9 +35,7 @@ export default {
       },
     },
     template: `
-      <unnnic-form-element label="Label" message="Helper text">
-        <unnnic-input v-model="value" @icon-right-click="click" v-bind="args" />
-      </unnnic-form-element>
+        <unnnic-input v-model="value" @icon-right-click="click" v-bind="args" label="Label" />
     `,
   }),
 };
