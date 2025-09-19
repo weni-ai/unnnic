@@ -39,7 +39,6 @@
 
     <section class="unnnic-form__hints-container">
       <p
-        v-if="message"
         class="unnnic-form__message"
         :class="{ error: type === 'error' }"
       >

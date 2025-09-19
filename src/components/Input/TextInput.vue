@@ -3,7 +3,6 @@
     :class="[
       'text-input',
       `size--${size}`,
-      `text-input--icon-right-size-${iconRightSize}`,
     ]"
   >
     <BaseInput
@@ -27,7 +26,7 @@
       v-if="iconLeft"
       :scheme="iconScheme"
       :icon="iconLeft"
-      :size="iconLeftSize"
+      size="ant"
       :clickable="iconLeftClickable"
       :class="['icon-left', { clickable: iconLeftClickable }]"
       @click="onIconLeftClick"
@@ -37,7 +36,7 @@
       v-if="iconRightSvg"
       :scheme="iconScheme"
       :icon="iconRightSvg"
-      :size="iconRightSize"
+      size="ant"
       :clickable="iconRightClickable || allowTogglePassword"
       :class="[
         'icon-right',
@@ -92,14 +91,6 @@ export default {
     iconRightClickable: {
       type: Boolean,
       default: null,
-    },
-    iconRightSize: {
-      type: String,
-      default: 'ant',
-    },
-    iconLeftSize: {
-      type: String,
-      default: 'ant',
     },
     allowTogglePassword: {
       type: Boolean,
@@ -196,6 +187,10 @@ export default {
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
+.text-input {
+  position: relative;
+}
+
 .icon {
   &-left,
   &-right {
@@ -206,32 +201,16 @@ export default {
 
   &-left {
     position: absolute;
-    top: 14px; // TODO: 12.5px
+    top: 50%;
+    transform: translateY(-50%);
     left: $unnnic-space-4;
   }
 
   &-right {
     position: absolute;
-    top: 14px; // TODO: 12.5px
+    top: 50%;
+    transform: translateY(-50%);
     right: $unnnic-space-4;
-  }
-}
-.text-input {
-  position: relative;
-
-  &.size--sm {
-    .icon-left,
-    .icon-right {
-      top: 10px;
-    }
-  }
-
-  &.size--sm.text-input--icon-right-size-ant .icon-right {
-    top: 10px;
-  }
-
-  &.size--md.text-input--icon-right-size-ant .icon-right {
-    top: 13px;
   }
 }
 </style>

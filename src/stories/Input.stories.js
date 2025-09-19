@@ -154,4 +154,20 @@ export const Mask = {
     placeholder: 'Text',
     mask: ['###.###.###-##', '##.###.###/####-##'],
   },
+
+};
+
+export const LimitMaxLength = {
+  args: {
+    placeholder: 'Text',
+    maxlength: 10,
+    showMaxlengthCounter: true,
+  },
+};
+
+export const WithTooltip = {
+  args: {
+    placeholder: 'Text',
+    tooltip: 'Tooltip',
+  },
 };
