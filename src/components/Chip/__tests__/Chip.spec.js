@@ -27,7 +27,7 @@ describe('Chip', () => {
       expect(wrapper.text()).toContain('Test Chip');
     });
 
-    it('should render with default scheme bg-base', () => {
+    it('should render with scheme bg-base', () => {
       expect(wrapper.classes()).toContain('chip--bg-base');
       expect(wrapper.classes()).toContain('chip--border');
     });
@@ -145,16 +145,6 @@ describe('Chip', () => {
   });
 
   describe('Icon scheme logic', () => {
-    it('should use neutral-darkest for default scheme', async () => {
-      await wrapper.setProps({ 
-        scheme: 'default',
-        icon: 'search-1'
-      });
-
-      const icon = wrapper.findComponent({ name: 'UnnnicIcon' });
-      expect(icon.props('scheme')).toBe('neutral-darkest');
-    });
-
     it('should use neutral-darkest for bg-base scheme', async () => {
       await wrapper.setProps({ 
         scheme: 'bg-base',
