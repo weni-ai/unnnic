@@ -3,4 +3,6 @@ export interface ChipProps {
   text?: string;
   count?: number;
   type: 'single' | 'multiple';
+  isClickable?: boolean;
+  onClick?: (event: Event) => void;
 }

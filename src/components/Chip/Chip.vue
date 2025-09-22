@@ -5,9 +5,11 @@
       'chip',
       chipClass,
       {
-        'chip--border': shouldShowBorder
+        'chip--border': shouldShowBorder,
+        'chip--is-clickable': isClickable
       }
     ]"
+    @click="onClick"
   >
     <p :class="['chip__text', textColorClass]">{{ text }}</p>
     <p v-if="count" :class="['chip__count', countColorClass]">{{ count }}</p>
@@ -27,6 +29,14 @@ import UnnnicIcon from '../Icon.vue';
 import type { ChipProps } from './types';
 
 const props = defineProps<ChipProps>();
+
+const emit = defineEmits<{
+  click: [event: Event];
+}>();
+
+const onClick = (event: Event) => {
+  emit('click', event);
+};
 
 const shouldShowBorder = computed(() => {
   return !props.isSelected;
@@ -75,8 +85,11 @@ const chipClass = computed(() => {
             background-color: $unnnic-color-teal-200;
         }
     }
-    
 
+    &--is-clickable {
+        cursor: pointer;
+    }
+    
     &--border {
         border: 1px solid $unnnic-color-border-base;
     }
