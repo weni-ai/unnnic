@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Smart Border Logic**: Automatic border application for unselected state only
   - **TypeScript Support**: Full TypeScript integration with streamlined type definitions (`ChipProps`)
   - **Storybook Documentation**: Complete documentation with interactive examples
-  - **Comprehensive Testing**: 20+ unit tests covering all functionality and state combinations
+  - **Comprehensive Testing**: 11 focused unit tests covering all functionality and state combinations
 
 - **Global Scheme Colors System**: Centralized color scheme management to eliminate code duplication:
   - **New File**: `src/assets/scss/scheme-colors.scss` with all color scheme definitions
