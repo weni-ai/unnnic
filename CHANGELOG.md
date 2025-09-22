@@ -9,14 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Chip Component**: New compact element component for displaying information, attributes, or actions:
-  - **Core Features**: Support for text, count badges, and icons in a single component
-  - **Teal Variations**: Complete support for all 11 teal color variations (teal-50 through teal-950) with automatic active styling
-  - **Smart Border Logic**: Automatic border application for `bg-base` and `bg-soft` schemes only
-  - **Icon Integration**: Seamless UnnnicIcon integration with coordinated color schemes
-  - **TypeScript Support**: Full TypeScript integration with dedicated type definitions (`ChipProps`, `ChipScheme`, `TealVariations`)
-  - **Storybook Documentation**: Complete documentation with 7+ interactive examples showcasing all features
-  - **Comprehensive Testing**: 36 unit tests covering all functionality, edge cases, and scheme variations
+- **Chip Component**: New simplified compact element component for selection and filtering:
+  - **Core Features**: Support for text, count badges, and automatic icon handling
+  - **Selection States**: Built-in `isSelected` state with automatic styling (teal background when selected)
+  - **Type System**: Support for `single` and `multiple` types with context-appropriate icons
+  - **Smart Icons**: Automatic add/close icons for multiple type based on selection state
+  - **Smart Border Logic**: Automatic border application for unselected state only
+  - **TypeScript Support**: Full TypeScript integration with streamlined type definitions (`ChipProps`)
+  - **Storybook Documentation**: Complete documentation with interactive examples
+  - **Comprehensive Testing**: 20+ unit tests covering all functionality and state combinations
 
 - **Global Scheme Colors System**: Centralized color scheme management to eliminate code duplication:
   - **New File**: `src/assets/scss/scheme-colors.scss` with all color scheme definitions
