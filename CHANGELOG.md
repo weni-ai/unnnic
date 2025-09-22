@@ -20,6 +20,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Outside Click Prevention**: Tests confirm dropdown stays open when clicking outside with `forceOpen` enabled
   - **Prop Compatibility**: Tests validate proper behavior with `useOpenProp` combinations
   - **Event Validation**: Tests ensure no unwanted events are emitted when `forceOpen` is active
+  
+# 3.2.5 (2025-09-19)
+
+### Added
+
+- **Chip Component**: New simplified compact element component for selection and filtering:
+  - **Core Features**: Support for text, count badges, and automatic icon handling
+  - **Selection States**: Built-in `isSelected` state with automatic styling (teal background when selected)
+  - **Type System**: Support for `single` and `multiple` types with context-appropriate icons
+  - **Smart Icons**: Automatic add/close icons for multiple type based on selection state
+  - **Smart Border Logic**: Automatic border application for unselected state only
+  - **Click Interaction**: Built-in click event handling with optional `isClickable` styling (cursor pointer)
+  - **TypeScript Support**: Full TypeScript integration with streamlined type definitions (`ChipProps`)
+  - **Storybook Documentation**: Complete documentation with interactive examples
+  - **Comprehensive Testing**: 15 focused unit tests covering all functionality and interaction patterns
+
+- **Global Scheme Colors System**: Centralized color scheme management to eliminate code duplication:
+  - **New File**: `src/assets/scss/scheme-colors.scss` with all color scheme definitions
+  - **New Tokens**: Added `bg-base`, `bg-soft`, and complete `teal-*` color scale (teal-50 to teal-950) support
+  - **Utility Functions**: Added `generate-scheme-classes()` mixin and `get-scheme-color()` function for easier component development
+  - **Legacy Compatibility**: Automatic mapping of legacy color names to new color system
+
+### Changed
+
+- **Color System Refactoring**: Migrated Chip, Icon, and Card components to use global `$unnnic-scheme-colors` instead of local definitions
+- **TypeScript Types Centralization**: Moved `SchemeColor` type to global `src/types/scheme-colors.d.ts` for better maintainability
+- **Import Optimization**: Updated component imports to use centralized type definitions from `@/types/scheme-colors`
+
+### Removed
+
+- **Code Duplication**: Eliminated ~136 lines of duplicate `$scheme-colors` definitions across components
 
 # 3.2.4 (2025-09-15)
 
