@@ -238,6 +238,51 @@ describe('SelectSmart.vue', () => {
     });
   });
 
+  describe('onActiveChange Event', () => {
+    it('should emit onActiveChange when dropdown opens', async () => {
+      await input().trigger('click');
+
+      expect(wrapper.emitted('onActiveChange')).toBeTruthy();
+      expect(wrapper.emitted('onActiveChange')[0][0]).toBe(true);
+    });
+
+    it('should emit onActiveChange when dropdown closes', async () => {
+      wrapper.vm.active = true;
+      await nextTick();
+
+      wrapper.vm.active = false;
+      await nextTick();
+
+      expect(wrapper.emitted('onActiveChange')).toBeTruthy();
+      expect(wrapper.emitted('onActiveChange')[1][0]).toBe(false);
+    });
+
+    it('should emit onActiveChange when toggling dropdown visibility', async () => {
+      // Open dropdown
+      await input().trigger('click');
+      
+      // Close dropdown
+      await input().trigger('click');
+
+      const emittedEvents = wrapper.emitted('onActiveChange');
+      expect(emittedEvents).toBeTruthy();
+      expect(emittedEvents.length).toBe(2);
+      expect(emittedEvents[0][0]).toBe(true);  // opened
+      expect(emittedEvents[1][0]).toBe(false); // closed
+    });
+
+    it('should emit onActiveChange when closing dropdown with escape key', async () => {
+      await input().trigger('click');
+      expect(wrapper.emitted('onActiveChange')[0][0]).toBe(true);
+
+      await selectSmart().trigger('keydown', { key: 'Escape' });
+
+      const emittedEvents = wrapper.emitted('onActiveChange');
+      expect(emittedEvents.length).toBe(2);
+      expect(emittedEvents[1][0]).toBe(false);
+    });
+  });
+
   describe('Secondary Type', () => {
     beforeEach(() => {
       mountWrapper({
