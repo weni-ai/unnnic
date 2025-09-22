@@ -91,6 +91,7 @@ import SelectTime from "./SelectTime/index.vue";
 import TemplatePreview from "./TemplatePreview/TemplatePreview.vue";
 import TemplatePreviewModal from "./TemplatePreview/TemplatePreviewModal.vue";
 import DataTable from './DataTable/index.vue';
+import Chip from "./Chip/Chip.vue";
 
 type VueComponent = Component;
 
@@ -192,6 +193,7 @@ export const components: ComponentsMap = {
   unnnicTemplatePreview: TemplatePreview,
   unnnicTemplatePreviewModal: TemplatePreviewModal,
   unnnicDataTable: DataTable,
+  unnnicChip: Chip,
 };
 
 export const unnnicFontSize = fontSize;
@@ -288,6 +290,7 @@ export const unnnicSelectTime = SelectTime as VueComponent;
 export const unnnicTemplatePreview = TemplatePreview as VueComponent;
 export const unnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
 export const unnnicDataTable = DataTable as VueComponent;
+export const unnnicChip = Chip;
 
 export const UnnnicFontSize = fontSize;
 export const UnnnicFormElement = formElement;
@@ -383,4 +386,4 @@ export const UnnnicSelectTime = SelectTime as VueComponent;
 export const UnnnicTemplatePreview = TemplatePreview as VueComponent;
 export const UnnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
 export const UnnnicDataTable = DataTable as VueComponent;
-
+export const UnnnicChip = Chip;
