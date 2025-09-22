@@ -15,9 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Type System**: Support for `single` and `multiple` types with context-appropriate icons
   - **Smart Icons**: Automatic add/close icons for multiple type based on selection state
   - **Smart Border Logic**: Automatic border application for unselected state only
+  - **Click Interaction**: Built-in click event handling with optional `isClickable` styling (cursor pointer)
   - **TypeScript Support**: Full TypeScript integration with streamlined type definitions (`ChipProps`)
   - **Storybook Documentation**: Complete documentation with interactive examples
-  - **Comprehensive Testing**: 11 focused unit tests covering all functionality and state combinations
+  - **Comprehensive Testing**: 15 focused unit tests covering all functionality and interaction patterns
 
 - **Global Scheme Colors System**: Centralized color scheme management to eliminate code duplication:
   - **New File**: `src/assets/scss/scheme-colors.scss` with all color scheme definitions
