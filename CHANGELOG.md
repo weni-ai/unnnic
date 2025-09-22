@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.2.6 (2025-09-22)
+
+### Added
+
+- **SelectSmart Component**: New `onActiveChange` event that emits when dropdown options become active/inactive:
+  - **Event Emission**: Emits `true` when dropdown opens and `false` when dropdown closes
+  - **Full Integration**: Works seamlessly with all existing SelectSmart functionality (keyboard navigation, click outside, escape key)
+  - **Comprehensive Testing**: Added 4 new unit tests covering all scenarios including toggle, escape key, and outside click behaviors
+
+- **Dropdown Component**: Enhanced `forceOpen` functionality with comprehensive test coverage:
+  - **Comprehensive Testing**: Added 5 new unit tests covering all `forceOpen` scenarios
+  - **Trigger Prevention**: Tests verify that clicking trigger doesn't toggle dropdown when `forceOpen` is enabled
+  - **Outside Click Prevention**: Tests confirm dropdown stays open when clicking outside with `forceOpen` enabled
+  - **Prop Compatibility**: Tests validate proper behavior with `useOpenProp` combinations
+  - **Event Validation**: Tests ensure no unwanted events are emitted when `forceOpen` is active
+  
 # 3.2.5 (2025-09-19)
 
 ### Added

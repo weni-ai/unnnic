@@ -38,6 +38,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    forceOpen: {
+      type: Boolean,
+      default: false,
+    },
     position: {
       type: String,
       default: 'bottom-left',
@@ -73,10 +77,12 @@ export default {
   },
   methods: {
     onClickTrigger() {
+      if (this.forceOpen) return;
       if (this.useOpenProp) this.$emit('update:open', !this.open);
       else this.active = !this.active;
     },
     onClickOutside() {
+      if (this.forceOpen) return;
       if (this.useOpenProp && this.open) {
         this.$emit('update:open', false);
         return;
