@@ -116,6 +116,34 @@ describe('Chip', () => {
     });
   });
 
+  describe('Click functionality', () => {
+    it('should emit click event when clicked', async () => {
+      await wrapper.setProps({ isClickable: true });
+      
+      await wrapper.trigger('click');
+      
+      expect(wrapper.emitted().click).toBeTruthy();
+      expect(wrapper.emitted().click).toHaveLength(1);
+    });
+
+    it('should apply clickable styling when isClickable is true', async () => {
+      await wrapper.setProps({ isClickable: true });
+      
+      expect(wrapper.classes()).toContain('chip--is-clickable');
+    });
+
+    it('should not apply clickable styling when isClickable is false', () => {
+      expect(wrapper.classes()).not.toContain('chip--is-clickable');
+    });
+
+    it('should emit click event even when not marked as clickable', async () => {
+      await wrapper.trigger('click');
+      
+      expect(wrapper.emitted().click).toBeTruthy();
+      expect(wrapper.emitted().click).toHaveLength(1);
+    });
+  });
+
   describe('Edge cases', () => {
     it('should handle negative count', async () => {
       await wrapper.setProps({ count: -5 });

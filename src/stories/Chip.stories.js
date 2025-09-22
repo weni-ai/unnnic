@@ -19,6 +19,7 @@ export default {
     type: 'single',
     isSelected: false,
     count: null,
+    isClickable: false,
   },
   argTypes: {
     type: {
@@ -37,6 +38,10 @@ export default {
     count: {
       control: { type: 'number' },
       description: 'Optional count number displayed in the chip',
+    },
+    isClickable: {
+      control: { type: 'boolean' },
+      description: 'Whether the chip should show clickable styling (cursor pointer)',
     },
   },
 };
@@ -122,12 +127,30 @@ export const LongTextSelected = {
   },
 };
 
+export const Clickable = {
+  args: {
+    text: 'Clickable Chip',
+    type: 'single',
+    isClickable: true,
+  },
+};
+
+export const ClickableSelected = {
+  args: {
+    text: 'Clickable Selected',
+    type: 'multiple',
+    isSelected: true,
+    isClickable: true,
+  },
+};
+
 // Interactive example showing state changes
 export const Interactive = {
   args: {
     text: 'Click to toggle',
     type: 'multiple',
     count: 3,
+    isClickable: true,
   },
   render: (args) => ({
     components: { UnnnicChip },
@@ -142,8 +165,8 @@ export const Interactive = {
         :type="'${args.type}'"
         :count="${args.count}"
         :isSelected="selected"
+        :isClickable="true"
         @click="selected = !selected"
-        style="cursor: pointer"
       />
     `,
   }),
