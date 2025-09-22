@@ -18,6 +18,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Storybook Documentation**: Complete documentation with 7+ interactive examples showcasing all features
   - **Comprehensive Testing**: 36 unit tests covering all functionality, edge cases, and scheme variations
 
+- **Global Scheme Colors System**: Centralized color scheme management to eliminate code duplication:
+  - **New File**: `src/assets/scss/scheme-colors.scss` with all color scheme definitions
+  - **New Tokens**: Added `bg-base`, `bg-soft`, and complete `teal-*` color scale (teal-50 to teal-950) support
+  - **Utility Functions**: Added `generate-scheme-classes()` mixin and `get-scheme-color()` function for easier component development
+  - **Legacy Compatibility**: Automatic mapping of legacy color names to new color system
+
+### Changed
+
+- **Color System Refactoring**: Migrated Chip, Icon, and Card components to use global `$unnnic-scheme-colors` instead of local definitions
+- **TypeScript Types Centralization**: Moved `SchemeColor` type to global `src/types/scheme-colors.d.ts` for better maintainability
+- **Import Optimization**: Updated component imports to use centralized type definitions from `@/types/scheme-colors`
+
+### Removed
+
+- **Code Duplication**: Eliminated ~136 lines of duplicate `$scheme-colors` definitions across components
+
 # 3.2.4 (2025-09-15)
 
 ### Added
