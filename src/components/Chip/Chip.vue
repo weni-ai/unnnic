@@ -15,7 +15,7 @@
     <p v-if="count" :class="['chip__count', countColorClass]">{{ count }}</p>
     <UnnnicIcon 
       v-if="type === 'multiple'" 
-      :icon="isSelected ? 'add' : 'close'" 
+      :icon="isSelected ? 'close' : 'add'" 
       :scheme="isSelected ? 'teal-600' : 'feedback-grey'" 
       class="chip__icon" 
       size="sm" 
