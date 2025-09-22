@@ -81,14 +81,14 @@ describe('Chip', () => {
       
       let icon = wrapper.findComponent({ name: 'UnnnicIcon' });
       expect(icon.exists()).toBe(true);
-      expect(icon.props('icon')).toBe('close');
+      expect(icon.props('icon')).toBe('add');
       expect(icon.props('scheme')).toBe('feedback-grey');
       expect(icon.props('size')).toBe('sm');
 
       await wrapper.setProps({ isSelected: true });
       
       icon = wrapper.findComponent({ name: 'UnnnicIcon' });
-      expect(icon.props('icon')).toBe('add');
+      expect(icon.props('icon')).toBe('close');
       expect(icon.props('scheme')).toBe('teal-600');
     });
   });
@@ -112,7 +112,7 @@ describe('Chip', () => {
       
       const icon = wrapper.findComponent({ name: 'UnnnicIcon' });
       expect(icon.exists()).toBe(true);
-      expect(icon.props('icon')).toBe('add');
+      expect(icon.props('icon')).toBe('close');
     });
   });
 
