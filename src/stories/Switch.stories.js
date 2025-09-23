@@ -4,9 +4,8 @@ export default {
   title: 'Form/Switch',
   component: UnnnicSwitch,
   argTypes: {
-    size: { control: { type: 'select', options: ['small', 'medium'] } },
-    textLeft: { control: { type: 'text' } },
-    textRight: { control: { type: 'text' } },
+    label: { control: { type: 'text' } },
+    helper: { control: { type: 'text' } },
     disabled: { control: { type: 'boolean' } },
   },
   render: (args) => ({
@@ -32,8 +31,8 @@ export default {
 
 export const Default = {
   args: {
-    size: 'medium',
-    textRight: 'Default',
+    label: 'Default',
+    helper: 'Helper text',
     disabled: false,
   },
 };
