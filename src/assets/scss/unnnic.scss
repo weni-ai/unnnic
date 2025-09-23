@@ -8,6 +8,7 @@
 @forward './spaces';
 @forward './icon-sizes';
 @forward './colors';
+@forward './scheme-colors';
 
 @use './deprecated/colors' as *;
 @use './deprecated/fonts' as *;
@@ -19,6 +20,7 @@
 @use './spaces' as *;
 @use './icon-sizes' as *;
 @use './colors' as *;
+@use './scheme-colors' as *;
 
 .unnnic {
     &--clickable {
