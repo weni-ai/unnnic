@@ -8,6 +8,7 @@
         :disabled="disabled"
         :checked="modelValue === value"
         @change="click"
+        v-bind="pick($attrs, ['id', 'name'])"
       />
 
       <p :class="[
@@ -22,6 +23,8 @@
 </template>
 
 <script setup>
+import { pick } from 'lodash';
+
 const props = defineProps({
   modelValue: {
     type: [String, Number],
