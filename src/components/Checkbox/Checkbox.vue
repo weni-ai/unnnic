@@ -13,7 +13,10 @@
 
       <p
         v-if="label || textRight"
-        class="unnnic-checkbox__label"
+        :class="[
+          'unnnic-checkbox__label',
+          { 'unnnic-checkbox__label--disabled': disabled },
+        ]"
         data-testid="checkbox-text-right"
       >
         {{ label || textRight }}
@@ -144,6 +147,10 @@ label {
   margin: 0;
   font: $unnnic-font-body;
   color: $unnnic-color-fg-emphasized;
+
+  &--disabled {
+    color: $unnnic-color-fg-muted;
+  }
 }
 
 .unnnic-checkbox__helper {
