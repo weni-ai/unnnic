@@ -194,29 +194,20 @@ export default {
 <style lang="scss">
 @use '@/assets/scss/unnnic' as *;
 
-$scheme-colors:
-  'feedback-red' $unnnic-color-feedback-red,
-  'feedback-green' $unnnic-color-feedback-green,
-  'feedback-yellow' $unnnic-color-feedback-yellow,
-  'feedback-blue' $unnnic-color-feedback-blue,
-  'feedback-grey' $unnnic-color-feedback-grey,
-  'aux-blue' $unnnic-color-aux-blue,
-  'aux-purple' $unnnic-color-aux-purple,
-  'aux-orange' $unnnic-color-aux-orange,
-  'aux-lemon' $unnnic-color-aux-lemon,
-  'aux-pink' $unnnic-color-aux-pink,
-  'brand-weni-soft' $unnnic-color-brand-weni-soft;
+$card-needed-colors: 'feedback-red', 'feedback-green', 'feedback-yellow', 'feedback-blue', 'feedback-grey', 'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink', 'brand-weni-soft';
 
-@each $name, $color in $scheme-colors {
-  .unnnic-card-scheme {
-    &--#{$name} {
-      background-color: rgba($color, $unnnic-opacity-level-extra-light);
-      color: $color;
-      &--icon {
+@each $name, $color in $unnnic-scheme-colors {
+  @if index($card-needed-colors, $name) {
+    .unnnic-card-scheme {
+      &--#{$name} {
+        background-color: rgba($color, $unnnic-opacity-level-extra-light);
         color: $color;
-      }
-      &--border {
-        border-left: 0.25 * $unnnic-font-size solid $color;
+        &--icon {
+          color: $color;
+        }
+        &--border {
+          border-left: 0.25 * $unnnic-font-size solid $color;
+        }
       }
     }
   }

@@ -214,7 +214,7 @@ export default {
     },
   },
 
-  emits: ['update:searchValue', 'onChange', 'update:modelValue'],
+  emits: ['update:searchValue', 'onChange', 'update:modelValue', 'onActiveChange'],
 
   data() {
     return {
@@ -302,6 +302,8 @@ export default {
   watch: {
     active(newValue) {
       this.$refs['dropdown-skeleton'].calculatePosition();
+
+      this.$emit('onActiveChange', newValue);
 
       this.$nextTick(() => {
         if (newValue && !this.multiple) {
