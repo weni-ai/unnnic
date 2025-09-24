@@ -6,18 +6,8 @@
     >
       <slot name="label" />
     </p>
-    <section 
-      v-else-if="label"
-      class="unnnic-form__label"
-    >
-      <p>
-        {{ fullySanitize(label) }}
-      </p>
-      <UnnnicToolTip v-if="tooltip" enabled :text="tooltip">
-        <UnnnicIcon icon="help" size="sm" scheme="fg-base" />
-      </UnnnicToolTip>
-    </section>
     
+    <UnnnicLabel v-else-if="label" class="unnnic-form__label" :label="label" :tooltip="tooltip" />
 
     <TextInput
       v-bind="$attrs"
@@ -59,12 +49,11 @@
 <script>
 import { fullySanitize } from '../../utils/sanitize';
 import TextInput from './TextInput.vue';
-import UnnnicToolTip from '../ToolTip/ToolTip.vue';
-import UnnnicIcon from '../Icon.vue';
+import UnnnicLabel from '../Label/Label.vue';
 
 export default {
   name: 'UnnnicInput',
-  components: { TextInput, UnnnicToolTip, UnnnicIcon },
+  components: { TextInput, UnnnicLabel },
   props: {
     placeholder: {
       type: String,
@@ -193,16 +182,7 @@ export default {
   }
 
   &__label {
-    font: $unnnic-font-body;
-    color: $unnnic-color-neutral-cloudy;
     margin-bottom: $unnnic-space-1;
-    display: flex;
-    align-items: center;
-    gap: $unnnic-space-2;
-
-    :deep(.unnnic-tooltip) {
-      display: flex;
-    }
   }
 
   &__hints-container {
