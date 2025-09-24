@@ -7,13 +7,13 @@
     :class="classes"
     :type="nativeType"
   />
-
   <input
     v-else
     v-bind="attributes"
     :value="fullySanitize(modelValue)"
     :class="classes"
     :type="nativeType"
+    :maxlength="maxlength"
   />
 </template>
 
@@ -49,6 +49,10 @@ export default {
     },
     hasIconLeft: Boolean,
     hasIconRight: Boolean,
+    maxlength: {
+      type: Number,
+      default: null,
+    },
   },
   emits: ['update:modelValue'],
   data() {
@@ -96,27 +100,21 @@ export default {
   &.size {
     &-md {
       @include input-md-font;
-
-      padding: ($unnnic-spacing-ant - $unnnic-border-width-thinner)
-        ($unnnic-spacing-sm - $unnnic-border-width-thinner);
+      padding: $unnnic-space-3 $unnnic-space-4;
     }
 
     &-sm {
       @include input-sm-font;
-
-      padding: $unnnic-spacing-xs
-        ($unnnic-spacing-sm - $unnnic-border-width-thinner);
+      padding: $unnnic-space-2 $unnnic-space-4;
     }
   }
 
   &.input--has-icon-left {
-    padding-left: $unnnic-spacing-sm + $unnnic-icon-size-sm + $unnnic-spacing-xs -
-      $unnnic-border-width-thinner;
+    padding-left: $unnnic-space-10;
   }
 
   &.input--has-icon-right {
-    padding-right: $unnnic-spacing-sm + $unnnic-icon-size-sm +
-      $unnnic-spacing-xs - $unnnic-border-width-thinner;
+    padding-right: $unnnic-space-10;
   }
 
   &.error {
@@ -126,7 +124,7 @@ export default {
   &:-ms-input-placeholder,
   &::-ms-input-placeholder {
     /* Internet Explorer 10-11 */
-    color: $unnnic-color-brand-sec;
+    color: $unnnic-color-fg-muted;
   }
 }
 </style>

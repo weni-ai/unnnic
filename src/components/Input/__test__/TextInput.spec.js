@@ -74,22 +74,22 @@ describe('TextInput.vue', () => {
 
   test('computes the correct iconScheme based on various states', async () => {
     await wrapper.setProps({ type: 'error' });
-    expect(wrapper.vm.iconScheme).toBe('aux-red-500');
+    expect(wrapper.vm.iconScheme).toBe('fg-critical');
 
     await wrapper.setProps({ type: 'normal' });
     await wrapper.setData({ isDisabled: true });
-    expect(wrapper.vm.iconScheme).toBe('neutral-cloudy');
+    expect(wrapper.vm.iconScheme).toBe('fg-base');
 
     await wrapper.setData({ isDisabled: false });
     await wrapper.setProps({ modelValue: 'text' });
-    expect(wrapper.vm.iconScheme).toBe('neutral-dark');
+    expect(wrapper.vm.iconScheme).toBe('color-gray-700');
 
     await wrapper.setData({ isFocused: true });
-    expect(wrapper.vm.iconScheme).toBe('neutral-dark');
+    expect(wrapper.vm.iconScheme).toBe('color-gray-700');
 
     await wrapper.setProps({ hasCloudyColor: true, modelValue: '' });
     await wrapper.setData({ isFocused: false });
-    expect(wrapper.vm.iconScheme).toBe('neutral-cloudy');
+    expect(wrapper.vm.iconScheme).toBe('fg-base');
   });
 
   test('attributes computed property returns combined attributes and props', () => {
