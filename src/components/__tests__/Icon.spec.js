@@ -35,8 +35,8 @@ const commonTests = async (wrapper) => {
 describe('Icon', () => {
   it('should accept valid lineHeight props', () => {
     const validValues = ['sm', 'md', 'lg', null];
-    
-    validValues.forEach(value => {
+
+    validValues.forEach((value) => {
       const wrapper = createWrapper({ lineHeight: value });
       expect(wrapper.exists()).toBe(true);
     });

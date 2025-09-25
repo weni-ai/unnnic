@@ -260,14 +260,14 @@ describe('SelectSmart.vue', () => {
     it('should emit onActiveChange when toggling dropdown visibility', async () => {
       // Open dropdown
       await input().trigger('click');
-      
+
       // Close dropdown
       await input().trigger('click');
 
       const emittedEvents = wrapper.emitted('onActiveChange');
       expect(emittedEvents).toBeTruthy();
       expect(emittedEvents.length).toBe(2);
-      expect(emittedEvents[0][0]).toBe(true);  // opened
+      expect(emittedEvents[0][0]).toBe(true); // opened
       expect(emittedEvents[1][0]).toBe(false); // closed
     });
 

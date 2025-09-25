@@ -6,7 +6,6 @@
 </template>
 
 <script>
-/* eslint-disable global-require */
 /* eslint-disable vue/multi-word-component-names */
 import UnnnicIcon from './Icon.vue';
 
