@@ -69,12 +69,19 @@
           'unnnic-data-table__body-row--loading',
         ]"
       >
-        <img
-          class="unnnic-data-table__body-cell--loading"
-          data-testid="body-row-loading"
-          src="../../assets/icons/weni-loading.svg"
-          height="40"
-        />
+        <td
+          :class="[
+            'unnnic-data-table__body-cell',
+            `unnnic-data-table__body-cell--${size}`,
+          ]"
+        >
+          <img
+            class="unnnic-data-table__body-cell--loading"
+            data-testid="body-row-loading"
+            src="../../assets/icons/weni-loading.svg"
+            height="40"
+          />
+        </td>
       </tr>
       <template v-else-if="props.items.length">
         <tr
@@ -116,7 +123,10 @@
       </template>
       <tr
         v-else
-        class="unnnic-data-table__body-row"
+        :class="[
+          'unnnic-data-table__body-row',
+          'unnnic-data-table__body-row--without-results',
+        ]"
       >
         <td
           v-if="slots['without-results']"
@@ -197,7 +207,7 @@ defineOptions({
 const slots = useSlots();
 
 const emit = defineEmits<{
-  'update:sort': [sort: { header: string; order: string }];
+  'update:sort': [sort: { header: string; itemKey: string; order: string }];
   itemClick: [item: DataTableItem];
   'update:page': [page: number];
 }>();
@@ -243,6 +253,7 @@ const headersItemsKeys: ComputedRef<string[]> = computed(() => {
 
 const sort = ref({
   header: '',
+  itemKey: '',
   order: '',
 });
 
@@ -260,8 +271,8 @@ const gridTemplateColumns: ComputedRef<string> = computed(() => {
   return columnSizes.join(' ');
 });
 
-const handleSort = (key: string, order: string) => {
-  sort.value = { header: key, order };
+const handleSort = (header: typeof sort.value, order: string) => {
+  sort.value = { ...header, order };
   emit('update:sort', sort.value);
 };
 
@@ -279,7 +290,12 @@ const handleClickHeader = (header: DataTableHeader) => {
       ? 'asc'
       : nextSortOrderMapper[sort.value.order];
 
-  handleSort(nextSort === '' ? '' : header.title, nextSort);
+  handleSort(
+    nextSort === ''
+      ? { header: '', itemKey: '', order: '' }
+      : { header: header.title, itemKey: header.itemKey, order: nextSort },
+    nextSort,
+  );
 };
 
 const handleClickRow = (item: DataTableItem) => {
@@ -396,7 +412,8 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
       grid-template-columns: v-bind(gridTemplateColumns);
 
-      &--loading {
+      &--loading,
+      &--without-results {
         grid-template-columns: 1fr;
       }
 
@@ -431,7 +448,7 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
     }
 
     &-cell--loading {
-      margin: $unnnic-spacing-xl 0;
+      margin: $unnnic-space-10 0;
       padding: 0;
 
       width: 100%;

@@ -73,7 +73,7 @@
 import { computed, watch, useSlots } from 'vue';
 import UnnnicIcon from '../Icon.vue';
 import type { ButtonProps, ButtonSize, ButtonType } from './types';
-import type { SchemeColor } from '../Icon/types';
+import type { SchemeColor } from '@/types/scheme-colors';
 
 defineOptions({
   name: 'UnnnicButton',
@@ -170,7 +170,7 @@ watch(
   () => {
     validateProps();
   },
-  { deep: true, immediate: true }
+  { deep: true, immediate: true },
 );
 </script>
 

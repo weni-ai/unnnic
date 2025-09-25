@@ -89,6 +89,7 @@ import Tour from './Tour/Tour.vue';
 import Navigator from './Navigator/index.vue';
 import SelectTime from './SelectTime/index.vue';
 import DataTable from './DataTable/index.vue';
+import Chip from './Chip/Chip.vue';
 
 type VueComponent = Component;
 
@@ -188,6 +189,7 @@ export const components: ComponentsMap = {
   unnnicNavigator: Navigator,
   unnnicSelectTime: SelectTime,
   unnnicDataTable: DataTable,
+  unnnicChip: Chip,
 };
 
 export const unnnicFontSize = fontSize;
@@ -282,6 +284,7 @@ export const unnnicTour = Tour;
 export const unnnicNavigator = Navigator;
 export const unnnicDataTable = DataTable as VueComponent;
 export const unnnicSelectTime = SelectTime as VueComponent;
+export const unnnicChip = Chip;
 
 export const UnnnicFontSize = fontSize;
 export const UnnnicFormElement = formElement;
@@ -375,3 +378,4 @@ export const UnnnicTour = Tour;
 export const UnnnicNavigator = Navigator;
 export const UnnnicDataTable = DataTable as VueComponent;
 export const UnnnicSelectTime = SelectTime as VueComponent;
+export const UnnnicChip = Chip;

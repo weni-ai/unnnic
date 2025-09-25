@@ -1,4 +1,4 @@
-import type { SchemeColor } from '../Icon/types';
+import type { SchemeColor } from '@/types/scheme-colors';
 
 export interface DisclaimerProps {
   text: string;

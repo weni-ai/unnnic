@@ -11,7 +11,7 @@
     @dragleave.stop.prevent="dragleave"
     @dragend.stop.prevent="dragend"
     @drop.stop.prevent="drop"
-    @click="() => $refs.file.click()"
+    @click="handleDropzoneClick"
   >
     <UnnnicIcon
       class="unnnic-upload-area__dropzone__icon"
@@ -64,7 +64,7 @@
 </template>
 
 <script setup>
-import { ref, computed, getCurrentInstance } from 'vue';
+import { ref, computed, getCurrentInstance, useTemplateRef } from 'vue';
 import mime from 'mime';
 
 import UnnnicIcon from '../Icon.vue';
@@ -73,6 +73,7 @@ const isDragging = ref(false);
 const hasError = ref(false);
 const dragEnterCounter = ref(0);
 const file = ref();
+const fileRef = useTemplateRef('file');
 
 const props = defineProps({
   acceptMultiple: {
@@ -111,6 +112,11 @@ const props = defineProps({
     type: String,
     default: '',
   },
+
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits([
@@ -135,15 +141,21 @@ const formattedSupportedFormats = computed(() => {
 });
 
 function dragenter() {
+  if (props.disabled) return;
+
   dragEnterCounter.value += 1;
   isDragging.value = true;
 }
 
 function dragover() {
+  if (props.disabled) return;
+
   isDragging.value = true;
 }
 
 function dragleave() {
+  if (props.disabled) return;
+
   dragEnterCounter.value -= 1;
   if (dragEnterCounter.value === 0) {
     isDragging.value = false;
@@ -151,10 +163,14 @@ function dragleave() {
 }
 
 function dragend() {
+  if (props.disabled) return;
+
   isDragging.value = false;
 }
 
 function drop(event) {
+  if (props.disabled) return;
+
   isDragging.value = false;
 
   const { files } = event.dataTransfer;
@@ -164,7 +180,15 @@ function drop(event) {
   }
 }
 
+function handleDropzoneClick() {
+  if (props.disabled) return;
+
+  fileRef.value.click();
+}
+
 function handleFileChange(event) {
+  if (props.disabled) return;
+
   const { files } = event.target;
 
   if (validateFiles(files)) {

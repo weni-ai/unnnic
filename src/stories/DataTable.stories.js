@@ -76,8 +76,8 @@ export default {
       UnnnicDataTable,
     },
     setup() {
-      const sort = ({ order, header }) => {
-        action('update:sort')({ order, header });
+      const sort = ({ order, header, itemKey }) => {
+        action('update:sort')({ order, header, itemKey });
         if (order === 'asc')
           args.items = args.items.sort((a, b) => a.id - b.id);
         if (order === 'desc')
