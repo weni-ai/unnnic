@@ -1,0 +1,10 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UnnnicPopover.vue > matches the snapshot 1`] = `
+"<section data-v-5a3125ac="" class="unnnic-popover">
+  <div data-v-5a3125ac="" class="unnnic-popover__trigger" data-testid="popover-trigger"><button data-testid="trigger-button">Click me</button></div>
+  <section data-v-b8e0eb2b="" data-v-5a3125ac="" class="unnnic-popover-balloon unnnic-popover__balloon" style="display: none;">
+    <div data-testid="popover-content">Popover content</div>
+  </section>
+</section>"
+`;
