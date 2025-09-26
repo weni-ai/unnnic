@@ -18,6 +18,7 @@
       :hasIconLeft="!!iconLeft"
       :hasIconRight="!!iconRight || allowTogglePassword"
       :maxlength="maxlength"
+      :readonly="readonly"
       @focus="onFocus"
       @blur="onBlur"
     />
@@ -109,6 +110,10 @@ export default {
       default: null,
     },
     disabled: {
+      type: Boolean,
+      default: false,
+    },
+    readonly: {
       type: Boolean,
       default: false,
     },

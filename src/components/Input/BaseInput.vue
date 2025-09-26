@@ -6,6 +6,7 @@
     :value="fullySanitize(modelValue)"
     :class="classes"
     :type="nativeType"
+    :readonly="readonly"
   />
   <input
     v-else
@@ -14,6 +15,7 @@
     :class="classes"
     :type="nativeType"
     :maxlength="maxlength"
+    :readonly="readonly"
   />
 </template>
 
@@ -52,6 +54,10 @@ export default {
     maxlength: {
       type: Number,
       default: null,
+    },
+    readonly: {
+      type: Boolean,
+      default: false,
     },
   },
   emits: ['update:modelValue'],

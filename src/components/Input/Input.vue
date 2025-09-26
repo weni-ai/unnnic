@@ -25,6 +25,7 @@
       :nativeType="nativeType"
       :maxlength="maxlength"
       :disabled="disabled"
+      :readonly="readonly"
     />
 
     <section class="unnnic-form__hints-container">
@@ -131,6 +132,10 @@ export default {
       default: false,
     },
     disabled: {
+      type: Boolean,
+      default: false,
+    },
+    readonly: {
       type: Boolean,
       default: false,
     },
