@@ -3,7 +3,7 @@
         <div class="unnnic-popover__trigger" data-testid="popover-trigger" @click="toggleOpen()">
             <slot name="trigger" :open="open"></slot>
         </div>
-        <div class="unnnic-popover__balloon" v-show="open">
+        <div class="unnnic-popover__balloon" data-testid="popover-balloon" v-show="open">
             <slot name="content" :open="open" />
         </div>
     </section>

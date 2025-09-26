@@ -1,7 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, afterEach, test, vi } from 'vitest';
 import UnnnicPopover from '@/components/Popover/index.vue';
-import UnnnicPopoverBalloon from '@/components/Popover/PopoverBalloon.vue';
 
 vi.mock('@vueuse/core', () => ({
   onClickOutside: vi.fn()
@@ -47,7 +46,7 @@ describe('UnnnicPopover.vue', () => {
   });
 
   test('renders content slot inside balloon', () => {
-    const balloon = wrapper.findComponent(UnnnicPopoverBalloon);
+    const balloon = wrapper.find('[data-testid="popover-balloon"]');
     const content = wrapper.find('[data-testid="popover-content"]');
     
     expect(balloon.exists()).toBe(true);
@@ -56,14 +55,14 @@ describe('UnnnicPopover.vue', () => {
   });
 
   test('balloon is hidden by default', () => {
-    const balloon = wrapper.findComponent(UnnnicPopoverBalloon);
+    const balloon = wrapper.find('[data-testid="popover-balloon"]');
     expect(balloon.isVisible()).toBe(false);
   });
 
   test('toggles balloon visibility when trigger is clicked', async () => {
     const trigger = wrapper.find('[data-testid="popover-trigger"]');
     
-    const balloon = wrapper.findComponent(UnnnicPopoverBalloon);
+    const balloon = wrapper.find('[data-testid="popover-balloon"]');
     
     expect(balloon.isVisible()).toBe(false);
 
@@ -78,7 +77,7 @@ describe('UnnnicPopover.vue', () => {
 
   test('uses modelValue when provided', async () => {
     const wrapper = mountWrapper({ modelValue: true });
-    const balloon = wrapper.findComponent(UnnnicPopoverBalloon);
+    const balloon = wrapper.find('[data-testid="popover-balloon"]');
     expect(balloon.isVisible()).toBe(true);
   });
 
@@ -99,21 +98,6 @@ describe('UnnnicPopover.vue', () => {
     expect(wrapper.emitted('update:modelValue')).toBeFalsy();
   });
 
-  test('passes popoverBalloonProps to balloon component', async () => {
-    const balloonProps = {
-      width: '200px',
-      height: '100px',
-      maxWidth: '300px',
-      maxHeight: '200px',
-      overflow: 'auto'
-    };
-    
-    await wrapper.setProps({ popoverBalloonProps: balloonProps });
-    const balloon = wrapper.findComponent(UnnnicPopoverBalloon);
-    
-    expect(balloon.props()).toMatchObject(balloonProps);
-  });
-
   test('exposes open ref', () => {
     expect(wrapper.vm.open).toBeDefined();
     expect(typeof wrapper.vm.open).toBe('boolean');
@@ -123,7 +107,7 @@ describe('UnnnicPopover.vue', () => {
     wrapper.vm.open = true;
     await wrapper.vm.$nextTick();
     
-    const balloon = wrapper.findComponent(UnnnicPopoverBalloon);
+    const balloon = wrapper.find('[data-testid="popover-balloon"]');
     expect(balloon.isVisible()).toBe(true);
   });
 
@@ -140,7 +124,7 @@ describe('UnnnicPopover.vue', () => {
     
     callback();
     
-    const balloon = wrapper.findComponent(UnnnicPopoverBalloon);
+    const balloon = wrapper.find('[data-testid="popover-balloon"]');
     expect(balloon.isVisible()).toBe(true);
   });
 
@@ -157,7 +141,7 @@ describe('UnnnicPopover.vue', () => {
     
     callback();
     
-    const balloon = wrapper.findComponent(UnnnicPopoverBalloon);
+    const balloon = wrapper.find('[data-testid="popover-balloon"]');
     expect(balloon.attributes().style).toBe("");
   });
 
