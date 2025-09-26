@@ -99,6 +99,18 @@ watch(open, (value) => {
         height: v-bind(popoverHeight);
         max-height: v-bind(popoverMaxHeight);
         overflow: auto;
+        
+        &::-webkit-scrollbar {
+            width: $unnnic-spacing-inline-nano;
+        }
+        &::-webkit-scrollbar-thumb {
+          background: $unnnic-color-neutral-cleanest;
+          border-radius: $unnnic-border-radius-pill;
+        }
+        &::-webkit-scrollbar-track {
+          background: $unnnic-color-neutral-soft;
+          border-radius: $unnnic-border-radius-pill;
+        }
     }
 }
 </style>
