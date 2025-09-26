@@ -75,6 +75,9 @@ watch(open, (value) => {
 .unnnic-popover {
     &__balloon {
         margin-top: $unnnic-space-1;
+        position: fixed;
+        left: auto;
+        right: auto;
     }
 }
 </style>

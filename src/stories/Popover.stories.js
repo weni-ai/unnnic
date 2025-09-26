@@ -20,6 +20,7 @@ export default {
           <p>Hello</p>
         </template>
       </unnnic-popover>
+      <p>label label</p>
     </div>
   `,
   }),
