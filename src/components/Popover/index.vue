@@ -1,18 +1,15 @@
 <template>
     <section class="unnnic-popover" ref="popover">
         <div class="unnnic-popover__trigger" data-testid="popover-trigger" @click="toggleOpen()">
-            <slot name="trigger"></slot>
+            <slot name="trigger" :open="open"></slot>
         </div>
-        <UnnnicPopoverBalloon class="unnnic-popover__balloon" v-show="open" v-bind="popoverBalloonProps">
-            <slot name="content" />
-        </UnnnicPopoverBalloon>
+        <div class="unnnic-popover__balloon" v-show="open">
+            <slot name="content" :open="open" />
+        </div>
     </section>
 </template>
 
 <script setup lang="ts">
-import UnnnicPopoverBalloon from './PopoverBalloon.vue';
-import { PopoverBalloonProps } from './PopoverBalloon.vue';
-
 import { computed, onMounted, ref, useTemplateRef, watch } from 'vue';
 import { onClickOutside } from '@vueuse/core';
 
@@ -27,6 +24,12 @@ defineOptions({
     name: "UnnnicPopover"
 })
 
+interface PopoverBalloonProps {
+    width?: string;
+    height?: string;
+    maxHeight?: string;
+}
+
 interface PopoverProps {
     modelValue?: boolean;
     persistent?: boolean;
@@ -38,6 +41,10 @@ const props = withDefaults(defineProps<PopoverProps>(), {
     persistent: false,
 });
 
+const emit = defineEmits<{
+    'update:modelValue': [value: boolean];
+}>()
+
 const useModelValue = computed(() => props.modelValue !== undefined);
 
 const open = ref<boolean>(useModelValue.value ? Boolean(props.modelValue) : false);
@@ -46,15 +53,23 @@ const toggleOpen = () => {
     open.value = !open.value;
 }
 
+const popoverWidth = computed(() => {
+    return props.popoverBalloonProps?.width || `${target.value?.offsetWidth}px`
+})
+
+const popoverHeight = computed(() => {
+    return props.popoverBalloonProps?.height || 'unset'
+})
+
+const popoverMaxHeight = computed(() => {
+    return props.popoverBalloonProps?.maxHeight || 'unset'
+})
+
 onMounted(() => {
     if(useModelValue.value) {
         open.value = Boolean(props.modelValue);
     }
 })
-
-const emit = defineEmits<{
-    'update:modelValue': [value: boolean];
-}>()
 
 watch(open, (value) => {
     if(useModelValue.value) {
@@ -74,10 +89,16 @@ watch(open, (value) => {
 
 .unnnic-popover {
     &__balloon {
-        margin-top: $unnnic-space-1;
+        border-radius: $unnnic-radius-2;
+        padding: $unnnic-space-4;
+        background: $unnnic-color-bg-base;
+        box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.16);
+        // margin-top: $unnnic-space-1;
         position: fixed;
-        left: auto;
-        right: auto;
+        width: v-bind(popoverWidth);
+        height: v-bind(popoverHeight);
+        max-height: v-bind(popoverMaxHeight);
+        overflow: auto;
     }
 }
 </style>
