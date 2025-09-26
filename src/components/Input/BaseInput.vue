@@ -4,7 +4,7 @@
     v-mask="mask"
     v-bind="attributes"
     :value="fullySanitize(modelValue)"
-    :class="classes"
+    :class="[classes, { 'focus': forceActiveStatus }]"
     :type="nativeType"
     :readonly="readonly"
   />
@@ -12,7 +12,7 @@
     v-else
     v-bind="attributes"
     :value="fullySanitize(modelValue)"
-    :class="classes"
+    :class="[classes, { 'focus': forceActiveStatus }]"
     :type="nativeType"
     :maxlength="maxlength"
     :readonly="readonly"
@@ -56,6 +56,10 @@ export default {
       default: null,
     },
     readonly: {
+      type: Boolean,
+      default: false,
+    },
+    forceActiveStatus: {
       type: Boolean,
       default: false,
     },

@@ -13,6 +13,7 @@
       v-bind="$attrs"
       v-model="val"
       class="unnnic-form-input"
+      :forceActiveStatus="forceActiveStatus"
       :placeholder="placeholder"
       :iconLeft="iconLeft"
       :iconRight="iconRight"
@@ -136,6 +137,10 @@ export default {
       default: false,
     },
     readonly: {
+      type: Boolean,
+      default: false,
+    },
+    forceActiveStatus: {
       type: Boolean,
       default: false,
     },

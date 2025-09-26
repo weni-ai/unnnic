@@ -1,8 +1,8 @@
 <template>
     <div class="unnnic-select">
         <UnnnicPopover :popover-balloon-props="{ maxHeight: '100px' }">
-            <template #trigger>
-                <UnnnicInput readonly />
+            <template #trigger="{ open }">
+                <UnnnicInput readonly :forceActiveStatus="open" />
             </template>
             <template #content>
                 <div style="display: flex; flex-direction: column;"></div>
