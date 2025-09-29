@@ -81,29 +81,40 @@ const onToastClose = () => {
 
 ### Programmatically
 
+The Toast component can be used programmatically through the `toast` utility, which provides a simple API for creating toasts without needing to manage component state.
+
 <Source
   language="javascript"
   dark
   code={`
+// Basic usage
 import { toast } from '@weni/unnnic-system';
 
-// Simple toast
-toast.success('Success!', 'Operation completed');
-
-// Toast with action button
-toast.info('New version available', 'Update to the latest version', {
-  button: {
-    text: 'Update',
-    action: () => window.location.reload()
-  }
-});
-
-// Persistent toast
-toast.warning('Attention', 'This message will not disappear automatically', {
-  timeout: 0
-});
+toast.info('Information', 'Here is some useful information');
   `}
 />
+
+#### API Reference
+
+| Method | Parameters | Description |
+|--------|------------|-------------|
+| `toast.success(title, description?, options?)` | `title: string`<br/>`description?: string`<br/>`options?: ToastOptions` | Creates a success toast |
+| `toast.error(title, description?, options?)` | `title: string`<br/>`description?: string`<br/>`options?: ToastOptions` | Creates an error toast |
+| `toast.attention(title, description?, options?)` | `title: string`<br/>`description?: string`<br/>`options?: ToastOptions` | Creates an attention/warning toast |
+| `toast.info(title, description?, options?)` | `title: string`<br/>`description?: string`<br/>`options?: ToastOptions` | Creates an informational toast |
+
+#### ToastOptions Interface
+
+```typescript
+interface ToastOptions {
+  timeout?: number;           // Auto-dismiss time in ms (0 = persistent)
+  button?: {                  // Optional action button
+    text: string;
+    action: () => void;
+  };
+  onClose?: () => void;      // Callback when toast is closed
+}
+```
 
 ## Animations
 

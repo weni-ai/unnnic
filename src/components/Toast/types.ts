@@ -1,3 +1,8 @@
+export interface ToastManager {
+  show: (props: ToastProps) => ToastInstance;
+  close: (id: string) => void;
+}
+
 export interface ToastButton {
   text: string;
   action: () => void;
@@ -26,4 +31,27 @@ export interface ToastInstance {
   props: ToastProps;
   close: () => void;
   promise: Promise<void>;
+}
+
+export interface ToastCall {
+  info: (
+    title: string,
+    description?: string,
+    options?: ToastOptions,
+  ) => Promise<void>;
+  success: (
+    title: string,
+    description?: string,
+    options?: ToastOptions,
+  ) => Promise<void>;
+  attention: (
+    title: string,
+    description?: string,
+    options?: ToastOptions,
+  ) => Promise<void>;
+  error: (
+    title: string,
+    description?: string,
+    options?: ToastOptions,
+  ) => Promise<void>;
 }

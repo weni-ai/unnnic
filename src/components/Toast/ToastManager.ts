@@ -1,8 +1,13 @@
 import { createApp } from 'vue';
 import Toast from './Toast.vue';
-import type { ToastProps, ToastInstance, ToastOptions } from './types';
+import type {
+  ToastProps,
+  ToastInstance,
+  ToastOptions,
+  ToastCall,
+} from './types';
 
-class ToastManager {
+class ToastManager implements ToastManager {
   private toasts: Map<string, ToastInstance> = new Map();
   private container: HTMLElement | null = null;
   private nextId = 0;
@@ -71,34 +76,34 @@ class ToastManager {
 
 const toastManager = new ToastManager();
 
-export const toast = {
+export const toast: ToastCall = {
   info: (title: string, description?: string, options?: ToastOptions) =>
     toastManager.show({
       title,
       description,
-      type: 'informational',
       ...options,
+      type: 'informational',
     }).promise,
   success: (title: string, description?: string, options?: ToastOptions) =>
     toastManager.show({
       title,
       description,
-      type: 'success',
       ...options,
+      type: 'success',
     }).promise,
-  warning: (title: string, description?: string, options?: ToastOptions) =>
+  attention: (title: string, description?: string, options?: ToastOptions) =>
     toastManager.show({
       title,
       description,
-      type: 'attention',
       ...options,
+      type: 'attention',
     }).promise,
   error: (title: string, description?: string, options?: ToastOptions) =>
     toastManager.show({
       title,
       description,
-      type: 'error',
       ...options,
+      type: 'error',
     }).promise,
 };
 
