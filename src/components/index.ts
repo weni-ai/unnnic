@@ -90,6 +90,8 @@ import Navigator from './Navigator/index.vue';
 import SelectTime from './SelectTime/index.vue';
 import DataTable from './DataTable/index.vue';
 import Chip from './Chip/Chip.vue';
+import Toast from './Toast/Toast.vue';
+import { toast } from './Toast/ToastManager';
 
 type VueComponent = Component;
 
@@ -190,6 +192,8 @@ export const components: ComponentsMap = {
   unnnicSelectTime: SelectTime,
   unnnicDataTable: DataTable,
   unnnicChip: Chip,
+  unnnicToast: Toast,
+  unnnicToastManager: toast,
 };
 
 export const unnnicFontSize = fontSize;
@@ -379,3 +383,5 @@ export const UnnnicNavigator = Navigator;
 export const UnnnicDataTable = DataTable as VueComponent;
 export const UnnnicSelectTime = SelectTime as VueComponent;
 export const UnnnicChip = Chip;
+export const UnnnicToast = Toast;
+export const UnnnicToastManager = toast;
