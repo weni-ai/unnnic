@@ -4,10 +4,11 @@
     appear
     @after-leave="$emit('destroy')"
   >
-    <section
+    <aside
       v-if="isVisible"
       :class="['unnnic-toast', `unnnic-toast--${type}`]"
-      role="alert"
+      :role="type === 'error' ? 'alert' : 'status'"
+      :aria-live="type === 'error' ? 'assertive' : 'polite'"
       data-testid="unnnic-toast"
     >
       <section class="unnnic-toast__content">
@@ -54,7 +55,7 @@
         @keydown.enter="handleAction"
         @keydown.space.prevent="handleAction"
       />
-    </section>
+    </aside>
   </Transition>
 </template>
 
