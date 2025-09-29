@@ -1,0 +1,112 @@
+import { Meta, Source, Story } from '@storybook/blocks';
+
+import * as ToastStories from './Toast.stories';
+
+<Meta of={ToastStories} />
+
+# Toast
+
+The Toast component is used to display temporary notifications in the user interface. It appears in the bottom right corner of the screen with smooth animation and can be closed automatically or manually.
+
+<Source
+  language="html"
+  dark
+  code={`
+<UnnnicToast
+  title="Success!"
+  description="Your action was completed successfully."
+  type="success"
+  :timeout="5000"
+  @close="onClose"
+  @destroy="onDestroy"
+/>
+  `}
+/>
+
+---
+
+#### **Props Options:**
+
+| Key         | Description                              | Values                                                      | Default         |
+|-------------|------------------------------------------|-------------------------------------------------------------|-----------------|
+| title       | **Required.** Toast title                | `string`                                                    | -               |
+| description | Toast descriptive text                   | `string`                                                    | `''`            |
+| type        | Visual type of the toast                 | `'informational'` \| `'attention'` \| `'success'` \| `'error'` | `'informational'` |
+| timeout     | Time in ms for auto-dismiss (0 = persistent) | `number`                                                | `5000`          |
+| button      | Optional action button configuration     | `{ text: string; action: () => void }`                     | `undefined`     |
+
+#### **Events:**
+
+| Event   | Description                                    |
+|---------|------------------------------------------------|
+| close   | Emitted when the toast is closed              |
+| destroy | Emitted when the toast is removed from DOM    |
+
+---
+
+## Features
+
+- **Animations**: Smooth entry and exit transitions
+- **Visual types**: Different variations for different types of messages
+- **Action button**: Optional, for quick actions
+- **Auto-dismiss**: Configurable or persistent
+
+## Usage
+
+### As component
+
+<Source
+  language="vue"
+  dark
+  code={`
+<template>
+  <UnnnicToast
+    title="Success!"
+    description="Your action was completed successfully."
+    type="success"
+    :timeout="5000"
+    @close="onToastClose"
+  />
+</template>
+
+<script setup>
+import { UnnnicToast } from '@weni/unnnic-system';
+
+const onToastClose = () => {
+  console.log('Toast closed');
+};
+</script>
+  `}
+/>
+
+### Programmatically
+
+<Source
+  language="javascript"
+  dark
+  code={`
+import { toast } from '@weni/unnnic-system';
+
+// Simple toast
+toast.success('Success!', 'Operation completed');
+
+// Toast with action button
+toast.info('New version available', 'Update to the latest version', {
+  button: {
+    text: 'Update',
+    action: () => window.location.reload()
+  }
+});
+
+// Persistent toast
+toast.warning('Attention', 'This message will not disappear automatically', {
+  timeout: 0
+});
+  `}
+/>
+
+## Animations
+
+- **Entry**: Slide from bottom to top with fade-in
+- **Exit**: Slide from top to bottom with fade-out
+- **Duration**: 300ms with smooth easing
