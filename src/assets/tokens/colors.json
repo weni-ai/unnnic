@@ -300,10 +300,10 @@
         "value": "{color.teal.600}"
       },
       "info": {
-        "value": "{color.blue.100}"
+        "value": "{color.blue.50}"
       },
       "success": {
-        "value": "{color.green.100}"
+        "value": "{color.green.50}"
       },
       "warning": {
         "value": "{color.yellow.50}"
