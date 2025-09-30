@@ -289,6 +289,8 @@ export const unnnicNavigator = Navigator;
 export const unnnicDataTable = DataTable as VueComponent;
 export const unnnicSelectTime = SelectTime as VueComponent;
 export const unnnicChip = Chip;
+export const unnnicToast = Toast;
+export const unnnicToastManager = toast;
 
 export const UnnnicFontSize = fontSize;
 export const UnnnicFormElement = formElement;
