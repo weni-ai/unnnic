@@ -9,6 +9,8 @@ const callAlert = ({ props, containerRef, seconds }) => {
   if (props.version === '1.1' || containerRef) {
     const AlertComponent = createApp(Alert, {
       ...props,
+      seconds,
+      version: '1.1',
       onClose: () => {
         instance.$el.remove();
       },
