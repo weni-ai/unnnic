@@ -1,22 +1,30 @@
 <template>
     <section class="unnnic-popover" ref="popover">
         <div class="unnnic-popover__trigger" data-testid="popover-trigger" @click="toggleOpen()">
-            <slot name="trigger" :open="open"></slot>
+            <slot name="trigger" />
         </div>
-        <div class="unnnic-popover__balloon" data-testid="popover-balloon" v-show="open">
-            <slot name="content" :open="open" />
+        <div v-if="open" class="unnnic-popover__balloon" data-testid="popover-balloon">
+            <slot name="content" />
         </div>
     </section>
 </template>
 
 <script setup lang="ts">
 import { computed, onMounted, ref, useTemplateRef, watch } from 'vue';
-import { onClickOutside } from '@vueuse/core';
+import { onClickOutside, useResizeObserver } from '@vueuse/core';
 
 const target = useTemplateRef<HTMLDivElement>('popover')
 
+const popoverWidth = ref<string>('')
+
+useResizeObserver(target, (entries) => {
+    const entry = entries[0]
+    const { width } = entry.contentRect
+    popoverWidth.value = `${width}px`
+})
+
 onClickOutside(target, () => {
-    if(props.persistent) return;
+    if (props.persistent) return;
     open.value = false;
 })
 
@@ -53,8 +61,8 @@ const toggleOpen = () => {
     open.value = !open.value;
 }
 
-const popoverWidth = computed(() => {
-    return props.popoverBalloonProps?.width || `${target.value?.offsetWidth}px`
+const calculatedPopoverWidth = computed(() => {
+    return props.popoverBalloonProps?.width || popoverWidth.value
 })
 
 const popoverHeight = computed(() => {
@@ -66,21 +74,26 @@ const popoverMaxHeight = computed(() => {
 })
 
 onMounted(() => {
-    if(useModelValue.value) {
+    if (useModelValue.value) {
         open.value = Boolean(props.modelValue);
     }
 })
 
 watch(open, (value) => {
-    if(useModelValue.value) {
+    if (useModelValue.value) {
         emit('update:modelValue', value);
     }
+})
+
+watch(() => props.modelValue, (value) => {
+    open.value = !!value;
 })
 
 </script>
 
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
+
 * {
     margin: 0;
     padding: 0;
@@ -95,21 +108,23 @@ watch(open, (value) => {
         box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.16);
         // margin-top: $unnnic-space-1;
         position: fixed;
-        width: v-bind(popoverWidth);
+        width: v-bind(calculatedPopoverWidth);
         height: v-bind(popoverHeight);
         max-height: v-bind(popoverMaxHeight);
         overflow: auto;
-        
+
         &::-webkit-scrollbar {
             width: $unnnic-spacing-inline-nano;
         }
+
         &::-webkit-scrollbar-thumb {
-          background: $unnnic-color-neutral-cleanest;
-          border-radius: $unnnic-border-radius-pill;
+            background: $unnnic-color-neutral-cleanest;
+            border-radius: $unnnic-border-radius-pill;
         }
+
         &::-webkit-scrollbar-track {
-          background: $unnnic-color-neutral-soft;
-          border-radius: $unnnic-border-radius-pill;
+            background: $unnnic-color-neutral-soft;
+            border-radius: $unnnic-border-radius-pill;
         }
     }
 }
