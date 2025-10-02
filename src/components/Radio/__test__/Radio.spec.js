@@ -33,41 +33,33 @@ describe('Radio.vue', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  test('renders UnnnicIcon component with correct props', () => {
-    const unnnicIcon = wrapper.findComponent(UnnnicIcon);
-    expect(unnnicIcon.exists()).toBe(true);
-    expect(unnnicIcon.props('icon')).toBe('radio-default');
-    expect(unnnicIcon.props('scheme')).toBe('neutral-cleanest');
-    expect(unnnicIcon.props('size')).toBe('md');
-  });
-
-  test('applies the correct size class', async () => {
-    expect(wrapper.classes()).toContain('unnnic-radio-container--md');
-
-    await wrapper.setProps({ size: 'sm' });
-    expect(wrapper.classes()).toContain('unnnic-radio-container--sm');
+  test('renders input with correct attributes', () => {
+    const input = wrapper.find('input');
+    expect(input.exists()).toBe(true);
+    expect(input.attributes('type')).toBe('radio');
+    expect(input.attributes('disabled')).toBe(undefined);
+    expect(input.attributes('checked')).toBe(undefined);
   });
 
   test('applies disabled class when disabled prop is true', async () => {
     await wrapper.setProps({ disabled: true });
-    expect(wrapper.classes()).toContain('disabled');
+    expect(wrapper.find('.unnnic-radio__label').classes()).toContain('unnnic-radio__label--disabled');
   });
 
   test('icon changes based on valueName', async () => {
     await wrapper.setProps({ modelValue: 'option1' });
-    const unnnicIcon = wrapper.findComponent(UnnnicIcon);
-    expect(unnnicIcon.props('icon')).toBe('radio-selected');
+    const input = wrapper.find('input');
+    expect(input.attributes()).toHaveProperty('checked');
   });
 
   test('icon and color change when disabled is true', async () => {
     await wrapper.setProps({ disabled: true });
-    const unnnicIcon = wrapper.findComponent(UnnnicIcon);
-    expect(unnnicIcon.props('icon')).toBe('radio-disable');
-    expect(unnnicIcon.props('scheme')).toBe('brand-sec');
+    const input = wrapper.find('input');
+    expect(input.attributes()).toHaveProperty('disabled');
   });
 
   test('emits update:modelValue with correct value when clicked and not disabled', async () => {
-    await wrapper.trigger('click');
+    await wrapper.find('input').trigger('change');
     expect(wrapper.emitted('update:modelValue')).toBeTruthy();
     expect(wrapper.emitted('update:modelValue')[0]).toEqual(['option1']);
   });
