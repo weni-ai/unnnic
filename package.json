@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "3.2.9-alpha.2",
+  "version": "3.2.9-alpha.3",
   "type": "module",
   "files": [
     "dist",
