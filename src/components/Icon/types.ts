@@ -1,9 +1,9 @@
-import type { SchemeColor } from "@/types/scheme-colors";
+import type { SchemeColor } from '@/types/scheme-colors';
 
 // Re-export SchemeColor for backward compatibility
 export type { SchemeColor };
 
-export type IconSize = 
+export type IconSize =
   | 'nano'
   | 'xs'
   | 'sm'

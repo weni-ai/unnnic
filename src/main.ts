@@ -5,4 +5,4 @@ import Unnnic from './index';
 const app = createApp(App);
 
 app.use(Unnnic);
-app.mount('#app'); 
+app.mount('#app');

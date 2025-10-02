@@ -68,7 +68,10 @@
           <slot />
         </div>
       </main>
-      <slot v-if="slots['right']" name="right" />
+      <slot
+        v-if="slots['right']"
+        name="right"
+      />
       <UnnnicButton
         v-else-if="close"
         class="unnnic-chats-header__close--sm"
@@ -127,7 +130,6 @@ const slots = useSlots();
 defineEmits<{
   crumbClick: [crumb: { name: string; path: string }];
 }>();
-
 </script>
 
 <style lang="scss">

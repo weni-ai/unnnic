@@ -61,10 +61,14 @@ describe('Switch', () => {
 
   it('should render the correct icon size based on the size prop', async () => {
     await wrapper.setProps({ size: 'small' });
-    expect(wrapper.findComponent({ name: 'UnnnicIcon' }).props('size')).toBe('sm');
+    expect(wrapper.findComponent({ name: 'UnnnicIcon' }).props('size')).toBe(
+      'sm',
+    );
 
     await wrapper.setProps({ size: 'medium' });
-    expect(wrapper.findComponent({ name: 'UnnnicIcon' }).props('size')).toBe('md');
+    expect(wrapper.findComponent({ name: 'UnnnicIcon' }).props('size')).toBe(
+      'md',
+    );
   });
 
   it('should change the icon color based on the state', async () => {

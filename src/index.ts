@@ -16,4 +16,4 @@ const Unnnic: UnnnicPlugin = {
 };
 
 export default Unnnic;
-export * from '@/components'; 
+export * from '@/components';

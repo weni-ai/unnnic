@@ -91,10 +91,10 @@ describe('Button', () => {
   });
 
   it('should render filled icons when iconsFilled prop is true', async () => {
-    const wrapper = createWrapper({ 
+    const wrapper = createWrapper({
       iconLeft: 'search-1',
       iconRight: 'search-1',
-      iconsFilled: true 
+      iconsFilled: true,
     });
 
     const leftIcon = wrapper.findComponent('[data-testid="icon-left"]');

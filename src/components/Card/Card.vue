@@ -194,7 +194,10 @@ export default {
 <style lang="scss">
 @use '@/assets/scss/unnnic' as *;
 
-$card-needed-colors: 'feedback-red', 'feedback-green', 'feedback-yellow', 'feedback-blue', 'feedback-grey', 'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon', 'aux-pink', 'brand-weni-soft';
+$card-needed-colors:
+  'feedback-red', 'feedback-green', 'feedback-yellow', 'feedback-blue',
+  'feedback-grey', 'aux-blue', 'aux-purple', 'aux-orange', 'aux-lemon',
+  'aux-pink', 'brand-weni-soft';
 
 @each $name, $color in $unnnic-scheme-colors {
   @if index($card-needed-colors, $name) {
