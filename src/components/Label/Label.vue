@@ -26,13 +26,13 @@ defineOptions({
   name: 'UnnnicLabel',
 });
 
-interface Props {
+export interface LabelProps {
   label?: string;
   tooltip?: string;
   useHtmlTooltip?: boolean;
 }
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<LabelProps>(), {
   label: '',
   tooltip: '',
   useHtmlTooltip: false,

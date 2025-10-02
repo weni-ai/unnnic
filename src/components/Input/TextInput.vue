@@ -18,6 +18,8 @@
       :hasIconLeft="!!iconLeft"
       :hasIconRight="!!iconRight || allowTogglePassword"
       :maxlength="maxlength"
+      :readonly="readonly"
+      :forceActiveStatus="forceActiveStatus"
       @focus="onFocus"
       @blur="onBlur"
     />
@@ -112,6 +114,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
+    forceActiveStatus: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['icon-left-click', 'icon-right-click'],
   data() {
@@ -142,7 +152,7 @@ export default {
         return 'fg-muted';
       }
 
-      if (this.modelValue || this.isFocused) {
+      if (this.modelValue || this.isFocused || this.forceActiveStatus) {
         return 'color-gray-700';
       }
 

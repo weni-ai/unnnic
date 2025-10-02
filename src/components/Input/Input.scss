@@ -9,7 +9,8 @@
   caret-color: $unnnic-color-fg-muted;
   font: $unnnic-font-body;
 
-  &:focus {
+  &:focus,
+  &.focus {
     border-color: $unnnic-color-border-active;
   }
 
