@@ -100,10 +100,10 @@ describe('Dropdown.vue', () => {
     it('should not toggle dropdown on trigger click when forceOpen is true', async () => {
       await wrapper.setProps({ forceOpen: true, open: false });
       const initialActiveState = wrapper.vm.active;
-      
+
       const trigger = wrapper.find('[data-testid="dropdown-trigger"]');
       await trigger.trigger('click');
-      
+
       expect(wrapper.vm.active).toBe(initialActiveState);
       expect(wrapper.emitted('update:open')).toBeFalsy();
     });
@@ -113,41 +113,41 @@ describe('Dropdown.vue', () => {
       expect(wrapper.vm.active).toBe(true);
 
       await wrapper.vm.onClickOutside();
-      
+
       expect(wrapper.vm.active).toBe(true);
     });
 
     it('should not emit update:open when forceOpen is true and useOpenProp is true', async () => {
-      await wrapper.setProps({ 
-        forceOpen: true, 
-        useOpenProp: true, 
-        open: false 
+      await wrapper.setProps({
+        forceOpen: true,
+        useOpenProp: true,
+        open: false,
       });
-      
+
       const trigger = wrapper.find('[data-testid="dropdown-trigger"]');
       await trigger.trigger('click');
-      
+
       expect(wrapper.emitted('update:open')).toBeFalsy();
     });
 
     it('should not close dropdown via onClickOutside when forceOpen is true and useOpenProp is true', async () => {
-      await wrapper.setProps({ 
-        forceOpen: true, 
-        useOpenProp: true, 
-        open: true 
+      await wrapper.setProps({
+        forceOpen: true,
+        useOpenProp: true,
+        open: true,
       });
-      
+
       await wrapper.vm.onClickOutside();
-      
+
       expect(wrapper.emitted('update:open')).toBeFalsy();
     });
 
     it('should allow normal behavior when forceOpen is false', async () => {
       await wrapper.setProps({ forceOpen: false, open: false });
-      
+
       const trigger = wrapper.find('[data-testid="dropdown-trigger"]');
       await trigger.trigger('click');
-      
+
       expect(wrapper.vm.active).toBe(true);
       expect(wrapper.emitted('update:open')).toBeTruthy();
     });
