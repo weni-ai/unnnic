@@ -3,9 +3,6 @@ import unnnicTab from '../components/Tab/Tab.vue';
 export default {
   title: 'tabs/Tab',
   component: unnnicTab,
-  argTypes: {
-    size: { control: { type: 'select', options: ['md', 'sm'] } },
-  },
   render: (args) => ({
     components: {
       unnnicTab,
@@ -36,6 +33,15 @@ export default {
             Second description
           </p>
         </template>
+        <template #tab-head-third>
+          Third
+        </template>
+        <template #tab-panel-third>
+          <h2 class="title">Third Content</h2>
+          <p class="description">
+            Third description
+          </p>
+        </template>
       </unnnic-tab>
     `,
   }),
@@ -44,6 +50,7 @@ export default {
 export const Default = {
   args: {
     initialTab: 'first',
-    tabs: ['first', 'second'],
+    tabs: ['first', 'second', 'third'],
+    disabledTabs: ['third'],
   },
 };
