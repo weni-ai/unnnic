@@ -9,6 +9,7 @@
           class="tab-head"
           :class="{
             'tab-head--active': localValue === tab,
+            'tab-head--disabled': disabledTabs?.includes(tab),
           }"
           @click="change(tab)"
         >
@@ -20,10 +21,9 @@
             side="bottom"
           >
             <UnnnicIcon
-              icon="info"
-              :size="size === 'sm' ? 'xs' : 'sm'"
-              filled
-              scheme="neutral-cleanest"
+              icon="help"
+              size="sm"
+              scheme="fg-base"
             />
           </UnnnicToolTip>
         </li>
@@ -63,6 +63,13 @@ export default {
       default: null,
     },
     tabs: {
+      type: Array,
+      default: null,
+      validator: (tabs) => {
+        return tabs.every((tab) => typeof tab === 'string') && tabs.length <= 5;
+      },
+    },
+    disabledTabs: {
       type: Array,
       default: null,
     },
@@ -105,6 +112,10 @@ export default {
       return '';
     },
     change(value) {
+      if (this.disabledTabs?.includes(value)) {
+        return;
+      }
+
       this.localValue = value;
       this.$emit('change', this.localValue);
     },
@@ -119,18 +130,15 @@ export default {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  color: $unnnic-color-neutral-cloudy;
-  font-family: $unnnic-font-family-secondary;
-  font-weight: $unnnic-font-weight-bold;
-  font-size: $unnnic-font-size-body-lg;
-  line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
-  margin-bottom: $unnnic-inset-sm;
-  border-bottom: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+  color: $unnnic-color-fg-base;
+  font: $unnnic-font-action;
+  margin-bottom: $unnnic-space-4;
+  border-bottom: $unnnic-border-width-thinner solid $unnnic-color-border-base;
 }
 
 .tab-content {
   display: flex;
-  gap: $unnnic-spacing-sm;
+  gap: $unnnic-space-6;
 
   margin: 0;
   padding: 0;
@@ -139,27 +147,24 @@ export default {
 
 .tab-head {
   display: flex;
-  gap: $unnnic-spacing-xs;
+  gap: $unnnic-space-2;
   align-items: center;
 
   cursor: pointer;
-  margin: $unnnic-spacing-xs $unnnic-spacing-sm;
+  padding: $unnnic-space-2 $unnnic-space-4;
 
   .unnnic-tooltip {
     display: flex;
   }
 
   &:hover {
-    color: $unnnic-color-neutral-black;
+    color: $unnnic-color-fg-emphasized;
   }
 }
 
 .tab-head--active {
-  font-family: $unnnic-font-family-secondary;
-  font-weight: $unnnic-font-weight-bold;
-  color: $unnnic-color-neutral-black;
-  font-size: $unnnic-font-size-body-lg;
-  line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
+  color: $unnnic-color-fg-emphasized;
+  font: $unnnic-font-action;
   transition: 0.4s;
 
   position: relative;
@@ -168,14 +173,23 @@ export default {
     content: '';
 
     position: absolute;
-    bottom: -$unnnic-spacing-xs;
-    left: -$unnnic-spacing-sm;
+    bottom: 0;
+    left: 0;
 
     display: block;
 
-    width: calc(100% + (#{$unnnic-spacing-sm} * 2));
+    width: 100%;
 
-    border-bottom: $unnnic-border-width-thin solid $unnnic-color-weni-600;
+    border-bottom: $unnnic-border-width-thin solid $unnnic-color-border-active;
+  }
+}
+
+.tab-head--disabled {
+  color: $unnnic-color-fg-muted;
+  cursor: default;
+
+  &:hover {
+    color: $unnnic-color-fg-muted;
   }
 }
 
