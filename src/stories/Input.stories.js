@@ -154,7 +154,6 @@ export const Mask = {
     placeholder: 'Text',
     mask: ['###.###.###-##', '##.###.###/####-##'],
   },
-
 };
 
 export const LimitMaxLength = {

@@ -116,7 +116,7 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false,
-  }
+  },
 });
 
 const emit = defineEmits([

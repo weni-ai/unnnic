@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.2.8 (2025-09-25)
+
+### Changed
+
+- **ESLint Configuration Migration**: Migrated from legacy `.eslintrc.js` to modern flat config format (`eslint.config.js`)
+  - **Modern Configuration**: Updated to use `@vue/eslint-config-typescript` with flat config structure
+  - **Enhanced TypeScript Support**: Improved TypeScript linting rules and configurations
+  - **Code Standardization**: Applied consistent code formatting across all components and files
+  - **Dependency Updates**: Updated ESLint-related package dependencies for better compatibility
+  - **Rule Optimization**: Enhanced linting rules for better code quality and consistency
+
+### Fixed
+
+- **Code Quality**: Standardized formatting across multiple components including AudioRecorder, Button, ChartMultiLine, ChatsHeader, ChatsMessage, DataTable, DatePicker, Drawer, EmojiPicker, FormElement, Input, InputDatePicker, Label, ModalNext, SelectSmart, Tag, and Tour components
+
 # 3.2.7 (2025-09-23)
 
 ### Fixed

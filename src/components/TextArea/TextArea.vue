@@ -119,7 +119,6 @@ export default {
       @include input-md-font;
 
       min-height: 100px;
-      
     }
 
     &--size-sm {

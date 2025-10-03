@@ -25,7 +25,10 @@
         >
           {{ fullySanitize(message) }}
         </p>
-        <p v-if="!!error.length" class="unnnic-form-element__message error">
+        <p
+          v-if="!!error.length"
+          class="unnnic-form-element__message error"
+        >
           {{ Array.isArray(error) ? error.join(', ') : error }}
         </p>
       </section>
@@ -39,7 +42,6 @@
 <script>
 import { fullySanitize } from '../../utils/sanitize';
 export default {
-
   props: {
     size: {
       type: String,
@@ -62,7 +64,7 @@ export default {
   },
   methods: {
     fullySanitize,
-  }
+  },
 };
 </script>
 
@@ -85,8 +87,7 @@ export default {
     gap: $unnnic-space-2;
 
     &--fixed {
-      margin-top: -$unnnic-font-size-body-gt - $unnnic-space-2 +
-        $unnnic-space-1;
+      margin-top: -$unnnic-font-size-body-gt - $unnnic-space-2 + $unnnic-space-1;
     }
 
     &--fixed {
@@ -126,7 +127,6 @@ export default {
     flex-direction: column;
     gap: $unnnic-space-1;
   }
-
 
   &--disabled .unnnic-form-element__label,
   &--disabled .unnnic-form-element__message {
