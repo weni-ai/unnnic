@@ -79,7 +79,8 @@ const chipClass = computed(() => {
   flex-shrink: 0;
   border-radius: 600px;
   background-color: $unnnic-color-bg-base;
-
+  border: 1px solid transparent;
+  
   &:hover {
     background-color: $unnnic-color-bg-soft;
   }
@@ -96,7 +97,7 @@ const chipClass = computed(() => {
   }
 
   &--border {
-    border: 1px solid $unnnic-color-border-base;
+    border-color: $unnnic-color-border-base;
   }
 
   &__text {
