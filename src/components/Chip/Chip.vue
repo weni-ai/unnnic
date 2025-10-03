@@ -71,7 +71,7 @@ const chipClass = computed(() => {
 
 .chip {
   display: inline-flex;
-  height: 26px;
+  height: 22px;
   padding: $unnnic-space-1 $unnnic-space-3;
   justify-content: center;
   align-items: center;
