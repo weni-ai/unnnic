@@ -1,43 +1,40 @@
 @use '@/assets/scss/unnnic' as *;
 
 @mixin input-base {
-  background: $unnnic-color-neutral-white;
-  border: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
+  background: $unnnic-color-white;
+  border: $unnnic-border-width-thinner solid $unnnic-color-border-base;
   outline: none;
-  border-radius: $unnnic-border-radius-sm;
-  color: $unnnic-color-neutral-darkest;
-  caret-color: $unnnic-color-neutral-clean;
-  font-weight: $unnnic-font-weight-regular;
-  font-family: $unnnic-font-family-secondary;
+  border-radius: $unnnic-radius-2;
+  color: $unnnic-color-fg-emphasized;
+  caret-color: $unnnic-color-fg-muted;
+  font: $unnnic-font-body;
 
   &:focus {
-    border-color: $unnnic-color-weni-600;
+    border-color: $unnnic-color-border-active;
   }
 
   &::placeholder {
-    color: $unnnic-color-neutral-cleanest;
-    opacity: 1; /* Firefox */
+    color: $unnnic-color-fg-muted;
+    opacity: 1;
+    /* Firefox */
   }
 
   &:disabled {
-    border-color: $unnnic-color-neutral-cleanest;
-    background-color: $unnnic-color-neutral-lightest;
+    border-color: $unnnic-color-border-muted;
+    background-color: $unnnic-color-bg-muted;
     cursor: not-allowed;
-    color: $unnnic-color-neutral-cleanest;
+    color: $unnnic-color-fg-muted;
   }
 }
 
 @mixin input-sm-font {
-  font-size: $unnnic-font-size-body-md;
-  line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+  font: $unnnic-font-body;
 }
 
 @mixin input-md-font {
-  font-size: $unnnic-font-size-body-gt;
-  line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+  font: $unnnic-font-body;
 }
 
 @mixin input-error {
-  border-color: $unnnic-color-aux-red-500;
-  color: $unnnic-color-aux-red-500;
+  border-color: $unnnic-color-border-critical;
 }
