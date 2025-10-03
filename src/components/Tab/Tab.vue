@@ -22,7 +22,7 @@
           >
             <UnnnicIcon
               icon="help"
-              size="sm"
+              :size="size === 'sm' ? 'xs' : 'sm'"
               scheme="fg-base"
             />
           </UnnnicToolTip>
