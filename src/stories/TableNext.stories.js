@@ -111,7 +111,7 @@ const addButton = {
   events: {
     click: (event) => {
       event.preventDefault();
-      // eslint-disable-next-line no-alert
+
       console.log('click');
     },
   },

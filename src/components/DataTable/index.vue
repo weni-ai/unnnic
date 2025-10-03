@@ -69,7 +69,7 @@
           'unnnic-data-table__body-row--loading',
         ]"
       >
-        <td 
+        <td
           :class="[
             'unnnic-data-table__body-cell',
             `unnnic-data-table__body-cell--${size}`,
@@ -132,7 +132,7 @@
           v-if="slots['without-results']"
           :class="[
             'unnnic-data-table__body-cell',
-            `unnnic-data-table__body-cell--${size}`
+            `unnnic-data-table__body-cell--${size}`,
           ]"
         >
           <slot name="without-results" />
@@ -212,8 +212,6 @@ const emit = defineEmits<{
   'update:page': [page: number];
 }>();
 
-
-
 const props = withDefaults(defineProps<Props>(), {
   isLoading: false,
   size: 'md',
@@ -292,7 +290,12 @@ const handleClickHeader = (header: DataTableHeader) => {
       ? 'asc'
       : nextSortOrderMapper[sort.value.order];
 
-  handleSort(nextSort === '' ? { header: '', itemKey: '', order: '' } : { header: header.title, itemKey: header.itemKey, order: nextSort }, nextSort);
+  handleSort(
+    nextSort === ''
+      ? { header: '', itemKey: '', order: '' }
+      : { header: header.title, itemKey: header.itemKey, order: nextSort },
+    nextSort,
+  );
 };
 
 const handleClickRow = (item: DataTableItem) => {

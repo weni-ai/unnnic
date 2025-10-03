@@ -74,7 +74,9 @@ const materialSymbolsName = computed(() => {
     return null;
   }
 
-  return (OldIconsMap as Record<string, string>)[props.icon as string] || props.icon;
+  return (
+    (OldIconsMap as Record<string, string>)[props.icon as string] || props.icon
+  );
 });
 
 const onClick = (event: Event) => {

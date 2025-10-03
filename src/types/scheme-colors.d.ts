@@ -1,4 +1,4 @@
-export type SchemeColor = 
+export type SchemeColor =
   | 'background-solo'
   | 'background-sky'
   | 'background-grass'
@@ -100,4 +100,3 @@ export type SchemeColor =
   | 'teal-800'
   | 'teal-900'
   | 'teal-950';
-  
