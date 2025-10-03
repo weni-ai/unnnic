@@ -1,10 +1,5 @@
 <template>
-  <div
-    :class="[
-      'text-input',
-      `size--${size}`,
-    ]"
-  >
+  <div :class="['text-input', `size--${size}`]">
     <BaseInput
       v-bind="attributes"
       ref="base-input"

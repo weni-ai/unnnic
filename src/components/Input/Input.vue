@@ -6,8 +6,13 @@
     >
       <slot name="label" />
     </p>
-    
-    <UnnnicLabel v-else-if="label" class="unnnic-form__label" :label="label" :tooltip="tooltip" />
+
+    <UnnnicLabel
+      v-else-if="label"
+      class="unnnic-form__label"
+      :label="label"
+      :tooltip="tooltip"
+    />
 
     <TextInput
       v-bind="$attrs"
@@ -37,7 +42,10 @@
         >
           {{ fullySanitize(message) }}
         </p>
-        <p v-if="!!errors.length" class="unnnic-form__message error">
+        <p
+          v-if="!!errors.length"
+          class="unnnic-form__message error"
+        >
           {{ Array.isArray(errors) ? errors.join(', ') : errors }}
         </p>
       </section>
