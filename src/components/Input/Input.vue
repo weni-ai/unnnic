@@ -7,12 +7,12 @@
       <slot name="label" />
     </p>
 
-    <p
+    <UnnnicLabel
       v-else-if="label"
       class="unnnic-form__label"
-    >
-      {{ fullySanitize(label) }}
-    </p>
+      :label="label"
+      :tooltip="tooltip"
+    />
 
     <TextInput
       v-bind="$attrs"
@@ -28,24 +28,40 @@
       :size="size"
       :mask="mask"
       :nativeType="nativeType"
+      :maxlength="maxlength"
+      :disabled="disabled"
     />
 
-    <p
-      v-if="message"
-      class="unnnic-form__message"
-    >
-      {{ fullySanitize(message) }}
-    </p>
+    <section class="unnnic-form__hints-container">
+      <section class="unnnic-form__message-container">
+        <p
+          v-if="message"
+          class="unnnic-form__message"
+        >
+          {{ fullySanitize(message) }}
+        </p>
+        <p
+          v-if="!!errors.length"
+          class="unnnic-form__message error"
+        >
+          {{ Array.isArray(errors) ? errors.join(', ') : errors }}
+        </p>
+      </section>
+      <p v-if="maxlength && showMaxlengthCounter">
+        {{ (val || '').length }} / {{ maxlength }}
+      </p>
+    </section>
   </div>
 </template>
 
 <script>
 import { fullySanitize } from '../../utils/sanitize';
 import TextInput from './TextInput.vue';
+import UnnnicLabel from '../Label/Label.vue';
 
 export default {
   name: 'UnnnicInput',
-  components: { TextInput },
+  components: { TextInput, UnnnicLabel },
   props: {
     placeholder: {
       type: String,
@@ -68,19 +84,23 @@ export default {
     },
     message: {
       type: String,
-      default: null,
+      default: '',
+    },
+    errors: {
+      type: [String, Array],
+      default: '',
     },
     label: {
       type: String,
-      default: null,
+      default: '',
     },
     iconLeft: {
       type: String,
-      default: null,
+      default: '',
     },
     iconRight: {
       type: String,
-      default: null,
+      default: '',
     },
     allowTogglePassword: {
       type: Boolean,
@@ -88,11 +108,11 @@ export default {
     },
     iconLeftClickable: {
       type: Boolean,
-      default: null,
+      default: false,
     },
     iconRightClickable: {
       type: Boolean,
-      default: null,
+      default: false,
     },
     hasCloudyColor: {
       type: Boolean,
@@ -105,6 +125,22 @@ export default {
     mask: {
       type: [String, Array],
       default: '',
+    },
+    tooltip: {
+      type: String,
+      default: '',
+    },
+    maxlength: {
+      type: [Number, null],
+      default: null,
+    },
+    showMaxlengthCounter: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   emits: ['update:modelValue'],
@@ -138,27 +174,37 @@ export default {
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .unnnic-form {
-  font-family: $unnnic-font-family-secondary;
   position: relative;
 
   &__message {
-    font-size: $unnnic-font-size-body-md;
-    margin: $unnnic-spacing-stack-nano 0;
-    color: $unnnic-color-feedback-red;
+    &.error {
+      color: $unnnic-color-fg-critical;
+    }
   }
 
   &__label {
-    font-weight: $unnnic-font-weight-regular;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
-    font-size: $unnnic-font-size-body-gt;
-    color: $unnnic-color-neutral-cloudy;
-    margin: $unnnic-spacing-stack-xs 0;
+    margin-bottom: $unnnic-space-1;
   }
 
-  &.sm &__label {
-    font-size: $unnnic-font-size-body-md;
-    line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
+  &__hints-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: $unnnic-space-1;
+    font: $unnnic-font-caption-2;
+    color: $unnnic-color-fg-base;
+  }
+
+  &__message-container {
+    display: flex;
+    flex-direction: column;
+    gap: $unnnic-space-1;
   }
 }
 </style>
