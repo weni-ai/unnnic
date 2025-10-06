@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.2.10 (2025-10-07)
+
+### Added
+
+- **DataTable**: Added optional `sort` prop for external sort state control:
+  - **Controlled Mode**: Pass `sort` prop to control sort state externally
+  - **Uncontrolled Mode**: Component manages sort state internally (default behavior)
+  - **v-model Support**: Full support for `v-model:sort` pattern
+  - **Backward Compatible**: Existing implementations continue working without changes
+
 # 3.2.9 (2025-10-03)
 
 ### Fixed
