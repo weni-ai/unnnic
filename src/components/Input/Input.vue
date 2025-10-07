@@ -27,6 +27,8 @@
       :maxlength="maxlength"
       :disabled="disabled"
       :readonly="readonly"
+      :showClear="showClear"
+      @clear="$emit('clear')"
     />
 
     <section class="unnnic-form__hints-container">
@@ -144,8 +146,14 @@ export default {
       type: Boolean,
       default: false,
     },
+    showClear: {
+      type: Boolean,
+      default: false,
+    },
   },
-  emits: ['update:modelValue'],
+  
+  emits: ['update:modelValue', 'clear'],
+
   data() {
     return {
       val: this.modelValue,

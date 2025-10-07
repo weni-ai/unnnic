@@ -51,6 +51,7 @@ export default {
     },
     hasIconLeft: Boolean,
     hasIconRight: Boolean,
+    hasClearIcon: Boolean,
     maxlength: {
       type: Number,
       default: null,
@@ -87,6 +88,7 @@ export default {
         {
           'input--has-icon-left': this.hasIconLeft,
           'input--has-icon-right': this.hasIconRight,
+          'input--has-clear-icon': this.hasClearIcon,
         },
       ];
     },
@@ -125,7 +127,14 @@ export default {
 
   &.input--has-icon-right {
     padding-right: $unnnic-space-10;
+    &.input--has-clear-icon {
+      padding-right: $unnnic-space-10 + $unnnic-space-6;
+    }
   }
+
+  &.input--has-clear-icon {
+      padding-right: $unnnic-space-10;
+    }
 
   &.error {
     @include input-error;
