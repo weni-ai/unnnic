@@ -16,7 +16,7 @@
             {
               'unnnic-data-table__header-cell--clickable': header.isSortable,
               'unnnic-data-table__header-cell--sorting':
-                sort.header === header.title && sort.order !== '',
+                sortState.header === header.title && sortState.order !== '',
             },
           ]"
           @click.stop="handleClickHeader(header)"
@@ -31,12 +31,12 @@
           </template>
           <template v-if="header.isSortable">
             <IconArrowsDefault
-              v-if="sort.header !== header.title"
+              v-if="sortState.header !== header.title"
               class="order-default-icon"
               data-testid="arrow-default-icon"
             />
             <Icon
-              v-else-if="sort.order === 'asc'"
+              v-else-if="sortState.order === 'asc'"
               clickable
               size="ant"
               :icon="'switch_left'"
@@ -44,7 +44,7 @@
               data-testid="arrow-asc-icon"
             />
             <Icon
-              v-else-if="sort.order === 'desc'"
+              v-else-if="sortState.order === 'desc'"
               clickable
               size="ant"
               :icon="'switch_left'"
@@ -183,6 +183,12 @@ type DataTableItem = {
   [key: string]: any;
 };
 
+type SortState = {
+  header: string;
+  itemKey: string;
+  order: string;
+};
+
 interface Props {
   headers: DataTableHeader[];
   items: DataTableItem[];
@@ -198,6 +204,7 @@ interface Props {
   pageTotal?: number;
   pageInterval?: number;
   locale?: string;
+  sort?: SortState;
 }
 
 defineOptions({
@@ -225,6 +232,7 @@ const props = withDefaults(defineProps<Props>(), {
   pageTotal: 0,
   pageInterval: 5,
   locale: 'en',
+  sort: undefined,
 });
 
 const defaultTranslations = {
@@ -251,10 +259,14 @@ const headersItemsKeys: ComputedRef<string[]> = computed(() => {
   return props.headers.map((header) => header.itemKey);
 });
 
-const sort = ref({
+const internalSort = ref({
   header: '',
   itemKey: '',
   order: '',
+});
+
+const sortState = computed(() => {
+  return props.sort !== undefined ? props.sort : internalSort.value;
 });
 
 const getHeaderColumnSize = (header: DataTableHeader): string => {
@@ -271,9 +283,12 @@ const gridTemplateColumns: ComputedRef<string> = computed(() => {
   return columnSizes.join(' ');
 });
 
-const handleSort = (header: typeof sort.value, order: string) => {
-  sort.value = { ...header, order };
-  emit('update:sort', sort.value);
+const handleSort = (header: SortState, order: string) => {
+  if (props.sort === undefined) {
+    internalSort.value = { ...header, order };
+  }
+
+  emit('update:sort', { ...header, order });
 };
 
 const handleClickHeader = (header: DataTableHeader) => {
@@ -286,9 +301,9 @@ const handleClickHeader = (header: DataTableHeader) => {
   };
 
   const nextSort =
-    header.title !== sort.value.header
+    header.title !== sortState.value.header
       ? 'asc'
-      : nextSortOrderMapper[sort.value.order];
+      : nextSortOrderMapper[sortState.value.order];
 
   handleSort(
     nextSort === ''
