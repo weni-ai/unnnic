@@ -1,5 +1,5 @@
 <template>
-    <div class="unnnic-select">
+    <div class="unnnic-select" @keydown="handleKeyDown">
         <UnnnicPopover v-model="openPopover" :popover-balloon-props="{ maxHeight: calculatedMaxHeight }">
             <template #trigger>
                 <UnnnicInput :model-value="inputValue" class="unnnic-select__input" readonly
@@ -12,9 +12,11 @@
                     <UnnnicInput v-if="props.enableSearch" class="unnnic-select__input-search"
                         :modelValue="props.search" :placeholder="$t('search')" iconLeft="search"
                         @update:modelValue="handleSearch" />
-                    <UnnnicSelectOption v-for="option in filteredOptions" :key="option[props.itemValue]"
+                    <UnnnicSelectOption v-for="(option, index) in filteredOptions" :key="option[props.itemValue]"
+                        :data-option-index="index"
                         :label="option[props.itemLabel]"
                         :active="option[props.itemValue] === selectedItem?.[props.itemValue]"
+                        :focused="focusedOptionIndex === index"
                         :disabled="option.disabled" @click="handleSelectOption(option)" />
                 </div>
             </template>
@@ -23,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, ref, watch, nextTick } from 'vue';
 import UnnnicInput from '../Input/Input.vue';
 import UnnnicPopover from '../Popover/index.vue';
 import UnnnicSelectOption from './SelectOption.vue';
@@ -79,13 +81,56 @@ const openPopover = ref(false)
 watch(openPopover, () => {
     if (!openPopover.value) {
         handleSearch('')
+    } else {
+        focusedOptionIndex.value = -1
+    }
+
+    if(openPopover.value && props.modelValue) {
+        const selectedOptionIndex = props.options.findIndex(option => option[props.itemValue] === selectedItem.value[props.itemValue])
+        scrollToOption(selectedOptionIndex, "instant", 'center')
     }
 })
 
+const handleKeyDown = (event) => {
+    const { key } = event
+    const validKeys = ['ArrowUp', 'ArrowDown', 'Enter']
+    if (validKeys.includes(key)) {
+        event.preventDefault()
+        if (key === 'ArrowUp') {
+            if(focusedOptionIndex.value === 0) return
+            focusedOptionIndex.value--
+            scrollToOption(focusedOptionIndex.value)
+        }
+        if (key === 'ArrowDown') {
+            if(focusedOptionIndex.value === filteredOptions.value.length - 1) return
+            focusedOptionIndex.value++
+            scrollToOption(focusedOptionIndex.value)
+        }
+        if (key === 'Enter') {
+            handleSelectOption(filteredOptions.value[focusedOptionIndex.value])
+        }
+    }
+}
+
+const focusedOptionIndex = ref<number>(-1)
+
+const scrollToOption = (index: number, behavior: 'smooth' | 'instant' = 'smooth', block: 'center' | 'start' | 'end' | 'nearest' = 'center') => {
+    nextTick(() => {
+        const option = document.querySelector(`[data-option-index="${index}"]`)
+        if (option) {
+            option.scrollIntoView({ behavior, block })
+        }
+    })  
+}
+
 const calculatedMaxHeight = computed(() => {
     if (!props.options || props.options.length === 0) return 'unset'
-    const fieldsHeight = (37 * props.optionsLines) + 40
-    return `${props.enableSearch ? fieldsHeight + 50 : fieldsHeight}px`
+    const popoverPadding = 32
+    const popoverGap = 4
+    // 37 = 21px (height) + 16px (padding)
+    const fieldsHeight = (37 * props.optionsLines)
+    const size = fieldsHeight + popoverPadding + (popoverGap * props.optionsLines - 2)
+    return `${props.enableSearch ? size + 54 : size}px`
 })
 
 const selectedItem = computed(() => {
