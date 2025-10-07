@@ -17,7 +17,7 @@
                         :label="option[props.itemLabel]"
                         :active="option[props.itemValue] === selectedItem?.[props.itemValue]"
                         :focused="focusedOptionIndex === index"
-                        :disabled="option.disabled" @click="handleSelectOption(option)" @mouseover="focusedOptionIndex = index" />
+                        :disabled="option.disabled" @click="handleSelectOption(option)" />
                 </div>
             </template>
         </UnnnicPopover>
@@ -81,6 +81,8 @@ const openPopover = ref(false)
 watch(openPopover, () => {
     if (!openPopover.value) {
         handleSearch('')
+    } else {
+        focusedOptionIndex.value = -1
     }
 
     if(openPopover.value && props.modelValue) {
