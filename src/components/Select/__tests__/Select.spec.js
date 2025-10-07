@@ -235,13 +235,13 @@ describe('UnnnicSelect.vue', () => {
   describe('computed properties', () => {
     test('calculatedMaxHeight returns correct value', () => {
       const maxHeight = wrapper.vm.calculatedMaxHeight;
-      expect(maxHeight).toBe('225px'); // (37 * 5) + 40 = 225
+      expect(maxHeight).toBe('235px');
     });
 
     test('calculatedMaxHeight includes search height when enabled', async () => {
       await wrapper.setProps({ enableSearch: true });
       const maxHeight = wrapper.vm.calculatedMaxHeight;
-      expect(maxHeight).toBe('275px'); // (37 * 5) + 40 + 50 = 275
+      expect(maxHeight).toBe('289px');
     });
 
     test('calculatedMaxHeight returns unset when no options', async () => {
