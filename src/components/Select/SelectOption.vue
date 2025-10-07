@@ -41,7 +41,7 @@ const props = withDefaults(defineProps<SelectOptionProps>(), {
     padding: $unnnic-space-2 $unnnic-space-4;
     font: $unnnic-font-emphasis;
 
-    &--focused {
+    &:hover:not(&--active):not(&--disabled), &--focused {
         background-color: $unnnic-color-bg-soft;
     }
 
