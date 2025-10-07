@@ -250,10 +250,11 @@ $unnnic-scheme-colors:
 
 @function get-scheme-color($name) {
   @each $scheme-name, $color in $unnnic-scheme-colors {
-    @if $scheme-name == $name {
+    @if $scheme-name ==$name {
       @return $color;
     }
   }
+
   @warn "Scheme color '#{$name}' not found in $unnnic-scheme-colors";
   @return null;
 }

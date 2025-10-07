@@ -148,8 +148,11 @@ export default {
       type: Boolean,
       default: false,
     },
+    showClear: {
+      type: Boolean,
+      default: false,
+    },
   },
-
   emits: ['update:modelValue', 'clear'],
 
   data() {
