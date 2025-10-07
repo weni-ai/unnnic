@@ -6,7 +6,11 @@ exports[`Input.vue > matches the snapshot 1`] = `
     <p data-v-7f222291="" class="unnnic-label__label">Sample Label</p>
     <!--v-if-->
   </section>
-  <div data-v-a0d36167="" data-v-d890ad85="" class="text-input size--md unnnic-form-input" mask="####-####"><input data-v-86533b41="" data-v-a0d36167="" class="unnnic-form-input input-itself input size-md normal input--has-icon-left input--has-icon-right unnnic-form-input input-itself" placeholder="Enter text" iconleft="search" iconright="clear" iconleftclickable="true" iconrightclickable="true" hascloudycolor="false" type="text" value=""><span data-v-26446d8e="" data-v-a0d36167="" class="material-symbols-rounded unnnic-icon-scheme--fg-base unnnic-icon-size--ant unnnic--clickable icon-left clickable" data-testid="material-icon" translate="no">search</span><span data-v-26446d8e="" data-v-a0d36167="" class="material-symbols-rounded unnnic-icon-scheme--fg-base unnnic-icon-size--ant unnnic--clickable icon-right clickable" data-testid="material-icon" translate="no">clear</span></div>
+  <div data-v-a0d36167="" data-v-d890ad85="" class="text-input size--md unnnic-form-input" mask="####-####"><input data-v-86533b41="" data-v-a0d36167="" class="unnnic-form-input input-itself input size-md normal input--has-icon-left input--has-icon-right unnnic-form-input input-itself" placeholder="Enter text" iconleft="search" iconright="clear" iconleftclickable="true" iconrightclickable="true" hascloudycolor="false" showclear="false" type="text" value=""><span data-v-26446d8e="" data-v-a0d36167="" class="material-symbols-rounded unnnic-icon-scheme--fg-base unnnic-icon-size--ant unnnic--clickable icon-left clickable" data-testid="material-icon" translate="no">search</span>
+    <section data-v-a0d36167="" class="icon-right-container">
+      <!--v-if--><span data-v-26446d8e="" data-v-a0d36167="" class="material-symbols-rounded unnnic-icon-scheme--fg-base unnnic-icon-size--ant unnnic--clickable icon-right clickable" data-testid="material-icon" translate="no">clear</span>
+    </section>
+  </div>
   <section data-v-d890ad85="" class="unnnic-form__hints-container">
     <section data-v-d890ad85="" class="unnnic-form__message-container">
       <p data-v-d890ad85="" class="unnnic-form__message">Error message</p>

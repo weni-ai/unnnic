@@ -5,7 +5,9 @@
                 <UnnnicInput :model-value="inputValue" class="unnnic-select__input" readonly
                     :forceActiveStatus="openPopover" :size="props.size" :placeholder="props.placeholder"
                     :label="props.label" :errors="props.errors" :message="props.message"
-                    :iconRight="openPopover ? 'keyboard_arrow_up' : 'keyboard_arrow_down'" :disabled="props.disabled" />
+                    :iconRight="openPopover ? 'keyboard_arrow_up' : 'keyboard_arrow_down'" :disabled="props.disabled" 
+                    showClear @clear="emit('update:modelValue', '')"
+                    />
             </template>
             <template #content>
                 <div class="unnnic-select__content">
