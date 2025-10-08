@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import ChartFunnelTwoRows from './SvgFunnel/ChartFunnelTwoRows.vue';
 import ChartFunnelThreeRows from './SvgFunnel/ChartFunnelThreeRows.vue';
 import ChartFunnelFourRows from './SvgFunnel/ChartFunnelFourRows.vue';
 import ChartFunnelFiveRows from './SvgFunnel/ChartFunnelFiveRows.vue';
@@ -15,6 +16,7 @@ export default {
   name: 'UnnnicChartFunnel',
 
   components: {
+    ChartFunnelTwoRows,
     ChartFunnelThreeRows,
     ChartFunnelFourRows,
     ChartFunnelFiveRows,
@@ -36,11 +38,13 @@ export default {
     chartComponent() {
       const componentMap = {
         default: {
+          2: ChartDefaultFunnelBase,
           3: ChartDefaultFunnelBase,
           4: ChartDefaultFunnelBase,
           5: ChartDefaultFunnelBase,
         },
         basic: {
+          2: 'ChartFunnelTwoRows',
           3: 'ChartFunnelThreeRows',
           4: 'ChartFunnelFourRows',
           5: 'ChartFunnelFiveRows',
