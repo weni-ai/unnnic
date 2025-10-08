@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  name: 'UnnnicChartFunnelThreeRows',
+  name: 'UnnnicChartFunnelBaseRow',
 
   props: {
     rows: {
