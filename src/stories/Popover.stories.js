@@ -6,9 +6,9 @@ export default {
   render: (args) => ({
     components: { UnnnicPopover },
     setup() {
-        return {
-            args,
-        }
+      return {
+        args,
+      };
     },
     template: `
     <div>
@@ -28,12 +28,12 @@ export default {
 
 export const Default = {
   args: {
-    modelValue: false
-  }
+    modelValue: false,
+  },
 };
 
 export const WithModelValue = {
-    args: {
-        modelValue: true,
-    }
-}
+  args: {
+    modelValue: true,
+  },
+};

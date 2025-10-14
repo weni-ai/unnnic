@@ -95,10 +95,10 @@ export const Normal = {
     type: 'normal',
     placeholder: 'Placeholder',
     showClear: true,
-    iconLeft: "expand-8-1",
-    iconRight: "messaging-we-chat-3",
+    iconLeft: 'expand-8-1',
+    iconRight: 'messaging-we-chat-3',
     iconLeftClickable: true,
-    iconRightClickable: false
+    iconRightClickable: false,
   },
 };
 
@@ -107,7 +107,7 @@ export const NormalSm = {
     size: 'sm',
     type: 'normal',
     placeholder: 'Placeholder',
-    showClear: true
+    showClear: true,
   },
 };
 

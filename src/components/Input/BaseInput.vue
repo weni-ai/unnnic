@@ -4,7 +4,7 @@
     v-mask="mask"
     v-bind="attributes"
     :value="fullySanitize(modelValue)"
-    :class="[classes, { 'focus': forceActiveStatus }]"
+    :class="[classes, { focus: forceActiveStatus }]"
     :type="nativeType"
     :readonly="readonly"
   />
@@ -12,7 +12,7 @@
     v-else
     v-bind="attributes"
     :value="fullySanitize(modelValue)"
-    :class="[classes, { 'focus': forceActiveStatus }]"
+    :class="[classes, { focus: forceActiveStatus }]"
     :type="nativeType"
     :maxlength="maxlength"
     :readonly="readonly"
@@ -133,8 +133,8 @@ export default {
   }
 
   &.input--has-clear-icon {
-      padding-right: $unnnic-space-10;
-    }
+    padding-right: $unnnic-space-10;
+  }
 
   &.error {
     @include input-error;

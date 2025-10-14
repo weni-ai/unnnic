@@ -52,7 +52,6 @@
         @click="onIconRightClick"
       />
     </section>
-    
   </div>
 </template>
 
@@ -132,7 +131,7 @@ export default {
     showClear: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   emits: ['icon-left-click', 'icon-right-click', 'clear'],
   data() {
@@ -233,7 +232,7 @@ export default {
     top: 50%;
     transform: translateY(-50%);
     right: $unnnic-space-4;
-    
+
     display: flex;
     align-items: center;
     gap: $unnnic-space-2;

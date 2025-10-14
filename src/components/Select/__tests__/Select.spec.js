@@ -5,9 +5,9 @@ import UnnnicSelect from '../index.vue';
 vi.mock('../../mixins/i18n', () => ({
   default: {
     methods: {
-      $t: (key) => key
-    }
-  }
+      $t: (key) => key,
+    },
+  },
 }));
 
 describe('UnnnicSelect.vue', () => {
@@ -17,23 +17,23 @@ describe('UnnnicSelect.vue', () => {
     options: [
       { label: 'Option 1', value: 'option1' },
       { label: 'Option 2', value: 'option2' },
-      { label: 'Option 3', value: 'option3' }
+      { label: 'Option 3', value: 'option3' },
     ],
-    modelValue: null
+    modelValue: null,
   };
 
   const mountWrapper = (props = {}, slots = {}) => {
     return mount(UnnnicSelect, {
       props: {
         ...defaultProps,
-        ...props
+        ...props,
       },
       global: {
         mocks: {
-          $t: (key) => key
-        }
+          $t: (key) => key,
+        },
       },
-      slots
+      slots,
     });
   };
 
@@ -119,10 +119,10 @@ describe('UnnnicSelect.vue', () => {
 
     test('input shows correct icon based on popover state', async () => {
       const input = wrapper.findComponent({ name: 'UnnnicInput' });
-      
+
       // Initially closed
       expect(input.props('iconRight')).toBe('keyboard_arrow_down');
-      
+
       // When popover is open
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
@@ -135,9 +135,9 @@ describe('UnnnicSelect.vue', () => {
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents({ name: 'UnnnicSelectOption' });
-      
+
       await options[0].vm.$emit('click');
-      
+
       expect(wrapper.emitted('update:modelValue')).toBeTruthy();
       expect(wrapper.emitted('update:modelValue')[0]).toEqual(['option1']);
     });
@@ -147,10 +147,12 @@ describe('UnnnicSelect.vue', () => {
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents({ name: 'UnnnicSelectOption' });
-      
+
       await options[0].vm.$emit('click');
-      
-      expect(wrapper.emitted('update:modelValue')[0]).toEqual([{ label: 'Option 1', value: 'option1' }]);
+
+      expect(wrapper.emitted('update:modelValue')[0]).toEqual([
+        { label: 'Option 1', value: 'option1' },
+      ]);
     });
 
     test('does not emit when same option is selected', async () => {
@@ -158,25 +160,25 @@ describe('UnnnicSelect.vue', () => {
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents({ name: 'UnnnicSelectOption' });
-      
+
       await options[0].vm.$emit('click');
-      
+
       expect(wrapper.emitted('update:modelValue')).toBeFalsy();
     });
 
     test('does not emit when disabled option is clicked', async () => {
       const disabledOptions = [
         { label: 'Option 1', value: 'option1' },
-        { label: 'Disabled Option', value: 'disabled', disabled: true }
+        { label: 'Disabled Option', value: 'disabled', disabled: true },
       ];
-      
+
       await wrapper.setProps({ options: disabledOptions });
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents({ name: 'UnnnicSelectOption' });
-      
+
       await options[1].vm.$emit('click');
-      
+
       expect(wrapper.emitted('update:modelValue')).toBeFalsy();
     });
   });
@@ -197,20 +199,20 @@ describe('UnnnicSelect.vue', () => {
     });
 
     test('emits update:search when search input changes', async () => {
-      await wrapper.setProps({ enableSearch: true});
+      await wrapper.setProps({ enableSearch: true });
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
       const searchInput = wrapper.findAllComponents({ name: 'UnnnicInput' })[1];
-      
+
       await searchInput.vm.$emit('update:modelValue', 'test search');
-      
+
       expect(wrapper.emitted('update:search')).toBeTruthy();
       expect(wrapper.emitted('update:search')[0]).toEqual(['test search']);
     });
 
     test('filters options based on search term', async () => {
       await wrapper.setProps({ enableSearch: true, search: 'Option 1' });
-      
+
       const filteredOptions = wrapper.vm.filteredOptions;
       expect(filteredOptions.length).toBe(1);
       expect(filteredOptions[0].label).toBe('Option 1');
@@ -218,7 +220,7 @@ describe('UnnnicSelect.vue', () => {
 
     test('filters options by both label and value', async () => {
       await wrapper.setProps({ enableSearch: true, search: 'option1' });
-      
+
       const filteredOptions = wrapper.vm.filteredOptions;
       expect(filteredOptions.length).toBe(1);
       expect(filteredOptions[0].value).toBe('option1');
@@ -226,7 +228,7 @@ describe('UnnnicSelect.vue', () => {
 
     test('shows all options when search is empty', async () => {
       await wrapper.setProps({ enableSearch: true, search: '' });
-      
+
       const filteredOptions = wrapper.vm.filteredOptions;
       expect(filteredOptions.length).toBe(3);
     });
@@ -259,7 +261,10 @@ describe('UnnnicSelect.vue', () => {
 
     test('selectedItem returns modelValue for returnObject true', async () => {
       const selectedOption = { label: 'Option 2', value: 'option2' };
-      await wrapper.setProps({ returnObject: true, modelValue: selectedOption });
+      await wrapper.setProps({
+        returnObject: true,
+        modelValue: selectedOption,
+      });
       const selectedItem = wrapper.vm.selectedItem;
       expect(selectedItem).toStrictEqual(selectedOption);
     });
@@ -326,16 +331,16 @@ describe('UnnnicSelect.vue', () => {
     test('uses custom itemLabel and itemValue', async () => {
       const customOptions = [
         { name: 'Custom 1', id: 'custom1' },
-        { name: 'Custom 2', id: 'custom2' }
+        { name: 'Custom 2', id: 'custom2' },
       ];
-      
-      await wrapper.setProps({ 
-        options: customOptions, 
-        itemLabel: 'name', 
+
+      await wrapper.setProps({
+        options: customOptions,
+        itemLabel: 'name',
         itemValue: 'id',
-        modelValue: 'custom1'
+        modelValue: 'custom1',
       });
-      
+
       const inputValue = wrapper.vm.inputValue;
       expect(inputValue).toBe('Custom 1');
     });

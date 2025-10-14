@@ -59,9 +59,8 @@ const props = defineProps<{
 }>();
 
 const calculatedTransform = computed(() => {
-  return `skew(${props.data.length === 2 ? '-8deg': '-12deg'}, 0deg) translateX(-20px)`;
+  return `skew(${props.data.length === 2 ? '-8deg' : '-12deg'}, 0deg) translateX(-20px)`;
 });
-
 </script>
 
 <style lang="scss" scoped>

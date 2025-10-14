@@ -133,9 +133,11 @@ const isSizePropValid = computed(() => {
 });
 
 const buttonType = computed(() => {
-  return {
-    'alternative': 'tertiary',
-  }[props.type] || props.type;
+  return (
+    {
+      alternative: 'tertiary',
+    }[props.type] || props.type
+  );
 });
 
 const isTypePropValid = computed(() => {
@@ -160,7 +162,8 @@ const validateProps = () => {
 
     if (!isTypePropValid.value) {
       errorMessage += ' Invalid type prop.';
-      errorMessage += ' Please provide one of the following types: primary, secondary, tertiary, warning, attention. Alternative is discontinued and it was forced renamed to tertiary.';
+      errorMessage +=
+        ' Please provide one of the following types: primary, secondary, tertiary, warning, attention. Alternative is discontinued and it was forced renamed to tertiary.';
     }
 
     throw new Error(errorMessage);

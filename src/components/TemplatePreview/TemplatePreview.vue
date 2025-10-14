@@ -13,11 +13,11 @@
         }`"
       >
         <img
-          class="unnnic-template-preview__header__media__preview"
           v-if="
             template?.header.type === 'MEDIA' &&
             template?.header.mediaType === 'IMAGE'
           "
+          class="unnnic-template-preview__header__media__preview"
           :src="template.header.src || imagePreview"
         />
         <template
@@ -50,8 +50,8 @@
           />
         </template>
         <h1
-          class="unnnic-template-preview__header__text__preview"
           v-else-if="template?.header.type === 'TEXT'"
+          class="unnnic-template-preview__header__text__preview"
         >
           {{ template.header.text }}
         </h1>
@@ -75,7 +75,10 @@
         {{ template?.footer }}
       </footer>
     </section>
-    <footer v-if="hasButtons" class="unnnic-template-preview__buttons">
+    <footer
+      v-if="hasButtons"
+      class="unnnic-template-preview__buttons"
+    >
       <section
         v-for="(button, index) in template?.buttons"
         :key="`button-${index}`"
@@ -96,15 +99,15 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
+import { computed } from 'vue';
 
-import type { Template } from "./types";
+import type { Template } from './types';
 
-import imagePreview from "../../assets/img/previews/image-preview.png";
-import documentPreview from "../../assets/img/previews/doc-preview.png";
-import videoPreview from "../../assets/img/previews/video-preview.png";
+import imagePreview from '../../assets/img/previews/image-preview.png';
+import documentPreview from '../../assets/img/previews/doc-preview.png';
+import videoPreview from '../../assets/img/previews/video-preview.png';
 
-import UnnnicIcon from "../Icon.vue";
+import UnnnicIcon from '../Icon.vue';
 
 interface Props {
   template?: Template | null;
@@ -115,30 +118,30 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const hasHeader = computed(
-  () => props.template?.header && props.template.header.type
+  () => props.template?.header && props.template.header.type,
 );
 const hasHeaderMedia = computed(
-  () => !!props.template?.header && props.template.header.type === "MEDIA"
+  () => !!props.template?.header && props.template.header.type === 'MEDIA',
 );
 const hasBody = computed(
-  () => !!props.template?.body && props.template.body.length > 0
+  () => !!props.template?.body && props.template.body.length > 0,
 );
 const hasFooter = computed(
-  () => !!props.template?.footer && props.template.footer.length > 0
+  () => !!props.template?.footer && props.template.footer.length > 0,
 );
 const hasButtons = computed(
-  () => !!props.template?.buttons && props.template.buttons.length > 0
+  () => !!props.template?.buttons && props.template.buttons.length > 0,
 );
 const parsedBody = computed(() => {
-  if (!hasBody.value) return "";
+  if (!hasBody.value) return '';
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const result = props
-    .template!.body!.replaceAll("\n", "<br/>")
-    .replaceAll(/(?:\*)([^*<\n]+)(?:\*)/g, "<strong>$1</strong>")
-    .replaceAll(/(?:_)([^_<\n]+)(?:_)/g, "<i>$1</i>")
-    .replaceAll(/(?:~)([^~<\n]+)(?:~)/g, "<s>$1</s>")
-    .replaceAll(/(?:```)([^```<\n]+)(?:```)/g, "<tt>$1</tt>")
+    .template!.body!.replaceAll('\n', '<br/>')
+    .replaceAll(/(?:\*)([^*<\n]+)(?:\*)/g, '<strong>$1</strong>')
+    .replaceAll(/(?:_)([^_<\n]+)(?:_)/g, '<i>$1</i>')
+    .replaceAll(/(?:~)([^~<\n]+)(?:~)/g, '<s>$1</s>')
+    .replaceAll(/(?:```)([^```<\n]+)(?:```)/g, '<tt>$1</tt>')
     .replaceAll(/{{.*?}}/g, (match) => `<strong>${match}</strong>`);
 
   return result;
@@ -146,19 +149,19 @@ const parsedBody = computed(() => {
 
 const getButtonIcon = (buttonType) => {
   const buttonMapper = {
-    PHONE_NUMBER: "phone",
-    URL: "open_in_new",
-    COPY_CODE: "content_copy",
-    FLOW: "",
-    QUICK_REPLY: "reply",
+    PHONE_NUMBER: 'phone',
+    URL: 'open_in_new',
+    COPY_CODE: 'content_copy',
+    FLOW: '',
+    QUICK_REPLY: 'reply',
   };
 
-  return buttonMapper[buttonType] || "";
+  return buttonMapper[buttonType] || '';
 };
 </script>
 
 <style lang="scss" scoped>
-@use "@/assets/scss/unnnic" as *;
+@use '@/assets/scss/unnnic' as *;
 
 .unnnic-template-preview {
   display: flex;
