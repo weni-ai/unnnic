@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "3.2.9-alpha.12",
+  "version": "3.2.9-alpha.13",
   "type": "commonjs",
   "files": [
     "dist",
