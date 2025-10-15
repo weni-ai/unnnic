@@ -44,6 +44,8 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue';
+
 interface FunnelStep {
   percentage: number | string;
   value: number | string;
@@ -52,9 +54,14 @@ interface FunnelStep {
   color: string;
 }
 
-defineProps<{
+const props = defineProps<{
   data: FunnelStep[];
 }>();
+
+const calculatedTransform = computed(() => {
+  return `skew(${props.data.length === 2 ? '-8deg': '-12deg'}, 0deg) translateX(-20px)`;
+});
+
 </script>
 
 <style lang="scss" scoped>
@@ -76,7 +83,7 @@ defineProps<{
   &__card {
     height: 100%;
     transition: background-color 0.3s ease;
-    transform: skew(-12deg, 0deg) translateX(-20px);
+    transform: v-bind(calculatedTransform);
     border-radius: 0 0 $unnnic-spacing-xs 0;
 
     &.first-item {
