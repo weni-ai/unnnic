@@ -22,6 +22,7 @@ export type SchemeColor =
   | 'feedback-yellow'
   | 'feedback-blue'
   | 'feedback-grey'
+  | 'fg-base'
   | 'aux-blue'
   | 'aux-purple'
   | 'aux-orange'
