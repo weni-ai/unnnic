@@ -6,9 +6,10 @@
         class="unnnic-radio"
         type="radio"
         :disabled="disabled"
-        :checked="modelValue === value"
+        :checked="computedModelValue === value"
         @change="click"
-        v-bind="pick($attrs, ['id', 'name'])"
+        :name="computedName"
+        v-bind="pick($attrs, ['id'])"
       />
 
       <p :class="[
@@ -24,6 +25,7 @@
 
 <script setup>
 import { pick } from 'lodash';
+import { inject, computed } from 'vue';
 
 const props = defineProps({
   modelValue: {
@@ -42,15 +44,34 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  name: {
+    type: String,
+    default: '',
+  },
 });
 
 const emit = defineEmits(['update:modelValue']);
 
+const contextModelValue = inject('contextModelValue', undefined);
+const contextName = inject('contextName', undefined);
+
 function click() {
   if (!props.disabled) {
     emit('update:modelValue', props.value);
+
+    if (contextModelValue) {
+      contextModelValue.value = props.value;
+    }
   }
 }
+
+const computedModelValue = computed(() => {
+  return contextModelValue?.value || props.modelValue;
+});
+
+const computedName = computed(() => {
+  return contextName?.value || props.name;
+});
 </script>
 
 <style lang="scss" scoped>
