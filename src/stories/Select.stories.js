@@ -16,6 +16,65 @@ const options = [
 export default {
   title: 'Form/Select',
   component: UnnnicSelect,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: "Select is designed to solve common problems related to option selection."
+      }
+    }
+  },
+  argTypes: {
+    options: {
+      description: 
+        'List of items to be displayed in the options. If an item has a `disabled` key set to `true`, that item will be disabled. By default, the component looks for the `label` and `value` keys to display and update the model, but these are not required if you wish to customize them using the `itemLabel` and `itemValue` props, respectively.',
+    },
+    placeholder: {
+      description: 'Text to be displayed in the placeholder.',
+    },
+    label: {
+      description: 'Text to be displayed in the label.',
+    },
+    modelValue: {
+      description: "Model variable. Its type will always match the return type of the key specified by `itemValue`, or the entire options object when `returnObject` prop is set to `true`."
+    },
+    returnObject: {
+      description: "Prop to indicate that the full option object should be returned in the v-model."
+    },
+    itemLabel: {
+      description: "Field of the option item that should be used to render the option label."
+    },
+    itemValue: {
+      description: "Field of the option item that should be used to return value to v-model."
+    },
+    type: {
+      description: "Select state type",
+    },
+    errors: {
+      description: "Error message or messages. When it's an array, the messages will be separated by commas.",
+    },
+    message: {
+      description: "Help or hint message."
+    },
+    size: {
+      description: "Select size"
+    },
+    optionsLines: {
+      description: "Number of options to display at most; if exceeded, scrolling will be enabled."
+    },
+    enableSearch: {
+      description: "If true, enables a search field displayed inside the options popover. The `update:search` event is emitted on each input."
+    },
+    search: {
+      description: "Search value."
+    },
+    locale: {
+      description: "Locale for i18n translations."
+    },
+    disabled: {
+      description: "Disable the select."
+    }
+  },
   render: (args) => ({
     components: { UnnnicSelect },
     setup() {

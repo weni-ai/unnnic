@@ -88,7 +88,7 @@ watch(openPopover, () => {
     }
 
     if(openPopover.value && props.modelValue) {
-        const selectedOptionIndex = props.options.findIndex(option => option[props.itemValue] === selectedItem.value[props.itemValue])
+        const selectedOptionIndex = props.options.findIndex(option => option[props.itemValue] === selectedItem.value?.[props.itemValue])
         scrollToOption(selectedOptionIndex, "instant", 'center')
     }
 })
