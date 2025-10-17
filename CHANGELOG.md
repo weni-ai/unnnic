@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.3.2 (2025-10-17)
+
+### Changed
+- **Scheme Colors**:
+  - **Updated `bg-info` token**: Changed from blue-100 to blue-50
+  - **Updated `bg-success` token**: Changed from green-100 to green-50
+  - **Expanded color scheme**: Added missing color token definitions to ensure complete coverage of the design system
+
 # 3.3.1 (2025-10-17)
 
 ### Added
