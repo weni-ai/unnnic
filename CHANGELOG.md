@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.3.1 (2025-10-17)
+
+### Added
+
+- **DataTable**: Added optional `sort` prop for external sort state control:
+  - **Controlled Mode**: Pass `sort` prop to control sort state externally
+  - **Uncontrolled Mode**: Component manages sort state internally (default behavior)
+  - **v-model Support**: Full support for `v-model:sort` pattern
+  - **Backward Compatible**: Existing implementations continue working without changes
+
+# 3.3.0 (2025-10-15)
+- **Chart Funnel**: Added two items variation
+
+# 3.2.9 (2025-10-14)
+
+### Fixed
+
+- **Chip Component**: Fixed layout shift issue when border state changes:
+  - **Consistent Sizing**: Component now maintains consistent dimensions regardless of border visibility
+  - **Smooth Transitions**: Eliminated visual "jumps" when toggling between selected/unselected states
+- **ESLint Configuration**: Update ESLint configuration and project package.json to use CommonJS
+
 # 3.2.8 (2025-09-25)
 
 ### Changed

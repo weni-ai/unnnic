@@ -1,21 +1,20 @@
-import { globalIgnores } from 'eslint/config';
-import {
+const {
   defineConfigWithVueTs,
   vueTsConfigs,
-} from '@vue/eslint-config-typescript';
-import pluginVue from 'eslint-plugin-vue';
+} = require('@vue/eslint-config-typescript');
+const pluginVue = require('eslint-plugin-vue');
 // @ts-expect-error - weniConfig is not typed
-import weniConfig from '@weni/eslint-config/vue3.js';
+const weniConfig = require('@weni/eslint-config/vue3.js');
 
-export default defineConfigWithVueTs(
+module.exports = defineConfigWithVueTs(
   {
     name: 'app/files-to-lint',
-    files: ['**/*.{ts,mts,tsx,vue}'],
+    files: ['src/**/*.{ts,mts,tsx,vue}'],
   },
 
   {
     name: 'app/files-to-ignore',
-    ignores: ['src/locales/**'],
+    ignores: ['src/locales/**', 'node_modules/'],
   },
 
   pluginVue.configs['flat/essential'],
