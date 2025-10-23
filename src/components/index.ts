@@ -90,6 +90,9 @@ import Navigator from './Navigator/index.vue';
 import SelectTime from './SelectTime/index.vue';
 import DataTable from './DataTable/index.vue';
 import Chip from './Chip/Chip.vue';
+import Popover from './ui/popover/Popover.vue';
+import PopoverContent from './ui/popover/PopoverContent.vue';
+import PopoverTrigger from './ui/popover/PopoverTrigger.vue';
 
 type VueComponent = Component;
 
@@ -190,6 +193,9 @@ export const components: ComponentsMap = {
   unnnicSelectTime: SelectTime,
   unnnicDataTable: DataTable,
   unnnicChip: Chip,
+  unnnicPopover: Popover,
+  unnnicPopoverContent: PopoverContent,
+  unnnicPopoverTrigger: PopoverTrigger,
 };
 
 export const unnnicFontSize = fontSize;
@@ -285,6 +291,9 @@ export const unnnicNavigator = Navigator;
 export const unnnicDataTable = DataTable as VueComponent;
 export const unnnicSelectTime = SelectTime as VueComponent;
 export const unnnicChip = Chip;
+export const unnnicPopover = Popover;
+export const unnnicPopoverContent = PopoverContent;
+export const unnnicPopoverTrigger = PopoverTrigger;
 
 export const UnnnicFontSize = fontSize;
 export const UnnnicFormElement = formElement;
@@ -379,3 +388,6 @@ export const UnnnicNavigator = Navigator;
 export const UnnnicDataTable = DataTable as VueComponent;
 export const UnnnicSelectTime = SelectTime as VueComponent;
 export const UnnnicChip = Chip;
+export const UnnnicPopover = Popover;
+export const UnnnicPopoverContent = PopoverContent;
+export const UnnnicPopoverTrigger = PopoverTrigger;
