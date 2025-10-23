@@ -1,0 +1,96 @@
+@import './colors-hsl.scss';
+@import './radii.scss';
+@import './fonts.scss';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Background colors */
+    --background: #{$unnnic-color-bg-base-hsl};
+    --foreground: #{$unnnic-color-fg-emphasized-hsl};
+    
+    /* Card colors */
+    --card: #{$unnnic-color-bg-base-hsl};
+    --card-foreground: #{$unnnic-color-fg-emphasized-hsl};
+    
+    /* Popover colors */
+    --popover: #{$unnnic-color-bg-base-hsl};
+    --popover-foreground: #{$unnnic-color-fg-emphasized-hsl};
+    
+    /* Primary colors - Teal (marca Weni) */
+    --primary: #{$unnnic-color-teal-600-hsl};
+    --primary-foreground: #{$unnnic-color-fg-inverted-hsl};
+    
+    /* Secondary colors - Gray */
+    --secondary: #{$unnnic-color-gray-100-hsl};
+    --secondary-foreground: #{$unnnic-color-gray-900-hsl};
+    
+    /* Muted colors */
+    --muted: #{$unnnic-color-gray-100-hsl};
+    --muted-foreground: #{$unnnic-color-fg-base-hsl};
+    
+    /* Accent colors - Teal soft */
+    --accent: #{$unnnic-color-gray-50-hsl};
+    --accent-foreground: #{$unnnic-color-gray-900-hsl};
+    
+    /* Destructive colors - Red (critical) */
+    --destructive: #{$unnnic-color-red-500-hsl};
+    --destructive-foreground: #{$unnnic-color-white-hsl};
+    
+    /* Border colors */
+    --border: #{$unnnic-color-border-base-hsl};
+    --input: #{$unnnic-color-border-base-hsl};
+    
+    /* Ring color (focus) - Teal */
+    --ring: #{$unnnic-color-teal-600-hsl};
+    
+    /* Border radius */
+    --radius: #{$unnnic-radius-2};
+  }
+
+  .dark {
+    --background: #{$unnnic-color-gray-900-hsl};
+    --foreground: #{$unnnic-color-white-hsl};
+    
+    --card: #{$unnnic-color-gray-800-hsl};
+    --card-foreground: #{$unnnic-color-white-hsl};
+    
+    --popover: #{$unnnic-color-gray-800-hsl};
+    --popover-foreground: #{$unnnic-color-white-hsl};
+    
+    --primary: #{$unnnic-color-teal-400-hsl};
+    --primary-foreground: #{$unnnic-color-gray-900-hsl};
+    
+    --secondary: #{$unnnic-color-gray-700-hsl};
+    --secondary-foreground: #{$unnnic-color-white-hsl};
+    
+    --muted: #{$unnnic-color-gray-700-hsl};
+    --muted-foreground: #{$unnnic-color-gray-300-hsl};
+    
+    --accent: #{$unnnic-color-gray-700-hsl};
+    --accent-foreground: #{$unnnic-color-white-hsl};
+    
+    --destructive: #{$unnnic-color-red-600-hsl};
+    --destructive-foreground: #{$unnnic-color-white-hsl};
+    
+    --border: #{$unnnic-color-gray-700-hsl};
+    --input: #{$unnnic-color-gray-700-hsl};
+    
+    --ring: #{$unnnic-color-teal-400-hsl};
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-family: $unnnic-font-family;
+  }
+}
+
