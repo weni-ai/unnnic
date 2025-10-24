@@ -104,7 +104,7 @@ export const FilledIcon = {
   args: {
     text: 'Button Text',
     iconLeft: 'play_arrow',
-    iconsFilled: true, 
+    iconsFilled: true,
   },
 };
 
