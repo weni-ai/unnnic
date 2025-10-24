@@ -25,6 +25,7 @@ import cardImage from './CardImage/CardImage.vue';
 import cardProject from './CardProject/CardProject.vue';
 import cardInformation from './CardInformation/CardInformation.vue';
 import checkbox from './Checkbox/Checkbox.vue';
+import checkboxGroup from './CheckboxGroup/CheckboxGroup.vue';
 import collapse from './Collapse/Collapse.vue';
 import radio from './Radio/Radio.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
@@ -131,6 +132,7 @@ export const components: ComponentsMap = {
   unnnicCardProject: cardProject,
   unnnicCardInformation: cardInformation,
   unnnicCheckbox: checkbox,
+  unnnicCheckboxGroup: checkboxGroup,
   unnnicCollapse: collapse,
   unnnicRadio: radio,
   unnnicLanguageSelect: languageSelect,
@@ -233,6 +235,7 @@ export const unnnicCardImage = cardImage as VueComponent;
 export const unnnicCardProject = cardProject as VueComponent;
 export const unnnicCardInformation = cardInformation;
 export const unnnicCheckbox = checkbox;
+export const unnnicCheckboxGroup = checkboxGroup; 
 export const unnnicCollapse = collapse;
 export const unnnicRadio = radio;
 export const unnniclanguageSelect = languageSelect as VueComponent;
@@ -332,6 +335,7 @@ export const UnnnicCardImage = cardImage as VueComponent;
 export const UnnnicCardProject = cardProject as VueComponent;
 export const UnnnicCardInformation = cardInformation;
 export const UnnnicCheckbox = checkbox;
+export const UnnnicCheckboxGroup = checkboxGroup;
 export const UnnnicCollapse = collapse;
 export const UnnnicRadio = radio;
 export const UnnniclanguageSelect = languageSelect as VueComponent;

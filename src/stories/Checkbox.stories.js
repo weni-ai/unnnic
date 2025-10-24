@@ -15,12 +15,12 @@ export default {
       },
     },
   },
-  args: { disabled: false, size: 'md' },
+  args: { disabled: false },
   argTypes: {
-    modelValue: { control: 'inline-radio', options: [true, false, 'less'] },
+    modelValue: { control: 'inline-radio', options: [true, false] },
     disabled: { control: 'boolean' },
-    size: { control: 'select', options: ['md', 'sm'] },
-    textRight: { control: 'text' },
+    label: { control: 'text' },
+    helper: { control: 'text' },
   },
   render: (args) => ({
     components: {
@@ -42,18 +42,15 @@ export default {
 export const Default = {
   args: {
     modelValue: false,
+    label: 'Label',
+    helper: 'Helper',
   },
 };
 
 export const Selected = {
   args: {
     modelValue: true,
-  },
-};
-
-export const LessSelected = {
-  args: {
-    modelValue: 'less',
+    label: 'Label',
   },
 };
 
@@ -61,6 +58,7 @@ export const Disabled = {
   args: {
     modelValue: false,
     disabled: true,
+    label: 'Label',
   },
 };
 
@@ -68,5 +66,6 @@ export const DisabledSelected = {
   args: {
     modelValue: true,
     disabled: true,
+    label: 'Label',
   },
 };
