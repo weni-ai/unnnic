@@ -69,7 +69,7 @@ module.exports = defineConfigWithVueTs(
     },
   },
   {
-    files: ['eslint.config.js'],
+    files: ['eslint.config.js', 'postcss.config.cjs'],
     env: {
       node: true,
     },

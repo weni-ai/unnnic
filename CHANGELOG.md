@@ -5,6 +5,40 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.4.0 (2025-10-23)
+
+### Added
+
+- **shadcn-vue Integration**: Integrated shadcn-vue component library with Tailwind CSS v3
+  - **Tailwind CSS v3**: Added Tailwind CSS v3 with CSS-first configuration approach
+  - **shadcn-vue CLI**: Integrated shadcn-vue CLI for component scaffolding
+  - **Component Library**: Added Reka UI as the headless component foundation
+  - **Utility Libraries**: Added class-variance-authority, clsx, and tailwind-merge for component styling
+  - **Design Token Integration**: Mapped unnnic design tokens to Tailwind via CSS variables
+
+### Changed
+
+- **Main Entry**: Updated `src/main.ts` to import Tailwind CSS styles
+- **Color System**: Exposed all unnnic color tokens as HSL
+
+### Technical Details
+
+- **Dependencies Added**:
+  - `tailwindcss@3.4.18` - CSS framework
+  - `postcss` - CSS processor
+  - `autoprefixer` - PostCSS plugin
+  - `tailwindcss-animate` - Animation utilities
+  - `class-variance-authority` - Variant management
+  - `clsx` - Class concatenation utility
+  - `tailwind-merge` - Smart class merging
+  - `reka-ui` - Headless UI components
+  - `ajv` - JSON schema validator
+
+- **Files Created**:
+  - `tailwind.config.js` - Tailwind configuration with unnnic token mapping
+  - `postcss.config.cjs` - PostCSS configuration
+  - `components.json` - shadcn-vue CLI configuration
+
 # 3.3.3 (2025-10-22)
 
 ### Fixed
