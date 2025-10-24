@@ -94,11 +94,6 @@ export const Normal = {
   args: {
     type: 'normal',
     placeholder: 'Placeholder',
-    showClear: true,
-    iconLeft: "expand-8-1",
-    iconRight: "messaging-we-chat-3",
-    iconLeftClickable: true,
-    iconRightClickable: false
   },
 };
 
@@ -107,7 +102,6 @@ export const NormalSm = {
     size: 'sm',
     type: 'normal',
     placeholder: 'Placeholder',
-    showClear: true
   },
 };
 
@@ -160,7 +154,6 @@ export const Mask = {
     placeholder: 'Text',
     mask: ['###.###.###-##', '##.###.###/####-##'],
   },
-
 };
 
 export const LimitMaxLength = {
