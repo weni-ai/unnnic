@@ -35,11 +35,9 @@
 
 <script>
 import { pick } from 'lodash';
-import UnnnicIcon from '../Icon.vue';
 
 export default {
   name: 'UnnnicSwitch',
-  components: { UnnnicIcon },
   props: {
     size: {
       type: String,
