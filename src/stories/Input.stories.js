@@ -55,11 +55,6 @@ export const Normal = {
   args: {
     label: 'Label',
     placeholder: 'Placeholder',
-    showClear: true,
-    iconLeft: "expand-8-1",
-    iconRight: "messaging-we-chat-3",
-    iconLeftClickable: true,
-    iconRightClickable: false
   },
 };
 
@@ -68,7 +63,6 @@ export const NormalSm = {
     label: 'Label',
     size: 'sm',
     placeholder: 'Placeholder',
-    showClear: true
   },
 };
 
