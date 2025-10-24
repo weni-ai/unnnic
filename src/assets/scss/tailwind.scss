@@ -11,42 +11,42 @@
     /* Background colors */
     --background: #{$unnnic-color-bg-base-hsl};
     --foreground: #{$unnnic-color-fg-emphasized-hsl};
-    
+
     /* Card colors */
     --card: #{$unnnic-color-bg-base-hsl};
     --card-foreground: #{$unnnic-color-fg-emphasized-hsl};
-    
+
     /* Popover colors */
     --popover: #{$unnnic-color-bg-base-hsl};
     --popover-foreground: #{$unnnic-color-fg-emphasized-hsl};
-    
-    /* Primary colors - Teal (marca Weni) */
+
+    /* Primary colors */
     --primary: #{$unnnic-color-teal-600-hsl};
     --primary-foreground: #{$unnnic-color-fg-inverted-hsl};
-    
-    /* Secondary colors - Gray */
+
+    /* Secondary colors */
     --secondary: #{$unnnic-color-gray-100-hsl};
     --secondary-foreground: #{$unnnic-color-gray-900-hsl};
-    
+
     /* Muted colors */
     --muted: #{$unnnic-color-gray-100-hsl};
     --muted-foreground: #{$unnnic-color-fg-base-hsl};
-    
-    /* Accent colors - Teal soft */
+
+    /* Accent colors */
     --accent: #{$unnnic-color-gray-50-hsl};
     --accent-foreground: #{$unnnic-color-gray-900-hsl};
-    
-    /* Destructive colors - Red (critical) */
+
+    /* Destructive colors */
     --destructive: #{$unnnic-color-red-500-hsl};
     --destructive-foreground: #{$unnnic-color-white-hsl};
-    
+
     /* Border colors */
     --border: #{$unnnic-color-border-base-hsl};
     --input: #{$unnnic-color-border-base-hsl};
-    
-    /* Ring color (focus) - Teal */
+
+    /* Ring color (focus) */
     --ring: #{$unnnic-color-teal-600-hsl};
-    
+
     /* Border radius */
     --radius: #{$unnnic-radius-2};
   }
