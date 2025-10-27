@@ -17,7 +17,7 @@ export default {
   },
   args: { disabled: false },
   argTypes: {
-    modelValue: { control: 'inline-radio', options: [true, false] },
+    modelValue: { control: 'inline-radio', options: [true, false, 'less'] },
     disabled: { control: 'boolean' },
     label: { control: 'text' },
     helper: { control: 'text' },
@@ -34,6 +34,7 @@ export default {
       return { args, updateModelValue };
     },
     template: `
+      <pre>v-model: {{ args.modelValue }}</pre>
       <UnnnicCheckbox v-bind="args" @update:modelValue="updateModelValue"/>
     `,
   }),
@@ -50,6 +51,13 @@ export const Default = {
 export const Selected = {
   args: {
     modelValue: true,
+    label: 'Label',
+  },
+};
+
+export const Less = {
+  args: {
+    modelValue: 'less',
     label: 'Label',
   },
 };
