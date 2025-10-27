@@ -66,7 +66,6 @@ const filterData = (audioBuffer) => {
 };
 
 const normalizeData = (filteredData) => {
-  // eslint-disable-next-line no-restricted-properties
   const multiplier = Math.pow(Math.max(...filteredData), -1);
   return filteredData.map((n) => n * multiplier);
 };
@@ -273,7 +272,9 @@ export default {
       this.audio.addEventListener('timeupdate', () => {
         if (this.status !== 'playing') return;
 
-        this.currentTime = isNaN(this.audio.currentTime) ? 0 : this.audio.currentTime;
+        this.currentTime = isNaN(this.audio.currentTime)
+          ? 0
+          : this.audio.currentTime;
       });
 
       this.audio.addEventListener('ended', () => {

@@ -284,7 +284,7 @@ export const Multiple = {
       { value: 'spain', label: 'Espanha' },
       { value: 'saudi_arabia', label: 'Arábia Saudita' },
     ],
-    multiple:true,
+    multiple: true,
     multipleWithoutSelectsMessage: 'No country selected yet :(',
   },
 };
