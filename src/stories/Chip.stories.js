@@ -25,7 +25,8 @@ export default {
     type: {
       control: { type: 'select' },
       options: ['single', 'multiple'],
-      description: 'The type of chip - single for basic display, multiple for selection with icons',
+      description:
+        'The type of chip - single for basic display, multiple for selection with icons',
     },
     text: {
       control: { type: 'text' },
@@ -33,7 +34,8 @@ export default {
     },
     isSelected: {
       control: { type: 'boolean' },
-      description: 'Whether the chip is in selected state (affects styling and icons)',
+      description:
+        'Whether the chip is in selected state (affects styling and icons)',
     },
     count: {
       control: { type: 'number' },
@@ -41,7 +43,8 @@ export default {
     },
     isClickable: {
       control: { type: 'boolean' },
-      description: 'Whether the chip should show clickable styling (cursor pointer)',
+      description:
+        'Whether the chip should show clickable styling (cursor pointer)',
     },
   },
 };
