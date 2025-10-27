@@ -1,5 +1,8 @@
 <template>
-  <section class="unnnic-radio-group__container">
+  <section :class="[
+    'unnnic-radio-group__container',
+    `unnnic-radio-group--state-${state}`
+    ]">
     <UnnnicLabel
       v-if="label"
       :label="label"
@@ -7,14 +10,16 @@
       :useHtmlTooltip="labelUseHtmlTooltip"
     />
 
-    <section
-      :class="[
-        'unnnic-radio-group__radios',
-        `unnnic-radio-group__radios--state-${state}`,
-      ]"
-    >
+    <section class="unnnic-radio-group__radios">
       <slot />
     </section>
+
+    <footer
+      v-if="helper"
+      class="unnnic-radio-group__helper"
+    >
+      {{ helper }}
+    </footer>
   </section>
 </template>
 
@@ -52,6 +57,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+
+  helper: {
+    type: String,
+  },
 });
 
 const emit = defineEmits(['update:modelValue']);
@@ -85,19 +94,37 @@ provide('contextName', computedName);
   &__container {
     display: flex;
     flex-direction: column;
-    gap: $unnnic-space-3;
   }
 
   &__radios {
+    margin-top: $unnnic-space-3;
+
     display: flex;
     gap: $unnnic-space-4 $unnnic-space-6;
+  }
 
-    &--state-horizontal {
+  &__helper {
+    font: $unnnic-font-caption-2;
+    color: $unnnic-color-fg-base;
+  }
+
+  &--state-horizontal {
+    .unnnic-radio-group__radios {
       flex-direction: row;
     }
 
-    &--state-vertical {
+    .unnnic-radio-group__helper {
+      margin-top: $unnnic-space-2;
+    }
+  }
+
+  &--state-vertical {
+    .unnnic-radio-group__radios {
       flex-direction: column;
+    }
+
+    .unnnic-radio-group__helper {
+      margin-top: $unnnic-space-3;
     }
   }
 }
