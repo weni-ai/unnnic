@@ -1,5 +1,13 @@
 <template>
-  <div class="unnnic-switch-wrapper">
+  <section class="unnnic-switch-wrapper">
+    <UnnnicLabel
+      v-if="label"
+      :label="label"
+      :tooltip="labelTooltip"
+      :useHtmlTooltip="labelUseHtmlTooltip"
+      class="unnnic-switch__label"
+    />
+
     <label>
       <input
         class="unnnic-switch"
@@ -11,14 +19,14 @@
       />
 
       <p
-        v-if="label || textLeft || textRight"
+        v-if="option || textLeft || textRight"
         :class="[
-          'unnnic-switch__label',
-          { 'unnnic-switch__label--disabled': disabled },
+          'unnnic-switch__option',
+          { 'unnnic-switch__option--disabled': disabled },
         ]"
-        data-testid="switch-label"
+        data-testid="switch-option"
       >
-        {{ label }}
+        {{ option }}
         {{ textLeft }}
         {{ textRight }}
       </p>
@@ -30,16 +38,18 @@
     >
       {{ helper }}
     </p>
-  </div>
+  </section>
 </template>
 
 <script>
 import { pick } from 'lodash';
-import UnnnicIcon from '../Icon.vue';
+import UnnnicLabel from '../Label/Label.vue';
 
 export default {
   name: 'UnnnicSwitch',
-  components: { UnnnicIcon },
+  components: {
+    UnnnicLabel,
+  },
   props: {
     size: {
       type: String,
@@ -54,6 +64,21 @@ export default {
       default: '',
     },
 
+    labelTooltip: {
+      type: String,
+      default: '',
+    },
+
+    labelUseHtmlTooltip: {
+      type: Boolean,
+      default: false,
+    },
+
+    option: {
+      type: String,
+      default: '',
+    },
+    
     helper: {
       type: String,
       default: '',
@@ -116,7 +141,7 @@ export default {
 @use '@/assets/scss/unnnic' as *;
 
 $switch-width: 38px;
-$switch-height: 21px;
+$switch-height: 20px;
 
 .unnnic-switch-wrapper {
   display: flex;
@@ -141,7 +166,7 @@ $switch-height: 21px;
 
   background-image: url('@/assets/icons/switch-checked.svg');
   background-repeat: no-repeat;
-  background-position: 2px center;
+  background-position: 4px center;
 
   transition: 200ms linear background-position, 200ms linear background-color;
 
@@ -156,6 +181,10 @@ $switch-height: 21px;
   }
 
   &__label {
+    margin-bottom: $unnnic-space-3;
+  }
+
+  &__option {
     margin: 0;
     font: $unnnic-font-body;
     color: $unnnic-color-fg-emphasized;

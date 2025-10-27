@@ -13,12 +13,11 @@ describe('Switch', () => {
     wrapper = createWrapper({ modelValue: false });
   });
 
-  it('should render the label when provided', async () => {
-    await wrapper.setProps({ label: 'Label Text' });
+  it('should render the option when provided', async () => {
+    await wrapper.setProps({ option: 'Option Text' });
 
-    // This check ensures that the icon is placed after the switch text
-    const switchLabel = wrapper.find('[data-testid="switch-label"]');
-    expect(switchLabel.text()).toBe('Label Text');
+    const switchOption = wrapper.find('[data-testid="switch-option"]');
+    expect(switchOption.text()).toBe('Option Text');
   });
 
   it('should toggle isActive state and emit the correct event when toggleState is called', async () => {

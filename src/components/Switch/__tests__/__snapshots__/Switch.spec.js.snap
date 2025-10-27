@@ -1,9 +1,10 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Switch > should match the snapshot 1`] = `
-"<div data-v-e4356c9d="" class="unnnic-switch-wrapper"><label data-v-e4356c9d=""><input data-v-e4356c9d="" class="unnnic-switch" type="checkbox">
+"<section data-v-e4356c9d="" class="unnnic-switch-wrapper">
+  <!--v-if--><label data-v-e4356c9d=""><input data-v-e4356c9d="" class="unnnic-switch" type="checkbox">
     <!--v-if-->
   </label>
   <!--v-if-->
-</div>"
+</section>"
 `;
