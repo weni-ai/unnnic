@@ -1,37 +1,44 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div class="unnnic-checkbox-wrapper">
-    <UnnnicIcon
-      class="unnnic-checkbox"
-      :class="{ disabled }"
-      :icon="icon"
-      :scheme="color"
-      :clickable="!disabled"
-      :size="size"
-      @click="click"
-    />
+  <section class="unnnic-checkbox-wrapper">
+    <label>
+      <input
+        :class="[
+          'unnnic-checkbox',
+          { 'unnnic-checkbox--less': modelValue === 'less' },
+        ]"
+        type="checkbox"
+        :disabled="disabled"
+        :checked="modelValue === 'less' || modelValue"
+        @change="click"
+        v-bind="pick($attrs, ['id', 'name'])"
+      />
 
-    <div
-      v-if="textRight"
-      :class="[
-        'unnnic-checkbox__label',
-        'unnnic-checkbox__label__right',
-        `unnnic-checkbox__label__${size}`,
-      ]"
-      data-testid="checkbox-text-right"
+      <p
+        v-if="label || textRight"
+        :class="[
+          'unnnic-checkbox__label',
+          { 'unnnic-checkbox__label--disabled': disabled },
+        ]"
+        data-testid="checkbox-text-right"
+      >
+        {{ label || textRight }}
+      </p>
+    </label>
+
+    <p
+      v-if="helper"
+      class="unnnic-checkbox__helper"
     >
-      {{ textRight }}
-    </div>
-  </div>
+      {{ helper }}
+    </p>
+  </section>
 </template>
 
 <script>
-import UnnnicIcon from '../Icon.vue';
+import { pick } from 'lodash';
 
 export default {
-  components: {
-    UnnnicIcon,
-  },
   model: {
     event: 'change',
   },
@@ -50,13 +57,16 @@ export default {
       default: false,
     },
 
-    size: {
+    label: {
       type: String,
-      default: 'md',
-      validator(value) {
-        return ['md', 'sm'].includes(value);
-      },
+      default: '',
     },
+
+    helper: {
+      type: String,
+      default: '',
+    },
+
     textRight: {
       type: String,
       default: '',
@@ -75,25 +85,11 @@ export default {
 
       return 'less';
     },
-
-    icon() {
-      return {
-        checked: 'checkbox-select',
-        default: this.disabled ? 'checkbox-disable' : 'checkbox-default',
-        less: 'checkbox-less',
-      }[this.valueName];
-    },
-
-    color() {
-      if (this.valueName === 'default') {
-        return 'neutral-clean';
-      }
-
-      return 'brand-weni';
-    },
   },
 
   methods: {
+    pick,
+
     click() {
       const isChecked = ['checked', 'less'].includes(this.valueName);
       this.$emit('change', !isChecked);
@@ -106,35 +102,72 @@ export default {
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
+$checkbox-size: 21px;
+
 .unnnic-checkbox-wrapper {
   display: flex;
+  flex-direction: column;
   align-items: flex-start;
-  cursor: pointer;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  column-gap: $unnnic-space-2;
 }
 
 .unnnic-checkbox {
-  &.disabled {
-    :deep(.primary) {
-      fill: $unnnic-color-neutral-cleanest;
+  appearance: none;
+  width: $checkbox-size;
+  height: $checkbox-size;
+  margin: 0;
+  background-color: $unnnic-color-bg-base;
+  border: 1px solid $unnnic-color-border-base;
+  border-radius: $unnnic-radius-1;
+  box-sizing: border-box;
+
+  outline: none;
+
+  &:checked {
+    border-width: 0;
+    background-color: $unnnic-color-bg-active;
+    background-image: url('../../assets/icons/checkbox-checked.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+
+    &.unnnic-checkbox--less {
+      background-image: url('../../assets/icons/checkbox-less.svg');
+    }
+  }
+
+  &:disabled, &:disabled:checked {
+    background-color: $unnnic-color-bg-muted;
+    border: 1px solid $unnnic-color-border-muted;
+  }
+
+  &:disabled:checked {
+    background-image: url('../../assets/icons/checkbox-checked-disabled.svg');
+
+    &.unnnic-checkbox--less {
+      background-image: url('../../assets/icons/checkbox-less-disabled.svg');
     }
   }
 }
 
 .unnnic-checkbox__label {
-  font-family: $unnnic-font-family-secondary;
-  font-weight: $unnnic-font-weight-regular;
-  color: $unnnic-color-neutral-darkest;
+  margin: 0;
+  font: $unnnic-font-body;
+  color: $unnnic-color-fg-emphasized;
 
-  &__sm {
-    margin-left: $unnnic-inline-nano;
-    font-size: $unnnic-font-size-body-md;
-    line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
+  &--disabled {
+    color: $unnnic-color-fg-muted;
   }
+}
 
-  &__md {
-    margin-left: $unnnic-inline-xs;
-    font-size: $unnnic-font-size-body-gt;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-  }
+.unnnic-checkbox__helper {
+  margin: 0;
+  margin-left: $checkbox-size + $unnnic-space-2;
+  font: $unnnic-font-caption-2;
+  color: $unnnic-color-fg-base;
 }
 </style>
