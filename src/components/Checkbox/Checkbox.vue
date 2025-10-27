@@ -3,10 +3,13 @@
   <section class="unnnic-checkbox-wrapper">
     <label>
       <input
-        class="unnnic-checkbox"
+        :class="[
+          'unnnic-checkbox',
+          { 'unnnic-checkbox--less': modelValue === 'less' },
+        ]"
         type="checkbox"
         :disabled="disabled"
-        :checked="modelValue"
+        :checked="modelValue === 'less' || modelValue"
         @change="click"
         v-bind="pick($attrs, ['id', 'name'])"
       />
@@ -131,6 +134,10 @@ label {
     background-image: url('../../assets/icons/checkbox-checked.svg');
     background-repeat: no-repeat;
     background-position: center;
+
+    &.unnnic-checkbox--less {
+      background-image: url('../../assets/icons/checkbox-less.svg');
+    }
   }
 
   &:disabled, &:disabled:checked {
@@ -140,6 +147,10 @@ label {
 
   &:disabled:checked {
     background-image: url('../../assets/icons/checkbox-checked-disabled.svg');
+
+    &.unnnic-checkbox--less {
+      background-image: url('../../assets/icons/checkbox-less-disabled.svg');
+    }
   }
 }
 
