@@ -1,34 +1,57 @@
 <template>
-  <p class="unnnic-label__label">{{ fullySanitize(label) }}</p>
+  <section class="unnnic-label">
+    <p class="unnnic-label__label">{{ fullySanitize(props.label) }}</p>
+    <UnnnicToolTip v-if="tooltip" enabled :text="tooltip" :enable-html="props.useHtmlTooltip">
+      <UnnnicIcon icon="help" size="sm" scheme="fg-base" />
+    </UnnnicToolTip>
+  </section>
 </template>
 
-<script>
-import { fullySanitize } from '../../utils/sanitize';
-export default {
+<script setup lang="ts">
+import { fullySanitize } from '@/utils/sanitize';
+
+import UnnnicToolTip from '../ToolTip/ToolTip.vue';
+import UnnnicIcon from '../Icon.vue';
+
+
+defineOptions({
   name: 'UnnnicLabel',
-  props: {
-    label: {
-      type: String,
-      default: null,
-    },
-  },
-  methods: {
-    fullySanitize,
-  },
-};
+});
+
+export interface LabelProps {
+  label?: string;
+  tooltip?: string;
+  useHtmlTooltip?: boolean;
+}
+
+const props = withDefaults(defineProps<LabelProps>(), {
+  label: '',
+  tooltip: '',
+  useHtmlTooltip: false,
+});
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
+* {
+  box-sizing: border-box;
+  padding: $unnnic-space-0;
+  margin: $unnnic-space-0;
+}
+
 .unnnic-label {
+  display: flex;
+  align-items: center;
+  gap: $unnnic-space-2;
+  color: $unnnic-color-fg-base;
+  
   &__label {
-    font-family: $unnnic-font-family-secondary;
-    font-weight: $unnnic-font-weight-regular;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
-    font-size: $unnnic-font-size-body-gt;
-    color: $unnnic-color-neutral-cloudy;
-    margin: $unnnic-spacing-stack-xs 0;
+    font: $unnnic-font-body;
+  }
+
+  :deep(.unnnic-tooltip) {
+      display: flex;
   }
 }
 </style>
