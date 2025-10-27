@@ -13,3 +13,10 @@ export const Default = {
     label: 'Label',
   },
 };
+
+export const WithTooltip = {
+  args: {
+    label: 'Label',
+    tooltip: 'Tooltip',
+  },
+};
