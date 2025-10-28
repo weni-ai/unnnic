@@ -22,6 +22,7 @@
     :class="[
       'unnnic-icon',
       `unnnic-icon--size-svg-${size}`,
+      `unnnic-icon__size--${size}`,
       clickable ? 'unnnic--clickable' : '',
       scheme ? `unnnic-icon-scheme--${scheme}` : '',
     ]"
@@ -38,6 +39,7 @@
       'material-symbols-rounded',
       `unnnic-icon-scheme--${scheme}`,
       `unnnic-icon-size--${size}`,
+      `unnnic-icon__size--${size}`,
       {
         'unnnic--clickable': clickable,
         'material-symbols-rounded--filled': filled,
@@ -151,6 +153,14 @@ $icon-sizes:
   @each $name, $color in $unnnic-scheme-colors {
     &.unnnic-icon-scheme--#{$name} {
       color: $color;
+
+      & .primary {
+        fill: $color;
+      }
+
+      & .primary-stroke {
+        stroke: $color;
+      }
     }
   }
 
