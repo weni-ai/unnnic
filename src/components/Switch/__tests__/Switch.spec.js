@@ -14,7 +14,7 @@ describe('Switch', () => {
   });
   it('should render the component correctly with default props', () => {
     expect(wrapper.exists()).toBe(true);
-    expect(wrapper.findComponent({ name: 'Icon' }).exists()).toBe(true);
+    expect(wrapper.findComponent({ name: 'UnnnicIcon' }).exists()).toBe(true);
     expect(wrapper.text()).toBe('');
   });
 
@@ -42,11 +42,11 @@ describe('Switch', () => {
 
   it('should render the correct icon when the switch is disabled/enabled', async () => {
     await wrapper.setProps({ disabled: true });
-    const disabledIconComponent = wrapper.findComponent({ name: 'Icon' });
+    const disabledIconComponent = wrapper.findComponent({ name: 'UnnnicIcon' });
     expect(disabledIconComponent.props('icon')).toBe('switch-default-disabled');
 
     await wrapper.setProps({ modelValue: true });
-    const enabledIconComponent = wrapper.findComponent({ name: 'Icon' });
+    const enabledIconComponent = wrapper.findComponent({ name: 'UnnnicIcon' });
     expect(enabledIconComponent.props('icon')).toBe('switch-selected-disabled');
   });
 
@@ -54,31 +54,35 @@ describe('Switch', () => {
     expect(wrapper.vm.isActive).toBe(false);
     await wrapper.setProps({ modelValue: true });
     expect(wrapper.vm.isActive).toBe(true);
-    expect(wrapper.findComponent({ name: 'Icon' }).props('icon')).toBe(
+    expect(wrapper.findComponent({ name: 'UnnnicIcon' }).props('icon')).toBe(
       'switch-default',
     );
   });
 
   it('should render the correct icon size based on the size prop', async () => {
     await wrapper.setProps({ size: 'small' });
-    expect(wrapper.findComponent({ name: 'Icon' }).props('size')).toBe('sm');
+    expect(wrapper.findComponent({ name: 'UnnnicIcon' }).props('size')).toBe(
+      'sm',
+    );
 
     await wrapper.setProps({ size: 'medium' });
-    expect(wrapper.findComponent({ name: 'Icon' }).props('size')).toBe('md');
+    expect(wrapper.findComponent({ name: 'UnnnicIcon' }).props('size')).toBe(
+      'md',
+    );
   });
 
   it('should change the icon color based on the state', async () => {
-    expect(wrapper.findComponent({ name: 'Icon' }).props('scheme')).toBe(
+    expect(wrapper.findComponent({ name: 'UnnnicIcon' }).props('scheme')).toBe(
       'neutral-soft',
     );
 
     await wrapper.setProps({ modelValue: true });
-    expect(wrapper.findComponent({ name: 'Icon' }).props('scheme')).toBe(
+    expect(wrapper.findComponent({ name: 'UnnnicIcon' }).props('scheme')).toBe(
       'brand-weni',
     );
 
     await wrapper.setProps({ disabled: true });
-    expect(wrapper.findComponent({ name: 'Icon' }).props('scheme')).toBe(
+    expect(wrapper.findComponent({ name: 'UnnnicIcon' }).props('scheme')).toBe(
       'neutral-soft',
     );
   });

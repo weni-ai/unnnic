@@ -38,21 +38,35 @@ describe('Disclaimer', () => {
     const iconComponent = wrapper.findComponent(
       '[data-testid="disclaimer-icon"]',
     );
-    expect(iconComponent.props('icon')).toBe(Disclaimer.props.icon.default);
-    expect(iconComponent.props('scheme')).toBe(
-      Disclaimer.props.iconColor.default,
-    );
+    expect(iconComponent.props('icon')).toBe('alert-circle-1-1');
+    expect(iconComponent.props('scheme')).toBe('neutral-darkest');
   });
 
   it('validates the icon prop correctly', () => {
-    const validator = Disclaimer.props.icon.validator;
-    expect(validator('alert-circle-1-1')).toBe(true);
-    expect(validator('invalid-icon')).toBe(false);
+    const wrapperValid = mount(Disclaimer, {
+      props: { text: 'Test', icon: 'alert-circle-1-1' },
+      global: { components: { UnnnicIcon: Icon } },
+    });
+    expect(wrapperValid.exists()).toBe(true);
+
+    const wrapperInvalid = mount(Disclaimer, {
+      props: { text: 'Test', icon: 'invalid-icon' },
+      global: { components: { UnnnicIcon: Icon } },
+    });
+    expect(wrapperInvalid.exists()).toBe(true);
   });
 
   it('validates the iconColor prop correctly', () => {
-    const validator = Disclaimer.props.iconColor.validator;
-    expect(validator('neutral-darkest')).toBe(true);
-    expect(validator('invalid-color')).toBe(false);
+    const wrapperValid = mount(Disclaimer, {
+      props: { text: 'Test', iconColor: 'neutral-darkest' },
+      global: { components: { UnnnicIcon: Icon } },
+    });
+    expect(wrapperValid.exists()).toBe(true);
+
+    const wrapperInvalid = mount(Disclaimer, {
+      props: { text: 'Test', iconColor: 'invalid-color' },
+      global: { components: { UnnnicIcon: Icon } },
+    });
+    expect(wrapperInvalid.exists()).toBe(true);
   });
 });

@@ -5,6 +5,235 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.4.0 (2025-10-23)
+
+### Added
+
+- **shadcn-vue Integration**: Integrated shadcn-vue component library with Tailwind CSS v3
+  - **Tailwind CSS v3**: Added Tailwind CSS v3 with CSS-first configuration approach
+  - **shadcn-vue CLI**: Integrated shadcn-vue CLI for component scaffolding
+  - **Component Library**: Added Reka UI as the headless component foundation
+  - **Utility Libraries**: Added class-variance-authority, clsx, and tailwind-merge for component styling
+  - **Design Token Integration**: Mapped unnnic design tokens to Tailwind via CSS variables
+
+### Changed
+
+- **Main Entry**: Updated `src/main.ts` to import Tailwind CSS styles
+- **Color System**: Exposed all unnnic color tokens as HSL
+
+### Technical Details
+
+- **Dependencies Added**:
+  - `tailwindcss@3.4.18` - CSS framework
+  - `postcss` - CSS processor
+  - `autoprefixer` - PostCSS plugin
+  - `tailwindcss-animate` - Animation utilities
+  - `class-variance-authority` - Variant management
+  - `clsx` - Class concatenation utility
+  - `tailwind-merge` - Smart class merging
+  - `reka-ui` - Headless UI components
+  - `ajv` - JSON schema validator
+
+- **Files Created**:
+  - `tailwind.config.js` - Tailwind configuration with unnnic token mapping
+  - `postcss.config.cjs` - PostCSS configuration
+  - `components.json` - shadcn-vue CLI configuration
+
+# 3.3.3 (2025-10-22)
+
+### Fixed
+
+- **Style Dictionary**: Regenerated design tokens to properly export `bg-info` and `bg-success` scheme color updates to the token system
+
+# 3.3.2 (2025-10-17)
+
+### Changed
+- **Scheme Colors**:
+  - **Updated `bg-info` token**: Changed from blue-100 to blue-50
+  - **Updated `bg-success` token**: Changed from green-100 to green-50
+  - **Expanded color scheme**: Added missing color token definitions to ensure complete coverage of the design system
+
+# 3.3.1 (2025-10-17)
+
+### Added
+
+- **DataTable**: Added optional `sort` prop for external sort state control:
+  - **Controlled Mode**: Pass `sort` prop to control sort state externally
+  - **Uncontrolled Mode**: Component manages sort state internally (default behavior)
+  - **v-model Support**: Full support for `v-model:sort` pattern
+  - **Backward Compatible**: Existing implementations continue working without changes
+
+# 3.3.0 (2025-10-15)
+- **Chart Funnel**: Added two items variation
+
+# 3.2.9 (2025-10-14)
+
+### Fixed
+
+- **Chip Component**: Fixed layout shift issue when border state changes:
+  - **Consistent Sizing**: Component now maintains consistent dimensions regardless of border visibility
+  - **Smooth Transitions**: Eliminated visual "jumps" when toggling between selected/unselected states
+- **ESLint Configuration**: Update ESLint configuration and project package.json to use CommonJS
+
+# 3.2.8 (2025-09-25)
+
+### Changed
+
+- **ESLint Configuration Migration**: Migrated from legacy `.eslintrc.js` to modern flat config format (`eslint.config.js`)
+  - **Modern Configuration**: Updated to use `@vue/eslint-config-typescript` with flat config structure
+  - **Enhanced TypeScript Support**: Improved TypeScript linting rules and configurations
+  - **Code Standardization**: Applied consistent code formatting across all components and files
+  - **Dependency Updates**: Updated ESLint-related package dependencies for better compatibility
+  - **Rule Optimization**: Enhanced linting rules for better code quality and consistency
+
+### Fixed
+
+- **Code Quality**: Standardized formatting across multiple components including AudioRecorder, Button, ChartMultiLine, ChatsHeader, ChatsMessage, DataTable, DatePicker, Drawer, EmojiPicker, FormElement, Input, InputDatePicker, Label, ModalNext, SelectSmart, Tag, and Tour components
+
+# 3.2.7 (2025-09-23)
+
+### Fixed
+
+- **DataTable**:
+  - Fixed without results colum grid
+  - Fixed loading variation console warnings
+  - Add `itemKey` in `update:sort` event
+
+# 3.2.6 (2025-09-22)
+
+### Added
+
+- **SelectSmart Component**: New `onActiveChange` event that emits when dropdown options become active/inactive:
+  - **Event Emission**: Emits `true` when dropdown opens and `false` when dropdown closes
+  - **Full Integration**: Works seamlessly with all existing SelectSmart functionality (keyboard navigation, click outside, escape key)
+  - **Comprehensive Testing**: Added 4 new unit tests covering all scenarios including toggle, escape key, and outside click behaviors
+
+- **Dropdown Component**: Enhanced `forceOpen` functionality with comprehensive test coverage:
+  - **Comprehensive Testing**: Added 5 new unit tests covering all `forceOpen` scenarios
+  - **Trigger Prevention**: Tests verify that clicking trigger doesn't toggle dropdown when `forceOpen` is enabled
+  - **Outside Click Prevention**: Tests confirm dropdown stays open when clicking outside with `forceOpen` enabled
+  - **Prop Compatibility**: Tests validate proper behavior with `useOpenProp` combinations
+  - **Event Validation**: Tests ensure no unwanted events are emitted when `forceOpen` is active
+  
+# 3.2.5 (2025-09-19)
+
+### Added
+
+- **Chip Component**: New simplified compact element component for selection and filtering:
+  - **Core Features**: Support for text, count badges, and automatic icon handling
+  - **Selection States**: Built-in `isSelected` state with automatic styling (teal background when selected)
+  - **Type System**: Support for `single` and `multiple` types with context-appropriate icons
+  - **Smart Icons**: Automatic add/close icons for multiple type based on selection state
+  - **Smart Border Logic**: Automatic border application for unselected state only
+  - **Click Interaction**: Built-in click event handling with optional `isClickable` styling (cursor pointer)
+  - **TypeScript Support**: Full TypeScript integration with streamlined type definitions (`ChipProps`)
+  - **Storybook Documentation**: Complete documentation with interactive examples
+  - **Comprehensive Testing**: 15 focused unit tests covering all functionality and interaction patterns
+
+- **Global Scheme Colors System**: Centralized color scheme management to eliminate code duplication:
+  - **New File**: `src/assets/scss/scheme-colors.scss` with all color scheme definitions
+  - **New Tokens**: Added `bg-base`, `bg-soft`, and complete `teal-*` color scale (teal-50 to teal-950) support
+  - **Utility Functions**: Added `generate-scheme-classes()` mixin and `get-scheme-color()` function for easier component development
+  - **Legacy Compatibility**: Automatic mapping of legacy color names to new color system
+
+### Changed
+
+- **Color System Refactoring**: Migrated Chip, Icon, and Card components to use global `$unnnic-scheme-colors` instead of local definitions
+- **TypeScript Types Centralization**: Moved `SchemeColor` type to global `src/types/scheme-colors.d.ts` for better maintainability
+- **Import Optimization**: Updated component imports to use centralized type definitions from `@/types/scheme-colors`
+
+### Removed
+
+- **Code Duplication**: Eliminated ~136 lines of duplicate `$scheme-colors` definitions across components
+
+# 3.2.4 (2025-09-15)
+
+### Added
+
+- **ChatsContact**: Added `forceShowUnreadMessages` prop to always keep the number of unread messages visible.
+
+# 3.2.3 (2025-09-12)
+
+### Added
+
+- **TypeScript Composition API Migration**: Migrated Icon, Button, and Disclaimer components from Options API to Composition API with full TypeScript support
+- **Component Renaming**: Renamed `Icon` component to `UnnnicIcon` for Pascal Case consistency
+- **Type Definitions**: Added comprehensive TypeScript interfaces and types:
+  - `IconSize`, `LineHeight`, `SchemeColor`, `IconProps` for Icon component
+  - `ButtonSize`, `ButtonType`, `ButtonProps` for Button component  
+  - `DisclaimerProps` for Disclaimer component
+- **Type Safety**: Full compile-time type validation for all component props
+- **Modular Types**: Separate type definition files for each component (`types.ts`)
+
+### Changed
+
+- **BREAKING**: Icon component name changed from `Icon` to `UnnnicIcon`
+- **BREAKING**: Components migrated to `<script setup lang="ts">` syntax
+- **Test Updates**: Updated all component tests to work with new TypeScript structure
+- **Prop Validation**: Replaced runtime validators with TypeScript compile-time validation
+
+### Fixed
+
+- CSS warning for `font-feature-settings` compatibility in Icon component
+- Style property typing issues in Button component
+
+
+# 3.2.2 (2025-09-12)
+
+### Added
+- **ChatsMessage**: Added automatic message variation
+
+# 3.2.1 (2025-09-11)
+
+### Fixed
+- Adjusted the formatting of font tokens to conform to the css font attribute
+
+# 3.2.0 (2025-09-11)
+
+### Added
+- Support for **Node.js v22**
+- Introduced **Style Dictionary**:
+  - Added the Style Dictionary package
+  - Migrated all SCSS tokens to Style Dictionary exports
+
+# 3.1.4 (2025-09-05)
+
+- **EmojiPicker Refactoring**: Complete modernization of EmojiPicker component:
+  - **Security Enhancement**: Local emoji sprite sheets to eliminate external CDN requests (CORS/CSP compliance)
+
+### Fixed
+
+- **Security**: Eliminated external requests to unpkg.com for emoji sprite sheets
+- **CSP Compliance**: EmojiPicker now works with strict Content Security Policy headers
+- **Performance**: Reduced bundle size and improved loading times
+
+# 3.1.3 (2025-09-05)
+
+### Added
+
+- Dependency: Added `emoji-mart-vue-fast` as the new emoji provider
+
+### Removed
+
+- Dependencies: Removed `emoji-mart` and `@emoji-mart/data`
+
+### Changed
+
+- EmojiPicker: Refactored to use `emoji-mart-vue-fast` while preserving backward compatibility (public props, events, and slots remain unchanged)
+
+## 3.1.2 (2025-09-03)
+
+### Added
+
+- **Semantic Color Tokens**: Added comprehensive semantic color token system with dedicated `$unnnic-color-` variables:
+  - **Background Semantic Tokens**: `$unnnic-color-bg-base`, `$unnnic-color-bg-soft`, `$unnnic-color-bg-muted`, `$unnnic-color-bg-active`, `$unnnic-color-bg-info`, `$unnnic-color-bg-success`, `$unnnic-color-bg-warning`, `$unnnic-color-bg-critical`
+  - **Text Semantic Tokens**: `$unnnic-color-fg-base`, `$unnnic-color-fg-muted`, `$unnnic-color-fg-emphasized`, `$unnnic-color-fg-inverted`, `$unnnic-color-fg-active`, `$unnnic-color-fg-info`, `$unnnic-color-fg-success`, `$unnnic-color-fg-warning`, `$unnnic-color-fg-critical`
+  - **Border Semantic Tokens**: `$unnnic-color-border-base`, `$unnnic-color-border-soft`, `$unnnic-color-border-muted`, `$unnnic-color-border-emphasized`, `$unnnic-color-border-active`, `$unnnic-color-border-info`, `$unnnic-color-border-success`, `$unnnic-color-border-warning`, `$unnnic-color-border-critical`
+
+### Changed
+
+- **Color System Refactoring**: Updated `$scheme-colors` map to reference the new semantic tokens instead of direct color values for improved maintainability and consistency
+
 ## 3.1.1 (2025-08-29)
 
 ### Added

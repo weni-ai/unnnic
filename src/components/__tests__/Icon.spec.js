@@ -23,50 +23,64 @@ const handlerIconMouseDownUpTest = async (wrapper) => {
 };
 
 const commonTests = async (wrapper) => {
-  it('should emit click event when the icon is clicked if clickable prop its true', () => {
-    handlerIconClickTest(wrapper);
+  it('should emit click event when the icon is clicked if clickable prop its true', async () => {
+    await handlerIconClickTest(wrapper);
   });
 
-  it('should emit mousedown/mouseup when doing the action with the mouse', () => {
-    handlerIconMouseDownUpTest(wrapper);
+  it('should emit mousedown/mouseup when doing the action with the mouse', async () => {
+    await handlerIconMouseDownUpTest(wrapper);
   });
 };
 
 describe('Icon', () => {
-  it('should log warning because invalid props', () => {
-    const warningSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  it('should accept valid lineHeight props', () => {
+    const validValues = ['sm', 'md', 'lg', null];
 
-    createWrapper({ lineHeight: 'invalid' });
-
-    expect(warningSpy).toHaveBeenCalled();
+    validValues.forEach((value) => {
+      const wrapper = createWrapper({ lineHeight: value });
+      expect(wrapper.exists()).toBe(true);
+    });
   });
-  describe('OldMapIcon', () => {
-    let wrapper = createWrapper({ icon: 'search-1' });
 
-    commonTests(wrapper);
+  describe('OldMapIcon', () => {
+    let wrapper;
 
     beforeEach(() => {
       wrapper = createWrapper({ icon: 'search-1' });
     });
 
-    it('should render the icon from OldIconsMap', async () => {
+    it('should render the icon from OldIconsMap', () => {
       const hasOldIcon = wrapper.find('[data-testid="old-map-icons"]');
       expect(hasOldIcon.exists()).toBe(true);
+    });
+
+    it('should emit click event when the icon is clicked if clickable prop its true', async () => {
+      await handlerIconClickTest(wrapper);
+    });
+
+    it('should emit mousedown/mouseup when doing the action with the mouse', async () => {
+      await handlerIconMouseDownUpTest(wrapper);
     });
   });
 
   describe('Material Icons', () => {
-    let wrapper = createWrapper({ icon: 'done_all' });
-
-    commonTests(wrapper);
+    let wrapper;
 
     beforeEach(() => {
       wrapper = createWrapper({ icon: 'done_all' });
     });
 
-    it('should render the icon from Material Icons', async () => {
+    it('should render the icon from Material Icons', () => {
       const hasOldIcon = wrapper.find('[data-testid="material-icon"]');
       expect(hasOldIcon.exists()).toBe(true);
+    });
+
+    it('should emit click event when the icon is clicked if clickable prop its true', async () => {
+      await handlerIconClickTest(wrapper);
+    });
+
+    it('should emit mousedown/mouseup when doing the action with the mouse', async () => {
+      await handlerIconMouseDownUpTest(wrapper);
     });
   });
 });

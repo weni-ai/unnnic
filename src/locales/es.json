@@ -22,5 +22,24 @@
       "image": "Imagen",
       "audio": "Mensaje de audio"
     }
+  },
+  "emoji_picker": {
+    "title": "Elige tu emoji...",
+    "search": "Buscar",
+    "notfound": "No se encontró ningún emoji",
+    "categories": {
+      "search": "Resultados de búsqueda",
+      "recent": "Usados frecuentemente",
+      "smileys": "Caritas y Emociones",
+      "people": "Personas y Cuerpo",
+      "nature": "Animales y Naturaleza",
+      "foods": "Comidas y Bebidas",
+      "activity": "Actividades",
+      "places": "Viajes y Lugares",
+      "objects": "Objetos",
+      "symbols": "Símbolos",
+      "flags": "Banderas",
+      "custom": "Personalizados"
+    }
   }
 }

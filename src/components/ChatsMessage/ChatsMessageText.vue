@@ -1,18 +1,48 @@
 <template>
-  <p
-    class="unnnic-chats-message__text"
-    v-html="formattedText"
-  />
+  <section class="unnnic-chats-message__text__container">
+    <p
+      class="unnnic-chats-message__text"
+      v-html="formattedText"
+    />
+    <p
+      v-if="isAutomatic"
+      class="unnnic-chats-message__text--automatic"
+    >
+      {{ i18n('automatic_message') }}
+    </p>
+  </section>
 </template>
 
 <script>
+import UnnnicI18n from '../../mixins/i18n';
+
 export default {
   name: 'ChatsMessageText',
+  mixins: [UnnnicI18n],
   props: {
+    locale: {
+      type: String,
+      default: 'en',
+    },
     text: {
       type: String,
       required: true,
     },
+    isAutomatic: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  data() {
+    return {
+      defaultTranslations: {
+        automatic_message: {
+          'pt-br': 'Mensagem de abertura automática',
+          en: 'Automatic Opening Message',
+          es: 'Mensaje de apertura automático',
+        },
+      },
+    };
   },
   computed: {
     formattedText() {
@@ -22,14 +52,12 @@ export default {
       }
 
       function removeHtmlDangerousContent(text) {
-        // eslint-disable-next-line default-param-last
         return text.replace(
           /<(\/)?([^> ]+)( [^>]+)?>/gi,
           ($1, $2 = '', $3, $4 = '') => {
             if (['b', 'i', 'u', 'ul', 'li', 'br', 'div'].includes($3)) {
               const complements = [];
 
-              // eslint-disable-next-line no-restricted-syntax
               for (const i of $4.matchAll(
                 /((?<name1>[^ =]+)="(?<value1>[^"]*)"|(?<name2>[^ =]+)='(?<value2>[^"]*)')/g,
               )) {
@@ -39,7 +67,6 @@ export default {
                 if (name === 'style') {
                   const styles = [];
 
-                  // eslint-disable-next-line no-restricted-syntax
                   for (const j of value.matchAll(
                     /(?<propertyName>[^:]+):(?<propertyValue>[^;]+);?/g,
                   )) {
@@ -78,3 +105,30 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@use '@/assets/scss/unnnic' as *;
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.unnnic-chats-message__text {
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: $unnnic-spacing-sm;
+    padding: $unnnic-spacing-nano 0;
+    font-size: $unnnic-font-size-body-gt;
+    color: $unnnic-color-neutral-dark;
+    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
+    word-break: break-word;
+  }
+  &--automatic {
+    font-size: $unnnic-font-size-body-md;
+    line-height: $unnnic-line-height-caption-1;
+    color: $unnnic-color-aux-blue-500;
+  }
+}
+</style>

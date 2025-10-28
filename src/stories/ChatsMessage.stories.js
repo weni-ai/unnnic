@@ -103,6 +103,12 @@ export default {
 
 export const Default = { args: {} };
 
+export const Automatic = {
+  args: {
+    automatic: true,
+  },
+};
+
 export const Sending = {
   args: {
     status: 'sending',

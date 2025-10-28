@@ -3,6 +3,7 @@
     class="unnnic-chats-message"
     :class="{
       sent: type === 'sent',
+      automatic: automatic,
       sending: status === 'sending',
       'is-document': isDocument,
       'is-media': isMedia,
@@ -45,7 +46,9 @@
       />
       <UnnnicChatsMessageText
         v-if="isText"
+        :locale="locale"
         :text="slotText"
+        :isAutomatic="automatic"
       />
       <div
         v-if="isDocument"
@@ -156,6 +159,10 @@ export default {
   },
   mixins: [UnnnicI18n],
   props: {
+    locale: {
+      type: String,
+      default: 'en',
+    },
     enableReply: {
       type: Boolean,
       default: false,
@@ -170,6 +177,10 @@ export default {
       validate(type) {
         return ['received', 'sent'].includes(type);
       },
+    },
+    automatic: {
+      type: Boolean,
+      default: false,
     },
     time: {
       type: Date,
@@ -323,6 +334,10 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
   &.sent {
     background-color: #cff8f4;
+
+    &.automatic {
+      background-color: $unnnic-color-aux-blue-50;
+    }
   }
 
   &.sending {

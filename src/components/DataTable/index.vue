@@ -16,7 +16,7 @@
             {
               'unnnic-data-table__header-cell--clickable': header.isSortable,
               'unnnic-data-table__header-cell--sorting':
-                sort.header === header.title && sort.order !== '',
+                sortState.header === header.title && sortState.order !== '',
             },
           ]"
           @click.stop="handleClickHeader(header)"
@@ -31,12 +31,12 @@
           </template>
           <template v-if="header.isSortable">
             <IconArrowsDefault
-              v-if="sort.header !== header.title"
+              v-if="sortState.header !== header.title"
               class="order-default-icon"
               data-testid="arrow-default-icon"
             />
             <Icon
-              v-else-if="sort.order === 'asc'"
+              v-else-if="sortState.order === 'asc'"
               clickable
               size="ant"
               :icon="'switch_left'"
@@ -44,7 +44,7 @@
               data-testid="arrow-asc-icon"
             />
             <Icon
-              v-else-if="sort.order === 'desc'"
+              v-else-if="sortState.order === 'desc'"
               clickable
               size="ant"
               :icon="'switch_left'"
@@ -69,12 +69,19 @@
           'unnnic-data-table__body-row--loading',
         ]"
       >
-        <img
-          class="unnnic-data-table__body-cell--loading"
-          data-testid="body-row-loading"
-          src="../../assets/icons/weni-loading.svg"
-          height="40"
-        />
+        <td
+          :class="[
+            'unnnic-data-table__body-cell',
+            `unnnic-data-table__body-cell--${size}`,
+          ]"
+        >
+          <img
+            class="unnnic-data-table__body-cell--loading"
+            data-testid="body-row-loading"
+            src="../../assets/icons/weni-loading.svg"
+            height="40"
+          />
+        </td>
       </tr>
       <template v-else-if="props.items.length">
         <tr
@@ -116,7 +123,10 @@
       </template>
       <tr
         v-else
-        class="unnnic-data-table__body-row"
+        :class="[
+          'unnnic-data-table__body-row',
+          'unnnic-data-table__body-row--without-results',
+        ]"
       >
         <td
           v-if="slots['without-results']"
@@ -173,6 +183,12 @@ type DataTableItem = {
   [key: string]: any;
 };
 
+type SortState = {
+  header: string;
+  itemKey: string;
+  order: string;
+};
+
 interface Props {
   headers: DataTableHeader[];
   items: DataTableItem[];
@@ -188,6 +204,7 @@ interface Props {
   pageTotal?: number;
   pageInterval?: number;
   locale?: string;
+  sort?: SortState;
 }
 
 defineOptions({
@@ -197,12 +214,10 @@ defineOptions({
 const slots = useSlots();
 
 const emit = defineEmits<{
-  'update:sort': [sort: { header: string; order: string }];
+  'update:sort': [sort: { header: string; itemKey: string; order: string }];
   itemClick: [item: DataTableItem];
   'update:page': [page: number];
 }>();
-
-
 
 const props = withDefaults(defineProps<Props>(), {
   isLoading: false,
@@ -217,6 +232,7 @@ const props = withDefaults(defineProps<Props>(), {
   pageTotal: 0,
   pageInterval: 5,
   locale: 'en',
+  sort: undefined,
 });
 
 const defaultTranslations = {
@@ -243,9 +259,14 @@ const headersItemsKeys: ComputedRef<string[]> = computed(() => {
   return props.headers.map((header) => header.itemKey);
 });
 
-const sort = ref({
+const internalSort = ref({
   header: '',
+  itemKey: '',
   order: '',
+});
+
+const sortState = computed(() => {
+  return props.sort !== undefined ? props.sort : internalSort.value;
 });
 
 const getHeaderColumnSize = (header: DataTableHeader): string => {
@@ -262,9 +283,12 @@ const gridTemplateColumns: ComputedRef<string> = computed(() => {
   return columnSizes.join(' ');
 });
 
-const handleSort = (key: string, order: string) => {
-  sort.value = { header: key, order };
-  emit('update:sort', sort.value);
+const handleSort = (header: SortState, order: string) => {
+  if (props.sort === undefined) {
+    internalSort.value = { ...header, order };
+  }
+
+  emit('update:sort', { ...header, order });
 };
 
 const handleClickHeader = (header: DataTableHeader) => {
@@ -277,11 +301,16 @@ const handleClickHeader = (header: DataTableHeader) => {
   };
 
   const nextSort =
-    header.title !== sort.value.header
+    header.title !== sortState.value.header
       ? 'asc'
-      : nextSortOrderMapper[sort.value.order];
+      : nextSortOrderMapper[sortState.value.order];
 
-  handleSort(nextSort === '' ? '' : header.title, nextSort);
+  handleSort(
+    nextSort === ''
+      ? { header: '', itemKey: '', order: '' }
+      : { header: header.title, itemKey: header.itemKey, order: nextSort },
+    nextSort,
+  );
 };
 
 const handleClickRow = (item: DataTableItem) => {
@@ -398,7 +427,8 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
       grid-template-columns: v-bind(gridTemplateColumns);
 
-      &--loading {
+      &--loading,
+      &--without-results {
         grid-template-columns: 1fr;
       }
 
@@ -433,7 +463,7 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
     }
 
     &-cell--loading {
-      margin: $unnnic-spacing-xl 0;
+      margin: $unnnic-space-10 0;
       padding: 0;
 
       width: 100%;
