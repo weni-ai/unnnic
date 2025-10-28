@@ -83,6 +83,7 @@ export const Vertical = {
     state: 'vertical',
     label: 'Label',
     helper: 'Helper text',
+    labelTooltip: 'Tooltip text',
   },
 
   render: (args) => ({
