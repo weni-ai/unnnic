@@ -2,12 +2,13 @@
   <section :class="[
     'unnnic-radio-group__container',
     `unnnic-radio-group--state-${state}`
-    ]">
+  ]">
     <UnnnicLabel
       v-if="label"
       :label="label"
       :tooltip="labelTooltip"
       :useHtmlTooltip="labelUseHtmlTooltip"
+      class="unnnic-radio-group__label"
     />
 
     <section class="unnnic-radio-group__radios">
@@ -96,9 +97,11 @@ provide('contextName', computedName);
     flex-direction: column;
   }
 
-  &__radios {
-    margin-top: $unnnic-space-3;
+  &__label {
+    margin-bottom: $unnnic-space-3;
+  }
 
+  &__radios {
     display: flex;
     gap: $unnnic-space-4 $unnnic-space-6;
   }
