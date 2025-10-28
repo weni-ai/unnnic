@@ -482,6 +482,25 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/retry/-/retry-0.4.3.tgz"
   integrity sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==
 
+"@iconify-json/material-symbols@^1.2.43":
+  version "1.2.43"
+  resolved "https://registry.npmjs.org/@iconify-json/material-symbols/-/material-symbols-1.2.43.tgz"
+  integrity sha512-Atn0KzZkk96vZuSA//BEzwd9we8FUbifNIWxS9+ngPbWsZEKv1WAe+Gxle8BQjvnfIpewCP1opIeHKMxcNEmPw==
+  dependencies:
+    "@iconify/types" "*"
+
+"@iconify/types@*", "@iconify/types@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/@iconify/types/-/types-2.0.0.tgz"
+  integrity sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==
+
+"@iconify/vue@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/@iconify/vue/-/vue-5.0.0.tgz"
+  integrity sha512-C+KuEWIF5nSBrobFJhT//JS87OZ++QDORB6f2q2Wm6fl2mueSTpFBeBsveK0KW9hWiZ4mNiPjsh6Zs4jjdROSg==
+  dependencies:
+    "@iconify/types" "^2.0.0"
+
 "@internationalized/date@^3.5.0":
   version "3.10.0"
   resolved "https://registry.npmjs.org/@internationalized/date/-/date-3.10.0.tgz"

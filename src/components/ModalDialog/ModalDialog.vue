@@ -47,7 +47,8 @@
           <UnnnicIcon
             v-if="showCloseIcon"
             data-testid="close-icon"
-            icon="close"
+            icon="close-rounded"
+            scheme="neutral-cloudy"
             clickable
             @click="close()"
           />
