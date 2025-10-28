@@ -1,7 +1,6 @@
 import UnnnicIcon from '../components/Icon.vue';
-import icons from '../utils/icons';
 
-const iconsOptions = Object.keys(icons);
+const iconsOptions = ['add'];
 
 const schemes = [
   'background-solo',
