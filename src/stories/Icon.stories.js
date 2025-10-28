@@ -1,6 +1,15 @@
 import UnnnicIcon from '../components/Icon.vue';
 
-const iconsOptions = ['add', 'add-1', 'warning', 'bi:stars'];
+const iconsOptions = [
+  'add',
+  'add-1',
+  'warning',
+  'bi:stars',
+  'indicator',
+  'fitness-biceps-1',
+  'close-1',
+  'check-2',
+];
 
 const schemes = [
   'background-solo',
