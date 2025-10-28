@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Radio.vue > matches the snapshot 1`] = `
-"<section data-v-38c6bf5e="" class="unnnic-radio-container" size="md"><label data-v-38c6bf5e=""><input data-v-38c6bf5e="" class="unnnic-radio" type="radio">
+"<section data-v-38c6bf5e="" class="unnnic-radio-container" size="md"><label data-v-38c6bf5e=""><input data-v-38c6bf5e="" class="unnnic-radio" type="radio" name="">
     <p data-v-38c6bf5e="" class="unnnic-radio__label"> Option 1</p>
   </label></section>"
 `;
