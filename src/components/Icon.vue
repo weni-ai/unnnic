@@ -16,6 +16,21 @@
     @mouseup="(event) => $emit('mouseup', event)"
   />
 
+  <component
+    :is="customSvgIcon"
+    v-else-if="customSvgIcon"
+    :class="[
+      'unnnic-icon',
+      `unnnic-icon--size-svg-${size}`,
+      clickable ? 'unnnic--clickable' : '',
+      scheme ? `unnnic-icon-scheme--${scheme}` : '',
+    ]"
+    data-testid="old-map-icons"
+    @click="onClick"
+    @mousedown="(event) => $emit('mousedown', event)"
+    @mouseup="(event) => $emit('mouseup', event)"
+  />
+
   <span
     v-else-if="materialSymbolsName"
     :class="[
@@ -41,7 +56,10 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { Icon } from '@iconify/vue';
+
+import icons from '../utils/icons';
 import OldIconsMap from './Icon/OldIconsMap.json';
+
 import type { IconProps, IconSize } from './Icon/types';
 import type { SchemeColor } from '@/types/scheme-colors';
 
@@ -65,16 +83,16 @@ const emit = defineEmits<{
   mouseup: [event: Event];
 }>();
 
-const isIconify = computed(() => {
-  return props.icon?.includes(':') ?? false;
-});
+const isIconify = computed(
+  () => (props.icon as string)?.includes(':') ?? false,
+);
 
-const materialSymbolsName = computed(() => {
-  if (isIconify.value) return null;
-  return (
-    (OldIconsMap as Record<string, string>)[props.icon as string] || props.icon
-  );
-});
+const customSvgIcon = computed(() => icons[props.icon as string] ?? null);
+
+const materialSymbolsName = computed(
+  () =>
+    (OldIconsMap as Record<string, string>)[props.icon as string] || props.icon,
+);
 
 const onClick = (event: Event) => {
   if (!props.clickable) return;
@@ -139,6 +157,11 @@ $icon-sizes:
   @each $name, $size in $icon-sizes {
     &.unnnic-icon-size--#{$name} {
       font-size: $size;
+    }
+
+    &--size-svg-#{$name} {
+      width: $size;
+      height: $size;
     }
   }
 }
