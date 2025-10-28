@@ -1,20 +1,27 @@
 <template>
-  <Icon
-    v-if="iconifyIconName"
-    :icon="iconifyIconName"
-    :class="iconClasses"
-    :style="iconStyles"
-    v-bind="$attrs"
+  <span
+    v-if="materialSymbolsName"
+    :class="[
+      'material-symbols-rounded',
+      `unnnic-icon-scheme--${scheme}`,
+      `unnnic-icon-size--${size}`,
+      {
+        'unnnic--clickable': clickable,
+        'material-symbols-rounded--filled': filled,
+      },
+    ]"
+    data-testid="material-icon"
+    translate="no"
     @click="onClick"
     @mousedown="(event) => $emit('mousedown', event)"
     @mouseup="(event) => $emit('mouseup', event)"
-  />
+  >
+    {{ materialSymbolsName }}
+  </span>
 </template>
 
 <script setup lang="ts">
-import { Icon, loadIcon } from '@iconify/vue';
-import { iconSizeTokens } from '@/assets/tokens/iconSizeTokens';
-import { computed, ref, watch } from 'vue';
+import { computed } from 'vue';
 import OldIconsMap from './Icon/OldIconsMap.json';
 import type { IconProps, IconSize } from './Icon/types';
 import type { SchemeColor } from '@/types/scheme-colors';
@@ -39,150 +46,11 @@ const emit = defineEmits<{
   mouseup: [event: Event];
 }>();
 
-// Icon size mapping (in pixels)
-const iconSizeMap: Record<IconSize, string> = {
-  nano: iconSizeTokens['3'],
-  xs: iconSizeTokens['3'],
-  sm: iconSizeTokens['4'],
-  ant: iconSizeTokens['5'],
-  md: iconSizeTokens['6'],
-  lg: iconSizeTokens['7'],
-  xl: iconSizeTokens['10'],
-  'avatar-nano': iconSizeTokens['5'],
-  'avatar-xs': iconSizeTokens['7'],
-  'avatar-sm': iconSizeTokens['10'],
-  'avatar-md': '72px',
-  'avatar-lg': '104px',
-};
-
-// State to track if icon should use fallback (-rounded instead of -outline-rounded)
-const shouldUseFallback = ref<Record<string, boolean>>({});
-
-/**
- * Builds the Material Symbols icon name with appropriate suffix
- */
-const buildMaterialSymbolsIcon = (
-  baseName: string,
-  filled: boolean,
-  useFallback = false,
-) => {
-  const prefix = 'material-symbols';
-  const normalizedName = baseName.replace(/_/g, '-');
-
-  // If icon already has -rounded or -outline-rounded suffix, use it as-is
-  if (
-    normalizedName.endsWith('-rounded') ||
-    normalizedName.endsWith('-outline-rounded')
-  ) {
-    return `${prefix}:${normalizedName}`;
-  }
-
-  if (filled) {
-    return `${prefix}:${normalizedName}-rounded`;
-  }
-
-  // For outline: use -rounded if fallback, otherwise -outline-rounded
-  const suffix = useFallback ? '-rounded' : '-outline-rounded';
-  return `${prefix}:${normalizedName}${suffix}`;
-};
-
-/**
- * Main computed property that returns the icon name
- * Renders immediately with default suffix, fallback is applied if needed
- */
-const iconifyIconName = computed(() => {
-  if (!props.icon) return null;
-
-  const iconName = props.icon as string;
-
-  // 1. Direct Iconify format (e.g., "mdi:heart", "lucide:star")
-  if (iconName.includes(':')) {
-    return iconName;
-  }
-
-  // 2. Get the base icon name (from OldIconsMap or use as-is)
-  const mappedIcon = (OldIconsMap as Record<string, string>)[iconName];
-  console.log('iconName', iconName);
-  console.log('mappedIcon', mappedIcon);
-
-  const baseName = mappedIcon || iconName;
-
-  // 3. Build Material Symbols icon with fallback state
-  const cacheKey = `${baseName}-${props.filled}`;
-  const useFallback = shouldUseFallback.value[cacheKey] || false;
-
-  return buildMaterialSymbolsIcon(baseName, props.filled, useFallback);
+const materialSymbolsName = computed(() => {
+  return (
+    (OldIconsMap as Record<string, string>)[props.icon as string] || props.icon
+  );
 });
-
-/**
- * Watch for icon or filled prop changes
- * Validates icon availability in parallel and switches to fallback if needed
- */
-watch(
-  () => [props.icon, props.filled] as const,
-  async ([newIcon, newFilled]) => {
-    if (!newIcon) return;
-
-    const iconName = newIcon as string;
-
-    // Skip validation for direct Iconify format
-    if (iconName.includes(':')) return;
-
-    // Skip validation for filled icons (always use -rounded)
-    if (newFilled) return;
-
-    // Get the base icon name
-    const mappedIcon = (OldIconsMap as Record<string, string>)[iconName];
-    const baseName = mappedIcon || iconName;
-    const normalizedName = baseName.replace(/_/g, '-');
-
-    // Skip validation if icon already has -rounded or -outline-rounded suffix
-    if (
-      normalizedName.endsWith('-rounded') ||
-      normalizedName.endsWith('-outline-rounded')
-    ) {
-      return;
-    }
-
-    const cacheKey = `${baseName}-${newFilled}`;
-
-    // Build the primary icon name with -outline-rounded
-    const primaryIcon = buildMaterialSymbolsIcon(baseName, newFilled, false);
-
-    try {
-      // Try to load the icon with -outline-rounded
-      await loadIcon(primaryIcon);
-      // Success: ensure fallback is not used
-      if (shouldUseFallback.value[cacheKey]) {
-        shouldUseFallback.value[cacheKey] = false;
-      }
-    } catch {
-      // Failed: switch to fallback (-rounded)
-      shouldUseFallback.value[cacheKey] = true;
-    }
-  },
-  { immediate: true },
-);
-
-const iconClasses = computed(() => [
-  'unnnic-icon',
-  `unnnic-icon-size--${props.size}`,
-  `unnnic-icon-scheme--${props.scheme}`,
-  {
-    'unnnic--clickable': props.clickable,
-  },
-  'material-symbols-rounded',
-]);
-
-const iconStyles = computed(() => ({
-  fontSize: iconSizeMap[props.size],
-  width: iconSizeMap[props.size],
-  height: iconSizeMap[props.size],
-  minWidth: iconSizeMap[props.size],
-  minHeight: iconSizeMap[props.size],
-  display: 'inline-block',
-  verticalAlign: 'middle',
-}));
 
 const onClick = (event: Event) => {
   if (!props.clickable) return;
@@ -193,32 +61,76 @@ const onClick = (event: Event) => {
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
-.unnnic-icon {
-  position: relative;
-  line-height: 1;
-
-  :deep(svg) {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
+.unnnic-icon :deep(svg) {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>
 
 <style lang="scss">
 @use '@/assets/scss/unnnic' as *;
+@use '@/assets/scss/icon-sizes' as *;
 
-@each $name, $color in $unnnic-scheme-colors {
-  .unnnic-icon-scheme--#{$name} {
-    color: $color;
+$icon-sizes:
+  'xs' $unnnic-icon-size-3,
+  'sm' $unnnic-icon-size-4,
+  'ant' $unnnic-icon-size-5,
+  'md' $unnnic-icon-size-6,
+  'lg' $unnnic-icon-size-7,
+  'xl' $unnnic-icon-size-10,
+  'avatar-nano' $unnnic-icon-size-5,
+  'avatar-xs' $unnnic-icon-size-7,
+  'avatar-sm' $unnnic-icon-size-10,
+  'avatar-md' '72px',
+  'avatar-lg' '104px';
 
-    :deep(svg) {
+@font-face {
+  font-family: 'Material Symbols Rounded';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../assets/fonts/Material Symbols Rounded.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Material Symbols Rounded Filled';
+  font-style: normal;
+  font-weight: 300;
+  src: url('../assets/fonts/Material Symbols Rounded Filled.woff2')
+    format('woff2');
+}
+
+.material-symbols-rounded {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+
+  &--filled {
+    font-family: 'Material Symbols Rounded Filled';
+  }
+
+  @each $name, $color in $unnnic-scheme-colors {
+    &.unnnic-icon-scheme--#{$name} {
       color: $color;
     }
   }
-}
 
-.unnnic--clickable {
-  cursor: pointer;
+  @each $name, $size in $icon-sizes {
+    &.unnnic-icon-size--#{$name} {
+      font-size: $size;
+    }
+  }
 }
 </style>

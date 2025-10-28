@@ -9,7 +9,7 @@
           <div :class="['header', `header--${size}`]">
             <UnnnicButton
               size="small"
-              :iconCenter="`arrow_${index === 0 ? 'back_ios_new_rounded' : 'forward_ios_rounded'}`"
+              :iconCenter="`keyboard_arrow_${index === 0 ? 'left' : 'right'}`"
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: `${index === 0 ? 'left' : 'right'}-button` }"
