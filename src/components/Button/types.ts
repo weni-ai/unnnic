@@ -16,7 +16,6 @@ export interface ButtonProps {
   iconRight?: string;
   iconCenter?: string;
   iconsFilled?: boolean;
-  next?: boolean;
   disabled?: boolean;
   loading?: boolean;
 }
