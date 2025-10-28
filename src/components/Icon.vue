@@ -1,7 +1,25 @@
 <template>
-  <span
-    v-if="materialSymbolsName"
+  <Icon
+    v-if="isIconify"
+    :icon="props.icon as string"
     :class="[
+      'unnnic-icon',
+      `unnnic-icon-scheme--${scheme}`,
+      `unnnic-icon-size--${size}`,
+      {
+        'unnnic--clickable': clickable,
+      },
+    ]"
+    data-testid="iconify-icon"
+    @click="onClick"
+    @mousedown="(event) => $emit('mousedown', event)"
+    @mouseup="(event) => $emit('mouseup', event)"
+  />
+
+  <span
+    v-else-if="materialSymbolsName"
+    :class="[
+      'unnnic-icon',
       'material-symbols-rounded',
       `unnnic-icon-scheme--${scheme}`,
       `unnnic-icon-size--${size}`,
@@ -22,6 +40,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { Icon } from '@iconify/vue';
 import OldIconsMap from './Icon/OldIconsMap.json';
 import type { IconProps, IconSize } from './Icon/types';
 import type { SchemeColor } from '@/types/scheme-colors';
@@ -46,7 +65,12 @@ const emit = defineEmits<{
   mouseup: [event: Event];
 }>();
 
+const isIconify = computed(() => {
+  return props.icon?.includes(':') ?? false;
+});
+
 const materialSymbolsName = computed(() => {
+  if (isIconify.value) return null;
   return (
     (OldIconsMap as Record<string, string>)[props.icon as string] || props.icon
   );
@@ -61,10 +85,15 @@ const onClick = (event: Event) => {
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
-.unnnic-icon :deep(svg) {
-  position: absolute;
-  top: 0;
-  left: 0;
+.unnnic-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  :deep(svg) {
+    width: 1em;
+    height: 1em;
+  }
 }
 </style>
 
@@ -100,6 +129,20 @@ $icon-sizes:
     format('woff2');
 }
 
+.unnnic-icon {
+  @each $name, $color in $unnnic-scheme-colors {
+    &.unnnic-icon-scheme--#{$name} {
+      color: $color;
+    }
+  }
+
+  @each $name, $size in $icon-sizes {
+    &.unnnic-icon-size--#{$name} {
+      font-size: $size;
+    }
+  }
+}
+
 .material-symbols-rounded {
   font-family: 'Material Symbols Rounded';
   font-weight: normal;
@@ -119,18 +162,6 @@ $icon-sizes:
 
   &--filled {
     font-family: 'Material Symbols Rounded Filled';
-  }
-
-  @each $name, $color in $unnnic-scheme-colors {
-    &.unnnic-icon-scheme--#{$name} {
-      color: $color;
-    }
-  }
-
-  @each $name, $size in $icon-sizes {
-    &.unnnic-icon-size--#{$name} {
-      font-size: $size;
-    }
   }
 }
 </style>
