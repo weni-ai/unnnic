@@ -1,6 +1,6 @@
 import UnnnicIcon from '../components/Icon.vue';
 
-const iconsOptions = ['add'];
+const iconsOptions = ['add', 'add-1', 'warning', 'bi:stars'];
 
 const schemes = [
   'background-solo',
@@ -93,27 +93,27 @@ const schemes = [
 ];
 
 export default {
-  title: 'example/Icon',
+  title: 'Misc/Icon',
   component: UnnnicIcon,
   argTypes: {
-    scheme: { control: { type: 'select', options: schemes } },
+    scheme: { control: { type: 'select' }, options: schemes },
     size: {
       control: {
         type: 'select',
-        options: [
-          'nano',
-          'xs',
-          'sm',
-          'md',
-          'lg',
-          'avatar-lg',
-          'avatar-md',
-          'avatar-sm',
-          'avatar-xs',
-          'avatar-nano',
-        ],
       },
+      options: [
+        'xs',
+        'sm',
+        'md',
+        'lg',
+        'avatar-lg',
+        'avatar-md',
+        'avatar-sm',
+        'avatar-xs',
+        'avatar-nano',
+      ],
     },
+    icon: { control: { type: 'select' }, options: iconsOptions },
   },
 };
 
