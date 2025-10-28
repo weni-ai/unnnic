@@ -18,44 +18,25 @@
   >
     {{ materialSymbolsName }}
   </span>
-
-  <component
-    :is="svg"
-    v-else
-    :class="[
-      'unnnic-icon',
-      `unnnic-icon__size--${size}`,
-      clickable ? 'unnnic--clickable' : '',
-      lineHeight ? `unnnic-icon__line-height--${lineHeight}` : '',
-      scheme ? `unnnic-icon-scheme--${scheme}` : '',
-    ]"
-    data-testid="old-map-icons"
-    @click="onClick"
-    @mousedown="(event) => $emit('mousedown', event)"
-    @mouseup="(event) => $emit('mouseup', event)"
-  />
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import icons from '../utils/icons';
 import OldIconsMap from './Icon/OldIconsMap.json';
-import type { IconProps, IconSize, LineHeight } from './Icon/types';
+import type { IconProps, IconSize } from './Icon/types';
 import type { SchemeColor } from '@/types/scheme-colors';
 
 defineOptions({
   name: 'UnnnicIcon',
 });
 
-export type { IconProps, IconSize, LineHeight, SchemeColor };
+export type { IconProps, IconSize, SchemeColor };
 
 const props = withDefaults(defineProps<IconProps>(), {
   filled: false,
-  next: false,
   icon: null,
   clickable: false,
   size: 'md',
-  lineHeight: null,
   scheme: 'neutral-darkest',
 });
 
@@ -65,15 +46,7 @@ const emit = defineEmits<{
   mouseup: [event: Event];
 }>();
 
-const svg = computed(() => {
-  return icons[props.icon as string];
-});
-
 const materialSymbolsName = computed(() => {
-  if (Object.keys(icons).includes(props.icon as string) && !props.next) {
-    return null;
-  }
-
   return (
     (OldIconsMap as Record<string, string>)[props.icon as string] || props.icon
   );
@@ -157,52 +130,6 @@ $icon-sizes:
     &.unnnic-icon-size--#{$name} {
       font-size: $size;
     }
-  }
-}
-
-@each $name, $color in $scheme-colors {
-  .unnnic-icon-scheme {
-    &--#{$name} {
-      & .primary {
-        fill: $color;
-      }
-
-      & .primary-stroke {
-        stroke: $color;
-      }
-    }
-  }
-}
-
-$line-heights:
-  'sm' $unnnic-line-height-small,
-  'md' $unnnic-line-height-medium,
-  'lg' $unnnic-line-height-large;
-
-.unnnic-icon {
-  position: relative;
-  display: inline-block;
-  vertical-align: middle;
-
-  @each $name, $size in $icon-sizes {
-    &__size--#{$name} {
-      width: $size;
-      height: $size;
-      min-width: $size;
-      min-height: $size;
-
-      @each $line-name, $line-size in $line-heights {
-        &.unnnic-icon__line-height--#{$line-name} svg {
-          position: relative;
-          top: calc(($size + $line-size) - ($size * 1.2)) / 1.2;
-        }
-      }
-    }
-  }
-
-  svg {
-    width: 100%;
-    height: 100%;
   }
 }
 </style>
