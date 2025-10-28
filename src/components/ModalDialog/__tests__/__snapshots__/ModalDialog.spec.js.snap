@@ -11,7 +11,7 @@ exports[`ModalDialog.vue > Elements rendering > matches the snapshot 1`] = `
           <unnnic-icon-stub data-v-68ebadeb="" filled="false" next="false" icon="test-icon" clickable="false" size="md" scheme="neutral-darkest" data-testid="title-icon" class="unnnic-modal-dialog__container__title-icon"></unnnic-icon-stub>
           <h1 data-v-68ebadeb="" class="unnnic-modal-dialog__container__title-text" data-testid="title-text">Test Title</h1>
         </section>
-        <unnnic-icon-stub data-v-68ebadeb="" filled="false" next="false" icon="close" clickable="true" size="md" scheme="neutral-darkest" data-testid="close-icon"></unnnic-icon-stub>
+        <unnnic-icon-stub data-v-68ebadeb="" filled="false" next="false" icon="close" clickable="true" size="md" scheme="neutral-cloudy" data-testid="close-icon"></unnnic-icon-stub>
       </header>
       <section data-v-68ebadeb="" class="unnnic-modal-dialog__container__content"></section>
       <section data-v-68ebadeb="" data-testid="actions-section" class="unnnic-modal-dialog__container__actions">
