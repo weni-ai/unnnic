@@ -25,12 +25,14 @@ export default {
     modelValue: { control: { type: ['string', 'number'] } },
     name: { control: { type: 'text' } },
     state: { control: 'select', options: ['horizontal', 'vertical'] },
+    helper: { control: { type: 'text' } },
   },
 };
 
 export const Default = {
   args: {
     label: 'Radio Group 1',
+    helper: 'Helper text',
   },
 
   render: (args) => ({
@@ -77,6 +79,7 @@ export const Horizontal = {
     state: 'horizontal',
     label: 'Label',
     name: 'Radio Group 1',
+    helper: 'Helper text',
   },
 
   render: (args) => ({
@@ -109,7 +112,9 @@ export const Vertical = {
   args: {
     state: 'vertical',
     label: 'Label',
+    labelTooltip: 'Tooltip',
     name: 'Radio Group 2',
+    helper: 'Helper text',
   },
 
   render: (args) => ({
