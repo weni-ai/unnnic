@@ -1,9 +1,8 @@
 import unnnicModalNext from '../components/ModalNext/ModalNext.vue';
-import icons from '../utils/icons';
 
 import { action } from '@storybook/addon-actions';
 
-const iconsOptions = Object.keys(icons);
+const iconsOptions = [];
 
 const schemesOptions = [
   'feedback-red',
