@@ -105,15 +105,10 @@ const onClick = (event: Event) => {
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
-.unnnic-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  :deep(svg) {
-    width: 1em;
-    height: 1em;
-  }
+.unnnic-icon :deep(svg) {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>
 
