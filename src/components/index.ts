@@ -93,6 +93,8 @@ import Chip from './Chip/Chip.vue';
 import Popover from './ui/popover/Popover.vue';
 import PopoverContent from './ui/popover/PopoverContent.vue';
 import PopoverTrigger from './ui/popover/PopoverTrigger.vue';
+import TemplatePreview from './TemplatePreview/TemplatePreview.vue';
+import TemplatePreviewModal from './TemplatePreview/TemplatePreviewModal.vue';
 
 type VueComponent = Component;
 
@@ -191,6 +193,8 @@ export const components: ComponentsMap = {
   unnnicTour: Tour,
   unnnicNavigator: Navigator,
   unnnicSelectTime: SelectTime,
+  unnnicTemplatePreview: TemplatePreview,
+  unnnicTemplatePreviewModal: TemplatePreviewModal,
   unnnicDataTable: DataTable,
   unnnicChip: Chip,
   unnnicPopover: Popover,
@@ -294,6 +298,8 @@ export const unnnicChip = Chip;
 export const unnnicPopover = Popover;
 export const unnnicPopoverContent = PopoverContent;
 export const unnnicPopoverTrigger = PopoverTrigger;
+export const unnnicTemplatePreview = TemplatePreview as VueComponent;
+export const unnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
 
 export const UnnnicFontSize = fontSize;
 export const UnnnicFormElement = formElement;
@@ -391,3 +397,5 @@ export const UnnnicChip = Chip;
 export const UnnnicPopover = Popover;
 export const UnnnicPopoverContent = PopoverContent;
 export const UnnnicPopoverTrigger = PopoverTrigger;
+export const UnnnicTemplatePreview = TemplatePreview as VueComponent;
+export const UnnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
