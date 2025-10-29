@@ -150,6 +150,15 @@ $icon-sizes:
 }
 
 .unnnic-icon {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
   @each $name, $color in $unnnic-scheme-colors {
     &.unnnic-icon-scheme--#{$name} {
       color: $color;
