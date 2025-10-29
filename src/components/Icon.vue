@@ -22,10 +22,11 @@
     :class="[
       'unnnic-icon',
       `unnnic-icon--size-svg-${size}`,
+      `unnnic-icon__size--${size}`,
       clickable ? 'unnnic--clickable' : '',
       scheme ? `unnnic-icon-scheme--${scheme}` : '',
     ]"
-    data-testid="old-map-icons"
+    data-testid="custom-icon"
     @click="onClick"
     @mousedown="(event) => $emit('mousedown', event)"
     @mouseup="(event) => $emit('mouseup', event)"
@@ -38,6 +39,7 @@
       'material-symbols-rounded',
       `unnnic-icon-scheme--${scheme}`,
       `unnnic-icon-size--${size}`,
+      `unnnic-icon__size--${size}`,
       {
         'unnnic--clickable': clickable,
         'material-symbols-rounded--filled': filled,
@@ -103,15 +105,10 @@ const onClick = (event: Event) => {
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
-.unnnic-icon {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  :deep(svg) {
-    width: 1em;
-    height: 1em;
-  }
+.unnnic-icon :deep(svg) {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 </style>
 
@@ -148,9 +145,26 @@ $icon-sizes:
 }
 
 .unnnic-icon {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+
   @each $name, $color in $unnnic-scheme-colors {
     &.unnnic-icon-scheme--#{$name} {
       color: $color;
+
+      & .primary {
+        fill: $color;
+      }
+
+      & .primary-stroke {
+        stroke: $color;
+      }
     }
   }
 
