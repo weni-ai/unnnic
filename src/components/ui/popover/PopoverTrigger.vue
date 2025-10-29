@@ -6,7 +6,18 @@ const props = defineProps<PopoverTriggerProps>();
 </script>
 
 <template>
-  <PopoverTrigger v-bind="props">
+  <PopoverTrigger
+    v-bind="props"
+    class="unnnic-popover-trigger"
+  >
     <slot />
   </PopoverTrigger>
 </template>
+
+<style scoped>
+.unnnic-popover-trigger {
+  border: none;
+  background: transparent;
+  padding: 0;
+}
+</style>

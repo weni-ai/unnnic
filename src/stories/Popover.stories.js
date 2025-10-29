@@ -212,7 +212,7 @@ export const Placements = {
       <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; padding: 100px;">
         <Popover>
           <PopoverTrigger>
-            <UnnnicButton text="Top" />
+            <UnnnicButton text="Top" style="width: 100%;" />
           </PopoverTrigger>
           <PopoverContent side="top" align="center">
             <p style="margin: 0;">Popover on top</p>
@@ -221,7 +221,7 @@ export const Placements = {
 
         <Popover>
           <PopoverTrigger>
-            <UnnnicButton text="Bottom" />
+            <UnnnicButton text="Bottom" style="width: 100%;" />
           </PopoverTrigger>
           <PopoverContent side="bottom" align="center">
             <p style="margin: 0;">Popover on bottom</p>
@@ -230,19 +230,19 @@ export const Placements = {
 
         <Popover>
           <PopoverTrigger>
-            <UnnnicButton text="Left" />
+            <UnnnicButton text="Right" style="width: 100%;" />
           </PopoverTrigger>
-          <PopoverContent side="left" align="center">
-            <p style="margin: 0;">Popover on left</p>
+          <PopoverContent side="right" align="center">
+            <p style="margin: 0;">Popover on right</p>
           </PopoverContent>
         </Popover>
 
         <Popover>
           <PopoverTrigger>
-            <UnnnicButton text="Right" />
+            <UnnnicButton text="Left" style="width: 100%;" />
           </PopoverTrigger>
-          <PopoverContent side="right" align="center">
-            <p style="margin: 0;">Popover on right</p>
+          <PopoverContent side="left" align="center">
+            <p style="margin: 0;">Popover on left</p>
           </PopoverContent>
         </Popover>
       </div>
