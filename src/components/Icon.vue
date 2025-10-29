@@ -26,7 +26,7 @@
       clickable ? 'unnnic--clickable' : '',
       scheme ? `unnnic-icon-scheme--${scheme}` : '',
     ]"
-    data-testid="old-map-icons"
+    data-testid="custom-icon"
     @click="onClick"
     @mousedown="(event) => $emit('mousedown', event)"
     @mouseup="(event) => $emit('mouseup', event)"
