@@ -309,7 +309,6 @@ export const unnnicPopoverContent = PopoverContent;
 export const unnnicPopoverTrigger = PopoverTrigger;
 
 export const UnnnicFontSize = fontSize;
-export const UnnnicFormElement = formElement;
 export const UnnnicInput = input;
 export const UnnnicInputNext = inputNext;
 export const UnnnicInputDatePicker = inputDatePicker;

@@ -2,6 +2,7 @@
   <Transition
     name="toast-slide"
     appear
+    data-testid="toast-transition"
     @after-leave="$emit('destroy')"
   >
     <aside
@@ -9,10 +10,16 @@
       :class="['unnnic-toast', `unnnic-toast--${type}`]"
       :role="type === 'error' ? 'alert' : 'status'"
       :aria-live="type === 'error' ? 'assertive' : 'polite'"
-      data-testid="unnnic-toast"
+      data-testid="toast"
     >
-      <section class="unnnic-toast__content">
-        <header class="unnnic-toast__header">
+      <section
+        class="unnnic-toast__content"
+        data-testid="toast-content"
+      >
+        <header
+          class="unnnic-toast__header"
+          data-testid="toast-header"
+        >
           <UnnnicIcon
             :icon="typeConfig.icon"
             :scheme="typeConfig.scheme"
@@ -20,7 +27,10 @@
             data-testid="toast-type-icon"
           />
 
-          <h3 class="unnnic-toast__title">
+          <h3
+            class="unnnic-toast__title"
+            data-testid="toast-title"
+          >
             {{ title }}
           </h3>
 
@@ -30,15 +40,15 @@
             size="ant"
             clickable
             class="unnnic-toast__close"
-            data-testid="toast-close-button"
+            data-testid="toast-close-icon"
             @click="handleClose"
             @keydown.enter="handleClose"
-            @keydown.space.prevent="handleClose"
           />
         </header>
 
         <p
           v-if="description"
+          data-testid="toast-text"
           class="unnnic-toast__text"
         >
           {{ description }}
@@ -147,7 +157,7 @@ onUnmounted(() => {
   display: flex;
   align-items: flex-end;
   flex-direction: column;
-  gap: $unnnic-space-5;
+  gap: $unnnic-space-2;
 
   min-width: 250px;
   max-width: 450px;
