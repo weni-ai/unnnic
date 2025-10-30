@@ -3,9 +3,9 @@ import type { HTMLAttributes } from 'vue';
 import { cn } from '@/lib/utils';
 
 const props = withDefaults(
-  defineProps<{ class?: HTMLAttributes['class']; withDivider?: boolean }>(),
+  defineProps<{ class?: HTMLAttributes['class']; divider?: boolean }>(),
   {
-    withDivider: true,
+    divider: true,
   },
 );
 </script>
@@ -15,7 +15,7 @@ const props = withDefaults(
     :class="
       cn(
         'unnnic-dialog-footer',
-        { 'unnnic-dialog-footer--with-divider': props.withDivider },
+        { 'unnnic-dialog-footer--with-divider': props.divider },
         props.class,
       )
     "

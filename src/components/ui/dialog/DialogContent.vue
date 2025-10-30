@@ -61,18 +61,24 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
+  background: rgba(53, 57, 69, 0.5);
 }
 
 .unnnic-dialog-content {
-  position: fixed;
   z-index: 10000;
 
+  position: fixed;
   top: 50%;
   left: 50%;
+
   transform: translate(-50%, -50%);
 
   width: 100%;
+  max-height: calc(100% - $unnnic-space-20);
+
+  display: flex;
+  flex-direction: column;
+
   box-shadow: $unnnic-shadow-2;
   border-radius: $unnnic-radius-4;
   background-color: $unnnic-color-bg-base;
@@ -87,6 +93,22 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
   &--size-large {
     max-width: 800px;
+  }
+
+  > * {
+    &::-webkit-scrollbar {
+      width: $unnnic-spacing-inline-nano;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $unnnic-color-neutral-cleanest;
+      border-radius: $unnnic-border-radius-pill;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $unnnic-color-neutral-soft;
+      border-radius: $unnnic-border-radius-pill;
+    }
   }
 }
 </style>
