@@ -1,11 +1,13 @@
 <template>
   <UnnnicDialog
     :open="modelValue"
+    data-testid="modal-dialog"
     @update:open="$emit('update:modelValue', $event)"
   >
     <UnnnicDialogContent
       :size="size === 'sm' ? 'small' : size === 'lg' ? 'large' : 'medium'"
       class="unnnic-modal-dialog__container"
+      data-testid="modal-container"
       @escape-key-down="persistentHandler"
       @pointer-down-outside="persistentHandler"
     >
@@ -47,6 +49,7 @@
             },
           ]"
           :divider="showActionsDivider"
+          data-testid="actions-section"
         >
           <UnnnicButton
             v-if="!hideSecondaryButton"
