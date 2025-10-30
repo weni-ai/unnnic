@@ -92,6 +92,8 @@ import DataTable from './DataTable/index.vue';
 import Chip from './Chip/Chip.vue';
 import Toast from './Toast/Toast.vue';
 import { toast } from './Toast/ToastManager';
+import TemplatePreview from './TemplatePreview/TemplatePreview.vue';
+import TemplatePreviewModal from './TemplatePreview/TemplatePreviewModal.vue';
 
 type VueComponent = Component;
 
@@ -190,6 +192,8 @@ export const components: ComponentsMap = {
   unnnicTour: Tour,
   unnnicNavigator: Navigator,
   unnnicSelectTime: SelectTime,
+  unnnicTemplatePreview: TemplatePreview,
+  unnnicTemplatePreviewModal: TemplatePreviewModal,
   unnnicDataTable: DataTable,
   unnnicChip: Chip,
   unnnicToast: Toast,
@@ -291,9 +295,10 @@ export const unnnicSelectTime = SelectTime as VueComponent;
 export const unnnicChip = Chip;
 export const unnnicToast = Toast;
 export const unnnicToastManager = toast;
+export const unnnicTemplatePreview = TemplatePreview as VueComponent;
+export const unnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
 
 export const UnnnicFontSize = fontSize;
-export const UnnnicFormElement = formElement;
 export const UnnnicInput = input;
 export const UnnnicInputNext = inputNext;
 export const UnnnicInputDatePicker = inputDatePicker;
@@ -387,3 +392,5 @@ export const UnnnicSelectTime = SelectTime as VueComponent;
 export const UnnnicChip = Chip;
 export const UnnnicToast = Toast;
 export const UnnnicToastManager = toast;
+export const UnnnicTemplatePreview = TemplatePreview as VueComponent;
+export const UnnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;

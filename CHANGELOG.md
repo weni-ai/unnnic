@@ -5,6 +5,93 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.5.2 (2025-10-29)
+
+### Fixed
+
+- **Tailwind CSS**: Disabled Tailwind CSS preflight styles to prevent base styles from affecting existing components (fixes unexpected behavior in TableNext loading icon)
+
+# 3.5.1 (2025-10-29)
+
+### Fixed
+
+- **Color Tokens**: Fixed `brand-weni-soft` color token referencing incorrect color after applying new color tokens (updated from `teal-100` to `teal-600` in scheme-colors)
+
+# 3.5.0 (2025-10-28)
+
+### Added
+- **Template Preview**: Add template preview compontents
+
+# 3.4.0 (2025-10-23)
+
+### Added
+
+- **shadcn-vue Integration**: Integrated shadcn-vue component library with Tailwind CSS v3
+  - **Tailwind CSS v3**: Added Tailwind CSS v3 with CSS-first configuration approach
+  - **shadcn-vue CLI**: Integrated shadcn-vue CLI for component scaffolding
+  - **Component Library**: Added Reka UI as the headless component foundation
+  - **Utility Libraries**: Added class-variance-authority, clsx, and tailwind-merge for component styling
+  - **Design Token Integration**: Mapped unnnic design tokens to Tailwind via CSS variables
+
+### Changed
+
+- **Main Entry**: Updated `src/main.ts` to import Tailwind CSS styles
+- **Color System**: Exposed all unnnic color tokens as HSL
+
+### Technical Details
+
+- **Dependencies Added**:
+  - `tailwindcss@3.4.18` - CSS framework
+  - `postcss` - CSS processor
+  - `autoprefixer` - PostCSS plugin
+  - `tailwindcss-animate` - Animation utilities
+  - `class-variance-authority` - Variant management
+  - `clsx` - Class concatenation utility
+  - `tailwind-merge` - Smart class merging
+  - `reka-ui` - Headless UI components
+  - `ajv` - JSON schema validator
+
+- **Files Created**:
+  - `tailwind.config.js` - Tailwind configuration with unnnic token mapping
+  - `postcss.config.cjs` - PostCSS configuration
+  - `components.json` - shadcn-vue CLI configuration
+
+# 3.3.3 (2025-10-22)
+
+### Fixed
+
+- **Style Dictionary**: Regenerated design tokens to properly export `bg-info` and `bg-success` scheme color updates to the token system
+
+# 3.3.2 (2025-10-17)
+
+### Changed
+- **Scheme Colors**:
+  - **Updated `bg-info` token**: Changed from blue-100 to blue-50
+  - **Updated `bg-success` token**: Changed from green-100 to green-50
+  - **Expanded color scheme**: Added missing color token definitions to ensure complete coverage of the design system
+
+# 3.3.1 (2025-10-17)
+
+### Added
+
+- **DataTable**: Added optional `sort` prop for external sort state control:
+  - **Controlled Mode**: Pass `sort` prop to control sort state externally
+  - **Uncontrolled Mode**: Component manages sort state internally (default behavior)
+  - **v-model Support**: Full support for `v-model:sort` pattern
+  - **Backward Compatible**: Existing implementations continue working without changes
+
+# 3.3.0 (2025-10-15)
+- **Chart Funnel**: Added two items variation
+
+# 3.2.9 (2025-10-14)
+
+### Fixed
+
+- **Chip Component**: Fixed layout shift issue when border state changes:
+  - **Consistent Sizing**: Component now maintains consistent dimensions regardless of border visibility
+  - **Smooth Transitions**: Eliminated visual "jumps" when toggling between selected/unselected states
+- **ESLint Configuration**: Update ESLint configuration and project package.json to use CommonJS
+
 # 3.2.8 (2025-09-25)
 
 ### Changed

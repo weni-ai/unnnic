@@ -1,5 +1,6 @@
 import type { App } from 'vue';
 import { components } from '@/components';
+import './assets/scss/tailwind.scss';
 
 interface UnnnicPlugin {
   install(app: App): void;

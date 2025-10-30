@@ -35,12 +35,21 @@ export default defineConfig({
       skipDiagnostics: true,
     }),
   ],
+  css: {
+    postcss: './postcss.config.cjs',
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler',
+      },
+    },
+  },
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'Unnnic',
       fileName: 'unnnic',
     },
+    cssCodeSplit: false,
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'src/index.ts'),
@@ -49,6 +58,10 @@ export default defineConfig({
       output: {
         globals: {
           vue: 'Vue',
+        },
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name === 'style.css') return 'style.css';
+          return assetInfo.name;
         },
       },
     },
