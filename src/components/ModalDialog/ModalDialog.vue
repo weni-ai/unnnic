@@ -6,6 +6,8 @@
     <UnnnicDialogContent
       :size="size === 'sm' ? 'small' : size === 'lg' ? 'large' : 'medium'"
       class="unnnic-modal-dialog__container"
+      @escape-key-down="persistentHandler"
+      @pointer-down-outside="persistentHandler"
     >
       <section
         :class="[
@@ -183,6 +185,11 @@ export default {
     updateBodyOverflow(isHidden) {
       document.body.style.overflow = isHidden ? 'hidden' : '';
     },
+    persistentHandler(event) {
+      if (this.persistent) {
+        event.preventDefault();
+      }
+    },
   },
 };
 </script>
@@ -206,6 +213,7 @@ export default {
     overflow-y: auto;
 
     &--left-sidebar {
+      border-radius: $unnnic-radius-4 0 0 $unnnic-radius-4;
       display: grid;
       grid-template-columns: auto 1fr;
       grid-template-areas: 'left-sidebar content';
