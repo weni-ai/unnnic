@@ -51,7 +51,7 @@ export const ContactRightSlot = {
         </template>
       </UnnnicChatsHeader>`,
   }),
-}
+};
 
 export const Dashboard = {
   args: {

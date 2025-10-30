@@ -5,32 +5,44 @@ import UnnnicEmojiPicker from '../EmojiPicker.vue';
 vi.mock('emoji-mart-vue-fast/src', () => ({
   Picker: {
     name: 'Picker',
-    props: ['data', 'set', 'theme', 'preview', 'search', 'navPosition', 'noResultsEmoji', 'maxFrequentRows', 'i18n', 'color'],
+    props: [
+      'data',
+      'set',
+      'theme',
+      'preview',
+      'search',
+      'navPosition',
+      'noResultsEmoji',
+      'maxFrequentRows',
+      'i18n',
+      'color',
+    ],
     emits: ['select', 'click-outside'],
-    template: '<div class="emoji-mart-picker"></div>'
+    template: '<div class="emoji-mart-picker"></div>',
   },
-  EmojiIndex: vi.fn().mockImplementation(() => ({}))
+  EmojiIndex: vi.fn().mockImplementation(() => ({})),
 }));
 
 vi.mock('emoji-mart-vue-fast/data/all.json', () => ({
-  default: {}
+  default: {},
 }));
 
 vi.mock('emoji-mart-vue-fast/css/emoji-mart.css', () => ({}));
 
 vi.mock('../../utils/plugins/i18n', () => {
-  const current = 'pt-br'
+  const current = 'pt-br';
   return {
     default: {
       global: {
-        get locale() { return current },
+        get locale() {
+          return current;
+        },
         set locale(_v) {},
         t: (key) => `${key}`,
       },
     },
-  }
+  };
 });
-
 
 describe('UnnnicEmojiPicker', () => {
   let wrapper;
@@ -50,12 +62,26 @@ describe('UnnnicEmojiPicker', () => {
         stubs: {
           Picker: {
             name: 'Picker',
-            props: ['data', 'set', 'theme', 'emoji', 'title', 'showPreview', 'search', 'navPosition', 'noResultsEmoji', 'maxFrequentRows', 'i18n', 'color'],
+            props: [
+              'data',
+              'set',
+              'theme',
+              'emoji',
+              'title',
+              'showPreview',
+              'search',
+              'navPosition',
+              'noResultsEmoji',
+              'maxFrequentRows',
+              'i18n',
+              'color',
+            ],
             emits: ['select', 'click-outside'],
-            template: '<div class="emoji-mart-picker" @select="$emit(\'select\', $event)" @click-outside="$emit(\'click-outside\')"></div>'
-          }
-        }
-      }
+            template:
+              '<div class="emoji-mart-picker" @select="$emit(\'select\', $event)" @click-outside="$emit(\'click-outside\')"></div>',
+          },
+        },
+      },
     });
   });
 
@@ -96,12 +122,26 @@ describe('UnnnicEmojiPicker', () => {
         stubs: {
           Picker: {
             name: 'Picker',
-            props: ['data', 'set', 'theme', 'emoji', 'title', 'showPreview', 'search', 'navPosition', 'noResultsEmoji', 'maxFrequentRows', 'i18n', 'color'],
+            props: [
+              'data',
+              'set',
+              'theme',
+              'emoji',
+              'title',
+              'showPreview',
+              'search',
+              'navPosition',
+              'noResultsEmoji',
+              'maxFrequentRows',
+              'i18n',
+              'color',
+            ],
             emits: ['select', 'click-outside'],
-            template: '<div class="emoji-mart-picker" @select="$emit(\'select\', $event)"></div>'
-          }
-        }
-      }
+            template:
+              '<div class="emoji-mart-picker" @select="$emit(\'select\', $event)"></div>',
+          },
+        },
+      },
     });
 
     const emojiMock = { id: 'smile', native: '😊' };
@@ -117,15 +157,15 @@ describe('UnnnicEmojiPicker', () => {
     // Simula um click fora do componente
     const outsideElement = document.createElement('div');
     document.body.appendChild(outsideElement);
-    
+
     const clickEvent = new Event('click', { bubbles: true });
     Object.defineProperty(clickEvent, 'target', { value: outsideElement });
-    
+
     document.dispatchEvent(clickEvent);
-    
+
     await wrapper.vm.$nextTick();
     expect(wrapper.emitted('close')).toBeTruthy();
-    
+
     // Cleanup
     document.body.removeChild(outsideElement);
   });
@@ -133,7 +173,28 @@ describe('UnnnicEmojiPicker', () => {
   it('renders bottom position class when position is bottom', async () => {
     const custom = mount(UnnnicEmojiPicker, {
       props: { position: 'bottom' },
-      global: { stubs: { Picker: { name: 'Picker', props: ['data','set','theme','emoji','title','showPreview','search','navPosition','noResultsEmoji','maxFrequentRows','i18n','color'], template: '<div />' } } }
+      global: {
+        stubs: {
+          Picker: {
+            name: 'Picker',
+            props: [
+              'data',
+              'set',
+              'theme',
+              'emoji',
+              'title',
+              'showPreview',
+              'search',
+              'navPosition',
+              'noResultsEmoji',
+              'maxFrequentRows',
+              'i18n',
+              'color',
+            ],
+            template: '<div />',
+          },
+        },
+      },
     });
     expect(custom.classes()).toContain('emoji-picker--bottom');
     custom.unmount();

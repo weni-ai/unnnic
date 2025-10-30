@@ -14,6 +14,25 @@ export default {
   ],
 };
 
+export const TwoRows = {
+  args: {
+    data: [
+      {
+        title: '100%',
+        description: 'Clicou em comprar',
+        value: '18.621',
+        color: '#F6E05E',
+      },
+      {
+        title: '67%',
+        description: 'Informou entrega',
+        value: '12.476',
+        color: '#F6AD55',
+      },
+    ],
+  },
+};
+
 export const ThreeRows = {
   args: {
     data: [

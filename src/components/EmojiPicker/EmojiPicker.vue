@@ -14,9 +14,9 @@
       :showPreview="true"
       showSkinTones
       :search="true"
-      nav-position="bottom"
-      no-results-emoji="cry"
-      :max-frequent-rows="3"
+      navPosition="bottom"
+      noResultsEmoji="cry"
+      :maxFrequentRows="3"
       :i18n="translations"
       :color="accentColor"
       @select="onEmojiSelect"
@@ -25,56 +25,62 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, onMounted, onUnmounted } from 'vue'
-import { get } from 'lodash'
-import i18n from '../../utils/plugins/i18n'
-import { Picker, EmojiIndex } from 'emoji-mart-vue-fast/src'
-import data from 'emoji-mart-vue-fast/data/all.json'
-import 'emoji-mart-vue-fast/css/emoji-mart.css'
-import UnnnicI18n from '../../mixins/i18n'
+import { computed, ref, onMounted, onUnmounted } from 'vue';
+import { get } from 'lodash';
+import i18n from '../../utils/plugins/i18n';
+import { Picker, EmojiIndex } from 'emoji-mart-vue-fast/src';
+import data from 'emoji-mart-vue-fast/data/all.json';
+import 'emoji-mart-vue-fast/css/emoji-mart.css';
+import UnnnicI18n from '../../mixins/i18n';
 
 defineOptions({
   mixins: [UnnnicI18n],
-})
+});
 
 interface Emoji {
-  id: string
-  native: string
+  id: string;
+  native: string;
 }
 
 export interface Props {
-  returnName?: boolean
-  position?: 'top' | 'bottom'
-  locale?: string
+  returnName?: boolean;
+  position?: 'top' | 'bottom';
+  locale?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   returnName: false,
   position: 'top',
-  locale: 'pt-br'
-})
+  locale: 'pt-br',
+});
 
 const emit = defineEmits<{
-  close: []
-  emojiSelected: [emoji: string]
-}>()
+  close: [];
+  emojiSelected: [emoji: string];
+}>();
 
-const emojiPickerRef = ref<HTMLElement>()
-const emojiIndex = computed(() => new EmojiIndex(data))
+const emojiPickerRef = ref<HTMLElement>();
+const emojiIndex = computed(() => new EmojiIndex(data));
 
-const accentColor = '#00A49F' // $unnnic-color-weni-600
+const accentColor = '#00A49F'; // $unnnic-color-weni-600
 
-const currentLocale = computed(() => props.locale || 'pt-br')
+const currentLocale = computed(() => props.locale || 'pt-br');
 
 const translation = (key: string) => {
-  const messages: Record<string, unknown> = i18n.global.messages as Record<string, unknown>
-  const loc = currentLocale.value
-  const localeMsgs = messages?.[loc] || messages?.[loc?.toLowerCase?.()] || messages?.[loc?.toUpperCase?.()]
-  const enMsgs = messages?.['en']
-  return get(localeMsgs, key) || get(enMsgs, key) || key
-}
+  const messages: Record<string, unknown> = i18n.global.messages as Record<
+    string,
+    unknown
+  >;
+  const loc = currentLocale.value;
+  const localeMsgs =
+    messages?.[loc] ||
+    messages?.[loc?.toLowerCase?.()] ||
+    messages?.[loc?.toUpperCase?.()];
+  const enMsgs = messages?.['en'];
+  return get(localeMsgs, key) || get(enMsgs, key) || key;
+};
 
-const title = computed(() => translation('emoji_picker.title'))
+const title = computed(() => translation('emoji_picker.title'));
 
 const translations = computed(() => ({
   search: translation('emoji_picker.search'),
@@ -91,27 +97,30 @@ const translations = computed(() => ({
     objects: translation('emoji_picker.categories.objects'),
     symbols: translation('emoji_picker.categories.symbols'),
     flags: translation('emoji_picker.categories.flags'),
-    custom: translation('emoji_picker.categories.custom')
-  }
-}))
+    custom: translation('emoji_picker.categories.custom'),
+  },
+}));
 
 const handleClickOutside = (event: Event) => {
-  if (emojiPickerRef.value && !emojiPickerRef.value.contains(event.target as Node)) {
-    emit('close')
+  if (
+    emojiPickerRef.value &&
+    !emojiPickerRef.value.contains(event.target as Node)
+  ) {
+    emit('close');
   }
-}
+};
 
 onMounted(() => {
-  document.addEventListener('click', handleClickOutside)
-})
+  document.addEventListener('click', handleClickOutside);
+});
 
 onUnmounted(() => {
-  document.removeEventListener('click', handleClickOutside)
-})
+  document.removeEventListener('click', handleClickOutside);
+});
 
 const onEmojiSelect = (emoji: Emoji) => {
-  emit('emojiSelected', props.returnName ? emoji.id : emoji.native)
-}
+  emit('emojiSelected', props.returnName ? emoji.id : emoji.native);
+};
 </script>
 
 <style lang="scss" scoped>
@@ -137,7 +146,7 @@ const onEmojiSelect = (emoji: Emoji) => {
     border: 1px solid rgb(244, 246, 248);
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
     cursor: default;
-    color: #3B4151; // $unnnic-color-neutral-darkest
+    color: #3b4151; // $unnnic-color-neutral-darkest
   }
 
   :deep(.emoji-mart-emoji) {
@@ -155,11 +164,11 @@ const onEmojiSelect = (emoji: Emoji) => {
 
   :deep(.emoji-mart-anchor:hover),
   :deep(.emoji-mart-anchor-selected) {
-    color: #00A49F; // $unnnic-color-weni-600
+    color: #00a49f; // $unnnic-color-weni-600
   }
 
   :deep(.emoji-mart-anchor-bar) {
-    background-color: #00A49F; // $unnnic-color-weni-600
+    background-color: #00a49f; // $unnnic-color-weni-600
   }
 
   :deep(.emoji-type-image.emoji-set-apple) {

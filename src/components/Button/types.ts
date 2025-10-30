@@ -1,6 +1,6 @@
 export type ButtonSize = 'small' | 'large' | 'extra-large';
 
-export type ButtonType = 
+export type ButtonType =
   | 'primary'
   | 'secondary'
   | 'tertiary'

@@ -119,7 +119,7 @@
           />
         </button>
         <p
-          v-else-if="(unreadMessages && !selected) || (forceShowUnreadMessages)"
+          v-else-if="(unreadMessages && !selected) || forceShowUnreadMessages"
           class="chats-contact__infos__unread-messages"
           :title="i18n('unread_messages', unreadMessages, { unreadMessages })"
         >

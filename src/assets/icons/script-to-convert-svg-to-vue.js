@@ -1,6 +1,6 @@
-const fs = require('node:fs');
+import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
 
-const files = fs.readdirSync('.');
+const files = readdirSync('.');
 
 files
   .filter((name) => name.endsWith('.svg'))
@@ -11,10 +11,7 @@ files
       .map((word) => word.slice(0, 1).toUpperCase() + word.slice(1))
       .join('');
 
-    const content = fs.readFileSync(file + '.svg', { encoding: 'utf8' });
+    const content = readFileSync(file + '.svg', { encoding: 'utf8' });
 
-    fs.writeFileSync(
-      pascalCaseName + '.vue',
-      `<template>${content}</template>`,
-    );
+    writeFileSync(pascalCaseName + '.vue', `<template>${content}</template>`);
   });
