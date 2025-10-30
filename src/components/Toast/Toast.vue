@@ -157,7 +157,7 @@ onUnmounted(() => {
   display: flex;
   align-items: flex-end;
   flex-direction: column;
-  gap: $unnnic-space-5;
+  gap: $unnnic-space-2;
 
   min-width: 250px;
   max-width: 450px;
