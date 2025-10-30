@@ -61,25 +61,25 @@ export const Default = {
           'Default dialog with header, body content, and footer with action buttons.',
       },
       source: {
-        code: `<Dialog>
-  <DialogTrigger>
+        code: `<UnnnicDialog>
+  <UnnnicDialogTrigger>
     <UnnnicButton text="Open Dialog" />
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Dialog Title</DialogTitle>
-    </DialogHeader>
+  </UnnnicDialogTrigger>
+  <UnnnicDialogContent>
+    <UnnnicDialogHeader>
+      <UnnnicDialogTitle>Dialog Title</UnnnicDialogTitle>
+    </UnnnicDialogHeader>
     <div style="padding: 24px;">
       <p>This is the content of the dialog.</p>
     </div>
-    <DialogFooter>
-      <DialogClose>
+    <UnnnicDialogFooter>
+      <UnnnicDialogClose>
         <UnnnicButton text="Cancel" type="tertiary" />
-      </DialogClose>
+      </UnnnicDialogClose>
       <UnnnicButton text="Confirm" type="primary" />
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`,
+    </UnnnicDialogFooter>
+  </UnnnicDialogContent>
+</UnnnicDialog>`,
       },
     },
   },
@@ -99,7 +99,7 @@ export const Default = {
     },
     template: `
       
-      <div style="display: flex; justify-content: center; align-items: center; min-height: 300px;">
+      <div style="display: flex; justify-content: center; align-items: center;">
         <Dialog>
           <DialogTrigger>
             <UnnnicButton text="Open Dialog" />
@@ -138,24 +138,24 @@ export const Success = {
           'Dialog with success type, displaying a success icon in the header.',
       },
       source: {
-        code: `<Dialog>
-  <DialogTrigger>
+        code: `<UnnnicDialog>
+  <UnnnicDialogTrigger>
     <UnnnicButton text="Success Dialog" />
-  </DialogTrigger>
-  <DialogContent size="medium">
-    <DialogHeader type="success">
-      <DialogTitle>Operation Successful</DialogTitle>
-    </DialogHeader>
+  </UnnnicDialogTrigger>
+  <UnnnicDialogContent size="medium">
+    <UnnnicDialogHeader type="success">
+      <UnnnicDialogTitle>Operation Successful</UnnnicDialogTitle>
+    </UnnnicDialogHeader>
     <div style="padding: 24px;">
       <p>Your changes have been saved successfully.</p>
     </div>
-    <DialogFooter>
-      <DialogClose>
+    <UnnnicDialogFooter>
+      <UnnnicDialogClose>
         <UnnnicButton text="Close" type="primary" />
-      </DialogClose>
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`,
+      </UnnnicDialogClose>
+    </UnnnicDialogFooter>
+  </UnnnicDialogContent>
+</UnnnicDialog>`,
       },
     },
   },
@@ -175,7 +175,7 @@ export const Success = {
     },
     template: `
       
-      <div style="display: flex; justify-content: center; align-items: center; min-height: 300px;">
+      <div style="display: flex; justify-content: center; align-items: center;">
         <Dialog>
           <DialogTrigger>
             <UnnnicButton text="Success Dialog" />
@@ -212,25 +212,25 @@ export const Warning = {
           'Dialog with warning type, useful for destructive actions or critical warnings.',
       },
       source: {
-        code: `<Dialog>
-  <DialogTrigger>
+        code: `<UnnnicDialog>
+  <UnnnicDialogTrigger>
     <UnnnicButton text="Warning Dialog" type="warning" />
-  </DialogTrigger>
-  <DialogContent size="medium">
-    <DialogHeader type="warning">
-      <DialogTitle>Delete Item</DialogTitle>
-    </DialogHeader>
+  </UnnnicDialogTrigger>
+  <UnnnicDialogContent size="medium">
+    <UnnnicDialogHeader type="warning">
+      <UnnnicDialogTitle>Delete Item</UnnnicDialogTitle>
+    </UnnnicDialogHeader>
     <div style="padding: 24px;">
       <p>Are you sure you want to delete this item? This action cannot be undone.</p>
     </div>
-    <DialogFooter>
-      <DialogClose>
+    <UnnnicDialogFooter>
+      <UnnnicDialogClose>
         <UnnnicButton text="Cancel" type="tertiary" />
-      </DialogClose>
+      </UnnnicDialogClose>
       <UnnnicButton text="Delete" type="warning" />
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`,
+    </UnnnicDialogFooter>
+  </UnnnicDialogContent>
+</UnnnicDialog>`,
       },
     },
   },
@@ -250,7 +250,7 @@ export const Warning = {
     },
     template: `
       
-      <div style="display: flex; justify-content: center; align-items: center; min-height: 300px;">
+      <div style="display: flex; justify-content: center; align-items: center;">
         <Dialog>
           <DialogTrigger>
             <UnnnicButton text="Warning Dialog" type="warning" />
@@ -288,25 +288,25 @@ export const Attention = {
           'Dialog with attention type, useful for important notices or alerts that require user attention.',
       },
       source: {
-        code: `<Dialog>
-  <DialogTrigger>
+        code: `<UnnnicDialog>
+  <UnnnicDialogTrigger>
     <UnnnicButton text="Attention Dialog" type="attention" />
-  </DialogTrigger>
-  <DialogContent size="medium">
-    <DialogHeader type="attention">
-      <DialogTitle>Important Notice</DialogTitle>
-    </DialogHeader>
+  </UnnnicDialogTrigger>
+  <UnnnicDialogContent size="medium">
+    <UnnnicDialogHeader type="attention">
+      <UnnnicDialogTitle>Important Notice</UnnnicDialogTitle>
+    </UnnnicDialogHeader>
     <div style="padding: 24px;">
       <p>Please review the following information carefully before proceeding.</p>
     </div>
-    <DialogFooter>
-      <DialogClose>
+    <UnnnicDialogFooter>
+      <UnnnicDialogClose>
         <UnnnicButton text="Cancel" type="tertiary" />
-      </DialogClose>
+      </UnnnicDialogClose>
       <UnnnicButton text="Continue" type="attention" />
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`,
+    </UnnnicDialogFooter>
+  </UnnnicDialogContent>
+</UnnnicDialog>`,
       },
     },
   },
@@ -326,7 +326,7 @@ export const Attention = {
     },
     template: `
       
-      <div style="display: flex; justify-content: center; align-items: center; min-height: 300px;">
+      <div style="display: flex; justify-content: center; align-items: center;">
         <Dialog>
           <DialogTrigger>
             <UnnnicButton text="Attention Dialog" type="attention" />
@@ -362,25 +362,25 @@ export const Sizes = {
       },
       source: {
         code: `<!-- Small Dialog -->
-<Dialog>
+<UnnnicDialog>
   ...
-  <DialogContent size="small">
+  <UnnnicDialogContent size="small">
   ...
-</Dialog>
+</UnnnicDialog>
 
 <!-- Medium Dialog -->
-<Dialog>
+<UnnnicDialog>
   ...
-  <DialogContent size="medium">
+  <UnnnicDialogContent size="medium">
   ...
-</Dialog>
+</UnnnicDialog>
 
 <!-- Large Dialog -->
-<Dialog>
+<UnnnicDialog>
   ...
-  <DialogContent size="large">
+  <UnnnicDialogContent size="large">
   ...
-</Dialog>`,
+</UnnnicDialog>`,
       },
     },
   },
@@ -399,7 +399,7 @@ export const Sizes = {
     },
     template: `
       
-      <div style="display: flex; justify-content: center; align-items: center; gap: 16px; min-height: 300px; flex-wrap: wrap;">
+      <div style="display: flex; justify-content: center; align-items: center; gap: 16px; flex-wrap: wrap;">
         <Dialog>
           <DialogTrigger>
             <UnnnicButton text="Small Dialog" />
@@ -469,21 +469,21 @@ export const WithoutHeader = {
           'Dialog without a header. Useful when you need full control over the content layout.',
       },
       source: {
-        code: `<Dialog>
-  <DialogTrigger>
+        code: `<UnnnicDialog>
+  <UnnnicDialogTrigger>
     <UnnnicButton text="Dialog Without Header" />
-  </DialogTrigger>
-  <DialogContent>
+  </UnnnicDialogTrigger>
+  <UnnnicDialogContent>
     <div style="padding: 24px;">
       <h2>Custom Header Content</h2>
       <p>This dialog doesn't use the DialogHeader component.</p>
     </div>
-    <DialogFooter>
+    <UnnnicDialogFooter>
       <UnnnicButton text="Cancel" type="tertiary" />
       <UnnnicButton text="Confirm" type="primary" />
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`,
+    </UnnnicDialogFooter>
+  </UnnnicDialogContent>
+</UnnnicDialog>`,
       },
     },
   },
@@ -500,7 +500,7 @@ export const WithoutHeader = {
     },
     template: `
       
-      <div style="display: flex; justify-content: center; align-items: center; min-height: 300px;">
+      <div style="display: flex; justify-content: center; align-items: center;">
         <Dialog>
           <DialogTrigger>
             <UnnnicButton text="Dialog Without Header" />
@@ -534,20 +534,20 @@ export const WithoutFooter = {
           'Dialog without a footer. Useful for informational dialogs or when actions are inline with content.',
       },
       source: {
-        code: `<Dialog>
-  <DialogTrigger>
+        code: `<UnnnicDialog>
+  <UnnnicDialogTrigger>
     <UnnnicButton text="Dialog Without Footer" />
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Information</DialogTitle>
-    </DialogHeader>
+  </UnnnicDialogTrigger>
+  <UnnnicDialogContent>
+    <UnnnicDialogHeader>
+      <UnnnicDialogTitle>Information</UnnnicDialogTitle>
+    </UnnnicDialogHeader>
     <div style="padding: 24px;">
       <p>This is an informational dialog without a footer.</p>
       <p>The user can close it by clicking outside or pressing ESC.</p>
     </div>
-  </DialogContent>
-</Dialog>`,
+  </UnnnicDialogContent>
+</UnnnicDialog>`,
       },
     },
   },
@@ -565,7 +565,7 @@ export const WithoutFooter = {
     },
     template: `
       
-      <div style="display: flex; justify-content: center; align-items: center; min-height: 300px;">
+      <div style="display: flex; justify-content: center; align-items: center;">
         <Dialog>
           <DialogTrigger>
             <UnnnicButton text="Dialog Without Footer" />
@@ -597,22 +597,22 @@ export const WithoutHeaderCloseButton = {
           'Dialog without a close button. Useful when you need to prevent the user from closing the dialog.',
       },
       source: {
-        code: `<Dialog>
-  <DialogTrigger>
+        code: `<UnnnicDialog>
+  <UnnnicDialogTrigger>
     <UnnnicButton text="Dialog Without Header Close Button" />
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader :closeButton="false">
-      <DialogTitle>Dialog Without Header Close Button</DialogTitle>
-    </DialogHeader>
+  </UnnnicDialogTrigger>
+  <UnnnicDialogContent>
+    <UnnnicDialogHeader :closeButton="false">
+      <UnnnicDialogTitle>Dialog Without Header Close Button</UnnnicDialogTitle>
+    </UnnnicDialogHeader>
     <div style="padding: 24px;">
       <p>This dialog doesn't have a header close button.</p>
     </div>
-    <DialogFooter>
+    <UnnnicDialogFooter>
       <UnnnicButton text="Confirm" type="primary" />
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`,
+    </UnnnicDialogFooter>
+  </UnnnicDialogContent>
+</UnnnicDialog>`,
       },
     },
   },
@@ -633,7 +633,7 @@ export const WithoutHeaderCloseButton = {
       return { args };
     },
     template: `
-    <div style="display: flex; justify-content: center; align-items: center; min-height: 300px;">
+    <div style="display: flex; justify-content: center; align-items: center;">
       <Dialog>
         <DialogTrigger>
           <UnnnicButton text="Dialog Without Header Close Button" />
@@ -682,20 +682,20 @@ const closeDialog = () => {
   <div>
     <UnnnicButton text="Open Dialog" @click="openDialog" />
     
-    <Dialog v-model:open="isOpen">
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Controlled Dialog</DialogTitle>
-        </DialogHeader>
+    <UnnnicDialog v-model:open="isOpen">
+      <UnnnicDialogContent>
+        <UnnnicDialogHeader>
+          <UnnnicDialogTitle>Controlled Dialog</UnnnicDialogTitle>
+        </UnnnicDialogHeader>
         <div style="padding: 24px;">
           <p>This dialog is controlled by the "open" prop.</p>
         </div>
-        <DialogFooter>
+        <UnnnicDialogFooter>
           <UnnnicButton text="Close" type="tertiary" @click="closeDialog" />
           <UnnnicButton text="Confirm" type="primary" @click="closeDialog" />
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </UnnnicDialogFooter>
+      </UnnnicDialogContent>
+    </UnnnicDialog>
   </div>
 </template>`,
       },
@@ -727,7 +727,7 @@ const closeDialog = () => {
       },
     },
     template: `
-      <div style="display: flex; justify-content: center; align-items: center; gap: 16px; min-height: 300px; flex-direction: column;">
+      <div style="display: flex; justify-content: center; align-items: center; gap: 16px; flex-direction: column;">
         <div style="display: flex; gap: 16px;">
           <UnnnicButton text="Open Dialog" @click="openDialog" />
         </div>
@@ -763,14 +763,14 @@ export const LongContent = {
           'Dialog with scrollable content. The dialog body will scroll when content exceeds the viewport height.',
       },
       source: {
-        code: `<Dialog>
-  <DialogTrigger>
+        code: `<UnnnicDialog>
+  <UnnnicDialogTrigger>
     <UnnnicButton text="Long Content Dialog" />
-  </DialogTrigger>
-  <DialogContent>
-    <DialogHeader>
-      <DialogTitle>Terms and Conditions</DialogTitle>
-    </DialogHeader>
+  </UnnnicDialogTrigger>
+  <UnnnicDialogContent>
+    <UnnnicDialogHeader>
+      <UnnnicDialogTitle>Terms and Conditions</UnnnicDialogTitle>
+    </UnnnicDialogHeader>
     <div style="padding: 24px; max-height: 400px; overflow-y: auto;">
       <!-- Your long content here -->
       <div v-for="i in 10" :key="i">
@@ -778,12 +778,12 @@ export const LongContent = {
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
       </div>
     </div>
-    <DialogFooter>
+    <UnnnicDialogFooter>
       <UnnnicButton text="Decline" type="tertiary" />
       <UnnnicButton text="Accept" type="primary" />
-    </DialogFooter>
-  </DialogContent>
-</Dialog>`,
+    </UnnnicDialogFooter>
+  </UnnnicDialogContent>
+</UnnnicDialog>`,
       },
     },
   },
@@ -802,7 +802,7 @@ export const LongContent = {
     },
     template: `
       
-      <div style="display: flex; justify-content: center; align-items: center; min-height: 300px;">
+      <div style="display: flex; justify-content: center; align-items: center;">
         <Dialog>
           <DialogTrigger>
             <UnnnicButton text="Long Content Dialog" />
