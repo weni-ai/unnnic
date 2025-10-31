@@ -11,6 +11,7 @@
 
   &:focus,
   &.focus {
+    transition: border-color 0.1s ease-in-out;
     border-color: $unnnic-color-border-active;
   }
 
