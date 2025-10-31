@@ -1,6 +1,6 @@
 <template>
   <section class="unnnic-form-element" :class="{ 'unnnic-form-element--disabled': disabled }">
-    <Label 
+    <UnnnicLabel 
       v-if="label" 
       :label="label" 
       :tooltip="tooltip"
@@ -35,11 +35,11 @@
 
 <script lang="js">
   import { fullySanitize } from '../../utils/sanitize';
-  import Label from '../Label/Label.vue';
+  import UnnnicLabel from '../Label/Label.vue';
 
   export default {
     components: {
-      Label,
+      UnnnicLabel,
     },
     props: {
       size: {
