@@ -211,6 +211,10 @@ watch(
   transition-timing-function: cubic-bezier(.4, 0, .2, 1);
   transition-duration: .15s;
 
+  * > {
+    cursor: pointer;
+  }
+
   &__icon {
     &-left {
       margin-right: $unnnic-inline-nano;
