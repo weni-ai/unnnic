@@ -1,7 +1,24 @@
 <template>
+  <Icon
+    v-if="isIconify"
+    :icon="props.icon as string"
+    :class="[
+      'unnnic-icon',
+      `unnnic-icon-scheme--${scheme}`,
+      `unnnic-icon-size--${size}`,
+      {
+        'unnnic--clickable': clickable,
+      },
+    ]"
+    data-testid="iconify-icon"
+    @click="onClick"
+    @mousedown="(event) => $emit('mousedown', event)"
+    @mouseup="(event) => $emit('mouseup', event)"
+  />
+
   <component
     :is="customSvgIcon"
-    v-if="customSvgIcon"
+    v-else-if="customSvgIcon"
     :class="[
       'unnnic-icon',
       `unnnic-icon--size-svg-${size}`,
@@ -40,6 +57,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import { Icon } from '@iconify/vue';
 
 import icons from '../utils/icons';
 import OldIconsMap from './Icon/OldIconsMap.json';
@@ -66,6 +84,10 @@ const emit = defineEmits<{
   mousedown: [event: Event];
   mouseup: [event: Event];
 }>();
+
+const isIconify = computed(
+  () => (props.icon as string)?.includes(':') ?? false,
+);
 
 const customSvgIcon = computed(() => icons[props.icon as string] ?? null);
 
