@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.7.0 (2025-10-31)
+
+### Added
+
+- **Iconify Integration**: Added the Iconify package to support icons not available in Material Symbols.
+- **Icon Component**: Implemented Iconify icon rendering logic in `Icon.vue`, expanding the component’s icon support.
+
 # 3.6.0 (2025-10-31)
 
 ### Added
