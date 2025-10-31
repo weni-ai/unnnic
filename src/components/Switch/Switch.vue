@@ -168,7 +168,9 @@ $switch-height: 20px;
   background-repeat: no-repeat;
   background-position: 4px center;
 
-  transition: 200ms linear background-position, 200ms linear background-color;
+  transition: 120ms linear background-position, 120ms linear background-color;
+
+  cursor: pointer;
 
   &:checked {
     background-color: $unnnic-color-bg-active;
@@ -178,6 +180,8 @@ $switch-height: 20px;
   &:disabled {
     background-color: $unnnic-color-bg-muted;
     background-image: url('@/assets/icons/switch-checked-disabled.svg');
+
+    cursor: not-allowed;
   }
 
   &__label {
