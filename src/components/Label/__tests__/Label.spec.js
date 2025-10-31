@@ -24,7 +24,7 @@ describe('Label', () => {
   });
 
   it('applies the correct classes and styles', () => {
-    const label = wrapper.findComponent('.unnnic-label__label');
+    const label = wrapper.find('.unnnic-label__label');
     expect(label.html()).toMatchSnapshot();
   });
 });

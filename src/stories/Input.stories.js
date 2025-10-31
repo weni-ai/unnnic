@@ -7,14 +7,25 @@ export default {
   component: unnnicInput,
   argTypes: {
     label: { control: { type: 'text' } },
-    size: { control: { type: 'select' }, options: ['md', 'sm'] },
-    type: { control: { type: 'select' }, options: ['normal', 'error'] },
+    size: {
+      control: { type: 'select' },
+      options: ['md', 'sm'],
+      defaultValue: {
+        summary: 'md',
+      },
+    },
+    type: {
+      control: { type: 'select' },
+      options: ['normal', 'error'],
+      defaultValue: {
+        summary: 'normal',
+      },
+    },
     nativeType: { control: { type: 'select' }, options: ['text', 'password'] },
     placeholder: { control: { type: 'text' } },
     iconLeft: { control: { type: 'select' }, options: iconList },
     iconRight: { control: { type: 'select' }, options: iconList },
     allowTogglePassword: { control: { type: 'boolean' } },
-    hasCloudyColor: { control: { type: 'select' }, options: [true, false] },
   },
   render: (args) => ({
     components: {
@@ -35,106 +46,72 @@ export default {
       },
     },
     template: `
-      <unnnic-form-element label="Label" message="Helper text">
-        <unnnic-input v-model="value" @icon-right-click="click" v-bind="args" />
-      </unnnic-form-element>
+      <unnnic-input v-model="value" @icon-right-click="click" v-bind="args" />
     `,
   }),
 };
 
-const TemplateError = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-
-  components: {
-    unnnicFormElement,
-    unnnicInput,
-  },
-
-  setup() {
-    return { args };
-  },
-
-  data() {
-    return {
-      value: '',
-    };
-  },
-
-  template: `
-    <unnnic-form-element label="Label" error="Error text">
-      <unnnic-input v-model="value" v-bind="args"/>
-    </unnnic-form-element>
-  `,
-});
-
-const TemplateDisabled = (args, { argTypes }) => ({
-  props: Object.keys(argTypes),
-
-  components: {
-    unnnicFormElement,
-    unnnicInput,
-  },
-
-  setup() {
-    return { args };
-  },
-
-  data() {
-    return {
-      value: '',
-    };
-  },
-
-  template: `
-    <unnnic-form-element label="Label" message="Helper text" disabled>
-      <unnnic-input v-model="value" v-bind="args"/>
-    </unnnic-form-element>
-  `,
-});
-
 export const Normal = {
   args: {
-    type: 'normal',
+    label: 'Label',
     placeholder: 'Placeholder',
   },
 };
 
 export const NormalSm = {
   args: {
+    label: 'Label',
     size: 'sm',
-    type: 'normal',
     placeholder: 'Placeholder',
   },
 };
 
-export const Error = TemplateError.bind({});
-Error.args = {
-  type: 'error',
-  placeholder: 'Placeholder',
+export const Error = {
+  args: {
+    label: 'Label',
+    placeholder: 'Placeholder',
+    errors: 'Error text',
+  },
 };
 
-export const ErrorSm = TemplateError.bind({});
-ErrorSm.args = {
-  size: 'sm',
-  type: 'error',
-  placeholder: 'Placeholder',
+export const ErrorSm = {
+  args: {
+    label: 'Label',
+    size: 'sm',
+    errors: 'Error text',
+    placeholder: 'Placeholder',
+  },
 };
 
-export const Disabled = TemplateDisabled.bind({});
-Disabled.args = {
-  disabled: true,
-  placeholder: 'Placeholder',
+export const Disabled = {
+  args: {
+    label: 'Label',
+    disabled: true,
+    placeholder: 'Placeholder',
+  },
 };
 
-export const DisabledSm = TemplateDisabled.bind({});
-DisabledSm.args = {
-  size: 'sm',
-  disabled: true,
-  placeholder: 'Placeholder',
+export const DisabledSm = {
+  args: {
+    label: 'Label',
+    size: 'sm',
+    disabled: true,
+    placeholder: 'Placeholder',
+  },
+};
+
+export const DisabledError = {
+  args: {
+    label: 'Label',
+    disabled: true,
+    errors: 'Error text',
+    placeholder: 'Placeholder',
+  },
 };
 
 export const Password = {
   args: {
+    label: 'Label',
     placeholder: 'Password',
     nativeType: 'password',
     allowTogglePassword: true,
@@ -143,6 +120,7 @@ export const Password = {
 
 export const IconLeftAndRight = {
   args: {
+    label: 'Label',
     placeholder: 'Text',
     iconLeft: 'email',
     iconRight: 'search',
@@ -155,5 +133,22 @@ export const Mask = {
     label: 'CPF or CNPJ',
     placeholder: 'Text',
     mask: ['###.###.###-##', '##.###.###/####-##'],
+  },
+};
+
+export const LimitMaxLength = {
+  args: {
+    label: 'Label',
+    placeholder: 'Text',
+    maxlength: 10,
+    showMaxlengthCounter: true,
+  },
+};
+
+export const WithTooltip = {
+  args: {
+    label: 'Label',
+    placeholder: 'Text',
+    tooltip: 'Tooltip',
   },
 };

@@ -47,7 +47,7 @@ export const Error = {
     maxLength: 150,
     disabled: false,
     type: 'error',
-    error: 'Error text',
+    errors: 'Error text',
     size: 'md',
   },
 };
@@ -84,7 +84,7 @@ export const ErrorSm = {
     maxLength: 150,
     disabled: false,
     type: 'error',
-    error: 'Error text',
+    errors: 'Error text',
     size: 'sm',
   },
 };
@@ -98,5 +98,16 @@ export const DisabledSm = {
     type: 'normal',
     size: 'sm',
     message: 'Helper text',
+  },
+};
+
+export const ResizeNone = {
+  args: {
+    label: 'Label',
+    placeholder: 'Placeholder',
+    maxLength: 150,
+    disabled: false,
+    type: 'normal',
+    resize: 'none',
   },
 };
