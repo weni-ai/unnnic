@@ -19,7 +19,6 @@ describe('TextInput.vue', () => {
         iconLeftClickable: true,
         iconRightClickable: true,
         allowTogglePassword: false,
-        hasCloudyColor: false,
         size: 'md',
       },
       global: {
@@ -74,7 +73,7 @@ describe('TextInput.vue', () => {
 
   test('computes the correct iconScheme based on various states', async () => {
     await wrapper.setProps({ type: 'error' });
-    expect(wrapper.vm.iconScheme).toBe('fg-critical');
+    expect(wrapper.vm.iconScheme).toBe('fg-base');
 
     await wrapper.setProps({ type: 'normal' });
     await wrapper.setData({ isDisabled: true });
@@ -82,14 +81,13 @@ describe('TextInput.vue', () => {
 
     await wrapper.setData({ isDisabled: false });
     await wrapper.setProps({ modelValue: 'text' });
-    expect(wrapper.vm.iconScheme).toBe('color-gray-700');
+    expect(wrapper.vm.iconScheme).toBe('fg-base');
 
     await wrapper.setData({ isFocused: true });
-    expect(wrapper.vm.iconScheme).toBe('color-gray-700');
-
-    await wrapper.setProps({ hasCloudyColor: true, modelValue: '' });
-    await wrapper.setData({ isFocused: false });
     expect(wrapper.vm.iconScheme).toBe('fg-base');
+
+    await wrapper.setProps({ disabled: true });
+    expect(wrapper.vm.iconScheme).toBe('fg-muted');
   });
 
   test('attributes computed property returns combined attributes and props', () => {

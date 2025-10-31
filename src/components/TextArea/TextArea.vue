@@ -4,7 +4,7 @@
     :size="size"
     :disabled="disabled"
     :message="message"
-    :error="errors.join(', ') || type === 'error'"
+    :error="computedError"
   >
     <textarea
       ref="textarea"
@@ -42,6 +42,14 @@ export default {
     size: {
       type: String,
       default: 'md',
+    },
+
+    resize: {
+      type: String,
+      default: 'vertical',
+      validator(value) {
+        return ['none', 'vertical'].indexOf(value) !== -1;
+      },
     },
 
     label: {
@@ -84,6 +92,16 @@ export default {
   },
   emits: ['update:modelValue'],
 
+  computed: {
+    computedError() {
+      if (Array.isArray(this.errors)) {
+        return this.errors.join(', ') || this.type === 'error';
+      }
+
+      return this.errors || this.type === 'error';
+    },
+  },
+
   methods: {
     fullySanitize,
     focus() {
@@ -109,7 +127,8 @@ export default {
 
     display: block;
     width: 100%;
-    resize: vertical;
+
+    resize: v-bind(resize);
 
     scrollbar-width: thin;
 
@@ -118,7 +137,7 @@ export default {
     &--size-md {
       @include input-md-font;
 
-      min-height: 100px;
+      min-height: 90px;
     }
 
     &--size-sm {
