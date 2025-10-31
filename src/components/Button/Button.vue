@@ -344,22 +344,12 @@ watch(
     &-large,
     &-extra-large {
       padding: $unnnic-inset-xs;
-
-      .unnnic-icon {
-        width: $unnnic-icon-size-md;
-        height: $unnnic-icon-size-md;
-      }
     }
 
     &-small {
       padding: $unnnic-inset-nano;
       height: 37px;
       width: 37px;
-
-      .unnnic-icon {
-        width: $unnnic-icon-size-ant;
-        height: $unnnic-icon-size-ant;
-      }
     }
   }
 }
