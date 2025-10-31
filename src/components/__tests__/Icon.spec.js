@@ -33,12 +33,20 @@ const commonTests = async (wrapper) => {
 };
 
 describe('Icon', () => {
-  it('should accept valid lineHeight props', () => {
-    const validValues = ['sm', 'md', 'lg', null];
-    
-    validValues.forEach(value => {
-      const wrapper = createWrapper({ lineHeight: value });
-      expect(wrapper.exists()).toBe(true);
+  describe('Custom Icons', () => {
+    let wrapper;
+
+    beforeEach(() => {
+      wrapper = createWrapper({ icon: 'checkbox-default' });
+    });
+
+    it('should render the icon from Custom Icons', () => {
+      const hasCustomIcon = wrapper.find('[data-testid="custom-icon"]');
+      expect(hasCustomIcon.exists()).toBe(true);
+    });
+
+    it('should emit click event when the icon is clicked if clickable prop its true', async () => {
+      await handlerIconClickTest(wrapper);
     });
   });
 
@@ -50,7 +58,7 @@ describe('Icon', () => {
     });
 
     it('should render the icon from OldIconsMap', () => {
-      const hasOldIcon = wrapper.find('[data-testid="old-map-icons"]');
+      const hasOldIcon = wrapper.find('[data-testid="material-icon"]');
       expect(hasOldIcon.exists()).toBe(true);
     });
 

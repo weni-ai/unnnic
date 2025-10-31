@@ -20,6 +20,7 @@
     >
       <UnnnicDatePicker
         v-if="showCalendarFilter"
+        v-model:equivalentOption="overwrittenValue"
         :type="type"
         :clearLabel="clearText"
         :actionLabel="actionText"
@@ -31,7 +32,6 @@
         :minDate="minDate"
         :maxDate="maxDate"
         :disableClear="disableClear"
-        v-model:equivalentOption="overwrittenValue"
         @change="emitSelectDate"
         @submit="changeDate"
       />

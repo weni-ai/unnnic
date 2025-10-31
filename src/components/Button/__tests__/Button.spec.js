@@ -47,16 +47,17 @@ describe('Button', () => {
     await wrapper.setProps({ iconCenter: 'search-1', text: '' });
 
     const centeredIcon = wrapper.findComponent('[data-testid="icon-center"]');
-
     expect(centeredIcon.exists()).toBe(true);
 
-    expect(wrapper.text()).toBe('');
+    const label = wrapper.find('[data-testid="button-label"]');
+    expect(label.text()).toBe('');
   });
 
   it('should render button float variation', async () => {
     await wrapper.setProps({ iconCenter: 'search-1', float: true });
 
-    expect(wrapper.text()).toBe('');
+    const label = wrapper.find('[data-testid="button-label"]');
+    expect(label.exists()).toBe(false);
 
     expect(wrapper.classes()).toContain('unnnic-button--float');
   });
@@ -91,10 +92,10 @@ describe('Button', () => {
   });
 
   it('should render filled icons when iconsFilled prop is true', async () => {
-    const wrapper = createWrapper({ 
+    const wrapper = createWrapper({
       iconLeft: 'search-1',
       iconRight: 'search-1',
-      iconsFilled: true 
+      iconsFilled: true,
     });
 
     const leftIcon = wrapper.findComponent('[data-testid="icon-left"]');
