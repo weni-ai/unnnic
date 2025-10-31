@@ -1,49 +1,55 @@
 <template>
-  <div class="unnnic-switch">
-    <div
-      v-if="textLeft"
-      data-test-id="switch-text-left"
-      :class="[
-        'unnnic-switch__label',
-        'unnnic-switch__label__left',
-        `unnnic-switch__label__${size}`,
-      ]"
-    >
-      {{ textLeft }}
-    </div>
-
-    <UnnnicIcon
-      :class="{ 'unnnic-switch__icon': true, active: isActive }"
-      :icon="currentIcon"
-      :size="iconSize"
-      :scheme="iconScheme"
-      :lineHeight="iconLineHeight"
-      :disabled="disabled"
-      :clickable="!disabled"
-      data-test-id="switch-icon"
-      @click="toggleState"
+  <section class="unnnic-switch-wrapper">
+    <UnnnicLabel
+      v-if="label"
+      :label="label"
+      :tooltip="labelTooltip"
+      :useHtmlTooltip="labelUseHtmlTooltip"
+      class="unnnic-switch__label"
     />
 
-    <div
-      v-if="textRight"
-      data-test-id="switch-text-right"
-      :class="[
-        'unnnic-switch__label',
-        'unnnic-switch__label__right',
-        `unnnic-switch__label__${size}`,
-      ]"
+    <label>
+      <input
+        class="unnnic-switch"
+        type="checkbox"
+        :disabled="disabled"
+        :checked="modelValue"
+        @change="toggleState"
+        v-bind="pick($attrs, ['id', 'name'])"
+      />
+
+      <p
+        v-if="option || textLeft || textRight"
+        :class="[
+          'unnnic-switch__option',
+          { 'unnnic-switch__option--disabled': disabled },
+        ]"
+        data-testid="switch-option"
+      >
+        {{ option }}
+        {{ textLeft }}
+        {{ textRight }}
+      </p>
+    </label>
+
+    <p
+      v-if="helper"
+      class="unnnic-switch__helper"
     >
-      {{ textRight }}
-    </div>
-  </div>
+      {{ helper }}
+    </p>
+  </section>
 </template>
 
 <script>
-import UnnnicIcon from '../Icon.vue';
+import { pick } from 'lodash';
+import UnnnicLabel from '../Label/Label.vue';
 
 export default {
   name: 'UnnnicSwitch',
-  components: { UnnnicIcon },
+  components: {
+    UnnnicLabel,
+  },
   props: {
     size: {
       type: String,
@@ -52,6 +58,32 @@ export default {
         return ['small', 'medium'].indexOf(value) !== -1;
       },
     },
+
+    label: {
+      type: String,
+      default: '',
+    },
+
+    labelTooltip: {
+      type: String,
+      default: '',
+    },
+
+    labelUseHtmlTooltip: {
+      type: Boolean,
+      default: false,
+    },
+
+    option: {
+      type: String,
+      default: '',
+    },
+    
+    helper: {
+      type: String,
+      default: '',
+    },
+
     textLeft: {
       type: String,
       default: '',
@@ -78,33 +110,6 @@ export default {
       isActive: false,
     };
   },
-  computed: {
-    currentIcon() {
-      if (this.disabled) {
-        return this.isActive
-          ? 'switch-selected-disabled'
-          : 'switch-default-disabled';
-      }
-
-      return 'switch-default';
-    },
-
-    iconSize() {
-      return this.size === 'small' ? 'sm' : 'md';
-    },
-
-    iconScheme() {
-      if (this.disabled) {
-        return 'neutral-soft';
-      }
-
-      return this.isActive === false ? 'neutral-soft' : 'brand-weni';
-    },
-
-    iconLineHeight() {
-      return this.size === 'small' ? 'sm' : '';
-    },
-  },
 
   watch: {
     modelValue: {
@@ -116,6 +121,8 @@ export default {
   },
 
   methods: {
+    pick,
+
     toggleState() {
       if (!this.disabled) {
         if (this.useVModel) {
@@ -133,51 +140,69 @@ export default {
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
-.unnnic-switch {
+$switch-width: 38px;
+$switch-height: 20px;
+
+.unnnic-switch-wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 
-  &__label {
-    font-family: $unnnic-font-family-secondary;
-    font-weight: $unnnic-font-weight-regular;
-    color: $unnnic-color-neutral-dark;
-
-    margin: $unnnic-spacing-stack-nano 0;
-    margin-right: $unnnic-inline-nano;
-
-    &__small {
-      font-size: $unnnic-font-size-body-md;
-      line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
-    }
-
-    &__medium {
-      font-size: $unnnic-font-size-body-gt;
-      line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-    }
-  }
-
-  &__icon {
-    align-self: center;
-    margin: $unnnic-spacing-stack-nano $unnnic-inline-nano;
-
-    :deep(#default-circle) {
-      transition: 0.2s linear transform;
-    }
-
-    &.active {
-      :deep(#default-circle) {
-        transform: translateX(45%);
-      }
-    }
+  label {
+    display: flex;
+    align-items: center;
+    column-gap: $unnnic-space-2;
   }
 }
 
-.unnnic-icon__size {
-  &--md {
-    width: 3 * $unnnic-font-size;
+.unnnic-switch {
+  appearance: none;
+  width: $switch-width;
+  height: $switch-height;
+  margin: 0;
+  background-color: $unnnic-color-bg-muted;
+  border-radius: $unnnic-radius-3;
+  box-sizing: border-box;
+  outline: none;
+
+  background-image: url('@/assets/icons/switch-checked.svg');
+  background-repeat: no-repeat;
+  background-position: 4px center;
+
+  transition: 120ms linear background-position, 120ms linear background-color;
+
+  cursor: pointer;
+
+  &:checked {
+    background-color: $unnnic-color-bg-active;
+    background-position: 20px center;
   }
-  &--sm {
-    width: 2 * $unnnic-font-size;
+
+  &:disabled {
+    background-color: $unnnic-color-bg-muted;
+    background-image: url('@/assets/icons/switch-checked-disabled.svg');
+
+    cursor: not-allowed;
+  }
+
+  &__label {
+    margin-bottom: $unnnic-space-3;
+  }
+
+  &__option {
+    margin: 0;
+    font: $unnnic-font-body;
+    color: $unnnic-color-fg-emphasized;
+
+    &--disabled {
+      color: $unnnic-color-fg-muted;
+    }
+  }
+
+  &__helper {
+    margin: 0;
+    margin-left: $switch-width + $unnnic-space-2;
+    font: $unnnic-font-caption-2;
+    color: $unnnic-color-fg-base;
   }
 }
 </style>
