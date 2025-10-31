@@ -27,7 +27,7 @@
       :filled="iconsFilled"
       :class="{ 'unnnic-button__icon-left': hasText }"
       :style="{ visibility: loading ? 'hidden' : 'visible' }"
-      :next="next"
+      clickable
       data-testid="icon-left"
     />
 
@@ -38,7 +38,7 @@
       :style="{ visibility: loading ? 'hidden' : 'visible' }"
       :size="iconSize"
       :filled="iconsFilled"
-      :next="next"
+      clickable
       data-testid="icon-center"
     />
 
@@ -59,7 +59,7 @@
       :filled="iconsFilled"
       :class="{ 'unnnic-button__icon-right': hasText }"
       :style="{ visibility: loading ? 'hidden' : 'visible' }"
-      :next="next"
+      clickable
       data-testid="icon-right"
     />
   </button>
@@ -208,12 +208,8 @@ watch(
   position: relative;
 
   transition-property: color, background-color, border-color;
-  transition-timing-function: cubic-bezier(.4, 0, .2, 1);
-  transition-duration: .15s;
-
-  * > {
-    cursor: pointer;
-  }
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 0.15s;
 
   &__icon {
     &-left {
