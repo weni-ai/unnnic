@@ -90,42 +90,6 @@ export default {
           `\n`
         );
       },
-      'ts/icon-sizes': (dictionary) => {
-        const tokenMap = dictionary.allTokens.reduce((acc, token) => {
-          // Extract the size number from token name (e.g., "icon-size-3" -> "3")
-          const sizeNumber = token.path.at(1);
-
-          // Process the value: calculate math expressions and convert to pixels
-          let value = token.value;
-
-          // Replace {font.size} with 16px
-          value = value.replace(/\{font\.size\}/g, '16px');
-
-          // Extract the expression before the comment
-          const match = value.match(/^(.+?)\s*\/\*/);
-          if (match) {
-            const expression = match[1].trim();
-
-            // Evaluate simple math expressions (e.g., "0.75 * 16px", "2 * 16px")
-            const mathMatch = expression.match(/^([\d.]+)\s*\*\s*(\d+)px$/);
-            if (mathMatch) {
-              const result =
-                parseFloat(mathMatch[1]) * parseFloat(mathMatch[2]);
-              value = `${result}px`;
-            } else if (expression.match(/^\d+px$/)) {
-              value = expression;
-            }
-          }
-
-          acc[sizeNumber] = value;
-          return acc;
-        }, {});
-
-        return (
-          `// Do not edit directly, this file was auto-generated.\n\n` +
-          `export const iconSizeTokens: Record<string, string> = ${JSON.stringify(tokenMap, null, 2)};\n`
-        );
-      },
     },
   },
   platforms: {
@@ -168,17 +132,6 @@ export default {
           destination: 'colors-hsl.scss',
           format: 'scss/hsl-variables',
           filter: 'colors',
-        },
-      ],
-    },
-    ts: {
-      transformGroup: 'js',
-      buildPath: './src/assets/tokens/',
-      files: [
-        {
-          destination: 'iconSizeTokens.ts',
-          format: 'ts/icon-sizes',
-          filter: 'iconSizes',
         },
       ],
     },
