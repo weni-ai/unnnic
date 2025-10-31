@@ -101,11 +101,13 @@ export default {
     &-md {
       @include input-md-font;
       padding: $unnnic-space-3 $unnnic-space-4;
+      height: 45px;
     }
 
     &-sm {
       @include input-sm-font;
       padding: $unnnic-space-2 $unnnic-space-4;
+      height: 37px;
     }
   }
 

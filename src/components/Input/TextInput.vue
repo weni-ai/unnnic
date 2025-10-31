@@ -91,10 +91,6 @@ export default {
       type: Boolean,
       default: null,
     },
-    hasCloudyColor: {
-      type: Boolean,
-      default: null,
-    },
     size: {
       type: String,
       default: 'md',
@@ -129,20 +125,8 @@ export default {
     },
 
     iconScheme() {
-      if (this.type === 'error') {
-        return 'fg-critical';
-      }
-
       if (this.isDisabled) {
         return 'fg-muted';
-      }
-
-      if (this.modelValue || this.isFocused) {
-        return 'color-gray-700';
-      }
-
-      if (this.hasCloudyColor) {
-        return 'fg-base';
       }
 
       return 'fg-base';
