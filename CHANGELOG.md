@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- **Upload Modal**: Fix close event emiter
+- **Upload Modal**: Fix close event emitter
 
 # 3.7.0 (2025-10-31)
 
