@@ -29,7 +29,7 @@ import collapse from './Collapse/Collapse.vue';
 import radio from './Radio/Radio.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
 import modal from './Modal/Modal.vue';
-import modalUpload from './ModalUpload/ModalUpload.vue';
+import modalUpload from './ModalUpload/ModalUploadV2.vue';
 import { callAlert, callModal } from '../utils/call';
 import selectSmart from './SelectSmart/SelectSmart.vue';
 // import select from './Select/Select.vue';
