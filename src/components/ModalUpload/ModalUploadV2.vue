@@ -10,6 +10,8 @@
     :secondaryButtonProps="props.secondaryButtonProps"
     @update:model-value="emit('update:modelValue', $event)"
     @close="emit('update:modelValue', false)"
+    @primary-button-click="emit('primaryButtonClick')"
+    @secondary-button-click="emit('update:modelValue', false)"
   >
     <UnnnicUploadArea
       :acceptMultiple="props.acceptMultiple"
@@ -76,5 +78,6 @@ const props = withDefaults(defineProps<ModalUploadProps>(), {
 const emit = defineEmits<{
   'update:modelValue': [boolean];
   'file-change': [File[]];
+  primaryButtonClick: [];
 }>();
 </script>
