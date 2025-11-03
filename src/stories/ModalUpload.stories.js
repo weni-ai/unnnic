@@ -1,5 +1,5 @@
 import i18n from '../utils/plugins/i18n';
-import unnnicModalUpload from '../components/ModalUpload/ModalUpload.vue';
+import unnnicModalUpload from '../components/ModalUpload/ModalUploadV2.vue';
 
 import { setup } from '@storybook/vue3';
 

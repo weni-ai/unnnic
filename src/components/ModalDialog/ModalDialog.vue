@@ -24,7 +24,10 @@
       </section>
 
       <section class="unnnic-modal-dialog__container__body">
-        <header v-if="title" class="unnnic-modal-dialog__container__header">
+        <header
+          v-if="title"
+          class="unnnic-modal-dialog__container__header"
+        >
           <section class="unnnic-modal-dialog__container__title-container">
             <UnnnicIcon
               v-if="icon || type"
@@ -96,12 +99,12 @@
 </template>
 
 <script>
-import UnnnicIcon from "../Icon.vue";
-import UnnnicButton from "../Button/Button.vue";
-import UnnnicI18n from "../../mixins/i18n";
+import UnnnicIcon from '../Icon.vue';
+import UnnnicButton from '../Button/Button.vue';
+import UnnnicI18n from '../../mixins/i18n';
 
 export default {
-  name: "UnnnicModalDialog",
+  name: 'UnnnicModalDialog',
   components: {
     UnnnicIcon,
     UnnnicButton,
@@ -118,29 +121,29 @@ export default {
     },
     type: {
       type: String,
-      default: "",
+      default: '',
       validate(type) {
-        return ["success", "warning", "attention"].includes(type);
+        return ['success', 'warning', 'attention'].includes(type);
       },
     },
     size: {
       type: String,
-      default: "md",
+      default: 'md',
       validate(size) {
-        return ["sm", "md", "lg"].includes(size);
+        return ['sm', 'md', 'lg'].includes(size);
       },
     },
     title: {
       type: String,
-      default: "",
+      default: '',
     },
     icon: {
       type: String,
-      default: "",
+      default: '',
     },
     iconScheme: {
       type: String,
-      default: "",
+      default: '',
     },
     showCloseIcon: {
       type: Boolean,
@@ -163,26 +166,26 @@ export default {
       default: () => ({}),
     },
   },
-  emits: ["primaryButtonClick", "secondaryButtonClick", "update:modelValue"],
+  emits: ['primaryButtonClick', 'secondaryButtonClick', 'update:modelValue'],
 
   data() {
     return {
       defaultTranslations: {
         cancel: {
-          "pt-br": "Cancelar",
-          en: "Cancel",
-          es: "Cancelar",
+          'pt-br': 'Cancelar',
+          en: 'Cancel',
+          es: 'Cancelar',
         },
       },
       iconsMapper: {
-        success: { icon: "check_circle", scheme: "aux-green-500" },
-        warning: { icon: "warning", scheme: "aux-red-500" },
-        attention: { icon: "error", scheme: "aux-yellow-500" },
+        success: { icon: 'check_circle', scheme: 'aux-green-500' },
+        warning: { icon: 'warning', scheme: 'aux-red-500' },
+        attention: { icon: 'error', scheme: 'aux-yellow-500' },
       },
       primaryButtonTypeMapper: {
-        success: "primary",
-        warning: "warning",
-        attention: "attention",
+        success: 'primary',
+        warning: 'warning',
+        attention: 'attention',
       },
     };
   },
@@ -193,17 +196,17 @@ export default {
   },
   methods: {
     close() {
-      this.$emit("update:modelValue", false);
+      this.$emit('update:modelValue', false);
     },
     updateBodyOverflow(isHidden) {
-      document.body.style.overflow = isHidden ? "hidden" : "";
+      document.body.style.overflow = isHidden ? 'hidden' : '';
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@use "@/assets/scss/unnnic" as *;
+@use '@/assets/scss/unnnic' as *;
 * {
   margin: 0;
   padding: 0;
@@ -310,7 +313,7 @@ export default {
   &__actions {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-areas: "secondary-button primary-button";
+    grid-template-areas: 'secondary-button primary-button';
     gap: $unnnic-spacing-sm;
     padding: $unnnic-spacing-md;
     flex-shrink: 0;
