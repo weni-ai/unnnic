@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "3.5.0",
+  "version": "3.7.1",
   "type": "commonjs",
   "files": [
     "dist",
@@ -38,7 +38,7 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "coverage": "vitest --coverage",
-    "style-dictionary:generate": "style-dictionary build --config styleDictionary.config.js"
+    "style-dictionary:generate": "style-dictionary build --config styleDictionary.config.mjs"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -51,6 +51,7 @@
     "vue": "^3.4.8"
   },
   "dependencies": {
+    "@iconify/vue": "^5.0.0",
     "@vueuse/components": "^10.4.1",
     "@vueuse/core": "^14.0.0",
     "emoji-mart-vue-fast": "^15.0.5",
