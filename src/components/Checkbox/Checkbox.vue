@@ -10,8 +10,8 @@
         type="checkbox"
         :disabled="disabled"
         :checked="modelValue === 'less' || modelValue"
-        @change="click"
         v-bind="pick($attrs, ['id', 'name'])"
+        @change="click"
       />
 
       <p
@@ -140,7 +140,8 @@ label {
     }
   }
 
-  &:disabled, &:disabled:checked {
+  &:disabled,
+  &:disabled:checked {
     background-color: $unnnic-color-bg-muted;
     border: 1px solid $unnnic-color-border-muted;
   }

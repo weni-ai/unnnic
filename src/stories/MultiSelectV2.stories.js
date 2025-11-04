@@ -1,4 +1,4 @@
-import UnnnicSelect from '../components/Select/index.vue';
+import UnnnicMultiSelect from '../components/MultiSelectV2/index.vue';
 
 const options = [
   { label: 'Option 1', value: 'option1', altValue: 'alt_value_option1' },
@@ -14,8 +14,8 @@ const options = [
 ];
 
 export default {
-  title: 'Form/Select',
-  component: UnnnicSelect,
+  title: 'Form/MultiSelectV2',
+  component: UnnnicMultiSelect,
   tags: ['autodocs'],
   parameters: {
     docs: {
@@ -84,7 +84,7 @@ export default {
     },
   },
   render: (args) => ({
-    components: { UnnnicSelect },
+    components: { UnnnicMultiSelect },
     setup() {
       const handleSearch = (value) => {
         args.search = value;
@@ -93,12 +93,12 @@ export default {
     },
     data() {
       return {
-        exampleValue: null,
+        exampleValue: [],
       };
     },
     template: `
       <p>modelValue: {{ exampleValue }}</p>
-      <unnnic-select v-model="exampleValue" v-bind="args" @update:search="handleSearch" />
+      <unnnic-multi-select v-model="exampleValue" v-bind="args" @update:search="handleSearch" />
     `,
   }),
 };
