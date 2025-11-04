@@ -330,3 +330,63 @@ export const Loading = {
     isLoading: true,
   },
 };
+
+export const ControlledSort = {
+  args: { headers, items },
+  render: (args) => ({
+    components: {
+      UnnnicDataTable,
+    },
+    setup() {
+      let sortState = {
+        header: 'ID',
+        itemKey: 'id',
+        order: 'asc',
+      };
+
+      const handleSort = ({ order, header, itemKey }) => {
+        action('update:sort')({ order, header, itemKey });
+        sortState = { header, itemKey, order };
+
+        if (order === 'asc') {
+          args.items = [...args.items].sort((a, b) => {
+            if (itemKey === 'id') return a.id - b.id;
+            return a[itemKey] > b[itemKey] ? 1 : -1;
+          });
+        } else if (order === 'desc') {
+          args.items = [...args.items].sort((a, b) => {
+            if (itemKey === 'id') return b.id - a.id;
+            return a[itemKey] < b[itemKey] ? 1 : -1;
+          });
+        }
+      };
+
+      const updatePage = (page) => {
+        action('update:page')(page);
+        args.page = page;
+      };
+
+      const itemClick = (item) => {
+        action('itemClick')(item);
+      };
+
+      return { args, sortState, handleSort, updatePage, itemClick };
+    },
+    template: `
+    <div>
+      <UnnnicDataTable
+        v-bind="args"
+        :headers="args.headers"
+        :items="args.items"
+        :pageTotal="125"
+        :pageInterval="5"
+        v-model:sort="sortState"
+        @update:sort="handleSort"
+        @update:page="updatePage"
+        @itemClick="itemClick"
+      >
+      </UnnnicDataTable>
+    </div>
+    `,
+  }),
+};
