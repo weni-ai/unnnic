@@ -6,6 +6,7 @@
     :message="message"
     :tooltip="tooltip"
     :error="computedError"
+    :class="['unnnic-form', size]"
   >
     <TextInput
       v-bind="$attrs"
