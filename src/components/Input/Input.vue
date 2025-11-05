@@ -7,6 +7,7 @@
     :tooltip="tooltip"
     :error="computedError"
     :class="['unnnic-form', size]"
+    data-testid="form-element"
   >
     <TextInput
       v-bind="$attrs"

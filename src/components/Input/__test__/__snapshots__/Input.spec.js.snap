@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Input.vue > matches the snapshot 1`] = `
-"<section data-v-9f8d6c86="" data-v-d890ad85="" class="unnnic-form-element">
+"<section data-v-9f8d6c86="" data-v-d890ad85="" class="unnnic-form-element unnnic-form md" data-testid="form-element">
   <section data-v-7f222291="" data-v-9f8d6c86="" class="unnnic-label unnnic-form-element__label">
     <p data-v-7f222291="" class="unnnic-label__label">Sample Label</p>
     <!--v-if-->
