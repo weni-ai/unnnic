@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "3.7.1",
+  "version": "3.8.0",
   "type": "commonjs",
   "files": [
     "dist",
@@ -53,6 +53,7 @@
   "dependencies": {
     "@iconify/vue": "^5.0.0",
     "@vueuse/components": "^10.4.1",
+    "@vueuse/core": "^14.0.0",
     "emoji-mart-vue-fast": "^15.0.5",
     "lodash": "^4.17.21",
     "lucide-vue-next": "^0.546.0",
