@@ -197,7 +197,6 @@ $icon-sizes:
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 
-  cursor: default;
   user-select: none;
 
   &--filled {
