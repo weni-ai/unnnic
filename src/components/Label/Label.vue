@@ -1,8 +1,17 @@
 <template>
   <section class="unnnic-label">
     <p class="unnnic-label__label">{{ fullySanitize(props.label) }}</p>
-    <UnnnicToolTip v-if="tooltip" enabled :text="tooltip" :enable-html="props.useHtmlTooltip">
-      <UnnnicIcon icon="help" size="sm" scheme="fg-base" />
+    <UnnnicToolTip
+      v-if="tooltip"
+      enabled
+      :text="tooltip"
+      :enableHtml="props.useHtmlTooltip"
+    >
+      <UnnnicIcon
+        icon="help"
+        size="sm"
+        scheme="fg-base"
+      />
     </UnnnicToolTip>
   </section>
 </template>
@@ -12,7 +21,6 @@ import { fullySanitize } from '@/utils/sanitize';
 
 import UnnnicToolTip from '../ToolTip/ToolTip.vue';
 import UnnnicIcon from '../Icon.vue';
-
 
 defineOptions({
   name: 'UnnnicLabel',
@@ -45,13 +53,13 @@ const props = withDefaults(defineProps<LabelProps>(), {
   align-items: center;
   gap: $unnnic-space-2;
   color: $unnnic-color-fg-base;
-  
+
   &__label {
     font: $unnnic-font-body;
   }
 
   :deep(.unnnic-tooltip) {
-      display: flex;
+    display: flex;
   }
 }
 </style>
