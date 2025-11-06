@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.8.1 (2025-11-06)
+
+### Fixed
+
+- **Tailwind CSS**: Disabled Tailwind CSS container styles to prevent query styles from affecting existing containers
+
 # 3.8.0 (2025-11-05)
 
 ### Added
