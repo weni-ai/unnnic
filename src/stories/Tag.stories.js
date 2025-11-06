@@ -8,13 +8,23 @@ export default {
   argTypes: {
     text: { control: { type: 'text' } },
     type: {
-      control: { type: 'select', options: ['default', 'indicator', 'brand'] },
+      control: 'select',
+      options: ['default', 'brand', 'next'],
     },
     scheme: {
       control: {
         type: 'select',
         options: colorsList,
       },
+    },
+    size: {
+      control: 'select',
+      options: ['small', 'medium'],
+    },
+    hasCloseIcon: { control: 'boolean' },
+    leftIcon: {
+      control: 'select',
+      options: [null, 'check_circle', 'sentiment_satisfied'],
     },
   },
 };
@@ -34,45 +44,10 @@ export const LeftIcon = {
   },
 };
 
-export const RightIcon = {
+export const Small = {
   args: {
     text: 'Label',
     type: 'default',
-    rightIcon: 'check_circle',
-  },
-};
-
-export const CloseIcon = {
-  args: {
-    text: 'Label',
-    type: 'default',
-    hasCloseIcon: true,
-  },
-};
-
-export const Next = {
-  args: {
-    text: 'Label',
-    type: 'next',
-    scheme: 'weni',
-  },
-};
-
-export const Indicator = {
-  args: {
-    text: 'Tag Name',
-    type: 'indicator',
-    count: 100,
-    clickable: true,
-    hasBackButton: false,
-    enableTooltip: true,
-    tooltipText: 'This is the amount',
-  },
-};
-
-export const Brand = {
-  args: {
-    text: 'Settings',
-    type: 'brand',
+    size: 'small',
   },
 };

@@ -1,8 +1,6 @@
 <template>
   <section
-    :class="`unnnic-tag
-        ${!disabled ? `unnnic-tag-scheme--${scheme}` : `unnnic-tag--disabled`}
-        ${clickable ? 'unnnic-tag--clickable' : ''}`"
+    :class="`unnnic-tag unnnic-tag-scheme--${scheme} unnnic-tag--${size}`"
   >
     <section
       v-if="leftIcon"
@@ -15,21 +13,9 @@
       />
     </section>
     <span
-      :class="`unnnic-tag__label
-      ${disabled ? 'unnnic-tag__label--disabled' : ''}`"
+      :class="`unnnic-tag__label`"
       >{{ text }}</span
     >
-    <section
-      v-if="rightIcon || hasCloseIcon"
-      :class="{ 'unnnic-tag__icon': true, clickable: !rightIcon }"
-      @click.stop="hasCloseIcon ? emitClose() : () => {}"
-    >
-      <UnnnicIcon
-        :icon="rightIcon || 'close'"
-        :scheme="rightIcon ? scheme : 'neutral-darkest'"
-        size="sm"
-      />
-    </section>
   </section>
 </template>
 
@@ -46,17 +32,12 @@ export default {
       type: String,
       default: null,
     },
-    clickable: {
-      type: Boolean,
-      default: false,
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    hasCloseIcon: {
-      type: Boolean,
-      default: false,
+    size: {
+      type: String,
+      default: 'medium',
+      validator(value) {
+        return ['small', 'medium'].includes(value);
+      },
     },
     scheme: {
       type: String,
@@ -65,19 +46,6 @@ export default {
     leftIcon: {
       type: String,
       default: null,
-    },
-    rightIcon: {
-      type: String,
-      default: null,
-    },
-  },
-  methods: {
-    closeClicked() {
-      if (!this.closeClicked) return;
-      this.$emit('close-click');
-    },
-    emitClose() {
-      this.$emit('close');
     },
   },
 };
@@ -100,45 +68,21 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: $unnnic-space-1;
   border-radius: $unnnic-border-radius-pill;
-  padding: 0 $unnnic-spacing-xs;
+  padding: calc($unnnic-space-1 * 1.5) $unnnic-space-3;
 
-  &--disabled {
-    background-color: $unnnic-color-background-sky;
-  }
-
-  &--clickable {
-    cursor: pointer;
-
-    @each $name, $color in $scheme-colors {
-      &.unnnic-tag-scheme--#{$name}:hover {
-        outline-style: solid;
-        outline-color: $unnnic-color-neutral-cleanest;
-        outline-width: $unnnic-border-width-thinner;
-        outline-offset: -$unnnic-border-width-thinner;
-      }
-    }
+  &--small {
+    padding: calc($unnnic-space-1 * 0.5) $unnnic-space-3;
   }
 
   &__label {
-    font-family: $unnnic-font-family-secondary;
-    font-size: $unnnic-font-size-body-md;
-    font-weight: $unnnic-font-weight-regular;
-    line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
-    padding: $unnnic-spacing-stack-nano;
-    color: $unnnic-color-neutral-darkest;
-
-    &--disabled {
-      color: $unnnic-color-neutral-cloudy;
-    }
+    font: $unnnic-font-caption-1;
+    color: $unnnic-color-fg-emphasized;
   }
 
   &__icon {
     display: flex;
-  }
-
-  .clickable {
-    cursor: pointer;
   }
 }
 </style>
