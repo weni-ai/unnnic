@@ -197,6 +197,8 @@ $icon-sizes:
   -webkit-font-feature-settings: 'liga';
   -webkit-font-smoothing: antialiased;
 
+  user-select: none;
+
   &--filled {
     font-family: 'Material Symbols Rounded Filled';
   }
