@@ -1,29 +1,31 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div
-    :class="[
-      'unnnic-radio-container',
-      `unnnic-radio-container--${size}`,
-      disabled ? 'disabled' : null,
-    ]"
-    @click="click"
-  >
-    <UnnnicIcon
-      class="unnnic-radio"
-      :icon="icon"
-      :scheme="color"
-      :size="size"
-    />
+  <section class="unnnic-radio-container">
+    <label>
+      <input
+        class="unnnic-radio"
+        type="radio"
+        :disabled="disabled"
+        :checked="computedModelValue === value"
+        @change="click"
+        :name="computedName"
+        v-bind="pick($attrs, ['id'])"
+      />
 
-    <span class="label">
-      <slot />
-    </span>
-  </div>
+      <p :class="[
+        'unnnic-radio__label',
+        { 'unnnic-radio__label--disabled': disabled },
+      ]">
+        {{ label }}
+        <slot />
+      </p>
+    </label>
+  </section>
 </template>
 
 <script setup>
-import { computed } from 'vue';
-import UnnnicIcon from '../Icon.vue';
+import { pick } from 'lodash';
+import { inject, computed } from 'vue';
 
 const props = defineProps({
   modelValue: {
@@ -38,79 +40,88 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  size: {
+  label: {
     type: String,
-    default: 'md',
-    validator(value) {
-      return ['md', 'sm'].includes(value);
-    },
+    default: '',
+  },
+  name: {
+    type: String,
+    default: '',
   },
 });
 
 const emit = defineEmits(['update:modelValue']);
 
-const valueName = computed(() =>
-  props.modelValue === props.value ? 'selected' : 'default',
-);
-const icon = computed(
-  () =>
-    ({
-      selected: 'radio-selected',
-      default: props.disabled ? 'radio-disable' : 'radio-default',
-    })[valueName.value],
-);
-const color = computed(() => {
-  if (props.disabled) {
-    return 'brand-sec';
-  }
-
-  return valueName.value === 'selected' ? 'brand-weni' : 'neutral-cleanest';
-});
+const contextModelValue = inject('contextModelValue', undefined);
+const contextName = inject('contextName', undefined);
 
 function click() {
   if (!props.disabled) {
     emit('update:modelValue', props.value);
+
+    if (contextModelValue) {
+      contextModelValue.value = props.value;
+    }
   }
 }
+
+const computedModelValue = computed(() => {
+  return contextModelValue?.value || props.modelValue;
+});
+
+const computedName = computed(() => {
+  return contextName?.value || props.name;
+});
 </script>
 
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
+$radio-size: 21px;
+
 .unnnic-radio-container {
   display: inline-flex;
-  align-items: center;
+  flex-direction: column;
 
-  &:not(.disabled) {
-    cursor: pointer;
+  label {
+    display: flex;
+    align-items: center;
+    gap: $unnnic-space-2;
   }
 
-  &--sm .unnnic-radio {
-    margin: $unnnic-spacing-stack-nano $unnnic-spacing-inline-nano;
+  .unnnic-radio {
+    appearance: none;
+    width: $radio-size;
+    height: $radio-size;
+    margin: 0;
+    background-color: $unnnic-color-bg-base;
+    border: 1px solid $unnnic-color-border-base;
+    border-radius: $unnnic-radius-full;
+    box-sizing: border-box;
+    outline: none;
+
+    &:checked {
+      border-width: 0;
+      background-color: $unnnic-color-bg-active;
+      background-image: url('@/assets/icons/radio-checked.svg');
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    &:disabled {
+      background-color: $unnnic-color-bg-muted;
+      border: 1px solid $unnnic-color-border-muted;
+    }
   }
 
-  &--md .unnnic-radio {
-    margin: $unnnic-spacing-stack-nano 0;
-    margin-left: $unnnic-spacing-inline-nano;
-    margin-right: $unnnic-spacing-inline-xs;
-  }
+  .unnnic-radio__label {
+    margin: 0;
+    font: $unnnic-font-body;
+    color: $unnnic-color-fg-emphasized;
 
-  .label {
-    font-family: $unnnic-font-family-secondary;
-    font-weight: $unnnic-font-weight-regular;
-    color: $unnnic-color-neutral-darkest;
-    margin: $unnnic-spacing-stack-nano 0;
-    margin-right: $unnnic-spacing-inline-nano;
-  }
-
-  &--sm .label {
-    font-size: $unnnic-font-size-body-md;
-    line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
-  }
-
-  &--md .label {
-    font-size: $unnnic-font-size-body-gt;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
+    &--disabled {
+      color: $unnnic-color-fg-muted;
+    }
   }
 }
 </style>
