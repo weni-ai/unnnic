@@ -6,7 +6,7 @@ exports[`Alert.vue > matches snapshot 1`] = `
     <div data-v-fb94f284="" class="alert__progress"></div>
     <div data-v-fb94f284="" class="alert__text">Test Alert</div>
     <div data-v-fb94f284="" class="alert__close">
-      <unnnic-icon-stub data-v-fb94f284="" filled="false" icon="close-1" clickable="false" size="sm" scheme="neutral-white"></unnnic-icon-stub>
+      <unnnic-icon-stub data-v-fb94f284="" filled="false" next="false" icon="close-1" clickable="false" size="sm" scheme="neutral-white"></unnnic-icon-stub>
     </div>
   </div>
 </div>"

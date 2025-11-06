@@ -5,7 +5,7 @@ exports[`TablePagination.vue > matches the snapshot 1`] = `
   <p data-v-e29458bb="" class="table-pagination__count" data-testid="count">1 - 10 of 100</p>
   <div data-v-0eeff8cb="" data-v-e29458bb="" class="pagination"><button data-v-ceff2a60="" data-v-0eeff8cb="" data-test="previous-button" disabled="" class="unnnic-button unnnic-button--size-small unnnic-button--tertiary unnnic-button--icon-on-center">
       <!--v-if-->
-      <!--v-if--><span data-v-26446d8e="" data-v-ceff2a60="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--neutral-clean unnnic-icon-size--ant unnnic-icon__size--ant" data-testid="icon-center" translate="no" style="visibility: visible;">chevron_left</span><span data-v-ceff2a60="" class="unnnic-button__label" style="visibility: visible;" data-testid="button-label"> </span>
+      <!--v-if--><span data-v-26446d8e="" data-v-ceff2a60="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--neutral-clean unnnic-icon-size--ant unnnic-icon__size--ant unnnic--clickable" data-testid="icon-center" translate="no" style="visibility: visible;">chevron_left</span><span data-v-ceff2a60="" class="unnnic-button__label" style="visibility: visible;" data-testid="button-label"> </span>
       <!--v-if-->
     </button><button data-v-ceff2a60="" data-v-0eeff8cb="" data-test="page-button" class="unnnic-button unnnic-button--size-small unnnic-button--secondary">
       <!--v-if-->
@@ -34,7 +34,7 @@ exports[`TablePagination.vue > matches the snapshot 1`] = `
       <!--v-if-->
     </button><button data-v-ceff2a60="" data-v-0eeff8cb="" data-test="next-button" class="unnnic-button unnnic-button--size-small unnnic-button--tertiary unnnic-button--icon-on-center">
       <!--v-if-->
-      <!--v-if--><span data-v-26446d8e="" data-v-ceff2a60="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--neutral-dark unnnic-icon-size--ant unnnic-icon__size--ant" data-testid="icon-center" translate="no" style="visibility: visible;">chevron_right</span><span data-v-ceff2a60="" class="unnnic-button__label" style="visibility: visible;" data-testid="button-label"> </span>
+      <!--v-if--><span data-v-26446d8e="" data-v-ceff2a60="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--neutral-dark unnnic-icon-size--ant unnnic-icon__size--ant unnnic--clickable" data-testid="icon-center" translate="no" style="visibility: visible;">chevron_right</span><span data-v-ceff2a60="" class="unnnic-button__label" style="visibility: visible;" data-testid="button-label"> </span>
       <!--v-if-->
     </button></div>
 </section>"
