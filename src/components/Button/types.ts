@@ -1,6 +1,6 @@
 export type ButtonSize = 'small' | 'large' | 'extra-large';
 
-export type ButtonType = 
+export type ButtonType =
   | 'primary'
   | 'secondary'
   | 'tertiary'
@@ -16,7 +16,6 @@ export interface ButtonProps {
   iconRight?: string;
   iconCenter?: string;
   iconsFilled?: boolean;
-  next?: boolean;
   disabled?: boolean;
   loading?: boolean;
 }

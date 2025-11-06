@@ -36,13 +36,7 @@ export default {
   argTypes: {
     type: {
       control: { type: 'select' },
-      options: [
-        'primary',
-        'secondary',
-        'tertiary',
-        'warning',
-        'attention',
-      ],
+      options: ['primary', 'secondary', 'tertiary', 'warning', 'attention'],
     },
     size: {
       control: { type: 'select' },
@@ -132,7 +126,7 @@ export const FilledIcon = {
   args: {
     text: 'Text',
     iconLeft: 'play_arrow',
-    iconsFilled: true, 
+    iconsFilled: true,
   },
 };
 

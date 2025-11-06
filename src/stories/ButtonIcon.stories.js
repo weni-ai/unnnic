@@ -1,7 +1,6 @@
 import UnnnicButtonIcon from '../components/Button/ButtonIcon.vue';
-import icons from '../utils/icons';
 
-const iconsOptions = Object.keys(icons);
+const iconsOptions = ['add'];
 
 export default {
   title: 'Form/ButtonIcon',
