@@ -1,5 +1,5 @@
 <template>
-  <UnnnicChip 
+  <UnnnicChip
     v-if="type === 'brand' || hasCloseIcon"
     :text="text"
     type="multiple"
@@ -17,51 +17,27 @@
   />
 </template>
 
-<script>
+<script setup lang="ts">
 import UnnnicChip from '../Chip/Chip.vue';
 import DefaultTag from './DefaultTag.vue';
+import type { TagProps } from './types';
 
-export default {
+defineOptions({
   name: 'UnnnicTag',
-  components: {
-    UnnnicChip,
-    DefaultTag,
-  },
-  props: {
-    type: {
-      type: String,
-      default: 'default',
-      validator(value) {
-        return ['default', 'brand', 'next'].indexOf(value) !== -1;
-      },
-    },
-    size: {
-      type: String,
-      default: 'medium',
-      validator(value) {
-        return ['small', 'medium'].includes(value);
-      },
-    },
-    text: {
-      type: String,
-      default: null,
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    scheme: {
-      type: String,
-      default: 'aux-purple',
-    },
-    leftIcon: {
-      type: String,
-      default: '',
-    },
-    hasCloseIcon: {
-      type: Boolean,
-      default: false,
-    },
-  },
-};
+});
+
+withDefaults(defineProps<TagProps>(), {
+  type: 'default',
+  size: 'medium',
+  text: undefined,
+  disabled: false,
+  scheme: 'aux-purple',
+  leftIcon: '',
+  hasCloseIcon: false,
+});
+
+defineEmits<{
+  close: [];
+  click: [];
+}>();
 </script>

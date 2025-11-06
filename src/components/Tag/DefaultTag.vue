@@ -19,36 +19,16 @@
   </section>
 </template>
 
-<script>
+<script setup lang="ts">
 import UnnnicIcon from '../Icon.vue';
+import type { DefaultTagProps } from './types';
 
-export default {
-  name: 'UnnnicTag',
-  components: {
-    UnnnicIcon,
-  },
-  props: {
-    text: {
-      type: String,
-      default: null,
-    },
-    size: {
-      type: String,
-      default: 'medium',
-      validator(value) {
-        return ['small', 'medium'].includes(value);
-      },
-    },
-    scheme: {
-      type: String,
-      default: 'aux-purple',
-    },
-    leftIcon: {
-      type: String,
-      default: null,
-    },
-  },
-};
+withDefaults(defineProps<DefaultTagProps>(), {
+  text: undefined,
+  size: 'medium',
+  scheme: 'aux-purple',
+  leftIcon: undefined,
+});
 </script>
 
 <style lang="scss" scoped>
