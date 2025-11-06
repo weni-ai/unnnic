@@ -1,5 +1,4 @@
 import UnnnicTag from '../components/Tag/Tag.vue';
-import colorsList from '../utils/colorsList';
 
 export default {
   title: 'Data Display/Tag',
@@ -12,10 +11,17 @@ export default {
       options: ['default', 'brand', 'next'],
     },
     scheme: {
-      control: {
-        type: 'select',
-        options: colorsList,
-      },
+      control: 'select',
+      options: [
+        'green',
+        'blue',
+        'purple',
+        'red',
+        'orange',
+        'yellow',
+        'gray',
+        'teal',
+      ],
     },
     size: {
       control: 'select',
