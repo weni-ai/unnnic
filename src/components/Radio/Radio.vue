@@ -1,9 +1,9 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <section class="unnnic-radio-container">
-    <label>
+  <section class="unnnic-radio">
+    <label :class="['unnnic-radio__input-wrapper', {'unnnic-radio__input-wrapper--disabled': disabled}]">
       <input
-        class="unnnic-radio"
+        class="unnnic-radio__input"
         type="radio"
         :disabled="disabled"
         :checked="computedModelValue === value"
@@ -79,18 +79,28 @@ const computedName = computed(() => {
 
 $radio-size: 21px;
 
-.unnnic-radio-container {
+.unnnic-radio {
   display: inline-flex;
   flex-direction: column;
 
-  label {
+  &__input-wrapper {
+    width: fit-content;
+
     display: flex;
     align-items: center;
     gap: $unnnic-space-2;
-  }
 
-  .unnnic-radio {
+    cursor: pointer;
+
+    &--disabled {
+      cursor: not-allowed;
+    }
+  }
+  
+
+  &__input {
     appearance: none;
+    min-width: $radio-size;
     width: $radio-size;
     height: $radio-size;
     margin: 0;
@@ -99,6 +109,8 @@ $radio-size: 21px;
     border-radius: $unnnic-radius-full;
     box-sizing: border-box;
     outline: none;
+
+    cursor: pointer;
 
     &:checked {
       border-width: 0;
@@ -111,10 +123,12 @@ $radio-size: 21px;
     &:disabled {
       background-color: $unnnic-color-bg-muted;
       border: 1px solid $unnnic-color-border-muted;
+
+      cursor: not-allowed;
     }
   }
 
-  .unnnic-radio__label {
+  &__label {
     margin: 0;
     font: $unnnic-font-body;
     color: $unnnic-color-fg-emphasized;

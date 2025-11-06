@@ -1,5 +1,5 @@
 <template>
-  <section class="unnnic-switch-wrapper">
+  <section class="unnnic-switch">
     <UnnnicLabel
       v-if="label"
       :label="label"
@@ -8,9 +8,9 @@
       class="unnnic-switch__label"
     />
 
-    <label>
+    <label :class="['unnnic-switch__input-wrapper', {'unnnic-switch__input-wrapper--disabled': disabled}]">
       <input
-        class="unnnic-switch"
+        class="unnnic-switch__input"
         type="checkbox"
         :disabled="disabled"
         :checked="modelValue"
@@ -143,45 +143,54 @@ export default {
 $switch-width: 38px;
 $switch-height: 20px;
 
-.unnnic-switch-wrapper {
+.unnnic-switch {
   display: flex;
   flex-direction: column;
 
-  label {
+  &__input-wrapper {
+    width: fit-content;
+
     display: flex;
     align-items: center;
     column-gap: $unnnic-space-2;
-  }
-}
 
-.unnnic-switch {
-  appearance: none;
-  width: $switch-width;
-  height: $switch-height;
-  margin: 0;
-  background-color: $unnnic-color-bg-muted;
-  border-radius: $unnnic-radius-3;
-  box-sizing: border-box;
-  outline: none;
+    cursor: pointer;
 
-  background-image: url('@/assets/icons/switch-checked.svg');
-  background-repeat: no-repeat;
-  background-position: 4px center;
-
-  transition: 120ms linear background-position, 120ms linear background-color;
-
-  cursor: pointer;
-
-  &:checked {
-    background-color: $unnnic-color-bg-active;
-    background-position: 20px center;
+    &--disabled {
+      cursor: not-allowed;
+    }
   }
 
-  &:disabled {
+  &__input {
+    appearance: none;
+    width: $switch-width;
+    min-width: $switch-width;
+    height: $switch-height;
+    margin: 0;
     background-color: $unnnic-color-bg-muted;
-    background-image: url('@/assets/icons/switch-checked-disabled.svg');
+    border-radius: $unnnic-radius-3;
+    box-sizing: border-box;
+    outline: none;
 
-    cursor: not-allowed;
+    background-image: url('@/assets/icons/switch-checked.svg');
+    background-repeat: no-repeat;
+    background-position: 4px center;
+
+    transition: 120ms linear background-position, 120ms linear background-color;
+
+    cursor: pointer;
+
+    &:checked {
+      background-color: $unnnic-color-bg-active;
+      background-position: 20px center;
+    }
+
+    &:disabled {
+      background-color: $unnnic-color-bg-muted;
+      background-image: url('@/assets/icons/switch-checked-disabled.svg');
+
+      cursor: not-allowed;
+    }
   }
 
   &__label {

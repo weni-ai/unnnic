@@ -8,15 +8,15 @@ exports[`ModalDialog.vue > Elements rendering > matches the snapshot 1`] = `
     <section data-v-68ebadeb="" class="unnnic-modal-dialog__container__body">
       <header data-v-68ebadeb="" class="unnnic-modal-dialog__container__header">
         <section data-v-68ebadeb="" class="unnnic-modal-dialog__container__title-container">
-          <unnnic-icon-stub data-v-68ebadeb="" filled="false" icon="test-icon" clickable="false" size="md" scheme="neutral-darkest" data-testid="title-icon" class="unnnic-modal-dialog__container__title-icon"></unnnic-icon-stub>
+          <unnnic-icon-stub data-v-68ebadeb="" filled="false" next="false" icon="test-icon" clickable="false" size="md" scheme="neutral-darkest" data-testid="title-icon" class="unnnic-modal-dialog__container__title-icon"></unnnic-icon-stub>
           <h1 data-v-68ebadeb="" class="unnnic-modal-dialog__container__title-text" data-testid="title-text">Test Title</h1>
         </section>
-        <unnnic-icon-stub data-v-68ebadeb="" filled="false" icon="close" clickable="true" size="md" scheme="neutral-cloudy" data-testid="close-icon"></unnnic-icon-stub>
+        <unnnic-icon-stub data-v-68ebadeb="" filled="false" next="false" icon="close" clickable="true" size="md" scheme="neutral-darkest" data-testid="close-icon"></unnnic-icon-stub>
       </header>
       <section data-v-68ebadeb="" class="unnnic-modal-dialog__container__content"></section>
       <section data-v-68ebadeb="" data-testid="actions-section" class="unnnic-modal-dialog__container__actions">
-        <unnnic-button-stub data-v-68ebadeb="" size="large" text="Cancel" type="tertiary" float="false" iconleft="" iconright="" iconcenter="" iconsfilled="false" disabled="false" loading="false" data-testid="secondary-button" class="unnnic-modal-dialog__container__actions__secondary-button"></unnnic-button-stub>
-        <unnnic-button-stub data-v-68ebadeb="" size="large" text="Confirm" type="primary" float="false" iconleft="" iconright="" iconcenter="" iconsfilled="false" disabled="false" loading="false" data-testid="primary-button" class="unnnic-modal-dialog__container__actions__primary-button"></unnnic-button-stub>
+        <unnnic-button-stub data-v-68ebadeb="" size="large" text="Cancel" type="tertiary" float="false" iconleft="" iconright="" iconcenter="" iconsfilled="false" next="false" disabled="false" loading="false" data-testid="secondary-button" class="unnnic-modal-dialog__container__actions__secondary-button"></unnnic-button-stub>
+        <unnnic-button-stub data-v-68ebadeb="" size="large" text="Confirm" type="primary" float="false" iconleft="" iconright="" iconcenter="" iconsfilled="false" next="false" disabled="false" loading="false" data-testid="primary-button" class="unnnic-modal-dialog__container__actions__primary-button"></unnnic-button-stub>
       </section>
     </section>
   </section>
