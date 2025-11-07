@@ -103,6 +103,7 @@ import Tabs from './ui/tabs/Tabs.vue';
 import TabsList from './ui/tabs/TabsList.vue';
 import TabsTrigger from './ui/tabs/TabsTrigger.vue';
 import TabsContent from './ui/tabs/TabsContent.vue';
+import PageHeader from './PageHeader/PageHeader.vue';
 
 type VueComponent = Component;
 
@@ -215,6 +216,7 @@ export const components: ComponentsMap = {
   unnnicTabsList: TabsList,
   unnnicTabsTrigger: TabsTrigger,
   unnnicTabsContent: TabsContent,
+  unnnicPageHeader: PageHeader,
 };
 
 export const unnnicFontSize = fontSize;
@@ -323,6 +325,7 @@ export const unnnicTabs = Tabs;
 export const unnnicTabsList = TabsList;
 export const unnnicTabsTrigger = TabsTrigger;
 export const unnnicTabsContent = TabsContent;
+export const unnnicPageHeader = PageHeader;
 
 export const UnnnicFontSize = fontSize;
 export const UnnnicInput = input;
@@ -429,3 +432,4 @@ export const UnnnicTabs = Tabs;
 export const UnnnicTabsList = TabsList;
 export const UnnnicTabsTrigger = TabsTrigger;
 export const UnnnicTabsContent = TabsContent;
+export const UnnnicPageHeader = PageHeader;
