@@ -1,0 +1,123 @@
+import { Meta, Source, Story } from '@storybook/blocks';
+
+import * as ToastStories from './Toast.stories';
+
+<Meta of={ToastStories} />
+
+# Toast
+
+The Toast component is used to display temporary notifications in the user interface. It appears in the bottom right corner of the screen with smooth animation and can be closed automatically or manually.
+
+<Source
+  language="html"
+  dark
+  code={`
+<UnnnicToast
+  title="Success!"
+  description="Your action was completed successfully."
+  type="success"
+  :timeout="5000"
+  @close="onClose"
+  @destroy="onDestroy"
+/>
+  `}
+/>
+
+---
+
+#### **Props Options:**
+
+| Key         | Description                              | Values                                                      | Default         |
+|-------------|------------------------------------------|-------------------------------------------------------------|-----------------|
+| title       | **Required.** Toast title                | `string`                                                    | -               |
+| description | Toast descriptive text                   | `string`                                                    | `''`            |
+| type        | Visual type of the toast                 | `'informational'` \| `'attention'` \| `'success'` \| `'error'` | `'informational'` |
+| timeout     | Time in ms for auto-dismiss (0 = persistent) | `number`                                                | `5000`          |
+| button      | Optional action button configuration     | `{ text: string; action: () => void }`                     | `undefined`     |
+
+#### **Events:**
+
+| Event   | Description                                    |
+|---------|------------------------------------------------|
+| close   | Emitted when the toast is closed              |
+| destroy | Emitted when the toast is removed from DOM    |
+
+---
+
+## Features
+
+- **Animations**: Smooth entry and exit transitions
+- **Visual types**: Different variations for different types of messages
+- **Action button**: Optional, for quick actions
+- **Auto-dismiss**: Configurable or persistent
+
+## Usage
+
+### As component
+
+<Source
+  language="vue"
+  dark
+  code={`
+<template>
+  <UnnnicToast
+    title="Success!"
+    description="Your action was completed successfully."
+    type="success"
+    :timeout="5000"
+    @close="onToastClose"
+  />
+</template>
+
+<script setup>
+import { UnnnicToast } from '@weni/unnnic-system';
+
+const onToastClose = () => {
+  console.log('Toast closed');
+};
+</script>
+  `}
+/>
+
+### Programmatically
+
+The Toast component can be used programmatically through the `toast` utility, which provides a simple API for creating toasts without needing to manage component state.
+
+<Source
+  language="javascript"
+  dark
+  code={`
+// Basic usage
+import { toast } from '@weni/unnnic-system';
+
+toast.info('Information', 'Here is some useful information');
+  `}
+/>
+
+#### API Reference
+
+| Method | Parameters | Description |
+|--------|------------|-------------|
+| `toast.success(title, description?, options?)` | `title: string`<br/>`description?: string`<br/>`options?: ToastOptions` | Creates a success toast |
+| `toast.error(title, description?, options?)` | `title: string`<br/>`description?: string`<br/>`options?: ToastOptions` | Creates an error toast |
+| `toast.attention(title, description?, options?)` | `title: string`<br/>`description?: string`<br/>`options?: ToastOptions` | Creates an attention/warning toast |
+| `toast.info(title, description?, options?)` | `title: string`<br/>`description?: string`<br/>`options?: ToastOptions` | Creates an informational toast |
+
+#### ToastOptions Interface
+
+```typescript
+interface ToastOptions {
+  timeout?: number;           // Auto-dismiss time in ms (0 = persistent)
+  button?: {                  // Optional action button
+    text: string;
+    action: () => void;
+  };
+  onClose?: () => void;      // Callback when toast is closed
+}
+```
+
+## Animations
+
+- **Entry**: Slide from bottom to top with fade-in
+- **Exit**: Slide from top to bottom with fade-out
+- **Duration**: 300ms with smooth easing

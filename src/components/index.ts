@@ -91,6 +91,8 @@ import Navigator from './Navigator/index.vue';
 import SelectTime from './SelectTime/index.vue';
 import DataTable from './DataTable/index.vue';
 import Chip from './Chip/Chip.vue';
+import Toast from './Toast/Toast.vue';
+import { toast } from './Toast/ToastManager';
 import Popover from './ui/popover/Popover.vue';
 import PopoverContent from './ui/popover/PopoverContent.vue';
 import PopoverTrigger from './ui/popover/PopoverTrigger.vue';
@@ -200,6 +202,8 @@ export const components: ComponentsMap = {
   unnnicTemplatePreviewModal: TemplatePreviewModal,
   unnnicDataTable: DataTable,
   unnnicChip: Chip,
+  unnnicToast: Toast,
+  unnnicToastManager: toast,
   unnnicPopover: Popover,
   unnnicPopoverContent: PopoverContent,
   unnnicPopoverTrigger: PopoverTrigger,
@@ -299,6 +303,8 @@ export const unnnicNavigator = Navigator;
 export const unnnicDataTable = DataTable as VueComponent;
 export const unnnicSelectTime = SelectTime as VueComponent;
 export const unnnicChip = Chip;
+export const unnnicToast = Toast;
+export const unnnicToastManager = toast;
 export const unnnicPopover = Popover;
 export const unnnicPopoverContent = PopoverContent;
 export const unnnicPopoverTrigger = PopoverTrigger;
@@ -307,7 +313,6 @@ export const unnnicTemplatePreview = TemplatePreview as VueComponent;
 export const unnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
 
 export const UnnnicFontSize = fontSize;
-export const UnnnicFormElement = formElement;
 export const UnnnicInput = input;
 export const UnnnicInputNext = inputNext;
 export const UnnnicInputDatePicker = inputDatePicker;
@@ -400,6 +405,8 @@ export const UnnnicNavigator = Navigator;
 export const UnnnicDataTable = DataTable as VueComponent;
 export const UnnnicSelectTime = SelectTime as VueComponent;
 export const UnnnicChip = Chip;
+export const UnnnicToast = Toast;
+export const UnnnicToastManager = toast;
 export const UnnnicPopover = Popover;
 export const UnnnicPopoverContent = PopoverContent;
 export const UnnnicPopoverTrigger = PopoverTrigger;
