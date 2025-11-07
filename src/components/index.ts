@@ -99,6 +99,10 @@ import PopoverTrigger from './ui/popover/PopoverTrigger.vue';
 import PopoverFooter from './ui/popover/PopoverFooter.vue';
 import TemplatePreview from './TemplatePreview/TemplatePreview.vue';
 import TemplatePreviewModal from './TemplatePreview/TemplatePreviewModal.vue';
+import Tabs from './ui/tabs/Tabs.vue';
+import TabsList from './ui/tabs/TabsList.vue';
+import TabsTrigger from './ui/tabs/TabsTrigger.vue';
+import TabsContent from './ui/tabs/TabsContent.vue';
 
 type VueComponent = Component;
 
@@ -207,6 +211,10 @@ export const components: ComponentsMap = {
   unnnicPopover: Popover,
   unnnicPopoverContent: PopoverContent,
   unnnicPopoverTrigger: PopoverTrigger,
+  unnnicTabs: Tabs,
+  unnnicTabsList: TabsList,
+  unnnicTabsTrigger: TabsTrigger,
+  unnnicTabsContent: TabsContent,
 };
 
 export const unnnicFontSize = fontSize;
@@ -236,7 +244,7 @@ export const unnnicCardImage = cardImage as VueComponent;
 export const unnnicCardProject = cardProject as VueComponent;
 export const unnnicCardInformation = cardInformation;
 export const unnnicCheckbox = checkbox;
-export const unnnicCheckboxGroup = checkboxGroup; 
+export const unnnicCheckboxGroup = checkboxGroup;
 export const unnnicCollapse = collapse;
 export const unnnicRadio = radio;
 export const unnniclanguageSelect = languageSelect as VueComponent;
@@ -311,6 +319,10 @@ export const unnnicPopoverTrigger = PopoverTrigger;
 export const unnnicPopoverFooter = PopoverFooter;
 export const unnnicTemplatePreview = TemplatePreview as VueComponent;
 export const unnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
+export const unnnicTabs = Tabs;
+export const unnnicTabsList = TabsList;
+export const unnnicTabsTrigger = TabsTrigger;
+export const unnnicTabsContent = TabsContent;
 
 export const UnnnicFontSize = fontSize;
 export const UnnnicInput = input;
@@ -413,3 +425,7 @@ export const UnnnicPopoverTrigger = PopoverTrigger;
 export const UnnnicPopoverFooter = PopoverFooter;
 export const UnnnicTemplatePreview = TemplatePreview as VueComponent;
 export const UnnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
+export const UnnnicTabs = Tabs;
+export const UnnnicTabsList = TabsList;
+export const UnnnicTabsTrigger = TabsTrigger;
+export const UnnnicTabsContent = TabsContent;
