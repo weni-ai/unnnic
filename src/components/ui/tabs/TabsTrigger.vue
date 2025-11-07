@@ -46,9 +46,14 @@ const classes = computed(() => {
 @use '@/assets/scss/unnnic' as *;
 
 .unnnic-tabs-trigger {
+  background-color: transparent;
+  border: none;
+
   padding: $unnnic-space-2 $unnnic-space-4;
   font: $unnnic-font-action;
   color: $unnnic-color-fg-base;
+
+  cursor: pointer;
 
   &[data-state='active'] {
     font: $unnnic-font-action;
@@ -63,6 +68,12 @@ const classes = computed(() => {
 
   &:hover {
     color: $unnnic-color-fg-emphasized;
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    gap: $unnnic-space-2;
   }
 }
 </style>

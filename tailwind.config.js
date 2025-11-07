@@ -49,4 +49,8 @@ export default {
     },
   },
   plugins: [tailwindcssAnimate],
+  corePlugins: {
+    preflight: false,
+    container: false,
+  },
 };

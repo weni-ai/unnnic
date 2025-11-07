@@ -95,12 +95,10 @@ export const WithTooltip = {
       <Tabs v-bind="args">
         <TabsList>
           <TabsTrigger value="account">
-            <span class="flex gap-2">
-                Account
-                <UnnnicToolTip enabled text="Manage your account settings" side="bottom" class="!inline-flex items-center">
-                    <UnnnicIcon icon="help" size="sm" scheme="fg-base"/>
-                </UnnnicToolTip>
-            </span>
+              Account
+              <UnnnicToolTip enabled text="Manage your account settings" side="bottom" class="!inline-flex items-center">
+                <UnnnicIcon icon="help" size="sm" scheme="fg-base"/>
+              </UnnnicToolTip>
           </TabsTrigger>
           <TabsTrigger value="password">
             <span>Password</span>

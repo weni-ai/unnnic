@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`UnnnicAlert.vue > matches the snapshot 1`] = `
-"<div data-v-284427ba="" class="unnnic-alert unnnic-alert-position--top-right"><span data-v-26446d8e="" data-v-284427ba="" class="material-symbols-rounded unnnic-icon-scheme--primary unnnic-icon-size--sm" data-testid="material-icon" translate="no" data-test="unnnic-icon">alert-icon</span>
+"<div data-v-284427ba="" class="unnnic-alert unnnic-alert-position--top-right"><span data-v-26446d8e="" data-v-284427ba="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--primary unnnic-icon-size--sm unnnic-icon__size--sm" data-testid="material-icon" translate="no" data-test="unnnic-icon">alert-icon</span>
   <div data-v-284427ba="" class="unnnic-alert__content">
     <div data-v-284427ba="" class="unnnic-alert__title">TEST ALERT</div>
     <div data-v-284427ba="" class="unnnic-alert__text">This is an alert message</div>
