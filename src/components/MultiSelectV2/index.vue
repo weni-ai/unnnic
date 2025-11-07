@@ -37,12 +37,10 @@
               :key="option[props.itemValue]"
               :data-option-index="index"
               :label="option[props.itemLabel]"
-              :active="
-                option[props.itemValue] === selectedItems?.[props.itemValue]
-              "
+              :active="getActivatedOptionStatus(option)"
               :focused="focusedOptionIndex === index"
               :disabled="option.disabled"
-              @update:model-value="handleSelectOption(option)"
+              @update:model-value="handleSelectOption(option, $event)"
             />
           </div>
         </div>
@@ -112,14 +110,25 @@ const calculatedMaxHeight = computed(() => {
 });
 
 const emit = defineEmits<{
-  'update:modelValue': [any[]];
+  'update:modelValue': [unknown[]];
   'update:search': [string];
 }>();
 
 const focusedOptionIndex = ref<number>(-1);
 
+const selectedItems = computed(() => {
+  if (props.returnObject) return props.modelValue;
+
+  const modelValueValues = props.returnObject
+    ? props.modelValue.map((item) => item[props.itemValue])
+    : props.modelValue;
+
+  return props.options.filter((option) =>
+    modelValueValues.includes(option[props.itemValue]),
+  );
+});
 const inputValue = computed(() => {
-  return props.modelValue.map((item) => item[props.itemLabel]).join(', ');
+  return selectedItems.value.map((item) => item[props.itemLabel]).join(', ');
 });
 
 const filteredOptions = computed(() => {
@@ -140,21 +149,57 @@ const handleSearch = (value: string) => {
   emit('update:search', value);
 };
 
-const selectedItems = computed(() => {
-  if (props.returnObject) return props.modelValue;
+const getActivatedOptionStatus = (option: (typeof props.options)[number]) => {
+  if (props.returnObject) {
+    return props.modelValue.find(
+      (item) => item[props.itemValue] === option[props.itemValue],
+    );
+  }
+  return props.modelValue.includes(option[props.itemValue]);
+};
 
-  return props.options.find(
-    (option) => option[props.itemValue] === props.modelValue,
-  );
-});
-
-const handleSelectOption = (option: any) => {
-  // TODO
+const handleSelectOption = (
+  option: (typeof props.options)[number],
+  selected: boolean,
+) => {
+  if (selected) {
+    emit(
+      'update:modelValue',
+      props.returnObject
+        ? [...props.modelValue, option]
+        : [...props.modelValue, option[props.itemValue]],
+    );
+  } else {
+    emit(
+      'update:modelValue',
+      props.returnObject
+        ? props.modelValue.filter(
+            (item) => item[props.itemValue] !== option[props.itemValue],
+          )
+        : props.modelValue.filter((item) => item !== option[props.itemValue]),
+    );
+  }
 };
 </script>
 
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
+
+:deep(.unnnic-multi-select__input) {
+  cursor: pointer;
+}
+
+:deep(.unnnic-multi-select__input-search) {
+  > .icon-left {
+    color: $unnnic-color-fg-base;
+  }
+}
+
+:deep(.unnnic-multi-select__input) {
+  > .icon-right {
+    color: $unnnic-color-fg-base;
+  }
+}
 
 .unnnic-multi-select {
   &__content {
