@@ -4,7 +4,6 @@ export type ButtonType =
   | 'primary'
   | 'secondary'
   | 'tertiary'
-  | 'alternative'
   | 'warning'
   | 'attention';
 
@@ -17,7 +16,6 @@ export interface ButtonProps {
   iconRight?: string;
   iconCenter?: string;
   iconsFilled?: boolean;
-  next?: boolean;
   disabled?: boolean;
   loading?: boolean;
 }

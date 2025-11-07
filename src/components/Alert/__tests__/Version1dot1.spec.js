@@ -90,8 +90,6 @@ describe('Alert.vue', () => {
       clickable: false,
       filled: false,
       icon: 'close-1',
-      lineHeight: null,
-      next: false,
       size: 'sm',
       scheme: 'neutral-white',
     });

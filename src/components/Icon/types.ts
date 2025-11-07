@@ -17,14 +17,10 @@ export type IconSize =
   | 'avatar-xs'
   | 'avatar-nano';
 
-export type LineHeight = 'sm' | 'md' | 'lg';
-
 export interface IconProps {
   filled?: boolean;
-  next?: boolean;
   icon?: string | null;
   clickable?: boolean;
   size?: IconSize;
-  lineHeight?: LineHeight | null;
   scheme?: SchemeColor;
 }
