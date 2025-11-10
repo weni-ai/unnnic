@@ -192,16 +192,16 @@ onUnmounted(() => {
     width: 100%;
 
     display: flex;
-    gap: $unnnic-space-2;
   }
 
   &__content {
     flex-direction: column;
-    gap: $unnnic-space-2;
+    gap: $unnnic-space-1;
   }
 
   &__header {
     align-items: center;
+    gap: $unnnic-space-2;
   }
 
   &__title {
