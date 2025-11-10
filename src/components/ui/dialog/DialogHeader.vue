@@ -52,6 +52,7 @@ const iconsMapper = {
       <UnnnicButton
         type="tertiary"
         iconCenter="close"
+        size="small"
       />
     </DialogClose>
   </header>
