@@ -128,7 +128,7 @@ const startTimeout = () => {
   }
 };
 
-const clearTimeout = () => {
+const stopTimeout = () => {
   if (timeoutId) {
     window.clearTimeout(timeoutId);
     timeoutId = null;
@@ -141,7 +141,7 @@ onMounted(() => {
 });
 
 onUnmounted(() => {
-  clearTimeout();
+  stopTimeout();
 });
 </script>
 

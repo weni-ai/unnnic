@@ -106,6 +106,11 @@ import DialogHeader from './ui/dialog/DialogHeader.vue';
 import DialogTitle from './ui/dialog/DialogTitle.vue';
 import DialogTrigger from './ui/dialog/DialogTrigger.vue';
 import DialogClose from './ui/dialog/DialogClose.vue';
+import Tabs from './ui/tabs/Tabs.vue';
+import TabsList from './ui/tabs/TabsList.vue';
+import TabsTrigger from './ui/tabs/TabsTrigger.vue';
+import TabsContent from './ui/tabs/TabsContent.vue';
+import PageHeader from './PageHeader/PageHeader.vue';
 
 type VueComponent = Component;
 
@@ -221,6 +226,11 @@ export const components: ComponentsMap = {
   unnnicDialogTitle: DialogTitle,
   unnnicDialogTrigger: DialogTrigger,
   unnnicDialogClose: DialogClose,
+  unnnicTabs: Tabs,
+  unnnicTabsList: TabsList,
+  unnnicTabsTrigger: TabsTrigger,
+  unnnicTabsContent: TabsContent,
+  unnnicPageHeader: PageHeader,
 };
 
 export const unnnicFontSize = fontSize;
@@ -319,6 +329,8 @@ export const unnnicTemplatePreview = TemplatePreview as VueComponent;
 export const unnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
 export const unnnicDataTable = DataTable as VueComponent;
 export const unnnicChip = Chip;
+export const unnnicToast = Toast;
+export const unnnicToastManager = toast;
 export const unnnicPopover = Popover;
 export const unnnicPopoverContent = PopoverContent;
 export const unnnicPopoverTrigger = PopoverTrigger;
@@ -330,6 +342,11 @@ export const unnnicDialogHeader = DialogHeader;
 export const unnnicDialogTitle = DialogTitle;
 export const unnnicDialogTrigger = DialogTrigger;
 export const unnnicDialogClose = DialogClose;
+export const unnnicTabs = Tabs;
+export const unnnicTabsList = TabsList;
+export const unnnicTabsTrigger = TabsTrigger;
+export const unnnicTabsContent = TabsContent;
+export const unnnicPageHeader = PageHeader;
 
 export const UnnnicFontSize = fontSize;
 export const UnnnicInput = input;
@@ -439,3 +456,8 @@ export const UnnnicDialogHeader = DialogHeader;
 export const UnnnicDialogTitle = DialogTitle;
 export const UnnnicDialogTrigger = DialogTrigger;
 export const UnnnicDialogClose = DialogClose;
+export const UnnnicTabs = Tabs;
+export const UnnnicTabsList = TabsList;
+export const UnnnicTabsTrigger = TabsTrigger;
+export const UnnnicTabsContent = TabsContent;
+export const UnnnicPageHeader = PageHeader;

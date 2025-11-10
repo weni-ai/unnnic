@@ -254,11 +254,18 @@ describe('UnnnicToast', () => {
     });
 
     test('clears timeout when component is unmounted', () => {
+      vi.useRealTimers();
       const clearTimeoutSpy = vi.spyOn(window, 'clearTimeout');
-      wrapper = createTimeoutWrapper();
 
-      wrapper.unmount();
+      const localWrapper = shallowMount(Toast, {
+        props: { title: 'Test Toast', timeout: 1000 },
+      });
+
+      localWrapper.unmount();
       expect(clearTimeoutSpy).toHaveBeenCalled();
+
+      clearTimeoutSpy.mockRestore();
+      vi.useFakeTimers();
     });
   });
 

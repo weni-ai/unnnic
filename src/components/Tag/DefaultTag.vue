@@ -62,6 +62,7 @@ const color = computed(() => {
   gap: $unnnic-space-1;
   border-radius: $unnnic-border-radius-pill;
   padding: calc($unnnic-space-1 * 1.5) $unnnic-space-3;
+  width: fit-content;
 
   background-color: v-bind(color);
 
@@ -71,6 +72,10 @@ const color = computed(() => {
 
   &__label {
     margin: 0;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 
     font: $unnnic-font-caption-1;
     color: $unnnic-color-fg-emphasized;
