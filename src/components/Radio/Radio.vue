@@ -19,6 +19,13 @@
         {{ label }}
         <slot />
       </p>
+
+      <footer
+        v-if="helper"
+        class="unnnic-radio__helper"
+      >
+        {{ helper }}
+      </footer>
     </label>
   </section>
 </template>
@@ -45,6 +52,10 @@ const props = defineProps({
     default: '',
   },
   name: {
+    type: String,
+    default: '',
+  },
+  helper: {
     type: String,
     default: '',
   },
@@ -86,9 +97,11 @@ $radio-size: 21px;
   &__input-wrapper {
     width: fit-content;
 
-    display: flex;
+    display: grid;
+    grid-template-columns: $radio-size auto;
+    grid-template-rows: auto auto;
     align-items: center;
-    gap: $unnnic-space-2;
+    column-gap: $unnnic-space-2;
 
     cursor: pointer;
 
@@ -136,6 +149,14 @@ $radio-size: 21px;
     &--disabled {
       color: $unnnic-color-fg-muted;
     }
+  }
+
+  &__helper {
+    grid-column: 2 / -1;
+    grid-row: 2;
+
+    font: $unnnic-font-caption-2;
+    color: $unnnic-color-fg-base;
   }
 }
 </style>
