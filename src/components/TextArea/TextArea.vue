@@ -4,6 +4,7 @@
     :size="size"
     :disabled="disabled"
     :message="message"
+    :tooltip="tooltip"
     :error="computedError"
   >
     <textarea
@@ -83,6 +84,11 @@ export default {
       validator(value) {
         return ['normal', 'error'].indexOf(value) !== -1;
       },
+    },
+
+    tooltip: {
+      type: String,
+      default: '',
     },
 
     errors: {
