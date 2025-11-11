@@ -1,13 +1,13 @@
 <template>
   <UnnnicDialog
     :open="modelValue"
-    data-testid="modal-dialog"
     @update:open="$emit('update:modelValue', $event)"
   >
     <UnnnicDialogContent
       :size="size === 'sm' ? 'small' : size === 'lg' ? 'large' : 'medium'"
+      :parentClass="['unnnic-modal-dialog', $attrs.class]"
       class="unnnic-modal-dialog__container"
-      data-testid="modal-container"
+      data-testid="modal-dialog"
       @escape-key-down="persistentHandler"
       @pointer-down-outside="persistentHandler"
     >
@@ -76,8 +76,8 @@
             class="unnnic-modal-dialog__container__actions__primary-button"
             @click.stop="$emit('primaryButtonClick')"
           />
-        </UnnnicDialogFooter>
-      </section>
+          </UnnnicDialogFooter>
+        </section>
     </UnnnicDialogContent>
   </UnnnicDialog>
 </template>
