@@ -4,7 +4,6 @@
     @update:open="$emit('update:modelValue', $event)"
   >
     <UnnnicDialogContent
-      v-if="modelValue"
       :size="size === 'sm' ? 'small' : size === 'lg' ? 'large' : 'medium'"
       :parentClass="['unnnic-modal-dialog', $attrs.class]"
       class="unnnic-modal-dialog__container"
