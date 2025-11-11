@@ -6,6 +6,7 @@
   >
     <UnnnicDialogContent
       :size="size === 'sm' ? 'small' : size === 'lg' ? 'large' : 'medium'"
+      :parentClass="['unnnic-modal-dialog', $attrs.class]"
       class="unnnic-modal-dialog__container"
       data-testid="modal-container"
       @escape-key-down="persistentHandler"
@@ -76,8 +77,8 @@
             class="unnnic-modal-dialog__container__actions__primary-button"
             @click.stop="$emit('primaryButtonClick')"
           />
-        </UnnnicDialogFooter>
-      </section>
+          </UnnnicDialogFooter>
+        </section>
     </UnnnicDialogContent>
   </UnnnicDialog>
 </template>
