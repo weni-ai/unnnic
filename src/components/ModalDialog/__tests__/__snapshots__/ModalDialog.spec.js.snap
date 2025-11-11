@@ -1,3 +1,3 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`ModalDialog.vue > Elements rendering > matches the snapshot 1`] = `"<unnnic-dialog-stub data-v-68ebadeb="" open="true" defaultopen="false" modal="false" data-testid="modal-dialog"></unnnic-dialog-stub>"`;
+exports[`ModalDialog.vue > Elements rendering > matches the snapshot 1`] = `"<unnnic-dialog-content-stub data-v-68ebadeb="" forcemount="false" disableoutsidepointerevents="false" aschild="false" parentclass="unnnic-modal-dialog," class="unnnic-modal-dialog__container" size="medium" data-testid="modal-dialog"></unnnic-dialog-content-stub>"`;
