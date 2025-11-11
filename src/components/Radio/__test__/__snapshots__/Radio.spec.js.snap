@@ -3,5 +3,6 @@
 exports[`Radio.vue > matches the snapshot 1`] = `
 "<section data-v-38c6bf5e="" class="unnnic-radio" size="md"><label data-v-38c6bf5e="" class="unnnic-radio__input-wrapper"><input data-v-38c6bf5e="" class="unnnic-radio__input" type="radio" name="">
     <p data-v-38c6bf5e="" class="unnnic-radio__label"> Option 1</p>
+    <!--v-if-->
   </label></section>"
 `;
