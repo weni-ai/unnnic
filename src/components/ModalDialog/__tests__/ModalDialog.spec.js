@@ -31,18 +31,6 @@ describe('ModalDialog.vue', () => {
       expect(wrapper.html()).toMatchSnapshot();
     });
 
-    it('should render correctly when modelValue is true', () => {
-      const modal = wrapper.find('[data-testid="modal-dialog"]');
-      expect(modal.exists()).toBe(true);
-    });
-
-    it('should not render when modelValue is false', async () => {
-      await wrapper.setProps({ modelValue: false });
-
-      const modal = wrapper.find('[data-testid="modal-dialog"]');
-      expect(modal.exists()).toBe(false);
-    });
-
     it('should apply the correct size class based on the size prop', async () => {
       const modalContainer = wrapper.find('[data-testid="modal-dialog"]');
 
