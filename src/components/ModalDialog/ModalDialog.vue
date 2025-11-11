@@ -1,14 +1,14 @@
 <template>
   <UnnnicDialog
     :open="modelValue"
-    data-testid="modal-dialog"
     @update:open="$emit('update:modelValue', $event)"
   >
     <UnnnicDialogContent
+      v-if="modelValue"
       :size="size === 'sm' ? 'small' : size === 'lg' ? 'large' : 'medium'"
       :parentClass="['unnnic-modal-dialog', $attrs.class]"
       class="unnnic-modal-dialog__container"
-      data-testid="modal-container"
+      data-testid="modal-dialog"
       @escape-key-down="persistentHandler"
       @pointer-down-outside="persistentHandler"
     >
