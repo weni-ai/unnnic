@@ -93,6 +93,10 @@ import DataTable from './DataTable/index.vue';
 import Chip from './Chip/Chip.vue';
 import Toast from './Toast/Toast.vue';
 import { toast } from './Toast/ToastManager';
+import Tabs from './ui/tabs/Tabs.vue';
+import TabsList from './ui/tabs/TabsList.vue';
+import TabsTrigger from './ui/tabs/TabsTrigger.vue';
+import TabsContent from './ui/tabs/TabsContent.vue';
 import Popover from './ui/popover/Popover.vue';
 import PopoverContent from './ui/popover/PopoverContent.vue';
 import PopoverTrigger from './ui/popover/PopoverTrigger.vue';
@@ -204,6 +208,10 @@ export const components: ComponentsMap = {
   unnnicChip: Chip,
   unnnicToast: Toast,
   unnnicToastManager: toast,
+  unnnicTabs: Tabs,
+  unnnicTabsList: TabsList,
+  unnnicTabsTrigger: TabsTrigger,
+  unnnicTabsContent: TabsContent,
   unnnicPopover: Popover,
   unnnicPopoverContent: PopoverContent,
   unnnicPopoverTrigger: PopoverTrigger,
@@ -236,7 +244,7 @@ export const unnnicCardImage = cardImage as VueComponent;
 export const unnnicCardProject = cardProject as VueComponent;
 export const unnnicCardInformation = cardInformation;
 export const unnnicCheckbox = checkbox;
-export const unnnicCheckboxGroup = checkboxGroup; 
+export const unnnicCheckboxGroup = checkboxGroup;
 export const unnnicCollapse = collapse;
 export const unnnicRadio = radio;
 export const unnniclanguageSelect = languageSelect as VueComponent;
@@ -305,6 +313,10 @@ export const unnnicSelectTime = SelectTime as VueComponent;
 export const unnnicChip = Chip;
 export const unnnicToast = Toast;
 export const unnnicToastManager = toast;
+export const unnnicTabs = Tabs;
+export const unnnicTabsList = TabsList;
+export const unnnicTabsTrigger = TabsTrigger;
+export const unnnicTabsContent = TabsContent;
 export const unnnicPopover = Popover;
 export const unnnicPopoverContent = PopoverContent;
 export const unnnicPopoverTrigger = PopoverTrigger;
@@ -407,6 +419,10 @@ export const UnnnicSelectTime = SelectTime as VueComponent;
 export const UnnnicChip = Chip;
 export const UnnnicToast = Toast;
 export const UnnnicToastManager = toast;
+export const UnnnicTabs = Tabs;
+export const UnnnicTabsList = TabsList;
+export const UnnnicTabsTrigger = TabsTrigger;
+export const UnnnicTabsContent = TabsContent;
 export const UnnnicPopover = Popover;
 export const UnnnicPopoverContent = PopoverContent;
 export const UnnnicPopoverTrigger = PopoverTrigger;
