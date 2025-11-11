@@ -2,7 +2,7 @@
   <header
     :class="`page-header 
       ${hasBackButton ? 'page-header--has-back-button' : ''} 
-      ${hasTabsSlot ? 'page-header--has-tabs' : ''}
+      ${$slots.tabs ? 'page-header--has-tabs' : ''}
     `"
   >
     <UnnnicButton
@@ -36,7 +36,7 @@
     </section>
 
     <section
-      v-if="hasActionsSlot"
+      v-if="$slots.actions"
       class="page-header__actions"
       data-testid="page-actions"
     >
@@ -44,7 +44,7 @@
     </section>
 
     <section
-      v-if="hasTabsSlot"
+      v-if="$slots.tabs"
       class="page-header__tabs"
       data-testid="page-tabs"
     >
@@ -54,8 +54,6 @@
 </template>
 
 <script setup lang="ts">
-import { useSlots } from 'vue';
-
 import UnnnicButton from '../Button/Button.vue';
 
 import type { PageHeaderProps, PageHeaderEmits } from './types';
@@ -66,10 +64,6 @@ withDefaults(defineProps<PageHeaderProps>(), {
 });
 
 const emit = defineEmits<PageHeaderEmits>();
-
-const slots = useSlots();
-const hasActionsSlot = !!slots.actions;
-const hasTabsSlot = !!slots.tabs;
 
 const handleBackClick = (): void => {
   emit('back');
