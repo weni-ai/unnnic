@@ -493,3 +493,102 @@ export const InfiniteScrollSimple = {
     `,
   }),
 };
+
+/**
+ * External Search with Debounce Example
+ *
+ * Demonstrates how to use SelectSmart with external API search and debounce.
+ * The component disables internal filtering and lets the parent control the options.
+ *
+ * Features:
+ * - Debounced search (500ms delay)
+ * - Simulates API calls
+ * - Shows loading state during search
+ * - External filter control via disableInternalFilter prop
+ */
+export const ExternalSearchWithDebounce = {
+  render: (args) => ({
+    components: {
+      unnnicFormElement,
+      unnnicSelectSmart,
+    },
+    setup() {
+      return { args };
+    },
+    data() {
+      return {
+        selected: [],
+        options: [],
+        allOptions: [],
+        isSearching: false,
+        searchDebounceTimer: null,
+      };
+    },
+    mounted() {
+      this.allOptions = Array.from({ length: 50 }, (_, i) => ({
+        value: `item-${i + 1}`,
+        label: `Item ${i + 1}`,
+        description: `Description for item ${i + 1}`,
+      }));
+      this.options = [...this.allOptions];
+    },
+    methods: {
+      handleSearchValueUpdate(searchValue) {
+        if (this.searchDebounceTimer) {
+          clearTimeout(this.searchDebounceTimer);
+        }
+
+        if (!searchValue || searchValue.trim() === '') {
+          this.options = [...this.allOptions];
+          this.isSearching = false;
+          return;
+        }
+
+        this.isSearching = true;
+
+        this.searchDebounceTimer = setTimeout(async () => {
+          try {
+            await new Promise((resolve) => setTimeout(resolve, 500));
+
+            const searchTerm = searchValue.toLowerCase();
+            const results = this.allOptions.filter((option) =>
+              option.label.toLowerCase().includes(searchTerm),
+            );
+
+            this.options = results;
+          } catch (error) {
+            console.error('Search error:', error);
+            this.options = [];
+          } finally {
+            this.isSearching = false;
+          }
+        }, 500);
+      },
+    },
+    beforeUnmount() {
+      if (this.searchDebounceTimer) {
+        clearTimeout(this.searchDebounceTimer);
+      }
+    },
+    template: `
+      <div>
+        <unnnicFormElement 
+          label="Search with API (Debounced)" 
+          message="Internal filter is disabled - parent controls filtering"
+        >
+          <unnnicSelectSmart
+            v-model="selected"
+            :options="options"
+            :disable-internal-filter="true"
+            :is-loading="isSearching"
+            :autocomplete="true"
+            :autocomplete-icon-left="true"
+            :autocomplete-clear-on-focus="true"
+            multiple
+            @update:search-value="handleSearchValueUpdate"
+          />
+        </unnnicFormElement>
+      </div>
+    `,
+  }),
+};
