@@ -258,17 +258,15 @@ describe('SelectSmart.vue', () => {
     });
 
     it('should emit onActiveChange when toggling dropdown visibility', async () => {
-      // Open dropdown
       await input().trigger('click');
 
-      // Close dropdown
       await input().trigger('click');
 
       const emittedEvents = wrapper.emitted('onActiveChange');
       expect(emittedEvents).toBeTruthy();
       expect(emittedEvents.length).toBe(2);
-      expect(emittedEvents[0][0]).toBe(true); // opened
-      expect(emittedEvents[1][0]).toBe(false); // closed
+      expect(emittedEvents[0][0]).toBe(true);
+      expect(emittedEvents[1][0]).toBe(false);
     });
 
     it('should emit onActiveChange when closing dropdown with escape key', async () => {
@@ -392,7 +390,6 @@ describe('SelectSmart.vue', () => {
       wrapper.vm.active = true;
       await nextTick();
 
-      // Simulate scroll-end
       wrapper.vm.infiniteScrollLoading = false;
       wrapper.vm.$emit('scroll-end');
 
@@ -467,6 +464,64 @@ describe('SelectSmart.vue', () => {
       expect(mainLoading.exists()).toBe(true);
 
       expect(wrapper.vm.infiniteScrollLoading).toBe(false);
+    });
+  });
+
+  describe('External Search (disableInternalFilter)', () => {
+    const searchOptions = [
+      { label: 'Apple', value: 'apple' },
+      { label: 'Banana', value: 'banana' },
+      { label: 'Orange', value: 'orange' },
+    ];
+
+    beforeEach(() => {
+      mountWrapper({
+        options: searchOptions,
+        autocomplete: true,
+      });
+    });
+
+    it('should apply internal filter by default', async () => {
+      wrapper.vm.active = true;
+      await wrapper.setData({ searchValue: 'ap' });
+
+      const filteredOptions = wrapper.vm.filterOptions(searchOptions);
+
+      expect(filteredOptions.length).toBe(1);
+      expect(filteredOptions[0].label).toBe('Apple');
+    });
+
+    it('should skip internal filter when disableInternalFilter is true', async () => {
+      await wrapper.setProps({ disableInternalFilter: true });
+      wrapper.vm.active = true;
+      await wrapper.setData({ searchValue: 'ap' });
+
+      const filteredOptions = wrapper.vm.filterOptions(searchOptions);
+
+      expect(filteredOptions.length).toBe(3);
+      expect(filteredOptions).toEqual(searchOptions);
+    });
+
+    it('should emit update:searchValue when user types', async () => {
+      wrapper.vm.active = true;
+      await wrapper.setData({ searchValue: 'test' });
+
+      expect(wrapper.emitted('update:searchValue')).toBeTruthy();
+      expect(wrapper.emitted('update:searchValue')[0][0]).toBe('test');
+    });
+
+    it('should allow parent to control filtering via options prop', async () => {
+      await wrapper.setProps({ disableInternalFilter: true });
+      wrapper.vm.active = true;
+      await nextTick();
+
+      const filteredByParent = [{ label: 'Apple', value: 'apple' }];
+      await wrapper.setProps({ options: filteredByParent });
+
+      const displayedOptions = wrapper.vm.filterOptions(filteredByParent);
+
+      expect(displayedOptions.length).toBe(1);
+      expect(displayedOptions[0].label).toBe('Apple');
     });
   });
 });
