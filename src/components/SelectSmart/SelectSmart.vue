@@ -237,6 +237,10 @@ export default {
       type: Function,
       default: () => true,
     },
+    disableInternalFilter: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -507,6 +511,10 @@ export default {
     },
 
     filterOptions(options) {
+      if (this.disableInternalFilter) {
+        return options;
+      }
+
       const searchValue = this.searchValue.toLowerCase();
 
       const searchTerms = searchValue
