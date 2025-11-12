@@ -9,12 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **SelectSmart Component - Infinite Scroll**:
+- **SelectSmart Component - Infinite Scroll & External Search**:
   - **Infinite Scroll Support**: Native infinite scroll using VueUse's `useInfiniteScroll` composable
+  - **External Search Support**: New `disableInternalFilter` prop for API-based search with debounce
   - **New Props**:
     - `infiniteScroll` (Boolean, default: false) - Enables infinite scroll functionality
     - `infiniteScrollDistance` (Number, default: 10) - Distance in pixels from bottom to trigger loading
     - `infiniteScrollCanLoadMore` (Function, default: () => true) - Callback to determine if more data is available
+    - `disableInternalFilter` (Boolean, default: false) - Disables internal filtering for external search control
   - **New Event**: `scroll-end` - Emitted when user scrolls near the bottom of options list
   - **Public Methods**:
     - `finishInfiniteScroll()` - Must be called after loading data to reset loading state
