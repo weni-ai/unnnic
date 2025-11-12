@@ -258,17 +258,15 @@ describe('SelectSmart.vue', () => {
     });
 
     it('should emit onActiveChange when toggling dropdown visibility', async () => {
-      // Open dropdown
       await input().trigger('click');
 
-      // Close dropdown
       await input().trigger('click');
 
       const emittedEvents = wrapper.emitted('onActiveChange');
       expect(emittedEvents).toBeTruthy();
       expect(emittedEvents.length).toBe(2);
-      expect(emittedEvents[0][0]).toBe(true); // opened
-      expect(emittedEvents[1][0]).toBe(false); // closed
+      expect(emittedEvents[0][0]).toBe(true);
+      expect(emittedEvents[1][0]).toBe(false);
     });
 
     it('should emit onActiveChange when closing dropdown with escape key', async () => {
@@ -346,6 +344,184 @@ describe('SelectSmart.vue', () => {
 
       const option = wrapper.findComponent('[data-testid="option"]');
       expect(option.props('activeColor')).toBe('primary');
+    });
+  });
+
+  describe('Infinite Scroll', () => {
+    beforeEach(() => {
+      mountWrapper({
+        options,
+        infiniteScroll: true,
+        infiniteScrollDistance: 20,
+      });
+    });
+
+    it('should have infiniteScrollLoading state initialized as false', () => {
+      expect(wrapper.vm.infiniteScrollLoading).toBe(false);
+    });
+
+    it('should not setup infinite scroll when infiniteScroll prop is false', async () => {
+      await wrapper.setProps({ infiniteScroll: false });
+      const setupSpy = vi.spyOn(wrapper.vm, 'setupInfiniteScroll');
+
+      wrapper.vm.active = true;
+      await nextTick();
+
+      expect(setupSpy).not.toHaveBeenCalled();
+    });
+
+    it('should set infiniteScrollLoading to false when finishInfiniteScroll is called', async () => {
+      wrapper.vm.infiniteScrollLoading = true;
+
+      wrapper.vm.finishInfiniteScroll();
+
+      expect(wrapper.vm.infiniteScrollLoading).toBe(false);
+    });
+
+    it('should reset infiniteScrollLoading when resetInfiniteScroll is called', () => {
+      wrapper.vm.infiniteScrollLoading = true;
+
+      wrapper.vm.resetInfiniteScroll();
+
+      expect(wrapper.vm.infiniteScrollLoading).toBe(false);
+    });
+
+    it('should emit scroll-end event when infinite scroll is triggered', async () => {
+      wrapper.vm.active = true;
+      await nextTick();
+
+      wrapper.vm.infiniteScrollLoading = false;
+      wrapper.vm.$emit('scroll-end');
+
+      expect(wrapper.emitted('scroll-end')).toBeTruthy();
+    });
+
+    it('should not emit scroll-end when infiniteScrollLoading is true', async () => {
+      wrapper.vm.active = true;
+      wrapper.vm.infiniteScrollLoading = true;
+      await nextTick();
+
+      wrapper.vm.infiniteScrollCanLoadMore();
+
+      expect(wrapper.vm.infiniteScrollLoading).toBe(true);
+    });
+
+    it('should setup infinite scroll when dropdown opens', async () => {
+      const setupSpy = vi.spyOn(wrapper.vm, 'setupInfiniteScroll');
+
+      wrapper.vm.active = true;
+      await nextTick();
+      await nextTick();
+
+      expect(setupSpy).toHaveBeenCalled();
+    });
+
+    it('should display loading indicator when infiniteScrollLoading is true', async () => {
+      await wrapper.setProps({ infiniteScroll: true });
+      wrapper.vm.active = true;
+      wrapper.vm.infiniteScrollLoading = true;
+      await nextTick();
+
+      const loadingIndicator = wrapper.find(
+        '.unnnic-select-smart__options-infinite-loading',
+      );
+      expect(loadingIndicator.exists()).toBe(true);
+    });
+
+    it('should not display loading indicator when infiniteScrollLoading is false', async () => {
+      await wrapper.setProps({ infiniteScroll: true });
+      wrapper.vm.active = true;
+      wrapper.vm.infiniteScrollLoading = false;
+      await nextTick();
+
+      const loadingIndicator = wrapper.find(
+        '.unnnic-select-smart__options-infinite-loading',
+      );
+      expect(loadingIndicator.exists()).toBe(false);
+    });
+
+    it('should not display infinite scroll loading when infiniteScroll is false', async () => {
+      await wrapper.setProps({ infiniteScroll: false });
+      wrapper.vm.active = true;
+      wrapper.vm.infiniteScrollLoading = true;
+      await nextTick();
+
+      const loadingIndicator = wrapper.find(
+        '.unnnic-select-smart__options-infinite-loading',
+      );
+      expect(loadingIndicator.exists()).toBe(false);
+    });
+
+    it('should not interfere with initial isLoading prop', async () => {
+      await wrapper.setProps({
+        isLoading: true,
+        infiniteScroll: true,
+      });
+      wrapper.vm.active = true;
+      await nextTick();
+
+      const mainLoading = wrapper.findComponent({ name: 'UnnnicIconLoading' });
+      expect(mainLoading.exists()).toBe(true);
+
+      expect(wrapper.vm.infiniteScrollLoading).toBe(false);
+    });
+  });
+
+  describe('External Search (disableInternalFilter)', () => {
+    const searchOptions = [
+      { label: 'Apple', value: 'apple' },
+      { label: 'Banana', value: 'banana' },
+      { label: 'Orange', value: 'orange' },
+    ];
+
+    beforeEach(() => {
+      mountWrapper({
+        options: searchOptions,
+        autocomplete: true,
+      });
+    });
+
+    it('should apply internal filter by default', async () => {
+      wrapper.vm.active = true;
+      await wrapper.setData({ searchValue: 'ap' });
+
+      const filteredOptions = wrapper.vm.filterOptions(searchOptions);
+
+      expect(filteredOptions.length).toBe(1);
+      expect(filteredOptions[0].label).toBe('Apple');
+    });
+
+    it('should skip internal filter when disableInternalFilter is true', async () => {
+      await wrapper.setProps({ disableInternalFilter: true });
+      wrapper.vm.active = true;
+      await wrapper.setData({ searchValue: 'ap' });
+
+      const filteredOptions = wrapper.vm.filterOptions(searchOptions);
+
+      expect(filteredOptions.length).toBe(3);
+      expect(filteredOptions).toEqual(searchOptions);
+    });
+
+    it('should emit update:searchValue when user types', async () => {
+      wrapper.vm.active = true;
+      await wrapper.setData({ searchValue: 'test' });
+
+      expect(wrapper.emitted('update:searchValue')).toBeTruthy();
+      expect(wrapper.emitted('update:searchValue')[0][0]).toBe('test');
+    });
+
+    it('should allow parent to control filtering via options prop', async () => {
+      await wrapper.setProps({ disableInternalFilter: true });
+      wrapper.vm.active = true;
+      await nextTick();
+
+      const filteredByParent = [{ label: 'Apple', value: 'apple' }];
+      await wrapper.setProps({ options: filteredByParent });
+
+      const displayedOptions = wrapper.vm.filterOptions(filteredByParent);
+
+      expect(displayedOptions.length).toBe(1);
+      expect(displayedOptions[0].label).toBe('Apple');
     });
   });
 });
