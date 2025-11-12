@@ -303,3 +303,193 @@ Secondary.args = {
     { value: '7', label: 'Option 7' },
   ],
 };
+
+/**
+ * Infinite Scroll Example
+ *
+ * This story demonstrates the infinite scroll feature.
+ * Scroll to the bottom of the options list to load more items.
+ *
+ * Features:
+ * - Loads 20 items per page
+ * - Simulates API delay (500ms)
+ * - Shows loading state while fetching
+ * - Stops loading when reaching the last page (5 pages total = 100 items)
+ * - Works with autocomplete and search
+ */
+export const InfiniteScroll = {
+  render: (args) => ({
+    components: {
+      unnnicFormElement,
+      unnnicSelectSmart,
+    },
+    setup() {
+      return { args };
+    },
+    data() {
+      return {
+        selectedOptions: [],
+        options: [],
+        currentPage: 1,
+        totalPages: 5,
+        itemsPerPage: 20,
+      };
+    },
+    computed: {
+      hasMoreData() {
+        return this.currentPage <= this.totalPages;
+      },
+    },
+    mounted() {
+      this.loadInitialOptions();
+    },
+    methods: {
+      async loadInitialOptions() {
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
+        const newOptions = Array.from({ length: this.itemsPerPage }, (_, i) => {
+          const itemNumber = (this.currentPage - 1) * this.itemsPerPage + i + 1;
+          return {
+            value: `item-${itemNumber}`,
+            label: `Item ${itemNumber}`,
+            description: `Description for item ${itemNumber}`,
+          };
+        });
+
+        this.options.push(...newOptions);
+        this.currentPage++;
+      },
+      async handleScrollEnd() {
+        if (!this.hasMoreData) {
+          this.$refs.selectSmart?.finishInfiniteScroll();
+          return;
+        }
+
+        try {
+          await new Promise((resolve) => setTimeout(resolve, 500));
+
+          const newOptions = Array.from(
+            { length: this.itemsPerPage },
+            (_, i) => {
+              const itemNumber =
+                (this.currentPage - 1) * this.itemsPerPage + i + 1;
+              return {
+                value: `item-${itemNumber}`,
+                label: `Item ${itemNumber}`,
+                description: `Description for item ${itemNumber}`,
+              };
+            },
+          );
+
+          this.options.push(...newOptions);
+          this.currentPage++;
+        } catch (error) {
+          console.error('Error loading options:', error);
+        } finally {
+          this.$refs.selectSmart?.finishInfiniteScroll();
+        }
+      },
+    },
+    template: `
+        <unnnicFormElement label="Select with Infinite Scroll" message="Try scrolling to the bottom of the list">
+          <unnnicSelectSmart
+            ref="selectSmart"
+            v-model="selectedOptions"
+            :options="options"
+            :infinite-scroll="true"
+            :infinite-scroll-distance="20"
+            :infinite-scroll-can-load-more="() => hasMoreData"
+            :autocomplete="true"
+            :autocomplete-icon-left="true"
+            :autocomplete-clear-on-focus="true"
+            multiple
+            @scroll-end="handleScrollEnd"
+          />
+        </unnnicFormElement>
+    `,
+  }),
+};
+
+/**
+ * Infinite Scroll Simple Example
+ *
+ * A simpler version without multiple selection and descriptions.
+ * Useful for single selection scenarios.
+ */
+export const InfiniteScrollSimple = {
+  render: (args) => ({
+    components: {
+      unnnicFormElement,
+      unnnicSelectSmart,
+    },
+    setup() {
+      return { args };
+    },
+    data() {
+      return {
+        selectedOption: [],
+        options: [],
+        currentPage: 1,
+        totalPages: 3,
+      };
+    },
+    mounted() {
+      this.loadInitialOptions();
+    },
+    methods: {
+      async loadInitialOptions() {
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
+        const newOptions = Array.from({ length: 15 }, (_, i) => {
+          const itemNumber = (this.currentPage - 1) * 15 + i + 1;
+          return {
+            value: `option-${itemNumber}`,
+            label: `Option ${itemNumber}`,
+          };
+        });
+
+        this.options.push(...newOptions);
+        this.currentPage++;
+      },
+      async handleScrollEnd() {
+        if (this.currentPage > this.totalPages) {
+          this.$refs.selectSmart?.finishInfiniteScroll();
+          return;
+        }
+
+        try {
+          await new Promise((resolve) => setTimeout(resolve, 400));
+
+          const newOptions = Array.from({ length: 15 }, (_, i) => {
+            const itemNumber = (this.currentPage - 1) * 15 + i + 1;
+            return {
+              value: `option-${itemNumber}`,
+              label: `Option ${itemNumber}`,
+            };
+          });
+
+          this.options.push(...newOptions);
+          this.currentPage++;
+        } catch (error) {
+          console.error('Error:', error);
+        } finally {
+          this.$refs.selectSmart?.finishInfiniteScroll();
+        }
+      },
+    },
+    template: `
+      <unnnicFormElement label="Simple Infinite Scroll">
+        <unnnicSelectSmart
+          ref="selectSmart"
+          v-model="selectedOption"
+          :options="options"
+          :infinite-scroll="true"
+          :infinite-scroll-distance="10"
+          :infinite-scroll-can-load-more="() => currentPage <= totalPages"
+          :autocomplete="true"
+          @scroll-end="handleScrollEnd"
+        />
+      </unnnicFormElement>
+    `,
+  }),
+};
