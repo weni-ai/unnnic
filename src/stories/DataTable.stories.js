@@ -70,6 +70,26 @@ export default {
       control: { type: 'select' },
       options: ['en', 'pt-br', 'es'],
     },
+    infiniteScroll: {
+      description:
+        'Enables infinite scroll functionality. When enabled, the table will emit a loadMore event when the user scrolls near the bottom.',
+      control: 'boolean',
+    },
+    infiniteScrollDistance: {
+      description:
+        'Distance in pixels from the bottom of the table to trigger the loadMore event.',
+      control: 'number',
+    },
+    infiniteScrollDisabled: {
+      description:
+        'Disables the infinite scroll functionality. Useful when all data has been loaded.',
+      control: 'boolean',
+    },
+    isLoadingMore: {
+      description:
+        'Indicates whether more data is being loaded for infinite scroll. Shows a loading indicator at the bottom of the table.',
+      control: 'boolean',
+    },
   },
   render: (args) => ({
     components: {
@@ -387,6 +407,288 @@ export const ControlledSort = {
       >
       </UnnnicDataTable>
     </div>
+    `,
+  }),
+};
+
+export const InfiniteScroll = {
+  args: { headers },
+  render: (args) => ({
+    components: {
+      UnnnicDataTable,
+    },
+    data() {
+      const generateItems = (count, startId) => {
+        const names = [
+          'Eduardo',
+          'Marcus',
+          'Paulo',
+          'Cristian',
+          'Aldemylla',
+          'João',
+          'Maria',
+          'Ana',
+          'Pedro',
+          'Lucas',
+        ];
+        const countries = ['Brazil', 'USA', 'Canada', 'Argentina', 'Chile'];
+
+        return Array.from({ length: count }, (_, i) => ({
+          id: String(startId + i),
+          name: names[Math.floor(Math.random() * names.length)],
+          age: Math.floor(Math.random() * 30) + 20,
+          country: countries[Math.floor(Math.random() * countries.length)],
+        }));
+      };
+
+      return {
+        args,
+        currentId: 11,
+        displayedItems: generateItems(10, 1),
+        isLoadingMore: false,
+      };
+    },
+    methods: {
+      generateItems(count, startId) {
+        const names = [
+          'Eduardo',
+          'Marcus',
+          'Paulo',
+          'Cristian',
+          'Aldemylla',
+          'João',
+          'Maria',
+          'Ana',
+          'Pedro',
+          'Lucas',
+        ];
+        const countries = ['Brazil', 'USA', 'Canada', 'Argentina', 'Chile'];
+
+        return Array.from({ length: count }, (_, i) => ({
+          id: String(startId + i),
+          name: names[Math.floor(Math.random() * names.length)],
+          age: Math.floor(Math.random() * 30) + 20,
+          country: countries[Math.floor(Math.random() * countries.length)],
+        }));
+      },
+      loadMore() {
+        action('loadMore')();
+        this.isLoadingMore = true;
+
+        setTimeout(() => {
+          const newItems = this.generateItems(5, this.currentId);
+          this.displayedItems = [...this.displayedItems, ...newItems];
+          this.currentId += 5;
+          this.isLoadingMore = false;
+        }, 1000);
+      },
+    },
+    template: `
+    <UnnnicDataTable
+      v-bind="args"
+      :headers="args.headers"
+      :items="displayedItems"
+      :infiniteScroll="true"
+      :infiniteScrollDistance="100"
+      :isLoadingMore="isLoadingMore"
+      :hidePagination="true"
+      height="400px"
+      @loadMore="loadMore"
+    >
+    </UnnnicDataTable>
+    `,
+  }),
+};
+
+export const InfiniteScrollWithFixedHeaders = {
+  args: { headers },
+  render: (args) => ({
+    components: {
+      UnnnicDataTable,
+    },
+    data() {
+      const generateItems = (count, startId) => {
+        const names = [
+          'Eduardo',
+          'Marcus',
+          'Paulo',
+          'Cristian',
+          'Aldemylla',
+          'João',
+          'Maria',
+          'Ana',
+          'Pedro',
+          'Lucas',
+        ];
+        const countries = ['Brazil', 'USA', 'Canada', 'Argentina', 'Chile'];
+
+        return Array.from({ length: count }, (_, i) => ({
+          id: String(startId + i),
+          name: names[Math.floor(Math.random() * names.length)],
+          age: Math.floor(Math.random() * 30) + 20,
+          country: countries[Math.floor(Math.random() * countries.length)],
+        }));
+      };
+
+      return {
+        args,
+        currentId: 11,
+        displayedItems: generateItems(10, 1),
+        isLoadingMore: false,
+        hasMore: true,
+      };
+    },
+    methods: {
+      generateItems(count, startId) {
+        const names = [
+          'Eduardo',
+          'Marcus',
+          'Paulo',
+          'Cristian',
+          'Aldemylla',
+          'João',
+          'Maria',
+          'Ana',
+          'Pedro',
+          'Lucas',
+        ];
+        const countries = ['Brazil', 'USA', 'Canada', 'Argentina', 'Chile'];
+
+        return Array.from({ length: count }, (_, i) => ({
+          id: String(startId + i),
+          name: names[Math.floor(Math.random() * names.length)],
+          age: Math.floor(Math.random() * 30) + 20,
+          country: countries[Math.floor(Math.random() * countries.length)],
+        }));
+      },
+      loadMore() {
+        if (!this.hasMore) return;
+
+        action('loadMore')();
+        this.isLoadingMore = true;
+
+        setTimeout(() => {
+          const newItems = this.generateItems(5, this.currentId);
+          this.displayedItems = [...this.displayedItems, ...newItems];
+          this.currentId += 5;
+
+          if (this.displayedItems.length >= 50) {
+            this.hasMore = false;
+          }
+
+          this.isLoadingMore = false;
+        }, 1000);
+      },
+    },
+    template: `
+    <UnnnicDataTable
+      v-bind="args"
+      :headers="args.headers"
+      :items="displayedItems"
+      :infiniteScroll="true"
+      :infiniteScrollDistance="50"
+      :infiniteScrollDisabled="!hasMore"
+      :isLoadingMore="isLoadingMore"
+      :hidePagination="true"
+      :fixedHeaders="true"
+      height="400px"
+      @loadMore="loadMore"
+    >
+    </UnnnicDataTable>
+    `,
+  }),
+};
+
+export const InfiniteScrollClickable = {
+  args: { headers },
+  render: (args) => ({
+    components: {
+      UnnnicDataTable,
+    },
+    data() {
+      const generateItems = (count, startId) => {
+        const names = [
+          'Eduardo',
+          'Marcus',
+          'Paulo',
+          'Cristian',
+          'Aldemylla',
+          'João',
+          'Maria',
+          'Ana',
+          'Pedro',
+          'Lucas',
+        ];
+        const countries = ['Brazil', 'USA', 'Canada', 'Argentina', 'Chile'];
+
+        return Array.from({ length: count }, (_, i) => ({
+          id: String(startId + i),
+          name: names[Math.floor(Math.random() * names.length)],
+          age: Math.floor(Math.random() * 30) + 20,
+          country: countries[Math.floor(Math.random() * countries.length)],
+        }));
+      };
+
+      return {
+        args,
+        currentId: 11,
+        displayedItems: generateItems(10, 1),
+        isLoadingMore: false,
+      };
+    },
+    methods: {
+      generateItems(count, startId) {
+        const names = [
+          'Eduardo',
+          'Marcus',
+          'Paulo',
+          'Cristian',
+          'Aldemylla',
+          'João',
+          'Maria',
+          'Ana',
+          'Pedro',
+          'Lucas',
+        ];
+        const countries = ['Brazil', 'USA', 'Canada', 'Argentina', 'Chile'];
+
+        return Array.from({ length: count }, (_, i) => ({
+          id: String(startId + i),
+          name: names[Math.floor(Math.random() * names.length)],
+          age: Math.floor(Math.random() * 30) + 20,
+          country: countries[Math.floor(Math.random() * countries.length)],
+        }));
+      },
+      loadMore() {
+        action('loadMore')();
+        this.isLoadingMore = true;
+
+        setTimeout(() => {
+          const newItems = this.generateItems(5, this.currentId);
+          this.displayedItems = [...this.displayedItems, ...newItems];
+          this.currentId += 5;
+          this.isLoadingMore = false;
+        }, 1000);
+      },
+      itemClick(item) {
+        action('itemClick')(item);
+      },
+    },
+    template: `
+    <UnnnicDataTable
+      v-bind="args"
+      :headers="args.headers"
+      :items="displayedItems"
+      :infiniteScroll="true"
+      :infiniteScrollDistance="100"
+      :isLoadingMore="isLoadingMore"
+      :hidePagination="true"
+      :clickable="true"
+      height="400px"
+      @loadMore="loadMore"
+      @itemClick="itemClick"
+    >
+    </UnnnicDataTable>
     `,
   }),
 };
