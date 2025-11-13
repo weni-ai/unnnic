@@ -89,7 +89,9 @@ describe('SelectOption.vue', () => {
         disabled: false,
       });
 
-      expect(wrapper.find('.unnnic-select-option__label').text()).toBe('Complex Option');
+      expect(wrapper.find('.unnnic-select-option__label').text()).toBe(
+        'Complex Option',
+      );
       expect(wrapper.classes()).toContain('unnnic-select-option--active');
       expect(wrapper.classes()).not.toContain('unnnic-select-option--disabled');
     });
@@ -114,7 +116,7 @@ describe('SelectOption.vue', () => {
     test('has proper semantic structure', () => {
       const div = wrapper.find('.unnnic-select-option');
       const p = wrapper.find('.unnnic-select-option__label');
-      
+
       expect(div.exists()).toBe(true);
       expect(p.exists()).toBe(true);
       expect(p.element.tagName).toBe('P');
@@ -134,7 +136,8 @@ describe('SelectOption.vue', () => {
     });
 
     test('handles long label text', async () => {
-      const longText = 'This is a very long label text that should be handled properly by the component';
+      const longText =
+        'This is a very long label text that should be handled properly by the component';
       await wrapper.setProps({ label: longText });
       const labelElement = wrapper.find('.unnnic-select-option__label');
       expect(labelElement.text()).toBe(longText);

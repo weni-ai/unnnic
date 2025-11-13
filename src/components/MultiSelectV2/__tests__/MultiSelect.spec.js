@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, afterEach, test, vi } from 'vitest';
-import UnnnicSelect from '../index.vue';
+import UnnnicMultiSelect from '../index.vue';
 
 vi.mock('../../mixins/i18n', () => ({
   default: {
@@ -10,7 +10,7 @@ vi.mock('../../mixins/i18n', () => ({
   },
 }));
 
-describe('UnnnicSelect.vue', () => {
+describe('UnnnicMultiSelect.vue', () => {
   let wrapper;
 
   const defaultProps = {
@@ -19,11 +19,11 @@ describe('UnnnicSelect.vue', () => {
       { label: 'Option 2', value: 'option2' },
       { label: 'Option 3', value: 'option3' },
     ],
-    modelValue: null,
+    modelValue: [],
   };
 
   const mountWrapper = (props = {}, slots = {}) => {
-    return mount(UnnnicSelect, {
+    return mount(UnnnicMultiSelect, {
       props: {
         ...defaultProps,
         ...props,
@@ -48,7 +48,7 @@ describe('UnnnicSelect.vue', () => {
   describe('rendering', () => {
     test('renders correctly', () => {
       expect(wrapper.exists()).toBe(true);
-      expect(wrapper.find('.unnnic-select').exists()).toBe(true);
+      expect(wrapper.find('.unnnic-multi-select').exists()).toBe(true);
     });
 
     test('renders input component', () => {
@@ -64,7 +64,9 @@ describe('UnnnicSelect.vue', () => {
     test('renders select options when popover is open', async () => {
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
-      const options = wrapper.findAllComponents({ name: 'UnnnicSelectOption' });
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
       expect(options.length).toBe(3);
     });
   });
@@ -100,10 +102,16 @@ describe('UnnnicSelect.vue', () => {
       expect(input.props('placeholder')).toBe('');
     });
 
-    test('displays selected option label', async () => {
-      await wrapper.setProps({ modelValue: 'option1' });
+    test('displays selected option labels', async () => {
+      await wrapper.setProps({ modelValue: ['option1'] });
       const input = wrapper.findComponent({ name: 'UnnnicInput' });
       expect(input.props('modelValue')).toBe('Option 1');
+    });
+
+    test('displays multiple selected option labels separated by comma', async () => {
+      await wrapper.setProps({ modelValue: ['option1', 'option2'] });
+      const input = wrapper.findComponent({ name: 'UnnnicInput' });
+      expect(input.props('modelValue')).toBe('Option 1, Option 2');
     });
 
     test('displays custom placeholder', async () => {
@@ -120,10 +128,8 @@ describe('UnnnicSelect.vue', () => {
     test('input shows correct icon based on popover state', async () => {
       const input = wrapper.findComponent({ name: 'UnnnicInput' });
 
-      // Initially closed
       expect(input.props('iconRight')).toBe('keyboard_arrow_down');
 
-      // When popover is open
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
       expect(input.props('iconRight')).toBe('keyboard_arrow_up');
@@ -131,39 +137,79 @@ describe('UnnnicSelect.vue', () => {
   });
 
   describe('option selection', () => {
-    test('emits update:modelValue when option is selected', async () => {
+    test('emits update:modelValue with array when option is selected', async () => {
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
-      const options = wrapper.findAllComponents({ name: 'UnnnicSelectOption' });
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
 
-      await options[0].vm.$emit('click');
+      await options[0].vm.$emit('update:model-value', true);
 
       expect(wrapper.emitted('update:modelValue')).toBeTruthy();
-      expect(wrapper.emitted('update:modelValue')[0]).toEqual(['option1']);
+      expect(wrapper.emitted('update:modelValue')[0]).toEqual([['option1']]);
     });
 
-    test('emits object when returnObject is true', async () => {
-      await wrapper.setProps({ returnObject: true });
+    test('adds option to existing selection', async () => {
+      await wrapper.setProps({ modelValue: ['option1'] });
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
-      const options = wrapper.findAllComponents({ name: 'UnnnicSelectOption' });
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
 
-      await options[0].vm.$emit('click');
+      await options[1].vm.$emit('update:model-value', true);
 
+      expect(wrapper.emitted('update:modelValue')).toBeTruthy();
       expect(wrapper.emitted('update:modelValue')[0]).toEqual([
-        { label: 'Option 1', value: 'option1' },
+        ['option1', 'option2'],
       ]);
     });
 
-    test('does not emit when same option is selected', async () => {
-      await wrapper.setProps({ modelValue: 'option1' });
+    test('removes option from selection when unselected', async () => {
+      await wrapper.setProps({ modelValue: ['option1', 'option2'] });
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
-      const options = wrapper.findAllComponents({ name: 'UnnnicSelectOption' });
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
 
-      await options[0].vm.$emit('click');
+      await options[0].vm.$emit('update:model-value', false);
 
-      expect(wrapper.emitted('update:modelValue')).toBeFalsy();
+      expect(wrapper.emitted('update:modelValue')).toBeTruthy();
+      expect(wrapper.emitted('update:modelValue')[0]).toEqual([['option2']]);
+    });
+
+    test('emits object array when returnObject is true', async () => {
+      await wrapper.setProps({ returnObject: true, modelValue: [] });
+      wrapper.vm.openPopover = true;
+      await wrapper.vm.$nextTick();
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+
+      await options[0].vm.$emit('update:model-value', true);
+
+      expect(wrapper.emitted('update:modelValue')[0]).toEqual([
+        [{ label: 'Option 1', value: 'option1' }],
+      ]);
+    });
+
+    test('removes object from selection when returnObject is true', async () => {
+      await wrapper.setProps({
+        returnObject: true,
+        modelValue: [{ label: 'Option 1', value: 'option1' }],
+      });
+      wrapper.vm.openPopover = true;
+      await wrapper.vm.$nextTick();
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+
+      await options[0].vm.$emit('update:model-value', false);
+
+      expect(wrapper.emitted('update:modelValue')).toBeTruthy();
+      expect(wrapper.emitted('update:modelValue')[0]).toEqual([[]]);
     });
 
     test('does not emit when disabled option is clicked', async () => {
@@ -175,11 +221,11 @@ describe('UnnnicSelect.vue', () => {
       await wrapper.setProps({ options: disabledOptions });
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
-      const options = wrapper.findAllComponents({ name: 'UnnnicSelectOption' });
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
 
-      await options[1].vm.$emit('click');
-
-      expect(wrapper.emitted('update:modelValue')).toBeFalsy();
+      expect(options[1].props('disabled')).toBe(true);
     });
   });
 
@@ -189,13 +235,13 @@ describe('UnnnicSelect.vue', () => {
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
       const searchInputs = wrapper.findAllComponents({ name: 'UnnnicInput' });
-      expect(searchInputs.length).toBe(2); // Main input + search input
+      expect(searchInputs.length).toBe(2);
     });
 
     test('does not render search input when enableSearch is false', async () => {
-      await wrapper.setProps({ enableSearch: false, modelValue: true });
+      await wrapper.setProps({ enableSearch: false });
       const searchInputs = wrapper.findAllComponents({ name: 'UnnnicInput' });
-      expect(searchInputs.length).toBe(1); // Only main input
+      expect(searchInputs.length).toBe(1);
     });
 
     test('emits update:search when search input changes', async () => {
@@ -237,13 +283,13 @@ describe('UnnnicSelect.vue', () => {
   describe('computed properties', () => {
     test('calculatedMaxHeight returns correct value', () => {
       const maxHeight = wrapper.vm.calculatedMaxHeight;
-      expect(maxHeight).toBe('235px');
+      expect(maxHeight).toBe('228px');
     });
 
     test('calculatedMaxHeight includes search height when enabled', async () => {
       await wrapper.setProps({ enableSearch: true });
       const maxHeight = wrapper.vm.calculatedMaxHeight;
-      expect(maxHeight).toBe('289px');
+      expect(maxHeight).toBe('295px');
     });
 
     test('calculatedMaxHeight returns unset when no options', async () => {
@@ -252,32 +298,94 @@ describe('UnnnicSelect.vue', () => {
       expect(maxHeight).toBe('unset');
     });
 
-    test('selectedItem returns correct item for returnObject false', async () => {
-      await wrapper.setProps({ modelValue: 'option2' });
-      const selectedItem = wrapper.vm.selectedItem;
-      expect(selectedItem.label).toBe('Option 2');
-      expect(selectedItem.value).toBe('option2');
+    test('selectedItems returns correct items for returnObject false', async () => {
+      await wrapper.setProps({ modelValue: ['option2'] });
+      const selectedItems = wrapper.vm.selectedItems;
+      expect(selectedItems.length).toBe(1);
+      expect(selectedItems[0].label).toBe('Option 2');
+      expect(selectedItems[0].value).toBe('option2');
     });
 
-    test('selectedItem returns modelValue for returnObject true', async () => {
-      const selectedOption = { label: 'Option 2', value: 'option2' };
+    test('selectedItems returns multiple items', async () => {
+      await wrapper.setProps({ modelValue: ['option1', 'option2'] });
+      const selectedItems = wrapper.vm.selectedItems;
+      expect(selectedItems.length).toBe(2);
+      expect(selectedItems[0].label).toBe('Option 1');
+      expect(selectedItems[1].label).toBe('Option 2');
+    });
+
+    test('selectedItems returns modelValue for returnObject true', async () => {
+      const selectedOptions = [
+        { label: 'Option 2', value: 'option2' },
+        { label: 'Option 3', value: 'option3' },
+      ];
       await wrapper.setProps({
         returnObject: true,
-        modelValue: selectedOption,
+        modelValue: selectedOptions,
       });
-      const selectedItem = wrapper.vm.selectedItem;
-      expect(selectedItem).toStrictEqual(selectedOption);
+      const selectedItems = wrapper.vm.selectedItems;
+      expect(selectedItems).toStrictEqual(selectedOptions);
     });
 
-    test('inputValue returns correct label', async () => {
-      await wrapper.setProps({ modelValue: 'option3' });
+    test('selectedItems handles returnObject false with array of values', async () => {
+      await wrapper.setProps({
+        returnObject: false,
+        modelValue: ['option1', 'option2'],
+      });
+      const selectedItems = wrapper.vm.selectedItems;
+      expect(selectedItems.length).toBe(2);
+      expect(selectedItems[0].value).toBe('option1');
+      expect(selectedItems[1].value).toBe('option2');
+    });
+
+    test('selectedItems with returnObject true and array of objects in modelValue', async () => {
+      const modelValueObjects = [
+        { label: 'Option 1', value: 'option1' },
+        { label: 'Option 2', value: 'option2' },
+      ];
+      await wrapper.setProps({
+        returnObject: true,
+        modelValue: modelValueObjects,
+      });
+      const selectedItems = wrapper.vm.selectedItems;
+
+      expect(selectedItems).toStrictEqual(modelValueObjects);
+    });
+
+    test('selectedItems handles modelValue as array of objects when returnObject is false', async () => {
+      const optionsWithCustomKeys = [
+        { name: 'Custom 1', id: 'custom1' },
+        { name: 'Custom 2', id: 'custom2' },
+      ];
+      await wrapper.setProps({
+        returnObject: false,
+        options: optionsWithCustomKeys,
+        itemLabel: 'name',
+        itemValue: 'id',
+        modelValue: ['custom1'],
+      });
+      const selectedItems = wrapper.vm.selectedItems;
+
+      expect(selectedItems.length).toBe(1);
+      expect(selectedItems[0].id).toBe('custom1');
+      expect(selectedItems[0].name).toBe('Custom 1');
+    });
+
+    test('inputValue returns correct labels separated by comma', async () => {
+      await wrapper.setProps({ modelValue: ['option3'] });
       const inputValue = wrapper.vm.inputValue;
       expect(inputValue).toBe('Option 3');
     });
 
-    test('inputValue returns undefined when no selection', () => {
+    test('inputValue returns multiple labels separated by comma', async () => {
+      await wrapper.setProps({ modelValue: ['option1', 'option2', 'option3'] });
       const inputValue = wrapper.vm.inputValue;
-      expect(inputValue).toBeUndefined();
+      expect(inputValue).toBe('Option 1, Option 2, Option 3');
+    });
+
+    test('inputValue returns empty string when no selection', () => {
+      const inputValue = wrapper.vm.inputValue;
+      expect(inputValue).toBe('');
     });
   });
 
@@ -353,16 +461,10 @@ describe('UnnnicSelect.vue', () => {
       expect(wrapper.vm.calculatedMaxHeight).toBe('unset');
     });
 
-    test('handles null modelValue', async () => {
-      await wrapper.setProps({ modelValue: null });
-      expect(wrapper.vm.inputValue).toBeUndefined();
-      expect(wrapper.vm.selectedItem).toBeUndefined();
-    });
-
-    test('handles undefined modelValue', async () => {
-      await wrapper.setProps({ modelValue: undefined });
-      expect(wrapper.vm.inputValue).toBeUndefined();
-      expect(wrapper.vm.selectedItem).toBeUndefined();
+    test('handles empty modelValue array', async () => {
+      await wrapper.setProps({ modelValue: [] });
+      expect(wrapper.vm.inputValue).toBe('');
+      expect(wrapper.vm.selectedItems).toEqual([]);
     });
 
     test('handles case insensitive search', async () => {
@@ -375,17 +477,54 @@ describe('UnnnicSelect.vue', () => {
     test('handles partial search matches', async () => {
       await wrapper.setProps({ enableSearch: true, search: 'tion' });
       const filteredOptions = wrapper.vm.filteredOptions;
-      expect(filteredOptions.length).toBe(3); // All options contain 'tion'
+      expect(filteredOptions.length).toBe(3);
     });
   });
 
   describe('component structure', () => {
     test('has correct component name', () => {
-      expect(wrapper.vm.$options.name).toBe('UnnnicSelect');
+      expect(wrapper.vm.$options.name).toBe('UnnnicMultiSelect');
+    });
+  });
+
+  describe('clear functionality', () => {
+    test('emits empty array when clear button is clicked', async () => {
+      await wrapper.setProps({ modelValue: ['option1', 'option2'] });
+      const input = wrapper.findComponent({ name: 'UnnnicInput' });
+
+      await input.vm.$emit('clear');
+
+      expect(wrapper.emitted('update:modelValue')).toBeTruthy();
+      expect(wrapper.emitted('update:modelValue')[0]).toEqual([[]]);
+    });
+  });
+
+  describe('getActivatedOptionStatus', () => {
+    test('returns true when option is in modelValue array', async () => {
+      await wrapper.setProps({ modelValue: ['option1'] });
+      wrapper.vm.openPopover = true;
+      await wrapper.vm.$nextTick();
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+
+      expect(options[0].props('active')).toBe(true);
+      expect(options[1].props('active')).toBe(false);
     });
 
-    test('includes i18n mixin', () => {
-      expect(wrapper.vm.$options.mixins).toBeDefined();
+    test('returns true when option object is in modelValue array with returnObject true', async () => {
+      await wrapper.setProps({
+        returnObject: true,
+        modelValue: [{ label: 'Option 1', value: 'option1' }],
+      });
+      wrapper.vm.openPopover = true;
+      await wrapper.vm.$nextTick();
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+
+      expect(options[0].props('active')).toBeTruthy();
+      expect(options[1].props('active')).toBeFalsy();
     });
   });
 
@@ -394,13 +533,18 @@ describe('UnnnicSelect.vue', () => {
       expect(wrapper.html()).toMatchSnapshot();
     });
 
-    test('matches snapshot with selected value', async () => {
-      await wrapper.setProps({ modelValue: 'option1' });
+    test('matches snapshot with selected values', async () => {
+      await wrapper.setProps({ modelValue: ['option1'] });
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+
+    test('matches snapshot with multiple selected values', async () => {
+      await wrapper.setProps({ modelValue: ['option1', 'option2'] });
       expect(wrapper.html()).toMatchSnapshot();
     });
 
     test('matches snapshot with search enabled', async () => {
-      await wrapper.setProps({ enableSearch: true, modelValue: true });
+      await wrapper.setProps({ enableSearch: true });
       expect(wrapper.html()).toMatchSnapshot();
     });
 
