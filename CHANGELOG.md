@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.9.2 (2025-11-13)
+
+### Added
+
+- **DataTable Component - Infinite Scroll Support**:
+  - **Infinite Scroll Functionality**: Native infinite scroll using VueUse's `useInfiniteScroll` composable
+  - **New Props**:
+    - `infiniteScroll` (Boolean, default: false) - Enables infinite scroll functionality
+    - `infiniteScrollDistance` (Number, default: 100) - Distance in pixels from bottom to trigger the loadMore event
+    - `infiniteScrollDisabled` (Boolean, default: false) - Disables infinite scroll (useful when all data has been loaded)
+    - `isLoadingMore` (Boolean, default: false) - Indicates whether more data is being loaded for infinite scroll
+  - **New Event**: `loadMore` - Emitted when user scrolls near the bottom of the table
+  - **Visual Feedback**: Loading indicator at the bottom of the table during data loading
+  - **Seamless Integration**: Works alongside existing pagination system (can be disabled with `hidePagination`)
+  - **Fixed Headers Support**: Compatible with `fixedHeaders` prop for optimal scrolling experience
+
 # 3.9.1 (2025-11-12)
 
 ### Added
