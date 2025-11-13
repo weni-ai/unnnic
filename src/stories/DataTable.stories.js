@@ -1,6 +1,31 @@
 import UnnnicDataTable from '../components/DataTable/index.vue';
 import { action } from '@storybook/addon-actions';
 
+const SAMPLE_NAMES = [
+  'Eduardo',
+  'Marcus',
+  'Paulo',
+  'Cristian',
+  'Aldemylla',
+  'João',
+  'Maria',
+  'Ana',
+  'Pedro',
+  'Lucas',
+];
+
+const SAMPLE_COUNTRIES = ['Brazil', 'USA', 'Canada', 'Argentina', 'Chile'];
+
+const generateItems = (count, startId) => {
+  return Array.from({ length: count }, (_, i) => ({
+    id: String(startId + i),
+    name: SAMPLE_NAMES[Math.floor(Math.random() * SAMPLE_NAMES.length)],
+    age: Math.floor(Math.random() * 30) + 20,
+    country:
+      SAMPLE_COUNTRIES[Math.floor(Math.random() * SAMPLE_COUNTRIES.length)],
+  }));
+};
+
 export default {
   title: 'Data Display/DataTable',
   component: UnnnicDataTable,
@@ -418,29 +443,6 @@ export const InfiniteScroll = {
       UnnnicDataTable,
     },
     data() {
-      const generateItems = (count, startId) => {
-        const names = [
-          'Eduardo',
-          'Marcus',
-          'Paulo',
-          'Cristian',
-          'Aldemylla',
-          'João',
-          'Maria',
-          'Ana',
-          'Pedro',
-          'Lucas',
-        ];
-        const countries = ['Brazil', 'USA', 'Canada', 'Argentina', 'Chile'];
-
-        return Array.from({ length: count }, (_, i) => ({
-          id: String(startId + i),
-          name: names[Math.floor(Math.random() * names.length)],
-          age: Math.floor(Math.random() * 30) + 20,
-          country: countries[Math.floor(Math.random() * countries.length)],
-        }));
-      };
-
       return {
         args,
         currentId: 11,
@@ -449,34 +451,12 @@ export const InfiniteScroll = {
       };
     },
     methods: {
-      generateItems(count, startId) {
-        const names = [
-          'Eduardo',
-          'Marcus',
-          'Paulo',
-          'Cristian',
-          'Aldemylla',
-          'João',
-          'Maria',
-          'Ana',
-          'Pedro',
-          'Lucas',
-        ];
-        const countries = ['Brazil', 'USA', 'Canada', 'Argentina', 'Chile'];
-
-        return Array.from({ length: count }, (_, i) => ({
-          id: String(startId + i),
-          name: names[Math.floor(Math.random() * names.length)],
-          age: Math.floor(Math.random() * 30) + 20,
-          country: countries[Math.floor(Math.random() * countries.length)],
-        }));
-      },
       loadMore() {
         action('loadMore')();
         this.isLoadingMore = true;
 
         setTimeout(() => {
-          const newItems = this.generateItems(5, this.currentId);
+          const newItems = generateItems(5, this.currentId);
           this.displayedItems = [...this.displayedItems, ...newItems];
           this.currentId += 5;
           this.isLoadingMore = false;
@@ -507,29 +487,6 @@ export const InfiniteScrollWithFixedHeaders = {
       UnnnicDataTable,
     },
     data() {
-      const generateItems = (count, startId) => {
-        const names = [
-          'Eduardo',
-          'Marcus',
-          'Paulo',
-          'Cristian',
-          'Aldemylla',
-          'João',
-          'Maria',
-          'Ana',
-          'Pedro',
-          'Lucas',
-        ];
-        const countries = ['Brazil', 'USA', 'Canada', 'Argentina', 'Chile'];
-
-        return Array.from({ length: count }, (_, i) => ({
-          id: String(startId + i),
-          name: names[Math.floor(Math.random() * names.length)],
-          age: Math.floor(Math.random() * 30) + 20,
-          country: countries[Math.floor(Math.random() * countries.length)],
-        }));
-      };
-
       return {
         args,
         currentId: 11,
@@ -539,28 +496,6 @@ export const InfiniteScrollWithFixedHeaders = {
       };
     },
     methods: {
-      generateItems(count, startId) {
-        const names = [
-          'Eduardo',
-          'Marcus',
-          'Paulo',
-          'Cristian',
-          'Aldemylla',
-          'João',
-          'Maria',
-          'Ana',
-          'Pedro',
-          'Lucas',
-        ];
-        const countries = ['Brazil', 'USA', 'Canada', 'Argentina', 'Chile'];
-
-        return Array.from({ length: count }, (_, i) => ({
-          id: String(startId + i),
-          name: names[Math.floor(Math.random() * names.length)],
-          age: Math.floor(Math.random() * 30) + 20,
-          country: countries[Math.floor(Math.random() * countries.length)],
-        }));
-      },
       loadMore() {
         if (!this.hasMore) return;
 
@@ -568,7 +503,7 @@ export const InfiniteScrollWithFixedHeaders = {
         this.isLoadingMore = true;
 
         setTimeout(() => {
-          const newItems = this.generateItems(5, this.currentId);
+          const newItems = generateItems(5, this.currentId);
           this.displayedItems = [...this.displayedItems, ...newItems];
           this.currentId += 5;
 
@@ -606,29 +541,6 @@ export const InfiniteScrollClickable = {
       UnnnicDataTable,
     },
     data() {
-      const generateItems = (count, startId) => {
-        const names = [
-          'Eduardo',
-          'Marcus',
-          'Paulo',
-          'Cristian',
-          'Aldemylla',
-          'João',
-          'Maria',
-          'Ana',
-          'Pedro',
-          'Lucas',
-        ];
-        const countries = ['Brazil', 'USA', 'Canada', 'Argentina', 'Chile'];
-
-        return Array.from({ length: count }, (_, i) => ({
-          id: String(startId + i),
-          name: names[Math.floor(Math.random() * names.length)],
-          age: Math.floor(Math.random() * 30) + 20,
-          country: countries[Math.floor(Math.random() * countries.length)],
-        }));
-      };
-
       return {
         args,
         currentId: 11,
@@ -637,34 +549,12 @@ export const InfiniteScrollClickable = {
       };
     },
     methods: {
-      generateItems(count, startId) {
-        const names = [
-          'Eduardo',
-          'Marcus',
-          'Paulo',
-          'Cristian',
-          'Aldemylla',
-          'João',
-          'Maria',
-          'Ana',
-          'Pedro',
-          'Lucas',
-        ];
-        const countries = ['Brazil', 'USA', 'Canada', 'Argentina', 'Chile'];
-
-        return Array.from({ length: count }, (_, i) => ({
-          id: String(startId + i),
-          name: names[Math.floor(Math.random() * names.length)],
-          age: Math.floor(Math.random() * 30) + 20,
-          country: countries[Math.floor(Math.random() * countries.length)],
-        }));
-      },
       loadMore() {
         action('loadMore')();
         this.isLoadingMore = true;
 
         setTimeout(() => {
-          const newItems = this.generateItems(5, this.currentId);
+          const newItems = generateItems(5, this.currentId);
           this.displayedItems = [...this.displayedItems, ...newItems];
           this.currentId += 5;
           this.isLoadingMore = false;
