@@ -21,7 +21,7 @@ export default {
     docs: {
       description: {
         component:
-          'Select is designed to solve common problems related to option selection.',
+          'MultiSelect is designed to solve common problems related to multiple option selection.',
       },
     },
   },
@@ -38,7 +38,7 @@ export default {
     },
     modelValue: {
       description:
-        'Model variable. Its type will always match the return type of the key specified by `itemValue`, or the entire options object when `returnObject` prop is set to `true`.',
+        'Model variable. Its type will always match a list of the return type of the key specified by `itemValue`, or the entire options object when the `returnObject` property is set to `true`.',
     },
     returnObject: {
       description:
