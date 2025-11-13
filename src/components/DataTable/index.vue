@@ -56,6 +56,7 @@
       </tr>
     </thead>
     <tbody
+      ref="tbodyRef"
       :class="[
         'unnnic-data-table__body',
         { 'unnnic-data-table__body--hide-headers': props.hideHeaders },
@@ -120,6 +121,27 @@
             </td>
           </template>
         </tr>
+        <tr
+          v-if="props.infiniteScroll && props.isLoadingMore"
+          :class="[
+            'unnnic-data-table__body-row',
+            'unnnic-data-table__body-row--loading-more',
+          ]"
+        >
+          <td
+            :class="[
+              'unnnic-data-table__body-cell',
+              `unnnic-data-table__body-cell--${size}`,
+            ]"
+          >
+            <img
+              class="unnnic-data-table__body-cell--loading"
+              data-testid="body-row-loading-more"
+              src="../../assets/icons/weni-loading.svg"
+              height="40"
+            />
+          </td>
+        </tr>
       </template>
       <tr
         v-else
@@ -166,6 +188,7 @@
 
 <script setup lang="ts">
 import { computed, ComputedRef, ref, useSlots } from 'vue';
+import { useInfiniteScroll } from '@vueuse/core';
 
 import Icon from '../Icon.vue';
 import IconArrowsDefault from '../icons/iconArrowsDefault.vue';
@@ -205,6 +228,10 @@ interface Props {
   pageInterval?: number;
   locale?: string;
   sort?: SortState;
+  infiniteScroll?: boolean;
+  infiniteScrollDistance?: number;
+  infiniteScrollDisabled?: boolean;
+  isLoadingMore?: boolean;
 }
 
 defineOptions({
@@ -217,6 +244,7 @@ const emit = defineEmits<{
   'update:sort': [sort: { header: string; itemKey: string; order: string }];
   itemClick: [item: DataTableItem];
   'update:page': [page: number];
+  loadMore: [];
 }>();
 
 const props = withDefaults(defineProps<Props>(), {
@@ -233,6 +261,10 @@ const props = withDefaults(defineProps<Props>(), {
   pageInterval: 5,
   locale: 'en',
   sort: undefined,
+  infiniteScroll: false,
+  infiniteScrollDistance: 100,
+  infiniteScrollDisabled: false,
+  isLoadingMore: false,
 });
 
 const defaultTranslations = {
@@ -318,6 +350,21 @@ const handleClickRow = (item: DataTableItem) => {
 
   emit('itemClick', item);
 };
+
+const tbodyRef = ref<HTMLElement | null>(null);
+
+const handleLoadMore = () => {
+  if (props.infiniteScrollDisabled || props.isLoading || props.isLoadingMore) {
+    return;
+  }
+  emit('loadMore');
+};
+
+if (props.infiniteScroll) {
+  useInfiniteScroll(tbodyRef, handleLoadMore, {
+    distance: props.infiniteScrollDistance,
+  });
+}
 </script>
 
 <style scoped lang="scss">
@@ -428,6 +475,7 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
       grid-template-columns: v-bind(gridTemplateColumns);
 
       &--loading,
+      &--loading-more,
       &--without-results {
         grid-template-columns: 1fr;
       }
