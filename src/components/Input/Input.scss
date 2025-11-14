@@ -11,7 +11,8 @@
 
   transition: border-color 0.1s ease-in-out;
 
-  &:focus {
+  &:focus,
+  &.focus {
     border-color: $unnnic-color-border-active;
   }
 
