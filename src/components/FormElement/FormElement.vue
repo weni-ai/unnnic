@@ -22,7 +22,7 @@
         <p v-if="message" class="unnnic-form-element__message">
           {{ fullySanitize(message) }}
         </p>
-        <p v-if="!!error.length" class="unnnic-form-element__message error">
+        <p v-if="!!error?.length" class="unnnic-form-element__message error">
           {{ Array.isArray(error) ? error.join(', ') : error }}
         </p>
       </section>
