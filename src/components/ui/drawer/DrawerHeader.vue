@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { HTMLAttributes } from 'vue';
 import { cn } from '@/lib/utils';
-import { UnnnicButton } from '@/components';
+import UnnnicButton from '@/components/Button/Button.vue';
 import DrawerClose from './DrawerClose.vue';
 
 const props = defineProps<{
@@ -39,7 +39,6 @@ const props = defineProps<{
   display: grid;
   align-items: center;
   grid-template-columns: 1fr auto;
-  grid-template-rows: auto auto;
   padding: $unnnic-space-6;
 
   gap: $unnnic-space-1;
