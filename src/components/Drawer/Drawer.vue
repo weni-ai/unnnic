@@ -5,93 +5,99 @@
     class="unnnic-drawer"
     data-testid="drawer"
   >
-    <DrawerPortal>
-      <DrawerContent
-        :showOverlay="!withoutOverlay"
-        data-testid="drawer-container"
-        :size="mappedSize"
-        :class="[
-          'unnnic-drawer__container',
-          `unnnic-drawer__container--${size}`,
-        ]"
-      >
-        <DrawerHeader class="unnnic-drawer__header">
-          <section class="unnnic-drawer__title-container">
-            <slot
-              v-if="$slots.title"
-              name="title"
-            />
+    <DrawerContent
+      :showOverlay="!withoutOverlay"
+      data-testid="drawer-container"
+      :size="mappedSize"
+      :class="[
+        'unnnic-drawer__container',
+        `unnnic-drawer__container--${size}`,
+      ]"
+    >
+      <DrawerHeader class="unnnic-drawer__header">
+        <section class="unnnic-drawer__title-container">
+          <slot
+            v-if="$slots.title"
+            name="title"
+          />
 
-            <template v-else>
-              <DrawerTitle
-                class="unnnic-drawer__title"
-                data-testid="drawer-title"
-              >
-                {{ title }}
-              </DrawerTitle>
-              <DrawerDescription
-                v-if="description"
-                class="unnnic-drawer__description"
-                data-testid="drawer-description"
-              >
-                {{ description }}
-              </DrawerDescription>
-            </template>
-          </section>
-          <template #close>
-            <DrawerClose>
-              <UnnnicIcon
-                class="unnnic-drawer__close-icon"
-                data-testid="close-icon"
-                :icon="closeIcon"
-                size="avatar-nano"
-                clickable
-                @click="back"
-              />
-            </DrawerClose>
+          <template v-else>
+            <DrawerTitle
+              class="unnnic-drawer__title"
+              data-testid="drawer-title"
+            >
+              {{ title }}
+            </DrawerTitle>
+            <DrawerDescription
+              v-if="description"
+              class="unnnic-drawer__description"
+              data-testid="drawer-description"
+            >
+              {{ description }}
+            </DrawerDescription>
           </template>
-        </DrawerHeader>
-
-        <section class="unnnic-drawer__content">
-          <slot name="content"></slot>
         </section>
+        <template #close>
+          <DrawerClose>
+            <UnnnicButton
+              class="unnnic-drawer__close-icon"
+              data-testid="close-icon"
+              :iconCenter="closeIcon"
+              size="small"
+              type="tertiary"
+              @click="back"
+            />
+          </DrawerClose>
+        </template>
+      </DrawerHeader>
 
-        <DrawerFooter
-          v-if="showFooter"
-          class="unnnic-drawer__footer"
-          data-testid="footer"
-        >
-          <UnnnicButton
-            v-if="secondaryButtonText"
-            data-testid="secondary-button"
-            size="large"
-            type="tertiary"
-            :disabled="disabledSecondaryButton"
-            :loading="loadingSecondaryButton"
-            :text="secondaryButtonText"
-            @click="$emit('secondaryButtonClick')"
-          />
-          <UnnnicButton
-            v-if="primaryButtonText"
-            data-testid="primary-button"
-            size="large"
-            :disabled="disabledPrimaryButton"
-            :loading="loadingPrimaryButton"
-            :type="primaryButtonType"
-            :text="primaryButtonText"
-            @click="$emit('primaryButtonClick')"
-          />
-        </DrawerFooter>
-      </DrawerContent>
-    </DrawerPortal>
+      <section class="unnnic-drawer__content">
+        <slot name="content"></slot>
+      </section>
+
+      <DrawerFooter
+        v-if="showFooter"
+        class="unnnic-drawer__footer"
+        data-testid="footer"
+      >
+        <UnnnicButton
+          v-if="secondaryButtonText"
+          data-testid="secondary-button"
+          size="large"
+          type="tertiary"
+          :disabled="disabledSecondaryButton"
+          :loading="loadingSecondaryButton"
+          :text="secondaryButtonText"
+          @click="$emit('secondaryButtonClick')"
+        />
+        <UnnnicButton
+          v-if="primaryButtonText"
+          data-testid="primary-button"
+          size="large"
+          :disabled="disabledPrimaryButton"
+          :loading="loadingPrimaryButton"
+          :type="primaryButtonType"
+          :text="primaryButtonText"
+          @click="$emit('primaryButtonClick')"
+        />
+      </DrawerFooter>
+    </DrawerContent>
   </Drawer>
 </template>
 
 <script setup>
 import { computed } from 'vue';
-import UnnnicIcon from '../Icon.vue';
+
 import UnnnicButton from '../Button/Button.vue';
-import { Drawer, DrawerContent, DrawerPortal, DrawerHeader, DrawerFooter, DrawerClose, DrawerTitle, DrawerDescription } from '../ui/drawer';
+import { 
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerFooter,
+  DrawerClose,
+  DrawerTitle,
+  DrawerDescription,
+} from '../ui/drawer';
 
 const props = defineProps({
   title: {
@@ -147,7 +153,7 @@ const props = defineProps({
   },
   closeIcon: {
     type: String,
-    default: 'arrow_back',
+    default: 'arrow_forward',
   },
   distinctCloseBack: {
     type: Boolean,
@@ -197,7 +203,6 @@ const back = () => {
 
   .unnnic-drawer__close-icon {
     margin: $unnnic-spacing-nano;
-    transform: rotate(180deg);
     display: flex;
   }
 
