@@ -5,6 +5,19 @@ import Drawer from '../Drawer.vue';
 describe('Drawer.vue', () => {
   let wrapper;
 
+  const templateSlot = { template: `<div><slot /></div>` };
+  const globalStubs = {
+    UnnnicIcon: true,
+    UnnnicButton: true,
+    Teleport: templateSlot,
+    Drawer: templateSlot,
+    DrawerContent: templateSlot,
+    DrawerFooter: templateSlot,
+    DrawerClose: templateSlot,
+    DrawerTitle: templateSlot,
+    DrawerDescription: templateSlot,
+  };
+
   beforeEach(() => {
     wrapper = mount(Drawer, {
       props: {
@@ -15,7 +28,7 @@ describe('Drawer.vue', () => {
         secondaryButtonText: 'Secondary Action',
       },
       global: {
-        stubs: ['UnnnicIcon', 'UnnnicButton'],
+        stubs: globalStubs,
       },
     });
   });
@@ -23,7 +36,6 @@ describe('Drawer.vue', () => {
   const element = (id) => wrapper.find(`[data-testid="${id}"]`);
   const component = (id) => wrapper.findComponent(`[data-testid="${id}"]`);
   const drawer = () => element('drawer');
-  const overlay = () => element('overlay');
   const title = () => element('drawer-title');
   const description = () => element('drawer-description');
   const primaryButton = () => component('primary-button');
@@ -39,21 +51,23 @@ describe('Drawer.vue', () => {
       });
 
       it('should render the drawer when modelValue is true', () => {
-        expect(drawer().exists()).toBe(true);
+        expect(drawer().attributes('open')).toBe('true');
       });
 
       it('should not render the drawer when modelValue is false', async () => {
         await wrapper.setProps({ modelValue: false });
-        expect(drawer().exists()).toBe(false);
+        expect(drawer().attributes('open')).toBe('false');
       });
 
       it('should render the overlay when withoutOverlay is false', () => {
-        expect(overlay().exists()).toBe(true);
+        console.log('wrapper.html()', wrapper.html());
+
+        expect(drawerContainer().attributes('showoverlay')).toBe('true');
       });
 
       it('should not render the overlay when withoutOverlay is true', async () => {
         await wrapper.setProps({ withoutOverlay: true });
-        expect(overlay().exists()).toBe(false);
+        expect(drawerContainer().attributes('showoverlay')).toBe('false');
       });
 
       it('should display the title and description correctly', () => {
@@ -75,7 +89,11 @@ describe('Drawer.vue', () => {
           slots: {
             content: '<div data-testid="slot-content">Slot Content</div>',
           },
+          global: {
+            stubs: globalStubs,
+          },
         });
+
         expect(wrapper.find('[data-testid="slot-content"]').exists()).toBe(
           true,
         );
@@ -92,6 +110,9 @@ describe('Drawer.vue', () => {
           },
           slots: {
             title: '<h2 data-testid="custom-title">Custom Title Content</h2>',
+          },
+          global: {
+            stubs: globalStubs,
           },
         });
 
@@ -112,6 +133,9 @@ describe('Drawer.vue', () => {
           },
           slots: {
             title: '<div data-testid="custom-title">Slot Title</div>',
+          },
+          global: {
+            stubs: globalStubs,
           },
         });
 
@@ -164,7 +188,7 @@ describe('Drawer.vue', () => {
     });
   });
 
-  describe('Interactions and Transitions', () => {
+  describe('Interactions', () => {
     beforeEach(() => {
       vi.useFakeTimers();
     });
@@ -174,9 +198,6 @@ describe('Drawer.vue', () => {
 
     it('should close the drawer when the close icon is clicked', async () => {
       await closeIcon().trigger('click');
-
-      vi.advanceTimersByTime(200);
-
       expect(wrapper.emitted('close')).toBeTruthy();
     });
 
@@ -184,44 +205,12 @@ describe('Drawer.vue', () => {
       await wrapper.setProps({ distinctCloseBack: true });
       await closeIcon().trigger('click');
 
-      vi.advanceTimersByTime(200);
-
       expect(wrapper.emitted('back')).toBeTruthy();
     });
 
     it('should not emit back event when back icon is clicked and distinctCloseBack is false', async () => {
       await closeIcon().trigger('click');
       expect(wrapper.emitted('back')).toBeUndefined();
-    });
-
-    it('should correctly handle transitions when closing the drawer', async () => {
-      await wrapper.vm.close();
-      expect(wrapper.vm.showDrawer).toBe(false);
-
-      setTimeout(() => {
-        expect(drawer().exists()).toBe(false);
-      }, 200);
-    });
-
-    it('should handle overlay clicks to close the drawer when withoutOverlay is false', async () => {
-      expect(overlay().exists()).toBe(true);
-      await overlay().trigger('click');
-
-      vi.advanceTimersByTime(200);
-
-      expect(wrapper.emitted('close')).toBeTruthy();
-    });
-
-    it('should execute the callback after 200ms timeout and reset showDrawer', async () => {
-      const callbackMock = vi.fn();
-      wrapper.vm.transitionClose(callbackMock);
-
-      expect(wrapper.vm.showDrawer).toBe(false);
-
-      vi.advanceTimersByTime(200);
-
-      expect(callbackMock).toHaveBeenCalled();
-      expect(wrapper.vm.showDrawer).toBe(true);
     });
   });
 
