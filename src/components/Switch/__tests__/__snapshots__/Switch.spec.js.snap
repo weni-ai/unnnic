@@ -1,11 +1,10 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Switch > should match the snapshot 1`] = `
-"<div data-v-e4356c9d="" class="unnnic-switch">
-  <!--v-if--><svg data-v-3d58a7dd="" data-v-26446d8e="" data-v-e4356c9d="" id="default" width="80" height="40" viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg" class="unnnic-icon unnnic-icon--size-svg-md unnnic-icon__size--md unnnic--clickable unnnic-icon-scheme--neutral-soft unnnic-switch__icon" data-testid="custom-icon" lineHeight="" disabled="false" data-test-id="switch-icon">
-    <rect data-v-3d58a7dd="" x="4.20013" y="2.10046" width="71.6" height="35.8" rx="17.9" class="primary"></rect>
-    <circle data-v-3d58a7dd="" id="default-circle" cx="22.5" cy="20.0005" r="12.5" fill="white"></circle>
-  </svg>
+"<section data-v-e4356c9d="" class="unnnic-switch">
+  <!--v-if--><label data-v-e4356c9d="" class="unnnic-switch__input-wrapper"><input data-v-e4356c9d="" class="unnnic-switch__input" type="checkbox">
+    <!--v-if-->
+  </label>
   <!--v-if-->
-</div>"
+</section>"
 `;

@@ -730,9 +730,10 @@ export default {
 
     margin-top: $unnnic-spacing-nano;
 
-    border-radius: $unnnic-border-radius-sm;
+    border-radius: $unnnic-radius-2;
+    border: 1px solid $unnnic-color-border-base;
 
-    box-shadow: $unnnic-shadow-level-near;
+    box-shadow: $unnnic-shadow-1;
 
     background-color: $unnnic-color-background-snow;
 
@@ -757,7 +758,7 @@ export default {
 
       display: grid;
 
-      margin: $unnnic-spacing-xs;
+      margin: $unnnic-space-4;
       margin-right: $unnnic-inline-xs;
       padding-right: $unnnic-inline-xs;
 
