@@ -12,6 +12,7 @@ const props = withDefaults(
     DialogContentProps & {
       class?: HTMLAttributes['class'];
       size?: 'medium' | 'large' | 'extra-large' | 'giant';
+      showOverlay?: boolean;
     }
   >(),
   {
@@ -26,7 +27,7 @@ const forwardedProps = useForwardPropsEmits(delegatedProps, emits);
 
 <template>
   <DrawerPortal>
-    <DrawerOverlay />
+    <DrawerOverlay v-if="showOverlay" />
     <DrawerContent
       v-bind="forwardedProps"
       :class="
@@ -49,6 +50,8 @@ const forwardedProps = useForwardPropsEmits(delegatedProps, emits);
 $drawer-space: $unnnic-space-2;
 
 .unnnic-drawer__content {
+  -webkit-user-select: unset;
+  user-select: unset;
   will-change: unset;
 
   &::after {

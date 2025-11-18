@@ -18,6 +18,8 @@ const props = defineProps<DrawerCloseProps>();
 @use '@/assets/scss/unnnic' as *;
 
 .unnnic-drawer__close {
+  display: flex;
+
   border: none;
   background: none;
   padding: 0;
