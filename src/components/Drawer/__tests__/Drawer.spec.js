@@ -264,7 +264,7 @@ describe('Drawer.vue', () => {
 
     it('should use correct icon for close button based on closeIcon prop', async () => {
       await wrapper.setProps({ closeIcon: 'custom_close_icon' });
-      expect(closeIcon().props('icon')).toBe('custom_close_icon');
+      expect(closeIcon().props('iconCenter')).toBe('custom_close_icon');
     });
 
     it('should validate all size prop values correctly', () => {
