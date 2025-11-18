@@ -17,6 +17,7 @@ const props = withDefaults(
   >(),
   {
     size: 'medium',
+    showOverlay: true,
   },
 );
 const emits = defineEmits<DialogContentEmits>();
