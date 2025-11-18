@@ -7,7 +7,7 @@ import iconsList from '../utils/iconList';
 import colorsList from '../utils/colorsList';
 
 export default {
-  title: 'Example/ModalDialog',
+  title: 'Feedback/ModalDialog',
   component: UnnnicModalDialog,
   argTypes: {
     type: {
