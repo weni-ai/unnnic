@@ -5,6 +5,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.9.2 (2025-11-13)
+
+### Added
+
+- **DataTable Component - Infinite Scroll Support**:
+  - **Infinite Scroll Functionality**: Native infinite scroll using VueUse's `useInfiniteScroll` composable
+  - **New Props**:
+    - `infiniteScroll` (Boolean, default: false) - Enables infinite scroll functionality
+    - `infiniteScrollDistance` (Number, default: 100) - Distance in pixels from bottom to trigger the loadMore event
+    - `infiniteScrollDisabled` (Boolean, default: false) - Disables infinite scroll (useful when all data has been loaded)
+    - `isLoadingMore` (Boolean, default: false) - Indicates whether more data is being loaded for infinite scroll
+  - **New Event**: `loadMore` - Emitted when user scrolls near the bottom of the table
+  - **Visual Feedback**: Loading indicator at the bottom of the table during data loading
+  - **Seamless Integration**: Works alongside existing pagination system (can be disabled with `hidePagination`)
+  - **Fixed Headers Support**: Compatible with `fixedHeaders` prop for optimal scrolling experience
+
+# 3.9.1 (2025-11-12)
+
+### Added
+
+- **SelectSmart Component - Infinite Scroll & External Search**:
+  - **Infinite Scroll Support**: Native infinite scroll using VueUse's `useInfiniteScroll` composable
+  - **External Search Support**: New `disableInternalFilter` prop for API-based search with debounce
+  - **New Props**:
+    - `infiniteScroll` (Boolean, default: false) - Enables infinite scroll functionality
+    - `infiniteScrollDistance` (Number, default: 10) - Distance in pixels from bottom to trigger loading
+    - `infiniteScrollCanLoadMore` (Function, default: () => true) - Callback to determine if more data is available
+    - `disableInternalFilter` (Boolean, default: false) - Disables internal filtering for external search control
+  - **New Event**: `scroll-end` - Emitted when user scrolls near the bottom of options list
+  - **Public Methods**:
+    - `finishInfiniteScroll()` - Must be called after loading data to reset loading state
+    - `resetInfiniteScroll()` - Resets infinite scroll state completely
+  - **Separate Loading States**: 
+    - `isLoading` prop now only for initial load (shows centered loading, hides options)
+    - Internal `infiniteScrollLoading` state for pagination (shows loading at bottom, keeps options visible)
+  - **Visual Feedback**: Dedicated loading indicator at the end of options list during pagination
+  - **Performance Optimized**: Automatic cleanup on unmount, prevents memory leaks
+
 # 3.9.0 (2025-11-07)
 
 ### Added
