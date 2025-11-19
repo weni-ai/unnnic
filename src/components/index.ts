@@ -94,6 +94,10 @@ import Tabs from './ui/tabs/Tabs.vue';
 import TabsList from './ui/tabs/TabsList.vue';
 import TabsTrigger from './ui/tabs/TabsTrigger.vue';
 import TabsContent from './ui/tabs/TabsContent.vue';
+import SegmentedControl from './ui/segmented-control/SegmentedControl.vue';
+import SegmentedControlList from './ui/segmented-control/SegmentedControlList.vue';
+import SegmentedControlTrigger from './ui/segmented-control/SegmentedControlTrigger.vue';
+import SegmentedControlContent from './ui/segmented-control/SegmentedControlContent.vue';
 import Popover from './ui/popover/Popover.vue';
 import PopoverContent from './ui/popover/PopoverContent.vue';
 import PopoverTrigger from './ui/popover/PopoverTrigger.vue';
@@ -206,6 +210,10 @@ export const components: ComponentsMap = {
   unnnicTabsList: TabsList,
   unnnicTabsTrigger: TabsTrigger,
   unnnicTabsContent: TabsContent,
+  unnnicSegmentedControl: SegmentedControl,
+  unnnicSegmentedControlList: SegmentedControlList,
+  unnnicSegmentedControlTrigger: SegmentedControlTrigger,
+  unnnicSegmentedControlContent: SegmentedControlContent,
   unnnicPopover: Popover,
   unnnicPopoverContent: PopoverContent,
   unnnicPopoverTrigger: PopoverTrigger,
@@ -308,6 +316,10 @@ export const unnnicTabs = Tabs;
 export const unnnicTabsList = TabsList;
 export const unnnicTabsTrigger = TabsTrigger;
 export const unnnicTabsContent = TabsContent;
+export const unnnicSegmentedControl = SegmentedControl;
+export const unnnicSegmentedControlList = SegmentedControlList;
+export const unnnicSegmentedControlTrigger = SegmentedControlTrigger;
+export const unnnicSegmentedControlContent = SegmentedControlContent;
 export const unnnicPopover = Popover;
 export const unnnicPopoverContent = PopoverContent;
 export const unnnicPopoverTrigger = PopoverTrigger;
@@ -412,6 +424,10 @@ export const UnnnicTabs = Tabs;
 export const UnnnicTabsList = TabsList;
 export const UnnnicTabsTrigger = TabsTrigger;
 export const UnnnicTabsContent = TabsContent;
+export const UnnnicSegmentedControl = SegmentedControl;
+export const UnnnicSegmentedControlList = SegmentedControlList;
+export const UnnnicSegmentedControlTrigger = SegmentedControlTrigger;
+export const UnnnicSegmentedControlContent = SegmentedControlContent;
 export const UnnnicPopover = Popover;
 export const UnnnicPopoverContent = PopoverContent;
 export const UnnnicPopoverTrigger = PopoverTrigger;
