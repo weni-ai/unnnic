@@ -5,6 +5,115 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.9.3 (2025-11-18)
+
+### Added
+
+- **ChatsContact Component**: Added the `lastInteractionTimePrefix` prop, which allows adding text preceding the time of the last interaction.
+
+# 3.9.2 (2025-11-13)
+
+### Added
+
+- **DataTable Component - Infinite Scroll Support**:
+  - **Infinite Scroll Functionality**: Native infinite scroll using VueUse's `useInfiniteScroll` composable
+  - **New Props**:
+    - `infiniteScroll` (Boolean, default: false) - Enables infinite scroll functionality
+    - `infiniteScrollDistance` (Number, default: 100) - Distance in pixels from bottom to trigger the loadMore event
+    - `infiniteScrollDisabled` (Boolean, default: false) - Disables infinite scroll (useful when all data has been loaded)
+    - `isLoadingMore` (Boolean, default: false) - Indicates whether more data is being loaded for infinite scroll
+  - **New Event**: `loadMore` - Emitted when user scrolls near the bottom of the table
+  - **Visual Feedback**: Loading indicator at the bottom of the table during data loading
+  - **Seamless Integration**: Works alongside existing pagination system (can be disabled with `hidePagination`)
+  - **Fixed Headers Support**: Compatible with `fixedHeaders` prop for optimal scrolling experience
+
+# 3.9.1 (2025-11-12)
+
+### Added
+
+- **SelectSmart Component - Infinite Scroll & External Search**:
+  - **Infinite Scroll Support**: Native infinite scroll using VueUse's `useInfiniteScroll` composable
+  - **External Search Support**: New `disableInternalFilter` prop for API-based search with debounce
+  - **New Props**:
+    - `infiniteScroll` (Boolean, default: false) - Enables infinite scroll functionality
+    - `infiniteScrollDistance` (Number, default: 10) - Distance in pixels from bottom to trigger loading
+    - `infiniteScrollCanLoadMore` (Function, default: () => true) - Callback to determine if more data is available
+    - `disableInternalFilter` (Boolean, default: false) - Disables internal filtering for external search control
+  - **New Event**: `scroll-end` - Emitted when user scrolls near the bottom of options list
+  - **Public Methods**:
+    - `finishInfiniteScroll()` - Must be called after loading data to reset loading state
+    - `resetInfiniteScroll()` - Resets infinite scroll state completely
+  - **Separate Loading States**: 
+    - `isLoading` prop now only for initial load (shows centered loading, hides options)
+    - Internal `infiniteScrollLoading` state for pagination (shows loading at bottom, keeps options visible)
+  - **Visual Feedback**: Dedicated loading indicator at the end of options list during pagination
+  - **Performance Optimized**: Automatic cleanup on unmount, prevents memory leaks
+
+# 3.9.0 (2025-11-07)
+
+### Added
+
+- **Tabs Component**: 
+  - Add and register Tabs, TabsList, TabsContent, and TabsTrigger components in the main index;
+  - Add Tabs stories.
+
+# 3.8.1 (2025-11-06)
+
+### Fixed
+
+- **Tailwind CSS**: Disabled Tailwind CSS container styles to prevent query styles from affecting existing containers
+
+# 3.8.0 (2025-11-05)
+
+### Added
+
+- **Popover Component**: 
+  - Add `@vueuse/core` dependency;
+  - Add and register Popover, PopoverContent, and PopoverTrigger components in the main index;
+  - Add Popover stories.
+
+# 3.7.1 (2025-11-03)
+
+### Fixed
+
+- **Upload Modal**: Fix close event emitter
+
+# 3.7.0 (2025-10-31)
+
+### Added
+
+- **Iconify Integration**: Added the Iconify package to support icons not available in Material Symbols.
+- **Icon Component**: Implemented Iconify icon rendering logic in `Icon.vue`, expanding the component’s icon support.
+
+# 3.6.0 (2025-10-31)
+
+### Added
+
+- **Icon Mappings**: Added more mappings for older icons to point to the icons in Material Symbols for better compatibility
+
+### Changed
+
+- **Icon Component**: Updated Icon sizes to use new design tokens
+
+### Removed
+
+- **Font Files**: Deleted 5 unused font files from icomoon pack
+- **Icon Files**: Deleted approximately 265 unused icon files
+- **Icon Utilities**: Deleted icons util with old icons
+- **Icon Props**: Removed unnecessary lineHeight property
+
+# 3.5.2 (2025-10-29)
+
+### Fixed
+
+- **Tailwind CSS**: Disabled Tailwind CSS preflight styles to prevent base styles from affecting existing components (fixes unexpected behavior in TableNext loading icon)
+
+# 3.5.1 (2025-10-29)
+
+### Fixed
+
+- **Color Tokens**: Fixed `brand-weni-soft` color token referencing incorrect color after applying new color tokens (updated from `teal-100` to `teal-600` in scheme-colors)
+
 # 3.5.0 (2025-10-28)
 
 ### Added

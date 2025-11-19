@@ -19,7 +19,6 @@
       :filled="iconsFilled"
       :style="{ position: 'absolute' }"
       class="rotation"
-      :next="next"
       data-testid="icon-loading"
     />
 
@@ -31,7 +30,6 @@
       :filled="iconsFilled"
       :class="{ 'unnnic-button__icon-left': hasText }"
       :style="{ visibility: loading ? 'hidden' : 'visible' }"
-      :next="next"
       data-testid="icon-left"
     />
 
@@ -42,7 +40,6 @@
       :style="{ visibility: loading ? 'hidden' : 'visible' }"
       :size="iconSize"
       :filled="iconsFilled"
-      :next="next"
       data-testid="icon-center"
     />
 
@@ -63,7 +60,6 @@
       :filled="iconsFilled"
       :class="{ 'unnnic-button__icon-right': hasText }"
       :style="{ visibility: loading ? 'hidden' : 'visible' }"
-      :next="next"
       data-testid="icon-right"
     />
   </button>
@@ -90,7 +86,6 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   iconRight: '',
   iconCenter: '',
   iconsFilled: false,
-  next: false,
   disabled: false,
   loading: false,
 });

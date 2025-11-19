@@ -98,7 +98,7 @@
         }"
         data-testid="last-interaction-time"
       >
-        {{ formattedLastInteraction }}
+        {{ `${lastInteractionTimePrefix} ${formattedLastInteraction}`.trim() }}
       </p>
       <section
         class="chats-contact__infos__unread-messages-container__pin-container"
@@ -173,11 +173,14 @@ export default {
     title: {
       type: String,
       default: '',
-      required: true,
     },
     lastMessage: {
       type: Object,
       default: () => ({}),
+    },
+    lastInteractionTimePrefix: {
+      type: String,
+      default: '',
     },
     lastInteractionTime: {
       type: String,
@@ -295,6 +298,7 @@ export default {
       moment.locale(this.locale);
 
       const now = moment();
+
       const lastInteractionMoment = moment(this.lastInteractionTime);
 
       if (now.subtract(1, 'day').isSame(lastInteractionMoment, 'day')) {
