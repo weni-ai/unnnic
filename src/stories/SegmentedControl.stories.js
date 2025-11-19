@@ -151,11 +151,12 @@ export const Disabled = {
   }),
 };
 
-export const FitContent = {
+export const AdaptedTriggersWidth = {
   parameters: {
     docs: {
       description: {
-        story: 'Segmented control with disabled triggers.',
+        story:
+          'Segmented control with triggers width adapted to the content width.',
       },
       source: {
         code: `
