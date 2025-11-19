@@ -82,6 +82,15 @@ export const Default = {
   },
 };
 
+export const WithLastInteractionTimePrefix = {
+  args: {
+    ...defaultArgs,
+    unreadMessages,
+    lastInteractionTime: new Date().toISOString(),
+    lastInteractionTimePrefix: 'Since',
+  },
+};
+
 export const Selected = {
   args: {
     ...defaultArgs,
