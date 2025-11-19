@@ -4,7 +4,6 @@ import type { HTMLAttributes } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
 import { TabsTrigger, useForwardProps } from 'reka-ui';
 import { cn } from '@/lib/utils';
-import { computed } from 'vue';
 
 const props = defineProps<
   TabsTriggerProps & { class?: HTMLAttributes['class'] }
@@ -13,28 +12,12 @@ const props = defineProps<
 const delegatedProps = reactiveOmit(props, 'class');
 
 const forwardedProps = useForwardProps(delegatedProps);
-
-const classes = computed(() => {
-  const defaultClasses = ['unnnic-tabs-trigger'];
-
-  if (props.disabled) {
-    defaultClasses.push('unnnic-tabs-trigger--disabled');
-  }
-
-  return defaultClasses;
-});
 </script>
 
 <template>
   <TabsTrigger
     v-bind="forwardedProps"
-    :class="
-      cn(
-        ...classes,
-        'transition-all disabled:pointer-events-none disabled:opacity-50',
-        props.class,
-      )
-    "
+    :class="cn('unnnic-tabs-trigger', 'transition-all', props.class)"
   >
     <span class="unnnic-tabs-trigger__content truncate">
       <slot />
@@ -62,11 +45,12 @@ const classes = computed(() => {
       $unnnic-color-border-active;
   }
 
-  &--disabled {
+  &:disabled {
     color: $unnnic-color-fg-muted;
+    cursor: not-allowed;
   }
 
-  &:hover {
+  &:hover:not(:disabled) {
     color: $unnnic-color-fg-emphasized;
   }
 
