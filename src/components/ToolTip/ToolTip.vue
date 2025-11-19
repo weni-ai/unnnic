@@ -1,46 +1,52 @@
 <template>
   <TooltipProvider>
-   <Tooltip 
-      :class="{ 'unnnic-tooltip': enabled || forceOpen }"
+    <Tooltip
       :disabled="!(enabled || forceOpen)"
       :open="forceOpen || undefined"
+      data-testid="tooltip-wrapper"
     >
-    <TooltipTrigger>
-      <slot />
-    </TooltipTrigger>
+      <TooltipTrigger data-testid="tooltip-trigger">
+        <slot />
+      </TooltipTrigger>
 
-    <TooltipContent
-      :class="['unnnic-tooltip-label', `unnnic-tooltip-label-${side}`]"
-      :style="{ maxWidth: maxWidth }"
-      :side="side"
-      data-testid="tooltip-label"
-    >
-      <template v-if="enableHtml">
-        <!-- eslint-disable-next-line vue/no-v-html -->
-        <section v-html="text"></section>
-      </template>
-      <template
-        v-for="(line, index) in text.split('\n')"
-        v-else
-        :key="index"
+      <TooltipContent
+        :class="['unnnic-tooltip-label', `unnnic-tooltip-label-${side}`]"
+        :style="{ maxWidth: maxWidth }"
+        :side="side"
+        data-testid="tooltip-content"
       >
-        {{ line }}
-        <br />
-      </template>
-    </TooltipContent>
-  </Tooltip>
+        <template v-if="enableHtml">
+          <!-- eslint-disable-next-line vue/no-v-html -->
+          <section
+            v-html="text"
+            data-testid="tooltip-html-content"
+          ></section>
+        </template>
+        <template
+          v-for="(line, index) in text.split('\n')"
+          v-else
+          :key="index"
+        >
+          {{ line }}
+          <br />
+        </template>
+      </TooltipContent>
+    </Tooltip>
   </TooltipProvider>
 </template>
 
 <script>
-import { Tooltip, TooltipProvider } from '../ui/tooltip'; 
+import { Tooltip, TooltipProvider } from '../ui/tooltip';
 import TooltipContent from '../ui/tooltip/TooltipContent.vue';
 import TooltipTrigger from '../ui/tooltip/TooltipTrigger.vue';
 
 export default {
   name: 'UnnnicTooltip',
   components: {
-     Tooltip, TooltipProvider, TooltipTrigger, TooltipContent
+    Tooltip,
+    TooltipProvider,
+    TooltipTrigger,
+    TooltipContent,
   },
   props: {
     text: {
