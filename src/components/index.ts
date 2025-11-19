@@ -94,10 +94,12 @@ import Tabs from './ui/tabs/Tabs.vue';
 import TabsList from './ui/tabs/TabsList.vue';
 import TabsTrigger from './ui/tabs/TabsTrigger.vue';
 import TabsContent from './ui/tabs/TabsContent.vue';
-import SegmentedControl from './ui/segmented-control/SegmentedControl.vue';
-import SegmentedControlList from './ui/segmented-control/SegmentedControlList.vue';
-import SegmentedControlTrigger from './ui/segmented-control/SegmentedControlTrigger.vue';
-import SegmentedControlContent from './ui/segmented-control/SegmentedControlContent.vue';
+import {
+  SegmentedControl,
+  SegmentedControlList,
+  SegmentedControlTrigger,
+  SegmentedControlContent,
+} from './ui/segmented-control';
 import Popover from './ui/popover/Popover.vue';
 import PopoverContent from './ui/popover/PopoverContent.vue';
 import PopoverTrigger from './ui/popover/PopoverTrigger.vue';
