@@ -1,7 +1,6 @@
 import AvatarIcon from '../components/AvatarIcon/AvatarIcon.vue';
-import icons from '../utils/icons';
 
-const iconsOptions = Object.keys(icons);
+const iconsOptions = [];
 
 const schemes = [
   'feedback-red',
