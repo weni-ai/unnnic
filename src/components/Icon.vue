@@ -133,14 +133,14 @@ $icon-sizes:
   font-family: 'Material Symbols Rounded';
   font-style: normal;
   font-weight: 300;
-  src: url('../assets/fonts/Material Symbols Rounded.woff2') format('woff2');
+  src: url('../assets/fonts/material-symbols-rounded.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Material Symbols Rounded Filled';
   font-style: normal;
   font-weight: 300;
-  src: url('../assets/fonts/Material Symbols Rounded Filled.woff2')
+  src: url('../assets/fonts/material-symbols-rounded-filled.woff2')
     format('woff2');
 }
 
@@ -198,7 +198,7 @@ $icon-sizes:
   -webkit-font-smoothing: antialiased;
 
   &--filled {
-    font-family: 'Material Symbols Rounded Filled';
+    font-variation-settings: 'FILL' 1;
   }
 }
 </style>
