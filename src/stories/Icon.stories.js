@@ -9,6 +9,8 @@ const iconsOptions = [
   'fitness-biceps-1',
   'close-1',
   'check-2',
+  'article_person',
+  'stacks',
 ];
 
 const schemes = [
