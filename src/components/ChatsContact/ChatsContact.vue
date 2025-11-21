@@ -45,12 +45,12 @@
           {{ title }}
         </h1>
 
-        <UnnnicTag
+        <p
           v-if="projectName"
           class="chats-contact__infos__project-tag"
-          :text="projectName"
-          scheme="neutral-white"
-        />
+        >
+          {{ projectName }}
+        </p>
       </section>
       <div
         class="chats-contact__infos__additional-information"
@@ -145,7 +145,6 @@ import UnnnicIcon from '../Icon.vue';
 import TransitionRipple from '../TransitionRipple/TransitionRipple.vue';
 import UnnnicI18n from '../../mixins/i18n';
 import Checkbox from '../Checkbox/Checkbox.vue';
-import UnnnicTag from '../Tag/Tag.vue';
 
 import('moment/dist/locale/es.js');
 import('moment/dist/locale/pt-br.js');
@@ -160,7 +159,6 @@ export default {
     UnnnicIcon,
     TransitionRipple,
     Checkbox,
-    UnnnicTag,
   },
 
   mixins: [UnnnicI18n],
@@ -509,6 +507,12 @@ export default {
       display: block;
       flex-shrink: 1;
       border: 1px solid $unnnic-color-neutral-cleanest;
+
+      font: $unnnic-font-caption-1;
+      color: $unnnic-color-fg-emphasized;
+
+      border-radius: $unnnic-radius-4;
+      padding: 1px $unnnic-space-2;
     }
 
     &__media {

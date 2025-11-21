@@ -4,7 +4,8 @@
     :size="size"
     :disabled="disabled"
     :message="message"
-    :error="errors.join(', ') || type === 'error'"
+    :tooltip="tooltip"
+    :error="computedError"
   >
     <textarea
       ref="textarea"
@@ -18,13 +19,14 @@
       :disabled="disabled"
       :value="modelValue"
       @input="$emit('update:modelValue', fullySanitize($event.target.value))"
-    ></textarea>
+    />
 
     <template
       v-if="maxLength"
       #rightMessage
-      >{{ modelValue.length }}/{{ maxLength }}</template
     >
+      {{ modelValue.length }}/{{ maxLength }}
+    </template>
   </UnnnicFormElement>
 </template>
 
@@ -41,6 +43,14 @@ export default {
     size: {
       type: String,
       default: 'md',
+    },
+
+    resize: {
+      type: String,
+      default: 'vertical',
+      validator(value) {
+        return ['none', 'vertical'].indexOf(value) !== -1;
+      },
     },
 
     label: {
@@ -76,12 +86,27 @@ export default {
       },
     },
 
+    tooltip: {
+      type: String,
+      default: '',
+    },
+
     errors: {
-      type: Array,
+      type: [Array, null],
       default: () => [],
     },
   },
   emits: ['update:modelValue'],
+
+  computed: {
+    computedError() {
+      if (Array.isArray(this.errors)) {
+        return this.errors.join(', ') || this.type === 'error';
+      }
+
+      return this.errors || this.type === 'error';
+    },
+  },
 
   methods: {
     fullySanitize,
@@ -96,31 +121,35 @@ export default {
 @use '@/assets/scss/unnnic' as *;
 @use '@/components/Input/Input' as *;
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .unnnic-text-area {
   &__textarea {
     @include input-base;
 
     display: block;
     width: 100%;
-    resize: vertical;
-    box-sizing: border-box;
+
+    resize: v-bind(resize);
 
     scrollbar-width: thin;
+
+    padding: $unnnic-space-3 $unnnic-space-4;
 
     &--size-md {
       @include input-md-font;
 
-      min-height: 6.25 * $unnnic-font-size;
-      padding: ($unnnic-spacing-ant - $unnnic-border-width-thinner)
-        ($unnnic-spacing-sm - $unnnic-border-width-thinner);
+      min-height: 90px;
     }
 
     &--size-sm {
       @include input-sm-font;
 
-      min-height: 5 * $unnnic-font-size;
-      padding: ($unnnic-spacing-xs)
-        ($unnnic-spacing-sm - $unnnic-border-width-thinner);
+      min-height: $unnnic-space-20;
     }
 
     &.unnnic-text-area__textarea--type-error {
