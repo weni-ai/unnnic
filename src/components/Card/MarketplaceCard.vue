@@ -33,6 +33,7 @@
           scheme="feedback-yellow"
           icon="rating-star-1"
           size="ant"
+          filled
         />
         <div class="unnnic-card-marketplace__content__rating__value">
           {{ rating }}
