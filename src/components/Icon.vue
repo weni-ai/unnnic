@@ -136,14 +136,6 @@ $icon-sizes:
   src: url('../assets/fonts/material-symbols-rounded.woff2') format('woff2');
 }
 
-@font-face {
-  font-family: 'Material Symbols Rounded Filled';
-  font-style: normal;
-  font-weight: 300;
-  src: url('../assets/fonts/material-symbols-rounded-filled.woff2')
-    format('woff2');
-}
-
 .unnnic-icon {
   position: relative;
   display: inline-block;
