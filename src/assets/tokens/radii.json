@@ -21,7 +21,7 @@
             "type": "size"
         },
         "full": {
-            "value": "100%",
+            "value": "1000px",
             "type": "size"
         }
     }
