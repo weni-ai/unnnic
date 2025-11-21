@@ -328,6 +328,7 @@ export const unnnicTabsContent = TabsContent;
 export const unnnicPageHeader = PageHeader;
 
 export const UnnnicFontSize = fontSize;
+export const UnnnicFormElement = formElement;
 export const UnnnicInput = input;
 export const UnnnicInputNext = inputNext;
 export const UnnnicInputDatePicker = inputDatePicker;
