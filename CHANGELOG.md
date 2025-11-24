@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.10.0 (2025-11-24)
+
+### Added
+
+- **Icon Component**: Added filled attribute to rating component in MarketplaceCard.
+
+### Changed
+
+- **Refactor**: Replace old font files with a new material-symbols font.
+
+### Fixed
+
+- **Collapse Component**: Update icon size in Collapse component from 'xs' to 'ant'.
+
 # 3.9.4 (2025-11-21)
 
 ### Changed
