@@ -4,7 +4,7 @@ import UnnnicIcon from '@/components/Icon.vue';
 import '@/assets/scss/tailwind.scss';
 
 export default {
-  title: 'Misc/Tabs',
+  title: 'Navigation/Tabs',
   component: Tabs,
   tags: ['autodocs'],
   render: (args) => ({
