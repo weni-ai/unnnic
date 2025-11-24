@@ -1,144 +1,88 @@
 <template>
-  <section
-    :class="`unnnic-tag
-        ${!disabled ? `unnnic-tag-scheme--${scheme}` : `unnnic-tag--disabled`}
-        ${clickable ? 'unnnic-tag--clickable' : ''}`"
-  >
+  <section :class="`unnnic-tag unnnic-tag--${size}`">
     <section
       v-if="leftIcon"
       class="unnnic-tag__icon"
     >
       <UnnnicIcon
         :icon="leftIcon"
-        :scheme="scheme"
+        scheme="fg-emphasized"
         size="sm"
       />
     </section>
-    <span
-      :class="`unnnic-tag__label
-      ${disabled ? 'unnnic-tag__label--disabled' : ''}`"
-      >{{ text }}</span
-    >
-    <section
-      v-if="rightIcon || hasCloseIcon"
-      :class="{ 'unnnic-tag__icon': true, clickable: !rightIcon }"
-      @click.stop="hasCloseIcon ? emitClose() : () => {}"
-    >
-      <UnnnicIcon
-        :icon="rightIcon || 'close'"
-        :scheme="rightIcon ? scheme : 'neutral-darkest'"
-        size="sm"
-      />
-    </section>
+    <p :class="`unnnic-tag__label`">{{ text }}</p>
   </section>
 </template>
 
-<script>
+<script setup lang="ts">
+import { computed } from 'vue';
+
+import { color as colors } from '@/assets/tokens/colors.json';
+
 import UnnnicIcon from '../Icon.vue';
 
-export default {
-  name: 'UnnnicTag',
-  components: {
-    UnnnicIcon,
-  },
-  props: {
-    text: {
-      type: String,
-      default: null,
-    },
-    clickable: {
-      type: Boolean,
-      default: false,
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    hasCloseIcon: {
-      type: Boolean,
-      default: false,
-    },
-    scheme: {
-      type: String,
-      default: 'aux-purple',
-    },
-    leftIcon: {
-      type: String,
-      default: null,
-    },
-    rightIcon: {
-      type: String,
-      default: null,
-    },
-  },
-  methods: {
-    closeClicked() {
-      if (!this.closeClicked) return;
-      this.$emit('close-click');
-    },
-    emitClose() {
-      this.$emit('close');
-    },
-  },
-};
+import type { DefaultTagProps } from './types';
+
+const props = withDefaults(defineProps<DefaultTagProps>(), {
+  text: undefined,
+  size: 'medium',
+  scheme: 'aux-purple',
+  leftIcon: undefined,
+});
+
+const COLOR_MAPPING = [
+  { keywords: ['green'], color: colors.green[200].value },
+  { keywords: ['blue'], color: colors.blue[200].value },
+  { keywords: ['purple'], color: colors.purple[200].value },
+  { keywords: ['red', 'pink'], color: colors.red[200].value },
+  { keywords: ['orange'], color: colors.orange[200].value },
+  { keywords: ['yellow'], color: colors.yellow[200].value },
+  { keywords: ['gray'], color: colors.gray[200].value },
+  { keywords: ['teal', 'weni'], color: colors.teal[200].value },
+];
+
+const color = computed(() => {
+  const scheme = props.scheme.toLowerCase();
+
+  const match = COLOR_MAPPING.find(({ keywords }) =>
+    keywords.some((keyword) => scheme.includes(keyword)),
+  );
+
+  return match?.color ?? colors.gray[200].value;
+});
 </script>
 
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
-@each $name, $color in $scheme-colors {
-  .unnnic-tag-scheme--#{$name} {
-    background-color: rgba($color, $unnnic-opacity-level-light);
-    outline-style: solid;
-    outline-color: rgba($color, $unnnic-opacity-level-extra-light);
-    outline-width: $unnnic-border-width-thinner;
-    outline-offset: -$unnnic-border-width-thinner;
-  }
-}
-
 .unnnic-tag {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: $unnnic-space-1;
   border-radius: $unnnic-border-radius-pill;
-  padding: 0 $unnnic-spacing-xs;
+  padding: calc($unnnic-space-1 * 1.5) $unnnic-space-3;
+  width: fit-content;
 
-  &--disabled {
-    background-color: $unnnic-color-background-sky;
-  }
+  background-color: v-bind(color);
 
-  &--clickable {
-    cursor: pointer;
-
-    @each $name, $color in $scheme-colors {
-      &.unnnic-tag-scheme--#{$name}:hover {
-        outline-style: solid;
-        outline-color: $unnnic-color-neutral-cleanest;
-        outline-width: $unnnic-border-width-thinner;
-        outline-offset: -$unnnic-border-width-thinner;
-      }
-    }
+  &--small {
+    padding: calc($unnnic-space-1 * 0.5) $unnnic-space-3;
   }
 
   &__label {
-    font-family: $unnnic-font-family-secondary;
-    font-size: $unnnic-font-size-body-md;
-    font-weight: $unnnic-font-weight-regular;
-    line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
-    padding: $unnnic-spacing-stack-nano;
-    color: $unnnic-color-neutral-darkest;
+    margin: 0;
 
-    &--disabled {
-      color: $unnnic-color-neutral-cloudy;
-    }
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    font: $unnnic-font-caption-1;
+    color: $unnnic-color-fg-emphasized;
   }
 
   &__icon {
     display: flex;
-  }
-
-  .clickable {
-    cursor: pointer;
   }
 }
 </style>

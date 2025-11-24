@@ -4,7 +4,7 @@ exports[`Tab.vue > matches the snapshot 1`] = `
 "<div data-v-b4e39fac="" class="tab size-md">
   <header data-v-b4e39fac="" class="tab-header">
     <ul data-v-b4e39fac="" class="tab-content">
-      <li data-v-b4e39fac="" class="tab-head">tab1<div data-v-bf0cf546="" data-v-b4e39fac="" class="unnnic-tooltip"><span data-v-26446d8e="" data-v-b4e39fac="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--neutral-cleanest unnnic-icon-size--sm unnnic-icon__size--sm material-symbols-rounded--filled" data-testid="material-icon" translate="no">info</span><span data-v-bf0cf546="" class="unnnic-tooltip-label unnnic-tooltip-label-bottom" data-testid="tooltip-label" style="left: 0px; top: 8px;">Tooltip text <br data-v-bf0cf546=""><!--v-if--></span></div>
+      <li data-v-b4e39fac="" class="tab-head">tab1<div data-v-bf0cf546="" data-v-b4e39fac="" class="unnnic-tooltip"><span data-v-26446d8e="" data-v-b4e39fac="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--fg-base unnnic-icon-size--sm unnnic-icon__size--sm" data-testid="material-icon" translate="no">help</span><span data-v-bf0cf546="" class="unnnic-tooltip-label unnnic-tooltip-label-bottom" data-testid="tooltip-label" style="left: 0px; top: 8px;">Tooltip text <br data-v-bf0cf546=""><!--v-if--></span></div>
       </li>
       <li data-v-b4e39fac="" class="tab-head tab-head--active">tab2
         <!--v-if-->

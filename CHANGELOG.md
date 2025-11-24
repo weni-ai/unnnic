@@ -5,6 +5,86 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.11.0 (2025-11-24)
+
+### Added
+
+- **Toast Component**: New inline notification system with ToastManager for programmatic toast display
+  - **Component**: Complete Toast component with multiple variants (success, info, warning, error)
+  - **Toast Manager**: Programmatic API for displaying toasts via `this.$unnnicCallToast()`
+  - **Storybook Documentation**: Complete documentation with interactive examples
+
+- **PageHeader Component**: New page header component for consistent page layouts
+  - **Flexible Layout**: Support for title, subtitle, and custom content slots
+  - **Slot Support**: Left and right content slots for custom elements
+
+- **Form Group Components**: New wrapper components for better form organization
+  - **CheckboxGroup**: Group multiple checkboxes with shared label and tooltip support
+  - **RadioGroup**: Group radio buttons with helper text and label styling
+
+- **Form Elements Enhancement**: Major improvements to all form components
+  - **Tooltip Support**: Added to Input, TextArea, Label, and Radio components
+  - **Helper Text**: Added to Radio and RadioGroup components
+  - **MaxLength Support**: Added to Input component with visual feedback
+  - **Disabled State**: Improved disabled state styling across all form elements
+
+- **New Icons**: Added dedicated SVG icons for form states
+  - `checkbox-checked.svg` and `checkbox-checked-disabled.svg`
+  - `checkbox-less.svg` and `checkbox-less-disabled.svg`
+  - `radio-checked.svg`
+  - `switch-checked.svg` and `switch-checked-disabled.svg`
+
+- **Icon Component**: New foreground color types added to color scheme
+
+### Changed
+
+- **Form Elements Redesign**: Complete visual and structural redesign of form components
+  - **Button**: Updated to use new design tokens, removed 'alternative' type, added transition effects
+  - **Checkbox**: Redesigned with improved styling, restored intermediate state, new disabled state handling, also removed size prop
+  - **Radio**: Complete redesign with improved structure and styling, also removed size prop
+  - **Switch**: Redesigned with updated icons and improved component styles
+  - **Input**: Enhanced with computed error handling, improved layout, dynamic styling based on size
+  - **TextArea**: Restructured with improved error handling and message display
+  - **Label**: Refactored with tooltip support and improved structure
+
+- **FormElement Component**: Major refactoring for better structure and maintainability
+  - **Label Integration**: Now uses UnnnicLabel component for improved consistency
+  - **Error Handling**: Updated to allow null type for TextArea errors
+  - **Improved Layout**: Restructured for better clarity and usability
+  - **Spacing Updates**: Enhanced spacing for improved visual hierarchy
+
+- **Tag Component**: Restructured and simplified
+  - **Default Variation**: Consolidated to contain only default variation
+  - **Improved Styling**: Enhanced with fit-content width and text overflow handling
+  - **Type Safety**: Added comprehensive prop type definitions
+
+- **Alert Component**: Simplified architecture
+  - **Toast Integration**: Integrated with new UnnnicToast component
+  - **Removed Deprecated**: Removed version variation 1.0 and AlertBanner and AlertCaller components
+  - **Streamlined version 1.1**: Removed link (linkHref prop) variation
+  - **Updated Tests**: Reflected version changes and removed deprecated props
+
+- **Tab Component**: Enhanced functionality
+  - **Disabled State**: Added support for disabled tabs
+  - **Dynamic Tooltip**: Tooltip icon size now adjusts based on tab size
+
+- **SelectSmart Component**: Improved consistency
+  - **Border Styling**: Updated border radius and border styling
+  - **Layout Adjustments**: Improved margin properties for better layout
+
+- **ChatsContact Component**: Changed to have its own tag instead of using UnnnicTag
+
+### Fixed
+
+- **Input Component**: Added transition effect for smoother border color change on focus
+- **Icon Component**: Fixed cursor styling for better UX
+
+### Refactored
+
+- **Button Component**: Replaced 'next' prop with 'clickable' for icon buttons, standardized text across stories
+- **Input Component**: Replaced label section with UnnnicLabel component for improved structure
+- **Label Component**: Renamed Props interface to LabelProps for clarity
+
 # 3.10.0 (2025-11-24)
 
 ### Added

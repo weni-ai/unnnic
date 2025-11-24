@@ -8,7 +8,7 @@ export default {
       description: {
         component: `Allows users to perform an action or navigate to another page. 
           It has styles for various needs and are ideal for directing the user's attention. 
-          It is divided into 6 types: Primary, Secondary, Tertiary, Alternative, Warning, Attention.
+          It is divided into 5 types: Primary, Secondary, Tertiary, Warning, Attention.
           Each of these types has its states.
           <br/>
           <br/>
@@ -36,14 +36,7 @@ export default {
   argTypes: {
     type: {
       control: { type: 'select' },
-      options: [
-        'primary',
-        'secondary',
-        'tertiary',
-        'alternative',
-        'warning',
-        'attention',
-      ],
+      options: ['primary', 'secondary', 'tertiary', 'warning', 'attention'],
     },
     size: {
       control: { type: 'select' },
@@ -75,49 +68,20 @@ export default {
 
 export const Primary = {
   args: {
-    text: 'Button Text',
+    text: 'Text',
   },
 };
 
 export const Secondary = {
   args: {
     type: 'secondary',
-    text: 'Button Text',
+    text: 'Text',
   },
 };
 
 export const Tertiary = {
   args: {
     type: 'tertiary',
-    text: 'Button Text',
-  },
-};
-
-export const WithIcon = {
-  args: {
-    text: 'Button Text',
-    iconLeft: 'add',
-  },
-};
-
-export const FilledIcon = {
-  args: {
-    text: 'Button Text',
-    iconLeft: 'play_arrow',
-    iconsFilled: true,
-  },
-};
-
-export const OnlyIcon = {
-  args: {
-    iconCenter: 'add',
-  },
-};
-
-export const Alternative = {
-  args: {
-    type: 'alternative',
-    iconLeft: 'add',
     text: 'Text',
   },
 };
@@ -133,7 +97,6 @@ export const Warning = {
   },
   args: {
     type: 'warning',
-    iconLeft: 'add',
     text: 'Text',
   },
 };
@@ -141,8 +104,35 @@ export const Warning = {
 export const Attention = {
   args: {
     type: 'attention',
-    iconLeft: 'add',
     text: 'Text',
+  },
+};
+
+export const Loading = {
+  args: {
+    loading: true,
+    text: 'Text',
+  },
+};
+
+export const WithIcon = {
+  args: {
+    text: 'Text',
+    iconLeft: 'add',
+  },
+};
+
+export const FilledIcon = {
+  args: {
+    text: 'Text',
+    iconLeft: 'play_arrow',
+    iconsFilled: true,
+  },
+};
+
+export const OnlyIcon = {
+  args: {
+    iconCenter: 'add',
   },
 };
 
