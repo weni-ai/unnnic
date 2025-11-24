@@ -100,6 +100,13 @@ import PopoverTrigger from './ui/popover/PopoverTrigger.vue';
 import PopoverFooter from './ui/popover/PopoverFooter.vue';
 import TemplatePreview from './TemplatePreview/TemplatePreview.vue';
 import TemplatePreviewModal from './TemplatePreview/TemplatePreviewModal.vue';
+import Dialog from './ui/dialog/Dialog.vue';
+import DialogContent from './ui/dialog/DialogContent.vue';
+import DialogFooter from './ui/dialog/DialogFooter.vue';
+import DialogHeader from './ui/dialog/DialogHeader.vue';
+import DialogTitle from './ui/dialog/DialogTitle.vue';
+import DialogTrigger from './ui/dialog/DialogTrigger.vue';
+import DialogClose from './ui/dialog/DialogClose.vue';
 
 type VueComponent = Component;
 
@@ -209,6 +216,13 @@ export const components: ComponentsMap = {
   unnnicPopover: Popover,
   unnnicPopoverContent: PopoverContent,
   unnnicPopoverTrigger: PopoverTrigger,
+  unnnicDialog: Dialog,
+  unnnicDialogContent: DialogContent,
+  unnnicDialogFooter: DialogFooter,
+  unnnicDialogHeader: DialogHeader,
+  unnnicDialogTitle: DialogTitle,
+  unnnicDialogTrigger: DialogTrigger,
+  unnnicDialogClose: DialogClose,
 };
 
 export const unnnicFontSize = fontSize;
@@ -314,6 +328,13 @@ export const unnnicPopoverTrigger = PopoverTrigger;
 export const unnnicPopoverFooter = PopoverFooter;
 export const unnnicTemplatePreview = TemplatePreview as VueComponent;
 export const unnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
+export const unnnicDialog = Dialog;
+export const unnnicDialogContent = DialogContent;
+export const unnnicDialogFooter = DialogFooter;
+export const unnnicDialogHeader = DialogHeader;
+export const unnnicDialogTitle = DialogTitle;
+export const unnnicDialogTrigger = DialogTrigger;
+export const unnnicDialogClose = DialogClose;
 
 export const UnnnicFontSize = fontSize;
 export const UnnnicFormElement = formElement;
@@ -418,3 +439,10 @@ export const UnnnicPopoverTrigger = PopoverTrigger;
 export const UnnnicPopoverFooter = PopoverFooter;
 export const UnnnicTemplatePreview = TemplatePreview as VueComponent;
 export const UnnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
+export const UnnnicDialog = Dialog;
+export const UnnnicDialogContent = DialogContent;
+export const UnnnicDialogFooter = DialogFooter;
+export const UnnnicDialogHeader = DialogHeader;
+export const UnnnicDialogTitle = DialogTitle;
+export const UnnnicDialogTrigger = DialogTrigger;
+export const UnnnicDialogClose = DialogClose;
