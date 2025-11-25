@@ -104,6 +104,13 @@ import TabsList from './ui/tabs/TabsList.vue';
 import TabsTrigger from './ui/tabs/TabsTrigger.vue';
 import TabsContent from './ui/tabs/TabsContent.vue';
 import PageHeader from './PageHeader/PageHeader.vue';
+import Dialog from './ui/dialog/Dialog.vue';
+import DialogContent from './ui/dialog/DialogContent.vue';
+import DialogFooter from './ui/dialog/DialogFooter.vue';
+import DialogHeader from './ui/dialog/DialogHeader.vue';
+import DialogTitle from './ui/dialog/DialogTitle.vue';
+import DialogTrigger from './ui/dialog/DialogTrigger.vue';
+import DialogClose from './ui/dialog/DialogClose.vue';
 
 type VueComponent = Component;
 
@@ -217,6 +224,16 @@ export const components: ComponentsMap = {
   unnnicTabsTrigger: TabsTrigger,
   unnnicTabsContent: TabsContent,
   unnnicPageHeader: PageHeader,
+  unnnicPopover: Popover,
+  unnnicPopoverContent: PopoverContent,
+  unnnicPopoverTrigger: PopoverTrigger,
+  unnnicDialog: Dialog,
+  unnnicDialogContent: DialogContent,
+  unnnicDialogFooter: DialogFooter,
+  unnnicDialogHeader: DialogHeader,
+  unnnicDialogTitle: DialogTitle,
+  unnnicDialogTrigger: DialogTrigger,
+  unnnicDialogClose: DialogClose,
 };
 
 export const unnnicFontSize = fontSize;
@@ -326,6 +343,13 @@ export const unnnicTabsList = TabsList;
 export const unnnicTabsTrigger = TabsTrigger;
 export const unnnicTabsContent = TabsContent;
 export const unnnicPageHeader = PageHeader;
+export const unnnicDialog = Dialog;
+export const unnnicDialogContent = DialogContent;
+export const unnnicDialogFooter = DialogFooter;
+export const unnnicDialogHeader = DialogHeader;
+export const unnnicDialogTitle = DialogTitle;
+export const unnnicDialogTrigger = DialogTrigger;
+export const unnnicDialogClose = DialogClose;
 
 export const UnnnicFontSize = fontSize;
 export const UnnnicFormElement = formElement;
@@ -434,3 +458,10 @@ export const UnnnicTabsList = TabsList;
 export const UnnnicTabsTrigger = TabsTrigger;
 export const UnnnicTabsContent = TabsContent;
 export const UnnnicPageHeader = PageHeader;
+export const UnnnicDialog = Dialog;
+export const UnnnicDialogContent = DialogContent;
+export const UnnnicDialogFooter = DialogFooter;
+export const UnnnicDialogHeader = DialogHeader;
+export const UnnnicDialogTitle = DialogTitle;
+export const UnnnicDialogTrigger = DialogTrigger;
+export const UnnnicDialogClose = DialogClose;
