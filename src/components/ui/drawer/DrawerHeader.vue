@@ -1,8 +1,12 @@
 <script lang="ts" setup>
-import type { HTMLAttributes } from 'vue';
+import { type HTMLAttributes } from 'vue';
 import { cn } from '@/lib/utils';
 import UnnnicButton from '@/components/Button/Button.vue';
 import DrawerClose from './DrawerClose.vue';
+
+defineOptions({
+  name: 'UnnnicDrawerHeader',
+});
 
 const props = defineProps<{
   class?: HTMLAttributes['class'];
