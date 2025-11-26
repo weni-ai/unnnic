@@ -1,9 +1,9 @@
 <template>
   <Drawer
-    :open="modelValue"
-    @update:open="$emit('update:modelValue', $event)"
     class="unnnic-drawer"
     data-testid="drawer"
+    :open="modelValue"
+    @update:open="$emit('update:modelValue', $event)"
   >
     <DrawerContent
       :showOverlay="!withoutOverlay"
@@ -98,6 +98,10 @@ import {
   DrawerTitle,
   DrawerDescription,
 } from '../ui/drawer';
+
+defineOptions({
+  name: 'UnnnicDrawer',
+});
 
 const props = defineProps({
   title: {

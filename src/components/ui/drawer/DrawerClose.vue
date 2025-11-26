@@ -2,6 +2,10 @@
 import type { DrawerCloseProps } from 'vaul-vue';
 import { DrawerClose } from 'vaul-vue';
 
+defineOptions({
+  name: 'UnnnicDrawerClose',
+});
+
 const props = defineProps<DrawerCloseProps>();
 </script>
 
