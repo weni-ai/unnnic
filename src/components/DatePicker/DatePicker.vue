@@ -1,11 +1,17 @@
 <template>
-  <div class="unnnic-date-picker">
+  <div
+    class="unnnic-date-picker"
+    data-testid="date-picker-root"
+  >
     <template v-if="type === 'day'">
       <template
         v-for="(openMonth, index) in openMonths"
         :key="openMonth"
       >
-        <div class="month-container">
+        <div
+          class="month-container"
+          data-testid="date-picker-month-container"
+        >
           <div :class="['header', `header--${size}`]">
             <UnnnicButton
               size="small"
@@ -13,6 +19,7 @@
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: `${index === 0 ? 'left' : 'right'}-button` }"
+              :data-testid="`date-picker-nav-${index === 0 ? 'left' : 'right'}`"
               @click.stop="
                 referenceDate = addMonth(referenceDate, index === 0 ? -1 : 1)
               "
@@ -48,6 +55,7 @@
                 left: date.properties.includes('left-highlighted'),
                 right: date.properties.includes('right-highlighted'),
               }"
+              data-testid="date-picker-day"
               @click="
                 date.properties.includes('inside month') &&
                 !date.properties.includes('out of range') &&
@@ -68,7 +76,10 @@
         v-for="openMonth in [referenceDate]"
         :key="openMonth"
       >
-        <div class="month-container">
+        <div
+          class="month-container"
+          data-testid="date-picker-month-container"
+        >
           <div :class="['header', `header--${size}`]">
             <UnnnicButton
               size="small"
@@ -76,6 +87,7 @@
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'left-button' }"
+              data-testid="date-picker-month-nav-left"
               @click="referenceDate = addMonth(referenceDate, -12)"
             />
 
@@ -89,6 +101,7 @@
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'right-button' }"
+              data-testid="date-picker-month-nav-right"
               @click="referenceDate = addMonth(referenceDate, 12)"
             />
           </div>
@@ -106,6 +119,7 @@
                 left: date.properties.includes('left-highlighted'),
                 right: date.properties.includes('right-highlighted'),
               }"
+              data-testid="date-picker-month-cell"
               @click="
                 date.properties.includes('inside month') && selectDate(date)
               "
@@ -124,7 +138,10 @@
         v-for="openMonth in [referenceDate]"
         :key="openMonth"
       >
-        <div class="month-container">
+        <div
+          class="month-container"
+          data-testid="date-picker-month-container"
+        >
           <div :class="['header', `header--${size}`]">
             <UnnnicButton
               size="small"
@@ -132,6 +149,7 @@
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'left-button' }"
+              data-testid="date-picker-year-nav-left"
               @click="referenceDate = addMonth(referenceDate, -12 * 12)"
             />
 
@@ -145,6 +163,7 @@
               :type="size === 'large' ? 'secondary' : 'tertiary'"
               class="button-space"
               :style="{ gridArea: 'right-button' }"
+              data-testid="date-picker-year-nav-right"
               @click="referenceDate = addMonth(referenceDate, 12 * 12)"
             />
           </div>
@@ -162,6 +181,7 @@
                 left: date.properties.includes('left-highlighted'),
                 right: date.properties.includes('right-highlighted'),
               }"
+              data-testid="date-picker-year-cell"
               @click="
                 date.properties.includes('inside month') && selectDate(date)
               "
@@ -178,6 +198,7 @@
     <div
       v-if="size !== 'small'"
       class="options-container"
+      data-testid="date-picker-options"
     >
       <div class="options">
         <div
@@ -190,6 +211,7 @@
               selected: optionSelected === option.id,
             },
           ]"
+          data-testid="date-picker-option"
           @click="option.id === 'custom' ? null : autoSelect(option.id)"
         >
           {{ option.name }}
@@ -202,6 +224,7 @@
           size="small"
           :text="clearText"
           type="tertiary"
+          data-testid="date-picker-clear"
           @click="clear"
         />
 
@@ -209,6 +232,7 @@
           size="small"
           :text="filterText"
           type="secondary"
+          data-testid="date-picker-submit"
           @click="submit"
         />
       </div>
@@ -240,6 +264,8 @@ export default {
 
     minDate: { type: String, default: '' },
     maxDate: { type: String, default: '' },
+
+    periodBaseDate: { type: String, default: '' },
 
     equivalentOption: { type: String, default: '' },
 
@@ -778,7 +804,24 @@ export default {
       let startDate;
       let endDate;
 
-      const today = new Date();
+      let baseDate;
+
+      if (this.periodBaseDate) {
+        const parts = this.periodBaseDate.split('-');
+
+        if (parts.length === 3) {
+          const [year, month, day] = parts;
+
+          baseDate = new Date(year, Number(month) - 1, day);
+        } else {
+          const parsed = new Date(this.periodBaseDate);
+          baseDate = Number.isNaN(parsed.getTime()) ? new Date() : parsed;
+        }
+      } else {
+        baseDate = new Date();
+      }
+
+      const today = new Date(baseDate.getTime());
 
       const days = period.match(/^last-(\d+)-days$/);
       const months = period.match(/^last-(\d+)-months$/);
@@ -797,10 +840,10 @@ export default {
         today.setMonth(today.getMonth() - howMuch);
         startDate = this.dateToString(today);
       } else if (period === 'current-month') {
-        const referenceDate = new Date();
+        const referenceDay = baseDate.getDate();
+
         today.setDate(1);
         startDate = this.dateToString(today);
-        const referenceDay = referenceDate.getDate();
         today.setDate(referenceDay);
         endDate = this.dateToString(today);
       } else if (period === 'previous-month') {
