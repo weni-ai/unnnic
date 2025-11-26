@@ -2,6 +2,10 @@
 import type { DrawerTriggerProps } from 'vaul-vue';
 import { DrawerTrigger } from 'vaul-vue';
 
+defineOptions({
+  name: 'UnnnicDrawerTrigger',
+});
+
 const props = defineProps<DrawerTriggerProps>();
 </script>
 

@@ -5,6 +5,10 @@ import { reactiveOmit } from '@vueuse/core';
 import { DrawerDescription } from 'vaul-vue';
 import { cn } from '@/lib/utils';
 
+defineOptions({
+  name: 'UnnnicDrawerDescription',
+});
+
 const props = defineProps<
   DrawerDescriptionProps & { class?: HTMLAttributes['class'] }
 >();
