@@ -5,6 +5,38 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.11.2 (2025-11-27)
+
+### Added
+
+- **DatePicker Component**:
+  - Added `periodBaseDate` prop to allow custom reference dates for predefined periods (e.g. `last-7-days`, `last-12-months`, `current-month`, `previous-month`), enabling use cases like "Last 7 days (up to 24h ago)".
+  - Added `data-testid` attributes to key interactive elements (root, navigation buttons, day/month/year cells, options, clear/apply buttons) to improve testability and coverage quality.
+  - Added new Storybook stories demonstrating multiple usage patterns:
+    - `SmallDayPicker` (type `day`, size `small`)
+    - `MonthView` (type `month`)
+    - `YearView` (type `year`)
+    - `WithMinAndMaxDateRange` (date range constrained by `minDate` and `maxDate`)
+    - `WithCustomLabelsAndDisableClear` (custom action/clear labels and `disableClear`)
+    - `CustomRelativePeriodsWithBaseDate` (custom relative filters backed by `periodBaseDate`).
+- **InputDatePicker Component**:
+  - Added `periodBaseDate` prop passthrough so external consumers can leverage the new relative date presets from `UnnnicDatePicker` (e.g. "Last 7 days (up to 24h ago)").
+  - Added new Storybook story `WithCustomRelativePeriodsAndBaseDate` showcasing InputDatePicker with relative filters backed by `periodBaseDate`.
+  - Added focused unit tests for InputDatePicker covering integration with DatePicker, v-model behavior, formatting, and dropdown open/close logic.
+
+### Changed
+
+- **DatePicker Component**:
+  - Migrated implementation to `<script setup lang="ts">` with Vue 3 Composition API while preserving the existing public API (props, events, and behavior) for backward compatibility.
+  - Normalized internal date-handling logic to use typed helpers (`dateToString`, `stringToTime`, etc.) for safer arithmetic across day, month, and year views.
+- **InputDatePicker Component**:
+  - Migrated implementation to `<script setup lang="ts">` Composition API while preserving existing props (`modelValue`, `type`, `format`, `inputFormat`, etc.), events, and visual behavior for backward compatibility.
+
+### Fixed
+
+- **DatePicker Component**:
+  - Corrected month label rendering in `type="month"` view by aligning month indices with the localized `monthsLocale` array (fixes incorrect labels and potential indexing errors).
+
 # 3.11.0 (2025-11-24)
 
 ### Added
