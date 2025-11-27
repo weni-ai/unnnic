@@ -10,12 +10,6 @@ describe('Drawer.vue', () => {
     UnnnicIcon: true,
     UnnnicButton: true,
     Teleport: templateSlot,
-    Drawer: templateSlot,
-    DrawerContent: templateSlot,
-    DrawerFooter: templateSlot,
-    DrawerClose: templateSlot,
-    DrawerTitle: templateSlot,
-    DrawerDescription: templateSlot,
   };
 
   beforeEach(() => {
@@ -35,7 +29,7 @@ describe('Drawer.vue', () => {
 
   const element = (id) => wrapper.find(`[data-testid="${id}"]`);
   const component = (id) => wrapper.findComponent(`[data-testid="${id}"]`);
-  const drawer = () => element('drawer');
+  const drawerRoot = () => wrapper.findComponent({ name: 'UnnnicDrawerNext' });
   const title = () => element('drawer-title');
   const description = () => element('drawer-description');
   const primaryButton = () => component('primary-button');
@@ -43,6 +37,8 @@ describe('Drawer.vue', () => {
   const footer = () => element('footer');
   const closeIcon = () => component('close-icon');
   const drawerContainer = () => element('drawer-container');
+  const drawerContentComponent = () =>
+    wrapper.findComponent({ name: 'UnnnicDrawerContent' });
 
   describe('Component Rendering', () => {
     describe('Component Rendering', () => {
@@ -51,23 +47,21 @@ describe('Drawer.vue', () => {
       });
 
       it('should render the drawer when modelValue is true', () => {
-        expect(drawer().attributes('open')).toBe('true');
+        expect(drawerRoot().props('open')).toBe(true);
       });
 
       it('should not render the drawer when modelValue is false', async () => {
         await wrapper.setProps({ modelValue: false });
-        expect(drawer().attributes('open')).toBe('false');
+        expect(drawerRoot().props('open')).toBe(false);
       });
 
       it('should render the overlay when withoutOverlay is false', () => {
-        console.log('wrapper.html()', wrapper.html());
-
-        expect(drawerContainer().attributes('showoverlay')).toBe('true');
+        expect(drawerContentComponent().props('showOverlay')).toBe(true);
       });
 
       it('should not render the overlay when withoutOverlay is true', async () => {
         await wrapper.setProps({ withoutOverlay: true });
-        expect(drawerContainer().attributes('showoverlay')).toBe('false');
+        expect(drawerContentComponent().props('showOverlay')).toBe(false);
       });
 
       it('should display the title and description correctly', () => {
@@ -217,14 +211,16 @@ describe('Drawer.vue', () => {
   describe('Props and Computed Properties', () => {
     it('should render the correct size class based on size prop', async () => {
       await wrapper.setProps({ size: 'lg' });
-      expect(drawerContainer().classes()).toContain(
+      expect(drawerContentComponent().props('class')).toContain(
         'unnnic-drawer__container--lg',
       );
+      expect(drawerContentComponent().props('size')).toBe('large');
 
       await wrapper.setProps({ size: 'xl' });
-      expect(drawerContainer().classes()).toContain(
+      expect(drawerContentComponent().props('class')).toContain(
         'unnnic-drawer__container--xl',
       );
+      expect(drawerContentComponent().props('size')).toBe('extra-large');
     });
 
     it('should display footer if either primaryButtonText or secondaryButtonText is provided', async () => {
