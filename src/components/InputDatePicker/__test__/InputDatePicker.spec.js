@@ -20,6 +20,7 @@ const factory = (props = {}) =>
         },
         UnnnicDatePicker: {
           name: 'UnnnicDatePicker',
+          props: ['minDate', 'maxDate', 'periodBaseDate', 'options'],
           template: '<div data-testid="datepicker"></div>',
         },
       },
