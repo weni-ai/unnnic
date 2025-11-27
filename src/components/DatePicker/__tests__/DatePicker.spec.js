@@ -107,7 +107,8 @@ describe('DatePicker.vue', () => {
 
     await wrapper.vm.autoSelect('last-7-days');
 
-    const baseDate = new Date(base);
+    const [year, month, day] = base.split('-');
+    const baseDate = new Date(Number(year), Number(month) - 1, Number(day));
     const expectedEnd = wrapper.vm.dateToString(baseDate);
 
     expect(wrapper.vm.endDate).toBe(expectedEnd);
