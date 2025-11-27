@@ -6,11 +6,11 @@
     <UnnnicInput
       :class="['input', { 'date-picker-input-next': next }]"
       :size="size"
-      :iconLeft="iconPosition === 'left' && 'calendar_month'"
-      :iconRight="iconPosition === 'right' && 'calendar_month'"
+      :iconLeft="iconPosition === 'left' ? 'calendar_month' : undefined"
+      :iconRight="iconPosition === 'right' ? 'calendar_month' : undefined"
       hasCloudyColor
       readonly
-      :modelValue="overwrittenValue || filterText"
+      :modelValue="overwrittenValue || filterText || ''"
       @focus="showCalendarFilter = true"
     />
 
@@ -40,197 +40,156 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import moment from 'moment';
+
 import UnnnicInput from '../Input/Input.vue';
-// @ts-expect-error: avoid leaking internal DatePickerProps type to this JS SFC declaration emit
 import UnnnicDatePicker from '../DatePicker/DatePicker.vue';
 
-export default {
-  components: {
-    UnnnicInput,
-    UnnnicDatePicker,
-  },
-  model: {
-    event: 'changed',
-  },
+defineOptions({
+  name: 'UnnnicInputDatePicker',
+});
 
-  props: {
-    modelValue: {
-      type: Object,
-      required: true,
-    },
-
-    iconPosition: {
-      type: String,
-      default: 'left',
-      validator(position) {
-        return ['left', 'right'].includes(position);
-      },
-    },
-
-    minDate: { type: String, default: '' },
-    maxDate: { type: String, default: '' },
-
-    fillW: {
-      type: Boolean,
-      default: false,
-    },
-
-    type: {
-      type: String,
-      default: 'day',
-    },
-
-    size: {
-      type: String,
-      default: 'md',
-    },
-
-    clearText: {
-      type: String,
-      default: 'Clear',
-    },
-
-    actionText: {
-      type: String,
-      default: 'Filter',
-    },
-
-    months: {
-      type: Array,
-      default: () => [],
-    },
-
-    days: {
-      type: Array,
-      default: () => [],
-    },
-
-    options: {
-      type: Array,
-      default: () => [],
-    },
-
-    next: {
-      type: Boolean,
-      default: false,
-    },
-
-    format: {
-      type: String,
-      default: 'YYYY-MM-DD',
-    },
-
-    inputFormat: {
-      type: String,
-      default: 'MM-DD-YYYY',
-    },
-
-    position: {
-      type: String,
-      default: 'left',
-    },
-    disableClear: {
-      type: Boolean,
-      default: false,
-    },
-
-    periodBaseDate: {
-      type: String,
-      default: '',
-    },
-  },
-
-  emits: ['update:model-value', 'selectDate'],
-
-  data() {
-    return {
-      showCalendarFilter: false,
-      overwrittenValue: '',
-    };
-  },
-
-  computed: {
-    filterText() {
-      const dates = [];
-
-      if (this.modelValue?.start) {
-        dates.push(
-          moment(this.modelValue?.start, this.format).format(this.inputFormat),
-        );
-      }
-
-      if (this.modelValue?.end) {
-        dates.push(
-          moment(this.modelValue?.end, this.format).format(this.inputFormat),
-        );
-      }
-
-      if (!dates.length) {
-        return String(this.inputFormat).replaceAll('-', '/').toLowerCase();
-      }
-
-      return dates.join(' ~ ');
-    },
-
-    initialStartDate() {
-      return this.modelValue.start
-        ? moment(this.modelValue.start, this.format).format('MM DD YYYY')
-        : null;
-    },
-
-    initialEndDate() {
-      return this.modelValue.end
-        ? moment(this.modelValue.end, this.format).format('MM DD YYYY')
-        : null;
-    },
-  },
-
-  mounted() {
-    window.document.body.addEventListener('click', this.mouseout);
-  },
-
-  beforeUnmount() {
-    window.document.body.removeEventListener('click', this.mouseout);
-  },
-
-  methods: {
-    emitSelectDate(date) {
-      const { startDate, endDate } = date;
-      const formattedDates = {
-        start: moment(startDate, 'MM-DD-YYYY').format(this.format),
-        end: moment(endDate, 'MM-DD-YYYY').format(this.format),
-      };
-      this.$emit('selectDate', formattedDates);
-    },
-    mouseout(event) {
-      if (this.$refs.dropdown?.contains(event.target)) {
-        return;
-      }
-
-      this.showCalendarFilter = false;
-    },
-
-    changeDate(value) {
-      const startDate = value.startDate.replace(
-        /(\d+)-(\d+)-(\d+)/,
-        '$3-$1-$2',
-      );
-
-      const endDate = value.endDate.replace(/(\d+)-(\d+)-(\d+)/, '$3-$1-$2');
-
-      this.showCalendarFilter = false;
-
-      this.$emit('update:model-value', {
-        start: startDate
-          ? moment(startDate, 'YYYY-MM-DD').format(this.format)
-          : null,
-        end: endDate ? moment(endDate, 'YYYY-MM-DD').format(this.format) : null,
-      });
-    },
-  },
+type DateRangeValue = {
+  start: string | null;
+  end: string | null;
 };
+
+interface InputDatePickerProps {
+  modelValue: DateRangeValue;
+
+  iconPosition?: 'left' | 'right';
+
+  minDate?: string;
+  maxDate?: string;
+
+  fillW?: boolean;
+
+  type?: 'day' | 'month' | 'year';
+  size?: string;
+
+  clearText?: string;
+  actionText?: string;
+
+  months?: string[];
+  days?: string[];
+  options?: Array<{ name: string; id: string }>;
+
+  next?: boolean;
+
+  format?: string;
+  inputFormat?: string | null;
+
+  position?: 'left' | 'right';
+  disableClear?: boolean;
+
+  periodBaseDate?: string;
+}
+
+const props = withDefaults(defineProps<InputDatePickerProps>(), {
+  iconPosition: 'left',
+  minDate: '',
+  maxDate: '',
+  fillW: false,
+  type: 'day',
+  size: 'md',
+  clearText: 'Clear',
+  actionText: 'Filter',
+  months: () => [],
+  days: () => [],
+  options: () => [],
+  next: false,
+  format: 'YYYY-MM-DD',
+  inputFormat: 'MM-DD-YYYY',
+  position: 'left',
+  disableClear: false,
+  periodBaseDate: '',
+});
+
+const emit = defineEmits<{
+  (e: 'update:model-value', value: DateRangeValue): void;
+  (e: 'selectDate', value: DateRangeValue): void;
+}>();
+
+const dropdown = ref<HTMLElement | null>(null);
+const showCalendarFilter = ref(false);
+const overwrittenValue = ref('');
+
+const filterText = computed(() => {
+  const dates: string[] = [];
+
+  const { start, end } = props.modelValue || {};
+
+  if (start) {
+    dates.push(moment(start, props.format).format(props.inputFormat || ''));
+  }
+
+  if (end) {
+    dates.push(moment(end, props.format).format(props.inputFormat || ''));
+  }
+
+  if (!dates.length) {
+    return String(props.inputFormat || '')
+      .replaceAll('-', '/')
+      .toLowerCase();
+  }
+
+  return dates.join(' ~ ');
+});
+
+const initialStartDate = computed<string | undefined>(() => {
+  return props.modelValue.start
+    ? moment(props.modelValue.start, props.format).format('MM DD YYYY')
+    : undefined;
+});
+
+const initialEndDate = computed<string | undefined>(() => {
+  return props.modelValue.end
+    ? moment(props.modelValue.end, props.format).format('MM DD YYYY')
+    : undefined;
+});
+
+function emitSelectDate(date: { startDate: string; endDate: string }) {
+  const { startDate, endDate } = date;
+  const formattedDates: DateRangeValue = {
+    start: moment(startDate, 'MM-DD-YYYY').format(props.format),
+    end: moment(endDate, 'MM-DD-YYYY').format(props.format),
+  };
+
+  emit('selectDate', formattedDates);
+}
+
+function mouseout(event: MouseEvent | { target: EventTarget | null }) {
+  if (dropdown.value?.contains(event.target as Node)) {
+    return;
+  }
+
+  showCalendarFilter.value = false;
+}
+
+function changeDate(value: { startDate: string; endDate: string }) {
+  const startDate = value.startDate.replace(/(\d+)-(\d+)-(\d+)/, '$3-$1-$2');
+
+  const endDate = value.endDate.replace(/(\d+)-(\d+)-(\d+)/, '$3-$1-$2');
+
+  showCalendarFilter.value = false;
+
+  emit('update:model-value', {
+    start: startDate
+      ? moment(startDate, 'YYYY-MM-DD').format(props.format)
+      : null,
+    end: endDate ? moment(endDate, 'YYYY-MM-DD').format(props.format) : null,
+  });
+}
+
+onMounted(() => {
+  window.document.body.addEventListener('click', mouseout as any);
+});
+
+onBeforeUnmount(() => {
+  window.document.body.removeEventListener('click', mouseout as any);
+});
 </script>
 
 <style lang="scss" scoped>
