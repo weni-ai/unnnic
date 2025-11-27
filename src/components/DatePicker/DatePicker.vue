@@ -124,7 +124,7 @@
                 date.properties.includes('inside month') && selectDate(date)
               "
             >
-              {{ monthsLocale[getMonth(date)].substr(0, 3) }}
+              {{ monthsLocale[getMonth(date) - 1].substr(0, 3) }}
             </div>
           </div>
         </div>
