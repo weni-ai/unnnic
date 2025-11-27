@@ -455,6 +455,16 @@ const i18nFn = (...args: any[]): string | undefined => {
 
 defineExpose({
   i18n: i18nFn,
+
+  startDate,
+  endDate,
+  optionSelected,
+  referenceDate,
+
+  autoSelect,
+  dateToString,
+  getStartAndEndDateByPeriod,
+  getDatesOfTheMonth,
 });
 
 function dateToString(date: Date): string {
