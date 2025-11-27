@@ -173,4 +173,54 @@ describe('DatePicker.vue', () => {
     const text = wrapper.vm.i18n('clean', 'Clean');
     expect(text).toBeTruthy();
   });
+
+  it('computes previous-month period correctly based on periodBaseDate', () => {
+    const base = '2025-03-15';
+    wrapper = factory({
+      periodBaseDate: base,
+      options: [{ name: 'Previous month', id: 'previous-month' }],
+    });
+
+    const { startDate, endDate } =
+      wrapper.vm.getStartAndEndDateByPeriod('previous-month');
+
+    const baseDate = new Date(base);
+    const firstPrevMonth = new Date(
+      baseDate.getFullYear(),
+      baseDate.getMonth() - 1,
+      1,
+    );
+    const lastPrevMonth = new Date(
+      firstPrevMonth.getFullYear(),
+      firstPrevMonth.getMonth() + 1,
+      0,
+    );
+
+    const expectedStart = wrapper.vm.dateToString(firstPrevMonth);
+    const expectedEnd = wrapper.vm.dateToString(lastPrevMonth);
+
+    expect(startDate).toBe(expectedStart);
+    expect(endDate).toBe(expectedEnd);
+  });
+
+  it('marks dates outside minDate and maxDate as out of range', () => {
+    const min = '2025-02-10';
+    const max = '2025-02-20';
+
+    wrapper = factory({
+      minDate: min,
+      maxDate: max,
+    });
+
+    const [year, month] = min.split('-');
+    const reference = `${Number(month)} 1 ${year}`;
+
+    const dates = wrapper.vm.getDatesOfTheMonth(reference);
+
+    const hasOutOfRange = dates.some((d) =>
+      d.properties.includes('out of range'),
+    );
+
+    expect(hasOutOfRange).toBe(true);
+  });
 });
