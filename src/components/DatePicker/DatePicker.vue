@@ -271,7 +271,7 @@ type PeriodOption = {
   name: string;
 };
 
-interface DatePickerProps {
+export interface DatePickerProps {
   initialStartDate?: string;
   initialEndDate?: string;
 
