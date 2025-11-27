@@ -35,6 +35,56 @@ export const Default = {
   },
 };
 
+export const SmallDayPicker = {
+  args: {
+    size: 'small',
+    type: 'day',
+    maxDate: moment().format('YYYY-MM-DD'),
+  },
+};
+
+export const MonthView = {
+  args: {
+    size: 'large',
+    type: 'month',
+    maxDate: moment().format('YYYY-MM-DD'),
+  },
+};
+
+export const YearView = {
+  args: {
+    size: 'large',
+    type: 'year',
+    maxDate: moment().format('YYYY-MM-DD'),
+  },
+};
+
+export const WithMinAndMaxDateRange = {
+  args: {
+    size: 'large',
+    type: 'day',
+    minDate: moment().subtract(30, 'days').format('YYYY-MM-DD'),
+    maxDate: moment().format('YYYY-MM-DD'),
+  },
+};
+
+export const WithCustomLabelsAndDisableClear = {
+  args: {
+    size: 'large',
+    type: 'day',
+    clearLabel: 'Reset',
+    actionLabel: 'Apply',
+    disableClear: true,
+    options: [
+      { name: 'Last 7 days', id: 'last-7-days' },
+      { name: 'Last 30 days', id: 'last-30-days' },
+      { name: 'Current month', id: 'current-month' },
+      { name: 'Previous month', id: 'previous-month' },
+      { name: 'Custom', id: 'custom' },
+    ],
+  },
+};
+
 export const CustomRelativePeriodsWithBaseDate = {
   args: {
     size: 'large',
