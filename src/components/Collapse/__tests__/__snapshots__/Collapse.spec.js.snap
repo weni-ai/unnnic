@@ -2,7 +2,7 @@
 
 exports[`Collapse.vue > matches the snapshot 1`] = `
 "<div data-v-7d0d9fbd="" data-testid="collapse" class="unnnic-collapse unnnic-collapse--size-lg">
-  <div data-v-7d0d9fbd="" data-testid="collapse-header" class="unnnic-collapse__header">Test Title<span data-v-26446d8e="" data-v-7d0d9fbd="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--neutral-cloudy unnnic-icon-size--xs unnnic-icon__size--xs" data-testid="material-icon" translate="no">expand_more</span></div>
+  <div data-v-7d0d9fbd="" data-testid="collapse-header" class="unnnic-collapse__header">Test Title<span data-v-26446d8e="" data-v-7d0d9fbd="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--neutral-cloudy unnnic-icon-size--ant unnnic-icon__size--ant" data-testid="material-icon" translate="no">expand_more</span></div>
   <div data-v-7d0d9fbd="" class="unnnic-collapse__body" style="display: none;"></div>
 </div>"
 `;

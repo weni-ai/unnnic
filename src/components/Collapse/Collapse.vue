@@ -20,7 +20,7 @@
       {{ title }}<slot name="header"></slot>
 
       <UnnnicIcon
-        size="xs"
+        size="ant"
         :icon="localActive ? 'arrow-button-up-1' : 'arrow-button-down-1'"
         :scheme="localActive ? 'neutral-dark' : 'neutral-cloudy'"
       />

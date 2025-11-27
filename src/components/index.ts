@@ -93,17 +93,37 @@ import DataTable from './DataTable/index.vue';
 import Chip from './Chip/Chip.vue';
 import Toast from './Toast/Toast.vue';
 import { toast } from './Toast/ToastManager';
+import Tabs from './ui/tabs/Tabs.vue';
+import TabsList from './ui/tabs/TabsList.vue';
+import TabsTrigger from './ui/tabs/TabsTrigger.vue';
+import TabsContent from './ui/tabs/TabsContent.vue';
+import {
+  SegmentedControl,
+  SegmentedControlList,
+  SegmentedControlTrigger,
+  SegmentedControlContent,
+} from './ui/segmented-control';
 import Popover from './ui/popover/Popover.vue';
 import PopoverContent from './ui/popover/PopoverContent.vue';
 import PopoverTrigger from './ui/popover/PopoverTrigger.vue';
 import PopoverFooter from './ui/popover/PopoverFooter.vue';
 import TemplatePreview from './TemplatePreview/TemplatePreview.vue';
 import TemplatePreviewModal from './TemplatePreview/TemplatePreviewModal.vue';
-import Tabs from './ui/tabs/Tabs.vue';
-import TabsList from './ui/tabs/TabsList.vue';
-import TabsTrigger from './ui/tabs/TabsTrigger.vue';
-import TabsContent from './ui/tabs/TabsContent.vue';
 import PageHeader from './PageHeader/PageHeader.vue';
+import Dialog from './ui/dialog/Dialog.vue';
+import DialogContent from './ui/dialog/DialogContent.vue';
+import DialogFooter from './ui/dialog/DialogFooter.vue';
+import DialogHeader from './ui/dialog/DialogHeader.vue';
+import DialogTitle from './ui/dialog/DialogTitle.vue';
+import DialogTrigger from './ui/dialog/DialogTrigger.vue';
+import DialogClose from './ui/dialog/DialogClose.vue';
+import DrawerNext from './ui/drawer/Drawer.vue';
+import DrawerContent from './ui/drawer/DrawerContent.vue';
+import DrawerHeader from './ui/drawer/DrawerHeader.vue';
+import DrawerFooter from './ui/drawer/DrawerFooter.vue';
+import DrawerClose from './ui/drawer/DrawerClose.vue';
+import DrawerTitle from './ui/drawer/DrawerTitle.vue';
+import DrawerDescription from './ui/drawer/DrawerDescription.vue';
 
 type VueComponent = Component;
 
@@ -217,6 +237,24 @@ export const components: ComponentsMap = {
   unnnicTabsTrigger: TabsTrigger,
   unnnicTabsContent: TabsContent,
   unnnicPageHeader: PageHeader,
+  unnnicSegmentedControl: SegmentedControl,
+  unnnicSegmentedControlList: SegmentedControlList,
+  unnnicSegmentedControlTrigger: SegmentedControlTrigger,
+  unnnicSegmentedControlContent: SegmentedControlContent,
+  unnnicDialog: Dialog,
+  unnnicDialogContent: DialogContent,
+  unnnicDialogFooter: DialogFooter,
+  unnnicDialogHeader: DialogHeader,
+  unnnicDialogTitle: DialogTitle,
+  unnnicDialogTrigger: DialogTrigger,
+  unnnicDialogClose: DialogClose,
+  unnnicDrawerNext: DrawerNext,
+  unnnicDrawerContent: DrawerContent,
+  unnnicDrawerHeader: DrawerHeader,
+  unnnicDrawerFooter: DrawerFooter,
+  unnnicDrawerClose: DrawerClose,
+  unnnicDrawerTitle: DrawerTitle,
+  unnnicDrawerDescription: DrawerDescription,
 };
 
 export const unnnicFontSize = fontSize;
@@ -315,19 +353,38 @@ export const unnnicSelectTime = SelectTime as VueComponent;
 export const unnnicChip = Chip;
 export const unnnicToast = Toast;
 export const unnnicToastManager = toast;
+export const unnnicTabs = Tabs;
+export const unnnicTabsList = TabsList;
+export const unnnicTabsTrigger = TabsTrigger;
+export const unnnicTabsContent = TabsContent;
+export const unnnicSegmentedControl = SegmentedControl;
+export const unnnicSegmentedControlList = SegmentedControlList;
+export const unnnicSegmentedControlTrigger = SegmentedControlTrigger;
+export const unnnicSegmentedControlContent = SegmentedControlContent;
 export const unnnicPopover = Popover;
 export const unnnicPopoverContent = PopoverContent;
 export const unnnicPopoverTrigger = PopoverTrigger;
 export const unnnicPopoverFooter = PopoverFooter;
 export const unnnicTemplatePreview = TemplatePreview as VueComponent;
 export const unnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
-export const unnnicTabs = Tabs;
-export const unnnicTabsList = TabsList;
-export const unnnicTabsTrigger = TabsTrigger;
-export const unnnicTabsContent = TabsContent;
 export const unnnicPageHeader = PageHeader;
+export const unnnicDialog = Dialog;
+export const unnnicDialogContent = DialogContent;
+export const unnnicDialogFooter = DialogFooter;
+export const unnnicDialogHeader = DialogHeader;
+export const unnnicDialogTitle = DialogTitle;
+export const unnnicDialogTrigger = DialogTrigger;
+export const unnnicDialogClose = DialogClose;
+export const unnnicDrawerNext = DrawerNext;
+export const unnnicDrawerContent = DrawerContent;
+export const unnnicDrawerHeader = DrawerHeader;
+export const unnnicDrawerFooter = DrawerFooter;
+export const unnnicDrawerClose = DrawerClose;
+export const unnnicDrawerTitle = DrawerTitle;
+export const unnnicDrawerDescription = DrawerDescription;
 
 export const UnnnicFontSize = fontSize;
+export const UnnnicFormElement = formElement;
 export const UnnnicInput = input;
 export const UnnnicInputNext = inputNext;
 export const UnnnicInputDatePicker = inputDatePicker;
@@ -422,14 +479,32 @@ export const UnnnicSelectTime = SelectTime as VueComponent;
 export const UnnnicChip = Chip;
 export const UnnnicToast = Toast;
 export const UnnnicToastManager = toast;
+export const UnnnicTabs = Tabs;
+export const UnnnicTabsList = TabsList;
+export const UnnnicTabsTrigger = TabsTrigger;
+export const UnnnicTabsContent = TabsContent;
+export const UnnnicSegmentedControl = SegmentedControl;
+export const UnnnicSegmentedControlList = SegmentedControlList;
+export const UnnnicSegmentedControlTrigger = SegmentedControlTrigger;
+export const UnnnicSegmentedControlContent = SegmentedControlContent;
 export const UnnnicPopover = Popover;
 export const UnnnicPopoverContent = PopoverContent;
 export const UnnnicPopoverTrigger = PopoverTrigger;
 export const UnnnicPopoverFooter = PopoverFooter;
 export const UnnnicTemplatePreview = TemplatePreview as VueComponent;
 export const UnnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
-export const UnnnicTabs = Tabs;
-export const UnnnicTabsList = TabsList;
-export const UnnnicTabsTrigger = TabsTrigger;
-export const UnnnicTabsContent = TabsContent;
 export const UnnnicPageHeader = PageHeader;
+export const UnnnicDialog = Dialog;
+export const UnnnicDialogContent = DialogContent;
+export const UnnnicDialogFooter = DialogFooter;
+export const UnnnicDialogHeader = DialogHeader;
+export const UnnnicDialogTitle = DialogTitle;
+export const UnnnicDialogTrigger = DialogTrigger;
+export const UnnnicDialogClose = DialogClose;
+export const UnnnicDrawerNext = DrawerNext;
+export const UnnnicDrawerContent = DrawerContent;
+export const UnnnicDrawerHeader = DrawerHeader;
+export const UnnnicDrawerFooter = DrawerFooter;
+export const UnnnicDrawerClose = DrawerClose;
+export const UnnnicDrawerTitle = DrawerTitle;
+export const UnnnicDrawerDescription = DrawerDescription;

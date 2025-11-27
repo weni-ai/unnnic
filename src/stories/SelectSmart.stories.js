@@ -303,3 +303,292 @@ Secondary.args = {
     { value: '7', label: 'Option 7' },
   ],
 };
+
+/**
+ * Infinite Scroll Example
+ *
+ * This story demonstrates the infinite scroll feature.
+ * Scroll to the bottom of the options list to load more items.
+ *
+ * Features:
+ * - Loads 20 items per page
+ * - Simulates API delay (500ms)
+ * - Shows loading state while fetching
+ * - Stops loading when reaching the last page (5 pages total = 100 items)
+ * - Works with autocomplete and search
+ */
+export const InfiniteScroll = {
+  render: (args) => ({
+    components: {
+      unnnicFormElement,
+      unnnicSelectSmart,
+    },
+    setup() {
+      return { args };
+    },
+    data() {
+      return {
+        selectedOptions: [],
+        options: [],
+        currentPage: 1,
+        totalPages: 5,
+        itemsPerPage: 20,
+      };
+    },
+    computed: {
+      hasMoreData() {
+        return this.currentPage <= this.totalPages;
+      },
+    },
+    mounted() {
+      this.loadInitialOptions();
+    },
+    methods: {
+      async loadInitialOptions() {
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
+        const newOptions = Array.from({ length: this.itemsPerPage }, (_, i) => {
+          const itemNumber = (this.currentPage - 1) * this.itemsPerPage + i + 1;
+          return {
+            value: `item-${itemNumber}`,
+            label: `Item ${itemNumber}`,
+            description: `Description for item ${itemNumber}`,
+          };
+        });
+
+        this.options.push(...newOptions);
+        this.currentPage++;
+      },
+      async handleScrollEnd() {
+        if (!this.hasMoreData) {
+          this.$refs.selectSmart?.finishInfiniteScroll();
+          return;
+        }
+
+        try {
+          await new Promise((resolve) => setTimeout(resolve, 500));
+
+          const newOptions = Array.from(
+            { length: this.itemsPerPage },
+            (_, i) => {
+              const itemNumber =
+                (this.currentPage - 1) * this.itemsPerPage + i + 1;
+              return {
+                value: `item-${itemNumber}`,
+                label: `Item ${itemNumber}`,
+                description: `Description for item ${itemNumber}`,
+              };
+            },
+          );
+
+          this.options.push(...newOptions);
+          this.currentPage++;
+        } catch (error) {
+          console.error('Error loading options:', error);
+        } finally {
+          this.$refs.selectSmart?.finishInfiniteScroll();
+        }
+      },
+    },
+    template: `
+        <unnnicFormElement label="Select with Infinite Scroll" message="Try scrolling to the bottom of the list">
+          <unnnicSelectSmart
+            ref="selectSmart"
+            v-model="selectedOptions"
+            :options="options"
+            :infinite-scroll="true"
+            :infinite-scroll-distance="20"
+            :infinite-scroll-can-load-more="() => hasMoreData"
+            :autocomplete="true"
+            :autocomplete-icon-left="true"
+            :autocomplete-clear-on-focus="true"
+            multiple
+            @scroll-end="handleScrollEnd"
+          />
+        </unnnicFormElement>
+    `,
+  }),
+};
+
+/**
+ * Infinite Scroll Simple Example
+ *
+ * A simpler version without multiple selection and descriptions.
+ * Useful for single selection scenarios.
+ */
+export const InfiniteScrollSimple = {
+  render: (args) => ({
+    components: {
+      unnnicFormElement,
+      unnnicSelectSmart,
+    },
+    setup() {
+      return { args };
+    },
+    data() {
+      return {
+        selectedOption: [],
+        options: [],
+        currentPage: 1,
+        totalPages: 3,
+      };
+    },
+    mounted() {
+      this.loadInitialOptions();
+    },
+    methods: {
+      async loadInitialOptions() {
+        await new Promise((resolve) => setTimeout(resolve, 300));
+
+        const newOptions = Array.from({ length: 15 }, (_, i) => {
+          const itemNumber = (this.currentPage - 1) * 15 + i + 1;
+          return {
+            value: `option-${itemNumber}`,
+            label: `Option ${itemNumber}`,
+          };
+        });
+
+        this.options.push(...newOptions);
+        this.currentPage++;
+      },
+      async handleScrollEnd() {
+        if (this.currentPage > this.totalPages) {
+          this.$refs.selectSmart?.finishInfiniteScroll();
+          return;
+        }
+
+        try {
+          await new Promise((resolve) => setTimeout(resolve, 400));
+
+          const newOptions = Array.from({ length: 15 }, (_, i) => {
+            const itemNumber = (this.currentPage - 1) * 15 + i + 1;
+            return {
+              value: `option-${itemNumber}`,
+              label: `Option ${itemNumber}`,
+            };
+          });
+
+          this.options.push(...newOptions);
+          this.currentPage++;
+        } catch (error) {
+          console.error('Error:', error);
+        } finally {
+          this.$refs.selectSmart?.finishInfiniteScroll();
+        }
+      },
+    },
+    template: `
+      <unnnicFormElement label="Simple Infinite Scroll">
+        <unnnicSelectSmart
+          ref="selectSmart"
+          v-model="selectedOption"
+          :options="options"
+          :infinite-scroll="true"
+          :infinite-scroll-distance="10"
+          :infinite-scroll-can-load-more="() => currentPage <= totalPages"
+          :autocomplete="true"
+          @scroll-end="handleScrollEnd"
+        />
+      </unnnicFormElement>
+    `,
+  }),
+};
+
+/**
+ * External Search with Debounce Example
+ *
+ * Demonstrates how to use SelectSmart with external API search and debounce.
+ * The component disables internal filtering and lets the parent control the options.
+ *
+ * Features:
+ * - Debounced search (500ms delay)
+ * - Simulates API calls
+ * - Shows loading state during search
+ * - External filter control via disableInternalFilter prop
+ */
+export const ExternalSearchWithDebounce = {
+  render: (args) => ({
+    components: {
+      unnnicFormElement,
+      unnnicSelectSmart,
+    },
+    setup() {
+      return { args };
+    },
+    data() {
+      return {
+        selected: [],
+        options: [],
+        allOptions: [],
+        isSearching: false,
+        searchDebounceTimer: null,
+      };
+    },
+    mounted() {
+      this.allOptions = Array.from({ length: 50 }, (_, i) => ({
+        value: `item-${i + 1}`,
+        label: `Item ${i + 1}`,
+        description: `Description for item ${i + 1}`,
+      }));
+      this.options = [...this.allOptions];
+    },
+    methods: {
+      handleSearchValueUpdate(searchValue) {
+        if (this.searchDebounceTimer) {
+          clearTimeout(this.searchDebounceTimer);
+        }
+
+        if (!searchValue || searchValue.trim() === '') {
+          this.options = [...this.allOptions];
+          this.isSearching = false;
+          return;
+        }
+
+        this.isSearching = true;
+
+        this.searchDebounceTimer = setTimeout(async () => {
+          try {
+            await new Promise((resolve) => setTimeout(resolve, 500));
+
+            const searchTerm = searchValue.toLowerCase();
+            const results = this.allOptions.filter((option) =>
+              option.label.toLowerCase().includes(searchTerm),
+            );
+
+            this.options = results;
+          } catch (error) {
+            console.error('Search error:', error);
+            this.options = [];
+          } finally {
+            this.isSearching = false;
+          }
+        }, 500);
+      },
+    },
+    beforeUnmount() {
+      if (this.searchDebounceTimer) {
+        clearTimeout(this.searchDebounceTimer);
+      }
+    },
+    template: `
+      <div>
+        <unnnicFormElement 
+          label="Search with API (Debounced)" 
+          message="Internal filter is disabled - parent controls filtering"
+        >
+          <unnnicSelectSmart
+            v-model="selected"
+            :options="options"
+            :disable-internal-filter="true"
+            :is-loading="isSearching"
+            :autocomplete="true"
+            :autocomplete-icon-left="true"
+            :autocomplete-clear-on-focus="true"
+            multiple
+            @update:search-value="handleSearchValueUpdate"
+          />
+        </unnnicFormElement>
+      </div>
+    `,
+  }),
+};
