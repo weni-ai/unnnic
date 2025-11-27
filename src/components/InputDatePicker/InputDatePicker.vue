@@ -27,6 +27,7 @@
         :months="months"
         :days="days"
         :options="options"
+        :periodBaseDate="periodBaseDate"
         :initialStartDate="initialStartDate"
         :initialEndDate="initialEndDate"
         :minDate="minDate"
@@ -42,6 +43,7 @@
 <script>
 import moment from 'moment';
 import UnnnicInput from '../Input/Input.vue';
+// @ts-expect-error: avoid leaking internal DatePickerProps type to this JS SFC declaration emit
 import UnnnicDatePicker from '../DatePicker/DatePicker.vue';
 
 export default {
@@ -132,6 +134,11 @@ export default {
     disableClear: {
       type: Boolean,
       default: false,
+    },
+
+    periodBaseDate: {
+      type: String,
+      default: '',
     },
   },
 
