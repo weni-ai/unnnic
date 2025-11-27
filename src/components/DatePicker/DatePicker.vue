@@ -240,7 +240,17 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import {
+  computed,
+  getCurrentInstance,
+  nextTick,
+  onMounted,
+  ref,
+  watch,
+} from 'vue';
+import { get } from 'lodash';
+
 import {
   months as translationMonths,
   days as translationDays,
@@ -248,640 +258,689 @@ import {
   buttons as translationButtons,
 } from './translations.js';
 
-import UnnnicI18n from '../../mixins/i18n';
+import i18n from '@/utils/plugins/i18n';
 
 import UnnnicButton from '../Button/Button.vue';
 
-export default {
-  components: {
-    UnnnicButton,
-  },
-  mixins: [UnnnicI18n],
-
-  props: {
-    initialStartDate: { type: String, default: '' },
-    initialEndDate: { type: String, default: '' },
-
-    minDate: { type: String, default: '' },
-    maxDate: { type: String, default: '' },
-
-    periodBaseDate: { type: String, default: '' },
-
-    equivalentOption: { type: String, default: '' },
-
-    type: {
-      type: String,
-      default: 'day',
-      validator(type) {
-        return ['day', 'month', 'year'].includes(type);
-      },
-    },
-
-    size: {
-      type: String,
-      default: 'large',
-      validator(size) {
-        return ['small', 'large'].includes(size);
-      },
-    },
-
-    clearLabel: {
-      type: String,
-      default: '',
-    },
-
-    actionLabel: {
-      type: String,
-      default: '',
-    },
-
-    months: {
-      type: Array,
-      default: () => [],
-      validator(months) {
-        return [0, 12].includes(months.length);
-      },
-    },
-
-    days: {
-      type: Array,
-      default: () => [],
-      validator(days) {
-        return [0, 7].includes(days.length);
-      },
-    },
-
-    options: {
-      type: Array,
-      default: () => [],
-    },
-
-    disableClear: {
-      type: Boolean,
-      default: false,
-    },
-  },
-
-  emits: ['change', 'submit', 'update:equivalentOption'],
-
-  data() {
-    const today = new Date();
-    const referenceDate = `${today.getMonth() + 1} 1 ${today.getFullYear()}`;
-
-    return {
-      referenceDate,
-      startDate: (this.initialStartDate || '').replace(/-/g, ' '),
-      endDate: (this.initialEndDate || '').replace(/-/g, ' '),
-      optionSelected: '',
-      defaultTranslations: {
-        clean: {
-          'pt-br': 'Limpar',
-          en: 'Clean',
-          es: 'Limpiar',
-        },
-        filter: {
-          'pt-br': 'Filtrar',
-          en: 'Filter',
-          es: 'Filtrar',
-        },
-      },
-    };
-  },
-
-  computed: {
-    openMonths() {
-      return [this.addMonth(this.referenceDate, -1), this.referenceDate];
-    },
-
-    value() {
-      return {
-        startDate: this.startDate.replaceAll(' ', '-'),
-        endDate: this.endDate.replaceAll(' ', '-'),
-      };
-    },
-
-    i18nLocale() {
-      return this.$i18n.locale.toLowerCase();
-    },
-
-    monthsLocale() {
-      const { months } = this;
-      return months.length ? months : translationMonths[this.i18nLocale];
-    },
-    daysLocale() {
-      const { days } = this;
-      return days.length ? days : translationDays[this.i18nLocale];
-    },
-    periodsLocale() {
-      const { options } = this;
-      return options.length ? options : translationPeriods[this.i18nLocale];
-    },
-
-    clearText() {
-      return this.clearLabel || translationButtons[this.i18nLocale].clear;
-    },
-    filterText() {
-      return this.actionLabel || translationButtons[this.i18nLocale].filter;
-    },
-  },
-
-  watch: {
-    value() {
-      this.updateOptionSelected();
-
-      this.$emit('change', this.value);
-    },
-  },
-
-  mounted() {
-    this.updateOptionSelected();
-  },
-
-  methods: {
-    submit() {
-      this.$emit('submit', this.value);
-
-      if (this.optionSelected === 'custom') {
-        this.$emit('update:equivalentOption', '');
-      } else {
-        this.$emit(
-          'update:equivalentOption',
-          this.periodsLocale.find(
-            ({ id: periodId }) => periodId === this.optionSelected,
-          )?.name || '',
-        );
-      }
-    },
-
-    updateOptionSelected() {
-      const { startDate, endDate } = this.value;
-
-      function isSameTime(date1, date2) {
-        return new Date(date1).getTime() === new Date(date2).getTime();
-      }
-
-      const period = this.periodsLocale.find(({ id: periodId }) => {
-        const { startDate: periodStartDate, endDate: periodEndDate } =
-          this.getStartAndEndDateByPeriod(periodId);
-
-        return (
-          isSameTime(startDate, periodStartDate) &&
-          isSameTime(endDate, periodEndDate)
-        );
-      });
-
-      this.optionSelected =
-        startDate || endDate ? (period ? period.id : 'custom') : '';
-    },
-
-    dateToString(date) {
-      return `${date.getMonth() + 1} ${date.getDate()} ${date.getFullYear()}`;
-    },
-
-    dateToStringMonth(date) {
-      return `${date.getMonth() + 1} ${date.getFullYear()}`;
-    },
-
-    dateToStringYear(date) {
-      return date.getFullYear();
-    },
-
-    stringToTime(date) {
-      const [month, day, year] = date.split(' ');
-      return new Date(year, Number(month) - 1, day).getTime();
-    },
-
-    getDate(date) {
-      return date.toString().split(' ')[1];
-    },
-
-    getMonth(date) {
-      return date.toString().split(' ')[0];
-    },
-
-    getFullYear(date) {
-      const [month, day, year] = date.split(' ');
-      return new Date(year, Number(month) - 1, day).getFullYear();
-    },
-
-    addMonth(referenceDate, quantity) {
-      const [month, day, year] = referenceDate.split(' ');
-
-      const date = new Date(year, Number(month) - 1, day);
-
-      date.setMonth(date.getMonth() + quantity);
-
-      return this.dateToString(date);
-    },
-
-    isDateBetween(internalDate) {
-      if (this.startDate && this.endDate) {
-        if (
-          internalDate >= this.stringToTime(this.startDate) &&
-          internalDate <= this.stringToTime(this.endDate)
-        ) {
-          return true;
-        }
-      } else if (
-        this.startDate &&
-        internalDate >= this.stringToTime(this.startDate)
-      ) {
-        return true;
-      } else if (
-        this.endDate &&
-        internalDate <= this.stringToTime(this.endDate)
-      ) {
-        return true;
-      }
-
-      return false;
-    },
-
-    isDateBetweenMonth(internalDate) {
-      const [month, day, year] = internalDate.split(' ');
-      const startDate = new Date(year, Number(month) - 1, day);
-      startDate.setDate(1);
-      const startDateTime = startDate.getTime();
-
-      if (this.startDate && this.endDate) {
-        if (
-          internalDate >= startDateTime &&
-          internalDate <= this.stringToTime(this.endDate)
-        ) {
-          return true;
-        }
-      } else if (this.startDate && internalDate >= startDateTime) {
-        return true;
-      } else if (
-        this.endDate &&
-        internalDate <= this.stringToTime(this.endDate)
-      ) {
-        return true;
-      }
-
-      return false;
-    },
-
-    isDateBetweenYear(internalDate) {
-      const [month, day, year] = internalDate.split(' ');
-      const startDate = new Date(year, Number(month) - 1, day);
-      startDate.setDate(1);
-      startDate.setMonth(0);
-      const startDateTime = startDate.getTime();
-
-      if (this.startDate && this.endDate) {
-        if (
-          internalDate >= startDateTime &&
-          internalDate <= this.stringToTime(this.endDate)
-        ) {
-          return true;
-        }
-      } else if (this.startDate && internalDate >= startDateTime) {
-        return true;
-      } else if (
-        this.endDate &&
-        internalDate <= this.stringToTime(this.endDate)
-      ) {
-        return true;
-      }
-
-      return false;
-    },
-
-    getDatesOfTheMonth(referenceDate) {
-      const [month, day, year] = referenceDate.split(' ');
-
-      const date = new Date(year, Number(month) - 1, day);
-
-      const currentMonth = date.getMonth();
-      const oneDayInSeconds = 86400;
-
-      date.setDate(1 - date.getDay());
-
-      const dates = [];
-
-      for (let i = 0; i < 6 * 7; i += 1) {
-        const dateString = this.dateToString(date);
-        const properties = [];
-
-        if (this.minDate) {
-          const [minDateYear, minDateMonth, minDateDay] =
-            this.minDate.split('-');
-
-          const formatedMinDate = new Date(
-            minDateYear,
-            Number(minDateMonth) - 1,
-            minDateDay,
-          );
-
-          if (date < formatedMinDate) properties.push('out of range');
-        }
-
-        if (this.maxDate) {
-          const [maxDateYear, maxDateMonth, maxDateDay] =
-            this.maxDate.split('-');
-
-          const formatedMaxDate = new Date(
-            maxDateYear,
-            Number(maxDateMonth) - 1,
-            maxDateDay,
-          );
-
-          if (date > formatedMaxDate) properties.push('out of range');
-        }
-
-        if (currentMonth === date.getMonth()) {
-          properties.push('inside month');
-
-          const dateInTime = this.stringToTime(this.dateToString(date));
-          const dayBefore = dateInTime - oneDayInSeconds;
-          const dayAfter = dateInTime + oneDayInSeconds;
-
-          if (this.isDateBetween(dateInTime)) {
-            properties.push('selected');
-
-            if (!this.isDateBetween(dayBefore)) {
-              properties.push('left-highlighted');
-            }
-
-            if (!this.isDateBetween(dayAfter)) {
-              properties.push('right-highlighted');
-            }
-
-            if (
-              properties.includes('left-highlighted') ||
-              properties.includes('right-highlighted')
-            ) {
-              properties.push('highlighted');
-            }
-          }
-        }
-
-        if (this.dateToString(date) === this.dateToString(new Date())) {
-          properties.push('today');
-        }
-
-        dates.push({
-          properties,
-          toString: () => dateString,
-        });
-
-        date.setDate(date.getDate() + 1);
-      }
-
-      return dates;
-    },
-
-    getMonthsOfTheYear(referenceDate) {
-      const [month, day, year] = referenceDate.split(' ');
-
-      const date = new Date(year, Number(month) - 1, day);
-
-      date.setMonth(0);
-
-      const dates = [];
-
-      for (let i = 0; i < 3 * 4; i += 1) {
-        const dateString = this.dateToString(date);
-        const properties = [];
-
-        properties.push('inside month');
-
-        const dateInTime = this.stringToTime(this.dateToString(date));
-        let monthBefore = new Date(dateInTime);
-        let monthAfter = new Date(dateInTime);
-
-        monthBefore.setMonth(monthBefore.getMonth() - 1);
-        monthAfter.setMonth(monthAfter.getMonth() + 1);
-
-        monthBefore = monthBefore.getTime();
-        monthAfter = monthAfter.getTime();
-
-        if (this.isDateBetweenMonth(dateInTime)) {
-          properties.push('selected');
-
-          if (!this.isDateBetweenMonth(monthBefore)) {
-            properties.push('left-highlighted');
-          }
-
-          if (!this.isDateBetweenMonth(monthAfter)) {
-            properties.push('right-highlighted');
-          }
-
-          if (
-            properties.includes('left-highlighted') ||
-            properties.includes('right-highlighted')
-          ) {
-            properties.push('highlighted');
-          }
-        }
-
-        if (
-          this.dateToStringMonth(date) === this.dateToStringMonth(new Date())
-        ) {
-          properties.push('today');
-        }
-
-        dates.push({
-          properties,
-          date: dateString,
-          toString: () => dateString,
-        });
-
-        date.setMonth(date.getMonth() + 1);
-      }
-
-      return dates;
-    },
-
-    getYears(referenceDate) {
-      const [month, day, year] = referenceDate.split(' ');
-
-      const date = new Date(year, Number(month) - 1, day);
-
-      date.setMonth(0);
-
-      const dates = [];
-
-      for (let i = 0; i < 3 * 4; i += 1) {
-        const dateString = this.dateToString(date);
-        const properties = [];
-
-        properties.push('inside month');
-
-        const dateInTime = this.stringToTime(this.dateToString(date));
-
-        const [dateInTimeMonth, dateInTimeDay, dateInTimeYear] =
-          referenceDate.split(' ');
-
-        let yearBefore = new Date(
-          dateInTimeYear,
-          Number(dateInTimeMonth) - 1,
-          dateInTimeDay,
-        );
-        let yearAfter = new Date(
-          dateInTimeYear,
-          Number(dateInTimeMonth) - 1,
-          dateInTimeDay,
-        );
-
-        yearBefore.setMonth(yearBefore.getMonth() - 12);
-        yearAfter.setMonth(yearAfter.getMonth() + 12);
-
-        yearBefore = yearBefore.getTime();
-        yearAfter = yearAfter.getTime();
-
-        if (this.isDateBetweenYear(dateInTime)) {
-          properties.push('selected');
-
-          if (!this.isDateBetweenYear(yearBefore)) {
-            properties.push('left-highlighted');
-          }
-
-          if (!this.isDateBetweenYear(yearAfter)) {
-            properties.push('right-highlighted');
-          }
-
-          if (
-            properties.includes('left-highlighted') ||
-            properties.includes('right-highlighted')
-          ) {
-            properties.push('highlighted');
-          }
-        }
-
-        if (this.dateToStringYear(date) === this.dateToStringYear(new Date())) {
-          properties.push('today');
-        }
-
-        dates.push({
-          properties,
-          date: date.getFullYear(),
-          toString: () => dateString,
-        });
-
-        date.setFullYear(date.getFullYear() + 1);
-      }
-
-      return dates;
-    },
-
-    selectDate(date) {
-      if (!this.startDate || !this.endDate) {
-        this.startDate = date.toString();
-        this.endDate = this.startDate;
-      } else {
-        const self = this.stringToTime(date.toString());
-
-        const startDate = this.stringToTime(this.startDate);
-        const endDate = this.stringToTime(this.endDate);
-
-        if (startDate !== endDate) {
-          this.startDate = date.toString();
-          this.endDate = this.startDate;
-        } else if (self > endDate) {
-          this.endDate = date.toString();
-        } else if (self < startDate) {
-          this.startDate = date.toString();
-        } else if (self === startDate || self === endDate) {
-          this.startDate = date.toString();
-          this.endDate = this.startDate;
-        } else if (self - startDate < endDate - self) {
-          this.startDate = date.toString();
-        } else {
-          this.endDate = date.toString();
-        }
-      }
-    },
-
-    clear() {
-      this.startDate = '';
-      this.endDate = '';
-      this.optionSelected = '';
-    },
-
-    getStartAndEndDateByPeriod(period) {
-      let startDate;
-      let endDate;
-
-      let baseDate;
-
-      if (this.periodBaseDate) {
-        const parts = this.periodBaseDate.split('-');
-
-        if (parts.length === 3) {
-          const [year, month, day] = parts;
-
-          baseDate = new Date(year, Number(month) - 1, day);
-        } else {
-          const parsed = new Date(this.periodBaseDate);
-          baseDate = Number.isNaN(parsed.getTime()) ? new Date() : parsed;
-        }
-      } else {
-        baseDate = new Date();
-      }
-
-      const today = new Date(baseDate.getTime());
-
-      const days = period.match(/^last-(\d+)-days$/);
-      const months = period.match(/^last-(\d+)-months$/);
-
-      if (days) {
-        const howMuch = Number(days[1]);
-
-        endDate = this.dateToString(today);
-        today.setDate(today.getDate() - howMuch + 1);
-        startDate = this.dateToString(today);
-      } else if (months) {
-        const howMuch = Number(months[1]);
-
-        endDate = this.dateToString(today);
-        today.setDate(today.getDate() + 1);
-        today.setMonth(today.getMonth() - howMuch);
-        startDate = this.dateToString(today);
-      } else if (period === 'current-month') {
-        const referenceDay = baseDate.getDate();
-
-        today.setDate(1);
-        startDate = this.dateToString(today);
-        today.setDate(referenceDay);
-        endDate = this.dateToString(today);
-      } else if (period === 'previous-month') {
-        today.setDate(1);
-        today.setMonth(today.getMonth() - 1);
-        startDate = this.dateToString(today);
-        today.setMonth(today.getMonth() + 1);
-        today.setDate(0);
-        endDate = this.dateToString(today);
-      }
-
-      return { startDate, endDate };
-    },
-
-    autoSelect(method) {
-      const { startDate, endDate } = this.getStartAndEndDateByPeriod(method);
-
-      this.startDate = startDate;
-      this.endDate = endDate;
-
-      if (this.endDate) {
-        const secondMonth = this.addMonth(this.referenceDate, 1);
-
-        const firstDateOfEndDate = `${Number(
-          this.getMonth(this.endDate),
-        )} 1 ${this.getFullYear(this.endDate)}`;
-
-        if (![this.referenceDate, secondMonth].includes(firstDateOfEndDate)) {
-          this.referenceDate = firstDateOfEndDate;
-        }
-      }
-
-      this.$nextTick(() => {
-        this.optionSelected = method;
-      });
-    },
-  },
+defineOptions({
+  name: 'UnnnicDatePicker',
+});
+
+type PeriodOption = {
+  id: string;
+  name: string;
 };
+
+interface DatePickerProps {
+  initialStartDate?: string;
+  initialEndDate?: string;
+
+  minDate?: string;
+  maxDate?: string;
+
+  periodBaseDate?: string;
+
+  equivalentOption?: string;
+
+  type?: 'day' | 'month' | 'year';
+  size?: 'small' | 'large';
+
+  clearLabel?: string;
+  actionLabel?: string;
+
+  months?: string[];
+  days?: string[];
+  options?: PeriodOption[];
+
+  disableClear?: boolean;
+
+  locale?: string;
+  translations?: Record<string, unknown>;
+}
+
+const props = withDefaults(defineProps<DatePickerProps>(), {
+  initialStartDate: '',
+  initialEndDate: '',
+  minDate: '',
+  maxDate: '',
+  periodBaseDate: '',
+  equivalentOption: '',
+  type: 'day',
+  size: 'large',
+  clearLabel: '',
+  actionLabel: '',
+  months: () => [],
+  days: () => [],
+  options: () => [],
+  disableClear: false,
+  locale: undefined,
+  translations: undefined,
+});
+
+const emit = defineEmits<{
+  (e: 'change', value: { startDate: string; endDate: string }): void;
+  (e: 'submit', value: { startDate: string; endDate: string }): void;
+  (e: 'update:equivalentOption', equivalentOption: string): void;
+}>();
+
+const today = new Date();
+const referenceDate = ref<string>(
+  `${today.getMonth() + 1} 1 ${today.getFullYear()}`,
+);
+const startDate = ref<string>(
+  (props.initialStartDate || '').replace(/-/g, ' '),
+);
+const endDate = ref<string>((props.initialEndDate || '').replace(/-/g, ' '));
+const optionSelected = ref<string>('');
+
+const defaultTranslations = {
+  clean: {
+    'pt-br': 'Limpar',
+    en: 'Clean',
+    es: 'Limpiar',
+  },
+  filter: {
+    'pt-br': 'Filtrar',
+    en: 'Filter',
+    es: 'Filtrar',
+  },
+} as const;
+
+const instance = getCurrentInstance();
+
+type I18nProxy = {
+  $i18n?: {
+    locale?: string;
+  };
+};
+
+const i18nLocale = computed(() => {
+  const localeFromInstance = (instance?.proxy as I18nProxy | null)?.$i18n
+    ?.locale;
+  const finalLocale = localeFromInstance || 'en-us';
+
+  return String(finalLocale).toLowerCase();
+});
+
+const monthsLocale = computed(() => {
+  const months = props.months || [];
+  return months.length ? months : translationMonths[i18nLocale.value];
+});
+
+const daysLocale = computed(() => {
+  const days = props.days || [];
+  return days.length ? days : translationDays[i18nLocale.value];
+});
+
+const periodsLocale = computed<PeriodOption[]>(() => {
+  const options = props.options || [];
+  return options.length ? options : translationPeriods[i18nLocale.value];
+});
+
+const clearText = computed(() => {
+  return props.clearLabel || translationButtons[i18nLocale.value].clear;
+});
+
+const filterText = computed(() => {
+  return props.actionLabel || translationButtons[i18nLocale.value].filter;
+});
+
+const value = computed(() => ({
+  startDate: startDate.value.replaceAll(' ', '-'),
+  endDate: endDate.value.replaceAll(' ', '-'),
+}));
+
+const i18nFn = (...args: any[]): string | undefined => {
+  const [key, defaults] = args;
+
+  const validLocaleValues = Object.keys(
+    ((i18n as any).global.messages as Record<string, unknown>) || {},
+  );
+
+  let locale = props.locale as string | undefined;
+
+  const treatedSelectedLocale =
+    get(i18n, 'global.locale') === 'en-us'
+      ? 'en'
+      : (get(i18n, 'global.locale') as string | undefined);
+
+  locale =
+    locale && validLocaleValues.includes(locale)
+      ? locale
+      : treatedSelectedLocale;
+
+  locale = locale?.toLowerCase();
+
+  let text = get(
+    props.translations,
+    `${key}.${locale}`,
+    get(props.translations, key),
+  ) as string | undefined;
+
+  if (!text) {
+    text = get(
+      defaultTranslations as Record<string, unknown>,
+      `${key}.${locale}`,
+      get(defaultTranslations as Record<string, unknown>, key, defaults),
+    ) as string | undefined;
+  }
+
+  if (text?.includes('|') && typeof args[1] === 'number') {
+    const count: number = args[1];
+    const pluralization = text.split('|');
+
+    if (pluralization.length === 3) {
+      text = pluralization[count] || pluralization[2];
+    } else if (pluralization.length === 2) {
+      text = count === 1 ? pluralization[0] : pluralization[1];
+    }
+  }
+
+  let vars: Record<string, string> = {};
+
+  Object.values(args)
+    .slice(1)
+    .forEach((argument) => {
+      if (!(argument instanceof Array) && argument instanceof Object) {
+        vars = argument as Record<string, string>;
+      }
+    });
+
+  Object.keys(vars).forEach((varName) => {
+    text = text?.replaceAll(new RegExp(`{ *${varName} *}`, 'g'), vars[varName]);
+  });
+
+  return text;
+};
+
+defineExpose({
+  i18n: i18nFn,
+});
+
+function dateToString(date: Date): string {
+  return `${date.getMonth() + 1} ${date.getDate()} ${date.getFullYear()}`;
+}
+
+function dateToStringMonth(date: Date): string {
+  return `${date.getMonth() + 1} ${date.getFullYear()}`;
+}
+
+function dateToStringYear(date: Date): number {
+  return date.getFullYear();
+}
+
+function stringToTime(date: string): number {
+  const [month, day, year] = date.split(' ');
+  return new Date(Number(year), Number(month) - 1, Number(day)).getTime();
+}
+
+function getDate(date: { toString: () => string }): string {
+  return date.toString().split(' ')[1];
+}
+
+function getMonth(date: { toString: () => string }): number {
+  return Number(date.toString().split(' ')[0]);
+}
+
+function getFullYear(date: string): number {
+  const [month, day, year] = date.split(' ');
+  return new Date(Number(year), Number(month) - 1, Number(day)).getFullYear();
+}
+
+function addMonth(reference: string, quantity: number): string {
+  const [month, day, year] = reference.split(' ');
+
+  const date = new Date(Number(year), Number(month) - 1, Number(day));
+
+  date.setMonth(date.getMonth() + quantity);
+
+  return dateToString(date);
+}
+
+function isDateBetween(internalDate: number): boolean {
+  if (startDate.value && endDate.value) {
+    if (
+      internalDate >= stringToTime(startDate.value) &&
+      internalDate <= stringToTime(endDate.value)
+    ) {
+      return true;
+    }
+  } else if (startDate.value && internalDate >= stringToTime(startDate.value)) {
+    return true;
+  } else if (endDate.value && internalDate <= stringToTime(endDate.value)) {
+    return true;
+  }
+
+  return false;
+}
+
+function isDateBetweenMonth(internalDate: number): boolean {
+  if (startDate.value && endDate.value) {
+    const startTime = stringToTime(startDate.value);
+    const endTime = stringToTime(endDate.value);
+
+    return internalDate >= startTime && internalDate <= endTime;
+  }
+
+  if (startDate.value) {
+    const startTime = stringToTime(startDate.value);
+    return internalDate >= startTime;
+  }
+
+  if (endDate.value) {
+    const endTime = stringToTime(endDate.value);
+    return internalDate <= endTime;
+  }
+
+  return false;
+}
+
+function isDateBetweenYear(internalDate: number): boolean {
+  if (startDate.value && endDate.value) {
+    const startTime = stringToTime(startDate.value);
+    const endTime = stringToTime(endDate.value);
+
+    return internalDate >= startTime && internalDate <= endTime;
+  }
+
+  if (startDate.value) {
+    const startTime = stringToTime(startDate.value);
+    return internalDate >= startTime;
+  }
+
+  if (endDate.value) {
+    const endTime = stringToTime(endDate.value);
+    return internalDate <= endTime;
+  }
+
+  return false;
+}
+
+function getDatesOfTheMonth(reference: string) {
+  const [month, day, year] = reference.split(' ');
+
+  const date = new Date(Number(year), Number(month) - 1, Number(day));
+
+  const currentMonth = date.getMonth();
+  const oneDayInSeconds = 86400;
+
+  date.setDate(1 - date.getDay());
+
+  const dates: { properties: string[]; toString: () => string }[] = [];
+
+  for (let i = 0; i < 6 * 7; i += 1) {
+    const dateString = dateToString(date);
+    const properties: string[] = [];
+
+    if (props.minDate) {
+      const [minDateYear, minDateMonth, minDateDay] = props.minDate.split('-');
+
+      const formatedMinDate = new Date(
+        Number(minDateYear),
+        Number(minDateMonth) - 1,
+        Number(minDateDay),
+      );
+
+      if (date < formatedMinDate) properties.push('out of range');
+    }
+
+    if (props.maxDate) {
+      const [maxDateYear, maxDateMonth, maxDateDay] = props.maxDate.split('-');
+
+      const formatedMaxDate = new Date(
+        Number(maxDateYear),
+        Number(maxDateMonth) - 1,
+        Number(maxDateDay),
+      );
+
+      if (date > formatedMaxDate) properties.push('out of range');
+    }
+
+    if (currentMonth === date.getMonth()) {
+      properties.push('inside month');
+
+      const dateInTime = stringToTime(dateToString(date));
+      const dayBefore = dateInTime - oneDayInSeconds;
+      const dayAfter = dateInTime + oneDayInSeconds;
+
+      if (isDateBetween(dateInTime)) {
+        properties.push('selected');
+
+        if (!isDateBetween(dayBefore)) {
+          properties.push('left-highlighted');
+        }
+
+        if (!isDateBetween(dayAfter)) {
+          properties.push('right-highlighted');
+        }
+
+        if (
+          properties.includes('left-highlighted') ||
+          properties.includes('right-highlighted')
+        ) {
+          properties.push('highlighted');
+        }
+      }
+    }
+
+    if (dateToString(date) === dateToString(new Date())) {
+      properties.push('today');
+    }
+
+    dates.push({
+      properties,
+      toString: () => dateString,
+    });
+
+    date.setDate(date.getDate() + 1);
+  }
+
+  return dates;
+}
+
+function getMonthsOfTheYear(reference: string) {
+  const [month, day, year] = reference.split(' ');
+
+  const date = new Date(Number(year), Number(month) - 1, Number(day));
+
+  date.setMonth(0);
+
+  const dates: {
+    properties: string[];
+    date: string;
+    toString: () => string;
+  }[] = [];
+
+  for (let i = 0; i < 3 * 4; i += 1) {
+    const dateString = dateToString(date);
+    const properties: string[] = [];
+
+    properties.push('inside month');
+
+    const dateInTime = stringToTime(dateToString(date));
+    const monthBefore = new Date(dateInTime);
+    const monthAfter = new Date(dateInTime);
+
+    monthBefore.setMonth(monthBefore.getMonth() - 1);
+    monthAfter.setMonth(monthAfter.getMonth() + 1);
+
+    const monthBeforeTime = monthBefore.getTime();
+    const monthAfterTime = monthAfter.getTime();
+
+    if (isDateBetweenMonth(dateInTime)) {
+      properties.push('selected');
+
+      if (!isDateBetweenMonth(monthBeforeTime)) {
+        properties.push('left-highlighted');
+      }
+
+      if (!isDateBetweenMonth(monthAfterTime)) {
+        properties.push('right-highlighted');
+      }
+
+      if (
+        properties.includes('left-highlighted') ||
+        properties.includes('right-highlighted')
+      ) {
+        properties.push('highlighted');
+      }
+    }
+
+    if (dateToStringMonth(date) === dateToStringMonth(new Date())) {
+      properties.push('today');
+    }
+
+    dates.push({
+      properties,
+      date: dateString,
+      toString: () => dateString,
+    });
+
+    date.setMonth(date.getMonth() + 1);
+  }
+
+  return dates;
+}
+
+function getYears(reference: string) {
+  const [month, day, year] = reference.split(' ');
+
+  const date = new Date(Number(year), Number(month) - 1, Number(day));
+
+  date.setMonth(0);
+
+  const dates: {
+    properties: string[];
+    date: number;
+    toString: () => string;
+  }[] = [];
+
+  for (let i = 0; i < 3 * 4; i += 1) {
+    const dateString = dateToString(date);
+    const properties: string[] = [];
+
+    properties.push('inside month');
+
+    const dateInTime = stringToTime(dateToString(date));
+
+    const [dateInTimeMonth, dateInTimeDay, dateInTimeYear] =
+      reference.split(' ');
+
+    const yearBefore = new Date(
+      Number(dateInTimeYear),
+      Number(dateInTimeMonth) - 1,
+      Number(dateInTimeDay),
+    );
+    const yearAfter = new Date(
+      Number(dateInTimeYear),
+      Number(dateInTimeMonth) - 1,
+      Number(dateInTimeDay),
+    );
+
+    yearBefore.setMonth(yearBefore.getMonth() - 12);
+    yearAfter.setMonth(yearAfter.getMonth() + 12);
+
+    const yearBeforeTime = yearBefore.getTime();
+    const yearAfterTime = yearAfter.getTime();
+
+    if (isDateBetweenYear(dateInTime)) {
+      properties.push('selected');
+
+      if (!isDateBetweenYear(yearBeforeTime)) {
+        properties.push('left-highlighted');
+      }
+
+      if (!isDateBetweenYear(yearAfterTime)) {
+        properties.push('right-highlighted');
+      }
+
+      if (
+        properties.includes('left-highlighted') ||
+        properties.includes('right-highlighted')
+      ) {
+        properties.push('highlighted');
+      }
+    }
+
+    if (dateToStringYear(date) === dateToStringYear(new Date())) {
+      properties.push('today');
+    }
+
+    dates.push({
+      properties,
+      date: date.getFullYear(),
+      toString: () => dateString,
+    });
+
+    date.setFullYear(date.getFullYear() + 1);
+  }
+
+  return dates;
+}
+
+function selectDate(date: { toString: () => string }) {
+  if (!startDate.value || !endDate.value) {
+    startDate.value = date.toString();
+    endDate.value = startDate.value;
+  } else {
+    const self = stringToTime(date.toString());
+
+    const startTime = stringToTime(startDate.value);
+    const endTime = stringToTime(endDate.value);
+
+    if (startTime !== endTime) {
+      startDate.value = date.toString();
+      endDate.value = startDate.value;
+    } else if (self > endTime) {
+      endDate.value = date.toString();
+    } else if (self < startTime) {
+      startDate.value = date.toString();
+    } else if (self === startTime || self === endTime) {
+      startDate.value = date.toString();
+      endDate.value = startDate.value;
+    } else if (self - startTime < endTime - self) {
+      startDate.value = date.toString();
+    } else {
+      endDate.value = date.toString();
+    }
+  }
+}
+
+function clear() {
+  startDate.value = '';
+  endDate.value = '';
+  optionSelected.value = '';
+}
+
+function getStartAndEndDateByPeriod(period: string) {
+  let periodStartDate: string | undefined;
+  let periodEndDate: string | undefined;
+
+  let baseDate: Date;
+
+  if (props.periodBaseDate) {
+    const parts = props.periodBaseDate.split('-');
+
+    if (parts.length === 3) {
+      const [year, month, day] = parts;
+
+      baseDate = new Date(Number(year), Number(month) - 1, Number(day));
+    } else {
+      const parsed = new Date(props.periodBaseDate);
+      baseDate = Number.isNaN(parsed.getTime()) ? new Date() : parsed;
+    }
+  } else {
+    baseDate = new Date();
+  }
+
+  const todayClone = new Date(baseDate.getTime());
+
+  const daysMatch = period.match(/^last-(\d+)-days$/);
+  const monthsMatch = period.match(/^last-(\d+)-months$/);
+
+  if (daysMatch) {
+    const howMuch = Number(daysMatch[1]);
+
+    periodEndDate = dateToString(todayClone);
+    todayClone.setDate(todayClone.getDate() - howMuch + 1);
+    periodStartDate = dateToString(todayClone);
+  } else if (monthsMatch) {
+    const howMuch = Number(monthsMatch[1]);
+
+    periodEndDate = dateToString(todayClone);
+    todayClone.setDate(todayClone.getDate() + 1);
+    todayClone.setMonth(todayClone.getMonth() - howMuch);
+    periodStartDate = dateToString(todayClone);
+  } else if (period === 'current-month') {
+    const referenceDay = baseDate.getDate();
+
+    todayClone.setDate(1);
+    periodStartDate = dateToString(todayClone);
+    todayClone.setDate(referenceDay);
+    periodEndDate = dateToString(todayClone);
+  } else if (period === 'previous-month') {
+    todayClone.setDate(1);
+    todayClone.setMonth(todayClone.getMonth() - 1);
+    periodStartDate = dateToString(todayClone);
+    todayClone.setMonth(todayClone.getMonth() + 1);
+    todayClone.setDate(0);
+    periodEndDate = dateToString(todayClone);
+  }
+
+  return { startDate: periodStartDate, endDate: periodEndDate };
+}
+
+function autoSelect(method: string) {
+  const { startDate: periodStartDate, endDate: periodEndDate } =
+    getStartAndEndDateByPeriod(method);
+
+  startDate.value = periodStartDate || '';
+  endDate.value = periodEndDate || '';
+
+  if (endDate.value) {
+    const secondMonth = addMonth(referenceDate.value, 1);
+
+    const firstDateOfEndDate = `${Number(
+      getMonth({
+        toString: () => endDate.value,
+      }),
+    )} 1 ${getFullYear(endDate.value)}`;
+
+    if (![referenceDate.value, secondMonth].includes(firstDateOfEndDate)) {
+      referenceDate.value = firstDateOfEndDate;
+    }
+  }
+
+  nextTick(() => {
+    optionSelected.value = method;
+  });
+}
+
+function submit() {
+  emit('submit', value.value);
+
+  if (optionSelected.value === 'custom') {
+    emit('update:equivalentOption', '');
+  } else {
+    const period = periodsLocale.value.find(
+      ({ id }) => id === optionSelected.value,
+    );
+
+    emit('update:equivalentOption', period?.name || '');
+  }
+}
+
+function updateOptionSelected() {
+  const { startDate: start, endDate: end } = value.value;
+
+  const isSameTime = (date1?: string, date2?: string) => {
+    if (!date1 || !date2) return false;
+    return new Date(date1).getTime() === new Date(date2).getTime();
+  };
+
+  const period = periodsLocale.value.find(({ id }) => {
+    const { startDate: periodStartDate, endDate: periodEndDate } =
+      getStartAndEndDateByPeriod(id);
+
+    return isSameTime(start, periodStartDate) && isSameTime(end, periodEndDate);
+  });
+
+  optionSelected.value = start || end ? (period ? period.id : 'custom') : '';
+}
+
+const openMonths = computed(() => [
+  addMonth(referenceDate.value, -1),
+  referenceDate.value,
+]);
+
+watch(value, (newValue) => {
+  updateOptionSelected();
+  emit('change', newValue);
+});
+
+onMounted(() => {
+  updateOptionSelected();
+});
 </script>
 
 <style lang="scss" scoped>

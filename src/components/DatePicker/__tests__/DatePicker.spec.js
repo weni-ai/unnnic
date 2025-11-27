@@ -168,4 +168,9 @@ describe('DatePicker.vue', () => {
 
     expect(wrapper.vm.referenceDate).not.toBe(initialReference);
   });
+
+  it('exposes i18n helper compatible with previous mixin', () => {
+    const text = wrapper.vm.i18n('clean', 'Clean');
+    expect(text).toBeTruthy();
+  });
 });
