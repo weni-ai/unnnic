@@ -14,7 +14,7 @@ const primaryButtonTypeOptions = [
 ];
 
 export default {
-  title: 'Example/Drawer',
+  title: 'Misc/Drawer',
   component: UnnnicDrawer,
   argTypes: {
     title: { control: { type: 'text' } },
