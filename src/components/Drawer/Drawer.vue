@@ -3,7 +3,7 @@
     class="unnnic-drawer"
     data-testid="drawer"
     :open="modelValue"
-    @update:open="$emit('update:modelValue', $event)"
+    @update:open="$event ? () => {} : back()"
   >
     <DrawerContent
       :showOverlay="!withoutOverlay"
