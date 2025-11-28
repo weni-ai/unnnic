@@ -66,7 +66,6 @@ $drawer-space: $unnnic-space-2;
   position: fixed;
   top: $drawer-space;
   right: $drawer-space;
-  z-index: 50;
 
   display: flex;
   flex-direction: column;
