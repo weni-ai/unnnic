@@ -27,7 +27,6 @@ const delegatedProps = reactiveOmit(props, 'class');
 .unnnic-drawer__overlay {
   position: fixed;
   inset: 0;
-  z-index: 50;
 
   background: rgba(53, 57, 69, 0.65);
 }
