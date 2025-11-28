@@ -12,7 +12,8 @@
       :class="[
         'unnnic-drawer__container',
         `unnnic-drawer__container--${size}`,
-      ]"
+        props.class,
+      ].filter(Boolean).join(' ')"
     >
       <DrawerHeader class="unnnic-drawer__header">
         <section class="unnnic-drawer__title-container">
@@ -162,6 +163,10 @@ const props = defineProps({
   distinctCloseBack: {
     type: Boolean,
     default: false,
+  },
+  class: {
+    type: String,
+    default: '',
   },
 });
 
