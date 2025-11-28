@@ -74,7 +74,6 @@ const ConditionalWrapper: Component = (_, { slots }) => {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 9999;
 
   width: 100vw;
   height: 100vh;
@@ -82,8 +81,6 @@ const ConditionalWrapper: Component = (_, { slots }) => {
 }
 
 .unnnic-dialog-content {
-  z-index: 10000;
-
   position: fixed;
   top: 50%;
   left: 50%;
