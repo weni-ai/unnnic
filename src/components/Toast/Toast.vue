@@ -7,9 +7,9 @@
   >
     <aside
       v-if="isVisible"
-      :class="['unnnic-toast', `unnnic-toast--${type}`]"
-      :role="type === 'error' ? 'alert' : 'status'"
-      :aria-live="type === 'error' ? 'assertive' : 'polite'"
+      :class="['unnnic-toast', `unnnic-toast--${validType}`]"
+      :role="validType === 'error' ? 'alert' : 'status'"
+      :aria-live="validType === 'error' ? 'assertive' : 'polite'"
       data-testid="toast"
     >
       <section
@@ -22,7 +22,7 @@
         >
           <UnnnicIcon
             :icon="typeConfig.icon"
-            :scheme="typeConfig.scheme"
+            :scheme="typeConfig.scheme as SchemeColor"
             size="ant"
             data-testid="toast-type-icon"
           />
@@ -95,6 +95,13 @@ const emit = defineEmits<ToastEmits>();
 const isVisible = ref(false);
 let timeoutId: number | null = null;
 
+const validType = computed(() => {
+  if (['informational', 'attention', 'success', 'error'].includes(props.type)) {
+    return props.type;
+  }
+  return 'informational';
+});
+
 const typeConfig = computed(() => {
   const configMap = {
     informational: { icon: 'info', scheme: 'blue-500' },
@@ -103,10 +110,7 @@ const typeConfig = computed(() => {
     error: { icon: 'cancel', scheme: 'red-500' },
   };
 
-  return configMap[props.type || 'informational'] as {
-    icon: string;
-    scheme: SchemeColor;
-  };
+  return configMap[validType.value];
 });
 
 const handleClose = () => {
