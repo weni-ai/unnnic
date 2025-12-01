@@ -10,6 +10,12 @@ describe('Drawer.vue', () => {
     UnnnicIcon: true,
     UnnnicButton: true,
     Teleport: templateSlot,
+    UnnnicDrawerNext: templateSlot,
+    UnnnicDrawerContent: templateSlot,
+    UnnnicDrawerFooter: templateSlot,
+    UnnnicDrawerClose: templateSlot,
+    UnnnicDrawerTitle: templateSlot,
+    UnnnicDrawerDescription: templateSlot,
   };
 
   beforeEach(() => {
