@@ -11,6 +11,10 @@ import {
 } from 'reka-ui';
 import { cn } from '@/lib/utils';
 
+defineOptions({
+  name: 'UnnnicDialogContent',
+});
+
 const props = withDefaults(
   defineProps<
     DialogContentProps & {

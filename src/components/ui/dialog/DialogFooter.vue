@@ -2,6 +2,10 @@
 import type { HTMLAttributes } from 'vue';
 import { cn } from '@/lib/utils';
 
+defineOptions({
+  name: 'UnnnicDialogFooter',
+});
+
 const props = withDefaults(
   defineProps<{ class?: HTMLAttributes['class']; divider?: boolean }>(),
   {
