@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Drawer.vue > Component Rendering > Component Rendering > matches the snapshot 1`] = `
-"<div data-v-196de012="" open="true" class="unnnic-drawer" data-testid="drawer">
+"<div data-v-196de012="" class="unnnic-drawer" data-testid="drawer" open="true">
   <div data-v-196de012="" showoverlay="true" data-testid="drawer-container" size="medium" class="unnnic-drawer__container unnnic-drawer__container--md">
     <header data-v-39d0dfb8="" data-v-196de012="" class="unnnic-drawer__header unnnic-drawer__header">
       <section data-v-196de012="" class="unnnic-drawer__title-container">
