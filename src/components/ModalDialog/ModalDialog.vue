@@ -4,6 +4,7 @@
     @update:open="$emit('update:modelValue', $event)"
   >
     <UnnnicDialogContent
+      v-bind="$attrs"
       :size="size === 'sm' ? 'small' : size === 'lg' ? 'large' : 'medium'"
       :parentClass="['unnnic-modal-dialog', $attrs.class]"
       class="unnnic-modal-dialog__container"
@@ -101,6 +102,7 @@ export default {
     UnnnicDialogTitle,
     UnnnicDialogFooter,
   },
+  inheritAttrs: false,
   mixins: [UnnnicI18n],
   props: {
     modelValue: {
