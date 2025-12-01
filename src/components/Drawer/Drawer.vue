@@ -6,6 +6,7 @@
     @update:open="$event ? () => {} : back()"
   >
     <DrawerContent
+      v-bind="$attrs"
       :showOverlay="!withoutOverlay"
       data-testid="drawer-container"
       :size="mappedSize"
@@ -102,6 +103,7 @@ import {
 
 defineOptions({
   name: 'UnnnicDrawer',
+  inheritAttrs: false,
 });
 
 const props = defineProps({
