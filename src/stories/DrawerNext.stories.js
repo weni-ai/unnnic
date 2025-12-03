@@ -189,6 +189,7 @@ export const Sizes = {
     components: {
       Drawer,
       DrawerContent,
+      DrawerClose,
       DrawerTrigger,
       DrawerHeader,
       DrawerTitle,
