@@ -67,3 +67,25 @@ export const WithMinMaxDates = {
     ],
   },
 };
+
+export const WithCustomRelativePeriodsAndBaseDate = {
+  args: {
+    size: 'sm',
+    next: true,
+    iconPosition: 'right',
+    fillW: true,
+
+    periodBaseDate: moment().subtract(1, 'day').format('YYYY-MM-DD'),
+    maxDate: moment().subtract(1, 'day').format('YYYY-MM-DD'),
+
+    options: [
+      { name: 'Last 7 days (up to 24h ago)', id: 'last-7-days' },
+      { name: 'Last 14 days (up to 24h ago)', id: 'last-14-days' },
+      { name: 'Last 30 days (up to 24h ago)', id: 'last-30-days' },
+      { name: 'Last 12 months (up to 24h ago)', id: 'last-12-months' },
+      { name: 'Current month (up to 24h ago)', id: 'current-month' },
+      { name: 'Previous month (up to 24h ago)', id: 'previous-month' },
+      { name: 'Custom', id: 'custom' },
+    ],
+  },
+};

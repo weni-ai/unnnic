@@ -5,6 +5,10 @@ import { reactiveOmit } from '@vueuse/core';
 import { DialogTitle, useForwardProps } from 'reka-ui';
 import { cn } from '@/lib/utils';
 
+defineOptions({
+  name: 'UnnnicDialogTitle',
+});
+
 const props = defineProps<
   DialogTitleProps & { class?: HTMLAttributes['class'] }
 >();

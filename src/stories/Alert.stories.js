@@ -1,7 +1,5 @@
-import AlertCaller from '../components/Alert/AlertCaller.vue';
 import alert from '../utils/call';
 import UnnnicAlert from '../components/Alert/Alert.vue';
-import AlertBanner from '../components/Alert/AlertBanner.vue';
 
 export default {
   title: 'Feedback/Alert',
@@ -20,9 +18,6 @@ export default {
   args: {
     type: 'default',
     text: 'Text',
-    linkHref: '',
-    linkText: '',
-    linkTarget: '',
   },
   argTypes: {
     type: {
@@ -37,40 +32,13 @@ export default {
         type: 'text',
       },
     },
-
-    linkHref: {
-      control: {
-        type: 'text',
-      },
-    },
-
-    linkText: {
-      control: {
-        type: 'text',
-      },
-    },
-
-    linkTarget: {
-      control: {
-        type: 'text',
-      },
-    },
-    position: {
-      if: { arg: 'version' },
-    },
     version: {
-      control: false,
+      control: {
+        type: 'select',
+      },
+      options: ['1.1', '2.0'],
     },
     title: {
-      if: { arg: 'version' },
-    },
-    icon: {
-      if: { arg: 'version' },
-    },
-    closeText: {
-      if: { arg: 'version' },
-    },
-    scheme: {
       if: { arg: 'version' },
     },
   },
@@ -95,7 +63,7 @@ export const Normal = {
     },
   },
   render: (args) => ({
-    components: { AlertCaller, UnnnicAlert },
+    components: { UnnnicAlert },
     setup() {
       return { args };
     },
@@ -117,7 +85,7 @@ export const Normal = {
 
 export const InlineComponent = {
   render: (args) => ({
-    components: { AlertCaller, UnnnicAlert },
+    components: { UnnnicAlert },
     setup() {
       return { args };
     },
@@ -166,7 +134,7 @@ export const WithContainerRef = {
     },
   },
   render: (args) => ({
-    components: { AlertCaller, UnnnicAlert },
+    components: { UnnnicAlert },
     setup() {
       return { args };
     },
@@ -188,34 +156,5 @@ export const WithContainerRef = {
     title: 'Title',
     text: 'Text',
     scheme: 'feedback-green',
-  },
-};
-
-export const Banner = {
-  parameters: {
-    docs: {
-      description: {
-        story: `This variation has the additional prop ${'`showCloseButton`'}, false by default.`,
-      },
-    },
-  },
-  render: (args) => ({
-    components: { AlertBanner },
-    setup() {
-      return { args };
-    },
-    methods: {
-      unnnicCallAlert() {
-        alert.callAlert({
-          props: this.args,
-          containerRef: this.$refs.divContainer,
-        });
-      },
-    },
-    template: '<alert-banner v-bind="args" />',
-  }),
-  args: {
-    text: 'Text',
-    showCloseButton: false,
   },
 };

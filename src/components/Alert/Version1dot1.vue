@@ -27,15 +27,6 @@
         {{ text }}
       </div>
 
-      <a
-        v-if="linkHref"
-        class="alert__link"
-        :href="linkHref"
-        :target="linkTarget"
-      >
-        {{ linkText }}
-      </a>
-
       <div
         class="alert__close"
         @click="emitClose"
@@ -58,10 +49,6 @@ export default {
     UnnnicIcon,
   },
   props: {
-    version: {
-      type: String,
-      default: '1.0',
-    },
     text: {
       type: String,
       default: null,
@@ -73,18 +60,6 @@ export default {
     onClose: {
       type: Function,
       default: () => {},
-    },
-    linkHref: {
-      type: String,
-      default: '',
-    },
-    linkTarget: {
-      type: String,
-      default: '_blank',
-    },
-    linkText: {
-      type: String,
-      default: 'Learn more',
     },
     type: {
       type: String,
@@ -207,21 +182,12 @@ export default {
     padding: $unnnic-spacing-xs $unnnic-spacing-sm;
   }
 
-  &__link,
   &__close {
     border-left: $unnnic-border-width-thinner solid $unnnic-color-neutral-cloudy;
 
     &:hover {
       background-color: $unnnic-color-neutral-cloudy;
     }
-  }
-
-  &__link {
-    padding: $unnnic-spacing-xs $unnnic-spacing-sm;
-    text-decoration: none;
-    color: inherit;
-    display: block;
-    font-weight: $unnnic-font-weight-bold;
   }
 
   &__close {
@@ -237,7 +203,6 @@ export default {
       background-color: $unnnic-color-aux-green-700;
     }
 
-    .alert__link,
     .alert__close {
       border-left: $unnnic-border-width-thinner solid
         $unnnic-color-aux-green-300;
@@ -255,7 +220,6 @@ export default {
       background-color: $unnnic-color-aux-red-700;
     }
 
-    .alert__link,
     .alert__close {
       border-left: $unnnic-border-width-thinner solid $unnnic-color-aux-red-300;
 

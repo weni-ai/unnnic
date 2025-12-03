@@ -1,19 +1,14 @@
 <template>
-  <div :class="['unnnic-form', size]">
-    <p
-      v-if="hasLabelSlot"
-      class="unnnic-form__label"
-    >
-      <slot name="label" />
-    </p>
-
-    <p
-      v-else-if="label"
-      class="unnnic-form__label"
-    >
-      {{ fullySanitize(label) }}
-    </p>
-
+  <UnnnicFormElement
+    :label="label || $slots.label"
+    :size="size"
+    :disabled="disabled"
+    :message="message"
+    :tooltip="tooltip"
+    :error="computedError"
+    :class="['unnnic-form', size]"
+    data-testid="form-element"
+  >
     <TextInput
       v-bind="$attrs"
       v-model="val"
@@ -21,31 +16,37 @@
       :placeholder="placeholder"
       :iconLeft="iconLeft"
       :iconRight="iconRight"
-      :type="type"
+      :type="errors.length > 0 && !disabled ? 'error' : type"
       :iconLeftClickable="iconLeftClickable"
       :iconRightClickable="iconRightClickable"
       :hasCloudyColor="hasCloudyColor"
       :size="size"
       :mask="mask"
       :nativeType="nativeType"
+      :maxlength="maxlength"
+      :disabled="disabled"
     />
 
-    <p
-      v-if="message"
-      class="unnnic-form__message"
+    <template
+      v-if="maxlength && showMaxlengthCounter"
+      #rightMessage
     >
-      {{ fullySanitize(message) }}
-    </p>
-  </div>
+      {{ (val || '').length }} / {{ maxlength }}
+    </template>
+  </UnnnicFormElement>
 </template>
 
 <script>
 import { fullySanitize } from '../../utils/sanitize';
 import TextInput from './TextInput.vue';
+import UnnnicFormElement from '../FormElement/FormElement.vue';
 
 export default {
   name: 'UnnnicInput',
-  components: { TextInput },
+  components: { 
+    TextInput, 
+    UnnnicFormElement,
+  },
   props: {
     placeholder: {
       type: String,
@@ -68,19 +69,23 @@ export default {
     },
     message: {
       type: String,
-      default: null,
+      default: '',
+    },
+    errors: {
+      type: [String, Array],
+      default: '',
     },
     label: {
       type: String,
-      default: null,
+      default: '',
     },
     iconLeft: {
       type: String,
-      default: null,
+      default: '',
     },
     iconRight: {
       type: String,
-      default: null,
+      default: '',
     },
     allowTogglePassword: {
       type: Boolean,
@@ -88,11 +93,11 @@ export default {
     },
     iconLeftClickable: {
       type: Boolean,
-      default: null,
+      default: false,
     },
     iconRightClickable: {
       type: Boolean,
-      default: null,
+      default: false,
     },
     hasCloudyColor: {
       type: Boolean,
@@ -106,6 +111,22 @@ export default {
       type: [String, Array],
       default: '',
     },
+    tooltip: {
+      type: String,
+      default: '',
+    },
+    maxlength: {
+      type: [Number, null],
+      default: null,
+    },
+    showMaxlengthCounter: {
+      type: Boolean,
+      default: false,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['update:modelValue'],
   data() {
@@ -114,8 +135,12 @@ export default {
     };
   },
   computed: {
-    hasLabelSlot() {
-      return !!this.$slots.label;
+    computedError() {
+      if (Array.isArray(this.errors)) {
+        return this.errors.join(', ') || this.type === 'error';
+      }
+
+      return this.errors || this.type === 'error';
     },
   },
   watch: {
@@ -136,29 +161,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/scss/unnnic' as *;
-
-.unnnic-form {
-  font-family: $unnnic-font-family-secondary;
-  position: relative;
-
-  &__message {
-    font-size: $unnnic-font-size-body-md;
-    margin: $unnnic-spacing-stack-nano 0;
-    color: $unnnic-color-feedback-red;
-  }
-
-  &__label {
-    font-weight: $unnnic-font-weight-regular;
-    line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
-    font-size: $unnnic-font-size-body-gt;
-    color: $unnnic-color-neutral-cloudy;
-    margin: $unnnic-spacing-stack-xs 0;
-  }
-
-  &.sm &__label {
-    font-size: $unnnic-font-size-body-md;
-    line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
-  }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 </style>
