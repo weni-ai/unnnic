@@ -87,8 +87,6 @@ const footerChildren = computed(() => {
 $popover-space: $unnnic-space-4;
 
 .unnnic-popover {
-  z-index: 10000;
-
   border-radius: $unnnic-radius-2;
   box-shadow: $unnnic-shadow-1;
 
