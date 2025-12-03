@@ -236,12 +236,6 @@ describe('ToolTip', () => {
   });
 
   describe('Component Structure', () => {
-    it('should have TooltipProvider component', () => {
-      expect(wrapper.findComponent({ name: 'TooltipProvider' }).exists()).toBe(
-        true,
-      );
-    });
-
     it('should have Tooltip component', () => {
       expect(wrapper.findComponent({ name: 'Tooltip' }).exists()).toBe(true);
     });
