@@ -55,7 +55,7 @@
 <script setup lang="ts">
 import { computed, ref, watch, nextTick } from 'vue';
 import UnnnicInput from '../Input/Input.vue';
-import UnnnicPopover from '../Popover/index.vue';
+import UnnnicPopover from './SelectPopover.vue';
 import UnnnicSelectOption from './SelectOption.vue';
 import UnnnicI18n from '../../mixins/i18n';
 
