@@ -93,6 +93,12 @@ import DataTable from './DataTable/index.vue';
 import Chip from './Chip/Chip.vue';
 import Toast from './Toast/Toast.vue';
 import { toast } from './Toast/ToastManager';
+import Popover from './ui/popover/Popover.vue';
+import PopoverContent from './ui/popover/PopoverContent.vue';
+import PopoverTrigger from './ui/popover/PopoverTrigger.vue';
+import PopoverFooter from './ui/popover/PopoverFooter.vue';
+import TemplatePreview from './TemplatePreview/TemplatePreview.vue';
+import TemplatePreviewModal from './TemplatePreview/TemplatePreviewModal.vue';
 import Tabs from './ui/tabs/Tabs.vue';
 import TabsList from './ui/tabs/TabsList.vue';
 import TabsTrigger from './ui/tabs/TabsTrigger.vue';
@@ -103,12 +109,6 @@ import {
   SegmentedControlTrigger,
   SegmentedControlContent,
 } from './ui/segmented-control';
-import Popover from './ui/popover/Popover.vue';
-import PopoverContent from './ui/popover/PopoverContent.vue';
-import PopoverTrigger from './ui/popover/PopoverTrigger.vue';
-import PopoverFooter from './ui/popover/PopoverFooter.vue';
-import TemplatePreview from './TemplatePreview/TemplatePreview.vue';
-import TemplatePreviewModal from './TemplatePreview/TemplatePreviewModal.vue';
 import PageHeader from './PageHeader/PageHeader.vue';
 import Dialog from './ui/dialog/Dialog.vue';
 import DialogContent from './ui/dialog/DialogContent.vue';
@@ -236,11 +236,11 @@ export const components: ComponentsMap = {
   unnnicTabsList: TabsList,
   unnnicTabsTrigger: TabsTrigger,
   unnnicTabsContent: TabsContent,
-  unnnicPageHeader: PageHeader,
   unnnicSegmentedControl: SegmentedControl,
   unnnicSegmentedControlList: SegmentedControlList,
   unnnicSegmentedControlTrigger: SegmentedControlTrigger,
   unnnicSegmentedControlContent: SegmentedControlContent,
+  unnnicPageHeader: PageHeader,
   unnnicDialog: Dialog,
   unnnicDialogContent: DialogContent,
   unnnicDialogFooter: DialogFooter,
@@ -353,6 +353,12 @@ export const unnnicSelectTime = SelectTime as VueComponent;
 export const unnnicChip = Chip;
 export const unnnicToast = Toast;
 export const unnnicToastManager = toast;
+export const unnnicPopover = Popover;
+export const unnnicPopoverContent = PopoverContent;
+export const unnnicPopoverTrigger = PopoverTrigger;
+export const unnnicPopoverFooter = PopoverFooter;
+export const unnnicTemplatePreview = TemplatePreview as VueComponent;
+export const unnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
 export const unnnicTabs = Tabs;
 export const unnnicTabsList = TabsList;
 export const unnnicTabsTrigger = TabsTrigger;
@@ -361,12 +367,6 @@ export const unnnicSegmentedControl = SegmentedControl;
 export const unnnicSegmentedControlList = SegmentedControlList;
 export const unnnicSegmentedControlTrigger = SegmentedControlTrigger;
 export const unnnicSegmentedControlContent = SegmentedControlContent;
-export const unnnicPopover = Popover;
-export const unnnicPopoverContent = PopoverContent;
-export const unnnicPopoverTrigger = PopoverTrigger;
-export const unnnicPopoverFooter = PopoverFooter;
-export const unnnicTemplatePreview = TemplatePreview as VueComponent;
-export const unnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
 export const unnnicPageHeader = PageHeader;
 export const unnnicDialog = Dialog;
 export const unnnicDialogContent = DialogContent;
@@ -479,6 +479,12 @@ export const UnnnicSelectTime = SelectTime as VueComponent;
 export const UnnnicChip = Chip;
 export const UnnnicToast = Toast;
 export const UnnnicToastManager = toast;
+export const UnnnicPopover = Popover;
+export const UnnnicPopoverContent = PopoverContent;
+export const UnnnicPopoverTrigger = PopoverTrigger;
+export const UnnnicPopoverFooter = PopoverFooter;
+export const UnnnicTemplatePreview = TemplatePreview as VueComponent;
+export const UnnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
 export const UnnnicTabs = Tabs;
 export const UnnnicTabsList = TabsList;
 export const UnnnicTabsTrigger = TabsTrigger;
@@ -487,12 +493,6 @@ export const UnnnicSegmentedControl = SegmentedControl;
 export const UnnnicSegmentedControlList = SegmentedControlList;
 export const UnnnicSegmentedControlTrigger = SegmentedControlTrigger;
 export const UnnnicSegmentedControlContent = SegmentedControlContent;
-export const UnnnicPopover = Popover;
-export const UnnnicPopoverContent = PopoverContent;
-export const UnnnicPopoverTrigger = PopoverTrigger;
-export const UnnnicPopoverFooter = PopoverFooter;
-export const UnnnicTemplatePreview = TemplatePreview as VueComponent;
-export const UnnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
 export const UnnnicPageHeader = PageHeader;
 export const UnnnicDialog = Dialog;
 export const UnnnicDialogContent = DialogContent;

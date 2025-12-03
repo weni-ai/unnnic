@@ -11,6 +11,7 @@
       :role="validType === 'error' ? 'alert' : 'status'"
       :aria-live="validType === 'error' ? 'assertive' : 'polite'"
       data-testid="toast"
+      :style="{ zIndex: toastZIndex }"
     >
       <section
         class="unnnic-toast__content"
@@ -74,6 +75,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue';
 
 import UnnnicIcon from '@/components/Icon.vue';
 import UnnnicButton from '@/components/Button/Button.vue';
+import { useLayerZIndex } from '@/lib/layer-manager';
 
 import type { ToastProps, ToastEmits } from './types';
 import type { SchemeColor } from '@/types/scheme-colors';
@@ -112,6 +114,8 @@ const typeConfig = computed(() => {
 
   return configMap[validType.value];
 });
+
+const toastZIndex = useLayerZIndex('toast');
 
 const handleClose = () => {
   isVisible.value = false;
@@ -156,7 +160,6 @@ onUnmounted(() => {
   position: fixed;
   bottom: $unnnic-space-4;
   right: $unnnic-space-4;
-  z-index: 9999;
 
   display: flex;
   align-items: flex-end;

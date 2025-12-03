@@ -9,6 +9,7 @@ import {
   useForwardPropsEmits,
 } from 'reka-ui';
 import { cn } from '@/lib/utils';
+import { useLayerZIndex } from '@/lib/layer-manager';
 
 defineOptions({
   inheritAttrs: false,
@@ -26,6 +27,7 @@ const emits = defineEmits<TooltipContentEmits>();
 const delegatedProps = reactiveOmit(props, 'class');
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
+const tooltipZIndex = useLayerZIndex('tooltip');
 </script>
 
 <template>
@@ -39,6 +41,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
           props.class,
         )
       "
+      :style="{ zIndex: tooltipZIndex }"
     >
       <slot />
 
@@ -51,8 +54,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 @use '@/assets/scss/unnnic' as *;
 
 .tooltip__content {
-  z-index: 10001;
-
   background-color: $unnnic-color-gray-900;
   color: $unnnic-color-white;
   border-radius: $unnnic-radius-1;
