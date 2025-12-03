@@ -1,14 +1,14 @@
 <template>
-  <div :class="['unnnic-form', size]">
-    <p
-      v-if="hasLabelSlot"
-      class="unnnic-form__label"
-    >
-      <slot name="label" />
-    </p>
-    
-    <UnnnicLabel v-else-if="label" class="unnnic-form__label" :label="label" :tooltip="tooltip" />
-
+  <UnnnicFormElement
+    :label="label || $slots.label"
+    :size="size"
+    :disabled="disabled"
+    :message="message"
+    :tooltip="tooltip"
+    :error="computedError"
+    :class="['unnnic-form', size]"
+    data-testid="form-element"
+  >
     <TextInput
       v-bind="$attrs"
       v-model="val"
@@ -17,7 +17,7 @@
       :placeholder="placeholder"
       :iconLeft="iconLeft"
       :iconRight="iconRight"
-      :type="type"
+      :type="errors.length > 0 && !disabled ? 'error' : type"
       :iconLeftClickable="iconLeftClickable"
       :iconRightClickable="iconRightClickable"
       :hasCloudyColor="hasCloudyColor"
@@ -31,33 +31,26 @@
       @clear="$emit('clear')"
     />
 
-    <section class="unnnic-form__hints-container">
-      <section class="unnnic-form__message-container">
-        <p
-          v-if="message"
-          class="unnnic-form__message"
-        >
-          {{ fullySanitize(message) }}
-        </p>
-        <p v-if="!!errors.length" class="unnnic-form__message error">
-          {{ Array.isArray(errors) ? errors.join(', ') : errors }}
-        </p>
-      </section>
-      <p v-if="maxlength && showMaxlengthCounter">
-        {{ (val || '').length }} / {{ maxlength }}
-      </p>
-    </section>
-  </div>
+    <template
+      v-if="maxlength && showMaxlengthCounter"
+      #rightMessage
+    >
+      {{ (val || '').length }} / {{ maxlength }}
+    </template>
+  </UnnnicFormElement>
 </template>
 
 <script>
 import { fullySanitize } from '../../utils/sanitize';
 import TextInput from './TextInput.vue';
-import UnnnicLabel from '../Label/Label.vue';
+import UnnnicFormElement from '../FormElement/FormElement.vue';
 
 export default {
   name: 'UnnnicInput',
-  components: { TextInput, UnnnicLabel },
+  components: { 
+    TextInput, 
+    UnnnicFormElement,
+  },
   props: {
     placeholder: {
       type: String,
@@ -160,8 +153,12 @@ export default {
     };
   },
   computed: {
-    hasLabelSlot() {
-      return !!this.$slots.label;
+    computedError() {
+      if (Array.isArray(this.errors)) {
+        return this.errors.join(', ') || this.type === 'error';
+      }
+
+      return this.errors || this.type === 'error';
     },
   },
   watch: {
@@ -182,39 +179,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@use '@/assets/scss/unnnic' as *;
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-.unnnic-form {
-  position: relative;
-
-  &__message {
-    &.error {
-      color: $unnnic-color-fg-critical;
-    }
-  }
-
-  &__label {
-    margin-bottom: $unnnic-space-1;
-  }
-
-  &__hints-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: $unnnic-space-1;
-    font: $unnnic-font-caption-2;
-    color: $unnnic-color-fg-base;
-  }
-
-  &__message-container {
-    display: flex;
-    flex-direction: column;
-    gap: $unnnic-space-1;
-  }
 }
 </style>

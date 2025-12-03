@@ -1,6 +1,31 @@
 import UnnnicDataTable from '../components/DataTable/index.vue';
 import { action } from '@storybook/addon-actions';
 
+const SAMPLE_NAMES = [
+  'Eduardo',
+  'Marcus',
+  'Paulo',
+  'Cristian',
+  'Aldemylla',
+  'João',
+  'Maria',
+  'Ana',
+  'Pedro',
+  'Lucas',
+];
+
+const SAMPLE_COUNTRIES = ['Brazil', 'USA', 'Canada', 'Argentina', 'Chile'];
+
+const generateItems = (count, startId) => {
+  return Array.from({ length: count }, (_, i) => ({
+    id: String(startId + i),
+    name: SAMPLE_NAMES[Math.floor(Math.random() * SAMPLE_NAMES.length)],
+    age: Math.floor(Math.random() * 30) + 20,
+    country:
+      SAMPLE_COUNTRIES[Math.floor(Math.random() * SAMPLE_COUNTRIES.length)],
+  }));
+};
+
 export default {
   title: 'Data Display/DataTable',
   component: UnnnicDataTable,
@@ -69,6 +94,26 @@ export default {
       description: 'The locale for the table translations.',
       control: { type: 'select' },
       options: ['en', 'pt-br', 'es'],
+    },
+    infiniteScroll: {
+      description:
+        'Enables infinite scroll functionality. When enabled, the table will emit a loadMore event when the user scrolls near the bottom.',
+      control: 'boolean',
+    },
+    infiniteScrollDistance: {
+      description:
+        'Distance in pixels from the bottom of the table to trigger the loadMore event.',
+      control: 'number',
+    },
+    infiniteScrollDisabled: {
+      description:
+        'Disables the infinite scroll functionality. Useful when all data has been loaded.',
+      control: 'boolean',
+    },
+    isLoadingMore: {
+      description:
+        'Indicates whether more data is being loaded for infinite scroll. Shows a loading indicator at the bottom of the table.',
+      control: 'boolean',
     },
   },
   render: (args) => ({
@@ -329,4 +374,211 @@ export const Loading = {
     items,
     isLoading: true,
   },
+};
+
+export const ControlledSort = {
+  args: { headers, items },
+  render: (args) => ({
+    components: {
+      UnnnicDataTable,
+    },
+    setup() {
+      let sortState = {
+        header: 'ID',
+        itemKey: 'id',
+        order: 'asc',
+      };
+
+      const handleSort = ({ order, header, itemKey }) => {
+        action('update:sort')({ order, header, itemKey });
+        sortState = { header, itemKey, order };
+
+        if (order === 'asc') {
+          args.items = [...args.items].sort((a, b) => {
+            if (itemKey === 'id') return a.id - b.id;
+            return a[itemKey] > b[itemKey] ? 1 : -1;
+          });
+        } else if (order === 'desc') {
+          args.items = [...args.items].sort((a, b) => {
+            if (itemKey === 'id') return b.id - a.id;
+            return a[itemKey] < b[itemKey] ? 1 : -1;
+          });
+        }
+      };
+
+      const updatePage = (page) => {
+        action('update:page')(page);
+        args.page = page;
+      };
+
+      const itemClick = (item) => {
+        action('itemClick')(item);
+      };
+
+      return { args, sortState, handleSort, updatePage, itemClick };
+    },
+    template: `
+    <div>
+      <UnnnicDataTable
+        v-bind="args"
+        :headers="args.headers"
+        :items="args.items"
+        :pageTotal="125"
+        :pageInterval="5"
+        v-model:sort="sortState"
+        @update:sort="handleSort"
+        @update:page="updatePage"
+        @itemClick="itemClick"
+      >
+      </UnnnicDataTable>
+    </div>
+    `,
+  }),
+};
+
+export const InfiniteScroll = {
+  args: { headers },
+  render: (args) => ({
+    components: {
+      UnnnicDataTable,
+    },
+    data() {
+      return {
+        args,
+        currentId: 11,
+        displayedItems: generateItems(10, 1),
+        isLoadingMore: false,
+      };
+    },
+    methods: {
+      loadMore() {
+        action('loadMore')();
+        this.isLoadingMore = true;
+
+        setTimeout(() => {
+          const newItems = generateItems(5, this.currentId);
+          this.displayedItems = [...this.displayedItems, ...newItems];
+          this.currentId += 5;
+          this.isLoadingMore = false;
+        }, 1000);
+      },
+    },
+    template: `
+    <UnnnicDataTable
+      v-bind="args"
+      :headers="args.headers"
+      :items="displayedItems"
+      :infiniteScroll="true"
+      :infiniteScrollDistance="100"
+      :isLoadingMore="isLoadingMore"
+      :hidePagination="true"
+      height="400px"
+      @loadMore="loadMore"
+    >
+    </UnnnicDataTable>
+    `,
+  }),
+};
+
+export const InfiniteScrollWithFixedHeaders = {
+  args: { headers },
+  render: (args) => ({
+    components: {
+      UnnnicDataTable,
+    },
+    data() {
+      return {
+        args,
+        currentId: 11,
+        displayedItems: generateItems(10, 1),
+        isLoadingMore: false,
+        hasMore: true,
+      };
+    },
+    methods: {
+      loadMore() {
+        if (!this.hasMore) return;
+
+        action('loadMore')();
+        this.isLoadingMore = true;
+
+        setTimeout(() => {
+          const newItems = generateItems(5, this.currentId);
+          this.displayedItems = [...this.displayedItems, ...newItems];
+          this.currentId += 5;
+
+          if (this.displayedItems.length >= 50) {
+            this.hasMore = false;
+          }
+
+          this.isLoadingMore = false;
+        }, 1000);
+      },
+    },
+    template: `
+    <UnnnicDataTable
+      v-bind="args"
+      :headers="args.headers"
+      :items="displayedItems"
+      :infiniteScroll="true"
+      :infiniteScrollDistance="50"
+      :infiniteScrollDisabled="!hasMore"
+      :isLoadingMore="isLoadingMore"
+      :hidePagination="true"
+      :fixedHeaders="true"
+      height="400px"
+      @loadMore="loadMore"
+    >
+    </UnnnicDataTable>
+    `,
+  }),
+};
+
+export const InfiniteScrollClickable = {
+  args: { headers },
+  render: (args) => ({
+    components: {
+      UnnnicDataTable,
+    },
+    data() {
+      return {
+        args,
+        currentId: 11,
+        displayedItems: generateItems(10, 1),
+        isLoadingMore: false,
+      };
+    },
+    methods: {
+      loadMore() {
+        action('loadMore')();
+        this.isLoadingMore = true;
+
+        setTimeout(() => {
+          const newItems = generateItems(5, this.currentId);
+          this.displayedItems = [...this.displayedItems, ...newItems];
+          this.currentId += 5;
+          this.isLoadingMore = false;
+        }, 1000);
+      },
+      itemClick(item) {
+        action('itemClick')(item);
+      },
+    },
+    template: `
+    <UnnnicDataTable
+      v-bind="args"
+      :headers="args.headers"
+      :items="displayedItems"
+      :infiniteScroll="true"
+      :infiniteScrollDistance="100"
+      :isLoadingMore="isLoadingMore"
+      :hidePagination="true"
+      :clickable="true"
+      height="400px"
+      @loadMore="loadMore"
+      @itemClick="itemClick"
+    >
+    </UnnnicDataTable>
+    `,
+  }),
 };

@@ -16,7 +16,7 @@
             {
               'unnnic-data-table__header-cell--clickable': header.isSortable,
               'unnnic-data-table__header-cell--sorting':
-                sort.header === header.title && sort.order !== '',
+                sortState.header === header.title && sortState.order !== '',
             },
           ]"
           @click.stop="handleClickHeader(header)"
@@ -31,12 +31,12 @@
           </template>
           <template v-if="header.isSortable">
             <IconArrowsDefault
-              v-if="sort.header !== header.title"
+              v-if="sortState.header !== header.title"
               class="order-default-icon"
               data-testid="arrow-default-icon"
             />
             <Icon
-              v-else-if="sort.order === 'asc'"
+              v-else-if="sortState.order === 'asc'"
               clickable
               size="ant"
               :icon="'switch_left'"
@@ -44,7 +44,7 @@
               data-testid="arrow-asc-icon"
             />
             <Icon
-              v-else-if="sort.order === 'desc'"
+              v-else-if="sortState.order === 'desc'"
               clickable
               size="ant"
               :icon="'switch_left'"
@@ -56,6 +56,7 @@
       </tr>
     </thead>
     <tbody
+      ref="tbodyRef"
       :class="[
         'unnnic-data-table__body',
         { 'unnnic-data-table__body--hide-headers': props.hideHeaders },
@@ -120,6 +121,27 @@
             </td>
           </template>
         </tr>
+        <tr
+          v-if="props.infiniteScroll && props.isLoadingMore"
+          :class="[
+            'unnnic-data-table__body-row',
+            'unnnic-data-table__body-row--loading-more',
+          ]"
+        >
+          <td
+            :class="[
+              'unnnic-data-table__body-cell',
+              `unnnic-data-table__body-cell--${size}`,
+            ]"
+          >
+            <img
+              class="unnnic-data-table__body-cell--loading"
+              data-testid="body-row-loading-more"
+              src="../../assets/icons/weni-loading.svg"
+              height="40"
+            />
+          </td>
+        </tr>
       </template>
       <tr
         v-else
@@ -166,6 +188,7 @@
 
 <script setup lang="ts">
 import { computed, ComputedRef, ref, useSlots } from 'vue';
+import { useInfiniteScroll } from '@vueuse/core';
 
 import Icon from '../Icon.vue';
 import IconArrowsDefault from '../icons/iconArrowsDefault.vue';
@@ -183,6 +206,12 @@ type DataTableItem = {
   [key: string]: any;
 };
 
+type SortState = {
+  header: string;
+  itemKey: string;
+  order: string;
+};
+
 interface Props {
   headers: DataTableHeader[];
   items: DataTableItem[];
@@ -198,6 +227,11 @@ interface Props {
   pageTotal?: number;
   pageInterval?: number;
   locale?: string;
+  sort?: SortState;
+  infiniteScroll?: boolean;
+  infiniteScrollDistance?: number;
+  infiniteScrollDisabled?: boolean;
+  isLoadingMore?: boolean;
 }
 
 defineOptions({
@@ -210,6 +244,7 @@ const emit = defineEmits<{
   'update:sort': [sort: { header: string; itemKey: string; order: string }];
   itemClick: [item: DataTableItem];
   'update:page': [page: number];
+  loadMore: [];
 }>();
 
 const props = withDefaults(defineProps<Props>(), {
@@ -225,6 +260,11 @@ const props = withDefaults(defineProps<Props>(), {
   pageTotal: 0,
   pageInterval: 5,
   locale: 'en',
+  sort: undefined,
+  infiniteScroll: false,
+  infiniteScrollDistance: 100,
+  infiniteScrollDisabled: false,
+  isLoadingMore: false,
 });
 
 const defaultTranslations = {
@@ -251,10 +291,14 @@ const headersItemsKeys: ComputedRef<string[]> = computed(() => {
   return props.headers.map((header) => header.itemKey);
 });
 
-const sort = ref({
+const internalSort = ref({
   header: '',
   itemKey: '',
   order: '',
+});
+
+const sortState = computed(() => {
+  return props.sort !== undefined ? props.sort : internalSort.value;
 });
 
 const getHeaderColumnSize = (header: DataTableHeader): string => {
@@ -271,9 +315,12 @@ const gridTemplateColumns: ComputedRef<string> = computed(() => {
   return columnSizes.join(' ');
 });
 
-const handleSort = (header: typeof sort.value, order: string) => {
-  sort.value = { ...header, order };
-  emit('update:sort', sort.value);
+const handleSort = (header: SortState, order: string) => {
+  if (props.sort === undefined) {
+    internalSort.value = { ...header, order };
+  }
+
+  emit('update:sort', { ...header, order });
 };
 
 const handleClickHeader = (header: DataTableHeader) => {
@@ -286,9 +333,9 @@ const handleClickHeader = (header: DataTableHeader) => {
   };
 
   const nextSort =
-    header.title !== sort.value.header
+    header.title !== sortState.value.header
       ? 'asc'
-      : nextSortOrderMapper[sort.value.order];
+      : nextSortOrderMapper[sortState.value.order];
 
   handleSort(
     nextSort === ''
@@ -303,6 +350,21 @@ const handleClickRow = (item: DataTableItem) => {
 
   emit('itemClick', item);
 };
+
+const tbodyRef = ref<HTMLElement | null>(null);
+
+const handleLoadMore = () => {
+  if (props.infiniteScrollDisabled || props.isLoading || props.isLoadingMore) {
+    return;
+  }
+  emit('loadMore');
+};
+
+if (props.infiniteScroll) {
+  useInfiniteScroll(tbodyRef, handleLoadMore, {
+    distance: props.infiniteScrollDistance,
+  });
+}
 </script>
 
 <style scoped lang="scss">
@@ -413,6 +475,7 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
       grid-template-columns: v-bind(gridTemplateColumns);
 
       &--loading,
+      &--loading-more,
       &--without-results {
         grid-template-columns: 1fr;
       }
