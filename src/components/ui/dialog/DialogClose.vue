@@ -2,6 +2,10 @@
 import type { DialogCloseProps } from 'reka-ui';
 import { DialogClose } from 'reka-ui';
 
+defineOptions({
+  name: 'UnnnicDialogClose',
+});
+
 const props = defineProps<DialogCloseProps>();
 </script>
 

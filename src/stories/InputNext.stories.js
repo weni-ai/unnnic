@@ -1,8 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import UnnnicInputNext from '../components/InputNext/InputNext.vue';
-import icons from '../utils/icons';
 
-const iconsOptions = Object.keys(icons);
+const iconsOptions = [];
 
 export default {
   title: 'Form/InputNext',

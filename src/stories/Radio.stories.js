@@ -21,9 +21,28 @@ export default {
     disabled: { control: { type: 'boolean' } },
     size: { control: { type: 'select', options: ['md', 'sm'] } },
   },
+  render: (args) => ({
+    components: {
+      UnnnicRadio,
+    },
+    setup() {
+      const updateModelValue = (value) => {
+        action('update:modelValue')(value);
+        args.modelValue = value;
+      };
+      return { args, updateModelValue };
+    },
+    template: `
+      <div>
+        <UnnnicRadio v-bind="args" @update:model-value="updateModelValue" :value="args.value">
+          Option
+        </UnnnicRadio>
+      </div>
+    `,
+  }),
 };
 
-export const Default = {
+export const Multiple = {
   render: (args) => ({
     components: {
       UnnnicRadio,
@@ -73,5 +92,13 @@ export const DisableSelected = {
     modelValue: 'option 1',
     value: 'option 1',
     disabled: true,
+  },
+};
+
+export const Helper = {
+  args: {
+    modelValue: 'option 1',
+    value: 'option 1',
+    helper: 'Helper text',
   },
 };

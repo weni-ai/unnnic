@@ -74,30 +74,42 @@
                 scheme="neutral-dark"
                 size="sm"
               />
-              <SelectSmartOption
-                v-for="(option, index) in filterOptions(options)"
-                v-else
-                :key="option.value"
-                data-testid="option"
-                :label="option.label"
-                :description="option.description"
-                :tabindex="index"
-                :size="size"
-                :active="
-                  option.value === modelValue || optionIsSelected(option)
-                "
-                :disabled="optionIsSelected(option) && option.disableRemove"
-                :focused="focusedOption && focusedOption.value === option.value"
-                :allowCheckbox="!!multiple"
-                :activeColor="type === 'secondary' ? 'secondary' : 'primary'"
-                @click="handleSelect(option)"
-              />
-              <p
-                v-if="filterOptions(options).length === 0 && !isLoading"
-                class="unnnic-select-smart__options--no-results"
-              >
-                {{ i18n('without_results') }}
-              </p>
+              <template v-else>
+                <SelectSmartOption
+                  v-for="(option, index) in filterOptions(options)"
+                  :key="option.value"
+                  data-testid="option"
+                  :label="option.label"
+                  :description="option.description"
+                  :tabindex="index"
+                  :size="size"
+                  :active="
+                    option.value === modelValue || optionIsSelected(option)
+                  "
+                  :disabled="optionIsSelected(option) && option.disableRemove"
+                  :focused="
+                    focusedOption && focusedOption.value === option.value
+                  "
+                  :allowCheckbox="!!multiple"
+                  :activeColor="type === 'secondary' ? 'secondary' : 'primary'"
+                  @click="handleSelect(option)"
+                />
+                <div
+                  v-if="infiniteScroll && infiniteScrollLoading"
+                  class="unnnic-select-smart__options-infinite-loading"
+                >
+                  <UnnnicIconLoading
+                    scheme="neutral-dark"
+                    size="sm"
+                  />
+                </div>
+                <p
+                  v-if="filterOptions(options).length === 0"
+                  class="unnnic-select-smart__options--no-results"
+                >
+                  {{ i18n('without_results') }}
+                </p>
+              </template>
             </div>
           </div>
         </div>
@@ -108,6 +120,7 @@
 
 <script>
 import { vOnClickOutside } from '@vueuse/components';
+import { useInfiniteScroll } from '@vueuse/core';
 
 import SelectSmartOption from './SelectSmartOption.vue';
 import SelectSmartMultipleHeader from './SelectSmartMultipleHeader.vue';
@@ -212,6 +225,22 @@ export default {
       type: [Number, null],
       default: null,
     },
+    infiniteScroll: {
+      type: Boolean,
+      default: false,
+    },
+    infiniteScrollDistance: {
+      type: Number,
+      default: 10,
+    },
+    infiniteScrollCanLoadMore: {
+      type: Function,
+      default: () => true,
+    },
+    disableInternalFilter: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -219,6 +248,7 @@ export default {
     'onChange',
     'update:modelValue',
     'onActiveChange',
+    'scroll-end',
   ],
 
   data() {
@@ -231,6 +261,9 @@ export default {
       isAutocompleteAllowed: false,
 
       multipleSelectedsTags: 2,
+
+      infiniteScrollReset: null,
+      infiniteScrollLoading: false,
 
       defaultTranslations: {
         without_results: {
@@ -318,6 +351,10 @@ export default {
             this.scrollToOption(activeOptionIndex, 'center');
           }
         }
+
+        if (newValue && this.infiniteScroll) {
+          this.setupInfiniteScroll();
+        }
       });
     },
 
@@ -368,9 +405,62 @@ export default {
     ) {
       this.selectOption(this.options?.[0]);
     }
+
+    this.setupInfiniteScroll();
+  },
+
+  beforeUnmount() {
+    if (this.infiniteScrollReset) {
+      this.infiniteScrollReset();
+    }
   },
 
   methods: {
+    setupInfiniteScroll() {
+      if (!this.infiniteScroll) {
+        return;
+      }
+
+      this.$nextTick(() => {
+        const scrollElement = this.$refs.selectSmartOptionsScrollArea;
+
+        if (!scrollElement) {
+          return;
+        }
+
+        const { reset } = useInfiniteScroll(
+          scrollElement,
+          () => {
+            if (!this.infiniteScrollLoading) {
+              this.infiniteScrollLoading = true;
+              this.$emit('scroll-end');
+            }
+          },
+          {
+            distance: this.infiniteScrollDistance,
+            canLoadMore: () => {
+              return (
+                this.infiniteScrollCanLoadMore() && !this.infiniteScrollLoading
+              );
+            },
+          },
+        );
+
+        this.infiniteScrollReset = reset;
+      });
+    },
+
+    finishInfiniteScroll() {
+      this.infiniteScrollLoading = false;
+    },
+
+    resetInfiniteScroll() {
+      this.infiniteScrollLoading = false;
+      if (this.infiniteScrollReset) {
+        this.infiniteScrollReset();
+      }
+    },
+
     optionIsSelected(option) {
       return this.modelValue.some(
         (selectedOption) => selectedOption.value === option.value,
@@ -421,6 +511,10 @@ export default {
     },
 
     filterOptions(options) {
+      if (this.disableInternalFilter) {
+        return options;
+      }
+
       const searchValue = this.searchValue.toLowerCase();
 
       const searchTerms = searchValue
@@ -636,9 +730,10 @@ export default {
 
     margin-top: $unnnic-spacing-nano;
 
-    border-radius: $unnnic-border-radius-sm;
+    border-radius: $unnnic-radius-2;
+    border: 1px solid $unnnic-color-border-base;
 
-    box-shadow: $unnnic-shadow-level-near;
+    box-shadow: $unnnic-shadow-1;
 
     background-color: $unnnic-color-background-snow;
 
@@ -648,6 +743,14 @@ export default {
       justify-self: center;
     }
 
+    &-infinite-loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: $unnnic-spacing-xs 0;
+      min-height: 40px;
+    }
+
     &__scroll-area {
       @function calc-max-height($value) {
         @return ($value * $unnnic-font-size) - ($unnnic-spacing-xs * 2);
@@ -655,7 +758,7 @@ export default {
 
       display: grid;
 
-      margin: $unnnic-spacing-xs;
+      margin: $unnnic-space-4;
       margin-right: $unnnic-inline-xs;
       padding-right: $unnnic-inline-xs;
 

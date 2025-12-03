@@ -11,22 +11,26 @@
       "
     >
       <section :class="`unnnic-popover__content ${props.class || ''}`">
-        <slot />
+        <component
+          :is="child"
+          v-for="(child, index) in contentChildren"
+          :key="index"
+        />
       </section>
 
-      <footer
-        v-if="$slots.footer"
-        class="unnnic-popover__footer"
-      >
-        <slot name="footer" />
-      </footer>
+      <component
+        :is="child"
+        v-for="(child, index) in footerChildren"
+        :key="index"
+      />
     </PopoverContent>
   </PopoverPortal>
 </template>
 
 <script setup lang="ts">
 import type { PopoverContentEmits, PopoverContentProps } from 'reka-ui';
-import type { HTMLAttributes } from 'vue';
+import type { HTMLAttributes, VNode } from 'vue';
+import { computed, useSlots } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
 import { PopoverContent, PopoverPortal, useForwardPropsEmits } from 'reka-ui';
 import { cn } from '@/lib/utils';
@@ -46,6 +50,7 @@ const props = withDefaults(
     align: 'center',
     sideOffset: 4,
     size: 'medium',
+    class: '',
   },
 );
 const emits = defineEmits<PopoverContentEmits>();
@@ -53,6 +58,27 @@ const emits = defineEmits<PopoverContentEmits>();
 const delegatedProps = reactiveOmit(props, 'class', 'size');
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
+
+const slots = useSlots();
+
+const getComponentName = (vnode: VNode): string | undefined => {
+  const componentType = vnode.type as { name?: string; __name?: string };
+  return componentType?.name || componentType?.__name;
+};
+
+const contentChildren = computed(() => {
+  const defaultSlot = slots.default?.() || [];
+  return defaultSlot.filter(
+    (vnode: VNode) => getComponentName(vnode) !== 'UnnnicPopoverFooter',
+  );
+});
+
+const footerChildren = computed(() => {
+  const defaultSlot = slots.default?.() || [];
+  return defaultSlot.filter(
+    (vnode: VNode) => getComponentName(vnode) === 'UnnnicPopoverFooter',
+  );
+});
 </script>
 
 <style lang="scss">
@@ -61,8 +87,6 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 $popover-space: $unnnic-space-4;
 
 .unnnic-popover {
-  z-index: 10000;
-
   border-radius: $unnnic-radius-2;
   box-shadow: $unnnic-shadow-1;
 
@@ -78,21 +102,6 @@ $popover-space: $unnnic-space-4;
 
   &__content {
     padding: $popover-space;
-  }
-
-  &__footer {
-    border-top: 1px solid $unnnic-color-border-soft;
-
-    padding: $popover-space;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: $unnnic-space-2;
-
-    > * {
-      width: 100%;
-    }
   }
 }
 </style>

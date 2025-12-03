@@ -5,6 +5,10 @@ import UnnnicButton from '@/components/Button/Button.vue';
 import DialogClose from './DialogClose.vue';
 import UnnnicIcon, { SchemeColor } from '@/components/Icon.vue';
 
+defineOptions({
+  name: 'UnnnicDialogHeader',
+});
+
 const props = withDefaults(
   defineProps<{
     class?: HTMLAttributes['class'];

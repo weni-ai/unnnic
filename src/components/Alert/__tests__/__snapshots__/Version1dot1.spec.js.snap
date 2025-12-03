@@ -4,9 +4,9 @@ exports[`Alert.vue > matches snapshot 1`] = `
 "<div data-v-fb94f284="" class="alert-container">
   <div data-v-fb94f284="" class="alert alert--scheme-aux-green">
     <div data-v-fb94f284="" class="alert__progress"></div>
-    <div data-v-fb94f284="" class="alert__text">Test Alert</div><a data-v-fb94f284="" class="alert__link" href="https://example.com" target="_blank">Learn more</a>
+    <div data-v-fb94f284="" class="alert__text">Test Alert</div>
     <div data-v-fb94f284="" class="alert__close">
-      <unnnic-icon-stub data-v-fb94f284="" filled="false" next="false" icon="close-1" clickable="false" size="sm" scheme="neutral-white"></unnnic-icon-stub>
+      <unnnic-icon-stub data-v-fb94f284="" filled="false" icon="close-1" clickable="false" size="sm" scheme="neutral-white"></unnnic-icon-stub>
     </div>
   </div>
 </div>"

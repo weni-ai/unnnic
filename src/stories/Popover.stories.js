@@ -1,6 +1,7 @@
 import {
   Popover,
   PopoverContent,
+  PopoverFooter,
   PopoverTrigger,
 } from '../components/ui/popover';
 import UnnnicButton from '../components/Button/Button.vue';
@@ -16,7 +17,7 @@ export default {
       description: {
         component: `A popover component that displays rich content in a portal, floating on top of other content.
           <br/>
-          It supports three sizes (small, medium, large) and optional footer slot for action buttons, for example.
+          It supports three sizes (small, medium, large).
           <br/>
           API reference: https://www.reka-ui.com/docs/components/popover
           `,
@@ -48,6 +49,25 @@ export default {
 };
 
 export const Default = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A simple popover with some content inside.',
+      },
+      source: {
+        code: `
+<UnnnicPopover>
+  <UnnnicPopoverTrigger>
+    <UnnnicButton text="Open Popover" />
+  </UnnnicPopoverTrigger>
+  <UnnnicPopoverContent v-bind="args">
+    <p style="margin: 0;">This is a simple popover with some content inside.</p>
+  </UnnnicPopoverContent>
+</UnnnicPopover>
+        `,
+      },
+    },
+  },
   render: (args) => ({
     components: { Popover, PopoverContent, PopoverTrigger, UnnnicButton },
     setup() {
@@ -73,12 +93,34 @@ export const WithFooter = {
     docs: {
       description: {
         story:
-          'Popover with action buttons in the footer using the `#footer` slot.',
+          'Popover with action buttons in the footer using the `PopoverFooter` component.',
+      },
+      source: {
+        code: `
+<UnnnicPopover>
+  <UnnnicPopoverTrigger>
+    <UnnnicButton text="Open Popover" />
+  </UnnnicPopoverTrigger>
+  <UnnnicPopoverContent v-bind="args">
+    <p style="margin: 0;">This popover has a footer with action buttons.</p>
+    <UnnnicPopoverFooter>
+      <UnnnicButton text="Cancel" type="tertiary" />
+      <UnnnicButton text="Save" type="primary" />
+    </UnnnicPopoverFooter>
+  </UnnnicPopoverContent>
+</UnnnicPopover>
+        `,
       },
     },
   },
   render: (args) => ({
-    components: { Popover, PopoverContent, PopoverTrigger, UnnnicButton },
+    components: {
+      Popover,
+      PopoverContent,
+      PopoverFooter,
+      PopoverTrigger,
+      UnnnicButton,
+    },
     setup() {
       return { args };
     },
@@ -90,10 +132,10 @@ export const WithFooter = {
           </PopoverTrigger>
           <PopoverContent v-bind="args">
             <p style="margin: 0;">This popover has a footer with action buttons.</p>
-            <template #footer>
+            <PopoverFooter>
               <UnnnicButton text="Cancel" type="tertiary" />
               <UnnnicButton text="Save" type="primary" />
-            </template>
+            </PopoverFooter>
           </PopoverContent>
         </Popover>
       </div>
@@ -113,6 +155,7 @@ export const WithForm = {
     components: {
       Popover,
       PopoverContent,
+      PopoverFooter,
       PopoverTrigger,
       UnnnicButton,
       UnnnicInput,
@@ -136,10 +179,10 @@ export const WithForm = {
               <UnnnicLabel label="Email" />
               <UnnnicInput placeholder="Enter your email" type="email" />
             </form>
-            <template #footer>
+            <PopoverFooter>
               <UnnnicButton text="Cancel" type="tertiary" />
               <UnnnicButton text="Save" type="primary" />
-            </template>
+            </PopoverFooter>
           </PopoverContent>
         </Popover>
       </div>
@@ -153,6 +196,25 @@ export const Sizes = {
       description: {
         story:
           'The popover comes in three sizes: small (240px), medium (320px), and large (400px).',
+      },
+      source: {
+        code: `
+<UnnnicPopover>
+  <!-- Small popover (240px) -->
+  <UnnnicPopoverContent size="small">
+  ...
+  </UnnnicPopoverContent>
+
+  <!-- Medium popover (320px) -->
+  <UnnnicPopoverContent size="medium">
+  ...
+  </UnnnicPopoverContent>
+  <!-- Large popover (400px) -->
+  <UnnnicPopoverContent size="large">
+  ...
+  </UnnnicPopoverContent>
+</UnnnicPopover>
+        `,
       },
     },
   },
@@ -200,6 +262,28 @@ export const Placements = {
       description: {
         story:
           'The popover can be positioned on any side of the trigger: top, bottom, left, or right.',
+      },
+      source: {
+        code: `
+<UnnnicPopover>
+  <!-- Top -->
+  <UnnnicPopoverContent side="top">
+  ...
+  </UnnnicPopoverContent>
+  <!-- Bottom -->
+  <UnnnicPopoverContent side="bottom">
+  ...
+  </UnnnicPopoverContent>
+  <!-- Right -->
+  <UnnnicPopoverContent side="right">
+  ...
+  </UnnnicPopoverContent>
+  <!-- Left -->
+  <UnnnicPopoverContent side="left">
+  ...
+  </UnnnicPopoverContent>
+</UnnnicPopover>
+        `,
       },
     },
   },
@@ -263,7 +347,13 @@ export const RichContent = {
     },
   },
   render: (args) => ({
-    components: { Popover, PopoverContent, PopoverTrigger, UnnnicButton },
+    components: {
+      Popover,
+      PopoverContent,
+      PopoverFooter,
+      PopoverTrigger,
+      UnnnicButton,
+    },
     setup() {
       return { args };
     },
@@ -295,9 +385,9 @@ export const RichContent = {
                 </div>
               </div>
             </div>
-            <template #footer>
+            <PopoverFooter>
               <UnnnicButton text="View Profile" type="primary" />
-            </template>
+            </PopoverFooter>
           </PopoverContent>
         </Popover>
       </div>
