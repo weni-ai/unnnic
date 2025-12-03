@@ -1,23 +1,22 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`Drawer.vue > Component Rendering > Component Rendering > matches the snapshot 1`] = `
-"<aside data-v-196de012="" class="unnnic-drawer" data-testid="drawer">
-  <section data-v-196de012="" class="unnnic-drawer__overlay" data-testid="overlay"></section>
-  <transition-stub data-v-196de012="" name="drawer" appear="true" persisted="false" css="true">
-    <section data-v-196de012="" data-testid="drawer-container" class="unnnic-drawer__container unnnic-drawer__container--md">
-      <header data-v-196de012="" class="unnnic-drawer__header">
-        <section data-v-196de012="" class="unnnic-drawer__title-container">
-          <h1 data-v-196de012="" class="unnnic-drawer__title" data-testid="drawer-title">Test Title</h1>
-          <p data-v-196de012="" class="unnnic-drawer__description" data-testid="drawer-description">Test Description</p>
-        </section>
-        <unnnic-icon-stub data-v-196de012="" filled="false" icon="arrow_back" clickable="true" size="avatar-nano" scheme="neutral-darkest" class="unnnic-drawer__close" data-testid="close-icon"></unnnic-icon-stub>
-      </header>
-      <section data-v-196de012="" class="unnnic-drawer__content"></section>
-      <footer data-v-196de012="" class="unnnic-drawer__footer" data-testid="footer">
-        <unnnic-button-stub data-v-196de012="" size="large" text="Secondary Action" type="tertiary" float="false" iconleft="" iconright="" iconcenter="" iconsfilled="false" disabled="false" loading="false" data-testid="secondary-button"></unnnic-button-stub>
-        <unnnic-button-stub data-v-196de012="" size="large" text="Primary Action" type="primary" float="false" iconleft="" iconright="" iconcenter="" iconsfilled="false" disabled="false" loading="false" data-testid="primary-button"></unnnic-button-stub>
-      </footer>
-    </section>
-  </transition-stub>
-</aside>"
+"<div data-v-196de012="" class="unnnic-drawer" data-testid="drawer" open="true">
+  <div data-v-196de012="" showoverlay="true" data-testid="drawer-container" size="medium" class="unnnic-drawer__container unnnic-drawer__container--md">
+    <header data-v-39d0dfb8="" data-v-196de012="" class="unnnic-drawer__header unnnic-drawer__header">
+      <section data-v-196de012="" class="unnnic-drawer__title-container">
+        <div data-v-196de012="" class="unnnic-drawer__title" data-testid="drawer-title">Test Title</div>
+        <div data-v-196de012="" class="unnnic-drawer__description" data-testid="drawer-description">Test Description</div>
+      </section>
+      <div data-v-196de012="">
+        <unnnic-button-stub data-v-196de012="" size="small" text="" type="tertiary" float="false" iconleft="" iconright="" iconcenter="arrow_forward" iconsfilled="false" disabled="false" loading="false" class="unnnic-drawer__close-icon" data-testid="close-icon"></unnnic-button-stub>
+      </div>
+    </header>
+    <section data-v-196de012="" class="unnnic-drawer__content"></section>
+    <div data-v-196de012="" class="unnnic-drawer__footer" data-testid="footer">
+      <unnnic-button-stub data-v-196de012="" size="large" text="Secondary Action" type="tertiary" float="false" iconleft="" iconright="" iconcenter="" iconsfilled="false" disabled="false" loading="false" data-testid="secondary-button"></unnnic-button-stub>
+      <unnnic-button-stub data-v-196de012="" size="large" text="Primary Action" type="primary" float="false" iconleft="" iconright="" iconcenter="" iconsfilled="false" disabled="false" loading="false" data-testid="primary-button"></unnnic-button-stub>
+    </div>
+  </div>
+</div>"
 `;

@@ -111,6 +111,13 @@ import DialogHeader from './ui/dialog/DialogHeader.vue';
 import DialogTitle from './ui/dialog/DialogTitle.vue';
 import DialogTrigger from './ui/dialog/DialogTrigger.vue';
 import DialogClose from './ui/dialog/DialogClose.vue';
+import DrawerNext from './ui/drawer/Drawer.vue';
+import DrawerContent from './ui/drawer/DrawerContent.vue';
+import DrawerHeader from './ui/drawer/DrawerHeader.vue';
+import DrawerFooter from './ui/drawer/DrawerFooter.vue';
+import DrawerClose from './ui/drawer/DrawerClose.vue';
+import DrawerTitle from './ui/drawer/DrawerTitle.vue';
+import DrawerDescription from './ui/drawer/DrawerDescription.vue';
 
 type VueComponent = Component;
 
@@ -231,6 +238,13 @@ export const components: ComponentsMap = {
   unnnicDialogTitle: DialogTitle,
   unnnicDialogTrigger: DialogTrigger,
   unnnicDialogClose: DialogClose,
+  unnnicDrawerNext: DrawerNext,
+  unnnicDrawerContent: DrawerContent,
+  unnnicDrawerHeader: DrawerHeader,
+  unnnicDrawerFooter: DrawerFooter,
+  unnnicDrawerClose: DrawerClose,
+  unnnicDrawerTitle: DrawerTitle,
+  unnnicDrawerDescription: DrawerDescription,
 };
 
 export const unnnicFontSize = fontSize;
@@ -347,6 +361,13 @@ export const unnnicDialogHeader = DialogHeader;
 export const unnnicDialogTitle = DialogTitle;
 export const unnnicDialogTrigger = DialogTrigger;
 export const unnnicDialogClose = DialogClose;
+export const unnnicDrawerNext = DrawerNext;
+export const unnnicDrawerContent = DrawerContent;
+export const unnnicDrawerHeader = DrawerHeader;
+export const unnnicDrawerFooter = DrawerFooter;
+export const unnnicDrawerClose = DrawerClose;
+export const unnnicDrawerTitle = DrawerTitle;
+export const unnnicDrawerDescription = DrawerDescription;
 
 export const UnnnicFontSize = fontSize;
 export const UnnnicFormElement = formElement;
@@ -462,3 +483,10 @@ export const UnnnicDialogHeader = DialogHeader;
 export const UnnnicDialogTitle = DialogTitle;
 export const UnnnicDialogTrigger = DialogTrigger;
 export const UnnnicDialogClose = DialogClose;
+export const UnnnicDrawerNext = DrawerNext;
+export const UnnnicDrawerContent = DrawerContent;
+export const UnnnicDrawerHeader = DrawerHeader;
+export const UnnnicDrawerFooter = DrawerFooter;
+export const UnnnicDrawerClose = DrawerClose;
+export const UnnnicDrawerTitle = DrawerTitle;
+export const UnnnicDrawerDescription = DrawerDescription;
