@@ -40,29 +40,21 @@ describe('Input.vue', () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  test('renders label correctly', async () => {
-    const label = wrapper.find('.unnnic-form__label');
-    expect(label.exists()).toBe(true);
-    expect(label.text()).toBe('Sample Label');
-
-    await wrapper.setProps({ label: null });
-    expect(wrapper.find('.unnnic-form__label').exists()).toBe(false);
+  test('renders form element correctly', async () => {
+    const formElement = wrapper.findComponent('[data-testid="form-element"]');
+    expect(formElement.exists()).toBe(true);
+    expect(formElement.props('label')).toBe('Sample Label');
+    expect(formElement.props('size')).toBe('md');
+    expect(formElement.props('message')).toBe('Error message');
+    expect(formElement.props('disabled')).toBe(false);
+    expect(formElement.props('tooltip')).toBe('');
+    expect(formElement.props('error')).toBe(false);
   });
 
-  test('renders message correctly', async () => {
-    const message = wrapper.find('.unnnic-form__message');
-    expect(message.exists()).toBe(true);
-    expect(message.text()).toBe('Error message');
-
-    await wrapper.setProps({ message: null });
-    expect(wrapper.find('.unnnic-form__message').exists()).toBe(false);
-  });
-
-  test('applies the correct size class', async () => {
-    expect(wrapper.classes()).toContain('md');
-
-    await wrapper.setProps({ size: 'sm' });
-    expect(wrapper.classes()).toContain('sm');
+  test('renders maxlength counter correctly', async () => {
+    expect(wrapper.text()).not.toContain('0 / 10');
+    await wrapper.setProps({ maxlength: 10, showMaxlengthCounter: true });
+    expect(wrapper.text()).toContain('0 / 10');
   });
 
   test('renders TextInput component', () => {
@@ -94,18 +86,6 @@ describe('Input.vue', () => {
     await wrapper.setProps({ modelValue: 'new value' });
 
     expect(wrapper.vm.val).toBe('new value');
-  });
-
-  test('hasLabelSlot computed property works correctly', async () => {
-    expect(wrapper.vm.hasLabelSlot).toBe(false);
-
-    wrapper = mount(Input, {
-      slots: {
-        label: '<span>Custom Label</span>',
-      },
-    });
-
-    expect(wrapper.vm.hasLabelSlot).toBe(true);
   });
 
   test('correctly mounts with initial modelValue', async () => {
