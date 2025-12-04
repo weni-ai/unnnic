@@ -133,8 +133,9 @@ export const WithOptions = {
               <PopoverOption label="View details" icon="info" scheme="fg-info" />
               <PopoverOption label="Edit" icon="edit" scheme="fg-warning" />
               <PopoverOption label="Delete" icon="delete" scheme="fg-critical" />
-              <PopoverOption label="Disable" icon="close" disabled />
-              <PopoverOption label="Active" icon="check" active />
+              <PopoverOption label="Focused" focused />
+              <PopoverOption label="Disable" disabled />
+              <PopoverOption label="Active" active />
             </section>
           </PopoverContent>
         </Popover>
