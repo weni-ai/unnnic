@@ -153,15 +153,6 @@ export default {
       if (this.isDisabled) {
         return 'fg-muted';
       }
-
-      if (this.modelValue || this.isFocused || this.forceActiveStatus) {
-        return 'color-gray-700';
-      }
-
-      if (this.hasCloudyColor) {
-        return 'fg-base';
-      }
-
       return 'fg-base';
     },
 

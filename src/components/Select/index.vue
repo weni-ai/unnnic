@@ -3,11 +3,11 @@
     class="unnnic-select"
     @keydown="handleKeyDown"
   >
-    <UnnnicPopover
-      v-model="openPopover"
-      :popoverBalloonProps="{ maxHeight: calculatedMaxHeight }"
+    <Popover
+      :open="openPopover"
+      @update:open="openPopover = $event"
     >
-      <template #trigger>
+      <PopoverTrigger>
         <UnnnicInput
           :modelValue="inputValue"
           class="unnnic-select__input"
@@ -23,8 +23,14 @@
           showClear
           @clear="emit('update:modelValue', '')"
         />
-      </template>
-      <template #content>
+      </PopoverTrigger>
+      <PopoverContent
+        align="start"
+        :style="{
+          maxHeight: calculatedMaxHeight,
+          overflow: 'auto',
+        }"
+      >
         <div class="unnnic-select__content">
           <UnnnicInput
             v-if="props.enableSearch"
@@ -34,10 +40,11 @@
             iconLeft="search"
             @update:model-value="handleSearch"
           />
-          <UnnnicSelectOption
+          <PopoverOption
             v-for="(option, index) in filteredOptions"
             :key="option[props.itemValue]"
             :data-option-index="index"
+            data-testid="select-option"
             :label="option[props.itemLabel]"
             :active="
               option[props.itemValue] === selectedItem?.[props.itemValue]
@@ -47,16 +54,21 @@
             @click="handleSelectOption(option)"
           />
         </div>
-      </template>
-    </UnnnicPopover>
+      </PopoverContent>
+    </Popover>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref, watch, nextTick } from 'vue';
 import UnnnicInput from '../Input/Input.vue';
-import UnnnicPopover from './SelectPopover.vue';
-import UnnnicSelectOption from './SelectOption.vue';
+
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverOption,
+} from '../ui/popover/index';
 import UnnnicI18n from '../../mixins/i18n';
 
 defineOptions({
@@ -157,7 +169,7 @@ const scrollToOption = (
   nextTick(() => {
     const option = document.querySelector(`[data-option-index="${index}"]`);
     if (option) {
-      option.scrollIntoView({ behavior, block });
+      option.scrollIntoView?.({ behavior, block });
     }
   });
 };
