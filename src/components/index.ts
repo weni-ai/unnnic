@@ -103,6 +103,12 @@ import Tabs from './ui/tabs/Tabs.vue';
 import TabsList from './ui/tabs/TabsList.vue';
 import TabsTrigger from './ui/tabs/TabsTrigger.vue';
 import TabsContent from './ui/tabs/TabsContent.vue';
+import {
+  SegmentedControl,
+  SegmentedControlList,
+  SegmentedControlTrigger,
+  SegmentedControlContent,
+} from './ui/segmented-control';
 import PageHeader from './PageHeader/PageHeader.vue';
 
 type VueComponent = Component;
@@ -216,6 +222,10 @@ export const components: ComponentsMap = {
   unnnicTabsList: TabsList,
   unnnicTabsTrigger: TabsTrigger,
   unnnicTabsContent: TabsContent,
+  unnnicSegmentedControl: SegmentedControl,
+  unnnicSegmentedControlList: SegmentedControlList,
+  unnnicSegmentedControlTrigger: SegmentedControlTrigger,
+  unnnicSegmentedControlContent: SegmentedControlContent,
   unnnicPageHeader: PageHeader,
 };
 
@@ -325,6 +335,10 @@ export const unnnicTabs = Tabs;
 export const unnnicTabsList = TabsList;
 export const unnnicTabsTrigger = TabsTrigger;
 export const unnnicTabsContent = TabsContent;
+export const unnnicSegmentedControl = SegmentedControl;
+export const unnnicSegmentedControlList = SegmentedControlList;
+export const unnnicSegmentedControlTrigger = SegmentedControlTrigger;
+export const unnnicSegmentedControlContent = SegmentedControlContent;
 export const unnnicPageHeader = PageHeader;
 
 export const UnnnicFontSize = fontSize;
@@ -433,4 +447,8 @@ export const UnnnicTabs = Tabs;
 export const UnnnicTabsList = TabsList;
 export const UnnnicTabsTrigger = TabsTrigger;
 export const UnnnicTabsContent = TabsContent;
+export const UnnnicSegmentedControl = SegmentedControl;
+export const UnnnicSegmentedControlList = SegmentedControlList;
+export const UnnnicSegmentedControlTrigger = SegmentedControlTrigger;
+export const UnnnicSegmentedControlContent = SegmentedControlContent;
 export const UnnnicPageHeader = PageHeader;
