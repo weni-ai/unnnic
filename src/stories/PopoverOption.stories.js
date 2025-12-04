@@ -8,11 +8,8 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `A popover component that displays rich content in a portal, floating on top of other content.
-            <br/>
-            It supports three sizes (small, medium, large).
-            <br/>
-            API reference: https://www.reka-ui.com/docs/components/popover
+        component: `A popover options item component.
+          It is used to display options in a popover.
             `,
       },
     },
