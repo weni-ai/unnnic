@@ -75,7 +75,7 @@ const schemeColor = computed(() => {
 
 .unnnic-popover-option {
   cursor: pointer;
-  border-radius: $unnnic-radius-1;
+  border-radius: $unnnic-radius-2;
   padding: $unnnic-space-2;
   font: $unnnic-font-emphasis;
   display: flex;
