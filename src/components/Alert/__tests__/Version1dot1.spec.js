@@ -9,13 +9,9 @@ describe('Alert.vue', () => {
   let wrapper;
 
   const defaultProps = {
-    version: '1.0',
     text: 'Test Alert',
     scheme: 'feedback-green',
     onClose: vi.fn(),
-    linkHref: 'https://example.com',
-    linkTarget: '_blank',
-    linkText: 'Learn more',
     type: 'success',
   };
 
@@ -51,19 +47,6 @@ describe('Alert.vue', () => {
     expect(wrapper.find('.alert--scheme-aux-red').exists()).toBe(true);
   });
 
-  test('renders link when linkHref is provided', () => {
-    const link = wrapper.find('.alert__link');
-    expect(link.exists()).toBe(true);
-    expect(link.attributes('href')).toBe('https://example.com');
-    expect(link.attributes('target')).toBe('_blank');
-    expect(link.text()).toBe('Learn more');
-  });
-
-  test('does not render link when linkHref is not provided', async () => {
-    await wrapper.setProps({ linkHref: '' });
-    expect(wrapper.find('.alert__link').exists()).toBe(false);
-  });
-
   test('emits close event and calls onClose prop when close button is clicked', async () => {
     await wrapper.find('.alert__close').trigger('click');
     expect(wrapper.emitted('close')).toBeTruthy();
@@ -93,12 +76,8 @@ describe('Alert.vue', () => {
   });
 
   test.each([
-    ['version', '1.1'],
     ['text', 'New Alert Text'],
     ['scheme', 'feedback-red'],
-    ['linkHref', 'https://newexample.com'],
-    ['linkTarget', '_self'],
-    ['linkText', 'Click here'],
     ['type', 'error'],
   ])('updates %s prop correctly', async (propName, newValue) => {
     await wrapper.setProps({ [propName]: newValue });
@@ -111,8 +90,6 @@ describe('Alert.vue', () => {
       clickable: false,
       filled: false,
       icon: 'close-1',
-      lineHeight: null,
-      next: false,
       size: 'sm',
       scheme: 'neutral-white',
     });

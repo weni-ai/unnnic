@@ -6,6 +6,7 @@
         icon="close-1"
         scheme="neutral-dark"
         size="sm"
+        clickable
         @click="$emit('close')"
       />
     </div>
@@ -128,6 +129,7 @@ export default {
       default: '',
     },
   },
+  emits: ['close', 'file-change', 'cancel', 'action'],
 
   data() {
     return {};

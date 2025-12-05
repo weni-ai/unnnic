@@ -25,6 +25,7 @@ import cardImage from './CardImage/CardImage.vue';
 import cardProject from './CardProject/CardProject.vue';
 import cardInformation from './CardInformation/CardInformation.vue';
 import checkbox from './Checkbox/Checkbox.vue';
+import checkboxGroup from './CheckboxGroup/CheckboxGroup.vue';
 import collapse from './Collapse/Collapse.vue';
 import radio from './Radio/Radio.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
@@ -32,7 +33,7 @@ import modal from './Modal/Modal.vue';
 import modalUpload from './ModalUpload/ModalUpload.vue';
 import { callAlert, callModal } from '../utils/call';
 import selectSmart from './SelectSmart/SelectSmart.vue';
-// import select from './Select/Select.vue';
+import select from './Select/index.vue';
 import selectItem from './Select/SelectItem.vue';
 // import selectListItem from './SelectListItem/SelectListItem.vue';
 import multiSelect from './MultiSelect/MultiSelect.vue';
@@ -90,6 +91,26 @@ import Navigator from './Navigator/index.vue';
 import SelectTime from './SelectTime/index.vue';
 import DataTable from './DataTable/index.vue';
 import Chip from './Chip/Chip.vue';
+import Toast from './Toast/Toast.vue';
+import { toast } from './Toast/ToastManager';
+import Popover from './ui/popover/Popover.vue';
+import PopoverContent from './ui/popover/PopoverContent.vue';
+import PopoverTrigger from './ui/popover/PopoverTrigger.vue';
+import PopoverFooter from './ui/popover/PopoverFooter.vue';
+import PopoverOption from './ui/popover/PopoverOption.vue';
+import TemplatePreview from './TemplatePreview/TemplatePreview.vue';
+import TemplatePreviewModal from './TemplatePreview/TemplatePreviewModal.vue';
+import Tabs from './ui/tabs/Tabs.vue';
+import TabsList from './ui/tabs/TabsList.vue';
+import TabsTrigger from './ui/tabs/TabsTrigger.vue';
+import TabsContent from './ui/tabs/TabsContent.vue';
+import {
+  SegmentedControl,
+  SegmentedControlList,
+  SegmentedControlTrigger,
+  SegmentedControlContent,
+} from './ui/segmented-control';
+import PageHeader from './PageHeader/PageHeader.vue';
 
 type VueComponent = Component;
 
@@ -124,6 +145,7 @@ export const components: ComponentsMap = {
   unnnicCardProject: cardProject,
   unnnicCardInformation: cardInformation,
   unnnicCheckbox: checkbox,
+  unnnicCheckboxGroup: checkboxGroup,
   unnnicCollapse: collapse,
   unnnicRadio: radio,
   unnnicLanguageSelect: languageSelect,
@@ -132,7 +154,7 @@ export const components: ComponentsMap = {
   unnnicModalDialog: ModalDialog,
   unnnicModalUpload: modalUpload,
   unnnicSelectSmart: selectSmart,
-  // unnnicSelect: select,
+  unnnicSelect: select,
   unnnicSelectItem: selectItem,
   // unnnicSelectListItem: selectListItem,
   unnnicMultiSelect: multiSelect,
@@ -188,8 +210,26 @@ export const components: ComponentsMap = {
   unnnicTour: Tour,
   unnnicNavigator: Navigator,
   unnnicSelectTime: SelectTime,
+  unnnicTemplatePreview: TemplatePreview,
+  unnnicTemplatePreviewModal: TemplatePreviewModal,
   unnnicDataTable: DataTable,
   unnnicChip: Chip,
+  unnnicToast: Toast,
+  unnnicToastManager: toast,
+  unnnicPopover: Popover,
+  unnnicPopoverContent: PopoverContent,
+  unnnicPopoverTrigger: PopoverTrigger,
+  unnnicPopoverFooter: PopoverFooter,
+  unnnicPopoverOption: PopoverOption,
+  unnnicTabs: Tabs,
+  unnnicTabsList: TabsList,
+  unnnicTabsTrigger: TabsTrigger,
+  unnnicTabsContent: TabsContent,
+  unnnicSegmentedControl: SegmentedControl,
+  unnnicSegmentedControlList: SegmentedControlList,
+  unnnicSegmentedControlTrigger: SegmentedControlTrigger,
+  unnnicSegmentedControlContent: SegmentedControlContent,
+  unnnicPageHeader: PageHeader,
 };
 
 export const unnnicFontSize = fontSize;
@@ -219,6 +259,7 @@ export const unnnicCardImage = cardImage as VueComponent;
 export const unnnicCardProject = cardProject as VueComponent;
 export const unnnicCardInformation = cardInformation;
 export const unnnicCheckbox = checkbox;
+export const unnnicCheckboxGroup = checkboxGroup;
 export const unnnicCollapse = collapse;
 export const unnnicRadio = radio;
 export const unnniclanguageSelect = languageSelect as VueComponent;
@@ -227,7 +268,7 @@ export const unnnicModalDialog = ModalDialog;
 export const unnnicModalNext = ModalNext;
 export const unnnicModalUpload = modalUpload;
 export const unnnicSelectSmart = selectSmart as VueComponent;
-// export const unnnicSelect = select;
+export const unnnicSelect = select as VueComponent;
 export const unnnicSelectItem = selectItem;
 // export const unnnicSelectListItem = selectListItem;
 export const unnnicMultiSelect = multiSelect as VueComponent;
@@ -285,12 +326,30 @@ export const unnnicNavigator = Navigator;
 export const unnnicDataTable = DataTable as VueComponent;
 export const unnnicSelectTime = SelectTime as VueComponent;
 export const unnnicChip = Chip;
+export const unnnicToast = Toast;
+export const unnnicToastManager = toast;
+export const unnnicPopover = Popover;
+export const unnnicPopoverContent = PopoverContent;
+export const unnnicPopoverTrigger = PopoverTrigger;
+export const unnnicPopoverFooter = PopoverFooter;
+export const unnnicPopoverOption = PopoverOption as VueComponent;
+export const unnnicTemplatePreview = TemplatePreview as VueComponent;
+export const unnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
+export const unnnicTabs = Tabs;
+export const unnnicTabsList = TabsList;
+export const unnnicTabsTrigger = TabsTrigger;
+export const unnnicTabsContent = TabsContent;
+export const unnnicSegmentedControl = SegmentedControl;
+export const unnnicSegmentedControlList = SegmentedControlList;
+export const unnnicSegmentedControlTrigger = SegmentedControlTrigger;
+export const unnnicSegmentedControlContent = SegmentedControlContent;
+export const unnnicPageHeader = PageHeader;
 
 export const UnnnicFontSize = fontSize;
 export const UnnnicFormElement = formElement;
 export const UnnnicInput = input;
 export const UnnnicInputNext = inputNext;
-export const UnnnicInputDatePicker = inputDatePicker;
+export const UnnnicInputDatePicker = inputDatePicker as VueComponent;
 export const UnnnicButton = button;
 export const UnnnicButtonIcon = buttonIcon;
 export const UnnnicSidebar = sidebar;
@@ -313,6 +372,7 @@ export const UnnnicCardImage = cardImage as VueComponent;
 export const UnnnicCardProject = cardProject as VueComponent;
 export const UnnnicCardInformation = cardInformation;
 export const UnnnicCheckbox = checkbox;
+export const UnnnicCheckboxGroup = checkboxGroup;
 export const UnnnicCollapse = collapse;
 export const UnnnicRadio = radio;
 export const UnnniclanguageSelect = languageSelect as VueComponent;
@@ -321,7 +381,7 @@ export const UnnnicModalDialog = ModalDialog;
 export const UnnnicModalNext = ModalNext;
 export const UnnnicModalUpload = modalUpload;
 export const UnnnicSelectSmart = selectSmart as VueComponent;
-// export const UnnnicSelect = select;
+export const UnnnicSelect = select as VueComponent;
 export const UnnnicSelectItem = selectItem;
 // export const UnnnicSelectListItem = selectListItem;
 export const UnnnicMultiSelect = multiSelect as VueComponent;
@@ -379,3 +439,21 @@ export const UnnnicNavigator = Navigator;
 export const UnnnicDataTable = DataTable as VueComponent;
 export const UnnnicSelectTime = SelectTime as VueComponent;
 export const UnnnicChip = Chip;
+export const UnnnicToast = Toast;
+export const UnnnicToastManager = toast;
+export const UnnnicPopover = Popover;
+export const UnnnicPopoverContent = PopoverContent;
+export const UnnnicPopoverTrigger = PopoverTrigger;
+export const UnnnicPopoverFooter = PopoverFooter;
+export const UnnnicPopoverOption = PopoverOption as VueComponent;
+export const UnnnicTemplatePreview = TemplatePreview as VueComponent;
+export const UnnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
+export const UnnnicTabs = Tabs;
+export const UnnnicTabsList = TabsList;
+export const UnnnicTabsTrigger = TabsTrigger;
+export const UnnnicTabsContent = TabsContent;
+export const UnnnicSegmentedControl = SegmentedControl;
+export const UnnnicSegmentedControlList = SegmentedControlList;
+export const UnnnicSegmentedControlTrigger = SegmentedControlTrigger;
+export const UnnnicSegmentedControlContent = SegmentedControlContent;
+export const UnnnicPageHeader = PageHeader;

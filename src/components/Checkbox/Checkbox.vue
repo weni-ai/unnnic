@@ -1,11 +1,16 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <section class="unnnic-checkbox-wrapper">
-    <label>
+  <section class="unnnic-checkbox">
+    <label
+      :class="[
+        'unnnic-checkbox__input-wrapper',
+        { 'unnnic-checkbox__input-wrapper--disabled': disabled },
+      ]"
+    >
       <input
         :class="[
-          'unnnic-checkbox',
-          { 'unnnic-checkbox--less': modelValue === 'less' },
+          'unnnic-checkbox__input',
+          { 'unnnic-checkbox__input--less': modelValue === 'less' },
         ]"
         type="checkbox"
         :disabled="disabled"
@@ -104,71 +109,84 @@ export default {
 
 $checkbox-size: 21px;
 
-.unnnic-checkbox-wrapper {
+.unnnic-checkbox {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-}
 
-label {
-  display: flex;
-  align-items: center;
-  column-gap: $unnnic-space-2;
-}
+  &__input-wrapper {
+    width: fit-content;
 
-.unnnic-checkbox {
-  appearance: none;
-  width: $checkbox-size;
-  height: $checkbox-size;
-  margin: 0;
-  background-color: $unnnic-color-bg-base;
-  border: 1px solid $unnnic-color-border-base;
-  border-radius: $unnnic-radius-1;
-  box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    column-gap: $unnnic-space-2;
 
-  outline: none;
+    cursor: pointer;
 
-  &:checked {
-    border-width: 0;
-    background-color: $unnnic-color-bg-active;
-    background-image: url('../../assets/icons/checkbox-checked.svg');
-    background-repeat: no-repeat;
-    background-position: center;
-
-    &.unnnic-checkbox--less {
-      background-image: url('../../assets/icons/checkbox-less.svg');
+    &--disabled {
+      cursor: not-allowed;
     }
   }
 
-  &:disabled,
-  &:disabled:checked {
-    background-color: $unnnic-color-bg-muted;
-    border: 1px solid $unnnic-color-border-muted;
-  }
+  &__input {
+    appearance: none;
+    width: $checkbox-size;
+    min-width: $checkbox-size;
+    height: $checkbox-size;
+    margin: 0;
+    background-color: $unnnic-color-bg-base;
+    border: 1px solid $unnnic-color-border-base;
+    border-radius: $unnnic-radius-1;
+    box-sizing: border-box;
 
-  &:disabled:checked {
-    background-image: url('../../assets/icons/checkbox-checked-disabled.svg');
+    outline: none;
 
-    &.unnnic-checkbox--less {
-      background-image: url('../../assets/icons/checkbox-less-disabled.svg');
+    cursor: pointer;
+
+    &:checked {
+      border-width: 0;
+      background-color: $unnnic-color-bg-active;
+      background-image: url('../../assets/icons/checkbox-checked.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+
+      &.unnnic-checkbox__input--less {
+        background-image: url('../../assets/icons/checkbox-less.svg');
+      }
+    }
+
+    &:disabled,
+    &:disabled:checked {
+      background-color: $unnnic-color-bg-muted;
+      border: 1px solid $unnnic-color-border-muted;
+
+      cursor: not-allowed;
+    }
+
+    &:disabled:checked {
+      background-image: url('../../assets/icons/checkbox-checked-disabled.svg');
+
+      &.unnnic-checkbox__input--less {
+        background-image: url('../../assets/icons/checkbox-less-disabled.svg');
+      }
     }
   }
-}
 
-.unnnic-checkbox__label {
-  margin: 0;
-  font: $unnnic-font-body;
-  color: $unnnic-color-fg-emphasized;
+  &__label {
+    margin: 0;
+    font: $unnnic-font-body;
+    color: $unnnic-color-fg-emphasized;
 
-  &--disabled {
-    color: $unnnic-color-fg-muted;
+    &--disabled {
+      color: $unnnic-color-fg-muted;
+    }
   }
-}
 
-.unnnic-checkbox__helper {
-  margin: 0;
-  margin-left: $checkbox-size + $unnnic-space-2;
-  font: $unnnic-font-caption-2;
-  color: $unnnic-color-fg-base;
+  &__helper {
+    margin: 0;
+    margin-left: $checkbox-size + $unnnic-space-2;
+    font: $unnnic-font-caption-2;
+    color: $unnnic-color-fg-base;
+  }
 }
 </style>

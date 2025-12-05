@@ -64,7 +64,9 @@ describe('UnnnicSelect.vue', () => {
     test('renders select options when popover is open', async () => {
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
-      const options = wrapper.findAllComponents({ name: 'UnnnicSelectOption' });
+      const options = wrapper.findAllComponents(
+        '[data-testid="select-option"]',
+      );
       expect(options.length).toBe(3);
     });
   });
@@ -134,7 +136,9 @@ describe('UnnnicSelect.vue', () => {
     test('emits update:modelValue when option is selected', async () => {
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
-      const options = wrapper.findAllComponents({ name: 'UnnnicSelectOption' });
+      const options = wrapper.findAllComponents(
+        '[data-testid="select-option"]',
+      );
 
       await options[0].vm.$emit('click');
 
@@ -146,7 +150,9 @@ describe('UnnnicSelect.vue', () => {
       await wrapper.setProps({ returnObject: true });
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
-      const options = wrapper.findAllComponents({ name: 'UnnnicSelectOption' });
+      const options = wrapper.findAllComponents(
+        '[data-testid="select-option"]',
+      );
 
       await options[0].vm.$emit('click');
 
@@ -159,7 +165,9 @@ describe('UnnnicSelect.vue', () => {
       await wrapper.setProps({ modelValue: 'option1' });
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
-      const options = wrapper.findAllComponents({ name: 'UnnnicSelectOption' });
+      const options = wrapper.findAllComponents(
+        '[data-testid="select-option"]',
+      );
 
       await options[0].vm.$emit('click');
 
@@ -175,7 +183,9 @@ describe('UnnnicSelect.vue', () => {
       await wrapper.setProps({ options: disabledOptions });
       wrapper.vm.openPopover = true;
       await wrapper.vm.$nextTick();
-      const options = wrapper.findAllComponents({ name: 'UnnnicSelectOption' });
+      const options = wrapper.findAllComponents(
+        '[data-testid="select-option"]',
+      );
 
       await options[1].vm.$emit('click');
 

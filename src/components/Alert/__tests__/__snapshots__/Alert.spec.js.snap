@@ -1,11 +1,15 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`UnnnicAlert.vue > matches the snapshot 1`] = `
-"<div data-v-284427ba="" class="unnnic-alert unnnic-alert-position--top-right"><span data-v-26446d8e="" data-v-284427ba="" class="material-symbols-rounded unnnic-icon-scheme--primary unnnic-icon-size--sm" data-testid="material-icon" translate="no" data-test="unnnic-icon">alert-icon</span>
-  <div data-v-284427ba="" class="unnnic-alert__content">
-    <div data-v-284427ba="" class="unnnic-alert__title">TEST ALERT</div>
-    <div data-v-284427ba="" class="unnnic-alert__text">This is an alert message</div>
-  </div>
-  <div data-v-284427ba="" class="unnnic-alert__close-text unnnic--clickable">CLOSE</div>
-</div>"
+"<transition-stub data-v-c3231c18="" name="toast-slide" appear="true" persisted="false" css="true" data-testid="toast-transition">
+  <aside data-v-c3231c18="" class="unnnic-toast unnnic-toast--success" role="status" aria-live="polite" data-testid="toast">
+    <section data-v-c3231c18="" class="unnnic-toast__content" data-testid="toast-content">
+      <header data-v-c3231c18="" class="unnnic-toast__header" data-testid="toast-header"><span data-v-26446d8e="" data-v-c3231c18="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--green-500 unnnic-icon-size--ant unnnic-icon__size--ant" data-testid="toast-type-icon" translate="no">check_circle</span>
+        <h3 data-v-c3231c18="" class="unnnic-toast__title" data-testid="toast-title">Test Alert</h3><span data-v-26446d8e="" data-v-c3231c18="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--neutral-dark unnnic-icon-size--ant unnnic-icon__size--ant unnnic--clickable unnnic-toast__close" data-testid="toast-close-icon" translate="no">close</span>
+      </header>
+      <!--v-if-->
+    </section>
+    <!--v-if-->
+  </aside>
+</transition-stub>"
 `;

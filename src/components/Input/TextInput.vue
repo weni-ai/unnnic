@@ -1,10 +1,5 @@
 <template>
-  <div
-    :class="[
-      'text-input',
-      `size--${size}`,
-    ]"
-  >
+  <div :class="['text-input', `size--${size}`]">
     <BaseInput
       v-bind="attributes"
       ref="base-input"
@@ -57,7 +52,6 @@
         @click="onIconRightClick"
       />
     </section>
-    
   </div>
 </template>
 
@@ -110,10 +104,6 @@ export default {
       type: Boolean,
       default: null,
     },
-    hasCloudyColor: {
-      type: Boolean,
-      default: null,
-    },
     size: {
       type: String,
       default: 'md',
@@ -137,7 +127,7 @@ export default {
     showClear: {
       type: Boolean,
       default: false,
-    }
+    },
   },
   emits: ['icon-left-click', 'icon-right-click', 'clear'],
   data() {
@@ -160,22 +150,9 @@ export default {
     },
 
     iconScheme() {
-      if (this.type === 'error') {
-        return 'fg-critical';
-      }
-
       if (this.isDisabled) {
         return 'fg-muted';
       }
-
-      if (this.modelValue || this.isFocused || this.forceActiveStatus) {
-        return 'color-gray-700';
-      }
-
-      if (this.hasCloudyColor) {
-        return 'fg-base';
-      }
-
       return 'fg-base';
     },
 
@@ -238,7 +215,7 @@ export default {
     top: 50%;
     transform: translateY(-50%);
     right: $unnnic-space-4;
-    
+
     display: flex;
     align-items: center;
     gap: $unnnic-space-2;

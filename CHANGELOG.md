@@ -5,6 +5,276 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.12.2 (2025-12-05)
+
+### Fixed
+
+- **Popover module exports**:
+  - Exposed `unnnicPopoverOption`/`UnnnicPopoverOption`.
+  - Added the missing `unnnicPopoverFooter` exports.
+  - `UnnnicInputDatePicker` as `VueComponent` at exports to fixes Typescript issue.
+
+# 3.12.1 (2025-12-04)
+
+### Added
+
+- **PopoverOption Component**:
+  - Added `PopoverOption` component.
+
+# 3.12.0 (2025-12-03)
+
+### Added
+
+- **SegmentedControl Component**:
+  - Introduced a segmented-control built on top of the `reka-ui` tabs primitives, composed by `SegmentedControl`, `SegmentedControlList`, `SegmentedControlTrigger`, and `SegmentedControlContent`.
+  - Documented the component in Storybook under `Navigation/SegmentedControl`, covering default, disabled, adaptive-width, and small examples to guide adoption.
+
+# 3.11.2 (2025-11-27)
+
+### Added
+
+- **DatePicker Component**:
+  - Added `periodBaseDate` prop to allow custom reference dates for predefined periods (e.g. `last-7-days`, `last-12-months`, `current-month`, `previous-month`), enabling use cases like "Last 7 days (up to 24h ago)".
+  - Added `data-testid` attributes to key interactive elements (root, navigation buttons, day/month/year cells, options, clear/apply buttons) to improve testability and coverage quality.
+  - Added new Storybook stories demonstrating multiple usage patterns:
+    - `SmallDayPicker` (type `day`, size `small`)
+    - `MonthView` (type `month`)
+    - `YearView` (type `year`)
+    - `WithMinAndMaxDateRange` (date range constrained by `minDate` and `maxDate`)
+    - `WithCustomLabelsAndDisableClear` (custom action/clear labels and `disableClear`)
+    - `CustomRelativePeriodsWithBaseDate` (custom relative filters backed by `periodBaseDate`).
+- **InputDatePicker Component**:
+  - Added `periodBaseDate` prop passthrough so external consumers can leverage the new relative date presets from `UnnnicDatePicker` (e.g. "Last 7 days (up to 24h ago)").
+  - Added new Storybook story `WithCustomRelativePeriodsAndBaseDate` showcasing InputDatePicker with relative filters backed by `periodBaseDate`.
+  - Added focused unit tests for InputDatePicker covering integration with DatePicker, v-model behavior, formatting, and dropdown open/close logic.
+
+### Changed
+
+- **DatePicker Component**:
+  - Migrated implementation to `<script setup lang="ts">` with Vue 3 Composition API while preserving the existing public API (props, events, and behavior) for backward compatibility.
+  - Normalized internal date-handling logic to use typed helpers (`dateToString`, `stringToTime`, etc.) for safer arithmetic across day, month, and year views.
+- **InputDatePicker Component**:
+  - Migrated implementation to `<script setup lang="ts">` Composition API while preserving existing props (`modelValue`, `type`, `format`, `inputFormat`, etc.), events, and visual behavior for backward compatibility.
+
+### Fixed
+
+- **DatePicker Component**:
+  - Corrected month label rendering in `type="month"` view by aligning month indices with the localized `monthsLocale` array (fixes incorrect labels and potential indexing errors).
+
+# 3.11.0 (2025-11-24)
+
+### Added
+
+- **Toast Component**: New inline notification system with ToastManager for programmatic toast display
+  - **Component**: Complete Toast component with multiple variants (success, info, warning, error)
+  - **Toast Manager**: Programmatic API for displaying toasts via `this.$unnnicCallToast()`
+  - **Storybook Documentation**: Complete documentation with interactive examples
+
+- **PageHeader Component**: New page header component for consistent page layouts
+  - **Flexible Layout**: Support for title, subtitle, and custom content slots
+  - **Slot Support**: Left and right content slots for custom elements
+
+- **Form Group Components**: New wrapper components for better form organization
+  - **CheckboxGroup**: Group multiple checkboxes with shared label and tooltip support
+  - **RadioGroup**: Group radio buttons with helper text and label styling
+
+- **Form Elements Enhancement**: Major improvements to all form components
+  - **Tooltip Support**: Added to Input, TextArea, Label, and Radio components
+  - **Helper Text**: Added to Radio and RadioGroup components
+  - **MaxLength Support**: Added to Input component with visual feedback
+  - **Disabled State**: Improved disabled state styling across all form elements
+
+- **New Icons**: Added dedicated SVG icons for form states
+  - `checkbox-checked.svg` and `checkbox-checked-disabled.svg`
+  - `checkbox-less.svg` and `checkbox-less-disabled.svg`
+  - `radio-checked.svg`
+  - `switch-checked.svg` and `switch-checked-disabled.svg`
+
+- **Icon Component**: New foreground color types added to color scheme
+
+### Changed
+
+- **Form Elements Redesign**: Complete visual and structural redesign of form components
+  - **Button**: Updated to use new design tokens, removed 'alternative' type, added transition effects
+  - **Checkbox**: Redesigned with improved styling, restored intermediate state, new disabled state handling, also removed size prop
+  - **Radio**: Complete redesign with improved structure and styling, also removed size prop
+  - **Switch**: Redesigned with updated icons and improved component styles
+  - **Input**: Enhanced with computed error handling, improved layout, dynamic styling based on size
+  - **TextArea**: Restructured with improved error handling and message display
+  - **Label**: Refactored with tooltip support and improved structure
+
+- **FormElement Component**: Major refactoring for better structure and maintainability
+  - **Label Integration**: Now uses UnnnicLabel component for improved consistency
+  - **Error Handling**: Updated to allow null type for TextArea errors
+  - **Improved Layout**: Restructured for better clarity and usability
+  - **Spacing Updates**: Enhanced spacing for improved visual hierarchy
+
+- **Tag Component**: Restructured and simplified
+  - **Default Variation**: Consolidated to contain only default variation
+  - **Improved Styling**: Enhanced with fit-content width and text overflow handling
+  - **Type Safety**: Added comprehensive prop type definitions
+
+- **Alert Component**: Simplified architecture
+  - **Toast Integration**: Integrated with new UnnnicToast component
+  - **Removed Deprecated**: Removed version variation 1.0 and AlertBanner and AlertCaller components
+  - **Streamlined version 1.1**: Removed link (linkHref prop) variation
+  - **Updated Tests**: Reflected version changes and removed deprecated props
+
+- **Tab Component**: Enhanced functionality
+  - **Disabled State**: Added support for disabled tabs
+  - **Dynamic Tooltip**: Tooltip icon size now adjusts based on tab size
+
+- **SelectSmart Component**: Improved consistency
+  - **Border Styling**: Updated border radius and border styling
+  - **Layout Adjustments**: Improved margin properties for better layout
+
+- **ChatsContact Component**: Changed to have its own tag instead of using UnnnicTag
+
+### Fixed
+
+- **Input Component**: Added transition effect for smoother border color change on focus
+- **Icon Component**: Fixed cursor styling for better UX
+
+### Refactored
+
+- **Button Component**: Replaced 'next' prop with 'clickable' for icon buttons, standardized text across stories
+- **Input Component**: Replaced label section with UnnnicLabel component for improved structure
+- **Label Component**: Renamed Props interface to LabelProps for clarity
+
+# 3.10.0 (2025-11-24)
+
+### Added
+
+- **Icon Component**: Added filled attribute to rating component in MarketplaceCard.
+
+### Changed
+
+- **Refactor**: Replace old font files with a new material-symbols font.
+
+### Fixed
+
+- **Collapse Component**: Update icon size in Collapse component from 'xs' to 'ant'.
+
+# 3.9.4 (2025-11-21)
+
+### Changed
+
+- **Border Radius Tokens**: Updated `$unnnic-radius-full` token from percentage-based to fixed pixel value. Changed from `100%` to `1000px` for more consistent circular shapes.
+
+# 3.9.3 (2025-11-18)
+
+### Added
+
+- **ChatsContact Component**: Added the `lastInteractionTimePrefix` prop, which allows adding text preceding the time of the last interaction.
+
+# 3.9.2 (2025-11-13)
+
+### Added
+
+- **DataTable Component - Infinite Scroll Support**:
+  - **Infinite Scroll Functionality**: Native infinite scroll using VueUse's `useInfiniteScroll` composable
+  - **New Props**:
+    - `infiniteScroll` (Boolean, default: false) - Enables infinite scroll functionality
+    - `infiniteScrollDistance` (Number, default: 100) - Distance in pixels from bottom to trigger the loadMore event
+    - `infiniteScrollDisabled` (Boolean, default: false) - Disables infinite scroll (useful when all data has been loaded)
+    - `isLoadingMore` (Boolean, default: false) - Indicates whether more data is being loaded for infinite scroll
+  - **New Event**: `loadMore` - Emitted when user scrolls near the bottom of the table
+  - **Visual Feedback**: Loading indicator at the bottom of the table during data loading
+  - **Seamless Integration**: Works alongside existing pagination system (can be disabled with `hidePagination`)
+  - **Fixed Headers Support**: Compatible with `fixedHeaders` prop for optimal scrolling experience
+
+# 3.9.1 (2025-11-12)
+
+### Added
+
+- **SelectSmart Component - Infinite Scroll & External Search**:
+  - **Infinite Scroll Support**: Native infinite scroll using VueUse's `useInfiniteScroll` composable
+  - **External Search Support**: New `disableInternalFilter` prop for API-based search with debounce
+  - **New Props**:
+    - `infiniteScroll` (Boolean, default: false) - Enables infinite scroll functionality
+    - `infiniteScrollDistance` (Number, default: 10) - Distance in pixels from bottom to trigger loading
+    - `infiniteScrollCanLoadMore` (Function, default: () => true) - Callback to determine if more data is available
+    - `disableInternalFilter` (Boolean, default: false) - Disables internal filtering for external search control
+  - **New Event**: `scroll-end` - Emitted when user scrolls near the bottom of options list
+  - **Public Methods**:
+    - `finishInfiniteScroll()` - Must be called after loading data to reset loading state
+    - `resetInfiniteScroll()` - Resets infinite scroll state completely
+  - **Separate Loading States**: 
+    - `isLoading` prop now only for initial load (shows centered loading, hides options)
+    - Internal `infiniteScrollLoading` state for pagination (shows loading at bottom, keeps options visible)
+  - **Visual Feedback**: Dedicated loading indicator at the end of options list during pagination
+  - **Performance Optimized**: Automatic cleanup on unmount, prevents memory leaks
+
+# 3.9.0 (2025-11-07)
+
+### Added
+
+- **Tabs Component**: 
+  - Add and register Tabs, TabsList, TabsContent, and TabsTrigger components in the main index;
+  - Add Tabs stories.
+
+# 3.8.1 (2025-11-06)
+
+### Fixed
+
+- **Tailwind CSS**: Disabled Tailwind CSS container styles to prevent query styles from affecting existing containers
+
+# 3.8.0 (2025-11-05)
+
+### Added
+
+- **Popover Component**: 
+  - Add `@vueuse/core` dependency;
+  - Add and register Popover, PopoverContent, and PopoverTrigger components in the main index;
+  - Add Popover stories.
+
+# 3.7.1 (2025-11-03)
+
+### Fixed
+
+- **Upload Modal**: Fix close event emitter
+
+# 3.7.0 (2025-10-31)
+
+### Added
+
+- **Iconify Integration**: Added the Iconify package to support icons not available in Material Symbols.
+- **Icon Component**: Implemented Iconify icon rendering logic in `Icon.vue`, expanding the component’s icon support.
+
+# 3.6.0 (2025-10-31)
+
+### Added
+
+- **Icon Mappings**: Added more mappings for older icons to point to the icons in Material Symbols for better compatibility
+
+### Changed
+
+- **Icon Component**: Updated Icon sizes to use new design tokens
+
+### Removed
+
+- **Font Files**: Deleted 5 unused font files from icomoon pack
+- **Icon Files**: Deleted approximately 265 unused icon files
+- **Icon Utilities**: Deleted icons util with old icons
+- **Icon Props**: Removed unnecessary lineHeight property
+
+# 3.5.2 (2025-10-29)
+
+### Fixed
+
+- **Tailwind CSS**: Disabled Tailwind CSS preflight styles to prevent base styles from affecting existing components (fixes unexpected behavior in TableNext loading icon)
+
+# 3.5.1 (2025-10-29)
+
+### Fixed
+
+- **Color Tokens**: Fixed `brand-weni-soft` color token referencing incorrect color after applying new color tokens (updated from `teal-100` to `teal-600` in scheme-colors)
+
+# 3.5.0 (2025-10-28)
+
+### Added
+- **Template Preview**: Add template preview compontents
+
 # 3.4.0 (2025-10-23)
 
 ### Added
