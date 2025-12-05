@@ -6,7 +6,9 @@ defineOptions({
   name: 'UnnnicDialogClose',
 });
 
-const props = defineProps<DialogCloseProps>();
+const props = withDefaults(defineProps<DialogCloseProps>(), {
+  asChild: true,
+});
 </script>
 
 <template>
@@ -19,8 +21,6 @@ const props = defineProps<DialogCloseProps>();
 </template>
 
 <style lang="scss" scoped>
-@use '@/assets/scss/unnnic' as *;
-
 .unnnic-dialog-close {
   > * {
     width: 100%;
