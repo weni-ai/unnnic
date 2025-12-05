@@ -6,7 +6,9 @@ defineOptions({
   name: 'UnnnicDrawerClose',
 });
 
-const props = defineProps<DrawerCloseProps>();
+const props = withDefaults(defineProps<DrawerCloseProps>(), {
+  asChild: true,
+});
 </script>
 
 <template>
@@ -22,14 +24,6 @@ const props = defineProps<DrawerCloseProps>();
 @use '@/assets/scss/unnnic' as *;
 
 .unnnic-drawer__close {
-  display: flex;
-
-  border: none;
-  background: none;
-  padding: 0;
-  margin: 0;
-  cursor: pointer;
-
   > * {
     width: 100%;
   }
