@@ -82,6 +82,7 @@ import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
 import EmojiPicker from './EmojiPicker/EmojiPicker.vue';
 import ChartFunnel from './ChartFunnel/ChartFunnel.vue';
 import Disclaimer from './Disclaimer/Disclaimer.vue';
+import DisclaimerV2 from './Disclaimer/DisclaimerV2.vue';
 import Drawer from './Drawer/Drawer.vue';
 import TableNext from './TableNext/TableNext.vue';
 import ModalNext from './ModalNext/ModalNext.vue';
@@ -204,6 +205,7 @@ export const components: ComponentsMap = {
   unnnicEmojiPicker: EmojiPicker,
   unnnicChartFunnel: ChartFunnel,
   unnnicDisclaimer: Disclaimer,
+  unnnicDisclaimerV2: DisclaimerV2,
   unnnicDrawer: Drawer,
   unnnicTableNext: TableNext,
   unnnicTour: Tour,
@@ -316,6 +318,7 @@ export const unnnicChartMultiLine = ChartMultiLine;
 export const unnnicEmojiPicker = EmojiPicker;
 export const unnnicChartFunnel = ChartFunnel as VueComponent;
 export const unnnicDisclaimer = Disclaimer;
+export const unnnicDisclaimerV2 = DisclaimerV2;
 export const unnnicDrawer = Drawer;
 export const unnnicTableNext = TableNext;
 export const unnnicTour = Tour;
@@ -428,6 +431,7 @@ export const UnnnicChartMultiLine = ChartMultiLine;
 export const UnnnicEmojiPicker = EmojiPicker;
 export const UnnnicChartFunnel = ChartFunnel as VueComponent;
 export const UnnnicDisclaimer = Disclaimer;
+export const UnnnicDisclaimerV2 = DisclaimerV2;
 export const UnnnicDrawer = Drawer;
 export const UnnnicTableNext = TableNext;
 export const UnnnicTour = Tour;

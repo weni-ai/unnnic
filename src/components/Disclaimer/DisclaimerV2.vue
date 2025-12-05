@@ -40,14 +40,8 @@
 import { computed } from 'vue';
 
 import UnnnicIcon from '../Icon.vue';
-import type { DisclaimerV2Props } from './types-v2';
-
-export type DisclaimerTypeV2 =
-  | 'informational'
-  | 'success'
-  | 'attention'
-  | 'error'
-  | 'neutral';
+import type { SchemeColor } from '@/types/scheme-colors';
+import type { DisclaimerTypeV2, DisclaimerV2Props } from './types-v2';
 
 defineOptions({
   name: 'UnnnicDisclaimerV2',
@@ -62,7 +56,10 @@ const props = withDefaults(defineProps<DisclaimerV2Props>(), {
 });
 
 const variant = computed(() => {
-  const variants: Record<DisclaimerTypeV2, { icon: string; scheme: string }> = {
+  const variants: Record<
+    DisclaimerTypeV2,
+    { icon: string; scheme: SchemeColor }
+  > = {
     informational: {
       icon: 'information-circle-4',
       scheme: 'blue-500',
