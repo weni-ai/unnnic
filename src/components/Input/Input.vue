@@ -13,6 +13,7 @@
       v-bind="$attrs"
       v-model="val"
       class="unnnic-form-input"
+      :forceActiveStatus="forceActiveStatus"
       :placeholder="placeholder"
       :iconLeft="iconLeft"
       :iconRight="iconRight"
@@ -25,6 +26,9 @@
       :nativeType="nativeType"
       :maxlength="maxlength"
       :disabled="disabled"
+      :readonly="readonly"
+      :showClear="showClear"
+      @clear="$emit('clear')"
     />
 
     <template
@@ -127,8 +131,22 @@ export default {
       type: Boolean,
       default: false,
     },
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
+    forceActiveStatus: {
+      type: Boolean,
+      default: false,
+    },
+    showClear: {
+      type: Boolean,
+      default: false,
+    },
   },
-  emits: ['update:modelValue'],
+  
+  emits: ['update:modelValue', 'clear'],
+
   data() {
     return {
       val: this.modelValue,

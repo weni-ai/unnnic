@@ -98,6 +98,10 @@ const schemeColor = computed(() => {
   }
 
   &__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
     @each $name, $color in $unnnic-scheme-colors {
       &.unnnic-popover-option__label--#{$name} {
         color: $color;
