@@ -1,0 +1,8 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UnnnicPopover.vue > matches the snapshot 1`] = `
+"<section data-v-ca2583de="" class="unnnic-select-popover">
+  <div data-v-ca2583de="" class="unnnic-select-popover__trigger" data-testid="popover-trigger"><button data-testid="trigger-button">Click me</button></div>
+  <!--v-if-->
+</section>"
+`;
