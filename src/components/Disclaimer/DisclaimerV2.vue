@@ -3,7 +3,7 @@
     class="unnnic-disclaimerv2"
     :class="[
       `type-${type}`,
-      { 'unnnic-disclaimerv2-align-center': showDescription && !showTitle },
+      { 'unnnic-disclaimerv2-align-center': alignCenter },
     ]"
     data-testid="disclaimerv2"
   >
@@ -19,14 +19,14 @@
 
     <section class="unnnic-disclaimerv2__content">
       <p
-        v-if="showTitle && title"
+        v-if="title"
         class="unnnic-disclaimerv2__title"
         data-testid="disclaimerv2-title"
       >
         {{ title }}
       </p>
       <p
-        v-if="showDescription && description"
+        v-if="description"
         class="unnnic-disclaimerv2__description"
         data-testid="disclaimerv2-description"
       >
@@ -49,11 +49,15 @@ defineOptions({
 
 const props = withDefaults(defineProps<DisclaimerV2Props>(), {
   title: 'Disclaimer',
-  showTitle: true,
   description: 'The quick brown fox jumps over the lazy dog',
-  showDescription: true,
   type: 'informational',
 });
+
+const hasTitle = computed(() => Boolean(props.title));
+const hasDescription = computed(() => Boolean(props.description));
+const alignCenter = computed(() =>
+  Boolean(!hasTitle.value && hasDescription.value),
+);
 
 const variant = computed(() => {
   const variants: Record<

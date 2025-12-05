@@ -24,20 +24,27 @@ describe('DisclaimerV2', () => {
     ).toBe('The quick brown fox jumps over the lazy dog');
   });
 
-  it('hides title when showTitle is false', () => {
-    const wrapper = mountComponent({ showTitle: false });
+  it('hides title when no title is provided', () => {
+    const wrapper = mountComponent({ title: '' });
 
     expect(wrapper.find('[data-testid="disclaimerv2-title"]').exists()).toBe(
       false,
     );
   });
 
-  it('hides description when showDescription is false', () => {
-    const wrapper = mountComponent({ showDescription: false });
+  it('hides description when no description is provided', () => {
+    const wrapper = mountComponent({ description: '' });
 
     expect(
       wrapper.find('[data-testid="disclaimerv2-description"]').exists(),
     ).toBe(false);
+  });
+
+  it('aligns center when only one description text line is present', () => {
+    const onlyDescription = mountComponent({ title: '' });
+    expect(onlyDescription.classes()).toContain(
+      'unnnic-disclaimerv2-align-center',
+    );
   });
 
   it.each([

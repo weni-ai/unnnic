@@ -8,8 +8,6 @@ export default {
       control: { type: 'select' },
       options: ['informational', 'success', 'attention', 'error', 'neutral'],
     },
-    showTitle: { control: { type: 'boolean' } },
-    showDescription: { control: { type: 'boolean' } },
   },
 };
 
@@ -26,8 +24,6 @@ Default.args = {
   title: 'Disclaimer',
   description: 'The quick brown fox jumps over the lazy dog',
   type: 'informational',
-  showTitle: true,
-  showDescription: true,
 };
 
 export const Success = Template.bind({});
@@ -42,8 +38,8 @@ Attention.args = {
   type: 'attention',
 };
 
-export const Error = Template.bind({});
-Error.args = {
+export const ErrorState = Template.bind({});
+ErrorState.args = {
   ...Default.args,
   type: 'error',
 };

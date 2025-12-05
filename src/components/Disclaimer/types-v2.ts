@@ -7,8 +7,6 @@ export type DisclaimerTypeV2 =
 
 export interface DisclaimerV2Props {
   title?: string;
-  showTitle?: boolean;
   description?: string;
-  showDescription?: boolean;
   type?: DisclaimerTypeV2;
 }
