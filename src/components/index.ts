@@ -36,7 +36,7 @@ import selectSmart from './SelectSmart/SelectSmart.vue';
 import select from './Select/index.vue';
 import selectItem from './Select/SelectItem.vue';
 // import selectListItem from './SelectListItem/SelectListItem.vue';
-import multiSelect from './MultiSelect/MultiSelect.vue';
+import multiSelect from './MultiSelect/index.vue';
 import alert from './Alert/Alert.vue';
 // import autocomplete from './Input/Autocomplete.vue';
 // import autocompleteSelect from './AutocompleteSelect/AutocompleteSelect.vue';
@@ -171,7 +171,7 @@ export const components: ComponentsMap = {
   unnnicSelect: select,
   unnnicSelectItem: selectItem,
   // unnnicSelectListItem: selectListItem,
-  unnnicMultiSelect: multiSelect,
+  unnnicMultiSelect: multiSelect as VueComponent,
   unnnicAlert: alert,
   unnnicCallAlert: callAlert,
   unnnicCallModal: callModal,
@@ -264,7 +264,7 @@ export const unnnicFontSize = fontSize;
 export const unnnicFormElement = formElement;
 export const unnnicInput = input;
 export const unnnicInputNext = inputNext;
-export const unnnicInputDatePicker = inputDatePicker;
+export const unnnicInputDatePicker = inputDatePicker as VueComponent;
 export const unnnicButton = button;
 export const unnnicButtonIcon = buttonIcon;
 export const unnnicSidebar = sidebar;

@@ -43,25 +43,7 @@ const props = withDefaults(defineProps<SelectOptionProps>(), {
 }
 
 .unnnic-multi-select-option {
-  //   cursor: pointer;
   border-radius: $unnnic-radius-1;
   font: $unnnic-font-emphasis;
-
-  //   TODO: remove variations styles?
-  //   &:hover:not(&--active):not(&--disabled),
-  //   &--focused {
-  //     background-color: $unnnic-color-bg-soft;
-  //   }
-
-  //   &--active {
-  //     background-color: $unnnic-color-bg-active;
-  //     color: $unnnic-color-fg-inverted;
-  //   }
-
-  //   &--disabled {
-  //     color: $unnnic-color-fg-muted;
-  //     background-color: $unnnic-color-bg-muted;
-  //     cursor: not-allowed;
-  //   }
 }
 </style>
