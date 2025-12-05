@@ -1,10 +1,10 @@
 <template>
   <div class="unnnic-multi-select">
-    <UnnnicPopover
-      v-model="openPopover"
-      :popoverBalloonProps="{ maxHeight: calculatedMaxHeight }"
+    <Popover
+      :open="openPopover"
+      @update:open="openPopover = $event"
     >
-      <template #trigger>
+      <PopoverTrigger>
         <UnnnicInput
           :modelValue="inputValue"
           class="unnnic-multi-select__input"
@@ -20,8 +20,11 @@
           showClear
           @clear="emit('update:modelValue', [])"
         />
-      </template>
-      <template #content>
+      </PopoverTrigger>
+      <PopoverContent
+        align="start"
+        :style="{ maxHeight: calculatedMaxHeight, overflow: 'auto' }"
+      >
         <div class="unnnic-multi-select__content">
           <UnnnicInput
             v-if="props.enableSearch"
@@ -44,15 +47,15 @@
             />
           </div>
         </div>
-      </template>
-    </UnnnicPopover>
+      </PopoverContent>
+    </Popover>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 
-import UnnnicPopover from '../Popover/index.vue';
+import { Popover, PopoverTrigger, PopoverContent } from '../ui/popover';
 import UnnnicInput from '../Input/Input.vue';
 import UnnnicMultiSelectOption from './MultSelectOption.vue';
 
