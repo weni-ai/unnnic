@@ -1,0 +1,81 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`UnnnicMultiSelect.vue > snapshot testing > matches snapshot with default props 1`] = `
+"<div data-v-03c7fb50="" class="unnnic-multi-select"><button data-v-9d52eef8="" data-v-03c7fb50="" class="unnnic-popover-trigger" id="reka-popover-trigger-v-0" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="" data-state="closed">
+    <section data-v-9f8d6c86="" data-v-d890ad85="" data-v-03c7fb50="" class="unnnic-form-element unnnic-form md unnnic-multi-select__input" data-testid="form-element">
+      <!--v-if-->
+      <div data-v-a0d36167="" data-v-d890ad85="" class="text-input size--md unnnic-multi-select__input unnnic-form-input" hascloudycolor="false" mask=""><input data-v-86533b41="" data-v-a0d36167="" class="unnnic-multi-select__input unnnic-form-input input-itself input size-md normal input--has-icon-right input--has-clear-icon unnnic-multi-select__input unnnic-form-input input-itself" hascloudycolor="false" placeholder="" iconleft="" iconright="keyboard_arrow_down" iconleftclickable="false" iconrightclickable="false" showclear="true" type="text" readonly="" value="">
+        <!--v-if-->
+        <section data-v-a0d36167="" class="icon-right-container"><span data-v-26446d8e="" data-v-a0d36167="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--fg-base unnnic-icon-size--ant unnnic-icon__size--ant unnnic--clickable icon-clear" data-testid="material-icon" translate="no">close</span><span data-v-26446d8e="" data-v-a0d36167="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--fg-base unnnic-icon-size--ant unnnic-icon__size--ant icon-right" data-testid="material-icon" translate="no">keyboard_arrow_down</span></section>
+      </div>
+      <!--v-if-->
+    </section>
+  </button>
+  <!--teleport start-->
+  <!--teleport end-->
+</div>"
+`;
+
+exports[`UnnnicMultiSelect.vue > snapshot testing > matches snapshot with disabled state 1`] = `
+"<div data-v-03c7fb50="" class="unnnic-multi-select"><button data-v-9d52eef8="" data-v-03c7fb50="" class="unnnic-popover-trigger" id="reka-popover-trigger-v-0" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="" data-state="closed">
+    <section data-v-9f8d6c86="" data-v-d890ad85="" data-v-03c7fb50="" class="unnnic-form-element unnnic-form-element--disabled unnnic-form md unnnic-multi-select__input" data-testid="form-element">
+      <!--v-if-->
+      <div data-v-a0d36167="" data-v-d890ad85="" class="text-input size--md unnnic-multi-select__input unnnic-form-input" hascloudycolor="false" mask=""><input data-v-86533b41="" data-v-a0d36167="" class="unnnic-multi-select__input unnnic-form-input input-itself input size-md normal input--has-icon-right input--has-clear-icon unnnic-multi-select__input unnnic-form-input input-itself" hascloudycolor="false" placeholder="" iconleft="" iconright="keyboard_arrow_down" iconleftclickable="false" iconrightclickable="false" showclear="true" type="text" readonly="" value="" disabled="">
+        <!--v-if-->
+        <section data-v-a0d36167="" class="icon-right-container"><span data-v-26446d8e="" data-v-a0d36167="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--fg-muted unnnic-icon-size--ant unnnic-icon__size--ant unnnic--clickable icon-clear" data-testid="material-icon" translate="no">close</span><span data-v-26446d8e="" data-v-a0d36167="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--fg-muted unnnic-icon-size--ant unnnic-icon__size--ant icon-right" data-testid="material-icon" translate="no">keyboard_arrow_down</span></section>
+      </div>
+      <!--v-if-->
+    </section>
+  </button>
+  <!--teleport start-->
+  <!--teleport end-->
+</div>"
+`;
+
+exports[`UnnnicMultiSelect.vue > snapshot testing > matches snapshot with multiple selected values 1`] = `
+"<div data-v-03c7fb50="" class="unnnic-multi-select"><button data-v-9d52eef8="" data-v-03c7fb50="" class="unnnic-popover-trigger" id="reka-popover-trigger-v-0" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="" data-state="closed">
+    <section data-v-9f8d6c86="" data-v-d890ad85="" data-v-03c7fb50="" class="unnnic-form-element unnnic-form md unnnic-multi-select__input" data-testid="form-element">
+      <!--v-if-->
+      <div data-v-a0d36167="" data-v-d890ad85="" class="text-input size--md unnnic-multi-select__input unnnic-form-input" hascloudycolor="false" mask=""><input data-v-86533b41="" data-v-a0d36167="" class="unnnic-multi-select__input unnnic-form-input input-itself input size-md normal input--has-icon-right input--has-clear-icon unnnic-multi-select__input unnnic-form-input input-itself" hascloudycolor="false" placeholder="" iconleft="" iconright="keyboard_arrow_down" iconleftclickable="false" iconrightclickable="false" showclear="true" type="text" readonly="" value="Option 1, Option 2">
+        <!--v-if-->
+        <section data-v-a0d36167="" class="icon-right-container"><span data-v-26446d8e="" data-v-a0d36167="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--fg-base unnnic-icon-size--ant unnnic-icon__size--ant unnnic--clickable icon-clear" data-testid="material-icon" translate="no">close</span><span data-v-26446d8e="" data-v-a0d36167="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--fg-base unnnic-icon-size--ant unnnic-icon__size--ant icon-right" data-testid="material-icon" translate="no">keyboard_arrow_down</span></section>
+      </div>
+      <!--v-if-->
+    </section>
+  </button>
+  <!--teleport start-->
+  <!--teleport end-->
+</div>"
+`;
+
+exports[`UnnnicMultiSelect.vue > snapshot testing > matches snapshot with search enabled 1`] = `
+"<div data-v-03c7fb50="" class="unnnic-multi-select"><button data-v-9d52eef8="" data-v-03c7fb50="" class="unnnic-popover-trigger" id="reka-popover-trigger-v-0" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="" data-state="closed">
+    <section data-v-9f8d6c86="" data-v-d890ad85="" data-v-03c7fb50="" class="unnnic-form-element unnnic-form md unnnic-multi-select__input" data-testid="form-element">
+      <!--v-if-->
+      <div data-v-a0d36167="" data-v-d890ad85="" class="text-input size--md unnnic-multi-select__input unnnic-form-input" hascloudycolor="false" mask=""><input data-v-86533b41="" data-v-a0d36167="" class="unnnic-multi-select__input unnnic-form-input input-itself input size-md normal input--has-icon-right input--has-clear-icon unnnic-multi-select__input unnnic-form-input input-itself" hascloudycolor="false" placeholder="" iconleft="" iconright="keyboard_arrow_down" iconleftclickable="false" iconrightclickable="false" showclear="true" type="text" readonly="" value="">
+        <!--v-if-->
+        <section data-v-a0d36167="" class="icon-right-container"><span data-v-26446d8e="" data-v-a0d36167="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--fg-base unnnic-icon-size--ant unnnic-icon__size--ant unnnic--clickable icon-clear" data-testid="material-icon" translate="no">close</span><span data-v-26446d8e="" data-v-a0d36167="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--fg-base unnnic-icon-size--ant unnnic-icon__size--ant icon-right" data-testid="material-icon" translate="no">keyboard_arrow_down</span></section>
+      </div>
+      <!--v-if-->
+    </section>
+  </button>
+  <!--teleport start-->
+  <!--teleport end-->
+</div>"
+`;
+
+exports[`UnnnicMultiSelect.vue > snapshot testing > matches snapshot with selected values 1`] = `
+"<div data-v-03c7fb50="" class="unnnic-multi-select"><button data-v-9d52eef8="" data-v-03c7fb50="" class="unnnic-popover-trigger" id="reka-popover-trigger-v-0" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="" data-state="closed">
+    <section data-v-9f8d6c86="" data-v-d890ad85="" data-v-03c7fb50="" class="unnnic-form-element unnnic-form md unnnic-multi-select__input" data-testid="form-element">
+      <!--v-if-->
+      <div data-v-a0d36167="" data-v-d890ad85="" class="text-input size--md unnnic-multi-select__input unnnic-form-input" hascloudycolor="false" mask=""><input data-v-86533b41="" data-v-a0d36167="" class="unnnic-multi-select__input unnnic-form-input input-itself input size-md normal input--has-icon-right input--has-clear-icon unnnic-multi-select__input unnnic-form-input input-itself" hascloudycolor="false" placeholder="" iconleft="" iconright="keyboard_arrow_down" iconleftclickable="false" iconrightclickable="false" showclear="true" type="text" readonly="" value="Option 1">
+        <!--v-if-->
+        <section data-v-a0d36167="" class="icon-right-container"><span data-v-26446d8e="" data-v-a0d36167="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--fg-base unnnic-icon-size--ant unnnic-icon__size--ant unnnic--clickable icon-clear" data-testid="material-icon" translate="no">close</span><span data-v-26446d8e="" data-v-a0d36167="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--fg-base unnnic-icon-size--ant unnnic-icon__size--ant icon-right" data-testid="material-icon" translate="no">keyboard_arrow_down</span></section>
+      </div>
+      <!--v-if-->
+    </section>
+  </button>
+  <!--teleport start-->
+  <!--teleport end-->
+</div>"
+`;
