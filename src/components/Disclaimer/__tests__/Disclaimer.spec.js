@@ -40,23 +40,16 @@ describe('Disclaimer', () => {
     ).toBe(false);
   });
 
-  it('aligns center when only one description text line is present', () => {
-    const onlyDescription = mountComponent({ title: '' });
-    expect(onlyDescription.classes()).toContain(
-      'unnnic-disclaimer-align-center',
-    );
-  });
-
   it.each([
-    ['informational', 'information-circle-4', 'blue-500'],
-    ['success', 'check-circle-1-1', 'green-500'],
-    ['attention', 'alert-circle-1-1', 'yellow-500'],
-    ['error', 'alert-circle-1', 'red-500'],
-    ['neutral', 'information-circle-4', 'gray-400'],
+    ['informational', 'info', 'blue-500'],
+    ['success', 'check_circle', 'green-500'],
+    ['attention', 'error', 'yellow-500'],
+    ['error', 'cancel', 'red-500'],
+    ['neutral', 'info', 'gray-400'],
   ])('applies variant %s styles', (type, icon, scheme) => {
     const wrapper = mountComponent({ type });
 
-    expect(wrapper.classes()).toContain(`type-${type}`);
+    expect(wrapper.classes()).toContain(`unnnic-disclaimer--${type}`);
 
     const iconComponent = wrapper.findComponent(
       '[data-testid="disclaimer-icon"]',
