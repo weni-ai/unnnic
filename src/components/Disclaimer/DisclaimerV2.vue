@@ -1,10 +1,6 @@
 <template>
   <section
-    class="unnnic-disclaimerv2"
-    :class="[
-      `type-${type}`,
-      { 'unnnic-disclaimerv2-align-center': alignCenter },
-    ]"
+    :class="['unnnic-disclaimerv2', `unnnic-disclaimerv2--${type}`]"
     data-testid="disclaimerv2"
   >
     <UnnnicIcon
@@ -51,12 +47,6 @@ const props = withDefaults(defineProps<DisclaimerV2Props>(), {
   type: 'informational',
 });
 
-const hasTitle = computed(() => Boolean(props.title));
-const hasDescription = computed(() => Boolean(props.description));
-const alignCenter = computed(() =>
-  Boolean(!hasTitle.value && hasDescription.value),
-);
-
 const variant = computed(() => {
   const variants: Record<
     DisclaimerTypeV2,
@@ -95,10 +85,6 @@ const variant = computed(() => {
   display: flex;
   gap: $unnnic-space-2;
 
-  &-align-center {
-    align-items: center;
-  }
-
   width: 100%;
   padding: $unnnic-space-4;
   box-sizing: border-box;
@@ -113,42 +99,41 @@ const variant = computed(() => {
   &__content {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: $unnnic-space-1;
   }
 
   &__title {
     margin: 0;
     font: $unnnic-font-action;
-    color: $unnnic-color-fg-emphasized;
   }
 
   &__description {
     margin: 0;
     font: $unnnic-font-caption-2;
-    color: $unnnic-color-fg-emphasized;
   }
 
-  &.type-informational {
+  &--informational {
     background-color: $unnnic-color-bg-info;
     border-color: $unnnic-color-border-info;
   }
 
-  &.type-success {
+  &--success {
     background-color: $unnnic-color-bg-success;
     border-color: $unnnic-color-border-success;
   }
 
-  &.type-attention {
+  &--attention {
     background-color: $unnnic-color-bg-warning;
     border-color: $unnnic-color-border-warning;
   }
 
-  &.type-error {
+  &--error {
     background-color: $unnnic-color-bg-critical;
     border-color: $unnnic-color-border-critical;
   }
 
-  &.type-neutral {
+  &--neutral {
     background-color: $unnnic-color-bg-soft;
     border-color: $unnnic-color-border-base;
   }
