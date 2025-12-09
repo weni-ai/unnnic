@@ -1,22 +1,51 @@
 import UnnnicDisclaimer from '../components/Disclaimer/Disclaimer.vue';
-import icons from '../utils/iconList';
-import colors from '../utils/colorsList';
 
 export default {
-  title: 'Example/Disclaimer',
+  title: 'Feedback/Disclaimer',
   component: UnnnicDisclaimer,
-  args: {},
   argTypes: {
-    text: { control: { type: 'text' } },
-    icon: { options: icons, control: { type: 'select' } },
-    iconColor: { options: colors, control: { type: 'select' } },
+    type: {
+      control: { type: 'select' },
+      options: ['informational', 'success', 'attention', 'error', 'neutral'],
+    },
   },
 };
 
-export const Default = {
-  args: {
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-    icon: 'alert-circle-1-1',
-    iconColor: 'feedback-yellow',
+const Template = (args) => ({
+  components: { UnnnicDisclaimer },
+  setup() {
+    return { args };
   },
+  template: '<UnnnicDisclaimer v-bind="args" />',
+});
+
+export const Default = Template.bind({});
+Default.args = {
+  title: 'Disclaimer',
+  description: 'The quick brown fox jumps over the lazy dog',
+  type: 'informational',
+};
+
+export const Success = Template.bind({});
+Success.args = {
+  ...Default.args,
+  type: 'success',
+};
+
+export const Attention = Template.bind({});
+Attention.args = {
+  ...Default.args,
+  type: 'attention',
+};
+
+export const ErrorState = Template.bind({});
+ErrorState.args = {
+  ...Default.args,
+  type: 'error',
+};
+
+export const Neutral = Template.bind({});
+Neutral.args = {
+  ...Default.args,
+  type: 'neutral',
 };

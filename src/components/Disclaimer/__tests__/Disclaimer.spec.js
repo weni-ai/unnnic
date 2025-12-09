@@ -1,72 +1,68 @@
 import { mount } from '@vue/test-utils';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 
 import Disclaimer from '../Disclaimer.vue';
 import Icon from '../../Icon.vue';
 
+const mountComponent = (props = {}) =>
+  mount(Disclaimer, {
+    props,
+    global: {
+      components: { UnnnicIcon: Icon },
+    },
+  });
+
 describe('Disclaimer', () => {
-  let wrapper;
+  it('renders default title and description', () => {
+    const wrapper = mountComponent();
 
-  beforeEach(() => {
-    wrapper = mount(Disclaimer, {
-      props: { text: 'Test Disclaimer Text' },
-      global: { components: { UnnnicIcon: Icon } },
-    });
-  });
-
-  it('renders the text prop correctly', () => {
-    expect(wrapper.find('[data-testid="disclaimer-text"]').text()).toBe(
-      'Test Disclaimer Text',
+    expect(wrapper.find('[data-testid="disclaimer-title"]').text()).toBe(
+      'Disclaimer',
+    );
+    expect(wrapper.find('[data-testid="disclaimer-description"]').text()).toBe(
+      'The quick brown fox jumps over the lazy dog',
     );
   });
 
-  it('renders the UnnnicIcon component with correct icon and color', async () => {
-    const icon = 'alert-circle-1-1';
-    const iconColor = 'neutral-darkest';
+  it('hides title when no title is provided', () => {
+    const wrapper = mountComponent({ title: '' });
 
-    await wrapper.setProps({ icon, iconColor });
+    expect(wrapper.find('[data-testid="disclaimer-title"]').exists()).toBe(
+      false,
+    );
+  });
+
+  it('hides description when no description is provided', () => {
+    const wrapper = mountComponent({ description: '' });
+
+    expect(
+      wrapper.find('[data-testid="disclaimer-description"]').exists(),
+    ).toBe(false);
+  });
+
+  it('aligns center when only one description text line is present', () => {
+    const onlyDescription = mountComponent({ title: '' });
+    expect(onlyDescription.classes()).toContain(
+      'unnnic-disclaimer-align-center',
+    );
+  });
+
+  it.each([
+    ['informational', 'information-circle-4', 'blue-500'],
+    ['success', 'check-circle-1-1', 'green-500'],
+    ['attention', 'alert-circle-1-1', 'yellow-500'],
+    ['error', 'alert-circle-1', 'red-500'],
+    ['neutral', 'information-circle-4', 'gray-400'],
+  ])('applies variant %s styles', (type, icon, scheme) => {
+    const wrapper = mountComponent({ type });
+
+    expect(wrapper.classes()).toContain(`type-${type}`);
 
     const iconComponent = wrapper.findComponent(
       '[data-testid="disclaimer-icon"]',
     );
-    expect(iconComponent.exists()).toBe(true);
+
     expect(iconComponent.props('icon')).toBe(icon);
-    expect(iconComponent.props('scheme')).toBe(iconColor);
-  });
-
-  it('renders with default icon and color if not provided', () => {
-    const iconComponent = wrapper.findComponent(
-      '[data-testid="disclaimer-icon"]',
-    );
-    expect(iconComponent.props('icon')).toBe('alert-circle-1-1');
-    expect(iconComponent.props('scheme')).toBe('neutral-darkest');
-  });
-
-  it('validates the icon prop correctly', () => {
-    const wrapperValid = mount(Disclaimer, {
-      props: { text: 'Test', icon: 'alert-circle-1-1' },
-      global: { components: { UnnnicIcon: Icon } },
-    });
-    expect(wrapperValid.exists()).toBe(true);
-
-    const wrapperInvalid = mount(Disclaimer, {
-      props: { text: 'Test', icon: 'invalid-icon' },
-      global: { components: { UnnnicIcon: Icon } },
-    });
-    expect(wrapperInvalid.exists()).toBe(true);
-  });
-
-  it('validates the iconColor prop correctly', () => {
-    const wrapperValid = mount(Disclaimer, {
-      props: { text: 'Test', iconColor: 'neutral-darkest' },
-      global: { components: { UnnnicIcon: Icon } },
-    });
-    expect(wrapperValid.exists()).toBe(true);
-
-    const wrapperInvalid = mount(Disclaimer, {
-      props: { text: 'Test', iconColor: 'invalid-color' },
-      global: { components: { UnnnicIcon: Icon } },
-    });
-    expect(wrapperInvalid.exists()).toBe(true);
+    expect(iconComponent.props('scheme')).toBe(scheme);
   });
 });
