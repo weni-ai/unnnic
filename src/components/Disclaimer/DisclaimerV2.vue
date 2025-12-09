@@ -7,15 +7,13 @@
     ]"
     data-testid="disclaimerv2"
   >
-    <section class="unnnic-disclaimerv2__icon-container">
-      <UnnnicIcon
-        class="unnnic-disclaimerv2__icon"
-        size="sm"
-        :icon="variant.icon"
-        :scheme="variant.scheme"
-        data-testid="disclaimerv2-icon"
-      />
-    </section>
+    <UnnnicIcon
+      class="unnnic-disclaimerv2__icon"
+      size="ant"
+      :icon="variant.icon"
+      :scheme="variant.scheme"
+      data-testid="disclaimerv2-icon"
+    />
 
     <section class="unnnic-disclaimerv2__content">
       <p
@@ -65,23 +63,23 @@ const variant = computed(() => {
     { icon: string; scheme: SchemeColor }
   > = {
     informational: {
-      icon: 'information-circle-4',
+      icon: 'info',
       scheme: 'blue-500',
     },
     success: {
-      icon: 'check-circle-1-1',
+      icon: 'check_circle',
       scheme: 'green-500',
     },
     attention: {
-      icon: 'alert-circle-1-1',
+      icon: 'error',
       scheme: 'yellow-500',
     },
     error: {
-      icon: 'alert-circle-1',
+      icon: 'cancel',
       scheme: 'red-500',
     },
     neutral: {
-      icon: 'information-circle-4',
+      icon: 'info',
       scheme: 'gray-400',
     },
   };
@@ -111,19 +109,6 @@ const variant = computed(() => {
   background-color: $unnnic-color-bg-soft;
 
   color: $unnnic-color-fg-emphasized;
-
-  &__icon-container {
-    display: flex;
-    padding: 3px $unnnic-space-05;
-    justify-content: center;
-    align-items: flex-start;
-    flex-shrink: 0;
-    align-self: stretch;
-  }
-
-  &__icon {
-    flex-shrink: 0;
-  }
 
   &__content {
     display: flex;
