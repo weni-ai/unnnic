@@ -45,8 +45,27 @@ const props = withDefaults(defineProps<DisclaimerProps>(), {
   title: 'Disclaimer',
   description: 'The quick brown fox jumps over the lazy dog',
   type: 'informational',
-  icon: 'alert-circle-1-1',
-  iconColor: 'neutral-darkest',
+  icon: undefined,
+  iconColor: undefined,
+});
+
+// This is a temporary solution to ensure backwards compatibility with the older version of the component.
+// TODO: It should be removed once the older version is discontinued.
+const variantCompatibleWithOlderVersion = computed((): DisclaimerType => {
+  if (props.icon) {
+    if (props.icon.includes('alert-circle')) return 'attention';
+    if (props.icon === 'info') return 'informational';
+    if (props.icon === 'error') return 'error';
+    return 'neutral';
+  }
+
+  if (props.iconColor) {
+    if (props.iconColor.includes('yellow')) return 'attention';
+    if (props.iconColor.includes('red')) return 'error';
+    return 'neutral';
+  }
+
+  return props.type;
 });
 
 const variant = computed(() => {
@@ -76,7 +95,7 @@ const variant = computed(() => {
     },
   };
 
-  return variants[props.type];
+  return variants[variantCompatibleWithOlderVersion.value || props.type];
 });
 </script>
 

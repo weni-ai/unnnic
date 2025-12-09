@@ -11,6 +11,6 @@ export interface DisclaimerProps {
   title?: string;
   description?: string;
   type?: DisclaimerType;
-  icon?: string;
-  iconColor?: SchemeColor;
+  icon?: string | undefined;
+  iconColor?: SchemeColor | undefined;
 }
