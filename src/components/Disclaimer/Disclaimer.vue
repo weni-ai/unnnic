@@ -84,14 +84,17 @@ const variant = computed(() => {
 @use '@/assets/scss/unnnic' as *;
 
 .unnnic-disclaimer {
+  $border-width: 1px;
+
   display: flex;
   gap: $unnnic-space-2;
 
   width: 100%;
-  padding: $unnnic-space-4;
+  min-height: 53px;
+  padding: calc($unnnic-space-4 - $border-width) $unnnic-space-4;
   box-sizing: border-box;
 
-  border: 1px solid $unnnic-color-border-base;
+  border: $border-width solid $unnnic-color-border-base;
   border-radius: $unnnic-radius-2;
 
   background-color: $unnnic-color-bg-soft;

@@ -49,3 +49,15 @@ Neutral.args = {
   ...Default.args,
   type: 'neutral',
 };
+
+export const OnlyTitle = Template.bind({});
+OnlyTitle.args = {
+  ...Default.args,
+  description: '',
+};
+
+export const OnlyDescription = Template.bind({});
+OnlyDescription.args = {
+  ...Default.args,
+  title: '',
+};
