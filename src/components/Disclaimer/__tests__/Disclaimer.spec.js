@@ -58,4 +58,40 @@ describe('Disclaimer', () => {
     expect(iconComponent.props('icon')).toBe(icon);
     expect(iconComponent.props('scheme')).toBe(scheme);
   });
+
+  describe('legacy compatibility', () => {
+    it.each([
+      ['alert-circle-1-1', 'error', 'yellow-500'],
+      ['info', 'info', 'blue-500'],
+      ['error', 'cancel', 'red-500'],
+      ['custom-icon', 'info', 'gray-400'],
+    ])('maps icon prop "%s" to variant', (icon, expectedIcon, scheme) => {
+      const wrapper = mountComponent({ icon });
+
+      const iconComponent = wrapper.findComponent(
+        '[data-testid="disclaimer-icon"]',
+      );
+
+      expect(iconComponent.props('icon')).toBe(expectedIcon);
+      expect(iconComponent.props('scheme')).toBe(scheme);
+    });
+
+    it.each([
+      ['feedback-yellow', 'error', 'yellow-500'],
+      ['feedback-red', 'cancel', 'red-500'],
+      ['feedback-blue', 'info', 'gray-400'],
+    ])(
+      'maps iconColor prop "%s" to variant',
+      (iconColor, expectedIcon, scheme) => {
+        const wrapper = mountComponent({ iconColor });
+
+        const iconComponent = wrapper.findComponent(
+          '[data-testid="disclaimer-icon"]',
+        );
+
+        expect(iconComponent.props('icon')).toBe(expectedIcon);
+        expect(iconComponent.props('scheme')).toBe(scheme);
+      },
+    );
+  });
 });
