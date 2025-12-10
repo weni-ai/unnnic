@@ -3,35 +3,35 @@ import { onBeforeUnmount, onMounted, ref, type Ref } from 'vue';
 const BASE_LAYER_Z_INDEX = 1000;
 const DEFAULT_STEP = 5;
 
-const activeValues: number[] = [];
-const allocations = new Map<symbol, number>();
+const layerStack: number[] = [];
+const layerHandles = new Map<symbol, number>();
 
-interface Allocation {
+interface LayerHandle {
   id: symbol;
   value: number;
 }
 
-function acquire(): Allocation {
+function pushLayer(): LayerHandle {
   const id = Symbol('layer');
-  const lastValue = activeValues.length
-    ? activeValues[activeValues.length - 1]
+  const lastValue = layerStack.length
+    ? layerStack[layerStack.length - 1]
     : BASE_LAYER_Z_INDEX;
   const value = lastValue + DEFAULT_STEP;
-  activeValues.push(value);
-  allocations.set(id, value);
+  layerStack.push(value);
+  layerHandles.set(id, value);
   return { id, value };
 }
 
-function release(id: symbol) {
-  const value = allocations.get(id);
+function popLayer(id: symbol) {
+  const value = layerHandles.get(id);
   if (value === undefined) {
     return;
   }
 
-  allocations.delete(id);
-  const index = activeValues.indexOf(value);
+  layerHandles.delete(id);
+  const index = layerStack.indexOf(value);
   if (index !== -1) {
-    activeValues.splice(index, 1);
+    layerStack.splice(index, 1);
   }
 }
 
@@ -46,16 +46,16 @@ export function useLayerZIndex(options?: LayerZIndexOptions): Ref<number> {
   let allocationId: symbol | null = null;
 
   const allocate = () => {
-    const allocation = acquire();
-    allocationId = allocation.id;
-    zIndex.value = allocation.value + offset;
+    const handle = pushLayer();
+    allocationId = handle.id;
+    zIndex.value = handle.value + offset;
   };
 
   onMounted(allocate);
 
   onBeforeUnmount(() => {
     if (allocationId) {
-      release(allocationId);
+      popLayer(allocationId);
       allocationId = null;
     }
   });
