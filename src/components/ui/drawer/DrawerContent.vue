@@ -31,7 +31,7 @@ const emits = defineEmits<DialogContentEmits>();
 const delegatedProps = reactiveOmit(props, 'class');
 const forwardedProps = useForwardPropsEmits(delegatedProps, emits);
 
-const layerZIndex = useLayerZIndex('drawer');
+const layerZIndex = useLayerZIndex();
 </script>
 
 <template>

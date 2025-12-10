@@ -1,62 +1,37 @@
 import { onBeforeUnmount, onMounted, ref, type Ref } from 'vue';
 
-export const layerScale = {
-  hide: -1,
-  base: 0,
-  drawer: 1000,
-  modal: 1100,
-  popover: 1200,
-  tooltip: 1300,
-  toast: 1400,
-} as const;
-
-export type LayerToken = keyof typeof layerScale;
-
+const BASE_LAYER_Z_INDEX = 1000;
 const DEFAULT_STEP = 5;
 
-const activeValues: Record<LayerToken, number[]> = {
-  hide: [],
-  base: [],
-  drawer: [],
-  modal: [],
-  popover: [],
-  tooltip: [],
-  toast: [],
-};
+const activeValues: number[] = [];
+const allocations = new Map<symbol, number>();
 
 interface Allocation {
   id: symbol;
-  type: LayerToken;
   value: number;
 }
 
-const allocations = new Map<symbol, Allocation>();
-
-function acquire(type: LayerToken): Allocation {
+function acquire(): Allocation {
   const id = Symbol('layer');
-  const list = activeValues[type];
-  const lastValue = list.length ? list[list.length - 1] : layerScale[type];
+  const lastValue = activeValues.length
+    ? activeValues[activeValues.length - 1]
+    : BASE_LAYER_Z_INDEX;
   const value = lastValue + DEFAULT_STEP;
-  const allocation: Allocation = { id, type, value };
-
-  list.push(value);
-  allocations.set(id, allocation);
-
-  return allocation;
+  activeValues.push(value);
+  allocations.set(id, value);
+  return { id, value };
 }
 
 function release(id: symbol) {
-  const allocation = allocations.get(id);
-  if (!allocation) {
+  const value = allocations.get(id);
+  if (value === undefined) {
     return;
   }
 
   allocations.delete(id);
-  const list = activeValues[allocation.type];
-  const index = list.indexOf(allocation.value);
-
+  const index = activeValues.indexOf(value);
   if (index !== -1) {
-    list.splice(index, 1);
+    activeValues.splice(index, 1);
   }
 }
 
@@ -64,19 +39,16 @@ export interface LayerZIndexOptions {
   offset?: number;
 }
 
-export function useLayerZIndex(
-  type: LayerToken = 'base',
-  options?: LayerZIndexOptions,
-): Ref<number> {
-  const initialValue = layerScale[type] + (options?.offset ?? 0);
-  const zIndex = ref(initialValue);
+export function useLayerZIndex(options?: LayerZIndexOptions): Ref<number> {
+  const offset = options?.offset ?? 0;
+  const zIndex = ref(BASE_LAYER_Z_INDEX + offset);
 
   let allocationId: symbol | null = null;
 
   const allocate = () => {
-    const allocation = acquire(type);
+    const allocation = acquire();
     allocationId = allocation.id;
-    zIndex.value = allocation.value + (options?.offset ?? 0);
+    zIndex.value = allocation.value + offset;
   };
 
   onMounted(allocate);

@@ -63,7 +63,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 const slots = useSlots();
 
-const popoverZIndex = useLayerZIndex('popover');
+const popoverZIndex = useLayerZIndex();
 
 const getComponentName = (vnode: VNode): string | undefined => {
   const componentType = vnode.type as { name?: string; __name?: string };

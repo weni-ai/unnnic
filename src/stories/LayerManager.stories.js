@@ -48,7 +48,7 @@ export default {
 };
 
 export const DialogWithTooltipAndPopover = {
-  name: 'Dialog + Tooltip + Popover',
+  name: 'Dialog > Tooltip + Popover',
   render: () => ({
     components: {
       Dialog,
@@ -110,7 +110,7 @@ export const DialogWithTooltipAndPopover = {
 };
 
 export const DrawerWithTooltipAndPopover = {
-  name: 'Drawer + Tooltip + Popover',
+  name: 'Drawer > Tooltip + Popover',
   render: () => ({
     components: {
       Drawer,
@@ -174,7 +174,7 @@ export const DrawerWithTooltipAndPopover = {
 };
 
 export const DrawerNextToDialog = {
-  name: 'Drawer + Dialog',
+  name: 'Drawer > Dialog',
   render: () => ({
     components: {
       Drawer,
@@ -188,8 +188,6 @@ export const DrawerNextToDialog = {
       DialogContent,
       DialogHeader,
       DialogTitle,
-      DialogFooter,
-      DialogClose,
       UnnnicButton,
     },
     setup() {
@@ -224,13 +222,58 @@ export const DrawerNextToDialog = {
             <div style="padding: 24px; color: #67738B;">
               This dialog must appear above the drawer and its overlay.
             </div>
-            <DialogFooter>
-              <DialogClose>
-                <UnnnicButton text="Close dialog" type="tertiary" />
-              </DialogClose>
-            </DialogFooter>
           </DialogContent>
         </Dialog>
+      </div>
+    `,
+  }),
+};
+
+export const DrawerOpenedFromDialog = {
+  name: 'Dialog > Drawer',
+  render: () => ({
+    components: {
+      UnnnicButton,
+      Dialog,
+      DialogContent,
+      DialogHeader,
+      DialogTitle,
+      Drawer,
+      DrawerContent,
+      DrawerHeader,
+      DrawerTitle,
+      DrawerDescription,
+    },
+    setup() {
+      const dialogOpen = ref(false);
+      const drawerOpen = ref(false);
+      return { dialogOpen, drawerOpen };
+    },
+    template: `
+      <div>
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center;">
+          <UnnnicButton text="Open dialog" type="primary" @click="dialogOpen = true" />
+        </div>
+        <Dialog v-model:open="dialogOpen">
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Dialog</DialogTitle>
+            </DialogHeader>
+            <div style="padding: 24px; color: #67738B;">
+              <UnnnicButton text="Open drawer" type="primary" @click="drawerOpen = true" /> 
+            </div>
+          </DialogContent>
+        </Dialog>
+        <Drawer v-model:open="drawerOpen">
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Drawer</DrawerTitle>
+            </DrawerHeader>
+            <div style="padding: 24px; color: #67738B;">
+              Drawer should appear above the dialog.
+            </div>
+          </DrawerContent>
+        </Drawer>
       </div>
     `,
   }),
@@ -303,7 +346,7 @@ export const NestedDialogs = {
 };
 
 export const DialogWithToast = {
-  name: 'Dialog + Toast',
+  name: 'Dialog > Toast',
   render: () => ({
     components: {
       Dialog,
