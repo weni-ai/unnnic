@@ -36,8 +36,8 @@ const delegatedProps = reactiveOmit(props, 'class', 'parentClass');
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
-const overlayZIndex = useLayerZIndex('modal', { offset: -2 });
-const modalZIndex = useLayerZIndex('modal');
+const overlayZIndex = useLayerZIndex({ offset: -2 });
+const modalZIndex = useLayerZIndex();
 
 const contentClasses = computed(() =>
   cn(

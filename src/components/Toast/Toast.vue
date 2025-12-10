@@ -111,7 +111,7 @@ const typeConfig = computed(() => {
   };
 });
 
-const toastZIndex = useLayerZIndex('toast');
+const toastZIndex = useLayerZIndex();
 
 const handleClose = () => {
   isVisible.value = false;

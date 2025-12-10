@@ -19,6 +19,7 @@ const props = withDefaults(
   defineProps<TooltipContentProps & { class?: HTMLAttributes['class'] }>(),
   {
     sideOffset: 0,
+    class: undefined,
   },
 );
 
@@ -27,7 +28,7 @@ const emits = defineEmits<TooltipContentEmits>();
 const delegatedProps = reactiveOmit(props, 'class');
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
-const tooltipZIndex = useLayerZIndex('tooltip');
+const tooltipZIndex = useLayerZIndex();
 </script>
 
 <template>

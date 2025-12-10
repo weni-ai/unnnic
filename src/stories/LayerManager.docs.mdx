@@ -4,7 +4,7 @@ import { Meta } from '@storybook/blocks';
 
 # Layer Manager Overview
 
-The layer manager exists to keep every teleported component (dialogs, drawers, popovers, tooltips, toasts, etc.) in a predictable stacking order without sprinkling arbitrary `z-index: 9999` rules across the codebase. Defining semantic bands (drawer, modal, popover, tooltip, toast) and allocating values automatically whenever a component mounts. [Reference](https://v1.chakra-ui.com/docs/components/recipes/z-index)
+The layer manager exists to keep every teleported component (dialogs, drawers, popovers, tooltips, toasts, etc.) in a predictable stacking order without sprinkling arbitrary `z-index: 9999` rules across the codebase. Instead of assigning fixed bands per component type, we keep a single global stack that increments as layers mount. [Reference](https://v1.chakra-ui.com/docs/components/recipes/z-index)
 
 ## Why avoid manual z-index values?
 
@@ -14,25 +14,25 @@ The layer manager exists to keep every teleported component (dialogs, drawers, p
 
 ## How it works here
 
-1. **Tokens, not numbers** – components request a token such as `modal`, `popover`, or `tooltip`. The manager maps those tokens to a base band (e.g., modals start at 1200, popovers at 1400).
-2. **Auto-increment** – every time a component mounts, it receives the next value in its band so nested dialogs or infinite toasts still stack correctly.
-3. **Scoped offsets** – overlays that belong to the same surface (e.g., `DialogOverlay` vs `DialogContent`) simply call `useLayerZIndex` with a small negative offset so the overlay sits just beneath the content that opened it.
+1. **Single base (1000)** – all teleported layers share the same starting point, which keeps the implementation simple and predictable.
+2. **Auto-increment** – every time a component mounts, it receives the next value in the global stack so the newest element always sits on top, regardless of type.
+3. **Scoped offsets** – overlays that belong to the same surface (e.g., `DialogOverlay` vs. `DialogContent`) call `useLayerZIndex({ offset: -2 })` so the overlay sits just beneath the content that spawned it.
 
 ```
-const modalZ = useLayerZIndex('modal');
-const overlayZ = useLayerZIndex('modal', { offset: -2 });
+const modalZ = useLayerZIndex();
+const overlayZ = useLayerZIndex({ offset: -2 });
 ```
 
 ## Benefits
 
-- **Deterministic ordering** – open a drawer, then a popover, then a dialog, then a tooltip and the visual order will always follow the semantic bands.
-- **Safer refactors** – tokens can be remapped (e.g., raise the entire `tooltip` band) without touching every component.
+- **Deterministic ordering** – the last overlay opened is always on top, no matter if it is a drawer, modal, popover, or toast.
+- **Safer refactors** – no need to chase down hard-coded z-index constants across the codebase; everything flows through the same stack.
 
 ## When to override
 
 In rare cases you might still need a custom `z-index`. Prefer to:
 
-1. Add a new token in the layer manager if the surface fits the existing pattern (e.g., `tour`).
+1. Add a dedicated offset (e.g., `useLayerZIndex({ offset: X })`) if the overlay needs to sit just above/below a sibling.
 2. Only apply inline overrides for truly one-off cases, and document why the global manager does not work there.
 
 
