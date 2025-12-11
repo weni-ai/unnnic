@@ -91,6 +91,21 @@ $popover-space: $unnnic-space-4;
 
   border-radius: $unnnic-radius-2;
   box-shadow: $unnnic-shadow-1;
+  border: 1px solid $unnnic-color-border-soft;
+
+  &::-webkit-scrollbar {
+    width: $unnnic-spacing-inline-nano;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $unnnic-color-neutral-cleanest;
+    border-radius: $unnnic-border-radius-pill;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $unnnic-color-neutral-soft;
+    border-radius: $unnnic-border-radius-pill;
+  }
 
   &--size-small {
     width: 240px;
