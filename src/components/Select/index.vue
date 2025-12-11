@@ -27,12 +27,7 @@
       <PopoverContent
         align="start"
         :class="'h-full'"
-        :style="{
-          height: calculatedPopoverHeight,
-          overflow: 'auto',
-          display: 'flex',
-          flexDirection: 'column',
-        }"
+        :style="popoverContentCustomStyles"
       >
         <div class="unnnic-select__content">
           <UnnnicInput
@@ -202,6 +197,18 @@ const calculatedPopoverHeight = computed(() => {
   return `${props.enableSearch ? size + 45 + 1 : size}px`;
 });
 
+const popoverContentCustomStyles = computed(() => {
+  const emptyFilteredOptions = filteredOptions.value?.length === 0;
+  return {
+    overflow: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: calculatedPopoverHeight.value,
+    maxHeight: emptyFilteredOptions ? 'unset' : calculatedPopoverHeight.value,
+    height: emptyFilteredOptions ? calculatedPopoverHeight.value : 'unset',
+  };
+});
+
 const selectedItem = computed(() => {
   if (props.returnObject) return props.modelValue;
 
@@ -274,7 +281,7 @@ const filteredOptions = computed(() => {
     margin: 0;
     gap: $unnnic-space-1;
 
-    height: 100%;
+    height: -webkit-fill-available;
 
     &-no-results {
       margin: 0;
