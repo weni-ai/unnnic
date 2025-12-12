@@ -4,7 +4,7 @@
     v-mask="mask"
     v-bind="attributes"
     :value="fullySanitize(modelValue)"
-    :class="[classes, { 'focus': forceActiveStatus }]"
+    :class="[classes, { focus, 'use-focus-prop': useFocusProp }]"
     :type="nativeType"
     :readonly="readonly"
   />
@@ -12,7 +12,7 @@
     v-else
     v-bind="attributes"
     :value="fullySanitize(modelValue)"
-    :class="[classes, { 'focus': forceActiveStatus }]"
+    :class="[classes, { focus, 'use-focus-prop': useFocusProp }]"
     :type="nativeType"
     :maxlength="maxlength"
     :readonly="readonly"
@@ -60,15 +60,16 @@ export default {
       type: Boolean,
       default: false,
     },
-    forceActiveStatus: {
+    useFocusProp: {
+      type: Boolean,
+      default: false,
+    },
+    focus: {
       type: Boolean,
       default: false,
     },
   },
   emits: ['update:modelValue'],
-  data() {
-    return {};
-  },
   computed: {
     attributes() {
       return {
@@ -135,8 +136,8 @@ export default {
   }
 
   &.input--has-clear-icon {
-      padding-right: $unnnic-space-10;
-    }
+    padding-right: $unnnic-space-10;
+  }
 
   &.error {
     @include input-error;

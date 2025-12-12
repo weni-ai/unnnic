@@ -13,7 +13,8 @@
       v-bind="$attrs"
       v-model="val"
       class="unnnic-form-input"
-      :forceActiveStatus="forceActiveStatus"
+      :useFocusProp="useFocusProp"
+      :focus="focus"
       :placeholder="placeholder"
       :iconLeft="iconLeft"
       :iconRight="iconRight"
@@ -47,8 +48,8 @@ import UnnnicFormElement from '../FormElement/FormElement.vue';
 
 export default {
   name: 'UnnnicInput',
-  components: { 
-    TextInput, 
+  components: {
+    TextInput,
     UnnnicFormElement,
   },
   props: {
@@ -135,7 +136,11 @@ export default {
       type: Boolean,
       default: false,
     },
-    forceActiveStatus: {
+    useFocusProp: {
+      type: Boolean,
+      default: false,
+    },
+    focus: {
       type: Boolean,
       default: false,
     },
@@ -144,7 +149,7 @@ export default {
       default: false,
     },
   },
-  
+
   emits: ['update:modelValue', 'clear'],
 
   data() {
