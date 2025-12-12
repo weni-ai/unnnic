@@ -9,7 +9,8 @@
           :modelValue="inputValue"
           class="unnnic-multi-select__input"
           readonly
-          :forceActiveStatus="openPopover"
+          useFocusProp
+          :focus="openPopover"
           :size="props.size"
           :placeholder="props.placeholder"
           :label="props.label"
