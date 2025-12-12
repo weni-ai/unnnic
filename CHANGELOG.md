@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.12.3 (2025-12-12)
+
+### Added
+
+- **DisclaimerV2 Component**:
+  - Introduced the new `UnnnicDisclaimerV2` component using `<script setup lang="ts">` and Composition API.
+  - Added support for multiple semantic variants (`informational`, `success`, `attention`, `error`, `neutral`) with dedicated icon and color mappings.
+  - Added unit tests covering default content, conditional title/description rendering, center alignment behavior, and variant-specific icon/scheme selection.
+  - Documented the component in Storybook under `Example/DisclaimerV2` with stories for each variant.
+
 # 3.12.2 (2025-12-05)
 
 ### Fixed
