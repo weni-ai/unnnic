@@ -15,9 +15,8 @@
       :hasClearIcon="showClear"
       :maxlength="maxlength"
       :readonly="readonly"
-      :forceActiveStatus="forceActiveStatus"
-      @focus="onFocus"
-      @blur="onBlur"
+      :useFocusProp="useFocusProp"
+      :focus="focus"
     />
 
     <UnnnicIcon
@@ -120,7 +119,11 @@ export default {
       type: Boolean,
       default: false,
     },
-    forceActiveStatus: {
+    useFocusProp: {
+      type: Boolean,
+      default: false,
+    },
+    focus: {
       type: Boolean,
       default: false,
     },
@@ -162,7 +165,7 @@ export default {
   },
 
   methods: {
-    focus() {
+    focusInput() {
       this.$refs['base-input'].$el.focus();
     },
 
