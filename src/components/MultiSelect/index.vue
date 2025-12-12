@@ -17,7 +17,7 @@
           :message="props.message"
           :iconRight="openPopover ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
           :disabled="props.disabled"
-          showClear
+          :showClear="!!selectedItems.length"
           @clear="emit('update:modelValue', [])"
         />
       </PopoverTrigger>
