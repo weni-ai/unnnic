@@ -80,7 +80,7 @@ const chipClass = computed(() => {
   border-radius: 600px;
   background-color: $unnnic-color-bg-base;
   border: 1px solid transparent;
-  
+
   &:hover {
     background-color: $unnnic-color-bg-soft;
   }

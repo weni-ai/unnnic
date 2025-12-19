@@ -1,8 +1,10 @@
 <template>
-  <section :class="[
-    'unnnic-checkbox-group__container',
-    `unnnic-checkbox-group--state-${state}`,
-  ]">
+  <section
+    :class="[
+      'unnnic-checkbox-group__container',
+      `unnnic-checkbox-group--state-${state}`,
+    ]"
+  >
     <UnnnicLabel
       v-if="label"
       :label="label"
@@ -52,7 +54,7 @@ const props = defineProps({
   },
 });
 </script>
-  
+
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 

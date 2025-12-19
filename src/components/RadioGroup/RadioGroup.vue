@@ -1,8 +1,10 @@
 <template>
-  <section :class="[
-    'unnnic-radio-group__container',
-    `unnnic-radio-group--state-${state}`
-  ]">
+  <section
+    :class="[
+      'unnnic-radio-group__container',
+      `unnnic-radio-group--state-${state}`,
+    ]"
+  >
     <UnnnicLabel
       v-if="label"
       :label="label"
@@ -68,11 +70,14 @@ const emit = defineEmits(['update:modelValue']);
 
 const contextModelValue = ref(props.modelValue);
 
-watch(() => props.modelValue, (newVal) => {
-  if (newVal !== contextModelValue.value) {
-    contextModelValue.value = newVal;
-  }
-});
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    if (newVal !== contextModelValue.value) {
+      contextModelValue.value = newVal;
+    }
+  },
+);
 
 watch(contextModelValue, (newVal) => {
   if (newVal !== props.modelValue) {
@@ -81,7 +86,10 @@ watch(contextModelValue, (newVal) => {
 });
 
 const computedName = computed(() => {
-  return props.name || `unnnic-radio-group-${Math.random().toString(36).substring(2, 15)}`;
+  return (
+    props.name ||
+    `unnnic-radio-group-${Math.random().toString(36).substring(2, 15)}`
+  );
 });
 
 provide('contextModelValue', contextModelValue);

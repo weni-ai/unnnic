@@ -17,8 +17,8 @@
       <template v-if="enableHtml">
         <!-- eslint-disable-next-line vue/no-v-html -->
         <section
-          v-html="text"
           data-testid="tooltip-html-content"
+          v-html="text"
         ></section>
       </template>
       <template
