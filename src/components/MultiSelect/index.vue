@@ -4,8 +4,9 @@
       :open="openPopover"
       @update:open="openPopover = $event"
     >
-      <PopoverTrigger>
+      <PopoverTrigger class="w-full">
         <UnnnicInput
+          ref="multiSelectInputRef"
           :modelValue="inputValue"
           class="unnnic-multi-select__input"
           readonly
@@ -24,7 +25,9 @@
       </PopoverTrigger>
       <PopoverContent
         align="start"
-        :style="{ maxHeight: calculatedMaxHeight, overflow: 'auto' }"
+        class="h-full"
+        :style="popoverContentCustomStyles"
+        :width="inputWidthString"
       >
         <div class="unnnic-multi-select__content">
           <UnnnicInput
@@ -35,6 +38,12 @@
             iconLeft="search"
             @update:model-value="handleSearch"
           />
+          <p
+            v-if="filteredOptions.length === 0"
+            class="unnnic-multi-select__content-no-results"
+          >
+            {{ $t('without_results') }}
+          </p>
           <div class="unnnic-multi-select__options">
             <UnnnicMultiSelectOption
               v-for="(option, index) in filteredOptions"
@@ -59,6 +68,7 @@ import { computed, ref } from 'vue';
 import { Popover, PopoverTrigger, PopoverContent } from '../ui/popover';
 import UnnnicInput from '../Input/Input.vue';
 import UnnnicMultiSelectOption from './MultSelectOption.vue';
+import { useElementSize } from '@vueuse/core';
 
 defineOptions({
   name: 'UnnnicMultiSelect',
@@ -103,8 +113,26 @@ const props = withDefaults(defineProps<MultiSelectProps>(), {
 });
 
 const openPopover = ref(false);
+const multiSelectInputRef = ref<HTMLInputElement | null>(null);
+const { width: inputWidth } = useElementSize(multiSelectInputRef);
 
-const calculatedMaxHeight = computed(() => {
+const inputWidthString = computed(() => {
+  return `${inputWidth.value}px`;
+});
+
+const popoverContentCustomStyles = computed(() => {
+  const emptyFilteredOptions = filteredOptions.value?.length === 0;
+  return {
+    overflow: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: calculatedPopoverHeight.value,
+    maxHeight: emptyFilteredOptions ? 'unset' : calculatedPopoverHeight.value,
+    height: emptyFilteredOptions ? calculatedPopoverHeight.value : 'unset',
+  };
+});
+
+const calculatedPopoverHeight = computed(() => {
   if (!props.options || props.options.length === 0) return 'unset';
   const popoverSearchGap = props.enableSearch ? 16 : 0;
   const popoverGap = 24;
@@ -212,6 +240,18 @@ const handleSelectOption = (
     padding: 0;
     margin: 0;
     gap: $unnnic-space-4;
+
+    height: -webkit-fill-available;
+
+    &-no-results {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font: $unnnic-font-emphasis;
+      color: $unnnic-color-fg-muted;
+    }
   }
 
   &__options {
