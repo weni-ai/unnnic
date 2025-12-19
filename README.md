@@ -36,7 +36,15 @@ import "@weni/unnnic-system/dist/style.css";
 
 const app = createApp(App);
 
-app.use(Unnnic);
+app.use(Unnnic, {
+  /**
+   * Optional: route every teleport-aware layer (dialogs, drawers,
+   * popovers, tooltips, toasts, etc) to a specific DOM container instead
+   * of falling back to document.body. Accepts a CSS selector or an
+   * HTMLElement reference.
+   */
+  teleportTarget: '#app',
+});
 ```
 
 3. Configuration in vite.config.js
