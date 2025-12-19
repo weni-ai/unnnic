@@ -7,8 +7,9 @@
       :open="openPopover"
       @update:open="openPopover = $event"
     >
-      <PopoverTrigger>
+      <PopoverTrigger class="w-full">
         <UnnnicInput
+          ref="inputRef"
           :modelValue="inputValue"
           class="unnnic-select__input"
           readonly
@@ -29,6 +30,7 @@
         align="start"
         :class="'h-full'"
         :style="popoverContentCustomStyles"
+        :width="inputWidthString"
       >
         <div class="unnnic-select__content">
           <UnnnicInput
@@ -67,6 +69,8 @@
 
 <script setup lang="ts">
 import { computed, ref, watch, nextTick } from 'vue';
+import { useElementSize } from '@vueuse/core';
+
 import UnnnicInput from '../Input/Input.vue';
 
 import {
@@ -128,6 +132,12 @@ const emit = defineEmits<{
 }>();
 
 const openPopover = ref(false);
+const inputRef = ref<HTMLInputElement | null>(null);
+const { width: inputWidth } = useElementSize(inputRef);
+
+const inputWidthString = computed(() => {
+  return `${inputWidth.value}px`;
+});
 
 watch(openPopover, () => {
   if (!openPopover.value) {

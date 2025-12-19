@@ -83,6 +83,7 @@ const footerChildren = computed(() => {
 });
 
 const contentWidth = computed(() => {
+  // return 'var(--reka-popper-available-width)';
   if (props.width) return props.width;
 
   const sizes = {
