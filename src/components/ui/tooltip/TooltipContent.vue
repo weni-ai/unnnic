@@ -10,6 +10,7 @@ import {
 } from 'reka-ui';
 import { cn } from '@/lib/utils';
 import { useLayerZIndex } from '@/lib/layer-manager';
+import { useTeleportTarget } from '@/lib/teleport-target';
 
 defineOptions({
   inheritAttrs: false,
@@ -29,10 +30,11 @@ const delegatedProps = reactiveOmit(props, 'class');
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 const tooltipZIndex = useLayerZIndex();
+const portalTarget = useTeleportTarget();
 </script>
 
 <template>
-  <TooltipPortal>
+  <TooltipPortal :to="portalTarget">
     <TooltipContent
       v-bind="{ ...forwarded, ...$attrs }"
       :class="
