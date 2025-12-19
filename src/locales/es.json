@@ -41,5 +41,7 @@
       "flags": "Banderas",
       "custom": "Personalizados"
     }
-  }
+  },
+  "search": "Buscar",
+  "without_results": "No se encontró ningún resultado"
 }
