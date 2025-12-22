@@ -7,12 +7,14 @@
       :open="openPopover"
       @update:open="openPopover = $event"
     >
-      <PopoverTrigger>
+      <PopoverTrigger class="w-full">
         <UnnnicInput
+          ref="selectInputRef"
           :modelValue="inputValue"
           class="unnnic-select__input"
           readonly
-          :forceActiveStatus="openPopover"
+          useFocusProp
+          :focus="openPopover"
           :size="props.size"
           :placeholder="props.placeholder"
           :label="props.label"
@@ -20,16 +22,15 @@
           :message="props.message"
           :iconRight="openPopover ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
           :disabled="props.disabled"
-          showClear
+          :showClear="!!selectedItem"
           @clear="emit('update:modelValue', '')"
         />
       </PopoverTrigger>
       <PopoverContent
         align="start"
-        :style="{
-          maxHeight: calculatedMaxHeight,
-          overflow: 'auto',
-        }"
+        :class="'h-full'"
+        :style="popoverContentCustomStyles"
+        :width="inputWidthString"
       >
         <div class="unnnic-select__content">
           <UnnnicInput
@@ -40,8 +41,15 @@
             iconLeft="search"
             @update:model-value="handleSearch"
           />
+          <p
+            v-if="filteredOptions.length === 0"
+            class="unnnic-select__content-no-results"
+          >
+            {{ $t('without_results') }}
+          </p>
           <PopoverOption
             v-for="(option, index) in filteredOptions"
+            v-else
             :key="option[props.itemValue]"
             :data-option-index="index"
             data-testid="select-option"
@@ -61,6 +69,8 @@
 
 <script setup lang="ts">
 import { computed, ref, watch, nextTick } from 'vue';
+import { useElementSize } from '@vueuse/core';
+
 import UnnnicInput from '../Input/Input.vue';
 
 import {
@@ -69,6 +79,7 @@ import {
   PopoverContent,
   PopoverOption,
 } from '../ui/popover/index';
+
 import UnnnicI18n from '../../mixins/i18n';
 
 defineOptions({
@@ -121,6 +132,12 @@ const emit = defineEmits<{
 }>();
 
 const openPopover = ref(false);
+const selectInputRef = ref<HTMLInputElement | null>(null);
+const { width: inputWidth } = useElementSize(selectInputRef);
+
+const inputWidthString = computed(() => {
+  return `${inputWidth.value}px`;
+});
 
 watch(openPopover, () => {
   if (!openPopover.value) {
@@ -141,6 +158,7 @@ watch(openPopover, () => {
 const handleKeyDown = (event) => {
   const { key } = event;
   const validKeys = ['ArrowUp', 'ArrowDown', 'Enter'];
+
   if (validKeys.includes(key)) {
     event.preventDefault();
     if (key === 'ArrowUp') {
@@ -153,7 +171,7 @@ const handleKeyDown = (event) => {
       focusedOptionIndex.value++;
       scrollToOption(focusedOptionIndex.value);
     }
-    if (key === 'Enter') {
+    if (key === 'Enter' && focusedOptionIndex.value !== -1) {
       handleSelectOption(filteredOptions.value[focusedOptionIndex.value]);
     }
   }
@@ -174,15 +192,32 @@ const scrollToOption = (
   });
 };
 
-const calculatedMaxHeight = computed(() => {
+const calculatedPopoverHeight = computed(() => {
   if (!props.options || props.options.length === 0) return 'unset';
   const popoverPadding = 32;
   const popoverGap = 4;
   // 37 = 21px (height) + 16px (padding)
   const fieldsHeight = 37 * props.optionsLines;
+  const gapsCompensation = props.enableSearch ? 1 : 2;
+
   const size =
-    fieldsHeight + popoverPadding + (popoverGap * props.optionsLines - 2);
-  return `${props.enableSearch ? size + 54 : size}px`;
+    fieldsHeight +
+    popoverPadding +
+    (popoverGap * props.optionsLines - gapsCompensation);
+
+  return `${props.enableSearch ? size + 45 + 1 : size}px`;
+});
+
+const popoverContentCustomStyles = computed(() => {
+  const emptyFilteredOptions = filteredOptions.value?.length === 0;
+  return {
+    overflow: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    minHeight: calculatedPopoverHeight.value,
+    maxHeight: emptyFilteredOptions ? 'unset' : calculatedPopoverHeight.value,
+    height: emptyFilteredOptions ? calculatedPopoverHeight.value : 'unset',
+  };
 });
 
 const selectedItem = computed(() => {
@@ -256,6 +291,18 @@ const filteredOptions = computed(() => {
     padding: 0;
     margin: 0;
     gap: $unnnic-space-1;
+
+    height: -webkit-fill-available;
+
+    &-no-results {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font: $unnnic-font-emphasis;
+      color: $unnnic-color-fg-muted;
+    }
   }
 }
 </style>

@@ -245,20 +245,20 @@ describe('UnnnicSelect.vue', () => {
   });
 
   describe('computed properties', () => {
-    test('calculatedMaxHeight returns correct value', () => {
-      const maxHeight = wrapper.vm.calculatedMaxHeight;
+    test('calculatedPopoverHeight returns correct value', () => {
+      const maxHeight = wrapper.vm.calculatedPopoverHeight;
       expect(maxHeight).toBe('235px');
     });
 
-    test('calculatedMaxHeight includes search height when enabled', async () => {
+    test('calculatedPopoverHeight includes search height when enabled', async () => {
       await wrapper.setProps({ enableSearch: true });
-      const maxHeight = wrapper.vm.calculatedMaxHeight;
-      expect(maxHeight).toBe('289px');
+      const maxHeight = wrapper.vm.calculatedPopoverHeight;
+      expect(maxHeight).toBe('282px');
     });
 
-    test('calculatedMaxHeight returns unset when no options', async () => {
+    test('calculatedPopoverHeight returns unset when no options', async () => {
       await wrapper.setProps({ options: [] });
-      const maxHeight = wrapper.vm.calculatedMaxHeight;
+      const maxHeight = wrapper.vm.calculatedPopoverHeight;
       expect(maxHeight).toBe('unset');
     });
 
@@ -360,7 +360,7 @@ describe('UnnnicSelect.vue', () => {
     test('handles empty options array', async () => {
       await wrapper.setProps({ options: [] });
       expect(wrapper.vm.filteredOptions).toEqual([]);
-      expect(wrapper.vm.calculatedMaxHeight).toBe('unset');
+      expect(wrapper.vm.calculatedPopoverHeight).toBe('unset');
     });
 
     test('handles null modelValue', async () => {

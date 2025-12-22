@@ -43,7 +43,9 @@ describe('Radio.vue', () => {
 
   test('applies disabled class when disabled prop is true', async () => {
     await wrapper.setProps({ disabled: true });
-    expect(wrapper.find('.unnnic-radio__label').classes()).toContain('unnnic-radio__label--disabled');
+    expect(wrapper.find('.unnnic-radio__label').classes()).toContain(
+      'unnnic-radio__label--disabled',
+    );
   });
 
   test('icon changes based on valueName', async () => {

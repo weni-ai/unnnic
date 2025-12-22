@@ -129,7 +129,7 @@ describe('TextInput.vue', () => {
 
   test('focus method calls focus on base input element', () => {
     const focusSpy = vi.spyOn(wrapper.vm.$refs['base-input'].$el, 'focus');
-    wrapper.vm.focus();
+    wrapper.vm.focusInput();
 
     expect(focusSpy).toHaveBeenCalled();
     focusSpy.mockRestore();

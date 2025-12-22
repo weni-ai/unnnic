@@ -3,9 +3,9 @@ import { beforeEach, describe, expect, test } from 'vitest';
 import SelectItem from '../SelectItem.vue';
 
 const createWrapper = (props = {}, slots = {}) => {
-  return mount(SelectItem, { 
+  return mount(SelectItem, {
     props,
-    slots: slots.default ? { default: slots.default } : {}
+    slots: slots.default ? { default: slots.default } : {},
   });
 };
 
@@ -76,8 +76,12 @@ describe('SelectItem.vue', () => {
     test('does not apply size class when size is empty', async () => {
       await wrapper.setProps({ size: '' });
       const labelElement = wrapper.find('.unnnic-select-item__label');
-      expect(labelElement.classes()).not.toContain('unnnic-select-item__label--md');
-      expect(labelElement.classes()).not.toContain('unnnic-select-item__label--sm');
+      expect(labelElement.classes()).not.toContain(
+        'unnnic-select-item__label--md',
+      );
+      expect(labelElement.classes()).not.toContain(
+        'unnnic-select-item__label--sm',
+      );
     });
   });
 
@@ -128,7 +132,10 @@ describe('SelectItem.vue', () => {
     });
 
     test('emits click event even when selectable is false', async () => {
-      const clickWrapper = createWrapper({ selectable: false }, { default: 'Test Item' });
+      const clickWrapper = createWrapper(
+        { selectable: false },
+        { default: 'Test Item' },
+      );
       await clickWrapper.trigger('click');
       expect(clickWrapper.emitted('click')).toBeTruthy();
       expect(clickWrapper.emitted('click').length).toBeGreaterThanOrEqual(1);
@@ -194,7 +201,7 @@ describe('SelectItem.vue', () => {
     test('has proper semantic structure', () => {
       const div = wrapper.find('.unnnic-select-item');
       const span = wrapper.find('.unnnic-select-item__label');
-      
+
       expect(div.exists()).toBe(true);
       expect(span.exists()).toBe(true);
       expect(span.element.tagName).toBe('SPAN');
@@ -214,7 +221,8 @@ describe('SelectItem.vue', () => {
     });
 
     test('handles long slot content', async () => {
-      const longText = 'This is a very long text content that should be handled properly by the component';
+      const longText =
+        'This is a very long text content that should be handled properly by the component';
       const longWrapper = createWrapper({}, { default: longText });
       const labelElement = longWrapper.find('.unnnic-select-item__label');
       expect(labelElement.text()).toBe(longText);
@@ -237,8 +245,12 @@ describe('SelectItem.vue', () => {
 
   describe('CSS class combinations', () => {
     test('applies correct classes for non-selectable inactive item', async () => {
-      await wrapper.setProps({ selectable: false, active: false, textFocused: false });
-      
+      await wrapper.setProps({
+        selectable: false,
+        active: false,
+        textFocused: false,
+      });
+
       expect(wrapper.classes()).toContain('unnnic-select-item');
       expect(wrapper.classes()).not.toContain('unnnic-select-item--selectable');
       expect(wrapper.classes()).not.toContain('unnnic--clickable');
@@ -247,8 +259,12 @@ describe('SelectItem.vue', () => {
     });
 
     test('applies correct classes for selectable active item', async () => {
-      await wrapper.setProps({ selectable: true, active: true, textFocused: false });
-      
+      await wrapper.setProps({
+        selectable: true,
+        active: true,
+        textFocused: false,
+      });
+
       expect(wrapper.classes()).toContain('unnnic-select-item');
       expect(wrapper.classes()).toContain('unnnic-select-item--selectable');
       expect(wrapper.classes()).toContain('unnnic--clickable');
@@ -257,8 +273,12 @@ describe('SelectItem.vue', () => {
     });
 
     test('applies correct classes for text-focused item', async () => {
-      await wrapper.setProps({ selectable: true, active: false, textFocused: true });
-      
+      await wrapper.setProps({
+        selectable: true,
+        active: false,
+        textFocused: true,
+      });
+
       expect(wrapper.classes()).toContain('unnnic-select-item');
       expect(wrapper.classes()).toContain('unnnic-select-item--selectable');
       expect(wrapper.classes()).toContain('unnnic--clickable');
@@ -298,11 +318,11 @@ describe('SelectItem.vue', () => {
     });
 
     test('matches snapshot with all states combined', async () => {
-      await wrapper.setProps({ 
+      await wrapper.setProps({
         size: 'md',
         selectable: true,
         active: true,
-        textFocused: true 
+        textFocused: true,
       });
       expect(wrapper.html()).toMatchSnapshot();
     });

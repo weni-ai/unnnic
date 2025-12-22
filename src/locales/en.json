@@ -42,5 +42,6 @@
       "custom": "Custom"
     }
   },
-  "search": "Search"
+  "search": "Search",
+  "without_results": "No results found"
 }

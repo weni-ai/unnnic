@@ -42,5 +42,6 @@
       "custom": "Personalizados"
     }
   },
-  "search": "Buscar"
+  "search": "Buscar",
+  "without_results": "Nenhum resultado encontrado"
 }

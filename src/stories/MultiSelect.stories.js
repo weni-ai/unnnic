@@ -97,8 +97,10 @@ export default {
       };
     },
     template: `
-      <p>modelValue: {{ exampleValue }}</p>
-      <unnnic-multi-select v-model="exampleValue" v-bind="args" @update:search="handleSearch" />
+      <div style="width: 300px;">
+        <p>modelValue: {{ exampleValue }}</p>
+        <unnnic-multi-select v-model="exampleValue" v-bind="args" @update:search="handleSearch" />
+      </div>
     `,
   }),
 };
