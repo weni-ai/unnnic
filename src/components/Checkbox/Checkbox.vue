@@ -1,7 +1,12 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <section class="unnnic-checkbox">
-    <label :class="['unnnic-checkbox__input-wrapper', {'unnnic-checkbox__input-wrapper--disabled': disabled}]">
+    <label
+      :class="[
+        'unnnic-checkbox__input-wrapper',
+        { 'unnnic-checkbox__input-wrapper--disabled': disabled },
+      ]"
+    >
       <input
         :class="[
           'unnnic-checkbox__input',
@@ -10,8 +15,8 @@
         type="checkbox"
         :disabled="disabled"
         :checked="modelValue === 'less' || modelValue"
-        @change="click"
         v-bind="pick($attrs, ['id', 'name'])"
+        @change="click"
       />
 
       <p
@@ -150,7 +155,8 @@ $checkbox-size: 21px;
       }
     }
 
-    &:disabled, &:disabled:checked {
+    &:disabled,
+    &:disabled:checked {
       background-color: $unnnic-color-bg-muted;
       border: 1px solid $unnnic-color-border-muted;
 
