@@ -199,12 +199,6 @@ export default {
 };
 </script>
 
-<style lang="scss">
-.unnnic-modal-dialog__container {
-  overflow: hidden;
-}
-</style>
-
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
