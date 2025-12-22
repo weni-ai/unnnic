@@ -97,8 +97,6 @@ const ConditionalWrapper: Component = (_, { slots }) => {
   top: 50%;
   left: 50%;
 
-  overflow: hidden;
-
   transform: translate(-50%, -50%);
 
   width: 100%;

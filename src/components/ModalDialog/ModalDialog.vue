@@ -201,6 +201,7 @@ export default {
 
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
+
 .unnnic-modal-dialog__container {
   &__left-sidebar {
     background-color: $unnnic-color-neutral-black;
