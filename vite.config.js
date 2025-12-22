@@ -26,6 +26,8 @@ export default defineConfig({
     vueJsx(),
     dts({
       insertTypesEntry: true,
+      rollupTypes: true,
+      tsconfigPath: './tsconfig.json',
       include: ['src/**/*'],
       exclude: [
         'src/**/*.stories.js',
