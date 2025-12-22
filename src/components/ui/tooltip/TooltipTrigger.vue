@@ -17,10 +17,8 @@ const props = defineProps<TooltipTriggerProps>();
 
 <style lang="scss" scoped>
 .unnnic-tooltip-trigger {
+  position: relative;
   display: inline-block;
-
-  & > * {
-    width: 100%;
-  }
+  overflow-wrap: break-word;
 }
 </style>
