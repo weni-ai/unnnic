@@ -23,6 +23,9 @@
       "audio": "Mensaje de audio"
     }
   },
+  "chats_contact": {
+    "yesterday": "Ayer"
+  },
   "emoji_picker": {
     "title": "Elige tu emoji...",
     "search": "Buscar",
