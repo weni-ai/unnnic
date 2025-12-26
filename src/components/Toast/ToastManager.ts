@@ -1,4 +1,5 @@
 import { createApp } from 'vue';
+import { getTeleportContainer } from '@/lib/teleport-target';
 import Toast from './Toast.vue';
 import type {
   ToastProps,
@@ -20,7 +21,9 @@ class ToastManager implements ToastManager {
     this.container = document.createElement('div');
     this.container.setAttribute('unnnic-toast-container', 'true');
 
-    document.body.appendChild(this.container);
+    const host = getTeleportContainer() ?? document.body;
+    host?.appendChild(this.container);
+
     return this.container;
   }
 
