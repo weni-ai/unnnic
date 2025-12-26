@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "3.12.7",
+  "version": "3.12.7-alpha-teleports.0",
   "type": "commonjs",
   "files": [
     "dist",
