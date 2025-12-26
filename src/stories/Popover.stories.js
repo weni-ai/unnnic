@@ -26,6 +26,11 @@ export default {
     },
   },
   argTypes: {
+    width: {
+      control: { type: 'text' },
+      description:
+        'The width of the popover. This overrides the size prop. If not provided, the size prop will be used.',
+    },
     size: {
       control: { type: 'select' },
       options: ['small', 'medium', 'large'],
