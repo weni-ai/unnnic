@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import type { PopoverContentEmits, PopoverContentProps } from 'reka-ui';
-import type { HTMLAttributes, VNode } from 'vue';
+import type { HTMLAttributes, Slots, VNode } from 'vue';
 import { computed, useSlots } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
 import { PopoverContent, PopoverPortal, useForwardPropsEmits } from 'reka-ui';
@@ -61,7 +61,7 @@ const delegatedProps = reactiveOmit(props, 'class', 'size');
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
-const slots = useSlots();
+const slots = useSlots() as Slots;
 
 const popoverZIndex = useLayerZIndex();
 

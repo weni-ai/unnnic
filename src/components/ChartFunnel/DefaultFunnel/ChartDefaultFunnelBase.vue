@@ -46,7 +46,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-interface FunnelStep {
+export interface FunnelStep {
   percentage: number | string;
   value: number | string;
   description: string;
