@@ -1,72 +1,97 @@
 import { mount } from '@vue/test-utils';
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 
 import Disclaimer from '../Disclaimer.vue';
 import Icon from '../../Icon.vue';
 
+const mountComponent = (props = {}) =>
+  mount(Disclaimer, {
+    props,
+    global: {
+      components: { UnnnicIcon: Icon },
+    },
+  });
+
 describe('Disclaimer', () => {
-  let wrapper;
+  it('renders default title and description', () => {
+    const wrapper = mountComponent();
 
-  beforeEach(() => {
-    wrapper = mount(Disclaimer, {
-      props: { text: 'Test Disclaimer Text' },
-      global: { components: { UnnnicIcon: Icon } },
-    });
-  });
-
-  it('renders the text prop correctly', () => {
-    expect(wrapper.find('[data-testid="disclaimer-text"]').text()).toBe(
-      'Test Disclaimer Text',
+    expect(wrapper.find('[data-testid="disclaimer-title"]').text()).toBe(
+      'Disclaimer',
+    );
+    expect(wrapper.find('[data-testid="disclaimer-description"]').text()).toBe(
+      'The quick brown fox jumps over the lazy dog',
     );
   });
 
-  it('renders the UnnnicIcon component with correct icon and color', async () => {
-    const icon = 'alert-circle-1-1';
-    const iconColor = 'neutral-darkest';
+  it('hides title when no title is provided', () => {
+    const wrapper = mountComponent({ title: '' });
 
-    await wrapper.setProps({ icon, iconColor });
+    expect(wrapper.find('[data-testid="disclaimer-title"]').exists()).toBe(
+      false,
+    );
+  });
+
+  it('hides description when no description is provided', () => {
+    const wrapper = mountComponent({ description: '' });
+
+    expect(
+      wrapper.find('[data-testid="disclaimer-description"]').exists(),
+    ).toBe(false);
+  });
+
+  it.each([
+    ['informational', 'info', 'blue-500'],
+    ['success', 'check_circle', 'green-500'],
+    ['attention', 'error', 'yellow-500'],
+    ['error', 'cancel', 'red-500'],
+    ['neutral', 'info', 'gray-400'],
+  ])('applies variant %s styles', (type, icon, scheme) => {
+    const wrapper = mountComponent({ type });
+
+    expect(wrapper.classes()).toContain(`unnnic-disclaimer--${type}`);
 
     const iconComponent = wrapper.findComponent(
       '[data-testid="disclaimer-icon"]',
     );
-    expect(iconComponent.exists()).toBe(true);
+
     expect(iconComponent.props('icon')).toBe(icon);
-    expect(iconComponent.props('scheme')).toBe(iconColor);
+    expect(iconComponent.props('scheme')).toBe(scheme);
   });
 
-  it('renders with default icon and color if not provided', () => {
-    const iconComponent = wrapper.findComponent(
-      '[data-testid="disclaimer-icon"]',
+  describe('legacy compatibility', () => {
+    it.each([
+      ['alert-circle-1-1', 'error', 'yellow-500'],
+      ['info', 'info', 'blue-500'],
+      ['error', 'cancel', 'red-500'],
+      ['custom-icon', 'info', 'gray-400'],
+    ])('maps icon prop "%s" to variant', (icon, expectedIcon, scheme) => {
+      const wrapper = mountComponent({ icon });
+
+      const iconComponent = wrapper.findComponent(
+        '[data-testid="disclaimer-icon"]',
+      );
+
+      expect(iconComponent.props('icon')).toBe(expectedIcon);
+      expect(iconComponent.props('scheme')).toBe(scheme);
+    });
+
+    it.each([
+      ['feedback-yellow', 'error', 'yellow-500'],
+      ['feedback-red', 'cancel', 'red-500'],
+      ['feedback-blue', 'info', 'gray-400'],
+    ])(
+      'maps iconColor prop "%s" to variant',
+      (iconColor, expectedIcon, scheme) => {
+        const wrapper = mountComponent({ iconColor });
+
+        const iconComponent = wrapper.findComponent(
+          '[data-testid="disclaimer-icon"]',
+        );
+
+        expect(iconComponent.props('icon')).toBe(expectedIcon);
+        expect(iconComponent.props('scheme')).toBe(scheme);
+      },
     );
-    expect(iconComponent.props('icon')).toBe('alert-circle-1-1');
-    expect(iconComponent.props('scheme')).toBe('neutral-darkest');
-  });
-
-  it('validates the icon prop correctly', () => {
-    const wrapperValid = mount(Disclaimer, {
-      props: { text: 'Test', icon: 'alert-circle-1-1' },
-      global: { components: { UnnnicIcon: Icon } },
-    });
-    expect(wrapperValid.exists()).toBe(true);
-
-    const wrapperInvalid = mount(Disclaimer, {
-      props: { text: 'Test', icon: 'invalid-icon' },
-      global: { components: { UnnnicIcon: Icon } },
-    });
-    expect(wrapperInvalid.exists()).toBe(true);
-  });
-
-  it('validates the iconColor prop correctly', () => {
-    const wrapperValid = mount(Disclaimer, {
-      props: { text: 'Test', iconColor: 'neutral-darkest' },
-      global: { components: { UnnnicIcon: Icon } },
-    });
-    expect(wrapperValid.exists()).toBe(true);
-
-    const wrapperInvalid = mount(Disclaimer, {
-      props: { text: 'Test', iconColor: 'invalid-color' },
-      global: { components: { UnnnicIcon: Icon } },
-    });
-    expect(wrapperInvalid.exists()).toBe(true);
   });
 });

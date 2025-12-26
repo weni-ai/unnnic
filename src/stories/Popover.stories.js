@@ -3,6 +3,7 @@ import {
   PopoverContent,
   PopoverFooter,
   PopoverTrigger,
+  PopoverOption,
 } from '../components/ui/popover';
 import UnnnicButton from '../components/Button/Button.vue';
 import UnnnicInput from '../components/Input/Input.vue';
@@ -81,6 +82,61 @@ export const Default = {
           </PopoverTrigger>
           <PopoverContent v-bind="args">
             <p style="margin: 0;">This is a simple popover with some content inside.</p>
+          </PopoverContent>
+        </Popover>
+      </div>
+    `,
+  }),
+};
+
+export const WithOptions = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Popover with options',
+      },
+      source: {
+        code: `
+<UnnnicPopover>
+  <UnnnicPopoverTrigger>
+    <UnnnicButton text="Open Popover with options" />
+  </UnnnicPopoverTrigger>
+  <UnnnicPopoverContent v-bind="args">
+    <UnnnicPopoverOption label="Option 1" />
+    <UnnnicPopoverOption label="Option 2" />
+    <UnnnicPopoverOption label="Option 3" />
+  </UnnnicPopoverContent>
+</UnnnicPopover>
+        `,
+      },
+    },
+  },
+  render: (args) => ({
+    components: {
+      Popover,
+      PopoverContent,
+      PopoverTrigger,
+      UnnnicButton,
+      PopoverOption,
+    },
+    setup() {
+      return { args };
+    },
+    template: `
+      <div style="display: flex; justify-content: center; align-items: center; min-height: 300px;">
+        <Popover>
+          <PopoverTrigger>
+            <UnnnicButton text="Open Popover" />
+          </PopoverTrigger>
+          <PopoverContent v-bind="args">
+            <section style="display: flex; flex-direction: column; gap: 8px;">
+              <PopoverOption label="View details" icon="info" scheme="fg-info" />
+              <PopoverOption label="Edit" icon="edit" scheme="fg-warning" />
+              <PopoverOption label="Delete" icon="delete" scheme="fg-critical" />
+              <PopoverOption label="Focused" focused />
+              <PopoverOption label="Disable" disabled />
+              <PopoverOption label="Active" active />
+            </section>
           </PopoverContent>
         </Popover>
       </div>
