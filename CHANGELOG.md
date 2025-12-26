@@ -5,7 +5,7 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-# 3.12.4 (2025-12-22)
+# 3.12.5 (2025-12-26)
 
 ### Fixed
 
@@ -14,6 +14,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Cast `unnnicInputDatePicker` to `VueComponent` to prevent leaking SFC-only prop types.
   - Typed `PopoverContent` slots using `Slots` to restore `slots.default` inference.
   - Enabled `rollupTypes` (using the project `tsconfig`) so `vite-plugin-dts` emits a resolvable `dist/index.d.ts`.
+
+# 3.12.4 (2025-12-23)
+
+### Added
+
+- **ChatsContact**:
+  - Change yesterday translations logic
+  - Added empty contact name tratative
 
 # 3.12.3 (2025-12-12)
 
