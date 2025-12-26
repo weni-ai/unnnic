@@ -10,6 +10,7 @@ import {
   useForwardPropsEmits,
 } from 'reka-ui';
 import { cn } from '@/lib/utils';
+import { useLayerZIndex } from '@/lib/layer-manager';
 
 defineOptions({
   name: 'UnnnicDialogContent',
@@ -35,6 +36,9 @@ const delegatedProps = reactiveOmit(props, 'class', 'parentClass');
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
+const overlayZIndex = useLayerZIndex({ offset: -2 });
+const modalZIndex = useLayerZIndex();
+
 const contentClasses = computed(() =>
   cn(
     'unnnic-dialog-content',
@@ -58,12 +62,14 @@ const ConditionalWrapper: Component = (_, { slots }) => {
   <DialogPortal>
     <DialogOverlay
       class="unnnic-dialog-overlay data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
+      :style="{ zIndex: overlayZIndex }"
     />
 
     <ConditionalWrapper>
       <DialogContent
         v-bind="forwarded"
         :class="contentClasses"
+        :style="{ zIndex: modalZIndex }"
       >
         <slot />
       </DialogContent>
