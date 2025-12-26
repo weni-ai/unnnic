@@ -5,6 +5,60 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.12.6 (2025-12-26)
+
+### Changed
+
+- **Disclaimer Component**:
+  - Replaced the icon names and normalized icon sizes to align with the latest design tokens.
+  - Refactored the component classes to simplify the structure and keep styling consistent across variations.
+  - Unified `DisclaimerV2` into `Disclaimer`, introducing an adapter layer so legacy props continue to work without breaking changes.
+  - Updated the related test suites to reflect the consolidated component API.
+
+# 3.12.5 (2025-12-26)
+
+### Fixed
+
+- **Type Declarations**:
+  - Exported `FunnelStep` so Chart Funnel typings remain publicly accessible.
+  - Cast `unnnicInputDatePicker` to `VueComponent` to prevent leaking SFC-only prop types.
+  - Typed `PopoverContent` slots using `Slots` to restore `slots.default` inference.
+  - Enabled `rollupTypes` (using the project `tsconfig`) so `vite-plugin-dts` emits a resolvable `dist/index.d.ts`.
+
+# 3.12.4 (2025-12-23)
+
+### Added
+
+- **ChatsContact**:
+  - Change yesterday translations logic
+  - Added empty contact name tratative
+
+# 3.12.3 (2025-12-12)
+
+### Added
+
+- **DisclaimerV2 Component**:
+  - Introduced the new `UnnnicDisclaimerV2` component using `<script setup lang="ts">` and Composition API.
+  - Added support for multiple semantic variants (`informational`, `success`, `attention`, `error`, `neutral`) with dedicated icon and color mappings.
+  - Added unit tests covering default content, conditional title/description rendering, center alignment behavior, and variant-specific icon/scheme selection.
+  - Documented the component in Storybook under `Example/DisclaimerV2` with stories for each variant.
+
+# 3.12.2 (2025-12-05)
+
+### Fixed
+
+- **Popover module exports**:
+  - Exposed `unnnicPopoverOption`/`UnnnicPopoverOption`.
+  - Added the missing `unnnicPopoverFooter` exports.
+  - `UnnnicInputDatePicker` as `VueComponent` at exports to fixes Typescript issue.
+
+# 3.12.1 (2025-12-04)
+
+### Added
+
+- **PopoverOption Component**:
+  - Added `PopoverOption` component.
+
 # 3.12.0 (2025-12-03)
 
 ### Added

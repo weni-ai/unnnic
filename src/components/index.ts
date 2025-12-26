@@ -97,6 +97,7 @@ import Popover from './ui/popover/Popover.vue';
 import PopoverContent from './ui/popover/PopoverContent.vue';
 import PopoverTrigger from './ui/popover/PopoverTrigger.vue';
 import PopoverFooter from './ui/popover/PopoverFooter.vue';
+import PopoverOption from './ui/popover/PopoverOption.vue';
 import TemplatePreview from './TemplatePreview/TemplatePreview.vue';
 import TemplatePreviewModal from './TemplatePreview/TemplatePreviewModal.vue';
 import Tabs from './ui/tabs/Tabs.vue';
@@ -225,6 +226,8 @@ export const components: ComponentsMap = {
   unnnicPopover: Popover,
   unnnicPopoverContent: PopoverContent,
   unnnicPopoverTrigger: PopoverTrigger,
+  unnnicPopoverFooter: PopoverFooter,
+  unnnicPopoverOption: PopoverOption,
   unnnicTabs: Tabs,
   unnnicTabsList: TabsList,
   unnnicTabsTrigger: TabsTrigger,
@@ -247,7 +250,7 @@ export const unnnicFontSize = fontSize;
 export const unnnicFormElement = formElement;
 export const unnnicInput = input;
 export const unnnicInputNext = inputNext;
-export const unnnicInputDatePicker = inputDatePicker;
+export const unnnicInputDatePicker = inputDatePicker as VueComponent;
 export const unnnicButton = button;
 export const unnnicButtonIcon = buttonIcon;
 export const unnnicSidebar = sidebar;
@@ -343,6 +346,7 @@ export const unnnicPopover = Popover;
 export const unnnicPopoverContent = PopoverContent;
 export const unnnicPopoverTrigger = PopoverTrigger;
 export const unnnicPopoverFooter = PopoverFooter;
+export const unnnicPopoverOption = PopoverOption as VueComponent;
 export const unnnicTemplatePreview = TemplatePreview as VueComponent;
 export const unnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
 export const unnnicTabs = Tabs;
@@ -366,7 +370,7 @@ export const UnnnicFontSize = fontSize;
 export const UnnnicFormElement = formElement;
 export const UnnnicInput = input;
 export const UnnnicInputNext = inputNext;
-export const UnnnicInputDatePicker = inputDatePicker;
+export const UnnnicInputDatePicker = inputDatePicker as VueComponent;
 export const UnnnicButton = button;
 export const UnnnicButtonIcon = buttonIcon;
 export const UnnnicSidebar = sidebar;
@@ -462,6 +466,7 @@ export const UnnnicPopover = Popover;
 export const UnnnicPopoverContent = PopoverContent;
 export const UnnnicPopoverTrigger = PopoverTrigger;
 export const UnnnicPopoverFooter = PopoverFooter;
+export const UnnnicPopoverOption = PopoverOption as VueComponent;
 export const UnnnicTemplatePreview = TemplatePreview as VueComponent;
 export const UnnnicTemplatePreviewModal = TemplatePreviewModal as VueComponent;
 export const UnnnicTabs = Tabs;
