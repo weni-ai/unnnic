@@ -34,7 +34,7 @@ import modal from './Modal/Modal.vue';
 import modalUpload from './ModalUpload/ModalUpload.vue';
 import { callAlert, callModal } from '../utils/call';
 import selectSmart from './SelectSmart/SelectSmart.vue';
-// import select from './Select/Select.vue';
+import select from './Select/index.vue';
 import selectItem from './Select/SelectItem.vue';
 // import selectListItem from './SelectListItem/SelectListItem.vue';
 import multiSelect from './MultiSelect/MultiSelect.vue';
@@ -156,7 +156,7 @@ export const components: ComponentsMap = {
   unnnicModalDialog: ModalDialog,
   unnnicModalUpload: modalUpload,
   unnnicSelectSmart: selectSmart,
-  // unnnicSelect: select,
+  unnnicSelect: select,
   unnnicSelectItem: selectItem,
   // unnnicSelectListItem: selectListItem,
   unnnicMultiSelect: multiSelect,
@@ -271,7 +271,7 @@ export const unnnicModalDialog = ModalDialog;
 export const unnnicModalNext = ModalNext;
 export const unnnicModalUpload = modalUpload;
 export const unnnicSelectSmart = selectSmart as VueComponent;
-// export const unnnicSelect = select;
+export const unnnicSelect = select as VueComponent;
 export const unnnicSelectItem = selectItem;
 // export const unnnicSelectListItem = selectListItem;
 export const unnnicMultiSelect = multiSelect as VueComponent;
@@ -385,7 +385,7 @@ export const UnnnicModalDialog = ModalDialog;
 export const UnnnicModalNext = ModalNext;
 export const UnnnicModalUpload = modalUpload;
 export const UnnnicSelectSmart = selectSmart as VueComponent;
-// export const UnnnicSelect = select;
+export const UnnnicSelect = select as VueComponent;
 export const UnnnicSelectItem = selectItem;
 // export const UnnnicSelectListItem = selectListItem;
 export const UnnnicMultiSelect = multiSelect as VueComponent;

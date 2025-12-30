@@ -4,16 +4,18 @@
     v-mask="mask"
     v-bind="attributes"
     :value="fullySanitize(modelValue)"
-    :class="classes"
+    :class="[classes, { focus, 'use-focus-prop': useFocusProp }]"
     :type="nativeType"
+    :readonly="readonly"
   />
   <input
     v-else
     v-bind="attributes"
     :value="fullySanitize(modelValue)"
-    :class="classes"
+    :class="[classes, { focus, 'use-focus-prop': useFocusProp }]"
     :type="nativeType"
     :maxlength="maxlength"
+    :readonly="readonly"
   />
 </template>
 
@@ -49,15 +51,25 @@ export default {
     },
     hasIconLeft: Boolean,
     hasIconRight: Boolean,
+    hasClearIcon: Boolean,
     maxlength: {
       type: Number,
       default: null,
     },
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
+    useFocusProp: {
+      type: Boolean,
+      default: false,
+    },
+    focus: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['update:modelValue'],
-  data() {
-    return {};
-  },
   computed: {
     attributes() {
       return {
@@ -77,6 +89,7 @@ export default {
         {
           'input--has-icon-left': this.hasIconLeft,
           'input--has-icon-right': this.hasIconRight,
+          'input--has-clear-icon': this.hasClearIcon,
         },
       ];
     },
@@ -116,6 +129,13 @@ export default {
   }
 
   &.input--has-icon-right {
+    padding-right: $unnnic-space-10;
+    &.input--has-clear-icon {
+      padding-right: $unnnic-space-10 + $unnnic-space-6;
+    }
+  }
+
+  &.input--has-clear-icon {
     padding-right: $unnnic-space-10;
   }
 
