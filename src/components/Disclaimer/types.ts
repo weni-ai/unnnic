@@ -1,7 +1,16 @@
 import type { SchemeColor } from '@/types/scheme-colors';
 
+export type DisclaimerType =
+  | 'informational'
+  | 'success'
+  | 'attention'
+  | 'error'
+  | 'neutral';
+
 export interface DisclaimerProps {
-  text: string;
-  icon?: string;
-  iconColor?: SchemeColor;
+  title?: string;
+  description?: string;
+  type?: DisclaimerType;
+  icon?: string | undefined;
+  iconColor?: SchemeColor | undefined;
 }

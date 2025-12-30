@@ -42,7 +42,7 @@
           :title="title"
           :class="{ bold: unreadMessages }"
         >
-          {{ title }}
+          {{ contactName }}
         </h1>
 
         <p
@@ -241,6 +241,16 @@ export default {
       isHovered: false,
 
       defaultTranslations: {
+        unnamed_contact: {
+          'pt-br': 'Contato sem nome',
+          en: 'Unnamed contact',
+          es: 'Contacto sin nombre',
+        },
+        yesterday: {
+          'pt-br': 'Ontem',
+          en: 'Yesterday',
+          es: 'Ayer',
+        },
         waiting_for: {
           'pt-br':
             'Aguardando há 1 minuto | Aguardando há {waitingTime} minutos',
@@ -286,13 +296,6 @@ export default {
     formattedLastInteraction() {
       if (!this.lastInteractionTime) return '';
 
-      const yesterdayTranslationsMapper = {
-        en: 'Yesterday',
-        'pt-br': 'Ontem',
-        es: 'Ayer',
-        ayer: 'Ayer',
-      };
-
       moment.locale(this.locale);
 
       const now = moment();
@@ -300,7 +303,7 @@ export default {
       const lastInteractionMoment = moment(this.lastInteractionTime);
 
       if (now.subtract(1, 'day').isSame(lastInteractionMoment, 'day')) {
-        return yesterdayTranslationsMapper[this.locale || 'en'];
+        return this.i18n('yesterday');
       }
 
       if (now.diff(lastInteractionMoment, 'hours') > 0) {
@@ -342,6 +345,9 @@ export default {
       const mediaText = mediaTextMapper[contentType];
 
       return { isMedia, contentType, lastMessage, mediaIcon, mediaText };
+    },
+    contactName() {
+      return this.title?.trim() || `[${this.i18n('unnamed_contact')}]`;
     },
     subtitle() {
       const { discussionGoal, lastMessage } = this;
