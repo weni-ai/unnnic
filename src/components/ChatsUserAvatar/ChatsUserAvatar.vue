@@ -79,7 +79,7 @@ export default {
       if (firstCodePoint) {
         return String.fromCodePoint(firstCodePoint);
       }
-      return '';
+      return '-';
     },
   },
 };
