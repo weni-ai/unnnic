@@ -11,37 +11,51 @@
       hasCloudyColor
       readonly
       :modelValue="overwrittenValue || filterText || ''"
+      @click="showCalendarFilter = true"
       @focus="showCalendarFilter = true"
     />
 
-    <div
-      class="dropdown-data"
-      :style="{ [position]: '0' }"
-    >
-      <UnnnicDatePicker
+    <Teleport to="body">
+      <div
         v-if="showCalendarFilter"
-        v-model:equivalentOption="overwrittenValue"
-        :type="type"
-        :clearLabel="clearText"
-        :actionLabel="actionText"
-        :months="months"
-        :days="days"
-        :options="options"
-        :periodBaseDate="periodBaseDate"
-        :initialStartDate="initialStartDate"
-        :initialEndDate="initialEndDate"
-        :minDate="minDate"
-        :maxDate="maxDate"
-        :disableClear="disableClear"
-        @change="emitSelectDate"
-        @submit="changeDate"
-      />
-    </div>
+        ref="dropdownData"
+        class="dropdown-data"
+        data-datepicker-dropdown="true"
+        :style="dropdownStyles"
+        @mousedown.stop
+        @click.stop
+      >
+        <UnnnicDatePicker
+          v-model:equivalentOption="overwrittenValue"
+          :type="type"
+          :clearLabel="clearText"
+          :actionLabel="actionText"
+          :months="months"
+          :days="days"
+          :options="options"
+          :periodBaseDate="periodBaseDate"
+          :initialStartDate="initialStartDate"
+          :initialEndDate="initialEndDate"
+          :minDate="minDate"
+          :maxDate="maxDate"
+          :disableClear="disableClear"
+          @change="emitSelectDate"
+          @submit="changeDate"
+        />
+      </div>
+    </Teleport>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import {
+  computed,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+  nextTick,
+} from 'vue';
 import moment from 'moment';
 
 import UnnnicInput from '../Input/Input.vue';
@@ -113,8 +127,15 @@ const emit = defineEmits<{
 }>();
 
 const dropdown = ref<HTMLElement | null>(null);
+const dropdownData = ref<HTMLElement | null>(null);
 const showCalendarFilter = ref(false);
 const overwrittenValue = ref('');
+const dropdownStyles = ref<Record<string, string>>({
+  position: 'absolute',
+  top: '0px',
+  left: '0px',
+  zIndex: '9999',
+});
 
 const filterText = computed(() => {
   const dates: string[] = [];
@@ -160,8 +181,33 @@ function emitSelectDate(date: { startDate: string; endDate: string }) {
   emit('selectDate', formattedDates);
 }
 
-function mouseout(event: MouseEvent | { target: EventTarget | null }) {
-  if (dropdown.value?.contains(event.target as Node)) {
+function updateDropdownPosition() {
+  if (!dropdown.value || !showCalendarFilter.value) {
+    return;
+  }
+
+  const rect = dropdown.value.getBoundingClientRect();
+  const top = rect.bottom + window.scrollY + 4; // 4px margin
+
+  let left = rect.left + window.scrollX;
+  if (props.position === 'right') {
+    left = rect.right + window.scrollX;
+  }
+
+  dropdownStyles.value = {
+    position: 'absolute',
+    top: `${top}px`,
+    left: `${left}px`,
+    zIndex: '9999',
+  };
+}
+
+function mouseout(event: Event) {
+  const target = event.target as Node | null;
+  if (
+    target &&
+    (dropdown.value?.contains(target) || dropdownData.value?.contains(target))
+  ) {
     return;
   }
 
@@ -183,12 +229,23 @@ function changeDate(value: { startDate: string; endDate: string }) {
   });
 }
 
+watch(showCalendarFilter, async (newValue) => {
+  if (newValue) {
+    await nextTick();
+    updateDropdownPosition();
+  }
+});
+
 onMounted(() => {
-  window.document.body.addEventListener('click', mouseout as any);
+  window.document.body.addEventListener('click', mouseout);
+  window.addEventListener('scroll', updateDropdownPosition, true);
+  window.addEventListener('resize', updateDropdownPosition);
 });
 
 onBeforeUnmount(() => {
-  window.document.body.removeEventListener('click', mouseout as any);
+  window.document.body.removeEventListener('click', mouseout);
+  window.removeEventListener('scroll', updateDropdownPosition, true);
+  window.removeEventListener('resize', updateDropdownPosition);
 });
 </script>
 
@@ -200,21 +257,6 @@ onBeforeUnmount(() => {
 .dropdown {
   position: relative;
   display: inline-block;
-
-  .dropdown-data {
-    position: absolute;
-    pointer-events: none;
-    display: none;
-    top: 100%;
-    z-index: 2;
-    margin-top: $unnnic-spacing-stack-nano;
-    width: max-content;
-  }
-
-  &.active .dropdown-data {
-    pointer-events: auto;
-    display: block;
-  }
 
   .input {
     display: inline-block;
@@ -228,5 +270,10 @@ onBeforeUnmount(() => {
       color: $unnnic-color-neutral-cloudy;
     }
   }
+}
+
+.dropdown-data {
+  pointer-events: auto;
+  width: max-content;
 }
 </style>
