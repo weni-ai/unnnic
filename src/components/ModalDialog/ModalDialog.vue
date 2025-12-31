@@ -77,8 +77,8 @@
             class="unnnic-modal-dialog__container__actions__primary-button"
             @click.stop="$emit('primaryButtonClick')"
           />
-          </UnnnicDialogFooter>
-        </section>
+        </UnnnicDialogFooter>
+      </section>
     </UnnnicDialogContent>
   </UnnnicDialog>
 </template>
@@ -102,8 +102,8 @@ export default {
     UnnnicDialogTitle,
     UnnnicDialogFooter,
   },
-  inheritAttrs: false,
   mixins: [UnnnicI18n],
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: Boolean,
@@ -185,6 +185,19 @@ export default {
     persistentHandler(event) {
       if (this.persistent) {
         event.preventDefault();
+        return;
+      }
+
+      // Check if the click is on a datepicker dropdown (teleported element)
+      const target = event.target;
+      if (target && target.closest) {
+        const isDatePickerDropdown = target.closest(
+          '[data-datepicker-dropdown]',
+        );
+        if (isDatePickerDropdown) {
+          event.preventDefault();
+          return;
+        }
       }
     },
   },
