@@ -28,6 +28,7 @@ import checkbox from './Checkbox/Checkbox.vue';
 import checkboxGroup from './CheckboxGroup/CheckboxGroup.vue';
 import collapse from './Collapse/Collapse.vue';
 import radio from './Radio/Radio.vue';
+import radioGroup from './RadioGroup/RadioGroup.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
 import modal from './Modal/Modal.vue';
 import modalUpload from './ModalUpload/ModalUpload.vue';
@@ -155,6 +156,7 @@ export const components: ComponentsMap = {
   unnnicCheckboxGroup: checkboxGroup,
   unnnicCollapse: collapse,
   unnnicRadio: radio,
+  unnnicRadioGroup: radioGroup,
   unnnicLanguageSelect: languageSelect,
   unnnicModal: modal,
   unnnicModalNext: ModalNext,
@@ -276,6 +278,7 @@ export const unnnicCheckbox = checkbox;
 export const unnnicCheckboxGroup = checkboxGroup;
 export const unnnicCollapse = collapse;
 export const unnnicRadio = radio;
+export const unnnicRadioGroup = radioGroup;
 export const unnniclanguageSelect = languageSelect as VueComponent;
 export const unnnicModal = modal;
 export const unnnicModalDialog = ModalDialog;
@@ -396,6 +399,7 @@ export const UnnnicCheckbox = checkbox;
 export const UnnnicCheckboxGroup = checkboxGroup;
 export const UnnnicCollapse = collapse;
 export const UnnnicRadio = radio;
+export const UnnnicRadioGroup = radioGroup;
 export const UnnniclanguageSelect = languageSelect as VueComponent;
 export const UnnnicModal = modal;
 export const UnnnicModalDialog = ModalDialog;
