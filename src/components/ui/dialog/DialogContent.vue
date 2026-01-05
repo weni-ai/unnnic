@@ -11,6 +11,7 @@ import {
 } from 'reka-ui';
 import { cn } from '@/lib/utils';
 import { useLayerZIndex } from '@/lib/layer-manager';
+import { useTeleportTarget } from '@/lib/teleport-target';
 
 defineOptions({
   name: 'UnnnicDialogContent',
@@ -38,6 +39,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 const overlayZIndex = useLayerZIndex({ offset: -2 });
 const modalZIndex = useLayerZIndex();
+const portalTarget = useTeleportTarget();
 
 const contentClasses = computed(() =>
   cn(
@@ -59,7 +61,7 @@ const ConditionalWrapper: Component = (_, { slots }) => {
 </script>
 
 <template>
-  <DialogPortal>
+  <DialogPortal :to="portalTarget">
     <DialogOverlay
       class="unnnic-dialog-overlay data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0"
       :style="{ zIndex: overlayZIndex }"
