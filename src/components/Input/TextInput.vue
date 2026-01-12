@@ -12,9 +12,11 @@
       class="input-itself"
       :hasIconLeft="!!iconLeft"
       :hasIconRight="!!iconRight || allowTogglePassword"
+      :hasClearIcon="showClear"
       :maxlength="maxlength"
-      @focus="onFocus"
-      @blur="onBlur"
+      :readonly="readonly"
+      :useFocusProp="useFocusProp"
+      :focus="focus"
     />
 
     <UnnnicIcon
@@ -27,18 +29,28 @@
       @click="onIconLeftClick"
     />
 
-    <UnnnicIcon
-      v-if="iconRightSvg"
-      :scheme="iconScheme"
-      :icon="iconRightSvg"
-      size="ant"
-      :clickable="iconRightClickable || allowTogglePassword"
-      :class="[
-        'icon-right',
-        { clickable: iconRightClickable || allowTogglePassword },
-      ]"
-      @click="onIconRightClick"
-    />
+    <section class="icon-right-container">
+      <UnnnicIcon
+        v-if="showClear"
+        class="icon-clear"
+        :scheme="iconScheme"
+        icon="close"
+        size="ant"
+        clickable
+        @click.stop="onClearClick"
+      />
+
+      <UnnnicIcon
+        v-if="iconRightSvg"
+        :scheme="iconScheme"
+        :icon="iconRightSvg"
+        size="ant"
+        :clickable="iconRightClickable || allowTogglePassword"
+        class="icon-right"
+        :class="{ clickable: iconRightClickable || allowTogglePassword }"
+        @click="onIconRightClick"
+      />
+    </section>
   </div>
 </template>
 
@@ -103,8 +115,24 @@ export default {
       type: Boolean,
       default: false,
     },
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
+    useFocusProp: {
+      type: Boolean,
+      default: false,
+    },
+    focus: {
+      type: Boolean,
+      default: false,
+    },
+    showClear: {
+      type: Boolean,
+      default: false,
+    },
   },
-  emits: ['icon-left-click', 'icon-right-click'],
+  emits: ['icon-left-click', 'icon-right-click', 'clear'],
   data() {
     return {
       isFocused: false,
@@ -128,7 +156,6 @@ export default {
       if (this.isDisabled) {
         return 'fg-muted';
       }
-
       return 'fg-base';
     },
 
@@ -138,7 +165,7 @@ export default {
   },
 
   methods: {
-    focus() {
+    focusInput() {
       this.$refs['base-input'].$el.focus();
     },
 
@@ -152,6 +179,10 @@ export default {
 
     onIconLeftClick() {
       if (this.iconLeftClickable) this.$emit('icon-left-click');
+    },
+
+    onClearClick() {
+      this.$emit('clear');
     },
 
     onIconRightClick() {
@@ -171,25 +202,33 @@ export default {
 }
 
 .icon {
-  &-left,
-  &-right {
-    &:not(.clickable) {
-      pointer-events: none;
-    }
-  }
-
   &-left {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     left: $unnnic-space-4;
+
+    &:not(.clickable) {
+      pointer-events: none;
+    }
   }
 
-  &-right {
+  &-right-container {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     right: $unnnic-space-4;
+
+    display: flex;
+    align-items: center;
+    gap: $unnnic-space-2;
+
+    .icon-clear {
+      cursor: pointer;
+    }
+    .icon-right:not(.clickable) {
+      pointer-events: none;
+    }
   }
 }
 </style>
