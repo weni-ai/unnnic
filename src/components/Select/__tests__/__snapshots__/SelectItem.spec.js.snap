@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SelectItem.vue > snapshot testing > matches snapshot with active state 1`] = `"<div class="unnnic-select-item unnnic-select-item__active unnnic--clickable unnnic-select-item--selectable"><span class="unnnic-select-item__label unnnic-select-item__label--">Test Item</span></div>"`;
+
+exports[`SelectItem.vue > snapshot testing > matches snapshot with all states combined 1`] = `"<div class="unnnic-select-item unnnic-select-item__active unnnic--clickable unnnic-select-item--selectable text-focused"><span class="unnnic-select-item__label unnnic-select-item__label--md">Test Item</span></div>"`;
+
+exports[`SelectItem.vue > snapshot testing > matches snapshot with default props 1`] = `"<div class="unnnic-select-item unnnic--clickable unnnic-select-item--selectable"><span class="unnnic-select-item__label unnnic-select-item__label--">Test Item</span></div>"`;
+
+exports[`SelectItem.vue > snapshot testing > matches snapshot with md size 1`] = `"<div class="unnnic-select-item unnnic--clickable unnnic-select-item--selectable"><span class="unnnic-select-item__label unnnic-select-item__label--md">Test Item</span></div>"`;
+
+exports[`SelectItem.vue > snapshot testing > matches snapshot with non-selectable state 1`] = `"<div class="unnnic-select-item"><span class="unnnic-select-item__label unnnic-select-item__label--">Test Item</span></div>"`;
+
+exports[`SelectItem.vue > snapshot testing > matches snapshot with sm size 1`] = `"<div class="unnnic-select-item unnnic--clickable unnnic-select-item--selectable"><span class="unnnic-select-item__label unnnic-select-item__label--sm">Test Item</span></div>"`;
+
+exports[`SelectItem.vue > snapshot testing > matches snapshot with textFocused state 1`] = `"<div class="unnnic-select-item unnnic--clickable unnnic-select-item--selectable text-focused"><span class="unnnic-select-item__label unnnic-select-item__label--">Test Item</span></div>"`;

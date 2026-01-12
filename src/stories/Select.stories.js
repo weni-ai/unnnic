@@ -1,4 +1,4 @@
-import UnnnicMultiSelect from '../components/MultiSelect/index.vue';
+import UnnnicSelect from '../components/Select/index.vue';
 
 const options = [
   { label: 'Option 1', value: 'option1', altValue: 'alt_value_option1' },
@@ -14,14 +14,14 @@ const options = [
 ];
 
 export default {
-  title: 'Form/MultiSelect',
-  component: UnnnicMultiSelect,
+  title: 'Form/Select',
+  component: UnnnicSelect,
   tags: ['autodocs'],
   parameters: {
     docs: {
       description: {
         component:
-          'MultiSelect is designed to solve common problems related to multiple option selection.',
+          'Select is designed to solve common problems related to option selection.',
       },
     },
   },
@@ -38,7 +38,7 @@ export default {
     },
     modelValue: {
       description:
-        'Model variable. Its type will always match a list of the return type of the key specified by `itemValue`, or the entire options object when the `returnObject` property is set to `true`.',
+        'Model variable. Its type will always match the return type of the key specified by `itemValue`, or the entire options object when `returnObject` prop is set to `true`.',
     },
     returnObject: {
       description:
@@ -84,7 +84,7 @@ export default {
     },
   },
   render: (args) => ({
-    components: { UnnnicMultiSelect },
+    components: { UnnnicSelect },
     setup() {
       const handleSearch = (value) => {
         args.search = value;
@@ -93,14 +93,15 @@ export default {
     },
     data() {
       return {
-        exampleValue: [],
+        exampleValue: null,
       };
     },
     template: `
       <div style="width: 300px;">
         <p>modelValue: {{ exampleValue }}</p>
-        <unnnic-multi-select v-model="exampleValue" v-bind="args" @update:search="handleSearch" />
+        <unnnic-select v-model="exampleValue" v-bind="args" @update:search="handleSearch" />
       </div>
+      
     `,
   }),
 };

@@ -13,6 +13,8 @@
       v-bind="$attrs"
       v-model="val"
       class="unnnic-form-input"
+      :useFocusProp="useFocusProp"
+      :focus="focus"
       :placeholder="placeholder"
       :iconLeft="iconLeft"
       :iconRight="iconRight"
@@ -25,6 +27,9 @@
       :nativeType="nativeType"
       :maxlength="maxlength"
       :disabled="disabled"
+      :readonly="readonly"
+      :showClear="showClear"
+      @clear="$emit('clear')"
     />
 
     <template
@@ -43,8 +48,8 @@ import UnnnicFormElement from '../FormElement/FormElement.vue';
 
 export default {
   name: 'UnnnicInput',
-  components: { 
-    TextInput, 
+  components: {
+    TextInput,
     UnnnicFormElement,
   },
   props: {
@@ -127,8 +132,26 @@ export default {
       type: Boolean,
       default: false,
     },
+    readonly: {
+      type: Boolean,
+      default: false,
+    },
+    useFocusProp: {
+      type: Boolean,
+      default: false,
+    },
+    focus: {
+      type: Boolean,
+      default: false,
+    },
+    showClear: {
+      type: Boolean,
+      default: false,
+    },
   },
-  emits: ['update:modelValue'],
+
+  emits: ['update:modelValue', 'clear'],
+
   data() {
     return {
       val: this.modelValue,

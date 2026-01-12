@@ -44,5 +44,7 @@
       "flags": "Flags",
       "custom": "Custom"
     }
-  }
+  },
+  "search": "Search",
+  "without_results": "No results found"
 }
