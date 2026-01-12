@@ -1,51 +1,61 @@
 <template>
-  <div
-    ref="dropdown"
-    :class="['dropdown', { active: showCalendarFilter, 'fill-w': fillW }]"
-  >
-    <UnnnicInput
-      :class="['input', { 'date-picker-input-next': next }]"
-      :size="size"
-      :iconLeft="iconPosition === 'left' ? 'calendar_month' : undefined"
-      :iconRight="iconPosition === 'right' ? 'calendar_month' : undefined"
-      hasCloudyColor
-      readonly
-      :modelValue="overwrittenValue || filterText || ''"
-      @focus="showCalendarFilter = true"
-    />
+  <div :class="['dropdown', { 'fill-w': fillW }]">
+    <UnnnicPopover v-model:open="isPopoverOpen">
+      <UnnnicPopoverTrigger :asChild="true">
+        <UnnnicInput
+          data-testid="input"
+          :class="['input', { 'date-picker-input-next': next }]"
+          :size="size"
+          :iconLeft="iconPosition === 'left' ? 'calendar_month' : undefined"
+          :iconRight="iconPosition === 'right' ? 'calendar_month' : undefined"
+          readonly
+          :modelValue="overwrittenValue || filterText || ''"
+          @click="openPopover"
+          @focus="openPopover"
+        />
+      </UnnnicPopoverTrigger>
 
-    <div
-      class="dropdown-data"
-      :style="{ [position]: '0' }"
-    >
-      <UnnnicDatePicker
-        v-if="showCalendarFilter"
-        v-model:equivalentOption="overwrittenValue"
-        :type="type"
-        :clearLabel="clearText"
-        :actionLabel="actionText"
-        :months="months"
-        :days="days"
-        :options="options"
-        :periodBaseDate="periodBaseDate"
-        :initialStartDate="initialStartDate"
-        :initialEndDate="initialEndDate"
-        :minDate="minDate"
-        :maxDate="maxDate"
-        :disableClear="disableClear"
-        @change="emitSelectDate"
-        @submit="changeDate"
-      />
-    </div>
+      <UnnnicPopoverContent
+        width="auto"
+        side="bottom"
+        :align="popoverAlign"
+        class="date-picker-popover-content"
+      >
+        <UnnnicDatePicker
+          v-model:equivalentOption="overwrittenValue"
+          data-testid="date-picker"
+          variant="popover"
+          :type="type"
+          :clearLabel="clearText"
+          :actionLabel="actionText"
+          :months="months"
+          :days="days"
+          :options="options"
+          :periodBaseDate="periodBaseDate"
+          :initialStartDate="initialStartDate"
+          :initialEndDate="initialEndDate"
+          :minDate="minDate"
+          :maxDate="maxDate"
+          :disableClear="disableClear"
+          @change="emitSelectDate"
+          @submit="changeDate"
+        />
+      </UnnnicPopoverContent>
+    </UnnnicPopover>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, ref } from 'vue';
 import moment from 'moment';
 
 import UnnnicInput from '../Input/Input.vue';
 import UnnnicDatePicker from '../DatePicker/DatePicker.vue';
+import {
+  Popover as UnnnicPopover,
+  PopoverContent as UnnnicPopoverContent,
+  PopoverTrigger as UnnnicPopoverTrigger,
+} from '../ui/popover';
 
 defineOptions({
   name: 'UnnnicInputDatePicker',
@@ -112,9 +122,11 @@ const emit = defineEmits<{
   (e: 'selectDate', value: DateRangeValue): void;
 }>();
 
-const dropdown = ref<HTMLElement | null>(null);
-const showCalendarFilter = ref(false);
+const isPopoverOpen = ref(false);
 const overwrittenValue = ref('');
+const popoverAlign = computed<'start' | 'end'>(() =>
+  props.position === 'right' ? 'end' : 'start',
+);
 
 const filterText = computed(() => {
   const dates: string[] = [];
@@ -160,20 +172,12 @@ function emitSelectDate(date: { startDate: string; endDate: string }) {
   emit('selectDate', formattedDates);
 }
 
-function mouseout(event: MouseEvent | { target: EventTarget | null }) {
-  if (dropdown.value?.contains(event.target as Node)) {
-    return;
-  }
-
-  showCalendarFilter.value = false;
-}
-
 function changeDate(value: { startDate: string; endDate: string }) {
   const startDate = value.startDate.replace(/(\d+)-(\d+)-(\d+)/, '$3-$1-$2');
 
   const endDate = value.endDate.replace(/(\d+)-(\d+)-(\d+)/, '$3-$1-$2');
 
-  showCalendarFilter.value = false;
+  isPopoverOpen.value = false;
 
   emit('update:model-value', {
     start: startDate
@@ -183,38 +187,29 @@ function changeDate(value: { startDate: string; endDate: string }) {
   });
 }
 
-onMounted(() => {
-  window.document.body.addEventListener('click', mouseout as any);
-});
-
-onBeforeUnmount(() => {
-  window.document.body.removeEventListener('click', mouseout as any);
-});
+function openPopover() {
+  isPopoverOpen.value = true;
+}
 </script>
+
+<style lang="scss">
+@use '@/assets/scss/unnnic' as *;
+
+.date-picker-popover-content {
+  overflow: hidden;
+  border-radius: $unnnic-radius-2;
+  padding: 0;
+}
+</style>
 
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 .fill-w {
   width: 100%;
 }
+
 .dropdown {
-  position: relative;
   display: inline-block;
-
-  .dropdown-data {
-    position: absolute;
-    pointer-events: none;
-    display: none;
-    top: 100%;
-    z-index: 2;
-    margin-top: $unnnic-spacing-stack-nano;
-    width: max-content;
-  }
-
-  &.active .dropdown-data {
-    pointer-events: auto;
-    display: block;
-  }
 
   .input {
     display: inline-block;

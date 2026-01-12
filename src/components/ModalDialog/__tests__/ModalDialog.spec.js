@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { describe, it } from 'vitest';
+import { beforeEach, describe, it, expect, vi } from 'vitest';
 import ModalDialog from '../ModalDialog.vue';
 
 describe('ModalDialog.vue', () => {
@@ -41,6 +41,36 @@ describe('ModalDialog.vue', () => {
 
       await wrapper.setProps({ size: 'sm' });
       expect(modalContainer.attributes('size')).toContain('small');
+    });
+  });
+
+  describe('persistentHandler', () => {
+    it('prevents default when persistent is true', () => {
+      wrapper = mount(ModalDialog, {
+        props: {
+          title: 'Test Title',
+          modelValue: true,
+          persistent: true,
+          primaryButtonProps: { text: 'Confirm' },
+        },
+        global: {
+          stubs: [
+            'teleport',
+            'UnnnicIcon',
+            'UnnnicButton',
+            'UnnnicDialogContent',
+          ],
+        },
+      });
+
+      const mockEvent = {
+        preventDefault: vi.fn(),
+        target: document.createElement('div'),
+      };
+
+      wrapper.vm.persistentHandler(mockEvent);
+
+      expect(mockEvent.preventDefault).toHaveBeenCalled();
     });
   });
 });
