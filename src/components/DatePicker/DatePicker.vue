@@ -967,7 +967,6 @@ onMounted(() => {
   overflow: hidden;
 
   &--popover {
-    background-color: transparent;
     border-radius: 0;
     box-shadow: none;
     overflow: visible;
