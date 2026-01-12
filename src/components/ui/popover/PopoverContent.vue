@@ -109,7 +109,7 @@ $popover-space: $unnnic-space-4;
   border: 1px solid $unnnic-color-border-soft;
 
   &::-webkit-scrollbar {
-    width: $unnnic-spacing-inline-nano;
+    width: $unnnic-space-1;
   }
 
   &::-webkit-scrollbar-thumb {
