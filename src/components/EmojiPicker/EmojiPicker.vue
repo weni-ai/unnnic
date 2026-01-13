@@ -172,7 +172,7 @@ const onEmojiSelect = (emoji: Emoji) => {
   }
 
   :deep(.emoji-type-image.emoji-set-apple) {
-    background-image: url('./apple-64.png') !important;
+    background-image: url('https://cdn.cloud.weni.ai/emojis-apple-64.png') !important;
   }
 
   :deep(.emoji-type-image.emoji-set-facebook),
