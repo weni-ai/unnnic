@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.14.0 (2025-01-12)
+
+### Added
+
+- **MultiSelect**:
+  - Rebuilt on Popover primitives with inline search, localized empty state, width syncing, checkbox options, and `returnObject` support.
+
+# 3.13.0 (2025-01-12)
+
+### Added
+
+- **Select Component**:
+  - Introduced `UnnnicSelect`, a popover-backed single select that mirrors `UnnnicInput`, supports keyboard navigation, disabled items, optional search input, custom `itemLabel`/`itemValue`, `returnObject`, auto width syncing, dynamic `optionsLines` height, clear action, and localized empty states.
+
+### Changed
+
+- **Input Family**:
+  - Reintroduced focus transition styling and added `readonly`, `useFocusProp`, `focus`, and `showClear` props across `UnnnicInput`, `TextInput`, and `BaseInput` so programmatic focus and inline clear affordances are available without losing sanitization.
+
 # 3.12.8 (2025-12-30)
 
 ### Fixed
