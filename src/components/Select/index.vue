@@ -9,7 +9,7 @@
     >
       <PopoverTrigger class="w-full">
         <UnnnicInput
-          ref="inputRef"
+          ref="selectInputRef"
           :modelValue="inputValue"
           class="unnnic-select__input"
           readonly
@@ -153,8 +153,8 @@ const emit = defineEmits<{
 }>();
 
 const openPopover = ref(false);
-const inputRef = ref<HTMLInputElement | null>(null);
-const { width: inputWidth } = useElementSize(inputRef);
+const selectInputRef = ref<HTMLInputElement | null>(null);
+const { width: inputWidth } = useElementSize(selectInputRef);
 const contentRef = ref<HTMLDivElement | null>(null);
 const infiniteScrollReset = ref<(() => void) | null>(null);
 const infiniteScrollLoading = ref(false);
