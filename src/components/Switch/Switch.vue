@@ -35,7 +35,7 @@
         {{ textLeft }}
         {{ textRight }}
 
-        <slot name="extra" />
+        <slot name="suffix" />
       </p>
     </label>
 
