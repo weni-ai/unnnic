@@ -25,7 +25,9 @@ export default {
     },
     template: `
       <div>
-        <UnnnicSwitch v-bind="args" v-model="value"/> 
+        <UnnnicSwitch v-bind="args" v-model="value">
+          <template #extra>Slot content</template>
+        </UnnnicSwitch> 
         <div>{{value}}</div>
       </div>
     `,
