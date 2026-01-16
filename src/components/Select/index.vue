@@ -22,7 +22,7 @@
           :message="props.message"
           :iconRight="openPopover ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
           :disabled="props.disabled"
-          :showClear="!!selectedItem"
+          :showClear="!!selectedItem && props.clearable"
           @clear="emit('update:modelValue', '')"
         />
       </PopoverTrigger>
@@ -32,7 +32,10 @@
         :style="popoverContentCustomStyles"
         :width="inputWidthString"
       >
-        <div class="unnnic-select__content">
+        <div
+          ref="contentRef"
+          class="unnnic-select__content"
+        >
           <UnnnicInput
             v-if="props.enableSearch"
             class="unnnic-select__input-search"
@@ -47,20 +50,30 @@
           >
             {{ $t('without_results') }}
           </p>
-          <PopoverOption
-            v-for="(option, index) in filteredOptions"
-            v-else
-            :key="option[props.itemValue]"
-            :data-option-index="index"
-            data-testid="select-option"
-            :label="option[props.itemLabel]"
-            :active="
-              option[props.itemValue] === selectedItem?.[props.itemValue]
-            "
-            :focused="focusedOptionIndex === index"
-            :disabled="option.disabled"
-            @click="handleSelectOption(option)"
-          />
+          <template v-else>
+            <PopoverOption
+              v-for="(option, index) in filteredOptions"
+              :key="option[props.itemValue]"
+              :data-option-index="index"
+              data-testid="select-option"
+              :label="option[props.itemLabel]"
+              :active="
+                option[props.itemValue] === selectedItem?.[props.itemValue]
+              "
+              :focused="focusedOptionIndex === index"
+              :disabled="option.disabled"
+              @click="handleSelectOption(option)"
+            />
+            <div
+              v-if="props.infiniteScroll && infiniteScrollLoading"
+              class="unnnic-select__infinite-loading"
+            >
+              <UnnnicIconLoading
+                scheme="neutral-dark"
+                size="sm"
+              />
+            </div>
+          </template>
         </div>
       </PopoverContent>
     </Popover>
@@ -68,10 +81,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch, nextTick } from 'vue';
-import { useElementSize } from '@vueuse/core';
+import { computed, ref, watch, nextTick, onBeforeUnmount } from 'vue';
+import { useElementSize, useInfiniteScroll } from '@vueuse/core';
 
 import UnnnicInput from '../Input/Input.vue';
+import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 
 import {
   Popover,
@@ -106,6 +120,10 @@ interface SelectProps {
   search?: string;
   locale?: string;
   disabled?: boolean;
+  clearable?: boolean;
+  infiniteScroll?: boolean;
+  infiniteScrollDistance?: number;
+  infiniteScrollCanLoadMore?: () => boolean;
 }
 
 const props = withDefaults(defineProps<SelectProps>(), {
@@ -119,21 +137,29 @@ const props = withDefaults(defineProps<SelectProps>(), {
   locale: 'en',
   enableSearch: false,
   disabled: false,
+  clearable: false,
   label: '',
   errors: '',
   message: '',
   search: '',
+  infiniteScroll: false,
+  infiniteScrollDistance: 10,
+  infiniteScrollCanLoadMore: () => true,
 });
 
 const emit = defineEmits<{
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   'update:modelValue': [value: any];
   'update:search': [value: string];
+  'scroll-end': [];
 }>();
 
 const openPopover = ref(false);
 const selectInputRef = ref<HTMLInputElement | null>(null);
 const { width: inputWidth } = useElementSize(selectInputRef);
+const contentRef = ref<HTMLDivElement | null>(null);
+const infiniteScrollReset = ref<(() => void) | null>(null);
+const infiniteScrollLoading = ref(false);
 
 const inputWidthString = computed(() => {
   return `${inputWidth.value}px`;
@@ -152,6 +178,12 @@ watch(openPopover, () => {
         option[props.itemValue] === selectedItem.value?.[props.itemValue],
     );
     scrollToOption(selectedOptionIndex, 'instant', 'center');
+  }
+
+  if (openPopover.value && props.infiniteScroll) {
+    nextTick(() => {
+      setupInfiniteScroll();
+    });
   }
 });
 
@@ -263,6 +295,79 @@ const filteredOptions = computed(() => {
         .includes(props.search?.toLowerCase()),
   );
 });
+
+const setupInfiniteScroll = () => {
+  if (!props.infiniteScroll) {
+    return;
+  }
+
+  if (infiniteScrollReset.value) {
+    infiniteScrollReset.value();
+    infiniteScrollReset.value = null;
+  }
+
+  nextTick(() => {
+    const scrollElement = contentRef.value;
+
+    if (!scrollElement) {
+      return;
+    }
+
+    const { reset } = useInfiniteScroll(
+      scrollElement,
+      () => {
+        if (!infiniteScrollLoading.value) {
+          infiniteScrollLoading.value = true;
+          emit('scroll-end');
+        }
+      },
+      {
+        distance: props.infiniteScrollDistance,
+        canLoadMore: () => {
+          return (
+            props.infiniteScrollCanLoadMore() && !infiniteScrollLoading.value
+          );
+        },
+      },
+    );
+
+    infiniteScrollReset.value = reset;
+  });
+};
+
+const finishInfiniteScroll = () => {
+  infiniteScrollLoading.value = false;
+
+  if (openPopover.value && props.infiniteScroll) {
+    nextTick(() => {
+      setupInfiniteScroll();
+    });
+  }
+};
+
+const resetInfiniteScroll = () => {
+  infiniteScrollLoading.value = false;
+  if (infiniteScrollReset.value) {
+    infiniteScrollReset.value();
+  }
+
+  if (openPopover.value && props.infiniteScroll) {
+    nextTick(() => {
+      setupInfiniteScroll();
+    });
+  }
+};
+
+onBeforeUnmount(() => {
+  if (infiniteScrollReset.value) {
+    infiniteScrollReset.value();
+  }
+});
+
+defineExpose({
+  finishInfiniteScroll,
+  resetInfiniteScroll,
+});
 </script>
 
 <style lang="scss" scoped>
@@ -270,16 +375,14 @@ const filteredOptions = computed(() => {
 
 :deep(.unnnic-select__input) {
   cursor: pointer;
-}
 
-:deep(.unnnic-select__input-search) {
-  > .icon-left {
+  > .icon-right {
     color: $unnnic-color-fg-base;
   }
 }
 
-:deep(.unnnic-select__input) {
-  > .icon-right {
+:deep(.unnnic-select__input-search) {
+  > .icon-left {
     color: $unnnic-color-fg-base;
   }
 }
@@ -303,6 +406,14 @@ const filteredOptions = computed(() => {
       font: $unnnic-font-emphasis;
       color: $unnnic-color-fg-muted;
     }
+  }
+
+  &__infinite-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $unnnic-space-2 0;
+    min-height: 40px;
   }
 }
 </style>

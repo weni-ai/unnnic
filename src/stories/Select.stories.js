@@ -82,6 +82,18 @@ export default {
     disabled: {
       description: 'Disable the select.',
     },
+    infiniteScroll: {
+      description:
+        'Enable infinite scroll functionality. When enabled, the component will emit a `scroll-end` event when the user scrolls near the bottom of the options list.',
+    },
+    infiniteScrollDistance: {
+      description:
+        'Distance in pixels from the bottom of the scroll area to trigger the `scroll-end` event. Default is 10.',
+    },
+    infiniteScrollCanLoadMore: {
+      description:
+        'Function that returns a boolean indicating whether more items can be loaded. Used to prevent unnecessary scroll-end events.',
+    },
   },
   render: (args) => ({
     components: { UnnnicSelect },
@@ -141,6 +153,15 @@ export const AlternativeValueLabel = {
   },
 };
 
+export const Clearable = {
+  args: {
+    placeholder: 'Placeholder',
+    label: 'Label',
+    options,
+    clearable: true,
+  },
+};
+
 export const Disabled = {
   args: {
     placeholder: 'Placeholder',
@@ -158,4 +179,78 @@ export const WithSearch = {
     enableSearch: true,
     search: '',
   },
+};
+
+export const WithInfiniteScroll = {
+  render: () => ({
+    components: { UnnnicSelect },
+    data() {
+      return {
+        selectedValue: null,
+        loadedOptions: [],
+        currentPage: 1,
+        totalPages: 10,
+        isLoading: false,
+      };
+    },
+    mounted() {
+      this.loadInitialOptions();
+    },
+    methods: {
+      loadInitialOptions() {
+        this.loadedOptions = this.generateOptions(1);
+      },
+      generateOptions(page) {
+        const startIndex = (page - 1) * 10 + 1;
+        return Array.from({ length: 10 }, (_, i) => ({
+          label: `Option ${startIndex + i}`,
+          value: `option${startIndex + i}`,
+        }));
+      },
+      async handleScrollEnd() {
+        if (this.currentPage >= this.totalPages || this.isLoading) {
+          return;
+        }
+
+        this.isLoading = true;
+
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        this.currentPage++;
+        const newOptions = this.generateOptions(this.currentPage);
+        this.loadedOptions = [...this.loadedOptions, ...newOptions];
+
+        this.isLoading = false;
+
+        this.$refs.selectRef.finishInfiniteScroll();
+      },
+      canLoadMore() {
+        return this.currentPage < this.totalPages && !this.isLoading;
+      },
+    },
+    template: `
+      <div style="width: 300px;">
+        <h3>Infinite Scroll Example</h3>
+        <p style="color: #666; font-size: 14px;">
+          Scroll down in the options list to load more items.
+          <br />
+          Page: {{ currentPage }} / {{ totalPages }}
+          <br />
+          Total options: {{ loadedOptions.length }}
+        </p>
+        <p>Selected: {{ selectedValue }}</p>
+        <unnnic-select
+          ref="selectRef"
+          v-model="selectedValue"
+          :options="loadedOptions"
+          placeholder="Select an option"
+          label="Infinite Scroll Select"
+          :infinite-scroll="true"
+          :infinite-scroll-distance="10"
+          :infinite-scroll-can-load-more="canLoadMore"
+          @scroll-end="handleScrollEnd"
+        />
+      </div>
+    `,
+  }),
 };
