@@ -101,8 +101,6 @@ const contentWidth = computed(() => {
 $popover-space: $unnnic-space-4;
 
 .unnnic-popover {
-  z-index: 10000;
-
   border-radius: $unnnic-radius-2;
   box-shadow: $unnnic-shadow-1;
   border: 1px solid $unnnic-color-border-soft;
