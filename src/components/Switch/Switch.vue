@@ -34,6 +34,8 @@
         {{ option }}
         {{ textLeft }}
         {{ textRight }}
+
+        <slot name="suffix" />
       </p>
     </label>
 
