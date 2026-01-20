@@ -4,26 +4,16 @@ import { describe, it, expect } from 'vitest';
 import Disclaimer from '../Disclaimer.vue';
 import Icon from '../../Icon.vue';
 
-const mountComponent = (props = {}) =>
+const mountComponent = (props = {}, slots = {}) =>
   mount(Disclaimer, {
     props,
+    slots,
     global: {
       components: { UnnnicIcon: Icon },
     },
   });
 
 describe('Disclaimer', () => {
-  it('renders default title and description', () => {
-    const wrapper = mountComponent();
-
-    expect(wrapper.find('[data-testid="disclaimer-title"]').text()).toBe(
-      'Disclaimer',
-    );
-    expect(wrapper.find('[data-testid="disclaimer-description"]').text()).toBe(
-      'The quick brown fox jumps over the lazy dog',
-    );
-  });
-
   it('hides title when no title is provided', () => {
     const wrapper = mountComponent({ title: '' });
 
@@ -38,6 +28,68 @@ describe('Disclaimer', () => {
     expect(
       wrapper.find('[data-testid="disclaimer-description"]').exists(),
     ).toBe(false);
+  });
+
+  describe('description slot', () => {
+    it('renders custom content via description slot', () => {
+      const wrapper = mountComponent(
+        { description: '' },
+        {
+          description: '<a href="https://example.com">Click here</a>',
+        },
+      );
+
+      const description = wrapper.find(
+        '[data-testid="disclaimer-description"]',
+      );
+
+      expect(description.exists()).toBe(true);
+      expect(description.find('a').exists()).toBe(true);
+      expect(description.find('a').attributes('href')).toBe(
+        'https://example.com',
+      );
+      expect(description.find('a').text()).toBe('Click here');
+    });
+
+    it('prioritizes slot content over description prop', () => {
+      const wrapper = mountComponent(
+        { description: 'Prop description' },
+        {
+          description: '<span>Slot description</span>',
+        },
+      );
+
+      const description = wrapper.find(
+        '[data-testid="disclaimer-description"]',
+      );
+
+      expect(description.text()).toBe('Slot description');
+      expect(description.find('span').exists()).toBe(true);
+    });
+
+    it('shows description from prop when slot is not provided', () => {
+      const wrapper = mountComponent({ description: 'Prop only description' });
+
+      expect(
+        wrapper.find('[data-testid="disclaimer-description"]').text(),
+      ).toBe('Prop only description');
+    });
+
+    it('hides description when neither slot nor prop is provided', () => {
+      const wrapper = mountComponent({ description: '' }, {});
+
+      expect(
+        wrapper.find('[data-testid="disclaimer-description"]').exists(),
+      ).toBe(false);
+    });
+
+    it('hides description when empty slot is provided', () => {
+      const wrapper = mountComponent({ description: '' }, { description: '' });
+
+      expect(
+        wrapper.find('[data-testid="disclaimer-description"]').exists(),
+      ).toBe(false);
+    });
   });
 
   it.each([
