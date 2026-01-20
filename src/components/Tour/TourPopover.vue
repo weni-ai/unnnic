@@ -170,6 +170,8 @@ export default {
   font-size: $unnnic-font-size-body-gt;
   font-weight: $unnnic-font-weight-regular;
 
+  pointer-events: auto;
+
   $arrowSize: $unnnic-icon-size-xs;
   $arrowHalfSize: calc($arrowSize / 2);
 
