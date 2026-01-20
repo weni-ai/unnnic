@@ -55,7 +55,10 @@ const props = withDefaults(defineProps<DisclaimerProps>(), {
 const slots = useSlots();
 
 const hasDescription = computed(() => {
-  return Boolean(slots.description || props.description);
+  return (
+    Boolean(props.description) ||
+    (slots.description && slots.description().length > 0)
+  );
 });
 
 // This is a temporary solution to ensure backwards compatibility with the older version of the component.

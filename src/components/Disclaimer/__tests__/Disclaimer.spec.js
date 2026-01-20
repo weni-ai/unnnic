@@ -82,6 +82,14 @@ describe('Disclaimer', () => {
         wrapper.find('[data-testid="disclaimer-description"]').exists(),
       ).toBe(false);
     });
+
+    it('hides description when empty slot is provided', () => {
+      const wrapper = mountComponent({ description: '' }, { description: '' });
+
+      expect(
+        wrapper.find('[data-testid="disclaimer-description"]').exists(),
+      ).toBe(false);
+    });
   });
 
   it.each([
