@@ -19,19 +19,22 @@
       >
         {{ title }}
       </p>
-      <p
-        v-if="description"
+
+      <div
+        v-if="hasDescription"
         class="unnnic-disclaimer__description"
         data-testid="disclaimer-description"
       >
-        {{ description }}
-      </p>
+        <slot name="description">
+          {{ description }}
+        </slot>
+      </div>
     </section>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, useSlots } from 'vue';
 
 import UnnnicIcon from '../Icon.vue';
 import type { SchemeColor } from '@/types/scheme-colors';
@@ -42,11 +45,17 @@ defineOptions({
 });
 
 const props = withDefaults(defineProps<DisclaimerProps>(), {
-  title: 'Disclaimer',
-  description: 'The quick brown fox jumps over the lazy dog',
+  title: '',
+  description: '',
   type: 'informational',
   icon: undefined,
   iconColor: undefined,
+});
+
+const slots = useSlots();
+
+const hasDescription = computed(() => {
+  return Boolean(slots.description || props.description);
 });
 
 // This is a temporary solution to ensure backwards compatibility with the older version of the component.
