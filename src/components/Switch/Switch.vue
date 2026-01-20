@@ -8,14 +8,19 @@
       class="unnnic-switch__label"
     />
 
-    <label :class="['unnnic-switch__input-wrapper', {'unnnic-switch__input-wrapper--disabled': disabled}]">
+    <label
+      :class="[
+        'unnnic-switch__input-wrapper',
+        { 'unnnic-switch__input-wrapper--disabled': disabled },
+      ]"
+    >
       <input
         class="unnnic-switch__input"
         type="checkbox"
         :disabled="disabled"
         :checked="modelValue"
-        @change="toggleState"
         v-bind="pick($attrs, ['id', 'name'])"
+        @change="toggleState"
       />
 
       <p
@@ -29,6 +34,8 @@
         {{ option }}
         {{ textLeft }}
         {{ textRight }}
+
+        <slot name="suffix" />
       </p>
     </label>
 
@@ -78,7 +85,7 @@ export default {
       type: String,
       default: '',
     },
-    
+
     helper: {
       type: String,
       default: '',
@@ -176,7 +183,9 @@ $switch-height: 20px;
     background-repeat: no-repeat;
     background-position: 4px center;
 
-    transition: 120ms linear background-position, 120ms linear background-color;
+    transition:
+      120ms linear background-position,
+      120ms linear background-color;
 
     cursor: pointer;
 

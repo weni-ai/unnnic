@@ -399,6 +399,72 @@ describe('UnnnicSelect.vue', () => {
     });
   });
 
+  describe('infinite scroll functionality', () => {
+    test('infinite scroll is disabled by default', () => {
+      expect(wrapper.vm.infiniteScroll).toBe(false);
+    });
+
+    test('applies infinite scroll props correctly', async () => {
+      await wrapper.setProps({
+        infiniteScroll: true,
+        infiniteScrollDistance: 20,
+        infiniteScrollCanLoadMore: () => false,
+      });
+
+      expect(wrapper.vm.infiniteScroll).toBe(true);
+      expect(wrapper.vm.infiniteScrollDistance).toBe(20);
+      expect(wrapper.vm.infiniteScrollCanLoadMore()).toBe(false);
+    });
+
+    test('does not render loading when infiniteScrollLoading is false', async () => {
+      await wrapper.setProps({ infiniteScroll: true });
+      wrapper.vm.openPopover = true;
+      await wrapper.vm.$nextTick();
+
+      const loading = wrapper.find('.unnnic-select__infinite-loading');
+      expect(loading.exists()).toBe(false);
+    });
+
+    test('sets infiniteScrollLoading to true and verifies state', async () => {
+      await wrapper.setProps({
+        infiniteScroll: true,
+        options: [
+          { label: 'Option 1', value: 'option1' },
+          { label: 'Option 2', value: 'option2' },
+        ],
+      });
+
+      wrapper.vm.openPopover = true;
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.vm.infiniteScrollLoading).toBe(false);
+
+      wrapper.vm.infiniteScrollLoading = true;
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.vm.infiniteScrollLoading).toBe(true);
+      expect(wrapper.vm.infiniteScroll).toBe(true);
+    });
+
+    test('finishInfiniteScroll sets loading to false', async () => {
+      await wrapper.setProps({ infiniteScroll: true });
+      wrapper.vm.infiniteScrollLoading = true;
+      expect(wrapper.vm.infiniteScrollLoading).toBe(true);
+
+      wrapper.vm.finishInfiniteScroll();
+      expect(wrapper.vm.infiniteScrollLoading).toBe(false);
+    });
+
+    test('resetInfiniteScroll sets loading to false', async () => {
+      await wrapper.setProps({ infiniteScroll: true });
+      wrapper.vm.infiniteScrollLoading = true;
+      expect(wrapper.vm.infiniteScrollLoading).toBe(true);
+
+      wrapper.vm.resetInfiniteScroll();
+      expect(wrapper.vm.infiniteScrollLoading).toBe(false);
+    });
+  });
+
   describe('snapshot testing', () => {
     test('matches snapshot with default props', () => {
       expect(wrapper.html()).toMatchSnapshot();
@@ -416,6 +482,14 @@ describe('UnnnicSelect.vue', () => {
 
     test('matches snapshot with disabled state', async () => {
       await wrapper.setProps({ disabled: true });
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+
+    test('matches snapshot with infinite scroll enabled', async () => {
+      await wrapper.setProps({ infiniteScroll: true });
+      wrapper.vm.openPopover = true;
+      wrapper.vm.infiniteScrollLoading = true;
+      await wrapper.vm.$nextTick();
       expect(wrapper.html()).toMatchSnapshot();
     });
   });
