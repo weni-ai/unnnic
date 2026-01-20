@@ -6,6 +6,7 @@ import ImageSample1 from './assets/images/un.png';
 import ImageSample2 from './assets/images/unnnic.png';
 import ImageSample3 from './assets/images/unnnicPortrait.png';
 import VideoSample from './assets/videos/weni.mp4';
+import UnnicIcon from '../components/Icon.vue';
 
 const baseReplyMessage = {
   uuid: '34fbcce3-a8fb-4097-9cb3-b9ff274a46c0',
@@ -386,6 +387,116 @@ export const Document = {
         <UnnnicChatsMessage v-bind="args" documentName="Lorem Ipsum.pdf" status="failed" />
         <UnnnicChatsMessage v-bind="args" documentName="Lorem ipsum dolor sit amet consectetur adipiscing elit.docx" />
         <UnnnicChatsMessage v-bind="args" documentName="Lorem ipsum dolor sit amet consectetur adipiscing elit fusce iaculis ligula fringilla consectetur tempor ex massa convallis risus ut sagittis est quam non est integer bibendum vehicula.csv" />
+      </div>
+    `,
+  }),
+};
+
+export const AudioWithTranscription = {
+  render: (args) => ({
+    setup() {
+      return { args };
+    },
+    data() {
+      return {
+        audio: AudioSample,
+      };
+    },
+    methods: {
+      updateShowTranscriptionText(value) {
+        this.showTranscriptionText = value;
+      },
+    },
+    components: { UnnnicChatsMessage, UnnnicAudioRecorder, UnnicIcon },
+    template: `
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <UnnnicChatsMessage v-bind="args" mediaType="audio" type="received">
+          <unnnic-audio-recorder 
+            class="media" 
+            style="padding: 8px; margin: 4px 0;" 
+            ref="audio-recorder" 
+            :src="audio" 
+            :canDiscard="false" 
+            :showTranscriptionAction="true" 
+            :enableGenerateTranscription="false"
+          >
+            <template #transcriptionInfo>
+              <div style="display: flex; align-items: center; gap: 8px; padding: 4px 8px;">
+                <UnnicIcon icon="material-symbols:info-outline" scheme="blue-500" size="sm" />
+                <span style="font-size: 12px; font-family: Lato; font-weight: 400; line-height: 18px; color: #353945;">Transcription unavailable info</span>
+              </div>
+            </template>
+          </unnnic-audio-recorder>
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args" mediaType="audio" type="received">
+          <unnnic-audio-recorder 
+            class="media" 
+            style="padding: 8px; margin: 4px 0;" 
+            ref="audio-recorder" 
+            :src="audio" 
+            :canDiscard="false" 
+            :showTranscriptionAction="true" 
+            :enableGenerateTranscription="true" 
+            :showTranscriptionText="false" 
+          />
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args" mediaType="audio" type="received">
+          <unnnic-audio-recorder 
+            class="media" 
+            style="padding: 8px; margin: 4px 0;" 
+            ref="audio-recorder" 
+            :src="audio" 
+            :canDiscard="false" 
+            :showTranscriptionAction="true" 
+            :enableGenerateTranscription="true" 
+            :showTranscriptionText="true" 
+            :isLoadingTranscription="true"
+          />
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args" mediaType="audio" type="received">
+          <unnnic-audio-recorder 
+            class="media" 
+            style="padding: 8px; margin: 4px 0;" 
+            ref="audio-recorder" 
+            :src="audio" 
+            :canDiscard="false" 
+            :showTranscriptionAction="true" 
+            :enableGenerateTranscription="true" 
+            :showTranscriptionText="false" 
+            fluidBar
+          >
+            <template #transcriptionInfo>
+              <div style="display: flex; align-items: center; gap: 8px; padding: 4px 8px;">
+                <UnnicIcon icon="material-symbols:cancel-outline" scheme="red-500" size="sm" />
+                <span style="font-size: 12px; font-family: Lato; font-weight: 400; line-height: 18px; color: #353945;">Unable to load the transcript. Please try again!</span>
+              </div>
+            </template>
+          </unnnic-audio-recorder>
+        </UnnnicChatsMessage>
+        <UnnnicChatsMessage v-bind="args" mediaType="audio" type="received">
+          <unnnic-audio-recorder 
+            class="media" 
+            style="padding: 8px; margin: 4px 0;" 
+            ref="audio-recorder" 
+            :src="audio" 
+            :canDiscard="false" 
+            :showTranscriptionAction="true" 
+            :enableGenerateTranscription="true" 
+            :showTranscriptionText="true" 
+            fluidBar
+            transcriptionText="Somos Weni, tecnologias inteligentes que libertam potencial humano!"
+          >
+            <template #transcriptionInfo>
+              <div style="display: flex; align-items: center; gap: 8px; padding: 4px;">
+                <span style="font-size: 12px; font-family: Lato; font-weight: 400; line-height: 18px; color: #353945;">This transcription was useful?</span>
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <UnnicIcon clickable icon="material-symbols:thumb-up-outline" scheme="gray-900" size="sm" />
+                  <UnnicIcon clickable icon="material-symbols:thumb-down-outline" scheme="gray-900" size="sm" />
+                </div>
+              </div>
+            </template>
+          </unnnic-audio-recorder>
+        </UnnnicChatsMessage>
       </div>
     `,
   }),
