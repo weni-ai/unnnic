@@ -44,6 +44,9 @@
       @pause="pause"
       @play="play"
       @progress-bar-update="progressBarUpdate"
+      @update:show-transcription-text="
+        $emit('update:showTranscriptionText', $event)
+      "
     >
       <template
         v-if="$slots.transcriptionInfo?.()"
@@ -150,7 +153,12 @@ export default {
     },
   },
 
-  emits: ['update:model-value', 'status', 'failed-click'],
+  emits: [
+    'update:model-value',
+    'status',
+    'failed-click',
+    'update:showTranscriptionText',
+  ],
 
   data: () => ({
     /**
