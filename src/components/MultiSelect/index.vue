@@ -19,7 +19,7 @@
           :message="props.message"
           :iconRight="openPopover ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
           :disabled="props.disabled"
-          :showClear="!!selectedItems.length"
+          :showClear="!!selectedItems.length && props.clearable"
           @clear="emit('update:modelValue', [])"
         />
       </PopoverTrigger>
@@ -93,6 +93,7 @@ interface MultiSelectProps {
   search?: string;
   locale?: string;
   disabled?: boolean;
+  clearable?: boolean;
 }
 
 const props = withDefaults(defineProps<MultiSelectProps>(), {
@@ -110,6 +111,7 @@ const props = withDefaults(defineProps<MultiSelectProps>(), {
   errors: '',
   message: '',
   search: '',
+  clearable: false,
 });
 
 const openPopover = ref(false);

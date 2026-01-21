@@ -22,7 +22,7 @@
           :message="props.message"
           :iconRight="openPopover ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
           :disabled="props.disabled"
-          :showClear="!!selectedItem"
+          :showClear="!!selectedItem && props.clearable"
           @clear="emit('update:modelValue', '')"
         />
       </PopoverTrigger>
@@ -120,6 +120,7 @@ interface SelectProps {
   search?: string;
   locale?: string;
   disabled?: boolean;
+  clearable?: boolean;
   infiniteScroll?: boolean;
   infiniteScrollDistance?: number;
   infiniteScrollCanLoadMore?: () => boolean;
@@ -136,6 +137,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
   locale: 'en',
   enableSearch: false,
   disabled: false,
+  clearable: false,
   label: '',
   errors: '',
   message: '',
