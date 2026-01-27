@@ -178,14 +178,14 @@ export default {
       progress: 0,
       defaultTranslations: {
         show_transcription: {
-          'pt-br': 'Clique para mostrar a transcrição',
-          en: 'Click to show transcription',
-          es: 'Haga clic para mostrar la transcripción',
+          'pt-br': 'Mostrar a transcrição',
+          en: 'Show transcript',
+          es: 'Mostrar la transcripción',
         },
         hide_transcription: {
-          'pt-br': 'Clique para ocultar a transcrição',
-          en: 'Click to hide transcription',
-          es: 'Haga clic para ocultar la transcripción',
+          'pt-br': 'Ocultar a transcrição',
+          en: 'Hide transcript',
+          es: 'Ocultar la transcripción',
         },
         unavailable_transcription: {
           'pt-br': 'Transcrição não habilitada',
