@@ -61,3 +61,17 @@ OnlyDescription.args = {
   ...Default.args,
   title: '',
 };
+
+const TemplateWithDescriptionSlot = (args) => ({
+  components: { UnnnicDisclaimer },
+  setup() {
+    return { args };
+  },
+  template:
+    '<UnnnicDisclaimer v-bind="args"><template #description>This is a slot description with a <a href="https://example.com">link</a></template></UnnnicDisclaimer>',
+});
+
+export const WithDescriptionSlot = TemplateWithDescriptionSlot.bind({});
+WithDescriptionSlot.args = {
+  ...Default.args,
+};

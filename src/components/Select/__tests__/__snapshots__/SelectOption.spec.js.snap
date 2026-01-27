@@ -1,0 +1,25 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`SelectOption.vue > snapshot testing > matches snapshot with active state 1`] = `
+"<div data-v-fabf1785="" class="unnnic-select-option unnnic-select-option--active">
+  <p data-v-fabf1785="" class="unnnic-select-option__label">Test Option</p>
+</div>"
+`;
+
+exports[`SelectOption.vue > snapshot testing > matches snapshot with both active and disabled states 1`] = `
+"<div data-v-fabf1785="" class="unnnic-select-option unnnic-select-option--disabled unnnic-select-option--active">
+  <p data-v-fabf1785="" class="unnnic-select-option__label">Test Option</p>
+</div>"
+`;
+
+exports[`SelectOption.vue > snapshot testing > matches snapshot with default props 1`] = `
+"<div data-v-fabf1785="" class="unnnic-select-option">
+  <p data-v-fabf1785="" class="unnnic-select-option__label">Test Option</p>
+</div>"
+`;
+
+exports[`SelectOption.vue > snapshot testing > matches snapshot with disabled state 1`] = `
+"<div data-v-fabf1785="" class="unnnic-select-option unnnic-select-option--disabled">
+  <p data-v-fabf1785="" class="unnnic-select-option__label">Test Option</p>
+</div>"
+`;

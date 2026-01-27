@@ -5,6 +5,60 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.17.1 (2026-01-20)
+
+### Added
+
+- **Select/MultiSelect Components**:
+  - Added `clearable` prop to enable show clear button.
+
+- **Tour Component**:
+  - Added missing `pointer-events` css attribute
+
+# 3.17.0 (2026-01-20)
+
+### Added
+
+- **Disclaimer Component**:
+  - Added slot support for description in disclaimer component.
+
+# 3.16.0 (2026-01-16)
+
+### Added
+
+- **Switch Component**:
+  - Added slot support for extra content in switch component.
+
+# 3.15.0 (2026-01-15)
+
+### Added
+
+- **Select Component**:
+  - Added infinite scroll support with new props: `infiniteScroll`, `infiniteScrollDistance`, and `infiniteScrollCanLoadMore` callback.
+  - Added `scroll-end` event emitted when scroll reaches the threshold to load more items.
+  - Exposed `finishInfiniteScroll()` and `resetInfiniteScroll()` methods for managing infinite scroll state.
+  - Added loading indicator (spinner) displayed while loading more items.
+  - Integrated `@vueuse/core`'s `useInfiniteScroll` composable for scroll detection.
+
+# 3.14.0 (2025-01-12)
+
+### Added
+
+- **MultiSelect**:
+  - Rebuilt on Popover primitives with inline search, localized empty state, width syncing, checkbox options, and `returnObject` support.
+
+# 3.13.0 (2025-01-12)
+
+### Added
+
+- **Select Component**:
+  - Introduced `UnnnicSelect`, a popover-backed single select that mirrors `UnnnicInput`, supports keyboard navigation, disabled items, optional search input, custom `itemLabel`/`itemValue`, `returnObject`, auto width syncing, dynamic `optionsLines` height, clear action, and localized empty states.
+
+### Changed
+
+- **Input Family**:
+  - Reintroduced focus transition styling and added `readonly`, `useFocusProp`, `focus`, and `showClear` props across `UnnnicInput`, `TextInput`, and `BaseInput` so programmatic focus and inline clear affordances are available without losing sanitization.
+
 # 3.12.8 (2025-12-30)
 
 ### Fixed
