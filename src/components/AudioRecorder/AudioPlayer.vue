@@ -217,7 +217,7 @@ export default {
 
       return this.isPlaying
         ? 'material-symbols:pause-rounded'
-        : 'material-symbols:play-arrow';
+        : 'material-symbols:play-arrow-rounded';
     },
     transcriptionTooltipText() {
       if (!this.enableGenerateTranscription) {
