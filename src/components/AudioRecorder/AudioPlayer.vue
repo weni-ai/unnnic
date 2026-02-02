@@ -305,8 +305,8 @@ export default {
     &-container {
       display: flex;
       border-radius: $unnnic-radius-1;
-      width: 24px;
-      height: 24px;
+      width: $unnnic-space-6;
+      height: $unnnic-space-6;
       &:hover {
         background-color: rgba(136, 147, 168, 0.1);
       }
@@ -317,7 +317,7 @@ export default {
         background-color: $unnnic-color-bg-muted;
       }
       :deep(.unnnic-tooltip) {
-        width: 24px;
+        width: $unnnic-space-6;
         height: 100%;
         display: flex;
         align-items: center;
@@ -330,7 +330,7 @@ export default {
     position: relative;
 
     width: clamp(85px, 100%, 185px);
-    height: 2px;
+    height: $unnnic-space-05;
 
     outline: none;
 
