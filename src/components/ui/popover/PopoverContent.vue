@@ -9,6 +9,7 @@
           'bg-popover text-popover-foreground outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2',
         )
       "
+      :style="{ zIndex: popoverZIndex }"
     >
       <section :class="`unnnic-popover__content ${props.class || ''}`">
         <component
@@ -34,6 +35,7 @@ import { computed, useSlots } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
 import { PopoverContent, PopoverPortal, useForwardPropsEmits } from 'reka-ui';
 import { cn } from '@/lib/utils';
+import { useLayerZIndex } from '@/lib/layer-manager';
 
 defineOptions({
   inheritAttrs: false,
@@ -62,6 +64,8 @@ const delegatedProps = reactiveOmit(props, 'class', 'size');
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 const slots = useSlots() as Slots;
+
+const popoverZIndex = useLayerZIndex();
 
 const getComponentName = (vnode: VNode): string | undefined => {
   const componentType = vnode.type as { name?: string; __name?: string };

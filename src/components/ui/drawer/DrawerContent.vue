@@ -5,6 +5,7 @@ import { reactiveOmit } from '@vueuse/core';
 import { useForwardPropsEmits } from 'reka-ui';
 import { DrawerContent, DrawerPortal } from 'vaul-vue';
 import { cn } from '@/lib/utils';
+import { useLayerZIndex } from '@/lib/layer-manager';
 import DrawerOverlay from './DrawerOverlay.vue';
 
 defineOptions({
@@ -20,6 +21,7 @@ const props = withDefaults(
     }
   >(),
   {
+    class: undefined,
     size: 'medium',
     showOverlay: true,
   },
@@ -28,11 +30,16 @@ const emits = defineEmits<DialogContentEmits>();
 
 const delegatedProps = reactiveOmit(props, 'class');
 const forwardedProps = useForwardPropsEmits(delegatedProps, emits);
+
+const layerZIndex = useLayerZIndex();
 </script>
 
 <template>
   <DrawerPortal>
-    <DrawerOverlay v-if="showOverlay" />
+    <DrawerOverlay
+      v-if="showOverlay"
+      :style="{ zIndex: layerZIndex - 2 }"
+    />
     <DrawerContent
       v-bind="forwardedProps"
       :class="
@@ -42,7 +49,10 @@ const forwardedProps = useForwardPropsEmits(delegatedProps, emits);
           props.class,
         )
       "
-      :style="{ '--initial-transform': 'calc(100% + 8px)' }"
+      :style="{
+        '--initial-transform': 'calc(100% + 8px)',
+        zIndex: layerZIndex,
+      }"
     >
       <slot />
     </DrawerContent>
