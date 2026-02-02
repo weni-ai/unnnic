@@ -45,32 +45,13 @@
         {{ time }}
       </span>
 
-      <div
+      <AudioTranscriptionButton
         v-if="showTranscriptionAction"
-        :class="[
-          'audio-player__icon-container',
-          {
-            'audio-player__icon-container--active': showTranscriptionText,
-            'audio-player__icon-container--disabled':
-              !enableGenerateTranscription,
-          },
-        ]"
-      >
-        <UnnnicToolTip
-          enabled
-          side="top"
-          :text="transcriptionTooltipText"
-        >
-          <UnnnicIcon
-            class="audio-player__icon-transcription"
-            clickable
-            icon="material-symbols:subject-rounded"
-            :scheme="!enableGenerateTranscription ? 'gray-300' : 'gray-900'"
-            size="ant"
-            @click="clickTranscription"
-          />
-        </UnnnicToolTip>
-      </div>
+        :active="showTranscriptionText"
+        :enableGenerateTranscription="enableGenerateTranscription"
+        :transcriptionTooltipText="transcriptionTooltipText"
+        @click="clickTranscription"
+      />
     </div>
 
     <div
@@ -98,12 +79,12 @@
 <script>
 import UnnnicIcon from '../Icon.vue';
 import UnnnicI18n from '../../mixins/i18n';
-import UnnnicToolTip from '../ToolTip/ToolTip.vue';
+import AudioTranscriptionButton from './AudioTranscriptionButton.vue';
 
 export default {
   components: {
     UnnnicIcon,
-    UnnnicToolTip,
+    AudioTranscriptionButton,
   },
 
   mixins: [UnnnicI18n],
@@ -298,31 +279,6 @@ export default {
 
     .inactive {
       pointer-events: none;
-    }
-  }
-
-  &__icon {
-    &-container {
-      display: flex;
-      border-radius: $unnnic-radius-1;
-      width: $unnnic-space-6;
-      height: $unnnic-space-6;
-      &:hover {
-        background-color: rgba(136, 147, 168, 0.1);
-      }
-      &--active {
-        background-color: rgba(136, 147, 168, 0.2);
-      }
-      &--disabled {
-        background-color: $unnnic-color-bg-muted;
-      }
-      :deep(.unnnic-tooltip) {
-        width: $unnnic-space-6;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
     }
   }
 
