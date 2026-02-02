@@ -6,6 +6,7 @@ import { useForwardPropsEmits } from 'reka-ui';
 import { DrawerContent, DrawerPortal } from 'vaul-vue';
 import { cn } from '@/lib/utils';
 import { useLayerZIndex } from '@/lib/layer-manager';
+import { useTeleportTarget } from '@/lib/teleport-target';
 import DrawerOverlay from './DrawerOverlay.vue';
 
 defineOptions({
@@ -32,10 +33,11 @@ const delegatedProps = reactiveOmit(props, 'class');
 const forwardedProps = useForwardPropsEmits(delegatedProps, emits);
 
 const layerZIndex = useLayerZIndex();
+const portalTarget = useTeleportTarget();
 </script>
 
 <template>
-  <DrawerPortal>
+  <DrawerPortal :to="portalTarget">
     <DrawerOverlay
       v-if="showOverlay"
       :style="{ zIndex: layerZIndex - 2 }"
