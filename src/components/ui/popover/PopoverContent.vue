@@ -2,7 +2,7 @@
   <PopoverPortal :to="portalTarget">
     <PopoverContent
       v-bind="{ ...forwarded, ...$attrs }"
-      :style="{ width: contentWidth }"
+      :style="{ width: contentWidth, zIndex: popoverZIndex }"
       :class="
         cn(
           'unnnic-popover',

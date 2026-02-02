@@ -131,10 +131,6 @@ export default {
       type: Boolean,
       default: false,
     },
-    showClear: {
-      type: Boolean,
-      default: false,
-    }
   },
   emits: ['icon-left-click', 'icon-right-click', 'clear'],
   data() {
