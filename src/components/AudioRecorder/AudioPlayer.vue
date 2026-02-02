@@ -426,10 +426,10 @@ export default {
       }
       .loading__dot {
         display: inline-block;
-        width: 2px;
-        height: 2px;
+        width: $unnnic-space-05;
+        height: $unnnic-space-05;
         border-radius: 50%;
-        margin-right: 2px;
+        margin-right: $unnnic-space-05;
         background-color: $unnnic-color-fg-base;
         animation: wave 1.5s linear infinite;
 

@@ -135,7 +135,6 @@
         />
       </section>
     </main>
-    <!-- aqui pode ter um slot e daria certo -->
   </section>
 </template>
 
