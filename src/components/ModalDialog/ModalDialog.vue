@@ -77,8 +77,8 @@
             class="unnnic-modal-dialog__container__actions__primary-button"
             @click.stop="$emit('primaryButtonClick')"
           />
-          </UnnnicDialogFooter>
-        </section>
+        </UnnnicDialogFooter>
+      </section>
     </UnnnicDialogContent>
   </UnnnicDialog>
 </template>
@@ -102,8 +102,8 @@ export default {
     UnnnicDialogTitle,
     UnnnicDialogFooter,
   },
-  inheritAttrs: false,
   mixins: [UnnnicI18n],
+  inheritAttrs: false,
   props: {
     modelValue: {
       type: Boolean,

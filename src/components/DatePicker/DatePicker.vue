@@ -1,6 +1,6 @@
 <template>
   <div
-    class="unnnic-date-picker"
+    :class="['unnnic-date-picker', `unnnic-date-picker--${props.variant}`]"
     data-testid="date-picker-root"
   >
     <template v-if="type === 'day'">
@@ -296,6 +296,8 @@ export interface DatePickerProps {
 
   locale?: string;
   translations?: Record<string, unknown>;
+
+  variant?: 'card' | 'popover';
 }
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
@@ -315,6 +317,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   disableClear: false,
   locale: undefined,
   translations: undefined,
+  variant: 'card',
 });
 
 const emit = defineEmits<{
@@ -962,6 +965,12 @@ onMounted(() => {
   border-radius: $unnnic-border-radius-sm;
   box-shadow: $unnnic-shadow-level-separated;
   overflow: hidden;
+
+  &--popover {
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
 
   .month-container {
     display: flex;
