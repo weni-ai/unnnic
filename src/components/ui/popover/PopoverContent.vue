@@ -1,5 +1,5 @@
 <template>
-  <PopoverPortal>
+  <PopoverPortal :to="portalTarget">
     <PopoverContent
       v-bind="{ ...forwarded, ...$attrs }"
       :style="{ width: contentWidth }"
@@ -34,6 +34,8 @@ import { computed, useSlots } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
 import { PopoverContent, PopoverPortal, useForwardPropsEmits } from 'reka-ui';
 import { cn } from '@/lib/utils';
+import { useLayerZIndex } from '@/lib/layer-manager';
+import { useTeleportTarget } from '@/lib/teleport-target';
 
 defineOptions({
   inheritAttrs: false,
@@ -62,6 +64,9 @@ const delegatedProps = reactiveOmit(props, 'class', 'size');
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 const slots = useSlots() as Slots;
+
+const popoverZIndex = useLayerZIndex();
+const portalTarget = useTeleportTarget();
 
 const getComponentName = (vnode: VNode): string | undefined => {
   const componentType = vnode.type as { name?: string; __name?: string };
@@ -101,8 +106,6 @@ const contentWidth = computed(() => {
 $popover-space: $unnnic-space-4;
 
 .unnnic-popover {
-  z-index: 10000;
-
   border-radius: $unnnic-radius-2;
   box-shadow: $unnnic-shadow-1;
   border: 1px solid $unnnic-color-border-soft;

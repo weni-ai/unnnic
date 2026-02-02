@@ -112,6 +112,20 @@ import {
   SegmentedControlContent,
 } from './ui/segmented-control';
 import PageHeader from './PageHeader/PageHeader.vue';
+import Dialog from './ui/dialog/Dialog.vue';
+import DialogContent from './ui/dialog/DialogContent.vue';
+import DialogFooter from './ui/dialog/DialogFooter.vue';
+import DialogHeader from './ui/dialog/DialogHeader.vue';
+import DialogTitle from './ui/dialog/DialogTitle.vue';
+import DialogTrigger from './ui/dialog/DialogTrigger.vue';
+import DialogClose from './ui/dialog/DialogClose.vue';
+import DrawerNext from './ui/drawer/Drawer.vue';
+import DrawerContent from './ui/drawer/DrawerContent.vue';
+import DrawerHeader from './ui/drawer/DrawerHeader.vue';
+import DrawerFooter from './ui/drawer/DrawerFooter.vue';
+import DrawerClose from './ui/drawer/DrawerClose.vue';
+import DrawerTitle from './ui/drawer/DrawerTitle.vue';
+import DrawerDescription from './ui/drawer/DrawerDescription.vue';
 
 type VueComponent = Component;
 
@@ -232,6 +246,20 @@ export const components: ComponentsMap = {
   unnnicSegmentedControlTrigger: SegmentedControlTrigger,
   unnnicSegmentedControlContent: SegmentedControlContent,
   unnnicPageHeader: PageHeader,
+  unnnicDialog: Dialog,
+  unnnicDialogContent: DialogContent,
+  unnnicDialogFooter: DialogFooter,
+  unnnicDialogHeader: DialogHeader,
+  unnnicDialogTitle: DialogTitle,
+  unnnicDialogTrigger: DialogTrigger,
+  unnnicDialogClose: DialogClose,
+  unnnicDrawerNext: DrawerNext,
+  unnnicDrawerContent: DrawerContent,
+  unnnicDrawerHeader: DrawerHeader,
+  unnnicDrawerFooter: DrawerFooter,
+  unnnicDrawerClose: DrawerClose,
+  unnnicDrawerTitle: DrawerTitle,
+  unnnicDrawerDescription: DrawerDescription,
 };
 
 export const unnnicFontSize = fontSize;
@@ -347,6 +375,20 @@ export const unnnicSegmentedControlList = SegmentedControlList;
 export const unnnicSegmentedControlTrigger = SegmentedControlTrigger;
 export const unnnicSegmentedControlContent = SegmentedControlContent;
 export const unnnicPageHeader = PageHeader;
+export const unnnicDialog = Dialog;
+export const unnnicDialogContent = DialogContent;
+export const unnnicDialogFooter = DialogFooter;
+export const unnnicDialogHeader = DialogHeader;
+export const unnnicDialogTitle = DialogTitle;
+export const unnnicDialogTrigger = DialogTrigger;
+export const unnnicDialogClose = DialogClose;
+export const unnnicDrawerNext = DrawerNext;
+export const unnnicDrawerContent = DrawerContent;
+export const unnnicDrawerHeader = DrawerHeader;
+export const unnnicDrawerFooter = DrawerFooter;
+export const unnnicDrawerClose = DrawerClose;
+export const unnnicDrawerTitle = DrawerTitle;
+export const unnnicDrawerDescription = DrawerDescription;
 
 export const UnnnicFontSize = fontSize;
 export const UnnnicFormElement = formElement;
@@ -461,3 +503,17 @@ export const UnnnicSegmentedControlList = SegmentedControlList;
 export const UnnnicSegmentedControlTrigger = SegmentedControlTrigger;
 export const UnnnicSegmentedControlContent = SegmentedControlContent;
 export const UnnnicPageHeader = PageHeader;
+export const UnnnicDialog = Dialog;
+export const UnnnicDialogContent = DialogContent;
+export const UnnnicDialogFooter = DialogFooter;
+export const UnnnicDialogHeader = DialogHeader;
+export const UnnnicDialogTitle = DialogTitle;
+export const UnnnicDialogTrigger = DialogTrigger;
+export const UnnnicDialogClose = DialogClose;
+export const UnnnicDrawerNext = DrawerNext;
+export const UnnnicDrawerContent = DrawerContent;
+export const UnnnicDrawerHeader = DrawerHeader;
+export const UnnnicDrawerFooter = DrawerFooter;
+export const UnnnicDrawerClose = DrawerClose;
+export const UnnnicDrawerTitle = DrawerTitle;
+export const UnnnicDrawerDescription = DrawerDescription;

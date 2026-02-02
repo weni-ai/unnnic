@@ -222,7 +222,6 @@ describe('UnnnicSelect.vue', () => {
 
     test('filters options based on search term', async () => {
       await wrapper.setProps({ enableSearch: true, search: 'Option 1' });
-
       const filteredOptions = wrapper.vm.filteredOptions;
       expect(filteredOptions.length).toBe(1);
       expect(filteredOptions[0].label).toBe('Option 1');
@@ -230,7 +229,6 @@ describe('UnnnicSelect.vue', () => {
 
     test('filters options by both label and value', async () => {
       await wrapper.setProps({ enableSearch: true, search: 'option1' });
-
       const filteredOptions = wrapper.vm.filteredOptions;
       expect(filteredOptions.length).toBe(1);
       expect(filteredOptions[0].value).toBe('option1');
@@ -238,7 +236,6 @@ describe('UnnnicSelect.vue', () => {
 
     test('shows all options when search is empty', async () => {
       await wrapper.setProps({ enableSearch: true, search: '' });
-
       const filteredOptions = wrapper.vm.filteredOptions;
       expect(filteredOptions.length).toBe(3);
     });

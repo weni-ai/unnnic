@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.18.0 (2026-02-02)
+
+### Added
+
+- **Teleport target configuration**: `Unnnic.install({ teleportTarget })` to route teleported layers to a custom container (CSS selector or `HTMLElement`).
+- **Layer manager**: `useLayerZIndex({ offset })` (base z-index 1000, step 5) to keep dialogs/drawers/popovers/tooltips/toasts stacked correctly, including overlay offsets.
+- **Dialog primitives**: Introduced `UnnnicDialog*` components with size variants (`small` | `medium` | `large`) and Storybook examples.
+- **Drawer primitives**: Introduced `UnnnicDrawer*` components with size variants (`medium` | `large` | `extra-large` | `giant`) and Storybook examples.
+- **LayerManager docs/stories**: Added documentation and interactive Storybook stories demonstrating stacking order across overlays.
+
+### Changed
+
+- **ModalDialog**: Rebuilt on top of `UnnnicDialog*`; forwards `$attrs` into content, disables `inheritAttrs`, adds `persistent` handling for Escape/outside-click, and is marked as deprecated in Storybook.
+- **Popover/Tooltip/Toast layering**: Popovers/tooltips/toasts now use the configured teleport target and `useLayerZIndex()` instead of hardcoded z-index; related triggers/styles were migrated to SCSS where applicable.
+- **InputDatePicker**: Now uses the popover primitives (`UnnnicPopover*`), improving behavior inside dialogs/overlays.
+
+# 3.17.1 (2026-01-20)
+
+### Added
+
+- **Select/MultiSelect Components**:
+  - Added `clearable` prop to enable show clear button.
+
+- **Tour Component**:
+  - Added missing `pointer-events` css attribute
+
 # 3.17.0 (2026-01-20)
 
 ### Added

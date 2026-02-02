@@ -153,6 +153,15 @@ export const AlternativeValueLabel = {
   },
 };
 
+export const Clearable = {
+  args: {
+    placeholder: 'Placeholder',
+    label: 'Label',
+    options,
+    clearable: true,
+  },
+};
+
 export const Disabled = {
   args: {
     placeholder: 'Placeholder',

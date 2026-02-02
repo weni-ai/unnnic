@@ -1,13 +1,16 @@
 import UnnnicModalDialog from '../components/ModalDialog/ModalDialog.vue';
 import UnnnicInput from '../components/Input/Input.vue';
 import UnnnicLabel from '../components/Label/Label.vue';
+import UnnnicInputDatePicker from '../components/InputDatePicker/InputDatePicker.vue';
+import UnnnicSwitch from '../components/Switch/Switch.vue';
+import UnnnicButton from '../components/Button/Button.vue';
 
 import { action } from '@storybook/addon-actions';
 import iconsList from '../utils/iconList';
 import colorsList from '../utils/colorsList';
 
 export default {
-  title: 'Example/ModalDialog',
+  title: 'Feedback/ModalDialog',
   component: UnnnicModalDialog,
   argTypes: {
     type: {
@@ -182,6 +185,85 @@ const TemplateLeftSidebar = (args) => ({
   },
 });
 
+const TemplateWithDatePicker = (args) => ({
+  components: {
+    UnnnicModalDialog,
+    UnnnicInputDatePicker,
+    UnnnicSwitch,
+    UnnnicButton,
+  },
+  setup() {
+    const updateModelValue = (value) => {
+      action('update:modelValue')(value);
+      args.modelValue = value;
+    };
+    return { args, updateModelValue };
+  },
+  data() {
+    return {
+      forms: [{ date: { start: null, end: null }, repeat: false }],
+      isLoading: false,
+    };
+  },
+  template: `
+  <div>
+    <button @click="updateModelValue(true)">Open Modal with DatePicker</button>
+    <unnnic-modal-dialog 
+      v-bind="args" 
+      @primaryButtonClick="handleSave" 
+      @secondaryButtonClick="secondaryButtonClick" 
+      @update:modelValue="updateModelValue"
+    >
+      <section style="display: flex; flex-direction: column; gap: 16px;">
+        <section 
+          v-for="(form, index) in forms"
+          :key="index"
+          style="display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid #E2E6ED; border-radius: 8px;"
+        >
+          <section style="display: flex; flex-direction: column; gap: 8px;">
+            <p style="font-family: 'Lato'; font-size: 14px; font-weight: 600; margin: 0; color: #3B414D;">
+              Select date or period
+            </p>
+            <UnnnicInputDatePicker
+              v-model="form.date"
+              :options="[{ id: 'custom', name: 'Custom' }]"
+              next
+              fillW
+              actionText="Confirm"
+              disableClear
+            />
+          </section>
+          <UnnnicSwitch
+            v-model="form.repeat"
+            textRight="Repeat annually"
+            size="small"
+          />
+        </section>
+        <UnnnicButton
+          iconCenter="add-1"
+          type="tertiary"
+          text="Add"
+          @click="addForm"
+        />
+      </section>
+    </unnnic-modal-dialog>
+  </div>
+  `,
+  methods: {
+    primaryButtonClick: action('primaryButtonClick'),
+    secondaryButtonClick: action('secondaryButtonClick'),
+    handleSave() {
+      action('primaryButtonClick')();
+      action('save')(this.forms);
+      console.log('Forms data:', this.forms);
+    },
+    addForm() {
+      this.forms.push({ date: { start: null, end: null }, repeat: false });
+      action('addForm')();
+    },
+  },
+});
+
 export const Default = Template.bind({});
 Default.args = {
   title: 'Default Modal',
@@ -260,4 +342,17 @@ Image.args = {
     text: 'Confirm',
   },
   showActionsDivider: true,
+};
+
+export const WithDatePicker = TemplateWithDatePicker.bind({});
+WithDatePicker.args = {
+  title: 'Add Non-Working Dates',
+  type: '',
+  primaryButtonProps: {
+    text: 'Save',
+    loading: false,
+  },
+  secondaryButtonProps: {
+    text: 'Cancel',
+  },
 };

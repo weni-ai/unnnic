@@ -139,6 +139,10 @@ export default {
     padding-right: $unnnic-space-10;
   }
 
+  &.input--has-clear-icon {
+      padding-right: $unnnic-space-10;
+    }
+
   &.error {
     @include input-error;
   }
