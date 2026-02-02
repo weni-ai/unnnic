@@ -1,61 +1,47 @@
 <template>
-  <section
-    v-if="modelValue"
-    class="unnnic-modal-dialog"
-    data-testid="modal-dialog"
+  <UnnnicDialog
+    :open="modelValue"
+    @update:open="$emit('update:modelValue', $event)"
   >
-    <section
-      class="unnnic-modal-dialog__overlay"
-      data-testid="modal-overlay"
-      @click.stop="!persistent && close()"
-    />
-    <section
-      :class="[
-        'unnnic-modal-dialog__container',
-        `unnnic-modal-dialog__container--${size}`,
-      ]"
-      data-testid="modal-container"
+    <UnnnicDialogContent
+      v-bind="$attrs"
+      :size="size === 'sm' ? 'small' : size === 'lg' ? 'large' : 'medium'"
+      :parentClass="['unnnic-modal-dialog', $attrs.class]"
+      class="unnnic-modal-dialog__container"
+      data-testid="modal-dialog"
+      @escape-key-down="persistentHandler"
+      @pointer-down-outside="persistentHandler"
     >
       <section
-        v-if="$slots.leftSidebar"
-        class="unnnic-modal-dialog__container__left-sidebar"
+        :class="[
+          'unnnic-modal-dialog__container__body',
+          {
+            'unnnic-modal-dialog__container__body--left-sidebar':
+              $slots.leftSidebar,
+          },
+        ]"
       >
-        <slot name="leftSidebar" />
-      </section>
-
-      <section class="unnnic-modal-dialog__container__body">
-        <header v-if="title" class="unnnic-modal-dialog__container__header">
-          <section class="unnnic-modal-dialog__container__title-container">
-            <UnnnicIcon
-              v-if="icon || type"
-              data-testid="title-icon"
-              class="unnnic-modal-dialog__container__title-icon"
-              :icon="icon || iconsMapper[type]?.icon"
-              :scheme="iconScheme || iconsMapper[type]?.scheme"
-              size="md"
-            />
-            <h1
-              class="unnnic-modal-dialog__container__title-text"
-              data-testid="title-text"
-            >
-              {{ title }}
-            </h1>
-          </section>
-          <UnnnicIcon
-            v-if="showCloseIcon"
-            data-testid="close-icon"
-            icon="close"
-            clickable
-            scheme="neutral-cloudy"
-            @click="close()"
-          />
-        </header>
+        <section
+          v-if="$slots.leftSidebar"
+          class="unnnic-modal-dialog__container__left-sidebar"
+        >
+          <slot name="leftSidebar" />
+        </section>
+        <UnnnicDialogHeader
+          v-if="title"
+          :closeButton="showCloseIcon"
+          :type="type"
+        >
+          <UnnnicDialogTitle>
+            {{ title }}
+          </UnnnicDialogTitle>
+        </UnnnicDialogHeader>
         <section class="unnnic-modal-dialog__container__content">
           <slot></slot>
         </section>
-        <section
+
+        <UnnnicDialogFooter
           v-if="primaryButtonProps.text"
-          data-testid="actions-section"
           :class="[
             'unnnic-modal-dialog__container__actions',
             {
@@ -63,6 +49,8 @@
                 showActionsDivider,
             },
           ]"
+          :divider="showActionsDivider"
+          data-testid="actions-section"
         >
           <UnnnicButton
             v-if="!hideSecondaryButton"
@@ -89,23 +77,32 @@
             class="unnnic-modal-dialog__container__actions__primary-button"
             @click.stop="$emit('primaryButtonClick')"
           />
+          </UnnnicDialogFooter>
         </section>
-      </section>
-    </section>
-  </section>
+    </UnnnicDialogContent>
+  </UnnnicDialog>
 </template>
 
 <script>
-import UnnnicIcon from "../Icon.vue";
-import UnnnicButton from "../Button/Button.vue";
-import UnnnicI18n from "../../mixins/i18n";
+import UnnnicButton from '../Button/Button.vue';
+import UnnnicI18n from '../../mixins/i18n';
+import UnnnicDialog from '../ui/dialog/Dialog.vue';
+import UnnnicDialogContent from '../ui/dialog/DialogContent.vue';
+import UnnnicDialogHeader from '../ui/dialog/DialogHeader.vue';
+import UnnnicDialogTitle from '../ui/dialog/DialogTitle.vue';
+import UnnnicDialogFooter from '../ui/dialog/DialogFooter.vue';
 
 export default {
-  name: "UnnnicModalDialog",
+  name: 'UnnnicModalDialog',
   components: {
-    UnnnicIcon,
     UnnnicButton,
+    UnnnicDialog,
+    UnnnicDialogContent,
+    UnnnicDialogHeader,
+    UnnnicDialogTitle,
+    UnnnicDialogFooter,
   },
+  inheritAttrs: false,
   mixins: [UnnnicI18n],
   props: {
     modelValue: {
@@ -118,29 +115,29 @@ export default {
     },
     type: {
       type: String,
-      default: "",
+      default: '',
       validate(type) {
-        return ["success", "warning", "attention"].includes(type);
+        return ['success', 'warning', 'attention'].includes(type);
       },
     },
     size: {
       type: String,
-      default: "md",
+      default: 'md',
       validate(size) {
-        return ["sm", "md", "lg"].includes(size);
+        return ['sm', 'md', 'lg'].includes(size);
       },
     },
     title: {
       type: String,
-      default: "",
+      default: '',
     },
     icon: {
       type: String,
-      default: "",
+      default: '',
     },
     iconScheme: {
       type: String,
-      default: "",
+      default: '',
     },
     showCloseIcon: {
       type: Boolean,
@@ -163,126 +160,62 @@ export default {
       default: () => ({}),
     },
   },
-  emits: ["primaryButtonClick", "secondaryButtonClick", "update:modelValue"],
+  emits: ['primaryButtonClick', 'secondaryButtonClick', 'update:modelValue'],
 
   data() {
     return {
       defaultTranslations: {
         cancel: {
-          "pt-br": "Cancelar",
-          en: "Cancel",
-          es: "Cancelar",
+          'pt-br': 'Cancelar',
+          en: 'Cancel',
+          es: 'Cancelar',
         },
       },
-      iconsMapper: {
-        success: { icon: "check_circle", scheme: "aux-green-500" },
-        warning: { icon: "warning", scheme: "aux-red-500" },
-        attention: { icon: "error", scheme: "aux-yellow-500" },
-      },
       primaryButtonTypeMapper: {
-        success: "primary",
-        warning: "warning",
-        attention: "attention",
+        success: 'primary',
+        warning: 'warning',
+        attention: 'attention',
       },
     };
   },
-  watch: {
-    modelValue(value) {
-      this.updateBodyOverflow(value);
-    },
-  },
   methods: {
     close() {
-      this.$emit("update:modelValue", false);
+      this.$emit('update:modelValue', false);
     },
-    updateBodyOverflow(isHidden) {
-      document.body.style.overflow = isHidden ? "hidden" : "";
+    persistentHandler(event) {
+      if (this.persistent) {
+        event.preventDefault();
+      }
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@use "@/assets/scss/unnnic" as *;
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-.unnnic-modal-dialog {
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-
-  &__overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-}
+@use '@/assets/scss/unnnic' as *;
 
 .unnnic-modal-dialog__container {
-  display: flex;
-  background: $unnnic-color-neutral-white;
-  border-radius: $unnnic-spacing-xs;
-  box-shadow: $unnnic-shadow-level-near;
-  position: fixed;
-  max-height: calc(100vh - $unnnic-spacing-giant);
-  overflow: hidden;
-
-  &--sm {
-    width: 400px;
-  }
-  &--md {
-    width: 600px;
-  }
-  &--lg {
-    width: 800px;
-  }
-
   &__left-sidebar {
     background-color: $unnnic-color-neutral-black;
     color: $unnnic-color-neutral-white;
+
+    grid-area: left-sidebar;
+    grid-row: span 3;
   }
 
   &__body {
     flex: 1;
     display: flex;
     flex-direction: column;
-  }
 
-  &__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid $unnnic-color-neutral-soft;
-    padding: $unnnic-spacing-md;
-    flex-shrink: 0;
-  }
+    overflow-y: auto;
 
-  &__title-container {
-    display: flex;
-    align-items: center;
-    gap: $unnnic-spacing-ant;
-  }
-
-  &__title-icon {
-    font-size: 28px;
-  }
-
-  &__title-text {
-    font-family: $unnnic-font-family-secondary;
-    font-size: $unnnic-font-size-title-sm;
-    font-weight: $unnnic-font-weight-black;
-    line-height: 28px;
-    color: $unnnic-color-neutral-darkest;
+    &--left-sidebar {
+      border-radius: $unnnic-radius-4 0 0 $unnnic-radius-4;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      grid-template-areas: 'left-sidebar content';
+    }
   }
 
   &__content {
@@ -304,27 +237,6 @@ export default {
     &::-webkit-scrollbar-track {
       background: $unnnic-color-neutral-soft;
       border-radius: $unnnic-border-radius-pill;
-    }
-  }
-
-  &__actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas: "secondary-button primary-button";
-    gap: $unnnic-spacing-sm;
-    padding: $unnnic-spacing-md;
-    flex-shrink: 0;
-
-    &--divider {
-      border-top: 1px solid $unnnic-color-neutral-soft;
-    }
-
-    &__secondary-button {
-      grid-area: secondary-button;
-    }
-
-    &__primary-button {
-      grid-area: primary-button;
     }
   }
 }
