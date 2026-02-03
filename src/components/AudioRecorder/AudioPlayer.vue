@@ -1,55 +1,93 @@
 <template>
   <div class="audio-player">
-    <span
-      class="unnnic--clickable"
-      :class="{ inactive: reqStatus === 'sending' }"
-      @click="click"
-      @keypress.enter="click"
-    >
-      <UnnnicIcon
-        :icon="playbackIcon"
-        scheme="neutral-darkest"
+    <div class="audio-player__actions">
+      <span
+        class="unnnic--clickable"
+        :class="{ inactive: reqStatus === 'sending' }"
+        @click="click"
+        @keypress.enter="click"
+      >
+        <UnnnicIcon
+          :icon="playbackIcon"
+          scheme="neutral-darkest"
+        />
+      </span>
+
+      <input
+        v-if="showProgressBar"
+        v-model="progress"
+        class="audio-player__progress-bar unnnic--clickable"
+        :class="{
+          inactive: reqStatus !== 'default',
+          'audio-player__progress-bar--fluid': fluidBar,
+        }"
+        type="range"
+        min="0"
+        :max="duration"
+        step="0.001"
+        :style="progressBarStyle"
+        @input="emitProgressBarUpdate"
       />
-    </span>
 
-    <input
-      v-if="showProgressBar"
-      v-model="progress"
-      class="audio-player__progress-bar unnnic--clickable"
-      :class="{ inactive: reqStatus !== 'default' }"
-      type="range"
-      min="0"
-      :max="duration"
-      step="0.001"
-      :style="progressBarStyle"
-      @input="emitProgressBarUpdate"
-    />
-
-    <div
-      v-else
-      class="audio-player__progress-bar-bars"
-    >
       <div
-        v-for="(bar, index) in bars"
-        :key="index"
-        :style="{ height: `${bar * 100}%` }"
-        :class="['bar', { active: isBarActive(index) }]"
-      ></div>
+        v-else
+        class="audio-player__progress-bar-bars"
+      >
+        <div
+          v-for="(bar, index) in bars"
+          :key="index"
+          :style="{ height: `${bar * 100}%` }"
+          :class="['bar', { active: isBarActive(index) }]"
+        />
+      </div>
+
+      <span class="audio-player__time">
+        {{ time }}
+      </span>
+
+      <AudioTranscriptionButton
+        v-if="showTranscriptionAction"
+        :active="showTranscriptionText"
+        :enableGenerateTranscription="enableGenerateTranscription"
+        :transcriptionTooltipText="transcriptionTooltipText"
+        @click="clickTranscription"
+      />
     </div>
 
-    <span class="audio-player__time">
-      {{ time }}
-    </span>
+    <div
+      v-if="showTranscriptionText"
+      class="audio-player__transcription"
+    >
+      <div
+        v-if="isLoadingTranscription"
+        class="audio-player__transcription-loading"
+      >
+        <p>{{ i18n('loading_transcription') }}</p>
+
+        <span
+          v-for="dot of 3"
+          :key="dot"
+          class="loading__dot"
+        />
+      </div>
+      <p v-else>{{ transcriptionText }}</p>
+    </div>
+    <slot name="transcriptionInfo" />
   </div>
 </template>
 
 <script>
 import UnnnicIcon from '../Icon.vue';
+import UnnnicI18n from '../../mixins/i18n';
+import AudioTranscriptionButton from './AudioTranscriptionButton.vue';
 
 export default {
   components: {
     UnnnicIcon,
+    AudioTranscriptionButton,
   },
+
+  mixins: [UnnnicI18n],
 
   props: {
     time: {
@@ -77,13 +115,70 @@ export default {
     },
     bars: {
       type: Array,
+      required: true,
+    },
+    showTranscriptionAction: {
+      type: Boolean,
+      default: false,
+    },
+    enableGenerateTranscription: {
+      type: Boolean,
+      default: false,
+    },
+    isLoadingTranscription: {
+      type: Boolean,
+      default: false,
+    },
+    showTranscriptionText: {
+      type: Boolean,
+      default: false,
+    },
+    transcriptionText: {
+      type: String,
+      default: '',
+    },
+    locale: {
+      type: String,
+      default: 'en',
+    },
+    fluidBar: {
+      type: Boolean,
+      default: true,
     },
   },
-  emits: ['play', 'pause', 'progress-bar-update', 'failed-click'],
+  emits: [
+    'play',
+    'pause',
+    'progress-bar-update',
+    'failed-click',
+    'update:showTranscriptionText',
+  ],
 
   data() {
     return {
       progress: 0,
+      defaultTranslations: {
+        show_transcription: {
+          'pt-br': 'Mostrar a transcrição',
+          en: 'Show transcript',
+          es: 'Mostrar la transcripción',
+        },
+        hide_transcription: {
+          'pt-br': 'Ocultar a transcrição',
+          en: 'Hide transcript',
+          es: 'Ocultar la transcripción',
+        },
+        unavailable_transcription: {
+          'pt-br': 'Transcrição não habilitada',
+          en: 'Transcription Unavailable',
+          es: 'Transcripción no habilitada',
+        },
+        loading_transcription: {
+          'pt-br': 'Carregando transcrição',
+          en: 'Loading transcription',
+          es: 'Cargando transcripción',
+        },
+      },
     };
   },
 
@@ -101,7 +196,17 @@ export default {
         return statusMapping[this.reqStatus];
       }
 
-      return this.isPlaying ? 'controls-pause-1' : 'controls-play-1';
+      return this.isPlaying
+        ? 'material-symbols:pause-rounded'
+        : 'material-symbols:play-arrow-rounded';
+    },
+    transcriptionTooltipText() {
+      if (!this.enableGenerateTranscription) {
+        return this.i18n('unavailable_transcription');
+      }
+      return this.showTranscriptionText
+        ? this.i18n('hide_transcription')
+        : this.i18n('show_transcription');
     },
     progressBarStyle() {
       return {
@@ -117,6 +222,11 @@ export default {
   },
 
   methods: {
+    clickTranscription() {
+      if (this.enableGenerateTranscription) {
+        this.$emit('update:showTranscriptionText', !this.showTranscriptionText);
+      }
+    },
     click() {
       if (this.reqStatus === 'failed') {
         this.$emit('failed-click');
@@ -151,20 +261,38 @@ export default {
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
+* {
+  margin: 0;
+  padding: 0;
+}
 .audio-player {
-  display: inline-flex;
-  align-items: center;
-  gap: $unnnic-spacing-stack-xs;
+  display: flex;
+  flex-direction: column;
+  gap: $unnnic-space-1;
 
-  width: 100%;
+  &__actions {
+    display: inline-flex;
+    align-items: center;
+    gap: $unnnic-space-2;
+
+    width: 100%;
+
+    .inactive {
+      pointer-events: none;
+    }
+  }
 
   &__progress-bar {
     position: relative;
 
     width: clamp(85px, 100%, 185px);
-    height: 2px;
+    height: $unnnic-space-05;
 
     outline: none;
+
+    &--fluid {
+      width: 100%;
+    }
 
     &::before {
       content: '';
@@ -227,12 +355,49 @@ export default {
     }
   }
 
-  &__time {
-    margin-left: $unnnic-spacing-stack-xs;
-  }
+  &__transcription {
+    display: flex;
+    padding: $unnnic-space-1 $unnnic-space-2;
+    max-width: 400px;
+    border-radius: $unnnic-radius-1;
+    background-color: $unnnic-color-bg-soft;
 
-  .inactive {
-    pointer-events: none;
+    font: $unnnic-font-caption-2;
+    color: $unnnic-color-fg-base;
+
+    &-loading {
+      display: flex;
+      align-items: baseline;
+
+      @keyframes wave {
+        0%,
+        60%,
+        100% {
+          transform: initial;
+        }
+
+        30% {
+          transform: translateY(-3px);
+        }
+      }
+      .loading__dot {
+        display: inline-block;
+        width: $unnnic-space-05;
+        height: $unnnic-space-05;
+        border-radius: 50%;
+        margin-right: $unnnic-space-05;
+        background-color: $unnnic-color-fg-base;
+        animation: wave 1.5s linear infinite;
+
+        &:nth-child(2) {
+          animation-delay: 0.9s;
+        }
+
+        &:nth-child(3) {
+          animation-delay: 1.2s;
+        }
+      }
+    }
   }
 }
 </style>
