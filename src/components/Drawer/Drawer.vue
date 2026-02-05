@@ -95,7 +95,7 @@
 </template>
 
 <script setup>
-import { computed, useTemplateRef } from 'vue';
+import { computed, ref } from 'vue';
 import { useInfiniteScroll } from '@vueuse/core';
 
 import UnnnicButton from '../Button/Button.vue';
@@ -224,7 +224,8 @@ const back = () => {
   }
 };
 
-const contentRef = useTemplateRef('contentRef');
+const contentRef = ref(null);
+
 useInfiniteScroll(
   contentRef,
   () => {
