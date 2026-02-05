@@ -10,11 +10,15 @@
       :showOverlay="!withoutOverlay"
       data-testid="drawer-container"
       :size="mappedSize"
-      :class="[
-        'unnnic-drawer__container',
-        `unnnic-drawer__container--${size}`,
-        props.class,
-      ].filter(Boolean).join(' ')"
+      :class="
+        [
+          'unnnic-drawer__container',
+          `unnnic-drawer__container--${size}`,
+          props.class,
+        ]
+          .filter(Boolean)
+          .join(' ')
+      "
     >
       <DrawerHeader class="unnnic-drawer__header">
         <section class="unnnic-drawer__title-container">
@@ -53,7 +57,10 @@
         </template>
       </DrawerHeader>
 
-      <section class="unnnic-drawer__content">
+      <section
+        ref="contentRef"
+        class="unnnic-drawer__content"
+      >
         <slot name="content"></slot>
       </section>
 
@@ -88,10 +95,11 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, useTemplateRef } from 'vue';
+import { useInfiniteScroll } from '@vueuse/core';
 
 import UnnnicButton from '../Button/Button.vue';
-import { 
+import {
   Drawer,
   DrawerContent,
   DrawerHeader,
@@ -170,17 +178,37 @@ const props = defineProps({
     type: String,
     default: '',
   },
+  enableInfiniteScroll: {
+    type: Boolean,
+    default: false,
+  },
+  infiniteScrollDistance: {
+    type: Number,
+    default: 10,
+  },
+  infiniteScrollCanLoadMore: {
+    type: Boolean,
+    default: false,
+  },
 });
 
-const emit = defineEmits(['primaryButtonClick', 'secondaryButtonClick', 'close', 'back']);
-const showFooter = computed(() => !!(props.primaryButtonText || props.secondaryButtonText));
+const emit = defineEmits([
+  'primaryButtonClick',
+  'secondaryButtonClick',
+  'close',
+  'back',
+  'scroll-end',
+]);
+const showFooter = computed(
+  () => !!(props.primaryButtonText || props.secondaryButtonText),
+);
 const mappedSize = computed(() => {
   const sizes = {
     md: 'medium',
     lg: 'large',
     xl: 'extra-large',
     gt: 'giant',
-  }
+  };
   return sizes[props.size] || 'medium';
 });
 
@@ -195,6 +223,21 @@ const back = () => {
     close();
   }
 };
+
+const contentRef = useTemplateRef('contentRef');
+useInfiniteScroll(
+  contentRef,
+  () => {
+    if (props.enableInfiniteScroll) {
+      emit('scroll-end');
+    }
+  },
+  {
+    canLoadMore: () => {
+      return props.infiniteScrollCanLoadMore;
+    },
+  },
+);
 </script>
 
 <style lang="scss" scoped>
