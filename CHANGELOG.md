@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.20.0 (2026-02-06)
+
+### Added
+
+- **Design Tokens as JavaScript/TypeScript**:
+  - Added ES Module exports for all design tokens (colors, fonts, spaces, radii, shadows, icon-sizes)
+  - Tokens are now available as importable JavaScript constants with TypeScript definitions
+  - Supports tree-shaking for optimal bundle size
+  - Example usage: `import { colorTeal600, colorBlue500 } from '@weni/unnnic-system/tokens/colors'`
+  - Package exports added for `@weni/unnnic-system/tokens/colors`, `@weni/unnnic-system/tokens/fonts`, `@weni/unnnic-system/tokens/spaces`, `@weni/unnnic-system/tokens/radii`, `@weni/unnnic-system/tokens/shadows`, and `@weni/unnnic-system/tokens/icon-sizes`
+  - All token exports use camelCase naming (e.g., `colorTeal600`, `fontSize`, `space4`)
+  - Tokens are generated as `.mjs` files with corresponding `.d.ts` TypeScript definitions
+
+### Changed
+
+- **Build Process**:
+  - Updated build script to automatically generate design tokens after Vite build
+  - Style Dictionary now generates both SCSS variables and JavaScript/TypeScript exports
+
 # 3.19.0 (2026-02-03)
 
 ### Added
