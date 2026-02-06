@@ -90,6 +90,18 @@ export default {
           `\n`
         );
       },
+      'typescript/es6-declarations': (dictionary) => {
+        return (
+          `// Do not edit directly, this file was auto-generated.\n\n` +
+          dictionary.allTokens
+            .map((token) => {
+              const name = token.name;
+              return `export declare const ${name}: string;`;
+            })
+            .join('\n') +
+          `\n`
+        );
+      },
     },
   },
   platforms: {
@@ -132,6 +144,72 @@ export default {
           destination: 'colors-hsl.scss',
           format: 'scss/hsl-variables',
           filter: 'colors',
+        },
+      ],
+    },
+    js: {
+      transforms: ['attribute/cti', 'name/camel', 'size/rem', 'color/hex'],
+      buildPath: './dist/tokens/',
+      files: [
+        {
+          destination: 'colors.js',
+          format: 'javascript/es6',
+          filter: 'colors',
+        },
+        {
+          destination: 'colors.d.ts',
+          format: 'typescript/es6-declarations',
+          filter: 'colors',
+        },
+        {
+          destination: 'fonts.js',
+          format: 'javascript/es6',
+          filter: 'fonts',
+        },
+        {
+          destination: 'fonts.d.ts',
+          format: 'typescript/es6-declarations',
+          filter: 'fonts',
+        },
+        {
+          destination: 'spaces.js',
+          format: 'javascript/es6',
+          filter: 'spaces',
+        },
+        {
+          destination: 'spaces.d.ts',
+          format: 'typescript/es6-declarations',
+          filter: 'spaces',
+        },
+        {
+          destination: 'radii.js',
+          format: 'javascript/es6',
+          filter: 'radii',
+        },
+        {
+          destination: 'radii.d.ts',
+          format: 'typescript/es6-declarations',
+          filter: 'radii',
+        },
+        {
+          destination: 'shadows.js',
+          format: 'javascript/es6',
+          filter: 'shadows',
+        },
+        {
+          destination: 'shadows.d.ts',
+          format: 'typescript/es6-declarations',
+          filter: 'shadows',
+        },
+        {
+          destination: 'icon-sizes.js',
+          format: 'javascript/es6',
+          filter: 'iconSizes',
+        },
+        {
+          destination: 'icon-sizes.d.ts',
+          format: 'typescript/es6-declarations',
+          filter: 'iconSizes',
         },
       ],
     },
