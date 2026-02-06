@@ -13,12 +13,18 @@ const delegatedProps = reactiveOmit(props, 'class');
 </script>
 
 <template>
-  <TabsList
-    v-bind="delegatedProps"
-    :class="cn('unnnic-tabs-list', props.class)"
+  <section
+    class="unnnic-tabs-list__container"
+    style=""
   >
-    <slot />
-  </TabsList>
+    <TabsList
+      v-bind="delegatedProps"
+      :class="cn('unnnic-tabs-list', props.class)"
+    >
+      <slot />
+    </TabsList>
+    <slot name="right" />
+  </section>
 </template>
 
 <style lang="scss" scoped>
@@ -27,8 +33,14 @@ const delegatedProps = reactiveOmit(props, 'class');
 .unnnic-tabs-list {
   display: flex;
   align-items: center;
+  width: 100%;
   gap: $unnnic-space-6;
   box-shadow: inset 0 (-$unnnic-border-width-thinner) 0 0
     $unnnic-color-border-base;
+  &__container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
 }
 </style>
