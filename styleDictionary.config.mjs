@@ -152,7 +152,7 @@ export default {
       buildPath: './dist/tokens/',
       files: [
         {
-          destination: 'colors.js',
+          destination: 'colors.mjs',
           format: 'javascript/es6',
           filter: 'colors',
         },
@@ -162,7 +162,7 @@ export default {
           filter: 'colors',
         },
         {
-          destination: 'fonts.js',
+          destination: 'fonts.mjs',
           format: 'javascript/es6',
           filter: 'fonts',
         },
@@ -172,7 +172,7 @@ export default {
           filter: 'fonts',
         },
         {
-          destination: 'spaces.js',
+          destination: 'spaces.mjs',
           format: 'javascript/es6',
           filter: 'spaces',
         },
@@ -182,7 +182,7 @@ export default {
           filter: 'spaces',
         },
         {
-          destination: 'radii.js',
+          destination: 'radii.mjs',
           format: 'javascript/es6',
           filter: 'radii',
         },
@@ -192,7 +192,7 @@ export default {
           filter: 'radii',
         },
         {
-          destination: 'shadows.js',
+          destination: 'shadows.mjs',
           format: 'javascript/es6',
           filter: 'shadows',
         },
@@ -202,7 +202,7 @@ export default {
           filter: 'shadows',
         },
         {
-          destination: 'icon-sizes.js',
+          destination: 'icon-sizes.mjs',
           format: 'javascript/es6',
           filter: 'iconSizes',
         },
