@@ -13,10 +13,7 @@ const delegatedProps = reactiveOmit(props, 'class');
 </script>
 
 <template>
-  <section
-    class="unnnic-tabs-list__container"
-    style=""
-  >
+  <section class="unnnic-tabs-list__container">
     <TabsList
       v-bind="delegatedProps"
       :class="cn('unnnic-tabs-list', props.class)"
@@ -39,8 +36,6 @@ const delegatedProps = reactiveOmit(props, 'class');
     $unnnic-color-border-base;
   &__container {
     display: flex;
-    align-items: center;
-    width: 100%;
   }
 }
 </style>
