@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "3.19.0",
+  "version": "3.20.0",
   "type": "commonjs",
   "files": [
     "dist",
@@ -23,12 +23,36 @@
     },
     "./dist/style.css": "./dist/style.css",
     "./src/assets/scss/unnnic.scss": "./src/assets/scss/unnnic.scss",
+    "./tokens/colors": {
+      "types": "./dist/tokens/colors.d.ts",
+      "import": "./dist/tokens/colors.mjs"
+    },
+    "./tokens/fonts": {
+      "types": "./dist/tokens/fonts.d.ts",
+      "import": "./dist/tokens/fonts.mjs"
+    },
+    "./tokens/spaces": {
+      "types": "./dist/tokens/spaces.d.ts",
+      "import": "./dist/tokens/spaces.mjs"
+    },
+    "./tokens/radii": {
+      "types": "./dist/tokens/radii.d.ts",
+      "import": "./dist/tokens/radii.mjs"
+    },
+    "./tokens/shadows": {
+      "types": "./dist/tokens/shadows.d.ts",
+      "import": "./dist/tokens/shadows.mjs"
+    },
+    "./tokens/icon-sizes": {
+      "types": "./dist/tokens/icon-sizes.d.ts",
+      "import": "./dist/tokens/icon-sizes.mjs"
+    },
     "./package.json": "./package.json"
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
-    "build:types": "vue-tsc && vite build",
+    "build": "vite build && npm run style-dictionary:generate",
+    "build:types": "vue-tsc && vite build && npm run style-dictionary:generate",
     "preview": "vite preview",
     "lint": "eslint src/**/*.{js,vue,ts} --fix",
     "format": "prettier --write src/",
