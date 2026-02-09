@@ -117,8 +117,8 @@ export default {
       default: '',
     },
     tooltip: {
-      type: String,
-      default: '',
+      type: Object,
+      default: undefined,
     },
     maxlength: {
       type: [Number, null],
