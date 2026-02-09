@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import { unnnicFontSize } from '../components/config';
 import unnnicToolTip from '../components/ToolTip/ToolTip.vue';
 
@@ -43,4 +44,28 @@ export const withLink = {
     side: 'right',
     enableHtml: true,
   },
+};
+
+export const withCloseButton = {
+  args: {
+    text: 'tooltip with close button',
+    enabled: true,
+    maxWidth: `${15 * unnnicFontSize}px`,
+    side: 'right',
+    showClose: true,
+  },
+  render: (args) => ({
+    components: {
+      unnnicToolTip,
+    },
+    setup() {
+      const open = ref(true);
+      return { args, open };
+    },
+    template: `
+    <unnnic-tool-tip v-bind="args" :force-open="open" @click:close="open = false">
+      Hover over text
+    </unnnic-tool-tip>
+    `,
+  }),
 };
