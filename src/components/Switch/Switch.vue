@@ -57,7 +57,7 @@ defineOptions({
   name: 'UnnnicSwitch',
 });
 
-interface SwitchProps {
+export interface SwitchProps {
   size?: 'small' | 'medium';
   label?: string;
   labelTooltip?: TooltipProps;

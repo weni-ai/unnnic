@@ -51,7 +51,7 @@ defineOptions({
   name: 'UnnnicFormElement',
 });
 
-interface FormElementProps {
+export interface FormElementProps {
   size?: 'md' | 'sm';
   label?: string;
   fixedLabel?: boolean;
