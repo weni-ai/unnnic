@@ -153,10 +153,6 @@ export default {
   cursor: pointer;
   padding: $unnnic-space-2 $unnnic-space-4;
 
-  .unnnic-tooltip {
-    display: flex;
-  }
-
   &:hover {
     color: $unnnic-color-fg-emphasized;
   }
