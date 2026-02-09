@@ -96,7 +96,7 @@ export default {
 
 .unnnic-tooltip {
   &__close {
-    margin-left: 12px;
+    margin-left: $unnnic-space-3;
     align-self: center;
   }
 }
