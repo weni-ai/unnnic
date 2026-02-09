@@ -30,6 +30,10 @@ import { ref, provide, watch, computed } from 'vue';
 import UnnnicLabel from '../Label/Label.vue';
 import { type TooltipProps } from '../ToolTip/ToolTip.vue';
 
+defineOptions({
+  name: 'UnnnicRadioGroup',
+});
+
 interface RadioGroupProps {
   modelValue?: string | number;
   state?: 'horizontal' | 'vertical';

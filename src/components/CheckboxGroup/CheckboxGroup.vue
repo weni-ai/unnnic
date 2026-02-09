@@ -28,6 +28,10 @@
 import UnnnicLabel from '../Label/Label.vue';
 import { type TooltipProps } from '../ToolTip/ToolTip.vue';
 
+defineOptions({
+  name: 'UnnnicCheckboxGroup',
+});
+
 interface CheckboxGroupProps {
   state?: 'horizontal' | 'vertical';
   label?: string;
