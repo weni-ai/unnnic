@@ -18,8 +18,7 @@ export default {
   },
   argTypes: {
     label: { control: { type: 'text' } },
-    labelTooltip: { control: { type: 'text' } },
-    labelUseHtmlTooltip: { control: 'boolean' },
+    labelTooltip: { control: { type: 'object' } },
     helper: { control: { type: 'text' } },
     state: { control: 'select', options: ['horizontal', 'vertical'] },
   },
@@ -83,7 +82,9 @@ export const Vertical = {
     state: 'vertical',
     label: 'Label',
     helper: 'Helper text',
-    labelTooltip: 'Tooltip text',
+    labelTooltip: {
+      text: 'Tooltip text',
+    },
   },
 
   render: (args) => ({
