@@ -17,8 +17,8 @@
       <template v-if="enableHtml">
         <!-- eslint-disable-next-line vue/no-v-html -->
         <section
-          v-html="text"
           data-testid="tooltip-html-content"
+          v-html="text"
         ></section>
       </template>
       <template
@@ -29,19 +29,30 @@
         {{ line }}
         <br />
       </template>
+      <UnnnicIcon
+        v-if="showClose"
+        class="unnnic-tooltip__close"
+        icon="close"
+        size="sm"
+        clickable
+        filled
+        scheme="bg-white"
+        @click="$emit('update:open', false)"
+      />
     </TooltipContent>
   </Tooltip>
 </template>
 
 <script>
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
-
+import UnnnicIcon from '../Icon.vue';
 export default {
   name: 'UnnnicTooltip',
   components: {
     Tooltip,
     TooltipTrigger,
     TooltipContent,
+    UnnnicIcon,
   },
   props: {
     text: {
@@ -71,6 +82,22 @@ export default {
       type: Boolean,
       default: false,
     },
+    showClose: {
+      type: Boolean,
+      default: true,
+    },
   },
+  emits: ['update:open'],
 };
 </script>
+
+<style lang="scss" scoped>
+@use '@/assets/scss/unnnic' as *;
+
+.unnnic-tooltip {
+  &__close {
+    margin-left: 12px;
+    align-self: center;
+  }
+}
+</style>
