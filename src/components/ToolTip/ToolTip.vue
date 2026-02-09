@@ -4,7 +4,10 @@
     :open="forceOpen || undefined"
     data-testid="tooltip-wrapper"
   >
-    <TooltipTrigger data-testid="tooltip-trigger">
+    <TooltipTrigger
+      class="unnnic-tooltip"
+      data-testid="tooltip-trigger"
+    >
       <slot />
     </TooltipTrigger>
 
