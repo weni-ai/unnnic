@@ -37,7 +37,7 @@
         clickable
         filled
         scheme="bg-white"
-        @click="$emit('update:open', false)"
+        @click="$emit('click:close', false)"
       />
     </TooltipContent>
   </Tooltip>
@@ -87,7 +87,7 @@ export default {
       default: true,
     },
   },
-  emits: ['update:open'],
+  emits: ['click:close'],
 };
 </script>
 
