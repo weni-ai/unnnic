@@ -63,7 +63,7 @@ export const withCloseButton = {
       return { args, open };
     },
     template: `
-    <unnnic-tool-tip v-bind="args" :force-open="open" @update:open="open = $event">
+    <unnnic-tool-tip v-bind="args" :force-open="open" @click:close="open = false">
       Hover over text
     </unnnic-tool-tip>
     `,
