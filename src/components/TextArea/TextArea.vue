@@ -45,7 +45,7 @@ defineOptions({
   name: 'UnnnicTextArea',
 });
 
-interface TextAreaProps {
+export interface TextAreaProps {
   size?: 'md' | 'sm';
   resize?: 'none' | 'vertical';
   label?: string;

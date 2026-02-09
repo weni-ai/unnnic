@@ -34,7 +34,7 @@ defineOptions({
   name: 'UnnnicRadioGroup',
 });
 
-interface RadioGroupProps {
+export interface RadioGroupProps {
   modelValue?: string | number;
   state?: 'horizontal' | 'vertical';
   label?: string;

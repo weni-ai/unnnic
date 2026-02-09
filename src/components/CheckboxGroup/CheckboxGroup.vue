@@ -32,7 +32,7 @@ defineOptions({
   name: 'UnnnicCheckboxGroup',
 });
 
-interface CheckboxGroupProps {
+export interface CheckboxGroupProps {
   state?: 'horizontal' | 'vertical';
   label?: string;
   labelTooltip?: TooltipProps;
