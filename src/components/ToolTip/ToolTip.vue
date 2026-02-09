@@ -37,7 +37,7 @@
         clickable
         filled
         scheme="bg-white"
-        @click="$emit('click:close', false)"
+        @click="$emit('click:close')"
       />
     </TooltipContent>
   </Tooltip>
@@ -84,7 +84,7 @@ export default {
     },
     showClose: {
       type: Boolean,
-      default: true,
+      default: false,
     },
   },
   emits: ['click:close'],
@@ -96,7 +96,7 @@ export default {
 
 .unnnic-tooltip {
   &__close {
-    margin-left: 12px;
+    margin-left: $unnnic-space-3;
     align-self: center;
   }
 }
