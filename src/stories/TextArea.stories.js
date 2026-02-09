@@ -37,7 +37,10 @@ export const Default = {
     errors: [],
     size: 'md',
     message: 'Helper text',
-    tooltip: 'Tooltip',
+    tooltip: {
+      text: 'Tooltip',
+      enabled: true,
+    },
   },
 };
 
