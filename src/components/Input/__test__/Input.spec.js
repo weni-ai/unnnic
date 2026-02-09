@@ -47,7 +47,7 @@ describe('Input.vue', () => {
     expect(formElement.props('size')).toBe('md');
     expect(formElement.props('message')).toBe('Error message');
     expect(formElement.props('disabled')).toBe(false);
-    expect(formElement.props('tooltip')).toBe('');
+    expect(formElement.props('tooltip')).toBe(undefined);
     expect(formElement.props('error')).toBe(false);
   });
 
