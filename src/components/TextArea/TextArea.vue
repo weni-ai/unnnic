@@ -8,7 +8,7 @@
     :error="computedError"
   >
     <textarea
-      ref="textarea"
+      ref="textareaRef"
       class="unnnic-text-area__textarea"
       :class="[
         `unnnic-text-area__textarea--size-${size}`,
@@ -18,7 +18,12 @@
       :maxlength="maxLength"
       :disabled="disabled"
       :value="modelValue"
-      @input="$emit('update:modelValue', fullySanitize($event.target.value))"
+      @input="
+        $emit(
+          'update:modelValue',
+          fullySanitize(($event.target as HTMLTextAreaElement)?.value ?? ''),
+        )
+      "
     />
 
     <template
@@ -30,91 +35,64 @@
   </UnnnicFormElement>
 </template>
 
-<script>
+<script setup lang="ts">
+import { computed, ref } from 'vue';
 import { fullySanitize } from '../../utils/sanitize';
 import UnnnicFormElement from '../FormElement/FormElement.vue';
+import { type TooltipProps } from '../ToolTip/ToolTip.vue';
 
-export default {
-  components: {
-    UnnnicFormElement,
+defineOptions({
+  name: 'UnnnicTextArea',
+});
+
+interface TextAreaProps {
+  size?: 'md' | 'sm';
+  resize?: 'none' | 'vertical';
+  label?: string;
+  placeholder?: string;
+  modelValue?: string;
+  maxLength?: number;
+  message?: string;
+  disabled?: boolean;
+  type?: 'normal' | 'error';
+  tooltip?: TooltipProps;
+  errors?: string | string[];
+}
+
+const props = withDefaults(defineProps<TextAreaProps>(), {
+  size: 'md',
+  resize: 'vertical',
+  label: '',
+  placeholder: '',
+  modelValue: '',
+  maxLength: undefined,
+  message: '',
+  disabled: false,
+  type: 'normal',
+  tooltip: undefined,
+  errors: () => [],
+});
+
+defineEmits(['update:modelValue']);
+
+const computedError = computed(() => {
+  if (Array.isArray(props.errors)) {
+    return props.errors.join(', ');
+  }
+
+  if (typeof props.errors === 'string') {
+    return props.errors;
+  }
+
+  return '';
+});
+
+const textareaRef = ref<HTMLTextAreaElement | null>(null);
+defineExpose({
+  focus: () => {
+    textareaRef.value?.focus();
   },
-
-  props: {
-    size: {
-      type: String,
-      default: 'md',
-    },
-
-    resize: {
-      type: String,
-      default: 'vertical',
-      validator(value) {
-        return ['none', 'vertical'].indexOf(value) !== -1;
-      },
-    },
-
-    label: {
-      type: String,
-    },
-
-    placeholder: {
-      type: String,
-    },
-
-    modelValue: {
-      type: String,
-    },
-
-    maxLength: {
-      type: Number,
-    },
-
-    message: {
-      type: String,
-      default: '',
-    },
-
-    disabled: {
-      type: Boolean,
-    },
-
-    type: {
-      type: String,
-      default: 'normal',
-      validator(value) {
-        return ['normal', 'error'].indexOf(value) !== -1;
-      },
-    },
-
-    tooltip: {
-      type: String,
-      default: '',
-    },
-
-    errors: {
-      type: [Array, null],
-      default: () => [],
-    },
-  },
-  emits: ['update:modelValue'],
-
-  computed: {
-    computedError() {
-      if (Array.isArray(this.errors)) {
-        return this.errors.join(', ') || this.type === 'error';
-      }
-
-      return this.errors || this.type === 'error';
-    },
-  },
-
-  methods: {
-    fullySanitize,
-    focus() {
-      this.$refs.textarea.focus();
-    },
-  },
-};
+});
 </script>
 
 <style lang="scss" scoped>
