@@ -57,6 +57,7 @@ const portalTarget = useTeleportTarget();
 @use '@/assets/scss/unnnic' as *;
 
 .tooltip__content {
+  display: flex;
   background-color: $unnnic-color-gray-900;
   color: $unnnic-color-white;
   border-radius: $unnnic-radius-1;
