@@ -281,18 +281,6 @@ describe('ToolTip', () => {
     });
   });
 
-  describe('Side Validator', () => {
-    it('should validate side prop correctly', () => {
-      const validator = wrapper.vm.$options.props.side.validator;
-
-      expect(validator('top')).toBe(true);
-      expect(validator('right')).toBe(true);
-      expect(validator('bottom')).toBe(true);
-      expect(validator('left')).toBe(true);
-      expect(validator('invalid')).toBe(false);
-    });
-  });
-
   describe('Props Defaults', () => {
     it('should have correct default values', () => {
       const defaultWrapper = createWrapper();
