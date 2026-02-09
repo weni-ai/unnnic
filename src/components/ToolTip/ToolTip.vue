@@ -37,7 +37,7 @@
         clickable
         filled
         scheme="bg-white"
-        @click="$emit('click:close', false)"
+        @click="$emit('click:close')"
       />
     </TooltipContent>
   </Tooltip>
