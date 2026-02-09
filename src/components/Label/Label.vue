@@ -4,8 +4,7 @@
     <UnnnicToolTip
       v-if="tooltip"
       enabled
-      :text="tooltip"
-      :enableHtml="props.useHtmlTooltip"
+      v-bind="tooltip"
     >
       <UnnnicIcon
         icon="help"
@@ -19,7 +18,7 @@
 <script setup lang="ts">
 import { fullySanitize } from '@/utils/sanitize';
 
-import UnnnicToolTip from '../ToolTip/ToolTip.vue';
+import UnnnicToolTip, { type TooltipProps } from '../ToolTip/ToolTip.vue';
 import UnnnicIcon from '../Icon.vue';
 
 defineOptions({
@@ -28,14 +27,12 @@ defineOptions({
 
 export interface LabelProps {
   label?: string;
-  tooltip?: string;
-  useHtmlTooltip?: boolean;
+  tooltip?: TooltipProps;
 }
 
 const props = withDefaults(defineProps<LabelProps>(), {
   label: '',
-  tooltip: '',
-  useHtmlTooltip: false,
+  tooltip: undefined,
 });
 </script>
 
