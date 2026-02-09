@@ -47,6 +47,10 @@ import { fullySanitize } from '../../utils/sanitize';
 import UnnnicLabel from '../Label/Label.vue';
 import { type TooltipProps } from '../ToolTip/ToolTip.vue';
 
+defineOptions({
+  name: 'UnnnicFormElement',
+});
+
 interface FormElementProps {
   size?: 'md' | 'sm';
   label?: string;
