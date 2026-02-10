@@ -4,6 +4,7 @@ import UnnnicLabel from '../components/Label/Label.vue';
 import UnnnicInputDatePicker from '../components/InputDatePicker/InputDatePicker.vue';
 import UnnnicSwitch from '../components/Switch/Switch.vue';
 import UnnnicButton from '../components/Button/Button.vue';
+import UnnnicTag from '../components/Tag/Tag.vue';
 
 import { action } from '@storybook/addon-actions';
 import iconsList from '../utils/iconList';
@@ -351,6 +352,95 @@ WithDatePicker.args = {
   primaryButtonProps: {
     text: 'Save',
     loading: false,
+  },
+  secondaryButtonProps: {
+    text: 'Cancel',
+  },
+};
+
+const TemplateCustomTitleSlot = (args) => ({
+  components: { UnnnicModalDialog, UnnnicTag, UnnnicButton },
+  setup() {
+    const updateModelValue = (value) => {
+      action('update:modelValue')(value);
+      args.modelValue = value;
+    };
+    return { args, updateModelValue };
+  },
+  template: `
+  <div>
+    <button @click="updateModelValue(true)">Open Modal</button>
+    <unnnic-modal-dialog
+      v-bind="args"
+      @primaryButtonClick="primaryButtonClick"
+      @secondaryButtonClick="secondaryButtonClick"
+      @update:modelValue="updateModelValue"
+    >
+      <template #title>
+        <span style="display: flex; align-items: center; gap: 8px;">
+          Custom Title
+          <UnnnicTag text="New" scheme="feedback-green" />
+        </span>
+      </template>
+      <p style="margin: 0;">This modal uses the <strong>title slot</strong> instead of the title prop, allowing you to add custom components like tags, buttons, or icons inside the title area.</p>
+    </unnnic-modal-dialog>
+  </div>
+  `,
+  methods: {
+    primaryButtonClick: action('primaryButtonClick'),
+    secondaryButtonClick: action('secondaryButtonClick'),
+  },
+});
+
+export const CustomTitleSlot = TemplateCustomTitleSlot.bind({});
+CustomTitleSlot.args = {
+  type: '',
+  showCloseIcon: true,
+  primaryButtonProps: {
+    text: 'Confirm',
+  },
+};
+
+const TemplateCustomTitleWithButtons = (args) => ({
+  components: { UnnnicModalDialog, UnnnicButton },
+  setup() {
+    const updateModelValue = (value) => {
+      action('update:modelValue')(value);
+      args.modelValue = value;
+    };
+    return { args, updateModelValue };
+  },
+  template: `
+  <div>
+    <button @click="updateModelValue(true)">Open Modal</button>
+    <unnnic-modal-dialog
+      v-bind="args"
+      @primaryButtonClick="primaryButtonClick"
+      @secondaryButtonClick="secondaryButtonClick"
+      @update:modelValue="updateModelValue"
+    >
+      <template #title>
+        <span style="display: flex; align-items: center; gap: 8px;">
+          Settings
+          <UnnnicButton type="tertiary" iconCenter="help" size="small" />
+        </span>
+      </template>
+      <p style="margin: 0;">This modal demonstrates a title with an inline help button using the <strong>title slot</strong>.</p>
+    </unnnic-modal-dialog>
+  </div>
+  `,
+  methods: {
+    primaryButtonClick: action('primaryButtonClick'),
+    secondaryButtonClick: action('secondaryButtonClick'),
+  },
+});
+
+export const CustomTitleWithButton = TemplateCustomTitleWithButtons.bind({});
+CustomTitleWithButton.args = {
+  type: '',
+  showCloseIcon: true,
+  primaryButtonProps: {
+    text: 'Save',
   },
   secondaryButtonProps: {
     text: 'Cancel',

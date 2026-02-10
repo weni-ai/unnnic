@@ -28,12 +28,14 @@
           <slot name="leftSidebar" />
         </section>
         <UnnnicDialogHeader
-          v-if="title"
+          v-if="title || $slots.title"
           :closeButton="showCloseIcon"
           :type="type"
         >
           <UnnnicDialogTitle>
-            {{ title }}
+            <slot name="title">
+              {{ title }}
+            </slot>
           </UnnnicDialogTitle>
         </UnnnicDialogHeader>
         <section class="unnnic-modal-dialog__container__content">
