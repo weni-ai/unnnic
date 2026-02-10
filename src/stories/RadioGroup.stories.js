@@ -20,8 +20,7 @@ export default {
   },
   argTypes: {
     label: { control: { type: 'text' } },
-    labelTooltip: { control: { type: 'text' } },
-    labelUseHtmlTooltip: { control: 'boolean' },
+    labelTooltip: { control: { type: 'object' } },
     modelValue: { control: { type: ['string', 'number'] } },
     name: { control: { type: 'text' } },
     state: { control: 'select', options: ['horizontal', 'vertical'] },
@@ -112,7 +111,9 @@ export const Vertical = {
   args: {
     state: 'vertical',
     label: 'Label',
-    labelTooltip: 'Tooltip',
+    labelTooltip: {
+      text: 'Tooltip',
+    },
     name: 'Radio Group 2',
     helper: 'Helper text',
   },

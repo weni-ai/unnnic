@@ -66,6 +66,11 @@ const portalTarget = useTeleportTarget();
   font: $unnnic-font-caption-2;
 
   overflow-wrap: break-word;
+
+  &[data-side='bottom'],
+  &[data-side='top'] {
+    text-align: center;
+  }
 }
 
 .tooltip__arrow {

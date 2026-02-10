@@ -4,7 +4,10 @@
     :open="forceOpen || undefined"
     data-testid="tooltip-wrapper"
   >
-    <TooltipTrigger data-testid="tooltip-trigger">
+    <TooltipTrigger
+      class="unnnic-tooltip"
+      data-testid="tooltip-trigger"
+    >
       <slot />
     </TooltipTrigger>
 
@@ -36,59 +39,42 @@
         size="sm"
         clickable
         filled
-        scheme="bg-white"
+        scheme="white"
         @click="$emit('click:close')"
       />
     </TooltipContent>
   </Tooltip>
 </template>
 
-<script>
+<script setup lang="ts">
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
 import UnnnicIcon from '../Icon.vue';
-export default {
+
+export interface TooltipProps {
+  text?: string;
+  enabled?: boolean;
+  forceOpen?: boolean;
+  side?: 'top' | 'right' | 'bottom' | 'left';
+  maxWidth?: string;
+  enableHtml?: boolean;
+  showClose?: boolean;
+}
+
+defineOptions({
   name: 'UnnnicTooltip',
-  components: {
-    Tooltip,
-    TooltipTrigger,
-    TooltipContent,
-    UnnnicIcon,
-  },
-  props: {
-    text: {
-      type: String,
-      default: '',
-    },
-    enabled: {
-      type: Boolean,
-      default: false,
-    },
-    forceOpen: {
-      type: Boolean,
-      default: false,
-    },
-    side: {
-      type: String,
-      default: 'right',
-      validator(value) {
-        return ['top', 'right', 'bottom', 'left'].indexOf(value) !== -1;
-      },
-    },
-    maxWidth: {
-      type: String,
-      default: '',
-    },
-    enableHtml: {
-      type: Boolean,
-      default: false,
-    },
-    showClose: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  emits: ['click:close'],
-};
+});
+
+withDefaults(defineProps<TooltipProps>(), {
+  text: '',
+  enabled: false,
+  forceOpen: false,
+  side: 'right',
+  maxWidth: '',
+  enableHtml: false,
+  showClose: false,
+});
+
+defineEmits(['click:close']);
 </script>
 
 <style lang="scss" scoped>

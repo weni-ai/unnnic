@@ -4,7 +4,7 @@ exports[`Tab.vue > matches the snapshot 1`] = `
 "<div data-v-b4e39fac="" class="tab size-md">
   <header data-v-b4e39fac="" class="tab-header">
     <ul data-v-b4e39fac="" class="tab-content">
-      <li data-v-b4e39fac="" class="tab-head">tab1<div data-v-b3d24f2b="" data-v-bf0cf546="" class="unnnic-tooltip-trigger" data-testid="tooltip-trigger" data-state="closed" data-grace-area-trigger=""><span data-v-26446d8e="" data-v-b4e39fac="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--fg-base unnnic-icon-size--sm unnnic-icon__size--sm" data-testid="material-icon" translate="no">help</span></div>
+      <li data-v-b4e39fac="" class="tab-head">tab1<div data-v-b3d24f2b="" data-v-bf0cf546="" class="unnnic-tooltip-trigger unnnic-tooltip" data-testid="tooltip-trigger" data-state="closed" data-grace-area-trigger=""><span data-v-26446d8e="" data-v-b4e39fac="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--fg-base unnnic-icon-size--sm unnnic-icon__size--sm" data-testid="material-icon" translate="no">help</span></div>
         <!--teleport start-->
         <!--teleport end-->
       </li>

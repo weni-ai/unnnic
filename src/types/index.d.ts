@@ -41,6 +41,9 @@ export declare const unnnicSidebar: Component;
 export declare const unnnicDrawer: Component;
 export declare const unnnicProgressBar: Component;
 export declare const unnnicSkeletonLoading: Component;
+export declare const unnnicFormElement: Component;
+export declare const unnnicRadioGroup: Component;
+export declare const unnnicCheckboxGroup: Component;
 
 export declare const unnnicCallAlert: (props: any) => void;
 export declare const unnnicCallModal: (props: any) => void;

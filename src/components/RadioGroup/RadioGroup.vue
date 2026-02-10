@@ -1,13 +1,14 @@
 <template>
-  <section :class="[
-    'unnnic-radio-group__container',
-    `unnnic-radio-group--state-${state}`
-  ]">
+  <section
+    :class="[
+      'unnnic-radio-group__container',
+      `unnnic-radio-group--state-${state}`,
+    ]"
+  >
     <UnnnicLabel
       v-if="label"
       :label="label"
       :tooltip="labelTooltip"
-      :useHtmlTooltip="labelUseHtmlTooltip"
       class="unnnic-radio-group__label"
     />
 
@@ -24,55 +25,45 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref, provide, watch, computed } from 'vue';
 import UnnnicLabel from '../Label/Label.vue';
+import { type TooltipProps } from '../ToolTip/ToolTip.vue';
 
-const props = defineProps({
-  modelValue: {
-    type: [String, Number],
-    default: '',
-  },
+defineOptions({
+  name: 'UnnnicRadioGroup',
+});
 
-  state: {
-    type: String,
-    default: 'horizontal',
-    validator(value) {
-      return ['horizontal', 'vertical'].includes(value);
-    },
-  },
+export interface RadioGroupProps {
+  modelValue?: string | number;
+  state?: 'horizontal' | 'vertical';
+  label?: string;
+  labelTooltip?: TooltipProps;
+  name?: string;
+  helper?: string;
+}
 
-  label: {
-    type: String,
-  },
-
-  labelTooltip: {
-    type: String,
-  },
-
-  labelUseHtmlTooltip: {
-    type: Boolean,
-  },
-
-  name: {
-    type: String,
-    default: '',
-  },
-
-  helper: {
-    type: String,
-  },
+const props = withDefaults(defineProps<RadioGroupProps>(), {
+  modelValue: '',
+  state: 'horizontal',
+  label: '',
+  labelTooltip: undefined,
+  name: '',
+  helper: '',
 });
 
 const emit = defineEmits(['update:modelValue']);
 
 const contextModelValue = ref(props.modelValue);
 
-watch(() => props.modelValue, (newVal) => {
-  if (newVal !== contextModelValue.value) {
-    contextModelValue.value = newVal;
-  }
-});
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    if (newVal !== contextModelValue.value) {
+      contextModelValue.value = newVal;
+    }
+  },
+);
 
 watch(contextModelValue, (newVal) => {
   if (newVal !== props.modelValue) {
@@ -81,7 +72,10 @@ watch(contextModelValue, (newVal) => {
 });
 
 const computedName = computed(() => {
-  return props.name || `unnnic-radio-group-${Math.random().toString(36).substring(2, 15)}`;
+  return (
+    props.name ||
+    `unnnic-radio-group-${Math.random().toString(36).substring(2, 15)}`
+  );
 });
 
 provide('contextModelValue', contextModelValue);
