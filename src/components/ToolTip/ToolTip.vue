@@ -19,6 +19,7 @@
       ]"
       :style="{ maxWidth: maxWidth }"
       :side="side"
+      v-bind="contentProps"
       data-testid="tooltip-content"
     >
       <template v-if="enableHtml">
@@ -52,6 +53,7 @@
 
 <script setup lang="ts">
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
+import type { TooltipContentProps } from 'reka-ui';
 import UnnnicIcon from '../Icon.vue';
 
 export interface TooltipProps {
@@ -63,6 +65,7 @@ export interface TooltipProps {
   enableHtml?: boolean;
   showClose?: boolean;
   class?: string;
+  contentProps?: Partial<TooltipContentProps>;
 }
 
 defineOptions({
@@ -78,6 +81,7 @@ const props = withDefaults(defineProps<TooltipProps>(), {
   enableHtml: false,
   showClose: false,
   class: '',
+  contentProps: undefined,
 });
 
 defineEmits(['click:close']);
