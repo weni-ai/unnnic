@@ -5,14 +5,18 @@
     data-testid="tooltip-wrapper"
   >
     <TooltipTrigger
-      class="unnnic-tooltip"
+      :class="['unnnic-tooltip', props.class]"
       data-testid="tooltip-trigger"
     >
       <slot />
     </TooltipTrigger>
 
     <TooltipContent
-      :class="['unnnic-tooltip-label', `unnnic-tooltip-label-${side}`]"
+      :class="[
+        'unnnic-tooltip-label',
+        `unnnic-tooltip-label-${side}`,
+        props.class,
+      ]"
       :style="{ maxWidth: maxWidth }"
       :side="side"
       data-testid="tooltip-content"
@@ -58,13 +62,14 @@ export interface TooltipProps {
   maxWidth?: string;
   enableHtml?: boolean;
   showClose?: boolean;
+  class?: string;
 }
 
 defineOptions({
   name: 'UnnnicTooltip',
 });
 
-withDefaults(defineProps<TooltipProps>(), {
+const props = withDefaults(defineProps<TooltipProps>(), {
   text: '',
   enabled: false,
   forceOpen: false,
@@ -72,6 +77,7 @@ withDefaults(defineProps<TooltipProps>(), {
   maxWidth: '',
   enableHtml: false,
   showClose: false,
+  class: '',
 });
 
 defineEmits(['click:close']);

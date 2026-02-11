@@ -5,6 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.23.0 (2026-02-10)
+
+### Added
+
+- **ModalDialog**: Added `title` named slot to allow custom title content (e.g., buttons, tags, icons, or any Vue component). The existing `title` prop continues to work as a fallback when no slot is provided.
+
+# 3.22.0 (2026-02-10)
+
+### Added
+
+- **Type definitions**: Added `unnnicFormElement`, `unnnicRadioGroup`, and `unnnicCheckboxGroup` component exports.
+
+### Changed
+
+- **ToolTip**: Migrated to Composition API with TypeScript, aligned tooltip text when `side` is `top`/`bottom`, and switched trigger display to `flex`.
+- **Form components**: Migrated `FormElement`, `CheckboxGroup`, `RadioGroup`, `Switch`, `Input`, and `TextArea` to Composition API/TypeScript and updated tooltip handling to use object props.
+- **Label**: Tooltip now accepts `TooltipProps`; removed `useHtmlTooltip` in favor of unified tooltip props.
+- **Tab**: Removed unused tooltip styles.
+
 # 3.21.0 (2026-02-09)
 
 ### Added
