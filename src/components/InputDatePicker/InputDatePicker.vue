@@ -37,6 +37,7 @@
           :minDate="minDate"
           :maxDate="maxDate"
           :disableClear="disableClear"
+          :hideOptions="hideOptions"
           @change="emitSelectDate"
           @submit="changeDate"
         />
@@ -93,6 +94,7 @@ interface InputDatePickerProps {
 
   position?: 'left' | 'right';
   disableClear?: boolean;
+  hideOptions?: boolean;
 
   periodBaseDate?: string;
 }
@@ -114,6 +116,7 @@ const props = withDefaults(defineProps<InputDatePickerProps>(), {
   inputFormat: 'MM-DD-YYYY',
   position: 'left',
   disableClear: false,
+  hideOptions: false,
   periodBaseDate: '',
 });
 
