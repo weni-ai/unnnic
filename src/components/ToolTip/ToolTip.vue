@@ -5,16 +5,21 @@
     data-testid="tooltip-wrapper"
   >
     <TooltipTrigger
-      class="unnnic-tooltip"
+      :class="['unnnic-tooltip', props.class]"
       data-testid="tooltip-trigger"
     >
       <slot />
     </TooltipTrigger>
 
     <TooltipContent
-      :class="['unnnic-tooltip-label', `unnnic-tooltip-label-${side}`]"
+      :class="[
+        'unnnic-tooltip-label',
+        `unnnic-tooltip-label-${side}`,
+        props.class,
+      ]"
       :style="{ maxWidth: maxWidth }"
       :side="side"
+      v-bind="contentProps"
       data-testid="tooltip-content"
     >
       <template v-if="enableHtml">
@@ -48,6 +53,7 @@
 
 <script setup lang="ts">
 import { Tooltip, TooltipContent, TooltipTrigger } from '../ui/tooltip';
+import type { TooltipContentProps } from 'reka-ui';
 import UnnnicIcon from '../Icon.vue';
 
 export interface TooltipProps {
@@ -58,13 +64,15 @@ export interface TooltipProps {
   maxWidth?: string;
   enableHtml?: boolean;
   showClose?: boolean;
+  class?: string;
+  contentProps?: Partial<TooltipContentProps>;
 }
 
 defineOptions({
   name: 'UnnnicTooltip',
 });
 
-withDefaults(defineProps<TooltipProps>(), {
+const props = withDefaults(defineProps<TooltipProps>(), {
   text: '',
   enabled: false,
   forceOpen: false,
@@ -72,6 +80,8 @@ withDefaults(defineProps<TooltipProps>(), {
   maxWidth: '',
   enableHtml: false,
   showClose: false,
+  class: '',
+  contentProps: undefined,
 });
 
 defineEmits(['click:close']);
