@@ -10,6 +10,7 @@
       'is-image': isImage,
       'is-video': isVideo,
       'is-geo': isGeolocation,
+      highlighted: highlighted,
     }"
     @mouseover="isHovering = true"
     @mouseleave="isHovering = false"
@@ -210,6 +211,10 @@ export default {
         return ['audio', 'image', 'video', 'geo'].includes(status);
       },
     },
+    highlighted: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: ['click', 'click-image', 'reply', 'click-reply-message'],
@@ -330,6 +335,10 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     cursor: pointer;
     margin: (-$unnnic-spacing-nano) (-$unnnic-spacing-xs) 0px
       (-$unnnic-spacing-xs);
+  }
+
+  &.highlighted {
+    border-bottom: $unnnic-space-05 solid $unnnic-color-border-warning;
   }
 
   &.sent {
