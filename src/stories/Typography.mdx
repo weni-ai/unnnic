@@ -1,16 +1,17 @@
-import { Meta, Title, Description, Typeset, Story } from '@storybook/blocks';
+import { Meta, Title, Story } from '@storybook/blocks';
+import * as TypographyStories from './Typography.stories.js';
 
 <Meta title="Typography" />
 
 <Title>Typography</Title>
 
-Typography follows the scale defined in the design system. 
+Typography follows the scale defined in the design system.
 
 **Design reference:** [Figma (Typography)](https://www.figma.com/design/YbvOpVPUBxTSEzg4J8pXKu/Weni---unnnic?node-id=404-210&m=dev)
 
 **Font:** Inter · **Weights:** 400 (Regular), 500 (Medium), 600 (Semibold)
 
-Inter uses **letter-spacing** adjustments for legibility. **Prefer the typography mixins** so font and letter-spacing are always applied together; the variables remain available when you need them separately.
+_Inter_ uses **letter-spacing** adjustments for legibility. **Prefer the typography mixins** so font and letter-spacing are always applied together; the variables remain available when you need them separately.
 
 ---
 
@@ -18,26 +19,15 @@ Inter uses **letter-spacing** adjustments for legibility. **Prefer the typograph
 
 Headings and large titles. Use for page titles and section headers.
 
-| Style      | Mixin (recommended) | Letter spacing | Size  | Line height | Weight |
-|-----------|---------------------|----------------|-------|-------------|--------|
-| Display 1 | `@include unnnic-font-display-1` | -4% | 24px  | 1.4        | Semibold   |
-| Display 2 | `@include unnnic-font-display-2` | -4% | 20px  | 1.4        | Semibold   |
-| Display 3 | `@include unnnic-font-display-3` | -2% | 16px  | 1.4        | Semibold   |
-| Display 4 | `@include unnnic-font-display-4` | -2% | 16px  | 1.4        | Regular |
+| Style     | Mixin                            | Size  | Weight   | Line height | Letter spacing |
+|-----------|----------------------------------|-------|----------|-------------|----------------|
+| Display 1 | `@include unnnic-font-display-1` | 24px  | Semibold | 1.4         | -4%            |
+| Display 2 | `@include unnnic-font-display-2` | 20px  | Semibold | 1.4         | -4%            |
+| Display 3 | `@include unnnic-font-display-3` | 16px  | Semibold | 1.4         | -2%            |
+| Display 4 | `@include unnnic-font-display-4` | 16px  | Regular  | 1.4         | -2%            |
 
-<Typeset
-  fontSizes={[24, 20, 16]}
-  fontWeight="600"
-  sampleText="Display — Headings and section titles"
-  fontFamily="Inter"
-/>
+<Story of={TypographyStories.Display} />
 
-<Typeset
-  fontSizes={[16]}
-  fontWeight="400"
-  sampleText="Display 4 — Body large / lead text"
-  fontFamily="Inter"
-/>
 
 ---
 
@@ -45,32 +35,13 @@ Headings and large titles. Use for page titles and section headers.
 
 Default text and emphasized content. Use for paragraphs, labels, and UI copy.
 
-| Style   | Mixin (recommended) | Letter spacing | Size | Line height | Weight |
-|---------|---------------------|----------------|------|-------------|--------|
-| Body    | `@include unnnic-font-body`     | -1% | 14px | 1.4        | Regular |
-| Emphasis| `@include unnnic-font-emphasis` | -1% | 14px | 1.4        | Medium  |
-| Action  | `@include unnnic-font-action`   | -1% | 14px | 1.4        | Semibold    |
+| Style   | Mixin                           | Size | Weight   | Line height | Letter spacing |
+|---------|---------------------------------|------|----------|-------------|----------------|
+| Body    | `@include unnnic-font-body`     | 14px | Regular  | 1.4         | -1%            |
+| Emphasis| `@include unnnic-font-emphasis` | 14px | Medium   | 1.4         | -1%            |
+| Action  | `@include unnnic-font-action`   | 14px | Semibold | 1.4         | -1%            |
 
-<Typeset
-  fontSizes={[14]}
-  fontWeight="400"
-  sampleText="Body — Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-  fontFamily="Inter"
-/>
-
-<Typeset
-  fontSizes={[14]}
-  fontWeight="500"
-  sampleText="Emphasis — Medium weight for highlighted text."
-  fontFamily="Inter"
-/>
-
-<Typeset
-  fontSizes={[14]}
-  fontWeight="600"
-  sampleText="Action — Semibold for buttons, labels, and CTAs."
-  fontFamily="Inter"
-/>
+<Story of={TypographyStories.Body} />
 
 ---
 
@@ -78,24 +49,12 @@ Default text and emphasized content. Use for paragraphs, labels, and UI copy.
 
 Small text for captions, tags, and secondary information.
 
-| Style     | Mixin (recommended) | Letter spacing | Size | Line height | Weight |
-|-----------|---------------------|----------------|------|-------------|--------|
-| Caption 1 | `@include unnnic-font-caption-1` | 0 | 12px | 1.4        | Medium  |
-| Caption 2 | `@include unnnic-font-caption-2` | 0 | 12px | 1.4        | Regular |
+| Style     | Mixin                            | Size | Weight   | Line height | Letter spacing |
+|-----------|----------------------------------|------|----------|-------------|----------------|
+| Caption 1 | `@include unnnic-font-caption-1` | 12px | Medium   | 1.4         | 0              |
+| Caption 2 | `@include unnnic-font-caption-2` | 12px | Regular  |  1.4        | 0              |
 
-<Typeset
-  fontSizes={[12]}
-  fontWeight="500"
-  sampleText="Caption 1 — Tags and labels"
-  fontFamily="Inter"
-/>
-
-<Typeset
-  fontSizes={[12]}
-  fontWeight="400"
-  sampleText="Caption 2 — Secondary captions and hints"
-  fontFamily="Inter"
-/>
+<Story of={TypographyStories.Caption} />
 
 ---
 
