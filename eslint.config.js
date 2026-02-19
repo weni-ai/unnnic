@@ -74,4 +74,14 @@ module.exports = defineConfigWithVueTs(
       node: true,
     },
   },
+  // Override ecmaVersion: Espree (via vue-eslint-parser) here only supports up to 2023.
+  // Must be last so it wins over @vue/eslint-config-typescript's 2024.
+  {
+    files: ['src/**/*.{ts,mts,tsx,vue}'],
+    languageOptions: {
+      parserOptions: {
+        ecmaVersion: 2023,
+      },
+    },
+  },
 );
