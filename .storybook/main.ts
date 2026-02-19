@@ -26,5 +26,12 @@ const config: StorybookConfig = {
     name: '@storybook/vue3-vite',
     options: {},
   },
+  async viteFinal(viteConfig) {
+    // Do not run vite-plugin-dts during Storybook build (dist/index.d.ts does not exist in this context)
+    viteConfig.plugins = (viteConfig.plugins ?? []).filter(
+      (plugin) => plugin && (plugin as { name?: string }).name !== 'vite:dts',
+    );
+    return viteConfig;
+  },
 };
 export default config;
