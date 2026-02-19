@@ -3,15 +3,16 @@
 
 $unnnic-font-size: 16px;
 $unnnic-font-family: Inter;
-$unnnic-font-weight-bold: 700;
+$unnnic-font-weight-bold: 600;
+$unnnic-font-weight-semibold: 600;
 $unnnic-font-weight-medium: 500;
 $unnnic-font-weight-regular: 400;
-$unnnic-font-display-1: 700 calc(1.5 * 16px) /* 24px */ / calc(2 * 16px) /* 32px */ Inter;
-$unnnic-font-display-2: 700 calc(1.25 * 16px) /* 20px */ / calc(1.6875 * 16px) /* 27px */ Inter;
-$unnnic-font-display-3: 700 calc(1 * 16px) /* 16px */ / calc(1.375 * 16px) /* 22px */ Inter;
-$unnnic-font-display-4: 400 calc(1 * 16px) /* 16px */ / calc(1.375 * 16px) /* 22px */ Inter;
-$unnnic-font-body: 400 calc(0.875 * 16px) /* 14px */ / calc(1.3125 * 16px) /* 21px */ Inter;
-$unnnic-font-emphasis: 500 calc(0.875 * 16px) /* 14px */ / calc(1.3125 * 16px) /* 21px */ Inter;
-$unnnic-font-action: 700 calc(0.875 * 16px) /* 14px */ / calc(1.3125 * 16px) /* 21px */ Inter;
-$unnnic-font-caption-1: 500 calc(0.75 * 16px) /* 12px */ / calc(1.125 * 16px) /* 18px */ Inter;
-$unnnic-font-caption-2: 400 calc(0.75 * 16px) /* 12px */ / calc(1.125 * 16px) /* 18px */ Inter;
+$unnnic-font-display-1: 600 calc(1.5 * 16px) / 1.4 Inter;
+$unnnic-font-display-2: 600 calc(1.25 * 16px) / 1.4 Inter;
+$unnnic-font-display-3: 600 calc(1 * 16px) / 1.4 Inter;
+$unnnic-font-display-4: 400 calc(1 * 16px) / 1.4 Inter;
+$unnnic-font-body: 400 calc(0.875 * 16px) / 1.4 Inter;
+$unnnic-font-emphasis: 500 calc(0.875 * 16px) / 1.4 Inter;
+$unnnic-font-action: 600 calc(0.875 * 16px) / 1.4 Inter;
+$unnnic-font-caption-1: 500 calc(0.75 * 16px) / 1.4 Inter;
+$unnnic-font-caption-2: 400 calc(0.75 * 16px) / 1.4 Inter;
