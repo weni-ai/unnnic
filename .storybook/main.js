@@ -26,10 +26,11 @@ const config = {
   },
   async viteFinal(viteConfig) {
     const { mergeConfig } = await import('vite');
-    const plugins = viteConfig.plugins.filter((plugin) => {
+    const plugins = (viteConfig.plugins || []).filter((plugin) => {
       const name =
         plugin?.name ?? (Array.isArray(plugin) ? plugin[0]?.name : null);
-      return name !== 'vite-plugin-dts' && name !== 'vite:dts';
+      const nameStr = String(name || '');
+      return !nameStr.includes('dts');
     });
     return mergeConfig(viteConfig, { plugins });
   },
