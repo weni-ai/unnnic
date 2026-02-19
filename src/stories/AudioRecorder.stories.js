@@ -8,7 +8,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Used for recording and playing audio.`,
+        component: `<div>Used for recording and playing audio.</div>`,
       },
     },
   },

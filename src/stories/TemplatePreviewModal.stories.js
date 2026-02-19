@@ -1,6 +1,6 @@
 import UnnnicTemplatePreviewModal from "../components/TemplatePreview/TemplatePreviewModal.vue";
 
-import { action } from "@storybook/addon-actions";
+import { action } from 'storybook/actions';
 
 export default {
   title: "example/TemplatePreviewModal",

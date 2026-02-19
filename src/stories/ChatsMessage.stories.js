@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import UnnnicChatsMessage from '../components/ChatsMessage/ChatsMessage.vue';
 import UnnnicAudioRecorder from '../components/AudioRecorder/AudioRecorder.vue';
 import AudioSample from './assets/audios/audio-recorder-sample.mp3';

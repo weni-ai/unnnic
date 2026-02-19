@@ -1,6 +1,6 @@
 import UnnnicChatsHeader from '../components/ChatsHeader/ChatsHeader.vue';
 import UnnnicChatsDashboardTagLive from '../components/ChatsDashboardTagLive/ChatsDashboardTagLive.vue';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 export default {
   title: 'Chats/Header',
