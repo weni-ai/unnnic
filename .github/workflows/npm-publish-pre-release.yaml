@@ -16,11 +16,11 @@ jobs:
           registry-url: https://registry.npmjs.org/
           scope: "@weni"
       - name: Install Dependencies
-        run: yarn
+        run: npm install
       - name: Run Lint
-        run: yarn lint --fix --quiet
+        run: npm run lint --fix --quiet
       - name: Build Bundle
-        run: yarn build
+        run: npm run build
       - name: Configure Git identity
         run: |
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -28,11 +28,11 @@ jobs:
       - name: Create Pre Release Version
         run: |
           git pull origin staging
-          yarn version --prerelease --preid alpha
+          npm version --prerelease --preid alpha
           NEW_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
           git push origin HEAD:staging
           git push origin $NEW_TAG
       - name: Publish Package
-        run: yarn publish
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}

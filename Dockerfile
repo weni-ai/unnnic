@@ -1,14 +1,14 @@
-FROM node:22.17.1-alpine3.22 as builder
+FROM node:22.17.1-alpine3.22 AS builder
 
 WORKDIR /home/app
 
-COPY ./package.json ./yarn.lock ./
+COPY ./package.json ./package-lock.json ./
 
-RUN yarn install
+RUN npm install
 
 COPY . .
 
-RUN yarn build-storybook
+RUN npm run build-storybook
 
 FROM nginxinc/nginx-unprivileged:1
 
