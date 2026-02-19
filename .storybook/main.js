@@ -19,10 +19,19 @@ const config = {
   ],
   framework: {
     name: '@storybook/vue3-vite',
-    options: {}
+    options: {},
   },
   docs: {
-    autodocs: 'tag'
-  }
-}
-export default config
+    autodocs: 'tag',
+  },
+  async viteFinal(viteConfig) {
+    const { mergeConfig } = await import('vite');
+    const plugins = viteConfig.plugins.filter((plugin) => {
+      const name =
+        plugin?.name ?? (Array.isArray(plugin) ? plugin[0]?.name : null);
+      return name !== 'vite-plugin-dts' && name !== 'vite:dts';
+    });
+    return mergeConfig(viteConfig, { plugins });
+  },
+};
+export default config;
