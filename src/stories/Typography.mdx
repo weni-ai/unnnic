@@ -10,18 +10,20 @@ Typography follows the scale defined in the design system.
 
 **Font:** Inter · **Weights:** 400 (Regular), 500 (Medium), 600 (Semibold)
 
+Inter uses **letter-spacing** adjustments for legibility. Each typography token has a matching letter-spacing token (e.g. `$unnnic-font-letter-spacing-display-1`). Use the `font` token for the CSS `font` shorthand and the letter-spacing token for the `letter-spacing` property.
+
 ---
 
 ## Display
 
 Headings and large titles. Use for page titles and section headers.
 
-| Style      | Token                  | Size  | Line height | Weight |
-|-----------|------------------------|-------|-------------|--------|
-| Display 1 | `$unnnic-font-display-1` | 24px  | 1.4        | Semibold   |
-| Display 2 | `$unnnic-font-display-2` | 20px  | 1.4        | Semibold   |
-| Display 3 | `$unnnic-font-display-3` | 16px  | 1.4        | Semibold   |
-| Display 4 | `$unnnic-font-display-4` | 16px  | 1.4        | Regular |
+| Style      | Token                  | Letter spacing | Size  | Line height | Weight |
+|-----------|------------------------|----------------|-------|-------------|--------|
+| Display 1 | `$unnnic-font-display-1` | `$unnnic-font-letter-spacing-display-1` (-4%) | 24px  | 1.4        | Semibold   |
+| Display 2 | `$unnnic-font-display-2` | `$unnnic-font-letter-spacing-display-2` (-4%) | 20px  | 1.4        | Semibold   |
+| Display 3 | `$unnnic-font-display-3` | `$unnnic-font-letter-spacing-display-3` (-2%) | 16px  | 1.4        | Semibold   |
+| Display 4 | `$unnnic-font-display-4` | `$unnnic-font-letter-spacing-display-4` (-2%) | 16px  | 1.4        | Regular |
 
 <Typeset
   fontSizes={[24, 20, 16]}
@@ -43,11 +45,11 @@ Headings and large titles. Use for page titles and section headers.
 
 Default text and emphasized content. Use for paragraphs, labels, and UI copy.
 
-| Style   | Token                 | Size | Line height | Weight |
-|---------|-----------------------|------|-------------|--------|
-| Body    | `$unnnic-font-body`     | 14px | 1.4        | Regular |
-| Emphasis| `$unnnic-font-emphasis` | 14px | 1.4        | Medium  |
-| Action  | `$unnnic-font-action`   | 14px | 1.4        | Semibold    |
+| Style   | Token                 | Letter spacing | Size | Line height | Weight |
+|---------|-----------------------|----------------|------|-------------|--------|
+| Body    | `$unnnic-font-body`     | `$unnnic-font-letter-spacing-body` (-1%) | 14px | 1.4        | Regular |
+| Emphasis| `$unnnic-font-emphasis` | `$unnnic-font-letter-spacing-emphasis` (-1%) | 14px | 1.4        | Medium  |
+| Action  | `$unnnic-font-action`   | `$unnnic-font-letter-spacing-action` (-1%) | 14px | 1.4        | Semibold    |
 
 <Typeset
   fontSizes={[14]}
@@ -76,10 +78,10 @@ Default text and emphasized content. Use for paragraphs, labels, and UI copy.
 
 Small text for captions, tags, and secondary information.
 
-| Style     | Token                    | Size | Line height | Weight |
-|-----------|--------------------------|------|-------------|--------|
-| Caption 1 | `$unnnic-font-caption-1` | 12px | 18px        | Medium  |
-| Caption 2 | `$unnnic-font-caption-2` | 12px | 18px        | Regular |
+| Style     | Token                    | Letter spacing | Size | Line height | Weight |
+|-----------|--------------------------|----------------|------|-------------|--------|
+| Caption 1 | `$unnnic-font-caption-1` | `$unnnic-font-letter-spacing-caption-1` (0) | 12px | 1.4        | Medium  |
+| Caption 2 | `$unnnic-font-caption-2` | `$unnnic-font-letter-spacing-caption-2` (0) | 12px | 1.4        | Regular |
 
 <Typeset
   fontSizes={[12]}
@@ -94,3 +96,21 @@ Small text for captions, tags, and secondary information.
   sampleText="Caption 2 — Secondary captions and hints"
   fontFamily="Inter, sans-serif"
 />
+
+---
+
+## Usage
+
+Use the `font` token for the CSS `font` shorthand and the matching letter-spacing token for `letter-spacing`:
+
+```scss
+.my-heading {
+  font: $unnnic-font-display-1;
+  letter-spacing: $unnnic-font-letter-spacing-display-1;
+}
+
+.my-body {
+  font: $unnnic-font-body;
+  letter-spacing: $unnnic-font-letter-spacing-body;
+}
+```
