@@ -99,7 +99,6 @@
   },
   "devDependencies": {
     "@storybook/addon-docs": "^10.2.10",
-    "@storybook/testing-library": "^0.2.2",
     "@storybook/vue3": "10.2.10",
     "@storybook/vue3-vite": "10.2.10",
     "@types/lodash": "^4.17.20",
