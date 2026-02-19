@@ -1,64 +1,96 @@
-import { Meta, Typeset } from '@storybook/blocks';
+import { Meta, Title, Description, Typeset, Story } from '@storybook/blocks';
 
 <Meta title="Typography" />
 
-export const typography = {
-  type: {
-    primary: 'Lato, sans-serif',
-  },
-  weight: {
-    regular: '400',
-    medium: '500',
-    bold: '700',
-  },
-  size: {
-    caption: 12,
-    body: 14,
-    base: 16,
-    display2: 20,
-    display1: 24,
-  },
-};
+<Title>Typography</Title>
 
-export const SampleText =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+Typography follows the scale defined in the design system. 
 
-# Typography
+**Design reference:** [Figma (Typography)](https://www.figma.com/design/YbvOpVPUBxTSEzg4J8pXKu/Weni---unnnic?node-id=404-210&m=dev)
 
-**Font:** Inter, sans-serif
+**Font:** Inter · **Weights:** 400 (Regular), 500 (Medium), 600 (Semibold)
 
-**Weights:** 400 (regular), 500 (medium), 700 (bold)
+---
 
-**Design reference:** [Figma](https://www.figma.com/design/YbvOpVPUBxTSEzg4J8pXKu/Weni---unnnic?node-id=404-210&m=dev)
+## Display
 
-Tokens from `src/assets/scss/fonts.scss`: `$unnnic-font-caption-1/2` (12px), `$unnnic-font-body` / `$unnnic-font-emphasis` / `$unnnic-font-action` (14px), `$unnnic-font-display-3` / `$unnnic-font-display-4` (16px), `$unnnic-font-display-2` (20px), `$unnnic-font-display-1` (24px).
+Headings and large titles. Use for page titles and section headers.
 
-## Size scale
+| Style      | Token                  | Size  | Line height | Weight |
+|-----------|------------------------|-------|-------------|--------|
+| Display 1 | `$unnnic-font-display-1` | 24px  | 1.4        | Semibold   |
+| Display 2 | `$unnnic-font-display-2` | 20px  | 1.4        | Semibold   |
+| Display 3 | `$unnnic-font-display-3` | 16px  | 1.4        | Semibold   |
+| Display 4 | `$unnnic-font-display-4` | 16px  | 1.4        | Regular |
 
 <Typeset
-  fontSizes={[
-    typography.size.caption,
-    typography.size.body,
-    typography.size.base,
-    typography.size.display2,
-    typography.size.display1,
-  ]}
-  fontWeight={typography.weight.regular}
-  sampleText={SampleText}
-  fontFamily={typography.type.primary}
+  fontSizes={[24, 20, 16]}
+  fontWeight="600"
+  sampleText="Display — Headings and section titles"
+  fontFamily="Inter, sans-serif"
 />
 
-## Bold (display / action)
+<Typeset
+  fontSizes={[16]}
+  fontWeight="400"
+  sampleText="Display 4 — Body large / lead text"
+  fontFamily="Inter, sans-serif"
+/>
+
+---
+
+## Body
+
+Default text and emphasized content. Use for paragraphs, labels, and UI copy.
+
+| Style   | Token                 | Size | Line height | Weight |
+|---------|-----------------------|------|-------------|--------|
+| Body    | `$unnnic-font-body`     | 14px | 1.4        | Regular |
+| Emphasis| `$unnnic-font-emphasis` | 14px | 1.4        | Medium  |
+| Action  | `$unnnic-font-action`   | 14px | 1.4        | Semibold    |
 
 <Typeset
-  fontSizes={[
-    typography.size.caption,
-    typography.size.body,
-    typography.size.base,
-    typography.size.display2,
-    typography.size.display1,
-  ]}
-  fontWeight={typography.weight.bold}
-  sampleText={SampleText}
-  fontFamily={typography.type.primary}
+  fontSizes={[14]}
+  fontWeight="400"
+  sampleText="Body — Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+  fontFamily="Inter, sans-serif"
+/>
+
+<Typeset
+  fontSizes={[14]}
+  fontWeight="500"
+  sampleText="Emphasis — Medium weight for highlighted text."
+  fontFamily="Inter, sans-serif"
+/>
+
+<Typeset
+  fontSizes={[14]}
+  fontWeight="600"
+  sampleText="Action — Semibold for buttons, labels, and CTAs."
+  fontFamily="Inter, sans-serif"
+/>
+
+---
+
+## Caption
+
+Small text for captions, tags, and secondary information.
+
+| Style     | Token                    | Size | Line height | Weight |
+|-----------|--------------------------|------|-------------|--------|
+| Caption 1 | `$unnnic-font-caption-1` | 12px | 18px        | Medium  |
+| Caption 2 | `$unnnic-font-caption-2` | 12px | 18px        | Regular |
+
+<Typeset
+  fontSizes={[12]}
+  fontWeight="500"
+  sampleText="Caption 1 — Tags and labels"
+  fontFamily="Inter, sans-serif"
+/>
+
+<Typeset
+  fontSizes={[12]}
+  fontWeight="400"
+  sampleText="Caption 2 — Secondary captions and hints"
+  fontFamily="Inter, sans-serif"
 />
