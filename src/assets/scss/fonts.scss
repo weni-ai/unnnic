@@ -2,20 +2,20 @@
 // Do not edit directly, this file was auto-generated.
 
 $unnnic-font-size: 16px;
-$unnnic-font-family: Inter;
+$unnnic-font-family: Inter, sans-serif;
 $unnnic-font-weight-bold: 600;
 $unnnic-font-weight-semibold: 600;
 $unnnic-font-weight-medium: 500;
 $unnnic-font-weight-regular: 400;
-$unnnic-font-display-1: 600 calc(1.5 * 16px) / 1.4 Inter;
-$unnnic-font-display-2: 600 calc(1.25 * 16px) / 1.4 Inter;
-$unnnic-font-display-3: 600 calc(1 * 16px) / 1.4 Inter;
-$unnnic-font-display-4: 400 calc(1 * 16px) / 1.4 Inter;
-$unnnic-font-body: 400 calc(0.875 * 16px) / 1.4 Inter;
-$unnnic-font-emphasis: 500 calc(0.875 * 16px) / 1.4 Inter;
-$unnnic-font-action: 600 calc(0.875 * 16px) / 1.4 Inter;
-$unnnic-font-caption-1: 500 calc(0.75 * 16px) / 1.4 Inter;
-$unnnic-font-caption-2: 400 calc(0.75 * 16px) / 1.4 Inter;
+$unnnic-font-display-1: 600 calc(1.5 * 16px) / 1.4 Inter, sans-serif;
+$unnnic-font-display-2: 600 calc(1.25 * 16px) / 1.4 Inter, sans-serif;
+$unnnic-font-display-3: 600 calc(1 * 16px) / 1.4 Inter, sans-serif;
+$unnnic-font-display-4: 400 calc(1 * 16px) / 1.4 Inter, sans-serif;
+$unnnic-font-body: 400 calc(0.875 * 16px) / 1.4 Inter, sans-serif;
+$unnnic-font-emphasis: 500 calc(0.875 * 16px) / 1.4 Inter, sans-serif;
+$unnnic-font-action: 600 calc(0.875 * 16px) / 1.4 Inter, sans-serif;
+$unnnic-font-caption-1: 500 calc(0.75 * 16px) / 1.4 Inter, sans-serif;
+$unnnic-font-caption-2: 400 calc(0.75 * 16px) / 1.4 Inter, sans-serif;
 $unnnic-font-letter-spacing-display-1: -4%;
 $unnnic-font-letter-spacing-display-2: -4%;
 $unnnic-font-letter-spacing-display-3: -2%;
@@ -25,3 +25,49 @@ $unnnic-font-letter-spacing-emphasis: -1%;
 $unnnic-font-letter-spacing-action: -1%;
 $unnnic-font-letter-spacing-caption-1: 0;
 $unnnic-font-letter-spacing-caption-2: 0;
+
+// Typography mixins
+@mixin unnnic-font-display-1 {
+  font: $unnnic-font-display-1;
+  letter-spacing: $unnnic-font-letter-spacing-display-1;
+}
+
+@mixin unnnic-font-display-2 {
+  font: $unnnic-font-display-2;
+  letter-spacing: $unnnic-font-letter-spacing-display-2;
+}
+
+@mixin unnnic-font-display-3 {
+  font: $unnnic-font-display-3;
+  letter-spacing: $unnnic-font-letter-spacing-display-3;
+}
+
+@mixin unnnic-font-display-4 {
+  font: $unnnic-font-display-4;
+  letter-spacing: $unnnic-font-letter-spacing-display-4;
+}
+
+@mixin unnnic-font-body {
+  font: $unnnic-font-body;
+  letter-spacing: $unnnic-font-letter-spacing-body;
+}
+
+@mixin unnnic-font-emphasis {
+  font: $unnnic-font-emphasis;
+  letter-spacing: $unnnic-font-letter-spacing-emphasis;
+}
+
+@mixin unnnic-font-action {
+  font: $unnnic-font-action;
+  letter-spacing: $unnnic-font-letter-spacing-action;
+}
+
+@mixin unnnic-font-caption-1 {
+  font: $unnnic-font-caption-1;
+  letter-spacing: $unnnic-font-letter-spacing-caption-1;
+}
+
+@mixin unnnic-font-caption-2 {
+  font: $unnnic-font-caption-2;
+  letter-spacing: $unnnic-font-letter-spacing-caption-2;
+}
