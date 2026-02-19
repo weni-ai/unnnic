@@ -200,7 +200,10 @@
       class="options-container"
       data-testid="date-picker-options"
     >
-      <div class="options">
+      <div
+        v-if="!hideOptions"
+        class="options"
+      >
         <div
           v-for="(option, index) in periodsLocale"
           :key="index"
@@ -293,6 +296,7 @@ export interface DatePickerProps {
   options?: PeriodOption[];
 
   disableClear?: boolean;
+  hideOptions?: boolean;
 
   locale?: string;
   translations?: Record<string, unknown>;
@@ -315,6 +319,7 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   days: () => [],
   options: () => [],
   disableClear: false,
+  hideOptions: false,
   locale: undefined,
   translations: undefined,
   variant: 'card',
@@ -392,6 +397,10 @@ const value = computed(() => ({
   startDate: startDate.value.replaceAll(' ', '-'),
   endDate: endDate.value.replaceAll(' ', '-'),
 }));
+
+const containerOptionsFlexDirection = computed(() => {
+  return props.hideOptions ? 'column-reverse' : 'column';
+});
 
 const i18nFn = (...args: any[]): string | undefined => {
   const [key, defaults] = args;
@@ -1091,7 +1100,7 @@ onMounted(() => {
 
   .options-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: v-bind(containerOptionsFlexDirection);
     justify-content: space-between;
 
     .options {

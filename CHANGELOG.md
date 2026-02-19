@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.24.1 (2026-02-12)
+
+### Added
+
+- **ChatsMessage**: `highlighted` prop to visually highlight messages.
+- **DatePicker**: `hideOptions` prop to hide the period options section (e.g. "Last 7 days", Clear/Filter buttons) when enabled.
+
+# 3.24.0 (2026-02-11)
+
+### Added
+
+- **ToolTip**: Exposed `class` prop and `contentProps` (partial `TooltipContentProps` from reka-ui) so consumers can apply custom styling and override tooltip internal content classes.
+
 # 3.23.0 (2026-02-10)
 
 ### Added
