@@ -6,7 +6,7 @@ import UnnnicSwitch from '../components/Switch/Switch.vue';
 import UnnnicButton from '../components/Button/Button.vue';
 import UnnnicTag from '../components/Tag/Tag.vue';
 
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import iconsList from '../utils/iconList';
 import colorsList from '../utils/colorsList';
 

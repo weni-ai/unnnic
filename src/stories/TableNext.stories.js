@@ -1,6 +1,6 @@
 import UnnnicTableNext from '../components/TableNext/TableNext.vue';
 import UnnnicButton from '../components/Button/Button.vue';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 export default {
   title: 'Data Display/TableNext',

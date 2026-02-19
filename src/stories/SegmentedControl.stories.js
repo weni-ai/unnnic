@@ -33,12 +33,12 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `A segmented control component that allows the user to select a single option from a list of options.
+        component: `<div>A segmented control component that allows the user to select a single option from a list of options.
           <br/>
           It supports two sizes (small, medium).
           <br/>
           API reference: https://www.reka-ui.com/docs/components/tabs
-          `,
+          </div>`,
       },
       source: {
         code: `

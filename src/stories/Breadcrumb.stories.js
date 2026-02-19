@@ -1,5 +1,5 @@
 import UnnnicBreadcrumb from '../components/Breadcrumb/Breadcrumb.vue';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 export default {
   title: 'Navigation/Breadcrumb',
@@ -8,8 +8,9 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Displays the path taken by the user within a system or hierarchical structure, 
-        facilitating navigation and offering clear context about the current location.`,
+        component: `<div>Displays the path taken by the user within a system or hierarchical structure, 
+        facilitating navigation and offering clear context about the current location.
+        </div>`,
       },
     },
   },
