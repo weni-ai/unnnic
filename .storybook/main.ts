@@ -26,9 +26,5 @@ const config: StorybookConfig = {
     name: '@storybook/vue3-vite',
     options: {},
   },
-  docs: {
-    defaultName: 'Documentation',
-    docsMode: true,
-  },
 };
 export default config;
