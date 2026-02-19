@@ -1,0 +1,83 @@
+import { Meta, Title, Story } from '@storybook/addon-docs/blocks';
+import * as TypographyStories from './Typography.stories.js';
+
+<Meta title="Typography" />
+
+<Title>Typography</Title>
+
+Typography follows the scale defined in the design system.
+
+**Design reference:** [Figma (Typography)](https://www.figma.com/design/YbvOpVPUBxTSEzg4J8pXKu/Weni---unnnic?node-id=404-210&m=dev)
+
+**Font:** Inter · **Weights:** 400 (Regular), 500 (Medium), 600 (Semibold)
+
+_Inter_ uses **letter-spacing** adjustments for legibility. **Prefer the typography mixins** so font and letter-spacing are always applied together; the variables remain available when you need them separately.
+
+---
+
+## Display
+
+Headings and large titles. Use for page titles and section headers.
+
+| Style     | Mixin                            | Size  | Weight   | Line height | Letter spacing |
+|-----------|----------------------------------|-------|----------|-------------|----------------|
+| Display 1 | `@include unnnic-font-display-1` | 24px  | Semibold | 1.4         | -4%            |
+| Display 2 | `@include unnnic-font-display-2` | 20px  | Semibold | 1.4         | -4%            |
+| Display 3 | `@include unnnic-font-display-3` | 16px  | Semibold | 1.4         | -2%            |
+| Display 4 | `@include unnnic-font-display-4` | 16px  | Regular  | 1.4         | -2%            |
+
+<Story of={TypographyStories.Display} />
+
+
+---
+
+## Body
+
+Default text and emphasized content. Use for paragraphs, labels, and UI copy.
+
+| Style   | Mixin                           | Size | Weight   | Line height | Letter spacing |
+|---------|---------------------------------|------|----------|-------------|----------------|
+| Body    | `@include unnnic-font-body`     | 14px | Regular  | 1.4         | -1%            |
+| Emphasis| `@include unnnic-font-emphasis` | 14px | Medium   | 1.4         | -1%            |
+| Action  | `@include unnnic-font-action`   | 14px | Semibold | 1.4         | -1%            |
+
+<Story of={TypographyStories.Body} />
+
+---
+
+## Caption
+
+Small text for captions, tags, and secondary information.
+
+| Style     | Mixin                            | Size | Weight   | Line height | Letter spacing |
+|-----------|----------------------------------|------|----------|-------------|----------------|
+| Caption 1 | `@include unnnic-font-caption-1` | 12px | Medium   | 1.4         | 0              |
+| Caption 2 | `@include unnnic-font-caption-2` | 12px | Regular  |  1.4        | 0              |
+
+<Story of={TypographyStories.Caption} />
+
+---
+
+## Usage
+
+**Recommended:** use the typography mixins so font and letter-spacing are always applied together.
+
+**When the project injects unnnic via sass-loader** (e.g. rspack/webpack/vite with `additionalData: "@use '@weni/unnnic-system/src/assets/scss/unnnic.scss' as *;"`), the mixins are available in every SCSS file and Vue `<style lang="scss">` without adding `@use` in each file:
+
+```scss
+.my-heading {
+  @include unnnic-font-display-1;
+}
+```
+
+**When unnnic is not globally injected**, add the `@use` once at the top of the file:
+
+```scss
+@use '@weni/unnnic-system/src/assets/scss/unnnic.scss' as *;
+
+.my-heading {
+  @include unnnic-font-display-1;
+}
+```
+
+If you need only the `font` or `letter-spacing` value (e.g. for overrides or calculations), use the variables: `$unnnic-font-display-1`, `$unnnic-font-letter-spacing-display-1`, etc.
