@@ -74,6 +74,11 @@
   "peerDependencies": {
     "vue": "^3.4.8"
   },
+  "overrides": {
+    "@typescript-eslint/utils": "^8.35.1",
+    "@typescript-eslint/parser": "^8.35.1",
+    "vue-eslint-parser": "^10.4.0"
+  },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
     "@vueuse/components": "^10.4.1",
@@ -119,7 +124,7 @@
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "eslint": "^9.37.0",
-    "eslint-plugin-storybook": "^0.8.0",
+    "eslint-plugin-storybook": "^0.10.0",
     "eslint-plugin-vue": "10.4.0",
     "jsdom": "^24.1.1",
     "postcss": "^8.5.6",
