@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import PageHeader from '../components/PageHeader/PageHeader.vue';
 import UnnnicButton from '../components/Button/Button.vue';
@@ -13,12 +13,12 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `A page header component to standardize the header of pages.
+        component: `<div>A page header component to standardize the header of pages.
           <br/>
           It supports title, description, actions, tabs, tags, and back navigation.
           <br/>
           This component provides multiple variations to handle different page header scenarios.
-          `,
+          </div>`,
       },
     },
   },

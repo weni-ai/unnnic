@@ -1,6 +1,6 @@
 import unnnicModalNext from '../components/ModalNext/ModalNext.vue';
 
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 const iconsOptions = [];
 

@@ -7,10 +7,11 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `A simplified compact element used for selection and filtering. 
+        component: `<div>A simplified compact element used for selection and filtering. 
         Chips are commonly used to display tags, filters, or selectable options 
         with automatic styling based on selection state. They provide a clean 
-        and organized way to show multiple related items with clear visual feedback.`,
+        and organized way to show multiple related items with clear visual feedback.
+        </div>`,
       },
     },
   },

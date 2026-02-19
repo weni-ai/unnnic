@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import UnnnicAccordion from '../components/Accordion/Accordion.vue';
 import UnnnicButton from '../components/Button/Button.vue';
 
@@ -9,11 +9,10 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Allows the user to dynamically expand and collapse sections of content. 
-        Ideal for organizing information in a clean and efficient layout, is especially 
+        component: `<div>Allows the user to dynamically expand and collapse sections of content. Ideal for organizing information in a clean and efficient layout, is especially 
         useful in situations where there is a lot of content to be presented, but without 
         overwhelming the user with visual information at the same time.
-          `,
+          </div>`,
       },
     },
   },
