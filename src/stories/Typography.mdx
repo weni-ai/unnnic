@@ -1,0 +1,64 @@
+import { Meta, Typeset } from '@storybook/blocks';
+
+<Meta title="Typography" />
+
+export const typography = {
+  type: {
+    primary: 'Lato, sans-serif',
+  },
+  weight: {
+    regular: '400',
+    medium: '500',
+    bold: '700',
+  },
+  size: {
+    caption: 12,
+    body: 14,
+    base: 16,
+    display2: 20,
+    display1: 24,
+  },
+};
+
+export const SampleText =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+
+# Typography
+
+**Font:** Inter, sans-serif
+
+**Weights:** 400 (regular), 500 (medium), 700 (bold)
+
+**Design reference:** [Figma](https://www.figma.com/design/YbvOpVPUBxTSEzg4J8pXKu/Weni---unnnic?node-id=404-210&m=dev)
+
+Tokens from `src/assets/scss/fonts.scss`: `$unnnic-font-caption-1/2` (12px), `$unnnic-font-body` / `$unnnic-font-emphasis` / `$unnnic-font-action` (14px), `$unnnic-font-display-3` / `$unnnic-font-display-4` (16px), `$unnnic-font-display-2` (20px), `$unnnic-font-display-1` (24px).
+
+## Size scale
+
+<Typeset
+  fontSizes={[
+    typography.size.caption,
+    typography.size.body,
+    typography.size.base,
+    typography.size.display2,
+    typography.size.display1,
+  ]}
+  fontWeight={typography.weight.regular}
+  sampleText={SampleText}
+  fontFamily={typography.type.primary}
+/>
+
+## Bold (display / action)
+
+<Typeset
+  fontSizes={[
+    typography.size.caption,
+    typography.size.body,
+    typography.size.base,
+    typography.size.display2,
+    typography.size.display1,
+  ]}
+  fontWeight={typography.weight.bold}
+  sampleText={SampleText}
+  fontFamily={typography.type.primary}
+/>
