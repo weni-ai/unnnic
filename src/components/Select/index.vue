@@ -105,11 +105,10 @@ import type { SelectBaseProps, SelectOption } from './types';
 
 defineOptions({
   name: 'UnnnicSelect',
-  inheritAttrs: false,
 });
 
 interface SelectProps extends SelectBaseProps {
-  modelValue: unknown;
+  modelValue: SelectOption | unknown;
   infiniteScroll?: boolean;
   infiniteScrollDistance?: number;
   infiniteScrollCanLoadMore?: () => boolean;
@@ -137,7 +136,7 @@ const props = withDefaults(defineProps<SelectProps>(), {
 });
 
 const emit = defineEmits<{
-  'update:modelValue': [value: unknown];
+  'update:modelValue': [value: SelectOption | unknown];
   'update:search': [value: string];
   'scroll-end': [];
 }>();

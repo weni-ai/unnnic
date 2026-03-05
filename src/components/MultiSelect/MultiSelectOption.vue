@@ -1,10 +1,5 @@
 <template>
-  <div
-    :class="['unnnic-multi-select-option']"
-    role="option"
-    :aria-selected="props.active"
-    :aria-disabled="props.disabled"
-  >
+  <div :class="['unnnic-multi-select-option']">
     <UnnnicCheckbox
       :modelValue="props.active"
       :disabled="props.disabled"
