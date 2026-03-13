@@ -28,11 +28,11 @@ jobs:
       - name: Create Pre Release Version
         run: |
           git pull origin staging
-          npm version --prerelease --preid alpha
+          npm version prerelease --preid alpha
           NEW_TAG=$(git describe --tags $(git rev-list --tags --max-count=1))
           git push origin HEAD:staging
           git push origin $NEW_TAG
       - name: Publish Package
-        run: npm publish
+        run: npm publish --tag alpha
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
