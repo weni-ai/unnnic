@@ -277,15 +277,15 @@ watch(
   }
 
   &--warning {
-    background-color: $unnnic-color-red-500;
-    color: $unnnic-color-neutral-white;
+    background-color: $unnnic-color-bg-red-strong;
+    color: $unnnic-color-fg-inverted;
 
     &:hover:enabled {
-      background-color: $unnnic-color-red-600;
+      background-color: $unnnic-color-red-10;
     }
 
     &:active:enabled {
-      background-color: $unnnic-color-red-700;
+      background-color: $unnnic-color-red-11;
     }
   }
 
