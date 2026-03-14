@@ -6,7 +6,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Allows users to perform an action or navigate to another page. 
+        component: `<div>Allows users to perform an action or navigate to another page. 
           It has styles for various needs and are ideal for directing the user's attention. 
           It is divided into 5 types: Primary, Secondary, Tertiary, Warning, Attention.
           Each of these types has its states.
@@ -15,7 +15,7 @@ export default {
           This component has 5 variations: without icon, with icon on the left, with icon on the right, just the icon and float. 
           Each of this variation has 4 states: default, hover, active and disabled. 
           The component has a fixed height of 46px and variable width. However, the icon-only variation has a fixed height and width of 46px.
-          `,
+          </div>`,
       },
     },
   },
@@ -90,8 +90,9 @@ export const Warning = {
   parameters: {
     docs: {
       description: {
-        story: `This variation aims to highlight actions that could be destructive or have negative consequences if taken. 
-        For example: Deleting an element.`,
+        story: `<div>This variation aims to highlight actions that could be destructive or have negative consequences if taken. 
+        For example: Deleting an element.
+        </div>`,
       },
     },
   },
@@ -140,9 +141,10 @@ export const Float = {
   parameters: {
     docs: {
       description: {
-        story: `When there is a need to present a main action above a list of contents. <br/>
+        story: `<div>When there is a need to present a main action above a list of contents. <br/>
           It is important that the component is always floating over the content and fixed to the bottom right side. <br/>
-          (Remember to add ${'`position relative`'} style to your container)`,
+          (Remember to add ${'`position relative`'} style to your container)
+          </div>`,
       },
     },
   },

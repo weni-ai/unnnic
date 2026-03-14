@@ -16,7 +16,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `A dialog component that displays content in a modal overlay. 
+        component: `<div>A dialog component that displays content in a modal overlay. 
           <br/>
           Built on top of Reka UI, it provides a modern and accessible way to display modal dialogs.
           <br/>
@@ -25,7 +25,7 @@ export default {
           Can be controlled via the "open" prop for programmatic control.
           <br/>
           API reference: https://www.reka-ui.com/docs/components/dialog
-          `,
+          </div>`,
       },
     },
   },
@@ -659,9 +659,10 @@ export const ControlledOpen = {
   parameters: {
     docs: {
       description: {
-        story: `Dialog controlled by the "open" prop. This allows you to programmatically open and close the dialog.
+        story: `<div>Dialog controlled by the "open" prop. This allows you to programmatically open and close the dialog.
           <br/>
-          Use v-model:open to bind the open state to a reactive variable in your component.`,
+          Use v-model:open to bind the open state to a reactive variable in your component.
+          </div>`,
       },
       source: {
         code: `<script setup>

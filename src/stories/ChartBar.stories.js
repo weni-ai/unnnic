@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import UnnnicChartBar from '../components/ChartBar/ChartBar.vue';
 
 export default {

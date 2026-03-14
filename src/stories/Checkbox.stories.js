@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import UnnnicCheckbox from '../components/Checkbox/Checkbox.vue';
 
 export default {
@@ -8,10 +8,10 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Allows the user to select multiple options from a category. It can also be 
+        component: `<div>Allows the user to select multiple options from a category. It can also be 
         used to display a single option that may require additional acceptance or confirmation 
         before submission.
-          `,
+        </div>`,
       },
     },
   },

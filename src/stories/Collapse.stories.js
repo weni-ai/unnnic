@@ -7,10 +7,10 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Allows for dynamic display and hiding of content. It enables sections of 
+        component: `<div>Allows for dynamic display and hiding of content. It enables sections of 
         information to be hidden or revealed with a simple click or tap, optimizing space usage 
         on the interface and enhancing the user experience.
-          `,
+        </div>`,
       },
     },
   },

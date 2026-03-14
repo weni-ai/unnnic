@@ -36,7 +36,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `**Transitional component to replace the [Drawer](?path=/docs/misc-drawer--default) in the future.**
+        component: `<div>**Transitional component to replace the [Drawer](?path=/docs/misc-drawer--default) in the future.**
         <br/>
         <br/>
         A drawer component that slides in from the right side of the screen, displaying content in a portal.
@@ -46,7 +46,7 @@ export default {
           Supports four sizes (medium, large, extra-large, giant) and can be controlled via the "open" prop for programmatic control.
           <br/>
           API reference: https://github.com/unovue/vaul-vue
-          `,
+          </div>`,
       },
     },
   },
@@ -375,9 +375,10 @@ export const ControlledOpen = {
   parameters: {
     docs: {
       description: {
-        story: `Drawer controlled by the "open" prop. This allows you to programmatically open and close the drawer.
+        story: `<div>Drawer controlled by the "open" prop. This allows you to programmatically open and close the drawer.
           <br/>
-          Use v-model:open to bind the open state to a reactive variable in your component.`,
+          Use v-model:open to bind the open state to a reactive variable in your component.
+          </div>`,
       },
       source: {
         code: `<script setup>
@@ -551,9 +552,10 @@ export const WithoutOverlay = {
   parameters: {
     docs: {
       description: {
-        story: `Drawer without overlay background. Useful when nesting drawers or when you want to allow interaction with the page behind.
+        story: `<div>Drawer without overlay background. Useful when nesting drawers or when you want to allow interaction with the page behind.
           <br/>
-          It is recommended to use this variation for contexts where the drawer is used with another drawer or modal.`,
+          It is recommended to use this variation for contexts where the drawer is used with another drawer or modal.
+          </div>`,
       },
       source: {
         code: `<UnnnicDrawerNext>
