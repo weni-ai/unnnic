@@ -1,0 +1,25 @@
+@use '@/assets/scss/unnnic' as *;
+
+@mixin select-input-trigger {
+  cursor: pointer;
+
+  > .icon-right {
+    color: $unnnic-color-fg-base;
+  }
+}
+
+@mixin select-input-search {
+  > .icon-left {
+    color: $unnnic-color-fg-base;
+  }
+}
+
+@mixin select-content-no-results {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font: $unnnic-font-emphasis;
+  color: $unnnic-color-fg-muted;
+}

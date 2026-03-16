@@ -2,7 +2,7 @@
   <div class="unnnic-multi-select">
     <Popover
       :open="openPopover"
-      @update:open="openPopover = $event"
+      @update:open="setOpenPopover"
     >
       <PopoverTrigger class="w-full">
         <UnnnicInput
@@ -29,7 +29,10 @@
         :style="popoverContentCustomStyles"
         :width="inputWidthString"
       >
-        <div class="unnnic-multi-select__content">
+        <div
+          ref="contentRef"
+          class="unnnic-multi-select__content"
+        >
           <UnnnicInput
             v-if="props.enableSearch"
             class="unnnic-multi-select__input-search"
@@ -44,12 +47,15 @@
           >
             {{ $t('without_results') }}
           </p>
-          <div class="unnnic-multi-select__options">
+          <div
+            v-else
+            class="unnnic-multi-select__options"
+          >
             <UnnnicMultiSelectOption
               v-for="(option, index) in filteredOptions"
-              :key="option[props.itemValue]"
+              :key="String(option[props.itemValue])"
               :data-option-index="index"
-              :label="option[props.itemLabel]"
+              :label="String(option[props.itemLabel] ?? '')"
               :active="getActivatedOptionStatus(option)"
               :focused="focusedOptionIndex === index"
               :disabled="option.disabled"
@@ -63,37 +69,22 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, watch, useTemplateRef } from 'vue';
 
 import { Popover, PopoverTrigger, PopoverContent } from '../ui/popover';
 import UnnnicInput from '../Input/Input.vue';
-import UnnnicMultiSelectOption from './MultSelectOption.vue';
-import { useElementSize } from '@vueuse/core';
+import UnnnicMultiSelectOption from './MultiSelectOption.vue';
+
+import { useSelectBase } from '../../composables/useSelectBase';
+import { useSelectKeyboard } from '../../composables/useSelectKeyboard';
+import type { SelectBaseProps, SelectOption } from '../Select/types';
 
 defineOptions({
   name: 'UnnnicMultiSelect',
 });
 
-interface MultiSelectProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  options: Array<{ [key: string]: any }>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  modelValue: any[];
-  returnObject?: boolean;
-  itemLabel?: string;
-  itemValue?: string;
-  placeholder?: string;
-  label?: string;
-  type?: 'normal' | 'error';
-  errors?: string | Array<string>;
-  message?: string;
-  size?: 'sm' | 'md';
-  optionsLines?: number;
-  enableSearch?: boolean;
-  search?: string;
-  locale?: string;
-  disabled?: boolean;
-  clearable?: boolean;
+interface MultiSelectProps extends SelectBaseProps {
+  modelValue: (SelectOption | unknown)[];
 }
 
 const props = withDefaults(defineProps<MultiSelectProps>(), {
@@ -114,125 +105,113 @@ const props = withDefaults(defineProps<MultiSelectProps>(), {
   clearable: false,
 });
 
-const openPopover = ref(false);
-const multiSelectInputRef = ref<HTMLInputElement | null>(null);
-const { width: inputWidth } = useElementSize(multiSelectInputRef);
-
-const inputWidthString = computed(() => {
-  return `${inputWidth.value}px`;
-});
-
-const popoverContentCustomStyles = computed(() => {
-  const emptyFilteredOptions = filteredOptions.value?.length === 0;
-  return {
-    overflow: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: calculatedPopoverHeight.value,
-    maxHeight: emptyFilteredOptions ? 'unset' : calculatedPopoverHeight.value,
-    height: emptyFilteredOptions ? calculatedPopoverHeight.value : 'unset',
-  };
-});
-
-const calculatedPopoverHeight = computed(() => {
-  if (!props.options || props.options.length === 0) return 'unset';
-  const popoverSearchGap = props.enableSearch ? 16 : 0;
-  const popoverGap = 24;
-  const fieldsHeight = 22 * props.optionsLines;
-  const size = fieldsHeight + (popoverGap * props.optionsLines - 2);
-  return `${props.enableSearch ? size + 51 + popoverSearchGap : size}px`;
-});
-
 const emit = defineEmits<{
-  'update:modelValue': [unknown[]];
-  'update:search': [string];
+  'update:modelValue': [value: (SelectOption | unknown)[]];
+  'update:search': [value: string];
 }>();
 
-const focusedOptionIndex = ref<number>(-1);
+const multiSelectInputRef = useTemplateRef<HTMLElement>('multiSelectInputRef');
+const contentRef = useTemplateRef<HTMLElement>('contentRef');
 
-const selectedItems = computed(() => {
-  if (props.returnObject) return props.modelValue;
+const base = useSelectBase(props, 'multi', multiSelectInputRef, contentRef);
 
-  const modelValueValues = props.returnObject
-    ? props.modelValue.map((item) => item[props.itemValue])
-    : props.modelValue;
+const openPopover = base.openPopover;
+const popoverContentCustomStyles = base.popoverContentCustomStyles;
+const inputWidthString = base.inputWidthString;
+const filteredOptions = base.filteredOptions;
 
+function setOpenPopover(value: boolean) {
+  base.openPopover.value = value;
+}
+
+const selectedItems = computed<SelectOption[]>(() => {
+  if (props.returnObject) return props.modelValue as SelectOption[];
+
+  const valueIds = props.modelValue.slice();
   return props.options.filter((option) =>
-    modelValueValues.includes(option[props.itemValue]),
-  );
-});
-const inputValue = computed(() => {
-  return selectedItems.value.map((item) => item[props.itemLabel]).join(', ');
-});
-
-const filteredOptions = computed(() => {
-  if (!props.enableSearch || !props.search) return props.options;
-
-  return props.options.filter(
-    (option) =>
-      option[props.itemLabel]
-        .toLowerCase()
-        .includes(props.search?.toLowerCase()) ||
-      option[props.itemValue]
-        .toLowerCase()
-        .includes(props.search?.toLowerCase()),
+    valueIds.includes(option[props.itemValue]),
   );
 });
 
-const handleSearch = (value: string) => {
+const inputValue = computed(() =>
+  selectedItems.value.map((item) => item[props.itemLabel]).join(', '),
+);
+
+function handleSearch(value: string) {
   emit('update:search', value);
-};
+}
 
-const getActivatedOptionStatus = (option: (typeof props.options)[number]) => {
+function getActivatedOptionStatus(option: SelectOption) {
   if (props.returnObject) {
-    return props.modelValue.find(
+    return (props.modelValue as SelectOption[]).some(
       (item) => item[props.itemValue] === option[props.itemValue],
     );
   }
   return props.modelValue.includes(option[props.itemValue]);
-};
+}
 
-const handleSelectOption = (
-  option: (typeof props.options)[number],
-  selected: boolean,
-) => {
+function handleSelectOption(option: SelectOption, selected: boolean) {
   if (selected) {
-    emit(
-      'update:modelValue',
-      props.returnObject
-        ? [...props.modelValue, option]
-        : [...props.modelValue, option[props.itemValue]],
-    );
+    const value = props.returnObject
+      ? [...props.modelValue, option]
+      : [...props.modelValue, option[props.itemValue]];
+    emit('update:modelValue', value);
   } else {
-    emit(
-      'update:modelValue',
-      props.returnObject
-        ? props.modelValue.filter(
-            (item) => item[props.itemValue] !== option[props.itemValue],
-          )
-        : props.modelValue.filter((item) => item !== option[props.itemValue]),
-    );
+    const value = props.returnObject
+      ? (props.modelValue as SelectOption[]).filter(
+          (item) => item[props.itemValue] !== option[props.itemValue],
+        )
+      : props.modelValue.filter((item) => item !== option[props.itemValue]);
+    emit('update:modelValue', value);
   }
-};
+}
+
+const keyboard = useSelectKeyboard<SelectOption>(
+  () => base.filteredOptions.value,
+  (option) => {
+    if (option.disabled) return;
+    const active = getActivatedOptionStatus(option);
+    handleSelectOption(option, !active);
+  },
+  {
+    closeOnSelect: false,
+    closePopover: () => (base.openPopover.value = false),
+    openPopoverRef: base.openPopover,
+  },
+);
+
+keyboard.setupKeydownBinding();
+
+const focusedOptionIndex = keyboard.focusedOptionIndex;
+
+watch(openPopover, () => {
+  if (!base.openPopover.value) {
+    handleSearch('');
+  } else {
+    keyboard.focusedOptionIndex.value = -1;
+  }
+});
+
+defineExpose({
+  openPopover,
+  setOpenPopover,
+  filteredOptions,
+  calculatedPopoverHeight: base.calculatedPopoverHeight,
+  selectedItems,
+  inputValue,
+});
 </script>
 
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
+@use '../Select/select-shared' as shared;
 
 :deep(.unnnic-multi-select__input) {
-  cursor: pointer;
+  @include shared.select-input-trigger;
 }
 
 :deep(.unnnic-multi-select__input-search) {
-  > .icon-left {
-    color: $unnnic-color-fg-base;
-  }
-}
-
-:deep(.unnnic-multi-select__input) {
-  > .icon-right {
-    color: $unnnic-color-fg-base;
-  }
+  @include shared.select-input-search;
 }
 
 .unnnic-multi-select {
@@ -246,13 +225,7 @@ const handleSelectOption = (
     height: -webkit-fill-available;
 
     &-no-results {
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      font: $unnnic-font-emphasis;
-      color: $unnnic-color-fg-muted;
+      @include shared.select-content-no-results;
     }
   }
 
