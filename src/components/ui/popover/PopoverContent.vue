@@ -110,6 +110,10 @@ $popover-space: $unnnic-space-4;
   box-shadow: $unnnic-shadow-1;
   border: 1px solid $unnnic-color-border-soft;
 
+  &.bg-popover {
+    background-color: $unnnic-color-bg-base;
+  }
+
   &::-webkit-scrollbar {
     width: $unnnic-space-1;
   }
