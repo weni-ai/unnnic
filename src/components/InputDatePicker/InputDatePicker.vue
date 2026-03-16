@@ -10,6 +10,7 @@
           :iconRight="iconPosition === 'right' ? 'calendar_month' : undefined"
           readonly
           :modelValue="overwrittenValue || filterText || ''"
+          :disabled="disabled"
           @click="openPopover"
           @focus="openPopover"
         />
@@ -97,6 +98,8 @@ interface InputDatePickerProps {
   hideOptions?: boolean;
 
   periodBaseDate?: string;
+
+  disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<InputDatePickerProps>(), {
@@ -118,6 +121,7 @@ const props = withDefaults(defineProps<InputDatePickerProps>(), {
   disableClear: false,
   hideOptions: false,
   periodBaseDate: '',
+  disabled: false,
 });
 
 const emit = defineEmits<{
