@@ -1,4 +1,5 @@
 import UnnnicChip from '../components/Chip/Chip.vue';
+import UnnnicIcon from '../components/Icon.vue';
 
 export default {
   title: 'Data Display/Chip',
@@ -145,6 +146,22 @@ export const ClickableSelected = {
     isSelected: true,
     isClickable: true,
   },
+};
+
+export const WithRightSlot = {
+  render: (args) => ({
+    components: { UnnnicChip, UnnnicIcon },
+    setup() {
+      return { args };
+    },
+    template: `
+      <UnnnicChip v-bind="args">
+        <template #right>
+          <UnnnicIcon icon="material-symbols:account-circle-sharp" size="sm" scheme="fg-base" />
+        </template>
+      </UnnnicChip>
+    `,
+  }),
 };
 
 // Interactive example showing state changes

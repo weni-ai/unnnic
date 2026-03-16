@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, test, afterEach } from 'vitest';
-import MultiSelectOption from '../MultSelectOption.vue';
+import MultiSelectOption from '../MultiSelectOption.vue';
 
 const createWrapper = (props = {}) => {
   return mount(MultiSelectOption, { props });

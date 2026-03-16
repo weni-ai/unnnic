@@ -18,6 +18,7 @@
     >
       {{ count }}
     </p>
+    <slot name="right" />
     <UnnnicIcon
       v-if="type === 'multiple'"
       :icon="isSelected ? 'close' : 'add'"
@@ -80,7 +81,7 @@ const chipClass = computed(() => {
   border-radius: 600px;
   background-color: $unnnic-color-bg-base;
   border: 1px solid transparent;
-  
+
   &:hover {
     background-color: $unnnic-color-bg-soft;
   }

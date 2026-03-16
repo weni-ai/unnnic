@@ -1,14 +1,7 @@
 import { mount } from '@vue/test-utils';
-import { beforeEach, describe, expect, afterEach, test, vi } from 'vitest';
+import { beforeEach, describe, expect, afterEach, test } from 'vitest';
 import UnnnicMultiSelect from '../index.vue';
-
-vi.mock('../../mixins/i18n', () => ({
-  default: {
-    methods: {
-      $t: (key) => key,
-    },
-  },
-}));
+import i18n from '@/utils/plugins/i18n';
 
 describe('UnnnicMultiSelect.vue', () => {
   let wrapper;
@@ -24,14 +17,12 @@ describe('UnnnicMultiSelect.vue', () => {
 
   const mountWrapper = (props = {}, slots = {}) => {
     return mount(UnnnicMultiSelect, {
+      global: {
+        plugins: [i18n],
+      },
       props: {
         ...defaultProps,
         ...props,
-      },
-      global: {
-        mocks: {
-          $t: (key) => key,
-        },
       },
       slots,
     });
@@ -62,7 +53,7 @@ describe('UnnnicMultiSelect.vue', () => {
     });
 
     test('renders select options when popover is open', async () => {
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents({
         name: 'UnnnicMultiSelectOption',
@@ -130,7 +121,7 @@ describe('UnnnicMultiSelect.vue', () => {
 
       expect(input.props('iconRight')).toBe('keyboard_arrow_down');
 
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       expect(input.props('iconRight')).toBe('keyboard_arrow_up');
     });
@@ -138,7 +129,7 @@ describe('UnnnicMultiSelect.vue', () => {
 
   describe('option selection', () => {
     test('emits update:modelValue with array when option is selected', async () => {
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents({
         name: 'UnnnicMultiSelectOption',
@@ -152,7 +143,7 @@ describe('UnnnicMultiSelect.vue', () => {
 
     test('adds option to existing selection', async () => {
       await wrapper.setProps({ modelValue: ['option1'] });
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents({
         name: 'UnnnicMultiSelectOption',
@@ -168,7 +159,7 @@ describe('UnnnicMultiSelect.vue', () => {
 
     test('removes option from selection when unselected', async () => {
       await wrapper.setProps({ modelValue: ['option1', 'option2'] });
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents({
         name: 'UnnnicMultiSelectOption',
@@ -182,7 +173,7 @@ describe('UnnnicMultiSelect.vue', () => {
 
     test('emits object array when returnObject is true', async () => {
       await wrapper.setProps({ returnObject: true, modelValue: [] });
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents({
         name: 'UnnnicMultiSelectOption',
@@ -200,7 +191,7 @@ describe('UnnnicMultiSelect.vue', () => {
         returnObject: true,
         modelValue: [{ label: 'Option 1', value: 'option1' }],
       });
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents({
         name: 'UnnnicMultiSelectOption',
@@ -219,7 +210,7 @@ describe('UnnnicMultiSelect.vue', () => {
       ];
 
       await wrapper.setProps({ options: disabledOptions });
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents({
         name: 'UnnnicMultiSelectOption',
@@ -232,7 +223,7 @@ describe('UnnnicMultiSelect.vue', () => {
   describe('search functionality', () => {
     test('renders search input when enableSearch is true', async () => {
       await wrapper.setProps({ enableSearch: true });
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const searchInputs = wrapper.findAllComponents({ name: 'UnnnicInput' });
       expect(searchInputs.length).toBe(2);
@@ -246,7 +237,7 @@ describe('UnnnicMultiSelect.vue', () => {
 
     test('emits update:search when search input changes', async () => {
       await wrapper.setProps({ enableSearch: true });
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const searchInput = wrapper.findAllComponents({ name: 'UnnnicInput' })[1];
 
@@ -503,7 +494,7 @@ describe('UnnnicMultiSelect.vue', () => {
   describe('getActivatedOptionStatus', () => {
     test('returns true when option is in modelValue array', async () => {
       await wrapper.setProps({ modelValue: ['option1'] });
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents({
         name: 'UnnnicMultiSelectOption',
@@ -518,7 +509,7 @@ describe('UnnnicMultiSelect.vue', () => {
         returnObject: true,
         modelValue: [{ label: 'Option 1', value: 'option1' }],
       });
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents({
         name: 'UnnnicMultiSelectOption',
