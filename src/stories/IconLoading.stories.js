@@ -3,6 +3,10 @@ import UnnnicIconLoading from '../components/IconLoading/IconLoading.vue';
 export default {
   title: 'Progress/IconLoading',
   component: UnnnicIconLoading,
+  args: {
+    scheme: 'fg-muted',
+    size: 'lg',
+  },
   argTypes: {
     scheme: {
       control: { type: 'select' },
@@ -37,23 +41,16 @@ export default {
   },
 };
 
-export const Default = {
-  args: {
-    scheme: 'fg-muted',
-    size: 'lg',
-  },
-};
+export const Default = {};
 
-export const Small = {
-  args: {
-    scheme: 'fg-muted',
-    size: 'sm',
-  },
-};
-
-export const Large = {
+export const CustomScheme = {
   args: {
     scheme: 'fg-accent',
-    size: 'xl',
+  },
+};
+
+export const CustomSize = {
+  args: {
+    size: '64px',
   },
 };

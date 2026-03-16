@@ -48,7 +48,7 @@ const props = defineProps({
 
 defineOptions({ name: 'UnnnicIconLoading' });
 
-const sizeInPixels = computed(() => SIZE_MAP[props.size] ?? SIZE_MAP.lg);
+const sizeInPixels = computed(() => SIZE_MAP[props.size] ?? props.size);
 </script>
 
 <style lang="scss" scoped>
