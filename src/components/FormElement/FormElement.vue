@@ -84,7 +84,6 @@ withDefaults(defineProps<FormElementProps>(), {
 .unnnic-form-element {
   &__label {
     font: $unnnic-font-body;
-    color: $unnnic-color-neutral-cloudy;
     margin-bottom: $unnnic-space-1;
     display: flex;
     align-items: center;
