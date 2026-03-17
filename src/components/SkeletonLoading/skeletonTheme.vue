@@ -1,5 +1,5 @@
 <template>
-  <div :style="themeStyle">
+  <div>
     <component
       :is="tag"
       v-if="tag"
@@ -12,22 +12,15 @@
 
 <script>
 import { ref, provide } from 'vue';
-import colors from '@/assets/scss/deprecated/colors.scss?inline';
+import colorsTokens from '@/assets/tokens/colors.json';
 
-// eslint-disable-next-line no-useless-escape
-const backgroundValueRegex = /unnnicColorBackgroundSolo:\s*(.*)\;/;
-const match = backgroundValueRegex.exec(colors);
-
-export const DEFAULT_BACKGROUND = match ? match[1] : '#E8F4F4';
-export const DEFAULT_HIGHLIGHT = 'rgba(255,255,255,0.375)';
+const { gray } = colorsTokens.color;
+export const DEFAULT_BACKGROUND = gray[3].value;
+export const DEFAULT_HIGHLIGHT = gray[1].value;
 export const SkeletonStyle = {
-  backgroundColor: DEFAULT_BACKGROUND,
-  backgroundImage: `linear-gradient(
-    90deg,
-    ${DEFAULT_BACKGROUND},
-    ${DEFAULT_HIGHLIGHT},
-    ${DEFAULT_BACKGROUND}
-  )`,
+  '--skeleton-bg': DEFAULT_BACKGROUND,
+  '--skeleton-highlight': DEFAULT_HIGHLIGHT,
+  '--skeleton-duration': '2s',
 };
 export default {
   name: 'UnnnicSkeletonTheme',
@@ -42,7 +35,7 @@ export default {
     },
     duration: {
       type: Number,
-      default: 1.5,
+      default: 2,
     },
     tag: {
       type: String,
@@ -54,7 +47,7 @@ export default {
     },
   },
   setup() {
-    const themeStyle = ref(SkeletonStyle);
+    const themeStyle = ref({ ...SkeletonStyle });
     const theme = ref({});
 
     provide('_themeStyle', themeStyle);
@@ -67,19 +60,9 @@ export default {
   },
   mounted() {
     const { color, highlight, duration } = this;
-    this.themeStyle.backgroundColor = color;
-    this.themeStyle.backgroundImage = `linear-gradient(
-      90deg,
-      ${color},
-      ${highlight},
-      ${color}
-    )`;
-    if (duration) {
-      this.themeStyle.animation = `SkeletonLoading ${duration}s ease-in-out infinite`;
-    } else {
-      this.themeStyle.animation = '';
-      this.themeStyle.backgroundImage = '';
-    }
+    this.themeStyle['--skeleton-bg'] = color;
+    this.themeStyle['--skeleton-highlight'] = highlight;
+    this.themeStyle['--skeleton-duration'] = duration ? `${duration}s` : '0s';
   },
 };
 </script>

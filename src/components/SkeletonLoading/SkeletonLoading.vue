@@ -38,7 +38,7 @@ export default {
     },
     duration: {
       type: Number,
-      default: 1.5,
+      default: 2,
     },
     tag: {
       type: String,
@@ -59,7 +59,7 @@ export default {
     },
   },
   setup() {
-    const themeStyle = inject('_themeStyle', ref(SkeletonStyle));
+    const themeStyle = inject('_themeStyle', ref({ ...SkeletonStyle }));
     const theme = inject('_skeletonTheme', ref({}));
 
     return {
@@ -69,26 +69,27 @@ export default {
   },
   computed: {
     classes() {
-      return [`${this.prefix}-skeleton`];
+      return [
+        `${this.prefix}-skeleton`,
+        this.circle ? `${this.prefix}-skeleton--circle` : '',
+      ];
     },
     styles() {
-      const styles = { ...this.themeStyle };
-      if (this.duration) {
-        styles.animation = `SkeletonLoading ${this.duration}s ease-in-out infinite`;
-      } else {
-        styles.backgroundImage = '';
-      }
+      const styles = {};
+
+      styles['--skeleton-bg'] = this.themeStyle['--skeleton-bg'];
+      styles['--skeleton-highlight'] = this.themeStyle['--skeleton-highlight'];
+      styles['--skeleton-duration'] = this.duration
+        ? `${this.duration}s`
+        : '0s';
+
       if (this.width) styles.width = this.width;
       if (this.height) styles.height = this.height;
-      if (this.circle) styles.borderRadius = '50%';
+
       return styles;
     },
     elements() {
-      const elements = [];
-      for (let i = 0; i < this.count; i += 1) {
-        elements.push({});
-      }
-      return elements;
+      return Array.from({ length: this.count }, () => ({}));
     },
     showLoading() {
       return typeof this.loading !== 'undefined'
@@ -114,21 +115,42 @@ export default {
 
 <style lang="scss">
 @use '@/assets/scss/unnnic' as *;
+
+@keyframes skeleton-pulse {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 .unnnic-skeleton {
-  background-size: 500px 100%;
-  background-repeat: no-repeat;
-  border-radius: $unnnic-border-radius-sm;
   display: inline-block;
+  position: relative;
   line-height: 1;
   width: 100%;
   height: inherit;
-}
-@keyframes SkeletonLoading {
-  0% {
-    background-position: -500px 0;
+  background-color: var(--skeleton-bg);
+  border-radius: $unnnic-radius-1;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: var(--skeleton-highlight);
+    animation: skeleton-pulse var(--skeleton-duration, 2s) ease-in-out 0.5s
+      infinite;
   }
-  100% {
-    background-position: calc(500px + 100%) 0;
+
+  &--circle {
+    border-radius: 50%;
   }
 }
 </style>
