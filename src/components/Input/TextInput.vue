@@ -33,7 +33,7 @@
       <UnnnicIcon
         v-if="showClear"
         class="icon-clear"
-        :scheme="iconScheme"
+        scheme="gray-7"
         icon="close"
         size="ant"
         clickable
