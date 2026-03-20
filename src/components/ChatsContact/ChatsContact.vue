@@ -19,15 +19,18 @@
       }
     "
   >
-    <div
+    <UserAvatar
       v-if="discussionGoal"
-      class="chats-contact__discussion-icon"
+      scheme="purple-200"
     >
-      <UnnnicIcon
-        icon="forum"
-        scheme="weni-50"
-      />
-    </div>
+      <template #content>
+        <UnnnicIcon
+          icon="communication"
+          scheme="gray-900"
+        />
+      </template>
+    </UserAvatar>
+    
     <UserAvatar
       v-else
       :username="title"
