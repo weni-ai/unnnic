@@ -530,22 +530,22 @@
         "value": "{color.gray.7}"
       },
       "accent-plain": {
-        "value": "{color.teal.3}"
+        "value": "{color.teal.5}"
       },
       "accent-strong": {
         "value": "{color.teal.8}"
       },
       "info": {
-        "value": "{color.blue.3}"
+        "value": "{color.blue.5}"
       },
       "success": {
-        "value": "{color.green.3}"
+        "value": "{color.green.5}"
       },
       "warning": {
-        "value": "{color.yellow.3}"
+        "value": "{color.yellow.5}"
       },
       "critical": {
-        "value": "{color.red.3}"
+        "value": "{color.red.6}"
       }
     }
   }
