@@ -19,25 +19,25 @@
       }
     "
   >
-    <UserAvatar
-      v-if="discussionGoal"
-      scheme="purple-200"
-    >
-      <template #content>
-        <UnnnicIcon
-          icon="communication"
-          scheme="gray-900"
-        />
-      </template>
-    </UserAvatar>
-    
-    <UserAvatar
-      v-else
-      :username="title"
-      :photoUrl="userPhoto"
-      :active="isHovered || selected"
-    />
-
+   <slot name="avatar">
+      <UserAvatar
+        v-if="discussionGoal"
+        scheme="purple-200"
+      >
+        <template #content>
+          <UnnnicIcon
+            icon="communication"
+            scheme="gray-900"
+          />
+        </template>
+      </UserAvatar>
+      <UserAvatar
+        v-else
+        :username="title"
+        :photoUrl="userPhoto"
+        :active="isHovered || selected"
+      />
+    </slot>
     <div class="chats-contact__infos">
       <section class="chats-contact__infos__title-container">
         <h1
