@@ -142,7 +142,7 @@ const onEmojiSelect = (emoji: Emoji) => {
 
   :deep(.emoji-mart) {
     border-radius: 16px;
-    font-family: Lato, sans-serif; // $unnnic-font-family
+    font-family: Inter, sans-serif; // $unnnic-font-family
     border: 1px solid rgb(244, 246, 248);
     box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
     cursor: default;
