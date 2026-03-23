@@ -2,7 +2,7 @@
   <header
     :class="`page-header 
       ${hasBackButton ? 'page-header--has-back-button' : ''} 
-      ${$slots.tabs ? 'page-header--has-tabs' : ''}
+      ${$slots.tabs || hideDivider ? 'page-header--no-diviver' : ''}
     `"
   >
     <UnnnicButton
@@ -14,26 +14,28 @@
       @click="handleBackClick"
     />
 
-    <section class="page-header__infos">
-      <section class="page-header__main-infos">
-        <h1
-          class="page-header__title"
-          data-testid="page-title"
+    <slot name="infos">
+      <section class="page-header__infos">
+        <section class="page-header__main-infos">
+          <h1
+            class="page-header__title"
+            data-testid="page-title"
+          >
+            {{ title }}
+          </h1>
+
+          <slot name="tag" />
+        </section>
+
+        <p
+          v-if="description"
+          class="page-header__description"
+          data-testid="page-description"
         >
-          {{ title }}
-        </h1>
-
-        <slot name="tag" />
+          {{ description }}
+        </p>
       </section>
-
-      <p
-        v-if="description"
-        class="page-header__description"
-        data-testid="page-description"
-      >
-        {{ description }}
-      </p>
-    </section>
+    </slot>
 
     <section
       v-if="$slots.actions"
@@ -61,6 +63,7 @@ import type { PageHeaderProps, PageHeaderEmits } from './types';
 withDefaults(defineProps<PageHeaderProps>(), {
   description: '',
   hasBackButton: false,
+  hideDivider: false,
 });
 
 const emit = defineEmits<PageHeaderEmits>();
@@ -96,7 +99,7 @@ const handleBackClick = (): void => {
     grid-template-columns: auto 1fr minmax(250px, 20%);
   }
 
-  &--has-tabs {
+  &--no-diviver {
     border-bottom: none;
   }
 
