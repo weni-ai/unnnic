@@ -198,8 +198,8 @@ export default {
 
 .unnnic-modal-dialog__container {
   &__left-sidebar {
-    background-color: $unnnic-color-neutral-black;
-    color: $unnnic-color-neutral-white;
+    background-color: $unnnic-color-gray-12;
+    color: $unnnic-color-fg-inverted;
 
     grid-area: left-sidebar;
     grid-row: span 3;
@@ -222,7 +222,7 @@ export default {
 
   &__content {
     padding: $unnnic-spacing-md;
-    color: $unnnic-color-neutral-cloudy;
+    color: $unnnic-color-fg-base;
     flex-grow: 1;
     overflow-y: auto;
     font-family: $unnnic-font-family-secondary;
@@ -232,12 +232,12 @@ export default {
     }
 
     &::-webkit-scrollbar-thumb {
-      background: $unnnic-color-neutral-cleanest;
+      background: $unnnic-color-gray-7;
       border-radius: $unnnic-border-radius-pill;
     }
 
     &::-webkit-scrollbar-track {
-      background: $unnnic-color-neutral-soft;
+      background: $unnnic-color-bg-muted;
       border-radius: $unnnic-border-radius-pill;
     }
   }

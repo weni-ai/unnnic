@@ -14,7 +14,7 @@
     >
       <UnnnicIcon
         :icon="icon"
-        scheme="neutral-cloudy"
+        scheme="fg-base"
         size="sm"
       />
     </div>
@@ -70,17 +70,17 @@ export default {
 
   border-radius: $unnnic-border-radius-sm;
   padding: $unnnic-squish-xs;
-  background-color: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-light);
-  border: 1px solid $unnnic-color-brand-weni;
+  background-color: rgba($unnnic-color-teal-8, $unnnic-opacity-level-light);
+  border: 1px solid $unnnic-color-teal-8;
   transition: 0.2s;
 
   &--disabled {
-    background-color: $unnnic-color-background-carpet;
-    border: 1px solid $unnnic-color-neutral-soft;
+    background-color: $unnnic-color-bg-base-soft;
+    border: 1px solid $unnnic-color-border-base;
 
     &:hover {
-      background-color: $unnnic-color-background-snow;
-      border: 1px solid $unnnic-color-neutral-cleanest;
+      background-color: $unnnic-color-bg-base;
+      border: 1px solid $unnnic-color-border-emphasized;
     }
   }
 
@@ -91,7 +91,7 @@ export default {
           font-weight: $unnnic-font-weight-bold;
         }
         &__description {
-          color: $unnnic-color-neutral-dark;
+          color: $unnnic-color-fg-base;
         }
       }
     }
@@ -110,7 +110,7 @@ export default {
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-gt;
       font-weight: $unnnic-font-weight-regular;
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     }
 
@@ -118,7 +118,7 @@ export default {
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-md;
       font-weight: $unnnic-font-weight-regular;
-      color: $unnnic-color-neutral-cloudy;
+      color: $unnnic-color-fg-base;
       line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
     }
   }
@@ -132,11 +132,11 @@ export default {
     border-radius: $unnnic-border-radius-sm;
     padding: 0.125 * $unnnic-font-size $unnnic-inline-nano;
     margin-right: $unnnic-inline-xs;
-    background-color: $unnnic-color-neutral-lightest;
+    background-color: $unnnic-color-bg-base-soft;
 
     &--disabled {
       background-color: rgba(
-        $unnnic-color-brand-weni-dark,
+        $unnnic-color-teal-12,
         $unnnic-opacity-level-extra-light
       );
     }

@@ -226,8 +226,8 @@ function openPopover() {
     width: 100%;
     & input {
       cursor: pointer;
-      border: 1px solid $unnnic-color-neutral-soft;
-      color: $unnnic-color-neutral-cloudy;
+      border: 1px solid $unnnic-color-border-base;
+      color: $unnnic-color-fg-base;
     }
   }
 }

@@ -1,0 +1,17 @@
+@use './colors' as *;
+
+.color-fg-base {
+  color: $unnnic-color-fg-base;
+}
+
+.color-fg-emphasized {
+  color: $unnnic-color-fg-emphasized;
+}
+
+.color-fg-muted {
+  color: $unnnic-color-fg-muted;
+}
+
+.color-fg-inverted {
+  color: $unnnic-color-fg-inverted;
+}

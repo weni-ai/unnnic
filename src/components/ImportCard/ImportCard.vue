@@ -62,7 +62,7 @@
         v-if="canDelete"
         class="unnnic-import-card__buttons__delete"
         size="sm"
-        scheme="neutral-cloudy"
+        scheme="fg-base"
         icon="delete"
         clickable
         @click="emitDeletion"
@@ -162,11 +162,11 @@ export default {
   column-gap: $unnnic-spacing-xs;
   align-items: center;
 
-  border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+  border: 1px solid $unnnic-color-border-base;
   border-radius: $unnnic-border-radius-sm;
 
-  background-color: $unnnic-color-neutral-white;
-  padding: $unnnic-spacing-xs - $unnnic-border-width-thinner;
+  background-color: $unnnic-color-bg-base;
+  padding: $unnnic-spacing-xs - 1px;
 
   &__file-icon {
     user-select: none;
@@ -183,7 +183,7 @@ export default {
     font-family: $unnnic-font-family-secondary;
 
     &__title {
-      color: $unnnic-color-neutral-dark;
+      color: $unnnic-color-fg-base;
       font-size: $unnnic-font-size-body-gt;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
       font-weight: $unnnic-font-weight-regular;
@@ -194,7 +194,7 @@ export default {
     }
 
     &__subtitle {
-      color: $unnnic-color-neutral-cloudy;
+      color: $unnnic-color-fg-base;
       font-size: $unnnic-font-size-body-md;
       line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
       font-weight: $unnnic-font-weight-regular;
@@ -227,14 +227,14 @@ export default {
 
     &__import {
       background-color: rgba(
-        $unnnic-color-brand-weni,
+        $unnnic-color-teal-8,
         $unnnic-opacity-level-light
       );
 
       :deep(.unnnic-icon) {
         svg {
           & .primary {
-            fill: $unnnic-color-brand-weni;
+            fill: $unnnic-color-teal-8;
           }
         }
       }

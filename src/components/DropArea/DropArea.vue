@@ -319,15 +319,15 @@ function addFiles(files) {
   padding: $unnnic-spacing-inset-lg;
 
   // Dashed border with increased dashes spacing and color neutral clean
-  background-image: borderDashed($unnnic-color-neutral-clean);
+  background-image: borderDashed($unnnic-color-fg-base);
 
   &__has-error {
-    background-image: borderDashed($unnnic-color-feedback-red);
+    background-image: borderDashed($unnnic-color-bg-red-strong);
   }
 
   &__is-dragover {
-    background-color: $unnnic-color-background-sky;
-    background-image: borderDashed($unnnic-color-brand-weni);
+    background-color: $unnnic-color-bg-base-soft;
+    background-image: borderDashed($unnnic-color-teal-8);
   }
 
   &__icon {
@@ -345,28 +345,28 @@ function addFiles(files) {
     font-family: $unnnic-font-family-secondary;
 
     &__title {
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
       font-weight: $unnnic-font-weight-regular;
       font-size: $unnnic-font-size-body-gt;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
 
       &__search {
-        color: $unnnic-color-brand-weni;
+        color: $unnnic-color-teal-8;
       }
 
       &__error {
-        color: $unnnic-color-feedback-red;
+        color: $unnnic-color-fg-critical;
       }
     }
 
     &__subtitle {
-      color: $unnnic-color-neutral-cloudy;
+      color: $unnnic-color-fg-base;
       font-weight: $unnnic-font-weight-regular;
       font-size: $unnnic-font-size-body-md;
       line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
 
       &__error {
-        color: $unnnic-color-feedback-red;
+        color: $unnnic-color-fg-critical;
       }
     }
   }

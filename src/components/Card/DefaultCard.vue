@@ -42,10 +42,10 @@ export default {
 
 .unnnic-card-default {
   display: flex;
-  background-color: $unnnic-color-background-snow;
+  background-color: $unnnic-color-bg-base;
   border-radius: $unnnic-border-radius-md;
   padding: $unnnic-inset-md;
-  border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+  border: 1px solid $unnnic-color-border-base;
 
   &__clickable {
     cursor: pointer;
@@ -66,7 +66,7 @@ export default {
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-lg;
     font-weight: $unnnic-font-weight-bold;
-    color: $unnnic-color-neutral-darkest;
+    color: $unnnic-color-fg-emphasized;
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
     padding-bottom: $unnnic-spacing-stack-nano;
   }
@@ -76,7 +76,7 @@ export default {
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-gt;
     font-weight: $unnnic-font-weight-regular;
-    color: $unnnic-color-neutral-cloudy;
+    color: $unnnic-color-fg-base;
     line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     white-space: nowrap;
     overflow: hidden;

@@ -25,9 +25,9 @@ const props = withDefaults(
 
 const iconsMapper = {
   default: { icon: '', scheme: '' as SchemeColor },
-  success: { icon: 'check_circle', scheme: 'aux-green-500' as SchemeColor },
-  warning: { icon: 'warning', scheme: 'aux-red-500' as SchemeColor },
-  attention: { icon: 'error', scheme: 'aux-yellow-500' as SchemeColor },
+  success: { icon: 'check_circle', scheme: 'fg-success' as SchemeColor },
+  warning: { icon: 'warning', scheme: 'fg-critical' as SchemeColor },
+  attention: { icon: 'error', scheme: 'fg-warning' as SchemeColor },
 };
 </script>
 

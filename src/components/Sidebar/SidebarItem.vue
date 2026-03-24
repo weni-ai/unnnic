@@ -9,7 +9,7 @@
       class="unnnic-sidebar-item__icon"
       :icon="item.icon"
       size="ant"
-      :scheme="active.item ? 'weni-600' : 'neutral-cloudy'"
+      :scheme="active.item ? 'fg-accent' : 'fg-base'"
       data-testid="item-icon"
     />
     <p
@@ -23,7 +23,7 @@
       class="unnnic-sidebar-item__arrow"
       :icon="showChildrenList ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
       size="ant"
-      scheme="neutral-cloudy"
+      scheme="fg-base"
       data-testid="arrow-icon"
     />
   </section>
@@ -47,7 +47,7 @@
           class="unnnic-sidebar-item-child__icon"
           :icon="child.icon"
           size="ant"
-          :scheme="isActive(childIndex) ? 'weni-600' : 'neutral-cloudy'"
+          :scheme="isActive(childIndex) ? 'fg-accent' : 'fg-base'"
         />
         <p
           :class="{
@@ -156,12 +156,12 @@ const emit = defineEmits(['navigate']);
 
 *:is(.active) {
   > :is(.unnnic-sidebar-item__label, .unnnic-sidebar-item-child__label) {
-    color: $unnnic-color-neutral-dark;
+    color: $unnnic-color-fg-base;
     font-weight: $unnnic-font-weight-bold;
   }
   border-radius: $unnnic-border-radius-sm;
-  background-color: $unnnic-color-neutral-light;
-  color: $unnnic-color-neutral-dark;
+  background-color: $unnnic-color-bg-base-soft;
+  color: $unnnic-color-fg-base;
   font-weight: $unnnic-font-weight-bold;
 }
 
@@ -183,7 +183,7 @@ const emit = defineEmits(['navigate']);
     font-weight: $unnnic-font-weight-regular;
     line-height: $unnnic-line-height-large * 1.375;
 
-    color: $unnnic-color-neutral-cloudy;
+    color: $unnnic-color-fg-base;
   }
 
   &__arrow {
@@ -217,7 +217,7 @@ const emit = defineEmits(['navigate']);
       font-weight: $unnnic-font-weight-regular;
       line-height: $unnnic-line-height-large * 1.375;
 
-      color: $unnnic-color-neutral-cloudy;
+      color: $unnnic-color-fg-base;
     }
   }
 }

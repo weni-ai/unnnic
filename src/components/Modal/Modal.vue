@@ -21,7 +21,7 @@
             >
               <UnnnicIcon
                 icon="close-1"
-                scheme="neutral-dark"
+                scheme="fg-base"
                 size="sm"
                 clickable
                 @click="onCloseClick"
@@ -237,13 +237,13 @@ export default {
 
     &-background {
       width: 31.125 * $unnnic-font-size;
-      box-shadow: $unnnic-shadow-level-separated;
+      box-shadow: $unnnic-shadow-1;
       transition: all 0.3s ease;
       border-radius: $unnnic-border-radius-sm;
       overflow: hidden;
 
       &-body {
-        background-color: $unnnic-color-background-carpet;
+        background-color: $unnnic-color-bg-base-soft;
         padding: 0 $unnnic-inline-md;
         text-align: center;
         padding-top: $unnnic-spacing-sm;
@@ -251,7 +251,7 @@ export default {
         &-title {
           text-align: center;
           font-family: $unnnic-font-family-secondary;
-          color: $unnnic-color-neutral-darkest;
+          color: $unnnic-color-fg-emphasized;
           font-weight: $unnnic-font-weight-black;
           font-size: $unnnic-font-size-title-sm;
           line-height: (
@@ -287,13 +287,13 @@ export default {
           text-align: center;
           overflow: auto;
           font-family: $unnnic-font-family-secondary;
-          color: $unnnic-color-neutral-cloudy;
+          color: $unnnic-color-fg-base;
           font-weight: $unnnic-font-weight-regular;
           font-size: $unnnic-font-size-body-lg;
           line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
 
           &-container {
-            background-color: $unnnic-color-background-carpet;
+            background-color: $unnnic-color-bg-base-soft;
             padding: 0 $unnnic-inline-md;
             box-sizing: border-box;
             display: flex;
@@ -306,13 +306,13 @@ export default {
       &-report {
         width: 100%;
         min-height: 4.25 * $unnnic-font-size;
-        background-color: $unnnic-color-neutral-soft;
+        background-color: $unnnic-color-bg-muted;
         display: flex;
         justify-content: center;
         align-items: center;
 
         font-family: $unnnic-font-family-secondary;
-        color: $unnnic-color-neutral-dark;
+        color: $unnnic-color-fg-base;
         font-weight: $unnnic-font-weight-regular;
         font-size: $unnnic-font-size-body-md;
         line-height: ($unnnic-font-size-body-md + $unnnic-line-height-medium);
@@ -323,7 +323,7 @@ export default {
         width: 100%;
         padding: $unnnic-inset-md;
         box-sizing: border-box;
-        background-color: $unnnic-color-background-carpet;
+        background-color: $unnnic-color-bg-base-soft;
         border-bottom-left-radius: $unnnic-border-radius-sm;
         border-bottom-right-radius: $unnnic-border-radius-sm;
 
@@ -357,7 +357,7 @@ export default {
 
           &-title {
             font-weight: $unnnic-font-weight-bold;
-            color: $unnnic-color-neutral-dark;
+            color: $unnnic-color-fg-base;
           }
 
           &-description {

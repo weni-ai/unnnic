@@ -109,18 +109,18 @@ const hasText = computed(() => {
 
 const iconScheme = computed((): SchemeColor => {
   if (buttonDisabled.value) {
-    return 'neutral-clean';
+    return 'fg-base';
   }
 
   const typeToSchemeMap: Record<ButtonType, SchemeColor> = {
-    primary: 'neutral-white',
-    secondary: 'neutral-dark',
-    tertiary: 'neutral-dark',
-    warning: 'neutral-white',
-    attention: 'neutral-white',
+    primary: 'fg-inverted',
+    secondary: 'fg-emphasized',
+    tertiary: 'fg-emphasized',
+    warning: 'fg-inverted',
+    attention: 'fg-inverted',
   };
 
-  return typeToSchemeMap[buttonType.value] || 'neutral-white';
+  return typeToSchemeMap[buttonType.value] || 'fg-inverted';
 });
 
 const isSizePropValid = computed(() => {
@@ -248,7 +248,7 @@ watch(
 
   &--secondary {
     background-color: $unnnic-color-bg-base;
-    box-shadow: inset 0 0 0 $unnnic-border-width-thinner
+    box-shadow: inset 0 0 0 1px
       $unnnic-color-border-base;
 
     &:hover:enabled {
@@ -317,7 +317,7 @@ watch(
     right: 0;
 
     border-radius: $unnnic-border-radius-pill;
-    box-shadow: $unnnic-shadow-level-near;
+    box-shadow: $unnnic-shadow-1;
   }
 
   &--size-large {

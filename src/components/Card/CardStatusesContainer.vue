@@ -48,7 +48,7 @@
           class="info"
           icon="information-circle-4"
           size="sm"
-          scheme="neutral-soft"
+          scheme="fg-muted"
         ></UnnnicIcon>
       </UnnnicToolTip>
     </div>
@@ -144,17 +144,17 @@ $calculated-width: 6 * $unnnic-font-size;
 
 .unnnic-card-container {
   padding: $unnnic-inset-sm;
-  border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+  border: 1px solid $unnnic-color-border-base;
   border-radius: $unnnic-border-radius-md;
 
   .separator {
-    height: $unnnic-border-width-thinner;
-    background-color: $unnnic-color-neutral-lightest;
+    height: 1px;
+    background-color: $unnnic-color-bg-base-soft;
     margin: $unnnic-spacing-stack-xs 0;
   }
 
   &--highlighted {
-    color: $unnnic-color-brand-weni;
+    color: $unnnic-color-teal-8;
     font-weight: $unnnic-font-weight-bold;
   }
 
@@ -175,7 +175,7 @@ $calculated-width: 6 * $unnnic-font-size;
         font-weight: $unnnic-font-weight-bold;
         font-size: $unnnic-font-size-body-lg;
         line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-        color: $unnnic-color-neutral-darkest;
+        color: $unnnic-color-fg-emphasized;
 
         white-space: nowrap;
         overflow: hidden;
@@ -188,7 +188,7 @@ $calculated-width: 6 * $unnnic-font-size;
         font-weight: $unnnic-font-weight-regular;
         font-size: $unnnic-font-size-body-md;
         line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
-        color: $unnnic-color-neutral-cloudy;
+        color: $unnnic-color-fg-base;
       }
     }
   }
@@ -198,7 +198,7 @@ $calculated-width: 6 * $unnnic-font-size;
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-lg;
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-    color: $unnnic-color-neutral-cloudy;
+    color: $unnnic-color-fg-base;
     margin: $unnnic-spacing-stack-sm 0;
   }
 
@@ -210,7 +210,7 @@ $calculated-width: 6 * $unnnic-font-size;
       font-weight: $unnnic-font-weight-bold;
       font-size: $unnnic-font-size-body-md;
       line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
-      color: $unnnic-color-neutral-cloudy;
+      color: $unnnic-color-fg-base;
       margin-right: $unnnic-spacing-inline-xs;
     }
   }
@@ -232,7 +232,7 @@ $calculated-width: 6 * $unnnic-font-size;
         font-weight: $unnnic-font-weight-regular;
         font-size: $unnnic-font-size-body-gt;
         line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-        color: $unnnic-color-neutral-dark;
+        color: $unnnic-color-fg-base;
       }
 
       .content {
@@ -246,7 +246,7 @@ $calculated-width: 6 * $unnnic-font-size;
           font-weight: $unnnic-font-weight-black;
           font-size: $unnnic-font-size-body-gt;
           line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-          color: $unnnic-color-neutral-darkest;
+          color: $unnnic-color-fg-emphasized;
         }
       }
     }

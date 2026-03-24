@@ -87,10 +87,10 @@ export default {
 .unnnic-card-dash {
   display: flex;
   flex-direction: column;
-  background-color: $unnnic-color-background-snow;
+  background-color: $unnnic-color-bg-base;
   border-radius: $unnnic-border-radius-sm;
   padding: $unnnic-inset-sm;
-  box-shadow: $unnnic-shadow-level-far;
+  box-shadow: $unnnic-shadow-1;
 
   .header {
     display: flex;
@@ -102,7 +102,7 @@ export default {
       font-size: $unnnic-font-size-body-lg;
       font-weight: $unnnic-font-weight-regular;
       line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-      color: $unnnic-color-neutral-dark;
+      color: $unnnic-color-fg-base;
       margin-left: $unnnic-inline-xs;
     }
   }
@@ -117,7 +117,7 @@ export default {
       font-size: $unnnic-font-size-title-md;
       font-weight: $unnnic-font-weight-bold;
       line-height: $unnnic-font-size-title-md + $unnnic-line-height-md;
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
       margin-right: $unnnic-inline-nano;
     }
 

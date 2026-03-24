@@ -66,7 +66,7 @@
               class="unnnic-select__infinite-loading"
             >
               <UnnnicIconLoading
-                scheme="neutral-dark"
+                scheme="fg-base"
                 size="sm"
               />
             </div>

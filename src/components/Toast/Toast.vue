@@ -37,7 +37,7 @@
 
           <UnnnicIcon
             icon="close"
-            scheme="neutral-dark"
+            scheme="fg-base"
             size="ant"
             clickable
             class="unnnic-toast__close"

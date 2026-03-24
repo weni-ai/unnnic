@@ -41,7 +41,7 @@
             class="menu-icon"
             icon="navigation-menu-vertical-1"
             size="sm"
-            :scheme="isOptionsOpen ? 'neutral-cloudy' : 'neutral-clean'"
+            scheme="fg-base"
           ></UnnnicIcon>
         </template>
 
@@ -88,20 +88,20 @@ export default {
   justify-content: space-between;
 
   outline-style: solid;
-  outline-color: $unnnic-color-neutral-cleanest;
-  outline-width: $unnnic-border-width-thinner;
-  outline-offset: -$unnnic-border-width-thinner;
+  outline-color: $unnnic-color-fg-muted;
+  outline-width: 1px;
+  outline-offset: -1px;
 
-  background-color: $unnnic-color-background-white;
+  background-color: $unnnic-color-bg-base;
   padding: $unnnic-spacing-md;
   border-radius: $unnnic-border-radius-md;
 
   &:hover {
-    box-shadow: $unnnic-shadow-level-near;
+    box-shadow: $unnnic-shadow-1;
   }
 
   .name {
-    color: $unnnic-color-neutral-black;
+    color: $unnnic-color-gray-12;
 
     font-family: $unnnic-font-family-secondary;
     font-weight: $unnnic-font-weight-bold;
@@ -113,7 +113,7 @@ export default {
   }
 
   .description {
-    color: $unnnic-color-neutral-dark;
+    color: $unnnic-color-fg-base;
 
     font-family: $unnnic-font-family-secondary;
     font-weight: $unnnic-font-weight-regular;
@@ -129,14 +129,14 @@ export default {
 
   &--old-version {
     outline: none;
-    background-color: $unnnic-color-background-sky;
+    background-color: $unnnic-color-bg-base-soft;
     column-gap: $unnnic-spacing-xs;
 
     &:hover {
       box-shadow: none;
 
       outline-style: solid;
-      outline-color: $unnnic-color-neutral-soft;
+      outline-color: $unnnic-color-bg-muted;
       outline-width: $unnnic-border-width-thin;
       outline-offset: -$unnnic-border-width-thin;
     }
@@ -160,10 +160,10 @@ export default {
     border-radius: $unnnic-border-radius-pill;
 
     $plan-colors:
-      'trial' $unnnic-color-aux-blue-500,
-      'scale' $unnnic-color-aux-orange-500,
-      'advanced' $unnnic-color-aux-purple-500,
-      'enterprise' $unnnic-color-aux-green-500;
+      'trial' $unnnic-color-blue-10,
+      'scale' $unnnic-color-orange-10,
+      'advanced' $unnnic-color-purple-10,
+      'enterprise' $unnnic-color-green-10;
 
     @each $name, $color in $plan-colors {
       &.#{$name} {

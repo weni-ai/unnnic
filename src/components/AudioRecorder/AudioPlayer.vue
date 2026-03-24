@@ -9,7 +9,7 @@
       >
         <UnnnicIcon
           :icon="playbackIcon"
-          scheme="neutral-darkest"
+          scheme="fg-emphasized"
         />
       </span>
 
@@ -305,7 +305,7 @@ export default {
       place-self: center;
 
       border-radius: $unnnic-border-radius-sm;
-      background: $unnnic-color-neutral-darkest;
+      background: $unnnic-color-fg-emphasized;
     }
 
     &::-webkit-slider-runnable-track {
@@ -313,7 +313,7 @@ export default {
       height: 100%;
 
       border-radius: $unnnic-border-radius-sm;
-      background: $unnnic-color-neutral-cleanest;
+      background: $unnnic-color-gray-7;
     }
     &::-webkit-slider-thumb {
       opacity: 0;
@@ -326,7 +326,7 @@ export default {
       height: 100%;
 
       border-radius: $unnnic-border-radius-sm;
-      background: $unnnic-color-neutral-cleanest;
+      background: $unnnic-color-gray-7;
     }
     &::-moz-range-thumb {
       opacity: 0;
@@ -345,11 +345,11 @@ export default {
       .bar {
         width: 3px;
 
-        background: $unnnic-color-neutral-cleanest;
+        background: $unnnic-color-gray-7;
         border-radius: 1.5px;
 
         &.active {
-          background: $unnnic-color-neutral-darkest;
+          background: $unnnic-color-fg-emphasized;
         }
       }
     }

@@ -107,7 +107,7 @@ const calculatedTransform = computed(() => {
       bottom: 0px;
       width: 100%;
       height: 1px;
-      background-color: $unnnic-color-neutral-soft;
+      background-color: $unnnic-color-bg-muted;
       z-index: -1;
     }
 
@@ -117,7 +117,7 @@ const calculatedTransform = computed(() => {
 
     &-description {
       margin: 0;
-      color: $unnnic-color-neutral-dark;
+      color: $unnnic-color-fg-base;
       text-align: center;
 
       font-family: $unnnic-font-family-secondary;
@@ -130,7 +130,7 @@ const calculatedTransform = computed(() => {
       display: flex;
       &-title {
         margin: 0;
-        color: $unnnic-color-neutral-dark;
+        color: $unnnic-color-fg-base;
 
         font-family: $unnnic-font-family-secondary;
         font-size: $unnnic-font-size-body-lg;
@@ -143,7 +143,7 @@ const calculatedTransform = computed(() => {
         display: flex;
         align-items: end;
         margin: 0;
-        color: $unnnic-color-neutral-cloudy;
+        color: $unnnic-color-fg-base;
 
         font-family: $unnnic-font-family-secondary;
         font-size: $unnnic-font-size-body-md;
@@ -190,7 +190,7 @@ const calculatedTransform = computed(() => {
     bottom: -1px;
     width: 100%;
     height: 2px;
-    background-color: $unnnic-color-neutral-soft;
+    background-color: $unnnic-color-bg-muted;
     z-index: -1;
   }
 

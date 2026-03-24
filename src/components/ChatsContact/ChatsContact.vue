@@ -66,7 +66,7 @@
           <section class="chats-contact__infos__media">
             <UnnnicIcon
               :icon="lastMessageMedia.mediaIcon"
-              scheme="neutral-cloudy"
+              scheme="fg-base"
               size="sm"
             />
             <p
@@ -134,7 +134,7 @@
     />
     <TransitionRipple
       ref="transitionRipple"
-      color="neutral-cleanest"
+      color="fg-muted"
     />
   </div>
 </template>
@@ -230,7 +230,7 @@ export default {
     },
     schemePin: {
       type: String,
-      default: ' neutral-cloudy',
+      default: ' fg-base',
     },
   },
 
@@ -397,9 +397,9 @@ export default {
   align-items: center;
   gap: $unnnic-spacing-xs;
 
-  background-color: $unnnic-color-background-white;
+  background-color: $unnnic-color-bg-base;
 
-  border: 1px solid $unnnic-color-neutral-soft;
+  border: 1px solid $unnnic-color-border-base;
 
   font-family: $unnnic-font-family-secondary;
 
@@ -408,7 +408,7 @@ export default {
   cursor: pointer;
 
   &:active {
-    border: 1px solid $unnnic-color-neutral-cleanest;
+    border: 1px solid $unnnic-color-border-emphasized;
   }
 
   &:focus-visible {
@@ -422,30 +422,30 @@ export default {
   }
 
   &.selected {
-    background-color: $unnnic-color-neutral-light;
-    border: 1px solid $unnnic-color-neutral-soft;
+    background-color: $unnnic-color-bg-base-soft;
+    border: 1px solid $unnnic-color-border-base;
   }
 
   &.waiting {
-    background-color: $unnnic-color-neutral-lightest;
+    background-color: $unnnic-color-bg-base-soft;
 
     &:hover {
-      background-color: $unnnic-color-neutral-light;
+      background-color: $unnnic-color-bg-base-soft;
     }
 
     .chats-contact__infos__unread-messages {
-      background: $unnnic-color-background-white;
+      background: $unnnic-color-bg-base;
     }
   }
 
   &.unread-messages {
     .title {
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
       font-weight: $unnnic-font-weight-bold;
     }
 
     .additional-information {
-      color: $unnnic-color-neutral-cloudy;
+      color: $unnnic-color-fg-base;
       font-weight: $unnnic-font-weight-bold;
     }
   }
@@ -453,27 +453,27 @@ export default {
   &.disabled {
     .content {
       .title {
-        color: $unnnic-color-neutral-cleanest;
+        color: $unnnic-color-fg-muted;
         font-weight: $unnnic-font-weight-bold;
       }
 
       .additional-information {
-        color: $unnnic-color-neutral-lightest;
+        color: $unnnic-color-gray-1;
       }
     }
 
     .unread-messages {
-      color: $unnnic-color-neutral-cleanest;
+      color: $unnnic-color-fg-muted;
     }
   }
 
   &:hover,
   &.selected:hover {
-    background-color: $unnnic-color-neutral-lightest;
+    background-color: $unnnic-color-bg-base-soft;
 
     .chats-contact__infos {
       &__unread-messages {
-        background: $unnnic-color-background-white;
+        background: $unnnic-color-bg-base;
       }
     }
   }
@@ -487,7 +487,7 @@ export default {
     justify-content: center;
     border-radius: $unnnic-border-radius-sm;
 
-    background-color: $unnnic-color-aux-purple-500;
+    background-color: $unnnic-color-purple-10;
   }
 
   &__infos {
@@ -512,7 +512,7 @@ export default {
     &__project-tag {
       display: block;
       flex-shrink: 1;
-      border: 1px solid $unnnic-color-neutral-cleanest;
+      border: 1px solid $unnnic-color-border-emphasized;
 
       font: $unnnic-font-caption-1;
       color: $unnnic-color-fg-emphasized;
@@ -535,7 +535,7 @@ export default {
 
     &__title {
       font-weight: $unnnic-font-weight-bold;
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
     }
 
     &__additional-information {
@@ -585,7 +585,7 @@ export default {
     }
 
     &__message-time {
-      color: $unnnic-color-neutral-dark;
+      color: $unnnic-color-fg-base;
       font-family: $unnnic-font-family-secondary;
       font-size: 10px;
       line-height: $unnnic-font-size-body-lg;

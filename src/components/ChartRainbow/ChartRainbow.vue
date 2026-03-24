@@ -158,7 +158,7 @@ export default {
   }
 
   .background {
-    stroke: $unnnic-color-background-sky;
+    stroke: $unnnic-color-bg-base-soft;
   }
 
   .front {
@@ -176,20 +176,20 @@ export default {
       font-weight: $unnnic-font-weight-black;
 
       .number {
-        color: $unnnic-color-neutral-black;
+        color: $unnnic-color-gray-12;
         font-size: $unnnic-font-size-h3;
         line-height: $unnnic-font-size-h3 + $unnnic-line-height-md;
       }
 
       .symbol {
-        color: $unnnic-color-neutral-soft;
+        color: $unnnic-color-bg-muted;
         font-size: $unnnic-font-size-h4;
         line-height: $unnnic-font-size-h4 + $unnnic-line-height-md;
       }
     }
 
     .description {
-      color: $unnnic-color-neutral-cleanest;
+      color: $unnnic-color-fg-muted;
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-lg;
       line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;

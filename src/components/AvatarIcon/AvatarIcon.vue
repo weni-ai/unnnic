@@ -11,7 +11,7 @@
   >
     <UnnnicIcon
       :icon="icon"
-      :scheme="enabled ? scheme : 'neutral-cloudy'"
+      :scheme="enabled ? scheme : 'fg-base'"
       :size="iconSize"
       :filled="filled"
     />
@@ -47,7 +47,7 @@ export default {
 
     scheme: {
       type: String,
-      default: 'aux-blue',
+      default: 'fg-info',
     },
     filled: {
       type: Boolean,
@@ -76,7 +76,7 @@ export default {
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
-@each $name, $color in $scheme-colors {
+@each $name, $color in $unnnic-scheme-colors {
   .unnnic-avatar-icon {
     &.#{$name} {
       background-color: rgba($color, $unnnic-opacity-level-extra-light);
@@ -91,7 +91,7 @@ export default {
 }
 
 .unnnic-avatar-icon.disabled {
-  background-color: $unnnic-color-background-grass;
+  background-color: $unnnic-color-bg-base-soft;
 }
 
 .unnnic-avatar-icon {

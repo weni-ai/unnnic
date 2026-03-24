@@ -163,8 +163,8 @@ const getButtonIcon = (buttonType) => {
 .unnnic-template-preview {
   display: flex;
   flex-direction: column;
-  box-shadow: $unnnic-shadow-level-near;
-  background-color: $unnnic-color-background-white;
+  box-shadow: $unnnic-shadow-1;
+  background-color: $unnnic-color-bg-base;
   width: 368px;
   border-radius: $unnnic-border-radius-md;
 
@@ -186,7 +186,7 @@ const getButtonIcon = (buttonType) => {
         font-weight: $unnnic-font-weight-bold;
         font-size: $unnnic-font-size-body-gt;
         line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
-        color: $unnnic-color-neutral-dark;
+        color: $unnnic-color-fg-base;
 
         margin: $unnnic-space-0;
       }
@@ -205,7 +205,7 @@ const getButtonIcon = (buttonType) => {
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-gt;
     line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
-    color: $unnnic-color-neutral-cloudy;
+    color: $unnnic-color-fg-base;
 
     &--has-media {
       padding: $unnnic-space-0 $unnnic-space-2;
@@ -217,7 +217,7 @@ const getButtonIcon = (buttonType) => {
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-md;
     line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
-    color: $unnnic-color-neutral-clean;
+    color: $unnnic-color-fg-base;
 
     &--has-media {
       padding: $unnnic-space-0 $unnnic-space-3 $unnnic-space-2;
@@ -237,10 +237,10 @@ const getButtonIcon = (buttonType) => {
       justify-content: center;
       gap: $unnnic-space-2;
       padding: $unnnic-space-3;
-      border-top: 1px solid $unnnic-color-neutral-light;
+      border-top: 1px solid $unnnic-color-border-muted;
 
       &__text {
-        color: $unnnic-color-aux-blue-500;
+        color: $unnnic-color-fg-info;
         margin: $unnnic-space-0;
       }
     }

@@ -22,7 +22,7 @@
       <UnnnicIcon
         size="ant"
         :icon="localActive ? 'arrow-button-up-1' : 'arrow-button-down-1'"
-        :scheme="localActive ? 'neutral-dark' : 'neutral-cloudy'"
+        scheme="fg-base"
       />
     </div>
 
@@ -100,13 +100,13 @@ watch(
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-lg;
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-    color: $unnnic-color-neutral-cloudy;
+    color: $unnnic-color-fg-base;
 
     &:hover {
-      color: $unnnic-color-neutral-dark;
+      color: $unnnic-color-fg-base;
 
       :deep(svg .primary) {
-        fill: $unnnic-color-neutral-dark;
+        fill: $unnnic-color-fg-base;
       }
     }
   }
@@ -118,17 +118,16 @@ watch(
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-gt;
     line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-    color: $unnnic-color-neutral-cloudy;
+    color: $unnnic-color-fg-base;
   }
 
   &--border-bottom {
-    padding-bottom: $unnnic-spacing-ant - $unnnic-border-width-thinner;
-    border-bottom: $unnnic-border-width-thinner solid
-      $unnnic-color-neutral-cleanest;
+    padding-bottom: $unnnic-spacing-ant - 1px;
+    border-bottom: 1px solid $unnnic-color-border-emphasized;
   }
 
   &--active .unnnic-collapse__header {
-    color: $unnnic-color-neutral-dark;
+    color: $unnnic-color-fg-base;
   }
 
   &--unspaced-icon .unnnic-collapse__header {

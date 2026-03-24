@@ -7,7 +7,7 @@
     >
       <UnnnicIcon
         icon="keyboard-arrow-left-1"
-        scheme="neutral-cloudy"
+        scheme="fg-base"
       />
     </div>
 
@@ -24,7 +24,7 @@
             'u font secondary body-gt bold',
             item.value === modelValue
               ? 'color-brand-weni-soft'
-              : 'color-neutral-cloudy',
+              : 'color-fg-base',
           ]"
           data-testid="tab-title"
         >
@@ -33,7 +33,7 @@
 
         <div
           data-testid="tab-description"
-          class="u font secondary body-sm color-neutral-cloudy"
+          class="u font secondary body-sm color-fg-base"
         >
           {{ item.description }}
         </div>
@@ -47,7 +47,7 @@
           icon="close-1"
           size="xs"
           clickable
-          scheme="neutral-cloudy"
+          scheme="fg-base"
           data-testid="tab-close-icon"
           @click.stop="$emit('close-tab', item)"
         />
@@ -61,7 +61,7 @@
     >
       <UnnnicIcon
         icon="add-1"
-        scheme="neutral-cloudy"
+        scheme="fg-base"
         size="sm"
       />
     </div>
@@ -97,11 +97,11 @@ export default {
 .unnnic-tabs-expanded {
   position: relative;
   display: flex;
-  background-color: $unnnic-color-background-snow;
-  border-bottom: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+  background-color: $unnnic-color-bg-base;
+  border-bottom: 1px solid $unnnic-color-border-base;
 
   > * {
-    margin-bottom: -$unnnic-border-width-thinner;
+    margin-bottom: -1px;
   }
 
   .back-container,
@@ -116,7 +116,7 @@ export default {
   }
 
   .back-container {
-    border-right: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+    border-right: 1px solid $unnnic-color-border-base;
 
     .unnnic-icon {
       width: 1.375 * $unnnic-font-size;
@@ -135,7 +135,7 @@ export default {
     display: flex;
     column-gap: $unnnic-spacing-inline-sm;
     justify-content: space-between;
-    border-right: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+    border-right: 1px solid $unnnic-color-border-base;
 
     > div {
       overflow: hidden;

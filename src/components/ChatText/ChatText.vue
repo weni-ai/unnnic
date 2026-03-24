@@ -15,7 +15,7 @@
             class="info__icon"
             icon="info"
             size="sm"
-            scheme="neutral-clean"
+            scheme="fg-base"
           ></UnnnicIcon>
         </UnnnicToolTip>
       </div>
@@ -87,11 +87,11 @@ export default {
 
 .unnnic-chat-text {
   border-radius: $unnnic-border-radius-lg;
-  background-color: $unnnic-color-background-snow;
+  background-color: $unnnic-color-bg-base;
   max-width: 31.25 * $unnnic-font-size;
   padding: $unnnic-spacing-inset-md;
   box-sizing: border-box;
-  border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+  border: 1px solid $unnnic-color-border-base;
   max-height: 15.625 * $unnnic-font-size;
   display: flex;
   flex-direction: column;
@@ -134,13 +134,13 @@ export default {
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-lg;
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-    color: $unnnic-color-neutral-darkest;
+    color: $unnnic-color-fg-emphasized;
     overflow: hidden;
     position: relative;
 
     .intent {
       background-color: rgba(
-        $unnnic-color-aux-purple,
+        $unnnic-color-purple-10,
         $unnnic-opacity-level-light
       );
       padding: calc($unnnic-line-height-md / 2) 0;
@@ -150,7 +150,7 @@ export default {
       position: absolute;
       background-image: linear-gradient(
         transparent,
-        $unnnic-color-background-snow
+        $unnnic-color-bg-base
       );
       width: 100%;
       height: 5 * $unnnic-font-size;

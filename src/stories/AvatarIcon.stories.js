@@ -35,7 +35,7 @@ export default {
     enabled: true,
     icon: 'graph-stats-1',
     size: 'sm',
-    scheme: 'aux-blue',
+    scheme: 'fg-info',
     filled: false,
     opacity: false,
   },
