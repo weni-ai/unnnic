@@ -9,6 +9,7 @@
       `unnnic-button--${buttonType}`,
       iconCenter ? `unnnic-button--icon-on-center` : null,
       float ? `unnnic-button--float` : null,
+      pressed ? `unnnic-button--pressed` : null,
     ]"
   >
     <UnnnicIconLoading
@@ -89,6 +90,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   iconsFilled: false,
   disabled: false,
   loading: false,
+  pressed: false,
 });
 
 const slots = useSlots();
@@ -241,7 +243,8 @@ watch(
       background-color: $unnnic-color-teal-700;
     }
 
-    &:active:enabled {
+    &:active:enabled,
+    &.unnnic-button--pressed {
       background-color: $unnnic-color-teal-800;
     }
   }
@@ -255,7 +258,8 @@ watch(
       background-color: $unnnic-color-gray-50;
     }
 
-    &:active:enabled {
+    &:active:enabled,
+    &.unnnic-button--pressed {
       background-color: $unnnic-color-gray-100;
     }
 
@@ -271,7 +275,8 @@ watch(
       background-color: rgba($unnnic-color-gray-400, 0.1);
     }
 
-    &:active:enabled {
+    &:active:enabled,
+    &.unnnic-button--pressed {
       background-color: rgba($unnnic-color-gray-400, 0.2);
     }
   }
@@ -284,7 +289,8 @@ watch(
       background-color: $unnnic-color-red-10;
     }
 
-    &:active:enabled {
+    &:active:enabled,
+    &.unnnic-button--pressed {
       background-color: $unnnic-color-red-11;
     }
   }
@@ -296,7 +302,8 @@ watch(
       background-color: $unnnic-color-yellow-600;
     }
 
-    &:active:enabled {
+    &:active:enabled,
+    &.unnnic-button--pressed {
       background-color: $unnnic-color-yellow-700;
     }
   }
