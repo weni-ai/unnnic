@@ -18,4 +18,5 @@ export interface ButtonProps {
   iconsFilled?: boolean;
   disabled?: boolean;
   loading?: boolean;
+  pressed?: boolean;
 }
