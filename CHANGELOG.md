@@ -5,7 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-# 3.24.4 (2026-03-04)]
+# 3.24.5 (2026-03-24)
+
+### Added
+
+- **Button**: `pressed` prop to indicate the pressed (active) state with matching styles; `ButtonProps` and Storybook documentation updated.
+
+### Changed
+
+- **ChatsUserAvatar**: Update visual and add slots supports
+
+# 3.24.4 (2026-03-04)
 
 ### Fixed
 - **Popover**: Background color
