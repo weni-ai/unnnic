@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Button**: `pressed` prop to indicate the pressed (active) state with matching styles; `ButtonProps` and Storybook documentation updated.
 
+### Changed
+
+- **ChatsUserAvatar**: Update visual and add slots supports
+
 # 3.24.4 (2026-03-04)
 
 ### Fixed
