@@ -89,13 +89,13 @@ export default {
 @use '@/assets/scss/unnnic' as *;
 
 .unnnic-select-smart__options__multiple {
-  border-bottom: 1px solid $unnnic-color-neutral-soft;
+  border-bottom: 1px solid $unnnic-color-border-base;
 
   &__selecteds {
     display: flex;
     align-items: center;
 
-    color: $unnnic-color-neutral-dark;
+    color: $unnnic-color-fg-base;
 
     &__container {
       display: flex;
@@ -112,10 +112,10 @@ export default {
       }
 
       &.unnnic-tag {
-        outline-color: $unnnic-color-neutral-light;
-        background-color: $unnnic-color-neutral-light;
+        outline-color: $unnnic-color-border-muted;
+        background-color: $unnnic-color-bg-base-soft;
 
-        color: $unnnic-color-neutral-dark;
+        color: $unnnic-color-fg-base;
       }
     }
 
@@ -134,7 +134,7 @@ export default {
   &--without-multiples {
     margin: 0;
 
-    color: $unnnic-color-neutral-cleanest;
+    color: $unnnic-color-fg-muted;
     line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
     font-size: $unnnic-font-size-body-md;
 

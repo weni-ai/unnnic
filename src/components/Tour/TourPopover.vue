@@ -158,14 +158,14 @@ export default {
   z-index: 1001;
 
   border-radius: $unnnic-border-radius-sm;
-  box-shadow: $unnnic-shadow-level-near;
-  background: $unnnic-color-background-white;
+  box-shadow: $unnnic-shadow-1;
+  background: $unnnic-color-bg-base;
   padding: $unnnic-spacing-ant;
 
   width: max-content;
   max-width: 30vw;
 
-  color: $unnnic-color-neutral-darkest;
+  color: $unnnic-color-fg-emphasized;
   font-family: $unnnic-font-family-secondary;
   font-size: $unnnic-font-size-body-gt;
   font-weight: $unnnic-font-weight-regular;
@@ -186,7 +186,7 @@ export default {
 
     background: linear-gradient(
       -45deg,
-      $unnnic-color-background-white 50%,
+      $unnnic-color-bg-base 50%,
       transparent 50%
     );
   }

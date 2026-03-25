@@ -106,8 +106,8 @@ export default {
 }
 
 .unnnic-card-marketplace {
-  border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
-  background-color: $unnnic-color-background-snow;
+  border: 1px solid $unnnic-color-border-base;
+  background-color: $unnnic-color-bg-base;
   border-radius: $unnnic-border-radius-md;
   padding: $unnnic-inset-sm;
 
@@ -136,7 +136,7 @@ export default {
       font-weight: $unnnic-font-weight-bold;
       font-size: $unnnic-font-size-body-lg;
       line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
       padding-top: $unnnic-spacing-stack-sm;
       padding-bottom: $unnnic-spacing-stack-nano;
 
@@ -153,7 +153,7 @@ export default {
       font-weight: $unnnic-font-weight-regular;
       font-size: $unnnic-font-size-body-lg;
       line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
-      color: $unnnic-color-neutral-cloudy;
+      color: $unnnic-color-fg-base;
       padding-bottom: $unnnic-spacing-stack-nano;
 
       display: -webkit-box;
@@ -174,12 +174,12 @@ export default {
 
       &__value {
         font-weight: $unnnic-font-weight-bold;
-        color: $unnnic-color-neutral-darkest;
+        color: $unnnic-color-fg-emphasized;
         padding: 0 $unnnic-inline-nano;
       }
 
       &__comments {
-        color: $unnnic-color-neutral-cloudy;
+        color: $unnnic-color-fg-base;
       }
     }
   }

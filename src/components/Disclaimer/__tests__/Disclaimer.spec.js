@@ -93,11 +93,11 @@ describe('Disclaimer', () => {
   });
 
   it.each([
-    ['informational', 'info', 'blue-500'],
-    ['success', 'check_circle', 'green-500'],
-    ['attention', 'error', 'yellow-500'],
-    ['error', 'cancel', 'red-500'],
-    ['neutral', 'info', 'gray-400'],
+    ['informational', 'info', 'fg-info'],
+    ['success', 'check_circle', 'fg-success'],
+    ['attention', 'error', 'fg-warning'],
+    ['error', 'cancel', 'fg-critical'],
+    ['neutral', 'info', 'fg-muted'],
   ])('applies variant %s styles', (type, icon, scheme) => {
     const wrapper = mountComponent({ type });
 
@@ -113,10 +113,10 @@ describe('Disclaimer', () => {
 
   describe('legacy compatibility', () => {
     it.each([
-      ['alert-circle-1-1', 'error', 'yellow-500'],
-      ['info', 'info', 'blue-500'],
-      ['error', 'cancel', 'red-500'],
-      ['custom-icon', 'info', 'gray-400'],
+      ['alert-circle-1-1', 'error', 'fg-warning'],
+      ['info', 'info', 'fg-info'],
+      ['error', 'cancel', 'fg-critical'],
+      ['custom-icon', 'info', 'fg-muted'],
     ])('maps icon prop "%s" to variant', (icon, expectedIcon, scheme) => {
       const wrapper = mountComponent({ icon });
 
@@ -129,9 +129,9 @@ describe('Disclaimer', () => {
     });
 
     it.each([
-      ['feedback-yellow', 'error', 'yellow-500'],
-      ['feedback-red', 'cancel', 'red-500'],
-      ['feedback-blue', 'info', 'gray-400'],
+      ['feedback-yellow', 'error', 'fg-warning'],
+      ['feedback-red', 'cancel', 'fg-critical'],
+      ['feedback-blue', 'info', 'fg-muted'],
     ])(
       'maps iconColor prop "%s" to variant',
       (iconColor, expectedIcon, scheme) => {

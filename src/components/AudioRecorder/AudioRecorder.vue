@@ -16,7 +16,7 @@
       >
         <UnnnicIcon
           icon="delete-1-1"
-          scheme="feedback-red"
+          scheme="fg-critical"
         />
       </span>
     </UnnnicToolTip>
@@ -450,7 +450,7 @@ export default {
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-md;
     line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
-    color: $unnnic-color-neutral-darkest;
+    color: $unnnic-color-fg-emphasized;
     user-select: none;
   }
 

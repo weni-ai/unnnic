@@ -120,15 +120,15 @@ export default {
 
   .background {
     fill: transparent;
-    stroke: rgba($unnnic-color-brand-weni, $unnnic-opacity-level-extra-light);
+    stroke: rgba($unnnic-color-teal-8, $unnnic-opacity-level-extra-light);
 
     &.filled {
-      stroke: $unnnic-color-brand-weni;
+      stroke: $unnnic-color-teal-8;
     }
   }
 
   .front {
-    stroke: $unnnic-color-brand-weni;
+    stroke: $unnnic-color-teal-8;
   }
 
   .content {
@@ -140,7 +140,7 @@ export default {
     left: 50%;
     transform: translate(-50%, -50%);
 
-    color: $unnnic-color-neutral-cleanest;
+    color: $unnnic-color-fg-muted;
     font-family: $unnnic-font-family-secondary;
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-gt;

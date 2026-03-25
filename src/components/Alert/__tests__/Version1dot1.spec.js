@@ -91,7 +91,7 @@ describe('Alert.vue', () => {
       filled: false,
       icon: 'close-1',
       size: 'sm',
-      scheme: 'neutral-white',
+      scheme: 'fg-inverted',
     });
   });
 

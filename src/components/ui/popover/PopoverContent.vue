@@ -119,12 +119,12 @@ $popover-space: $unnnic-space-4;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $unnnic-color-neutral-cleanest;
+    background: $unnnic-color-gray-7;
     border-radius: $unnnic-border-radius-pill;
   }
 
   &::-webkit-scrollbar-track {
-    background: $unnnic-color-neutral-soft;
+    background: $unnnic-color-bg-muted;
     border-radius: $unnnic-border-radius-pill;
   }
 

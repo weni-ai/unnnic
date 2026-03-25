@@ -34,7 +34,7 @@ const delegatedProps = reactiveOmit(props, 'class');
     align-items: center;
     width: 100%;
     gap: $unnnic-space-6;
-    box-shadow: inset 0 (-$unnnic-border-width-thinner) 0 0
+    box-shadow: inset 0 (-1px) 0 0
       $unnnic-color-border-base;
   }
 }

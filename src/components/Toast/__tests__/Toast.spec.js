@@ -67,7 +67,7 @@ describe('UnnnicToast', () => {
 
       expect(closeIcon().exists()).toBe(true);
       expect(closeIcon().props('icon')).toBe('close');
-      expect(closeIcon().props('scheme')).toBe('neutral-dark');
+      expect(closeIcon().props('scheme')).toBe('fg-base');
       expect(closeIcon().props('size')).toBe('ant');
       expect(closeIcon().props('clickable')).toBe(true);
     });

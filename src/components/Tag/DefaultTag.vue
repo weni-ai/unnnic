@@ -31,14 +31,14 @@ const props = withDefaults(defineProps<DefaultTagProps>(), {
 });
 
 const COLOR_MAPPING = [
-  { keywords: ['green'], color: colors.green[4].value },
-  { keywords: ['blue'], color: colors.blue[4].value },
-  { keywords: ['purple'], color: colors.purple[4].value },
-  { keywords: ['red', 'pink'], color: colors.red[4].value },
-  { keywords: ['orange'], color: colors.orange[4].value },
-  { keywords: ['yellow'], color: colors.yellow[4].value },
-  { keywords: ['gray'], color: colors.gray[4].value },
-  { keywords: ['teal', 'weni'], color: colors.teal[4].value },
+  { keywords: ['green'], color: colors.green['2'].value },
+  { keywords: ['blue'], color: colors.blue['2'].value },
+  { keywords: ['purple'], color: colors.purple['3'].value },
+  { keywords: ['red', 'pink'], color: colors.red['3'].value },
+  { keywords: ['orange'], color: colors.orange['3'].value },
+  { keywords: ['yellow'], color: colors.yellow['2'].value },
+  { keywords: ['gray'], color: colors.gray['2'].value },
+  { keywords: ['teal', 'weni'], color: colors.teal['2'].value },
 ];
 
 const color = computed(() => {
@@ -48,7 +48,7 @@ const color = computed(() => {
     keywords.some((keyword) => scheme.includes(keyword)),
   );
 
-  return match?.color ?? colors.gray[4].value;
+  return match?.color ?? colors.gray['2'].value;
 });
 </script>
 

@@ -288,7 +288,7 @@ export default {
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
-$tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+$tableBorder: 1px solid $unnnic-color-border-base;
 
 .unnnic-table-next {
   border-spacing: 0;
@@ -312,7 +312,7 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
       box-sizing: border-box;
       border: $tableBorder;
-      background-color: $unnnic-color-neutral-light;
+      background-color: $unnnic-color-bg-base-soft;
 
       font-weight: $unnnic-font-weight-bold;
 
@@ -331,13 +331,13 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
       }
 
       &--sorting {
-        background-color: $unnnic-color-neutral-soft;
+        background-color: $unnnic-color-bg-muted;
       }
 
       &--clickable {
         &:hover {
           cursor: pointer;
-          background-color: $unnnic-color-neutral-soft;
+          background-color: $unnnic-color-bg-muted;
         }
       }
     }
@@ -365,11 +365,11 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
         text-decoration: none;
 
         &:hover {
-          background-color: $unnnic-color-neutral-lightest;
+          background-color: $unnnic-color-bg-base-soft;
         }
 
         :visited {
-          color: $unnnic-color-neutral-dark;
+          color: $unnnic-color-fg-base;
         }
       }
 
@@ -413,7 +413,7 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
     font-size: $unnnic-font-size-body-gt;
     line-height: $unnnic-line-height-small * 5.5;
     text-align: left;
-    color: $unnnic-color-neutral-dark;
+    color: $unnnic-color-fg-base;
 
     overflow: hidden;
     white-space: nowrap;

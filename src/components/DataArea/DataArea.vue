@@ -68,7 +68,7 @@ export default {
     margin-bottom: $unnnic-spacing-stack-xs;
 
     &__title {
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
     }
   }
 
@@ -78,10 +78,10 @@ export default {
     justify-content: space-between;
     gap: $unnnic-spacing-inline-sm;
 
-    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+    border: 1px solid $unnnic-color-border-base;
     border-radius: $unnnic-border-radius-sm;
     padding: $unnnic-spacing-inset-sm;
-    background-color: $unnnic-color-background-snow;
+    background-color: $unnnic-color-bg-base;
 
     &__text {
       flex: 1;
@@ -92,7 +92,7 @@ export default {
       font-weight: $unnnic-font-weight-regular;
       font-size: $unnnic-font-size-body-gt;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-      color: $unnnic-color-neutral-dark;
+      color: $unnnic-color-fg-base;
     }
   }
 }

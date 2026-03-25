@@ -14,6 +14,14 @@ const iconsOptions = [
 ];
 
 const schemes = [
+  'fg-base',
+  'fg-emphasized',
+  'fg-muted',
+  'fg-inverted',
+  'fg-info',
+  'fg-success',
+  'fg-warning',
+  'fg-critical',
   'background-solo',
   'background-sky',
   'background-grass',

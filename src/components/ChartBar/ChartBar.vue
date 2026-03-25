@@ -12,7 +12,7 @@
       >
         <div
           v-if="title"
-          class="title unnnic-font bold title-sm color-neutral-darkest"
+          class="title unnnic-font bold title-sm color-fg-emphasized"
           @click="$emit('update')"
         >
           {{ title }}
@@ -20,7 +20,7 @@
 
         <div
           v-if="description"
-          class="description unnnic-font secondary body-gt color-neutral-cloudy"
+          class="description unnnic-font secondary body-gt color-fg-base"
         >
           {{ description }}
         </div>
@@ -38,12 +38,12 @@
           <UnnnicIcon
             icon="button-refresh-arrow-1"
             size="sm"
-            scheme="neutral-darkest"
+            scheme="fg-emphasized"
           />
 
           <span
             v-if="updateText"
-            class="unnnic-font secondary body-md color-neutral-dark"
+            class="unnnic-font secondary body-md color-fg-base"
           >
             {{ updateText }}
           </span>
@@ -84,13 +84,13 @@
               value(0),
             ]"
             :key="index"
-            class="value unnnic-font secondary body-md color-neutral-cleanest"
+            class="value unnnic-font secondary body-md color-fg-muted"
           >
             {{ value }}
           </div>
         </div>
 
-        <div class="unnnic-font secondary body-md color-neutral-cleanest">
+        <div class="unnnic-font secondary body-md color-fg-muted">
           &nbsp;
         </div>
       </div>
@@ -117,7 +117,7 @@
           </div>
 
           <div
-            class="title unnnic-font secondary body-md color-neutral-cleanest"
+            class="title unnnic-font secondary body-md color-fg-muted"
           >
             {{ group.title }}
           </div>
@@ -138,7 +138,7 @@
           icon="indicator"
           :scheme="colors[index]"
         />
-        <div class="unnnic-font secondary body-gt color-neutral-cloudy">
+        <div class="unnnic-font secondary body-gt color-fg-base">
           {{ legend }}
         </div>
       </div>
@@ -221,7 +221,7 @@ export default {
 @use '@/assets/scss/unnnic' as *;
 
 .unnnic-chart-bar {
-  background-color: $unnnic-color-background-snow;
+  background-color: $unnnic-color-bg-base;
   border-radius: $unnnic-border-radius-md;
   padding: $unnnic-spacing-inset-md;
   min-width: 15.5625 * $unnnic-font-size;
@@ -230,9 +230,9 @@ export default {
   flex-direction: column;
   row-gap: $unnnic-spacing-stack-lg;
   outline-style: solid;
-  outline-color: $unnnic-color-neutral-soft;
-  outline-width: $unnnic-border-width-thinner;
-  outline-offset: -$unnnic-border-width-thinner;
+  outline-color: $unnnic-color-bg-muted;
+  outline-width: 1px;
+  outline-offset: -1px;
 
   &.condensed {
     padding: $unnnic-spacing-inset-sm;
@@ -319,16 +319,16 @@ export default {
             border-radius: $unnnic-border-radius-sm;
 
             $colors:
-              '0' $unnnic-color-aux-blue,
-              '1' $unnnic-color-aux-purple,
-              '2' $unnnic-color-aux-orange,
-              '3' $unnnic-color-aux-lemon,
-              '4' $unnnic-color-aux-pink,
-              '5' $unnnic-color-aux-baby-blue,
-              '6' $unnnic-color-aux-baby-yellow,
-              '7' $unnnic-color-aux-baby-red,
-              '8' $unnnic-color-aux-baby-green,
-              '9' $unnnic-color-aux-baby-pink;
+              '0' $unnnic-color-teal-5,
+              '1' $unnnic-color-purple-10,
+              '2' $unnnic-color-orange-7,
+              '3' $unnnic-color-yellow-4,
+              '4' $unnnic-color-pink-10,
+              '5' $unnnic-color-cyan-4,
+              '6' $unnnic-color-yellow-2,
+              '7' $unnnic-color-red-6,
+              '8' $unnnic-color-green-3,
+              '9' $unnnic-color-pink-4;
 
             @each $name, $color in $colors {
               &.color-#{$name} {

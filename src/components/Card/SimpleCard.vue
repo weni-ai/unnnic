@@ -21,7 +21,7 @@
           <UnnnicIcon
             icon="info"
             size="nano"
-            scheme="neutral-cloudy"
+            scheme="fg-base"
           />
         </UnnnicToolTip>
       </section>
@@ -96,15 +96,15 @@ export default {
 }
 
 .unnnic-simple-card:hover {
-  box-shadow: $unnnic-shadow-level-far;
+  box-shadow: $unnnic-shadow-1;
 }
 
 .unnnic-simple-card:active {
-  border: 1px solid $unnnic-color-neutral-cleanest;
+  border: 1px solid $unnnic-color-border-emphasized;
 }
 
 .unnnic-simple-card {
-  border: 1px solid $unnnic-color-neutral-soft;
+  border: 1px solid $unnnic-color-border-base;
   border-radius: $unnnic-border-radius-md;
   padding: $unnnic-spacing-md;
   display: grid;
@@ -139,7 +139,7 @@ export default {
   }
 
   &__text {
-    color: $unnnic-color-neutral-dark;
+    color: $unnnic-color-fg-base;
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-md;
     line-height: $unnnic-line-height-large + $unnnic-line-height-small;
@@ -153,7 +153,7 @@ export default {
   }
 
   &__footer {
-    border-top: 1px solid $unnnic-color-neutral-light;
+    border-top: 1px solid $unnnic-color-border-muted;
     padding-top: $unnnic-spacing-ant;
     font-family: $unnnic-font-family-secondary;
     * {

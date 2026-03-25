@@ -72,9 +72,9 @@ export default {
 @use '@/assets/scss/unnnic' as *;
 
 .card {
-  background-color: $unnnic-color-background-snow;
-  padding: $unnnic-spacing-inset-sm - $unnnic-border-width-thinner;
-  border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+  background-color: $unnnic-color-bg-base;
+  padding: $unnnic-spacing-inset-sm - 1px;
+  border: 1px solid $unnnic-color-border-base;
   border-radius: $unnnic-border-radius-md;
 
   .header {
@@ -86,7 +86,7 @@ export default {
       font-weight: $unnnic-font-weight-bold;
       font-size: $unnnic-font-size-body-lg;
       line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
       flex: 1;
     }
 
@@ -100,7 +100,7 @@ export default {
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-lg;
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-    color: $unnnic-color-neutral-cloudy;
+    color: $unnnic-color-fg-base;
   }
 
   .footer {
@@ -111,11 +111,11 @@ export default {
       font-weight: $unnnic-font-weight-bold;
       font-size: $unnnic-font-size-body-gt;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
 
       .info {
         font-weight: $unnnic-font-weight-regular;
-        color: $unnnic-color-neutral-cloudy;
+        color: $unnnic-color-fg-base;
       }
     }
   }

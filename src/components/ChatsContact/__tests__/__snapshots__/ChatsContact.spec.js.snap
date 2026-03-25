@@ -2,14 +2,14 @@
 
 exports[`UnnnicChatsContact > should match snapshot 1`] = `
 "<div data-v-8ce6efd5="" class="chats-contact" tabindex="0" style="position: relative; overflow: hidden;">
-  <section data-v-c735998e="" data-v-8ce6efd5="" class="user-avatar user-avatar--xl"><span data-v-c735998e="">C</span></section>
+  <section data-v-c735998e="" data-v-8ce6efd5="" class="user-avatar user-avatar--xl user-avatar--gray-200"><span data-v-c735998e="" class="text-gray-900">C</span></section>
   <div data-v-8ce6efd5="" class="chats-contact__infos">
     <section data-v-8ce6efd5="" class="chats-contact__infos__title-container">
       <h1 data-v-8ce6efd5="" class="chats-contact__infos__title ellipsis" title="Contact Name">Contact Name</h1>
       <!--v-if-->
     </section>
     <div data-v-8ce6efd5="" class="chats-contact__infos__additional-information">
-      <p data-v-8ce6efd5="" class="ellipsis" title="Message">Message</p>
+      <p data-v-8ce6efd5="" class="ellipsis subtitle" title="Message">Message</p>
     </div>
   </div>
   <section data-v-8ce6efd5="" class="chats-contact__infos__unread-messages-container">

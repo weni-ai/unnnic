@@ -2,7 +2,7 @@
 
 @mixin input-base {
   background: $unnnic-color-white;
-  border: $unnnic-border-width-thinner solid $unnnic-color-border-base;
+  border: 1px solid $unnnic-color-border-base;
   outline: none;
   border-radius: $unnnic-radius-2;
   color: $unnnic-color-fg-emphasized;

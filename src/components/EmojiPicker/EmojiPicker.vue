@@ -124,6 +124,8 @@ const onEmojiSelect = (emoji: Emoji) => {
 </script>
 
 <style lang="scss" scoped>
+@use '@/assets/scss/unnnic' as *;
+
 .emoji-picker {
   position: absolute;
   z-index: 1;
@@ -141,12 +143,12 @@ const onEmojiSelect = (emoji: Emoji) => {
   }
 
   :deep(.emoji-mart) {
-    border-radius: 16px;
-    font-family: Lato, sans-serif; // $unnnic-font-family
-    border: 1px solid rgb(244, 246, 248);
-    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+    border-radius: $unnnic-radius-4;
+    font-family: $unnnic-font-family;
+    border: 1px solid $unnnic-color-border-base;
+    box-shadow: $unnnic-shadow-1;
     cursor: default;
-    color: #3b4151; // $unnnic-color-neutral-darkest
+    color: $unnnic-color-fg-emphasized;
   }
 
   :deep(.emoji-mart-emoji) {
@@ -164,11 +166,11 @@ const onEmojiSelect = (emoji: Emoji) => {
 
   :deep(.emoji-mart-anchor:hover),
   :deep(.emoji-mart-anchor-selected) {
-    color: #00a49f; // $unnnic-color-weni-600
+    color: $unnnic-color-fg-accent;
   }
 
   :deep(.emoji-mart-anchor-bar) {
-    background-color: #00a49f; // $unnnic-color-weni-600
+    background-color: $unnnic-color-fg-accent;
   }
 
   :deep(.emoji-type-image.emoji-set-apple) {

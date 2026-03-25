@@ -76,7 +76,7 @@ const props = withDefaults(defineProps<IconProps>(), {
   icon: null,
   clickable: false,
   size: 'md',
-  scheme: 'neutral-darkest',
+  scheme: 'fg-emphasized',
 });
 
 const emit = defineEmits<{

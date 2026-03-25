@@ -30,7 +30,7 @@ export default {
 @use '@/assets/scss/unnnic' as *;
 
 .unnnic-card-number {
-  background-color: $unnnic-color-background-carpet;
+  background-color: $unnnic-color-bg-base-soft;
   border-radius: $unnnic-border-radius-md;
   padding: $unnnic-inset-sm;
   font-family: $unnnic-font-family-secondary;
@@ -48,13 +48,13 @@ export default {
     font-size: $unnnic-font-size-body-gt;
     line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
 
-    color: $unnnic-color-neutral-cloudy;
+    color: $unnnic-color-fg-base;
   }
 
   span {
     font-weight: $unnnic-font-weight-black;
     font-size: $unnnic-font-size-title-lg;
-    color: $unnnic-color-neutral-black;
+    color: $unnnic-color-gray-12;
     line-height: $unnnic-font-size-title-lg + $unnnic-line-height-md;
   }
 }

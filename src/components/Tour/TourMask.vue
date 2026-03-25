@@ -129,7 +129,7 @@ export default {
   }
 
   &__overlay {
-    fill: rgba($unnnic-color-neutral-black, $unnnic-opacity-level-overlay);
+    fill: rgba($unnnic-color-gray-12, $unnnic-opacity-level-overlay);
   }
 }
 </style>

@@ -61,7 +61,7 @@
             <UnnnicIcon
               size="xs"
               :icon="dropdownIcon"
-              scheme="neutral-clean"
+              scheme="fg-base"
             />
           </div>
 
@@ -96,7 +96,7 @@
             <UnnnicIcon
               size="xs"
               :icon="dropdownIcon"
-              scheme="neutral-clean"
+              scheme="fg-base"
             />
           </div>
         </template>
@@ -221,7 +221,7 @@ export default {
     display: flex;
     border-radius: $unnnic-border-radius-pill;
     padding: $unnnic-inset-xs;
-    background-color: $unnnic-color-background-snow;
+    background-color: $unnnic-color-bg-base;
     width: $unnnic-inset-xs * 2 + $unnnic-icon-size-sm;
     box-sizing: border-box;
     overflow: hidden;
@@ -241,13 +241,13 @@ export default {
     &.open {
       padding: $unnnic-squish-xs;
       width: auto;
-      box-shadow: $unnnic-shadow-level-near;
+      box-shadow: $unnnic-shadow-1;
     }
   }
 
   .container.normal {
     border-radius: $unnnic-border-radius-pill;
-    background-color: $unnnic-color-background-snow;
+    background-color: $unnnic-color-bg-base;
     min-width: 9 * $unnnic-font-size;
     width: 100%;
     height: $unnnic-font-size-body-md + $unnnic-line-height-md + 2 *
@@ -256,7 +256,7 @@ export default {
     overflow: hidden;
     cursor: pointer;
     position: relative;
-    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+    border: 1px solid $unnnic-color-border-base;
 
     .option {
       display: flex;
@@ -268,7 +268,7 @@ export default {
         font-size: $unnnic-font-size-body-md;
         font-weight: $unnnic-font-weight-regular;
         line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
-        color: $unnnic-color-neutral-dark;
+        color: $unnnic-color-fg-base;
         margin-left: $unnnic-spacing-inline-xs;
         margin-right: $unnnic-spacing-inline-nano;
         flex: 1;
@@ -276,8 +276,8 @@ export default {
     }
 
     .divider {
-      height: $unnnic-border-width-thinner;
-      background: $unnnic-color-background-sky;
+      height: 1px;
+      background: $unnnic-color-bg-base-soft;
       margin: $unnnic-spacing-stack-xs $unnnic-spacing-inline-sm;
     }
 
@@ -287,8 +287,8 @@ export default {
 
       .all {
         border-radius: $unnnic-border-radius-sm;
-        background-color: $unnnic-color-background-snow;
-        box-shadow: $unnnic-shadow-level-near;
+        background-color: $unnnic-color-bg-base;
+        box-shadow: $unnnic-shadow-1;
       }
     }
   }

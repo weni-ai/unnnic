@@ -219,7 +219,7 @@ const back = () => {
 
   .unnnic-drawer__content {
     overflow-y: auto;
-    color: $unnnic-color-neutral-cloudy;
+    color: $unnnic-color-fg-base;
     padding: $unnnic-spacing-md $unnnic-spacing-md 0 $unnnic-spacing-md;
     flex: 1 0 0;
   }

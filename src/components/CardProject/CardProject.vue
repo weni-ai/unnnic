@@ -31,7 +31,7 @@
             size="sm"
             icon="navigation-menu-vertical-1"
             clickable
-            scheme="neutral-cleanest"
+            scheme="fg-muted"
           />
         </template>
 
@@ -164,9 +164,9 @@ export default {
     },
     colorStatus() {
       const colorStatusMapper = {
-        ACTIVE: 'aux-green-900',
-        INACTIVE: 'neutral-cloudy',
-        IN_TEST: 'aux-orange-500',
+        ACTIVE: 'fg-success',
+        INACTIVE: 'fg-base',
+        IN_TEST: 'fg-warning',
       };
 
       return colorStatusMapper[this.status];
@@ -210,7 +210,7 @@ export default {
   flex-direction: column;
   gap: $unnnic-spacing-xs;
   padding: $unnnic-inset-sm;
-  border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+  border: 1px solid $unnnic-color-border-base;
   border-radius: $unnnic-border-radius-md;
 
   :deep(.unnnic-dropdown__content) {
@@ -221,7 +221,7 @@ export default {
       padding: 0px $unnnic-spacing-nano;
       &:hover {
         border-radius: $unnnic-border-radius-sm;
-        background: $unnnic-color-neutral-lightest;
+        background: $unnnic-color-bg-base-soft;
       }
     }
     .unnnic-dropdown-item::before {
@@ -230,7 +230,7 @@ export default {
   }
 
   &--inactive {
-    background-color: $unnnic-color-neutral-lightest;
+    background-color: $unnnic-color-bg-base-soft;
   }
 
   &--clickable {
@@ -248,14 +248,14 @@ export default {
     overflow: hidden;
     text-overflow: ellipsis;
 
-    color: $unnnic-color-neutral-darkest;
+    color: $unnnic-color-fg-emphasized;
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-lg;
     font-weight: $unnnic-font-weight-bold;
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
 
     &--inactive {
-      color: $unnnic-color-neutral-clean;
+      color: $unnnic-color-fg-base;
     }
   }
 
@@ -265,7 +265,7 @@ export default {
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: $unnnic-color-neutral-dark;
+    color: $unnnic-color-fg-base;
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-gt;
     font-weight: $unnnic-font-weight-regular;
@@ -274,7 +274,7 @@ export default {
     min-height: 44px;
 
     &--inactive {
-      color: $unnnic-color-neutral-clean;
+      color: $unnnic-color-fg-base;
     }
   }
 
@@ -302,18 +302,18 @@ export default {
     }
 
     &--ACTIVE {
-      background-color: $unnnic-color-aux-green-100;
-      color: $unnnic-color-aux-green-900;
+      background-color: $unnnic-color-green-2;
+      color: $unnnic-color-green-11;
     }
 
     &--IN_TEST {
-      background-color: $unnnic-color-aux-orange-100;
-      color: $unnnic-color-aux-orange-500;
+      background-color: $unnnic-color-orange-2;
+      color: $unnnic-color-orange-10;
     }
 
     &--INACTIVE {
-      background-color: $unnnic-color-neutral-soft;
-      color: $unnnic-color-neutral-cloudy;
+      background-color: $unnnic-color-bg-muted;
+      color: $unnnic-color-fg-base;
     }
   }
 }

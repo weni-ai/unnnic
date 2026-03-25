@@ -104,13 +104,13 @@ export default {
 <style lang="scss">
 @use '@/assets/scss/unnnic' as *;
 .unnnic-select-smart-option {
-  background-color: $unnnic-color-background-snow;
+  background-color: $unnnic-color-bg-base;
   padding: $unnnic-spacing-stack-nano $unnnic-inline-xs;
 
   max-width: 100%;
 
   font-family: $unnnic-font-family-secondary;
-  color: $unnnic-color-neutral-darkest;
+  color: $unnnic-color-fg-emphasized;
   font-weight: $unnnic-font-weight-regular;
 
   white-space: nowrap;
@@ -126,7 +126,7 @@ export default {
   &--focused {
     border-radius: $unnnic-border-radius-sm;
 
-    background-color: $unnnic-color-neutral-light;
+    background-color: $unnnic-color-bg-base-soft;
   }
 
   &--active:not(&--with-checkbox) {
@@ -134,7 +134,7 @@ export default {
     font-weight: $unnnic-font-weight-bold;
 
     &.unnnic-select-smart-option--active-secondary {
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
     }
   }
 
@@ -165,7 +165,7 @@ export default {
   &__description {
     margin: 0;
 
-    color: $unnnic-color-neutral-cloudy;
+    color: $unnnic-color-fg-base;
     font-weight: $unnnic-font-weight-regular;
 
     &--md,
