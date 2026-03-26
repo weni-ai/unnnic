@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import CardCompany from '../components/Card/CardCompany.vue';
 
 export default {

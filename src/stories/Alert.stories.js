@@ -8,10 +8,7 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Ideal for conveying important messages or notifications to the user in a clear 
-        and prominent manner. Used to communicate alerts, errors, warnings or confirmations, this 
-        component helps ensure that the message is noticed and understood quickly.
-          `,
+        component: `Ideal for conveying important messages or notifications to the user in a clear and prominent manner. Used to communicate alerts, errors, warnings or confirmations, this component helps ensure that the message is noticed and understood quickly.`,
       },
     },
   },

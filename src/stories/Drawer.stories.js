@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import UnnnicDrawer from '../components/Drawer/Drawer.vue';
 import UnnnicButton from '../components/Button/Button.vue';
@@ -189,8 +189,9 @@ export const WithoutOverlay = {
   parameters: {
     docs: {
       description: {
-        story: `It is recommended to use this variation for contexts where the drawer occupies 
-        the screen with another drawer or modal (components with overlay in general).`,
+        story: `<div>It is recommended to use this variation for contexts where the drawer occupies 
+        the screen with another drawer or modal (components with overlay in general).
+        </div>`,
       },
     },
   },

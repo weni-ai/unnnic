@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import UnnnicChatText from '../components/ChatText/ChatText.vue';
 import UnnnicButtonIcon from '../components/Button/ButtonIcon.vue';
