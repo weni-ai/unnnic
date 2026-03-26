@@ -170,8 +170,8 @@ export default {
     }
     margin-top: $unnnic-spacing-nano;
     border-radius: $unnnic-border-radius-sm;
-    box-shadow: $unnnic-shadow-level-near;
-    background-color: $unnnic-color-background-snow;
+    box-shadow: $unnnic-shadow-1;
+    background-color: $unnnic-color-bg-base;
     cursor: pointer;
     display: grid;
     max-height: calc-max-height(9.25);
@@ -179,11 +179,11 @@ export default {
 
     &__item {
       margin: 0px $unnnic-spacing-nano;
-      background-color: $unnnic-color-background-snow;
+      background-color: $unnnic-color-bg-base;
       padding: $unnnic-spacing-stack-nano $unnnic-inline-xs;
       max-width: 100%;
       font-family: $unnnic-font-family-secondary;
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
       font-weight: $unnnic-font-weight-regular;
 
       white-space: nowrap;
@@ -193,7 +193,7 @@ export default {
 
       &:hover {
         border-radius: $unnnic-border-radius-sm;
-        background-color: $unnnic-color-neutral-light;
+        background-color: $unnnic-color-bg-base-soft;
       }
 
       &--selected {
@@ -207,12 +207,12 @@ export default {
     }
 
     &::-webkit-scrollbar-thumb {
-      background: $unnnic-color-neutral-cleanest;
+      background: $unnnic-color-gray-7;
       border-radius: $unnnic-border-radius-pill;
     }
 
     &::-webkit-scrollbar-track {
-      background: $unnnic-color-neutral-soft;
+      background: $unnnic-color-bg-muted;
       border-radius: $unnnic-border-radius-pill;
     }
   }

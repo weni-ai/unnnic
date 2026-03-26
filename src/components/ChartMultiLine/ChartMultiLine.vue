@@ -5,7 +5,7 @@
       v-if="title"
       class="header"
     >
-      <div class="title unnnic-font secondary body-lg color-neutral-dark">
+      <div class="title unnnic-font secondary body-lg color-fg-base">
         {{ title }}
       </div>
     </div>
@@ -16,13 +16,13 @@
           <div
             v-for="(value, index) in [value(maxValue), value(maxValue / 2), 0]"
             :key="index + Math.random() * 100"
-            class="value unnnic-font secondary body-md color-neutral-cleanest"
+            class="value unnnic-font secondary body-md color-fg-muted"
           >
             {{ value }}
           </div>
         </div>
 
-        <div class="unnnic-font secondary body-md color-neutral-cleanest">
+        <div class="unnnic-font secondary body-md color-fg-muted">
           &nbsp;
         </div>
       </div>
@@ -43,7 +43,7 @@
           <div
             v-for="n in 3"
             :key="n + Math.random() * 100"
-            class="horizontal-line color-neutral-cleanest"
+            class="horizontal-line color-fg-muted"
             :style="{ top: `${(n - 1) * ((122 + 67) / 3) - 8}px` }"
           />
         </div>
@@ -53,7 +53,7 @@
       <div
         v-for="(value, index) in lineData"
         :key="index + Math.random() * 100"
-        class="title unnnic-font secondary body-md color-neutral-cleanest"
+        class="title unnnic-font secondary body-md color-fg-muted"
       >
         {{ formatValue(value) }}
       </div>
@@ -62,7 +62,7 @@
       <div
         v-for="(chart, index) in data"
         :key="index + Math.random() * 100"
-        class="label unnnic-font secondary body-lg color-neutral-dark"
+        class="label unnnic-font secondary body-lg color-fg-base"
       >
         <svg
           width="15"
@@ -167,7 +167,7 @@ export default {
 @use '@/assets/scss/unnnic' as *;
 
 .unnnic-chart-line {
-  background-color: $unnnic-color-background-snow;
+  background-color: $unnnic-color-bg-base;
   border-radius: $unnnic-border-radius-md;
   padding: $unnnic-spacing-inset-md;
   box-sizing: border-box;
@@ -175,9 +175,9 @@ export default {
   flex-direction: column;
   row-gap: $unnnic-spacing-stack-nano;
   outline-style: solid;
-  outline-color: $unnnic-color-neutral-soft;
-  outline-width: $unnnic-border-width-thinner;
-  outline-offset: -$unnnic-border-width-thinner;
+  outline-color: $unnnic-color-bg-muted;
+  outline-width: 1px;
+  outline-offset: -1px;
   width: 100%;
   height: 296px;
 
@@ -260,7 +260,7 @@ export default {
         .unnnic-tooltip:hover .bar {
           width: 0;
           height: 100%;
-          border-left: 1px dashed $unnnic-color-neutral-dark;
+          border-left: 1px dashed $unnnic-color-fg-base;
           margin: 0 auto;
         }
         .horizontal-line {

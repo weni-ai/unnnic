@@ -87,23 +87,23 @@ const variant = computed(() => {
   > = {
     informational: {
       icon: 'info',
-      scheme: 'blue-500',
+      scheme: 'fg-info',
     },
     success: {
       icon: 'check_circle',
-      scheme: 'green-500',
+      scheme: 'fg-success',
     },
     attention: {
       icon: 'error',
-      scheme: 'yellow-500',
+      scheme: 'fg-warning',
     },
     error: {
       icon: 'cancel',
-      scheme: 'red-500',
+      scheme: 'fg-critical',
     },
     neutral: {
       icon: 'info',
-      scheme: 'gray-400',
+      scheme: 'fg-muted',
     },
   };
 

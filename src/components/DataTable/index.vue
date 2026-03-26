@@ -370,7 +370,7 @@ if (props.infiniteScroll) {
 <style scoped lang="scss">
 @use '@/assets/scss/unnnic' as *;
 
-$tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+$tableBorder: 1px solid $unnnic-color-border-base;
 
 .unnnic-data-table {
   border-spacing: 0;
@@ -387,12 +387,12 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $unnnic-color-neutral-cleanest;
+    background: $unnnic-color-gray-7;
     border-radius: $unnnic-border-radius-pill;
   }
 
   &::-webkit-scrollbar-track {
-    background: $unnnic-color-neutral-soft;
+    background: $unnnic-color-bg-muted;
     border-radius: $unnnic-border-radius-pill;
   }
 
@@ -410,7 +410,7 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
       box-sizing: border-box;
       border: $tableBorder;
-      background-color: $unnnic-color-neutral-light;
+      background-color: $unnnic-color-bg-base-soft;
 
       font-weight: $unnnic-font-weight-bold;
 
@@ -429,13 +429,13 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
       }
 
       &--sorting {
-        background-color: $unnnic-color-neutral-soft;
+        background-color: $unnnic-color-bg-muted;
       }
 
       &--clickable {
         &:hover {
           cursor: pointer;
-          background-color: $unnnic-color-neutral-soft;
+          background-color: $unnnic-color-bg-muted;
         }
       }
     }
@@ -447,12 +447,12 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: $unnnic-color-neutral-cleanest;
+      background: $unnnic-color-gray-7;
       border-radius: $unnnic-border-radius-pill;
     }
 
     &::-webkit-scrollbar-track {
-      background: $unnnic-color-neutral-soft;
+      background: $unnnic-color-bg-muted;
       border-radius: $unnnic-border-radius-pill;
     }
 
@@ -485,7 +485,7 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
 
         &:hover {
           cursor: pointer;
-          background-color: $unnnic-color-neutral-lightest;
+          background-color: $unnnic-color-bg-base-soft;
         }
       }
 
@@ -529,7 +529,7 @@ $tableBorder: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
     font-size: $unnnic-font-size-body-gt;
     line-height: $unnnic-line-height-small * 5.5;
     text-align: left;
-    color: $unnnic-color-neutral-dark;
+    color: $unnnic-color-fg-base;
 
     overflow: hidden;
     white-space: nowrap;

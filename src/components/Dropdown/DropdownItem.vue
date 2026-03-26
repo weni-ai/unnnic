@@ -16,7 +16,7 @@ export default {
 <style lang="scss">
 @use '@/assets/scss/unnnic' as *;
 .unnnic-dropdown-item {
-  color: $unnnic-color-neutral-dark;
+  color: $unnnic-color-fg-base;
   text-decoration: none;
   font-family: $unnnic-font-family-secondary;
   font-size: $unnnic-font-size-body-md;
@@ -25,7 +25,7 @@ export default {
     height: 0;
     content: '';
     display: block;
-    border: 1px solid $unnnic-color-neutral-lightest;
+    border: 1px solid $unnnic-color-border-muted;
     margin: $unnnic-spacing-stack-xs 0;
   }
 }

@@ -34,7 +34,7 @@
         <UnnnicIcon
           icon="close-1"
           size="sm"
-          scheme="neutral-white"
+          scheme="fg-inverted"
         />
       </div>
     </div>
@@ -135,13 +135,13 @@ export default {
   align-items: center;
   margin-bottom: $unnnic-spacing-sm;
 
-  color: $unnnic-color-neutral-white;
+  color: $unnnic-color-fg-inverted;
   font-family: $unnnic-font-family-secondary;
   font-size: $unnnic-font-size-body-gt;
   line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
   font-weight: $unnnic-font-weight-regular;
 
-  background-color: $unnnic-color-neutral-dark;
+  background-color: $unnnic-color-fg-base;
 
   z-index: 9999;
 
@@ -161,7 +161,7 @@ export default {
   &__progress {
     position: absolute;
     height: 100%;
-    background-color: $unnnic-color-neutral-darkest;
+    background-color: $unnnic-color-fg-emphasized;
     border-radius: $unnnic-border-radius-sm;
     left: 0;
     top: 0;
@@ -183,10 +183,10 @@ export default {
   }
 
   &__close {
-    border-left: $unnnic-border-width-thinner solid $unnnic-color-neutral-cloudy;
+    border-left: 1px solid $unnnic-color-fg-base;
 
     &:hover {
-      background-color: $unnnic-color-neutral-cloudy;
+      background-color: $unnnic-color-fg-base;
     }
   }
 
@@ -197,34 +197,34 @@ export default {
   }
 
   &--scheme-aux-green {
-    background-color: $unnnic-color-aux-green-500;
+    background-color: $unnnic-color-green-10;
 
     .alert__progress {
-      background-color: $unnnic-color-aux-green-700;
+      background-color: $unnnic-color-green-9;
     }
 
     .alert__close {
-      border-left: $unnnic-border-width-thinner solid
-        $unnnic-color-aux-green-300;
+      border-left: 1px solid
+        $unnnic-color-green-4;
 
       &:hover {
-        background-color: $unnnic-color-aux-green-300;
+        background-color: $unnnic-color-green-4;
       }
     }
   }
 
   &--scheme-aux-red {
-    background-color: $unnnic-color-aux-red-500;
+    background-color: $unnnic-color-red-10;
 
     .alert__progress {
-      background-color: $unnnic-color-aux-red-700;
+      background-color: $unnnic-color-red-9;
     }
 
     .alert__close {
-      border-left: $unnnic-border-width-thinner solid $unnnic-color-aux-red-300;
+      border-left: 1px solid $unnnic-color-red-4;
 
       &:hover {
-        background-color: $unnnic-color-aux-red-300;
+        background-color: $unnnic-color-red-4;
       }
     }
   }

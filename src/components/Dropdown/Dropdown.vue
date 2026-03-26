@@ -104,8 +104,8 @@ export default {
   }
 
   &__content {
-    background-color: $unnnic-color-neutral-snow;
-    box-shadow: $unnnic-shadow-level-near;
+    background-color: $unnnic-color-bg-base;
+    box-shadow: $unnnic-shadow-1;
     border-radius: $unnnic-border-radius-sm;
     position: absolute;
     display: flex;

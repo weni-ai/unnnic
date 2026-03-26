@@ -16,13 +16,13 @@
         v-if="username === 'Agent'"
         icon="single-neutral-actions-1"
         size="sm"
-        :scheme="disabled ? 'neutral-snow' : ''"
+        :scheme="disabled ? 'fg-inverted' : ''"
       />
       <UnnnicIcon
         v-else-if="username === 'Bot'"
         icon="science-fiction-robot-2"
         size="sm"
-        :scheme="disabled ? 'neutral-snow' : ''"
+        :scheme="disabled ? 'fg-inverted' : ''"
       />
       <img
         v-else-if="!!photoUrl"
@@ -115,8 +115,8 @@ $avatar-sizes:
   border-radius: $unnnic-radius-full;
 
   &.disabled {
-    background: $unnnic-color-neutral-cleanest;
-    color: $unnnic-color-neutral-snow;
+    background: $unnnic-color-gray-7;
+    color: $unnnic-color-fg-inverted;
   }
 
   &.clickable {

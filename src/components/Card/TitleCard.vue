@@ -21,7 +21,7 @@
         icon="information-circle-4"
         class="unnnic-card-title__content_info"
         size="sm"
-        scheme="neutral-soft"
+        scheme="fg-muted"
       />
     </ToolTip>
   </div>
@@ -89,7 +89,7 @@ export default {
     font-size: $unnnic-font-size-title-sm;
     font-weight: $unnnic-font-weight-regular;
     line-height: $unnnic-font-size-title-sm + $unnnic-line-height-md;
-    color: $unnnic-color-neutral-darkest;
+    color: $unnnic-color-fg-emphasized;
     flex: 1;
   }
 

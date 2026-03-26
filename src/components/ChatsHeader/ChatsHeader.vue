@@ -143,9 +143,9 @@ defineEmits<{
   align-items: center;
 
   box-shadow:
-    inset 0 -1px 0 $unnnic-color-neutral-light,
-    $unnnic-shadow-level-far;
-  background-color: $unnnic-color-background-white;
+    inset 0 -1px 0 $unnnic-color-border-muted,
+    $unnnic-shadow-1;
+  background-color: $unnnic-color-bg-base;
 
   font-family: $unnnic-font-family-secondary;
 
@@ -180,7 +180,7 @@ defineEmits<{
     display: flex;
     gap: $unnnic-spacing-ant;
 
-    color: $unnnic-color-neutral-dark;
+    color: $unnnic-color-fg-base;
 
     user-select: none;
 
@@ -234,7 +234,7 @@ defineEmits<{
         gap: $unnnic-spacing-md;
 
         box-shadow: none;
-        box-shadow: inset 0 -1px 0 $unnnic-color-neutral-soft;
+        box-shadow: inset 0 -1px 0 $unnnic-color-border-base;
 
         .unnnic-chats-header__infos__title {
           h1 {
@@ -264,7 +264,7 @@ defineEmits<{
       }
 
       &.contact {
-        box-shadow: $unnnic-shadow-level-far;
+        box-shadow: $unnnic-shadow-1;
 
         .unnnic-chats-header__close--sm {
           display: initial;

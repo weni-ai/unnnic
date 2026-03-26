@@ -4,7 +4,7 @@
       <UnnnicIcon
         class="close-button"
         icon="close-1"
-        scheme="neutral-dark"
+        scheme="fg-base"
         size="sm"
         clickable
         @click="$emit('close')"
@@ -141,12 +141,12 @@ export default {
 @use '@/assets/scss/unnnic' as *;
 
 .modal-upload {
-  background-color: $unnnic-color-background-carpet;
+  background-color: $unnnic-color-bg-base-soft;
   border-radius: $unnnic-border-radius-sm;
   padding: 0 $unnnic-spacing-inline-md;
   padding-top: $unnnic-spacing-stack-sm;
   padding-bottom: $unnnic-spacing-stack-giant;
-  box-shadow: $unnnic-shadow-level-separated;
+  box-shadow: $unnnic-shadow-1;
 
   .close-button-container {
     text-align: right;
@@ -163,7 +163,7 @@ export default {
     font-weight: $unnnic-font-weight-black;
     font-size: $unnnic-font-size-title-sm;
     line-height: $unnnic-font-size-title-sm + $unnnic-line-height-md;
-    color: $unnnic-color-neutral-darkest;
+    color: $unnnic-color-fg-emphasized;
     margin-bottom: $unnnic-spacing-stack-md;
   }
 

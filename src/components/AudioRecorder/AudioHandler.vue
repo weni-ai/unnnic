@@ -9,7 +9,7 @@
         icon="indicator"
         size="sm"
         :class="[{ 'is-recording': isRecording }]"
-        :scheme="isRecording ? null : 'neutral-clean'"
+        :scheme="isRecording ? null : 'fg-base'"
       />
     </div>
 
@@ -81,15 +81,15 @@ export default {
 
 @keyframes pulse {
   0% {
-    fill: $unnnic-color-neutral-soft;
+    fill: $unnnic-color-border-base;
   }
 
   50% {
-    fill: $unnnic-color-feedback-red;
+    fill: $unnnic-color-fg-critical;
   }
 
   100% {
-    fill: $unnnic-color-neutral-soft;
+    fill: $unnnic-color-border-base;
   }
 }
 </style>

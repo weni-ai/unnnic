@@ -65,12 +65,12 @@ $scroll-size: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $unnnic-color-neutral-cleanest;
+    background: $unnnic-color-gray-7;
     border-radius: $unnnic-border-radius-pill;
   }
 
   &::-webkit-scrollbar-track {
-    background: $unnnic-color-neutral-soft;
+    background: $unnnic-color-bg-muted;
     border-radius: $unnnic-border-radius-pill;
     // background-color: blue;
   }
@@ -79,7 +79,7 @@ $scroll-size: 4px;
 .unnnic-table {
   display: flex;
   flex-direction: column;
-  background-color: $unnnic-color-background-snow;
+  background-color: $unnnic-color-bg-base;
   border-radius: $unnnic-border-radius-sm;
 
   .header,
@@ -89,11 +89,11 @@ $scroll-size: 4px;
   }
 
   .header {
-    background-color: $unnnic-color-background-carpet;
+    background-color: $unnnic-color-bg-base-soft;
 
     :deep(.col) {
       font-family: $unnnic-font-family-secondary;
-      color: $unnnic-color-neutral-cloudy;
+      color: $unnnic-color-fg-base;
       font-weight: $unnnic-font-weight-regular;
       font-size: $unnnic-font-size-body-gt;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
@@ -101,15 +101,15 @@ $scroll-size: 4px;
   }
 
   .item {
-    background-color: $unnnic-color-background-snow;
+    background-color: $unnnic-color-bg-base;
 
     &:hover {
-      background-color: $unnnic-color-background-carpet;
+      background-color: $unnnic-color-bg-base-soft;
     }
 
     &.loading {
       font-family: $unnnic-font-family-secondary;
-      color: $unnnic-color-neutral-clean;
+      color: $unnnic-color-fg-base;
       font-size: $unnnic-font-size-body-gt;
       font-weight: $unnnic-font-weight-regular;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;

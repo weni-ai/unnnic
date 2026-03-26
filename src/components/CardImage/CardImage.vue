@@ -4,14 +4,14 @@
       <div class="content">
         <div
           v-if="title"
-          class="u font secondary body-lg bold color-neutral-darkest"
+          class="u font secondary body-lg bold color-fg-emphasized"
         >
           {{ title }}
         </div>
 
         <div
           v-if="description"
-          class="u font secondary body-md color-neutral-cloudy"
+          class="u font secondary body-md color-fg-base"
         >
           {{ description }}
         </div>
@@ -30,7 +30,7 @@
           <UnnnicIcon
             icon="navigation-menu-vertical-1"
             size="sm"
-            scheme="neutral-cleanest"
+            scheme="fg-muted"
             clickable
           />
         </template>
@@ -53,7 +53,7 @@
         :key="index"
         class="data"
       >
-        <div class="u font secondary body-gt color-neutral-dark">
+        <div class="u font secondary body-gt color-fg-base">
           {{ item.name }}
         </div>
 
@@ -64,7 +64,7 @@
             :scheme="item.scheme"
           />
 
-          <div class="u font secondary body-gt black color-neutral-darkest">
+          <div class="u font secondary body-gt color-fg-emphasized">
             {{ item.value }}
           </div>
         </div>
@@ -109,22 +109,22 @@ export default {
   display: flex;
   flex-direction: column;
   row-gap: $unnnic-spacing-stack-sm;
-  background-color: $unnnic-color-background-snow;
+  background-color: $unnnic-color-bg-base;
   border-radius: $unnnic-border-radius-md;
   padding: $unnnic-spacing-inset-md;
   box-sizing: border-box;
 
   outline-style: solid;
-  outline-color: $unnnic-color-neutral-soft;
-  outline-width: $unnnic-border-width-thinner;
-  outline-offset: -$unnnic-border-width-thinner;
+  outline-color: $unnnic-color-bg-muted;
+  outline-width: 1px;
+  outline-offset: -1px;
 
   &:hover {
-    box-shadow: $unnnic-shadow-level-near;
+    box-shadow: $unnnic-shadow-1;
   }
 
   &.checked {
-    outline-color: $unnnic-color-brand-weni;
+    outline-color: $unnnic-color-teal-8;
   }
 
   .header {

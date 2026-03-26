@@ -7,7 +7,7 @@
         <UnnnicIcon
           icon="arrow-left-1-1"
           size="sm"
-          :scheme="hasPrev ? 'neutral-black' : 'neutral-cleanest'"
+          :scheme="hasPrev ? 'gray-12' : 'fg-muted'"
           clickable
           @click="previous()"
         />
@@ -49,7 +49,7 @@
         <UnnnicIcon
           icon="arrow-right-1-1"
           size="sm"
-          :scheme="hasNext ? 'neutral-black' : 'neutral-cleanest'"
+          :scheme="hasNext ? 'gray-12' : 'fg-muted'"
           clickable
           @click="next()"
         />
@@ -171,7 +171,7 @@ export default {
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: $unnnic-color-background-snow;
+      background-color: $unnnic-color-bg-base;
     }
 
     &__blur {
@@ -180,15 +180,15 @@ export default {
       &--left {
         background-image: linear-gradient(
           to right,
-          $unnnic-color-background-snow,
-          rgba($unnnic-color-neutral-snow, $unnnic-opacity-level-overlay)
+          $unnnic-color-bg-base,
+          rgba($unnnic-color-bg-base, $unnnic-opacity-level-overlay)
         );
       }
       &--right {
         background-image: linear-gradient(
           to right,
-          rgba($unnnic-color-neutral-snow, $unnnic-opacity-level-overlay),
-          $unnnic-color-background-snow
+          rgba($unnnic-color-bg-base, $unnnic-opacity-level-overlay),
+          $unnnic-color-bg-base
         );
       }
     }

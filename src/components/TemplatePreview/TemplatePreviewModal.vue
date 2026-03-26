@@ -46,6 +46,6 @@ defineEmits<{
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $unnnic-color-neutral-lightest;
+  background-color: $unnnic-color-bg-base-soft;
 }
 </style>

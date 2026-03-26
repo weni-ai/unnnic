@@ -4,7 +4,8 @@
       v-for="index in 5"
       :key="index"
       :scheme="starScheme(index)"
-      icon="rating-star-1"
+      icon="star"
+      :filled="index <= modelValue"
       size="ant"
     />
 
@@ -46,7 +47,7 @@ export default {
 
   methods: {
     starScheme(star) {
-      return star <= this.modelValue ? 'feedback-yellow' : 'neutral-clean';
+      return star <= this.modelValue ? 'yellow-5' : 'fg-base';
     },
   },
 };
@@ -65,10 +66,10 @@ export default {
     font-weight: $unnnic-font-weight-bold;
     font-size: $unnnic-font-size-body-lg;
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-    color: $unnnic-color-neutral-cleanest;
+    color: $unnnic-color-fg-muted;
 
     .highlight {
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
     }
   }
 }

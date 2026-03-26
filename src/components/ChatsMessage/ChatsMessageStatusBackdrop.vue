@@ -3,13 +3,13 @@
     <div class="unnnic-chats-message-status-backdrop">
       <UnnnicIconLoading
         v-if="status === 'sending'"
-        scheme="neutral-white"
+        scheme="fg-inverted"
         size="avatar-sm"
       />
       <UnnnicIcon
         v-else
         icon="upload"
-        scheme="neutral-white"
+        scheme="fg-inverted"
         size="avatar-sm"
         :class="{ loading: status === 'sending' }"
       />
@@ -64,7 +64,7 @@ export default {
   padding: $unnnic-spacing-ant;
 
   box-sizing: content-box;
-  background-color: rgba($unnnic-color-neutral-darkest, 0.3);
+  background-color: rgba($unnnic-color-fg-emphasized, 0.3);
 
   display: flex;
 

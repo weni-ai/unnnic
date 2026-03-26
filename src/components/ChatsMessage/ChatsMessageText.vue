@@ -128,7 +128,7 @@ export default {
   &--automatic {
     font-size: $unnnic-font-size-body-md;
     line-height: $unnnic-line-height-caption-1;
-    color: $unnnic-color-aux-blue-500;
+    color: $unnnic-color-fg-info;
   }
 }
 </style>

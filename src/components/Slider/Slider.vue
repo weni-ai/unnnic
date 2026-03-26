@@ -18,7 +18,7 @@
           class="unnnic-label__tooltip__icon"
           icon="info"
           size="sm"
-          scheme="neutral-clean"
+          scheme="fg-base"
           :filled="true"
         />
       </UnnnicTooltip>
@@ -242,9 +242,9 @@ export default {
 .value-input {
   display: flex;
   margin-left: $unnnic-spacing-inline-sm;
-  background: $unnnic-color-neutral-snow;
+  background: $unnnic-color-bg-base;
   border-radius: $unnnic-border-radius-sm;
-  color: $unnnic-color-neutral-dark;
+  color: $unnnic-color-fg-base;
   font-weight: $unnnic-font-weight-regular;
   font-family: $unnnic-font-family-secondary;
   box-sizing: border-box;
@@ -258,7 +258,7 @@ export default {
   height: $unnnic-font-size-body-md + $unnnic-line-height-medium + 0.5 *
     $unnnic-font-size * 2;
   position: relative;
-  border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
+  border: 1px solid $unnnic-color-border-emphasized;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -275,7 +275,7 @@ export default {
   }
 
   &:focus:before {
-    border-color: $unnnic-color-neutral-clean;
+    border-color: $unnnic-color-fg-base;
   }
 
   &:focus {
@@ -310,7 +310,7 @@ export default {
     font-weight: $unnnic-font-weight-regular;
     line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     font-size: $unnnic-font-size-body-gt;
-    color: $unnnic-color-neutral-cloudy;
+    color: $unnnic-color-fg-base;
     margin: $unnnic-spacing-stack-xs 0;
   }
   &__content {
@@ -334,7 +334,7 @@ export default {
         font-weight: $unnnic-font-weight-regular;
         font-size: $unnnic-font-size-body-md;
         line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
-        color: $unnnic-color-neutral-cloudy;
+        color: $unnnic-color-fg-base;
       }
 
       &__max {
@@ -343,7 +343,7 @@ export default {
         font-weight: $unnnic-font-weight-regular;
         font-size: $unnnic-font-size-body-md;
         line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
-        color: $unnnic-color-neutral-cloudy;
+        color: $unnnic-color-fg-base;
       }
     }
 
@@ -361,7 +361,7 @@ export default {
         border-radius: 50%;
 
         &:active {
-          box-shadow: $unnnic-shadow-level-near;
+          box-shadow: $unnnic-shadow-1;
         }
       }
 
@@ -385,7 +385,7 @@ export default {
         height: 4px;
         box-sizing: border-box;
         border: none;
-        background: $unnnic-color-neutral-soft;
+        background: $unnnic-color-bg-muted;
         border-radius: $unnnic-border-radius-pill;
       }
 
@@ -400,8 +400,8 @@ export default {
           to right,
           $unnnic-color-weni-600 0%,
           $unnnic-color-weni-600 calc(var(--progress)),
-          $unnnic-color-neutral-soft calc(var(--progress)),
-          $unnnic-color-neutral-soft 100%
+          $unnnic-color-bg-muted calc(var(--progress)),
+          $unnnic-color-bg-muted 100%
         );
       }
       /* Firefox */

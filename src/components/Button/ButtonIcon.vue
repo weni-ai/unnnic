@@ -42,10 +42,10 @@ export default {
   computed: {
     iconScheme() {
       if (this.type === 'primary') {
-        return 'neutral-snow';
+        return 'fg-inverted';
       }
 
-      return 'neutral-darkest';
+      return 'fg-emphasized';
     },
   },
 };
@@ -68,7 +68,7 @@ export default {
   }
 
   &.primary {
-    background-color: $unnnic-color-neutral-darkest;
+    background-color: $unnnic-color-fg-emphasized;
 
     &:hover {
       opacity: $unnnic-opacity-level-clear;
@@ -77,7 +77,7 @@ export default {
 
   &.secondary {
     background-color: rgba(
-      $unnnic-color-neutral-soft,
+      $unnnic-color-bg-muted,
       $unnnic-opacity-level-light
     );
     position: relative;
@@ -89,14 +89,14 @@ export default {
       right: 0;
       top: 0;
       bottom: 0;
-      border: $unnnic-border-width-thinner solid $unnnic-color-neutral-cleanest;
+      border: 1px solid $unnnic-color-border-emphasized;
       border-radius: inherit;
       pointer-events: none;
     }
 
     &:hover {
       background-color: rgba(
-        $unnnic-color-neutral-soft,
+        $unnnic-color-bg-muted,
         $unnnic-opacity-level-overlay
       );
 

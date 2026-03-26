@@ -103,9 +103,9 @@ withDefaults(defineProps<FormElementProps>(), {
         content: ' ';
         position: absolute;
         left: $unnnic-space-0;
-        bottom: $unnnic-space-1 - $unnnic-border-width-thinner;
+        bottom: $unnnic-space-1 - 1px;
         width: 100%;
-        height: $unnnic-border-width-thinner;
+        height: 1px;
         background-color: $unnnic-color-white;
       }
     }

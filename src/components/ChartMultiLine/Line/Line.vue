@@ -136,7 +136,7 @@ export default {
   .unnnic-tooltip:hover .bar {
     width: 0;
     height: 100%;
-    border-left: 1px dashed $unnnic-color-neutral-dark;
+    border-left: 1px dashed $unnnic-color-fg-base;
     margin: 0 auto;
     cursor: pointer;
   }
@@ -160,7 +160,7 @@ export default {
 
     .tooltip:hover {
       display: flex;
-      color: $unnnic-color-neutral-dark;
+      color: $unnnic-color-fg-base;
       font-family: $unnnic-font-family-primary;
       justify-content: center;
       align-items: flex-end;

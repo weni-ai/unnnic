@@ -61,7 +61,7 @@ export default {
   &__row {
     .row__title,
     .row__description {
-      fill: $unnnic-color-neutral-white;
+      fill: $unnnic-color-bg-base;
       font-family: $unnnic-font-family-secondary;
       text-anchor: middle;
     }

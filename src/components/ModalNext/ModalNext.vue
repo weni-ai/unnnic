@@ -277,8 +277,8 @@ export default {
     flex-direction: column;
 
     border-radius: $unnnic-border-radius-sm;
-    background-color: $unnnic-color-background-carpet;
-    box-shadow: $unnnic-shadow-level-separated;
+    background-color: $unnnic-color-bg-base-soft;
+    box-shadow: $unnnic-shadow-1;
     padding-top: $unnnic-spacing-stack-giant;
 
     padding: $unnnic-spacing-stack-giant $unnnic-inline-md;
@@ -297,12 +297,12 @@ export default {
       }
 
       &::-webkit-scrollbar-thumb {
-        background: $unnnic-color-neutral-cleanest;
+        background: $unnnic-color-gray-7;
         border-radius: $unnnic-border-radius-pill;
       }
 
       &::-webkit-scrollbar-track {
-        background: $unnnic-color-neutral-soft;
+        background: $unnnic-color-bg-muted;
         border-radius: $unnnic-border-radius-pill;
       }
     }
@@ -353,7 +353,7 @@ export default {
     .title {
       text-align: center;
       font-family: $unnnic-font-family-secondary;
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
       font-weight: $unnnic-font-weight-black;
       font-size: $unnnic-font-size-title-sm;
       line-height: ($unnnic-font-size-title-sm + $unnnic-line-height-medium);
@@ -364,7 +364,7 @@ export default {
       text-align: center;
 
       font-family: $unnnic-font-family-secondary;
-      color: $unnnic-color-neutral-cloudy;
+      color: $unnnic-color-fg-base;
       font-weight: $unnnic-font-weight-regular;
       font-size: $unnnic-font-size-body-lg;
       line-height: ($unnnic-font-size-body-lg + $unnnic-line-height-medium);
@@ -422,13 +422,13 @@ export default {
 
       .button {
         &.danger:not([disabled]) {
-          background-color: $unnnic-color-feedback-red;
-          color: $unnnic-color-neutral-snow;
+          background-color: $unnnic-color-red-8;
+          color: $unnnic-color-fg-inverted;
         }
 
         &.alert:not([disabled]) {
-          background-color: $unnnic-color-feedback-yellow;
-          color: $unnnic-color-neutral-snow;
+          background-color: $unnnic-color-orange-6;
+          color: $unnnic-color-fg-inverted;
         }
       }
     }

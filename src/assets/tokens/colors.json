@@ -460,19 +460,19 @@
         "value": "{color.yellow.8}"
       },
       "green-plain": {
-        "value": "{color.green.2}"
+        "value": "{color.green.3}"
       },
       "green-strong": {
         "value": "{color.green.8}"
       },
       "teal-plain": {
-        "value": "{color.teal.2}"
+        "value": "{color.teal.3}"
       },
       "teal-strong": {
         "value": "{color.teal.8}"
       },
       "blue-plain": {
-        "value": "{color.blue.2}"
+        "value": "{color.blue.3}"
       },
       "blue-strong": {
         "value": "{color.blue.8}"
