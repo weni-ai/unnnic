@@ -16,7 +16,7 @@
       >
         <UnnnicIcon
           icon="delete-1-1"
-          scheme="feedback-red"
+          scheme="fg-critical"
         />
       </span>
     </UnnnicToolTip>

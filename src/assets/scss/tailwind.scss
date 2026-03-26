@@ -21,65 +21,65 @@
     --popover-foreground: #{$unnnic-color-fg-emphasized-hsl};
 
     /* Primary colors */
-    --primary: #{$unnnic-color-teal-600-hsl};
+    --primary: #{$unnnic-color-teal-8-hsl};
     --primary-foreground: #{$unnnic-color-fg-inverted-hsl};
 
     /* Secondary colors */
-    --secondary: #{$unnnic-color-gray-100-hsl};
-    --secondary-foreground: #{$unnnic-color-gray-900-hsl};
+    --secondary: #{$unnnic-color-gray-2-hsl};
+    --secondary-foreground: #{$unnnic-color-gray-13-hsl};
 
     /* Muted colors */
-    --muted: #{$unnnic-color-gray-100-hsl};
+    --muted: #{$unnnic-color-gray-2-hsl};
     --muted-foreground: #{$unnnic-color-fg-base-hsl};
 
     /* Accent colors */
-    --accent: #{$unnnic-color-gray-50-hsl};
-    --accent-foreground: #{$unnnic-color-gray-900-hsl};
+    --accent: #{$unnnic-color-gray-1-hsl};
+    --accent-foreground: #{$unnnic-color-gray-13-hsl};
 
     /* Destructive colors */
-    --destructive: #{$unnnic-color-red-500-hsl};
-    --destructive-foreground: #{$unnnic-color-white-hsl};
+    --destructive: #{$unnnic-color-red-7-hsl};
+    --destructive-foreground: #{$unnnic-color-gray-0-hsl};
 
     /* Border colors */
     --border: #{$unnnic-color-border-base-hsl};
     --input: #{$unnnic-color-border-base-hsl};
 
     /* Ring color (focus) */
-    --ring: #{$unnnic-color-teal-600-hsl};
+    --ring: #{$unnnic-color-teal-8-hsl};
 
     /* Border radius */
     --radius: #{$unnnic-radius-2};
   }
 
   .dark {
-    --background: #{$unnnic-color-gray-900-hsl};
-    --foreground: #{$unnnic-color-white-hsl};
-    
-    --card: #{$unnnic-color-gray-800-hsl};
-    --card-foreground: #{$unnnic-color-white-hsl};
-    
-    --popover: #{$unnnic-color-gray-800-hsl};
-    --popover-foreground: #{$unnnic-color-white-hsl};
-    
-    --primary: #{$unnnic-color-teal-400-hsl};
-    --primary-foreground: #{$unnnic-color-gray-900-hsl};
-    
-    --secondary: #{$unnnic-color-gray-700-hsl};
-    --secondary-foreground: #{$unnnic-color-white-hsl};
-    
-    --muted: #{$unnnic-color-gray-700-hsl};
-    --muted-foreground: #{$unnnic-color-gray-300-hsl};
-    
-    --accent: #{$unnnic-color-gray-700-hsl};
-    --accent-foreground: #{$unnnic-color-white-hsl};
-    
-    --destructive: #{$unnnic-color-red-600-hsl};
-    --destructive-foreground: #{$unnnic-color-white-hsl};
-    
-    --border: #{$unnnic-color-gray-700-hsl};
-    --input: #{$unnnic-color-gray-700-hsl};
-    
-    --ring: #{$unnnic-color-teal-400-hsl};
+    --background: #{$unnnic-color-gray-12-hsl};
+    --foreground: #{$unnnic-color-gray-0-hsl};
+
+    --card: #{$unnnic-color-gray-12-hsl};
+    --card-foreground: #{$unnnic-color-gray-0-hsl};
+
+    --popover: #{$unnnic-color-gray-12-hsl};
+    --popover-foreground: #{$unnnic-color-gray-0-hsl};
+
+    --primary: #{$unnnic-color-teal-6-hsl};
+    --primary-foreground: #{$unnnic-color-gray-13-hsl};
+
+    --secondary: #{$unnnic-color-gray-10-hsl};
+    --secondary-foreground: #{$unnnic-color-gray-0-hsl};
+
+    --muted: #{$unnnic-color-gray-10-hsl};
+    --muted-foreground: #{$unnnic-color-gray-5-hsl};
+
+    --accent: #{$unnnic-color-gray-10-hsl};
+    --accent-foreground: #{$unnnic-color-gray-0-hsl};
+
+    --destructive: #{$unnnic-color-red-8-hsl};
+    --destructive-foreground: #{$unnnic-color-gray-0-hsl};
+
+    --border: #{$unnnic-color-gray-10-hsl};
+    --input: #{$unnnic-color-gray-10-hsl};
+
+    --ring: #{$unnnic-color-teal-6-hsl};
   }
 }
 

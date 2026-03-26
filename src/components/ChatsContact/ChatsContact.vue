@@ -82,7 +82,7 @@
         </template>
         <p
           v-else-if="subtitle"
-          class="ellipsis"
+          class="ellipsis subtitle"
           :title="subtitle"
         >
           {{ subtitle }}
@@ -544,7 +544,7 @@ export default {
     &__additional-information {
       width: 100%; // important to ellipsis work
 
-      color: $unnnic-color-neutral-cloudy;
+      color: $unnnic-color-fg-muted;
     }
 
     &__unread-messages-container {

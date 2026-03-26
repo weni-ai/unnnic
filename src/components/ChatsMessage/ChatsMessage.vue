@@ -132,7 +132,7 @@
           v-if="type === 'sent'"
           :icon="messageStatusIcon"
           size="sm"
-          :scheme="status === 'read' ? 'aux-blue-500' : 'neutral-clean'"
+          :scheme="status === 'read' ? 'fg-info' : 'fg-muted'"
         />
       </section>
     </main>
@@ -345,7 +345,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     background-color: #cff8f4;
 
     &.automatic {
-      background-color: $unnnic-color-aux-blue-50;
+      background-color: $unnnic-color-blue-100;
     }
   }
 
@@ -452,7 +452,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   &__time {
     font-size: $unnnic-font-size-body-md;
     line-height: $defaultLineHeight;
-    color: $unnnic-color-neutral-clean;
+    color: $unnnic-color-fg-muted;
     margin: 0;
     padding: 0;
 

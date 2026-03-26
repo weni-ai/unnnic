@@ -9,7 +9,7 @@ exports[`UnnnicChatsContact > should match snapshot 1`] = `
       <!--v-if-->
     </section>
     <div data-v-8ce6efd5="" class="chats-contact__infos__additional-information">
-      <p data-v-8ce6efd5="" class="ellipsis" title="Message">Message</p>
+      <p data-v-8ce6efd5="" class="ellipsis subtitle" title="Message">Message</p>
     </div>
   </div>
   <section data-v-8ce6efd5="" class="chats-contact__infos__unread-messages-container">
