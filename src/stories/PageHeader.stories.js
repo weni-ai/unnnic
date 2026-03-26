@@ -4,6 +4,8 @@ import PageHeader from '../components/PageHeader/PageHeader.vue';
 import UnnnicButton from '../components/Button/Button.vue';
 import UnnnicTag from '../components/Tag/Tag.vue';
 import UnnnicSelectSmart from '../components/SelectSmart/SelectSmart.vue';
+import UnnnicIcon from '../components/Icon.vue';
+
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 export default {
@@ -325,6 +327,32 @@ export const WithBackButton = {
     },
     template: `
       <PageHeader v-bind="args" @back="handleBack" />
+    `,
+  }),
+};
+
+export const WithCustomInfos = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Page header with custom infos.',
+      },
+    },
+  },
+  render: (args) => ({
+    components: { PageHeader, UnnnicIcon },
+    setup() {
+      return { args };
+    },
+    template: `
+      <PageHeader v-bind="args">
+        <template #infos>
+          <section style="display: flex; align-items: center; gap: $unnnic-space-2;">
+            <UnnnicIcon icon="home" />
+            <p>Custom infos</p>
+          </section>
+        </template>
+      </PageHeader>
     `,
   }),
 };
