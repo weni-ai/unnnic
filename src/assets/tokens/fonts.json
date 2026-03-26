@@ -4,11 +4,14 @@
       "value": "16px"
     },
     "family": {
-      "value": "Lato"
+      "value": "Inter, sans-serif"
     },
     "weight": {
       "bold": {
-        "value": "700"
+        "value": "600"
+      },
+      "semibold": {
+        "value": "600"
       },
       "medium": {
         "value": "500"
@@ -19,33 +22,48 @@
     },
     "display": {
       "1": {
-        "value": "{font.weight.bold} calc(1.5 * {font.size}) /* 24px */ / calc(2 * {font.size}) /* 32px */ {font.family}"
+        "value": "{font.weight.semibold} calc(1.5 * {font.size}) / 1.4 {font.family}"
       },
       "2": {
-        "value": "{font.weight.bold} calc(1.25 * {font.size}) /* 20px */ / calc(1.6875 * {font.size}) /* 27px */ {font.family}"
+        "value": "{font.weight.semibold} calc(1.25 * {font.size}) / 1.4 {font.family}"
       },
       "3": {
-        "value": "{font.weight.bold} calc(1 * {font.size}) /* 16px */ / calc(1.375 * {font.size}) /* 22px */ {font.family}"
+        "value": "{font.weight.semibold} calc(1 * {font.size}) / 1.4 {font.family}"
       },
       "4": {
-        "value": "{font.weight.regular} calc(1 * {font.size}) /* 16px */ / calc(1.375 * {font.size}) /* 22px */ {font.family}"
+        "value": "{font.weight.regular} calc(1 * {font.size}) / 1.4 {font.family}"
       }
     },
     "body": {
-      "value": "{font.weight.regular} calc(0.875 * {font.size}) /* 14px */ / calc(1.3125 * {font.size}) /* 21px */ {font.family}"
+      "value": "{font.weight.regular} calc(0.875 * {font.size}) / 1.4 {font.family}"
     },
     "emphasis": {
-      "value": "{font.weight.medium} calc(0.875 * {font.size}) /* 14px */ / calc(1.3125 * {font.size}) /* 21px */ {font.family}"
+      "value": "{font.weight.medium} calc(0.875 * {font.size}) / 1.4 {font.family}"
     },
     "action": {
-      "value": "{font.weight.bold} calc(0.875 * {font.size}) /* 14px */ / calc(1.3125 * {font.size}) /* 21px */ {font.family}"
+      "value": "{font.weight.semibold} calc(0.875 * {font.size}) / 1.4 {font.family}"
     },
     "caption": {
       "1": {
-        "value": "{font.weight.medium} calc(0.75 * {font.size}) /* 12px */ / calc(1.125 * {font.size}) /* 18px */ {font.family}"
+        "value": "{font.weight.medium} calc(0.75 * {font.size}) / 1.4 {font.family}"
       },
       "2": {
-        "value": "{font.weight.regular} calc(0.75 * {font.size}) /* 12px */ / calc(1.125 * {font.size}) /* 18px */ {font.family}"
+        "value": "{font.weight.regular} calc(0.75 * {font.size}) / 1.4 {font.family}"
+      }
+    },
+    "letterSpacing": {
+      "display": {
+        "1": { "value": "-4%" },
+        "2": { "value": "-4%" },
+        "3": { "value": "-2%" },
+        "4": { "value": "-2%" }
+      },
+      "body": { "value": "-1%" },
+      "emphasis": { "value": "-1%" },
+      "action": { "value": "-1%" },
+      "caption": {
+        "1": { "value": "0" },
+        "2": { "value": "0" }
       }
     }
   }

@@ -144,7 +144,7 @@ const TemplateImage = (args) => ({
       <section style="display: flex; flex-direction: column; align-items: center; gap: 24px">
         <img height='120' width='120' src="./doris.png"/>
         <section style="display: flex; flex-direction: column; justify-content: center; align-items: center">
-          <h1 style="font-family: 'Lato'; font-size: 20px; font-weight: 900; line-height: 28px; padding: 0; margin: 0; color:#3B414D">Title</h1>
+          <h1 style="font-family: 'Inter'; font-size: 20px; font-weight: 900; line-height: 28px; padding: 0; margin: 0; color:#3B414D">Title</h1>
           <p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
         </section>
       </section>
@@ -222,7 +222,7 @@ const TemplateWithDatePicker = (args) => ({
           style="display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid #E2E6ED; border-radius: 8px;"
         >
           <section style="display: flex; flex-direction: column; gap: 8px;">
-            <p style="font-family: 'Lato'; font-size: 14px; font-weight: 600; margin: 0; color: #3B414D;">
+            <p style="font-family: 'Inter'; font-size: 14px; font-weight: 600; margin: 0; color: #3B414D;">
               Select date or period
             </p>
             <UnnnicInputDatePicker
