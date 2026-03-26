@@ -25,8 +25,8 @@ describe('SkeletonLoading', () => {
       });
     });
 
-    it('should have borderRadius', () => {
-      expect(wrapper.vm.styles.borderRadius).toBe('50%');
+    it('should have circle modifier class', () => {
+      expect(wrapper.vm.classes).toContain('unnnic-skeleton--circle');
     });
   });
 
@@ -46,8 +46,8 @@ describe('SkeletonLoading', () => {
       });
     });
 
-    it('should not have the gradient background', () => {
-      expect(wrapper.vm.styles.backgroundImage).toBe('');
+    it('should disable pulse animation duration', () => {
+      expect(wrapper.vm.styles['--skeleton-duration']).toBe('0s');
     });
   });
 
@@ -117,9 +117,12 @@ describe('SkeletonLoading', () => {
     });
 
     it('renders the skeleton loading directly on the component', async () => {
-      expect(wrapper.html()).toBe(
-        '<span class="unnnic-skeleton" style="background-color: rgb(232, 244, 244); width: 100px; height: 100px;"></span>',
-      );
+      expect(wrapper.classes()).toContain('unnnic-skeleton');
+      expect(wrapper.attributes('style')).toContain('--skeleton-bg');
+      expect(wrapper.attributes('style')).toContain('--skeleton-highlight');
+      expect(wrapper.attributes('style')).toContain('--skeleton-duration: 0s');
+      expect(wrapper.attributes('style')).toContain('width: 100px');
+      expect(wrapper.attributes('style')).toContain('height: 100px');
     });
   });
 });
