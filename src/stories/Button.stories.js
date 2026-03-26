@@ -63,6 +63,10 @@ export default {
       description:
         'Used to indicate whether the button icon should be converted to the new icon library',
     },
+    pressed: {
+      control: { type: 'boolean' },
+      description: 'Used to indicate whether the button is pressed state',
+    },
   },
 };
 
