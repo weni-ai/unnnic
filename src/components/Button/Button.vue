@@ -111,7 +111,7 @@ const hasText = computed(() => {
 
 const iconScheme = computed((): SchemeColor => {
   if (buttonDisabled.value) {
-    return 'fg-base';
+    return 'fg-muted';
   }
 
   const typeToSchemeMap: Record<ButtonType, SchemeColor> = {
@@ -251,8 +251,7 @@ watch(
 
   &--secondary {
     background-color: $unnnic-color-bg-base;
-    box-shadow: inset 0 0 0 1px
-      $unnnic-color-border-base;
+    box-shadow: inset 0 0 0 1px $unnnic-color-border-base;
 
     &:hover:enabled {
       background-color: $unnnic-color-gray-50;
@@ -316,6 +315,10 @@ watch(
     background-color: $unnnic-color-bg-muted;
     color: $unnnic-color-fg-muted;
     cursor: not-allowed;
+
+    :deep(.unnnic--clickable) {
+      cursor: not-allowed;
+    }
   }
 
   &--float {
