@@ -109,18 +109,18 @@ const hasText = computed(() => {
 
 const iconScheme = computed((): SchemeColor => {
   if (buttonDisabled.value) {
-    return 'neutral-clean';
+    return 'fg-muted';
   }
 
   const typeToSchemeMap: Record<ButtonType, SchemeColor> = {
-    primary: 'neutral-white',
-    secondary: 'neutral-dark',
-    tertiary: 'neutral-dark',
-    warning: 'neutral-white',
-    attention: 'neutral-white',
+    primary: 'fg-inverted',
+    secondary: 'fg-emphasized',
+    tertiary: 'fg-emphasized',
+    warning: 'fg-inverted',
+    attention: 'fg-inverted',
   };
 
-  return typeToSchemeMap[buttonType.value] || 'neutral-white';
+  return typeToSchemeMap[buttonType.value] || 'fg-inverted';
 });
 
 const isSizePropValid = computed(() => {
@@ -226,37 +226,37 @@ watch(
   &--primary,
   &--warning,
   &--attention {
-    color: $unnnic-color-fg-inverted;
+    color: var(--unnnic-color-fg-inverted);
   }
 
   &--secondary,
   &--tertiary {
-    color: $unnnic-color-fg-emphasized;
+    color: var(--unnnic-color-fg-emphasized);
   }
 
   &--primary {
-    background-color: $unnnic-color-bg-active;
+    background-color: var(--unnnic-color-bg-accent-strong);
 
     &:hover:enabled {
-      background-color: $unnnic-color-teal-700;
+      background-color: $unnnic-color-teal-11;
     }
 
     &:active:enabled {
-      background-color: $unnnic-color-teal-800;
+      background-color: $unnnic-color-teal-12;
     }
   }
 
   &--secondary {
-    background-color: $unnnic-color-bg-base;
+    background-color: var(--unnnic-color-bg-base);
     box-shadow: inset 0 0 0 $unnnic-border-width-thinner
-      $unnnic-color-border-base;
+      var(--unnnic-color-border-base);
 
     &:hover:enabled {
-      background-color: $unnnic-color-gray-50;
+      background-color: var(--unnnic-color-bg-base-soft);
     }
 
     &:active:enabled {
-      background-color: $unnnic-color-gray-100;
+      background-color: var(--unnnic-color-bg-muted);
     }
 
     &:disabled {
@@ -268,36 +268,35 @@ watch(
     background-color: transparent;
 
     &:hover:enabled {
-      background-color: rgba($unnnic-color-gray-400, 0.1);
+      background-color: var(--unnnic-color-bg-base-soft);
     }
 
     &:active:enabled {
-      background-color: rgba($unnnic-color-gray-400, 0.2);
+      background-color: var(--unnnic-color-bg-muted);
     }
   }
 
   &--warning {
-    background-color: $unnnic-color-red-500;
-    color: $unnnic-color-neutral-white;
+    background-color: var(--unnnic-color-bg-red-strong);
 
     &:hover:enabled {
-      background-color: $unnnic-color-red-600;
+      background-color: $unnnic-color-red-11;
     }
 
     &:active:enabled {
-      background-color: $unnnic-color-red-700;
+      background-color: $unnnic-color-red-12;
     }
   }
 
   &--attention {
-    background-color: $unnnic-color-yellow-500;
+    background-color: var(--unnnic-color-bg-yellow-strong);
 
     &:hover:enabled {
-      background-color: $unnnic-color-yellow-600;
+      background-color: $unnnic-color-yellow-11;
     }
 
     &:active:enabled {
-      background-color: $unnnic-color-yellow-700;
+      background-color: $unnnic-color-yellow-12;
     }
   }
 
@@ -306,8 +305,8 @@ watch(
   &--tertiary:disabled,
   &--warning:disabled,
   &--attention:disabled {
-    background-color: $unnnic-color-bg-muted;
-    color: $unnnic-color-fg-muted;
+    background-color: var(--unnnic-color-bg-muted);
+    color: var(--unnnic-color-fg-muted);
     cursor: not-allowed;
   }
 
