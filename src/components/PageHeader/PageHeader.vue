@@ -2,7 +2,7 @@
   <header
     :class="`page-header 
       ${hasBackButton ? 'page-header--has-back-button' : ''} 
-      ${$slots.tabs || hideDivider ? 'page-header--no-diviver' : ''}
+      ${$slots.tabs || hideDivider ? 'page-header--no-divider' : ''}
     `"
   >
     <UnnnicButton
@@ -99,7 +99,7 @@ const handleBackClick = (): void => {
     grid-template-columns: auto 1fr minmax(250px, 20%);
   }
 
-  &--no-diviver {
+  &--no-divider {
     border-bottom: none;
   }
 

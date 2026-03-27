@@ -5,6 +5,37 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.25.0 (2026-03-26)
+
+### Added
+
+- **Typography**: Documentation and stories in Storybook; typography mixins and letter-spacing tokens.
+- **Colors**: Documentation and stories in Storybook; new color scale and semantic text utilities.
+- **IconLoading**: Refactored to SVG for improved accessibility and visual consistency.
+
+### Changed
+
+- **Fonts**: Migrated font family from Lato to Inter across styles, tokens, and components.
+- **Colors**: Updated color tokens, palette values, and accent colors for improved consistency and accessibility.
+- **DefaultTag**: Updated color mapping to use new color tokens.
+- **SkeletonLoading**: Enhanced styling and animation properties.
+- **FormElement / TextInput**: Updated label color and icon scheme.
+- **Chats components**: Updated color schemes, class names, and font family.
+- **AudioRecorder / Icons**: Updated icon color schemes across multiple components.
+- **Storybook**: Upgraded to v10.2.10; removed deprecated configuration and dependencies.
+- **Build**: Migrated from Yarn to npm; updated Vite, Vue plugins, and ESLint dependencies.
+- **CI**: Updated npm publish workflow for alpha prerelease versioning.
+
+### Fixed
+
+- **IconLoading**: Correctly compute size based on props.
+
+# 3.24.6 (2026-03-26)
+
+### Added
+
+- **PageHeader**: `infos` named slot to replace the default title, description, and `tag` block with custom content; `hideDivider` prop to remove the bottom border (also applied when the `tabs` slot is used); Storybook example for the custom infos slot.
+
 # 3.24.5 (2026-03-24)
 
 ### Added

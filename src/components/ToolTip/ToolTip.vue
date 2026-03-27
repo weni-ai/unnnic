@@ -17,7 +17,7 @@
         `unnnic-tooltip-label-${side}`,
         props.class,
       ]"
-      :style="{ maxWidth: maxWidth }"
+      :style="{ maxWidth: maxWidth || '320px' }"
       :side="side"
       v-bind="contentProps"
       data-testid="tooltip-content"
