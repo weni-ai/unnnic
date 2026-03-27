@@ -16,6 +16,7 @@ const config = {
         },
       },
     },
+    '@storybook/addon-themes',
   ],
   framework: {
     name: '@storybook/vue3-vite',
