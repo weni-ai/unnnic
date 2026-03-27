@@ -90,7 +90,7 @@ export default {
   height: min-content;
 
   &__count {
-    color: $unnnic-color-neutral-dark;
+    color: $unnnic-color-fg-base;
     font-size: $unnnic-font-size-body-gt;
     font-family: $unnnic-font-family-secondary;
   }

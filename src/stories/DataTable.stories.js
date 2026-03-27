@@ -1,5 +1,5 @@
 import UnnnicDataTable from '../components/DataTable/index.vue';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 const SAMPLE_NAMES = [
   'Eduardo',

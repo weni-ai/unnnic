@@ -57,7 +57,7 @@
     >
       <UnnnicIcon
         icon="close-1"
-        scheme="neutral-clean"
+        scheme="fg-base"
         size="sm"
         clickable
         @click="$emit('close')"
@@ -115,10 +115,10 @@ export default {
 .unnnic-progress-bar {
   &.primary,
   &.secondary {
-    background-color: $unnnic-color-background-carpet;
+    background-color: $unnnic-color-bg-base-soft;
     border-radius: $unnnic-border-radius-sm;
     padding: $unnnic-squish-md;
-    box-shadow: $unnnic-shadow-level-separated;
+    box-shadow: $unnnic-shadow-1;
     display: flex;
 
     .main {
@@ -126,7 +126,7 @@ export default {
     }
 
     .title {
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
       font-family: $unnnic-font-family-primary;
       font-size: $unnnic-font-size-title-sm;
       line-height: $unnnic-font-size-title-sm + $unnnic-line-height-md;
@@ -137,7 +137,7 @@ export default {
     &.has-subtitle .footer .percentage,
     .progress-bar-container .percentage,
     .progress-bar-container .progress-container .bar .percentage {
-      color: $unnnic-color-neutral-dark;
+      color: $unnnic-color-fg-base;
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-gt;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
@@ -151,7 +151,7 @@ export default {
 
       .progress-container {
         background-color: rgba(
-          $unnnic-color-aux-blue,
+          $unnnic-color-teal-5,
           $unnnic-opacity-level-light
         );
         height: 1.25 * $unnnic-font-size;
@@ -161,7 +161,7 @@ export default {
         flex: 1;
 
         .bar {
-          background-color: $unnnic-color-aux-blue;
+          background-color: $unnnic-color-teal-5;
           height: 100%;
         }
       }
@@ -205,7 +205,7 @@ export default {
         align-items: center;
 
         .subtitle {
-          color: $unnnic-color-neutral-cloudy;
+          color: $unnnic-color-fg-base;
           font-family: $unnnic-font-family-secondary;
           font-size: $unnnic-font-size-body-gt;
           line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;

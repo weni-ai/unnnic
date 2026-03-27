@@ -10,15 +10,14 @@ jobs:
           node-version: 22
       - name: Install Dependencies
         run: |
-          npm install -g yarn
-          yarn install
+          npm install
       - name: Run Lint
-        run: yarn lint --fix --quiet
+        run: npm run lint --fix --quiet
       - name: Run tests and coverage
-        run: yarn coverage
+        run: npm run coverage
       - name: Upload results to Codecov
         uses: codecov/codecov-action@v4
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
       - name: Build Bundle
-        run: yarn build
+        run: npm run build

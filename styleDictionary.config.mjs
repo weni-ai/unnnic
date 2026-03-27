@@ -43,6 +43,8 @@ function hexToHSL(hex) {
   return `${h} ${s}% ${l}%`;
 }
 
+const AUTO_GENERATED_COMMENT = `\n// Do not edit directly, this file was auto-generated.\n\n`;
+
 export default {
   source: ['./src/assets/tokens/**/*.json'],
   hooks: {
@@ -79,7 +81,7 @@ export default {
     formats: {
       'scss/hsl-variables': (dictionary) => {
         return (
-          `\n// Do not edit directly, this file was auto-generated.\n\n` +
+          AUTO_GENERATED_COMMENT +
           dictionary.allTokens
             .map((token) => {
               const name = token.name.replace(/_/g, '-');
@@ -88,6 +90,54 @@ export default {
             })
             .join('\n') +
           `\n`
+        );
+      },
+      'typescript/es6-declarations': (dictionary) => {
+        return (
+          AUTO_GENERATED_COMMENT +
+          dictionary.allTokens
+            .map((token) => {
+              const name = token.name;
+              return `export declare const ${name}: string;`;
+            })
+            .join('\n') +
+          `\n`
+        );
+      },
+      'scss/fonts-with-mixins': (dictionary) => {
+        const tokens = dictionary.allTokens;
+        const varName = (token) => `$${token.name.replace(/_/g, '-')}`;
+        const byPath = new Map(
+          tokens.map((token) => [token.path.join('.'), token]),
+        );
+
+        const variables =
+          AUTO_GENERATED_COMMENT +
+          tokens
+            .map((token) => `${varName(token)}: ${token.value};`)
+            .join('\n');
+
+        const mixins = tokens
+          .filter(
+            (token) =>
+              token.path[0] === 'font' && token.path[1] === 'letterSpacing',
+          )
+          .map((letterSpacingToken) => {
+            const fontPath = ['font', ...letterSpacingToken.path.slice(2)];
+            const fontToken = byPath.get(fontPath.join('.'));
+            if (!fontToken) return null;
+            const name = fontToken.name.replace(/_/g, '-');
+
+            const fontValue = `font: ${varName(fontToken)}`;
+            const letterSpacingValue = `letter-spacing: ${varName(letterSpacingToken)}`;
+
+            return `@mixin ${name} {\n  ${fontValue};\n  ${letterSpacingValue};\n}`;
+          })
+          .filter(Boolean)
+          .join('\n\n');
+
+        return (
+          variables + (mixins ? `\n\n// Typography mixins\n${mixins}\n` : '')
         );
       },
     },
@@ -105,7 +155,7 @@ export default {
         },
         {
           destination: 'fonts.scss',
-          format: 'scss/variables',
+          format: 'scss/fonts-with-mixins',
           filter: 'fonts',
         },
         {
@@ -132,6 +182,72 @@ export default {
           destination: 'colors-hsl.scss',
           format: 'scss/hsl-variables',
           filter: 'colors',
+        },
+      ],
+    },
+    js: {
+      transforms: ['attribute/cti', 'name/camel', 'size/rem', 'color/hex'],
+      buildPath: './dist/tokens/',
+      files: [
+        {
+          destination: 'colors.mjs',
+          format: 'javascript/es6',
+          filter: 'colors',
+        },
+        {
+          destination: 'colors.d.ts',
+          format: 'typescript/es6-declarations',
+          filter: 'colors',
+        },
+        {
+          destination: 'fonts.mjs',
+          format: 'javascript/es6',
+          filter: 'fonts',
+        },
+        {
+          destination: 'fonts.d.ts',
+          format: 'typescript/es6-declarations',
+          filter: 'fonts',
+        },
+        {
+          destination: 'spaces.mjs',
+          format: 'javascript/es6',
+          filter: 'spaces',
+        },
+        {
+          destination: 'spaces.d.ts',
+          format: 'typescript/es6-declarations',
+          filter: 'spaces',
+        },
+        {
+          destination: 'radii.mjs',
+          format: 'javascript/es6',
+          filter: 'radii',
+        },
+        {
+          destination: 'radii.d.ts',
+          format: 'typescript/es6-declarations',
+          filter: 'radii',
+        },
+        {
+          destination: 'shadows.mjs',
+          format: 'javascript/es6',
+          filter: 'shadows',
+        },
+        {
+          destination: 'shadows.d.ts',
+          format: 'typescript/es6-declarations',
+          filter: 'shadows',
+        },
+        {
+          destination: 'icon-sizes.mjs',
+          format: 'javascript/es6',
+          filter: 'iconSizes',
+        },
+        {
+          destination: 'icon-sizes.d.ts',
+          format: 'typescript/es6-declarations',
+          filter: 'iconSizes',
         },
       ],
     },

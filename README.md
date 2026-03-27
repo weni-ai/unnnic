@@ -18,14 +18,14 @@
 Before install the lib, make sure you have installed the following tools on your machine:
 
 - [Node.js 20](https://nodejs.org/en)
-- [NPM](https://www.npmjs.com/) or [Yarn](https://yarnpkg.com/) (recommended) 
+- [NPM](https://www.npmjs.com/)
 
 # Set up at projects with Vue 3
 
 1. Install unnnic in your project
 
 ```
-yarn add @weni/unnnic-system
+npm i @weni/unnnic-system
 ```
 
 2. Configuration in main.js 
@@ -36,7 +36,15 @@ import "@weni/unnnic-system/dist/style.css";
 
 const app = createApp(App);
 
-app.use(Unnnic);
+app.use(Unnnic, {
+  /**
+   * Optional: route every teleport-aware layer (dialogs, drawers,
+   * popovers, tooltips, toasts, etc) to a specific DOM container instead
+   * of falling back to document.body. Accepts a CSS selector or an
+   * HTMLElement reference.
+   */
+  teleportTarget: '#app',
+});
 ```
 
 3. Configuration in vite.config.js

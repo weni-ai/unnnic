@@ -24,7 +24,7 @@ export default {
   props: {
     color: {
       type: String,
-      default: 'neutral-white',
+      default: 'fg-inverted',
     },
   },
   data() {
@@ -81,7 +81,7 @@ export default {
   height: 100%;
   z-index: 1;
 
-  @each $name, $color in $scheme-colors {
+  @each $name, $color in $unnnic-scheme-colors {
     &-color--#{$name} {
       background-color: $color;
     }

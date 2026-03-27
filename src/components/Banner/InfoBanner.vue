@@ -85,7 +85,7 @@ export default {
       this.$emit('ratingAction', star);
     },
     starScheme(star) {
-      return star <= this.baseRating ? 'feedback-yellow' : 'neutral-clean';
+      return star <= this.baseRating ? 'feedback-yellow' : 'fg-base';
     },
     starOver(star) {
       this.tempRating = this.baseRating;
@@ -107,7 +107,7 @@ export default {
 
   border-radius: $unnnic-border-radius-sm;
   padding: $unnnic-squish-md;
-  background-color: $unnnic-color-background-carpet;
+  background-color: $unnnic-color-bg-base-soft;
   text-align: center;
   justify-content: center;
 
@@ -120,7 +120,7 @@ export default {
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-lg;
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-    color: $unnnic-color-neutral-cloudy;
+    color: $unnnic-color-fg-base;
     margin-bottom: $unnnic-spacing-stack-nano;
   }
 
@@ -129,7 +129,7 @@ export default {
     font-weight: $unnnic-font-weight-bold;
     font-size: $unnnic-font-size-title-md;
     line-height: $unnnic-font-size-title-md + $unnnic-line-height-md;
-    color: $unnnic-color-neutral-dark;
+    color: $unnnic-color-fg-base;
   }
 
   &__subtitle {
@@ -137,14 +137,14 @@ export default {
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-lg;
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-    color: $unnnic-color-neutral-cloudy;
+    color: $unnnic-color-fg-base;
     margin-top: $unnnic-spacing-stack-nano;
   }
 
   &__divider {
     align-self: center;
 
-    border-left: $unnnic-border-width-thinner solid $unnnic-color-neutral-clean;
+    border-left: 1px solid $unnnic-color-fg-base;
     height: 36px;
     margin: 0 $unnnic-inline-md;
   }

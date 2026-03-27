@@ -104,3 +104,11 @@ export const CustomRelativePeriodsWithBaseDate = {
     ],
   },
 };
+
+export const WithHiddenOptions = {
+  args: {
+    size: 'large',
+    type: 'day',
+    hideOptions: true,
+  },
+};

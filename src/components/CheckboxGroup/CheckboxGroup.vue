@@ -1,13 +1,14 @@
 <template>
-  <section :class="[
-    'unnnic-checkbox-group__container',
-    `unnnic-checkbox-group--state-${state}`,
-  ]">
+  <section
+    :class="[
+      'unnnic-checkbox-group__container',
+      `unnnic-checkbox-group--state-${state}`,
+    ]"
+  >
     <UnnnicLabel
       v-if="label"
       :label="label"
       :tooltip="labelTooltip"
-      :useHtmlTooltip="labelUseHtmlTooltip"
     />
 
     <section class="unnnic-checkbox-group__checkboxes">
@@ -23,36 +24,29 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import UnnnicLabel from '../Label/Label.vue';
+import { type TooltipProps } from '../ToolTip/ToolTip.vue';
 
-const props = defineProps({
-  state: {
-    type: String,
-    default: 'horizontal',
-    validator(value) {
-      return ['horizontal', 'vertical'].includes(value);
-    },
-  },
+defineOptions({
+  name: 'UnnnicCheckboxGroup',
+});
 
-  label: {
-    type: String,
-  },
+export interface CheckboxGroupProps {
+  state?: 'horizontal' | 'vertical';
+  label?: string;
+  labelTooltip?: TooltipProps;
+  helper?: string;
+}
 
-  labelTooltip: {
-    type: String,
-  },
-
-  labelUseHtmlTooltip: {
-    type: Boolean,
-  },
-
-  helper: {
-    type: String,
-  },
+withDefaults(defineProps<CheckboxGroupProps>(), {
+  state: 'horizontal',
+  label: '',
+  labelTooltip: undefined,
+  helper: '',
 });
 </script>
-  
+
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 

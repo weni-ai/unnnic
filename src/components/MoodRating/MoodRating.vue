@@ -97,7 +97,7 @@ export default {
     font-weight: $unnnic-font-weight-bold;
     font-size: $unnnic-font-size-body-lg;
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-    color: $unnnic-color-neutral-cloudy;
+    color: $unnnic-color-fg-base;
   }
 
   .moods {

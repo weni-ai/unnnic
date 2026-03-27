@@ -4,7 +4,7 @@
       v-if="title"
       class="header"
     >
-      <div class="title unnnic-font secondary body-lg color-neutral-dark">
+      <div class="title unnnic-font secondary body-lg color-fg-base">
         {{ title }}
       </div>
     </div>
@@ -19,13 +19,13 @@
               value(0),
             ]"
             :key="index"
-            class="value unnnic-font secondary body-md color-neutral-cleanest"
+            class="value unnnic-font secondary body-md color-fg-muted"
           >
             {{ value }}
           </div>
         </div>
 
-        <div class="unnnic-font secondary body-md color-neutral-cleanest">
+        <div class="unnnic-font secondary body-md color-fg-muted">
           &nbsp;
         </div>
       </div>
@@ -56,7 +56,7 @@
           <div
             v-for="({ title }, index) in data"
             :key="index"
-            class="title unnnic-font secondary body-md color-neutral-cleanest"
+            class="title unnnic-font secondary body-md color-fg-muted"
           >
             {{ title }}
           </div>
@@ -193,7 +193,7 @@ export default {
 @use '@/assets/scss/unnnic' as *;
 
 .unnnic-chart-line {
-  background-color: $unnnic-color-background-snow;
+  background-color: $unnnic-color-bg-base;
   border-radius: $unnnic-border-radius-md;
   padding: $unnnic-spacing-inset-md;
   box-sizing: border-box;
@@ -201,9 +201,9 @@ export default {
   flex-direction: column;
   row-gap: $unnnic-spacing-stack-nano;
   outline-style: solid;
-  outline-color: $unnnic-color-neutral-soft;
-  outline-width: $unnnic-border-width-thinner;
-  outline-offset: -$unnnic-border-width-thinner;
+  outline-color: $unnnic-color-bg-muted;
+  outline-width: 1px;
+  outline-offset: -1px;
 
   &.condensed {
     padding: $unnnic-spacing-inset-sm;
@@ -255,7 +255,7 @@ export default {
         .unnnic-tooltip:hover .bar {
           width: 0;
           height: 100%;
-          border-left: 1px dashed $unnnic-color-neutral-dark;
+          border-left: 1px dashed $unnnic-color-fg-base;
           margin: 0 auto;
         }
       }

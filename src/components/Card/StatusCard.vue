@@ -3,7 +3,7 @@
     <div class="header">
       <UnnnicIcon
         :icon="icon"
-        scheme="neutral-dark"
+        scheme="fg-base"
         size="md"
         class="icon"
       />
@@ -63,7 +63,7 @@ export default {
 .unnnic-card-status {
   display: flex;
   flex-direction: column;
-  background-color: $unnnic-color-background-sky;
+  background-color: $unnnic-color-bg-base-soft;
   border-radius: $unnnic-border-radius-sm;
   padding: $unnnic-inset-sm;
 
@@ -80,7 +80,7 @@ export default {
       font-size: $unnnic-font-size-body-lg;
       font-weight: $unnnic-font-weight-regular;
       line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-      color: $unnnic-color-neutral-dark;
+      color: $unnnic-color-fg-base;
     }
   }
 
@@ -96,7 +96,7 @@ export default {
         font-size: $unnnic-font-size-body-gt;
         font-weight: $unnnic-font-weight-regular;
         line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-        color: $unnnic-color-neutral-darkest;
+        color: $unnnic-color-fg-emphasized;
       }
     }
 
@@ -104,7 +104,7 @@ export default {
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-gt;
       font-weight: $unnnic-font-weight-regular;
-      color: $unnnic-color-neutral-cloudy;
+      color: $unnnic-color-fg-base;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
       margin-left: $unnnic-icon-size-sm;
     }

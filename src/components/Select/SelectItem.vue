@@ -47,12 +47,12 @@ export default {
 <style lang="scss">
 @use '@/assets/scss/unnnic' as *;
 .unnnic-select-item {
-  background-color: $unnnic-color-background-snow;
+  background-color: $unnnic-color-bg-base;
   padding: $unnnic-spacing-stack-nano $unnnic-inline-xs;
   margin: $unnnic-inline-xs;
 
   font-family: $unnnic-font-family-secondary;
-  color: $unnnic-color-neutral-dark;
+  color: $unnnic-color-fg-base;
   font-weight: $unnnic-font-weight-regular;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -61,13 +61,13 @@ export default {
   -webkit-line-clamp: 1;
 
   &.text-focused {
-    color: $unnnic-color-brand-weni-soft;
+    color: $unnnic-color-teal-8;
     font-weight: $unnnic-font-weight-bold;
   }
 
   &--selectable:hover,
   &__active {
-    background-color: $unnnic-color-neutral-lightest;
+    background-color: $unnnic-color-bg-base-soft;
     border-radius: $unnnic-border-radius-sm;
   }
 

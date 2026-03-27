@@ -21,7 +21,7 @@
           <UnnnicIcon
             :icon="getLinkIcon(link)"
             size="lg"
-            scheme="neutral-snow"
+            scheme="fg-inverted"
             :filled="isSelected(link)"
           />
         </a>

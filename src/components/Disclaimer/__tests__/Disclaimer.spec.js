@@ -4,26 +4,16 @@ import { describe, it, expect } from 'vitest';
 import Disclaimer from '../Disclaimer.vue';
 import Icon from '../../Icon.vue';
 
-const mountComponent = (props = {}) =>
+const mountComponent = (props = {}, slots = {}) =>
   mount(Disclaimer, {
     props,
+    slots,
     global: {
       components: { UnnnicIcon: Icon },
     },
   });
 
 describe('Disclaimer', () => {
-  it('renders default title and description', () => {
-    const wrapper = mountComponent();
-
-    expect(wrapper.find('[data-testid="disclaimer-title"]').text()).toBe(
-      'Disclaimer',
-    );
-    expect(wrapper.find('[data-testid="disclaimer-description"]').text()).toBe(
-      'The quick brown fox jumps over the lazy dog',
-    );
-  });
-
   it('hides title when no title is provided', () => {
     const wrapper = mountComponent({ title: '' });
 
@@ -40,12 +30,74 @@ describe('Disclaimer', () => {
     ).toBe(false);
   });
 
+  describe('description slot', () => {
+    it('renders custom content via description slot', () => {
+      const wrapper = mountComponent(
+        { description: '' },
+        {
+          description: '<a href="https://example.com">Click here</a>',
+        },
+      );
+
+      const description = wrapper.find(
+        '[data-testid="disclaimer-description"]',
+      );
+
+      expect(description.exists()).toBe(true);
+      expect(description.find('a').exists()).toBe(true);
+      expect(description.find('a').attributes('href')).toBe(
+        'https://example.com',
+      );
+      expect(description.find('a').text()).toBe('Click here');
+    });
+
+    it('prioritizes slot content over description prop', () => {
+      const wrapper = mountComponent(
+        { description: 'Prop description' },
+        {
+          description: '<span>Slot description</span>',
+        },
+      );
+
+      const description = wrapper.find(
+        '[data-testid="disclaimer-description"]',
+      );
+
+      expect(description.text()).toBe('Slot description');
+      expect(description.find('span').exists()).toBe(true);
+    });
+
+    it('shows description from prop when slot is not provided', () => {
+      const wrapper = mountComponent({ description: 'Prop only description' });
+
+      expect(
+        wrapper.find('[data-testid="disclaimer-description"]').text(),
+      ).toBe('Prop only description');
+    });
+
+    it('hides description when neither slot nor prop is provided', () => {
+      const wrapper = mountComponent({ description: '' }, {});
+
+      expect(
+        wrapper.find('[data-testid="disclaimer-description"]').exists(),
+      ).toBe(false);
+    });
+
+    it('hides description when empty slot is provided', () => {
+      const wrapper = mountComponent({ description: '' }, { description: '' });
+
+      expect(
+        wrapper.find('[data-testid="disclaimer-description"]').exists(),
+      ).toBe(false);
+    });
+  });
+
   it.each([
-    ['informational', 'info', 'blue-500'],
-    ['success', 'check_circle', 'green-500'],
-    ['attention', 'error', 'yellow-500'],
-    ['error', 'cancel', 'red-500'],
-    ['neutral', 'info', 'gray-400'],
+    ['informational', 'info', 'fg-info'],
+    ['success', 'check_circle', 'fg-success'],
+    ['attention', 'error', 'fg-warning'],
+    ['error', 'cancel', 'fg-critical'],
+    ['neutral', 'info', 'fg-muted'],
   ])('applies variant %s styles', (type, icon, scheme) => {
     const wrapper = mountComponent({ type });
 
@@ -61,10 +113,10 @@ describe('Disclaimer', () => {
 
   describe('legacy compatibility', () => {
     it.each([
-      ['alert-circle-1-1', 'error', 'yellow-500'],
-      ['info', 'info', 'blue-500'],
-      ['error', 'cancel', 'red-500'],
-      ['custom-icon', 'info', 'gray-400'],
+      ['alert-circle-1-1', 'error', 'fg-warning'],
+      ['info', 'info', 'fg-info'],
+      ['error', 'cancel', 'fg-critical'],
+      ['custom-icon', 'info', 'fg-muted'],
     ])('maps icon prop "%s" to variant', (icon, expectedIcon, scheme) => {
       const wrapper = mountComponent({ icon });
 
@@ -77,9 +129,9 @@ describe('Disclaimer', () => {
     });
 
     it.each([
-      ['feedback-yellow', 'error', 'yellow-500'],
-      ['feedback-red', 'cancel', 'red-500'],
-      ['feedback-blue', 'info', 'gray-400'],
+      ['feedback-yellow', 'error', 'fg-warning'],
+      ['feedback-red', 'cancel', 'fg-critical'],
+      ['feedback-blue', 'info', 'fg-muted'],
     ])(
       'maps iconColor prop "%s" to variant',
       (iconColor, expectedIcon, scheme) => {

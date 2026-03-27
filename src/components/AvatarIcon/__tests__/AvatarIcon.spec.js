@@ -65,10 +65,10 @@ describe('AvatarIcon.vue', () => {
     expect(wrapper.vm.iconSize).toBe('xl');
   });
 
-  test('renders neutral-cloudy scheme when enabled is false', async () => {
+  test('renders fg-base scheme when enabled is false', async () => {
     await wrapper.setProps({ enabled: false });
     const icon = wrapper.findComponent({ name: 'UnnnicIcon' });
-    expect(icon.props('scheme')).toBe('neutral-cloudy');
+    expect(icon.props('scheme')).toBe('fg-base');
   });
 
   test('applies opacity class based on prop', async () => {

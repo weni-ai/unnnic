@@ -5,8 +5,7 @@ export default {
   component: UnnnicSwitch,
   argTypes: {
     label: { control: { type: 'text' } },
-    labelTooltip: { control: { type: 'text' } },
-    labelUseHtmlTooltip: { control: 'boolean' },
+    labelTooltip: { control: { type: 'object' } },
     option: { control: { type: 'text' } },
     helper: { control: { type: 'text' } },
     disabled: { control: { type: 'boolean' } },
@@ -25,7 +24,9 @@ export default {
     },
     template: `
       <div>
-        <UnnnicSwitch v-bind="args" v-model="value"/> 
+        <UnnnicSwitch v-bind="args" v-model="value">
+          <template #suffix>Slot content</template>
+        </UnnnicSwitch> 
         <div>{{value}}</div>
       </div>
     `,
@@ -35,8 +36,9 @@ export default {
 export const Default = {
   args: {
     label: 'Default',
-    labelTooltip: 'Tooltip',
-    labelUseHtmlTooltip: true,
+    labelTooltip: {
+      text: 'Tooltip',
+    },
     option: 'Option',
     helper: 'Helper text',
     disabled: false,

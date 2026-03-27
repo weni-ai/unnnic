@@ -1,4 +1,4 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import UnnnicRadioGroup from '../components/RadioGroup/RadioGroup.vue';
 import UnnnicRadio from '../components/Radio/Radio.vue';
 import { ref } from 'vue';
@@ -10,18 +10,17 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Fundamental in forms, used when we present a list of two or more mutually 
+        component: `<div>Fundamental in forms, used when we present a list of two or more mutually 
         exclusive options, and the user needs to choose exactly one of them. When you click on 
         an unselected radio button, it will automatically deselect any other buttons that were 
         previously selected in the list.
-          `,
+        </div>`,
       },
     },
   },
   argTypes: {
     label: { control: { type: 'text' } },
-    labelTooltip: { control: { type: 'text' } },
-    labelUseHtmlTooltip: { control: 'boolean' },
+    labelTooltip: { control: { type: 'object' } },
     modelValue: { control: { type: ['string', 'number'] } },
     name: { control: { type: 'text' } },
     state: { control: 'select', options: ['horizontal', 'vertical'] },
@@ -112,7 +111,9 @@ export const Vertical = {
   args: {
     state: 'vertical',
     label: 'Label',
-    labelTooltip: 'Tooltip',
+    labelTooltip: {
+      text: 'Tooltip',
+    },
     name: 'Radio Group 2',
     helper: 'Helper text',
   },

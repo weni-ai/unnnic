@@ -3,7 +3,7 @@
     <span
       v-if="!!$slots.label || label"
       :class="[
-        'label unnnic-font secondary color-neutral-cloudy',
+        'label unnnic-font secondary color-fg-base',
         { 'body-md': size === 'sm', 'body-gt': size == 'md' },
       ]"
       @click="$refs.input.focus()"
@@ -86,7 +86,7 @@
 
     <div
       v-else-if="message"
-      class="message unnnic-font secondary body-md color-neutral-cloudy"
+      class="message unnnic-font secondary body-md color-fg-base"
     >
       {{ message }}
     </div>
@@ -163,7 +163,7 @@ export default {
         return 'feedback-red';
       }
 
-      return this.isFocused ? 'neutral-dark' : 'neutral-cloudy';
+      return 'fg-base';
     },
   },
 
@@ -188,25 +188,25 @@ export default {
   }
 
   .input-container {
-    background-color: $unnnic-color-neutral-snow;
+    background-color: $unnnic-color-bg-base;
     border-radius: $unnnic-border-radius-sm;
     outline-style: solid;
-    outline-color: $unnnic-color-neutral-soft;
-    outline-width: $unnnic-border-width-thinner;
-    outline-offset: -$unnnic-border-width-thinner;
+    outline-color: $unnnic-color-bg-muted;
+    outline-width: 1px;
+    outline-offset: -1px;
     cursor: text;
     display: flex;
     align-items: center;
     column-gap: $unnnic-spacing-inline-xs;
 
     &:focus-within {
-      outline-color: $unnnic-color-neutral-clean;
+      outline-color: $unnnic-color-fg-base;
     }
 
     &:has(input:disabled) {
       outline-style: dashed;
-      outline-color: $unnnic-color-neutral-cleanest;
-      background-color: $unnnic-color-neutral-light;
+      outline-color: $unnnic-color-fg-muted;
+      background-color: $unnnic-color-bg-base-soft;
       cursor: default;
     }
 
@@ -217,14 +217,14 @@ export default {
 
       font-family: $unnnic-font-family-secondary;
       font-weight: $unnnic-font-weight-regular;
-      color: $unnnic-color-neutral-dark;
+      color: $unnnic-color-fg-base;
 
       &:focus::placeholder {
-        color: $unnnic-color-neutral-cleanest;
+        color: $unnnic-color-fg-muted;
       }
 
       &::placeholder {
-        color: $unnnic-color-neutral-cloudy;
+        color: $unnnic-color-fg-base;
         opacity: 1; /* Firefox */
         user-select: none;
       }
@@ -267,13 +267,13 @@ export default {
 
   &.type-error {
     .input-container {
-      outline-color: $unnnic-color-feedback-red;
+      outline-color: $unnnic-color-fg-critical;
 
       input {
-        color: $unnnic-color-feedback-red;
+        color: $unnnic-color-fg-critical;
 
         &::placeholder {
-          color: $unnnic-color-feedback-red;
+          color: $unnnic-color-fg-critical;
         }
       }
     }

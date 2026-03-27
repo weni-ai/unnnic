@@ -6,30 +6,33 @@
       clickable,
       disabled,
       [`user-avatar--${size}`]: true,
+      [`user-avatar--${scheme}`]: true,
     }"
     @click="$emit('click')"
     @keypress.enter="$emit('click')"
   >
-    <UnnnicIcon
-      v-if="username === 'Agent'"
-      icon="single-neutral-actions-1"
-      size="sm"
-      :scheme="disabled ? 'neutral-snow' : ''"
-    />
-    <UnnnicIcon
-      v-else-if="username === 'Bot'"
-      icon="science-fiction-robot-2"
-      size="sm"
-      :scheme="disabled ? 'neutral-snow' : ''"
-    />
-    <img
-      v-else-if="!!photoUrl"
-      :src="photoUrl"
-      alt=""
-    />
-    <span v-else>
-      {{ getUsernameFirstCharacter }}
-    </span>
+    <slot name="content">
+      <UnnnicIcon
+        v-if="username === 'Agent'"
+        icon="single-neutral-actions-1"
+        size="sm"
+        :scheme="disabled ? 'fg-inverted' : ''"
+      />
+      <UnnnicIcon
+        v-else-if="username === 'Bot'"
+        icon="science-fiction-robot-2"
+        size="sm"
+        :scheme="disabled ? 'fg-inverted' : ''"
+      />
+      <img
+        v-else-if="!!photoUrl"
+        :src="photoUrl"
+        alt=""
+      />
+      <span v-else :class="`text-${textColor}`">
+        {{ getUsernameFirstCharacter }}
+      </span>
+    </slot>
   </section>
 </template>
 
@@ -62,11 +65,19 @@ export default {
     },
     username: {
       type: String,
-      required: true,
+      default: '',
     },
     photoUrl: {
       type: String,
       default: '',
+    },
+    scheme: {
+      type: String,
+      default: 'gray-200',
+    },
+    textColor: {
+      type: String,
+      default: 'gray-900',
     },
   },
   emits: ['click'],
@@ -101,22 +112,25 @@ $avatar-sizes:
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: $unnnic-border-radius-sm;
-
-  border: 1px solid $unnnic-color-aux-purple-100;
-  color: $unnnic-color-aux-purple-500;
-
-  &.active {
-    background: $unnnic-color-neutral-white;
-  }
+  border-radius: $unnnic-radius-full;
 
   &.disabled {
-    background: $unnnic-color-neutral-cleanest;
-    color: $unnnic-color-neutral-snow;
+    background: $unnnic-color-gray-7;
+    color: $unnnic-color-fg-inverted;
   }
 
   &.clickable {
     cursor: pointer;
+  }
+
+  @each $name, $color in $unnnic-scheme-colors {
+    &.text-#{$name} {
+      color: $color;
+    }
+
+    &--#{$name} {
+      background-color: $color;
+    }
   }
 
   @each $name, $size in $avatar-sizes {

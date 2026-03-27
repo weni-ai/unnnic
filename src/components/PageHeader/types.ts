@@ -3,6 +3,7 @@ export interface PageHeaderProps {
   description?: string;
 
   hasBackButton?: boolean;
+  hideDivider?: boolean;
 }
 
 export interface PageHeaderEmits {

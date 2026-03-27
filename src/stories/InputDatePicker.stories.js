@@ -89,3 +89,10 @@ export const WithCustomRelativePeriodsAndBaseDate = {
     ],
   },
 };
+
+export const WithHiddenOptions = {
+  args: {
+    size: 'sm',
+    hideOptions: true,
+  },
+};

@@ -7,7 +7,7 @@
     <div class="header">
       <UnnnicIcon
         :icon="open ? 'subtract-circle-1' : 'add-circle-1'"
-        scheme="neutral-clean"
+        scheme="fg-base"
         size="md"
       />
 
@@ -89,7 +89,7 @@ export default {
 @use '@/assets/scss/unnnic' as *;
 
 .unnnic-accordion {
-  background-color: $unnnic-color-background-snow;
+  background-color: $unnnic-color-bg-base;
   padding: $unnnic-spacing-inset-md;
   border-radius: $unnnic-border-radius-md;
   z-index: 0;
@@ -106,7 +106,7 @@ export default {
     right: 0;
     z-index: -1;
     border-radius: $unnnic-border-radius-md;
-    border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+    border: 1px solid $unnnic-color-border-base;
   }
 
   .header {
@@ -119,7 +119,7 @@ export default {
       font-weight: $unnnic-font-weight-regular;
       font-size: $unnnic-font-size-body-lg;
       line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
       margin-left: $unnnic-spacing-inline-xs;
 
       &.open {
@@ -138,7 +138,7 @@ export default {
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-lg;
     line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-    color: $unnnic-color-neutral-dark;
+    color: $unnnic-color-fg-base;
   }
 
   .content.open {

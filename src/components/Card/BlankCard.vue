@@ -8,7 +8,7 @@
     <div class="unnnic-card-blank__content">
       <UnnnicIcon
         :icon="icon"
-        scheme="neutral-clean"
+        scheme="fg-base"
         class="unnnic-card-blank__content__icon"
         size="xl"
       />
@@ -48,14 +48,14 @@ export default {
 
 .unnnic-card-blank {
   display: flex;
-  background-color: $unnnic-color-background-snow;
+  background-color: $unnnic-color-bg-base;
   border-radius: $unnnic-border-radius-md;
   padding: $unnnic-inset-md;
-  border: $unnnic-border-width-thinner solid $unnnic-color-neutral-soft;
+  border: 1px solid $unnnic-color-border-base;
   cursor: pointer;
 
   &:hover {
-    box-shadow: $unnnic-shadow-level-near;
+    box-shadow: $unnnic-shadow-1;
   }
 
   &__clickable {
@@ -77,7 +77,7 @@ export default {
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-lg;
       font-weight: $unnnic-font-weight-regular;
-      color: $unnnic-color-neutral-cloudy;
+      color: $unnnic-color-fg-base;
       line-height: $unnnic-font-size-body-lg + $unnnic-line-height-medium;
     }
   }

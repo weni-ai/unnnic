@@ -1,9 +1,11 @@
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 import PageHeader from '../components/PageHeader/PageHeader.vue';
 import UnnnicButton from '../components/Button/Button.vue';
 import UnnnicTag from '../components/Tag/Tag.vue';
 import UnnnicSelectSmart from '../components/SelectSmart/SelectSmart.vue';
+import UnnnicIcon from '../components/Icon.vue';
+
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 export default {
@@ -13,12 +15,12 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `A page header component to standardize the header of pages.
+        component: `<div>A page header component to standardize the header of pages.
           <br/>
           It supports title, description, actions, tabs, tags, and back navigation.
           <br/>
           This component provides multiple variations to handle different page header scenarios.
-          `,
+          </div>`,
       },
     },
   },
@@ -325,6 +327,32 @@ export const WithBackButton = {
     },
     template: `
       <PageHeader v-bind="args" @back="handleBack" />
+    `,
+  }),
+};
+
+export const WithCustomInfos = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'Page header with custom infos.',
+      },
+    },
+  },
+  render: (args) => ({
+    components: { PageHeader, UnnnicIcon },
+    setup() {
+      return { args };
+    },
+    template: `
+      <PageHeader v-bind="args">
+        <template #infos>
+          <section style="display: flex; align-items: center; gap: $unnnic-space-2;">
+            <UnnnicIcon icon="home" />
+            <p>Custom infos</p>
+          </section>
+        </template>
+      </PageHeader>
     `,
   }),
 };

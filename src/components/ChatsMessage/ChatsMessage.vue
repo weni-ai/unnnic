@@ -10,6 +10,7 @@
       'is-image': isImage,
       'is-video': isVideo,
       'is-geo': isGeolocation,
+      highlighted: highlighted,
     }"
     @mouseover="isHovering = true"
     @mouseleave="isHovering = false"
@@ -56,19 +57,19 @@
       >
         <UnnnicIconLoading
           v-if="status === 'sending'"
-          scheme="neutral-dark"
+          scheme="fg-base"
           size="lg"
         />
         <UnnnicIcon
           v-else-if="status === 'failed'"
           icon="upload"
-          scheme="neutral-dark"
+          scheme="fg-base"
           size="lg"
         />
         <UnnnicIcon
           v-else
           icon="article"
-          scheme="neutral-dark"
+          scheme="fg-base"
           size="lg"
         />
         <p
@@ -95,7 +96,7 @@
       <UnnnicIconLoading
         v-if="sendingMedia"
         size="avatar-nano"
-        scheme="neutral-dark"
+        scheme="fg-base"
       />
 
       <section
@@ -113,7 +114,7 @@
           <UnnnicIcon
             icon="reply"
             clickable
-            scheme="neutral-dark"
+            scheme="fg-base"
             size="avatar-nano"
             data-testid="reply-icon"
             @click.stop="$emit('reply')"
@@ -131,7 +132,7 @@
           v-if="type === 'sent'"
           :icon="messageStatusIcon"
           size="sm"
-          :scheme="status === 'read' ? 'aux-blue-500' : 'neutral-clean'"
+          :scheme="status === 'read' ? 'fg-info' : 'fg-muted'"
         />
       </section>
     </main>
@@ -209,6 +210,10 @@ export default {
       validate(status) {
         return ['audio', 'image', 'video', 'geo'].includes(status);
       },
+    },
+    highlighted: {
+      type: Boolean,
+      default: false,
     },
   },
 
@@ -314,7 +319,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
   padding: $unnnic-spacing-xs $unnnic-spacing-ant;
 
-  background-color: $unnnic-color-neutral-white;
+  background-color: $unnnic-color-bg-base;
 
   font-family: $unnnic-font-family-secondary;
 
@@ -332,17 +337,21 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
       (-$unnnic-spacing-xs);
   }
 
+  &.highlighted {
+    border-bottom: $unnnic-space-05 solid $unnnic-color-border-warning;
+  }
+
   &.sent {
     background-color: #cff8f4;
 
     &.automatic {
-      background-color: $unnnic-color-aux-blue-50;
+      background-color: $unnnic-color-blue-100;
     }
   }
 
   &.sending {
     .unnnic-chats-message__text {
-      color: $unnnic-color-neutral-clean;
+      color: $unnnic-color-fg-muted;
     }
   }
 
@@ -421,7 +430,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     padding: $unnnic-spacing-nano 0;
 
     font-size: $unnnic-font-size-body-gt;
-    color: $unnnic-color-neutral-dark;
+    color: $unnnic-color-fg-base;
     line-height: $defaultLineHeight;
     word-break: break-word;
   }
@@ -443,7 +452,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   &__time {
     font-size: $unnnic-font-size-body-md;
     line-height: $defaultLineHeight;
-    color: $unnnic-color-neutral-clean;
+    color: $unnnic-color-fg-muted;
     margin: 0;
     padding: 0;
 

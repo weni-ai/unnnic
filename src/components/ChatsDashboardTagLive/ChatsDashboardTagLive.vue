@@ -48,9 +48,9 @@ export default {
   gap: $unnnic-spacing-ant;
 
   border-radius: $unnnic-border-radius-sm;
-  background-color: $unnnic-color-neutral-lightest;
+  background-color: $unnnic-color-bg-base-soft;
 
-  color: $unnnic-color-neutral-dark;
+  color: $unnnic-color-fg-base;
   font-family: $unnnic-font-family-secondary;
 
   &__indicator {
@@ -60,15 +60,15 @@ export default {
 
     @keyframes pulse {
       0% {
-        fill: $unnnic-color-neutral-soft;
+        fill: $unnnic-color-border-base;
       }
 
       50% {
-        fill: $unnnic-color-aux-green-300;
+        fill: $unnnic-color-green-4;
       }
 
       100% {
-        fill: $unnnic-color-neutral-soft;
+        fill: $unnnic-color-border-base;
       }
     }
   }

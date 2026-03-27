@@ -71,7 +71,7 @@
               <UnnnicIconLoading
                 v-if="isLoading"
                 class="unnnic-select-smart__options-loading"
-                scheme="neutral-dark"
+                scheme="fg-base"
                 size="sm"
               />
               <template v-else>
@@ -99,7 +99,7 @@
                   class="unnnic-select-smart__options-infinite-loading"
                 >
                   <UnnnicIconLoading
-                    scheme="neutral-dark"
+                    scheme="fg-base"
                     size="sm"
                   />
                 </div>
@@ -735,7 +735,7 @@ export default {
 
     box-shadow: $unnnic-shadow-1;
 
-    background-color: $unnnic-color-background-snow;
+    background-color: $unnnic-color-bg-base;
 
     cursor: default;
 
@@ -771,12 +771,12 @@ export default {
       }
 
       &::-webkit-scrollbar-thumb {
-        background: $unnnic-color-neutral-cleanest;
+        background: $unnnic-color-gray-7;
         border-radius: $unnnic-border-radius-pill;
       }
 
       &::-webkit-scrollbar-track {
-        background: $unnnic-color-neutral-soft;
+        background: $unnnic-color-bg-muted;
         border-radius: $unnnic-border-radius-pill;
       }
 
@@ -804,7 +804,7 @@ export default {
     &--no-results {
       margin: 0;
 
-      color: $unnnic-color-neutral-cleanest;
+      color: $unnnic-color-fg-muted;
       line-height: $unnnic-font-size-body-md + $unnnic-line-height-medium;
       font-size: $unnnic-font-size-body-md;
 
@@ -823,7 +823,7 @@ export default {
     .unnnic-select-smart--secondary & {
       border-radius: 0.25rem;
       margin-top: -1px;
-      box-shadow: $unnnic-shadow-level-near;
+      box-shadow: $unnnic-shadow-1;
     }
   }
 
@@ -851,7 +851,7 @@ export default {
 
   .unnnic-select-smart__input--secondary input {
     border: none;
-    color: $unnnic-color-neutral-darkest;
+    color: $unnnic-color-fg-emphasized;
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-gt;
     line-height: $unnnic-line-height-md + $unnnic-font-size-body-gt;
@@ -863,11 +863,11 @@ export default {
 }
 
 ::-webkit-scrollbar-track {
-  background: $unnnic-color-neutral-soft;
+  background: $unnnic-color-bg-muted;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: $unnnic-color-neutral-cleanest;
+  background: $unnnic-color-gray-7;
   border-radius: $unnnic-border-radius-pill;
 }
 </style>

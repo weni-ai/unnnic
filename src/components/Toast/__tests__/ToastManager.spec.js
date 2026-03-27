@@ -1,11 +1,15 @@
 import { beforeEach, describe, expect, afterEach, test, vi } from 'vitest';
 
-vi.mock('vue', () => ({
-  createApp: vi.fn(() => ({
-    mount: vi.fn(),
-    unmount: vi.fn(),
-  })),
-}));
+vi.mock('vue', async () => {
+  const actual = await vi.importActual('vue');
+  return {
+    ...actual,
+    createApp: vi.fn(() => ({
+      mount: vi.fn(),
+      unmount: vi.fn(),
+    })),
+  };
+});
 
 vi.mock('../Toast.vue', () => ({
   default: {

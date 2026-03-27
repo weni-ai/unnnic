@@ -9,6 +9,7 @@
       `unnnic-button--${buttonType}`,
       iconCenter ? `unnnic-button--icon-on-center` : null,
       float ? `unnnic-button--float` : null,
+      pressed ? `unnnic-button--pressed` : null,
     ]"
   >
     <UnnnicIconLoading
@@ -89,6 +90,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   iconsFilled: false,
   disabled: false,
   loading: false,
+  pressed: false,
 });
 
 const slots = useSlots();
@@ -241,21 +243,22 @@ watch(
       background-color: $unnnic-color-teal-11;
     }
 
-    &:active:enabled {
+    &:active:enabled,
+    &.unnnic-button--pressed {
       background-color: $unnnic-color-teal-12;
     }
   }
 
   &--secondary {
     background-color: var(--unnnic-color-bg-base);
-    box-shadow: inset 0 0 0 $unnnic-border-width-thinner
-      var(--unnnic-color-border-base);
+    box-shadow: inset 0 0 0 1px var(--unnnic-color-border-base);
 
     &:hover:enabled {
       background-color: var(--unnnic-color-bg-base-soft);
     }
 
-    &:active:enabled {
+    &:active:enabled,
+    &.unnnic-button--pressed {
       background-color: var(--unnnic-color-bg-muted);
     }
 
@@ -271,7 +274,8 @@ watch(
       background-color: var(--unnnic-color-bg-base-soft);
     }
 
-    &:active:enabled {
+    &:active:enabled,
+    &.unnnic-button--pressed {
       background-color: var(--unnnic-color-bg-muted);
     }
   }
@@ -283,7 +287,8 @@ watch(
       background-color: $unnnic-color-red-11;
     }
 
-    &:active:enabled {
+    &:active:enabled,
+    &.unnnic-button--pressed {
       background-color: $unnnic-color-red-12;
     }
   }
@@ -295,7 +300,8 @@ watch(
       background-color: $unnnic-color-yellow-11;
     }
 
-    &:active:enabled {
+    &:active:enabled,
+    &.unnnic-button--pressed {
       background-color: $unnnic-color-yellow-12;
     }
   }
@@ -308,6 +314,10 @@ watch(
     background-color: var(--unnnic-color-bg-muted);
     color: var(--unnnic-color-fg-muted);
     cursor: not-allowed;
+
+    :deep(.unnnic--clickable) {
+      cursor: not-allowed;
+    }
   }
 
   &--float {
@@ -316,7 +326,7 @@ watch(
     right: 0;
 
     border-radius: $unnnic-border-radius-pill;
-    box-shadow: $unnnic-shadow-level-near;
+    box-shadow: $unnnic-shadow-1;
   }
 
   &--size-large {

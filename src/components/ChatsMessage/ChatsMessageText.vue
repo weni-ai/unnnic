@@ -121,14 +121,14 @@ export default {
     gap: $unnnic-spacing-sm;
     padding: $unnnic-spacing-nano 0;
     font-size: $unnnic-font-size-body-gt;
-    color: $unnnic-color-neutral-dark;
+    color: $unnnic-color-fg-emphasized;
     line-height: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     word-break: break-word;
   }
   &--automatic {
     font-size: $unnnic-font-size-body-md;
     line-height: $unnnic-line-height-caption-1;
-    color: $unnnic-color-aux-blue-500;
+    color: $unnnic-color-fg-info;
   }
 }
 </style>

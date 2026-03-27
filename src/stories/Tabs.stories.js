@@ -123,3 +123,47 @@ export const WithTooltip = {
     defaultValue: 'account',
   },
 };
+
+const WithRightSlotTemplateCode = `
+<Tabs v-bind="args">
+  <TabsList>
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="password">Password</TabsTrigger>
+    <TabsTrigger value="settings">Settings</TabsTrigger>
+    <template #right>
+      <div style="display: flex; align-self: self-end; gap: $unnnic-space-2;">
+        <UnnnicIcon icon="add-1" size="sm" scheme="fg-base"/>
+        <UnnnicIcon icon="help" size="sm" scheme="fg-base"/>
+      </div>
+    </template>
+  </TabsList>
+  <TabsContent value="account">
+    <div>Make changes to your account here.</div>
+  </TabsContent>
+  <TabsContent value="password">
+    <div>Change your password here.</div>
+  </TabsContent>
+  <TabsContent value="settings">
+    <div>Update your application settings here.</div>
+  </TabsContent>
+</Tabs>
+    `;
+export const WithRightSlot = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'A simple popover with some content inside.',
+      },
+      source: {
+        code: WithRightSlotTemplateCode,
+      },
+    },
+  },
+  render: (args) => ({
+    components: { Tabs, TabsList, TabsTrigger, TabsContent, UnnnicIcon },
+    setup() {
+      return { args };
+    },
+    template: WithRightSlotTemplateCode,
+  }),
+};

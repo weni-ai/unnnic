@@ -4,18 +4,22 @@
       v-if="label"
       :label="label"
       :tooltip="labelTooltip"
-      :useHtmlTooltip="labelUseHtmlTooltip"
       class="unnnic-switch__label"
     />
 
-    <label :class="['unnnic-switch__input-wrapper', {'unnnic-switch__input-wrapper--disabled': disabled}]">
+    <label
+      :class="[
+        'unnnic-switch__input-wrapper',
+        { 'unnnic-switch__input-wrapper--disabled': disabled },
+      ]"
+    >
       <input
         class="unnnic-switch__input"
         type="checkbox"
         :disabled="disabled"
         :checked="modelValue"
-        @change="toggleState"
         v-bind="pick($attrs, ['id', 'name'])"
+        @change="toggleState"
       />
 
       <p
@@ -29,6 +33,8 @@
         {{ option }}
         {{ textLeft }}
         {{ textRight }}
+
+        <slot name="suffix" />
       </p>
     </label>
 
@@ -41,100 +47,60 @@
   </section>
 </template>
 
-<script>
+<script setup lang="ts">
+import { ref, watch } from 'vue';
 import { pick } from 'lodash';
 import UnnnicLabel from '../Label/Label.vue';
+import { type TooltipProps } from '../ToolTip/ToolTip.vue';
 
-export default {
+defineOptions({
   name: 'UnnnicSwitch',
-  components: {
-    UnnnicLabel,
+});
+
+export interface SwitchProps {
+  size?: 'small' | 'medium';
+  label?: string;
+  labelTooltip?: TooltipProps;
+  option?: string;
+  helper?: string;
+  textLeft?: string;
+  textRight?: string;
+  disabled?: boolean;
+  modelValue?: boolean;
+}
+
+const props = withDefaults(defineProps<SwitchProps>(), {
+  size: 'medium',
+  label: '',
+  labelTooltip: undefined,
+  option: '',
+  helper: '',
+  textLeft: '',
+  textRight: '',
+  disabled: false,
+  modelValue: false,
+});
+
+const emit = defineEmits(['update:model-value']);
+
+const isActive = ref(props.modelValue);
+
+watch(
+  () => props.modelValue,
+  (newVal: boolean) => {
+    if (newVal !== isActive.value) {
+      isActive.value = newVal;
+    }
   },
-  props: {
-    size: {
-      type: String,
-      default: 'medium',
-      validator(value) {
-        return ['small', 'medium'].indexOf(value) !== -1;
-      },
-    },
+  { immediate: true },
+);
 
-    label: {
-      type: String,
-      default: '',
-    },
-
-    labelTooltip: {
-      type: String,
-      default: '',
-    },
-
-    labelUseHtmlTooltip: {
-      type: Boolean,
-      default: false,
-    },
-
-    option: {
-      type: String,
-      default: '',
-    },
-    
-    helper: {
-      type: String,
-      default: '',
-    },
-
-    textLeft: {
-      type: String,
-      default: '',
-    },
-    textRight: {
-      type: String,
-      default: '',
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    modelValue: {
-      type: Boolean,
-      default: false,
-    },
-    useVModel: {
-      type: Boolean,
-    },
-  },
-  emits: ['update:model-value'],
-  data() {
-    return {
-      isActive: false,
-    };
-  },
-
-  watch: {
-    modelValue: {
-      immediate: true,
-      handler() {
-        this.isActive = this.modelValue;
-      },
-    },
-  },
-
-  methods: {
-    pick,
-
-    toggleState() {
-      if (!this.disabled) {
-        if (this.useVModel) {
-          this.$emit('update:model-value', !this.isActive);
-        } else {
-          this.isActive = !this.isActive;
-          this.$emit('update:model-value', this.isActive);
-        }
-      }
-    },
-  },
-};
+function toggleState() {
+  if (!props.disabled) {
+    isActive.value = !isActive.value;
+    emit('update:model-value', isActive.value);
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -176,7 +142,9 @@ $switch-height: 20px;
     background-repeat: no-repeat;
     background-position: 4px center;
 
-    transition: 120ms linear background-position, 120ms linear background-color;
+    transition:
+      120ms linear background-position,
+      120ms linear background-color;
 
     cursor: pointer;
 

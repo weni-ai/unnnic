@@ -5,6 +5,195 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.25.1 (2026-03-27)
+
+### Fixed
+
+- **Button**: Disabled icons now use muted styling and `not-allowed` cursor feedback.
+- **ToolTip**: Fallback `maxWidth` now defaults to `320px` when no custom width is provided.
+
+# 3.25.0 (2026-03-26)
+
+### Added
+
+- **Typography**: Documentation and stories in Storybook; typography mixins and letter-spacing tokens.
+- **Colors**: Documentation and stories in Storybook; new color scale and semantic text utilities.
+- **IconLoading**: Refactored to SVG for improved accessibility and visual consistency.
+
+### Changed
+
+- **Fonts**: Migrated font family from Lato to Inter across styles, tokens, and components.
+- **Colors**: Updated color tokens, palette values, and accent colors for improved consistency and accessibility.
+- **DefaultTag**: Updated color mapping to use new color tokens.
+- **SkeletonLoading**: Enhanced styling and animation properties.
+- **FormElement / TextInput**: Updated label color and icon scheme.
+- **Chats components**: Updated color schemes, class names, and font family.
+- **AudioRecorder / Icons**: Updated icon color schemes across multiple components.
+- **Storybook**: Upgraded to v10.2.10; removed deprecated configuration and dependencies.
+- **Build**: Migrated from Yarn to npm; updated Vite, Vue plugins, and ESLint dependencies.
+- **CI**: Updated npm publish workflow for alpha prerelease versioning.
+
+### Fixed
+
+- **IconLoading**: Correctly compute size based on props.
+
+# 3.24.6 (2026-03-26)
+
+### Added
+
+- **PageHeader**: `infos` named slot to replace the default title, description, and `tag` block with custom content; `hideDivider` prop to remove the bottom border (also applied when the `tabs` slot is used); Storybook example for the custom infos slot.
+
+# 3.24.5 (2026-03-24)
+
+### Added
+
+- **Button**: `pressed` prop to indicate the pressed (active) state with matching styles; `ButtonProps` and Storybook documentation updated.
+
+### Changed
+
+- **ChatsUserAvatar**: Update visual and add slots supports
+
+# 3.24.4 (2026-03-04)
+
+### Fixed
+- **Popover**: Background color
+
+### Changed
+
+- **Select and MultiSelect**: 
+  - Refactored to share logic and improve maintainability. 
+  - Introduced composables `useSelectBase` (popover state, dimensions, search filter, content height) and `useSelectKeyboard` (ArrowUp/ArrowDown/Enter navigation, `setupKeydownBinding()` for document keydown when popover is open). 
+  - Shared types in `Select/types.ts` (`SelectOption`, `SelectBaseProps`, `SelectPopoverHeightParams`) and shared SCSS mixins in `Select/_select-shared.scss`. 
+  - Both components now use `useTemplateRef` for trigger and content refs;
+
+# 3.24.3 (2026-03-04)
+
+### Added
+
+- **Chip**: `right` slot support
+
+# 3.24.2 (2026-02-20)
+
+### Added
+
+- **InputDatePicker**: `disabled` prop to show disabled input variation.
+
+# 3.24.1 (2026-02-12)
+
+### Added
+
+- **ChatsMessage**: `highlighted` prop to visually highlight messages.
+- **DatePicker**: `hideOptions` prop to hide the period options section (e.g. "Last 7 days", Clear/Filter buttons) when enabled.
+
+# 3.24.0 (2026-02-11)
+
+### Added
+
+- **ToolTip**: Exposed `class` prop and `contentProps` (partial `TooltipContentProps` from reka-ui) so consumers can apply custom styling and override tooltip internal content classes.
+
+# 3.23.0 (2026-02-10)
+
+### Added
+
+- **ModalDialog**: Added `title` named slot to allow custom title content (e.g., buttons, tags, icons, or any Vue component). The existing `title` prop continues to work as a fallback when no slot is provided.
+
+# 3.22.0 (2026-02-10)
+
+### Added
+
+- **Type definitions**: Added `unnnicFormElement`, `unnnicRadioGroup`, and `unnnicCheckboxGroup` component exports.
+
+### Changed
+
+- **ToolTip**: Migrated to Composition API with TypeScript, aligned tooltip text when `side` is `top`/`bottom`, and switched trigger display to `flex`.
+- **Form components**: Migrated `FormElement`, `CheckboxGroup`, `RadioGroup`, `Switch`, `Input`, and `TextArea` to Composition API/TypeScript and updated tooltip handling to use object props.
+- **Label**: Tooltip now accepts `TooltipProps`; removed `useHtmlTooltip` in favor of unified tooltip props.
+- **Tab**: Removed unused tooltip styles.
+
+# 3.21.0 (2026-02-09)
+
+### Added
+
+- **ToolTip**: Close button support via `showClose` prop; tooltip can be controlled with `forceOpen` and `@click:close` when using the close button.
+- **Tabs**: Right slot for content on the right side of the tabs; styling adjustments.
+
+# 3.20.0 (2026-02-06)
+
+### Added
+
+- **Design Tokens as JavaScript/TypeScript**:
+  - Added ES Module exports for all design tokens (colors, fonts, spaces, radii, shadows, icon-sizes)
+  - Tokens are now available as importable JavaScript constants with TypeScript definitions
+  - Supports tree-shaking for optimal bundle size
+  - Example usage: `import { colorTeal600, colorBlue500 } from '@weni/unnnic-system/tokens/colors'`
+  - Package exports added for `@weni/unnnic-system/tokens/colors`, `@weni/unnnic-system/tokens/fonts`, `@weni/unnnic-system/tokens/spaces`, `@weni/unnnic-system/tokens/radii`, `@weni/unnnic-system/tokens/shadows`, and `@weni/unnnic-system/tokens/icon-sizes`
+  - All token exports use camelCase naming (e.g., `colorTeal600`, `fontSize`, `space4`)
+  - Tokens are generated as `.mjs` files with corresponding `.d.ts` TypeScript definitions
+
+### Changed
+
+- **Build Process**:
+  - Updated build script to automatically generate design tokens after Vite build
+  - Style Dictionary now generates both SCSS variables and JavaScript/TypeScript exports
+
+# 3.19.0 (2026-02-03)
+
+### Added
+
+- **AudioRecorder**:
+  - Added `AudioRecord` transcription support
+
+# 3.18.0 (2026-02-02)
+
+### Added
+
+- **Teleport target configuration**: `Unnnic.install({ teleportTarget })` to route teleported layers to a custom container (CSS selector or `HTMLElement`).
+- **Layer manager**: `useLayerZIndex({ offset })` (base z-index 1000, step 5) to keep dialogs/drawers/popovers/tooltips/toasts stacked correctly, including overlay offsets.
+- **Dialog primitives**: Introduced `UnnnicDialog*` components with size variants (`small` | `medium` | `large`) and Storybook examples.
+- **Drawer primitives**: Introduced `UnnnicDrawer*` components with size variants (`medium` | `large` | `extra-large` | `giant`) and Storybook examples.
+- **LayerManager docs/stories**: Added documentation and interactive Storybook stories demonstrating stacking order across overlays.
+
+### Changed
+
+- **ModalDialog**: Rebuilt on top of `UnnnicDialog*`; forwards `$attrs` into content, disables `inheritAttrs`, adds `persistent` handling for Escape/outside-click, and is marked as deprecated in Storybook.
+- **Popover/Tooltip/Toast layering**: Popovers/tooltips/toasts now use the configured teleport target and `useLayerZIndex()` instead of hardcoded z-index; related triggers/styles were migrated to SCSS where applicable.
+- **InputDatePicker**: Now uses the popover primitives (`UnnnicPopover*`), improving behavior inside dialogs/overlays.
+
+# 3.17.1 (2026-01-20)
+
+### Added
+
+- **Select/MultiSelect Components**:
+  - Added `clearable` prop to enable show clear button.
+
+- **Tour Component**:
+  - Added missing `pointer-events` css attribute
+
+# 3.17.0 (2026-01-20)
+
+### Added
+
+- **Disclaimer Component**:
+  - Added slot support for description in disclaimer component.
+
+# 3.16.0 (2026-01-16)
+
+### Added
+
+- **Switch Component**:
+  - Added slot support for extra content in switch component.
+
+# 3.15.0 (2026-01-15)
+
+### Added
+
+- **Select Component**:
+  - Added infinite scroll support with new props: `infiniteScroll`, `infiniteScrollDistance`, and `infiniteScrollCanLoadMore` callback.
+  - Added `scroll-end` event emitted when scroll reaches the threshold to load more items.
+  - Exposed `finishInfiniteScroll()` and `resetInfiniteScroll()` methods for managing infinite scroll state.
+  - Added loading indicator (spinner) displayed while loading more items.
+  - Integrated `@vueuse/core`'s `useInfiniteScroll` composable for scroll detection.
+
 # 3.14.0 (2025-01-12)
 
 ### Added

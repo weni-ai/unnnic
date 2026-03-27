@@ -16,7 +16,7 @@
       >
         <UnnnicIcon
           icon="delete-1-1"
-          scheme="feedback-red"
+          scheme="fg-critical"
         />
       </span>
     </UnnnicToolTip>
@@ -33,11 +33,28 @@
       :progressBarPercentualValue="playedPercentual"
       :isPlaying="isPlaying"
       :bars="playbackAudioBars ? bars : null"
+      :showTranscriptionAction="showTranscriptionAction"
+      :enableGenerateTranscription="enableGenerateTranscription"
+      :showTranscriptionText="showTranscriptionText"
+      :transcriptionText="transcriptionText"
+      :locale="locale"
+      :fluidBar="fluidBar"
+      :isLoadingTranscription="isLoadingTranscription"
       @failed-click="$emit('failed-click')"
       @pause="pause"
       @play="play"
       @progress-bar-update="progressBarUpdate"
-    />
+      @update:show-transcription-text="
+        $emit('update:showTranscriptionText', $event)
+      "
+    >
+      <template
+        v-if="$slots.transcriptionInfo?.()"
+        #transcriptionInfo
+      >
+        <slot name="transcriptionInfo" />
+      </template>
+    </AudioPlayer>
   </section>
 </template>
 
@@ -106,9 +123,42 @@ export default {
       type: Boolean,
       default: false,
     },
+    showTranscriptionAction: {
+      type: Boolean,
+      default: false,
+    },
+    enableGenerateTranscription: {
+      type: Boolean,
+      default: false,
+    },
+    showTranscriptionText: {
+      type: Boolean,
+      default: false,
+    },
+    isLoadingTranscription: {
+      type: Boolean,
+      default: false,
+    },
+    transcriptionText: {
+      type: String,
+      default: '',
+    },
+    locale: {
+      type: String,
+      default: 'en',
+    },
+    fluidBar: {
+      type: Boolean,
+      default: false,
+    },
   },
 
-  emits: ['update:model-value', 'status', 'failed-click'],
+  emits: [
+    'update:model-value',
+    'status',
+    'failed-click',
+    'update:showTranscriptionText',
+  ],
 
   data: () => ({
     /**
@@ -400,7 +450,7 @@ export default {
     font-weight: $unnnic-font-weight-regular;
     font-size: $unnnic-font-size-body-md;
     line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
-    color: $unnnic-color-neutral-darkest;
+    color: $unnnic-color-fg-emphasized;
     user-select: none;
   }
 

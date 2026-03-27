@@ -19,19 +19,22 @@
       >
         {{ title }}
       </p>
-      <p
-        v-if="description"
+
+      <div
+        v-if="hasDescription"
         class="unnnic-disclaimer__description"
         data-testid="disclaimer-description"
       >
-        {{ description }}
-      </p>
+        <slot name="description">
+          {{ description }}
+        </slot>
+      </div>
     </section>
   </section>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, useSlots } from 'vue';
 
 import UnnnicIcon from '../Icon.vue';
 import type { SchemeColor } from '@/types/scheme-colors';
@@ -42,11 +45,20 @@ defineOptions({
 });
 
 const props = withDefaults(defineProps<DisclaimerProps>(), {
-  title: 'Disclaimer',
-  description: 'The quick brown fox jumps over the lazy dog',
+  title: '',
+  description: '',
   type: 'informational',
   icon: undefined,
   iconColor: undefined,
+});
+
+const slots = useSlots();
+
+const hasDescription = computed(() => {
+  return (
+    Boolean(props.description) ||
+    (slots.description && slots.description().length > 0)
+  );
 });
 
 // This is a temporary solution to ensure backwards compatibility with the older version of the component.
@@ -75,23 +87,23 @@ const variant = computed(() => {
   > = {
     informational: {
       icon: 'info',
-      scheme: 'blue-500',
+      scheme: 'fg-info',
     },
     success: {
       icon: 'check_circle',
-      scheme: 'green-500',
+      scheme: 'fg-success',
     },
     attention: {
       icon: 'error',
-      scheme: 'yellow-500',
+      scheme: 'fg-warning',
     },
     error: {
       icon: 'cancel',
-      scheme: 'red-500',
+      scheme: 'fg-critical',
     },
     neutral: {
       icon: 'info',
-      scheme: 'gray-400',
+      scheme: 'fg-muted',
     },
   };
 

@@ -1,6 +1,6 @@
 <template>
   <div
-    class="unnnic-date-picker"
+    :class="['unnnic-date-picker', `unnnic-date-picker--${props.variant}`]"
     data-testid="date-picker-root"
   >
     <template v-if="type === 'day'">
@@ -200,7 +200,10 @@
       class="options-container"
       data-testid="date-picker-options"
     >
-      <div class="options">
+      <div
+        v-if="!hideOptions"
+        class="options"
+      >
         <div
           v-for="(option, index) in periodsLocale"
           :key="index"
@@ -293,9 +296,12 @@ export interface DatePickerProps {
   options?: PeriodOption[];
 
   disableClear?: boolean;
+  hideOptions?: boolean;
 
   locale?: string;
   translations?: Record<string, unknown>;
+
+  variant?: 'card' | 'popover';
 }
 
 const props = withDefaults(defineProps<DatePickerProps>(), {
@@ -313,8 +319,10 @@ const props = withDefaults(defineProps<DatePickerProps>(), {
   days: () => [],
   options: () => [],
   disableClear: false,
+  hideOptions: false,
   locale: undefined,
   translations: undefined,
+  variant: 'card',
 });
 
 const emit = defineEmits<{
@@ -389,6 +397,10 @@ const value = computed(() => ({
   startDate: startDate.value.replaceAll(' ', '-'),
   endDate: endDate.value.replaceAll(' ', '-'),
 }));
+
+const containerOptionsFlexDirection = computed(() => {
+  return props.hideOptions ? 'column-reverse' : 'column';
+});
 
 const i18nFn = (...args: any[]): string | undefined => {
   const [key, defaults] = args;
@@ -958,10 +970,16 @@ onMounted(() => {
 
 .unnnic-date-picker {
   display: inline-flex;
-  background-color: $unnnic-color-background-snow;
+  background-color: $unnnic-color-bg-base;
   border-radius: $unnnic-border-radius-sm;
-  box-shadow: $unnnic-shadow-level-separated;
+  box-shadow: $unnnic-shadow-1;
   overflow: hidden;
+
+  &--popover {
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
+  }
 
   .month-container {
     display: flex;
@@ -987,7 +1005,7 @@ onMounted(() => {
       .label {
         font-family: $unnnic-font-family-secondary;
         font-weight: $unnnic-font-weight-black;
-        color: $unnnic-color-neutral-darkest;
+        color: $unnnic-color-fg-emphasized;
         text-align: center;
         grid-area: label;
 
@@ -1006,7 +1024,7 @@ onMounted(() => {
       display: grid;
       font-family: $unnnic-font-family-secondary;
       font-weight: $unnnic-font-weight-regular;
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
       text-align: center;
 
       user-select: none;
@@ -1043,19 +1061,19 @@ onMounted(() => {
 
       .today {
         font-weight: $unnnic-font-weight-black;
-        background-color: $unnnic-color-background-sky;
+        background-color: $unnnic-color-bg-base-soft;
         border-radius: $unnnic-border-radius-sm;
       }
 
       .selected {
         font-weight: $unnnic-font-weight-black;
-        background-color: $unnnic-color-background-sky;
-        color: $unnnic-color-brand-weni-soft;
+        background-color: $unnnic-color-bg-base-soft;
+        color: $unnnic-color-teal-8;
         border-radius: 0;
 
         &.highlighted {
-          background-color: $unnnic-color-brand-weni-soft;
-          color: $unnnic-color-neutral-snow;
+          background-color: $unnnic-color-teal-8;
+          color: $unnnic-color-fg-inverted;
 
           &.left {
             border-top-left-radius: $unnnic-border-radius-sm;
@@ -1077,12 +1095,12 @@ onMounted(() => {
 
   .divider {
     width: 1px;
-    background-color: $unnnic-color-neutral-soft;
+    background-color: $unnnic-color-bg-muted;
   }
 
   .options-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: v-bind(containerOptionsFlexDirection);
     justify-content: space-between;
 
     .options {
@@ -1091,7 +1109,7 @@ onMounted(() => {
         font-weight: $unnnic-font-weight-regular;
         font-size: $unnnic-font-size-body-gt;
         line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
-        color: $unnnic-color-neutral-darkest;
+        color: $unnnic-color-fg-emphasized;
 
         padding: $unnnic-spacing-stack-xs $unnnic-spacing-inline-sm;
         user-select: none;
@@ -1100,17 +1118,17 @@ onMounted(() => {
           cursor: pointer;
 
           &:hover {
-            background-color: $unnnic-color-background-sky;
+            background-color: $unnnic-color-bg-base-soft;
           }
         }
 
         &.selected {
-          background-color: $unnnic-color-background-sky;
+          background-color: $unnnic-color-bg-base-soft;
         }
 
         &.selected {
           font-weight: $unnnic-font-weight-bold;
-          color: $unnnic-color-brand-weni-soft;
+          color: $unnnic-color-teal-8;
         }
       }
     }

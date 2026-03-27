@@ -23,7 +23,7 @@
         size="xs"
         lineHeight="md"
         class="unnnic-breadcrumb__container__divider"
-        scheme="neutral-cloudy"
+        scheme="fg-base"
       />
     </template>
   </div>
@@ -67,13 +67,13 @@ export default {
       font-weight: $unnnic-font-weight-regular;
       font-size: $unnnic-font-size-body-lg;
       line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
-      color: $unnnic-color-neutral-cloudy;
+      color: $unnnic-color-fg-base;
 
       &__active {
         text-decoration: none;
         cursor: default;
 
-        color: $unnnic-color-neutral-dark;
+        color: $unnnic-color-fg-base;
         font-weight: $unnnic-font-weight-bold;
       }
     }

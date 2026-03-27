@@ -8,9 +8,10 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `A popover options item component.
+        component: `<div>
+          A popover options item component.
           It is used to display options in a popover.
-            `,
+          </div>`,
       },
     },
   },

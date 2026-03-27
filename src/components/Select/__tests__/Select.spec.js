@@ -1,14 +1,7 @@
 import { mount } from '@vue/test-utils';
-import { beforeEach, describe, expect, afterEach, test, vi } from 'vitest';
+import { beforeEach, describe, expect, afterEach, test } from 'vitest';
 import UnnnicSelect from '../index.vue';
-
-vi.mock('../../mixins/i18n', () => ({
-  default: {
-    methods: {
-      $t: (key) => key,
-    },
-  },
-}));
+import i18n from '@/utils/plugins/i18n';
 
 describe('UnnnicSelect.vue', () => {
   let wrapper;
@@ -24,14 +17,12 @@ describe('UnnnicSelect.vue', () => {
 
   const mountWrapper = (props = {}, slots = {}) => {
     return mount(UnnnicSelect, {
+      global: {
+        plugins: [i18n],
+      },
       props: {
         ...defaultProps,
         ...props,
-      },
-      global: {
-        mocks: {
-          $t: (key) => key,
-        },
       },
       slots,
     });
@@ -62,7 +53,7 @@ describe('UnnnicSelect.vue', () => {
     });
 
     test('renders select options when popover is open', async () => {
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents(
         '[data-testid="select-option"]',
@@ -126,7 +117,7 @@ describe('UnnnicSelect.vue', () => {
       expect(input.props('iconRight')).toBe('keyboard_arrow_down');
 
       // When popover is open
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       expect(input.props('iconRight')).toBe('keyboard_arrow_up');
     });
@@ -134,7 +125,7 @@ describe('UnnnicSelect.vue', () => {
 
   describe('option selection', () => {
     test('emits update:modelValue when option is selected', async () => {
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents(
         '[data-testid="select-option"]',
@@ -148,7 +139,7 @@ describe('UnnnicSelect.vue', () => {
 
     test('emits object when returnObject is true', async () => {
       await wrapper.setProps({ returnObject: true });
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents(
         '[data-testid="select-option"]',
@@ -163,7 +154,7 @@ describe('UnnnicSelect.vue', () => {
 
     test('does not emit when same option is selected', async () => {
       await wrapper.setProps({ modelValue: 'option1' });
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents(
         '[data-testid="select-option"]',
@@ -181,7 +172,7 @@ describe('UnnnicSelect.vue', () => {
       ];
 
       await wrapper.setProps({ options: disabledOptions });
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const options = wrapper.findAllComponents(
         '[data-testid="select-option"]',
@@ -196,7 +187,7 @@ describe('UnnnicSelect.vue', () => {
   describe('search functionality', () => {
     test('renders search input when enableSearch is true', async () => {
       await wrapper.setProps({ enableSearch: true });
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const searchInputs = wrapper.findAllComponents({ name: 'UnnnicInput' });
       expect(searchInputs.length).toBe(2); // Main input + search input
@@ -210,7 +201,7 @@ describe('UnnnicSelect.vue', () => {
 
     test('emits update:search when search input changes', async () => {
       await wrapper.setProps({ enableSearch: true });
-      wrapper.vm.openPopover = true;
+      wrapper.vm.setOpenPopover(true);
       await wrapper.vm.$nextTick();
       const searchInput = wrapper.findAllComponents({ name: 'UnnnicInput' })[1];
 
@@ -222,7 +213,6 @@ describe('UnnnicSelect.vue', () => {
 
     test('filters options based on search term', async () => {
       await wrapper.setProps({ enableSearch: true, search: 'Option 1' });
-
       const filteredOptions = wrapper.vm.filteredOptions;
       expect(filteredOptions.length).toBe(1);
       expect(filteredOptions[0].label).toBe('Option 1');
@@ -230,7 +220,6 @@ describe('UnnnicSelect.vue', () => {
 
     test('filters options by both label and value', async () => {
       await wrapper.setProps({ enableSearch: true, search: 'option1' });
-
       const filteredOptions = wrapper.vm.filteredOptions;
       expect(filteredOptions.length).toBe(1);
       expect(filteredOptions[0].value).toBe('option1');
@@ -238,7 +227,6 @@ describe('UnnnicSelect.vue', () => {
 
     test('shows all options when search is empty', async () => {
       await wrapper.setProps({ enableSearch: true, search: '' });
-
       const filteredOptions = wrapper.vm.filteredOptions;
       expect(filteredOptions.length).toBe(3);
     });
@@ -394,8 +382,77 @@ describe('UnnnicSelect.vue', () => {
       expect(wrapper.vm.$options.name).toBe('UnnnicSelect');
     });
 
-    test('includes i18n mixin', () => {
-      expect(wrapper.vm.$options.mixins).toBeDefined();
+    test('uses i18n for labels', () => {
+      const searchPlaceholder = wrapper.find('.unnnic-select__input-search');
+      if (searchPlaceholder.exists()) {
+        expect(searchPlaceholder.attributes('placeholder')).toBeDefined();
+      }
+    });
+  });
+
+  describe('infinite scroll functionality', () => {
+    test('infinite scroll is disabled by default', () => {
+      expect(wrapper.vm.infiniteScroll).toBe(false);
+    });
+
+    test('applies infinite scroll props correctly', async () => {
+      await wrapper.setProps({
+        infiniteScroll: true,
+        infiniteScrollDistance: 20,
+        infiniteScrollCanLoadMore: () => false,
+      });
+
+      expect(wrapper.vm.infiniteScroll).toBe(true);
+      expect(wrapper.vm.infiniteScrollDistance).toBe(20);
+      expect(wrapper.vm.infiniteScrollCanLoadMore()).toBe(false);
+    });
+
+    test('does not render loading when infiniteScrollLoading is false', async () => {
+      await wrapper.setProps({ infiniteScroll: true });
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+
+      const loading = wrapper.find('.unnnic-select__infinite-loading');
+      expect(loading.exists()).toBe(false);
+    });
+
+    test('sets infiniteScrollLoading to true and verifies state', async () => {
+      await wrapper.setProps({
+        infiniteScroll: true,
+        options: [
+          { label: 'Option 1', value: 'option1' },
+          { label: 'Option 2', value: 'option2' },
+        ],
+      });
+
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.vm.infiniteScrollLoading).toBe(false);
+
+      wrapper.vm.infiniteScrollLoading = true;
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.vm.infiniteScrollLoading).toBe(true);
+      expect(wrapper.vm.infiniteScroll).toBe(true);
+    });
+
+    test('finishInfiniteScroll sets loading to false', async () => {
+      await wrapper.setProps({ infiniteScroll: true });
+      wrapper.vm.infiniteScrollLoading = true;
+      expect(wrapper.vm.infiniteScrollLoading).toBe(true);
+
+      wrapper.vm.finishInfiniteScroll();
+      expect(wrapper.vm.infiniteScrollLoading).toBe(false);
+    });
+
+    test('resetInfiniteScroll sets loading to false', async () => {
+      await wrapper.setProps({ infiniteScroll: true });
+      wrapper.vm.infiniteScrollLoading = true;
+      expect(wrapper.vm.infiniteScrollLoading).toBe(true);
+
+      wrapper.vm.resetInfiniteScroll();
+      expect(wrapper.vm.infiniteScrollLoading).toBe(false);
     });
   });
 
@@ -416,6 +473,14 @@ describe('UnnnicSelect.vue', () => {
 
     test('matches snapshot with disabled state', async () => {
       await wrapper.setProps({ disabled: true });
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+
+    test('matches snapshot with infinite scroll enabled', async () => {
+      await wrapper.setProps({ infiniteScroll: true });
+      wrapper.vm.setOpenPopover(true);
+      wrapper.vm.infiniteScrollLoading = true;
+      await wrapper.vm.$nextTick();
       expect(wrapper.html()).toMatchSnapshot();
     });
   });

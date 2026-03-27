@@ -1,7 +1,7 @@
 import UnnnicDataArea from '../components/DataArea/DataArea.vue';
 import UnnnicButton from '../components/Button/Button.vue';
 import { unnnicFontSize } from '../components/config';
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 
 export default {
   title: 'Data Display/DataArea',

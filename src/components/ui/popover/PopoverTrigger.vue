@@ -14,10 +14,14 @@ const props = defineProps<PopoverTriggerProps>();
   </PopoverTrigger>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .unnnic-popover-trigger {
   border: none;
   background: transparent;
   padding: 0;
+
+  & > * {
+    width: 100%;
+  }
 }
 </style>

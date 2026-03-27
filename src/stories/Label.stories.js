@@ -1,8 +1,9 @@
 import unnnicLabel from '../components/Label/Label.vue';
 
 export default {
-  title: 'Example/Label',
+  title: 'Form/Label',
   component: unnnicLabel,
+  tags: ['autodocs'],
   argTypes: {
     label: { control: { type: 'text' } },
   },
@@ -17,6 +18,13 @@ export const Default = {
 export const WithTooltip = {
   args: {
     label: 'Label',
-    tooltip: 'Tooltip',
+    tooltip: {
+      text: 'Tooltip',
+      enabled: true,
+      forceOpen: false,
+      side: 'bottom',
+      maxWidth: '200px',
+      enableHtml: false,
+    },
   },
 };

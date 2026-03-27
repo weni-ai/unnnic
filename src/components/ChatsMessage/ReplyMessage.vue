@@ -112,7 +112,7 @@
       clickable
       data-testid="close-icon"
       size="avatar-nano"
-      scheme="neutral-clean"
+      scheme="fg-base"
       @click="$emit('close')"
     />
   </section>
@@ -190,7 +190,7 @@ onUpdated(() => {
   border-radius: $unnnic-border-radius-sm;
 
   &.received {
-    background: $unnnic-color-neutral-lightest;
+    background: $unnnic-color-bg-base-soft;
   }
   &.sent {
     background: rgba(8, 103, 102, 0.1);
@@ -199,7 +199,7 @@ onUpdated(() => {
     border-left: 2px solid $unnnic-color-weni-600;
   }
   &--contact {
-    border-left: 2px solid $unnnic-color-aux-purple-500;
+    border-left: 2px solid $unnnic-color-purple-10;
   }
   &__message-container {
     display: flex;
@@ -215,14 +215,14 @@ onUpdated(() => {
       color: $unnnic-color-weni-600;
     }
     &--contact {
-      color: $unnnic-color-aux-purple-500;
+      color: $unnnic-color-purple-10;
     }
   }
   &__content {
     display: flex;
     align-items: center;
     gap: $unnnic-spacing-nano;
-    color: $unnnic-color-neutral-dark;
+    color: $unnnic-color-fg-base;
     font-family: $unnnic-font-family-secondary;
     font-size: $unnnic-font-size-body-gt;
     line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;

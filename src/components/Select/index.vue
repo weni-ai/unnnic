@@ -1,16 +1,13 @@
 <template>
-  <div
-    class="unnnic-select"
-    @keydown="handleKeyDown"
-  >
+  <div class="unnnic-select">
     <Popover
       :open="openPopover"
-      @update:open="openPopover = $event"
+      @update:open="setOpenPopover"
     >
       <PopoverTrigger class="w-full">
         <UnnnicInput
           ref="selectInputRef"
-          :modelValue="inputValue"
+          :modelValue="inputValue as string"
           class="unnnic-select__input"
           readonly
           useFocusProp
@@ -22,7 +19,7 @@
           :message="props.message"
           :iconRight="openPopover ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
           :disabled="props.disabled"
-          :showClear="!!selectedItem"
+          :showClear="!!selectedItem && props.clearable"
           @clear="emit('update:modelValue', '')"
         />
       </PopoverTrigger>
@@ -32,7 +29,10 @@
         :style="popoverContentCustomStyles"
         :width="inputWidthString"
       >
-        <div class="unnnic-select__content">
+        <div
+          ref="contentRef"
+          class="unnnic-select__content"
+        >
           <UnnnicInput
             v-if="props.enableSearch"
             class="unnnic-select__input-search"
@@ -47,20 +47,30 @@
           >
             {{ $t('without_results') }}
           </p>
-          <PopoverOption
-            v-for="(option, index) in filteredOptions"
-            v-else
-            :key="option[props.itemValue]"
-            :data-option-index="index"
-            data-testid="select-option"
-            :label="option[props.itemLabel]"
-            :active="
-              option[props.itemValue] === selectedItem?.[props.itemValue]
-            "
-            :focused="focusedOptionIndex === index"
-            :disabled="option.disabled"
-            @click="handleSelectOption(option)"
-          />
+          <template v-else>
+            <PopoverOption
+              v-for="(option, index) in filteredOptions"
+              :key="option[props.itemValue] as string"
+              :data-option-index="index"
+              data-testid="select-option"
+              :label="option[props.itemLabel] as string"
+              :active="
+                option[props.itemValue] === selectedItem?.[props.itemValue]
+              "
+              :focused="focusedOptionIndex === index"
+              :disabled="option.disabled"
+              @click="handleSelectOption(option)"
+            />
+            <div
+              v-if="props.infiniteScroll && infiniteScrollLoading"
+              class="unnnic-select__infinite-loading"
+            >
+              <UnnnicIconLoading
+                scheme="fg-base"
+                size="sm"
+              />
+            </div>
+          </template>
         </div>
       </PopoverContent>
     </Popover>
@@ -68,11 +78,19 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch, nextTick } from 'vue';
-import { useElementSize } from '@vueuse/core';
+import {
+  computed,
+  ref,
+  watch,
+  nextTick,
+  onBeforeUnmount,
+  useTemplateRef,
+} from 'vue';
+
+import { useInfiniteScroll } from '@vueuse/core';
 
 import UnnnicInput from '../Input/Input.vue';
-
+import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import {
   Popover,
   PopoverTrigger,
@@ -80,32 +98,20 @@ import {
   PopoverOption,
 } from '../ui/popover/index';
 
-import UnnnicI18n from '../../mixins/i18n';
+import { useSelectBase } from '../../composables/useSelectBase';
+import { useSelectKeyboard } from '../../composables/useSelectKeyboard';
+
+import type { SelectBaseProps, SelectOption } from './types';
 
 defineOptions({
   name: 'UnnnicSelect',
-  mixins: [UnnnicI18n],
 });
 
-interface SelectProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  options: Array<{ [key: string]: any }>;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  modelValue: any;
-  returnObject?: boolean;
-  itemLabel?: string;
-  itemValue?: string;
-  placeholder?: string;
-  label?: string;
-  type?: 'normal' | 'error';
-  errors?: string | Array<string>;
-  message?: string;
-  size?: 'sm' | 'md';
-  optionsLines?: number;
-  enableSearch?: boolean;
-  search?: string;
-  locale?: string;
-  disabled?: boolean;
+interface SelectProps extends SelectBaseProps {
+  modelValue: SelectOption | unknown;
+  infiniteScroll?: boolean;
+  infiniteScrollDistance?: number;
+  infiniteScrollCanLoadMore?: () => boolean;
 }
 
 const props = withDefaults(defineProps<SelectProps>(), {
@@ -119,106 +125,35 @@ const props = withDefaults(defineProps<SelectProps>(), {
   locale: 'en',
   enableSearch: false,
   disabled: false,
+  clearable: false,
   label: '',
   errors: '',
   message: '',
   search: '',
+  infiniteScroll: false,
+  infiniteScrollDistance: 10,
+  infiniteScrollCanLoadMore: () => true,
 });
 
 const emit = defineEmits<{
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  'update:modelValue': [value: any];
+  'update:modelValue': [value: SelectOption | unknown];
   'update:search': [value: string];
+  'scroll-end': [];
 }>();
 
-const openPopover = ref(false);
-const selectInputRef = ref<HTMLInputElement | null>(null);
-const { width: inputWidth } = useElementSize(selectInputRef);
+const selectInputRef = useTemplateRef<HTMLElement>('selectInputRef');
+const contentRef = useTemplateRef<HTMLDivElement>('contentRef');
 
-const inputWidthString = computed(() => {
-  return `${inputWidth.value}px`;
-});
+const base = useSelectBase(props, 'single', selectInputRef, contentRef);
 
-watch(openPopover, () => {
-  if (!openPopover.value) {
-    handleSearch('');
-  } else {
-    focusedOptionIndex.value = -1;
-  }
+const openPopover = base.openPopover;
+const popoverContentCustomStyles = base.popoverContentCustomStyles;
+const inputWidthString = base.inputWidthString;
+const filteredOptions = base.filteredOptions;
 
-  if (openPopover.value && props.modelValue) {
-    const selectedOptionIndex = props.options.findIndex(
-      (option) =>
-        option[props.itemValue] === selectedItem.value?.[props.itemValue],
-    );
-    scrollToOption(selectedOptionIndex, 'instant', 'center');
-  }
-});
-
-const handleKeyDown = (event) => {
-  const { key } = event;
-  const validKeys = ['ArrowUp', 'ArrowDown', 'Enter'];
-
-  if (validKeys.includes(key)) {
-    event.preventDefault();
-    if (key === 'ArrowUp') {
-      if (focusedOptionIndex.value === 0) return;
-      focusedOptionIndex.value--;
-      scrollToOption(focusedOptionIndex.value);
-    }
-    if (key === 'ArrowDown') {
-      if (focusedOptionIndex.value === filteredOptions.value.length - 1) return;
-      focusedOptionIndex.value++;
-      scrollToOption(focusedOptionIndex.value);
-    }
-    if (key === 'Enter' && focusedOptionIndex.value !== -1) {
-      handleSelectOption(filteredOptions.value[focusedOptionIndex.value]);
-    }
-  }
-};
-
-const focusedOptionIndex = ref<number>(-1);
-
-const scrollToOption = (
-  index: number,
-  behavior: 'smooth' | 'instant' = 'smooth',
-  block: 'center' | 'start' | 'end' | 'nearest' = 'center',
-) => {
-  nextTick(() => {
-    const option = document.querySelector(`[data-option-index="${index}"]`);
-    if (option) {
-      option.scrollIntoView?.({ behavior, block });
-    }
-  });
-};
-
-const calculatedPopoverHeight = computed(() => {
-  if (!props.options || props.options.length === 0) return 'unset';
-  const popoverPadding = 32;
-  const popoverGap = 4;
-  // 37 = 21px (height) + 16px (padding)
-  const fieldsHeight = 37 * props.optionsLines;
-  const gapsCompensation = props.enableSearch ? 1 : 2;
-
-  const size =
-    fieldsHeight +
-    popoverPadding +
-    (popoverGap * props.optionsLines - gapsCompensation);
-
-  return `${props.enableSearch ? size + 45 + 1 : size}px`;
-});
-
-const popoverContentCustomStyles = computed(() => {
-  const emptyFilteredOptions = filteredOptions.value?.length === 0;
-  return {
-    overflow: 'auto',
-    display: 'flex',
-    flexDirection: 'column',
-    minHeight: calculatedPopoverHeight.value,
-    maxHeight: emptyFilteredOptions ? 'unset' : calculatedPopoverHeight.value,
-    height: emptyFilteredOptions ? calculatedPopoverHeight.value : 'unset',
-  };
-});
+function setOpenPopover(value: boolean) {
+  base.openPopover.value = value;
+}
 
 const selectedItem = computed(() => {
   if (props.returnObject) return props.modelValue;
@@ -228,60 +163,129 @@ const selectedItem = computed(() => {
   );
 });
 
-const inputValue = computed(() => {
-  return selectedItem.value?.[props.itemLabel];
-});
+const inputValue = computed(() => selectedItem.value?.[props.itemLabel]);
 
-const handleSelectOption = (option) => {
+function handleSelectOption(option: SelectOption) {
   if (
     option[props.itemValue] === selectedItem.value?.[props.itemValue] ||
     option.disabled
   )
     return;
-
   emit(
     'update:modelValue',
     props.returnObject ? option : option[props.itemValue],
   );
-  openPopover.value = false;
-};
+  base.openPopover.value = false;
+}
 
-const handleSearch = (value: string) => {
+const keyboard = useSelectKeyboard<SelectOption>(
+  () => base.filteredOptions.value,
+  handleSelectOption,
+  {
+    closeOnSelect: true,
+    closePopover: () => (base.openPopover.value = false),
+    openPopoverRef: base.openPopover,
+  },
+);
+
+keyboard.setupKeydownBinding();
+
+const focusedOptionIndex = keyboard.focusedOptionIndex;
+
+watch(base.openPopover, () => {
+  if (!base.openPopover.value) {
+    handleSearch('');
+  } else {
+    keyboard.focusedOptionIndex.value = -1;
+    if (props.modelValue) {
+      const selectedOptionIndex = props.options.findIndex(
+        (option) =>
+          option[props.itemValue] === selectedItem.value?.[props.itemValue],
+      );
+      keyboard.scrollToOption(selectedOptionIndex, 'instant', 'center');
+    }
+    if (props.infiniteScroll) {
+      nextTick(() => setupInfiniteScroll());
+    }
+  }
+});
+
+const infiniteScrollReset = ref<(() => void) | null>(null);
+const infiniteScrollLoading = ref(false);
+
+function setupInfiniteScroll() {
+  if (!props.infiniteScroll) return;
+  if (infiniteScrollReset.value) {
+    infiniteScrollReset.value();
+    infiniteScrollReset.value = null;
+  }
+  nextTick(() => {
+    const scrollElement = base.contentRef.value;
+    if (!scrollElement) return;
+    const { reset } = useInfiniteScroll(
+      scrollElement,
+      () => {
+        if (!infiniteScrollLoading.value) {
+          infiniteScrollLoading.value = true;
+          emit('scroll-end');
+        }
+      },
+      {
+        distance: props.infiniteScrollDistance,
+        canLoadMore: () =>
+          props.infiniteScrollCanLoadMore() && !infiniteScrollLoading.value,
+      },
+    );
+    infiniteScrollReset.value = reset;
+  });
+}
+
+function finishInfiniteScroll() {
+  infiniteScrollLoading.value = false;
+  if (base.openPopover.value && props.infiniteScroll) {
+    nextTick(() => setupInfiniteScroll());
+  }
+}
+
+function resetInfiniteScroll() {
+  infiniteScrollLoading.value = false;
+  if (infiniteScrollReset.value) infiniteScrollReset.value();
+  if (base.openPopover.value && props.infiniteScroll) {
+    nextTick(() => setupInfiniteScroll());
+  }
+}
+
+function handleSearch(value: string) {
   emit('update:search', value);
-};
+}
 
-const filteredOptions = computed(() => {
-  if (!props.enableSearch || !props.search) return props.options;
+onBeforeUnmount(() => {
+  if (infiniteScrollReset.value) infiniteScrollReset.value();
+});
 
-  return props.options.filter(
-    (option) =>
-      option[props.itemLabel]
-        .toLowerCase()
-        .includes(props.search?.toLowerCase()) ||
-      option[props.itemValue]
-        .toLowerCase()
-        .includes(props.search?.toLowerCase()),
-  );
+defineExpose({
+  openPopover,
+  setOpenPopover,
+  filteredOptions,
+  calculatedPopoverHeight: base.calculatedPopoverHeight,
+  selectedItem,
+  inputValue,
+  infiniteScrollLoading,
+  finishInfiniteScroll,
+  resetInfiniteScroll,
 });
 </script>
 
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
+@use './select-shared' as shared;
 
 :deep(.unnnic-select__input) {
-  cursor: pointer;
+  @include shared.select-input-trigger;
 }
 
 :deep(.unnnic-select__input-search) {
-  > .icon-left {
-    color: $unnnic-color-fg-base;
-  }
-}
-
-:deep(.unnnic-select__input) {
-  > .icon-right {
-    color: $unnnic-color-fg-base;
-  }
+  @include shared.select-input-search;
 }
 
 .unnnic-select {
@@ -295,14 +299,16 @@ const filteredOptions = computed(() => {
     height: -webkit-fill-available;
 
     &-no-results {
-      margin: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      font: $unnnic-font-emphasis;
-      color: $unnnic-color-fg-muted;
+      @include shared.select-content-no-results;
     }
+  }
+
+  &__infinite-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $unnnic-space-2 0;
+    min-height: $unnnic-space-10;
   }
 }
 </style>

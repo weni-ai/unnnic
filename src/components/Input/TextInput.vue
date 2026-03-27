@@ -33,7 +33,7 @@
       <UnnnicIcon
         v-if="showClear"
         class="icon-clear"
-        :scheme="iconScheme"
+        scheme="gray-7"
         icon="close"
         size="ant"
         clickable
@@ -218,7 +218,6 @@ export default {
     top: 50%;
     transform: translateY(-50%);
     right: $unnnic-space-4;
-
     display: flex;
     align-items: center;
     gap: $unnnic-space-2;

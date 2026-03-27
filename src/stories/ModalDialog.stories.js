@@ -1,13 +1,17 @@
 import UnnnicModalDialog from '../components/ModalDialog/ModalDialog.vue';
 import UnnnicInput from '../components/Input/Input.vue';
 import UnnnicLabel from '../components/Label/Label.vue';
+import UnnnicInputDatePicker from '../components/InputDatePicker/InputDatePicker.vue';
+import UnnnicSwitch from '../components/Switch/Switch.vue';
+import UnnnicButton from '../components/Button/Button.vue';
+import UnnnicTag from '../components/Tag/Tag.vue';
 
-import { action } from '@storybook/addon-actions';
+import { action } from 'storybook/actions';
 import iconsList from '../utils/iconList';
 import colorsList from '../utils/colorsList';
 
 export default {
-  title: 'Example/ModalDialog',
+  title: 'Feedback/ModalDialog',
   component: UnnnicModalDialog,
   argTypes: {
     type: {
@@ -140,7 +144,7 @@ const TemplateImage = (args) => ({
       <section style="display: flex; flex-direction: column; align-items: center; gap: 24px">
         <img height='120' width='120' src="./doris.png"/>
         <section style="display: flex; flex-direction: column; justify-content: center; align-items: center">
-          <h1 style="font-family: 'Lato'; font-size: 20px; font-weight: 900; line-height: 28px; padding: 0; margin: 0; color:#3B414D">Title</h1>
+          <h1 style="font-family: 'Inter'; font-size: 20px; font-weight: 900; line-height: 28px; padding: 0; margin: 0; color:#3B414D">Title</h1>
           <p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod</p>
         </section>
       </section>
@@ -179,6 +183,85 @@ const TemplateLeftSidebar = (args) => ({
   methods: {
     primaryButtonClick: action('primaryButtonClick'),
     secondaryButtonClick: action('secondaryButtonClick'),
+  },
+});
+
+const TemplateWithDatePicker = (args) => ({
+  components: {
+    UnnnicModalDialog,
+    UnnnicInputDatePicker,
+    UnnnicSwitch,
+    UnnnicButton,
+  },
+  setup() {
+    const updateModelValue = (value) => {
+      action('update:modelValue')(value);
+      args.modelValue = value;
+    };
+    return { args, updateModelValue };
+  },
+  data() {
+    return {
+      forms: [{ date: { start: null, end: null }, repeat: false }],
+      isLoading: false,
+    };
+  },
+  template: `
+  <div>
+    <button @click="updateModelValue(true)">Open Modal with DatePicker</button>
+    <unnnic-modal-dialog 
+      v-bind="args" 
+      @primaryButtonClick="handleSave" 
+      @secondaryButtonClick="secondaryButtonClick" 
+      @update:modelValue="updateModelValue"
+    >
+      <section style="display: flex; flex-direction: column; gap: 16px;">
+        <section 
+          v-for="(form, index) in forms"
+          :key="index"
+          style="display: flex; flex-direction: column; gap: 12px; padding: 16px; border: 1px solid #E2E6ED; border-radius: 8px;"
+        >
+          <section style="display: flex; flex-direction: column; gap: 8px;">
+            <p style="font-family: 'Inter'; font-size: 14px; font-weight: 600; margin: 0; color: #3B414D;">
+              Select date or period
+            </p>
+            <UnnnicInputDatePicker
+              v-model="form.date"
+              :options="[{ id: 'custom', name: 'Custom' }]"
+              next
+              fillW
+              actionText="Confirm"
+              disableClear
+            />
+          </section>
+          <UnnnicSwitch
+            v-model="form.repeat"
+            textRight="Repeat annually"
+            size="small"
+          />
+        </section>
+        <UnnnicButton
+          iconCenter="add-1"
+          type="tertiary"
+          text="Add"
+          @click="addForm"
+        />
+      </section>
+    </unnnic-modal-dialog>
+  </div>
+  `,
+  methods: {
+    primaryButtonClick: action('primaryButtonClick'),
+    secondaryButtonClick: action('secondaryButtonClick'),
+    handleSave() {
+      action('primaryButtonClick')();
+      action('save')(this.forms);
+      console.log('Forms data:', this.forms);
+    },
+    addForm() {
+      this.forms.push({ date: { start: null, end: null }, repeat: false });
+      action('addForm')();
+    },
   },
 });
 
@@ -260,4 +343,106 @@ Image.args = {
     text: 'Confirm',
   },
   showActionsDivider: true,
+};
+
+export const WithDatePicker = TemplateWithDatePicker.bind({});
+WithDatePicker.args = {
+  title: 'Add Non-Working Dates',
+  type: '',
+  primaryButtonProps: {
+    text: 'Save',
+    loading: false,
+  },
+  secondaryButtonProps: {
+    text: 'Cancel',
+  },
+};
+
+const TemplateCustomTitleSlot = (args) => ({
+  components: { UnnnicModalDialog, UnnnicTag, UnnnicButton },
+  setup() {
+    const updateModelValue = (value) => {
+      action('update:modelValue')(value);
+      args.modelValue = value;
+    };
+    return { args, updateModelValue };
+  },
+  template: `
+  <div>
+    <button @click="updateModelValue(true)">Open Modal</button>
+    <unnnic-modal-dialog
+      v-bind="args"
+      @primaryButtonClick="primaryButtonClick"
+      @secondaryButtonClick="secondaryButtonClick"
+      @update:modelValue="updateModelValue"
+    >
+      <template #title>
+        <span style="display: flex; align-items: center; gap: 8px;">
+          Custom Title
+          <UnnnicTag text="New" scheme="feedback-green" />
+        </span>
+      </template>
+      <p style="margin: 0;">This modal uses the <strong>title slot</strong> instead of the title prop, allowing you to add custom components like tags, buttons, or icons inside the title area.</p>
+    </unnnic-modal-dialog>
+  </div>
+  `,
+  methods: {
+    primaryButtonClick: action('primaryButtonClick'),
+    secondaryButtonClick: action('secondaryButtonClick'),
+  },
+});
+
+export const CustomTitleSlot = TemplateCustomTitleSlot.bind({});
+CustomTitleSlot.args = {
+  type: '',
+  showCloseIcon: true,
+  primaryButtonProps: {
+    text: 'Confirm',
+  },
+};
+
+const TemplateCustomTitleWithButtons = (args) => ({
+  components: { UnnnicModalDialog, UnnnicButton },
+  setup() {
+    const updateModelValue = (value) => {
+      action('update:modelValue')(value);
+      args.modelValue = value;
+    };
+    return { args, updateModelValue };
+  },
+  template: `
+  <div>
+    <button @click="updateModelValue(true)">Open Modal</button>
+    <unnnic-modal-dialog
+      v-bind="args"
+      @primaryButtonClick="primaryButtonClick"
+      @secondaryButtonClick="secondaryButtonClick"
+      @update:modelValue="updateModelValue"
+    >
+      <template #title>
+        <span style="display: flex; align-items: center; gap: 8px;">
+          Settings
+          <UnnnicButton type="tertiary" iconCenter="help" size="small" />
+        </span>
+      </template>
+      <p style="margin: 0;">This modal demonstrates a title with an inline help button using the <strong>title slot</strong>.</p>
+    </unnnic-modal-dialog>
+  </div>
+  `,
+  methods: {
+    primaryButtonClick: action('primaryButtonClick'),
+    secondaryButtonClick: action('secondaryButtonClick'),
+  },
+});
+
+export const CustomTitleWithButton = TemplateCustomTitleWithButtons.bind({});
+CustomTitleWithButton.args = {
+  type: '',
+  showCloseIcon: true,
+  primaryButtonProps: {
+    text: 'Save',
+  },
+  secondaryButtonProps: {
+    text: 'Cancel',
+  },
 };

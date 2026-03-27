@@ -81,7 +81,8 @@ describe('TextArea.vue', () => {
   });
 
   test('focus method focuses the textarea element', () => {
-    const focusSpy = vi.spyOn(wrapper.vm.$refs.textarea, 'focus');
+    const textarea = wrapper.find('textarea');
+    const focusSpy = vi.spyOn(textarea.element, 'focus');
     wrapper.vm.focus();
     expect(focusSpy).toHaveBeenCalled();
   });
@@ -123,7 +124,8 @@ describe('TextArea.vue', () => {
 
   test('focuses correctly when in error state', async () => {
     await wrapper.setProps({ type: 'error' });
-    const focusSpy = vi.spyOn(wrapper.vm.$refs.textarea, 'focus');
+    const textarea = wrapper.find('textarea');
+    const focusSpy = vi.spyOn(textarea.element, 'focus');
     wrapper.vm.focus();
     expect(focusSpy).toHaveBeenCalled();
   });
@@ -139,19 +141,6 @@ describe('TextArea.vue', () => {
     expect(wrapper.find('textarea').classes()).toContain(
       'unnnic-text-area__textarea--size-md',
     );
-  });
-
-  test('validates type prop', () => {
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-
-    mount(TextArea, { props: { type: 'normal' } });
-    mount(TextArea, { props: { type: 'error' } });
-    expect(warnSpy).not.toHaveBeenCalled();
-
-    mount(TextArea, { props: { type: 'invalid' } });
-    expect(warnSpy).toHaveBeenCalled();
-
-    warnSpy.mockRestore();
   });
 
   test('renders placeholder correctly', () => {

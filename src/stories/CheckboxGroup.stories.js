@@ -1,7 +1,5 @@
-import { action } from '@storybook/addon-actions';
 import UnnnicCheckboxGroup from '../components/CheckboxGroup/CheckboxGroup.vue';
 import UnnnicCheckbox from '../components/Checkbox/Checkbox.vue';
-import { ref } from 'vue';
 
 export default {
   title: 'Form/CheckboxGroup',
@@ -10,16 +8,16 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: `Allows the user to select multiple options from a category. It can also be 
+        component: `<div>Allows the user to select multiple options from a category. It can also be 
         used to display a single option that may require additional acceptance or confirmation 
-        before submission.`,
+        before submission.
+        </div>`,
       },
     },
   },
   argTypes: {
     label: { control: { type: 'text' } },
-    labelTooltip: { control: { type: 'text' } },
-    labelUseHtmlTooltip: { control: 'boolean' },
+    labelTooltip: { control: { type: 'object' } },
     helper: { control: { type: 'text' } },
     state: { control: 'select', options: ['horizontal', 'vertical'] },
   },
@@ -83,7 +81,9 @@ export const Vertical = {
     state: 'vertical',
     label: 'Label',
     helper: 'Helper text',
-    labelTooltip: 'Tooltip text',
+    labelTooltip: {
+      text: 'Tooltip text',
+    },
   },
 
   render: (args) => ({

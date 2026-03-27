@@ -133,7 +133,7 @@ export default {
   color: $unnnic-color-fg-base;
   font: $unnnic-font-action;
   margin-bottom: $unnnic-space-4;
-  border-bottom: $unnnic-border-width-thinner solid $unnnic-color-border-base;
+  border-bottom: 1px solid $unnnic-color-border-base;
 }
 
 .tab-content {
@@ -152,10 +152,6 @@ export default {
 
   cursor: pointer;
   padding: $unnnic-space-2 $unnnic-space-4;
-
-  .unnnic-tooltip {
-    display: flex;
-  }
 
   &:hover {
     color: $unnnic-color-fg-emphasized;

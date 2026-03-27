@@ -14,6 +14,7 @@ export default {
         summary: 'md',
       },
     },
+    tooltip: { control: { type: 'object' } },
     type: {
       control: { type: 'select' },
       options: ['normal', 'error'],
@@ -149,6 +150,8 @@ export const WithTooltip = {
   args: {
     label: 'Label',
     placeholder: 'Text',
-    tooltip: 'Tooltip',
+    tooltip: {
+      text: 'Tooltip',
+    },
   },
 };

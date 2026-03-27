@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+
 import InputDatePicker from '../InputDatePicker.vue';
 
 const factory = (props = {}) =>
@@ -11,20 +12,7 @@ const factory = (props = {}) =>
       },
       ...props,
     },
-    global: {
-      stubs: {
-        UnnnicInput: {
-          name: 'UnnnicInput',
-          template:
-            '<input data-testid="input" v-bind="$attrs" @focus="$emit(\'focus\', $event)" />',
-        },
-        UnnnicDatePicker: {
-          name: 'UnnnicDatePicker',
-          props: ['minDate', 'maxDate', 'periodBaseDate', 'options'],
-          template: '<div data-testid="datepicker"></div>',
-        },
-      },
-    },
+    attachTo: document.body,
   });
 
 describe('InputDatePicker.vue', () => {
@@ -32,6 +20,12 @@ describe('InputDatePicker.vue', () => {
 
   beforeEach(() => {
     wrapper = factory();
+  });
+
+  afterEach(() => {
+    if (wrapper) {
+      wrapper.unmount();
+    }
   });
 
   it('renders input and does not show datepicker by default', () => {
@@ -42,13 +36,23 @@ describe('InputDatePicker.vue', () => {
   it('opens datepicker when input receives focus', async () => {
     const input = wrapper.find('[data-testid="input"]');
     await input.trigger('focus');
-
-    wrapper.vm.showCalendarFilter = true;
     await wrapper.vm.$nextTick();
 
     expect(wrapper.findComponent({ name: 'UnnnicDatePicker' }).exists()).toBe(
       true,
     );
+    expect(wrapper.vm.isPopoverOpen).toBe(true);
+  });
+
+  it('opens datepicker when input receives click', async () => {
+    const input = wrapper.find('[data-testid="input"]');
+    await input.trigger('click');
+    await wrapper.vm.$nextTick();
+
+    expect(wrapper.findComponent({ name: 'UnnnicDatePicker' }).exists()).toBe(
+      true,
+    );
+    expect(wrapper.vm.isPopoverOpen).toBe(true);
   });
 
   it('computes filterText placeholder when there is no date selected', () => {
@@ -66,6 +70,7 @@ describe('InputDatePicker.vue', () => {
     });
 
     expect(withDates.vm.filterText).toBe('01-10-2025 ~ 01-20-2025');
+    withDates.unmount();
   });
 
   it('computes initialStartDate and initialEndDate for DatePicker', () => {
@@ -78,10 +83,11 @@ describe('InputDatePicker.vue', () => {
 
     expect(withDates.vm.initialStartDate).toBe('01 10 2025');
     expect(withDates.vm.initialEndDate).toBe('01 20 2025');
+    withDates.unmount();
   });
 
   it('emits selectDate with formatted dates when DatePicker emits change', async () => {
-    wrapper.vm.showCalendarFilter = true;
+    wrapper.vm.isPopoverOpen = true;
     await wrapper.vm.$nextTick();
 
     const datePicker = wrapper.findComponent({ name: 'UnnnicDatePicker' });
@@ -104,7 +110,7 @@ describe('InputDatePicker.vue', () => {
   });
 
   it('emits update:model-value and closes dropdown when DatePicker emits submit', async () => {
-    wrapper.vm.showCalendarFilter = true;
+    wrapper.vm.isPopoverOpen = true;
     await wrapper.vm.$nextTick();
 
     const datePicker = wrapper.findComponent({ name: 'UnnnicDatePicker' });
@@ -125,7 +131,7 @@ describe('InputDatePicker.vue', () => {
       end: '2025-01-20',
     });
 
-    expect(wrapper.vm.showCalendarFilter).toBe(false);
+    expect(wrapper.vm.isPopoverOpen).toBe(false);
   });
 
   it('passes minDate, maxDate, options and periodBaseDate down to DatePicker', async () => {
@@ -137,7 +143,7 @@ describe('InputDatePicker.vue', () => {
     };
 
     wrapper = factory(props);
-    wrapper.vm.showCalendarFilter = true;
+    wrapper.vm.isPopoverOpen = true;
     await wrapper.vm.$nextTick();
 
     const datePicker = wrapper.findComponent({ name: 'UnnnicDatePicker' });
@@ -147,13 +153,14 @@ describe('InputDatePicker.vue', () => {
     expect(dpProps.maxDate).toBe(props.maxDate);
     expect(dpProps.periodBaseDate).toBe(props.periodBaseDate);
     expect(dpProps.options).toEqual(props.options);
+    expect(dpProps.variant).toBe('popover');
   });
 
-  it('closes dropdown on mouseout when clicking outside', () => {
-    wrapper.vm.showCalendarFilter = true;
+  it('aligns the popover to the end when position is right', () => {
+    const rightWrapper = factory({ position: 'right' });
 
-    wrapper.vm.mouseout({ target: document.createElement('div') });
+    expect(rightWrapper.vm.popoverAlign).toBe('end');
 
-    expect(wrapper.vm.showCalendarFilter).toBe(false);
+    rightWrapper.unmount();
   });
 });

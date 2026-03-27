@@ -39,10 +39,10 @@ export default {
 @use '@/assets/scss/unnnic' as *;
 
 .grid-example {
-  background-color: $unnnic-color-brand-weni;
+  background-color: $unnnic-color-teal-8;
 
   &-container {
-    background-color: $unnnic-color-neutral-dark;
+    background-color: $unnnic-color-fg-base;
     width: 100%;
     height: 100vh;
   }

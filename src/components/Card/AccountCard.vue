@@ -65,7 +65,7 @@ export default {
   padding: $unnnic-squish-xs;
 
   &.enabled {
-    background-color: $unnnic-color-background-sky;
+    background-color: $unnnic-color-bg-base-soft;
   }
 
   .icon {
@@ -77,7 +77,7 @@ export default {
       font-family: $unnnic-font-family-primary;
       font-size: $unnnic-font-size-body-lg;
       font-weight: $unnnic-font-weight-regular;
-      color: $unnnic-color-neutral-darkest;
+      color: $unnnic-color-fg-emphasized;
       line-height: $unnnic-font-size-body-lg + $unnnic-line-height-md;
     }
 
@@ -85,7 +85,7 @@ export default {
       font-family: $unnnic-font-family-secondary;
       font-size: $unnnic-font-size-body-gt;
       font-weight: $unnnic-font-weight-regular;
-      color: $unnnic-color-neutral-cloudy;
+      color: $unnnic-color-fg-base;
       line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
       margin-top: $unnnic-spacing-stack-nano;
     }
