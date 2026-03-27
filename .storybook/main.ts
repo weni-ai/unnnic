@@ -21,6 +21,7 @@ const config: StorybookConfig = {
         },
       },
     },
+    '@storybook/addon-themes',
   ],
   framework: {
     name: '@storybook/vue3-vite',

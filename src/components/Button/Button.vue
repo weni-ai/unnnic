@@ -228,38 +228,38 @@ watch(
   &--primary,
   &--warning,
   &--attention {
-    color: $unnnic-color-fg-inverted;
+    color: var(--unnnic-color-fg-inverted);
   }
 
   &--secondary,
   &--tertiary {
-    color: $unnnic-color-fg-emphasized;
+    color: var(--unnnic-color-fg-emphasized);
   }
 
   &--primary {
-    background-color: $unnnic-color-bg-active;
+    background-color: var(--unnnic-color-bg-accent-strong);
 
     &:hover:enabled {
-      background-color: $unnnic-color-teal-700;
+      background-color: $unnnic-color-teal-11;
     }
 
     &:active:enabled,
     &.unnnic-button--pressed {
-      background-color: $unnnic-color-teal-800;
+      background-color: $unnnic-color-teal-12;
     }
   }
 
   &--secondary {
-    background-color: $unnnic-color-bg-base;
-    box-shadow: inset 0 0 0 1px $unnnic-color-border-base;
+    background-color: var(--unnnic-color-bg-base);
+    box-shadow: inset 0 0 0 1px var(--unnnic-color-border-base);
 
     &:hover:enabled {
-      background-color: $unnnic-color-gray-50;
+      background-color: var(--unnnic-color-bg-base-soft);
     }
 
     &:active:enabled,
     &.unnnic-button--pressed {
-      background-color: $unnnic-color-gray-100;
+      background-color: var(--unnnic-color-bg-muted);
     }
 
     &:disabled {
@@ -271,39 +271,38 @@ watch(
     background-color: transparent;
 
     &:hover:enabled {
-      background-color: rgba($unnnic-color-gray-400, 0.1);
+      background-color: var(--unnnic-color-bg-base-soft);
     }
 
     &:active:enabled,
     &.unnnic-button--pressed {
-      background-color: rgba($unnnic-color-gray-400, 0.2);
+      background-color: var(--unnnic-color-bg-muted);
     }
   }
 
   &--warning {
-    background-color: $unnnic-color-bg-red-strong;
-    color: $unnnic-color-fg-inverted;
+    background-color: var(--unnnic-color-bg-red-strong);
 
     &:hover:enabled {
-      background-color: $unnnic-color-red-10;
+      background-color: $unnnic-color-red-11;
     }
 
     &:active:enabled,
     &.unnnic-button--pressed {
-      background-color: $unnnic-color-red-11;
+      background-color: $unnnic-color-red-12;
     }
   }
 
   &--attention {
-    background-color: $unnnic-color-yellow-500;
+    background-color: var(--unnnic-color-bg-yellow-strong);
 
     &:hover:enabled {
-      background-color: $unnnic-color-yellow-600;
+      background-color: $unnnic-color-yellow-11;
     }
 
     &:active:enabled,
     &.unnnic-button--pressed {
-      background-color: $unnnic-color-yellow-700;
+      background-color: $unnnic-color-yellow-12;
     }
   }
 
@@ -312,8 +311,8 @@ watch(
   &--tertiary:disabled,
   &--warning:disabled,
   &--attention:disabled {
-    background-color: $unnnic-color-bg-muted;
-    color: $unnnic-color-fg-muted;
+    background-color: var(--unnnic-color-bg-muted);
+    color: var(--unnnic-color-fg-muted);
     cursor: not-allowed;
 
     :deep(.unnnic--clickable) {

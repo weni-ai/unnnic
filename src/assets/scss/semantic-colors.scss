@@ -1,0 +1,31 @@
+@use './colors' as *;
+
+:global(:root) {
+  --unnnic-color-bg-base: #{$unnnic-color-gray-0};
+  --unnnic-color-bg-base-soft: #{$unnnic-color-gray-1};
+  --unnnic-color-bg-muted: #{$unnnic-color-gray-2};
+  --unnnic-color-bg-accent-strong: #{$unnnic-color-teal-8};
+  --unnnic-color-bg-red-strong: #{$unnnic-color-red-9};
+  --unnnic-color-bg-yellow-strong: #{$unnnic-color-yellow-8};
+
+  --unnnic-color-fg-emphasized: #{$unnnic-color-gray-12};
+  --unnnic-color-fg-muted: #{$unnnic-color-gray-9};
+  --unnnic-color-fg-inverted: #{$unnnic-color-gray-0};
+
+  --unnnic-color-border-base: #{$unnnic-color-gray-3};
+}
+
+:global(.dark) {
+  --unnnic-color-bg-base: #{$unnnic-color-gray-12};
+  --unnnic-color-bg-base-soft: rgba(255, 255, 255, 0.05);
+  --unnnic-color-bg-muted: rgba(255, 255, 255, 0.10);
+  --unnnic-color-bg-accent-strong: #{$unnnic-color-teal-8};
+  --unnnic-color-bg-red-strong: #{$unnnic-color-red-9};
+  --unnnic-color-bg-yellow-strong: #{$unnnic-color-yellow-8};
+
+  --unnnic-color-fg-emphasized: #{$unnnic-color-gray-0};
+  --unnnic-color-fg-muted: #{$unnnic-color-gray-7};
+  --unnnic-color-fg-inverted: #{$unnnic-color-gray-0};
+
+  --unnnic-color-border-base: rgba(255, 255, 255, 0.16);
+}

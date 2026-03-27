@@ -160,6 +160,25 @@ $icon-sizes:
     }
   }
 
+  $unnnic-scheme-colors-as-variables:
+    'fg-emphasized' var(--unnnic-color-fg-emphasized),
+    'fg-muted' var(--unnnic-color-fg-muted),
+    'fg-inverted' var(--unnnic-color-fg-inverted);
+
+  @each $name, $color in $unnnic-scheme-colors-as-variables {
+    &.unnnic-icon-scheme--#{$name} {
+      color: $color;
+
+      & .primary {
+        fill: $color;
+      }
+
+      & .primary-stroke {
+        stroke: $color;
+      }
+    }
+  }
+
   @each $name, $size in $icon-sizes {
     &.unnnic-icon-size--#{$name} {
       font-size: $size;
