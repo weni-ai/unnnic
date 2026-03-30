@@ -139,8 +139,8 @@ export default {
 
         return (
           AUTO_GENERATED_COMMENT +
-          `:global(:root) {\n${rootBlock}\n}\n\n` +
-          `:global(.dark) {\n${darkBlock}\n}\n`
+          `:root {\n${rootBlock}\n}\n\n` +
+          `.dark {\n${darkBlock}\n}\n`
         );
       },
       'scss/bridge-variables': (dictionary) => {

@@ -1,7 +1,7 @@
 
 // Do not edit directly, this file was auto-generated.
 
-:global(:root) {
+:root {
   --unnnic-color-bg-base: #FFFFFF;
   --unnnic-color-bg-base-soft: #F5F5F5;
   --unnnic-color-bg-muted: #EBEBEB;
@@ -47,7 +47,7 @@
   --unnnic-color-border-critical: #FF9E8B;
 }
 
-:global(.dark) {
+.dark {
   --unnnic-color-bg-base: #1F1F1F;
   --unnnic-color-bg-base-soft: rgba(255, 255, 255, 0.05);
   --unnnic-color-bg-muted: rgba(255, 255, 255, 0.10);
