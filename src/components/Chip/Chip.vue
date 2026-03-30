@@ -87,9 +87,10 @@ const chipClass = computed(() => {
   }
 
   &--is-selected {
-    background-color: $unnnic-color-teal-100;
+    background-color: $unnnic-color-bg-teal-plain;
+
     &:hover {
-      background-color: $unnnic-color-teal-200;
+      background-color: $unnnic-color-teal-4;
     }
   }
 
@@ -106,7 +107,7 @@ const chipClass = computed(() => {
     font: $unnnic-font-caption-1;
 
     &--is-selected {
-      color: $unnnic-color-fg-active;
+      color: $unnnic-color-fg-accent;
     }
   }
 
@@ -123,8 +124,8 @@ const chipClass = computed(() => {
     font-weight: $unnnic-font-weight-medium;
 
     &--is-selected {
-      color: $unnnic-color-fg-active;
-      background: $unnnic-color-white;
+      color: $unnnic-color-fg-accent;
+      background: $unnnic-color-bg-base;
     }
   }
 }

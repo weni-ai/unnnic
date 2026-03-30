@@ -342,10 +342,10 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   }
 
   &.sent {
-    background-color: #cff8f4;
+    background-color: $unnnic-color-bg-accent-plain;
 
     &.automatic {
-      background-color: $unnnic-color-blue-100;
+      background-color: $unnnic-color-bg-info;
     }
   }
 
