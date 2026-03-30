@@ -12,11 +12,9 @@
 
 <script>
 import { ref, provide } from 'vue';
-import colorsTokens from '@/assets/tokens/colors-primitives.json';
 
-const { gray } = colorsTokens.color;
-export const DEFAULT_BACKGROUND = gray[3].value;
-export const DEFAULT_HIGHLIGHT = gray[1].value;
+export const DEFAULT_BACKGROUND = 'var(--unnnic-color-bg-muted)';
+export const DEFAULT_HIGHLIGHT = 'var(--unnnic-color-bg-base-soft)';
 export const SkeletonStyle = {
   '--skeleton-bg': DEFAULT_BACKGROUND,
   '--skeleton-highlight': DEFAULT_HIGHLIGHT,

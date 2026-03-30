@@ -17,8 +17,6 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { color as colors } from '@/assets/tokens/colors-primitives.json';
-
 import UnnnicIcon from '../Icon.vue';
 
 import type { DefaultTagProps } from './types';
@@ -31,14 +29,14 @@ const props = withDefaults(defineProps<DefaultTagProps>(), {
 });
 
 const COLOR_MAPPING = [
-  { keywords: ['green'], color: colors.green['2'].value },
-  { keywords: ['blue'], color: colors.blue['2'].value },
-  { keywords: ['purple'], color: colors.purple['3'].value },
-  { keywords: ['red', 'pink'], color: colors.red['3'].value },
-  { keywords: ['orange'], color: colors.orange['3'].value },
-  { keywords: ['yellow'], color: colors.yellow['2'].value },
-  { keywords: ['gray'], color: colors.gray['2'].value },
-  { keywords: ['teal', 'weni'], color: colors.teal['2'].value },
+  { keywords: ['green'], color: 'var(--unnnic-color-bg-green-plain)' },
+  { keywords: ['blue'], color: 'var(--unnnic-color-bg-blue-plain)' },
+  { keywords: ['purple'], color: 'var(--unnnic-color-bg-purple-plain)' },
+  { keywords: ['red', 'pink'], color: 'var(--unnnic-color-bg-red-plain)' },
+  { keywords: ['orange'], color: 'var(--unnnic-color-bg-orange-plain)' },
+  { keywords: ['yellow'], color: 'var(--unnnic-color-bg-yellow-plain)' },
+  { keywords: ['gray'], color: 'var(--unnnic-color-bg-muted)' },
+  { keywords: ['teal', 'weni'], color: 'var(--unnnic-color-bg-teal-plain)' },
 ];
 
 const color = computed(() => {
@@ -48,7 +46,7 @@ const color = computed(() => {
     keywords.some((keyword) => scheme.includes(keyword)),
   );
 
-  return match?.color ?? colors.gray['2'].value;
+  return match?.color ?? 'var(--unnnic-color-bg-muted)';
 });
 </script>
 
