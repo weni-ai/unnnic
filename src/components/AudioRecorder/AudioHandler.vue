@@ -6,6 +6,7 @@
       </span>
 
       <UnnnicIcon
+        v-if="!hideRecordingIndicator"
         icon="indicator"
         size="sm"
         :class="[{ 'is-recording': isRecording }]"
@@ -15,7 +16,7 @@
 
     <UnnnicToolTip
       enabled
-      text="Salvar"
+      :text="saveText || i18n('save')"
       side="top"
     >
       <span
@@ -24,7 +25,8 @@
         @keypress.enter="save"
       >
         <UnnnicIcon
-          icon="check-circle-1-1"
+          size="ant"
+          icon="check_circle"
           scheme="feedback-green"
         />
       </span>
@@ -35,12 +37,15 @@
 <script>
 import UnnnicIcon from '../Icon.vue';
 import UnnnicToolTip from '../ToolTip/ToolTip.vue';
+import UnnnicI18n from '../../mixins/i18n';
 
 export default {
   components: {
     UnnnicIcon,
     UnnnicToolTip,
   },
+
+  mixins: [UnnnicI18n],
 
   props: {
     isRecording: {
@@ -51,8 +56,29 @@ export default {
       type: String,
       default: '',
     },
+    saveText: {
+      type: String,
+      default: '',
+    },
+    hideRecordingIndicator: {
+      type: Boolean,
+      default: false,
+    },
   },
+
   emits: ['save'],
+
+  data() {
+    return {
+      defaultTranslations: {
+        save: {
+          'pt-br': 'Salvar',
+          en: 'Save',
+          es: 'Guardar',
+        },
+      },
+    };
+  },
 
   methods: {
     save() {
