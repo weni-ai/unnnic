@@ -228,16 +228,16 @@ watch(
   &--primary,
   &--warning,
   &--attention {
-    color: var(--unnnic-color-fg-inverted);
+    color: $unnnic-color-fg-inverted;
   }
 
   &--secondary,
   &--tertiary {
-    color: var(--unnnic-color-fg-emphasized);
+    color: $unnnic-color-fg-emphasized;
   }
 
   &--primary {
-    background-color: var(--unnnic-color-bg-accent-strong);
+    background-color: $unnnic-color-bg-accent-strong;
 
     &:hover:enabled {
       background-color: $unnnic-color-teal-11;
@@ -250,16 +250,16 @@ watch(
   }
 
   &--secondary {
-    background-color: var(--unnnic-color-bg-base);
-    box-shadow: inset 0 0 0 1px var(--unnnic-color-border-base);
+    background-color: $unnnic-color-bg-base;
+    box-shadow: inset 0 0 0 1px $unnnic-color-border-base;
 
     &:hover:enabled {
-      background-color: var(--unnnic-color-bg-base-soft);
+      background-color: $unnnic-color-bg-base-soft;
     }
 
     &:active:enabled,
     &.unnnic-button--pressed {
-      background-color: var(--unnnic-color-bg-muted);
+      background-color: $unnnic-color-bg-muted;
     }
 
     &:disabled {
@@ -271,17 +271,17 @@ watch(
     background-color: transparent;
 
     &:hover:enabled {
-      background-color: var(--unnnic-color-bg-base-soft);
+      background-color: $unnnic-color-bg-base-soft;
     }
 
     &:active:enabled,
     &.unnnic-button--pressed {
-      background-color: var(--unnnic-color-bg-muted);
+      background-color: $unnnic-color-bg-muted;
     }
   }
 
   &--warning {
-    background-color: var(--unnnic-color-bg-red-strong);
+    background-color: $unnnic-color-bg-red-strong;
 
     &:hover:enabled {
       background-color: $unnnic-color-red-11;
@@ -294,7 +294,7 @@ watch(
   }
 
   &--attention {
-    background-color: var(--unnnic-color-bg-yellow-strong);
+    background-color: $unnnic-color-bg-yellow-strong;
 
     &:hover:enabled {
       background-color: $unnnic-color-yellow-11;
@@ -311,8 +311,8 @@ watch(
   &--tertiary:disabled,
   &--warning:disabled,
   &--attention:disabled {
-    background-color: var(--unnnic-color-bg-muted);
-    color: var(--unnnic-color-fg-muted);
+    background-color: $unnnic-color-bg-muted;
+    color: $unnnic-color-fg-muted;
     cursor: not-allowed;
 
     :deep(.unnnic--clickable) {
