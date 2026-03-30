@@ -17,7 +17,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 
-import { color as colors } from '@/assets/tokens/colors.json';
+import { color as colors } from '@/assets/tokens/colors-primitives.json';
 
 import UnnnicIcon from '../Icon.vue';
 

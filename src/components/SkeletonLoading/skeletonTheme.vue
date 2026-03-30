@@ -12,7 +12,7 @@
 
 <script>
 import { ref, provide } from 'vue';
-import colorsTokens from '@/assets/tokens/colors.json';
+import colorsTokens from '@/assets/tokens/colors-primitives.json';
 
 const { gray } = colorsTokens.color;
 export const DEFAULT_BACKGROUND = gray[3].value;

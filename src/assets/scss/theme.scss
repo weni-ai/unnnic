@@ -1,0 +1,94 @@
+
+// Do not edit directly, this file was auto-generated.
+
+:global(:root) {
+  --unnnic-color-bg-base: #FFFFFF;
+  --unnnic-color-bg-base-soft: #F5F5F5;
+  --unnnic-color-bg-muted: #EBEBEB;
+  --unnnic-color-bg-accent-plain: #CFF8F4;
+  --unnnic-color-bg-accent-strong: #01A29B;
+  --unnnic-color-bg-info: #F1F8FD;
+  --unnnic-color-bg-success: #E9FCE3;
+  --unnnic-color-bg-warning: #FBF7D4;
+  --unnnic-color-bg-critical: #FDF6F5;
+  --unnnic-color-bg-red-plain: #FFDFD9;
+  --unnnic-color-bg-red-strong: #EC3727;
+  --unnnic-color-bg-orange-plain: #FFE0AE;
+  --unnnic-color-bg-orange-strong: #E57001;
+  --unnnic-color-bg-yellow-plain: #FDF5AD;
+  --unnnic-color-bg-yellow-strong: #B18D01;
+  --unnnic-color-bg-green-plain: #AFF79E;
+  --unnnic-color-bg-green-strong: #08A822;
+  --unnnic-color-bg-teal-plain: #ABF2EB;
+  --unnnic-color-bg-teal-strong: #01A29B;
+  --unnnic-color-bg-blue-plain: #CBE9FF;
+  --unnnic-color-bg-blue-strong: #3993F4;
+  --unnnic-color-bg-purple-plain: #EDDCFE;
+  --unnnic-color-bg-purple-strong: #AD71F8;
+  --unnnic-color-bg-pink-plain: #FFDFEB;
+  --unnnic-color-bg-pink-strong: #EF5997;
+  --unnnic-color-fg-base: #3D3D3D;
+  --unnnic-color-fg-emphasized: #1F1F1F;
+  --unnnic-color-fg-muted: #707070;
+  --unnnic-color-fg-inverted: #FFFFFF;
+  --unnnic-color-fg-accent: #01A29B;
+  --unnnic-color-fg-info: #157BF4;
+  --unnnic-color-fg-success: #019213;
+  --unnnic-color-fg-warning: #9C7901;
+  --unnnic-color-fg-critical: #EC3727;
+  --unnnic-color-border-base: #E0E0E0;
+  --unnnic-color-border-muted: #EBEBEB;
+  --unnnic-color-border-emphasized: #999999;
+  --unnnic-color-border-accent-plain: #66DBD3;
+  --unnnic-color-border-accent-strong: #01A29B;
+  --unnnic-color-border-info: #97CFFE;
+  --unnnic-color-border-success: #74E26C;
+  --unnnic-color-border-warning: #E9C701;
+  --unnnic-color-border-critical: #FF9E8B;
+}
+
+:global(.dark) {
+  --unnnic-color-bg-base: #1F1F1F;
+  --unnnic-color-bg-base-soft: rgba(255, 255, 255, 0.05);
+  --unnnic-color-bg-muted: rgba(255, 255, 255, 0.10);
+  --unnnic-color-bg-accent-plain: rgba(1, 162, 155, 0.18);
+  --unnnic-color-bg-accent-strong: #01A29B;
+  --unnnic-color-bg-info: rgba(21, 123, 244, 0.18);
+  --unnnic-color-bg-success: rgba(1, 146, 19, 0.18);
+  --unnnic-color-bg-warning: rgba(156, 121, 1, 0.18);
+  --unnnic-color-bg-critical: rgba(236, 55, 39, 0.18);
+  --unnnic-color-bg-red-plain: rgba(236, 55, 39, 0.20);
+  --unnnic-color-bg-red-strong: #EC3727;
+  --unnnic-color-bg-orange-plain: rgba(229, 112, 1, 0.20);
+  --unnnic-color-bg-orange-strong: #E57001;
+  --unnnic-color-bg-yellow-plain: rgba(156, 121, 1, 0.20);
+  --unnnic-color-bg-yellow-strong: #B18D01;
+  --unnnic-color-bg-green-plain: rgba(1, 146, 19, 0.20);
+  --unnnic-color-bg-green-strong: #08A822;
+  --unnnic-color-bg-teal-plain: rgba(1, 162, 155, 0.18);
+  --unnnic-color-bg-teal-strong: #01A29B;
+  --unnnic-color-bg-blue-plain: rgba(21, 123, 244, 0.20);
+  --unnnic-color-bg-blue-strong: #3993F4;
+  --unnnic-color-bg-purple-plain: rgba(156, 86, 243, 0.20);
+  --unnnic-color-bg-purple-strong: #AD71F8;
+  --unnnic-color-bg-pink-plain: rgba(222, 56, 127, 0.20);
+  --unnnic-color-bg-pink-strong: #EF5997;
+  --unnnic-color-fg-base: #D6D6D6;
+  --unnnic-color-fg-emphasized: #FFFFFF;
+  --unnnic-color-fg-muted: #999999;
+  --unnnic-color-fg-inverted: #FFFFFF;
+  --unnnic-color-fg-accent: #10B6AF;
+  --unnnic-color-fg-info: #5AA8F7;
+  --unnnic-color-fg-success: #28BC37;
+  --unnnic-color-fg-warning: #C5A001;
+  --unnnic-color-fg-critical: #FF7F68;
+  --unnnic-color-border-base: rgba(255, 255, 255, 0.16);
+  --unnnic-color-border-muted: rgba(255, 255, 255, 0.10);
+  --unnnic-color-border-emphasized: rgba(255, 255, 255, 0.24);
+  --unnnic-color-border-accent-plain: rgba(141, 234, 227, 0.24);
+  --unnnic-color-border-accent-strong: #01A29B;
+  --unnnic-color-border-info: rgba(182, 223, 255, 0.24);
+  --unnnic-color-border-success: rgba(151, 239, 134, 0.24);
+  --unnnic-color-border-warning: rgba(250, 222, 30, 0.24);
+  --unnnic-color-border-critical: rgba(255, 208, 199, 0.24);
+}
