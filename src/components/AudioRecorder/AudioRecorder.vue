@@ -6,7 +6,7 @@
     <UnnnicToolTip
       v-if="isRecording || canDiscard"
       enabled
-      :text="$t('audio_recorder.discard_button')"
+      :text="discardText || $t('audio_recorder.discard_button')"
       side="top"
     >
       <span
@@ -15,7 +15,8 @@
         @keypress.enter="discard"
       >
         <UnnnicIcon
-          icon="delete-1-1"
+          size="ant"
+          icon="cancel"
           scheme="fg-critical"
         />
       </span>
@@ -24,6 +25,8 @@
       v-if="isRecording"
       :isRecording="isRecording"
       :time="numberToTimeString(duration)"
+      :saveText="saveText"
+      :hideRecordingIndicator="hideRecordingIndicator"
       @save="save"
     />
     <AudioPlayer
@@ -100,10 +103,12 @@ export default {
   props: {
     modelValue: {
       type: HTMLAudioElement,
+      required: true,
     },
 
     src: {
       type: String,
+      default: undefined,
     },
 
     canDiscard: {
@@ -148,6 +153,18 @@ export default {
       default: 'en',
     },
     fluidBar: {
+      type: Boolean,
+      default: false,
+    },
+    saveText: {
+      type: String,
+      default: '',
+    },
+    discardText: {
+      type: String,
+      default: '',
+    },
+    hideRecordingIndicator: {
       type: Boolean,
       default: false,
     },
@@ -446,11 +463,8 @@ export default {
 
   :deep(.audio-player__time),
   :deep(.audio-handler__time) {
-    font-family: $unnnic-font-family-secondary;
-    font-weight: $unnnic-font-weight-regular;
-    font-size: $unnnic-font-size-body-md;
-    line-height: $unnnic-font-size-body-md + $unnnic-line-height-md;
-    color: $unnnic-color-fg-emphasized;
+    font: $unnnic-font-emphasis;
+    color: $unnnic-color-fg-base;
     user-select: none;
   }
 
