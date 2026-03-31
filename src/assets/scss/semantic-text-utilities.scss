@@ -1,4 +1,5 @@
 @use './colors' as *;
+@use './semantic-colors' as *;
 
 .color-fg-base {
   color: $unnnic-color-fg-base;

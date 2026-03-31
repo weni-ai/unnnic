@@ -1,9 +1,11 @@
 /**
  * Converts HEX to HSL
  * @param {string} hex - Color in hexadecimal format (#RRGGBB)
- * @returns {string} - Color in HSL format (h s% l%)
+ * @returns {string|null} - Color in HSL format (h s% l%) or null if not hex
  */
 function hexToHSL(hex) {
+  if (!hex.startsWith('#')) return null;
+
   hex = hex.replace('#', '');
 
   const r = parseInt(hex.substring(0, 2), 16) / 255;
@@ -43,51 +45,109 @@ function hexToHSL(hex) {
   return `${h} ${s}% ${l}%`;
 }
 
+const SEMANTIC_CATEGORIES = ['bg', 'fg', 'border'];
+
 const AUTO_GENERATED_COMMENT = `\n// Do not edit directly, this file was auto-generated.\n\n`;
+
+function cssVarName(token) {
+  const path =
+    token.path[0] === 'colorDark'
+      ? ['color', ...token.path.slice(1)]
+      : token.path;
+  return `--unnnic-${path.join('-')}`;
+}
+
+function scssVarName(token) {
+  return `$unnnic-${token.path.join('-')}`;
+}
 
 export default {
   source: ['./src/assets/tokens/**/*.json'],
   hooks: {
     filters: {
       colors: (token) => {
-        const isColor = token.path.at(0) === 'color';
-        return isColor;
+        return token.path.at(0) === 'color';
+      },
+      primitiveColors: (token) => {
+        return (
+          token.path.at(0) === 'color' &&
+          !SEMANTIC_CATEGORIES.includes(token.path.at(1))
+        );
+      },
+      semanticColors: (token) => {
+        return (
+          token.path.at(0) === 'color' &&
+          SEMANTIC_CATEGORIES.includes(token.path.at(1))
+        );
+      },
+      themeColors: (token) => {
+        const isLightSemantic =
+          token.path.at(0) === 'color' &&
+          SEMANTIC_CATEGORIES.includes(token.path.at(1));
+        const isDarkSemantic = token.path.at(0) === 'colorDark';
+        return isLightSemantic || isDarkSemantic;
       },
       fonts: (token) => {
-        const isFont = token.path.at(0) === 'font';
-        return isFont;
+        return token.path.at(0) === 'font';
       },
       spaces: (token) => {
-        const isSpace = token.path.at(0) === 'space';
-        return isSpace;
+        return token.path.at(0) === 'space';
       },
       radii: (token) => {
-        const isRadius = token.path.at(0) === 'radius';
-        return isRadius;
+        return token.path.at(0) === 'radius';
       },
       shadows: (token) => {
         const isNumber = (element) => !isNaN(element);
-        const isShadow =
-          token.path.at(0) === 'shadow' && isNumber(token.path.at(1));
-        return isShadow;
+        return token.path.at(0) === 'shadow' && isNumber(token.path.at(1));
       },
       iconSizes: (token) => {
         const isNumber = (element) => !isNaN(element);
-        const isIconSize =
-          token.path.at(0) === 'icon-size' && isNumber(token.path.at(1));
-        return isIconSize;
+        return token.path.at(0) === 'icon-size' && isNumber(token.path.at(1));
       },
     },
     formats: {
       'scss/hsl-variables': (dictionary) => {
+        const hexTokens = dictionary.allTokens.filter(
+          (token) => hexToHSL(token.value) !== null,
+        );
         return (
           AUTO_GENERATED_COMMENT +
-          dictionary.allTokens
+          hexTokens
             .map((token) => {
               const name = token.name.replace(/_/g, '-');
               const hslValue = hexToHSL(token.value);
               return `$${name}-hsl: ${hslValue}; /* ${token.value} */`;
             })
+            .join('\n') +
+          `\n`
+        );
+      },
+      'scss/theme-variables': (dictionary) => {
+        const lightTokens = dictionary.allTokens.filter(
+          (token) =>
+            token.path.at(0) === 'color' &&
+            SEMANTIC_CATEGORIES.includes(token.path.at(1)),
+        );
+        const darkTokens = dictionary.allTokens.filter(
+          (token) => token.path.at(0) === 'colorDark',
+        );
+
+        const renderVar = (token) => `  ${cssVarName(token)}: ${token.value};`;
+
+        const rootBlock = lightTokens.map(renderVar).join('\n');
+        const darkBlock = darkTokens.map(renderVar).join('\n');
+
+        return (
+          AUTO_GENERATED_COMMENT +
+          `:root {\n${rootBlock}\n}\n\n` +
+          `.dark {\n${darkBlock}\n}\n`
+        );
+      },
+      'scss/bridge-variables': (dictionary) => {
+        return (
+          AUTO_GENERATED_COMMENT +
+          dictionary.allTokens
+            .map((token) => `${scssVarName(token)}: var(${cssVarName(token)});`)
             .join('\n') +
           `\n`
         );
@@ -151,7 +211,17 @@ export default {
         {
           destination: 'colors.scss',
           format: 'scss/variables',
-          filter: 'colors',
+          filter: 'primitiveColors',
+        },
+        {
+          destination: 'theme.scss',
+          format: 'scss/theme-variables',
+          filter: 'themeColors',
+        },
+        {
+          destination: 'semantic-colors.scss',
+          format: 'scss/bridge-variables',
+          filter: 'semanticColors',
         },
         {
           destination: 'fonts.scss',

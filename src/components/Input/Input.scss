@@ -1,7 +1,7 @@
 @use '@/assets/scss/unnnic' as *;
 
 @mixin input-base {
-  background: $unnnic-color-white;
+  background: $unnnic-color-bg-base;
   border: 1px solid $unnnic-color-border-base;
   outline: none;
   border-radius: $unnnic-radius-2;
@@ -13,7 +13,7 @@
 
   &:focus:not(.use-focus-prop),
   &.focus {
-    border-color: $unnnic-color-border-active;
+    border-color: $unnnic-color-border-accent-strong;
   }
 
   &::placeholder {
