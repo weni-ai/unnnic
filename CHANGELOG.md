@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.25.2 (2026-03-30)
+
+### Added
+
+- **AudioRecorder**: `saveText` and `discardText` props to override save and discard tooltip labels; `hideRecordingIndicator` to hide the recording indicator in the handler; built-in i18n for the save action (pt-BR, en, es) when `saveText` is not set.
+
+### Changed
+
+- **AudioRecorder**: discard and save controls use updated icons (`cancel`, `check_circle`); recording time typography uses `$unnnic-font-emphasis` and `$unnnic-color-fg-base`.
+
 # 3.25.1 (2026-03-27)
 
 ### Fixed
