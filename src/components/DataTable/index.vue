@@ -92,7 +92,8 @@
             'unnnic-data-table__body-row',
             { 'unnnic-data-table__body-row--clickable': props.clickable },
           ]"
-          @click="handleClickRow(item)"
+          @click="handleClickRow({ item })"
+          @click.middle.exact="handleClickRow({ item, button: 'middle' })"
         >
           <template
             v-for="key in headersItemsKeys"
@@ -243,6 +244,7 @@ const slots = useSlots();
 const emit = defineEmits<{
   'update:sort': [sort: { header: string; itemKey: string; order: string }];
   itemClick: [item: DataTableItem];
+  'itemClick:middle': [item: DataTableItem];
   'update:page': [page: number];
   loadMore: [];
 }>();
@@ -345,10 +347,19 @@ const handleClickHeader = (header: DataTableHeader) => {
   );
 };
 
-const handleClickRow = (item: DataTableItem) => {
+const handleClickRow = ({
+  item,
+  button,
+}: {
+  item: DataTableItem;
+  button?: 'left' | 'middle' | 'right';
+}) => {
   if (!props.clickable) return;
 
-  emit('itemClick', item);
+  const eventName =
+    !!button && button !== 'left' ? `itemClick:${button}` : 'itemClick';
+
+  emit(eventName as keyof typeof emit, item);
 };
 
 const tbodyRef = ref<HTMLElement | null>(null);

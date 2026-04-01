@@ -135,8 +135,11 @@ export default {
       const itemClick = (item) => {
         action('itemClick')(item);
       };
+      const itemClickMiddle = (item) => {
+        action('itemClick:middle')(item);
+      };
 
-      return { args, sort, updatePage, itemClick };
+      return { args, sort, updatePage, itemClick, itemClickMiddle };
     },
     template: `
     <UnnnicDataTable
@@ -148,6 +151,7 @@ export default {
       @update:sort="sort"
       @update:page="updatePage"
       @itemClick="itemClick"
+      @itemClick:middle="itemClickMiddle"
     >
     </UnnnicDataTable>
     `,
