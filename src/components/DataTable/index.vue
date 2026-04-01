@@ -359,8 +359,6 @@ const handleClickRow = ({
   const eventName =
     !!button && button !== 'left' ? `itemClick:${button}` : 'itemClick';
 
-  console.log(eventName);
-
   emit(eventName as keyof typeof emit, item);
 };
 
