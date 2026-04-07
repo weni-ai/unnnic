@@ -15,7 +15,7 @@ export default {
   decorators: [
     withThemeByClassName({
       themes: {
-        light: '', 
+        light: '',
         dark: 'dark',
       },
       defaultTheme: 'light',

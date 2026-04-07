@@ -115,14 +115,14 @@ const iconScheme = computed((): SchemeColor => {
   }
 
   const typeToSchemeMap: Record<ButtonType, SchemeColor> = {
-    primary: 'fg-inverted',
+    primary: 'fg-on-primary',
     secondary: 'fg-emphasized',
     tertiary: 'fg-emphasized',
-    warning: 'fg-inverted',
-    attention: 'fg-inverted',
+    warning: 'fg-on-primary',
+    attention: 'fg-on-primary',
   };
 
-  return typeToSchemeMap[buttonType.value] || 'fg-inverted';
+  return typeToSchemeMap[buttonType.value] || 'fg-on-primary';
 });
 
 const isSizePropValid = computed(() => {
@@ -228,7 +228,7 @@ watch(
   &--primary,
   &--warning,
   &--attention {
-    color: $unnnic-color-fg-inverted;
+    color: $unnnic-color-fg-on-primary;
   }
 
   &--secondary,

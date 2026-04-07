@@ -19,15 +19,15 @@
       }
     "
   >
-   <slot name="avatar">
+    <slot name="avatar">
       <UserAvatar
         v-if="discussionGoal"
-        scheme="purple-200"
+        scheme="bg-purple-plain"
       >
         <template #content>
           <UnnnicIcon
             icon="communication"
-            scheme="gray-900"
+            scheme="fg-base"
           />
         </template>
       </UserAvatar>

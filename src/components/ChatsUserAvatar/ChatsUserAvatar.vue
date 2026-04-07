@@ -16,20 +16,23 @@
         v-if="username === 'Agent'"
         icon="single-neutral-actions-1"
         size="sm"
-        :scheme="disabled ? 'fg-inverted' : ''"
+        :scheme="disabled ? 'fg-on-primary' : ''"
       />
       <UnnnicIcon
         v-else-if="username === 'Bot'"
         icon="science-fiction-robot-2"
         size="sm"
-        :scheme="disabled ? 'fg-inverted' : ''"
+        :scheme="disabled ? 'fg-on-primary' : ''"
       />
       <img
         v-else-if="!!photoUrl"
         :src="photoUrl"
         alt=""
       />
-      <span v-else :class="`text-${textColor}`">
+      <span
+        v-else
+        :class="`text-${textColor}`"
+      >
         {{ getUsernameFirstCharacter }}
       </span>
     </slot>
@@ -116,7 +119,7 @@ $avatar-sizes:
 
   &.disabled {
     background: $unnnic-color-gray-7;
-    color: $unnnic-color-fg-inverted;
+    color: $unnnic-color-fg-on-primary;
   }
 
   &.clickable {

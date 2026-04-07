@@ -302,13 +302,13 @@ export default {
     }
 
     &--ACTIVE {
-      background-color: $unnnic-color-green-2;
-      color: $unnnic-color-green-11;
+      background-color: $unnnic-color-bg-green-plain;
+      color: $unnnic-color-fg-success;
     }
 
     &--IN_TEST {
-      background-color: $unnnic-color-orange-2;
-      color: $unnnic-color-orange-10;
+      background-color: $unnnic-color-bg-orange-plain;
+      color: $unnnic-color-fg-warning;
     }
 
     &--INACTIVE {

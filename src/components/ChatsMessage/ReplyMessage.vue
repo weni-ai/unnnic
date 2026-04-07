@@ -196,10 +196,10 @@ onUpdated(() => {
     background: rgba(8, 103, 102, 0.1);
   }
   &--you {
-    border-left: 2px solid $unnnic-color-weni-600;
+    border-left: 2px solid $unnnic-color-bg-teal-strong;
   }
   &--contact {
-    border-left: 2px solid $unnnic-color-purple-10;
+    border-left: 2px solid $unnnic-color-bg-purple-strong;
   }
   &__message-container {
     display: flex;
@@ -212,10 +212,10 @@ onUpdated(() => {
     font-weight: $unnnic-font-weight-bold;
     line-height: $unnnic-font-size-body-gt + $unnnic-line-height-md;
     &--you {
-      color: $unnnic-color-weni-600;
+      color: $unnnic-color-bg-teal-strong;
     }
     &--contact {
-      color: $unnnic-color-purple-10;
+      color: $unnnic-color-bg-purple-strong;
     }
   }
   &__content {
