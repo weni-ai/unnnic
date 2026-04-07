@@ -1068,11 +1068,11 @@ onMounted(() => {
       .selected {
         font-weight: $unnnic-font-weight-black;
         background-color: $unnnic-color-bg-base-soft;
-        color: $unnnic-color-teal-8;
+        color: $unnnic-color-fg-accent;
         border-radius: 0;
 
         &.highlighted {
-          background-color: $unnnic-color-teal-8;
+          background-color: $unnnic-color-bg-accent-strong;
           color: $unnnic-color-fg-on-primary;
 
           &.left {
@@ -1128,7 +1128,7 @@ onMounted(() => {
 
         &.selected {
           font-weight: $unnnic-font-weight-bold;
-          color: $unnnic-color-teal-8;
+          color: $unnnic-color-fg-accent;
         }
       }
     }

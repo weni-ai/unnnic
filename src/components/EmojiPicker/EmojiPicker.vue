@@ -62,7 +62,7 @@ const emit = defineEmits<{
 const emojiPickerRef = ref<HTMLElement>();
 const emojiIndex = computed(() => new EmojiIndex(data));
 
-const accentColor = '#01A29B'; // $unnnic-color-teal-8
+const accentColor = 'var(--unnnic-color-fg-accent)';
 
 const currentLocale = computed(() => props.locale || 'pt-br');
 

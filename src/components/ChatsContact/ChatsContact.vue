@@ -461,7 +461,7 @@ export default {
       }
 
       .additional-information {
-        color: $unnnic-color-fg-muted;
+        color: $unnnic-color-gray-1;
       }
     }
 
