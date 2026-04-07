@@ -11,7 +11,7 @@
     ]"
     @click="onClick"
   >
-    <p :class="['chip__text', textColorClass]">{{ text }}</p>
+    <p class="chip__text">{{ text }}</p>
     <p
       v-if="count"
       :class="['chip__count', countColorClass]"
@@ -22,7 +22,7 @@
     <UnnnicIcon
       v-if="type === 'multiple'"
       :icon="isSelected ? 'close' : 'add'"
-      :scheme="isSelected ? 'teal-600' : 'feedback-grey'"
+      scheme="fg-emphasized"
       class="chip__icon"
       size="sm"
     />
@@ -48,13 +48,6 @@ const shouldShowBorder = computed(() => {
   return !props.isSelected;
 });
 
-const textColorClass = computed(() => {
-  if (props.isSelected) {
-    return 'chip__text--is-selected';
-  }
-  return '';
-});
-
 const countColorClass = computed(() => {
   if (props.isSelected) {
     return 'chip__count--is-selected';
@@ -78,19 +71,25 @@ const chipClass = computed(() => {
   align-items: center;
   gap: $unnnic-space-2;
   flex-shrink: 0;
-  border-radius: 600px;
+  border-radius: $unnnic-radius-full;
   background-color: $unnnic-color-bg-base;
-  border: 1px solid transparent;
+  border: 1px solid $unnnic-color-border-base;
+
+  cursor: default;
+
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1); // Same as UnnnicButton
 
   &:hover {
     background-color: $unnnic-color-bg-soft;
   }
 
   &--is-selected {
-    background-color: $unnnic-color-bg-teal-plain;
+    background-color: $unnnic-color-bg-accent-plain;
+    border-color: transparent;
 
     &:hover {
-      background-color: $unnnic-color-teal-4;
+      background-color: $unnnic-color-bg-accent-plain;
+      border-color: $unnnic-color-border-accent-plain;
     }
   }
 
@@ -103,12 +102,8 @@ const chipClass = computed(() => {
   }
 
   &__text {
-    color: $unnnic-color-fg-base;
-    font: $unnnic-font-caption-1;
-
-    &--is-selected {
-      color: $unnnic-color-fg-accent;
-    }
+    color: $unnnic-color-fg-emphasized;
+    @include unnnic-font-caption-1;
   }
 
   &__count {
@@ -117,15 +112,13 @@ const chipClass = computed(() => {
     justify-content: center;
     align-items: center;
     gap: 10px;
-    border-radius: 600px;
-    background: $unnnic-color-bg-soft;
-    color: $unnnic-color-fg-base;
-    font: $unnnic-font-caption-1;
-    font-weight: $unnnic-font-weight-medium;
+    border-radius: $unnnic-radius-full;
+    background: $unnnic-color-bg-muted;
+    color: $unnnic-color-fg-emphasized;
+    @include unnnic-font-caption-2;
 
     &--is-selected {
-      color: $unnnic-color-fg-accent;
-      background: $unnnic-color-bg-base;
+      background: $unnnic-color-bg-teal-plain;
     }
   }
 }
