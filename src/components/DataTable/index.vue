@@ -387,7 +387,7 @@ $tableBorder: 1px solid $unnnic-color-border-base;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $unnnic-color-gray-7;
+    background: $unnnic-color-border-emphasized;
     border-radius: $unnnic-border-radius-pill;
   }
 
@@ -447,7 +447,7 @@ $tableBorder: 1px solid $unnnic-color-border-base;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: $unnnic-color-gray-7;
+      background: $unnnic-color-border-emphasized;
       border-radius: $unnnic-border-radius-pill;
     }
 
