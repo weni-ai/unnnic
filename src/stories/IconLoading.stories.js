@@ -15,6 +15,7 @@ export default {
         'fg-muted',
         'fg-emphasized',
         'fg-inverted',
+        'fg-on-primary',
         'fg-active',
         'fg-info',
         'fg-success',

@@ -25,13 +25,15 @@
       "purple-plain": { "value": "rgba(156, 86, 243, 0.20)" },
       "purple-strong": { "value": "{color.purple.8}" },
       "pink-plain": { "value": "rgba(222, 56, 127, 0.20)" },
-      "pink-strong": { "value": "{color.pink.8}" }
+      "pink-strong": { "value": "{color.pink.8}" },
+      "inverted": { "value": "{color.gray.0}" }
     },
     "fg": {
       "base": { "value": "{color.gray.4}" },
       "emphasized": { "value": "{color.gray.0}" },
       "muted": { "value": "{color.gray.7}" },
-      "inverted": { "value": "{color.gray.0}" },
+      "inverted": { "value": "{color.gray.12}" },
+      "on-primary": { "value": "{color.gray.0}" },
       "accent": { "value": "{color.teal.7}" },
       "info": { "value": "{color.blue.7}" },
       "success": { "value": "{color.green.7}" },

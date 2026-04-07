@@ -56,7 +56,7 @@ const props = withDefaults(defineProps<PopoverOptionProps>(), {
 
 const schemeColor = computed(() => {
   if (props.active) {
-    return 'fg-inverted';
+    return 'fg-on-primary';
   }
   if (props.disabled) {
     return 'fg-muted';
@@ -113,7 +113,7 @@ const schemeColor = computed(() => {
     }
 
     &--active {
-      color: $unnnic-color-fg-inverted;
+      color: $unnnic-color-fg-on-primary;
     }
   }
 }
