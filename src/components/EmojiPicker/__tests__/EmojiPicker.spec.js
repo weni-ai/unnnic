@@ -102,7 +102,7 @@ describe('UnnnicEmojiPicker', () => {
     expect(picker.props('navPosition')).toBe('bottom');
     expect(picker.props('noResultsEmoji')).toBe('cry');
     expect(picker.props('maxFrequentRows')).toBe(3);
-    expect(picker.props('color')).toBe('#00A49F');
+    expect(picker.props('color')).toBe('var(--unnnic-color-fg-accent)');
     expect(picker.props('i18n')).toBeDefined();
   });
 
