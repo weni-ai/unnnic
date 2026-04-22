@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { DrawerRootEmits, DrawerRootProps } from 'vaul-vue';
+import type { DrawerRootEmits } from 'vaul-vue';
 import { computed, toRef } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
 import { useForwardPropsEmits } from 'reka-ui';
@@ -10,7 +10,34 @@ defineOptions({
   name: 'UnnnicDrawerNext',
 });
 
-interface UnnnicDrawerNextProps extends DrawerRootProps {
+/**
+ * Self-contained props type that mirrors `vaul-vue`'s `DrawerRootProps`.
+ *
+ * We intentionally avoid extending or intersecting `DrawerRootProps` because
+ * its definition includes the internal, non-exported `WithoutFadeFromProps`
+ * type, which breaks `vite-plugin-dts` declaration rollup with TS4023 when
+ * combined with our extra `lazyMount` / `unmountDelay` props.
+ */
+interface DrawerRootProps {
+  activeSnapPoint?: number | string | null;
+  closeThreshold?: number;
+  shouldScaleBackground?: boolean;
+  setBackgroundColorOnScale?: boolean;
+  scrollLockTimeout?: number;
+  fixed?: boolean;
+  dismissible?: boolean;
+  modal?: boolean;
+  open?: boolean;
+  defaultOpen?: boolean;
+  nested?: boolean;
+  direction?: 'top' | 'bottom' | 'left' | 'right';
+  noBodyStyles?: boolean;
+  handleOnly?: boolean;
+  preventScrollRestoration?: boolean;
+  snapPoints?: (number | string)[];
+}
+
+export interface UnnnicDrawerNextProps extends DrawerRootProps {
   /**
    * When true, the drawer is only mounted while open and stays mounted for
    * `unmountDelay` ms after closing so the exit animation can play. Use it
@@ -36,10 +63,8 @@ const delegatedProps = reactiveOmit(props, 'lazyMount', 'unmountDelay');
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 const open = toRef(props, 'open');
-// @ts-expect-error - unmountDelay conflict with the DrawerRootProps type
 const lazyShouldRender = useDelayedUnmount(open, props.unmountDelay);
 
-// @ts-expect-error - lazyMount conflict with the DrawerRootProps type
 const shouldRender = computed(() => !props.lazyMount || lazyShouldRender.value);
 </script>
 
