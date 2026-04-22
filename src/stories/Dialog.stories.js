@@ -46,10 +46,28 @@ export default {
       },
       description: 'The type of the dialog (affects header icon)',
     },
+    lazyMount: {
+      control: { type: 'boolean' },
+      defaultValue: {
+        summary: false,
+      },
+      description:
+        'When true, the dialog is only mounted while open and stays mounted for `unmountDelay` ms after closing so the exit animation can play. Use it to avoid mounting many dialogs eagerly inside lists.',
+    },
+    unmountDelay: {
+      control: { type: 'number' },
+      defaultValue: {
+        summary: 300,
+      },
+      description:
+        'Delay (ms) before the dialog is unmounted after closing. Should match the leave animation duration. Only applies when `lazyMount` is true.',
+    },
   },
   args: {
     size: 'medium',
     type: 'default',
+    lazyMount: false,
+    unmountDelay: 300,
   },
 };
 
