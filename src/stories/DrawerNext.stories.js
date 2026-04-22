@@ -66,10 +66,28 @@ export default {
       },
       description: 'Whether to show the overlay background',
     },
+    lazyMount: {
+      control: { type: 'boolean' },
+      defaultValue: {
+        summary: false,
+      },
+      description:
+        'When true, the drawer is only mounted while open and stays mounted for `unmountDelay` ms after closing so the exit animation can play. Use it to avoid mounting many drawers eagerly inside lists.',
+    },
+    unmountDelay: {
+      control: { type: 'number' },
+      defaultValue: {
+        summary: 300,
+      },
+      description:
+        'Delay (ms) before the drawer is unmounted after closing. Should match the leave animation duration. Only applies when `lazyMount` is true.',
+    },
   },
   args: {
     size: 'medium',
     showOverlay: true,
+    lazyMount: false,
+    unmountDelay: 300,
   },
 };
 
