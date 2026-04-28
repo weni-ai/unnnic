@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.25.4 (2026-04-24)
+
+### Added
+
+- **UnnnicDrawerNext**, **UnnnicDialog**, and **UnnnicDrawer** (legacy): optional `lazyMount` (default `false`) and `unmountDelay` (default `300` ms) on the root wrappers. When `lazyMount` is enabled, `DrawerRoot` / `DialogRoot` (and portal content) mount only after `open` becomes `true` the first time; on close, the tree stays mounted for `unmountDelay` so exit animations from reka-ui / vaul-vue complete before unmount. Reopening remounts the overlay.
+
+### Fixed
+
+- **UnnnicDrawerContent** and **UnnnicDialogContent**: `inheritAttrs: false` with attributes merged into the inner `DrawerContent` / `DialogContent` so extras (e.g. `data-testid`) no longer hit the portal / Teleport fragment and no longer trigger Vue’s “Extraneous non-prop attributes … could not be automatically inherited” warning per instance.
+
 # 3.25.3 (2026-04-01)
 
 ### Added
