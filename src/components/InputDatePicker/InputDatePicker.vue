@@ -9,7 +9,7 @@
           :iconLeft="iconPosition === 'left' ? 'calendar_month' : undefined"
           :iconRight="iconPosition === 'right' ? 'calendar_month' : undefined"
           readonly
-          :modelValue="overwrittenValue || filterText || ''"
+          :modelValue="inputText"
           :disabled="disabled"
           @click="openPopover"
           @focus="openPopover"
@@ -100,6 +100,8 @@ interface InputDatePickerProps {
   periodBaseDate?: string;
 
   disabled?: boolean;
+
+  disableShowOverwrittenValue?: boolean;
 }
 
 const props = withDefaults(defineProps<InputDatePickerProps>(), {
@@ -122,6 +124,7 @@ const props = withDefaults(defineProps<InputDatePickerProps>(), {
   hideOptions: false,
   periodBaseDate: '',
   disabled: false,
+  disableShowOverwrittenValue: false,
 });
 
 const emit = defineEmits<{
@@ -134,6 +137,14 @@ const overwrittenValue = ref('');
 const popoverAlign = computed<'start' | 'end'>(() =>
   props.position === 'right' ? 'end' : 'start',
 );
+
+const inputText = computed(() => {
+  if (props.disableShowOverwrittenValue) {
+    return filterText.value || '';
+  }
+
+  return overwrittenValue.value || filterText.value || '';
+});
 
 const filterText = computed(() => {
   const dates: string[] = [];
