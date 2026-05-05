@@ -106,6 +106,20 @@
       <section
         class="chats-contact__infos__unread-messages-container__pin-container"
       >
+        <UnnnicTooltip
+          v-if="pendingResponse"
+          class="chats-contact__infos__pending-response"
+          :enabled="!!pendingResponseTooltip"
+          :text="pendingResponseTooltip"
+          side="top"
+        >
+          <UnnnicIcon
+            icon="reply"
+            size="sm"
+            scheme="fg-info"
+            data-testid="pending-response-icon"
+          />
+        </UnnnicTooltip>
         <button
           v-if="isRenderPin"
           data-testid="pin-button"
@@ -148,6 +162,7 @@ import UnnnicIcon from '../Icon.vue';
 import TransitionRipple from '../TransitionRipple/TransitionRipple.vue';
 import UnnnicI18n from '../../mixins/i18n';
 import Checkbox from '../Checkbox/Checkbox.vue';
+import UnnnicTooltip from '../ToolTip/ToolTip.vue';
 
 import('moment/dist/locale/es.js');
 import('moment/dist/locale/pt-br.js');
@@ -162,6 +177,7 @@ export default {
     UnnnicIcon,
     TransitionRipple,
     Checkbox,
+    UnnnicTooltip,
   },
 
   mixins: [UnnnicI18n],
@@ -234,6 +250,14 @@ export default {
     schemePin: {
       type: String,
       default: ' fg-base',
+    },
+    pendingResponse: {
+      type: Boolean,
+      default: false,
+    },
+    pendingResponseTooltip: {
+      type: String,
+      default: '',
     },
   },
 
@@ -547,6 +571,11 @@ export default {
       color: $unnnic-color-fg-muted;
     }
 
+    &__pending-response {
+      display: flex;
+      align-items: center;
+    }
+
     &__unread-messages-container {
       height: 100%;
       min-width: max-content;
@@ -560,6 +589,7 @@ export default {
       &__pin-container {
         display: flex;
         align-items: center;
+        gap: $unnnic-spacing-nano;
         position: relative;
         z-index: 10;
       }
