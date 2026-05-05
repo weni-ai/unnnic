@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, afterEach, test, vi } from 'vitest';
+import { beforeEach, describe, expect, afterEach, it, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 import UnnnicChatsContact from '../ChatsContact.vue';
@@ -256,6 +256,48 @@ describe('UnnnicChatsContact', () => {
 
       const pinElement = wrapper.find('[data-testid="pin-button"]');
       expect(pinElement.exists()).toBe(false);
+    });
+  });
+
+  describe('Pending response', () => {
+    it('should not render the pending response icon by default', () => {
+      const icon = wrapper.find('[data-testid="pending-response-icon"]');
+      expect(icon.exists()).toBe(false);
+    });
+
+    it('should render the pending response icon when pendingResponse is true', async () => {
+      await wrapper.setProps({ pendingResponse: true });
+
+      const icon = wrapper.find('[data-testid="pending-response-icon"]');
+      expect(icon.exists()).toBe(true);
+      expect(icon.attributes('icon')).toBe('reply');
+      expect(icon.attributes('scheme')).toBe('fg-info');
+    });
+
+    it('should keep tooltip disabled when pendingResponseTooltip is empty', async () => {
+      await wrapper.setProps({
+        pendingResponse: true,
+        pendingResponseTooltip: '',
+      });
+
+      const tooltip = wrapper.findComponent({ name: 'UnnnicTooltip' });
+      expect(tooltip.exists()).toBe(true);
+      expect(tooltip.props('enabled')).toBe(false);
+      expect(tooltip.props('text')).toBe('');
+    });
+
+    it('should enable tooltip with the provided text when pendingResponseTooltip is set', async () => {
+      const tooltipText = 'You did not respond to this contact';
+
+      await wrapper.setProps({
+        pendingResponse: true,
+        pendingResponseTooltip: tooltipText,
+      });
+
+      const tooltip = wrapper.findComponent({ name: 'UnnnicTooltip' });
+      expect(tooltip.exists()).toBe(true);
+      expect(tooltip.props('enabled')).toBe(true);
+      expect(tooltip.props('text')).toBe(tooltipText);
     });
   });
 });
