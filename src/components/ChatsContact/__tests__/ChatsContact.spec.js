@@ -268,10 +268,10 @@ describe('UnnnicChatsContact', () => {
     it('should render the pending response icon when pendingResponse is true', async () => {
       await wrapper.setProps({ pendingResponse: true });
 
-      const icon = wrapper.find('[data-testid="pending-response-icon"]');
+      const icon = wrapper.findComponent('[data-testid="pending-response-icon"]');
       expect(icon.exists()).toBe(true);
-      expect(icon.attributes('icon')).toBe('reply');
-      expect(icon.attributes('scheme')).toBe('fg-info');
+      expect(icon.props('icon')).toBe('reply');
+      expect(icon.props('scheme')).toBe('fg-info');
     });
 
     it('should keep tooltip disabled when pendingResponseTooltip is empty', async () => {
