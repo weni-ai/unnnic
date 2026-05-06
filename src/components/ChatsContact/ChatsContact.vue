@@ -589,7 +589,7 @@ export default {
       &__pin-container {
         display: flex;
         align-items: center;
-        gap: $unnnic-spacing-nano;
+        gap: $unnnic-space-1;
         position: relative;
         z-index: 10;
       }
