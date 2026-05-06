@@ -76,7 +76,6 @@ import ChatsContact from './ChatsContact/ChatsContact.vue';
 import ChatsDashboardTagLive from './ChatsDashboardTagLive/ChatsDashboardTagLive.vue';
 import ChatsMessage from './ChatsMessage/ChatsMessage.vue';
 import ReplyMessage from './ChatsMessage/ReplyMessage.vue';
-import ChatsNavbar from './ChatsNavbar/ChatsNavbar.vue';
 import ChatsUserAvatar from './ChatsUserAvatar/ChatsUserAvatar.vue';
 import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
 import EmojiPicker from './EmojiPicker/EmojiPicker.vue';
@@ -213,7 +212,6 @@ export const components: ComponentsMap = {
   unnnicChatsDashboardTagLive: ChatsDashboardTagLive,
   unnnicChatsMessage: ChatsMessage,
   unnnicReplyMessage: ReplyMessage,
-  unnnicChatsNavbar: ChatsNavbar,
   unnnicChatsUserAvatar: ChatsUserAvatar,
   unnnicChartMultiLine: ChartMultiLine,
   unnnicEmojiPicker: EmojiPicker,
@@ -341,7 +339,6 @@ export const unnnicChatsContact = ChatsContact;
 export const unnnicChatsDashboardTagLive = ChatsDashboardTagLive;
 export const unnnicChatsMessage = ChatsMessage;
 export const unnnicReplyMessage = ReplyMessage;
-export const unnnicChatsNavbar = ChatsNavbar;
 export const unnnicChatsUserAvatar = ChatsUserAvatar;
 export const unnnicChartMultiLine = ChartMultiLine;
 export const unnnicEmojiPicker = EmojiPicker;
@@ -468,7 +465,6 @@ export const UnnnicChatsContact = ChatsContact;
 export const UnnnicChatsDashboardTagLive = ChatsDashboardTagLive;
 export const UnnnicChatsMessage = ChatsMessage;
 export const UnnnicReplyMessage = ReplyMessage;
-export const UnnnicChatsNavbar = ChatsNavbar;
 export const UnnnicChatsUserAvatar = ChatsUserAvatar;
 export const UnnnicChartMultiLine = ChartMultiLine;
 export const UnnnicEmojiPicker = EmojiPicker;
