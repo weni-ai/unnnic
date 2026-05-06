@@ -74,7 +74,6 @@ import circleProgressBar from './CircleProgressBar/CircleProgressBar.vue';
 import progressBar from './ProgressBar/ProgressBar.vue';
 import ChatsContact from './ChatsContact/ChatsContact.vue';
 import ChatsDashboardTagLive from './ChatsDashboardTagLive/ChatsDashboardTagLive.vue';
-import ChatsHeader from './ChatsHeader/ChatsHeader.vue';
 import ChatsMessage from './ChatsMessage/ChatsMessage.vue';
 import ReplyMessage from './ChatsMessage/ReplyMessage.vue';
 import ChatsNavbar from './ChatsNavbar/ChatsNavbar.vue';
@@ -212,7 +211,6 @@ export const components: ComponentsMap = {
   unnnicProgressBar: progressBar,
   unnnicChatsContact: ChatsContact,
   unnnicChatsDashboardTagLive: ChatsDashboardTagLive,
-  unnnicChatsHeader: ChatsHeader,
   unnnicChatsMessage: ChatsMessage,
   unnnicReplyMessage: ReplyMessage,
   unnnicChatsNavbar: ChatsNavbar,
@@ -341,7 +339,6 @@ export const unnnicCircleProgressBar = circleProgressBar;
 export const unnnicProgressBar = progressBar;
 export const unnnicChatsContact = ChatsContact;
 export const unnnicChatsDashboardTagLive = ChatsDashboardTagLive;
-export const unnnicChatsHeader = ChatsHeader as VueComponent;
 export const unnnicChatsMessage = ChatsMessage;
 export const unnnicReplyMessage = ReplyMessage;
 export const unnnicChatsNavbar = ChatsNavbar;
@@ -469,7 +466,6 @@ export const UnnnicCircleProgressBar = circleProgressBar;
 export const UnnnicProgressBar = progressBar;
 export const UnnnicChatsContact = ChatsContact;
 export const UnnnicChatsDashboardTagLive = ChatsDashboardTagLive;
-export const UnnnicChatsHeader = ChatsHeader as VueComponent;
 export const UnnnicChatsMessage = ChatsMessage;
 export const UnnnicReplyMessage = ReplyMessage;
 export const UnnnicChatsNavbar = ChatsNavbar;
