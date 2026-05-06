@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.25.6 (2026-05-05)
+
+### Added
+
+- **ChatsContact**: `pendingResponse` (Boolean, default `false`) and `pendingResponseTooltip` (String, default `''`) props. When `pendingResponse` is `true`, a blue `reply` icon (`fg-info`) is rendered in the right-side container, anchored to the edge of the card and placed next to the pin icon when both are active. The optional `pendingResponseTooltip` shows a tooltip on hover; when empty, no tooltip is displayed. Storybook stories `PendingResponse` and `PendingResponsePinned` added.
+
 # 3.25.5 (2026-04-28)
 
 ### Added
