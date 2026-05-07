@@ -11,6 +11,7 @@ import DrawerOverlay from './DrawerOverlay.vue';
 
 defineOptions({
   name: 'UnnnicDrawerContent',
+  inheritAttrs: false,
 });
 
 const props = withDefaults(
@@ -43,7 +44,7 @@ const portalTarget = useTeleportTarget();
       :style="{ zIndex: layerZIndex - 2 }"
     />
     <DrawerContent
-      v-bind="forwardedProps"
+      v-bind="{ ...forwardedProps, ...$attrs }"
       :class="
         cn(
           'unnnic-drawer__content',

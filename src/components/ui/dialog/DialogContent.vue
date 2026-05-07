@@ -15,6 +15,7 @@ import { useTeleportTarget } from '@/lib/teleport-target';
 
 defineOptions({
   name: 'UnnnicDialogContent',
+  inheritAttrs: false,
 });
 
 const props = withDefaults(
@@ -69,7 +70,7 @@ const ConditionalWrapper: Component = (_, { slots }) => {
 
     <ConditionalWrapper>
       <DialogContent
-        v-bind="forwarded"
+        v-bind="{ ...forwarded, ...$attrs }"
         :class="contentClasses"
         :style="{ zIndex: modalZIndex }"
       >

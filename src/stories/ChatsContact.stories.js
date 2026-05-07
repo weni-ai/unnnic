@@ -135,6 +135,36 @@ export const Discussion = {
   },
 };
 
+export const PendingResponse = {
+  args: {
+    ...defaultArgs,
+    title: 'Aline',
+    projectName: 'Sector name',
+    lastMessage: {
+      text: 'I’d like to know if powdered dishwasher detergent is available',
+    },
+    lastInteractionTime: new Date().toISOString(),
+    pendingResponse: true,
+    pendingResponseTooltip: 'You did not respond to this contact',
+  },
+};
+
+export const PendingResponsePinned = {
+  args: {
+    ...defaultArgs,
+    title: 'Milena',
+    projectName: 'Sector name',
+    lastMessage: {
+      text: 'Okay, I’ll wait for a response regarding the order status',
+    },
+    lastInteractionTime: new Date().toISOString(),
+    pendingResponse: true,
+    pendingResponseTooltip: 'You did not respond to this contact',
+    pinned: true,
+    activePin: true,
+  },
+};
+
 export const ContactList = {
   args: {
     ...defaultArgs,

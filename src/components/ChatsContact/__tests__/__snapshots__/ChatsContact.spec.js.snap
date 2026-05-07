@@ -16,6 +16,7 @@ exports[`UnnnicChatsContact > should match snapshot 1`] = `
     <!--v-if-->
     <section data-v-8ce6efd5="" class="chats-contact__infos__unread-messages-container__pin-container">
       <!--v-if-->
+      <!--v-if-->
     </section>
   </section>
   <transition-group-stub data-v-17112bed="" data-v-8ce6efd5="" name="grow" tag="div" appear="false" persisted="false" css="true" class="ripples"></transition-group-stub>
