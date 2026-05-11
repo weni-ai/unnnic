@@ -626,7 +626,7 @@ export default {
       line-height: $unnnic-font-size-body-lg;
 
       &--active {
-        color: $unnnic-color-weni-700;
+        color: $unnnic-color-fg-info;
         font-weight: $unnnic-font-weight-bold;
       }
     }
