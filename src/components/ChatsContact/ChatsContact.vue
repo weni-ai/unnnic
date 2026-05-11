@@ -249,7 +249,7 @@ export default {
     },
     schemePin: {
       type: String,
-      default: ' fg-base',
+      default: 'fg-emphasized',
     },
     pendingResponse: {
       type: Boolean,
@@ -539,13 +539,13 @@ export default {
     &__project-tag {
       display: block;
       flex-shrink: 1;
-      border: 1px solid $unnnic-color-border-emphasized;
+      background: $unnnic-color-bg-muted;
 
       font: $unnnic-font-caption-1;
       color: $unnnic-color-fg-emphasized;
 
-      border-radius: $unnnic-radius-4;
-      padding: 1px $unnnic-space-2;
+      border-radius: $unnnic-radius-full;
+      padding: $unnnic-space-05 $unnnic-space-3;
     }
 
     &__media {
@@ -568,7 +568,7 @@ export default {
     &__additional-information {
       width: 100%; // important to ellipsis work
 
-      color: $unnnic-color-fg-muted;
+      color: $unnnic-color-fg-base;
     }
 
     &__pending-response {
