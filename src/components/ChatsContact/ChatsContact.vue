@@ -36,6 +36,8 @@
         :username="title"
         :photoUrl="userPhoto"
         :active="isHovered || selected"
+        scheme="bg-muted"
+        textColor="fg-emphasized"
       />
     </slot>
     <div class="chats-contact__infos">
@@ -635,7 +637,7 @@ export default {
       align-items: center;
 
       border-radius: 50%;
-      background: $unnnic-color-weni-50;
+      background: $unnnic-color-bg-info;
 
       width: 1.25rem;
       min-width: 1.25rem;
@@ -644,7 +646,7 @@ export default {
       font-size: $unnnic-font-size-body-md;
       font-weight: $unnnic-font-weight-bold;
       line-height: $unnnic-line-height-small;
-      color: $unnnic-color-weni-700;
+      color: $unnnic-color-fg-info;
     }
 
     .ellipsis {
