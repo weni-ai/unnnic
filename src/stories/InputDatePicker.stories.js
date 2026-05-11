@@ -96,3 +96,10 @@ export const WithHiddenOptions = {
     hideOptions: true,
   },
 };
+
+export const WithDisableShowOverwrittenValue = {
+  args: {
+    size: 'sm',
+    disableShowOverwrittenValue: true,
+  },
+};
