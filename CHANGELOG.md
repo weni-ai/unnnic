@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.25.7 (2026-05-14)
+
+### Added
+
+- **ChatsContact**: `lastMessage.isFromUser` flag renders a localized "You:" prefix (`en: You:`, `pt-br: Você:`, `es: Tú:`) before the media icon when the last message is a media sent by the agent. Storybook story `MediaLastMessageFromUser` added.
+- **ChatsContact**: `newMessageIndicator` (Boolean, default `false`) and `newMessageIndicatorTooltip` (String, default `''`) props. When `newMessageIndicator` is `true`, an 8 px `bg-blue-strong` dot is rendered in the right-side container in place of the unread-count badge, vertically aligned with the message text row. The optional `newMessageIndicatorTooltip` shows a tooltip on hover (anchored to `top`); when empty, no tooltip is displayed. Storybook stories `NewMessageIndicator` and `NewMessageIndicatorWithTooltip` added.
+
 # 3.25.6 (2026-05-05)
 
 ### Added
