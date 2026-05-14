@@ -259,6 +259,125 @@ describe('UnnnicChatsContact', () => {
     });
   });
 
+  describe('Media "You:" prefix', () => {
+    const imageMedia = {
+      media: [
+        {
+          content_type: 'image/jpeg',
+          message: 'a997421d-6238-4bef-912d-e689c1c0db3f',
+          url: 'https://example.com/photo.jpg',
+          created_on: '2025-04-15T14:58:56.163027-03:00',
+        },
+      ],
+    };
+
+    it('should not render the prefix on a media message when isFromUser is falsy', async () => {
+      await wrapper.setProps({ lastMessage: imageMedia });
+
+      const prefix = wrapper.find('[data-testid="media-sender-prefix"]');
+      expect(prefix.exists()).toBe(false);
+    });
+
+    it('should render the EN "You:" prefix when isFromUser is true', async () => {
+      await wrapper.setProps({
+        lastMessage: { ...imageMedia, isFromUser: true },
+        locale: 'en',
+      });
+
+      const prefix = wrapper.find('[data-testid="media-sender-prefix"]');
+      expect(prefix.exists()).toBe(true);
+      expect(prefix.text()).toBe('You:');
+    });
+
+    it('should render the PT-BR "Você:" prefix when isFromUser is true', async () => {
+      await wrapper.setProps({
+        lastMessage: { ...imageMedia, isFromUser: true },
+        locale: 'pt-br',
+      });
+
+      const prefix = wrapper.find('[data-testid="media-sender-prefix"]');
+      expect(prefix.exists()).toBe(true);
+      expect(prefix.text()).toBe('Você:');
+    });
+
+    it('should render the ES "Tú:" prefix when isFromUser is true', async () => {
+      await wrapper.setProps({
+        lastMessage: { ...imageMedia, isFromUser: true },
+        locale: 'es',
+      });
+
+      const prefix = wrapper.find('[data-testid="media-sender-prefix"]');
+      expect(prefix.exists()).toBe(true);
+      expect(prefix.text()).toBe('Tú:');
+    });
+
+    it('should not render the prefix for non-media messages even when isFromUser is true', async () => {
+      await wrapper.setProps({
+        lastMessage: { text: 'Hello there', isFromUser: true },
+      });
+
+      const prefix = wrapper.find('[data-testid="media-sender-prefix"]');
+      expect(prefix.exists()).toBe(false);
+    });
+  });
+
+  describe('New message indicator', () => {
+    it('should not render the dot by default', () => {
+      const indicator = wrapper.find('[data-testid="new-message-indicator"]');
+      expect(indicator.exists()).toBe(false);
+    });
+
+    it('should render the dot when newMessageIndicator is true', async () => {
+      await wrapper.setProps({ newMessageIndicator: true });
+
+      const indicator = wrapper.find('[data-testid="new-message-indicator"]');
+      expect(indicator.exists()).toBe(true);
+    });
+
+    it('should hide the unread-count circle when newMessageIndicator and unreadMessages are both set', async () => {
+      await wrapper.setProps({
+        newMessageIndicator: true,
+        unreadMessages: 5,
+      });
+
+      const indicator = wrapper.find('[data-testid="new-message-indicator"]');
+      const unreadCount = wrapper.find(
+        '.chats-contact__infos__unread-messages',
+      );
+
+      expect(indicator.exists()).toBe(true);
+      expect(unreadCount.exists()).toBe(false);
+    });
+
+    it('should keep tooltip disabled when newMessageIndicatorTooltip is empty', async () => {
+      await wrapper.setProps({
+        newMessageIndicator: true,
+        newMessageIndicatorTooltip: '',
+      });
+
+      const tooltip = wrapper.findComponent({ name: 'UnnnicTooltip' });
+
+      expect(tooltip.exists()).toBe(true);
+      expect(tooltip.props('enabled')).toBe(false);
+      expect(tooltip.props('text')).toBe('');
+    });
+
+    it('should enable tooltip with the provided text when newMessageIndicatorTooltip is set', async () => {
+      const tooltipText = 'New chats received';
+
+      await wrapper.setProps({
+        newMessageIndicator: true,
+        newMessageIndicatorTooltip: tooltipText,
+      });
+
+      const tooltip = wrapper.findComponent({ name: 'UnnnicTooltip' });
+
+      expect(tooltip.exists()).toBe(true);
+      expect(tooltip.props('enabled')).toBe(true);
+      expect(tooltip.props('text')).toBe(tooltipText);
+    });
+  });
+
   describe('Pending response', () => {
     it('should not render the pending response icon by default', () => {
       const icon = wrapper.find('[data-testid="pending-response-icon"]');
@@ -268,7 +387,9 @@ describe('UnnnicChatsContact', () => {
     it('should render the pending response icon when pendingResponse is true', async () => {
       await wrapper.setProps({ pendingResponse: true });
 
-      const icon = wrapper.findComponent('[data-testid="pending-response-icon"]');
+      const icon = wrapper.findComponent(
+        '[data-testid="pending-response-icon"]',
+      );
       expect(icon.exists()).toBe(true);
       expect(icon.props('icon')).toBe('reply');
       expect(icon.props('scheme')).toBe('fg-info');

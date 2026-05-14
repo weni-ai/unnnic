@@ -220,3 +220,56 @@ export const MediaLastMessage = {
   `,
   }),
 };
+
+const lastMessageMediaFromUser = Object.fromEntries(
+  Object.entries(lastMessageMedia).map(([mediaType, message]) => [
+    mediaType,
+    { ...message, isFromUser: true },
+  ]),
+);
+
+export const MediaLastMessageFromUser = {
+  args: {
+    ...defaultArgs,
+  },
+  render: (args) => ({
+    setup() {
+      return { args, lastMessageMediaFromUser };
+    },
+    components: { unnnicChatsContact },
+    template: `
+    <div style="display: grid;">
+      <unnnic-chats-contact v-for="mediaType in ['geo', 'audio', 'image', 'video', 'document']" v-bind="args" :lastMessage="lastMessageMediaFromUser[mediaType]"/>
+    </div>
+  `,
+  }),
+};
+
+export const NewMessageIndicator = {
+  args: {
+    ...defaultArgs,
+    title: 'Aline',
+    projectName: 'Sector name',
+    lastMessage: {
+      text: 'I’d like to know if powdered dishwasher detergent is available',
+    },
+    lastInteractionTime: new Date().toISOString(),
+    unreadMessages: 1,
+    newMessageIndicator: true,
+  },
+};
+
+export const NewMessageIndicatorWithTooltip = {
+  args: {
+    ...defaultArgs,
+    title: 'Aline',
+    projectName: 'Sector name',
+    lastMessage: {
+      text: 'I’d like to know if powdered dishwasher detergent is available',
+    },
+    lastInteractionTime: new Date().toISOString(),
+    unreadMessages: 1,
+    newMessageIndicator: true,
+    newMessageIndicatorTooltip: 'New chats received',
+  },
+};
