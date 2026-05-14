@@ -67,6 +67,13 @@
         </p>
         <template v-else-if="lastMessageMedia.isMedia">
           <section class="chats-contact__infos__media">
+            <p
+              v-if="lastMessage.isFromUser"
+              class="chats-contact__infos__media__sender-prefix"
+              data-testid="media-sender-prefix"
+            >
+              {{ i18n('you_message_prefix') }}
+            </p>
             <UnnnicIcon
               :icon="lastMessageMedia.mediaIcon"
               scheme="fg-base"
@@ -135,6 +142,18 @@
             :scheme="schemePin"
           />
         </button>
+        <UnnnicTooltip
+          v-else-if="newMessageIndicator"
+          class="chats-contact__infos__new-message-indicator-tooltip"
+          :enabled="!!newMessageIndicatorTooltip"
+          :text="newMessageIndicatorTooltip"
+          side="top"
+        >
+          <span
+            class="chats-contact__infos__new-message-indicator"
+            data-testid="new-message-indicator"
+          />
+        </UnnnicTooltip>
         <p
           v-else-if="(unreadMessages && !selected) || forceShowUnreadMessages"
           class="chats-contact__infos__unread-messages"
@@ -259,6 +278,14 @@ export default {
       type: String,
       default: '',
     },
+    newMessageIndicator: {
+      type: Boolean,
+      default: false,
+    },
+    newMessageIndicatorTooltip: {
+      type: String,
+      default: '',
+    },
   },
 
   emits: ['click', 'clickPin'],
@@ -309,12 +336,18 @@ export default {
           en: 'Video',
           es: 'Video',
         },
+        you_message_prefix: {
+          'pt-br': 'Você:',
+          en: 'You:',
+          es: 'Tú:',
+        },
       },
     };
   },
 
   computed: {
     messageInfoAlign() {
+      if (this.newMessageIndicator) return 'space-between';
       return this.unreadMessages && this.selected ? 'center' : 'flex-start';
     },
     messageInfoMarginTop() {
@@ -552,6 +585,10 @@ export default {
       display: flex;
       align-items: center;
       gap: $unnnic-spacing-nano;
+
+      &__sender-prefix {
+        color: $unnnic-color-fg-base;
+      }
     }
 
     &__title,
@@ -645,6 +682,27 @@ export default {
       font-weight: $unnnic-font-weight-bold;
       line-height: $unnnic-line-height-small;
       color: $unnnic-color-weni-700;
+    }
+
+    &__new-message-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: $unnnic-space-5;
+      min-width: $unnnic-space-5;
+      height: $unnnic-space-5;
+
+      &::before {
+        content: '';
+        display: block;
+
+        width: $unnnic-space-2;
+        height: $unnnic-space-2;
+
+        border-radius: 50%;
+        background-color: $unnnic-color-bg-blue-strong;
+      }
     }
 
     .ellipsis {
