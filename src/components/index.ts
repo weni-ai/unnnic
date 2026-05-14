@@ -72,7 +72,6 @@ import starRating from './StarRating/StarRating.vue';
 import audioRecorder from './AudioRecorder/AudioRecorder.vue';
 import circleProgressBar from './CircleProgressBar/CircleProgressBar.vue';
 import progressBar from './ProgressBar/ProgressBar.vue';
-import ChatsDashboardTagLive from './ChatsDashboardTagLive/ChatsDashboardTagLive.vue';
 import ChatsMessage from './ChatsMessage/ChatsMessage.vue';
 import ReplyMessage from './ChatsMessage/ReplyMessage.vue';
 import ChatsUserAvatar from './ChatsUserAvatar/ChatsUserAvatar.vue';
@@ -207,7 +206,6 @@ export const components: ComponentsMap = {
   unnnicAudioRecorder: audioRecorder,
   unnnicCircleProgressBar: circleProgressBar,
   unnnicProgressBar: progressBar,
-  unnnicChatsDashboardTagLive: ChatsDashboardTagLive,
   unnnicChatsMessage: ChatsMessage,
   unnnicReplyMessage: ReplyMessage,
   unnnicChatsUserAvatar: ChatsUserAvatar,
@@ -333,7 +331,6 @@ export const unnnicStarRating = starRating;
 export const unnnicAudioRecorder = audioRecorder;
 export const unnnicCircleProgressBar = circleProgressBar;
 export const unnnicProgressBar = progressBar;
-export const unnnicChatsDashboardTagLive = ChatsDashboardTagLive;
 export const unnnicChatsMessage = ChatsMessage;
 export const unnnicReplyMessage = ReplyMessage;
 export const unnnicChatsUserAvatar = ChatsUserAvatar;
@@ -458,7 +455,6 @@ export const UnnnicStarRating = starRating;
 export const UnnnicAudioRecorder = audioRecorder;
 export const UnnnicCircleProgressBar = circleProgressBar;
 export const UnnnicProgressBar = progressBar;
-export const UnnnicChatsDashboardTagLive = ChatsDashboardTagLive;
 export const UnnnicChatsMessage = ChatsMessage;
 export const UnnnicReplyMessage = ReplyMessage;
 export const UnnnicChatsUserAvatar = ChatsUserAvatar;
