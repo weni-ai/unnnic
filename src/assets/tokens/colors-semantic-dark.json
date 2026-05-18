@@ -1,0 +1,55 @@
+{
+  "colorDark": {
+    "bg": {
+      "base": { "value": "{color.gray.12}" },
+      "base-soft": { "value": "rgba(255, 255, 255, 0.05)" },
+      "muted": { "value": "rgba(255, 255, 255, 0.10)" },
+      "accent-plain": { "value": "rgba(1, 162, 155, 0.18)" },
+      "accent-strong": { "value": "{color.teal.8}" },
+      "info": { "value": "rgba(21, 123, 244, 0.18)" },
+      "success": { "value": "rgba(1, 146, 19, 0.18)" },
+      "warning": { "value": "rgba(156, 121, 1, 0.18)" },
+      "critical": { "value": "rgba(236, 55, 39, 0.18)" },
+      "red-plain": { "value": "rgba(236, 55, 39, 0.20)" },
+      "red-strong": { "value": "{color.red.9}" },
+      "orange-plain": { "value": "rgba(229, 112, 1, 0.20)" },
+      "orange-strong": { "value": "{color.orange.8}" },
+      "yellow-plain": { "value": "rgba(156, 121, 1, 0.20)" },
+      "yellow-strong": { "value": "{color.yellow.8}" },
+      "green-plain": { "value": "rgba(1, 146, 19, 0.20)" },
+      "green-strong": { "value": "{color.green.8}" },
+      "teal-plain": { "value": "rgba(1, 162, 155, 0.18)" },
+      "teal-strong": { "value": "{color.teal.8}" },
+      "blue-plain": { "value": "rgba(21, 123, 244, 0.20)" },
+      "blue-strong": { "value": "{color.blue.8}" },
+      "purple-plain": { "value": "rgba(156, 86, 243, 0.20)" },
+      "purple-strong": { "value": "{color.purple.8}" },
+      "pink-plain": { "value": "rgba(222, 56, 127, 0.20)" },
+      "pink-strong": { "value": "{color.pink.8}" },
+      "inverted": { "value": "{color.gray.0}" }
+    },
+    "fg": {
+      "base": { "value": "{color.gray.4}" },
+      "emphasized": { "value": "{color.gray.0}" },
+      "muted": { "value": "{color.gray.7}" },
+      "inverted": { "value": "{color.gray.12}" },
+      "on-primary": { "value": "{color.gray.0}" },
+      "accent": { "value": "{color.teal.7}" },
+      "info": { "value": "{color.blue.7}" },
+      "success": { "value": "{color.green.7}" },
+      "warning": { "value": "{color.yellow.7}" },
+      "critical": { "value": "{color.red.7}" }
+    },
+    "border": {
+      "base": { "value": "rgba(255, 255, 255, 0.16)" },
+      "muted": { "value": "rgba(255, 255, 255, 0.10)" },
+      "emphasized": { "value": "rgba(255, 255, 255, 0.24)" },
+      "accent-plain": { "value": "rgba(141, 234, 227, 0.24)" },
+      "accent-strong": { "value": "{color.teal.8}" },
+      "info": { "value": "rgba(182, 223, 255, 0.24)" },
+      "success": { "value": "rgba(151, 239, 134, 0.24)" },
+      "warning": { "value": "rgba(250, 222, 30, 0.24)" },
+      "critical": { "value": "rgba(255, 208, 199, 0.24)" }
+    }
+  }
+}

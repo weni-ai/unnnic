@@ -101,7 +101,7 @@ export default {
   }
 
   .name {
-    color: $unnnic-color-gray-12;
+    color: $unnnic-color-fg-emphasized;
 
     font-family: $unnnic-font-family-secondary;
     font-weight: $unnnic-font-weight-bold;

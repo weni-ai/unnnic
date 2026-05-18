@@ -62,7 +62,7 @@ const emit = defineEmits<{
 const emojiPickerRef = ref<HTMLElement>();
 const emojiIndex = computed(() => new EmojiIndex(data));
 
-const accentColor = '#00A49F'; // $unnnic-color-weni-600
+const accentColor = 'var(--unnnic-color-fg-accent)';
 
 const currentLocale = computed(() => props.locale || 'pt-br');
 
@@ -125,6 +125,7 @@ const onEmojiSelect = (emoji: Emoji) => {
 
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
+@use '@/components/Input/Input.scss' as *;
 
 .emoji-picker {
   position: absolute;
@@ -146,6 +147,7 @@ const onEmojiSelect = (emoji: Emoji) => {
     border-radius: $unnnic-radius-4;
     font-family: $unnnic-font-family;
     border: 1px solid $unnnic-color-border-base;
+    background-color: $unnnic-color-bg-base;
     box-shadow: $unnnic-shadow-1;
     cursor: default;
     color: $unnnic-color-fg-emphasized;
@@ -153,15 +155,33 @@ const onEmojiSelect = (emoji: Emoji) => {
 
   :deep(.emoji-mart-emoji) {
     cursor: pointer;
+
+    &::before {
+      background-color: $unnnic-color-bg-base-soft;
+    }
   }
 
-  :deep(.emoji-mart-category .emoji-mart-emoji span) {
-    cursor: pointer;
+  :deep(.emoji-mart-search) {
+    margin: $unnnic-space-2 0;
+
+    input {
+      @include input-base;
+    }
+  }
+
+  :deep(.emoji-mart-category) {
+    .emoji-mart-emoji span {
+      cursor: pointer;
+    }
+
+    .emoji-mart-category-label {
+      background-color: transparent;
+    }
   }
 
   :deep(.emoji-mart-anchor) {
     cursor: pointer;
-    color: #858585;
+    color: $unnnic-color-fg-base;
   }
 
   :deep(.emoji-mart-anchor:hover),
@@ -181,6 +201,22 @@ const onEmojiSelect = (emoji: Emoji) => {
   :deep(.emoji-type-image.emoji-set-google),
   :deep(.emoji-type-image.emoji-set-twitter) {
     background-image: none !important;
+  }
+
+  :deep(.emoji-mart-scroll) {
+    &::-webkit-scrollbar {
+      width: $unnnic-space-2;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: $unnnic-color-border-emphasized;
+      border-radius: $unnnic-radius-full;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: $unnnic-color-border-muted;
+      border-radius: $unnnic-radius-full;
+    }
   }
 }
 

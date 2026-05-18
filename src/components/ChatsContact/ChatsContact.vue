@@ -22,12 +22,12 @@
     <slot name="avatar">
       <UserAvatar
         v-if="discussionGoal"
-        scheme="purple-200"
+        scheme="bg-purple-plain"
       >
         <template #content>
           <UnnnicIcon
             icon="communication"
-            scheme="gray-900"
+            scheme="fg-base"
           />
         </template>
       </UserAvatar>
@@ -36,6 +36,8 @@
         :username="title"
         :photoUrl="userPhoto"
         :active="isHovered || selected"
+        scheme="bg-muted"
+        textColor="fg-emphasized"
       />
     </slot>
     <div class="chats-contact__infos">
@@ -268,7 +270,7 @@ export default {
     },
     schemePin: {
       type: String,
-      default: ' fg-base',
+      default: 'fg-emphasized',
     },
     pendingResponse: {
       type: Boolean,
@@ -572,13 +574,13 @@ export default {
     &__project-tag {
       display: block;
       flex-shrink: 1;
-      border: 1px solid $unnnic-color-border-emphasized;
+      background: $unnnic-color-bg-muted;
 
       font: $unnnic-font-caption-1;
       color: $unnnic-color-fg-emphasized;
 
-      border-radius: $unnnic-radius-4;
-      padding: 1px $unnnic-space-2;
+      border-radius: $unnnic-radius-full;
+      padding: $unnnic-space-05 $unnnic-space-3;
     }
 
     &__media {
@@ -605,7 +607,7 @@ export default {
     &__additional-information {
       width: 100%; // important to ellipsis work
 
-      color: $unnnic-color-fg-muted;
+      color: $unnnic-color-fg-base;
     }
 
     &__pending-response {
@@ -661,7 +663,7 @@ export default {
       line-height: $unnnic-font-size-body-lg;
 
       &--active {
-        color: $unnnic-color-weni-700;
+        color: $unnnic-color-fg-info;
         font-weight: $unnnic-font-weight-bold;
       }
     }
@@ -672,7 +674,7 @@ export default {
       align-items: center;
 
       border-radius: 50%;
-      background: $unnnic-color-weni-50;
+      background: $unnnic-color-bg-info;
 
       width: 1.25rem;
       min-width: 1.25rem;
@@ -681,7 +683,7 @@ export default {
       font-size: $unnnic-font-size-body-md;
       font-weight: $unnnic-font-weight-bold;
       line-height: $unnnic-line-height-small;
-      color: $unnnic-color-weni-700;
+      color: $unnnic-color-fg-info;
     }
 
     &__new-message-indicator {

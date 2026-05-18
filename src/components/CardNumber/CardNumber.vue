@@ -54,7 +54,7 @@ export default {
   span {
     font-weight: $unnnic-font-weight-black;
     font-size: $unnnic-font-size-title-lg;
-    color: $unnnic-color-gray-12;
+    color: $unnnic-color-fg-emphasized;
     line-height: $unnnic-font-size-title-lg + $unnnic-line-height-md;
   }
 }

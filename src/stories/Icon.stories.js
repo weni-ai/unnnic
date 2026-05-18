@@ -18,6 +18,7 @@ const schemes = [
   'fg-emphasized',
   'fg-muted',
   'fg-inverted',
+  'fg-on-primary',
   'fg-info',
   'fg-success',
   'fg-warning',

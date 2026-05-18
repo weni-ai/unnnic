@@ -1,5 +1,6 @@
 @use './colors' as *;
 @use './deprecated/colors' as *;
+@use './semantic-colors' as *;
 
 // Global scheme colors mapping for all components
 
@@ -176,11 +177,13 @@ $unnnic-scheme-colors:
   'bg-purple-strong' $unnnic-color-bg-purple-strong,
   'bg-pink-plain' $unnnic-color-bg-pink-plain,
   'bg-pink-strong' $unnnic-color-bg-pink-strong,
+  'bg-inverted' $unnnic-color-bg-inverted,
 
   'fg-base' $unnnic-color-fg-base,
   'fg-emphasized' $unnnic-color-fg-emphasized,
   'fg-muted' $unnnic-color-fg-muted,
   'fg-inverted' $unnnic-color-fg-inverted,
+  'fg-on-primary' $unnnic-color-fg-on-primary,
   'fg-accent' $unnnic-color-fg-accent,
   'fg-info' $unnnic-color-fg-info,
   'fg-success' $unnnic-color-fg-success,

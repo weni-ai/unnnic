@@ -44,7 +44,7 @@
         size="sm"
         clickable
         filled
-        scheme="white"
+        scheme="fg-inverted"
         @click="$emit('click:close')"
       />
     </TooltipContent>

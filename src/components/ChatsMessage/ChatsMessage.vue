@@ -321,7 +321,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
 
   background-color: $unnnic-color-bg-base;
 
-  font-family: $unnnic-font-family-secondary;
+  font: $unnnic-font-body;
 
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.1);
 
@@ -342,10 +342,10 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   }
 
   &.sent {
-    background-color: #cff8f4;
+    background-color: $unnnic-color-bg-accent-plain;
 
     &.automatic {
-      background-color: $unnnic-color-blue-100;
+      background-color: $unnnic-color-bg-info;
     }
   }
 
@@ -430,7 +430,7 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
     padding: $unnnic-spacing-nano 0;
 
     font-size: $unnnic-font-size-body-gt;
-    color: $unnnic-color-fg-base;
+    color: $unnnic-color-fg-emphasized;
     line-height: $defaultLineHeight;
     word-break: break-word;
   }
@@ -450,9 +450,8 @@ $defaultLineHeight: $unnnic-font-size-body-gt + $unnnic-line-height-medium;
   }
 
   &__time {
-    font-size: $unnnic-font-size-body-md;
-    line-height: $defaultLineHeight;
-    color: $unnnic-color-fg-muted;
+    font: $unnnic-font-caption-2;
+    color: $unnnic-color-fg-base;
     margin: 0;
     padding: 0;
 

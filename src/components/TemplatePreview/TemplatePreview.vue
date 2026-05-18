@@ -84,7 +84,7 @@
         <UnnnicIcon
           class="unnnic-template-preview__buttons__button__icon"
           :icon="getButtonIcon(button.type)"
-          scheme="aux-blue-500"
+          scheme="fg-info"
           size="ant"
         />
         <p class="unnnic-template-preview__buttons__button__text">

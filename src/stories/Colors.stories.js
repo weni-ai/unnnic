@@ -2,7 +2,12 @@
  * Colors stories. use tags: ['!dev']
  * so they only appear in Colors.mdx via <Story of={...} />, not in the sidebar.
  */
-import colors from '@/assets/tokens/colors.json';
+import primitives from '@/assets/tokens/colors-primitives.json';
+import semantic from '@/assets/tokens/colors-semantic.json';
+
+const colors = {
+  color: { ...primitives.color, ...semantic.color },
+};
 
 function resolveReference(ref, root) {
   const path = ref.replace(/^\{|\}$/g, '').split('.');
