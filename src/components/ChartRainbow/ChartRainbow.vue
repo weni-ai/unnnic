@@ -176,13 +176,13 @@ export default {
       font-weight: $unnnic-font-weight-black;
 
       .number {
-        color: $unnnic-color-gray-12;
+        color: $unnnic-color-fg-emphasized;
         font-size: $unnnic-font-size-h3;
         line-height: $unnnic-font-size-h3 + $unnnic-line-height-md;
       }
 
       .symbol {
-        color: $unnnic-color-bg-muted;
+        color: $unnnic-color-fg-muted;
         font-size: $unnnic-font-size-h4;
         line-height: $unnnic-font-size-h4 + $unnnic-line-height-md;
       }

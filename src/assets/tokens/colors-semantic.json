@@ -1,0 +1,55 @@
+{
+  "color": {
+    "bg": {
+      "base": { "value": "{color.gray.0}" },
+      "base-soft": { "value": "{color.gray.1}" },
+      "muted": { "value": "{color.gray.2}" },
+      "accent-plain": { "value": "{color.teal.2}" },
+      "accent-strong": { "value": "{color.teal.8}" },
+      "info": { "value": "{color.blue.1}" },
+      "success": { "value": "{color.green.1}" },
+      "warning": { "value": "{color.yellow.1}" },
+      "critical": { "value": "{color.red.1}" },
+      "red-plain": { "value": "{color.red.3}" },
+      "red-strong": { "value": "{color.red.9}" },
+      "orange-plain": { "value": "{color.orange.3}" },
+      "orange-strong": { "value": "{color.orange.8}" },
+      "yellow-plain": { "value": "{color.yellow.2}" },
+      "yellow-strong": { "value": "{color.yellow.8}" },
+      "green-plain": { "value": "{color.green.3}" },
+      "green-strong": { "value": "{color.green.8}" },
+      "teal-plain": { "value": "{color.teal.3}" },
+      "teal-strong": { "value": "{color.teal.8}" },
+      "blue-plain": { "value": "{color.blue.3}" },
+      "blue-strong": { "value": "{color.blue.8}" },
+      "purple-plain": { "value": "{color.purple.3}" },
+      "purple-strong": { "value": "{color.purple.8}" },
+      "pink-plain": { "value": "{color.pink.3}" },
+      "pink-strong": { "value": "{color.pink.8}" },
+      "inverted": { "value": "{color.gray.12}" }
+    },
+    "fg": {
+      "base": { "value": "{color.gray.11}" },
+      "emphasized": { "value": "{color.gray.12}" },
+      "muted": { "value": "{color.gray.9}" },
+      "inverted": { "value": "{color.gray.0}" },
+      "on-primary": { "value": "{color.gray.0}" },
+      "accent": { "value": "{color.teal.8}" },
+      "info": { "value": "{color.blue.9}" },
+      "success": { "value": "{color.green.9}" },
+      "warning": { "value": "{color.yellow.9}" },
+      "critical": { "value": "{color.red.9}" }
+    },
+    "border": {
+      "base": { "value": "{color.gray.3}" },
+      "muted": { "value": "{color.gray.2}" },
+      "emphasized": { "value": "{color.gray.7}" },
+      "accent-plain": { "value": "{color.teal.5}" },
+      "accent-strong": { "value": "{color.teal.8}" },
+      "info": { "value": "{color.blue.5}" },
+      "success": { "value": "{color.green.5}" },
+      "warning": { "value": "{color.yellow.5}" },
+      "critical": { "value": "{color.red.6}" }
+    }
+  }
+}

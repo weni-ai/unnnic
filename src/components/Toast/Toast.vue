@@ -99,10 +99,10 @@ let timeoutId: number | null = null;
 
 const typeConfig = computed(() => {
   const configMap = {
-    informational: { icon: 'info', scheme: 'blue-500' },
-    attention: { icon: 'error', scheme: 'yellow-500' },
-    success: { icon: 'check_circle', scheme: 'green-500' },
-    error: { icon: 'cancel', scheme: 'red-500' },
+    informational: { icon: 'info', scheme: 'fg-info' },
+    attention: { icon: 'error', scheme: 'fg-warning' },
+    success: { icon: 'check_circle', scheme: 'fg-success' },
+    error: { icon: 'cancel', scheme: 'fg-critical' },
   };
 
   return configMap[props.type || 'informational'] as {

@@ -115,14 +115,14 @@ const iconScheme = computed((): SchemeColor => {
   }
 
   const typeToSchemeMap: Record<ButtonType, SchemeColor> = {
-    primary: 'fg-inverted',
+    primary: 'fg-on-primary',
     secondary: 'fg-emphasized',
     tertiary: 'fg-emphasized',
-    warning: 'fg-inverted',
-    attention: 'fg-inverted',
+    warning: 'fg-on-primary',
+    attention: 'fg-on-primary',
   };
 
-  return typeToSchemeMap[buttonType.value] || 'fg-inverted';
+  return typeToSchemeMap[buttonType.value] || 'fg-on-primary';
 });
 
 const isSizePropValid = computed(() => {
@@ -228,7 +228,7 @@ watch(
   &--primary,
   &--warning,
   &--attention {
-    color: $unnnic-color-fg-inverted;
+    color: $unnnic-color-fg-on-primary;
   }
 
   &--secondary,
@@ -237,15 +237,15 @@ watch(
   }
 
   &--primary {
-    background-color: $unnnic-color-bg-active;
+    background-color: $unnnic-color-bg-accent-strong;
 
     &:hover:enabled {
-      background-color: $unnnic-color-teal-700;
+      background-color: $unnnic-color-teal-11;
     }
 
     &:active:enabled,
     &.unnnic-button--pressed {
-      background-color: $unnnic-color-teal-800;
+      background-color: $unnnic-color-teal-12;
     }
   }
 
@@ -254,12 +254,12 @@ watch(
     box-shadow: inset 0 0 0 1px $unnnic-color-border-base;
 
     &:hover:enabled {
-      background-color: $unnnic-color-gray-50;
+      background-color: $unnnic-color-bg-base-soft;
     }
 
     &:active:enabled,
     &.unnnic-button--pressed {
-      background-color: $unnnic-color-gray-100;
+      background-color: $unnnic-color-bg-muted;
     }
 
     &:disabled {
@@ -271,39 +271,38 @@ watch(
     background-color: transparent;
 
     &:hover:enabled {
-      background-color: rgba($unnnic-color-gray-400, 0.1);
+      background-color: $unnnic-color-bg-base-soft;
     }
 
     &:active:enabled,
     &.unnnic-button--pressed {
-      background-color: rgba($unnnic-color-gray-400, 0.2);
+      background-color: $unnnic-color-bg-muted;
     }
   }
 
   &--warning {
     background-color: $unnnic-color-bg-red-strong;
-    color: $unnnic-color-fg-inverted;
 
     &:hover:enabled {
-      background-color: $unnnic-color-red-10;
+      background-color: $unnnic-color-red-11;
     }
 
     &:active:enabled,
     &.unnnic-button--pressed {
-      background-color: $unnnic-color-red-11;
+      background-color: $unnnic-color-red-12;
     }
   }
 
   &--attention {
-    background-color: $unnnic-color-yellow-500;
+    background-color: $unnnic-color-bg-yellow-strong;
 
     &:hover:enabled {
-      background-color: $unnnic-color-yellow-600;
+      background-color: $unnnic-color-yellow-11;
     }
 
     &:active:enabled,
     &.unnnic-button--pressed {
-      background-color: $unnnic-color-yellow-700;
+      background-color: $unnnic-color-yellow-12;
     }
   }
 

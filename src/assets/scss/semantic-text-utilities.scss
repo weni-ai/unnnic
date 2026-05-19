@@ -1,4 +1,13 @@
 @use './colors' as *;
+@use './semantic-colors' as *;
+
+a {
+  color: $unnnic-color-fg-base;
+
+  &:hover {
+    color: $unnnic-color-fg-emphasized;
+  }
+}
 
 .color-fg-base {
   color: $unnnic-color-fg-base;

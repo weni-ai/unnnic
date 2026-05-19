@@ -25,3 +25,5 @@ const Unnnic: UnnnicPlugin = {
 
 export default Unnnic;
 export * from '@/components';
+export { useTheme } from '@/composables/useTheme';
+export type { Theme, ThemePreference } from '@/composables/useTheme';

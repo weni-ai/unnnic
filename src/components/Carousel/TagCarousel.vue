@@ -7,7 +7,7 @@
         <UnnnicIcon
           icon="arrow-left-1-1"
           size="sm"
-          :scheme="hasPrev ? 'gray-12' : 'fg-muted'"
+          :scheme="hasPrev ? 'fg-emphasized' : 'fg-muted'"
           clickable
           @click="previous()"
         />
@@ -49,7 +49,7 @@
         <UnnnicIcon
           icon="arrow-right-1-1"
           size="sm"
-          :scheme="hasNext ? 'gray-12' : 'fg-muted'"
+          :scheme="hasNext ? 'fg-emphasized' : 'fg-muted'"
           clickable
           @click="next()"
         />

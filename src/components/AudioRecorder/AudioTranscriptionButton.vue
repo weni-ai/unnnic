@@ -19,7 +19,9 @@
           class="audio-player__icon-transcription"
           clickable
           icon="material-symbols:subject-rounded"
-          :scheme="!props.enableGenerateTranscription ? 'gray-300' : 'gray-900'"
+          :scheme="
+            !props.enableGenerateTranscription ? 'fg-muted' : 'fg-emphasized'
+          "
           size="ant"
           @click="emit('click')"
         />

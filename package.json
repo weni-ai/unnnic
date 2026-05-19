@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "3.25.5",
+  "version": "3.26.0",
   "type": "commonjs",
   "files": [
     "dist",
@@ -99,6 +99,7 @@
   },
   "devDependencies": {
     "@storybook/addon-docs": "^10.2.10",
+    "@storybook/addon-themes": "10.2.10",
     "@storybook/vue3": "10.2.10",
     "@storybook/vue3-vite": "10.2.10",
     "@types/lodash": "^4.17.20",

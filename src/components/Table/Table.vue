@@ -65,7 +65,7 @@ $scroll-size: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $unnnic-color-gray-7;
+    background: $unnnic-color-border-emphasized;
     border-radius: $unnnic-border-radius-pill;
   }
 

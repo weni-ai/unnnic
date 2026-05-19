@@ -58,8 +58,8 @@ const portalTarget = useTeleportTarget();
 
 .tooltip__content {
   display: flex;
-  background-color: $unnnic-color-gray-900;
-  color: $unnnic-color-white;
+  background-color: $unnnic-color-bg-inverted;
+  color: $unnnic-color-fg-inverted;
   border-radius: $unnnic-radius-1;
   padding: $unnnic-space-2;
   box-shadow: $unnnic-shadow-1;
@@ -76,8 +76,9 @@ const portalTarget = useTeleportTarget();
 .tooltip__arrow {
   width: 10px;
   height: 10px;
-  background-color: $unnnic-color-gray-900;
-  fill: $unnnic-color-gray-900;
+  background-color: $unnnic-color-bg-inverted;
+  fill: $unnnic-color-bg-inverted;
+  border-radius: calc($unnnic-radius-1 / 2);
   transform: rotate(45deg) translate(-50%, -50%);
 }
 </style>

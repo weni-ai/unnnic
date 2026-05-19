@@ -64,7 +64,7 @@ export default {
   padding: $unnnic-spacing-ant;
 
   box-sizing: content-box;
-  background-color: rgba($unnnic-color-fg-emphasized, 0.3);
+  background-color: rgba($unnnic-color-gray-13, 0.3);
 
   display: flex;
 

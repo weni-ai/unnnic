@@ -53,7 +53,7 @@ describe('UnnnicToast', () => {
 
       expect(typeIcon().exists()).toBe(true);
       expect(typeIcon().props('icon')).toBe('info');
-      expect(typeIcon().props('scheme')).toBe('blue-500');
+      expect(typeIcon().props('scheme')).toBe('fg-info');
       expect(typeIcon().props('size')).toBe('ant');
 
       expect(title().exists()).toBe(true);
@@ -120,10 +120,10 @@ describe('UnnnicToast', () => {
 
     test('displays correct scheme color for each type', async () => {
       const typeConfigs = [
-        { type: 'informational', expectedScheme: 'blue-500' },
-        { type: 'attention', expectedScheme: 'yellow-500' },
-        { type: 'success', expectedScheme: 'green-500' },
-        { type: 'error', expectedScheme: 'red-500' },
+        { type: 'informational', expectedScheme: 'fg-info' },
+        { type: 'attention', expectedScheme: 'fg-warning' },
+        { type: 'success', expectedScheme: 'fg-success' },
+        { type: 'error', expectedScheme: 'fg-critical' },
       ];
 
       for (const { type, expectedScheme } of typeConfigs) {

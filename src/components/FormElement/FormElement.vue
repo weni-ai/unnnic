@@ -106,7 +106,7 @@ withDefaults(defineProps<FormElementProps>(), {
         bottom: $unnnic-space-1 - 1px;
         width: 100%;
         height: 1px;
-        background-color: $unnnic-color-white;
+        background-color: $unnnic-color-bg-base;
       }
     }
   }
