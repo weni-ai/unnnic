@@ -5,6 +5,35 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.26.0 (2026-05-18)
+
+### Added
+
+- **Theme (dark mode)**: Initial dark mode support across the design system.
+  - New `useTheme` composable (exported from the package entry) returning `preference` (`light` / `dark` / `system`), `resolvedTheme`, `setTheme(value)`, and `toggleTheme()`. The preference is persisted in `localStorage` under `unnnic-theme`; `system` resolves the OS color scheme via `@vueuse/core`'s `usePreferredColorScheme`. The composable toggles the `.dark` class on `<html>` automatically. Types `Theme` and `ThemePreference` are also exported.
+  - New semantic color token architecture: `colors-primitives.json` (primitive scale), `colors-semantic.json` (light), and `colors-semantic-dark.json` (dark) generate `theme.scss` (CSS variables under `:root` and `.dark`) and `semantic-colors.scss` (SCSS bridge variables that resolve to the CSS variables). New tokens `bg-inverted` and `fg-on-primary` added in both themes and exposed in the `SchemeColor` type.
+- **Style Dictionary**: New filters (`primitiveColors`, `semanticColors`, `themeColors`) and formatters (`scss/theme-variables`, `scss/bridge-variables`) to emit the theme CSS variables and the SCSS → CSS-var bridge.
+- **Storybook**: `@storybook/addon-themes` integration with the `withThemeByClassName` decorator (light / dark) and a dedicated `.storybook/theme.scss` that adjusts the preview background under `.dark`.
+
+### Changed
+
+- **Tokens**: `colors.scss` no longer ships the semantic tokens; those moved to the auto-generated `semantic-colors.scss` (CSS variables) so they switch with the active theme. `unnnic.scss` now also forwards `theme.scss` and `semantic-colors.scss`.
+- **Components**: Migrated color usage to the semantic CSS-variable tokens so they react to the `.dark` class. Includes `Button`, `Icon`, `Alert`, `Chip`, `Toast`, `EmojiPicker`, `SkeletonLoading`, `DefaultTag`, `AudioTranscriptionButton`, `CardCompany`, `CardNumber`, `CardProject`, `TagCarousel`, `ChartRainbow`, `ChatsContact`, `ChatsMessage`, `ChatsMessageStatusBackdrop`, `ReplyMessage`, `ChatsNavbar`, `ChatsUserAvatar`, `DataTable`, `DatePicker`, `FormElement`, `TextInput`, `Input`, `SelectTime`, `Sidebar`, `Table`, `TemplatePreview`, `ToolTip`, `TourMask`, `DialogContent`, `PopoverContent`, `PopoverOption`, and `TooltipContent`.
+- **Tailwind preset**: `--primary-foreground` now maps to `--unnnic-color-fg-on-primary-hsl` (was `fg-inverted-hsl`) to keep the on-primary contrast independent from the inverted scale.
+- **ChatsContact**: Refined background, text, project tag, additional-info, and active-state styles for the new semantic tokens; default `schemePin` updated for the new color scheme.
+- **ChatsMessage**: Adjusted font properties and color tokens for improved visual hierarchy in both themes.
+
+### Fixed
+
+- **Style Dictionary**: `hexToHSL()` no longer crashes on non-hex token values (e.g. the `rgba(...)` values used by the dark semantic tokens).
+
+# 3.25.7 (2026-05-14)
+
+### Added
+
+- **ChatsContact**: `lastMessage.isFromUser` flag renders a localized "You:" prefix (`en: You:`, `pt-br: Você:`, `es: Tú:`) before the media icon when the last message is a media sent by the agent. Storybook story `MediaLastMessageFromUser` added.
+- **ChatsContact**: `newMessageIndicator` (Boolean, default `false`) and `newMessageIndicatorTooltip` (String, default `''`) props. When `newMessageIndicator` is `true`, an 8 px `bg-blue-strong` dot is rendered in the right-side container in place of the unread-count badge, vertically aligned with the message text row. The optional `newMessageIndicatorTooltip` shows a tooltip on hover (anchored to `top`); when empty, no tooltip is displayed. Storybook stories `NewMessageIndicator` and `NewMessageIndicatorWithTooltip` added.
+
 # 3.25.6 (2026-05-05)
 
 ### Added
