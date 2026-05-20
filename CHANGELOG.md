@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.26.1 (2026-05-20)
+
+### Removed
+
+- **ChatsContact**: Removed component along with unit tests, snapshots, and Storybook stories. No longer registered in the plugin map or exported (`unnnicChatsContact` / `UnnnicChatsContact`).
+- **ChatsDashboardTagLive**: Removed component and Storybook stories. No longer exported (`unnnicChatsDashboardTagLive` / `UnnnicChatsDashboardTagLive`).
+- **ChatsHeader**: Removed component and Storybook stories. No longer exported (`unnnicChatsHeader` / `UnnnicChatsHeader`).
+- **ChatsNavbar**: Removed component and Storybook stories. No longer exported (`unnnicChatsNavbar` / `UnnnicChatsNavbar`).
+
 # 3.26.0 (2026-05-18)
 
 ### Added
