@@ -72,8 +72,6 @@ import starRating from './StarRating/StarRating.vue';
 import audioRecorder from './AudioRecorder/AudioRecorder.vue';
 import circleProgressBar from './CircleProgressBar/CircleProgressBar.vue';
 import progressBar from './ProgressBar/ProgressBar.vue';
-import ChatsMessage from './ChatsMessage/ChatsMessage.vue';
-import ReplyMessage from './ChatsMessage/ReplyMessage.vue';
 import ChatsUserAvatar from './ChatsUserAvatar/ChatsUserAvatar.vue';
 import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
 import EmojiPicker from './EmojiPicker/EmojiPicker.vue';
@@ -206,8 +204,6 @@ export const components: ComponentsMap = {
   unnnicAudioRecorder: audioRecorder,
   unnnicCircleProgressBar: circleProgressBar,
   unnnicProgressBar: progressBar,
-  unnnicChatsMessage: ChatsMessage,
-  unnnicReplyMessage: ReplyMessage,
   unnnicChatsUserAvatar: ChatsUserAvatar,
   unnnicChartMultiLine: ChartMultiLine,
   unnnicEmojiPicker: EmojiPicker,
@@ -331,8 +327,6 @@ export const unnnicStarRating = starRating;
 export const unnnicAudioRecorder = audioRecorder;
 export const unnnicCircleProgressBar = circleProgressBar;
 export const unnnicProgressBar = progressBar;
-export const unnnicChatsMessage = ChatsMessage;
-export const unnnicReplyMessage = ReplyMessage;
 export const unnnicChatsUserAvatar = ChatsUserAvatar;
 export const unnnicChartMultiLine = ChartMultiLine;
 export const unnnicEmojiPicker = EmojiPicker;
@@ -455,8 +449,6 @@ export const UnnnicStarRating = starRating;
 export const UnnnicAudioRecorder = audioRecorder;
 export const UnnnicCircleProgressBar = circleProgressBar;
 export const UnnnicProgressBar = progressBar;
-export const UnnnicChatsMessage = ChatsMessage;
-export const UnnnicReplyMessage = ReplyMessage;
 export const UnnnicChatsUserAvatar = ChatsUserAvatar;
 export const UnnnicChartMultiLine = ChartMultiLine;
 export const UnnnicEmojiPicker = EmojiPicker;
