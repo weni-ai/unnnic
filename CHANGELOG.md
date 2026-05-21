@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **ChatsDashboardTagLive**: Removed component and Storybook stories. No longer exported (`unnnicChatsDashboardTagLive` / `UnnnicChatsDashboardTagLive`).
 - **ChatsHeader**: Removed component and Storybook stories. No longer exported (`unnnicChatsHeader` / `UnnnicChatsHeader`).
 - **ChatsNavbar**: Removed component and Storybook stories. No longer exported (`unnnicChatsNavbar` / `UnnnicChatsNavbar`).
+- **ChatsMessage**: Removed component and Storybook stories. No longer expored (`unnnicChatsMessage` / `UnnnicChatsMessage`).
 
 # 3.26.0 (2026-05-18)
 
