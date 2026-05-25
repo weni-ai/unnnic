@@ -72,12 +72,6 @@ import starRating from './StarRating/StarRating.vue';
 import audioRecorder from './AudioRecorder/AudioRecorder.vue';
 import circleProgressBar from './CircleProgressBar/CircleProgressBar.vue';
 import progressBar from './ProgressBar/ProgressBar.vue';
-import ChatsContact from './ChatsContact/ChatsContact.vue';
-import ChatsDashboardTagLive from './ChatsDashboardTagLive/ChatsDashboardTagLive.vue';
-import ChatsHeader from './ChatsHeader/ChatsHeader.vue';
-import ChatsMessage from './ChatsMessage/ChatsMessage.vue';
-import ReplyMessage from './ChatsMessage/ReplyMessage.vue';
-import ChatsNavbar from './ChatsNavbar/ChatsNavbar.vue';
 import ChatsUserAvatar from './ChatsUserAvatar/ChatsUserAvatar.vue';
 import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
 import EmojiPicker from './EmojiPicker/EmojiPicker.vue';
@@ -210,12 +204,6 @@ export const components: ComponentsMap = {
   unnnicAudioRecorder: audioRecorder,
   unnnicCircleProgressBar: circleProgressBar,
   unnnicProgressBar: progressBar,
-  unnnicChatsContact: ChatsContact,
-  unnnicChatsDashboardTagLive: ChatsDashboardTagLive,
-  unnnicChatsHeader: ChatsHeader,
-  unnnicChatsMessage: ChatsMessage,
-  unnnicReplyMessage: ReplyMessage,
-  unnnicChatsNavbar: ChatsNavbar,
   unnnicChatsUserAvatar: ChatsUserAvatar,
   unnnicChartMultiLine: ChartMultiLine,
   unnnicEmojiPicker: EmojiPicker,
@@ -339,12 +327,6 @@ export const unnnicStarRating = starRating;
 export const unnnicAudioRecorder = audioRecorder;
 export const unnnicCircleProgressBar = circleProgressBar;
 export const unnnicProgressBar = progressBar;
-export const unnnicChatsContact = ChatsContact;
-export const unnnicChatsDashboardTagLive = ChatsDashboardTagLive;
-export const unnnicChatsHeader = ChatsHeader as VueComponent;
-export const unnnicChatsMessage = ChatsMessage;
-export const unnnicReplyMessage = ReplyMessage;
-export const unnnicChatsNavbar = ChatsNavbar;
 export const unnnicChatsUserAvatar = ChatsUserAvatar;
 export const unnnicChartMultiLine = ChartMultiLine;
 export const unnnicEmojiPicker = EmojiPicker;
@@ -467,12 +449,6 @@ export const UnnnicStarRating = starRating;
 export const UnnnicAudioRecorder = audioRecorder;
 export const UnnnicCircleProgressBar = circleProgressBar;
 export const UnnnicProgressBar = progressBar;
-export const UnnnicChatsContact = ChatsContact;
-export const UnnnicChatsDashboardTagLive = ChatsDashboardTagLive;
-export const UnnnicChatsHeader = ChatsHeader as VueComponent;
-export const UnnnicChatsMessage = ChatsMessage;
-export const UnnnicReplyMessage = ReplyMessage;
-export const UnnnicChatsNavbar = ChatsNavbar;
 export const UnnnicChatsUserAvatar = ChatsUserAvatar;
 export const UnnnicChartMultiLine = ChartMultiLine;
 export const UnnnicEmojiPicker = EmojiPicker;
