@@ -27,12 +27,8 @@ const props = defineProps<{
   padding: $unnnic-space-6;
 
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   gap: $unnnic-space-2;
-
-  > * {
-    width: 100%;
-  }
 }
 </style>

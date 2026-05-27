@@ -244,14 +244,5 @@ const back = () => {
     padding: $unnnic-spacing-md $unnnic-spacing-md 0 $unnnic-spacing-md;
     flex: 1 0 0;
   }
-
-  .unnnic-drawer__footer {
-    display: flex;
-    padding: $unnnic-spacing-md;
-    gap: $unnnic-spacing-ant;
-    > * {
-      flex-grow: 1;
-    }
-  }
 }
 </style>

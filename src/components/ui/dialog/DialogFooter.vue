@@ -33,7 +33,7 @@ const props = withDefaults(
 
 .unnnic-dialog-footer {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   gap: $unnnic-space-2;
 
@@ -41,10 +41,6 @@ const props = withDefaults(
 
   &--with-divider {
     border-top: 1px solid $unnnic-color-border-soft;
-  }
-
-  > * {
-    width: 100%;
   }
 }
 </style>
