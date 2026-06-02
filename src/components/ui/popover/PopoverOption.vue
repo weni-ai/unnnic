@@ -6,6 +6,7 @@
         'unnnic-popover-option--disabled': props.disabled,
         'unnnic-popover-option--active': props.active,
         'unnnic-popover-option--focused': props.focused,
+        'unnnic-popover-option--with-content': hasDefaultSlot,
       },
     ]"
   >
@@ -15,15 +16,17 @@
       :scheme="schemeColor"
       size="ant"
     />
-    <p
-      :class="[
-        'unnnic-popover-option__label',
-        `unnnic-popover-option__label--${schemeColor}`,
-        `unnnic-popover-option--disabled: ${props.disabled}`,
-      ]"
-    >
-      {{ props.label }}
-    </p>
+    <slot>
+      <p
+        :class="[
+          'unnnic-popover-option__label',
+          `unnnic-popover-option__label--${schemeColor}`,
+          `unnnic-popover-option--disabled: ${props.disabled}`,
+        ]"
+      >
+        {{ props.label }}
+      </p>
+    </slot>
   </div>
 </template>
 
@@ -31,7 +34,7 @@
 import UnnnicIcon from '@/components/Icon.vue';
 
 import type { SchemeColor } from '@/types/scheme-colors';
-import { computed } from 'vue';
+import { computed, useSlots } from 'vue';
 
 defineOptions({
   name: 'UnnnicPopoverOption',
@@ -53,6 +56,9 @@ const props = withDefaults(defineProps<PopoverOptionProps>(), {
   scheme: 'fg-emphasized',
   icon: '',
 });
+
+const slots = useSlots();
+const hasDefaultSlot = computed(() => !!slots.default);
 
 const schemeColor = computed(() => {
   if (props.active) {
@@ -81,6 +87,10 @@ const schemeColor = computed(() => {
   display: flex;
   gap: $unnnic-space-2;
   align-items: center;
+
+  &--with-content {
+    justify-content: space-between;
+  }
 
   &:hover:not(&--active):not(&--disabled),
   &--focused {
