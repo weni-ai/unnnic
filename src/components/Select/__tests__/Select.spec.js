@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, afterEach, test } from 'vitest';
+import { h } from 'vue';
 import UnnnicSelect from '../index.vue';
 import i18n from '@/utils/plugins/i18n';
 
@@ -482,6 +483,144 @@ describe('UnnnicSelect.vue', () => {
       wrapper.vm.infiniteScrollLoading = true;
       await wrapper.vm.$nextTick();
       expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
+
+  describe('option slot', () => {
+    test('renders custom content for each option through the option slot', async () => {
+      const slotWrapper = mountWrapper(
+        {},
+        {
+          option: (slotProps) =>
+            h('span', { class: 'custom-option' }, `custom-${slotProps.label}`),
+        },
+      );
+
+      slotWrapper.vm.setOpenPopover(true);
+      await slotWrapper.vm.$nextTick();
+
+      const options = slotWrapper.findAllComponents({
+        name: 'UnnnicPopoverOption',
+      });
+      expect(options.length).toBe(3);
+      expect(options[0].find('.custom-option').exists()).toBe(true);
+      expect(options[0].find('.custom-option').text()).toBe('custom-Option 1');
+
+      slotWrapper.unmount();
+    });
+
+    test('falls back to default label rendering without option slot', async () => {
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicPopoverOption',
+      });
+      expect(options[0].find('.custom-option').exists()).toBe(false);
+      expect(options[0].find('.unnnic-popover-option__label').exists()).toBe(
+        true,
+      );
+    });
+  });
+
+  describe('selected slot (custom trigger)', () => {
+    const selectedSlot = {
+      selected: (slotProps) =>
+        h('span', { class: 'custom-selected' }, `selected-${slotProps.label}`),
+    };
+
+    test('renders custom trigger when selected slot is used and an item is selected', () => {
+      const slotWrapper = mountWrapper({ modelValue: 'option1' }, selectedSlot);
+
+      expect(slotWrapper.find('.unnnic-select__trigger').exists()).toBe(true);
+      expect(slotWrapper.find('.custom-selected').text()).toBe(
+        'selected-Option 1',
+      );
+      expect(slotWrapper.findComponent({ name: 'UnnnicInput' }).exists()).toBe(
+        false,
+      );
+
+      slotWrapper.unmount();
+    });
+
+    test('falls back to UnnnicInput when no item is selected', () => {
+      const slotWrapper = mountWrapper({ modelValue: null }, selectedSlot);
+
+      expect(slotWrapper.find('.unnnic-select__trigger').exists()).toBe(false);
+      expect(slotWrapper.findComponent({ name: 'UnnnicInput' }).exists()).toBe(
+        true,
+      );
+
+      slotWrapper.unmount();
+    });
+
+    test('falls back to UnnnicInput when selected slot is not provided', () => {
+      const fallbackWrapper = mountWrapper({ modelValue: 'option1' });
+
+      expect(fallbackWrapper.find('.unnnic-select__trigger').exists()).toBe(
+        false,
+      );
+      expect(
+        fallbackWrapper.findComponent({ name: 'UnnnicInput' }).exists(),
+      ).toBe(true);
+
+      fallbackWrapper.unmount();
+    });
+
+    test('shows the field label above the custom trigger', () => {
+      const slotWrapper = mountWrapper(
+        { modelValue: 'option1', label: 'Representative' },
+        selectedSlot,
+      );
+
+      const label = slotWrapper.find('.unnnic-select__trigger-label');
+      expect(label.exists()).toBe(true);
+      expect(label.text()).toBe('Representative');
+
+      slotWrapper.unmount();
+    });
+
+    test('reflects the popover state through the chevron icon', async () => {
+      const slotWrapper = mountWrapper({ modelValue: 'option1' }, selectedSlot);
+
+      const arrow = slotWrapper.find('.unnnic-select__trigger-arrow');
+      expect(arrow.exists()).toBe(true);
+
+      slotWrapper.vm.setOpenPopover(true);
+      await slotWrapper.vm.$nextTick();
+      expect(slotWrapper.vm.openPopover).toBe(true);
+
+      slotWrapper.unmount();
+    });
+
+    test('emits update:modelValue with empty value when clear is clicked', async () => {
+      const slotWrapper = mountWrapper(
+        { modelValue: 'option1', clearable: true },
+        selectedSlot,
+      );
+
+      const clear = slotWrapper.find('.unnnic-select__trigger-clear');
+      expect(clear.exists()).toBe(true);
+
+      await clear.trigger('click');
+
+      expect(slotWrapper.emitted('update:modelValue')).toBeTruthy();
+      expect(slotWrapper.emitted('update:modelValue')[0]).toEqual(['']);
+
+      slotWrapper.unmount();
+    });
+
+    test('does not render clear icon when clearable is false', () => {
+      const slotWrapper = mountWrapper(
+        { modelValue: 'option1', clearable: false },
+        selectedSlot,
+      );
+
+      expect(slotWrapper.find('.unnnic-select__trigger-clear').exists()).toBe(
+        false,
+      );
+
+      slotWrapper.unmount();
     });
   });
 });
