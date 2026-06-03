@@ -1,4 +1,5 @@
 import UnnnicSelect from '../components/Select/index.vue';
+import UnnnicTag from '../components/Tag/Tag.vue';
 
 const options = [
   { label: 'Option 1', value: 'option1', altValue: 'alt_value_option1' },
@@ -179,6 +180,124 @@ export const WithSearch = {
     enableSearch: true,
     search: '',
   },
+};
+
+export const WithStatus = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Customizes option and selected content through the `#option` and `#selected` scoped slots. The status tag lives entirely in the consumer, keeping the Select decoupled from the concept of status.',
+      },
+      source: {
+        code: `<UnnnicSelect
+  v-model="selected"
+  :options="options"
+  label="Representative"
+  placeholder="Select a representative"
+  clearable
+>
+  <template #option="{ label, option }">
+    <span class="select-status__label">{{ label }}</span>
+    <UnnnicTag
+      type="default"
+      size="small"
+      :scheme="statusConfig[option.status].scheme"
+      :text="statusConfig[option.status].text"
+    />
+  </template>
+
+  <template #selected="{ label, option }">
+    <span class="select-status__label">{{ label }}</span>
+    <UnnnicTag
+      type="default"
+      size="small"
+      :scheme="statusConfig[option.status].scheme"
+      :text="statusConfig[option.status].text"
+    />
+  </template>
+</UnnnicSelect>`,
+      },
+    },
+  },
+  render: () => ({
+    components: { UnnnicSelect, UnnnicTag },
+    data() {
+      return {
+        emptyValue: null,
+        selectedValue: 'anna',
+        statusOptions: [
+          { label: 'Ana', value: 'ana', status: 'online' },
+          { label: 'Anna', value: 'anna', status: 'online' },
+          { label: 'Davi', value: 'davi', status: 'lunch' },
+          { label: 'João', value: 'joao', status: 'offline' },
+          { label: 'Ricardo', value: 'ricardo', status: 'offline' },
+        ],
+        statusConfig: {
+          online: { scheme: 'green', text: 'Online' },
+          lunch: { scheme: 'orange', text: 'Lunch' },
+          offline: { scheme: 'gray', text: 'Offline' },
+        },
+      };
+    },
+    template: `
+      <div style="width: 512px; display: flex; flex-direction: column; gap: 32px;">
+        <unnnic-select
+          v-model="emptyValue"
+          :options="statusOptions"
+          label="Representative"
+          placeholder="Select a representative"
+          clearable
+        >
+          <template #option="{ label, option }">
+            <span style="flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ label }}</span>
+            <unnnic-tag
+              type="default"
+              size="small"
+              :scheme="statusConfig[option.status].scheme"
+              :text="statusConfig[option.status].text"
+            />
+          </template>
+          <template #selected="{ label, option }">
+            <span style="flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ label }}</span>
+            <unnnic-tag
+              type="default"
+              size="small"
+              :scheme="statusConfig[option.status].scheme"
+              :text="statusConfig[option.status].text"
+            />
+          </template>
+        </unnnic-select>
+
+        <unnnic-select
+          v-model="selectedValue"
+          :options="statusOptions"
+          label="Representative"
+          placeholder="Select a representative"
+          clearable
+        >
+          <template #option="{ label, option }">
+            <span style="flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ label }}</span>
+            <unnnic-tag
+              type="default"
+              size="small"
+              :scheme="statusConfig[option.status].scheme"
+              :text="statusConfig[option.status].text"
+            />
+          </template>
+          <template #selected="{ label, option }">
+            <span style="flex: 1 1 auto; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ label }}</span>
+            <unnnic-tag
+              type="default"
+              size="small"
+              :scheme="statusConfig[option.status].scheme"
+              :text="statusConfig[option.status].text"
+            />
+          </template>
+        </unnnic-select>
+      </div>
+    `,
+  }),
 };
 
 export const WithInfiniteScroll = {
