@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.28.1 (2026-06-05)
+
+### Fixed
+
+- **UnnnicPopoverContent**: `UnnnicPopoverFooter` is now detected at any nesting level. Previously only top-level slot children were checked, so a footer wrapped in a container (e.g. `<section>`) was rendered inside `unnnic-popover__content` instead of the dedicated footer area.
+
 # 3.28.0 (2026-06-02)
 
 ### Added
