@@ -5,6 +5,27 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.28.0 (2026-06-02)
+
+### Added
+
+- **UnnnicSelect**: Scoped slots `#option` and `#selected` for rendering custom content in each option row and in the trigger when an item is selected. The default behavior (label-only rendering via `UnnnicInput`) is preserved as a fallback.
+- **UnnnicPopoverOption**: Default slot that, when provided, replaces the built-in label paragraph. Enables arbitrary content (e.g. tags, icons) inside popover options.
+- **Storybook**: `WithStatus` story demonstrating the new Select slots with status tags (Online, Lunch, Offline).
+
+# 3.27.1 (2026-05-28)
+
+### Fixed
+
+- **UnnnicToast**: Status backgrounds (informational, attention, success, error) now use layered linear gradients so semi-transparent semantic tokens render correctly over `bg-base` in dark mode;
+
+# 3.27.0 (2026-05-28)
+
+### Changed
+
+- **UnnnicDrawerFooter** and **UnnnicDialogFooter**: Footer actions aligned to the right; direct children no longer stretch to full width.
+- **UnnnicDrawer** (legacy): Removed duplicate footer layout rules now handled by `UnnnicDrawerFooter`.
+
 # 3.26.1 (2026-05-20)
 
 ### Removed

@@ -172,22 +172,25 @@ onUnmounted(() => {
 
   &--informational {
     border-color: $unnnic-color-border-info;
-    background-color: $unnnic-color-bg-info;
+    background: linear-gradient($unnnic-color-bg-info), $unnnic-color-bg-base;
   }
 
   &--attention {
     border-color: $unnnic-color-border-warning;
-    background-color: $unnnic-color-bg-warning;
+    background:
+      linear-gradient($unnnic-color-bg-warning), $unnnic-color-bg-base;
   }
 
   &--success {
     border-color: $unnnic-color-border-success;
-    background-color: $unnnic-color-bg-success;
+    background:
+      linear-gradient($unnnic-color-bg-success), $unnnic-color-bg-base;
   }
 
   &--error {
     border-color: $unnnic-color-border-critical;
-    background-color: $unnnic-color-bg-critical;
+    background:
+      linear-gradient($unnnic-color-bg-critical), $unnnic-color-bg-base;
   }
 
   &__content,

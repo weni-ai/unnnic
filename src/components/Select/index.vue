@@ -5,7 +5,53 @@
       @update:open="setOpenPopover"
     >
       <PopoverTrigger class="w-full">
+        <section
+          v-if="hasSelectedSlot && selectedItem"
+          ref="selectInputRef"
+          class="unnnic-select__trigger-wrapper"
+        >
+          <span
+            v-if="props.label"
+            class="unnnic-select__trigger-label"
+          >
+            {{ props.label }}
+          </span>
+          <section
+            :class="[
+              'unnnic-select__trigger',
+              `unnnic-select__trigger--${props.size}`,
+              {
+                'unnnic-select__trigger--focused': openPopover,
+                'unnnic-select__trigger--disabled': props.disabled,
+              },
+            ]"
+          >
+            <section class="unnnic-select__trigger-content">
+              <slot
+                name="selected"
+                :option="selectedItem"
+                :label="inputValue as string"
+              />
+            </section>
+            <UnnnicIcon
+              v-if="props.clearable && !props.disabled"
+              class="unnnic-select__trigger-clear"
+              icon="close"
+              size="ant"
+              scheme="fg-base"
+              clickable
+              @click.stop="emit('update:modelValue', '')"
+            />
+            <UnnnicIcon
+              class="unnnic-select__trigger-arrow"
+              :icon="openPopover ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
+              size="ant"
+              scheme="fg-base"
+            />
+          </section>
+        </section>
         <UnnnicInput
+          v-else
           ref="selectInputRef"
           :modelValue="inputValue as string"
           class="unnnic-select__input"
@@ -60,7 +106,23 @@
               :focused="focusedOptionIndex === index"
               :disabled="option.disabled"
               @click="handleSelectOption(option)"
-            />
+            >
+              <template
+                v-if="$slots.option"
+                #default
+              >
+                <slot
+                  name="option"
+                  :option="option"
+                  :label="option[props.itemLabel] as string"
+                  :active="
+                    option[props.itemValue] === selectedItem?.[props.itemValue]
+                  "
+                  :focused="focusedOptionIndex === index"
+                  :index="index"
+                />
+              </template>
+            </PopoverOption>
             <div
               v-if="props.infiniteScroll && infiniteScrollLoading"
               class="unnnic-select__infinite-loading"
@@ -85,11 +147,13 @@ import {
   nextTick,
   onBeforeUnmount,
   useTemplateRef,
+  useSlots,
 } from 'vue';
 
 import { useInfiniteScroll } from '@vueuse/core';
 
 import UnnnicInput from '../Input/Input.vue';
+import UnnnicIcon from '../Icon.vue';
 import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import {
   Popover,
@@ -141,6 +205,20 @@ const emit = defineEmits<{
   'scroll-end': [];
 }>();
 
+defineSlots<{
+  option?: (props: {
+    option: SelectOption;
+    label: string;
+    active: boolean;
+    focused: boolean;
+    index: number;
+  }) => unknown;
+  selected?: (props: { option: SelectOption; label: string }) => unknown;
+}>();
+
+const slots = useSlots();
+const hasSelectedSlot = computed(() => !!slots.selected);
+
 const selectInputRef = useTemplateRef<HTMLElement>('selectInputRef');
 const contentRef = useTemplateRef<HTMLDivElement>('contentRef');
 
@@ -155,8 +233,11 @@ function setOpenPopover(value: boolean) {
   base.openPopover.value = value;
 }
 
-const selectedItem = computed(() => {
-  if (props.returnObject) return props.modelValue;
+const selectedItem = computed((): SelectOption | undefined => {
+  if (props.returnObject) {
+    if (props.modelValue == null || props.modelValue === '') return undefined;
+    return props.modelValue as SelectOption;
+  }
 
   return props.options.find(
     (option) => option[props.itemValue] === props.modelValue,
@@ -289,6 +370,70 @@ defineExpose({
 }
 
 .unnnic-select {
+  &__trigger-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: $unnnic-space-1;
+    width: 100%;
+    text-align: left;
+    font: $unnnic-font-body;
+  }
+
+  &__trigger-label {
+    font: $unnnic-font-body;
+    color: $unnnic-color-fg-base;
+  }
+
+  &__trigger {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: $unnnic-space-2;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+
+    background: $unnnic-color-bg-base;
+    border: 1px solid $unnnic-color-border-base;
+    border-radius: $unnnic-radius-2;
+    padding: $unnnic-space-3 $unnnic-space-4;
+    height: 45px;
+
+    transition: border-color 0.1s ease-in-out;
+
+    &--sm {
+      padding: $unnnic-space-2 $unnnic-space-4;
+      height: 37px;
+    }
+
+    &--focused {
+      border-color: $unnnic-color-border-accent-strong;
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+      border-color: $unnnic-color-border-muted;
+      background-color: $unnnic-color-bg-muted;
+    }
+
+    &-content {
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      align-items: center;
+      gap: $unnnic-space-2;
+      overflow: hidden;
+      font: $unnnic-font-body;
+      color: $unnnic-color-fg-emphasized;
+    }
+
+    &-clear,
+    &-arrow {
+      flex-shrink: 0;
+    }
+  }
+
   &__content {
     display: flex;
     flex-direction: column;
