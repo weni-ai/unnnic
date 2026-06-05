@@ -73,19 +73,33 @@ const getComponentName = (vnode: VNode): string | undefined => {
   return componentType?.name || componentType?.__name;
 };
 
-const contentChildren = computed(() => {
-  const defaultSlot = slots.default?.() || [];
-  return defaultSlot.filter(
-    (vnode: VNode) => getComponentName(vnode) !== 'UnnnicPopoverFooter',
-  );
+const isFooter = (vnode: VNode) =>
+  getComponentName(vnode) === 'UnnnicPopoverFooter';
+
+// This function recursively checks if there is a UnnnicPopoverFooter in the slot,
+// and splits the content into content and footer
+const splitSlot = computed(() => {
+  const footers: VNode[] = [];
+
+  const content = (function extract(vnodes: VNode[]): VNode[] {
+    return vnodes.filter((vnode: VNode) => {
+      if (!vnode || typeof vnode !== 'object') return true;
+      if (isFooter(vnode)) return footers.push(vnode) && false;
+
+      if (Array.isArray(vnode.children) && vnode.children.length) {
+        vnode.children = extract(vnode.children as VNode[]);
+        return (vnode.children as VNode[]).length > 0;
+      }
+
+      return true;
+    });
+  })(slots.default?.() || []);
+
+  return { content, footers };
 });
 
-const footerChildren = computed(() => {
-  const defaultSlot = slots.default?.() || [];
-  return defaultSlot.filter(
-    (vnode: VNode) => getComponentName(vnode) === 'UnnnicPopoverFooter',
-  );
-});
+const contentChildren = computed(() => splitSlot.value.content);
+const footerChildren = computed(() => splitSlot.value.footers);
 
 const contentWidth = computed(() => {
   if (props.width) return props.width;
