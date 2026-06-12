@@ -11,17 +11,12 @@
       "
     >
       <section :class="`unnnic-popover__content ${props.class || ''}`">
-        <component
-          :is="child"
-          v-for="(child, index) in contentChildren"
-          :key="index"
-        />
+        <slot />
       </section>
 
-      <component
-        :is="child"
-        v-for="(child, index) in footerChildren"
-        :key="index"
+      <div
+        ref="footerContainer"
+        data-testid="popover-footer-container"
       />
     </PopoverContent>
   </PopoverPortal>
@@ -29,13 +24,14 @@
 
 <script setup lang="ts">
 import type { PopoverContentEmits, PopoverContentProps } from 'reka-ui';
-import type { HTMLAttributes, Slots, VNode } from 'vue';
-import { computed, useSlots } from 'vue';
+import type { HTMLAttributes } from 'vue';
+import { computed, provide, ref } from 'vue';
 import { reactiveOmit } from '@vueuse/core';
 import { PopoverContent, PopoverPortal, useForwardPropsEmits } from 'reka-ui';
 import { cn } from '@/lib/utils';
 import { useLayerZIndex } from '@/lib/layer-manager';
 import { useTeleportTarget } from '@/lib/teleport-target';
+import { POPOVER_FOOTER_TARGET } from './context';
 
 defineOptions({
   inheritAttrs: false,
@@ -63,29 +59,11 @@ const delegatedProps = reactiveOmit(props, 'class', 'size');
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
-const slots = useSlots() as Slots;
-
 const popoverZIndex = useLayerZIndex();
 const portalTarget = useTeleportTarget();
 
-const getComponentName = (vnode: VNode): string | undefined => {
-  const componentType = vnode.type as { name?: string; __name?: string };
-  return componentType?.name || componentType?.__name;
-};
-
-const contentChildren = computed(() => {
-  const defaultSlot = slots.default?.() || [];
-  return defaultSlot.filter(
-    (vnode: VNode) => getComponentName(vnode) !== 'UnnnicPopoverFooter',
-  );
-});
-
-const footerChildren = computed(() => {
-  const defaultSlot = slots.default?.() || [];
-  return defaultSlot.filter(
-    (vnode: VNode) => getComponentName(vnode) === 'UnnnicPopoverFooter',
-  );
-});
+const footerContainer = ref<HTMLElement | null>(null);
+provide(POPOVER_FOOTER_TARGET, footerContainer);
 
 const contentWidth = computed(() => {
   if (props.width) return props.width;
