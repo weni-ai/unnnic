@@ -205,4 +205,103 @@ describe('Pagination', () => {
       });
     });
   });
+
+  describe('edge cases', () => {
+    it('renders single page pagination', () => {
+      const wrapper = setup({ modelValue: 1, max: 1, disabled: false });
+
+      expect(wrapper.findAll('[data-test="page-button"]')).toHaveLength(1);
+      expect(
+        wrapper.find('[data-test="next-button"]').isDisabled(),
+      ).toBeTruthy();
+    });
+  });
+
+  describe('when previous is not available', () => {
+    it('does not emit when previous button is clicked on first page', async () => {
+      const wrapper = setup({
+        modelValue: 1,
+        max: 10,
+        disabled: false,
+      });
+
+      await wrapper.find('[data-test="previous-button"]').trigger('click');
+      expect(wrapper.emitted('update:model-value')).toBeUndefined();
+    });
+  });
+
+  describe('when next is not available', () => {
+    it('does not emit when next button is clicked on last page', async () => {
+      const wrapper = setup({
+        modelValue: 10,
+        max: 10,
+        disabled: false,
+      });
+
+      await wrapper.find('[data-test="next-button"]').trigger('click');
+      expect(wrapper.emitted('update:model-value')).toBeUndefined();
+    });
+  });
+
+  describe('when pagination is disabled', () => {
+    it('disables all page buttons', () => {
+      const wrapper = setup({
+        modelValue: 2,
+        max: 5,
+        disabled: true,
+      });
+
+      wrapper.findAll('[data-test="page-button"]').forEach((button) => {
+        expect(button.isDisabled()).toBeTruthy();
+      });
+      expect(
+        wrapper.find('[data-test="previous-button"]').isDisabled(),
+      ).toBeTruthy();
+      expect(
+        wrapper.find('[data-test="next-button"]').isDisabled(),
+      ).toBeTruthy();
+    });
+  });
+
+  describe('when previous page is outside visible pages', () => {
+    it('updates reference when navigating to a hidden page', async () => {
+      const wrapper = setup({
+        modelValue: 4,
+        max: 10,
+        disabled: false,
+      });
+
+      await wrapper.find('[data-test="previous-button"]').trigger('click');
+
+      expect(wrapper.emitted('update:model-value')).toContainEqual([3]);
+      expect(wrapper.vm.reference).toBe(3);
+    });
+  });
+
+  describe('when next page is outside visible pages', () => {
+    it('updates reference when navigating forward to a hidden page', async () => {
+      const wrapper = setup({
+        modelValue: 6,
+        max: 10,
+        disabled: false,
+      });
+
+      await wrapper.find('[data-test="next-button"]').trigger('click');
+
+      expect(wrapper.emitted('update:model-value')).toContainEqual([7]);
+      expect(wrapper.vm.reference).toBe(7);
+    });
+  });
+
+  describe('when initialized on a page outside visible range', () => {
+    it('sets reference to the current page', () => {
+      const wrapper = setup({
+        modelValue: 8,
+        max: 20,
+        disabled: false,
+      });
+
+      expect(wrapper.vm.reference).toBe(8);
+    });
+  });
 });
