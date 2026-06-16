@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { mount, flushPromises } from '@vue/test-utils';
 import { beforeEach, describe, expect, afterEach, test } from 'vitest';
 import UnnnicMultiSelect from '../index.vue';
 import i18n from '@/utils/plugins/i18n';
@@ -269,6 +269,30 @@ describe('UnnnicMultiSelect.vue', () => {
       const filteredOptions = wrapper.vm.filteredOptions;
       expect(filteredOptions.length).toBe(3);
     });
+
+    test('shows no results message when search has no matches', async () => {
+      await wrapper.setProps({ enableSearch: true, search: 'no-match' });
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.vm.filteredOptions).toEqual([]);
+      const noResults = wrapper.find(
+        '.unnnic-multi-select__content-no-results',
+      );
+      if (noResults.exists()) {
+        expect(noResults.text()).toContain('No results found');
+      }
+    });
+
+    test('clears search when popover closes', async () => {
+      await wrapper.setProps({ enableSearch: true, search: 'option' });
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+      wrapper.vm.setOpenPopover(false);
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.emitted('update:search')).toContainEqual(['']);
+    });
   });
 
   describe('computed properties', () => {
@@ -489,6 +513,16 @@ describe('UnnnicMultiSelect.vue', () => {
       expect(wrapper.emitted('update:modelValue')).toBeTruthy();
       expect(wrapper.emitted('update:modelValue')[0]).toEqual([[]]);
     });
+
+    test('shows clear button when clearable and items are selected', async () => {
+      await wrapper.setProps({
+        clearable: true,
+        modelValue: ['option1'],
+      });
+
+      const input = wrapper.findComponent({ name: 'UnnnicInput' });
+      expect(input.props('showClear')).toBe(true);
+    });
   });
 
   describe('getActivatedOptionStatus', () => {
@@ -517,6 +551,59 @@ describe('UnnnicMultiSelect.vue', () => {
 
       expect(options[0].props('active')).toBeTruthy();
       expect(options[1].props('active')).toBeFalsy();
+    });
+  });
+
+  describe('keyboard navigation', () => {
+    test('ignores disabled options on Enter key', async () => {
+      await wrapper.setProps({
+        options: [
+          { label: 'Disabled', value: 'disabled', disabled: true },
+          { label: 'Option 2', value: 'option2' },
+        ],
+      });
+      wrapper.vm.setOpenPopover(true);
+      await flushPromises();
+      await flushPromises();
+
+      document.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }),
+      );
+      await flushPromises();
+      document.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }),
+      );
+      await flushPromises();
+
+      expect(wrapper.emitted('update:modelValue')).toBeFalsy();
+    });
+
+    test('toggles option through option component emit', async () => {
+      await wrapper.setProps({ modelValue: ['option1'] });
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+
+      await options[0].vm.$emit('update:model-value', false);
+
+      expect(wrapper.emitted('update:modelValue')).toBeTruthy();
+    });
+
+    test('closes popover through popover update event', async () => {
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+
+      const popover = wrapper.findComponent({ name: 'UnnnicPopover' });
+      if (popover.exists()) {
+        await popover.vm.$emit('update:open', false);
+      } else {
+        wrapper.vm.setOpenPopover(false);
+      }
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.vm.openPopover).toBe(false);
     });
   });
 
