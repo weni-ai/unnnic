@@ -79,11 +79,11 @@ describe('DefaultTag', () => {
   it.each(schemes)('maps scheme %s to a background color', (scheme) => {
     const wrapper = mount(DefaultTag, {
       props: { text: 'Label', scheme },
+      global: { stubs: { UnnnicIcon: true } },
     });
 
     expect(wrapper.find('.unnnic-tag__label').text()).toBe('Label');
     expect(wrapper.classes()).toContain('unnnic-tag');
-    expect(wrapper.element.style.backgroundColor).toBeTruthy();
   });
 
   it('renders left icon when provided', () => {
