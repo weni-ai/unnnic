@@ -68,11 +68,27 @@ describe('RadioGroup', () => {
     expect(inputs[0].element.checked).toBe(true);
   });
 
+  it('does not emit when modelValue is already in sync', async () => {
+    const wrapper = mountRadioGroup({ modelValue: 'a' });
+
+    await wrapper.setProps({ modelValue: 'a' });
+
+    expect(wrapper.emitted('update:modelValue') ?? []).toHaveLength(0);
+  });
+
   it('uses custom name when provided', () => {
     const wrapper = mountRadioGroup({ name: 'custom-group' });
 
     expect(wrapper.find('input[type="radio"]').attributes('name')).toBe(
       'custom-group',
+    );
+  });
+
+  it('generates a random group name when name is not provided', () => {
+    const wrapper = mountRadioGroup();
+
+    expect(wrapper.find('input[type="radio"]').attributes('name')).toMatch(
+      /^unnnic-radio-group-/,
     );
   });
 

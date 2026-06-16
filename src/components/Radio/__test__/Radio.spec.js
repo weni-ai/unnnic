@@ -85,6 +85,24 @@ describe('Radio.vue', () => {
     expect(wrapper.find('.unnnic-radio__label').text()).toContain('Radio label');
   });
 
+  test('uses injected name when inside RadioGroup without name prop', () => {
+    const groupWrapper = mount(RadioGroup, {
+      props: { modelValue: '', name: 'group-name' },
+      slots: {
+        default: '<Radio value="option1" label="Option 1" />',
+      },
+      global: {
+        components: { Radio },
+        stubs: { UnnnicLabel: true },
+      },
+    });
+
+    expect(groupWrapper.find('input[type="radio"]').attributes('name')).toBe(
+      'group-name',
+    );
+    groupWrapper.unmount();
+  });
+
   test('updates group context value when used inside RadioGroup', async () => {
     const groupWrapper = mount(RadioGroup, {
       props: { modelValue: '' },
