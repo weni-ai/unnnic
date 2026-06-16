@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { describe, test, expect, beforeEach, afterEach } from 'vitest';
 import Radio from '@/components/Radio/Radio.vue';
+import RadioGroup from '@/components/RadioGroup/RadioGroup.vue';
 import UnnnicIcon from '@/components/Icon.vue';
 
 describe('Radio.vue', () => {
@@ -72,5 +73,35 @@ describe('Radio.vue', () => {
 
   test('matches the snapshot', () => {
     expect(wrapper.html()).toMatchSnapshot();
+  });
+
+  test('renders helper text when provided', async () => {
+    await wrapper.setProps({ helper: 'Radio helper' });
+    expect(wrapper.find('.unnnic-radio__helper').text()).toBe('Radio helper');
+  });
+
+  test('renders label prop', async () => {
+    await wrapper.setProps({ label: 'Radio label' });
+    expect(wrapper.find('.unnnic-radio__label').text()).toContain('Radio label');
+  });
+
+  test('updates group context value when used inside RadioGroup', async () => {
+    const groupWrapper = mount(RadioGroup, {
+      props: { modelValue: '' },
+      slots: {
+        default: '<Radio value="option1" label="Option 1" />',
+      },
+      global: {
+        components: { Radio },
+        stubs: {
+          UnnnicLabel: true,
+        },
+      },
+    });
+
+    await groupWrapper.find('input[type="radio"]').trigger('change');
+
+    expect(groupWrapper.emitted('update:modelValue')[0]).toEqual(['option1']);
+    groupWrapper.unmount();
   });
 });
