@@ -44,7 +44,9 @@ describe('Radio.vue', () => {
 
   test('applies disabled class when disabled prop is true', async () => {
     await wrapper.setProps({ disabled: true });
-    expect(wrapper.find('.unnnic-radio__label').classes()).toContain('unnnic-radio__label--disabled');
+    expect(wrapper.find('.unnnic-radio__label').classes()).toContain(
+      'unnnic-radio__label--disabled',
+    );
   });
 
   test('icon changes based on valueName', async () => {
@@ -82,7 +84,25 @@ describe('Radio.vue', () => {
 
   test('renders label prop', async () => {
     await wrapper.setProps({ label: 'Radio label' });
-    expect(wrapper.find('.unnnic-radio__label').text()).toContain('Radio label');
+    expect(wrapper.find('.unnnic-radio__label').text()).toContain(
+      'Radio label',
+    );
+  });
+
+  test('uses name prop when radio is standalone', () => {
+    const standalone = mount(Radio, {
+      props: {
+        modelValue: '',
+        value: 'option1',
+        name: 'standalone-radio',
+      },
+      global: { components: { UnnnicIcon } },
+    });
+
+    expect(standalone.find('input').attributes('name')).toBe(
+      'standalone-radio',
+    );
+    standalone.unmount();
   });
 
   test('uses injected name when inside RadioGroup without name prop', () => {
