@@ -91,6 +91,14 @@ describe('Button', () => {
     expect(invalidType).toThrow(Error);
   });
 
+  it('should render button text from slot without text prop', () => {
+    const slotOnlyWrapper = createWrapper(
+      { text: '' },
+      { default: 'Slot only' },
+    );
+    expect(slotOnlyWrapper.text()).toContain('Slot only');
+  });
+
   it('should render filled icons when iconsFilled prop is true', async () => {
     const wrapper = createWrapper({
       iconLeft: 'search-1',
