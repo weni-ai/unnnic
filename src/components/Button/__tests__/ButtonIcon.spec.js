@@ -46,7 +46,11 @@ describe('ButtonIcon', () => {
     expect(wrapper.classes()).toContain('small');
   });
 
-  it('throws when size prop is invalid', () => {
-    expect(() => mountButtonIcon({ size: 'invalid' })).toThrow();
+  it('rejects invalid size prop in validator', () => {
+    const { validator } = ButtonIcon.props.size;
+
+    expect(validator('large')).toBe(true);
+    expect(validator('small')).toBe(true);
+    expect(validator('invalid')).toBe(false);
   });
 });
