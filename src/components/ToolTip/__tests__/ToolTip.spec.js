@@ -441,7 +441,9 @@ describe('ToolTip', () => {
         text: 'Text',
       });
 
-      const content = defaultWidthWrapper.find('[data-testid="tooltip-content"]');
+      const content = defaultWidthWrapper.find(
+        '[data-testid="tooltip-content"]',
+      );
       expect(content.attributes('style')).toContain('max-width: 320px');
       defaultWidthWrapper.unmount();
     });
