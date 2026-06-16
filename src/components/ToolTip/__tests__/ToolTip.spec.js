@@ -9,7 +9,7 @@ globalThis.ResizeObserver = vi.fn().mockImplementation(() => ({
   disconnect: vi.fn(),
 }));
 
-const createWrapper = (props = {}, slots = {}) => {
+const createWrapper = (props = {}, slots = {}, options = {}) => {
   return mount(ToolTip, {
     props,
     slots: {
@@ -20,10 +20,40 @@ const createWrapper = (props = {}, slots = {}) => {
     global: {
       stubs: {
         teleport: true,
+        ...options.stubs,
       },
     },
   });
 };
+
+const createOpenWrapper = (props = {}, slots = {}) =>
+  mount(ToolTip, {
+    props: {
+      forceOpen: true,
+      enabled: true,
+      ...props,
+    },
+    slots: {
+      default: '<button data-testid="trigger-button">Hover me</button>',
+      ...slots,
+    },
+    attachTo: document.body,
+    global: {
+      stubs: {
+        Tooltip: {
+          template: '<div data-testid="tooltip-wrapper"><slot /></div>',
+        },
+        TooltipTrigger: {
+          template: '<div data-testid="tooltip-trigger"><slot /></div>',
+        },
+        TooltipContent: {
+          props: ['side', 'style', 'class'],
+          template:
+            '<div data-testid="tooltip-content" :style="style"><slot /></div>',
+        },
+      },
+    },
+  });
 
 describe('ToolTip', () => {
   let wrapper;
@@ -365,6 +395,55 @@ describe('ToolTip', () => {
       expect(forceOpenWrapper.html()).toContain('unnnic-tooltip');
 
       forceOpenWrapper.unmount();
+    });
+  });
+
+  describe('Close button', () => {
+    it('emits click:close when close icon is clicked', async () => {
+      const closeWrapper = createOpenWrapper({
+        text: 'Text',
+        showClose: true,
+      });
+
+      await closeWrapper.find('.unnnic-tooltip__close').trigger('click');
+
+      expect(closeWrapper.emitted('click:close')).toBeTruthy();
+      closeWrapper.unmount();
+    });
+  });
+
+  describe('Content rendering with forceOpen', () => {
+    it('renders multiline text content', async () => {
+      const multilineWrapper = createOpenWrapper({
+        text: 'Line one\nLine two',
+      });
+
+      const content = multilineWrapper.find('[data-testid="tooltip-content"]');
+      expect(content.text()).toContain('Line one');
+      expect(content.text()).toContain('Line two');
+      multilineWrapper.unmount();
+    });
+
+    it('renders HTML content when enableHtml is true', async () => {
+      const htmlWrapper = createOpenWrapper({
+        text: '<strong>Bold</strong>',
+        enableHtml: true,
+      });
+
+      expect(
+        htmlWrapper.find('[data-testid="tooltip-html-content"]').exists(),
+      ).toBe(true);
+      htmlWrapper.unmount();
+    });
+
+    it('applies default maxWidth of 320px when not provided', async () => {
+      const defaultWidthWrapper = createOpenWrapper({
+        text: 'Text',
+      });
+
+      const content = defaultWidthWrapper.find('[data-testid="tooltip-content"]');
+      expect(content.attributes('style')).toContain('max-width: 320px');
+      defaultWidthWrapper.unmount();
     });
   });
 });
