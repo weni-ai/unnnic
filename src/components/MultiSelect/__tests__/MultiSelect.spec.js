@@ -15,10 +15,13 @@ describe('UnnnicMultiSelect.vue', () => {
     modelValue: [],
   };
 
-  const mountWrapper = (props = {}, slots = {}) => {
+  const mountWrapper = (props = {}, slots = {}, options = {}) => {
     return mount(UnnnicMultiSelect, {
+      attachTo: document.body,
+      ...options,
       global: {
         plugins: [i18n],
+        ...(options.global || {}),
       },
       props: {
         ...defaultProps,
@@ -555,6 +558,23 @@ describe('UnnnicMultiSelect.vue', () => {
   });
 
   describe('keyboard navigation', () => {
+    test('closes popover through keyboard close callback', async () => {
+      wrapper.vm.setOpenPopover(true);
+      await flushPromises();
+      await flushPromises();
+
+      document.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }),
+      );
+      await flushPromises();
+      document.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'Enter', bubbles: true }),
+      );
+      await flushPromises();
+
+      expect(wrapper.emitted('update:modelValue')).toBeTruthy();
+    });
+
     test('ignores disabled options on Enter key', async () => {
       await wrapper.setProps({
         options: [
