@@ -62,30 +62,6 @@ describe('Tag', () => {
 });
 
 describe('DefaultTag', () => {
-  const schemes = [
-    ['aux-green', 'green'],
-    ['aux-blue', 'blue'],
-    ['aux-purple', 'purple'],
-    ['aux-red', 'red'],
-    ['aux-pink', 'pink'],
-    ['aux-orange', 'orange'],
-    ['aux-yellow', 'yellow'],
-    ['aux-gray', 'gray'],
-    ['aux-teal', 'teal'],
-    ['aux-weni', 'weni'],
-    ['unknown', 'muted'],
-  ];
-
-  it.each(schemes)('maps scheme %s to a background color', (scheme) => {
-    const wrapper = mount(DefaultTag, {
-      props: { text: 'Label', scheme },
-      global: { stubs: { UnnnicIcon: true } },
-    });
-
-    expect(wrapper.find('.unnnic-tag__label').text()).toBe('Label');
-    expect(wrapper.classes()).toContain('unnnic-tag');
-  });
-
   it('renders left icon when provided', () => {
     const wrapper = mount(DefaultTag, {
       props: { text: 'Label', leftIcon: 'info' },

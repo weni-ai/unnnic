@@ -1,5 +1,8 @@
 <template>
-  <section :class="`unnnic-tag unnnic-tag--${size}`">
+  <section
+    :class="`unnnic-tag unnnic-tag--${size}`"
+    :style="{ backgroundColor: color }"
+  >
     <section
       v-if="leftIcon"
       class="unnnic-tag__icon"
@@ -61,8 +64,6 @@ const color = computed(() => {
   border-radius: $unnnic-border-radius-pill;
   padding: calc($unnnic-space-1 * 1.5) $unnnic-space-3;
   width: fit-content;
-
-  background-color: v-bind(color);
 
   &--small {
     padding: calc($unnnic-space-1 * 0.5) $unnnic-space-3;
