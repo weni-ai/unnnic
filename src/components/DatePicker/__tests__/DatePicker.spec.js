@@ -24,6 +24,11 @@ const findFirstSelectableDay = (wrapper) =>
     .findAll('[data-testid="date-picker-day"]')
     .find((day) => day.classes().includes('selectable'));
 
+const findSelectableDays = (wrapper) =>
+  wrapper
+    .findAll('[data-testid="date-picker-day"]')
+    .filter((day) => day.classes().includes('selectable'));
+
 describe('DatePicker.vue', () => {
   let wrapper;
 
@@ -468,32 +473,66 @@ describe('DatePicker.vue', () => {
     );
   });
 
-  it('adjusts start date when selecting a day closer to range start', async () => {
-    const days = wrapper
-      .findAll('[data-testid="date-picker-day"]')
-      .filter((day) => day.classes().includes('selectable'));
+  it('applies column-reverse layout when hideOptions is true', () => {
+    wrapper = factory({
+      hideOptions: true,
+      size: 'large',
+      options: [{ name: 'Last 7 days', id: 'last-7-days' }],
+    });
 
-    await days[2].trigger('click');
-    await days[8].trigger('click');
-    const middleDay = days[4];
-    await middleDay.trigger('click');
-
-    expect(wrapper.vm.startDate).toBeTruthy();
-    expect(wrapper.vm.endDate).toBeTruthy();
+    expect(wrapper.find('[data-testid="date-picker-options"]').exists()).toBe(
+      true,
+    );
   });
 
-  it('adjusts end date when selecting a day closer to range end', async () => {
-    const days = wrapper
-      .findAll('[data-testid="date-picker-day"]')
-      .filter((day) => day.classes().includes('selectable'));
+  it('highlights year range with only start year selected', async () => {
+    wrapper = factory({ type: 'year' });
+    wrapper.vm.startDate = wrapper.vm.referenceDate;
+    wrapper.vm.endDate = '';
+    await wrapper.vm.$nextTick();
+
+    const highlighted = wrapper
+      .findAll('[data-testid="date-picker-year-cell"]')
+      .filter((cell) => cell.classes().includes('highlighted'));
+
+    expect(highlighted.length).toBeGreaterThan(0);
+  });
+
+  it('highlights year range with only end year selected', async () => {
+    wrapper = factory({ type: 'year' });
+    wrapper.vm.startDate = '';
+    wrapper.vm.endDate = wrapper.vm.referenceDate;
+    await wrapper.vm.$nextTick();
+
+    const highlighted = wrapper
+      .findAll('[data-testid="date-picker-year-cell"]')
+      .filter((cell) => cell.classes().includes('highlighted'));
+
+    expect(highlighted.length).toBeGreaterThan(0);
+  });
+
+  it('moves range start when selecting an interior day closer to start', async () => {
+    const days = findSelectableDays(wrapper);
 
     await days[2].trigger('click');
     await days[10].trigger('click');
-    const nearEndDay = days[9];
-    await nearEndDay.trigger('click');
+    await days[4].trigger('click');
 
     expect(wrapper.vm.startDate).toBeTruthy();
     expect(wrapper.vm.endDate).toBeTruthy();
+    expect(wrapper.emitted('change')).toBeTruthy();
+  });
+
+  it('moves range end when selecting an interior day closer to end', async () => {
+    const days = findSelectableDays(wrapper);
+
+    await days[2].trigger('click');
+    await days[10].trigger('click');
+    await days[9].trigger('click');
+
+    expect(wrapper.vm.startDate).toBeTruthy();
+    expect(wrapper.vm.endDate).toBeTruthy();
+    expect(wrapper.emitted('change')).toBeTruthy();
   });
 
   it('highlights month range with only start month selected', async () => {
