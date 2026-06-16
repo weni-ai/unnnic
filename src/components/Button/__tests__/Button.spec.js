@@ -91,6 +91,17 @@ describe('Button', () => {
     expect(invalidType).toThrow(Error);
   });
 
+  it('should count slot content as text for icon spacing', () => {
+    const slotWrapper = createWrapper(
+      { iconLeft: 'search-1', text: '' },
+      { default: 'Label' },
+    );
+
+    expect(slotWrapper.find('[data-testid="icon-left"]').classes()).toContain(
+      'unnnic-button__icon-left',
+    );
+  });
+
   it('should render button text from slot without text prop', () => {
     const slotOnlyWrapper = createWrapper(
       { text: '' },
