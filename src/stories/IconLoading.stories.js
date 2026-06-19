@@ -55,3 +55,9 @@ export const CustomSize = {
     size: '64px',
   },
 };
+
+export const CustomStrokeWidth = {
+  args: {
+    strokeWidth: 3,
+  },
+};
