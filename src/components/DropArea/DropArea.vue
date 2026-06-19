@@ -72,7 +72,6 @@ import UnnnicIcon from '../Icon.vue';
 const isDragging = ref(false);
 const hasError = ref(false);
 const dragEnterCounter = ref(0);
-const file = ref();
 const fileRef = useTemplateRef('file');
 
 const props = defineProps({
@@ -195,7 +194,7 @@ function handleFileChange(event) {
     addFiles(files);
   }
 
-  file.value.value = '';
+  fileRef.value.value = '';
 }
 
 function setErrorState() {
