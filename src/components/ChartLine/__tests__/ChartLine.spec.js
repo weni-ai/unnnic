@@ -128,7 +128,7 @@ describe('ChartLine', () => {
   it('clears width interval on unmount', () => {
     const wrapper = mountChart();
     const intervalId = wrapper.vm.chartContainerWidthInterval;
-    const clearSpy = vi.spyOn(global, 'clearInterval');
+    const clearSpy = vi.spyOn(globalThis, 'clearInterval');
 
     wrapper.unmount();
 
@@ -138,7 +138,7 @@ describe('ChartLine', () => {
   it('clears width interval on unmount even when interval is unset', () => {
     const wrapper = mountChart();
     wrapper.vm.chartContainerWidthInterval = null;
-    const clearSpy = vi.spyOn(global, 'clearInterval');
+    const clearSpy = vi.spyOn(globalThis, 'clearInterval');
 
     wrapper.unmount();
 
