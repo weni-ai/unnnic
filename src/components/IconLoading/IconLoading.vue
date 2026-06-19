@@ -53,7 +53,6 @@ const props = defineProps({
 defineOptions({ name: 'UnnnicIconLoading' });
 
 const sizeInPixels = computed(() => SIZE_MAP[props.size] ?? props.size);
-const strokeWidth = computed(() => props.strokeWidth);
 </script>
 
 <style lang="scss" scoped>
