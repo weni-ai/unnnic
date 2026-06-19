@@ -1,4 +1,5 @@
 import UnnnicDisclaimer from '../components/Disclaimer/Disclaimer.vue';
+import UnnnicIconLoading from '../components/IconLoading/IconLoading.vue';
 
 export default {
   title: 'Feedback/Disclaimer',
@@ -74,4 +75,19 @@ const TemplateWithDescriptionSlot = (args) => ({
 export const WithDescriptionSlot = TemplateWithDescriptionSlot.bind({});
 WithDescriptionSlot.args = {
   ...Default.args,
+};
+
+const TemplateWithCustomIcon = (args) => ({
+  components: { UnnnicDisclaimer, UnnnicIconLoading },
+  setup() {
+    return { args };
+  },
+  template:
+    '<UnnnicDisclaimer v-bind="args"><template #icon><UnnnicIconLoading size="sm" scheme="fg-emphasized" stroke-width="3" /></template></UnnnicDisclaimer>',
+});
+
+export const WithCustomIcon = TemplateWithCustomIcon.bind({});
+WithCustomIcon.args = {
+  text: '',
+  description: 'Analysis in progress · 381 of 437 items processed.',
 };
