@@ -3,13 +3,15 @@
     :class="['unnnic-disclaimer', `unnnic-disclaimer--${type}`]"
     data-testid="disclaimer"
   >
-    <UnnnicIcon
-      class="unnnic-disclaimer__icon"
-      size="ant"
-      :icon="variant.icon"
-      :scheme="variant.scheme"
-      data-testid="disclaimer-icon"
-    />
+    <slot name="icon">
+      <UnnnicIcon
+        class="unnnic-disclaimer__icon"
+        size="ant"
+        :icon="variant.icon"
+        :scheme="variant.scheme"
+        data-testid="disclaimer-icon"
+      />
+    </slot>
 
     <section class="unnnic-disclaimer__content">
       <p
@@ -57,7 +59,7 @@ const slots = useSlots();
 const hasDescription = computed(() => {
   return (
     Boolean(props.description) ||
-    (slots.description && slots.description().length > 0)
+    (slots.description && slots.description({}).length > 0)
   );
 });
 
