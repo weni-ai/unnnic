@@ -9,7 +9,7 @@
           size="sm"
           :scheme="hasPrev ? 'fg-emphasized' : 'fg-muted'"
           clickable
-          @click="previous()"
+          @click="handlePrevious"
         />
       </div>
       <span
@@ -51,7 +51,7 @@
           size="sm"
           :scheme="hasNext ? 'fg-emphasized' : 'fg-muted'"
           clickable
-          @click="next()"
+          @click="handleNext"
         />
       </div>
     </div>
@@ -91,6 +91,12 @@ export default {
     this.slides = this.tagItems;
   },
   methods: {
+    handleNext() {
+      this.next();
+    },
+    handlePrevious() {
+      this.previous();
+    },
     save(tagItem) {
       let valueLocal = this.modelValue;
       if (this.checkIsInclude(tagItem)) {
