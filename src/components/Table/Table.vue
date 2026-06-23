@@ -1,6 +1,10 @@
 <template>
+  <UiTable v-if="version === '2'">
+    <slot />
+  </UiTable>
+
   <div
-    v-show="true"
+    v-else
     class="unnnic-table"
   >
     <div class="header">
@@ -28,14 +32,29 @@
 </template>
 
 <script>
+import { computed } from 'vue';
+import { Table as UiTable } from '@/components/ui/table';
+
 export default {
   name: 'UnnnicTable',
 
-  components: {},
+  components: {
+    UiTable,
+  },
+
+  provide() {
+    return {
+      unnnicTableVersion: computed(() => this.version),
+    };
+  },
 
   props: {
     items: {
       type: Array,
+    },
+    version: {
+      type: String,
+      default: '1',
     },
   },
 

@@ -10,6 +10,7 @@ import sidebar from './Sidebar/index.vue';
 import sidebarItem from './Sidebar/SidebarItem.vue';
 import table from './Table/Table.vue';
 import tableRow from './Table/TableRow.vue';
+import { TableBody, TableCell, TableHead, TableHeader } from './ui/table';
 import dropdown from './Dropdown/Dropdown.vue';
 import dropdownItem from './Dropdown/DropdownItem.vue';
 import avatarIcon from './AvatarIcon/AvatarIcon.vue';
@@ -138,6 +139,10 @@ export const components: ComponentsMap = {
   unnnicSidebarItem: sidebarItem,
   unnnicTable: table,
   unnnicTableRow: tableRow,
+  unnnicTableBody: TableBody,
+  unnnicTableCell: TableCell,
+  unnnicTableHead: TableHead,
+  unnnicTableHeader: TableHeader,
   unnnicAvatarIcon: avatarIcon,
   unnnicIcon: icon,
   unnnicIconSvg: icon,
@@ -261,6 +266,10 @@ export const unnnicSidebar = sidebar;
 export const unnnicSidebarItem = sidebarItem;
 export const unnnicTable = table;
 export const unnnicTableRow = tableRow;
+export const unnnicTableBody = TableBody;
+export const unnnicTableCell = TableCell;
+export const unnnicTableHead = TableHead;
+export const unnnicTableHeader = TableHeader;
 export const unnnicDropdown = dropdown as VueComponent;
 export const unnnicDropdownItem = dropdownItem;
 export const unnnicAvatarIcon = avatarIcon;
@@ -383,6 +392,10 @@ export const UnnnicSidebar = sidebar;
 export const UnnnicSidebarItem = sidebarItem;
 export const UnnnicTable = table;
 export const UnnnicTableRow = tableRow;
+export const UnnnicTableBody = TableBody;
+export const UnnnicTableCell = TableCell;
+export const UnnnicTableHead = TableHead;
+export const UnnnicTableHeader = TableHeader;
 export const UnnnicDropdown = dropdown as VueComponent;
 export const UnnnicDropdownItem = dropdownItem;
 export const UnnnicAvatarIcon = avatarIcon;
