@@ -57,11 +57,30 @@ describe('TextArea.vue', () => {
     expect(wrapper.emitted('update:modelValue')[0]).toEqual(['new text']);
   });
 
+  test('applies resize none class binding', async () => {
+    await wrapper.setProps({ resize: 'none' });
+    expect(wrapper.find('textarea').exists()).toBe(true);
+  });
+
+  test('returns empty error string for non-string non-array errors', async () => {
+    await wrapper.setProps({ type: 'error', errors: null });
+    expect(
+      wrapper.findComponent({ name: 'UnnnicFormElement' }).props('error'),
+    ).toBe('');
+  });
+
   test('displays errors when type is error', async () => {
     await wrapper.setProps({ type: 'error', errors: ['Error 1', 'Error 2'] });
     expect(
       wrapper.findComponent({ name: 'UnnnicFormElement' }).props('error'),
     ).toBe('Error 1, Error 2');
+  });
+
+  test('displays string error when errors is a string', async () => {
+    await wrapper.setProps({ type: 'error', errors: 'Single error' });
+    expect(
+      wrapper.findComponent({ name: 'UnnnicFormElement' }).props('error'),
+    ).toBe('Single error');
   });
 
   test('applies disabled class and disables textarea when disabled is true', async () => {

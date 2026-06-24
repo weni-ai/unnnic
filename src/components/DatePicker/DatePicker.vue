@@ -198,6 +198,7 @@
     <div
       v-if="size !== 'small'"
       class="options-container"
+      :style="{ flexDirection: containerOptionsFlexDirection }"
       data-testid="date-picker-options"
     >
       <div

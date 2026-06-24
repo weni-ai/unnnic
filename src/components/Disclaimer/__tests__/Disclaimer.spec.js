@@ -14,6 +14,22 @@ const mountComponent = (props = {}, slots = {}) =>
   });
 
 describe('Disclaimer', () => {
+  it('renders title when provided', () => {
+    const wrapper = mountComponent({ title: 'Disclaimer title' });
+
+    expect(wrapper.find('[data-testid="disclaimer-title"]').text()).toBe(
+      'Disclaimer title',
+    );
+  });
+
+  it('uses explicit type when legacy icon props are absent', () => {
+    const wrapper = mountComponent({ type: 'success', title: 'Success' });
+
+    expect(
+      wrapper.findComponent('[data-testid="disclaimer-icon"]').props('icon'),
+    ).toBe('check_circle');
+  });
+
   it('hides title when no title is provided', () => {
     const wrapper = mountComponent({ title: '' });
 

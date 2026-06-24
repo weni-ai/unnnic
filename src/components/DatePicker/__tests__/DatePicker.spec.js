@@ -24,6 +24,11 @@ const findFirstSelectableDay = (wrapper) =>
     .findAll('[data-testid="date-picker-day"]')
     .find((day) => day.classes().includes('selectable'));
 
+const findSelectableDays = (wrapper) =>
+  wrapper
+    .findAll('[data-testid="date-picker-day"]')
+    .filter((day) => day.classes().includes('selectable'));
+
 describe('DatePicker.vue', () => {
   let wrapper;
 
@@ -223,5 +228,364 @@ describe('DatePicker.vue', () => {
     );
 
     expect(hasOutOfRange).toBe(true);
+  });
+
+  it('selects range when start and end differ and a new date is clicked', async () => {
+    const first = findFirstSelectableDay(wrapper);
+    const days = wrapper
+      .findAll('[data-testid="date-picker-day"]')
+      .filter((day) => day.classes().includes('selectable'));
+
+    await first.trigger('click');
+    await days[5].trigger('click');
+    await days[10].trigger('click');
+
+    expect(wrapper.vm.startDate).toBeTruthy();
+    expect(wrapper.vm.endDate).toBe(wrapper.vm.startDate);
+  });
+
+  it('extends end date when selecting a later day from a single-day range', async () => {
+    const days = wrapper
+      .findAll('[data-testid="date-picker-day"]')
+      .filter((day) => day.classes().includes('selectable'));
+
+    await days[0].trigger('click');
+    await days[4].trigger('click');
+
+    expect(wrapper.vm.endDate).not.toBe(wrapper.vm.startDate);
+  });
+
+  it('moves start date when selecting an earlier day from a single-day range', async () => {
+    const days = wrapper
+      .findAll('[data-testid="date-picker-day"]')
+      .filter((day) => day.classes().includes('selectable'));
+
+    await days[10].trigger('click');
+    const earlierDay = days[2];
+    await earlierDay.trigger('click');
+
+    expect(wrapper.vm.startDate).toBeTruthy();
+    expect(wrapper.vm.startDate).toContain(String(earlierDay.text()));
+  });
+
+  it('resets range when clicking the same selected day twice', async () => {
+    const day = findFirstSelectableDay(wrapper);
+    const dayText = day.text();
+
+    await day.trigger('click');
+    await day.trigger('click');
+
+    expect(wrapper.vm.startDate).toContain(dayText);
+    expect(wrapper.vm.endDate).toBe(wrapper.vm.startDate);
+  });
+
+  it('computes last-N-months period correctly', () => {
+    wrapper = factory({
+      periodBaseDate: '2025-06-15',
+      options: [{ name: 'Last 3 months', id: 'last-3-months' }],
+    });
+
+    const { startDate, endDate } =
+      wrapper.vm.getStartAndEndDateByPeriod('last-3-months');
+
+    expect(startDate).toBeTruthy();
+    expect(endDate).toBeTruthy();
+  });
+
+  it('computes current-month period correctly', () => {
+    wrapper = factory({
+      periodBaseDate: '2025-06-15',
+      options: [{ name: 'Current month', id: 'current-month' }],
+    });
+
+    const { startDate, endDate } =
+      wrapper.vm.getStartAndEndDateByPeriod('current-month');
+
+    expect(startDate).toContain('1 2025');
+    expect(endDate).toContain('15 2025');
+  });
+
+  it('parses non-ISO periodBaseDate format', () => {
+    wrapper = factory({
+      periodBaseDate: 'June 15, 2025',
+      options: [{ name: 'Last 7 days', id: 'last-7-days' }],
+    });
+
+    const { startDate, endDate } =
+      wrapper.vm.getStartAndEndDateByPeriod('last-7-days');
+
+    expect(startDate).toBeTruthy();
+    expect(endDate).toBeTruthy();
+  });
+
+  it('falls back to current date for invalid periodBaseDate', () => {
+    wrapper = factory({
+      periodBaseDate: 'invalid-date',
+      options: [{ name: 'Last 7 days', id: 'last-7-days' }],
+    });
+
+    const { startDate, endDate } =
+      wrapper.vm.getStartAndEndDateByPeriod('last-7-days');
+
+    expect(startDate).toBeTruthy();
+    expect(endDate).toBeTruthy();
+  });
+
+  it('uses i18n pluralization with three forms', () => {
+    wrapper = factory({
+      translations: {
+        items: {
+          en: 'one|few|many',
+        },
+      },
+    });
+
+    expect(wrapper.vm.i18n('items', 0)).toBe('one');
+    expect(wrapper.vm.i18n('items', 1)).toBe('few');
+    expect(wrapper.vm.i18n('items', 2)).toBe('many');
+  });
+
+  it('uses i18n pluralization with two forms', () => {
+    wrapper = factory({
+      translations: {
+        items: {
+          en: 'singular|plural',
+        },
+      },
+    });
+
+    expect(wrapper.vm.i18n('items', 1)).toBe('singular');
+    expect(wrapper.vm.i18n('items', 2)).toBe('plural');
+  });
+
+  it('replaces variables in i18n text', () => {
+    wrapper = factory({
+      translations: {
+        greeting: {
+          en: 'Hello {name}',
+        },
+      },
+    });
+
+    expect(wrapper.vm.i18n('greeting', { name: 'Weni' })).toBe('Hello Weni');
+  });
+
+  it('renders popover variant class', () => {
+    wrapper = factory({ variant: 'popover' });
+    expect(wrapper.classes()).toContain('unnnic-date-picker--popover');
+  });
+
+  it('hides preset options when hideOptions is true', () => {
+    wrapper = factory({
+      hideOptions: true,
+      options: [{ name: 'Last 7 days', id: 'last-7-days' }],
+    });
+
+    expect(wrapper.find('[data-testid="date-picker-option"]').exists()).toBe(
+      false,
+    );
+    expect(wrapper.find('[data-testid="date-picker-options"]').exists()).toBe(
+      true,
+    );
+  });
+
+  it('navigates month view with navigation buttons', async () => {
+    wrapper = factory({
+      type: 'month',
+      options: [{ name: 'Last 12 months', id: 'last-12-months' }],
+    });
+
+    const initialReference = wrapper.vm.referenceDate;
+    await wrapper
+      .find('[data-testid="date-picker-month-nav-right"]')
+      .trigger('click');
+
+    expect(wrapper.vm.referenceDate).not.toBe(initialReference);
+  });
+
+  it('navigates year view with navigation buttons', async () => {
+    wrapper = factory({
+      type: 'year',
+      options: [{ name: 'Previous year', id: 'previous-year' }],
+    });
+
+    const initialReference = wrapper.vm.referenceDate;
+    await wrapper
+      .find('[data-testid="date-picker-year-nav-left"]')
+      .trigger('click');
+
+    expect(wrapper.vm.referenceDate).not.toBe(initialReference);
+  });
+
+  it('updates equivalent option name on submit for matched period', async () => {
+    await wrapper.vm.autoSelect('last-7-days');
+    await wrapper.find('[data-testid="date-picker-submit"]').trigger('click');
+
+    expect(wrapper.emitted('update:equivalentOption')[0][0]).toBe(
+      'Last 7 days',
+    );
+  });
+
+  it('marks custom selection when dates do not match a preset', async () => {
+    const day = findFirstSelectableDay(wrapper);
+    await day.trigger('click');
+
+    expect(wrapper.vm.optionSelected).toBe('custom');
+  });
+
+  it('does nothing when clicking a custom preset option', async () => {
+    wrapper = factory({
+      options: [
+        { name: 'Last 7 days', id: 'last-7-days' },
+        { name: 'Custom', id: 'custom' },
+      ],
+    });
+
+    const customOption = wrapper
+      .findAll('[data-testid="date-picker-option"]')
+      .find((option) => option.text() === 'Custom');
+
+    await customOption.trigger('click');
+    expect(wrapper.vm.optionSelected).not.toBe('last-7-days');
+  });
+
+  it('highlights dates when only start date is set', async () => {
+    wrapper = factory();
+    wrapper.vm.startDate = wrapper.vm.referenceDate;
+    wrapper.vm.endDate = '';
+    await wrapper.vm.$nextTick();
+
+    const dates = wrapper.vm.getDatesOfTheMonth(wrapper.vm.referenceDate);
+    expect(dates.some((date) => date.properties.includes('highlighted'))).toBe(
+      true,
+    );
+  });
+
+  it('highlights dates when only end date is set', async () => {
+    wrapper = factory();
+    wrapper.vm.startDate = '';
+    wrapper.vm.endDate = wrapper.vm.referenceDate;
+    await wrapper.vm.$nextTick();
+
+    const dates = wrapper.vm.getDatesOfTheMonth(wrapper.vm.referenceDate);
+    expect(dates.some((date) => date.properties.includes('highlighted'))).toBe(
+      true,
+    );
+  });
+
+  it('applies column-reverse layout when hideOptions is true', () => {
+    wrapper = factory({
+      hideOptions: true,
+      size: 'large',
+      options: [{ name: 'Last 7 days', id: 'last-7-days' }],
+    });
+
+    expect(wrapper.find('[data-testid="date-picker-options"]').exists()).toBe(
+      true,
+    );
+  });
+
+  it('highlights year range with only start year selected', async () => {
+    wrapper = factory({ type: 'year' });
+    wrapper.vm.startDate = wrapper.vm.referenceDate;
+    wrapper.vm.endDate = '';
+    await wrapper.vm.$nextTick();
+
+    const highlighted = wrapper
+      .findAll('[data-testid="date-picker-year-cell"]')
+      .filter((cell) => cell.classes().includes('highlighted'));
+
+    expect(highlighted.length).toBeGreaterThan(0);
+  });
+
+  it('highlights year range with only end year selected', async () => {
+    wrapper = factory({ type: 'year' });
+    wrapper.vm.startDate = '';
+    wrapper.vm.endDate = wrapper.vm.referenceDate;
+    await wrapper.vm.$nextTick();
+
+    const highlighted = wrapper
+      .findAll('[data-testid="date-picker-year-cell"]')
+      .filter((cell) => cell.classes().includes('highlighted'));
+
+    expect(highlighted.length).toBeGreaterThan(0);
+  });
+
+  it('moves range start when selecting an interior day closer to start', async () => {
+    const days = findSelectableDays(wrapper);
+
+    await days[2].trigger('click');
+    await days[10].trigger('click');
+    await days[4].trigger('click');
+
+    expect(wrapper.vm.startDate).toBeTruthy();
+    expect(wrapper.vm.endDate).toBeTruthy();
+    expect(wrapper.emitted('change')).toBeTruthy();
+  });
+
+  it('moves range end when selecting an interior day closer to end', async () => {
+    const days = findSelectableDays(wrapper);
+
+    await days[2].trigger('click');
+    await days[10].trigger('click');
+    await days[9].trigger('click');
+
+    expect(wrapper.vm.startDate).toBeTruthy();
+    expect(wrapper.vm.endDate).toBeTruthy();
+    expect(wrapper.emitted('change')).toBeTruthy();
+  });
+
+  it('highlights month range with only start month selected', async () => {
+    wrapper = factory({ type: 'month' });
+    wrapper.vm.startDate = '3 1 2026';
+    wrapper.vm.endDate = '';
+    await wrapper.vm.$nextTick();
+
+    const highlighted = wrapper
+      .findAll('[data-testid="date-picker-month-cell"]')
+      .filter((cell) => cell.classes().includes('highlighted'));
+
+    expect(highlighted.length).toBeGreaterThan(0);
+  });
+
+  it('highlights month range with only end month selected', async () => {
+    wrapper = factory({ type: 'month' });
+    wrapper.vm.startDate = '';
+    wrapper.vm.endDate = '6 1 2026';
+    await wrapper.vm.$nextTick();
+
+    const highlighted = wrapper
+      .findAll('[data-testid="date-picker-month-cell"]')
+      .filter((cell) => cell.classes().includes('highlighted'));
+
+    expect(highlighted.length).toBeGreaterThan(0);
+  });
+
+  it('navigates month view to previous year', async () => {
+    wrapper = factory({
+      type: 'month',
+      options: [{ name: 'Last 12 months', id: 'last-12-months' }],
+    });
+
+    const initialReference = wrapper.vm.referenceDate;
+    await wrapper
+      .find('[data-testid="date-picker-month-nav-left"]')
+      .trigger('click');
+
+    expect(wrapper.vm.referenceDate).not.toBe(initialReference);
+  });
+
+  it('navigates year view to next range', async () => {
+    wrapper = factory({
+      type: 'year',
+      options: [{ name: 'Previous year', id: 'previous-year' }],
+    });
+
+    const initialReference = wrapper.vm.referenceDate;
+    await wrapper
+      .find('[data-testid="date-picker-year-nav-right"]')
+      .trigger('click');
+
+    expect(wrapper.vm.referenceDate).not.toBe(initialReference);
   });
 });
