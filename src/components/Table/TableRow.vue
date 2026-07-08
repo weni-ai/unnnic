@@ -1,5 +1,16 @@
 <template>
-  <div class="table-row">
+  <UiTableRow
+    v-if="isVersion2"
+    v-bind="$attrs"
+  >
+    <slot />
+  </UiTableRow>
+
+  <div
+    v-else
+    class="table-row"
+    v-bind="$attrs"
+  >
     <template
       v-for="(header, index) in headers"
       :key="header.id"
@@ -26,8 +37,17 @@
 </template>
 
 <script>
+import { computed, inject, unref } from 'vue';
+import UiTableRow from '@/components/ui/table/TableRow.vue';
+
 export default {
   name: 'UnnnicTableRow',
+
+  components: {
+    UiTableRow,
+  },
+
+  inheritAttrs: false,
 
   props: {
     headers: {
@@ -35,8 +55,13 @@ export default {
     },
   },
 
-  data() {
-    return {};
+  setup() {
+    const tableVersion = inject('unnnicTableVersion', '1');
+    const isVersion2 = computed(() => unref(tableVersion) === '2');
+
+    return {
+      isVersion2,
+    };
   },
 };
 </script>

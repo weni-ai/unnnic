@@ -5,6 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.30.0 (2026-07-08)
+
+### Added
+
+- **UnnnicTable**: `version` prop (String, default `'1'`). When set to `'2'`, renders a semantic HTML table via the new composition API. Version `'1'` preserves the existing slot-based layout unchanged. Provides `unnnicTableVersion` via `provide` so child components can adapt.
+- **UnnnicTableRow**: When the parent table `version` is `'2'`, delegates rendering to the new `UiTableRow` primitive. Legacy header-driven row layout is preserved for version `'1'`.
+- **UnnnicTableBody**, **UnnnicTableCell**, **UnnnicTableHead**, **UnnnicTableHeader**: New table primitives (`<tbody>`, `<td>`, `<th>`, `<thead>`) with design-token styling. Registered in the plugin map and exported (`unnnicTableBody` / `UnnnicTableBody`, etc.).
+- **UiTable** (internal): Semantic `<table>` wrapper with overflow scrolling, border-collapse, and body typography tokens.
+- **UiTableRow** (internal): Row with bottom border, hover background (`bg-soft`), horizontal padding on first/last cells, and `cursor-pointer` when a `click` listener is bound.
+- **Storybook**: `Version2` story demonstrating the composition API with `TableHeader`, `TableBody`, `TableHead`, `TableCell`, tags, and clickable rows. `version` control added to argTypes.
+
 # 3.29.0 (2026-07-08)
 
 ### Added

@@ -2,11 +2,24 @@ import unnnicTable from '../components/Table/Table.vue';
 import unnnicTableRow from '../components/Table/TableRow.vue';
 import unnnicButton from '../components/Button/Button.vue';
 import unnnicCheckbox from '../components/Checkbox/Checkbox.vue';
+import {
+  TableHeader,
+  TableBody,
+  TableHead,
+  TableCell,
+} from '@/components/ui/table';
+import UnnnicTag from '@/components/Tag/Tag.vue';
+import { action } from 'storybook/actions';
 
 export default {
   title: 'example/Table',
   component: unnnicTable,
-  argTypes: {},
+  argTypes: {
+    version: {
+      control: { type: 'select' },
+      options: ['1', '2'],
+    },
+  },
 };
 
 const Template = (args, { argTypes }) => ({
@@ -21,6 +34,7 @@ const Template = (args, { argTypes }) => ({
     <div>
       <unnnic-table
         v-bind="$props"
+        version="1"
         :items="table.items"
         :style="{ maxHeight: '280px', maxWidth: '800px', }"
       >
@@ -142,4 +156,63 @@ const Template = (args, { argTypes }) => ({
 });
 
 export const Default = Template.bind({});
-Default.args = {};
+Default.args = {
+  version: '1',
+};
+
+export const Version2 = {
+  render: () => ({
+    components: {
+      unnnicTable,
+      unnnicTableRow,
+      TableHeader,
+      TableBody,
+      TableHead,
+      TableCell,
+      UnnnicTag,
+    },
+    setup() {
+      return {
+        onRowClick: action('click'),
+      };
+    },
+    template: `
+      <unnnic-table version="2">
+        <TableHeader>
+          <unnnic-table-row>
+            <TableHead>
+              Invoice
+            </TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Method</TableHead>
+            <TableHead>
+              Amount
+            </TableHead>
+          </unnnic-table-row>
+        </TableHeader>
+        <TableBody>
+          <unnnic-table-row>
+            <TableCell>
+              INV001
+            </TableCell>
+            <TableCell><UnnnicTag scheme="green" text="Paid" /></TableCell>
+            <TableCell>Credit Card</TableCell>
+            <TableCell>
+              $250.00
+            </TableCell>
+          </unnnic-table-row>
+          <unnnic-table-row @click="onRowClick">
+            <TableCell>
+              INV002
+            </TableCell>
+            <TableCell><UnnnicTag scheme="red" text="Pending" /></TableCell>
+            <TableCell>Bank Transfer</TableCell>
+            <TableCell>
+              $199.00
+            </TableCell>
+          </unnnic-table-row>
+        </TableBody>
+      </unnnic-table>
+    `,
+  }),
+};
