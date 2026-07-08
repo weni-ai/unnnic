@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.29.0 (2026-07-08)
+
+### Added
+
+- **UnnnicDisclaimer**: `#icon` scoped slot to render a custom icon in place of the default type-based `UnnnicIcon`. The built-in icon is preserved as the fallback when the slot is not provided.
+- **UnnnicIconLoading**: `strokeWidth` prop (Number, default `5`) to customize the SVG circle stroke width.
+- **Storybook**: `WithCustomIcon` story for Disclaimer demonstrating the `#icon` slot with `UnnnicIconLoading`; `CustomStrokeWidth` story for IconLoading.
+
+### Fixed
+
+- **UnnnicDisclaimer**: Description slot detection now invokes the slot function with an empty props object (`slots.description({})`), matching Vue 3 slot API usage.
+
+### Changed
+
+- **UnnnicIconLoading**: Spinner container now uses `align-items: center` for improved vertical alignment.
+
 # 3.28.1 (2026-06-05)
 
 ### Fixed
