@@ -44,6 +44,10 @@ const props = defineProps({
     type: String,
     default: 'lg',
   },
+  strokeWidth: {
+    type: Number,
+    default: 5,
+  },
 });
 
 defineOptions({ name: 'UnnnicIconLoading' });
@@ -79,6 +83,7 @@ const sizeInPixels = computed(() => SIZE_MAP[props.size] ?? props.size);
 
 .unnnic-icon-loading {
   display: inline-flex;
+  align-items: center;
   user-select: none;
 
   svg {
@@ -87,7 +92,7 @@ const sizeInPixels = computed(() => SIZE_MAP[props.size] ?? props.size);
     circle {
       fill: none;
       stroke: currentColor;
-      stroke-width: 5;
+      stroke-width: v-bind(strokeWidth);
       stroke-linecap: round;
       animation: unnnic-icon-loading-dash 1s ease-in-out infinite;
     }
