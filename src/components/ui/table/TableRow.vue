@@ -8,11 +8,15 @@ const props = defineProps<{
 }>();
 
 const attrs = useAttrs();
+
 const isClickable = computed(() => Boolean(attrs.onClick));
 </script>
 
 <template>
   <tr
+    :tabindex="isClickable ? 0 : undefined"
+    @keydown.enter="isClickable && $emit('click', $event)"
+    @keydown.space.prevent="isClickable && $emit('click', $event)"
     :class="
       cn(
         'unnnic-table-row',
@@ -24,6 +28,7 @@ const isClickable = computed(() => Boolean(attrs.onClick));
   >
     <slot />
   </tr>
+
 </template>
 
 <style lang="scss" scoped>
