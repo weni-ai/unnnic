@@ -42,13 +42,17 @@
           @change="emitSelectDate"
           @submit="changeDate"
         />
+
+        <UnnnicPopoverFooter v-if="hasFooterSlot">
+          <slot name="footer" />
+        </UnnnicPopoverFooter>
       </UnnnicPopoverContent>
     </UnnnicPopover>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, useSlots } from 'vue';
 import moment from 'moment';
 
 import UnnnicInput from '../Input/Input.vue';
@@ -56,12 +60,16 @@ import UnnnicDatePicker from '../DatePicker/DatePicker.vue';
 import {
   Popover as UnnnicPopover,
   PopoverContent as UnnnicPopoverContent,
+  PopoverFooter as UnnnicPopoverFooter,
   PopoverTrigger as UnnnicPopoverTrigger,
 } from '../ui/popover';
 
 defineOptions({
   name: 'UnnnicInputDatePicker',
 });
+
+const slots = useSlots();
+const hasFooterSlot = computed(() => Boolean(slots.footer));
 
 type DateRangeValue = {
   start: string | null;
