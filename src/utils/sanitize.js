@@ -12,16 +12,10 @@ export function escapeHtml(input) {
  * Sanitizes HTML by removing disallowed tags and unsafe attributes.
  * @param {string} input
  * @param {Array<string>} allowedTags - List of allowed HTML tags.
- * @param {number} maxLength - Maximum length of the sanitized string.
  * @returns {string}
  */
-export function sanitizeHtml(input, allowedTags = [], maxLength = 1000) {
+export function sanitizeHtml(input, allowedTags = []) {
   if (typeof input !== 'string') return '';
-
-  // Limits text length
-  if (input.length > maxLength) {
-    input = input.substring(0, maxLength);
-  }
 
   // Decodes HTML entities (&lt;, &gt;, &amp;)
   input = escapeHtml(input);
@@ -41,13 +35,12 @@ export function sanitizeHtml(input, allowedTags = [], maxLength = 1000) {
  *
  * @param {string} input
  * @param {Array<string>} allowedTags - List of allowed HTML tags.
- * @param {number} maxLength - Maximum length of the sanitized string.
  * @returns {string}
  */
-export function fullySanitize(input, allowedTags = [], maxLength = 1000) {
+export function fullySanitize(input, allowedTags = []) {
   if (typeof input !== 'string') return '';
 
-  let sanitizedInput = sanitizeHtml(input, allowedTags, maxLength);
+  let sanitizedInput = sanitizeHtml(input, allowedTags);
 
   return escapeHtml(sanitizedInput);
 }
@@ -56,10 +49,9 @@ export function fullySanitize(input, allowedTags = [], maxLength = 1000) {
  * Validates and sanitizes input text.
  * @param {string} input - The input string to validate.
  * @param {Array<string>} allowedTags - List of allowed HTML tags.
- * @param {number} maxLength - Maximum length of the sanitized string.
  * @returns {{ isValid: boolean, sanitized: string, errors: string[] }} - Validation result.
  */
-export function validateInput(input, allowedTags = [], maxLength = 1000) {
+export function validateInput(input, allowedTags = []) {
   const errors = [];
 
   if (typeof input !== 'string') {
@@ -67,12 +59,7 @@ export function validateInput(input, allowedTags = [], maxLength = 1000) {
     return { isValid: false, sanitized: '', errors };
   }
 
-  if (input.length > maxLength) {
-    errors.push(`Input exceeds the maximum length of ${maxLength} characters.`);
-    input = input.substring(0, maxLength);
-  }
-
-  const sanitized = fullySanitize(input, allowedTags, maxLength);
+  const sanitized = fullySanitize(input, allowedTags);
 
   if (sanitized !== input) {
     errors.push(
