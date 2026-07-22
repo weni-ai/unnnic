@@ -13,6 +13,7 @@ const isClickable = computed(() => Boolean(attrs.onClick));
 
 <template>
   <tr
+    :tabindex="isClickable ? 0 : undefined"
     :class="
       cn(
         'unnnic-table-row',
@@ -21,6 +22,8 @@ const isClickable = computed(() => Boolean(attrs.onClick));
         props.class,
       )
     "
+    @keydown.enter="isClickable && $emit('click', $event)"
+    @keydown.space.prevent="isClickable && $emit('click', $event)"
   >
     <slot />
   </tr>

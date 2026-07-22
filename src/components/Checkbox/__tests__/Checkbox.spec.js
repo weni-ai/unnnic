@@ -48,4 +48,18 @@ describe('Checkbox', () => {
     await checkbox.trigger('click');
     expect(wrapper.emitted('change')).eq(undefined);
   });
+
+  it('should render helper text', () => {
+    wrapper = createWrapper({ helper: 'Helper message' });
+    expect(wrapper.find('.unnnic-checkbox__helper').text()).toBe(
+      'Helper message',
+    );
+  });
+
+  it('should render label prop', () => {
+    wrapper = createWrapper({ label: 'Checkbox label' });
+    expect(wrapper.find('[data-testid="checkbox-text-right"]').text()).toBe(
+      'Checkbox label',
+    );
+  });
 });

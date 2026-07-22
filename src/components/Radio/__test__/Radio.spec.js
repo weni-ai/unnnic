@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { describe, test, expect, beforeEach, afterEach } from 'vitest';
 import Radio from '@/components/Radio/Radio.vue';
+import RadioGroup from '@/components/RadioGroup/RadioGroup.vue';
 import UnnnicIcon from '@/components/Icon.vue';
 
 describe('Radio.vue', () => {
@@ -43,7 +44,9 @@ describe('Radio.vue', () => {
 
   test('applies disabled class when disabled prop is true', async () => {
     await wrapper.setProps({ disabled: true });
-    expect(wrapper.find('.unnnic-radio__label').classes()).toContain('unnnic-radio__label--disabled');
+    expect(wrapper.find('.unnnic-radio__label').classes()).toContain(
+      'unnnic-radio__label--disabled',
+    );
   });
 
   test('icon changes based on valueName', async () => {
@@ -72,5 +75,71 @@ describe('Radio.vue', () => {
 
   test('matches the snapshot', () => {
     expect(wrapper.html()).toMatchSnapshot();
+  });
+
+  test('renders helper text when provided', async () => {
+    await wrapper.setProps({ helper: 'Radio helper' });
+    expect(wrapper.find('.unnnic-radio__helper').text()).toBe('Radio helper');
+  });
+
+  test('renders label prop', async () => {
+    await wrapper.setProps({ label: 'Radio label' });
+    expect(wrapper.find('.unnnic-radio__label').text()).toContain(
+      'Radio label',
+    );
+  });
+
+  test('uses name prop when radio is standalone', () => {
+    const standalone = mount(Radio, {
+      props: {
+        modelValue: '',
+        value: 'option1',
+        name: 'standalone-radio',
+      },
+      global: { components: { UnnnicIcon } },
+    });
+
+    expect(standalone.find('input').attributes('name')).toBe(
+      'standalone-radio',
+    );
+    standalone.unmount();
+  });
+
+  test('uses injected name when inside RadioGroup without name prop', () => {
+    const groupWrapper = mount(RadioGroup, {
+      props: { modelValue: '', name: 'group-name' },
+      slots: {
+        default: '<Radio value="option1" label="Option 1" />',
+      },
+      global: {
+        components: { Radio },
+        stubs: { UnnnicLabel: true },
+      },
+    });
+
+    expect(groupWrapper.find('input[type="radio"]').attributes('name')).toBe(
+      'group-name',
+    );
+    groupWrapper.unmount();
+  });
+
+  test('updates group context value when used inside RadioGroup', async () => {
+    const groupWrapper = mount(RadioGroup, {
+      props: { modelValue: '' },
+      slots: {
+        default: '<Radio value="option1" label="Option 1" />',
+      },
+      global: {
+        components: { Radio },
+        stubs: {
+          UnnnicLabel: true,
+        },
+      },
+    });
+
+    await groupWrapper.find('input[type="radio"]').trigger('change');
+
+    expect(groupWrapper.emitted('update:modelValue')[0]).toEqual(['option1']);
+    groupWrapper.unmount();
   });
 });

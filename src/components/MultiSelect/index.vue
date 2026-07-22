@@ -175,7 +175,7 @@ const keyboard = useSelectKeyboard<SelectOption>(
   },
   {
     closeOnSelect: false,
-    closePopover: () => (base.openPopover.value = false),
+    closePopover: () => setOpenPopover(false),
     openPopoverRef: base.openPopover,
   },
 );

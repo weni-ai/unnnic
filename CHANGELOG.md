@@ -5,6 +5,39 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.31.0 (2026-07-22)
+
+### Added
+
+- **InputDatePicker**: `#footer` slot rendered via `UnnnicPopoverFooter` when provided. The footer area is omitted when the slot is empty. Storybook story `WithFooter` added.
+
+# 3.30.0 (2026-07-08)
+
+### Added
+
+- **UnnnicTable**: `version` prop (String, default `'1'`). When set to `'2'`, renders a semantic HTML table via the new composition API. Version `'1'` preserves the existing slot-based layout unchanged. Provides `unnnicTableVersion` via `provide` so child components can adapt.
+- **UnnnicTableRow**: When the parent table `version` is `'2'`, delegates rendering to the new `UiTableRow` primitive. Legacy header-driven row layout is preserved for version `'1'`.
+- **UnnnicTableBody**, **UnnnicTableCell**, **UnnnicTableHead**, **UnnnicTableHeader**: New table primitives (`<tbody>`, `<td>`, `<th>`, `<thead>`) with design-token styling. Registered in the plugin map and exported (`unnnicTableBody` / `UnnnicTableBody`, etc.).
+- **UiTable** (internal): Semantic `<table>` wrapper with overflow scrolling, border-collapse, and body typography tokens.
+- **UiTableRow** (internal): Row with bottom border, hover background (`bg-soft`), horizontal padding on first/last cells, and `cursor-pointer` when a `click` listener is bound.
+- **Storybook**: `Version2` story demonstrating the composition API with `TableHeader`, `TableBody`, `TableHead`, `TableCell`, tags, and clickable rows. `version` control added to argTypes.
+
+# 3.29.0 (2026-07-08)
+
+### Added
+
+- **UnnnicDisclaimer**: `#icon` scoped slot to render a custom icon in place of the default type-based `UnnnicIcon`. The built-in icon is preserved as the fallback when the slot is not provided.
+- **UnnnicIconLoading**: `strokeWidth` prop (Number, default `5`) to customize the SVG circle stroke width.
+- **Storybook**: `WithCustomIcon` story for Disclaimer demonstrating the `#icon` slot with `UnnnicIconLoading`; `CustomStrokeWidth` story for IconLoading.
+
+### Fixed
+
+- **UnnnicDisclaimer**: Description slot detection now invokes the slot function with an empty props object (`slots.description({})`), matching Vue 3 slot API usage.
+
+### Changed
+
+- **UnnnicIconLoading**: Spinner container now uses `align-items: center` for improved vertical alignment.
+
 # 3.28.1 (2026-06-05)
 
 ### Fixed

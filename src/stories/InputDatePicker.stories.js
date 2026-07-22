@@ -1,4 +1,5 @@
 import UnnnicInputDatePicker from '../components/InputDatePicker/InputDatePicker.vue';
+import UnnnicDisclaimer from '../components/Disclaimer/Disclaimer.vue';
 import moment from 'moment';
 export default {
   title: 'Form/InputDatePicker',
@@ -102,4 +103,53 @@ export const WithDisableShowOverwrittenValue = {
     size: 'sm',
     disableShowOverwrittenValue: true,
   },
+};
+
+export const WithFooter = {
+  args: {
+    size: 'sm',
+    next: true,
+    iconPosition: 'right',
+    fillW: true,
+    maxDate: moment().format('YYYY-MM-DD'),
+    minDate: moment().subtract(89, 'days').format('YYYY-MM-DD'),
+    options: [
+      { name: 'Last 7 days', id: 'last-7-days' },
+      { name: 'Last 14 days', id: 'last-14-days' },
+      { name: 'Last 30 days', id: 'last-30-days' },
+      { name: 'Last 90 days', id: 'last-90-days' },
+      { name: 'Current month', id: 'current-month' },
+      { name: 'Custom', id: 'custom' },
+    ],
+  },
+  render: (args) => ({
+    components: {
+      UnnnicInputDatePicker,
+      UnnnicDisclaimer,
+    },
+    setup() {
+      return { args };
+    },
+    data() {
+      return {
+        dates: {
+          start: null,
+          end: null,
+        },
+      };
+    },
+    template: `
+      <div style="max-width: 200px">
+        <pre>v-model: {{ dates }}</pre>
+        <UnnnicInputDatePicker v-bind="args" v-model="dates">
+          <template #footer>
+            <UnnnicDisclaimer
+              type="neutral"
+              description="Conversations older than 90 days are archived and can't be shown. To access them, contact support."
+            />
+          </template>
+        </UnnnicInputDatePicker>
+      </div>
+    `,
+  }),
 };
