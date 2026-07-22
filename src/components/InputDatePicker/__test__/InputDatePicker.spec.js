@@ -3,7 +3,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import InputDatePicker from '../InputDatePicker.vue';
 
-const factory = (props = {}) =>
+const inlineSlot = { template: '<div><slot /></div>' };
+const portalStubs = {
+  PopoverPortal: inlineSlot,
+  PopoverContent: inlineSlot,
+};
+
+const factory = (props = {}, { slots = {}, stubs = {} } = {}) =>
   mount(InputDatePicker, {
     props: {
       modelValue: {
@@ -12,7 +18,11 @@ const factory = (props = {}) =>
       },
       ...props,
     },
+    slots,
     attachTo: document.body,
+    global: {
+      stubs,
+    },
   });
 
 describe('InputDatePicker.vue', () => {
@@ -162,5 +172,37 @@ describe('InputDatePicker.vue', () => {
     expect(rightWrapper.vm.popoverAlign).toBe('end');
 
     rightWrapper.unmount();
+  });
+
+  it('does not render PopoverFooter when the footer slot is empty', async () => {
+    wrapper.vm.isPopoverOpen = true;
+    await wrapper.vm.$nextTick();
+
+    expect(
+      wrapper.findComponent({ name: 'UnnnicPopoverFooter' }).exists(),
+    ).toBe(false);
+  });
+
+  it('renders the footer slot content inside PopoverFooter', async () => {
+    const withFooter = factory(
+      {},
+      {
+        slots: {
+          footer: '<p data-testid="custom-footer">Archive notice</p>',
+        },
+        stubs: portalStubs,
+      },
+    );
+
+    withFooter.vm.isPopoverOpen = true;
+    await withFooter.vm.$nextTick();
+
+    const footer = withFooter.findComponent({ name: 'UnnnicPopoverFooter' });
+    const customFooter = withFooter.find('[data-testid="custom-footer"]');
+
+    expect(footer.exists()).toBe(true);
+    expect(customFooter.text()).toBe('Archive notice');
+
+    withFooter.unmount();
   });
 });
