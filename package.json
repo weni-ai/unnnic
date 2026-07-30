@@ -3,9 +3,7 @@
   "version": "3.31.1-alpha.1",
   "type": "commonjs",
   "files": [
-    "dist",
-    "src",
-    "public"
+    "dist"
   ],
   "main": "./dist/unnnic.umd.js",
   "module": "./dist/unnnic.mjs",
@@ -22,7 +20,9 @@
       }
     },
     "./dist/style.css": "./dist/style.css",
-    "./src/assets/scss/unnnic.scss": "./src/assets/scss/unnnic.scss",
+    "./dist/scss/unnnic.scss": "./dist/scss/unnnic.scss",
+    "./scss/unnnic.scss": "./dist/scss/unnnic.scss",
+    "./src/assets/scss/unnnic.scss": "./dist/scss/unnnic.scss",
     "./tokens/colors": {
       "types": "./dist/tokens/colors.d.ts",
       "import": "./dist/tokens/colors.mjs"
@@ -51,8 +51,9 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npm run style-dictionary:generate",
-    "build:types": "vue-tsc && vite build && npm run style-dictionary:generate",
+    "build": "vite build && npm run style-dictionary:generate && npm run copy:scss",
+    "build:types": "vue-tsc && vite build && npm run style-dictionary:generate && npm run copy:scss",
+    "copy:scss": "node scripts/copy-scss.mjs",
     "preview": "vite preview",
     "lint": "eslint src/**/*.{js,vue,ts} --fix",
     "format": "prettier --write src/",

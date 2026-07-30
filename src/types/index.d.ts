@@ -36,7 +36,6 @@ export declare const unnnicTag: Component;
 export declare const unnnicTab: Component;
 export declare const unnnicAccordion: Component;
 export declare const unnnicCollapse: Component;
-export declare const unnnicCarousel: Component;
 export declare const unnnicSidebar: Component;
 export declare const unnnicDrawer: Component;
 export declare const unnnicProgressBar: Component;
