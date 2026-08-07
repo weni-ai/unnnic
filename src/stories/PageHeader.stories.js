@@ -3,7 +3,7 @@ import { action } from 'storybook/actions';
 import PageHeader from '../components/PageHeader/PageHeader.vue';
 import UnnnicButton from '../components/Button/Button.vue';
 import UnnnicTag from '../components/Tag/Tag.vue';
-import UnnnicSelectSmart from '../components/SelectSmart/SelectSmart.vue';
+import UnnnicSelect from '../components/Select/index.vue';
 import UnnnicIcon from '../components/Icon.vue';
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
@@ -193,7 +193,7 @@ export const WithSelect = {
   description="Description"
 >
   <template #actions>
-    <UnnnicSelectSmart />
+    <UnnnicSelect placeholder="Select" :options="options" />
   </template>
 </UnnnicPageHeader>
         `,
@@ -201,14 +201,20 @@ export const WithSelect = {
     },
   },
   render: (args) => ({
-    components: { PageHeader, UnnnicSelectSmart },
+    components: { PageHeader, UnnnicSelect },
     setup() {
-      return { args };
+      return {
+        args,
+        options: [
+          { label: 'Option 1', value: 'option1' },
+          { label: 'Option 2', value: 'option2' },
+        ],
+      };
     },
     template: `
       <PageHeader v-bind="args">
         <template #actions>
-          <UnnnicSelectSmart />
+          <UnnnicSelect placeholder="Select" :options="options" />
         </template>
       </PageHeader>
     `,

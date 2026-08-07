@@ -2,10 +2,8 @@ import type { Component } from 'vue';
 import { unnnicFontSize as fontSize } from './config';
 import formElement from './FormElement/FormElement.vue';
 import input from './Input/Input.vue';
-import inputNext from './InputNext/InputNext.vue';
 import inputDatePicker from './InputDatePicker/InputDatePicker.vue';
 import button from './Button/Button.vue';
-import buttonIcon from './Button/ButtonIcon.vue';
 import sidebar from './Sidebar/index.vue';
 import sidebarItem from './Sidebar/SidebarItem.vue';
 import table from './Table/Table.vue';
@@ -32,7 +30,6 @@ import radio from './Radio/Radio.vue';
 import radioGroup from './RadioGroup/RadioGroup.vue';
 import languageSelect from './Dropdown/LanguageSelect.vue';
 import modal from './Modal/Modal.vue';
-import modalUpload from './ModalUpload/ModalUpload.vue';
 import { callAlert, callModal } from '../utils/call';
 import selectSmart from './SelectSmart/SelectSmart.vue';
 import select from './Select/index.vue';
@@ -44,9 +41,7 @@ import alert from './Alert/Alert.vue';
 // import autocompleteSelect from './AutocompleteSelect/AutocompleteSelect.vue';
 import tag from './Tag/Tag.vue';
 import accordion from './Accordion/Accordion.vue';
-import indicator from './Indicator/Indicator.vue';
-import skeletonLoading from './SkeletonLoading/SkeletonLoading.vue'; // TODO: Unbreak this component
-import carousel from './Carousel/Carousel.vue';
+import skeletonLoading from './SkeletonLoading/SkeletonLoading.vue';
 import label from './Label/Label.vue';
 import tab from './Tab/Tab.vue';
 import tabsExpanded from './TabsExpanded/TabsExpanded.vue';
@@ -55,23 +50,18 @@ import comment from './Comment/Comment.vue';
 import datePicker from './DatePicker/DatePicker.vue';
 import breadcrumb from './Breadcrumb/Breadcrumb.vue';
 import Switch from './Switch/Switch.vue';
-import Slider from './Slider/Slider.vue';
 import DataArea from './DataArea/DataArea.vue';
 import Pagination from './Pagination/Pagination.vue';
 import DropArea from './DropArea/DropArea.vue';
 import UploadArea from './UploadArea/UploadArea.vue';
 import ImportCard from './ImportCard/ImportCard.vue';
 import DateFilter from './DateFilter/DateFilter.vue';
-import ChatText from './ChatText/ChatText.vue';
 import TextArea from './TextArea/TextArea.vue';
 import CardNumber from './CardNumber/CardNumber.vue';
 import chartRainbow from './ChartRainbow/ChartRainbow.vue';
 import chartBar from './ChartBar/ChartBar.vue';
 import chartLine from './ChartLine/ChartLine.vue';
-import moodRating from './MoodRating/MoodRating.vue';
-import starRating from './StarRating/StarRating.vue';
 import audioRecorder from './AudioRecorder/AudioRecorder.vue';
-import circleProgressBar from './CircleProgressBar/CircleProgressBar.vue';
 import progressBar from './ProgressBar/ProgressBar.vue';
 import ChatsUserAvatar from './ChatsUserAvatar/ChatsUserAvatar.vue';
 import ChartMultiLine from './ChartMultiLine/ChartMultiLine.vue';
@@ -131,10 +121,8 @@ export interface ComponentsMap {
 export const components: ComponentsMap = {
   unnnicFormElement: formElement,
   unnnicInput: input,
-  unnnicInputNext: inputNext,
   unnnicInputDatePicker: inputDatePicker,
   unnnicButton: button,
-  unnnicButtonIcon: buttonIcon,
   unnnicSidebar: sidebar,
   unnnicSidebarItem: sidebarItem,
   unnnicTable: table,
@@ -167,7 +155,6 @@ export const components: ComponentsMap = {
   unnnicModal: modal,
   unnnicModalNext: ModalNext,
   unnnicModalDialog: ModalDialog,
-  unnnicModalUpload: modalUpload,
   unnnicSelectSmart: selectSmart,
   unnnicSelect: select,
   unnnicSelectItem: selectItem,
@@ -180,9 +167,7 @@ export const components: ComponentsMap = {
   // unnnicAutocompleteSelect: autocompleteSelect,
   unnnicTag: tag,
   unnnicAccordion: accordion,
-  unnnicIndicator: indicator,
   unnnicSkeletonLoading: skeletonLoading,
-  unnnicCarousel: carousel,
   unnnicLabel: label,
   unnnicTab: tab,
   unnnicTabsExpanded: tabsExpanded,
@@ -191,23 +176,18 @@ export const components: ComponentsMap = {
   unnnicDatePicker: datePicker,
   unnnicBreadcrumb: breadcrumb,
   unnnicSwitch: Switch,
-  unnnicSlider: Slider,
   unnnicDataArea: DataArea,
   unnnicPagination: Pagination,
   unnnicDropArea: DropArea,
   unnnicUploadArea: UploadArea,
   unnnicImportCard: ImportCard,
   unnnicDateFilter: DateFilter,
-  unnnicChatText: ChatText,
   unnnicTextArea: TextArea,
   unnnicCardNumber: CardNumber,
   unnnicChartRainbow: chartRainbow,
   unnnicChartBar: chartBar,
   unnnicChartLine: chartLine,
-  unnnicMoodRating: moodRating,
-  unnnicStarRating: starRating,
   unnnicAudioRecorder: audioRecorder,
-  unnnicCircleProgressBar: circleProgressBar,
   unnnicProgressBar: progressBar,
   unnnicChatsUserAvatar: ChatsUserAvatar,
   unnnicChartMultiLine: ChartMultiLine,
@@ -258,10 +238,8 @@ export const components: ComponentsMap = {
 export const unnnicFontSize = fontSize;
 export const unnnicFormElement = formElement;
 export const unnnicInput = input;
-export const unnnicInputNext = inputNext;
 export const unnnicInputDatePicker = inputDatePicker as VueComponent;
 export const unnnicButton = button;
-export const unnnicButtonIcon = buttonIcon;
 export const unnnicSidebar = sidebar;
 export const unnnicSidebarItem = sidebarItem;
 export const unnnicTable = table;
@@ -294,7 +272,6 @@ export const unnniclanguageSelect = languageSelect as VueComponent;
 export const unnnicModal = modal;
 export const unnnicModalDialog = ModalDialog;
 export const unnnicModalNext = ModalNext;
-export const unnnicModalUpload = modalUpload;
 export const unnnicSelectSmart = selectSmart as VueComponent;
 export const unnnicSelect = select as VueComponent;
 export const unnnicSelectItem = selectItem;
@@ -307,9 +284,7 @@ export const unnnicCallModal = (props: any) => callModal(props);
 // export const unnnicAutocompleteSelect = autocompleteSelect;
 export const unnnicTag = tag;
 export const unnnicAccordion = accordion;
-export const unnnicIndicator = indicator;
 export const unnnicSkeletonLoading = skeletonLoading;
-export const unnnicCarousel = carousel;
 export const unnnicLabel = label as VueComponent;
 export const unnnicTab = tab;
 export const unnnicTabsExpanded = tabsExpanded;
@@ -318,23 +293,18 @@ export const unnnicComment = comment;
 export const unnnicDatePicker = datePicker;
 export const unnnicBreadcrumb = breadcrumb;
 export const unnnicSwitch = Switch;
-export const unnnicSlider = Slider;
 export const unnnicDataArea = DataArea;
 export const unnnicPagination = Pagination;
 export const unnnicDropArea = DropArea;
 export const unnnicUploadArea = UploadArea;
 export const unnnicImportCard = ImportCard;
 export const unnnicDateFilter = DateFilter;
-export const unnnicChatText = ChatText;
 export const unnnicTextArea = TextArea;
 export const unnnicCardNumber = CardNumber;
 export const unnnicChartRainbow = chartRainbow;
 export const unnnicChartBar = chartBar;
 export const unnnicChartLine = chartLine;
-export const unnnicMoodRating = moodRating;
-export const unnnicStarRating = starRating;
 export const unnnicAudioRecorder = audioRecorder;
-export const unnnicCircleProgressBar = circleProgressBar;
 export const unnnicProgressBar = progressBar;
 export const unnnicChatsUserAvatar = ChatsUserAvatar;
 export const unnnicChartMultiLine = ChartMultiLine;
@@ -384,10 +354,8 @@ export const unnnicDrawerDescription = DrawerDescription;
 export const UnnnicFontSize = fontSize;
 export const UnnnicFormElement = formElement;
 export const UnnnicInput = input;
-export const UnnnicInputNext = inputNext;
 export const UnnnicInputDatePicker = inputDatePicker as VueComponent;
 export const UnnnicButton = button;
-export const UnnnicButtonIcon = buttonIcon;
 export const UnnnicSidebar = sidebar;
 export const UnnnicSidebarItem = sidebarItem;
 export const UnnnicTable = table;
@@ -420,7 +388,6 @@ export const UnnniclanguageSelect = languageSelect as VueComponent;
 export const UnnnicModal = modal;
 export const UnnnicModalDialog = ModalDialog;
 export const UnnnicModalNext = ModalNext;
-export const UnnnicModalUpload = modalUpload;
 export const UnnnicSelectSmart = selectSmart as VueComponent;
 export const UnnnicSelect = select as VueComponent;
 export const UnnnicSelectItem = selectItem;
@@ -433,9 +400,7 @@ export const UnnnicCallModal = (props: any) => callModal(props);
 // export const UnnnicAutocompleteSelect = autocompleteSelect;
 export const UnnnicTag = tag;
 export const UnnnicAccordion = accordion;
-export const UnnnicIndicator = indicator;
 export const UnnnicSkeletonLoading = skeletonLoading;
-export const UnnnicCarousel = carousel;
 export const UnnnicLabel = label as VueComponent;
 export const UnnnicTab = tab;
 export const UnnnicTabsExpanded = tabsExpanded;
@@ -444,23 +409,18 @@ export const UnnnicComment = comment;
 export const UnnnicDatePicker = datePicker;
 export const UnnnicBreadcrumb = breadcrumb;
 export const UnnnicSwitch = Switch;
-export const UnnnicSlider = Slider;
 export const UnnnicDataArea = DataArea;
 export const UnnnicPagination = Pagination;
 export const UnnnicDropArea = DropArea;
 export const UnnnicUploadArea = UploadArea;
 export const UnnnicImportCard = ImportCard;
 export const UnnnicDateFilter = DateFilter;
-export const UnnnicChatText = ChatText;
 export const UnnnicTextArea = TextArea;
 export const UnnnicCardNumber = CardNumber;
 export const UnnnicChartRainbow = chartRainbow;
 export const UnnnicChartBar = chartBar;
 export const UnnnicChartLine = chartLine;
-export const UnnnicMoodRating = moodRating;
-export const UnnnicStarRating = starRating;
 export const UnnnicAudioRecorder = audioRecorder;
-export const UnnnicCircleProgressBar = circleProgressBar;
 export const UnnnicProgressBar = progressBar;
 export const UnnnicChatsUserAvatar = ChatsUserAvatar;
 export const UnnnicChartMultiLine = ChartMultiLine;

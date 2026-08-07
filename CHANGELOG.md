@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.32.0 (2026-08-07)
+
+### Removed
+
+- Deprecated components and related tests/stories: `ButtonIcon`, `Carousel`, `TagCarousel`, `ChatText`, `CircleProgressBar`, `Indicator`, `InputNext`, `ModalUpload`, `MoodRating`, `Slider`, `StarRating`, and `TransitionRipple`. No longer registered or exported.
+
+### Changed
+
+- **PageHeader** Storybook: `WithSelect` now uses `UnnnicSelect` instead of `UnnnicSelectSmart`.
+
 # 3.31.1 (2026-07-22)
 
 ### Changed
