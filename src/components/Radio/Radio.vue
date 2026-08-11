@@ -30,41 +30,46 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { pick } from 'lodash';
-import { inject, computed } from 'vue';
+import { inject, computed, useAttrs, type Ref, type ComputedRef } from 'vue';
 
-const props = defineProps({
-  modelValue: {
-    type: [String, Number],
-    default: '',
-  },
-  value: {
-    type: [String, Number],
-    default: '',
-  },
-  disabled: {
-    type: Boolean,
-    default: false,
-  },
-  label: {
-    type: String,
-    default: '',
-  },
-  name: {
-    type: String,
-    default: '',
-  },
-  helper: {
-    type: String,
-    default: '',
-  },
+defineOptions({
+  name: 'UnnnicRadio',
 });
 
-const emit = defineEmits(['update:modelValue']);
+export interface RadioProps {
+  modelValue?: string | number;
+  value?: string | number;
+  disabled?: boolean;
+  label?: string;
+  name?: string;
+  helper?: string;
+}
 
-const contextModelValue = inject('contextModelValue', undefined);
-const contextName = inject('contextName', undefined);
+const props = withDefaults(defineProps<RadioProps>(), {
+  modelValue: '',
+  value: '',
+  disabled: false,
+  label: '',
+  name: '',
+  helper: '',
+});
+
+const emit = defineEmits<{
+  'update:modelValue': [value: string | number];
+}>();
+
+const $attrs = useAttrs();
+
+const contextModelValue = inject<Ref<string | number> | undefined>(
+  'contextModelValue',
+  undefined,
+);
+const contextName = inject<ComputedRef<string> | Ref<string> | undefined>(
+  'contextName',
+  undefined,
+);
 
 function click() {
   if (!props.disabled) {
