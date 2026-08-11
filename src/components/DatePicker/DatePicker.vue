@@ -260,7 +260,8 @@ import {
   days as translationDays,
   periods as translationPeriods,
   buttons as translationButtons,
-} from './translations.js';
+  type PeriodOption,
+} from './translations';
 
 import i18n from '@/utils/plugins/i18n';
 
@@ -270,9 +271,34 @@ defineOptions({
   name: 'UnnnicDatePicker',
 });
 
-type PeriodOption = {
-  id: string;
-  name: string;
+export type { PeriodOption };
+
+export type DateCellProperty =
+  | 'inside month'
+  | 'out of range'
+  | 'selected'
+  | 'left-highlighted'
+  | 'right-highlighted'
+  | 'highlighted'
+  | 'today'
+  | string;
+
+export interface DateCell {
+  properties: DateCellProperty[];
+  date?: string | number;
+  toString: () => string;
+}
+
+export type DatePickerTranslations = Record<
+  string,
+  string | Record<string, string>
+>;
+
+type I18nPlugin = {
+  global: {
+    locale: string;
+    messages: Record<string, unknown>;
+  };
 };
 
 export interface DatePickerProps {
@@ -300,7 +326,7 @@ export interface DatePickerProps {
   hideOptions?: boolean;
 
   locale?: string;
-  translations?: Record<string, unknown>;
+  translations?: DatePickerTranslations;
 
   variant?: 'card' | 'popover';
 }
@@ -403,19 +429,24 @@ const containerOptionsFlexDirection = computed(() => {
   return props.hideOptions ? 'column-reverse' : 'column';
 });
 
-const i18nFn = (...args: any[]): string | undefined => {
-  const [key, defaults] = args;
+const i18nPlugin = i18n as unknown as I18nPlugin;
 
-  const validLocaleValues = Object.keys(
-    ((i18n as any).global.messages as Record<string, unknown>) || {},
-  );
+type I18nFnArg = number | string | Record<string, string>;
 
-  let locale = props.locale as string | undefined;
+const i18nFn = (
+  key: string,
+  ...args: I18nFnArg[]
+): string | undefined => {
+  const [defaults] = args;
+
+  const validLocaleValues = Object.keys(i18nPlugin.global.messages || {});
+
+  let locale = props.locale;
 
   const treatedSelectedLocale =
-    get(i18n, 'global.locale') === 'en-us'
+    get(i18nPlugin, 'global.locale') === 'en-us'
       ? 'en'
-      : (get(i18n, 'global.locale') as string | undefined);
+      : (get(i18nPlugin, 'global.locale') as string | undefined);
 
   locale =
     locale && validLocaleValues.includes(locale)
@@ -432,14 +463,14 @@ const i18nFn = (...args: any[]): string | undefined => {
 
   if (!text) {
     text = get(
-      defaultTranslations as Record<string, unknown>,
+      defaultTranslations,
       `${key}.${locale}`,
-      get(defaultTranslations as Record<string, unknown>, key, defaults),
+      get(defaultTranslations, key, defaults),
     ) as string | undefined;
   }
 
-  if (text?.includes('|') && typeof args[1] === 'number') {
-    const count: number = args[1];
+  if (text?.includes('|') && typeof args[0] === 'number') {
+    const count: number = args[0];
     const pluralization = text.split('|');
 
     if (pluralization.length === 3) {
@@ -451,13 +482,11 @@ const i18nFn = (...args: any[]): string | undefined => {
 
   let vars: Record<string, string> = {};
 
-  Object.values(args)
-    .slice(1)
-    .forEach((argument) => {
-      if (!(argument instanceof Array) && argument instanceof Object) {
-        vars = argument as Record<string, string>;
-      }
-    });
+  args.forEach((argument) => {
+    if (!(argument instanceof Array) && argument instanceof Object) {
+      vars = argument;
+    }
+  });
 
   Object.keys(vars).forEach((varName) => {
     text = text?.replaceAll(new RegExp(`{ *${varName} *}`, 'g'), vars[varName]);
@@ -589,7 +618,7 @@ function getDatesOfTheMonth(reference: string) {
 
   date.setDate(1 - date.getDay());
 
-  const dates: { properties: string[]; toString: () => string }[] = [];
+  const dates: DateCell[] = [];
 
   for (let i = 0; i < 6 * 7; i += 1) {
     const dateString = dateToString(date);
@@ -668,11 +697,7 @@ function getMonthsOfTheYear(reference: string) {
 
   date.setMonth(0);
 
-  const dates: {
-    properties: string[];
-    date: string;
-    toString: () => string;
-  }[] = [];
+  const dates: DateCell[] = [];
 
   for (let i = 0; i < 3 * 4; i += 1) {
     const dateString = dateToString(date);
@@ -732,11 +757,7 @@ function getYears(reference: string) {
 
   date.setMonth(0);
 
-  const dates: {
-    properties: string[];
-    date: number;
-    toString: () => string;
-  }[] = [];
+  const dates: DateCell[] = [];
 
   for (let i = 0; i < 3 * 4; i += 1) {
     const dateString = dateToString(date);

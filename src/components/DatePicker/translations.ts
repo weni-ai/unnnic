@@ -1,3 +1,15 @@
+export type DatePickerLocale = 'pt-br' | 'en' | 'en-us' | 'es';
+
+export type PeriodOption = {
+  id: string;
+  name: string;
+};
+
+export type LocaleButtons = {
+  clear: string;
+  filter: string;
+};
+
 const englishMonths = [
   'January',
   'February',
@@ -15,7 +27,7 @@ const englishMonths = [
 
 const englishDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
-const englishPeriods = [
+const englishPeriods: PeriodOption[] = [
   { name: 'Last 7 days', id: 'last-7-days' },
   { name: 'Last 14 days', id: 'last-14-days' },
   { name: 'Last 30 days', id: 'last-30-days' },
@@ -25,7 +37,7 @@ const englishPeriods = [
   { name: 'Custom', id: 'custom' },
 ];
 
-export const months = {
+export const months: Record<string, string[]> = {
   'pt-br': [
     'Janeiro',
     'Fevereiro',
@@ -58,14 +70,14 @@ export const months = {
   ],
 };
 
-export const days = {
+export const days: Record<string, string[]> = {
   'pt-br': ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'],
   en: englishDays,
   'en-us': englishDays,
   es: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
 };
 
-export const buttons = {
+export const buttons: Record<string, LocaleButtons> = {
   'pt-br': {
     clear: 'Limpar',
     filter: 'Filtrar',
@@ -82,7 +94,7 @@ export const buttons = {
 
 buttons.en = buttons['en-us'];
 
-export const periods = {
+export const periods: Record<string, PeriodOption[]> = {
   'pt-br': [
     {
       name: 'Últimos 7 dias',
