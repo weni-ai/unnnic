@@ -14,90 +14,82 @@
     :value="fullySanitize(modelValue)"
     :class="[classes, { focus, 'use-focus-prop': useFocusProp }]"
     :type="nativeType"
-    :maxlength="maxlength"
+    :maxlength="maxlength ?? undefined"
     :readonly="readonly"
   />
 </template>
 
-<script>
-import { mask } from 'vue-the-mask';
+<script setup lang="ts">
+import { computed, useAttrs } from 'vue';
+import { mask as vMask } from 'vue-the-mask';
 import { fullySanitize } from '../../utils/sanitize';
 
-export default {
-  directives: { mask },
-  props: {
-    type: {
-      type: String,
-      default: 'normal',
-      validator(value) {
-        return ['normal', 'error'].indexOf(value) !== -1;
-      },
-    },
-    modelValue: {
-      type: String,
-      default: '',
-    },
-    nativeType: {
-      type: String,
-      default: 'text',
-    },
-    size: {
-      type: String,
-      default: 'md',
-    },
-    mask: {
-      type: [String, Array],
-      default: '',
-    },
-    hasIconLeft: Boolean,
-    hasIconRight: Boolean,
-    hasClearIcon: Boolean,
-    maxlength: {
-      type: Number,
-      default: null,
-    },
-    readonly: {
-      type: Boolean,
-      default: false,
-    },
-    useFocusProp: {
-      type: Boolean,
-      default: false,
-    },
-    focus: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  emits: ['update:modelValue'],
-  computed: {
-    attributes() {
-      return {
-        ...this.$attrs,
-        ...this.$attrs['v-bind'],
-        onInput: (event) => {
-          this.$emit('update:modelValue', event.srcElement.value);
-        },
-      };
-    },
+defineOptions({
+  name: 'UnnnicBaseInput',
+});
 
-    classes() {
-      return [
-        'input',
-        `size-${this.size}`,
-        this.type,
-        {
-          'input--has-icon-left': this.hasIconLeft,
-          'input--has-icon-right': this.hasIconRight,
-          'input--has-clear-icon': this.hasClearIcon,
-        },
-      ];
+export type InputVariant = 'normal' | 'error';
+export type InputSize = 'md' | 'sm';
+
+export interface BaseInputProps {
+  type?: InputVariant;
+  modelValue?: string;
+  nativeType?: string;
+  size?: InputSize | string;
+  mask?: string | string[];
+  hasIconLeft?: boolean;
+  hasIconRight?: boolean;
+  hasClearIcon?: boolean;
+  maxlength?: number | null;
+  readonly?: boolean;
+  useFocusProp?: boolean;
+  focus?: boolean;
+}
+
+const props = withDefaults(defineProps<BaseInputProps>(), {
+  type: 'normal',
+  modelValue: '',
+  nativeType: 'text',
+  size: 'md',
+  mask: '',
+  hasIconLeft: false,
+  hasIconRight: false,
+  hasClearIcon: false,
+  maxlength: null,
+  readonly: false,
+  useFocusProp: false,
+  focus: false,
+});
+
+const emit = defineEmits<{
+  'update:modelValue': [value: string];
+}>();
+
+const attrs = useAttrs();
+
+const attributes = computed(() => {
+  return {
+    ...attrs,
+    ...(attrs['v-bind'] as Record<string, unknown> | undefined),
+    onInput: (event: Event) => {
+      const target = event.target as HTMLInputElement | null;
+      emit('update:modelValue', target?.value ?? '');
     },
-  },
-  methods: {
-    fullySanitize,
-  },
-};
+  };
+});
+
+const classes = computed(() => {
+  return [
+    'input',
+    `size-${props.size}`,
+    props.type,
+    {
+      'input--has-icon-left': props.hasIconLeft,
+      'input--has-icon-right': props.hasIconRight,
+      'input--has-clear-icon': props.hasClearIcon,
+    },
+  ];
+});
 </script>
 
 <style lang="scss" scoped>

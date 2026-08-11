@@ -40,68 +40,55 @@
   </section>
 </template>
 
-<script>
+<script setup lang="ts">
+import { computed, useAttrs } from 'vue';
 import { pick } from 'lodash';
 
-export default {
-  model: {
-    event: 'change',
-  },
+defineOptions({
+  name: 'UnnnicCheckbox',
+});
 
-  props: {
-    modelValue: {
-      type: [Boolean, String],
-      default: false,
-      validator(value) {
-        return [true, false, 'less'].includes(value);
-      },
-    },
+export type CheckboxValue = boolean | 'less';
 
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
+export interface CheckboxProps {
+  modelValue?: CheckboxValue;
+  disabled?: boolean;
+  label?: string;
+  helper?: string;
+  textRight?: string;
+}
 
-    label: {
-      type: String,
-      default: '',
-    },
+const props = withDefaults(defineProps<CheckboxProps>(), {
+  modelValue: false,
+  disabled: false,
+  label: '',
+  helper: '',
+  textRight: '',
+});
 
-    helper: {
-      type: String,
-      default: '',
-    },
+const emit = defineEmits<{
+  change: [value: boolean];
+  'update:model-value': [value: boolean];
+}>();
 
-    textRight: {
-      type: String,
-      default: '',
-    },
-  },
-  emits: ['change', 'update:model-value'],
+const $attrs = useAttrs();
 
-  computed: {
-    valueName() {
-      if (this.modelValue === true) {
-        return 'checked';
-      }
-      if (this.modelValue === false) {
-        return 'default';
-      }
+const valueName = computed(() => {
+  if (props.modelValue === true) {
+    return 'checked';
+  }
+  if (props.modelValue === false) {
+    return 'default';
+  }
 
-      return 'less';
-    },
-  },
+  return 'less';
+});
 
-  methods: {
-    pick,
-
-    click() {
-      const isChecked = ['checked', 'less'].includes(this.valueName);
-      this.$emit('change', !isChecked);
-      this.$emit('update:model-value', !isChecked);
-    },
-  },
-};
+function click() {
+  const isChecked = ['checked', 'less'].includes(valueName.value);
+  emit('change', !isChecked);
+  emit('update:model-value', !isChecked);
+}
 </script>
 
 <style lang="scss" scoped>

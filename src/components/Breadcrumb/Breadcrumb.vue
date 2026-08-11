@@ -11,7 +11,7 @@
             index === crumbs.length - 1,
         }"
         :data-test="crumb.name"
-        @click="$emit('crumb-click', crumb)"
+        @click="emit('crumb-click', crumb)"
       >
         {{ crumb.name }}
       </div>
@@ -29,22 +29,28 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import UnnnicIcon from '../Icon.vue';
 
-export default {
+defineOptions({
   name: 'UnnnicBreadcrumb',
-  components: { UnnnicIcon },
-  props: {
-    crumbs: {
-      type: Array,
-      default: null,
-      validator: (crumb) => crumb.every((c) => c.name !== null),
-    },
-  },
+});
 
-  emits: ['crumb-click'],
-};
+export interface BreadcrumbItem {
+  name: string;
+}
+
+export interface BreadcrumbProps {
+  crumbs?: BreadcrumbItem[] | null;
+}
+
+withDefaults(defineProps<BreadcrumbProps>(), {
+  crumbs: null,
+});
+
+const emit = defineEmits<{
+  'crumb-click': [crumb: BreadcrumbItem];
+}>();
 </script>
 
 <style scoped lang="scss">
@@ -56,7 +62,7 @@ export default {
 
   &__container {
     &__divider {
-      margin: 0 $unnnic-inline-xs;
+      margin: 0 $unnnic-space-2;
     }
 
     &__link {

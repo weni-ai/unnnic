@@ -21,96 +21,93 @@
   </component>
 </template>
 
-<script>
-import { ref, inject } from 'vue';
-import { SkeletonStyle } from './skeletonTheme.vue';
+<script setup lang="ts">
+import { computed, inject, ref, useSlots, type Ref, type CSSProperties } from 'vue';
+import {
+  SkeletonStyle,
+  type SkeletonStyleVars,
+} from './skeletonTheme.vue';
 
-export default {
+defineOptions({
   name: 'UnnnicSkeletonLoading',
-  props: {
-    prefix: {
-      type: String,
-      default: 'unnnic',
-    },
-    count: {
-      type: Number,
-      default: 1,
-    },
-    duration: {
-      type: Number,
-      default: 2,
-    },
-    tag: {
-      type: String,
-      default: 'span',
-    },
-    width: [String, Number],
-    height: [String, Number],
-    circle: {
-      type: Boolean,
-      default: false,
-    },
-    loading: {
-      type: Boolean,
-      default: undefined,
-    },
-    direct: {
-      type: Boolean,
-    },
-  },
-  setup() {
-    const themeStyle = inject('_themeStyle', ref({ ...SkeletonStyle }));
-    const theme = inject('_skeletonTheme', ref({}));
+});
 
-    return {
-      themeStyle,
-      theme,
-    };
-  },
-  computed: {
-    classes() {
-      return [
-        `${this.prefix}-skeleton`,
-        this.circle ? `${this.prefix}-skeleton--circle` : '',
-      ];
-    },
-    styles() {
-      const styles = {};
+export interface SkeletonLoadingProps {
+  prefix?: string;
+  count?: number;
+  duration?: number;
+  tag?: string;
+  width?: string | number;
+  height?: string | number;
+  circle?: boolean;
+  loading?: boolean;
+  direct?: boolean;
+}
 
-      styles['--skeleton-bg'] = this.themeStyle['--skeleton-bg'];
-      styles['--skeleton-highlight'] = this.themeStyle['--skeleton-highlight'];
-      styles['--skeleton-duration'] = this.duration
-        ? `${this.duration}s`
-        : '0s';
+const props = withDefaults(defineProps<SkeletonLoadingProps>(), {
+  prefix: 'unnnic',
+  count: 1,
+  duration: 2,
+  tag: 'span',
+  width: undefined,
+  height: undefined,
+  circle: false,
+  loading: undefined,
+  direct: false,
+});
 
-      if (this.width) styles.width = this.width;
-      if (this.height) styles.height = this.height;
+const slots = useSlots();
 
-      return styles;
-    },
-    elements() {
-      return Array.from({ length: this.count }, () => ({}));
-    },
-    showLoading() {
-      return typeof this.loading !== 'undefined'
-        ? this.loading
-        : this.isEmptyVNode(this.$slots.default);
-    },
-  },
-  methods: {
-    isEmptyVNode(children) {
-      if (!children) return true;
-      const [firstNode] = children();
-      let str = firstNode.children;
+const themeStyle = inject<Ref<SkeletonStyleVars>>(
+  '_themeStyle',
+  ref({ ...SkeletonStyle }),
+);
 
-      if (str) {
-        // remove all line-break and space character
-        str = str.replace(/(\n|\r\n|\s)/g, '');
-      }
-      return !str;
-    },
-  },
-};
+const classes = computed(() => {
+  return [
+    `${props.prefix}-skeleton`,
+    props.circle ? `${props.prefix}-skeleton--circle` : '',
+  ];
+});
+
+const styles = computed((): CSSProperties => {
+  const nextStyles: Record<string, string | number> = {};
+
+  nextStyles['--skeleton-bg'] = themeStyle.value['--skeleton-bg'];
+  nextStyles['--skeleton-highlight'] = themeStyle.value['--skeleton-highlight'];
+  nextStyles['--skeleton-duration'] = props.duration
+    ? `${props.duration}s`
+    : '0s';
+
+  if (props.width) nextStyles.width = props.width;
+  if (props.height) nextStyles.height = props.height;
+
+  return nextStyles as CSSProperties;
+});
+
+const elements = computed(() => {
+  return Array.from({ length: props.count }, () => ({}));
+});
+
+function isEmptyVNode(
+  children: (() => unknown[]) | undefined,
+): boolean {
+  if (!children) return true;
+  const [firstNode] = children() as Array<{ children?: string } | undefined>;
+  let str = firstNode?.children;
+
+  if (str) {
+    // remove all line-break and space character
+    str = str.replace(/(\n|\r\n|\s)/g, '');
+  }
+  return !str;
+}
+
+const showLoading = computed(() => {
+  return typeof props.loading !== 'undefined'
+    ? props.loading
+    : isEmptyVNode(slots.default as (() => unknown[]) | undefined);
+});
 </script>
 
 <style lang="scss">
