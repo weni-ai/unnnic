@@ -10,57 +10,62 @@
   </div>
 </template>
 
-<script>
-import { ref, provide } from 'vue';
-
+<script lang="ts">
 export const DEFAULT_BACKGROUND = 'var(--unnnic-color-bg-muted)';
 export const DEFAULT_HIGHLIGHT = 'var(--unnnic-color-bg-base-soft)';
-export const SkeletonStyle = {
+
+export type SkeletonStyleVars = {
+  '--skeleton-bg': string;
+  '--skeleton-highlight': string;
+  '--skeleton-duration': string;
+};
+
+export const SkeletonStyle: SkeletonStyleVars = {
   '--skeleton-bg': DEFAULT_BACKGROUND,
   '--skeleton-highlight': DEFAULT_HIGHLIGHT,
   '--skeleton-duration': '2s',
 };
-export default {
+
+export interface SkeletonThemeProps {
+  color?: string;
+  highlight?: string;
+  duration?: number;
+  tag?: string;
+  loading?: boolean;
+}
+</script>
+
+<script setup lang="ts">
+import { ref, provide, onMounted } from 'vue';
+
+defineOptions({
   name: 'UnnnicSkeletonTheme',
-  props: {
-    color: {
-      type: String,
-      default: DEFAULT_BACKGROUND,
-    },
-    highlight: {
-      type: String,
-      default: DEFAULT_HIGHLIGHT,
-    },
-    duration: {
-      type: Number,
-      default: 2,
-    },
-    tag: {
-      type: String,
-      default: 'div',
-    },
-    loading: {
-      type: Boolean,
-      default: undefined,
-    },
-  },
-  setup() {
-    const themeStyle = ref({ ...SkeletonStyle });
-    const theme = ref({});
+});
 
-    provide('_themeStyle', themeStyle);
-    provide('_skeletonTheme', theme);
+const props = withDefaults(defineProps<SkeletonThemeProps>(), {
+  color: DEFAULT_BACKGROUND,
+  highlight: DEFAULT_HIGHLIGHT,
+  duration: 2,
+  tag: 'div',
+  loading: undefined,
+});
 
-    return {
-      themeStyle,
-      theme,
-    };
-  },
-  mounted() {
-    const { color, highlight, duration } = this;
-    this.themeStyle['--skeleton-bg'] = color;
-    this.themeStyle['--skeleton-highlight'] = highlight;
-    this.themeStyle['--skeleton-duration'] = duration ? `${duration}s` : '0s';
-  },
-};
+const themeStyle = ref<SkeletonStyleVars>({ ...SkeletonStyle });
+const theme = ref<Record<string, unknown>>({});
+
+provide('_themeStyle', themeStyle);
+provide('_skeletonTheme', theme);
+
+onMounted(() => {
+  themeStyle.value['--skeleton-bg'] = props.color;
+  themeStyle.value['--skeleton-highlight'] = props.highlight;
+  themeStyle.value['--skeleton-duration'] = props.duration
+    ? `${props.duration}s`
+    : '0s';
+});
+
+defineExpose({
+  themeStyle,
+  theme,
+});
 </script>
