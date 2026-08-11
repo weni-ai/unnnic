@@ -67,7 +67,8 @@ describe('TextInput.vue', () => {
     await wrapper.setProps({ allowTogglePassword: true });
     expect(wrapper.vm.iconRightSvg).toBe('view-1-1');
 
-    await wrapper.setData({ showPassword: true });
+    wrapper.vm.showPassword = true;
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.iconRightSvg).toBe('view-off-1');
   });
 
@@ -76,14 +77,13 @@ describe('TextInput.vue', () => {
     expect(wrapper.vm.iconScheme).toBe('fg-base');
 
     await wrapper.setProps({ type: 'normal' });
-    await wrapper.setData({ isDisabled: true });
     expect(wrapper.vm.iconScheme).toBe('fg-base');
 
-    await wrapper.setData({ isDisabled: false });
     await wrapper.setProps({ modelValue: 'text' });
     expect(wrapper.vm.iconScheme).toBe('fg-base');
 
-    await wrapper.setData({ isFocused: true });
+    wrapper.vm.isFocused = true;
+    await wrapper.vm.$nextTick();
     expect(wrapper.vm.iconScheme).toBe('fg-base');
 
     await wrapper.setProps({ disabled: true });
@@ -106,9 +106,7 @@ describe('TextInput.vue', () => {
 
     await wrapper.find('.icon-right').trigger('click');
     expect(wrapper.vm.showPassword).toBe(true);
-    expect(
-      wrapper.findComponent({ name: 'BaseInput' }).attributes('type'),
-    ).toBe('text');
+    expect(wrapper.findComponent(BaseInput).props('nativeType')).toBe('text');
 
     await wrapper.find('.icon-right').trigger('click');
     expect(wrapper.vm.showPassword).toBe(false);
@@ -145,7 +143,7 @@ describe('TextInput.vue', () => {
   });
 
   test('onBlur method sets isFocused to false', async () => {
-    wrapper.setData({ isFocused: true });
+    wrapper.vm.isFocused = true;
     await wrapper.vm.$nextTick();
     expect(wrapper.vm.isFocused).toBe(true);
 
@@ -191,16 +189,14 @@ describe('TextInput.vue', () => {
   });
 
   test('onIconRightClick method does nothing if the input is disabled', async () => {
-    await wrapper.setData({ attributes: { disabled: true } });
-
-    const iconRightClickSpy = vi.spyOn(wrapper.vm, 'onIconRightClick');
+    await wrapper.setProps({
+      disabled: true,
+      allowTogglePassword: true,
+    });
 
     wrapper.vm.onIconRightClick();
 
-    expect(iconRightClickSpy).toHaveBeenCalled();
     expect(wrapper.vm.showPassword).toBe(false);
-
-    iconRightClickSpy.mockRestore();
   });
 
   test('matches the snapshot', () => {
