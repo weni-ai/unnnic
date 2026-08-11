@@ -106,9 +106,7 @@ describe('TextInput.vue', () => {
 
     await wrapper.find('.icon-right').trigger('click');
     expect(wrapper.vm.showPassword).toBe(true);
-    expect(
-      wrapper.findComponent({ name: 'BaseInput' }).attributes('type'),
-    ).toBe('text');
+    expect(wrapper.findComponent(BaseInput).props('nativeType')).toBe('text');
 
     await wrapper.find('.icon-right').trigger('click');
     expect(wrapper.vm.showPassword).toBe(false);
