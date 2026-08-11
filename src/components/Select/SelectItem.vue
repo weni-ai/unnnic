@@ -7,7 +7,7 @@
       'unnnic-select-item--selectable': selectable,
       'text-focused': textFocused,
     }"
-    @click="$emit('click')"
+    @click="emit('click')"
   >
     <span
       :class="[
@@ -20,36 +20,36 @@
   </div>
 </template>
 
-<script>
-export default {
+<script setup lang="ts">
+defineOptions({
   name: 'UnnicSelectItem',
-  props: {
-    size: {
-      type: String,
-      default: '',
-    },
-    selectable: {
-      type: Boolean,
-      default: true,
-    },
-    active: {
-      type: Boolean,
-      default: false,
-    },
-    textFocused: {
-      type: Boolean,
-      default: false,
-    },
-  },
-};
+});
+
+export interface SelectItemProps {
+  size?: string;
+  selectable?: boolean;
+  active?: boolean;
+  textFocused?: boolean;
+}
+
+withDefaults(defineProps<SelectItemProps>(), {
+  size: '',
+  selectable: true,
+  active: false,
+  textFocused: false,
+});
+
+const emit = defineEmits<{
+  click: [];
+}>();
 </script>
 
 <style lang="scss">
 @use '@/assets/scss/unnnic' as *;
 .unnnic-select-item {
   background-color: $unnnic-color-bg-base;
-  padding: $unnnic-spacing-stack-nano $unnnic-inline-xs;
-  margin: $unnnic-inline-xs;
+  padding: $unnnic-space-1 $unnnic-space-2;
+  margin: $unnnic-space-2;
 
   font-family: $unnnic-font-family-secondary;
   color: $unnnic-color-fg-base;
