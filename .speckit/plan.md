@@ -1,5 +1,19 @@
 # Technical Plan — Unnnic AI-Native Design System
 
+> **Status:** Validated against spec.md and constitution.md  
+> **Last updated:** 2026-08-12  
+> **Covers:** US-01, US-02, US-03, US-04, US-05
+
+## User Story Coverage
+
+| User Story | Solution | Phase |
+|------------|----------|-------|
+| US-01: Cursor Skill | `.cursor/skills/unnnic/SKILL.md` in npm package | 1 |
+| US-02: Code Connect | `.figma.ts` files for 19 priority components | 2 |
+| US-03: MCP Search | `unnnic.search` + `unnnic.get_component` tools | 3-4 |
+| US-04: Validation | `unnnic.validate_usage` tool | 4 |
+| US-05: CI Validation | GitHub Actions workflows | 5 |
+
 ## Architecture Overview
 
 ```
@@ -288,3 +302,169 @@ jobs:
 2. **Read-only operations** — MCP server only reads, never writes
 3. **Local execution** — stdio transport, no network exposure
 4. **Version pinning** — Prevents supply chain attacks
+
+---
+
+## Implementation Phases
+
+### Phase 1: Cursor Skill (2-3 days) — US-01
+
+**Goal:** Immediate value with zero infrastructure
+
+**Deliverables:**
+- `.cursor/skills/unnnic/SKILL.md` — Component/token quick reference
+- Updated `package.json` with `.cursor` in files array
+
+**Validation:**
+- Skill auto-detected from `node_modules`
+- Token count ≤4K
+
+**Status:** ✅ Done
+
+---
+
+### Phase 2: Code Connect (3-5 days) — US-02
+
+**Goal:** Precise Figma-to-code mapping
+
+**Deliverables:**
+- `@figma/code-connect` integration
+- `.figma.ts` files for 19 priority components
+
+**Priority Components:**
+1. UnnnicButton
+2. UnnnicInput + UnnnicFormElement
+3. UnnnicSelect
+4. UnnnicDialog
+5. UnnnicCheckbox + UnnnicCheckboxGroup
+6. UnnnicRadio + UnnnicRadioGroup
+7. UnnnicIcon
+8. UnnnicDrawer
+9. UnnnicTextarea
+10. UnnnicSkeletonLoading
+11. UnnnicToast
+12. UnnnicChip
+13. UnnnicTabs
+14. UnnnicPopover
+15. UnnnicPageHeader
+16. UnnnicDatePicker
+17. UnnnicSwitch
+18. UnnnicTag
+19. UnnnicTooltip
+
+**Validation:**
+- Figma Dev Mode shows code snippets
+- `get_design_context` returns Unnnic code
+
+**Status:** 🔲 Pending
+
+---
+
+### Phase 3: Snapshot Generator (5-7 days) — US-03, US-05
+
+**Goal:** Extract DS knowledge into structured JSON
+
+**Deliverables:**
+- `packages/ai-generator/` — CLI package
+- Token extractor (Style Dictionary → TokenDoc)
+- Component extractor (TypeScript → ComponentDoc)
+- Storybook extractor (MDX/stories → PatternDoc/ExampleDoc)
+- Search index builder
+- Schema validator
+
+**CLI:**
+```bash
+unnnic-ai build --version X.Y.Z --out dist/
+unnnic-ai validate --dir dist/
+```
+
+**Validation:**
+- All entities pass JSON Schema validation
+- 100% component coverage
+- 100% token coverage
+
+**Status:** 🔲 Pending
+
+---
+
+### Phase 4: MCP Server (5-7 days) — US-03, US-04
+
+**Goal:** Queryable access to DS knowledge
+
+**Deliverables:**
+- `@weni/unnnic-system-mcp` — npm package
+- MCP server with stdio transport
+- Tools: `search`, `get_component`, `get_token`, `validate_usage`
+
+**Configuration:**
+```json
+// .cursor/mcp.json
+{
+  "mcpServers": {
+    "unnnic": {
+      "command": "npx",
+      "args": ["@weni/unnnic-system-mcp"]
+    }
+  }
+}
+```
+
+**Validation:**
+- All tools respond in ≤500ms
+- Response tokens ≤2K per entity
+- Works offline
+
+**Status:** 🔲 Pending
+
+---
+
+### Phase 5: CI/CD Integration (2-3 days) — US-05
+
+**Goal:** Automated snapshot generation on release
+
+**Deliverables:**
+- `.github/workflows/ai-release.yml` — Release workflow
+- `.github/workflows/ai-validate.yml` — PR validation
+
+**Validation:**
+- MCP package version = DS package version
+- PRs fail on snapshot errors
+
+**Status:** 🔲 Pending
+
+---
+
+### Phase 6: Refinement (3-5 days)
+
+**Goal:** Polish and documentation
+
+**Deliverables:**
+- Deprecation extraction from JSDoc/CHANGELOG
+- Search relevance tuning
+- Developer documentation
+
+**Status:** 🔲 Pending
+
+---
+
+## Dependencies Graph
+
+```
+Phase 1 (Skill) ─────────────────────────────────────┐
+                                                     │
+Phase 2 (Code Connect) ──────────────────────────────┤
+                                                     │
+Phase 3 (Generator) ─────┬───────────────────────────┤
+                         │                           │
+                         ▼                           │
+Phase 4 (MCP Server) ────┼───────────────────────────┤
+                         │                           │
+                         ▼                           ▼
+Phase 5 (CI/CD) ─────────┴───────────────────► Release
+                                                     │
+Phase 6 (Refinement) ────────────────────────────────┘
+```
+
+**Critical Path:** Phase 3 → Phase 4 → Phase 5
+
+**Parallel Work:** Phases 1, 2 can run independently
