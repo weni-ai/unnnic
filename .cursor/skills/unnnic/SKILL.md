@@ -40,6 +40,7 @@ These are the most commonly used components. Use these first before looking for 
 | `UnnnicToast` | Notification | Use `unnnicToastManager.show({ type, message })` |
 | `UnnnicPopover` | Popover | Composable: `PopoverTrigger`, `PopoverContent` |
 | `UnnnicToolTip` | Tooltip | `text`, `side` |
+| `UnnnicDisclaimer` | Inline message | `type`: informational/success/attention/error/neutral, `title`, `description` |
 
 ### Display
 
@@ -50,6 +51,7 @@ These are the most commonly used components. Use these first before looking for 
 | `UnnnicTag` | Label | `text`, `type` |
 | `UnnnicSkeletonLoading` | Loading | `width`, `height` |
 | `UnnnicTabs` | Modern tabs | Composable: `TabsList`, `TabsTrigger`, `TabsContent` |
+| `UnnnicSegmentedControl` | Segmented toggle | Composable: `SegmentedControlList`, `SegmentedControlTrigger`, `SegmentedControlContent`, `size`: small/medium |
 | `UnnnicPageHeader` | Page header | `title`, `description`, slots for actions |
 
 ## Other Components
