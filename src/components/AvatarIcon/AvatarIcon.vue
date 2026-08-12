@@ -18,59 +18,45 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import { computed } from 'vue';
 import UnnnicIcon from '../Icon.vue';
+import type { SchemeColor } from '../Icon.vue';
+import type { IconSize } from '../Icon/types';
 
-export default {
-  components: {
-    UnnnicIcon,
-  },
+defineOptions({
+  name: 'UnnnicAvatarIcon',
+});
 
-  props: {
-    enabled: {
-      type: Boolean,
-      default: true,
-    },
+export type AvatarIconSize = 'nano' | 'xs' | 'sm' | 'lg' | 'xl';
 
-    icon: {
-      type: String,
-      default: 'graph-stats-1',
-    },
+export interface AvatarIconProps {
+  enabled?: boolean;
+  icon?: string;
+  size?: AvatarIconSize;
+  scheme?: SchemeColor;
+  filled?: boolean;
+  opacity?: boolean;
+}
 
-    size: {
-      type: String,
-      default: 'sm',
-      validator(value) {
-        return ['nano', 'xs', 'sm', 'lg', 'xl'].indexOf(value) !== -1;
-      },
-    },
+const props = withDefaults(defineProps<AvatarIconProps>(), {
+  enabled: true,
+  icon: 'graph-stats-1',
+  size: 'sm',
+  scheme: 'fg-info',
+  filled: false,
+  opacity: true,
+});
 
-    scheme: {
-      type: String,
-      default: 'fg-info',
-    },
-    filled: {
-      type: Boolean,
-      default: false,
-    },
-    opacity: {
-      type: Boolean,
-      default: true,
-    },
-  },
-
-  computed: {
-    iconSize() {
-      return {
-        nano: 'xs',
-        xs: 'sm',
-        sm: 'md',
-        lg: 'lg',
-        xl: 'xl',
-      }[this.size];
-    },
-  },
-};
+const iconSize = computed((): IconSize => {
+  return {
+    nano: 'xs',
+    xs: 'sm',
+    sm: 'md',
+    lg: 'lg',
+    xl: 'xl',
+  }[props.size] as IconSize;
+});
 </script>
 
 <style lang="scss" scoped>
@@ -96,12 +82,12 @@ export default {
 
 .unnnic-avatar-icon {
   border-radius: $unnnic-border-radius-sm;
-  padding: $unnnic-spacing-inset-nano;
+  padding: $unnnic-space-2;
   display: inline-flex;
 
   &.nano,
   &.xs {
-    padding: $unnnic-spacing-stack-nano $unnnic-spacing-inline-nano;
+    padding: $unnnic-space-1;
   }
 }
 </style>
