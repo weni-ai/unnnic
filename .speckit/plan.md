@@ -205,7 +205,7 @@
 
 ## Entity Schemas
 
-All entities follow JSON Schema definitions in `docs/ai-native/schemas/`:
+All entities follow JSON Schema definitions in `.speckit/schemas/`:
 
 - `manifest.schema.json` — Snapshot metadata
 - `component.schema.json` — ComponentDoc with props, events, slots

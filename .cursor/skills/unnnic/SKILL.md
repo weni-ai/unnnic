@@ -23,6 +23,7 @@ These are the most commonly used components. Use these first before looking for 
 | `UnnnicFormElement` | Form wrapper | `label`, `error`, `message`, `disabled` — wrap inputs with this |
 | `UnnnicTextArea` | Multiline text | `modelValue`, `maxlength` |
 | `UnnnicSelect` | Dropdown select | `options`, `modelValue` |
+| `UnnnicMultiSelect` | Multi Dropdown select | `options`, `modelValue` |
 | `UnnnicCheckbox` | Boolean toggle | `modelValue`, `label` |
 | `UnnnicCheckboxGroup` | Checkbox list | `options`, `modelValue` |
 | `UnnnicRadio` | Single option | `modelValue`, `value` |
@@ -60,23 +61,17 @@ These are the most commonly used components. Use these first before looking for 
 | `UnnnicModal` | `UnnnicDialog` |
 | `UnnnicDrawer` | `UnnnicDrawerNext` |
 | `UnnnicTab` | `UnnnicTabs` |
+| `UnnnicSelectSmart` | `UnnnicSelect` |
 
 ### Additional Components
 
 | Component | Purpose | Key Props |
 |-----------|---------|-----------|
-| `UnnnicSelectSmart` | Advanced select | `options`, `modelValue`, `multiple`, `autocomplete` |
-| `UnnnicMultiSelect` | Multi-select | `options`, `modelValue` |
-| `UnnnicTable` | Legacy table | `headers`, use `UnnnicTableRow` for rows |
-| `UnnnicTableNext` | Modern table | `headers`, `items`, `@row-click`, `@sort` |
+| `UnnnicTable` | version="2" is Modern version="1" is Legacy | `headers`, use `UnnnicTableRow` for rows |
+| `UnnnicTableNext` | Legacy table | `headers`, `items`, `@row-click`, `@sort` |
 | `UnnnicDataTable` | Data table | `headers`, `items`, with pagination |
-| `UnnnicCard` | Container | Generic card wrapper |
-| `UnnnicAlert` | Inline message | `type`: info/success/warning/error, `message` |
-| `UnnnicBanner` | Page alert | `type`, `message` |
-| `UnnnicSidebar` | App sidebar | Contains `UnnnicSidebarItem` |
 | `UnnnicBreadcrumb` | Breadcrumbs | `crumbs` array |
 | `UnnnicPagination` | Page nav | `modelValue`, `total`, `perPage` |
-| `UnnnicDropdown` | Dropdown menu | Contains `UnnnicDropdownItem` |
 | `UnnnicAvatarIcon` | User avatar | `username`, `size` |
 
 ## Tokens
@@ -102,6 +97,7 @@ These are the most commonly used components. Use these first before looking for 
 
 | Token | Value |
 |-------|-------|
+| `space-05` | 2px |
 | `space-1` | 4px |
 | `space-2` | 8px |
 | `space-3` | 12px |
@@ -109,6 +105,21 @@ These are the most commonly used components. Use these first before looking for 
 | `space-6` | 24px |
 | `space-8` | 32px |
 | `space-12` | 48px |
+| `space-16` | 64px |
+| `space-20` | 80px |
+
+### Icon sizer (SCSS)
+
+`$unnnic-icon-size-{n}` — Base unit: 4px
+
+| Token | Value |
+|-------|-------|
+| `size-3` | 12px |
+| `size-4` | 16px |
+| `size-5` | 20px |
+| `size-6` | 24px |
+| `size-7` | 32px |
+| `size-10` | 40px |
 
 ### Typography (SCSS mixins)
 
@@ -122,11 +133,11 @@ These are the most commonly used components. Use these first before looking for 
 
 ### Radii
 
-`$unnnic-radius-{n}` — 1, 2, 3, 4 (4px increments)
+`$unnnic-radius-{n}` — 1, 2, 3, 4 or full (4px increments)
 
 ### Shadows
 
-`$unnnic-shadow-{n}` — 1, 2, 3
+`$unnnic-shadow-{n}` — 1 or 2
 
 ## Patterns
 
@@ -149,19 +160,6 @@ These are the most commonly used components. Use these first before looking for 
 - **Tertiary/link:** `type="tertiary"`
 - **Destructive:** `type="warning"`
 - **Caution:** `type="attention"`
-
-### Modal Dialog
-
-```vue
-<UnnnicModalDialog
-  title="Confirm deletion"
-  description="This action cannot be undone"
-  primaryAction="Delete"
-  secondaryAction="Cancel"
-  @click-action-primary="handleDelete"
-  @click-action-secondary="closeModal"
-/>
-```
 
 ### Toast Notifications
 
@@ -217,6 +215,6 @@ When implementing from Figma designs:
 
 ## Resources
 
-- **Storybook:** https://unnnic.weni.ai
+- **Storybook:** https://unnnic.stg.cloud.weni.ai/
 - **Figma:** https://figma.com/design/YbvOpVPUBxTSEzg4J8pXKu/Weni---unnnic
 - **npm:** https://www.npmjs.com/package/@weni/unnnic-system
