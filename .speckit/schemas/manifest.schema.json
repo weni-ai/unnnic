@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:weni:unnnic:ai:schema:manifest:1.0",
+  "title": "Unnnic AI Snapshot Manifest",
+  "description": "Metadata for an AI knowledge snapshot of the Unnnic Design System",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "packageName",
+    "packageVersion",
+    "gitSha",
+    "publishedAt",
+    "entityCounts",
+    "paths"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0",
+      "description": "Schema version for forward compatibility"
+    },
+    "packageName": {
+      "type": "string",
+      "const": "@weni/unnnic-system",
+      "description": "Name of the design system package"
+    },
+    "packageVersion": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+(-[a-zA-Z0-9.]+)?$",
+      "description": "Semver version of the design system package"
+    },
+    "gitSha": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$",
+      "description": "Full Git commit SHA used to build the snapshot"
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of snapshot generation"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repoUrl"],
+      "properties": {
+        "repoUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "GitHub repository URL"
+        },
+        "tag": {
+          "type": "string",
+          "description": "Git tag for the release"
+        }
+      }
+    },
+    "entityCounts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["components", "tokens", "patterns", "examples"],
+      "properties": {
+        "components": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of ComponentDoc entities"
+        },
+        "tokens": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of TokenDoc entities"
+        },
+        "patterns": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of PatternDoc entities"
+        },
+        "examples": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of ExampleDoc entities"
+        }
+      }
+    },
+    "paths": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["entitiesDir", "searchIndex"],
+      "properties": {
+        "entitiesDir": {
+          "type": "string",
+          "const": "entities",
+          "description": "Relative path to entities directory"
+        },
+        "searchIndex": {
+          "type": "string",
+          "const": "index/search.json",
+          "description": "Relative path to search index"
+        }
+      }
+    },
+    "generatorVersion": {
+      "type": "string",
+      "description": "Version of the snapshot generator tool"
+    }
+  }
+}

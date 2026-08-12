@@ -1,11 +1,13 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "3.32.1",
+  "version": "3.33.0",
   "type": "commonjs",
   "files": [
     "dist",
     "src",
-    "public"
+    "public",
+    ".cursor-plugin",
+    "skills"
   ],
   "main": "./dist/unnnic.umd.js",
   "module": "./dist/unnnic.mjs",
