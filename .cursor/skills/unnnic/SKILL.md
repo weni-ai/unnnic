@@ -1,7 +1,5 @@
 # Unnnic Design System
 
-> **Skill Version:** 0.1.0
-
 Use this skill when implementing UI with Weni's Unnnic Design System (`@weni/unnnic-system`).
 
 ## Import
