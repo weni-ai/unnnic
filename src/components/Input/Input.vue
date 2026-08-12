@@ -29,7 +29,7 @@
       :disabled="disabled"
       :readonly="readonly"
       :showClear="showClear"
-      @clear="$emit('clear')"
+      @clear="emit('clear')"
     />
 
     <template
@@ -41,145 +41,97 @@
   </UnnnicFormElement>
 </template>
 
-<script>
+<script setup lang="ts">
+import { computed, ref, watch } from 'vue';
 import { fullySanitize } from '../../utils/sanitize';
 import TextInput from './TextInput.vue';
 import UnnnicFormElement from '../FormElement/FormElement.vue';
+import { type TooltipProps } from '../ToolTip/ToolTip.vue';
+import type { InputSize, InputVariant } from './BaseInput.vue';
 
-export default {
+defineOptions({
   name: 'UnnnicInput',
-  components: {
-    TextInput,
-    UnnnicFormElement,
-  },
-  props: {
-    placeholder: {
-      type: String,
-      default: '',
-    },
-    type: {
-      type: String,
-      default: 'normal',
-      validator(value) {
-        return ['normal', 'error'].indexOf(value) !== -1;
-      },
-    },
-    modelValue: {
-      type: String,
-      default: '',
-    },
-    nativeType: {
-      type: String,
-      default: 'text',
-    },
-    message: {
-      type: String,
-      default: '',
-    },
-    errors: {
-      type: [String, Array],
-      default: '',
-    },
-    label: {
-      type: String,
-      default: '',
-    },
-    iconLeft: {
-      type: String,
-      default: '',
-    },
-    iconRight: {
-      type: String,
-      default: '',
-    },
-    allowTogglePassword: {
-      type: Boolean,
-      default: false,
-    },
-    iconLeftClickable: {
-      type: Boolean,
-      default: false,
-    },
-    iconRightClickable: {
-      type: Boolean,
-      default: false,
-    },
-    hasCloudyColor: {
-      type: Boolean,
-      default: false,
-    },
-    size: {
-      type: String,
-      default: 'md',
-    },
-    mask: {
-      type: [String, Array],
-      default: '',
-    },
-    tooltip: {
-      type: Object,
-      default: undefined,
-    },
-    maxlength: {
-      type: [Number, null],
-      default: null,
-    },
-    showMaxlengthCounter: {
-      type: Boolean,
-      default: false,
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    readonly: {
-      type: Boolean,
-      default: false,
-    },
-    useFocusProp: {
-      type: Boolean,
-      default: false,
-    },
-    focus: {
-      type: Boolean,
-      default: false,
-    },
-    showClear: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  emits: ['update:modelValue', 'clear'],
+});
 
-  data() {
-    return {
-      val: this.modelValue,
-    };
-  },
-  computed: {
-    computedError() {
-      if (Array.isArray(this.errors)) {
-        return this.errors.join(', ') || this.type === 'error';
-      }
+export interface InputProps {
+  placeholder?: string;
+  type?: InputVariant;
+  modelValue?: string;
+  nativeType?: string;
+  message?: string;
+  errors?: string | string[];
+  label?: string;
+  iconLeft?: string;
+  iconRight?: string;
+  allowTogglePassword?: boolean;
+  iconLeftClickable?: boolean;
+  iconRightClickable?: boolean;
+  hasCloudyColor?: boolean;
+  size?: InputSize | string;
+  mask?: string | string[];
+  tooltip?: TooltipProps;
+  maxlength?: number | null;
+  showMaxlengthCounter?: boolean;
+  disabled?: boolean;
+  readonly?: boolean;
+  useFocusProp?: boolean;
+  focus?: boolean;
+  showClear?: boolean;
+}
 
-      return this.errors || this.type === 'error';
-    },
+const props = withDefaults(defineProps<InputProps>(), {
+  placeholder: '',
+  type: 'normal',
+  modelValue: '',
+  nativeType: 'text',
+  message: '',
+  errors: '',
+  label: '',
+  iconLeft: '',
+  iconRight: '',
+  allowTogglePassword: false,
+  iconLeftClickable: false,
+  iconRightClickable: false,
+  hasCloudyColor: false,
+  size: 'md',
+  mask: '',
+  tooltip: undefined,
+  maxlength: null,
+  showMaxlengthCounter: false,
+  disabled: false,
+  readonly: false,
+  useFocusProp: false,
+  focus: false,
+  showClear: false,
+});
+
+const emit = defineEmits<{
+  'update:modelValue': [value: string];
+  clear: [];
+}>();
+
+const val = ref(props.modelValue);
+
+const computedError = computed(() => {
+  if (Array.isArray(props.errors)) {
+    return props.errors.join(', ') || props.type === 'error';
+  }
+
+  return props.errors || props.type === 'error';
+});
+
+watch(val, () => {
+  emit('update:modelValue', fullySanitize(val.value));
+});
+
+watch(
+  () => props.modelValue,
+  () => {
+    val.value = props.modelValue;
   },
-  watch: {
-    val() {
-      this.$emit('update:modelValue', fullySanitize(this.val));
-    },
-    modelValue() {
-      this.val = this.modelValue;
-    },
-  },
-  mounted() {
-    this.val = this.modelValue;
-  },
-  methods: {
-    fullySanitize,
-  },
-};
+);
+
+val.value = props.modelValue;
 </script>
 
 <style lang="scss" scoped>
