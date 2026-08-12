@@ -10,7 +10,9 @@ import { UnnnicButton, UnnnicInput, UnnnicFormElement } from '@weni/unnnic-syste
 </script>
 ```
 
-## Components
+## Priority Components
+
+These are the most commonly used components. Use these first before looking for alternatives.
 
 ### Form Controls
 
@@ -19,76 +21,63 @@ import { UnnnicButton, UnnnicInput, UnnnicFormElement } from '@weni/unnnic-syste
 | `UnnnicButton` | Actions | `type`: primary/secondary/tertiary/warning/attention, `size`: large/small, `loading`, `disabled`, `iconLeft`, `iconRight` |
 | `UnnnicInput` | Text input | `type`: normal/error, `size`: md/sm, `iconLeft`, `iconRight`, `placeholder` |
 | `UnnnicFormElement` | Form wrapper | `label`, `error`, `message`, `disabled` — wrap inputs with this |
+| `UnnnicTextArea` | Multiline text | `modelValue`, `maxlength` |
 | `UnnnicSelect` | Dropdown select | `options`, `modelValue` |
-| `UnnnicSelectSmart` | Advanced select | `options`, `modelValue`, `multiple`, `autocomplete` |
-| `UnnnicMultiSelect` | Multi-select | `options`, `modelValue` |
 | `UnnnicCheckbox` | Boolean toggle | `modelValue`, `label` |
 | `UnnnicCheckboxGroup` | Checkbox list | `options`, `modelValue` |
 | `UnnnicRadio` | Single option | `modelValue`, `value` |
 | `UnnnicRadioGroup` | Radio list | `options`, `modelValue` |
 | `UnnnicSwitch` | Toggle switch | `modelValue`, `label` |
-| `UnnnicTextArea` | Multiline text | `modelValue`, `maxlength` |
 | `UnnnicDatePicker` | Date selection | `modelValue`, `format` |
 
-### Feedback
+### Feedback & Overlays
 
 | Component | Purpose | Key Props |
 |-----------|---------|-----------|
-| `UnnnicModal` | Legacy dialog | `title`, `showCloseButton` |
-| `UnnnicModalNext` | Modern dialog | `title`, `description`, use slots for content |
-| `UnnnicModalDialog` | Confirmation | `title`, `description`, `primaryAction`, `secondaryAction` |
-| `UnnnicDialog` | Headless dialog | Composable: `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogFooter` |
+| `UnnnicDialog` | Modern dialog | Composable: `DialogTrigger`, `DialogContent`, `DialogHeader`, `DialogFooter`, `DialogClose` |
+| `UnnnicDrawerNext` | Modern drawer | Composable: `DrawerContent`, `DrawerHeader`, `DrawerFooter`, `DrawerClose` |
 | `UnnnicToast` | Notification | Use `unnnicToastManager.show({ type, message })` |
-| `UnnnicAlert` | Inline message | `type`: info/success/warning/error, `message` |
-| `UnnnicBanner` | Page alert | `type`, `message` |
-| `UnnnicDisclaimer` | Info box | `type`, `message` |
-
-### Navigation
-
-| Component | Purpose | Key Props |
-|-----------|---------|-----------|
-| `UnnnicSidebar` | App sidebar | Contains `UnnnicSidebarItem` |
-| `UnnnicTab` | Legacy tabs | `tabs`, `modelValue` |
-| `UnnnicTabs` | Modern tabs | Composable: `TabsList`, `TabsTrigger`, `TabsContent` |
-| `UnnnicBreadcrumb` | Breadcrumbs | `crumbs` array |
-| `UnnnicPagination` | Page nav | `modelValue`, `total`, `perPage` |
-| `UnnnicNavigator` | Step nav | `steps`, `modelValue` |
-
-### Data Display
-
-| Component | Purpose | Key Props |
-|-----------|---------|-----------|
-| `UnnnicTable` | Legacy table | `headers`, use `UnnnicTableRow` for rows |
-| `UnnnicTableNext` | Modern table | `headers`, `items`, `@row-click`, `@sort` |
-| `UnnnicDataTable` | Data table | `headers`, `items`, with pagination |
-| `UnnnicCard` | Container | Generic card wrapper |
-| `UnnnicCardData` | Data card | `title`, `value` |
-| `UnnnicTag` | Label | `text`, `type` |
-| `UnnnicChip` | Chip | `text`, `removable` |
-| `UnnnicLabel` | Form label | `label` |
-| `UnnnicSkeletonLoading` | Loading | `width`, `height` |
-| `UnnnicProgressBar` | Progress | `value`, `max` |
-
-### Layout
-
-| Component | Purpose | Key Props |
-|-----------|---------|-----------|
-| `UnnnicDrawer` | Legacy drawer | `open` |
-| `UnnnicDrawerNext` | Modern drawer | Composable: `DrawerContent`, `DrawerHeader`, `DrawerFooter` |
-| `UnnnicCollapse` | Accordion | `title`, `open` |
-| `UnnnicAccordion` | Accordion group | Contains collapsible sections |
 | `UnnnicPopover` | Popover | Composable: `PopoverTrigger`, `PopoverContent` |
 | `UnnnicToolTip` | Tooltip | `text`, `side` |
-| `UnnnicDropdown` | Dropdown menu | Contains `UnnnicDropdownItem` |
 
-### Media
+### Display
 
 | Component | Purpose | Key Props |
 |-----------|---------|-----------|
 | `UnnnicIcon` | Icon | `icon`, `scheme`, `size`: ant/sm/md/lg/xl |
+| `UnnnicChip` | Chip | `text`, `removable` |
+| `UnnnicTag` | Label | `text`, `type` |
+| `UnnnicSkeletonLoading` | Loading | `width`, `height` |
+| `UnnnicTabs` | Modern tabs | Composable: `TabsList`, `TabsTrigger`, `TabsContent` |
+| `UnnnicPageHeader` | Page header | `title`, `description`, slots for actions |
+
+## Other Components
+
+### Legacy (use modern alternatives when possible)
+
+| Legacy | Modern Alternative |
+|--------|-------------------|
+| `UnnnicModal` | `UnnnicDialog` |
+| `UnnnicDrawer` | `UnnnicDrawerNext` |
+| `UnnnicTab` | `UnnnicTabs` |
+
+### Additional Components
+
+| Component | Purpose | Key Props |
+|-----------|---------|-----------|
+| `UnnnicSelectSmart` | Advanced select | `options`, `modelValue`, `multiple`, `autocomplete` |
+| `UnnnicMultiSelect` | Multi-select | `options`, `modelValue` |
+| `UnnnicTable` | Legacy table | `headers`, use `UnnnicTableRow` for rows |
+| `UnnnicTableNext` | Modern table | `headers`, `items`, `@row-click`, `@sort` |
+| `UnnnicDataTable` | Data table | `headers`, `items`, with pagination |
+| `UnnnicCard` | Container | Generic card wrapper |
+| `UnnnicAlert` | Inline message | `type`: info/success/warning/error, `message` |
+| `UnnnicBanner` | Page alert | `type`, `message` |
+| `UnnnicSidebar` | App sidebar | Contains `UnnnicSidebarItem` |
+| `UnnnicBreadcrumb` | Breadcrumbs | `crumbs` array |
+| `UnnnicPagination` | Page nav | `modelValue`, `total`, `perPage` |
+| `UnnnicDropdown` | Dropdown menu | Contains `UnnnicDropdownItem` |
 | `UnnnicAvatarIcon` | User avatar | `username`, `size` |
-| `UnnnicCardImage` | Image card | `src`, `title` |
-| `UnnnicEmojiPicker` | Emoji selector | `@select` |
 
 ## Tokens
 

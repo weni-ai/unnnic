@@ -166,14 +166,23 @@ Bridge Figma components to code implementations, enabling precise design-to-code
 
 1. UnnnicButton
 2. UnnnicInput + UnnnicFormElement
-3. UnnnicSelect / UnnnicSelectSmart
-4. UnnnicModal / UnnnicModalNext
-5. UnnnicTable / UnnnicTableNext
+3. UnnnicSelect
+4. UnnnicDialog
+5. UnnnicCheckbox + UnnnicCheckboxGroup
+5. UnnnicRadio + UnnnicRadioGroup
 6. UnnnicIcon
-7. UnnnicDropdown
-8. UnnnicCard
-9. UnnnicTabs
-10. UnnnicAlert / UnnnicToast
+7. UnnnicDrawer
+8. UnnnicTextarea
+9. UnnnicSkeletonLoading
+10. UnnnicToast
+11. UnnnicChip
+12. UnnnicTabs
+13. UnnnicPopover
+14. UnnnicPageHeader
+15. UnnnicDatePicker
+16. UnnnicSwitch
+17. UnnnicTag
+18. UnnnicTooltip
 
 ### Mapping Format
 
@@ -485,19 +494,16 @@ Each published snapshot is immutable and tied to:
 
 ---
 
-## Implementation Phases
+## Implementation
 
-See [ROADMAP.md](./ROADMAP.md) for detailed implementation plan.
+See [`.speckit/`](../../.speckit/) for the specification-driven development artifacts:
 
-**Summary:**
-1. Cursor Skill (2-3 days)
-2. Code Connect for top 10 components (3-5 days)
-3. Snapshot Generator (5-7 days)
-4. MCP Server (5-7 days)
-5. CI/CD Integration (2-3 days)
-6. Refinement (3-5 days)
+- **constitution.md** — Project principles and constraints
+- **spec.md** — Requirements and user stories
+- **plan.md** — Technical architecture
+- **tasks.md** — Implementation task breakdown
 
-**Total:** 20-30 days
+Run `/speckit.plan` to generate or update the technical plan, then `/speckit.tasks` to break it into actionable items.
 
 ---
 
