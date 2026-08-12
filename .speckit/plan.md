@@ -1,5 +1,6 @@
 # Technical Plan — Unnnic AI-Native Design System
 
+> **Version:** 0.1.0  
 > **Status:** Validated against spec.md and constitution.md  
 > **Last updated:** 2026-08-12  
 > **Covers:** US-01, US-02, US-03, US-04, US-05

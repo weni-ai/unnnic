@@ -1,5 +1,8 @@
 # Constitution — Unnnic AI-Native Design System
 
+> **Version:** 0.1.0  
+> **Last updated:** 2026-08-12
+
 This document defines the non-negotiable principles that govern the development of the AI-native capabilities for Unnnic Design System.
 
 ## Project Identity

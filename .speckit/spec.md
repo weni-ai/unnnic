@@ -1,5 +1,8 @@
 # Specification — Unnnic AI-Native Design System
 
+> **Version:** 0.1.0  
+> **Last updated:** 2026-08-12
+
 ## Problem Statement
 
 When developers use AI-assisted coding with Unnnic Design System, LLMs frequently:

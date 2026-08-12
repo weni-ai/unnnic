@@ -1,5 +1,8 @@
 # Tasks — Unnnic AI-Native Design System
 
+> **Version:** 0.1.0  
+> **Last updated:** 2026-08-12
+
 ## Phase 1: Cursor Skill (2-3 days)
 
 ### TASK-1.1: Create skill directory structure
