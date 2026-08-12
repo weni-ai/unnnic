@@ -54,144 +54,130 @@
   </div>
 </template>
 
-<script>
-import BaseInput from './BaseInput.vue';
+<script setup lang="ts">
+import { computed, ref, useAttrs, useTemplateRef } from 'vue';
+import BaseInput, {
+  type InputSize,
+  type InputVariant,
+} from './BaseInput.vue';
 import UnnnicIcon from '../Icon.vue';
 
-export default {
-  components: {
-    BaseInput,
-    UnnnicIcon,
-  },
-  props: {
-    placeholder: {
-      type: String,
-      default: null,
-    },
-    type: {
-      type: String,
-      default: 'normal',
-      validator(value) {
-        return ['normal', 'error'].indexOf(value) !== -1;
-      },
-    },
-    modelValue: {
-      type: String,
-      default: '',
-    },
-    nativeType: {
-      type: String,
-      default: '',
-    },
-    iconLeft: {
-      type: String,
-      default: null,
-    },
-    iconRight: {
-      type: String,
-      default: null,
-    },
-    iconLeftClickable: {
-      type: Boolean,
-      default: null,
-    },
-    iconRightClickable: {
-      type: Boolean,
-      default: null,
-    },
-    allowTogglePassword: {
-      type: Boolean,
-      default: null,
-    },
-    size: {
-      type: String,
-      default: 'md',
-    },
-    maxlength: {
-      type: Number,
-      default: null,
-    },
-    disabled: {
-      type: Boolean,
-      default: false,
-    },
-    readonly: {
-      type: Boolean,
-      default: false,
-    },
-    useFocusProp: {
-      type: Boolean,
-      default: false,
-    },
-    focus: {
-      type: Boolean,
-      default: false,
-    },
-    showClear: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  emits: ['icon-left-click', 'icon-right-click', 'clear'],
-  data() {
-    return {
-      isFocused: false,
-      showPassword: false,
-    };
-  },
-  computed: {
-    isDisabled() {
-      return this.$attrs.disabled || this.disabled;
-    },
+defineOptions({
+  name: 'UnnnicTextInput',
+});
 
-    iconRightSvg() {
-      if (this.allowTogglePassword) {
-        return this.showPassword ? 'view-off-1' : 'view-1-1';
-      }
+export interface TextInputProps {
+  placeholder?: string | null;
+  type?: InputVariant;
+  modelValue?: string;
+  nativeType?: string;
+  iconLeft?: string | null;
+  iconRight?: string | null;
+  iconLeftClickable?: boolean | null;
+  iconRightClickable?: boolean | null;
+  allowTogglePassword?: boolean | null;
+  size?: InputSize | string;
+  maxlength?: number | null;
+  disabled?: boolean;
+  readonly?: boolean;
+  useFocusProp?: boolean;
+  focus?: boolean;
+  showClear?: boolean;
+}
 
-      return this.iconRight;
-    },
+const props = withDefaults(defineProps<TextInputProps>(), {
+  placeholder: null,
+  type: 'normal',
+  modelValue: '',
+  nativeType: '',
+  iconLeft: null,
+  iconRight: null,
+  iconLeftClickable: null,
+  iconRightClickable: null,
+  allowTogglePassword: null,
+  size: 'md',
+  maxlength: null,
+  disabled: false,
+  readonly: false,
+  useFocusProp: false,
+  focus: false,
+  showClear: false,
+});
 
-    iconScheme() {
-      if (this.isDisabled) {
-        return 'fg-muted';
-      }
-      return 'fg-base';
-    },
+const emit = defineEmits<{
+  'icon-left-click': [];
+  'icon-right-click': [];
+  clear: [];
+}>();
 
-    attributes() {
-      return { ...this.$attrs, ...this.$attrs['v-bind'], ...this.$props };
-    },
-  },
+const attrs = useAttrs();
+const baseInput = useTemplateRef<{ $el: HTMLInputElement }>('base-input');
+const isFocused = ref(false);
+const showPassword = ref(false);
 
-  methods: {
-    focusInput() {
-      this.$refs['base-input'].$el.focus();
-    },
+const isDisabled = computed(() => {
+  return Boolean(attrs.disabled || props.disabled);
+});
 
-    onFocus() {
-      this.isFocused = true;
-    },
+const iconRightSvg = computed(() => {
+  if (props.allowTogglePassword) {
+    return showPassword.value ? 'view-off-1' : 'view-1-1';
+  }
 
-    onBlur() {
-      this.isFocused = false;
-    },
+  return props.iconRight;
+});
 
-    onIconLeftClick() {
-      if (this.iconLeftClickable) this.$emit('icon-left-click');
-    },
+const iconScheme = computed(() => {
+  if (isDisabled.value) {
+    return 'fg-muted';
+  }
+  return 'fg-base';
+});
 
-    onClearClick() {
-      this.$emit('clear');
-    },
+const attributes = computed(() => {
+  return {
+    ...attrs,
+    ...(attrs['v-bind'] as Record<string, unknown> | undefined),
+    ...props,
+  };
+});
 
-    onIconRightClick() {
-      if (this.attributes.disabled) return;
-      if (this.allowTogglePassword) this.showPassword = !this.showPassword;
-      else if (this.iconRightClickable) this.$emit('icon-right-click');
-    },
-  },
-};
+function focusInput() {
+  baseInput.value?.$el.focus();
+}
+
+function onFocus() {
+  isFocused.value = true;
+}
+
+function onBlur() {
+  isFocused.value = false;
+}
+
+function onIconLeftClick() {
+  if (props.iconLeftClickable) emit('icon-left-click');
+}
+
+function onClearClick() {
+  emit('clear');
+}
+
+function onIconRightClick() {
+  if (attributes.value.disabled) return;
+  if (props.allowTogglePassword) showPassword.value = !showPassword.value;
+  else if (props.iconRightClickable) emit('icon-right-click');
+}
+
+defineExpose({
+  focusInput,
+  onFocus,
+  onBlur,
+  showPassword,
+  isFocused,
+  iconRightSvg,
+  iconScheme,
+  attributes,
+});
 </script>
 
 <style lang="scss" scoped>
