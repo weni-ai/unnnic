@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:weni:unnnic:ai:schema:example:1.0",
+  "title": "Unnnic AI ExampleDoc",
+  "description": "Documentation entity for a code example (typically from Storybook) in the Unnnic Design System",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "id",
+    "version",
+    "title",
+    "sourceRefs"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "kind": {
+      "type": "string",
+      "const": "example"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^example:[a-z][a-z0-9-]*$",
+      "description": "Unique identifier in format example:{storyId}"
+    },
+    "version": {
+      "type": "string",
+      "description": "Package version this doc was generated from"
+    },
+    "storyId": {
+      "type": "string",
+      "description": "Storybook story ID, e.g., form-button--primary"
+    },
+    "title": {
+      "type": "string",
+      "description": "Story title from Storybook"
+    },
+    "name": {
+      "type": "string",
+      "description": "Story name (variant), e.g., Primary"
+    },
+    "description": {
+      "type": "string",
+      "description": "What this example demonstrates"
+    },
+    "component": {
+      "type": "string",
+      "description": "Primary component ID this example demonstrates"
+    },
+    "args": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Storybook args (prop values) for this example"
+    },
+    "snippet": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "type": "string",
+          "enum": ["vue", "html", "typescript"]
+        },
+        "code": {
+          "type": "string",
+          "description": "Rendered code snippet"
+        }
+      }
+    },
+    "related": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "tokens": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "patterns": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Storybook tags and custom tags"
+    },
+    "sourceRefs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["storybook_story", "repo_file"]
+          },
+          "storyId": {
+            "type": "string"
+          },
+          "path": {
+            "type": "string"
+          },
+          "ref": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

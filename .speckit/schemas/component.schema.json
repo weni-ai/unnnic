@@ -1,0 +1,310 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:weni:unnnic:ai:schema:component:1.0",
+  "title": "Unnnic AI ComponentDoc",
+  "description": "Documentation entity for a Vue component in the Unnnic Design System",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "id",
+    "version",
+    "exportName",
+    "import",
+    "api",
+    "sourceRefs"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "kind": {
+      "type": "string",
+      "const": "component"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^component:[A-Za-z][A-Za-z0-9]*$",
+      "description": "Unique identifier in format component:{ExportName}"
+    },
+    "version": {
+      "type": "string",
+      "description": "Package version this doc was generated from"
+    },
+    "exportName": {
+      "type": "string",
+      "description": "Exported component name, e.g., UnnnicButton"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable name, e.g., Button"
+    },
+    "description": {
+      "type": "string",
+      "description": "Component purpose and usage summary"
+    },
+    "import": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package", "name"],
+      "properties": {
+        "package": {
+          "type": "string",
+          "const": "@weni/unnnic-system"
+        },
+        "name": {
+          "type": "string",
+          "description": "Named export to import"
+        },
+        "style": {
+          "type": "string",
+          "description": "Optional separate style import path"
+        }
+      }
+    },
+    "api": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["props", "events", "slots"],
+      "properties": {
+        "props": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/PropDef" }
+        },
+        "events": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/EventDef" }
+        },
+        "slots": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/SlotDef" }
+        }
+      }
+    },
+    "usageRules": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "When to use this component"
+        },
+        "do": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Recommended practices"
+        },
+        "dont": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Anti-patterns to avoid"
+        },
+        "a11y": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Accessibility guidelines"
+        }
+      }
+    },
+    "related": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "tokens": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Related token IDs"
+        },
+        "components": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Related component IDs"
+        },
+        "patterns": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Related pattern IDs"
+        },
+        "examples": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Related example IDs"
+        }
+      }
+    },
+    "figma": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "nodeUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Figma component node URL"
+        },
+        "hasCodeConnect": {
+          "type": "boolean",
+          "description": "Whether Code Connect mapping exists"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Searchable tags"
+    },
+    "sourceRefs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/SourceRef" }
+    }
+  },
+  "$defs": {
+    "PropDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "type", "required"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Prop name in camelCase"
+        },
+        "type": {
+          "type": "string",
+          "description": "TypeScript type as string"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "default": {
+          "type": "string",
+          "description": "Default value as string representation"
+        },
+        "description": {
+          "type": "string"
+        },
+        "since": {
+          "type": "string",
+          "description": "Version when prop was added"
+        },
+        "deprecation": {
+          "$ref": "#/$defs/Deprecation"
+        }
+      }
+    },
+    "EventDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Event name in kebab-case"
+        },
+        "payload": {
+          "type": "string",
+          "description": "TypeScript type of event payload"
+        },
+        "description": {
+          "type": "string"
+        },
+        "since": {
+          "type": "string"
+        },
+        "deprecation": {
+          "$ref": "#/$defs/Deprecation"
+        }
+      }
+    },
+    "SlotDef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Slot name (default for unnamed slot)"
+        },
+        "description": {
+          "type": "string"
+        },
+        "bindings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "type": { "type": "string" }
+            }
+          },
+          "description": "Scoped slot bindings"
+        },
+        "since": {
+          "type": "string"
+        },
+        "deprecation": {
+          "$ref": "#/$defs/Deprecation"
+        }
+      }
+    },
+    "Deprecation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "deprecated": {
+          "type": "boolean",
+          "const": true
+        },
+        "since": {
+          "type": "string",
+          "description": "Version when deprecated"
+        },
+        "removed": {
+          "type": "boolean",
+          "description": "Whether fully removed"
+        },
+        "removedIn": {
+          "type": "string",
+          "description": "Version when removed"
+        },
+        "replacement": {
+          "type": "string",
+          "description": "Suggested replacement"
+        },
+        "migrationNotes": {
+          "type": "string",
+          "description": "Migration instructions"
+        }
+      }
+    },
+    "SourceRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["repo_file", "storybook_story", "storybook_docs", "figma"]
+        },
+        "path": {
+          "type": "string",
+          "description": "File path for repo_file type"
+        },
+        "ref": {
+          "type": "string",
+          "description": "Git ref (tag or sha)"
+        },
+        "storyId": {
+          "type": "string",
+          "description": "Storybook story ID"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "External URL (Figma, etc.)"
+        }
+      }
+    }
+  }
+}
