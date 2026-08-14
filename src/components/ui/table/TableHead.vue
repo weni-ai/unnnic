@@ -6,6 +6,7 @@ const props = withDefaults(
   defineProps<{
     class?: HTMLAttributes['class'];
     ellipsis?: boolean;
+    width?: string;
   }>(),
   {
     ellipsis: false,
@@ -22,6 +23,7 @@ const props = withDefaults(
         props.class,
       )
     "
+    :style="{ width: props.width }"
   >
     <slot />
   </th>

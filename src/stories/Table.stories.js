@@ -180,12 +180,12 @@ export const Version2 = {
       <unnnic-table version="2">
         <TableHeader>
           <unnnic-table-row>
-            <TableHead>
+            <TableHead width="50%">
               Invoice
             </TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead>
+            <TableHead width="20%">Status</TableHead>
+            <TableHead width="15%">Method</TableHead>
+            <TableHead width="15%">
               Amount
             </TableHead>
           </unnnic-table-row>
