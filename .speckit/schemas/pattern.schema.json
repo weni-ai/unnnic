@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:weni:unnnic:ai:schema:pattern:1.0",
+  "title": "Unnnic AI PatternDoc",
+  "description": "Documentation entity for a UI pattern or guideline in the Unnnic Design System",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "id",
+    "version",
+    "title",
+    "sourceRefs"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "kind": {
+      "type": "string",
+      "const": "pattern"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^pattern:[a-z][a-z0-9.-]*$",
+      "description": "Unique identifier in format pattern:{slug}"
+    },
+    "version": {
+      "type": "string",
+      "description": "Package version this doc was generated from"
+    },
+    "title": {
+      "type": "string",
+      "description": "Pattern name"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["forms", "feedback", "navigation", "layout", "data-display", "accessibility"],
+      "description": "Pattern category"
+    },
+    "summary": {
+      "type": "string",
+      "description": "Brief description of the pattern"
+    },
+    "problem": {
+      "type": "string",
+      "description": "What problem this pattern solves"
+    },
+    "solution": {
+      "type": "string",
+      "description": "How the pattern addresses the problem"
+    },
+    "do": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Recommended practices"
+    },
+    "dont": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Anti-patterns to avoid"
+    },
+    "codeExample": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "language": {
+          "type": "string",
+          "enum": ["vue", "html", "typescript", "scss"]
+        },
+        "code": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "related": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Component IDs used in this pattern"
+        },
+        "tokens": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Token IDs relevant to this pattern"
+        },
+        "patterns": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Related pattern IDs"
+        },
+        "examples": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Example IDs demonstrating this pattern"
+        }
+      }
+    },
+    "a11y": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "wcagLevel": {
+          "type": "string",
+          "enum": ["A", "AA", "AAA"]
+        },
+        "guidelines": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "screenReaderNotes": {
+          "type": "string"
+        },
+        "keyboardNotes": {
+          "type": "string"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "sourceRefs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["storybook_docs", "repo_file"]
+          },
+          "path": {
+            "type": "string"
+          },
+          "ref": {
+            "type": "string"
+          },
+          "storyId": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

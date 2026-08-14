@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:weni:unnnic:ai:schema:token:1.0",
+  "title": "Unnnic AI TokenDoc",
+  "description": "Documentation entity for a design token in the Unnnic Design System",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "kind",
+    "id",
+    "version",
+    "category",
+    "name",
+    "value",
+    "sourceRefs"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "kind": {
+      "type": "string",
+      "const": "token"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^token:[a-z][a-z0-9.-]*$",
+      "description": "Unique identifier in format token:{path}"
+    },
+    "version": {
+      "type": "string",
+      "description": "Package version this doc was generated from"
+    },
+    "category": {
+      "type": "string",
+      "enum": ["color", "space", "font", "radius", "shadow", "icon-size"],
+      "description": "Token category"
+    },
+    "name": {
+      "type": "string",
+      "description": "Token path without prefix, e.g., color.bg.accent-strong"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "Human-readable name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Purpose and usage guidelines"
+    },
+    "value": {
+      "type": ["string", "number"],
+      "description": "Resolved token value"
+    },
+    "rawValue": {
+      "description": "Original value from Style Dictionary (may include aliases)"
+    },
+    "aliasOf": {
+      "type": ["string", "null"],
+      "description": "If token is an alias, the canonical token path"
+    },
+    "formats": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "scssVar": {
+          "type": "string",
+          "description": "SCSS variable name, e.g., $unnnic-color-bg-accent-strong"
+        },
+        "cssVar": {
+          "type": "string",
+          "description": "CSS custom property, e.g., --unnnic-color-bg-accent-strong"
+        },
+        "jsExport": {
+          "type": "string",
+          "description": "JavaScript export name"
+        }
+      }
+    },
+    "theme": {
+      "type": "string",
+      "enum": ["light", "dark", "both"],
+      "description": "Which theme(s) this token applies to"
+    },
+    "usageRules": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "summary": {
+          "type": "string",
+          "description": "When to use this token"
+        },
+        "do": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "dont": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "deprecation": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "deprecated": {
+          "type": "boolean",
+          "const": true
+        },
+        "since": {
+          "type": "string"
+        },
+        "replacement": {
+          "type": "string"
+        },
+        "migrationNotes": {
+          "type": "string"
+        }
+      }
+    },
+    "related": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "components": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Components that use this token"
+        },
+        "tokens": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Related tokens (e.g., same scale)"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "sourceRefs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["repo_file", "storybook_docs"]
+          },
+          "path": {
+            "type": "string"
+          },
+          "ref": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

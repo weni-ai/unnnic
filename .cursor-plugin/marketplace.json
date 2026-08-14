@@ -1,0 +1,16 @@
+{
+  "name": "unnnic-marketplace",
+  "owner": {
+    "name": "Weni"
+  },
+  "metadata": {
+    "description": "Unnnic Design System plugins for AI-assisted development"
+  },
+  "plugins": [
+    {
+      "name": "unnnic",
+      "source": "cursor-plugin",
+      "description": "Unnnic Design System - AI context for components, tokens, and patterns"
+    }
+  ]
+}
