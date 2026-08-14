@@ -5,9 +5,7 @@
   "files": [
     "dist",
     "src",
-    "public",
-    ".cursor-plugin",
-    "skills"
+    "public"
   ],
   "main": "./dist/unnnic.umd.js",
   "module": "./dist/unnnic.mjs",

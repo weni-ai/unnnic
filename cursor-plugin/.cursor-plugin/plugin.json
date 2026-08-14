@@ -1,0 +1,11 @@
+{
+  "name": "unnnic",
+  "description": "Unnnic Design System - AI context for components, tokens, and patterns",
+  "version": "3.33.0",
+  "author": {
+    "name": "Weni"
+  },
+  "homepage": "https://github.com/weni-ai/unnnic",
+  "repository": "https://github.com/weni-ai/unnnic",
+  "keywords": ["design-system", "vue", "components", "tokens", "unnnic", "weni"]
+}
