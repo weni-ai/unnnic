@@ -2,13 +2,27 @@
 import type { HTMLAttributes } from 'vue';
 import { cn } from '@/lib/utils';
 
-const props = defineProps<{
-  class?: HTMLAttributes['class'];
-}>();
+const props = withDefaults(
+  defineProps<{
+    class?: HTMLAttributes['class'];
+    ellipsis?: boolean;
+  }>(),
+  {
+    ellipsis: false,
+  },
+);
 </script>
 
 <template>
-  <th :class="cn('unnnic-table-head', props.class)">
+  <th
+    :class="
+      cn(
+        'unnnic-table-head',
+        { 'unnnic-table-head--ellipsis': props.ellipsis },
+        props.class,
+      )
+    "
+  >
     <slot />
   </th>
 </template>
@@ -23,5 +37,11 @@ const props = defineProps<{
   align-items: center;
 
   pointer-events: none;
+
+  &--ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 }
 </style>
