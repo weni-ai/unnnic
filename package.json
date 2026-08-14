@@ -6,7 +6,8 @@
     "dist",
     "src",
     "public",
-    ".cursor"
+    ".cursor-plugin",
+    "skills"
   ],
   "main": "./dist/unnnic.umd.js",
   "module": "./dist/unnnic.mjs",

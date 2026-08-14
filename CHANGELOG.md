@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Cursor Skill**: `.cursor/skills/unnnic/SKILL.md` distributed via npm for AI-assisted development. Provides component reference, design tokens, usage patterns, and Figma integration guidelines. Auto-detected by Cursor from `node_modules`.
+- **Cursor Plugin**: `skills/unnnic/SKILL.md` distributed via npm as a Cursor Plugin for AI-assisted development. Provides component reference, design tokens, usage patterns, and Figma integration guidelines. Auto-detected by Cursor from `node_modules`.
 
 # 3.32.1 (2026-08-11)
 
