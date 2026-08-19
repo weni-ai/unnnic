@@ -1,8 +1,36 @@
 import { mount } from '@vue/test-utils';
-import { beforeEach, describe, expect, afterEach, test } from 'vitest';
+import { beforeEach, describe, expect, afterEach, test, vi } from 'vitest';
 import { h } from 'vue';
 import UnnnicSelect from '../index.vue';
 import i18n from '@/utils/plugins/i18n';
+
+const { infiniteScrollResetMock, useInfiniteScrollMock } = vi.hoisted(() => {
+  const infiniteScrollResetMock = vi.fn();
+  const useInfiniteScrollMock = vi.fn((_element, _onLoadMore, _options) => ({
+    reset: infiniteScrollResetMock,
+    isLoading: { value: false },
+  }));
+  return { infiniteScrollResetMock, useInfiniteScrollMock };
+});
+
+vi.mock('@vueuse/core', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    useInfiniteScroll: (...args) => useInfiniteScrollMock(...args),
+  };
+});
+
+function getInfiniteScrollCallbacks() {
+  const lastCall = useInfiniteScrollMock.mock.calls.at(-1);
+  return {
+    onLoadMore: lastCall?.[1],
+    canLoadMore: lastCall?.[2]?.canLoadMore,
+  };
+}
+
+const visibleScrollEl = { clientHeight: 200 };
+const overflowingScrollEl = { clientHeight: 200, scrollHeight: 800 };
 
 describe('UnnnicSelect.vue', () => {
   let wrapper;
@@ -30,6 +58,8 @@ describe('UnnnicSelect.vue', () => {
   };
 
   beforeEach(() => {
+    infiniteScrollResetMock.mockClear();
+    useInfiniteScrollMock.mockClear();
     wrapper = mountWrapper();
   });
 
@@ -454,6 +484,85 @@ describe('UnnnicSelect.vue', () => {
 
       wrapper.vm.resetInfiniteScroll();
       expect(wrapper.vm.infiniteScrollLoading).toBe(false);
+    });
+
+    test('calls useInfiniteScroll once and does not recreate it on finish', async () => {
+      wrapper.unmount();
+      useInfiniteScrollMock.mockClear();
+      infiniteScrollResetMock.mockClear();
+
+      const scrollWrapper = mountWrapper({ infiniteScroll: true });
+      expect(useInfiniteScrollMock).toHaveBeenCalledTimes(1);
+
+      scrollWrapper.vm.setOpenPopover(true);
+      await scrollWrapper.vm.$nextTick();
+      scrollWrapper.vm.infiniteScrollLoading = true;
+      scrollWrapper.vm.finishInfiniteScroll();
+      await scrollWrapper.vm.$nextTick();
+
+      expect(useInfiniteScrollMock).toHaveBeenCalledTimes(1);
+      expect(infiniteScrollResetMock).toHaveBeenCalled();
+
+      scrollWrapper.unmount();
+    });
+
+    test('emits scroll-end once when the list does not fill the popover', async () => {
+      const fewOptions = [
+        { label: 'Option 1', value: 'option1' },
+        { label: 'Option 2', value: 'option2' },
+      ];
+      const scrollWrapper = mountWrapper({
+        infiniteScroll: true,
+        options: fewOptions,
+      });
+
+      scrollWrapper.vm.setOpenPopover(true);
+      await scrollWrapper.vm.$nextTick();
+
+      const { onLoadMore, canLoadMore } = getInfiniteScrollCallbacks();
+      expect(canLoadMore(visibleScrollEl)).toBe(true);
+      expect(scrollWrapper.emitted('scroll-end')).toBeFalsy();
+
+      onLoadMore();
+      expect(scrollWrapper.emitted('scroll-end')).toHaveLength(1);
+      expect(scrollWrapper.vm.infiniteScrollLoading).toBe(true);
+      expect(canLoadMore(visibleScrollEl)).toBe(false);
+
+      onLoadMore();
+      expect(scrollWrapper.emitted('scroll-end')).toHaveLength(1);
+
+      scrollWrapper.unmount();
+    });
+
+    test('does not emit scroll-end on open when the list already overflows', async () => {
+      const manyOptions = Array.from({ length: 20 }, (_, i) => ({
+        label: `Option ${i + 1}`,
+        value: `option${i + 1}`,
+      }));
+      const scrollWrapper = mountWrapper({
+        infiniteScroll: true,
+        options: manyOptions,
+        optionsLines: 5,
+      });
+
+      scrollWrapper.vm.setOpenPopover(true);
+      await scrollWrapper.vm.$nextTick();
+
+      expect(scrollWrapper.emitted('scroll-end')).toBeFalsy();
+
+      const { canLoadMore } = getInfiniteScrollCallbacks();
+      expect(canLoadMore(overflowingScrollEl)).toBe(true);
+      expect(canLoadMore({ clientHeight: 0 })).toBe(false);
+
+      scrollWrapper.unmount();
+    });
+
+    test('canLoadMore is false when infinite scroll is disabled or the popover is closed', () => {
+      const { canLoadMore } = getInfiniteScrollCallbacks();
+      expect(canLoadMore(visibleScrollEl)).toBe(false);
+
+      wrapper.vm.setOpenPopover(true);
+      expect(canLoadMore(visibleScrollEl)).toBe(false);
     });
   });
 
