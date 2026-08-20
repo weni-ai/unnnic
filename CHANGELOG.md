@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.33.1 (2026-08-20)
+
+### Fixed
+
+- **UnnnicSelect**: Fixed the infiniteScroll issue.
+
 # 3.33.0 (2026-08-12)
 
 ### Added
@@ -222,14 +228,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 # 3.24.4 (2026-03-04)
 
 ### Fixed
+
 - **Popover**: Background color
 
 ### Changed
 
-- **Select and MultiSelect**: 
-  - Refactored to share logic and improve maintainability. 
-  - Introduced composables `useSelectBase` (popover state, dimensions, search filter, content height) and `useSelectKeyboard` (ArrowUp/ArrowDown/Enter navigation, `setupKeydownBinding()` for document keydown when popover is open). 
-  - Shared types in `Select/types.ts` (`SelectOption`, `SelectBaseProps`, `SelectPopoverHeightParams`) and shared SCSS mixins in `Select/_select-shared.scss`. 
+- **Select and MultiSelect**:
+  - Refactored to share logic and improve maintainability.
+  - Introduced composables `useSelectBase` (popover state, dimensions, search filter, content height) and `useSelectKeyboard` (ArrowUp/ArrowDown/Enter navigation, `setupKeydownBinding()` for document keydown when popover is open).
+  - Shared types in `Select/types.ts` (`SelectOption`, `SelectBaseProps`, `SelectPopoverHeightParams`) and shared SCSS mixins in `Select/_select-shared.scss`.
   - Both components now use `useTemplateRef` for trigger and content refs;
 
 # 3.24.3 (2026-03-04)
@@ -632,7 +639,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Public Methods**:
     - `finishInfiniteScroll()` - Must be called after loading data to reset loading state
     - `resetInfiniteScroll()` - Resets infinite scroll state completely
-  - **Separate Loading States**: 
+  - **Separate Loading States**:
     - `isLoading` prop now only for initial load (shows centered loading, hides options)
     - Internal `infiniteScrollLoading` state for pagination (shows loading at bottom, keeps options visible)
   - **Visual Feedback**: Dedicated loading indicator at the end of options list during pagination
@@ -642,7 +649,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Tabs Component**: 
+- **Tabs Component**:
   - Add and register Tabs, TabsList, TabsContent, and TabsTrigger components in the main index;
   - Add Tabs stories.
 
@@ -656,7 +663,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- **Popover Component**: 
+- **Popover Component**:
   - Add `@vueuse/core` dependency;
   - Add and register Popover, PopoverContent, and PopoverTrigger components in the main index;
   - Add Popover stories.
@@ -706,6 +713,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 # 3.5.0 (2025-10-28)
 
 ### Added
+
 - **Template Preview**: Add template preview compontents
 
 # 3.4.0 (2025-10-23)
@@ -751,6 +759,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 # 3.3.2 (2025-10-17)
 
 ### Changed
+
 - **Scheme Colors**:
   - **Updated `bg-info` token**: Changed from blue-100 to blue-50
   - **Updated `bg-success` token**: Changed from green-100 to green-50
@@ -767,6 +776,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Backward Compatible**: Existing implementations continue working without changes
 
 # 3.3.0 (2025-10-15)
+
 - **Chart Funnel**: Added two items variation
 
 # 3.2.9 (2025-10-14)
@@ -817,7 +827,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - **Outside Click Prevention**: Tests confirm dropdown stays open when clicking outside with `forceOpen` enabled
   - **Prop Compatibility**: Tests validate proper behavior with `useOpenProp` combinations
   - **Event Validation**: Tests ensure no unwanted events are emitted when `forceOpen` is active
-  
+
 # 3.2.5 (2025-09-19)
 
 ### Added
@@ -863,7 +873,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Component Renaming**: Renamed `Icon` component to `UnnnicIcon` for Pascal Case consistency
 - **Type Definitions**: Added comprehensive TypeScript interfaces and types:
   - `IconSize`, `LineHeight`, `SchemeColor`, `IconProps` for Icon component
-  - `ButtonSize`, `ButtonType`, `ButtonProps` for Button component  
+  - `ButtonSize`, `ButtonType`, `ButtonProps` for Button component
   - `DisclaimerProps` for Disclaimer component
 - **Type Safety**: Full compile-time type validation for all component props
 - **Modular Types**: Separate type definition files for each component (`types.ts`)
@@ -880,20 +890,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - CSS warning for `font-feature-settings` compatibility in Icon component
 - Style property typing issues in Button component
 
-
 # 3.2.2 (2025-09-12)
 
 ### Added
+
 - **ChatsMessage**: Added automatic message variation
 
 # 3.2.1 (2025-09-11)
 
 ### Fixed
+
 - Adjusted the formatting of font tokens to conform to the css font attribute
 
 # 3.2.0 (2025-09-11)
 
 ### Added
+
 - Support for **Node.js v22**
 - Introduced **Style Dictionary**:
   - Added the Style Dictionary package
@@ -956,7 +968,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Semantic Color Tokens**: Added new active state semantic color tokens:
   - `bg-active`: Background color for active states using teal-600
-  - `fg-active`: Foreground/text color for active states using teal-600  
+  - `fg-active`: Foreground/text color for active states using teal-600
   - `border-active`: Border color for active states using teal-600
 
 ## 3.0.3 (2025-08-25)
