@@ -1,5 +1,8 @@
 <template>
-  <UiTable v-if="version === '2'">
+  <UiTable
+    v-if="version === '2'"
+    v-bind="$attrs"
+  >
     <slot />
   </UiTable>
 
@@ -47,6 +50,8 @@ export default {
       unnnicTableVersion: computed(() => this.version),
     };
   },
+
+  inheritAttrs: false,
 
   props: {
     items: {
