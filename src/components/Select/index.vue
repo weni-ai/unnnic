@@ -140,15 +140,7 @@
 </template>
 
 <script setup lang="ts">
-import {
-  computed,
-  ref,
-  watch,
-  nextTick,
-  onBeforeUnmount,
-  useTemplateRef,
-  useSlots,
-} from 'vue';
+import { computed, ref, watch, nextTick, useTemplateRef, useSlots } from 'vue';
 
 import { useInfiniteScroll } from '@vueuse/core';
 
@@ -273,76 +265,74 @@ keyboard.setupKeydownBinding();
 
 const focusedOptionIndex = keyboard.focusedOptionIndex;
 
-watch(base.openPopover, () => {
-  if (!base.openPopover.value) {
-    handleSearch('');
-  } else {
-    keyboard.focusedOptionIndex.value = -1;
-    if (props.modelValue) {
-      const selectedOptionIndex = props.options.findIndex(
-        (option) =>
-          option[props.itemValue] === selectedItem.value?.[props.itemValue],
-      );
-      keyboard.scrollToOption(selectedOptionIndex, 'instant', 'center');
-    }
-    if (props.infiniteScroll) {
-      nextTick(() => setupInfiniteScroll());
-    }
-  }
-});
-
-const infiniteScrollReset = ref<(() => void) | null>(null);
 const infiniteScrollLoading = ref(false);
 
-function setupInfiniteScroll() {
-  if (!props.infiniteScroll) return;
-  if (infiniteScrollReset.value) {
-    infiniteScrollReset.value();
-    infiniteScrollReset.value = null;
+function canLoadMoreInfiniteScroll(el?: unknown) {
+  if (
+    !props.infiniteScroll ||
+    !base.openPopover.value ||
+    infiniteScrollLoading.value ||
+    !props.infiniteScrollCanLoadMore()
+  ) {
+    return false;
   }
-  nextTick(() => {
-    const scrollElement = base.contentRef.value;
-    if (!scrollElement) return;
-    const { reset } = useInfiniteScroll(
-      scrollElement,
-      () => {
-        if (!infiniteScrollLoading.value) {
-          infiniteScrollLoading.value = true;
-          emit('scroll-end');
-        }
-      },
-      {
-        distance: props.infiniteScrollDistance,
-        canLoadMore: () =>
-          props.infiniteScrollCanLoadMore() && !infiniteScrollLoading.value,
-      },
-    );
-    infiniteScrollReset.value = reset;
-  });
+
+  if (!el || typeof el !== 'object' || !('clientHeight' in el)) return false;
+  return (el as HTMLElement).clientHeight > 0;
 }
+
+const scrollElement = computed(
+  () => contentRef.value?.closest('.unnnic-popover') ?? contentRef.value,
+);
+
+const { reset: resetInfiniteScrollObserver } = useInfiniteScroll(
+  scrollElement,
+  () => {
+    if (infiniteScrollLoading.value) return;
+    infiniteScrollLoading.value = true;
+    emit('scroll-end');
+  },
+  {
+    distance: props.infiniteScrollDistance,
+    canLoadMore: canLoadMoreInfiniteScroll,
+  },
+);
+
+watch(base.openPopover, (isOpen) => {
+  if (!isOpen) {
+    handleSearch('');
+    infiniteScrollLoading.value = false;
+    return;
+  }
+
+  keyboard.focusedOptionIndex.value = -1;
+  if (props.modelValue) {
+    const selectedOptionIndex = props.options.findIndex(
+      (option) =>
+        option[props.itemValue] === selectedItem.value?.[props.itemValue],
+    );
+    keyboard.scrollToOption(selectedOptionIndex, 'instant', 'center');
+  }
+  if (props.infiniteScroll) {
+    nextTick(() => resetInfiniteScrollObserver());
+  }
+});
 
 function finishInfiniteScroll() {
   infiniteScrollLoading.value = false;
   if (base.openPopover.value && props.infiniteScroll) {
-    nextTick(() => setupInfiniteScroll());
+    nextTick(() => resetInfiniteScrollObserver());
   }
 }
 
 function resetInfiniteScroll() {
   infiniteScrollLoading.value = false;
-  if (infiniteScrollReset.value) infiniteScrollReset.value();
-  if (base.openPopover.value && props.infiniteScroll) {
-    nextTick(() => setupInfiniteScroll());
-  }
+  nextTick(() => resetInfiniteScrollObserver());
 }
 
 function handleSearch(value: string) {
   emit('update:search', value);
 }
-
-onBeforeUnmount(() => {
-  if (infiniteScrollReset.value) infiniteScrollReset.value();
-});
 
 defineExpose({
   openPopover,
