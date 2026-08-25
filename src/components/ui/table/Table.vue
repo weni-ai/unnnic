@@ -20,6 +20,7 @@ const props = defineProps<{
 
 .unnnic-table {
   border-collapse: collapse;
+  table-layout: fixed;
   width: 100%;
   caption-side: bottom;
 

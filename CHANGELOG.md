@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.34.0 (2026-08-25)
+
+### Added
+
+- **UnnnicTableCell** and **UnnnicTableHead**: `ellipsis` prop (Boolean, default `false`) and `width` prop (String) for text truncation and custom column widths.
+
+### Changed
+
+- **UnnnicTable** (version `'2'`): `inheritAttrs: false` with attributes forwarded to the inner table; fixed layout via `table-layout: fixed`.
+
+### Fixed
+
+- **UnnnicTableRow**: Restored keyboard activation (Enter/Space) for clickable rows; typed `click` emit as `MouseEvent | KeyboardEvent`.
+
 # 3.33.1 (2026-08-20)
 
 ### Fixed

@@ -180,20 +180,20 @@ export const Version2 = {
       <unnnic-table version="2">
         <TableHeader>
           <unnnic-table-row>
-            <TableHead>
+            <TableHead width="50%">
               Invoice
             </TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead>
+            <TableHead width="20%">Status</TableHead>
+            <TableHead width="15%">Method</TableHead>
+            <TableHead width="15%">
               Amount
             </TableHead>
           </unnnic-table-row>
         </TableHeader>
         <TableBody>
           <unnnic-table-row>
-            <TableCell>
-              INV001
+            <TableCell ellipsis>
+              INV001 — With ellipsis lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </TableCell>
             <TableCell><UnnnicTag scheme="green" text="Paid" /></TableCell>
             <TableCell>Credit Card</TableCell>
@@ -203,7 +203,7 @@ export const Version2 = {
           </unnnic-table-row>
           <unnnic-table-row @click="onRowClick">
             <TableCell>
-              INV002
+              INV002 — Without ellipsis lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </TableCell>
             <TableCell><UnnnicTag scheme="red" text="Pending" /></TableCell>
             <TableCell>Bank Transfer</TableCell>
