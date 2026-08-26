@@ -156,27 +156,27 @@ export const Default = {
   }),
 };
 
-export const WithoutEllipsis = {
+export const ColumnWidth = {
   parameters: {
     docs: {
       description: {
         story:
-          'Set `:ellipsis="false"` on `UnnnicTableCell` to show the full text. Ellipsis is enabled by default.',
+          'Use the `width` prop on `UnnnicTableHead` to set each column size. Values follow CSS `width` (percentages, pixels, or other length units) and apply to the header cell, which defines the column layout.',
       },
       source: {
         code: `<UnnnicTable version="2">
   <UnnnicTableHeader>
     <UnnnicTableRow>
-      <UnnnicTableHead width="70%">Description</UnnnicTableHead>
-      <UnnnicTableHead width="30%">Reference</UnnnicTableHead>
+      <UnnnicTableHead width="50%">Invoice</UnnnicTableHead>
+      <UnnnicTableHead width="120px">Method</UnnnicTableHead>
+      <UnnnicTableHead width="10%">Amount</UnnnicTableHead>
     </UnnnicTableRow>
   </UnnnicTableHeader>
   <UnnnicTableBody>
     <UnnnicTableRow>
-      <UnnnicTableCell :ellipsis="false">
-        The lazy fox jumps over the quick brown dog while carrying a very long description.
-      </UnnnicTableCell>
-      <UnnnicTableCell :ellipsis="false">REF-0000123456789</UnnnicTableCell>
+      <UnnnicTableCell>INV001 — Monthly subscription</UnnnicTableCell>
+      <UnnnicTableCell>Credit Card</UnnnicTableCell>
+      <UnnnicTableCell>$250.00</UnnnicTableCell>
     </UnnnicTableRow>
   </UnnnicTableBody>
 </UnnnicTable>`,
@@ -193,25 +193,24 @@ export const WithoutEllipsis = {
       TableCell,
     },
     template: `
-      <unnnic-table version="2" :style="{ maxWidth: '600px' }">
+      <unnnic-table version="2">
         <TableHeader>
           <unnnic-table-row>
-            <TableHead width="70%">Description</TableHead>
-            <TableHead width="30%">Reference</TableHead>
+            <TableHead width="50%">Invoice (50%)</TableHead>
+            <TableHead width="120px">Method (120px)</TableHead>
+            <TableHead width="10%">Amount (10%)</TableHead>
           </unnnic-table-row>
         </TableHeader>
         <TableBody>
           <unnnic-table-row>
-            <TableCell :ellipsis="false">
-              The lazy fox jumps over the quick brown dog while carrying a very long description that should wrap.
-            </TableCell>
-            <TableCell :ellipsis="false">REF-0000123456789</TableCell>
+            <TableCell>INV001 — Monthly subscription with a longer invoice label</TableCell>
+            <TableCell>Credit Card</TableCell>
+            <TableCell>$250.00</TableCell>
           </unnnic-table-row>
           <unnnic-table-row>
-            <TableCell :ellipsis="false">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
-            </TableCell>
-            <TableCell :ellipsis="false">REF-0000987654321</TableCell>
+            <TableCell>INV002 — Enterprise license</TableCell>
+            <TableCell>Wire Transfer</TableCell>
+            <TableCell>$1,200.00</TableCell>
           </unnnic-table-row>
         </TableBody>
       </unnnic-table>
@@ -430,6 +429,69 @@ export const ClickableRow = {
             </TableCell>
             <TableCell>{{ row.method }}</TableCell>
             <TableCell align="right">{{ row.amount }}</TableCell>
+          </unnnic-table-row>
+        </TableBody>
+      </unnnic-table>
+    `,
+  }),
+};
+
+export const WithoutEllipsis = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Set `:ellipsis="false"` on `UnnnicTableCell` to show the full text. Ellipsis is enabled by default.',
+      },
+      source: {
+        code: `<UnnnicTable version="2">
+  <UnnnicTableHeader>
+    <UnnnicTableRow>
+      <UnnnicTableHead width="70%">Description</UnnnicTableHead>
+      <UnnnicTableHead width="30%">Reference</UnnnicTableHead>
+    </UnnnicTableRow>
+  </UnnnicTableHeader>
+  <UnnnicTableBody>
+    <UnnnicTableRow>
+      <UnnnicTableCell :ellipsis="false">
+        The lazy fox jumps over the quick brown dog while carrying a very long description.
+      </UnnnicTableCell>
+      <UnnnicTableCell :ellipsis="false">REF-0000123456789</UnnnicTableCell>
+    </UnnnicTableRow>
+  </UnnnicTableBody>
+</UnnnicTable>`,
+      },
+    },
+  },
+  render: () => ({
+    components: {
+      unnnicTable,
+      unnnicTableRow,
+      TableHeader,
+      TableBody,
+      TableHead,
+      TableCell,
+    },
+    template: `
+      <unnnic-table version="2" :style="{ maxWidth: '600px' }">
+        <TableHeader>
+          <unnnic-table-row>
+            <TableHead width="70%">Description</TableHead>
+            <TableHead width="30%">Reference</TableHead>
+          </unnnic-table-row>
+        </TableHeader>
+        <TableBody>
+          <unnnic-table-row>
+            <TableCell :ellipsis="false">
+              The lazy fox jumps over the quick brown dog while carrying a very long description that should wrap.
+            </TableCell>
+            <TableCell :ellipsis="false">REF-0000123456789</TableCell>
+          </unnnic-table-row>
+          <unnnic-table-row>
+            <TableCell :ellipsis="false">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.
+            </TableCell>
+            <TableCell :ellipsis="false">REF-0000987654321</TableCell>
           </unnnic-table-row>
         </TableBody>
       </unnnic-table>
