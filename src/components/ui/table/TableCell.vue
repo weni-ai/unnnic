@@ -1,17 +1,38 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue';
+import type { HTMLAttributes, VNode } from 'vue';
+import { Comment, Fragment, Text, computed, useSlots } from 'vue';
 import { cn } from '@/lib/utils';
 
 const props = withDefaults(
   defineProps<{
+    align?: 'center' | 'left' | 'right';
     class?: HTMLAttributes['class'];
     ellipsis?: boolean;
     width?: string;
   }>(),
   {
-    ellipsis: false,
+    align: 'left',
+    ellipsis: true,
   },
 );
+
+const slots = useSlots();
+
+const isTextOnlySlot = (vnodes: VNode[] | undefined): boolean => {
+  if (!vnodes?.length) return true;
+
+  return vnodes.every((vnode) => {
+    if (vnode.type === Comment) return true;
+    if (vnode.type === Text) return true;
+    if (vnode.type === Fragment) {
+      return isTextOnlySlot(vnode.children as VNode[]);
+    }
+
+    return false;
+  });
+};
+
+const hasComponentContent = computed(() => !isTextOnlySlot(slots.default?.()));
 </script>
 
 <template>
@@ -19,7 +40,11 @@ const props = withDefaults(
     :class="
       cn(
         'unnnic-table-cell',
-        { 'unnnic-table-cell--ellipsis': props.ellipsis },
+        `unnnic-table-cell--align-${props.align}`,
+        {
+          'unnnic-table-cell--ellipsis': props.ellipsis,
+          'unnnic-table-cell--has-component': hasComponentContent,
+        },
         props.class,
       )
     "
@@ -33,12 +58,26 @@ const props = withDefaults(
 @use '@/assets/scss/unnnic' as *;
 
 .unnnic-table-cell {
+  @include unnnic-font-body;
+  color: $unnnic-color-fg-emphasized;
   vertical-align: middle;
+  padding: $unnnic-space-3 $unnnic-space-4;
 
-  padding: $unnnic-space-4 0;
+  &--has-component {
+    padding-top: $unnnic-space-2;
+    padding-bottom: $unnnic-space-2;
+  }
 
-  &:not(:last-child) {
-    padding-right: $unnnic-space-4;
+  &--align-left {
+    text-align: left;
+  }
+
+  &--align-center {
+    text-align: center;
+  }
+
+  &--align-right {
+    text-align: right;
   }
 
   &--ellipsis {
