@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
-import { computed, useAttrs } from 'vue';
+import { computed, getCurrentInstance } from 'vue';
 import { cn } from '@/lib/utils';
 
-defineEmits<{
+const emit = defineEmits<{
   (e: 'click', event: KeyboardEvent | MouseEvent): void;
 }>();
 
@@ -11,9 +11,13 @@ const props = defineProps<{
   class?: HTMLAttributes['class'];
 }>();
 
-const attrs = useAttrs();
+const instance = getCurrentInstance();
+const isClickable = computed(() => Boolean(instance?.vnode.props?.onClick));
 
-const isClickable = computed(() => Boolean(attrs.onClick));
+function handleClick(event: KeyboardEvent | MouseEvent) {
+  if (!isClickable.value) return;
+  emit('click', event);
+}
 </script>
 
 <template>
@@ -27,8 +31,9 @@ const isClickable = computed(() => Boolean(attrs.onClick));
         props.class,
       )
     "
-    @keydown.enter="isClickable && $emit('click', $event)"
-    @keydown.space.prevent="isClickable && $emit('click', $event)"
+    @click="handleClick"
+    @keydown.enter="handleClick"
+    @keydown.space.prevent="handleClick"
   >
     <slot />
   </tr>
@@ -38,14 +43,6 @@ const isClickable = computed(() => Boolean(attrs.onClick));
 @use '@/assets/scss/unnnic' as *;
 
 .unnnic-table-row {
-  & > :first-child {
-    padding-left: $unnnic-space-3;
-  }
-
-  & > :last-child {
-    padding-right: $unnnic-space-3;
-  }
-
   border-bottom: 1px solid $unnnic-color-border-base;
 
   &:hover {
