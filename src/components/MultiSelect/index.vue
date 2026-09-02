@@ -47,21 +47,29 @@
           >
             {{ $t('without_results') }}
           </p>
-          <div
-            v-else
-            class="unnnic-multi-select__options"
-          >
-            <UnnnicMultiSelectOption
-              v-for="(option, index) in filteredOptions"
-              :key="String(option[props.itemValue])"
-              :data-option-index="index"
-              :label="String(option[props.itemLabel] ?? '')"
-              :active="getActivatedOptionStatus(option)"
-              :focused="focusedOptionIndex === index"
-              :disabled="option.disabled"
-              @update:model-value="handleSelectOption(option, $event)"
-            />
-          </div>
+          <template v-else>
+            <div class="unnnic-multi-select__options">
+              <UnnnicMultiSelectOption
+                v-for="(option, index) in filteredOptions"
+                :key="String(option[props.itemValue])"
+                :data-option-index="index"
+                :label="String(option[props.itemLabel] ?? '')"
+                :active="getActivatedOptionStatus(option)"
+                :focused="focusedOptionIndex === index"
+                :disabled="option.disabled"
+                @update:model-value="handleSelectOption(option, $event)"
+              />
+            </div>
+            <div
+              v-if="props.infiniteScroll && infiniteScrollLoading"
+              class="unnnic-multi-select__infinite-loading"
+            >
+              <UnnnicIconLoading
+                scheme="fg-base"
+                size="sm"
+              />
+            </div>
+          </template>
         </div>
       </PopoverContent>
     </Popover>
@@ -69,10 +77,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch, useTemplateRef } from 'vue';
+import { computed, ref, watch, nextTick, useTemplateRef } from 'vue';
+
+import { useInfiniteScroll } from '@vueuse/core';
 
 import { Popover, PopoverTrigger, PopoverContent } from '../ui/popover';
 import UnnnicInput from '../Input/Input.vue';
+import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import UnnnicMultiSelectOption from './MultiSelectOption.vue';
 
 import { useSelectBase } from '../../composables/useSelectBase';
@@ -85,6 +96,9 @@ defineOptions({
 
 interface MultiSelectProps extends SelectBaseProps {
   modelValue: (SelectOption | unknown)[];
+  infiniteScroll?: boolean;
+  infiniteScrollDistance?: number;
+  infiniteScrollCanLoadMore?: () => boolean;
 }
 
 const props = withDefaults(defineProps<MultiSelectProps>(), {
@@ -103,15 +117,19 @@ const props = withDefaults(defineProps<MultiSelectProps>(), {
   message: '',
   search: '',
   clearable: false,
+  infiniteScroll: false,
+  infiniteScrollDistance: 10,
+  infiniteScrollCanLoadMore: () => true,
 });
 
 const emit = defineEmits<{
   'update:modelValue': [value: (SelectOption | unknown)[]];
   'update:search': [value: string];
+  'scroll-end': [];
 }>();
 
 const multiSelectInputRef = useTemplateRef<HTMLElement>('multiSelectInputRef');
-const contentRef = useTemplateRef<HTMLElement>('contentRef');
+const contentRef = useTemplateRef<HTMLDivElement>('contentRef');
 
 const base = useSelectBase(props, 'multi', multiSelectInputRef, contentRef);
 
@@ -184,13 +202,65 @@ keyboard.setupKeydownBinding();
 
 const focusedOptionIndex = keyboard.focusedOptionIndex;
 
-watch(openPopover, () => {
-  if (!base.openPopover.value) {
+const infiniteScrollLoading = ref(false);
+
+function canLoadMoreInfiniteScroll(el?: unknown) {
+  if (
+    !props.infiniteScroll ||
+    !base.openPopover.value ||
+    infiniteScrollLoading.value ||
+    !props.infiniteScrollCanLoadMore()
+  ) {
+    return false;
+  }
+
+  if (!el || typeof el !== 'object' || !('clientHeight' in el)) return false;
+  return (el as HTMLElement).clientHeight > 0;
+}
+
+const scrollElement = computed(
+  () =>
+    (contentRef.value?.closest('.unnnic-popover') as HTMLElement | null) ??
+    contentRef.value,
+);
+
+const { reset: resetInfiniteScrollObserver } = useInfiniteScroll(
+  scrollElement,
+  () => {
+    if (infiniteScrollLoading.value) return;
+    infiniteScrollLoading.value = true;
+    emit('scroll-end');
+  },
+  {
+    distance: props.infiniteScrollDistance,
+    canLoadMore: canLoadMoreInfiniteScroll,
+  },
+);
+
+watch(base.openPopover, (isOpen) => {
+  if (!isOpen) {
     handleSearch('');
-  } else {
-    keyboard.focusedOptionIndex.value = -1;
+    infiniteScrollLoading.value = false;
+    return;
+  }
+
+  keyboard.focusedOptionIndex.value = -1;
+  if (props.infiniteScroll) {
+    nextTick(() => resetInfiniteScrollObserver());
   }
 });
+
+function finishInfiniteScroll() {
+  infiniteScrollLoading.value = false;
+  if (base.openPopover.value && props.infiniteScroll) {
+    nextTick(() => resetInfiniteScrollObserver());
+  }
+}
+
+function resetInfiniteScroll() {
+  infiniteScrollLoading.value = false;
+  nextTick(() => resetInfiniteScrollObserver());
+}
 
 defineExpose({
   openPopover,
@@ -199,6 +269,9 @@ defineExpose({
   calculatedPopoverHeight: base.calculatedPopoverHeight,
   selectedItems,
   inputValue,
+  infiniteScrollLoading,
+  finishInfiniteScroll,
+  resetInfiniteScroll,
 });
 </script>
 
@@ -235,6 +308,14 @@ defineExpose({
     display: flex;
     flex-direction: column;
     gap: $unnnic-space-6;
+  }
+
+  &__infinite-loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: $unnnic-space-2 0;
+    min-height: $unnnic-space-10;
   }
 }
 </style>

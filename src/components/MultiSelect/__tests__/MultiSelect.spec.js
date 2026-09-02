@@ -1,7 +1,35 @@
 import { mount, flushPromises } from '@vue/test-utils';
-import { beforeEach, describe, expect, afterEach, test } from 'vitest';
+import { beforeEach, describe, expect, afterEach, test, vi } from 'vitest';
 import UnnnicMultiSelect from '../index.vue';
 import i18n from '@/utils/plugins/i18n';
+
+const { infiniteScrollResetMock, useInfiniteScrollMock } = vi.hoisted(() => {
+  const infiniteScrollResetMock = vi.fn();
+  const useInfiniteScrollMock = vi.fn((_element, _onLoadMore, _options) => ({
+    reset: infiniteScrollResetMock,
+    isLoading: { value: false },
+  }));
+  return { infiniteScrollResetMock, useInfiniteScrollMock };
+});
+
+vi.mock('@vueuse/core', async (importOriginal) => {
+  const actual = await importOriginal();
+  return {
+    ...actual,
+    useInfiniteScroll: (...args) => useInfiniteScrollMock(...args),
+  };
+});
+
+function getInfiniteScrollCallbacks() {
+  const lastCall = useInfiniteScrollMock.mock.calls.at(-1);
+  return {
+    onLoadMore: lastCall?.[1],
+    canLoadMore: lastCall?.[2]?.canLoadMore,
+  };
+}
+
+const visibleScrollEl = { clientHeight: 200 };
+const overflowingScrollEl = { clientHeight: 200, scrollHeight: 800 };
 
 describe('UnnnicMultiSelect.vue', () => {
   let wrapper;
@@ -32,6 +60,8 @@ describe('UnnnicMultiSelect.vue', () => {
   };
 
   beforeEach(() => {
+    infiniteScrollResetMock.mockClear();
+    useInfiniteScrollMock.mockClear();
     wrapper = mountWrapper();
   });
 
@@ -627,6 +657,176 @@ describe('UnnnicMultiSelect.vue', () => {
     });
   });
 
+  describe('infinite scroll functionality', () => {
+    test('infinite scroll is disabled by default', () => {
+      expect(wrapper.vm.infiniteScroll).toBe(false);
+    });
+
+    test('applies infinite scroll props correctly', async () => {
+      await wrapper.setProps({
+        infiniteScroll: true,
+        infiniteScrollDistance: 20,
+        infiniteScrollCanLoadMore: () => false,
+      });
+
+      expect(wrapper.vm.infiniteScroll).toBe(true);
+      expect(wrapper.vm.infiniteScrollDistance).toBe(20);
+      expect(wrapper.vm.infiniteScrollCanLoadMore()).toBe(false);
+    });
+
+    test('does not render loading when infiniteScrollLoading is false', async () => {
+      await wrapper.setProps({ infiniteScroll: true });
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+
+      const loading = wrapper.find('.unnnic-multi-select__infinite-loading');
+      expect(loading.exists()).toBe(false);
+    });
+
+    test('sets infiniteScrollLoading to true and verifies state', async () => {
+      await wrapper.setProps({
+        infiniteScroll: true,
+        options: [
+          { label: 'Option 1', value: 'option1' },
+          { label: 'Option 2', value: 'option2' },
+        ],
+      });
+
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.vm.infiniteScrollLoading).toBe(false);
+
+      wrapper.vm.infiniteScrollLoading = true;
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.vm.infiniteScrollLoading).toBe(true);
+      expect(wrapper.vm.infiniteScroll).toBe(true);
+    });
+
+    test('finishInfiniteScroll sets loading to false', async () => {
+      await wrapper.setProps({ infiniteScroll: true });
+      wrapper.vm.infiniteScrollLoading = true;
+      expect(wrapper.vm.infiniteScrollLoading).toBe(true);
+
+      wrapper.vm.finishInfiniteScroll();
+      expect(wrapper.vm.infiniteScrollLoading).toBe(false);
+    });
+
+    test('resetInfiniteScroll sets loading to false', async () => {
+      await wrapper.setProps({ infiniteScroll: true });
+      wrapper.vm.infiniteScrollLoading = true;
+      expect(wrapper.vm.infiniteScrollLoading).toBe(true);
+
+      wrapper.vm.resetInfiniteScroll();
+      expect(wrapper.vm.infiniteScrollLoading).toBe(false);
+    });
+
+    test('calls useInfiniteScroll once and does not recreate it on finish', async () => {
+      wrapper.unmount();
+      useInfiniteScrollMock.mockClear();
+      infiniteScrollResetMock.mockClear();
+
+      const scrollWrapper = mountWrapper({ infiniteScroll: true });
+      expect(useInfiniteScrollMock).toHaveBeenCalledTimes(1);
+
+      scrollWrapper.vm.setOpenPopover(true);
+      await scrollWrapper.vm.$nextTick();
+      scrollWrapper.vm.infiniteScrollLoading = true;
+      scrollWrapper.vm.finishInfiniteScroll();
+      await scrollWrapper.vm.$nextTick();
+
+      expect(useInfiniteScrollMock).toHaveBeenCalledTimes(1);
+      expect(infiniteScrollResetMock).toHaveBeenCalled();
+
+      scrollWrapper.unmount();
+    });
+
+    test('emits scroll-end once when the list does not fill the popover', async () => {
+      const fewOptions = [
+        { label: 'Option 1', value: 'option1' },
+        { label: 'Option 2', value: 'option2' },
+      ];
+      const scrollWrapper = mountWrapper({
+        infiniteScroll: true,
+        options: fewOptions,
+      });
+
+      scrollWrapper.vm.setOpenPopover(true);
+      await scrollWrapper.vm.$nextTick();
+
+      const { onLoadMore, canLoadMore } = getInfiniteScrollCallbacks();
+      expect(canLoadMore(visibleScrollEl)).toBe(true);
+      expect(scrollWrapper.emitted('scroll-end')).toBeFalsy();
+
+      onLoadMore();
+      expect(scrollWrapper.emitted('scroll-end')).toHaveLength(1);
+      expect(scrollWrapper.vm.infiniteScrollLoading).toBe(true);
+      expect(canLoadMore(visibleScrollEl)).toBe(false);
+
+      onLoadMore();
+      expect(scrollWrapper.emitted('scroll-end')).toHaveLength(1);
+
+      scrollWrapper.unmount();
+    });
+
+    test('does not emit scroll-end on open when the list already overflows', async () => {
+      const manyOptions = Array.from({ length: 20 }, (_, i) => ({
+        label: `Option ${i + 1}`,
+        value: `option${i + 1}`,
+      }));
+      const scrollWrapper = mountWrapper({
+        infiniteScroll: true,
+        options: manyOptions,
+        optionsLines: 5,
+      });
+
+      scrollWrapper.vm.setOpenPopover(true);
+      await scrollWrapper.vm.$nextTick();
+
+      expect(scrollWrapper.emitted('scroll-end')).toBeFalsy();
+
+      const { canLoadMore } = getInfiniteScrollCallbacks();
+      expect(canLoadMore(overflowingScrollEl)).toBe(true);
+      expect(canLoadMore({ clientHeight: 0 })).toBe(false);
+
+      scrollWrapper.unmount();
+    });
+
+    test('canLoadMore is false when infinite scroll is disabled or the popover is closed', () => {
+      const { canLoadMore } = getInfiniteScrollCallbacks();
+      expect(canLoadMore(visibleScrollEl)).toBe(false);
+
+      wrapper.vm.setOpenPopover(true);
+      expect(canLoadMore(visibleScrollEl)).toBe(false);
+    });
+
+    test('displays loading indicator when infiniteScrollLoading is true', async () => {
+      await wrapper.setProps({ infiniteScroll: true });
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+
+      const { onLoadMore } = getInfiniteScrollCallbacks();
+      onLoadMore();
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.vm.infiniteScrollLoading).toBe(true);
+      expect(
+        document.querySelector('.unnnic-multi-select__infinite-loading'),
+      ).not.toBeNull();
+    });
+
+    test('does not display infinite scroll loading when infiniteScroll is false', async () => {
+      await wrapper.setProps({ infiniteScroll: false });
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+
+      expect(
+        document.querySelector('.unnnic-multi-select__infinite-loading'),
+      ).toBeNull();
+    });
+  });
+
   describe('snapshot testing', () => {
     test('matches snapshot with default props', () => {
       expect(wrapper.html()).toMatchSnapshot();
@@ -649,6 +849,18 @@ describe('UnnnicMultiSelect.vue', () => {
 
     test('matches snapshot with disabled state', async () => {
       await wrapper.setProps({ disabled: true });
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+
+    test('matches snapshot with infinite scroll enabled', async () => {
+      await wrapper.setProps({ infiniteScroll: true });
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+
+      const { onLoadMore } = getInfiniteScrollCallbacks();
+      onLoadMore();
+      await wrapper.vm.$nextTick();
+
       expect(wrapper.html()).toMatchSnapshot();
     });
   });
