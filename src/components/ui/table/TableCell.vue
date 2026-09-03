@@ -50,22 +50,35 @@ const hasComponentContent = computed(() => !isTextOnlySlot(slots.default?.()));
     "
     :style="{ width: props.width }"
   >
-    <slot />
+    <div class="unnnic-table-cell__inner">
+      <slot />
+    </div>
   </td>
 </template>
 
 <style lang="scss" scoped>
 @use '@/assets/scss/unnnic' as *;
 
+$row-min-height: 61px;
+
 .unnnic-table-cell {
   @include unnnic-font-body;
   color: $unnnic-color-fg-emphasized;
   vertical-align: middle;
-  padding: $unnnic-space-3 $unnnic-space-4;
+  padding: 0;
 
-  &--has-component {
-    padding-top: $unnnic-space-2;
-    padding-bottom: $unnnic-space-2;
+  &__inner {
+    box-sizing: border-box;
+    display: grid;
+    align-items: center;
+    min-width: 0;
+    max-width: 100%;
+    min-height: $row-min-height;
+    padding: $unnnic-space-3 $unnnic-space-4;
+  }
+
+  &--has-component &__inner {
+    padding-block: $unnnic-space-2;
   }
 
   &--align-left {
@@ -80,10 +93,12 @@ const hasComponentContent = computed(() => !isTextOnlySlot(slots.default?.()));
     text-align: right;
   }
 
-  &--ellipsis {
+  &--ellipsis:not(&--has-component) &__inner {
+    display: block;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    align-content: center;
   }
 }
 </style>
