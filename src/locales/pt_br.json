@@ -26,6 +26,9 @@
   "chats_contact": {
     "yesterday": "Ontem"
   },
+  "data_table": {
+    "without_results": "Nenhum resultado correspondente"
+  },
   "emoji_picker": {
     "title": "Escolha seu emoji...",
     "search": "Buscar",
