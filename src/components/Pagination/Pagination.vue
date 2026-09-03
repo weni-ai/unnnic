@@ -2,6 +2,7 @@
 <template>
   <div class="pagination">
     <UnnnicButton
+      class="pagination__button"
       type="tertiary"
       size="small"
       iconCenter="arrow-left-1-1"
@@ -13,6 +14,7 @@
     <UnnnicButton
       v-for="(page, index) in pages"
       :key="index"
+      class="pagination__button"
       :type="page === modelValue ? 'secondary' : 'tertiary'"
       size="small"
       :text="
@@ -26,6 +28,7 @@
     />
 
     <UnnnicButton
+      class="pagination__button"
       type="tertiary"
       size="small"
       iconCenter="arrow-right-1-1"
@@ -169,5 +172,9 @@ if (!pages.value.includes(pageNumber)) {
   align-items: center;
   column-gap: $unnnic-space-2;
   user-select: none;
+
+  &__button {
+    min-height: 37px; /* 37px is the height of the small UnnnicButton */
+  }
 }
 </style>
