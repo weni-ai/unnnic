@@ -40,16 +40,16 @@ exports[`TableNext.vue > matches the snapshot 1`] = `
   </tbody>
   <section data-v-e29458bb="" data-v-2143c794="" class="table-pagination">
     <p data-v-e29458bb="" class="table-pagination__count" data-testid="count">1 - 1 of 1</p>
-    <div data-v-0eeff8cb="" data-v-e29458bb="" class="pagination"><button data-v-ceff2a60="" data-v-0eeff8cb="" data-test="previous-button" disabled="" class="unnnic-button unnnic-button--size-small unnnic-button--tertiary unnnic-button--icon-on-center">
+    <div data-v-0eeff8cb="" data-v-e29458bb="" class="pagination"><button data-v-ceff2a60="" data-v-0eeff8cb="" class="pagination__button unnnic-button unnnic-button--size-small unnnic-button--tertiary unnnic-button--icon-on-center pagination__button" data-test="previous-button" disabled="">
         <!--v-if-->
         <!--v-if--><span data-v-26446d8e="" data-v-ceff2a60="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--fg-muted unnnic-icon-size--ant unnnic-icon__size--ant unnnic--clickable" data-testid="icon-center" translate="no" style="visibility: visible;">chevron_left</span><span data-v-ceff2a60="" class="unnnic-button__label" style="visibility: visible;" data-testid="button-label"> </span>
         <!--v-if-->
-      </button><button data-v-ceff2a60="" data-v-0eeff8cb="" data-test="page-button" class="unnnic-button unnnic-button--size-small unnnic-button--secondary">
+      </button><button data-v-ceff2a60="" data-v-0eeff8cb="" class="pagination__button unnnic-button unnnic-button--size-small unnnic-button--secondary pagination__button" data-test="page-button">
         <!--v-if-->
         <!--v-if-->
         <!--v-if--><span data-v-ceff2a60="" class="unnnic-button__label" style="visibility: visible;" data-testid="button-label"> 1</span>
         <!--v-if-->
-      </button><button data-v-ceff2a60="" data-v-0eeff8cb="" data-test="next-button" disabled="" class="unnnic-button unnnic-button--size-small unnnic-button--tertiary unnnic-button--icon-on-center">
+      </button><button data-v-ceff2a60="" data-v-0eeff8cb="" class="pagination__button unnnic-button unnnic-button--size-small unnnic-button--tertiary unnnic-button--icon-on-center pagination__button" data-test="next-button" disabled="">
         <!--v-if-->
         <!--v-if--><span data-v-26446d8e="" data-v-ceff2a60="" class="unnnic-icon material-symbols-rounded unnnic-icon-scheme--fg-muted unnnic-icon-size--ant unnnic-icon__size--ant unnnic--clickable" data-testid="icon-center" translate="no" style="visibility: visible;">chevron_right</span><span data-v-ceff2a60="" class="unnnic-button__label" style="visibility: visible;" data-testid="button-label"> </span>
         <!--v-if-->

@@ -259,6 +259,52 @@ export const Small = {
   },
 };
 
+export const Alignment = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Set `align` on each header to control column alignment. Use `left` (default), `center`, or `right`. The value applies to both the header and the body cells of that column.',
+      },
+    },
+  },
+  args: {
+    headers: [
+      {
+        title: 'Product',
+        itemKey: 'product',
+      },
+      {
+        title: 'Quantity',
+        itemKey: 'quantity',
+        align: 'center',
+      },
+      {
+        title: 'Amount',
+        itemKey: 'amount',
+        align: 'right',
+      },
+    ],
+    items: [
+      {
+        product: 'Marketing plan',
+        quantity: 12,
+        amount: '$1,200.00',
+      },
+      {
+        product: 'Support package',
+        quantity: 3,
+        amount: '$450.00',
+      },
+      {
+        product: 'Enterprise license',
+        quantity: 1,
+        amount: '$3,600.00',
+      },
+    ],
+  },
+};
+
 export const HideHeaders = {
   args: {
     headers,
