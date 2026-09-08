@@ -69,7 +69,7 @@ $row-min-height: 61px;
 
   &__inner {
     box-sizing: border-box;
-    display: grid;
+    display: flex;
     align-items: center;
     min-width: 0;
     max-width: 100%;
@@ -83,14 +83,26 @@ $row-min-height: 61px;
 
   &--align-left {
     text-align: left;
+
+    .unnnic-table-cell__inner {
+      justify-content: flex-start;
+    }
   }
 
   &--align-center {
     text-align: center;
+
+    .unnnic-table-cell__inner {
+      justify-content: center;
+    }
   }
 
   &--align-right {
     text-align: right;
+
+    .unnnic-table-cell__inner {
+      justify-content: flex-end;
+    }
   }
 
   &--ellipsis:not(&--has-component) &__inner {
