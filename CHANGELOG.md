@@ -16,6 +16,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **UnnnicTableCell**: `ellipsis` now defaults to `true`; tighter padding when the cell contains a component.
 - **UnnnicTable** (version `'2'`): updated cell, header, and row spacing; header hover uses `bg-soft`.
 
+# 3.34.1 (2026-09-02)
+
+### Added
+
+- **UnnnicTableCell** and **UnnnicTableHead**: `align` prop (`'left'` | `'center'` | `'right'`, default `'left'`).
+
+### Changed
+
+- **UnnnicTableCell**: `ellipsis` now defaults to `true`; tighter padding when the cell contains a component.
+- **UnnnicTable** (version `'2'`): updated cell, header, and row spacing; header hover uses `bg-soft`.
+
 # 3.34.0 (2026-08-25)
 
 ### Added

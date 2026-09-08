@@ -1,7 +1,6 @@
 export type CellAlign = 'left' | 'center' | 'right';
 export type CellType = 'header' | 'body';
 export type DataTableSize = 'sm' | 'md';
-export type HeaderAlign = 'start' | 'center' | 'end';
 
 export const SORT_ORDER = {
   ASC: 'asc',
@@ -17,17 +16,11 @@ export const NEXT_SORT_ORDER: Record<SortOrder, SortOrder> = {
   [SORT_ORDER.NONE]: SORT_ORDER.ASC,
 };
 
-export const HEADER_ALIGN_MAP: Record<HeaderAlign, CellAlign> = {
-  start: 'left',
-  center: 'center',
-  end: 'right',
-};
-
 export interface DataTableHeader {
   title: string;
   isSortable?: boolean;
   itemKey: string;
-  align?: HeaderAlign;
+  align?: CellAlign;
   size?: number | string;
 }
 

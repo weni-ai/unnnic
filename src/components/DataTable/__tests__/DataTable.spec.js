@@ -6,7 +6,7 @@ import DataTable from '../index.vue';
 const headers = [
   { title: 'ID', itemKey: 'id', isSortable: true },
   { title: 'Name', itemKey: 'name' },
-  { title: 'Age', itemKey: 'age', align: 'end' },
+  { title: 'Age', itemKey: 'age', align: 'right' },
 ];
 
 const items = [
@@ -47,7 +47,7 @@ describe('UnnnicDataTable', () => {
       );
     });
 
-    it('maps header align end to right-aligned cells', () => {
+    it('maps header align right to right-aligned cells', () => {
       const wrapper = mountTable();
       const ageHeader = wrapper.findAll('[data-testid="header-cell"]')[2];
 

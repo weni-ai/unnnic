@@ -84,11 +84,5 @@ $row-min-height: 61px;
     white-space: nowrap;
     align-content: center;
   }
-
-  &--ellipsis {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
 }
 </style>

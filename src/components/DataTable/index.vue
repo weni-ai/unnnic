@@ -130,7 +130,6 @@ import DataTableCell from './DataTableCell.vue';
 import DataTableLoadingRow from './DataTableLoadingRow.vue';
 import TablePagination from '../TableNext/TablePagination.vue';
 import {
-  HEADER_ALIGN_MAP,
   NEXT_SORT_ORDER,
   SORT_ORDER,
   type CellAlign,
@@ -202,7 +201,7 @@ const shouldHideHeaders = computed(() => {
 });
 
 const getHeaderAlign = (align?: DataTableHeader['align']): CellAlign =>
-  HEADER_ALIGN_MAP[align ?? 'start'];
+  align ?? 'left';
 
 const getHeaderColumnSize = (header: DataTableHeader): string => {
   return typeof header.size === 'number'

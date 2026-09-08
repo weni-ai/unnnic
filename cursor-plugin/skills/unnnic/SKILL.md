@@ -177,7 +177,7 @@ unnnicToastManager.show({
 
 ### DataTable
 
-Prefer `UnnnicDataTable` for lists with sorting, pagination, or infinite scroll. Pass `headers` (`title`, `itemKey`, optional `isSortable`, `align`, `size`) and `items`. Customize cells with named slots — do not import `DataTableCell` (internal).
+Prefer `UnnnicDataTable` for lists with sorting, pagination, or infinite scroll. Pass `headers` (`title`, `itemKey`, optional `isSortable`, `align`: left/center/right, `size`) and `items`. Customize cells with named slots — do not import `DataTableCell` (internal).
 
 ```vue
 <UnnnicDataTable
