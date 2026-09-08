@@ -5,11 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-# 3.35.0 (2026-08-26)
+# 3.35.0 (2026-09-08)
 
 ### Added
 
 - **UnnnicTableCell** and **UnnnicTableHead**: `align` prop (`'left'` | `'center'` | `'right'`, default `'left'`).
+- **UnnnicDataTable**: `headers[].align` (`'left'` | `'center'` | `'right'`, default `'left'`). Applies to the header and body cells of that column. Clickable rows can be activated with Enter/Space.
+
+### Changed
+
+- **UnnnicDataTable**: visual update aligned with the design system — cell padding, min-height, typography, borders, and corner radius. `size="sm"` affects body cells only; headers stay medium.
 
 ### Changed
 
