@@ -433,10 +433,7 @@ const i18nPlugin = i18n as unknown as I18nPlugin;
 
 type I18nFnArg = number | string | Record<string, string>;
 
-const i18nFn = (
-  key: string,
-  ...args: I18nFnArg[]
-): string | undefined => {
+const i18nFn = (key: string, ...args: I18nFnArg[]): string | undefined => {
   const [defaults] = args;
 
   const validLocaleValues = Object.keys(i18nPlugin.global.messages || {});
@@ -882,7 +879,10 @@ function getStartAndEndDateByPeriod(period: string) {
   const daysMatch = period.match(/^last-(\d+)-days$/);
   const monthsMatch = period.match(/^last-(\d+)-months$/);
 
-  if (daysMatch) {
+  if (period === 'today') {
+    periodStartDate = dateToString(todayClone);
+    periodEndDate = dateToString(todayClone);
+  } else if (daysMatch) {
     const howMuch = Number(daysMatch[1]);
 
     periodEndDate = dateToString(todayClone);
