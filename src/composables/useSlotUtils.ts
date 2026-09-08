@@ -1,5 +1,5 @@
 import type { VNode } from 'vue';
-import { Comment, Fragment, Text, computed, useSlots } from 'vue';
+import { Comment, Fragment, Text, computed, isVNode, useSlots } from 'vue';
 
 export function isTextOnlySlot(vnodes: VNode[] | undefined): boolean {
   if (!vnodes?.length) return true;
@@ -7,7 +7,17 @@ export function isTextOnlySlot(vnodes: VNode[] | undefined): boolean {
   return vnodes.every((vnode) => {
     if (vnode.type === Comment || vnode.type === Text) return true;
     if (vnode.type === Fragment) {
-      return isTextOnlySlot(vnode.children as VNode[]);
+      const { children } = vnode;
+
+      if (children == null || typeof children === 'string') {
+        return true;
+      }
+
+      if (!Array.isArray(children)) {
+        return false;
+      }
+
+      return isTextOnlySlot(children.filter(isVNode));
     }
 
     return false;
