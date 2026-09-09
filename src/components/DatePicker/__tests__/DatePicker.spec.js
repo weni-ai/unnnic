@@ -95,6 +95,28 @@ describe('DatePicker.vue', () => {
     expect(updateEquivalent[0][0]).toBe('Last 7 days');
   });
 
+  it('submits with today period and emits equivalent option name', async () => {
+    wrapper = factory({
+      options: [
+        { name: 'Today', id: 'today' },
+        { name: 'Custom', id: 'custom' },
+      ],
+    });
+
+    await wrapper.vm.autoSelect('today');
+    await wrapper.find('[data-testid="date-picker-submit"]').trigger('click');
+
+    const submit = wrapper.emitted('submit');
+    const updateEquivalent = wrapper.emitted('update:equivalentOption');
+
+    expect(submit).toBeTruthy();
+    expect(submit[0][0]).toHaveProperty('startDate');
+    expect(submit[0][0]).toHaveProperty('endDate');
+    expect(submit[0][0].startDate).toBe(submit[0][0].endDate);
+
+    expect(updateEquivalent[0][0]).toBe('Today');
+  });
+
   it('submits with custom selection and clears equivalent option', async () => {
     wrapper.vm.optionSelected = 'custom';
     await wrapper.find('[data-testid="date-picker-submit"]').trigger('click');
