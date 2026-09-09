@@ -28,6 +28,7 @@ const englishMonths = [
 const englishDays = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
 const englishPeriods: PeriodOption[] = [
+  { name: 'Today', id: 'today' },
   { name: 'Last 7 days', id: 'last-7-days' },
   { name: 'Last 14 days', id: 'last-14-days' },
   { name: 'Last 30 days', id: 'last-30-days' },
@@ -97,6 +98,10 @@ buttons.en = buttons['en-us'];
 export const periods: Record<string, PeriodOption[]> = {
   'pt-br': [
     {
+      name: 'Hoje',
+      id: 'today',
+    },
+    {
       name: 'Últimos 7 dias',
       id: 'last-7-days',
     },
@@ -128,6 +133,10 @@ export const periods: Record<string, PeriodOption[]> = {
   en: englishPeriods,
   'en-us': englishPeriods,
   es: [
+    {
+      name: 'Hoy',
+      id: 'today',
+    },
     {
       name: 'Últimos 7 días',
       id: 'last-7-days',

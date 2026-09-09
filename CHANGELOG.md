@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **UnnnicTableCell**: `ellipsis` now defaults to `true`; tighter padding when the cell contains a component.
 - **UnnnicTable** (version `'2'`): updated cell, header, and row spacing; header hover uses `bg-soft`.
 
+# 3.34.2 (2026-09-09)
+
+### Added
+
+- **UnnnicDatePicker**: Added "Today" (`today`) preset to the default period options. Selecting it sets `startDate` and `endDate` to the same day (the current date, or `periodBaseDate` when provided). Localized labels: "Today" (`en`/`en-us`), "Hoje" (`pt-br`), and "Hoy" (`es`). On submit, the selected preset name is emitted via `update:equivalentOption`.
+
 # 3.34.1 (2026-09-02)
 
 ### Added
