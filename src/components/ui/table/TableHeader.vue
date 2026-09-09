@@ -18,7 +18,11 @@ const props = defineProps<{
 
 .unnnic-table-header {
   * {
-    padding-bottom: $unnnic-space-2;
+    padding: $unnnic-space-3 $unnnic-space-4;
+  }
+
+  &:hover {
+    background-color: $unnnic-color-bg-soft;
   }
 }
 </style>

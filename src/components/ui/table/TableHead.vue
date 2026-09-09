@@ -4,11 +4,13 @@ import { cn } from '@/lib/utils';
 
 const props = withDefaults(
   defineProps<{
+    align?: 'center' | 'left' | 'right';
     class?: HTMLAttributes['class'];
     ellipsis?: boolean;
     width?: string;
   }>(),
   {
+    align: 'left',
     ellipsis: false,
   },
 );
@@ -19,6 +21,7 @@ const props = withDefaults(
     :class="
       cn(
         'unnnic-table-head',
+        `unnnic-table-head--align-${props.align}`,
         { 'unnnic-table-head--ellipsis': props.ellipsis },
         props.class,
       )
@@ -35,10 +38,19 @@ const props = withDefaults(
 .unnnic-table-head {
   @include unnnic-font-caption-1;
   color: $unnnic-color-fg-base;
-  text-align: left;
-  align-items: center;
+  vertical-align: middle;
 
-  pointer-events: none;
+  &--align-left {
+    text-align: left;
+  }
+
+  &--align-center {
+    text-align: center;
+  }
+
+  &--align-right {
+    text-align: right;
+  }
 
   &--ellipsis {
     overflow: hidden;
