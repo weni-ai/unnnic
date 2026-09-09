@@ -53,6 +53,7 @@ These are the most commonly used components. Use these first before looking for 
 | `UnnnicTabs` | Modern tabs | Composable: `TabsList`, `TabsTrigger`, `TabsContent` |
 | `UnnnicSegmentedControl` | Segmented toggle | Composable: `SegmentedControlList`, `SegmentedControlTrigger`, `SegmentedControlContent`, `size`: small/medium |
 | `UnnnicPageHeader` | Page header | `title`, `description`, slots for actions |
+| `UnnnicDataTable` | Data grid | `headers`, `items`, `size`: sm/md (body only), `clickable`, pagination, `@update:sort`, slots `#header-{itemKey}` / `#body-{itemKey}` |
 
 ## Other Components
 
@@ -64,14 +65,14 @@ These are the most commonly used components. Use these first before looking for 
 | `UnnnicDrawer` | `UnnnicDrawerNext` |
 | `UnnnicTab` | `UnnnicTabs` |
 | `UnnnicSelectSmart` | `UnnnicSelect` |
+| `UnnnicTableNext` | `UnnnicDataTable` |
+| `UnnnicTable` `version="1"` | `UnnnicTable` `version="2"` or `UnnnicDataTable` |
 
 ### Additional Components
 
 | Component | Purpose | Key Props |
 |-----------|---------|-----------|
-| `UnnnicTable` | version="2" is Modern version="1" is Legacy | `headers`, use `UnnnicTableRow` for rows |
-| `UnnnicTableNext` | Legacy table | `headers`, `items`, `@row-click`, `@sort` |
-| `UnnnicDataTable` | Data table | `headers`, `items`, with pagination |
+| `UnnnicTable` | Composable semantic table (`version="2"`) | Compose `UnnnicTableHeader`, `UnnnicTableRow`, `UnnnicTableHead`, `UnnnicTableCell` |
 | `UnnnicBreadcrumb` | Breadcrumbs | `crumbs` array |
 | `UnnnicPagination` | Page nav | `modelValue`, `total`, `perPage` |
 | `UnnnicAvatarIcon` | User avatar | `username`, `size` |
@@ -174,6 +175,28 @@ unnnicToastManager.show({
 });
 ```
 
+### DataTable
+
+Prefer `UnnnicDataTable` for lists with sorting, pagination, or infinite scroll. Pass `headers` (`title`, `itemKey`, optional `isSortable`, `align`: left/center/right, `size`) and `items`. Customize cells with named slots — do not import `DataTableCell` (internal).
+
+```vue
+<UnnnicDataTable
+  :headers="headers"
+  :items="items"
+  size="sm"
+  clickable
+  @item-click="onRowClick"
+  @update:sort="onSort"
+  @update:page="onPage"
+>
+  <template #body-status="{ item }">
+    <UnnnicTag :text="item.status" />
+  </template>
+</UnnnicDataTable>
+```
+
+Use `UnnnicTable` with `version="2"` only for simple composed markup without pagination or server sort.
+
 ### Modern Composable Components
 
 Newer components use composable patterns:
@@ -214,6 +237,8 @@ When implementing from Figma designs:
 - Don't use multiple `type="primary"` buttons in same section
 - Don't forget error states — pass `error` prop to `UnnnicFormElement`
 - Don't use legacy `UnnnicModal` for new code — prefer `UnnnicDialog`
+- Don't use `UnnnicTableNext` for new data grids — prefer `UnnnicDataTable`
+- Don't import `DataTableCell` — customize `UnnnicDataTable` with `#header-*` / `#body-*` slots
 
 
 ## Resources

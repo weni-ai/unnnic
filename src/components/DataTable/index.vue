@@ -1,24 +1,26 @@
 <template>
   <table
     class="unnnic-data-table"
+    :class="[
+      `unnnic-data-table--${size}`,
+      { 'unnnic-data-table--has-scrollbar': scrollbarWidth },
+    ]"
     :style="props.fixedHeaders ? {} : heightStyles"
   >
     <thead
       v-if="!shouldHideHeaders"
       class="unnnic-data-table__header"
+      :style="headerGutterStyle"
     >
       <tr class="unnnic-data-table__header-row">
-        <th
+        <DataTableCell
           v-for="header in headers"
           :key="header.itemKey"
-          :class="[
-            'unnnic-data-table__header-cell',
-            {
-              'unnnic-data-table__header-cell--clickable': header.isSortable,
-              'unnnic-data-table__header-cell--sorting':
-                sortState.header === header.title && sortState.order !== '',
-            },
-          ]"
+          type="header"
+          :align="getHeaderAlign(header.align)"
+          :sortable="header.isSortable"
+          :sortOrder="getSortOrder(header)"
+          data-testid="header-cell"
           @click.stop="handleClickHeader(header)"
         >
           <slot
@@ -29,120 +31,58 @@
           <template v-else>
             {{ header.title }}
           </template>
-          <template v-if="header.isSortable">
-            <IconArrowsDefault
-              v-if="sortState.header !== header.title"
-              class="order-default-icon"
-              data-testid="arrow-default-icon"
-            />
-            <Icon
-              v-else-if="sortState.order === 'asc'"
-              clickable
-              size="ant"
-              :icon="'switch_left'"
-              style="transform: rotate(-90deg)"
-              data-testid="arrow-asc-icon"
-            />
-            <Icon
-              v-else-if="sortState.order === 'desc'"
-              clickable
-              size="ant"
-              :icon="'switch_left'"
-              style="transform: rotate(90deg)"
-              data-testid="arrow-desc-icon"
-            />
-          </template>
-        </th>
+        </DataTableCell>
       </tr>
     </thead>
     <tbody
       ref="tbodyRef"
       :class="[
         'unnnic-data-table__body',
-        { 'unnnic-data-table__body--hide-headers': props.hideHeaders },
+        { 'unnnic-data-table__body--hide-headers': shouldHideHeaders },
       ]"
       :style="props.fixedHeaders ? heightStyles : {}"
     >
-      <tr
+      <DataTableLoadingRow
         v-if="isLoading"
-        :class="[
-          'unnnic-data-table__body-row',
-          'unnnic-data-table__body-row--loading',
-        ]"
-      >
-        <td
-          :class="[
-            'unnnic-data-table__body-cell',
-            `unnnic-data-table__body-cell--${size}`,
-          ]"
-        >
-          <img
-            class="unnnic-data-table__body-cell--loading"
-            data-testid="body-row-loading"
-            src="../../assets/icons/weni-loading.svg"
-            height="40"
-          />
-        </td>
-      </tr>
+        :size="size"
+      />
       <template v-else-if="props.items.length">
         <tr
           v-for="(item, index) in props.items"
           :key="index"
+          :tabindex="props.clickable ? 0 : undefined"
           :class="[
             'unnnic-data-table__body-row',
             { 'unnnic-data-table__body-row--clickable': props.clickable },
           ]"
-          @click="handleClickRow({ item })"
-          @click.middle.exact="handleClickRow({ item, button: 'middle' })"
+          @click="handleClickRow(item)"
+          @click.middle.exact="handleClickRow(item, 'middle')"
+          @keydown.enter="handleClickRow(item)"
+          @keydown.space.prevent="handleClickRow(item)"
         >
-          <template
-            v-for="key in headersItemsKeys"
-            :key="key"
+          <DataTableCell
+            v-for="header in headers"
+            :key="header.itemKey"
+            type="body"
+            :size="size"
+            :align="getHeaderAlign(header.align)"
+            data-testid="body-cell"
           >
-            <td
-              v-if="slots[`body-${key}`]"
-              :class="[
-                'unnnic-data-table__body-cell',
-                `unnnic-data-table__body-cell--${size}`,
-              ]"
-            >
-              <slot
-                :name="`body-${key}`"
-                :item="item"
-              />
-            </td>
-            <td
-              v-else
-              :class="[
-                'unnnic-data-table__body-cell',
-                `unnnic-data-table__body-cell--${size}`,
-              ]"
-            >
-              {{ item[key] }}
-            </td>
-          </template>
-        </tr>
-        <tr
-          v-if="props.infiniteScroll && props.isLoadingMore"
-          :class="[
-            'unnnic-data-table__body-row',
-            'unnnic-data-table__body-row--loading-more',
-          ]"
-        >
-          <td
-            :class="[
-              'unnnic-data-table__body-cell',
-              `unnnic-data-table__body-cell--${size}`,
-            ]"
-          >
-            <img
-              class="unnnic-data-table__body-cell--loading"
-              data-testid="body-row-loading-more"
-              src="../../assets/icons/weni-loading.svg"
-              height="40"
+            <slot
+              v-if="slots[`body-${header.itemKey}`]"
+              :name="`body-${header.itemKey}`"
+              :item="item"
             />
-          </td>
+            <template v-else>
+              {{ item[header.itemKey] }}
+            </template>
+          </DataTableCell>
         </tr>
+        <DataTableLoadingRow
+          v-if="props.infiniteScroll && props.isLoadingMore"
+          :size="size"
+          loadingMore
+        />
       </template>
       <tr
         v-else
@@ -151,30 +91,23 @@
           'unnnic-data-table__body-row--without-results',
         ]"
       >
-        <td
-          v-if="slots['without-results']"
-          :class="[
-            'unnnic-data-table__body-cell',
-            `unnnic-data-table__body-cell--${size}`,
-          ]"
-        >
-          <slot name="without-results" />
-        </td>
-        <td
-          v-else
-          :class="[
-            'unnnic-data-table__body-cell',
-            `unnnic-data-table__body-cell--${size}`,
-          ]"
+        <DataTableCell
+          type="body"
+          :size="size"
           data-testid="body-cell"
         >
+          <slot
+            v-if="slots['without-results']"
+            name="without-results"
+          />
           <p
+            v-else
             class="unnnic-data-table__body-cell-text"
             data-testid="body-cell-text"
           >
-            {{ defaultTranslations.without_results[props.locale || 'en'] }}
+            {{ withoutResultsText }}
           </p>
-        </td>
+        </DataTableCell>
       </tr>
     </tbody>
     <TablePagination
@@ -188,52 +121,24 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ComputedRef, ref, useSlots } from 'vue';
-import { useInfiniteScroll } from '@vueuse/core';
+import { computed, nextTick, ref, useSlots, watch } from 'vue';
+import { useInfiniteScroll, useResizeObserver } from '@vueuse/core';
+import { get } from 'lodash';
 
-import Icon from '../Icon.vue';
-import IconArrowsDefault from '../icons/iconArrowsDefault.vue';
+import i18n from '@/utils/plugins/i18n';
+import DataTableCell from './DataTableCell.vue';
+import DataTableLoadingRow from './DataTableLoadingRow.vue';
 import TablePagination from '../TableNext/TablePagination.vue';
-
-type DataTableHeader = {
-  title: string;
-  isSortable?: boolean;
-  itemKey: string;
-  align?: 'start' | 'center' | 'end';
-  size?: number | string;
-};
-
-type DataTableItem = {
-  [key: string]: any;
-};
-
-type SortState = {
-  header: string;
-  itemKey: string;
-  order: string;
-};
-
-interface Props {
-  headers: DataTableHeader[];
-  items: DataTableItem[];
-  isLoading?: boolean;
-  size?: 'sm' | 'md';
-  height?: string;
-  maxHeight?: string;
-  clickable?: boolean;
-  fixedHeaders?: boolean;
-  hideHeaders?: boolean;
-  hidePagination?: boolean;
-  page?: number;
-  pageTotal?: number;
-  pageInterval?: number;
-  locale?: string;
-  sort?: SortState;
-  infiniteScroll?: boolean;
-  infiniteScrollDistance?: number;
-  infiniteScrollDisabled?: boolean;
-  isLoadingMore?: boolean;
-}
+import {
+  NEXT_SORT_ORDER,
+  SORT_ORDER,
+  type CellAlign,
+  type DataTableHeader,
+  type DataTableItem,
+  type DataTableProps,
+  type SortOrder,
+  type SortState,
+} from './types';
 
 defineOptions({
   name: 'UnnnicDataTable',
@@ -242,14 +147,14 @@ defineOptions({
 const slots = useSlots();
 
 const emit = defineEmits<{
-  'update:sort': [sort: { header: string; itemKey: string; order: string }];
+  'update:sort': [sort: SortState];
   itemClick: [item: DataTableItem];
   'itemClick:middle': [item: DataTableItem];
   'update:page': [page: number];
   loadMore: [];
 }>();
 
-const props = withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<DataTableProps>(), {
   isLoading: false,
   size: 'md',
   height: '',
@@ -269,13 +174,19 @@ const props = withDefaults(defineProps<Props>(), {
   isLoadingMore: false,
 });
 
-const defaultTranslations = {
-  without_results: {
-    'pt-br': 'Nenhum resultado correspondente',
-    en: 'No matching results',
-    es: 'No hay resultados coincidentes',
-  },
-};
+const withoutResultsText = computed(() => {
+  const locale = String(
+    props.locale || i18n.global.locale || 'en',
+  ).toLowerCase();
+  const normalizedLocale = locale === 'en-us' ? 'en' : locale;
+
+  return (
+    get(
+      i18n.global.messages,
+      `${normalizedLocale}.data_table.without_results`,
+    ) || get(i18n.global.messages, 'en.data_table.without_results')
+  );
+});
 
 const heightStyles = computed(() => {
   return {
@@ -289,19 +200,8 @@ const shouldHideHeaders = computed(() => {
   return props.hideHeaders || !props.headers.length;
 });
 
-const headersItemsKeys: ComputedRef<string[]> = computed(() => {
-  return props.headers.map((header) => header.itemKey);
-});
-
-const internalSort = ref({
-  header: '',
-  itemKey: '',
-  order: '',
-});
-
-const sortState = computed(() => {
-  return props.sort !== undefined ? props.sort : internalSort.value;
-});
+const getHeaderAlign = (align?: DataTableHeader['align']): CellAlign =>
+  align ?? 'left';
 
 const getHeaderColumnSize = (header: DataTableHeader): string => {
   return typeof header.size === 'number'
@@ -309,15 +209,36 @@ const getHeaderColumnSize = (header: DataTableHeader): string => {
     : header.size || '1fr';
 };
 
-const gridTemplateColumns: ComputedRef<string> = computed(() => {
-  const columnSizes = props.headers.length
-    ? props.headers.map(getHeaderColumnSize)
-    : props.items[0].content.map(() => '1fr');
+const gridTemplateColumns = computed(() => {
+  if (!props.headers.length) {
+    return '1fr';
+  }
 
-  return columnSizes.join(' ');
+  return props.headers.map(getHeaderColumnSize).join(' ');
 });
 
-const handleSort = (header: SortState, order: string) => {
+const internalSort = ref<SortState>({
+  header: '',
+  itemKey: '',
+  order: SORT_ORDER.NONE,
+});
+
+const sortState = computed(() => {
+  return props.sort !== undefined ? props.sort : internalSort.value;
+});
+
+const getSortOrder = (header: DataTableHeader): SortOrder => {
+  if (sortState.value.header !== header.title) return SORT_ORDER.NONE;
+  if (
+    sortState.value.order === SORT_ORDER.ASC ||
+    sortState.value.order === SORT_ORDER.DESC
+  ) {
+    return sortState.value.order;
+  }
+  return SORT_ORDER.NONE;
+};
+
+const handleSort = (header: SortState, order: SortOrder) => {
   if (props.sort === undefined) {
     internalSort.value = { ...header, order };
   }
@@ -328,62 +249,111 @@ const handleSort = (header: SortState, order: string) => {
 const handleClickHeader = (header: DataTableHeader) => {
   if (!header.isSortable) return;
 
-  const nextSortOrderMapper = {
-    asc: 'desc',
-    desc: 'asc',
-    '': 'asc',
-  };
-
   const nextSort =
     header.title !== sortState.value.header
-      ? 'asc'
-      : nextSortOrderMapper[sortState.value.order];
+      ? SORT_ORDER.ASC
+      : (NEXT_SORT_ORDER[sortState.value.order] ?? SORT_ORDER.ASC);
 
   handleSort(
-    nextSort === ''
-      ? { header: '', itemKey: '', order: '' }
-      : { header: header.title, itemKey: header.itemKey, order: nextSort },
+    {
+      header: header.title,
+      itemKey: header.itemKey,
+      order: nextSort,
+    },
     nextSort,
   );
 };
 
-const handleClickRow = ({
-  item,
-  button,
-}: {
-  item: DataTableItem;
-  button?: 'left' | 'middle' | 'right';
-}) => {
+const handleClickRow = (
+  item: DataTableItem,
+  button: 'left' | 'middle' = 'left',
+) => {
   if (!props.clickable) return;
 
-  const eventName =
-    !!button && button !== 'left' ? `itemClick:${button}` : 'itemClick';
+  if (button === 'middle') {
+    emit('itemClick:middle', item);
+    return;
+  }
 
-  emit(eventName as keyof typeof emit, item);
+  emit('itemClick', item);
 };
 
 const tbodyRef = ref<HTMLElement | null>(null);
+const scrollbarWidth = ref(0);
 
-const handleLoadMore = () => {
-  if (props.infiniteScrollDisabled || props.isLoading || props.isLoadingMore) {
+const headerGutterStyle = computed(() => {
+  if (!scrollbarWidth.value) return {};
+
+  return { paddingRight: `${scrollbarWidth.value}px` };
+});
+
+const updateScrollbarWidth = () => {
+  const el = tbodyRef.value;
+  if (!el || !props.fixedHeaders) {
+    scrollbarWidth.value = 0;
     return;
   }
+
+  scrollbarWidth.value = Math.max(0, el.offsetWidth - el.clientWidth);
+};
+
+useResizeObserver(tbodyRef, updateScrollbarWidth);
+
+watch(
+  () => [
+    props.fixedHeaders,
+    props.items.length,
+    props.height,
+    props.maxHeight,
+    props.isLoading,
+    props.isLoadingMore,
+  ],
+  () => {
+    nextTick(updateScrollbarWidth);
+  },
+  { immediate: true },
+);
+
+const handleLoadMore = () => {
   emit('loadMore');
 };
 
-if (props.infiniteScroll) {
-  useInfiniteScroll(tbodyRef, handleLoadMore, {
+useInfiniteScroll(
+  () => (props.infiniteScroll ? tbodyRef.value : null),
+  handleLoadMore,
+  {
     distance: props.infiniteScrollDistance,
-  });
-}
+    canLoadMore: () =>
+      props.infiniteScroll &&
+      !props.infiniteScrollDisabled &&
+      !props.isLoading &&
+      !props.isLoadingMore,
+  },
+);
 </script>
 
 <style scoped lang="scss">
 @use '@/assets/scss/unnnic' as *;
 
-$tableBorder: 1px solid $unnnic-color-border-base;
+@mixin data-table-scrollbar {
+  &::-webkit-scrollbar {
+    width: $unnnic-space-1;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $unnnic-color-border-emphasized;
+    border-radius: $unnnic-radius-full;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $unnnic-color-bg-muted;
+    border-radius: $unnnic-radius-full;
+  }
+}
 
 .unnnic-data-table {
+  @include data-table-scrollbar;
+
   border-spacing: 0;
 
   overflow: hidden;
@@ -393,95 +363,28 @@ $tableBorder: 1px solid $unnnic-color-border-base;
   display: flex;
   flex-direction: column;
 
-  &::-webkit-scrollbar {
-    width: $unnnic-spacing-inline-nano;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $unnnic-color-border-emphasized;
-    border-radius: $unnnic-border-radius-pill;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: $unnnic-color-bg-muted;
-    border-radius: $unnnic-border-radius-pill;
-  }
-
   &__header {
+    display: block;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    min-width: 0;
+
     &-row {
       @extend %base-row;
 
+      width: 100%;
       grid-template-columns: v-bind(gridTemplateColumns);
-    }
-
-    &-cell {
-      @extend %base-cell;
-
-      height: 100%;
-
-      box-sizing: border-box;
-      border: $tableBorder;
-      background-color: $unnnic-color-bg-base-soft;
-
-      font-weight: $unnnic-font-weight-bold;
-
-      display: flex;
-
-      &:first-of-type {
-        border-radius: $unnnic-border-radius-sm 0 0 0;
-      }
-
-      &:not(:first-of-type) {
-        border-left: none;
-      }
-
-      &:last-of-type {
-        border-radius: 0 $unnnic-border-radius-sm 0 0;
-      }
-
-      &--sorting {
-        background-color: $unnnic-color-bg-muted;
-      }
-
-      &--clickable {
-        &:hover {
-          cursor: pointer;
-          background-color: $unnnic-color-bg-muted;
-        }
-      }
     }
   }
 
   &__body {
-    &::-webkit-scrollbar {
-      width: $unnnic-spacing-inline-nano;
-    }
+    @include data-table-scrollbar;
 
-    &::-webkit-scrollbar-thumb {
-      background: $unnnic-color-border-emphasized;
-      border-radius: $unnnic-border-radius-pill;
-    }
-
-    &::-webkit-scrollbar-track {
-      background: $unnnic-color-bg-muted;
-      border-radius: $unnnic-border-radius-pill;
-    }
-
-    &--hide-headers {
-      .unnnic-data-table__body-row:first-of-type {
-        border-radius: $unnnic-border-radius-sm $unnnic-border-radius-sm 0 0;
-        border-top: $tableBorder;
-      }
-    }
+    display: block;
+    min-width: 0;
 
     &-row {
       @extend %base-row;
-
-      overflow: hidden;
-
-      border: $tableBorder;
-      border-collapse: collapse;
-      border-top: none;
 
       grid-template-columns: v-bind(gridTemplateColumns);
 
@@ -492,59 +395,17 @@ $tableBorder: 1px solid $unnnic-color-border-base;
       }
 
       &--clickable {
-        text-decoration: none;
-
-        &:hover {
-          cursor: pointer;
-          background-color: $unnnic-color-bg-base-soft;
-        }
-      }
-
-      &:last-of-type {
-        border-radius: 0 0 $unnnic-border-radius-sm $unnnic-border-radius-sm;
+        cursor: pointer;
       }
     }
 
-    &-cell {
-      @extend %base-cell;
+    &-cell-text {
+      margin: 0;
 
-      &-text {
-        margin: 0;
-
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-      }
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
     }
-
-    td.unnnic-data-table__body-cell--sm {
-      padding: $unnnic-spacing-ant $unnnic-spacing-sm;
-    }
-
-    &-cell--loading {
-      margin: $unnnic-space-10 0;
-      padding: 0;
-
-      width: 100%;
-
-      pointer-events: none;
-    }
-  }
-
-  %base-cell {
-    border-collapse: collapse;
-
-    padding: $unnnic-spacing-sm $unnnic-spacing-sm;
-
-    font-family: $unnnic-font-family-secondary;
-    font-size: $unnnic-font-size-body-gt;
-    line-height: $unnnic-line-height-small * 5.5;
-    text-align: left;
-    color: $unnnic-color-fg-base;
-
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
   }
 
   %base-row {

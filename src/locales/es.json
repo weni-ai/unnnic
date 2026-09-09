@@ -26,6 +26,9 @@
   "chats_contact": {
     "yesterday": "Ayer"
   },
+  "data_table": {
+    "without_results": "No hay resultados coincidentes"
+  },
   "emoji_picker": {
     "title": "Elige tu emoji...",
     "search": "Buscar",
