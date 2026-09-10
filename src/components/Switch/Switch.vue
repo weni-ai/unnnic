@@ -49,7 +49,7 @@
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { pick } from 'lodash';
+import { pick } from '@/utils/objectPath';
 import UnnnicLabel from '../Label/Label.vue';
 import { type TooltipProps } from '../ToolTip/ToolTip.vue';
 

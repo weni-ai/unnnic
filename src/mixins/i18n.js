@@ -1,4 +1,4 @@
-import { get } from 'lodash';
+import { get } from '@/utils/objectPath';
 import i18n from '@/utils/plugins/i18n';
 
 export default {

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import moment from 'moment';
+import dayjs from '@/utils/date';
 import UnnnicInput from '../Input/Input.vue';
 
 export default {
@@ -51,14 +51,14 @@ export default {
       let range = '';
 
       if (this.startDate) {
-        const formattedDate = moment(this.startDate).format(
+        const formattedDate = dayjs(this.startDate).format(
           this.dateFormat.replaceAll('/', ''),
         );
         range += formattedDate.toString();
       }
 
       if (this.endDate) {
-        const formattedDate = moment(this.endDate).format(
+        const formattedDate = dayjs(this.endDate).format(
           this.dateFormat.replaceAll('/', ''),
         );
         range += formattedDate.toString();

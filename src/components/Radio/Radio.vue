@@ -1,21 +1,28 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <section class="unnnic-radio">
-    <label :class="['unnnic-radio__input-wrapper', {'unnnic-radio__input-wrapper--disabled': disabled}]">
+    <label
+      :class="[
+        'unnnic-radio__input-wrapper',
+        { 'unnnic-radio__input-wrapper--disabled': disabled },
+      ]"
+    >
       <input
         class="unnnic-radio__input"
         type="radio"
         :disabled="disabled"
         :checked="computedModelValue === value"
-        @change="click"
         :name="computedName"
         v-bind="pick($attrs, ['id'])"
+        @change="click"
       />
 
-      <p :class="[
-        'unnnic-radio__label',
-        { 'unnnic-radio__label--disabled': disabled },
-      ]">
+      <p
+        :class="[
+          'unnnic-radio__label',
+          { 'unnnic-radio__label--disabled': disabled },
+        ]"
+      >
         {{ label }}
         <slot />
       </p>
@@ -31,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { pick } from 'lodash';
+import { pick } from '@/utils/objectPath';
 import { inject, computed, useAttrs, type Ref, type ComputedRef } from 'vue';
 
 defineOptions({
@@ -114,7 +121,6 @@ $radio-size: 21px;
       cursor: not-allowed;
     }
   }
-  
 
   &__input {
     appearance: none;

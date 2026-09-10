@@ -5,6 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.35.1 (2026-09-10)
+
+### Changed
+
+- Replaced `moment` with `dayjs` in **UnnnicDateFilter**, **UnnnicInputDatePicker**, and related Storybook stories. Public APIs and date formats are unchanged.
+- Replaced `lodash` `get` / `pick` with local helpers in `src/utils/objectPath.ts` across **UnnnicCheckbox**, **UnnnicSwitch**, **UnnnicRadio**, **UnnnicDatePicker**, **UnnnicDataTable**, **UnnnicEmojiPicker**, and the i18n mixin.
+
+### Removed
+
+- Dependencies `moment`, `lodash`, and `@types/lodash`.
+
+### Added
+
+- Dependency `dayjs` and `src/utils/date.ts` (dayjs + `customParseFormat`).
+
 # 3.35.0 (2026-09-08)
 
 ### Added
@@ -20,6 +35,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **UnnnicTableCell**: `ellipsis` now defaults to `true`; tighter padding when the cell contains a component.
 - **UnnnicTable** (version `'2'`): updated cell, header, and row spacing; header hover uses `bg-soft`.
+
+# 3.34.2 (2026-09-09)
+
+### Added
+
+- **UnnnicDatePicker**: Added "Today" (`today`) preset to the default period options. Selecting it sets `startDate` and `endDate` to the same day (the current date, or `periodBaseDate` when provided). Localized labels: "Today" (`en`/`en-us`), "Hoje" (`pt-br`), and "Hoy" (`es`). On submit, the selected preset name is emitted via `update:equivalentOption`.
 
 # 3.34.1 (2026-09-02)
 

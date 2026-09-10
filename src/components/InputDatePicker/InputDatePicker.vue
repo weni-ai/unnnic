@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
 import { computed, ref, useSlots } from 'vue';
-import moment from 'moment';
+import dayjs from '@/utils/date';
 
 import UnnnicInput from '../Input/Input.vue';
 import UnnnicDatePicker from '../DatePicker/DatePicker.vue';
@@ -160,11 +160,11 @@ const filterText = computed(() => {
   const { start, end } = props.modelValue || {};
 
   if (start) {
-    dates.push(moment(start, props.format).format(props.inputFormat || ''));
+    dates.push(dayjs(start, props.format).format(props.inputFormat || ''));
   }
 
   if (end) {
-    dates.push(moment(end, props.format).format(props.inputFormat || ''));
+    dates.push(dayjs(end, props.format).format(props.inputFormat || ''));
   }
 
   if (!dates.length) {
@@ -178,21 +178,21 @@ const filterText = computed(() => {
 
 const initialStartDate = computed<string | undefined>(() => {
   return props.modelValue.start
-    ? moment(props.modelValue.start, props.format).format('MM DD YYYY')
+    ? dayjs(props.modelValue.start, props.format).format('MM DD YYYY')
     : undefined;
 });
 
 const initialEndDate = computed<string | undefined>(() => {
   return props.modelValue.end
-    ? moment(props.modelValue.end, props.format).format('MM DD YYYY')
+    ? dayjs(props.modelValue.end, props.format).format('MM DD YYYY')
     : undefined;
 });
 
 function emitSelectDate(date: { startDate: string; endDate: string }) {
   const { startDate, endDate } = date;
   const formattedDates: DateRangeValue = {
-    start: moment(startDate, 'MM-DD-YYYY').format(props.format),
-    end: moment(endDate, 'MM-DD-YYYY').format(props.format),
+    start: dayjs(startDate, 'MM-DD-YYYY').format(props.format),
+    end: dayjs(endDate, 'MM-DD-YYYY').format(props.format),
   };
 
   emit('selectDate', formattedDates);
@@ -207,9 +207,9 @@ function changeDate(value: { startDate: string; endDate: string }) {
 
   emit('update:model-value', {
     start: startDate
-      ? moment(startDate, 'YYYY-MM-DD').format(props.format)
+      ? dayjs(startDate, 'YYYY-MM-DD').format(props.format)
       : null,
-    end: endDate ? moment(endDate, 'YYYY-MM-DD').format(props.format) : null,
+    end: endDate ? dayjs(endDate, 'YYYY-MM-DD').format(props.format) : null,
   });
 }
 
