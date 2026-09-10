@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
 import { computed, useAttrs } from 'vue';
-import { pick } from 'lodash';
+import { pick } from '@/utils/objectPath';
 
 defineOptions({
   name: 'UnnnicCheckbox',
