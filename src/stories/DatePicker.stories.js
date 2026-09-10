@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from '@/utils/date';
 import UnnnicDatePicker from '../components/DatePicker/DatePicker.vue';
 
 export default {
@@ -29,7 +29,7 @@ export default {
 export const Default = {
   args: {
     size: 'large',
-    maxDate: moment().format('YYYY-MM-DD'),
+    maxDate: dayjs().format('YYYY-MM-DD'),
     initialStartDate: '12-01-2021',
     initialEndDate: '12-01-2021',
   },
@@ -39,7 +39,7 @@ export const SmallDayPicker = {
   args: {
     size: 'small',
     type: 'day',
-    maxDate: moment().format('YYYY-MM-DD'),
+    maxDate: dayjs().format('YYYY-MM-DD'),
   },
 };
 
@@ -47,7 +47,7 @@ export const MonthView = {
   args: {
     size: 'large',
     type: 'month',
-    maxDate: moment().format('YYYY-MM-DD'),
+    maxDate: dayjs().format('YYYY-MM-DD'),
   },
 };
 
@@ -55,7 +55,7 @@ export const YearView = {
   args: {
     size: 'large',
     type: 'year',
-    maxDate: moment().format('YYYY-MM-DD'),
+    maxDate: dayjs().format('YYYY-MM-DD'),
   },
 };
 
@@ -63,8 +63,8 @@ export const WithMinAndMaxDateRange = {
   args: {
     size: 'large',
     type: 'day',
-    minDate: moment().subtract(30, 'days').format('YYYY-MM-DD'),
-    maxDate: moment().format('YYYY-MM-DD'),
+    minDate: dayjs().subtract(30, 'days').format('YYYY-MM-DD'),
+    maxDate: dayjs().format('YYYY-MM-DD'),
   },
 };
 
@@ -89,9 +89,9 @@ export const CustomRelativePeriodsWithBaseDate = {
   args: {
     size: 'large',
 
-    periodBaseDate: moment().subtract(1, 'day').format('YYYY-MM-DD'),
+    periodBaseDate: dayjs().subtract(1, 'day').format('YYYY-MM-DD'),
 
-    maxDate: moment().subtract(1, 'day').format('YYYY-MM-DD'),
+    maxDate: dayjs().subtract(1, 'day').format('YYYY-MM-DD'),
 
     options: [
       { name: 'Last 7 days (up to 24h ago)', id: 'last-7-days' },
