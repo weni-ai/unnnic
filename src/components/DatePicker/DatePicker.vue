@@ -253,7 +253,7 @@ import {
   ref,
   watch,
 } from 'vue';
-import { get } from 'lodash';
+import { get } from '@/utils/objectPath';
 
 import {
   months as translationMonths,

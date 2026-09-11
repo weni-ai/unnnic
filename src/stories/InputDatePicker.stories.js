@@ -1,6 +1,6 @@
 import UnnnicInputDatePicker from '../components/InputDatePicker/InputDatePicker.vue';
 import UnnnicDisclaimer from '../components/Disclaimer/Disclaimer.vue';
-import moment from 'moment';
+import dayjs from '@/utils/date';
 export default {
   title: 'Form/InputDatePicker',
   component: UnnnicInputDatePicker,
@@ -45,11 +45,11 @@ export default {
 export const Default = {
   args: {
     size: 'sm',
-    maxDate: moment().format('YYYY-MM-DD'),
+    maxDate: dayjs().format('YYYY-MM-DD'),
   },
 };
 
-const today = moment();
+const today = dayjs();
 
 export const WithMinMaxDates = {
   args: {
@@ -76,8 +76,8 @@ export const WithCustomRelativePeriodsAndBaseDate = {
     iconPosition: 'right',
     fillW: true,
 
-    periodBaseDate: moment().subtract(1, 'day').format('YYYY-MM-DD'),
-    maxDate: moment().subtract(1, 'day').format('YYYY-MM-DD'),
+    periodBaseDate: dayjs().subtract(1, 'day').format('YYYY-MM-DD'),
+    maxDate: dayjs().subtract(1, 'day').format('YYYY-MM-DD'),
 
     options: [
       { name: 'Last 7 days (up to 24h ago)', id: 'last-7-days' },
@@ -111,8 +111,8 @@ export const WithFooter = {
     next: true,
     iconPosition: 'right',
     fillW: true,
-    maxDate: moment().format('YYYY-MM-DD'),
-    minDate: moment().subtract(89, 'days').format('YYYY-MM-DD'),
+    maxDate: dayjs().format('YYYY-MM-DD'),
+    minDate: dayjs().subtract(89, 'days').format('YYYY-MM-DD'),
     options: [
       { name: 'Last 7 days', id: 'last-7-days' },
       { name: 'Last 14 days', id: 'last-14-days' },

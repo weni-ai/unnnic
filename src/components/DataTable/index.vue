@@ -123,7 +123,7 @@
 <script setup lang="ts">
 import { computed, nextTick, ref, useSlots, watch } from 'vue';
 import { useInfiniteScroll, useResizeObserver } from '@vueuse/core';
-import { get } from 'lodash';
+import { get } from '@/utils/objectPath';
 
 import i18n from '@/utils/plugins/i18n';
 import DataTableCell from './DataTableCell.vue';

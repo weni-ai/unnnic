@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { computed, ref, onMounted, onUnmounted } from 'vue';
-import { get } from 'lodash';
+import { get } from '@/utils/objectPath';
 import i18n from '../../utils/plugins/i18n';
 import { Picker, EmojiIndex } from 'emoji-mart-vue-fast/src';
 import data from 'emoji-mart-vue-fast/data/all.json';
