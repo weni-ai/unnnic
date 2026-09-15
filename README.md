@@ -20,6 +20,30 @@ Before install the lib, make sure you have installed the following tools on your
 - [Node.js 20](https://nodejs.org/en)
 - [NPM](https://www.npmjs.com/)
 
+# Recommended usage (import on demand)
+
+To avoid loading the entire design system when your module only uses a
+few components, prefer named imports and local registration:
+
+```vue
+<script setup>
+import { UnnnicButton, UnnnicInput } from '@weni/unnnic-system';
+import '@weni/unnnic-system/dist/style.css';
+</script>
+
+<template>
+  <UnnnicButton text="Save" />
+  <UnnnicInput v-model="value" />
+</template>
+```
+
+This ensures only the components referenced in your code end up in your
+application's final bundle.
+
+> Use `app.use(Unnnic, { ... })` only if your module actually uses most
+> of the library — this mode registers **all** components globally,
+> regardless of actual usage.
+
 # Set up at projects with Vue 3
 
 1. Install unnnic in your project
