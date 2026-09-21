@@ -83,12 +83,41 @@ describe('InputDatePicker.vue', () => {
     withDates.unmount();
   });
 
+  it('computes filterText from start and end dates with date-fns', () => {
+    const withDates = factory({
+      modelValue: {
+        start: '2025-01-10',
+        end: '2025-01-20',
+      },
+      format: 'YYYY-MM-DD',
+      inputFormat: 'MM-DD-YYYY',
+      useDateFns: true,
+    });
+
+    expect(withDates.vm.filterText).toBe('01-10-2025 ~ 01-20-2025');
+    withDates.unmount();
+  });
+
   it('computes initialStartDate and initialEndDate for DatePicker', () => {
     const withDates = factory({
       modelValue: {
         start: '2025-01-10',
         end: '2025-01-20',
       },
+    });
+
+    expect(withDates.vm.initialStartDate).toBe('01 10 2025');
+    expect(withDates.vm.initialEndDate).toBe('01 20 2025');
+    withDates.unmount();
+  });
+
+  it('computes initialStartDate and initialEndDate with date-fns', () => {
+    const withDates = factory({
+      modelValue: {
+        start: '2025-01-10',
+        end: '2025-01-20',
+      },
+      useDateFns: true,
     });
 
     expect(withDates.vm.initialStartDate).toBe('01 10 2025');
@@ -119,6 +148,65 @@ describe('InputDatePicker.vue', () => {
     });
   });
 
+  it('emits selectDate with formatted dates using date-fns', async () => {
+    wrapper = factory({ useDateFns: true });
+    wrapper.vm.isPopoverOpen = true;
+    await wrapper.vm.$nextTick();
+
+    const datePicker = wrapper.findComponent({ name: 'UnnnicDatePicker' });
+
+    await datePicker.vm.$emit('change', {
+      startDate: '01-10-2025',
+      endDate: '01-20-2025',
+    });
+
+    const emitted = wrapper.emitted('selectDate');
+    expect(emitted).toBeTruthy();
+
+    const [formatted] = emitted[0];
+    expect(formatted).toEqual({
+      start: '2025-01-10',
+      end: '2025-01-20',
+    });
+  });
+
+  it('formats unpadded DatePicker dates on selectDate', async () => {
+    wrapper.vm.isPopoverOpen = true;
+    await wrapper.vm.$nextTick();
+
+    const datePicker = wrapper.findComponent({ name: 'UnnnicDatePicker' });
+
+    await datePicker.vm.$emit('change', {
+      startDate: '9-21-2026',
+      endDate: '9-22-2026',
+    });
+
+    const [formatted] = wrapper.emitted('selectDate')[0];
+    expect(formatted).toEqual({
+      start: '2026-09-21',
+      end: '2026-09-22',
+    });
+  });
+
+  it('formats unpadded DatePicker dates on submit with date-fns', async () => {
+    wrapper = factory({ useDateFns: true });
+    wrapper.vm.isPopoverOpen = true;
+    await wrapper.vm.$nextTick();
+
+    const datePicker = wrapper.findComponent({ name: 'UnnnicDatePicker' });
+
+    await datePicker.vm.$emit('submit', {
+      startDate: '9-21-2026',
+      endDate: '9-22-2026',
+    });
+
+    const [newValue] = wrapper.emitted('update:model-value')[0];
+    expect(newValue).toEqual({
+      start: '2026-09-21',
+      end: '2026-09-22',
+    });
+  });
+
   it('emits update:model-value and closes dropdown when DatePicker emits submit', async () => {
     wrapper.vm.isPopoverOpen = true;
     await wrapper.vm.$nextTick();
@@ -131,6 +219,30 @@ describe('InputDatePicker.vue', () => {
     };
 
     await datePicker.vm.$emit('submit', payload);
+
+    const emitted = wrapper.emitted('update:model-value');
+    expect(emitted).toBeTruthy();
+
+    const [newValue] = emitted[0];
+    expect(newValue).toEqual({
+      start: '2025-01-10',
+      end: '2025-01-20',
+    });
+
+    expect(wrapper.vm.isPopoverOpen).toBe(false);
+  });
+
+  it('emits update:model-value with date-fns and closes dropdown on submit', async () => {
+    wrapper = factory({ useDateFns: true });
+    wrapper.vm.isPopoverOpen = true;
+    await wrapper.vm.$nextTick();
+
+    const datePicker = wrapper.findComponent({ name: 'UnnnicDatePicker' });
+
+    await datePicker.vm.$emit('submit', {
+      startDate: '01-10-2025',
+      endDate: '01-20-2025',
+    });
 
     const emitted = wrapper.emitted('update:model-value');
     expect(emitted).toBeTruthy();

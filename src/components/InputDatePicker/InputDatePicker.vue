@@ -53,7 +53,7 @@
 
 <script setup lang="ts">
 import { computed, ref, useSlots } from 'vue';
-import dayjs from '@/utils/date';
+import { formatDate } from '@/utils/formatDate';
 
 import UnnnicInput from '../Input/Input.vue';
 import UnnnicDatePicker from '../DatePicker/DatePicker.vue';
@@ -110,6 +110,8 @@ interface InputDatePickerProps {
   disabled?: boolean;
 
   disableShowOverwrittenValue?: boolean;
+
+  useDateFns?: boolean;
 }
 
 const props = withDefaults(defineProps<InputDatePickerProps>(), {
@@ -133,6 +135,7 @@ const props = withDefaults(defineProps<InputDatePickerProps>(), {
   periodBaseDate: '',
   disabled: false,
   disableShowOverwrittenValue: false,
+  useDateFns: false,
 });
 
 const emit = defineEmits<{
@@ -145,6 +148,17 @@ const overwrittenValue = ref('');
 const popoverAlign = computed<'start' | 'end'>(() =>
   props.position === 'right' ? 'end' : 'start',
 );
+
+function formatPickerDate(
+  value: string,
+  outputFormat: string,
+  parseFormat?: string,
+) {
+  return formatDate(value, outputFormat, {
+    parseFormat,
+    useDateFns: props.useDateFns,
+  });
+}
 
 const inputText = computed(() => {
   if (props.disableShowOverwrittenValue) {
@@ -160,11 +174,11 @@ const filterText = computed(() => {
   const { start, end } = props.modelValue || {};
 
   if (start) {
-    dates.push(dayjs(start, props.format).format(props.inputFormat || ''));
+    dates.push(formatPickerDate(start, props.inputFormat || '', props.format));
   }
 
   if (end) {
-    dates.push(dayjs(end, props.format).format(props.inputFormat || ''));
+    dates.push(formatPickerDate(end, props.inputFormat || '', props.format));
   }
 
   if (!dates.length) {
@@ -178,38 +192,36 @@ const filterText = computed(() => {
 
 const initialStartDate = computed<string | undefined>(() => {
   return props.modelValue.start
-    ? dayjs(props.modelValue.start, props.format).format('MM DD YYYY')
+    ? formatPickerDate(props.modelValue.start, 'MM DD YYYY', props.format)
     : undefined;
 });
 
 const initialEndDate = computed<string | undefined>(() => {
   return props.modelValue.end
-    ? dayjs(props.modelValue.end, props.format).format('MM DD YYYY')
+    ? formatPickerDate(props.modelValue.end, 'MM DD YYYY', props.format)
     : undefined;
 });
 
 function emitSelectDate(date: { startDate: string; endDate: string }) {
   const { startDate, endDate } = date;
   const formattedDates: DateRangeValue = {
-    start: dayjs(startDate, 'MM-DD-YYYY').format(props.format),
-    end: dayjs(endDate, 'MM-DD-YYYY').format(props.format),
+    start: formatPickerDate(startDate, props.format, 'MM-DD-YYYY'),
+    end: formatPickerDate(endDate, props.format, 'MM-DD-YYYY'),
   };
 
   emit('selectDate', formattedDates);
 }
 
 function changeDate(value: { startDate: string; endDate: string }) {
-  const startDate = value.startDate.replace(/(\d+)-(\d+)-(\d+)/, '$3-$1-$2');
-
-  const endDate = value.endDate.replace(/(\d+)-(\d+)-(\d+)/, '$3-$1-$2');
-
   isPopoverOpen.value = false;
 
   emit('update:model-value', {
-    start: startDate
-      ? dayjs(startDate, 'YYYY-MM-DD').format(props.format)
+    start: value.startDate
+      ? formatPickerDate(value.startDate, props.format, 'MM-DD-YYYY')
       : null,
-    end: endDate ? dayjs(endDate, 'YYYY-MM-DD').format(props.format) : null,
+    end: value.endDate
+      ? formatPickerDate(value.endDate, props.format, 'MM-DD-YYYY')
+      : null,
   });
 }
 
