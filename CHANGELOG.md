@@ -11,6 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - `sideEffects` in `package.json` so consumer bundlers can tree-shake unused JS when using named imports.
 - README section **Recommended usage (import on demand)** documenting named imports as the preferred setup; `app.use(Unnnic)` remains supported for full global registration.
+- **UnnnicInputDatePicker** and **UnnnicDateFilter**: `useDateFns` prop (default `false`). When `true`, date parsing and formatting use `date-fns`; `dayjs` remains the default. Public format tokens stay in dayjs style (`YYYY`, `DD`).
+- Dependency `date-fns` and `src/utils/formatDate.ts` (dayjs and date-fns format helpers).
+
+### Fixed
+
+- **UnnnicInputDatePicker**: parse DatePicker values without zero-padding (e.g. `9-21-2026`) so selection no longer returns `Invalid Date`.
 
 # 3.35.1 (2026-09-10)
 
