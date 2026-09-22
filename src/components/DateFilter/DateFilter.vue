@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import dayjs from '@/utils/date';
+import { formatDate } from '@/utils/formatDate';
 import UnnnicInput from '../Input/Input.vue';
 
 export default {
@@ -45,23 +45,26 @@ export default {
       type: String,
       default: '',
     },
+    useDateFns: {
+      type: Boolean,
+      default: false,
+    },
   },
   computed: {
     dateRange() {
       let range = '';
+      const outputFormat = this.dateFormat.replaceAll('/', '');
 
       if (this.startDate) {
-        const formattedDate = dayjs(this.startDate).format(
-          this.dateFormat.replaceAll('/', ''),
-        );
-        range += formattedDate.toString();
+        range += formatDate(this.startDate, outputFormat, {
+          useDateFns: this.useDateFns,
+        });
       }
 
       if (this.endDate) {
-        const formattedDate = dayjs(this.endDate).format(
-          this.dateFormat.replaceAll('/', ''),
-        );
-        range += formattedDate.toString();
+        range += formatDate(this.endDate, outputFormat, {
+          useDateFns: this.useDateFns,
+        });
       }
 
       return range;

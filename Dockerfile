@@ -2,7 +2,7 @@ FROM node:22.17.1-alpine3.22 AS builder
 
 WORKDIR /home/app
 
-COPY ./package.json ./package-lock.json ./
+COPY ./package.json ./package-lock.json ./.npmrc ./
 
 RUN npm install
 

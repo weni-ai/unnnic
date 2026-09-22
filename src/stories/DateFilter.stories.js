@@ -7,6 +7,7 @@ export default {
     dateFormat: { control: { type: 'text' } },
     startDate: { control: { type: 'date' } },
     endDate: { control: { type: 'date' } },
+    useDateFns: { control: 'boolean' },
   },
 };
 
