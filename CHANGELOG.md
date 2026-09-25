@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# 3.35.4 (2026-09-25)
+
+### Fixed
+
+- Stop emitting Google Fonts `@import` and `:root` token blocks from every component CSS. The Inter font, theme CSS variables, font/grid utilities, and `.unnnic--clickable` now load once from the global entry (`tailwind.scss`). `dist/style.css` concatenation also hoists any leftover `@import` rules to the top of the file so PostCSS prefixers (e.g. Insights) can parse it.
+
 # 3.35.3 (2026-09-21)
 
 ### Added
