@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 # 3.35.4 (2026-09-25)
 
+### Added
+
+- Public export `@weni/unnnic-system/theme.css` (~15 KB): Inter, `:root` semantic tokens (`--unnnic-color-*`), font/grid utilities, and `.unnnic--clickable`. Named imports only pull per-component CSS; this file is required when `dist/style.css` is not imported. `dist/index.mjs` is **not** listed in `sideEffects` so unused JS can still tree-shake.
+
+### Changed
+
+- Consumer guide and README: import `theme.css` once in `main` when migrating off `dist/style.css`.
+
 ### Fixed
 
 - Stop emitting Google Fonts `@import` and `:root` token blocks from every component CSS. The Inter font, theme CSS variables, font/grid utilities, and `.unnnic--clickable` now load once from the global entry (`tailwind.scss`). `dist/style.css` concatenation also hoists any leftover `@import` rules to the top of the file so PostCSS prefixers (e.g. Insights) can parse it.
