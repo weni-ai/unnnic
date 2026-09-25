@@ -27,6 +27,8 @@
       }
     },
     "./dist/style.css": "./dist/style.css",
+    "./theme.css": "./dist/assets/scss/tailwind.css",
+    "./dist/assets/scss/tailwind.css": "./dist/assets/scss/tailwind.css",
     "./src/assets/scss/unnnic.scss": "./src/assets/scss/unnnic.scss",
     "./tokens/colors": {
       "types": "./dist/tokens/colors.d.ts",
