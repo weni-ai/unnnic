@@ -17,6 +17,9 @@ export default {
         options: ['left', 'right'],
       },
     },
+    useDateFns: {
+      control: 'boolean',
+    },
   },
   render: (args) => ({
     components: {
