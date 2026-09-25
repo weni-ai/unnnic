@@ -36,6 +36,18 @@ function collectCssFiles(dir, files = []) {
   return files;
 }
 
+function hoistCssImports(css) {
+  const imports = [];
+  const rest = css.replace(
+    /@import\s*(?:"[^"]+"|'[^']+'|url\((?:'[^']+'|"[^"]+"|[^)]+)\))\s*;/g,
+    (match) => {
+      if (!imports.includes(match)) imports.push(match);
+      return '';
+    },
+  );
+  return `${imports.join('\n')}${imports.length ? '\n' : ''}${rest}`.trimStart();
+}
+
 /** Concatenate all emitted CSS into dist/style.css for backwards compatibility. */
 function legacyStyleCss() {
   return {
@@ -45,9 +57,9 @@ function legacyStyleCss() {
       try {
         const cssFiles = collectCssFiles(distDir).sort();
         if (!cssFiles.length) return;
-        const combined = cssFiles
-          .map((file) => readFileSync(file, 'utf8'))
-          .join('\n');
+        const combined = hoistCssImports(
+          cssFiles.map((file) => readFileSync(file, 'utf8')).join('\n'),
+        );
         writeFileSync(join(distDir, 'style.css'), combined);
         console.log(
           `✓ wrote dist/style.css (${cssFiles.length} CSS files concatenated)`,
