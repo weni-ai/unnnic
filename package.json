@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "3.35.3",
+  "version": "3.35.4",
   "type": "commonjs",
   "files": [
     "dist",
@@ -13,13 +13,13 @@
     "dist/style.css"
   ],
   "main": "./dist/unnnic.umd.js",
-  "module": "./dist/unnnic.mjs",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": {
         "types": "./dist/index.d.ts",
-        "default": "./dist/unnnic.mjs"
+        "default": "./dist/index.mjs"
       },
       "require": {
         "types": "./dist/index.d.ts",
@@ -27,6 +27,8 @@
       }
     },
     "./dist/style.css": "./dist/style.css",
+    "./theme.css": "./dist/assets/scss/tailwind.css",
+    "./dist/assets/scss/tailwind.css": "./dist/assets/scss/tailwind.css",
     "./src/assets/scss/unnnic.scss": "./src/assets/scss/unnnic.scss",
     "./tokens/colors": {
       "types": "./dist/tokens/colors.d.ts",
@@ -140,6 +142,7 @@
     "typescript": "^5.9.2",
     "vite": "^5.4.0",
     "vite-plugin-dts": "^4.5.4",
+    "vite-plugin-lib-inject-css": "^2.2.2",
     "vitest": "^1.6.0",
     "vue-eslint-parser": "^10.4.0",
     "vue-tsc": "^3.0.5"

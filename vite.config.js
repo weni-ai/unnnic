@@ -1,10 +1,15 @@
 import { fileURLToPath, URL } from 'node:url';
 import { resolve } from 'path';
+import { readdirSync, readFileSync, writeFileSync, statSync } from 'node:fs';
+import { join } from 'node:path';
 
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 import dts from 'vite-plugin-dts';
+import { libInjectCss } from 'vite-plugin-lib-inject-css';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const testExcludes = [
   '**/node_modules/**',
@@ -19,11 +24,66 @@ const testExcludes = [
   '.eslintrc.js',
 ];
 
+function collectCssFiles(dir, files = []) {
+  for (const entry of readdirSync(dir)) {
+    const fullPath = join(dir, entry);
+    if (statSync(fullPath).isDirectory()) {
+      collectCssFiles(fullPath, files);
+    } else if (entry.endsWith('.css') && entry !== 'style.css') {
+      files.push(fullPath);
+    }
+  }
+  return files;
+}
+
+function hoistCssImports(css) {
+  const imports = [];
+  const rest = css.replace(
+    /@import\s*(?:"[^"]+"|'[^']+'|url\((?:'[^']+'|"[^"]+"|[^)]+)\))\s*;/g,
+    (match) => {
+      if (!imports.includes(match)) imports.push(match);
+      return '';
+    },
+  );
+  return `${imports.join('\n')}${imports.length ? '\n' : ''}${rest}`.trimStart();
+}
+
+/** Concatenate all emitted CSS into dist/style.css for backwards compatibility. */
+function legacyStyleCss() {
+  return {
+    name: 'unnnic-legacy-style-css',
+    closeBundle() {
+      const distDir = resolve(__dirname, 'dist');
+      try {
+        const cssFiles = collectCssFiles(distDir).sort();
+        if (!cssFiles.length) return;
+        const combined = hoistCssImports(
+          cssFiles.map((file) => readFileSync(file, 'utf8')).join('\n'),
+        );
+        writeFileSync(join(distDir, 'style.css'), combined);
+        console.log(
+          `✓ wrote dist/style.css (${cssFiles.length} CSS files concatenated)`,
+        );
+      } catch (error) {
+        console.warn('Could not generate dist/style.css:', error.message);
+      }
+    },
+  };
+}
+
+const assetFileNames = (assetInfo) => {
+  if (assetInfo.name === 'style.css' || assetInfo.name === 'index.css') {
+    return 'style.css';
+  }
+  return assetInfo.name;
+};
+
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     vue(),
     vueJsx(),
+    libInjectCss(),
     dts({
       insertTypesEntry: true,
       rollupTypes: true,
@@ -36,6 +96,7 @@ export default defineConfig({
       ],
       skipDiagnostics: true,
     }),
+    legacyStyleCss(),
   ],
   css: {
     postcss: './postcss.config.cjs',
@@ -50,22 +111,28 @@ export default defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'Unnnic',
       fileName: 'unnnic',
+      formats: ['es', 'umd'],
     },
-    cssCodeSplit: false,
+    cssCodeSplit: true,
     rollupOptions: {
-      input: {
-        main: resolve(__dirname, 'src/index.ts'),
-      },
       external: ['vue'],
-      output: {
-        globals: {
-          vue: 'Vue',
+      output: [
+        {
+          format: 'es',
+          preserveModules: true,
+          preserveModulesRoot: 'src',
+          entryFileNames: '[name].mjs',
+          assetFileNames,
         },
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name === 'style.css') return 'style.css';
-          return assetInfo.name;
+        {
+          format: 'umd',
+          name: 'Unnnic',
+          globals: {
+            vue: 'Vue',
+          },
+          assetFileNames,
         },
-      },
+      ],
     },
   },
   test: {
