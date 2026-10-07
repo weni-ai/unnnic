@@ -141,7 +141,7 @@ export default defineConfig({
     coverage: {
       all: true,
       provider: 'istanbul',
-      exclude: testExcludes,
+      exclude: [...testExcludes, 'scripts/localization-lock*.js'],
       reporter: ['text', 'json', 'html'],
     },
     exclude: testExcludes,
