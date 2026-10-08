@@ -69,7 +69,8 @@
     "test": "vitest",
     "test:ui": "vitest --ui",
     "coverage": "vitest --coverage",
-    "style-dictionary:generate": "style-dictionary build --config styleDictionary.config.mjs"
+    "style-dictionary:generate": "style-dictionary build --config styleDictionary.config.mjs",
+    "prepare": "git config core.hooksPath .githooks || true"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
@@ -128,7 +129,9 @@
     "eslint": "^9.37.0",
     "eslint-plugin-storybook": "^0.10.0",
     "eslint-plugin-vue": "10.4.0",
+    "js-yaml": "^4.1.0",
     "jsdom": "^24.1.1",
+    "micromatch": "^4.0.5",
     "postcss": "^8.5.6",
     "prettier": "3.6.2",
     "react": "^18.2.0",
