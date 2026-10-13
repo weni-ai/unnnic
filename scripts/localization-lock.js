@@ -26,8 +26,35 @@ if (!fs.existsSync(crowdinYmlPath)) {
 }
 
 // §2 — Get staged files
-const raw = execSync('git diff --name-only --cached', { encoding: 'utf8' })
-const stagedFiles = raw.split('\n').filter(line => line.length > 0)
+function gitLines(command) {
+  const raw = execSync(command, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] })
+  return raw.split('\n').filter(line => line.length > 0)
+}
+
+let stagedFiles = gitLines('git diff --name-only --cached')
+
+// §2b — Merge commits: ignore translation files that arrive from the other branch.
+//
+// When a developer merges the default branch into a feature branch (or pulls with
+// merge) and has to resolve a conflict, the merge is concluded with `git commit`, which
+// runs this hook. At that point `git diff --cached` (against HEAD = the feature branch)
+// lists every file the merged branch changed — including translation files delivered
+// to the default branch by Crowdin or by the Localization Agent. Those are not the
+// developer's edits and must not block the merge. Files whose staged content also
+// differs from MERGE_HEAD were changed on both sides (or edited during the merge), so
+// they are still checked.
+let mergeInProgress = false
+try {
+  execSync('git rev-parse -q --verify MERGE_HEAD', { stdio: 'ignore' })
+  mergeInProgress = true
+} catch (_) {
+  // Not a merge commit.
+}
+
+if (mergeInProgress) {
+  const differsFromMergeHead = new Set(gitLines('git diff --name-only --cached MERGE_HEAD'))
+  stagedFiles = stagedFiles.filter(file => differsFromMergeHead.has(file))
+}
 
 // §3 — Check paths
 let blocked
@@ -40,13 +67,24 @@ try {
 
 if (blocked.length > 0) {
   let msg = 'localization-lock: commit blocked.\n\n'
-  msg +=
-    'The following staged files are translation files managed by the Localization team:\n\n'
+  if (mergeInProgress) {
+    msg +=
+      'The following translation files differ from both sides of this merge, so the\n' +
+      'staged content is not what the Localization team delivered:\n\n'
+  } else {
+    msg +=
+      'The following staged files are translation files managed by the Localization team:\n\n'
+  }
   for (const entry of blocked) {
     msg += `  ${entry.path}  (matched: ${entry.matchedGlob})\n`
   }
   msg +=
     '\nTranslation files are managed via Crowdin. Do not commit them directly.\n'
+  if (mergeInProgress) {
+    msg +=
+      'To finish the merge, keep the incoming version of each file listed above:\n' +
+      '  git checkout MERGE_HEAD -- <file>   (then `git add <file>` and commit again)\n'
+  }
   msg += `\nSetup guide: ${GOLDEN_PATH_URL}\n`
   process.stdout.write(msg)
   process.exit(1)
