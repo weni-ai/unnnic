@@ -1,20 +1,11 @@
 @forward './colors';
-@forward './theme';
 @forward './semantic-colors';
-@forward './semantic-text-utilities';
 @forward './deprecated/colors';
 @forward './deprecated/fonts';
 @forward './deprecated/spacing';
-@forward './deprecated/grid';
 @forward './fonts';
 @forward './radii';
 @forward './shadows';
 @forward './spaces';
 @forward './icon-sizes';
 @forward './scheme-colors';
-
-.unnnic {
-    &--clickable {
-        cursor: pointer;
-    }
-}

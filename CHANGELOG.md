@@ -5,18 +5,43 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-# 3.35.2 (2026-09-15)
+# Unreleased
 
 ### Added
 
-- `sideEffects` in `package.json` so consumer bundlers can tree-shake unused JS when using named imports.
-- README section **Recommended usage (import on demand)** documenting named imports as the preferred setup; `app.use(Unnnic)` remains supported for full global registration.
+- Localization-lock guardrail (AGENTS.md instructions, pre-commit hook, and Claude Code PreToolUse hook) preventing edits to Crowdin-managed translation files, plus the `localization-automation.yml` workflow that opens the automated translation PR and Jira review ticket on merge.
+
+# 3.35.4 (2026-09-25)
+
+### Added
+
+- Public export `@weni/unnnic-system/theme.css` (~15 KB): Inter, `:root` semantic tokens (`--unnnic-color-*`), font/grid utilities, and `.unnnic--clickable`. Named imports only pull per-component CSS; this file is required when `dist/style.css` is not imported. `dist/index.mjs` is **not** listed in `sideEffects` so unused JS can still tree-shake.
+
+### Changed
+
+- Consumer guide and README: import `theme.css` once in `main` when migrating off `dist/style.css`.
+
+### Fixed
+
+- Stop emitting Google Fonts `@import` and `:root` token blocks from every component CSS. The Inter font, theme CSS variables, font/grid utilities, and `.unnnic--clickable` now load once from the global entry (`tailwind.scss`). `dist/style.css` concatenation also hoists any leftover `@import` rules to the top of the file so PostCSS prefixers (e.g. Insights) can parse it.
+
+# 3.35.3 (2026-09-21)
+
+### Added
+
 - **UnnnicInputDatePicker** and **UnnnicDateFilter**: `useDateFns` prop (default `false`). When `true`, date parsing and formatting use `date-fns`; `dayjs` remains the default. Public format tokens stay in dayjs style (`YYYY`, `DD`).
 - Dependency `date-fns` and `src/utils/formatDate.ts` (dayjs and date-fns format helpers).
 
 ### Fixed
 
 - **UnnnicInputDatePicker**: parse DatePicker values without zero-padding (e.g. `9-21-2026`) so selection no longer returns `Invalid Date`.
+
+# 3.35.2 (2026-09-15)
+
+### Added
+
+- `sideEffects` in `package.json` so consumer bundlers can tree-shake unused JS when using named imports.
+- README section **Recommended usage (import on demand)** documenting named imports as the preferred setup; `app.use(Unnnic)` remains supported for full global registration.
 
 # 3.35.1 (2026-09-10)
 

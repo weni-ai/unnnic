@@ -23,12 +23,17 @@ Before install the lib, make sure you have installed the following tools on your
 # Recommended usage (import on demand)
 
 To avoid loading the entire design system when your module only uses a
-few components, prefer named imports and local registration:
+few components, prefer named imports and local registration. Import the
+theme CSS **once** in `main` (not `dist/style.css`):
+
+```js
+// main.js
+import '@weni/unnnic-system/theme.css';
+```
 
 ```vue
 <script setup>
 import { UnnnicButton, UnnnicInput } from '@weni/unnnic-system';
-import '@weni/unnnic-system/dist/style.css';
 </script>
 
 <template>
@@ -37,8 +42,13 @@ import '@weni/unnnic-system/dist/style.css';
 </template>
 ```
 
-This ensures only the components referenced in your code end up in your
-application's final bundle.
+Named imports pull only the JS and CSS of the components you use.
+`theme.css` (~15 KB) defines Inter, `:root` semantic tokens
+(`--unnnic-color-*`), and `.unnnic--clickable`. Without it, component
+CSS loads but tokens such as `--unnnic-color-bg-info` stay undefined.
+
+Do **not** import `dist/style.css` in this mode — that file is the full
+~11 MB bundle. Keep it only with `app.use(Unnnic)`.
 
 > Use `app.use(Unnnic, { ... })` only if your module actually uses most
 > of the library — this mode registers **all** components globally,
