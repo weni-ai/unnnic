@@ -32,6 +32,7 @@ const props = withDefaults(
       type="body"
       :size="props.size"
       align="center"
+      hideTooltip
     >
       <IconLoading
         class="unnnic-data-table__body-cell--loading"

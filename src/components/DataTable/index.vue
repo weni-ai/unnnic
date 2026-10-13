@@ -20,6 +20,7 @@
           :align="getHeaderAlign(header.align)"
           :sortable="header.isSortable"
           :sortOrder="getSortOrder(header)"
+          :hideTooltip="shouldHideCellTooltip(`header-${header.itemKey}`)"
           data-testid="header-cell"
           @click.stop="handleClickHeader(header)"
         >
@@ -66,6 +67,7 @@
             type="body"
             :size="size"
             :align="getHeaderAlign(header.align)"
+            :hideTooltip="shouldHideCellTooltip(`body-${header.itemKey}`)"
             data-testid="body-cell"
           >
             <slot
@@ -94,6 +96,9 @@
         <DataTableCell
           type="body"
           :size="size"
+          :hideTooltip="
+            props.hideTableTooltips || Boolean(slots['without-results'])
+          "
           data-testid="body-cell"
         >
           <slot
@@ -163,6 +168,7 @@ const props = withDefaults(defineProps<DataTableProps>(), {
   fixedHeaders: false,
   hideHeaders: false,
   hidePagination: false,
+  hideTableTooltips: false,
   page: 1,
   pageTotal: 0,
   pageInterval: 5,
@@ -199,6 +205,9 @@ const heightStyles = computed(() => {
 const shouldHideHeaders = computed(() => {
   return props.hideHeaders || !props.headers.length;
 });
+
+const shouldHideCellTooltip = (slotName: string) =>
+  props.hideTableTooltips || Boolean(slots[slotName]);
 
 const getHeaderAlign = (align?: DataTableHeader['align']): CellAlign =>
   align ?? 'left';
