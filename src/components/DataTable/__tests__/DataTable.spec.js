@@ -184,6 +184,12 @@ describe('UnnnicDataTable', () => {
         wrapper.findComponent({ name: 'UnnnicIconLoading' }).exists(),
       ).toBe(true);
       expect(wrapper.find('[data-testid="body-cell"]').exists()).toBe(false);
+      expect(
+        wrapper
+          .find('.unnnic-data-table__body-row--loading')
+          .findComponent({ name: 'UnnnicTooltip' })
+          .exists(),
+      ).toBe(false);
     });
 
     it('shows the empty state', () => {
@@ -248,6 +254,56 @@ describe('UnnnicDataTable', () => {
       expect(
         wrapper.findComponent({ name: 'UnnnicIconLoading' }).exists(),
       ).toBe(true);
+    });
+  });
+
+  describe('tooltips', () => {
+    const tooltipIn = (cell) => cell.findComponent({ name: 'UnnnicTooltip' });
+
+    it('renders tooltips on default header and body cells', () => {
+      const wrapper = mountTable();
+
+      expect(wrapper.findAllComponents({ name: 'UnnnicTooltip' })).toHaveLength(
+        headers.length + headers.length * items.length,
+      );
+    });
+
+    it('hides header and body tooltips when hideTableTooltips is set', () => {
+      const wrapper = mountTable({ hideTableTooltips: true });
+
+      expect(wrapper.findComponent({ name: 'UnnnicTooltip' }).exists()).toBe(
+        false,
+      );
+    });
+
+    it('hides the tooltip for a text header slot', () => {
+      const wrapper = mountTable({}, { 'header-name': 'Custom name' });
+      const headerCells = wrapper.findAll('[data-testid="header-cell"]');
+
+      expect(tooltipIn(headerCells[1]).exists()).toBe(false);
+      expect(tooltipIn(headerCells[0]).exists()).toBe(true);
+      expect(headerCells[1].text()).toContain('Custom name');
+    });
+
+    it('hides the tooltip for a text body slot', () => {
+      const wrapper = mountTable({}, { 'body-name': 'Custom name' });
+      const bodyCells = wrapper.findAll('[data-testid="body-cell"]');
+
+      expect(tooltipIn(bodyCells[1]).exists()).toBe(false);
+      expect(tooltipIn(bodyCells[0]).exists()).toBe(true);
+      expect(bodyCells[1].text()).toBe('Custom name');
+    });
+
+    it('hides the tooltip for the without-results slot', () => {
+      const wrapper = mountTable({ items: [] }, { 'without-results': 'Empty' });
+
+      expect(
+        tooltipIn(wrapper.find('[data-testid="body-cell"]')).exists(),
+      ).toBe(false);
+      expect(
+        tooltipIn(wrapper.find('[data-testid="header-cell"]')).exists(),
+      ).toBe(true);
+      expect(wrapper.text()).toContain('Empty');
     });
   });
 

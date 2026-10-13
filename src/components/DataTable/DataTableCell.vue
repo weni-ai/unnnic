@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue';
-import { computed } from 'vue';
+import { computed, nextTick, onMounted, onUpdated, ref } from 'vue';
+import { useResizeObserver } from '@vueuse/core';
 import { cn } from '@/lib/utils';
 import { useHasComponentContent } from '@/composables/useSlotUtils';
 import Icon from '../Icon.vue';
 import IconArrowsDefault from '../icons/iconArrowsDefault.vue';
+import UnnnicToolTip from '../ToolTip/ToolTip.vue';
 import {
   SORT_ORDER,
   type CellAlign,
@@ -26,6 +28,7 @@ const props = withDefaults(
     sortable?: boolean;
     type?: CellType;
     width?: string;
+    hideTooltip?: boolean;
   }>(),
   {
     align: 'left',
@@ -35,10 +38,40 @@ const props = withDefaults(
     sortable: false,
     type: 'body',
     width: undefined,
+    hideTooltip: false,
   },
 );
 
 const hasComponentContent = useHasComponentContent();
+
+const contentRef = ref<HTMLElement | null>(null);
+const isTruncated = ref(false);
+const tooltipText = ref('');
+
+const updateTruncation = () => {
+  const element = contentRef.value;
+
+  if (!element || props.hideTooltip) {
+    isTruncated.value = false;
+    tooltipText.value = '';
+    return;
+  }
+
+  const text = element.textContent?.trim() ?? '';
+  tooltipText.value = text;
+  isTruncated.value =
+    text.length > 0 && element.scrollWidth > element.clientWidth;
+};
+
+onMounted(() => {
+  nextTick(updateTruncation);
+});
+
+onUpdated(() => {
+  updateTruncation();
+});
+
+useResizeObserver(contentRef, updateTruncation);
 
 const isSorting = computed(
   () =>
@@ -76,7 +109,23 @@ const cellClasses = computed(() =>
     :scope="props.type === 'header' ? 'col' : undefined"
     :style="{ width: props.width }"
   >
-    <span class="unnnic-data-table-cell__content">
+    <UnnnicToolTip
+      v-if="!props.hideTooltip"
+      :enabled="isTruncated"
+      :text="tooltipText"
+      side="top"
+    >
+      <span
+        ref="contentRef"
+        class="unnnic-data-table-cell__content"
+      >
+        <slot />
+      </span>
+    </UnnnicToolTip>
+    <span
+      v-else
+      class="unnnic-data-table-cell__content"
+    >
       <slot />
     </span>
     <template v-if="props.type === 'header' && props.sortable">
@@ -134,6 +183,14 @@ $cell-min-height-sm: 46px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+  }
+
+  :deep(.unnnic-tooltip.unnnic-tooltip-trigger) {
+    display: flex;
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
   }
 
   :deep(.unnnic-data-table-cell__sort-icon) {

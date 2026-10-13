@@ -115,6 +115,11 @@ export default {
         'Indicates whether more data is being loaded for infinite scroll. Shows a loading indicator at the bottom of the table.',
       control: 'boolean',
     },
+    hideTableTooltips: {
+      description:
+        'Hides the tooltip shown when header or body text is truncated with an ellipsis.',
+      control: 'boolean',
+    },
   },
   render: (args) => ({
     components: {
@@ -408,6 +413,35 @@ export const HidePagination = {
     headers,
     items,
     hidePagination: true,
+  },
+};
+
+export const TruncatedCells = {
+  args: {
+    hidePagination: true,
+    headers: [
+      {
+        title: 'Identifier with a very long header title that does not fit',
+        itemKey: 'id',
+        isSortable: true,
+        size: '140px',
+      },
+      {
+        title: 'Name',
+        itemKey: 'name',
+        size: '180px',
+      },
+    ],
+    items: [
+      {
+        id: 'INV-0001-ALPHA-LONG-IDENTIFIER',
+        name: 'Eduardo with a long display name that should truncate',
+      },
+      {
+        id: 'INV-0002',
+        name: 'Marcus',
+      },
+    ],
   },
 };
 
