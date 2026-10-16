@@ -5,11 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-# Unreleased
+# 3.36.0 (2026-10-16)
 
 ### Added
 
+- **UnnnicDataTable**: tooltip with the full text when a header or body cell is truncated with an ellipsis. Named slots (`#header-*`, `#body-*`, `#without-results`) do not show this tooltip.
+- **UnnnicDataTable** and **UnnnicTable** (`version="2"`): `hideTableTooltips` prop to disable truncation tooltips.
+- **UnnnicTable** (`version="2"`): tooltip with the full text when header or body text is truncated. Cells and headers with component content do not show this tooltip.
+
 - Localization-lock guardrail (AGENTS.md instructions, pre-commit hook, and Claude Code PreToolUse hook) preventing edits to Crowdin-managed translation files, plus the `localization-automation.yml` workflow that opens the automated translation PR and Jira review ticket on merge.
+
+### Changed
+
+- **UnnnicTableHead**: `ellipsis` now defaults to `true`. Set `:ellipsis="false"` to show the full header text without a tooltip.
 
 # 3.35.4 (2026-09-25)
 

@@ -54,6 +54,7 @@ export interface DataTableProps {
   fixedHeaders?: boolean;
   hideHeaders?: boolean;
   hidePagination?: boolean;
+  hideTableTooltips?: boolean;
   page?: number;
   pageTotal?: number;
   pageInterval?: number;
