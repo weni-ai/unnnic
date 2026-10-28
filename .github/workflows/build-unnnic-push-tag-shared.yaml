@@ -7,11 +7,43 @@ on:
       - '*.*.*-staging'
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag_latest: ${{ steps.setup.outputs.image_tag_latest }}
+    steps:
+      - name: Set outputs
+        id: setup
+        run: |
+          TAG="$( echo "${GITHUB_REF}" | cut -d'/' -f3 )"
+          if grep -qs -e '^.*.*-develop' <<< "${TAG}" ; then
+            echo "Found environment: DEVELOP - ${TAG}"
+            echo "MANIFESTS_ENVIRONMENT=develop" | tee "${GITHUB_OUTPUT}"
+            export "MANIFESTS_ENVIRONMENT=develop"
+          elif grep -qs -e '^.*.*-staging' <<< "${TAG}" ; then
+            echo "Found environment: STAGING - ${TAG}"
+            echo "MANIFESTS_ENVIRONMENT=staging" | tee -a "${GITHUB_OUTPUT}"
+            export "MANIFESTS_ENVIRONMENT=staging"
+          elif grep -qs -e '^.*.*' <<< "${TAG}" ; then
+            echo "No environment found, assuming: PRODUCTION - ${TAG}"
+            echo "MANIFESTS_ENVIRONMENT=production" | tee -a "${GITHUB_OUTPUT}"
+            export "MANIFESTS_ENVIRONMENT=production"
+          else
+            echo 'Not a valid tag. Skipping...'
+            exit 1
+          fi
+          echo "image_tag_latest=latest-${MANIFESTS_ENVIRONMENT}" | tee -a "${GITHUB_OUTPUT}"
+
   call-workflow:
     uses: weni-ai/actions-workflows/.github/workflows/reusable-workflow.yaml@main
+    needs:
+      - setup
     with:
       image_repository: unnnic
-      dockerfile: Dockerfile
+      image_tags: |
+        type=ref,event=tag
+        type=raw,${{ needs.setup.outputs.image_tag_latest }}
+      dockerfile: "Dockerfile"
       target_repository: weni-ai/kubernetes-manifests
       target_repository_branch: main
       target_application: unnnic
