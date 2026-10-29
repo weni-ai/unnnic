@@ -11,9 +11,9 @@ settle the points the spec leaves to the plan.
 
 ## R2. Search filter scope
 
-- **Decision**: Tree-aware filtering in `useSelectBase` runs only for the `'multi'` variant. `'single'` keeps today's flat filter.
-- **Rationale**: The prototype changed the filter for both variants. The spec keeps `UnnnicSelect` unchanged (Contracts, Rejected Alternatives).
-- **Alternatives considered**: A separate filter in `useMultiSelectTree` (duplicates the matching rule, against Principle XXV).
+- **Decision**: `useSelectBase` stays flat and accepts an optional `filterOptions` strategy; only `UnnnicMultiSelect` passes the tree filter (`filterTreeOptions`). The matching rule stays in `useSelectBase` and is injected (`matchesSearch`).
+- **Rationale**: The prototype changed the filter for both variants. The spec keeps `UnnnicSelect` unchanged (Contracts, Rejected Alternatives). A strategy keeps the shared composable free of tree knowledge and of a `variant` branch, and the tree filter returns the original options instead of clones.
+- **Alternatives considered**: Branching on `variant === 'multi'` inside `useSelectBase` (the shared composable learns about children); a separate matching rule in the tree layer (duplicates it, against Principle XXV).
 
 ## R3. Check state and normalization over enabled children
 
@@ -29,7 +29,7 @@ settle the points the spec leaves to the plan.
 
 ## R5. File size of `index.vue`
 
-- **Decision**: Move the tree list markup into an internal `src/components/MultiSelect/MultiSelectTreeOptions.vue` (not exported), and the tree keyboard handlers and `aria-checked` mapping into `useMultiSelectTree`. Tree rows carry a precomputed `checkState`.
+- **Decision**: Move the tree list markup and its `aria-checked` mapping into an internal `src/components/MultiSelect/MultiSelectTreeOptions.vue` (not exported), and the rows and arrow handlers into `useMultiSelectRows` (see R8). Rows carry a precomputed `checkState`.
 - **Rationale**: Applied directly, the prototype brings `index.vue` from 321 to about 430 lines, past the 350-line limit (Principle XI). The tree list is a cohesive unit with its own markup, ARIA and styles.
 - **Alternatives considered**: Keeping it inline and justifying it (avoidable); exporting the new component publicly (no consumer needs it, and it would widen the contract).
 
@@ -41,6 +41,12 @@ settle the points the spec leaves to the plan.
 
 ## R7. Testing seams
 
-- **Decision**: Extend `MultiSelect.spec.js` (tree mode `describe`) and `MultiSelectOption.spec.js`. Query the teleported popover through `document`, and drive rows through `findAllComponents(UnnnicMultiSelectOption)`. Add one `Select.spec.js` case proving that `children` does not change `UnnnicSelect` search.
-- **Rationale**: These are the seams the prototype already validated. The `Select` case guards R2.
+- **Decision**: Extend `MultiSelect.spec.js` (tree mode `describe`) and `MultiSelectOption.spec.js`. Query the teleported popover through `document`, and drive rows through `findAllComponents(UnnnicMultiSelectOption)`. Add one `Select.spec.js` case proving that `children` does not change `UnnnicSelect` search. Unit-test the pure rules in `src/lib/__tests__/tree-selection.spec.ts`.
+- **Rationale**: These are the seams the prototype already validated. The `Select` case guards R2. Pure functions are tested directly, like `teleport-target`; `src/utils/**` is excluded from Vitest, so the rules live in `src/lib`.
 - **Alternatives considered**: Standalone composable tests (the repository tests composables through their components).
+
+## R8. Layering of the selection rules
+
+- **Decision**: Pure rules over option values in `src/lib/tree-selection.ts`; `useMultiSelectSelection` adapts `modelValue` to them for flat and tree lists alike; `useMultiSelectRows` builds rows and arrow handlers; `useTreeExpansion` owns the expansion state. `index.vue` only wires them and keeps the flat markup under `v-else`, fed by the same rows.
+- **Rationale**: A flat list is a tree of leaves, so one selection path removes the mode branching from `index.vue` (selection, check state, keyboard). Value-based rules do not depend on `returnObject` and are unit-testable without mounting. Flat behavior and snapshots stay identical; the one kept difference is the closed field of a flat `returnObject` list, which shows `modelValue` as received so selected objects missing from `options` (infinite scroll) still show.
+- **Alternatives considered**: A single `useMultiSelectTree` composable with separate flat code in `index.vue` (the first implementation: two selection paths and mode checks in the component); a strategy object per mode (two implementations of the same rules).

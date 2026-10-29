@@ -58,8 +58,8 @@ Unchanged names. In tree mode, `selectedItems` returns the display items and `in
 
 | Export | Change |
 |--------|--------|
-| `useSelectBase` → `getOptionChildren(option)` | added |
-| `useSelectBase` → `optionMatchesSearch(option, searchLower, itemLabel, itemValue)` | added |
+| `useSelectBase(props, variant, triggerRef, contentRef, { filterOptions? })`: `filterOptions(options, matches)` picks the options kept by a search; defaults to `options.filter(matches)` | added, optional |
+| `useSelectBase` → `isSearchActive`, `matchesSearch(option)` (`true` for every option while the search is inactive) | added |
 | `useSelectKeyboard` options `onArrowRight`, `onArrowLeft` (may return a new focus index), `toggleOnSpace` | added |
 
 ## i18n
