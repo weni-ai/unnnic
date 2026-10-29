@@ -54,7 +54,6 @@
               :itemLabel="props.itemLabel"
               :itemValue="props.itemValue"
               :focusedIndex="focusedOptionIndex"
-              :expandDisabled="tree.isSearchActive.value"
               @select="handleSelectOption"
               @expand="tree.toggleExpanded"
             />

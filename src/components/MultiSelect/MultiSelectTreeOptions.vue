@@ -20,7 +20,6 @@
         :level="row.level"
         :expandable="row.hasChildren"
         :expanded="row.isExpanded"
-        :expandDisabled="props.expandDisabled"
         role="treeitem"
         :aria-level="row.level"
         :aria-checked="toAriaChecked(row.checkState)"
@@ -50,12 +49,9 @@ interface MultiSelectTreeOptionsProps {
   itemLabel: string;
   itemValue: string;
   focusedIndex: number;
-  expandDisabled?: boolean;
 }
 
-const props = withDefaults(defineProps<MultiSelectTreeOptionsProps>(), {
-  expandDisabled: false,
-});
+const props = defineProps<MultiSelectTreeOptionsProps>();
 
 const emit = defineEmits<{
   select: [option: SelectOption, selected: boolean];

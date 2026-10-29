@@ -12,7 +12,6 @@
       tabindex="-1"
       :aria-expanded="props.expanded"
       :aria-label="props.expanded ? $t('collapse') : $t('expand')"
-      :disabled="props.expandDisabled"
       @click.stop="emit('update:expanded', !props.expanded)"
     >
       <UnnnicIcon
@@ -57,7 +56,6 @@ interface SelectOptionProps {
   level?: 1 | 2;
   expandable?: boolean;
   expanded?: boolean;
-  expandDisabled?: boolean;
 }
 
 const props = withDefaults(defineProps<SelectOptionProps>(), {
@@ -67,7 +65,6 @@ const props = withDefaults(defineProps<SelectOptionProps>(), {
   level: undefined,
   expandable: false,
   expanded: false,
-  expandDisabled: false,
 });
 </script>
 
@@ -103,10 +100,6 @@ const props = withDefaults(defineProps<SelectOptionProps>(), {
     background: transparent;
     cursor: pointer;
     color: $unnnic-color-fg-base;
-
-    &:disabled {
-      cursor: default;
-    }
   }
 
   &__expand-spacer {
