@@ -48,7 +48,20 @@
             {{ $t('without_results') }}
           </p>
           <template v-else>
-            <div class="unnnic-multi-select__options">
+            <UnnnicMultiSelectTreeOptions
+              v-if="tree.isTreeMode.value"
+              :groups="tree.optionGroups.value"
+              :itemLabel="props.itemLabel"
+              :itemValue="props.itemValue"
+              :focusedIndex="focusedOptionIndex"
+              :expandDisabled="tree.isSearchActive.value"
+              @select="handleSelectOption"
+              @expand="tree.toggleExpanded"
+            />
+            <div
+              v-else
+              class="unnnic-multi-select__options"
+            >
               <UnnnicMultiSelectOption
                 v-for="(option, index) in filteredOptions"
                 :key="String(option[props.itemValue])"
@@ -85,9 +98,11 @@ import { Popover, PopoverTrigger, PopoverContent } from '../ui/popover';
 import UnnnicInput from '../Input/Input.vue';
 import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import UnnnicMultiSelectOption from './MultiSelectOption.vue';
+import UnnnicMultiSelectTreeOptions from './MultiSelectTreeOptions.vue';
 
 import { useSelectBase } from '../../composables/useSelectBase';
 import { useSelectKeyboard } from '../../composables/useSelectKeyboard';
+import { useMultiSelectTree } from '../../composables/useMultiSelectTree';
 import type { SelectBaseProps, SelectOption } from '../Select/types';
 
 defineOptions({
@@ -138,11 +153,15 @@ const popoverContentCustomStyles = base.popoverContentCustomStyles;
 const inputWidthString = base.inputWidthString;
 const filteredOptions = base.filteredOptions;
 
+const tree = useMultiSelectTree(props, emit, base.filteredOptions);
+
 function setOpenPopover(value: boolean) {
   base.openPopover.value = value;
 }
 
 const selectedItems = computed<SelectOption[]>(() => {
+  if (tree.isTreeMode.value) return tree.displayItems.value;
+
   if (props.returnObject) return props.modelValue as SelectOption[];
 
   const valueIds = props.modelValue.slice();
@@ -169,32 +188,40 @@ function getActivatedOptionStatus(option: SelectOption) {
 }
 
 function handleSelectOption(option: SelectOption, selected: boolean) {
-  if (selected) {
-    const value = props.returnObject
-      ? [...props.modelValue, option]
-      : [...props.modelValue, option[props.itemValue]];
-    emit('update:modelValue', value);
-  } else {
-    const value = props.returnObject
-      ? (props.modelValue as SelectOption[]).filter(
-          (item) => item[props.itemValue] !== option[props.itemValue],
-        )
-      : props.modelValue.filter((item) => item !== option[props.itemValue]);
-    emit('update:modelValue', value);
-  }
+  if (tree.isTreeMode.value) return tree.toggleOption(option, selected);
+
+  const optionValue = option[props.itemValue];
+  const value = selected
+    ? [...props.modelValue, props.returnObject ? option : optionValue]
+    : props.modelValue.filter((item) =>
+        props.returnObject
+          ? (item as SelectOption)[props.itemValue] !== optionValue
+          : item !== optionValue,
+      );
+  emit('update:modelValue', value);
 }
 
 const keyboard = useSelectKeyboard<SelectOption>(
-  () => base.filteredOptions.value,
+  () =>
+    tree.isTreeMode.value
+      ? tree.visibleRows.value.map((row) => row.option)
+      : base.filteredOptions.value,
   (option) => {
     if (option.disabled) return;
-    const active = getActivatedOptionStatus(option);
-    handleSelectOption(option, !active);
+    const active = tree.isTreeMode.value
+      ? tree.getCheckState(option)
+      : getActivatedOptionStatus(option);
+    handleSelectOption(option, active !== true);
   },
   {
     closeOnSelect: false,
     closePopover: () => setOpenPopover(false),
     openPopoverRef: base.openPopover,
+    toggleOnSpace: () => tree.isTreeMode.value,
+    onArrowRight: (index) =>
+      tree.isTreeMode.value ? tree.handleArrowRight(index) : undefined,
+    onArrowLeft: (index) =>
+      tree.isTreeMode.value ? tree.handleArrowLeft(index) : undefined,
   },
 );
 
@@ -241,6 +268,7 @@ watch(base.openPopover, (isOpen) => {
   if (!isOpen) {
     handleSearch('');
     infiniteScrollLoading.value = false;
+    tree.resetExpanded();
     return;
   }
 
@@ -281,6 +309,7 @@ defineExpose({
 
 :deep(.unnnic-multi-select__input) {
   @include shared.select-input-trigger;
+  @include shared.select-input-ellipsis;
 }
 
 :deep(.unnnic-multi-select__input-search) {

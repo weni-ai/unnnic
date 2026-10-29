@@ -11,6 +11,27 @@ import type {
 
 export type SelectVariant = 'single' | 'multi';
 
+export function getOptionChildren(option: SelectOption): SelectOption[] {
+  return Array.isArray(option.children) ? option.children : [];
+}
+
+export function optionMatchesSearch(
+  option: SelectOption,
+  searchLower: string,
+  itemLabel: string,
+  itemValue: string,
+) {
+  const matchLabel = String(option[itemLabel] ?? '')
+    .toLowerCase()
+    .includes(searchLower);
+
+  const matchValue = String(option[itemValue] ?? '')
+    .toLowerCase()
+    .includes(searchLower);
+
+  return matchLabel || matchValue;
+}
+
 export interface UseSelectBaseProps {
   options: SelectOption[];
   itemLabel: string;
@@ -43,16 +64,27 @@ export function useSelectBase(
     const opts = props.options;
     if (!props.enableSearch || !props.search) return opts;
     const searchLower = props.search?.toLowerCase() ?? '';
-    return opts.filter((option) => {
-      const matchLabel = String(option[props.itemLabel] ?? '')
-        .toLowerCase()
-        .includes(searchLower);
+    const matches = (option: SelectOption) =>
+      optionMatchesSearch(
+        option,
+        searchLower,
+        props.itemLabel,
+        props.itemValue,
+      );
 
-      const matchValue = String(option[props.itemValue] ?? '')
-        .toLowerCase()
-        .includes(searchLower);
+    // Select (single) does not render children, so its search stays flat.
+    if (variant === 'single') return opts.filter(matches);
 
-      return matchLabel || matchValue;
+    return opts.flatMap((option) => {
+      const children = getOptionChildren(option);
+
+      if (matches(option)) return [option];
+      if (!children.length) return [];
+
+      const matchingChildren = children.filter(matches);
+      if (!matchingChildren.length) return [];
+
+      return [{ ...option, children: matchingChildren }];
     });
   });
 
