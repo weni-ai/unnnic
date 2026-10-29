@@ -41,8 +41,8 @@ settle the points the spec leaves to the plan.
 
 ## R7. Testing seams
 
-- **Decision**: Extend `MultiSelect.spec.js` (tree mode `describe`) and `MultiSelectOption.spec.js`. Query the teleported popover through `document`, and drive rows through `findAllComponents(UnnnicMultiSelectOption)`. Add one `Select.spec.js` case proving that `children` does not change `UnnnicSelect` search. Unit-test the pure rules in `src/lib/__tests__/tree-selection.spec.ts`.
-- **Rationale**: These are the seams the prototype already validated. The `Select` case guards R2. Pure functions are tested directly, like `teleport-target`; `src/utils/**` is excluded from Vitest, so the rules live in `src/lib`.
+- **Decision**: Extend `MultiSelect.spec.js` (tree mode `describe`) and `MultiSelectOption.spec.js`. Query the teleported popover through `document`, and drive rows through `findAllComponents(UnnnicMultiSelectOption)`. Unit-test the pure rules in `src/lib/__tests__/tree-selection.spec.ts`.
+- **Rationale**: These are the seams the prototype already validated. Pure functions are tested directly, like `teleport-target`; `src/utils/**` is excluded from Vitest, so the rules live in `src/lib`. `UnnnicSelect` needs no new case: since R2, `useSelectBase` has no tree knowledge and the tree filter is opt-in, so its existing search tests cover it.
 - **Alternatives considered**: Standalone composable tests (the repository tests composables through their components).
 
 ## R8. Layering of the selection rules
