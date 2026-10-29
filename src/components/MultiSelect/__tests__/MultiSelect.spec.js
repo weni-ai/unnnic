@@ -937,22 +937,32 @@ describe('UnnnicMultiSelect.vue', () => {
       expect(wrapper.emitted('update:modelValue')).toBeFalsy();
     });
 
+    const getOptionLabels = () =>
+      wrapper
+        .findAllComponents({ name: 'UnnnicMultiSelectOption' })
+        .map((option) => option.props('label'));
+
     test('search matching a parent keeps all of its children', async () => {
       await mountTree({ enableSearch: true, search: 'Status' });
 
-      expect(wrapper.vm.filteredOptions).toHaveLength(1);
-      expect(wrapper.vm.filteredOptions[0].value).toBe('status');
-      expect(wrapper.vm.filteredOptions[0].children).toHaveLength(3);
+      expect(wrapper.vm.filteredOptions.map(({ value }) => value)).toEqual([
+        'status',
+      ]);
+      expect(getOptionLabels()).toEqual([
+        'Status do pedido',
+        'Atraso na entrega',
+        'Rastreamento',
+        'Nota fiscal',
+      ]);
     });
 
     test('search matching a child keeps its parent with only matching children', async () => {
-      await mountTree({ enableSearch: true, search: 'Pix' });
+      await mountTree({ enableSearch: true, search: 'Rastre' });
 
-      expect(wrapper.vm.filteredOptions).toHaveLength(1);
-      expect(wrapper.vm.filteredOptions[0].value).toBe('pagamento');
-      expect(wrapper.vm.filteredOptions[0].children).toEqual([
-        { label: 'Pix', value: 'pix' },
+      expect(wrapper.vm.filteredOptions.map(({ value }) => value)).toEqual([
+        'status',
       ]);
+      expect(getOptionLabels()).toEqual(['Status do pedido', 'Rastreamento']);
     });
 
     test('matching branches render expanded while search is not empty', async () => {

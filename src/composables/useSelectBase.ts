@@ -11,25 +11,14 @@ import type {
 
 export type SelectVariant = 'single' | 'multi';
 
-export function getOptionChildren(option: SelectOption): SelectOption[] {
-  return Array.isArray(option.children) ? option.children : [];
-}
+export type SelectOptionMatcher = (option: SelectOption) => boolean;
 
-export function optionMatchesSearch(
-  option: SelectOption,
-  searchLower: string,
-  itemLabel: string,
-  itemValue: string,
-) {
-  const matchLabel = String(option[itemLabel] ?? '')
-    .toLowerCase()
-    .includes(searchLower);
-
-  const matchValue = String(option[itemValue] ?? '')
-    .toLowerCase()
-    .includes(searchLower);
-
-  return matchLabel || matchValue;
+export interface UseSelectBaseOptions {
+  /** Picks the options kept by a search. Defaults to the matching options. */
+  filterOptions?: (
+    options: SelectOption[],
+    matches: SelectOptionMatcher,
+  ) => SelectOption[];
 }
 
 export interface UseSelectBaseProps {
@@ -54,39 +43,40 @@ export function useSelectBase(
   variant: SelectVariant,
   triggerRef: SelectTriggerRef,
   contentRef: SelectContentRef,
+  {
+    filterOptions = (options, matches) => options.filter(matches),
+  }: UseSelectBaseOptions = {},
 ) {
   const openPopover = ref(false);
 
   const { width: inputWidth } = useElementSize(triggerRef);
   const inputWidthString = computed(() => `${inputWidth.value}px`);
 
-  const filteredOptions = computed(() => {
-    const opts = props.options;
-    if (!props.enableSearch || !props.search) return opts;
-    const searchLower = props.search?.toLowerCase() ?? '';
-    const matches = (option: SelectOption) =>
-      optionMatchesSearch(
-        option,
-        searchLower,
-        props.itemLabel,
-        props.itemValue,
-      );
+  const isSearchActive = computed(
+    () => props.enableSearch && Boolean(props.search),
+  );
 
-    // Select (single) does not render children, so its search stays flat.
-    if (variant === 'single') return opts.filter(matches);
+  /** Every option matches while the search is inactive. */
+  function matchesSearch(option: SelectOption) {
+    if (!isSearchActive.value) return true;
+    const searchLower = props.search.toLowerCase();
 
-    return opts.flatMap((option) => {
-      const children = getOptionChildren(option);
+    const matchLabel = String(option[props.itemLabel] ?? '')
+      .toLowerCase()
+      .includes(searchLower);
 
-      if (matches(option)) return [option];
-      if (!children.length) return [];
+    const matchValue = String(option[props.itemValue] ?? '')
+      .toLowerCase()
+      .includes(searchLower);
 
-      const matchingChildren = children.filter(matches);
-      if (!matchingChildren.length) return [];
+    return matchLabel || matchValue;
+  }
 
-      return [{ ...option, children: matchingChildren }];
-    });
-  });
+  const filteredOptions = computed(() =>
+    isSearchActive.value
+      ? filterOptions(props.options, matchesSearch)
+      : props.options,
+  );
 
   function calcPopoverHeight(params: SelectPopoverHeightParams): string {
     const {
@@ -146,6 +136,8 @@ export function useSelectBase(
     inputWidthString,
     calculatedPopoverHeight,
     popoverContentCustomStyles,
+    isSearchActive,
+    matchesSearch,
     filteredOptions,
   };
 }
