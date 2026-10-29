@@ -28,7 +28,7 @@ export default {
   argTypes: {
     options: {
       description:
-        'List of items to be displayed in the options. If an item has a `disabled` key set to `true`, that item will be disabled. By default, the component looks for the `label` and `value` keys to display and update the model, but these are not required if you wish to customize them using the `itemLabel` and `itemValue` props, respectively.',
+        'List of items to be displayed in the options. If an item has a `disabled` key set to `true`, that item will be disabled. By default, the component looks for the `label` and `value` keys to display and update the model, but these are not required if you wish to customize them using the `itemLabel` and `itemValue` props, respectively. An optional `children` array (one level) turns the item into a collapsible group: checking the parent selects every child, a partial selection shows the parent as indeterminate, and the closed field lists a fully checked parent once without its children.',
     },
     placeholder: {
       description: 'Text to be displayed in the placeholder.',
@@ -175,6 +175,67 @@ export const WithSearch = {
     placeholder: 'Placeholder',
     label: 'Label',
     options,
+    enableSearch: true,
+    search: '',
+  },
+};
+
+const topicOptions = [
+  {
+    label: 'Status do pedido',
+    value: 'status-do-pedido',
+    children: [
+      { label: 'Atraso na entrega', value: 'atraso-na-entrega' },
+      { label: 'Rastreamento', value: 'rastreamento' },
+      { label: 'Nota fiscal', value: 'nota-fiscal' },
+    ],
+  },
+  {
+    label: 'Troca e devolução',
+    value: 'troca-e-devolucao',
+    children: [
+      { label: 'Produto com defeito', value: 'produto-com-defeito' },
+      { label: 'Arrependimento', value: 'arrependimento' },
+    ],
+  },
+  {
+    label: 'Pagamento',
+    value: 'pagamento',
+    children: [
+      { label: 'Pix', value: 'pix' },
+      { label: 'Cartão', value: 'cartao' },
+    ],
+  },
+  {
+    label: 'Dúvidas sobre produto',
+    value: 'duvidas-sobre-produto',
+    children: [
+      { label: 'Tamanho', value: 'tamanho' },
+      { label: 'Cor', value: 'cor' },
+    ],
+  },
+  {
+    label: 'Cancelamento',
+    value: 'cancelamento',
+    children: [{ label: 'Pedido', value: 'pedido' }],
+  },
+  { label: 'Unclassified', value: 'unclassified' },
+  { label: 'Other', value: 'other' },
+];
+
+export const WithChildren = {
+  args: {
+    placeholder: 'All topics',
+    label: 'Topic',
+    options: topicOptions,
+  },
+};
+
+export const WithChildrenAndSearch = {
+  args: {
+    placeholder: 'All topics',
+    label: 'Topic',
+    options: topicOptions,
     enableSearch: true,
     search: '',
   },

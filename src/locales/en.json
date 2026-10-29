@@ -48,6 +48,8 @@
       "custom": "Custom"
     }
   },
+  "collapse": "Collapse",
+  "expand": "Expand",
   "search": "Search",
   "without_results": "No results found"
 }
