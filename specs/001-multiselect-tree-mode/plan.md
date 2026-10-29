@@ -87,8 +87,7 @@ specs/001-multiselect-tree-mode/
 src/
 ├── components/
 │   ├── Select/
-│   │   ├── types.ts                         # + children
-│   │   └── __tests__/Select.spec.js         # + children does not affect Select search
+│   │   └── types.ts                         # + children
 │   └── MultiSelect/
 │       ├── index.vue                        # tree branch, display items, keyboard wiring, ellipsis
 │       ├── MultiSelectOption.vue            # CheckboxValue, chevron, level
