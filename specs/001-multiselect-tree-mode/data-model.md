@@ -11,11 +11,11 @@ Nothing is persisted. These are the in-memory shapes the component works with.
 | `disabled` | `boolean?` | A disabled option cannot be toggled, and parent toggles skip it. |
 | `children` | `SelectOption[]?` | One level only. `[]` or absent means a leaf. Grandchildren are ignored. |
 
-## TreeRow (internal, `useMultiSelectTree`)
+## OptionRow (internal, `useMultiSelectRows`)
 
 | Field | Type | Rule |
 |-------|------|------|
-| `option` | `SelectOption` | The option as returned by the filter (a parent may carry only its matching children during a search). |
+| `option` | `SelectOption` | The original option object from `options`; search never clones it. |
 | `parent` | `SelectOption \| null` | `null` for level 1. |
 | `level` | `1 \| 2` | `aria-level`. |
 | `hasChildren` | `boolean` | Renders the chevron. |
@@ -24,6 +24,8 @@ Nothing is persisted. These are the in-memory shapes the component works with.
 | `index` | `number` | Position in `visibleRows`; `data-option-index` and keyboard focus. |
 
 ## Selection state
+
+The rules below are pure functions in `src/lib/tree-selection.ts` over option values; `useMultiSelectSelection` converts `modelValue` to values and back (keeping the received objects with `returnObject`). A flat list follows the same rules, as leaves.
 
 - `selectedValues` = the values in `modelValue`, plus the enabled children of every parent whose value is in `modelValue`.
 - A parent's **driving children** are its enabled children, or all its children when every child is disabled.
@@ -45,7 +47,7 @@ Nothing is persisted. These are the in-memory shapes the component works with.
 
 The base of every transition is `modelValue`, plus the implied children of R3, so unknown values are kept and implied children become explicit.
 
-## Expansion state
+## Expansion state (`useTreeExpansion`)
 
 - `expandedValues: Set<value>`, local to the component.
 - Reset when the popover closes.

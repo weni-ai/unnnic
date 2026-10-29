@@ -60,21 +60,25 @@
 | Component | Change | Why |
 |-----------|--------|-----|
 | `src/components/Select/types.ts` | modified | Add `children?: SelectOption[]` to `SelectOption`. |
-| `src/composables/useSelectBase.ts` | modified | Tree-aware `filteredOptions` for the `'multi'` variant only; export `getOptionChildren` and `optionMatchesSearch`. `'single'` keeps the flat filter. |
-| `src/composables/useMultiSelectTree.ts` | new | Tree state and rules: tree detection, visible rows, check state, toggle with normalization, expansion, display items, reset. Keeps `index.vue` under the 350-line limit. |
+| `src/composables/useSelectBase.ts` | modified | Optional `filterOptions` strategy (default: today's flat filter); returns `isSearchActive` and `matchesSearch`. No tree knowledge; `UnnnicSelect` keeps the default. |
+| `src/lib/tree-selection.ts` | new | Pure selection rules over option values: tree detection, search filter and visible children, implied children, check state, toggle with normalization, display options. Flat lists are leaves of the same rules. |
+| `src/composables/useMultiSelectSelection.ts` | new | Adapts `modelValue` (values or objects with `returnObject`) to the pure rules for flat and tree lists: `isTreeMode`, `getCheckState`, `toggleOption`, `toggle`, `displayItems`. |
+| `src/composables/useMultiSelectRows.ts` | new | Rows to render and navigate (`optionGroups`, `visibleRows`), ArrowRight and ArrowLeft handlers, expansion toggling. |
+| `src/composables/useTreeExpansion.ts` | new | Expanded parents, with the search-only collapsed set; reset on close. |
 | `src/composables/useSelectKeyboard.ts` | modified | Optional `onArrowRight`, `onArrowLeft` and `toggleOnSpace` options; skip handling when the event target is an editable field; clamp the focused index when the list shrinks. |
 | `src/components/MultiSelect/MultiSelectOption.vue` | modified | `active: CheckboxValue`; optional `level`, `expandable`, `expanded`; chevron button; emits `update:expanded`. |
-| `src/components/MultiSelect/index.vue` | modified | Tree branch of the template (`v-if="isTreeMode"`), flat branch unchanged (`v-else`); closed field uses display items; ellipsis CSS; tree keyboard wiring; reset expansion on close. |
+| `src/components/MultiSelect/index.vue` | modified | Wires the composables: one selection and keyboard path for flat and tree lists; tree branch of the template (`v-if="isTreeMode"`), flat markup unchanged (`v-else`) and fed by the same rows; closed field uses display items; ellipsis CSS; reset expansion on close. |
 | `src/locales/en.json` | modified | Add `expand` ("Expand") and `collapse` ("Collapse") for the chevron `aria-label`. |
 | `src/stories/MultiSelect.stories.js` | modified | `WithChildren` and `WithChildrenAndSearch` stories with topics, subtopics and leaf options. |
 | `src/components/MultiSelect/__tests__/*.spec.js` | modified | Tree tests; flat snapshots unchanged. |
+| `src/lib/__tests__/tree-selection.spec.ts` | new | Unit tests for the pure rules. |
 | `CHANGELOG.md` | modified | `Unreleased` entries (Added: tree mode; Changed: ellipsis on the closed field). |
 
 ### Flow
 
 1. **Input.** The consumer passes `options` where some options have `children` (topics with subtopics) and others do not (for example "No matching topic"). `isTreeMode` is `true` when at least one option has a non-empty `children` array; otherwise every code path is today's flat path.
-2. **Search.** With `enableSearch` and a non-empty `search`, `filteredOptions` (`'multi'`) returns: a parent whose label or value matches, with all its children; a parent that does not match but has matching children, with only those children; a matching leaf. Matching uses today's rule (lowercased `includes` on `itemLabel` and `itemValue`).
-3. **Rows.** `useMultiSelectTree` turns `filteredOptions` into `optionGroups` (one group per root: the root row plus its children when expanded) and `visibleRows` (the flat list keyboard navigation walks). A row is `{ option, parent, level: 1 | 2, hasChildren, isExpanded, index }`. When a search starts, every parent in the result is expanded; the user can still collapse and expand them while searching.
+2. **Search.** With `enableSearch` and a non-empty `search`, `UnnnicMultiSelect` passes `filterTreeOptions` to `useSelectBase`, so `filteredOptions` keeps the roots that match or have a matching child, as the original option objects. Under a kept root, `getVisibleChildren` shows all children when the root matches, or only the matching ones otherwise. Matching uses today's rule (lowercased `includes` on `itemLabel` and `itemValue`).
+3. **Rows.** `useMultiSelectRows` turns `filteredOptions` into `optionGroups` (one group per root: the root row plus its visible children when expanded) and `visibleRows` (the flat list keyboard navigation walks). A row is `{ option, parent, level: 1 | 2, hasChildren, isExpanded, checkState, index }`; a flat list yields one leaf row per option. When a search starts, every parent in the result is expanded; the user can still collapse and expand them while searching.
 4. **Render.** The options container gets `role="tree"` and `aria-multiselectable="true"`. Each group (`unnnic-multi-select__option-group`) renders `UnnnicMultiSelectOption` rows with `role="treeitem"`, `aria-level`, `aria-checked` (`mixed` for `'less'`), `aria-expanded` on parents and `data-option-index` from `visibleRows`.
 5. **Check state.** `getCheckState(option)`: a leaf is `true` when its value is in `modelValue`. A parent is `true` when its value is in `modelValue` or all its enabled children are; `'less'` when only some children are; `false` otherwise.
 6. **Toggle.** `toggleOption(row)` computes the next value array and emits a single `update:modelValue`:
@@ -89,7 +93,8 @@
 
 - **A separate `UnnnicTreeSelect` component**: duplicates popover, search, checkbox, keyboard and infinite-scroll mechanics already in `UnnnicMultiSelect`; the Product Spec asks to reuse the existing multi-select. An optional `children` field is additive and backward compatible.
 - **Nested `modelValue` (`{ parent: [children] }`)**: breaks the existing flat contract and forces consumers to reshape values; a flat array maps directly to the query parameters the webapp sends.
-- **Tree logic inside `index.vue`**: the file is already at 321 lines and the tree adds roughly 200; a composable keeps both files under 350 lines and makes the rules unit-testable.
+- **Tree logic inside `index.vue`**: the file is already at 321 lines and the tree adds roughly 200; pure rules plus thin composables keep every file under 350 lines and make the rules unit-testable.
+- **Separate selection paths for flat and tree lists**: a flat list is a tree of leaves, so one set of rules serves both and `index.vue` does not branch on the mode for selection or keyboard. The only kept difference is the closed field of a flat `returnObject` list, which still shows `modelValue` as received.
 - **Tree-aware filtering for `UnnnicSelect` too**: `UnnnicSelect` does not render children; returning parents for matching children would change its search results with no consumer asking for it.
 
 ## Contracts
@@ -102,7 +107,7 @@
 | `UnnnicMultiSelect` keyboard (tree): ArrowRight, ArrowLeft, Space | added | minor | yes — flat lists keep ArrowUp, ArrowDown and Enter only |
 | `UnnnicMultiSelectOption` props `active: boolean \| 'less'`, `level`, `expandable`, `expanded`; emit `update:expanded` | added / widened | minor | yes — all optional; `active: boolean` still valid |
 | `useSelectKeyboard` options `onArrowRight`, `onArrowLeft`, `toggleOnSpace` | added | minor | yes — optional |
-| `useSelectBase` exports `getOptionChildren`, `optionMatchesSearch` | added | minor | yes |
+| `useSelectBase` option `filterOptions`; returns `isSearchActive`, `matchesSearch` | added | minor | yes — optional, default is today's filter |
 | i18n keys `expand`, `collapse` (`en.json`) | added | minor | yes |
 
 Release: `@weni/unnnic-system` `3.37.0` (next minor after `3.36.0`), first as `3.37.0-staging` (alpha prerelease).
@@ -159,17 +164,17 @@ Rollback: consumers pin the previous minor. Because every addition is optional a
 | VI. No Silent Divergence | FR-013 is recorded below and not implemented in a contradicting way until the amendment is decided. | none |
 | VII. Commit Messages | Conventional, scoped commits per layer (`feat(MultiSelect): …`, `test(MultiSelect): …`, `docs(MultiSelect): …`). | none |
 | VIII. Changelog Maintenance | `Unreleased` entries for Added (tree mode) and Changed (ellipsis), named in bold, above the current `3.36.0` heading; the release commit turns them into `3.37.0`. | none |
-| X. Type Safety | New composable and changed composables in TypeScript; `TreeRow` and `CheckboxValue` typed; tests and stories stay JavaScript like their neighbours. | none |
-| XI. Single Responsibility | Tree rules live in `useMultiSelectTree.ts`; `index.vue` and the composable each stay under 350 lines. | none |
-| XII. Naming Conventions | `useMultiSelectTree.ts` camelCase; component files under the PascalCase exception. | Project exception (component folders and SFCs). |
-| XIII. Component Architecture | New emit `update:expanded` follows Vue convention; handlers `handleToggleExpanded`, state `isTreeMode`, `isSearchActive`. | Project exception (emitted names without `on`). |
+| X. Type Safety | New lib module and composables in TypeScript; `OptionRow` and `CheckboxValue` typed; component tests and stories stay JavaScript like their neighbours, the lib test is TypeScript like its neighbour. | none |
+| XI. Single Responsibility | Pure rules in `src/lib/tree-selection.ts`; model adaptation, rows and expansion each in their own composable; every file stays under 350 lines. | none |
+| XII. Naming Conventions | Composables camelCase (`useMultiSelectSelection.ts`, `useMultiSelectRows.ts`, `useTreeExpansion.ts`); lib module kebab-case like `teleport-target.ts`; component files under the PascalCase exception. | Project exception (component folders and SFCs). |
+| XIII. Component Architecture | New emit `update:expanded` follows Vue convention; actions `toggleOption`, `toggleExpanded`, state `isTreeMode`, `isSearchActive`. | Project exception (emitted names without `on`). |
 | XIV / XV. Styling and BEM | `$unnnic-space-*` and `$unnnic-icon-size-*` tokens only; classes `unnnic-multi-select__option-group`, `unnnic-multi-select-option--level-2`, `unnnic-multi-select-option__expand`. | none |
 | XVI. State Management | Selection stays controlled by `modelValue`; only the visual expansion state is local. | none |
 | XX. Testing | Behavior tests colocated in `__tests__/`; snapshot change limited to the option placeholder and explained. | none |
 | XXI. Accessibility | `role="tree"` / `treeitem`, `aria-level`, `aria-checked="mixed"`, `aria-expanded`; chevron is a `<button type="button" tabindex="-1">` with a translated `aria-label`; keyboard per NFR-003. | none |
 | XXII. Performance | No new dependency; computed state; collapsed children not rendered. | none |
 | XXIII. Internationalization | `expand` and `collapse` added to `src/locales/en.json` only. | Project exception (localization lock): pt_br and es arrive through Crowdin after merge. |
-| XXV. Maintainability | Search matching shared through `optionMatchesSearch` in `useSelectBase`; keyboard rules stay in `useSelectKeyboard`. | none |
+| XXV. Maintainability | Search matching stays in `useSelectBase` and is injected into the tree filter (`filterOptions`, `matchesSearch`); one selection path for flat and tree lists; keyboard rules stay in `useSelectKeyboard`. | none |
 
 ## Implementation Decisions
 

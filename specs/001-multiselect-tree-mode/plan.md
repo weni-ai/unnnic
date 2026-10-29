@@ -98,9 +98,14 @@ src/
 │           ├── MultiSelectOption.spec.js    # + chevron, level, 'less'
 │           └── __snapshots__/MultiSelectOption.spec.js.snap
 ├── composables/
-│   ├── useSelectBase.ts                     # tree-aware filter ('multi' only), exports
+│   ├── useSelectBase.ts                     # optional filterOptions strategy, matchesSearch
 │   ├── useSelectKeyboard.ts                 # ArrowRight/ArrowLeft/Space options, clamp
-│   └── useMultiSelectTree.ts                # new: rows, state, toggle, expansion, keyboard handlers
+│   ├── useMultiSelectSelection.ts           # new: model <-> values, check state, toggle, display
+│   ├── useMultiSelectRows.ts                # new: rows, arrow handlers
+│   └── useTreeExpansion.ts                  # new: expansion state
+├── lib/
+│   ├── tree-selection.ts                    # new: pure selection and search rules
+│   └── __tests__/tree-selection.spec.ts     # new: unit tests for the rules
 ├── locales/en.json                          # + expand, collapse
 └── stories/MultiSelect.stories.js           # + WithChildren, WithChildrenAndSearch
 CHANGELOG.md                                 # Unreleased
@@ -122,7 +127,7 @@ No violations to justify.
 ## Delivery Sequence
 
 1. Types and the shared composables (`types.ts`, `useSelectBase`, `useSelectKeyboard`). Everything else builds on them, and `UnnnicSelect` must be proven unchanged first.
-2. `useMultiSelectTree`, which holds the selection rules every UI piece reads.
+2. `src/lib/tree-selection.ts` (the pure rules every UI piece reads), then `useTreeExpansion`, `useMultiSelectSelection` and `useMultiSelectRows`.
 3. `MultiSelectOption`, then `MultiSelectTreeOptions`, then `index.vue` wiring, in dependency order.
 4. Locale key, stories and CHANGELOG.
 5. Validation: tests, lint, type-check, build, then the Storybook check from quickstart.md.
