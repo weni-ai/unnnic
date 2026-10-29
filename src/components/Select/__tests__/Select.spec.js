@@ -249,22 +249,6 @@ describe('UnnnicSelect.vue', () => {
       expect(filteredOptions[0].label).toBe('Option 1');
     });
 
-    test('ignores option children when searching', async () => {
-      await wrapper.setProps({
-        enableSearch: true,
-        search: 'Pix',
-        options: [
-          {
-            label: 'Pagamento',
-            value: 'pagamento',
-            children: [{ label: 'Pix', value: 'pix' }],
-          },
-        ],
-      });
-
-      expect(wrapper.vm.filteredOptions).toEqual([]);
-    });
-
     test('filters options by both label and value', async () => {
       await wrapper.setProps({ enableSearch: true, search: 'option1' });
       const filteredOptions = wrapper.vm.filteredOptions;

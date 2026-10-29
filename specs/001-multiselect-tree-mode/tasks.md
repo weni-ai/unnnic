@@ -93,7 +93,7 @@ Source prototype: `stash@{0}` (tracked files) and `stash@{0}^3` (`src/composable
   - no match shows `without_results`;
   - branches start expanded and can still be collapsed and expanded while searching;
   - manual expansion restored after clearing.
-- [X] T012 [P] [US2] Add a test in src/components/Select/__tests__/Select.spec.js proving `UnnnicSelect` search ignores `children` (a parent with a matching child is not returned).
+- [X] T012 [P] [US2] Add a test in src/components/Select/__tests__/Select.spec.js proving `UnnnicSelect` search ignores `children` (a parent with a matching child is not returned). Removed in T028: superseded by R8.
 - [X] T013 [US2] Ensure `isSearchActive` starts every branch expanded while keeping the chevron usable (a search-only collapsed set) in src/composables/useMultiSelectTree.ts.
 
 ---
@@ -140,6 +140,7 @@ Source prototype: `stash@{0}` (tracked files) and `stash@{0}^3` (`src/composable
 - [X] T025 Replace src/composables/useMultiSelectTree.ts with `useMultiSelectSelection` (model adaptation for flat and tree lists), `useMultiSelectRows` (rows and arrow handlers) and `useTreeExpansion` (expansion state); move `toAriaChecked` into `MultiSelectTreeOptions.vue`.
 - [X] T026 Wire one selection and keyboard path in src/components/MultiSelect/index.vue, feeding the flat markup from the same rows; keep flat behavior, the flat `returnObject` closed field and the snapshots unchanged.
 - [X] T027 Run the MultiSelect, Select and lib tests, ESLint, Prettier and `vue-tsc`; verify every touched file is ≤ 350 lines.
+- [X] T028 Remove the T012 `Select.spec.js` case: `useSelectBase` no longer knows about `children`, and the tree filter is opt-in through `filterOptions`.
 
 ---
 
