@@ -2,7 +2,7 @@
  * Tree selection, expansion and closed-field display for MultiSelect.
  * One level of children. Options without children stay leaf nodes.
  */
-import { computed, ref, type ComputedRef } from 'vue';
+import { computed, ref, watch, type ComputedRef } from 'vue';
 import type { CheckboxValue } from '../components/Checkbox/Checkbox.vue';
 import type { SelectOption } from '../components/Select/types';
 import { getOptionChildren } from './useSelectBase';
@@ -55,12 +55,22 @@ export function useMultiSelectTree(
   filteredOptions: ComputedRef<SelectOption[]>,
 ) {
   const expandedValues = ref(new Set<unknown>());
+  /**
+   * While searching, parents start expanded and the user may still collapse
+   * them; this set is discarded when the search starts or ends, so the manual
+   * expansion is back once the search is cleared.
+   */
+  const searchCollapsedValues = ref(new Set<unknown>());
 
   const isTreeMode = computed(() => props.options.some(optionHasChildren));
 
   const isSearchActive = computed(
     () => props.enableSearch && Boolean(props.search),
   );
+
+  watch(isSearchActive, () => {
+    searchCollapsedValues.value = new Set();
+  });
 
   function getOptionValue(option: SelectOption) {
     return option[props.itemValue];
@@ -138,16 +148,20 @@ export function useMultiSelectTree(
     return children.some((child) => isSelected(child)) ? 'less' : false;
   }
 
+  function isOptionExpanded(option: SelectOption) {
+    const value = getOptionValue(option);
+    return isSearchActive.value
+      ? !searchCollapsedValues.value.has(value)
+      : expandedValues.value.has(value);
+  }
+
   const optionGroups = computed(() => {
     const groups: TreeRow[][] = [];
     let index = 0;
 
     for (const option of filteredOptions.value) {
       const hasChildren = optionHasChildren(option);
-      const isExpanded =
-        hasChildren &&
-        (isSearchActive.value ||
-          expandedValues.value.has(getOptionValue(option)));
+      const isExpanded = hasChildren && isOptionExpanded(option);
 
       const group: TreeRow[] = [
         {
@@ -216,17 +230,22 @@ export function useMultiSelectTree(
 
   function toggleExpanded(option: SelectOption, expanded?: boolean) {
     const value = getOptionValue(option);
-    const next = new Set(expandedValues.value);
-    const shouldExpand = expanded ?? !next.has(value);
+    const shouldExpand = expanded ?? !isOptionExpanded(option);
+    const target = isSearchActive.value
+      ? searchCollapsedValues
+      : expandedValues;
+    const next = new Set(target.value);
+    const shouldAdd = isSearchActive.value ? !shouldExpand : shouldExpand;
 
-    if (shouldExpand) next.add(value);
+    if (shouldAdd) next.add(value);
     else next.delete(value);
 
-    expandedValues.value = next;
+    target.value = next;
   }
 
   function resetExpanded() {
     expandedValues.value = new Set();
+    searchCollapsedValues.value = new Set();
   }
 
   /** ArrowRight: expand a collapsed parent, or move into its first child. */
@@ -248,7 +267,7 @@ export function useMultiSelectTree(
     if (!row) return;
 
     if (row.hasChildren && row.isExpanded) {
-      if (!isSearchActive.value) toggleExpanded(row.option, false);
+      toggleExpanded(row.option, false);
       return;
     }
 
@@ -274,7 +293,6 @@ export function useMultiSelectTree(
 
   return {
     isTreeMode,
-    isSearchActive,
     optionGroups,
     visibleRows,
     getCheckState,

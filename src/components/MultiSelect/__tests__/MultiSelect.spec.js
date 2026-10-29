@@ -962,8 +962,32 @@ describe('UnnnicMultiSelect.vue', () => {
       });
 
       expect(options[0].props('expanded')).toBe(true);
-      expect(options[0].props('expandDisabled')).toBe(true);
       expect(options.length).toBe(4);
+    });
+
+    test('lets the user collapse and expand branches while searching', async () => {
+      await mountTree({ enableSearch: true, search: 'Status' });
+      const getOptions = () =>
+        wrapper.findAllComponents({ name: 'UnnnicMultiSelectOption' });
+
+      await getOptions()[0].vm.$emit('update:expanded', false);
+      expect(getOptions()).toHaveLength(1);
+      expect(getOptions()[0].props('expanded')).toBe(false);
+
+      await getOptions()[0].vm.$emit('update:expanded', true);
+      expect(getOptions()).toHaveLength(4);
+    });
+
+    test('expands branches again when a new search starts', async () => {
+      await mountTree({ enableSearch: true, search: 'Status' });
+      const getOptions = () =>
+        wrapper.findAllComponents({ name: 'UnnnicMultiSelectOption' });
+
+      await getOptions()[0].vm.$emit('update:expanded', false);
+      await wrapper.setProps({ search: '' });
+      await wrapper.setProps({ search: 'Status' });
+
+      expect(getOptions()[0].props('expanded')).toBe(true);
     });
 
     test('shows no results when the tree search has no matches', async () => {
