@@ -2,6 +2,7 @@
 
 exports[`MultiSelectOption.vue > snapshot testing > matches snapshot with active state 1`] = `
 "<div data-v-7d79eb5d="" class="unnnic-multi-select-option">
+  <!--v-if-->
   <section data-v-18939422="" data-v-7d79eb5d="" class="unnnic-checkbox"><label data-v-18939422="" class="unnnic-checkbox__input-wrapper"><input data-v-18939422="" class="unnnic-checkbox__input" type="checkbox" checked="">
       <p data-v-18939422="" class="unnnic-checkbox__label" data-testid="checkbox-text-right">Test Option</p>
     </label>
@@ -12,6 +13,7 @@ exports[`MultiSelectOption.vue > snapshot testing > matches snapshot with active
 
 exports[`MultiSelectOption.vue > snapshot testing > matches snapshot with both active and disabled states 1`] = `
 "<div data-v-7d79eb5d="" class="unnnic-multi-select-option">
+  <!--v-if-->
   <section data-v-18939422="" data-v-7d79eb5d="" class="unnnic-checkbox"><label data-v-18939422="" class="unnnic-checkbox__input-wrapper unnnic-checkbox__input-wrapper--disabled"><input data-v-18939422="" class="unnnic-checkbox__input" type="checkbox" disabled="" checked="">
       <p data-v-18939422="" class="unnnic-checkbox__label unnnic-checkbox__label--disabled" data-testid="checkbox-text-right">Test Option</p>
     </label>
@@ -22,6 +24,7 @@ exports[`MultiSelectOption.vue > snapshot testing > matches snapshot with both a
 
 exports[`MultiSelectOption.vue > snapshot testing > matches snapshot with default props 1`] = `
 "<div data-v-7d79eb5d="" class="unnnic-multi-select-option">
+  <!--v-if-->
   <section data-v-18939422="" data-v-7d79eb5d="" class="unnnic-checkbox"><label data-v-18939422="" class="unnnic-checkbox__input-wrapper"><input data-v-18939422="" class="unnnic-checkbox__input" type="checkbox">
       <p data-v-18939422="" class="unnnic-checkbox__label" data-testid="checkbox-text-right">Test Option</p>
     </label>
@@ -32,6 +35,7 @@ exports[`MultiSelectOption.vue > snapshot testing > matches snapshot with defaul
 
 exports[`MultiSelectOption.vue > snapshot testing > matches snapshot with disabled state 1`] = `
 "<div data-v-7d79eb5d="" class="unnnic-multi-select-option">
+  <!--v-if-->
   <section data-v-18939422="" data-v-7d79eb5d="" class="unnnic-checkbox"><label data-v-18939422="" class="unnnic-checkbox__input-wrapper unnnic-checkbox__input-wrapper--disabled"><input data-v-18939422="" class="unnnic-checkbox__input" type="checkbox" disabled="">
       <p data-v-18939422="" class="unnnic-checkbox__label unnnic-checkbox__label--disabled" data-testid="checkbox-text-right">Test Option</p>
     </label>
@@ -42,6 +46,7 @@ exports[`MultiSelectOption.vue > snapshot testing > matches snapshot with disabl
 
 exports[`MultiSelectOption.vue > snapshot testing > matches snapshot with focused state 1`] = `
 "<div data-v-7d79eb5d="" class="unnnic-multi-select-option">
+  <!--v-if-->
   <section data-v-18939422="" data-v-7d79eb5d="" class="unnnic-checkbox"><label data-v-18939422="" class="unnnic-checkbox__input-wrapper"><input data-v-18939422="" class="unnnic-checkbox__input" type="checkbox">
       <p data-v-18939422="" class="unnnic-checkbox__label" data-testid="checkbox-text-right">Test Option</p>
     </label>

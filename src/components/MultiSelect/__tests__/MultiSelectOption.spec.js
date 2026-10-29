@@ -1,9 +1,15 @@
 import { mount } from '@vue/test-utils';
 import { beforeEach, describe, expect, test, afterEach } from 'vitest';
 import MultiSelectOption from '../MultiSelectOption.vue';
+import i18n from '@/utils/plugins/i18n';
 
 const createWrapper = (props = {}) => {
-  return mount(MultiSelectOption, { props });
+  return mount(MultiSelectOption, {
+    props,
+    global: {
+      plugins: [i18n],
+    },
+  });
 };
 
 describe('MultiSelectOption.vue', () => {
@@ -69,6 +75,54 @@ describe('MultiSelectOption.vue', () => {
       await wrapper.setProps({ disabled: false });
       const checkbox = wrapper.findComponent({ name: 'UnnnicCheckbox' });
       expect(checkbox.props('disabled')).toBe(false);
+    });
+  });
+
+  describe('indeterminate state', () => {
+    test('passes less to the checkbox modelValue', async () => {
+      await wrapper.setProps({ active: 'less' });
+      const checkbox = wrapper.findComponent({ name: 'UnnnicCheckbox' });
+      expect(checkbox.props('modelValue')).toBe('less');
+    });
+
+    test('emits true when the checkbox is clicked while less', async () => {
+      await wrapper.setProps({ active: 'less' });
+      const checkbox = wrapper.findComponent({ name: 'UnnnicCheckbox' });
+
+      await checkbox.vm.$emit('update:model-value', false);
+
+      expect(wrapper.emitted('update:modelValue')[0][0]).toBe(true);
+    });
+  });
+
+  describe('tree props', () => {
+    test('renders the expand button and emits update:expanded', async () => {
+      await wrapper.setProps({ expandable: true, expanded: false });
+
+      const button = wrapper.find('.unnnic-multi-select-option__expand');
+      expect(button.exists()).toBe(true);
+      expect(button.attributes('aria-expanded')).toBe('false');
+
+      await button.trigger('click');
+
+      expect(wrapper.emitted('update:expanded')[0][0]).toBe(true);
+    });
+
+    test('applies the level 2 modifier class', async () => {
+      await wrapper.setProps({ level: 2 });
+      expect(wrapper.classes()).toContain(
+        'unnnic-multi-select-option--level-2',
+      );
+    });
+
+    test('renders a spacer on a root leaf', async () => {
+      await wrapper.setProps({ level: 1, expandable: false });
+      expect(
+        wrapper.find('.unnnic-multi-select-option__expand-spacer').exists(),
+      ).toBe(true);
+      expect(wrapper.find('.unnnic-multi-select-option__expand').exists()).toBe(
+        false,
+      );
     });
   });
 
