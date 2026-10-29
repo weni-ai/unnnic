@@ -34,10 +34,8 @@
 <script setup lang="ts">
 import UnnnicMultiSelectOption from './MultiSelectOption.vue';
 
-import {
-  toAriaChecked,
-  type TreeRow,
-} from '../../composables/useMultiSelectTree';
+import type { OptionRow } from '../../composables/useMultiSelectRows';
+import type { CheckboxValue } from '../Checkbox/Checkbox.vue';
 import type { SelectOption } from '../Select/types';
 
 defineOptions({
@@ -45,7 +43,7 @@ defineOptions({
 });
 
 interface MultiSelectTreeOptionsProps {
-  groups: TreeRow[][];
+  groups: OptionRow[][];
   itemLabel: string;
   itemValue: string;
   focusedIndex: number;
@@ -57,6 +55,11 @@ const emit = defineEmits<{
   select: [option: SelectOption, selected: boolean];
   expand: [option: SelectOption, expanded: boolean];
 }>();
+
+function toAriaChecked(state: CheckboxValue) {
+  if (state === 'less') return 'mixed';
+  return state ? 'true' : 'false';
+}
 </script>
 
 <style lang="scss" scoped>

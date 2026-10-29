@@ -49,27 +49,27 @@
           </p>
           <template v-else>
             <UnnnicMultiSelectTreeOptions
-              v-if="tree.isTreeMode.value"
-              :groups="tree.optionGroups.value"
+              v-if="isTreeMode"
+              :groups="optionGroups"
               :itemLabel="props.itemLabel"
               :itemValue="props.itemValue"
               :focusedIndex="focusedOptionIndex"
-              @select="handleSelectOption"
-              @expand="tree.toggleExpanded"
+              @select="toggleOption"
+              @expand="toggleExpanded"
             />
             <div
               v-else
               class="unnnic-multi-select__options"
             >
               <UnnnicMultiSelectOption
-                v-for="(option, index) in filteredOptions"
-                :key="String(option[props.itemValue])"
-                :data-option-index="index"
-                :label="String(option[props.itemLabel] ?? '')"
-                :active="getActivatedOptionStatus(option)"
-                :focused="focusedOptionIndex === index"
-                :disabled="option.disabled"
-                @update:model-value="handleSelectOption(option, $event)"
+                v-for="row in visibleRows"
+                :key="String(row.option[props.itemValue])"
+                :data-option-index="row.index"
+                :label="String(row.option[props.itemLabel] ?? '')"
+                :active="row.checkState"
+                :focused="focusedOptionIndex === row.index"
+                :disabled="row.option.disabled"
+                @update:model-value="toggleOption(row.option, $event)"
               />
             </div>
             <div
@@ -101,7 +101,9 @@ import UnnnicMultiSelectTreeOptions from './MultiSelectTreeOptions.vue';
 
 import { useSelectBase } from '../../composables/useSelectBase';
 import { useSelectKeyboard } from '../../composables/useSelectKeyboard';
-import { useMultiSelectTree } from '../../composables/useMultiSelectTree';
+import { useMultiSelectSelection } from '../../composables/useMultiSelectSelection';
+import { useMultiSelectRows } from '../../composables/useMultiSelectRows';
+import { filterTreeOptions } from '../../lib/tree-selection';
 import type { SelectBaseProps, SelectOption } from '../Select/types';
 
 defineOptions({
@@ -145,29 +147,40 @@ const emit = defineEmits<{
 const multiSelectInputRef = useTemplateRef<HTMLElement>('multiSelectInputRef');
 const contentRef = useTemplateRef<HTMLDivElement>('contentRef');
 
-const base = useSelectBase(props, 'multi', multiSelectInputRef, contentRef);
+const base = useSelectBase(props, 'multi', multiSelectInputRef, contentRef, {
+  filterOptions: filterTreeOptions,
+});
 
 const openPopover = base.openPopover;
 const popoverContentCustomStyles = base.popoverContentCustomStyles;
 const inputWidthString = base.inputWidthString;
 const filteredOptions = base.filteredOptions;
 
-const tree = useMultiSelectTree(props, emit, base.filteredOptions);
+const {
+  isTreeMode,
+  getCheckState,
+  toggleOption,
+  toggle,
+  displayItems: selectedItems,
+} = useMultiSelectSelection(props, emit);
+
+const {
+  optionGroups,
+  visibleRows,
+  toggleExpanded,
+  resetExpanded,
+  handleArrowRight,
+  handleArrowLeft,
+} = useMultiSelectRows(props, {
+  filteredOptions: base.filteredOptions,
+  isSearchActive: base.isSearchActive,
+  matchesSearch: base.matchesSearch,
+  getCheckState,
+});
 
 function setOpenPopover(value: boolean) {
   base.openPopover.value = value;
 }
-
-const selectedItems = computed<SelectOption[]>(() => {
-  if (tree.isTreeMode.value) return tree.displayItems.value;
-
-  if (props.returnObject) return props.modelValue as SelectOption[];
-
-  const valueIds = props.modelValue.slice();
-  return props.options.filter((option) =>
-    valueIds.includes(option[props.itemValue]),
-  );
-});
 
 const inputValue = computed(() =>
   selectedItems.value.map((item) => item[props.itemLabel]).join(', '),
@@ -177,50 +190,16 @@ function handleSearch(value: string) {
   emit('update:search', value);
 }
 
-function getActivatedOptionStatus(option: SelectOption) {
-  if (props.returnObject) {
-    return (props.modelValue as SelectOption[]).some(
-      (item) => item[props.itemValue] === option[props.itemValue],
-    );
-  }
-  return props.modelValue.includes(option[props.itemValue]);
-}
-
-function handleSelectOption(option: SelectOption, selected: boolean) {
-  if (tree.isTreeMode.value) return tree.toggleOption(option, selected);
-
-  const optionValue = option[props.itemValue];
-  const value = selected
-    ? [...props.modelValue, props.returnObject ? option : optionValue]
-    : props.modelValue.filter((item) =>
-        props.returnObject
-          ? (item as SelectOption)[props.itemValue] !== optionValue
-          : item !== optionValue,
-      );
-  emit('update:modelValue', value);
-}
-
 const keyboard = useSelectKeyboard<SelectOption>(
-  () =>
-    tree.isTreeMode.value
-      ? tree.visibleRows.value.map((row) => row.option)
-      : base.filteredOptions.value,
-  (option) => {
-    if (option.disabled) return;
-    const active = tree.isTreeMode.value
-      ? tree.getCheckState(option)
-      : getActivatedOptionStatus(option);
-    handleSelectOption(option, active !== true);
-  },
+  () => visibleRows.value.map((row) => row.option),
+  toggle,
   {
     closeOnSelect: false,
     closePopover: () => setOpenPopover(false),
     openPopoverRef: base.openPopover,
-    toggleOnSpace: () => tree.isTreeMode.value,
-    onArrowRight: (index) =>
-      tree.isTreeMode.value ? tree.handleArrowRight(index) : undefined,
-    onArrowLeft: (index) =>
-      tree.isTreeMode.value ? tree.handleArrowLeft(index) : undefined,
+    toggleOnSpace: isTreeMode,
+    onArrowRight: handleArrowRight,
+    onArrowLeft: handleArrowLeft,
   },
 );
 
@@ -267,7 +246,7 @@ watch(base.openPopover, (isOpen) => {
   if (!isOpen) {
     handleSearch('');
     infiniteScrollLoading.value = false;
-    tree.resetExpanded();
+    resetExpanded();
     return;
   }
 
