@@ -64,13 +64,13 @@ Source prototype: `stash@{0}` (tracked files) and `stash@{0}^3` (`src/composable
 - [X] T007 [P] [US1] Write the option tests in src/components/MultiSelect/__tests__/MultiSelectOption.spec.js: chevron rendered only when `expandable`, `update:expanded`, the `--level-2` class, the level-1 spacer, and `active: 'less'` emitting `true`. Update src/components/MultiSelect/__tests__/__snapshots__/MultiSelectOption.spec.js.snap only for the `<!--v-if-->` placeholder.
 - [X] T008 [US1] Update src/components/MultiSelect/MultiSelectOption.vue:
   - `active: CheckboxValue`;
-  - `level`, `expandable`, `expanded`, `expandDisabled`;
+  - `level`, `expandable`, `expanded`;
   - chevron `<button type="button" tabindex="-1">` with `UnnnicIcon` (`keyboard_arrow_down` / `keyboard_arrow_right`, size `ant`);
   - spacer on level-1 leaves, `--level-2` padding `$unnnic-space-7`;
   - emits `update:expanded`.
 - [X] T009 [US1] Create src/components/MultiSelect/MultiSelectTreeOptions.vue (internal, not exported):
   - one `unnnic-multi-select__option-group` (gap `$unnnic-space-4`) per root;
-  - `UnnnicMultiSelectOption` rows with `data-option-index`, `focused`, `level`, `expandable`, `expanded`, `expandDisabled`;
+  - `UnnnicMultiSelectOption` rows with `data-option-index`, `focused`, `level`, `expandable`, `expanded`;
   - emits `select` (option, selected) and `expand` (option, expanded).
 - [X] T010 [US1] Wire tree mode in src/components/MultiSelect/index.vue:
   - `useMultiSelectTree`; `MultiSelectTreeOptions` under `v-if="isTreeMode"`, with the flat list unchanged under `v-else`;
@@ -91,10 +91,10 @@ Source prototype: `stash@{0}` (tracked files) and `stash@{0}^3` (`src/composable
 - [X] T011 [P] [US2] Add search tests in src/components/MultiSelect/__tests__/MultiSelect.spec.js:
   - parent match; child-only match;
   - no match shows `without_results`;
-  - forced expansion with the chevron disabled;
+  - branches start expanded and can still be collapsed and expanded while searching;
   - manual expansion restored after clearing.
 - [X] T012 [P] [US2] Add a test in src/components/Select/__tests__/Select.spec.js proving `UnnnicSelect` search ignores `children` (a parent with a matching child is not returned).
-- [X] T013 [US2] Ensure `isSearchActive` drives forced expansion and `expandDisabled` through src/composables/useMultiSelectTree.ts and src/components/MultiSelect/MultiSelectTreeOptions.vue.
+- [X] T013 [US2] Ensure `isSearchActive` starts every branch expanded while keeping the chevron usable (a search-only collapsed set) in src/composables/useMultiSelectTree.ts.
 
 ---
 
