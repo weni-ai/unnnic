@@ -133,6 +133,14 @@ Source prototype: `stash@{0}` (tracked files) and `stash@{0}^3` (`src/composable
 - [X] T021 Run `npx vitest run src/components/MultiSelect src/components/Select`, ESLint and Prettier on the changed files, and `vue-tsc --noEmit` on the changed files; fix any issues.
 - [X] T022 Verify that `index.vue`, `useMultiSelectTree.ts` and `MultiSelectTreeOptions.vue` are each ≤ 350 lines, and that no `pt_br.json` or `es.json` change is staged.
 
+## Phase 8: Layering refactor (research R8)
+
+- [X] T023 Move the selection and search rules into pure functions over option values in src/lib/tree-selection.ts, with unit tests in src/lib/__tests__/tree-selection.spec.ts.
+- [X] T024 Return `useSelectBase` to a flat filter with an optional `filterOptions` strategy, and expose `isSearchActive` and `matchesSearch` (R2).
+- [X] T025 Replace src/composables/useMultiSelectTree.ts with `useMultiSelectSelection` (model adaptation for flat and tree lists), `useMultiSelectRows` (rows and arrow handlers) and `useTreeExpansion` (expansion state); move `toAriaChecked` into `MultiSelectTreeOptions.vue`.
+- [X] T026 Wire one selection and keyboard path in src/components/MultiSelect/index.vue, feeding the flat markup from the same rows; keep flat behavior, the flat `returnObject` closed field and the snapshots unchanged.
+- [X] T027 Run the MultiSelect, Select and lib tests, ESLint, Prettier and `vue-tsc`; verify every touched file is ≤ 350 lines.
+
 ---
 
 ## Dependencies
