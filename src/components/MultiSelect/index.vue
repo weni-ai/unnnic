@@ -48,16 +48,28 @@
             {{ $t('without_results') }}
           </p>
           <template v-else>
-            <div class="unnnic-multi-select__options">
+            <UnnnicMultiSelectTreeOptions
+              v-if="isTreeMode"
+              :groups="optionGroups"
+              :itemLabel="props.itemLabel"
+              :itemValue="props.itemValue"
+              :focusedIndex="focusedOptionIndex"
+              @select="toggleOption"
+              @expand="toggleExpanded"
+            />
+            <div
+              v-else
+              class="unnnic-multi-select__options"
+            >
               <UnnnicMultiSelectOption
-                v-for="(option, index) in filteredOptions"
-                :key="String(option[props.itemValue])"
-                :data-option-index="index"
-                :label="String(option[props.itemLabel] ?? '')"
-                :active="getActivatedOptionStatus(option)"
-                :focused="focusedOptionIndex === index"
-                :disabled="option.disabled"
-                @update:model-value="handleSelectOption(option, $event)"
+                v-for="row in visibleRows"
+                :key="String(row.option[props.itemValue])"
+                :data-option-index="row.index"
+                :label="String(row.option[props.itemLabel] ?? '')"
+                :active="row.checkState"
+                :focused="focusedOptionIndex === row.index"
+                :disabled="row.option.disabled"
+                @update:model-value="toggleOption(row.option, $event)"
               />
             </div>
             <div
@@ -85,9 +97,13 @@ import { Popover, PopoverTrigger, PopoverContent } from '../ui/popover';
 import UnnnicInput from '../Input/Input.vue';
 import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import UnnnicMultiSelectOption from './MultiSelectOption.vue';
+import UnnnicMultiSelectTreeOptions from './MultiSelectTreeOptions.vue';
 
 import { useSelectBase } from '../../composables/useSelectBase';
 import { useSelectKeyboard } from '../../composables/useSelectKeyboard';
+import { useMultiSelectSelection } from '../../composables/useMultiSelectSelection';
+import { useMultiSelectRows } from '../../composables/useMultiSelectRows';
+import { filterTreeOptions } from '../../lib/tree-selection';
 import type { SelectBaseProps, SelectOption } from '../Select/types';
 
 defineOptions({
@@ -131,25 +147,40 @@ const emit = defineEmits<{
 const multiSelectInputRef = useTemplateRef<HTMLElement>('multiSelectInputRef');
 const contentRef = useTemplateRef<HTMLDivElement>('contentRef');
 
-const base = useSelectBase(props, 'multi', multiSelectInputRef, contentRef);
+const base = useSelectBase(props, 'multi', multiSelectInputRef, contentRef, {
+  filterOptions: filterTreeOptions,
+});
 
 const openPopover = base.openPopover;
 const popoverContentCustomStyles = base.popoverContentCustomStyles;
 const inputWidthString = base.inputWidthString;
 const filteredOptions = base.filteredOptions;
 
+const {
+  isTreeMode,
+  getCheckState,
+  toggleOption,
+  toggle,
+  displayItems: selectedItems,
+} = useMultiSelectSelection(props, emit);
+
+const {
+  optionGroups,
+  visibleRows,
+  toggleExpanded,
+  resetExpanded,
+  handleArrowRight,
+  handleArrowLeft,
+} = useMultiSelectRows(props, {
+  filteredOptions: base.filteredOptions,
+  isSearchActive: base.isSearchActive,
+  matchesSearch: base.matchesSearch,
+  getCheckState,
+});
+
 function setOpenPopover(value: boolean) {
   base.openPopover.value = value;
 }
-
-const selectedItems = computed<SelectOption[]>(() => {
-  if (props.returnObject) return props.modelValue as SelectOption[];
-
-  const valueIds = props.modelValue.slice();
-  return props.options.filter((option) =>
-    valueIds.includes(option[props.itemValue]),
-  );
-});
 
 const inputValue = computed(() =>
   selectedItems.value.map((item) => item[props.itemLabel]).join(', '),
@@ -159,42 +190,16 @@ function handleSearch(value: string) {
   emit('update:search', value);
 }
 
-function getActivatedOptionStatus(option: SelectOption) {
-  if (props.returnObject) {
-    return (props.modelValue as SelectOption[]).some(
-      (item) => item[props.itemValue] === option[props.itemValue],
-    );
-  }
-  return props.modelValue.includes(option[props.itemValue]);
-}
-
-function handleSelectOption(option: SelectOption, selected: boolean) {
-  if (selected) {
-    const value = props.returnObject
-      ? [...props.modelValue, option]
-      : [...props.modelValue, option[props.itemValue]];
-    emit('update:modelValue', value);
-  } else {
-    const value = props.returnObject
-      ? (props.modelValue as SelectOption[]).filter(
-          (item) => item[props.itemValue] !== option[props.itemValue],
-        )
-      : props.modelValue.filter((item) => item !== option[props.itemValue]);
-    emit('update:modelValue', value);
-  }
-}
-
 const keyboard = useSelectKeyboard<SelectOption>(
-  () => base.filteredOptions.value,
-  (option) => {
-    if (option.disabled) return;
-    const active = getActivatedOptionStatus(option);
-    handleSelectOption(option, !active);
-  },
+  () => visibleRows.value.map((row) => row.option),
+  toggle,
   {
     closeOnSelect: false,
     closePopover: () => setOpenPopover(false),
     openPopoverRef: base.openPopover,
+    toggleOnSpace: isTreeMode,
+    onArrowRight: handleArrowRight,
+    onArrowLeft: handleArrowLeft,
   },
 );
 
@@ -241,6 +246,7 @@ watch(base.openPopover, (isOpen) => {
   if (!isOpen) {
     handleSearch('');
     infiniteScrollLoading.value = false;
+    resetExpanded();
     return;
   }
 
@@ -281,6 +287,7 @@ defineExpose({
 
 :deep(.unnnic-multi-select__input) {
   @include shared.select-input-trigger;
+  @include shared.select-input-ellipsis;
 }
 
 :deep(.unnnic-multi-select__input-search) {

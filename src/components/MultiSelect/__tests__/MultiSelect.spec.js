@@ -587,6 +587,562 @@ describe('UnnnicMultiSelect.vue', () => {
     });
   });
 
+  describe('tree mode', () => {
+    const treeOptions = [
+      {
+        label: 'Status do pedido',
+        value: 'status',
+        children: [
+          { label: 'Atraso na entrega', value: 'atraso' },
+          { label: 'Rastreamento', value: 'rastreamento' },
+          { label: 'Nota fiscal', value: 'nota' },
+        ],
+      },
+      {
+        label: 'Pagamento',
+        value: 'pagamento',
+        children: [{ label: 'Pix', value: 'pix' }],
+      },
+      { label: 'Unclassified', value: 'unclassified' },
+    ];
+
+    async function mountTree(props = {}) {
+      wrapper.unmount();
+      wrapper = mountWrapper({
+        options: treeOptions,
+        modelValue: [],
+        ...props,
+      });
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+      return wrapper;
+    }
+
+    async function expandFirstParent() {
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+      await options[0].vm.$emit('update:expanded', true);
+      await wrapper.vm.$nextTick();
+    }
+
+    function pressKey(key) {
+      document.dispatchEvent(
+        new KeyboardEvent('keydown', { key, bubbles: true }),
+      );
+    }
+
+    function getFocusedIndex() {
+      return wrapper
+        .findAllComponents({ name: 'UnnnicMultiSelectOption' })
+        .findIndex((option) => option.props('focused'));
+    }
+
+    test('renders only root rows while parents are collapsed', async () => {
+      await mountTree();
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+      expect(options.length).toBe(3);
+      expect(options[0].props('expandable')).toBe(true);
+      expect(options[0].props('expanded')).toBe(false);
+      expect(options[2].props('expandable')).toBe(false);
+      expect(options[2].props('level')).toBe(1);
+    });
+
+    test('expands a parent and shows its children', async () => {
+      await mountTree();
+      await expandFirstParent();
+
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+      expect(options.length).toBe(6);
+      expect(options[1].props('label')).toBe('Atraso na entrega');
+      expect(options[1].props('level')).toBe(2);
+    });
+
+    test('checking a parent selects it and every child', async () => {
+      await mountTree();
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+
+      await options[0].vm.$emit('update:model-value', true);
+
+      expect(wrapper.emitted('update:modelValue')[0][0]).toEqual([
+        'atraso',
+        'rastreamento',
+        'nota',
+        'status',
+      ]);
+    });
+
+    test('unchecking a parent clears it and its children', async () => {
+      await mountTree({
+        modelValue: ['status', 'atraso', 'rastreamento', 'nota'],
+      });
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+
+      await options[0].vm.$emit('update:model-value', false);
+
+      expect(wrapper.emitted('update:modelValue')[0][0]).toEqual([]);
+    });
+
+    test('shows the parent as indeterminate when only some children are selected', async () => {
+      await mountTree({ modelValue: ['atraso'] });
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+
+      expect(options[0].props('active')).toBe('less');
+    });
+
+    test('clicking an indeterminate parent selects every child', async () => {
+      await mountTree({ modelValue: ['atraso'] });
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+
+      await options[0].vm.$emit('update:model-value', true);
+
+      expect(wrapper.emitted('update:modelValue')[0][0]).toEqual([
+        'atraso',
+        'rastreamento',
+        'nota',
+        'status',
+      ]);
+    });
+
+    test('ticking the last child adds the parent value', async () => {
+      await mountTree({ modelValue: ['atraso', 'rastreamento'] });
+      await expandFirstParent();
+
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+      await options[3].vm.$emit('update:model-value', true);
+
+      expect(wrapper.emitted('update:modelValue')[0][0]).toEqual([
+        'atraso',
+        'rastreamento',
+        'nota',
+        'status',
+      ]);
+    });
+
+    test('skips disabled children and counts only enabled ones for the parent', async () => {
+      const optionsWithDisabled = [
+        {
+          label: 'Parent',
+          value: 'parent',
+          children: [
+            { label: 'Off', value: 'off', disabled: true },
+            { label: 'On', value: 'on' },
+          ],
+        },
+      ];
+      await mountTree({ options: optionsWithDisabled });
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+
+      await options[0].vm.$emit('update:model-value', true);
+
+      expect(wrapper.emitted('update:modelValue')[0][0]).toEqual([
+        'on',
+        'parent',
+      ]);
+    });
+
+    test('an incoming parent value implies its children', async () => {
+      await mountTree({ modelValue: ['status'] });
+      await expandFirstParent();
+
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+      expect(options[0].props('active')).toBe(true);
+      expect(options[1].props('active')).toBe(true);
+
+      await options[1].vm.$emit('update:model-value', false);
+
+      expect(wrapper.emitted('update:modelValue')[0][0]).toEqual([
+        'rastreamento',
+        'nota',
+      ]);
+    });
+
+    test('keeps values that are not in the options', async () => {
+      await mountTree({ modelValue: ['unknown'] });
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+
+      await options[2].vm.$emit('update:model-value', true);
+
+      expect(wrapper.emitted('update:modelValue')[0][0]).toEqual([
+        'unknown',
+        'unclassified',
+      ]);
+    });
+
+    test('emits option objects with returnObject', async () => {
+      await mountTree({ returnObject: true });
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+
+      await options[1].vm.$emit('update:model-value', true);
+
+      expect(wrapper.emitted('update:modelValue')[0][0]).toEqual([
+        treeOptions[1].children[0],
+        treeOptions[1],
+      ]);
+    });
+
+    test('treats empty children as a flat list', async () => {
+      await mountTree({
+        options: [{ label: 'Leaf', value: 'leaf', children: [] }],
+      });
+
+      expect(document.querySelector('[role="tree"]')).toBeNull();
+    });
+
+    test('renders 550 options expanded and searched', async () => {
+      const manyOptions = Array.from({ length: 50 }, (_, parentIndex) => ({
+        label: `Topic ${parentIndex}`,
+        value: `topic-${parentIndex}`,
+        children: Array.from({ length: 10 }, (_, childIndex) => ({
+          label: `Subtopic ${parentIndex}-${childIndex}`,
+          value: `subtopic-${parentIndex}-${childIndex}`,
+        })),
+      }));
+      await mountTree({ options: manyOptions, enableSearch: true });
+
+      await wrapper.setProps({ search: 'Subtopic' });
+      expect(
+        wrapper.findAllComponents({ name: 'UnnnicMultiSelectOption' }).length,
+      ).toBe(550);
+
+      await wrapper.setProps({ search: 'Subtopic 7-' });
+      expect(
+        wrapper.findAllComponents({ name: 'UnnnicMultiSelectOption' }).length,
+      ).toBe(11);
+    });
+
+    test('restores the manual expansion when the search is cleared', async () => {
+      await mountTree({ enableSearch: true });
+      await expandFirstParent();
+
+      await wrapper.setProps({ search: 'Pix' });
+      await wrapper.setProps({ search: '' });
+
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+      expect(options.length).toBe(6);
+      expect(options[0].props('expanded')).toBe(true);
+      expect(options[4].props('expanded')).toBe(false);
+    });
+
+    test('closed field lists display items in tree order', async () => {
+      await mountTree({
+        modelValue: ['unclassified', 'pix', 'pagamento', 'nota'],
+      });
+
+      expect(wrapper.vm.inputValue).toBe(
+        'Nota fiscal, Pagamento, Unclassified',
+      );
+    });
+
+    test('ArrowRight moves into the first child of an expanded parent', async () => {
+      await mountTree();
+      await expandFirstParent();
+      await flushPromises();
+      await flushPromises();
+
+      pressKey('ArrowDown');
+      await flushPromises();
+      pressKey('ArrowRight');
+      await flushPromises();
+
+      expect(getFocusedIndex()).toBe(1);
+    });
+
+    test('ArrowLeft moves from a child to its parent', async () => {
+      await mountTree();
+      await expandFirstParent();
+      await flushPromises();
+      await flushPromises();
+
+      pressKey('ArrowDown');
+      pressKey('ArrowDown');
+      pressKey('ArrowDown');
+      await flushPromises();
+      pressKey('ArrowLeft');
+      await flushPromises();
+
+      expect(getFocusedIndex()).toBe(0);
+    });
+
+    test('Enter toggles the focused parent', async () => {
+      await mountTree();
+      await flushPromises();
+      await flushPromises();
+
+      pressKey('ArrowDown');
+      pressKey('ArrowDown');
+      await flushPromises();
+      pressKey('Enter');
+      await flushPromises();
+
+      expect(wrapper.emitted('update:modelValue')[0][0]).toEqual([
+        'pix',
+        'pagamento',
+      ]);
+    });
+
+    test('clamps the focus when a collapse shrinks the list', async () => {
+      await mountTree();
+      await expandFirstParent();
+      await flushPromises();
+      await flushPromises();
+
+      for (let step = 0; step < 6; step += 1) pressKey('ArrowDown');
+      await flushPromises();
+      expect(getFocusedIndex()).toBe(5);
+
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+      await options[0].vm.$emit('update:expanded', false);
+      await flushPromises();
+
+      expect(getFocusedIndex()).toBe(2);
+    });
+
+    test('flat lists ignore Space', async () => {
+      wrapper.vm.setOpenPopover(true);
+      await flushPromises();
+      await flushPromises();
+
+      pressKey('ArrowDown');
+      await flushPromises();
+      pressKey(' ');
+      await flushPromises();
+
+      expect(wrapper.emitted('update:modelValue')).toBeFalsy();
+    });
+
+    const getOptionLabels = () =>
+      wrapper
+        .findAllComponents({ name: 'UnnnicMultiSelectOption' })
+        .map((option) => option.props('label'));
+
+    test('search matching a parent keeps all of its children', async () => {
+      await mountTree({ enableSearch: true, search: 'Status' });
+
+      expect(wrapper.vm.filteredOptions.map(({ value }) => value)).toEqual([
+        'status',
+      ]);
+      expect(getOptionLabels()).toEqual([
+        'Status do pedido',
+        'Atraso na entrega',
+        'Rastreamento',
+        'Nota fiscal',
+      ]);
+    });
+
+    test('search matching a child keeps its parent with only matching children', async () => {
+      await mountTree({ enableSearch: true, search: 'Rastre' });
+
+      expect(wrapper.vm.filteredOptions.map(({ value }) => value)).toEqual([
+        'status',
+      ]);
+      expect(getOptionLabels()).toEqual(['Status do pedido', 'Rastreamento']);
+    });
+
+    test('matching branches render expanded while search is not empty', async () => {
+      await mountTree({ enableSearch: true, search: 'Status' });
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+
+      expect(options[0].props('expanded')).toBe(true);
+      expect(options.length).toBe(4);
+    });
+
+    test('lets the user collapse and expand branches while searching', async () => {
+      await mountTree({ enableSearch: true, search: 'Status' });
+      const getOptions = () =>
+        wrapper.findAllComponents({ name: 'UnnnicMultiSelectOption' });
+
+      await getOptions()[0].vm.$emit('update:expanded', false);
+      expect(getOptions()).toHaveLength(1);
+      expect(getOptions()[0].props('expanded')).toBe(false);
+
+      await getOptions()[0].vm.$emit('update:expanded', true);
+      expect(getOptions()).toHaveLength(4);
+    });
+
+    test('expands branches again when a new search starts', async () => {
+      await mountTree({ enableSearch: true, search: 'Status' });
+      const getOptions = () =>
+        wrapper.findAllComponents({ name: 'UnnnicMultiSelectOption' });
+
+      await getOptions()[0].vm.$emit('update:expanded', false);
+      await wrapper.setProps({ search: '' });
+      await wrapper.setProps({ search: 'Status' });
+
+      expect(getOptions()[0].props('expanded')).toBe(true);
+    });
+
+    test('shows no results when the tree search has no matches', async () => {
+      await mountTree({ enableSearch: true, search: 'no-match' });
+
+      expect(wrapper.vm.filteredOptions).toEqual([]);
+      expect(
+        document.querySelector('.unnnic-multi-select__content-no-results'),
+      ).not.toBeNull();
+    });
+
+    test('closed field shows only the parent label when every child is selected', async () => {
+      await mountTree({
+        modelValue: ['status', 'atraso', 'rastreamento', 'nota'],
+      });
+
+      expect(wrapper.vm.inputValue).toBe('Status do pedido');
+    });
+
+    test('closed field lists checked children when the parent is partial', async () => {
+      await mountTree({ modelValue: ['atraso'] });
+
+      expect(wrapper.vm.inputValue).toBe('Atraso na entrega');
+    });
+
+    test('clear button emits an empty model', async () => {
+      await mountTree({
+        clearable: true,
+        modelValue: ['status', 'atraso', 'rastreamento', 'nota'],
+      });
+      const input = wrapper.findComponent({ name: 'UnnnicInput' });
+
+      await input.vm.$emit('clear');
+
+      expect(wrapper.emitted('update:modelValue')[0]).toEqual([[]]);
+    });
+
+    test('exposes tree ARIA attributes', async () => {
+      await mountTree({ modelValue: ['atraso'] });
+
+      const tree = document.querySelector('[role="tree"]');
+      const parent = document.querySelector('[role="treeitem"]');
+
+      expect(tree).not.toBeNull();
+      expect(parent?.getAttribute('aria-level')).toBe('1');
+      expect(parent?.getAttribute('aria-checked')).toBe('mixed');
+      expect(parent?.getAttribute('aria-expanded')).toBe('false');
+    });
+
+    test('resets expansion when the popover closes', async () => {
+      await mountTree();
+      await expandFirstParent();
+      expect(
+        wrapper.findAllComponents({ name: 'UnnnicMultiSelectOption' }).length,
+      ).toBe(6);
+
+      wrapper.vm.setOpenPopover(false);
+      await wrapper.vm.$nextTick();
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+
+      expect(
+        wrapper.findAllComponents({ name: 'UnnnicMultiSelectOption' }).length,
+      ).toBe(3);
+    });
+
+    test('ArrowRight expands the focused parent', async () => {
+      await mountTree();
+      await flushPromises();
+      await flushPromises();
+
+      document.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }),
+      );
+      await flushPromises();
+      document.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'ArrowRight', bubbles: true }),
+      );
+      await flushPromises();
+
+      expect(
+        wrapper.findAllComponents({ name: 'UnnnicMultiSelectOption' }).length,
+      ).toBe(6);
+    });
+
+    test('ArrowLeft collapses the focused parent', async () => {
+      await mountTree();
+      await expandFirstParent();
+      await flushPromises();
+      await flushPromises();
+
+      document.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }),
+      );
+      await flushPromises();
+      document.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'ArrowLeft', bubbles: true }),
+      );
+      await flushPromises();
+
+      expect(
+        wrapper.findAllComponents({ name: 'UnnnicMultiSelectOption' }).length,
+      ).toBe(3);
+    });
+
+    test('Space toggles the focused option', async () => {
+      await mountTree();
+      await flushPromises();
+      await flushPromises();
+
+      document.dispatchEvent(
+        new KeyboardEvent('keydown', { key: 'ArrowDown', bubbles: true }),
+      );
+      await flushPromises();
+      document.dispatchEvent(
+        new KeyboardEvent('keydown', { key: ' ', bubbles: true }),
+      );
+      await flushPromises();
+
+      expect(wrapper.emitted('update:modelValue')).toBeTruthy();
+      expect(wrapper.emitted('update:modelValue')[0][0]).toEqual([
+        'atraso',
+        'rastreamento',
+        'nota',
+        'status',
+      ]);
+    });
+
+    test('Space is ignored while the search input has focus', async () => {
+      await mountTree({ enableSearch: true });
+      await flushPromises();
+      await flushPromises();
+
+      const searchInput = document.querySelector(
+        '.unnnic-multi-select__input-search input',
+      );
+      searchInput.dispatchEvent(
+        new KeyboardEvent('keydown', { key: ' ', bubbles: true }),
+      );
+      await flushPromises();
+
+      expect(wrapper.emitted('update:modelValue')).toBeFalsy();
+    });
+  });
+
   describe('keyboard navigation', () => {
     test('closes popover through keyboard close callback', async () => {
       wrapper.vm.setOpenPopover(true);
