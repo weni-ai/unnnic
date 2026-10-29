@@ -50,7 +50,7 @@ Unchanged names. In tree mode, `selectedItems` returns the display items and `in
 |--------------|--------|
 | `active` | widened to `boolean \| 'less'` |
 | `level` | added, `1 \| 2`, optional |
-| `expandable`, `expanded`, `expandDisabled` | added, `boolean`, default `false` |
+| `expandable`, `expanded` | added, `boolean`, default `false` |
 | `update:expanded` | added, payload `boolean` |
 | `update:modelValue` | unchanged name; emits `true` when `active` is `false` or `'less'` |
 
