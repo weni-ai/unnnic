@@ -19,7 +19,7 @@ Nothing is persisted. These are the in-memory shapes the component works with.
 | `parent` | `SelectOption \| null` | `null` for level 1. |
 | `level` | `1 \| 2` | `aria-level`. |
 | `hasChildren` | `boolean` | Renders the chevron. |
-| `isExpanded` | `boolean` | `true` while the search is active, otherwise the manual state. |
+| `isExpanded` | `boolean` | While searching, `true` unless the user collapsed it during the search; otherwise the manual state. |
 | `checkState` | `boolean \| 'less'` | Derived; see the state rules below. |
 | `index` | `number` | Position in `visibleRows`; `data-option-index` and keyboard focus. |
 
@@ -49,4 +49,4 @@ The base of every transition is `modelValue`, plus the implied children of R3, s
 
 - `expandedValues: Set<value>`, local to the component.
 - Reset when the popover closes.
-- Ignored (everything expanded) while `enableSearch && search` is set.
+- `searchCollapsedValues: Set<value>`, used instead while `enableSearch && search` is set: every parent starts expanded, and the user's collapses during the search go here. It is discarded when the search starts or ends.

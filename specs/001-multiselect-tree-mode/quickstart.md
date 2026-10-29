@@ -28,7 +28,7 @@ npm run storybook
 Open **Form/MultiSelect**:
 
 1. **WithChildren**: parents start collapsed. Expand a topic, check one subtopic, and the parent shows indeterminate. Check the rest, and the parent shows checked. The closed field shows the parent label once, and the leaves (Unclassified, Other) align with the parents.
-2. **WithChildrenAndSearch**: type part of a subtopic; its parent appears expanded with only the matching children and the chevron disabled. Type a parent label, and all its children show. Clear the search, and the manual expansion comes back. Close and reopen, and everything is collapsed.
+2. **WithChildrenAndSearch**: type part of a subtopic; its parent appears expanded with only the matching children, and its chevron still collapses and expands it. Type a parent label, and all its children show. Clear the search, and the manual expansion comes back. Close and reopen, and everything is collapsed.
 3. Keyboard (popover open): ArrowDown to a parent → ArrowRight (expands) → ArrowRight (first child) → Space (toggles) → ArrowLeft (to parent) → ArrowLeft (collapses) → Enter (toggles parent). Typing a space in the search field does not toggle a row.
 4. Select many items: the closed field ends with an ellipsis, and the X clears everything.
 5. **Default**, **WithSearch**, **WithInfiniteScroll**: unchanged behavior.

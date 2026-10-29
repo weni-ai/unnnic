@@ -63,7 +63,7 @@
 | `src/composables/useSelectBase.ts` | modified | Tree-aware `filteredOptions` for the `'multi'` variant only; export `getOptionChildren` and `optionMatchesSearch`. `'single'` keeps the flat filter. |
 | `src/composables/useMultiSelectTree.ts` | new | Tree state and rules: tree detection, visible rows, check state, toggle with normalization, expansion, display items, reset. Keeps `index.vue` under the 350-line limit. |
 | `src/composables/useSelectKeyboard.ts` | modified | Optional `onArrowRight`, `onArrowLeft` and `toggleOnSpace` options; skip handling when the event target is an editable field; clamp the focused index when the list shrinks. |
-| `src/components/MultiSelect/MultiSelectOption.vue` | modified | `active: CheckboxValue`; optional `level`, `expandable`, `expanded`, `expandDisabled`; chevron button; emits `update:expanded`. |
+| `src/components/MultiSelect/MultiSelectOption.vue` | modified | `active: CheckboxValue`; optional `level`, `expandable`, `expanded`; chevron button; emits `update:expanded`. |
 | `src/components/MultiSelect/index.vue` | modified | Tree branch of the template (`v-if="isTreeMode"`), flat branch unchanged (`v-else`); closed field uses display items; ellipsis CSS; tree keyboard wiring; reset expansion on close. |
 | `src/locales/en.json` | modified | Add `expand` ("Expand") and `collapse` ("Collapse") for the chevron `aria-label`. |
 | `src/stories/MultiSelect.stories.js` | modified | `WithChildren` and `WithChildrenAndSearch` stories with topics, subtopics and leaf options. |
@@ -74,7 +74,7 @@
 
 1. **Input.** The consumer passes `options` where some options have `children` (topics with subtopics) and others do not (for example "No matching topic"). `isTreeMode` is `true` when at least one option has a non-empty `children` array; otherwise every code path is today's flat path.
 2. **Search.** With `enableSearch` and a non-empty `search`, `filteredOptions` (`'multi'`) returns: a parent whose label or value matches, with all its children; a parent that does not match but has matching children, with only those children; a matching leaf. Matching uses today's rule (lowercased `includes` on `itemLabel` and `itemValue`).
-3. **Rows.** `useMultiSelectTree` turns `filteredOptions` into `optionGroups` (one group per root: the root row plus its children when expanded) and `visibleRows` (the flat list keyboard navigation walks). A row is `{ option, parent, level: 1 | 2, hasChildren, isExpanded, index }`. While the search is not empty, every parent in the result is expanded and the chevron is disabled.
+3. **Rows.** `useMultiSelectTree` turns `filteredOptions` into `optionGroups` (one group per root: the root row plus its children when expanded) and `visibleRows` (the flat list keyboard navigation walks). A row is `{ option, parent, level: 1 | 2, hasChildren, isExpanded, index }`. When a search starts, every parent in the result is expanded; the user can still collapse and expand them while searching.
 4. **Render.** The options container gets `role="tree"` and `aria-multiselectable="true"`. Each group (`unnnic-multi-select__option-group`) renders `UnnnicMultiSelectOption` rows with `role="treeitem"`, `aria-level`, `aria-checked` (`mixed` for `'less'`), `aria-expanded` on parents and `data-option-index` from `visibleRows`.
 5. **Check state.** `getCheckState(option)`: a leaf is `true` when its value is in `modelValue`. A parent is `true` when its value is in `modelValue` or all its enabled children are; `'less'` when only some children are; `false` otherwise.
 6. **Toggle.** `toggleOption(row)` computes the next value array and emits a single `update:modelValue`:
@@ -100,7 +100,7 @@
 | `UnnnicMultiSelect` tree selection semantics (`update:modelValue`) | added | minor | yes — flat lists unchanged |
 | `UnnnicMultiSelect` closed field (`inputValue`, `selectedItems`) | modified: ellipsis on overflow; in tree mode, display items | minor | yes — same text in flat mode; CSS only |
 | `UnnnicMultiSelect` keyboard (tree): ArrowRight, ArrowLeft, Space | added | minor | yes — flat lists keep ArrowUp, ArrowDown and Enter only |
-| `UnnnicMultiSelectOption` props `active: boolean \| 'less'`, `level`, `expandable`, `expanded`, `expandDisabled`; emit `update:expanded` | added / widened | minor | yes — all optional; `active: boolean` still valid |
+| `UnnnicMultiSelectOption` props `active: boolean \| 'less'`, `level`, `expandable`, `expanded`; emit `update:expanded` | added / widened | minor | yes — all optional; `active: boolean` still valid |
 | `useSelectKeyboard` options `onArrowRight`, `onArrowLeft`, `toggleOnSpace` | added | minor | yes — optional |
 | `useSelectBase` exports `getOptionChildren`, `optionMatchesSearch` | added | minor | yes |
 | i18n keys `expand`, `collapse` (`en.json`) | added | minor | yes |
@@ -176,7 +176,7 @@ Rollback: consumers pin the previous minor. Because every addition is optional a
 - **Tree detection**: `isTreeMode` is `true` when any option has a non-empty `children` array. Mixed lists (topics plus "No matching topic") render leaves at level 1 with a spacer where the chevron would be, so labels align.
 - **Value normalization**: the parent value is present in the emitted array if and only if all its enabled children are, so the webapp can read topics and subtopics from one flat array (FR-012).
 - **Search matching**: today's lowercase `includes` over `itemLabel` and `itemValue`, for parents and children; no accent folding, to keep one matching rule across `UnnnicSelect` and `UnnnicMultiSelect`.
-- **Expansion during search**: all parents in the result are expanded and the chevron is disabled while `search` is not empty; the manual expansion state is restored when the search is cleared and reset on close.
+- **Expansion during search**: when `search` becomes non-empty, all parents in the result start expanded, and the user can collapse or expand them freely; collapses made during a search are kept while typing and discarded when the search is cleared, which restores the manual expansion state. Everything resets on close.
 - **Keyboard**: ArrowUp/ArrowDown over `visibleRows`; ArrowRight expands a collapsed parent or moves to its first child; ArrowLeft collapses an expanded parent or moves from a child to its parent; Space and Enter toggle the focused row in tree mode. Keys typed in the search input are ignored by the row handlers.
 - **Closed field**: comma-separated display items (fully checked parent once, partial parent's checked children), with ellipsis on overflow, for every `UnnnicMultiSelect`; the CSS is scoped to `.unnnic-multi-select__input` so `UnnnicSelect` and the search input are unaffected.
 - **Infinite scroll**: unchanged; new pages append root options and are rendered as trees when they carry `children`.
