@@ -158,7 +158,7 @@ Rollback: consumers pin the previous minor. Because every addition is optional a
 | V. Specification Traceability | Pinned to tag `015-audit-filters-v1.0.0`; inheritance section in the mandated format. The upstream webapp spec is still untracked, so it cannot be pinned yet. | Pending: pin `agent-builder-webapp` `specs/004-audit-conversation-filters` by commit once it is committed, before `/speckit-plan`. |
 | VI. No Silent Divergence | FR-013 is recorded below and not implemented in a contradicting way until the amendment is decided. | none |
 | VII. Commit Messages | Conventional, scoped commits per layer (`feat(MultiSelect): …`, `test(MultiSelect): …`, `docs(MultiSelect): …`). | none |
-| VIII. Changelog Maintenance | `Unreleased` entries for Added (tree mode) and Changed (ellipsis), named in bold. `CHANGELOG.md` currently stops at `3.1.2` while `package.json` is `3.36.0`; this feature adds its entry under `Unreleased` without backfilling. | none |
+| VIII. Changelog Maintenance | `Unreleased` entries for Added (tree mode) and Changed (ellipsis), named in bold, above the current `3.36.0` heading; the release commit turns them into `3.37.0`. | none |
 | X. Type Safety | New composable and changed composables in TypeScript; `TreeRow` and `CheckboxValue` typed; tests and stories stay JavaScript like their neighbours. | none |
 | XI. Single Responsibility | Tree rules live in `useMultiSelectTree.ts`; `index.vue` and the composable each stay under 350 lines. | none |
 | XII. Naming Conventions | `useMultiSelectTree.ts` camelCase; component files under the PascalCase exception. | Project exception (component folders and SFCs). |
