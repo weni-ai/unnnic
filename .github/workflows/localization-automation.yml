@@ -14,10 +14,12 @@
 # Also required at repo root: crowdin.yml with project_id + files mappings
 # (see templates/crowdin.example.yml and localization-automation/README.md §1).
 #
-# Requires org Actions secrets in weni-ai: LOC_GITHUB_APP_ID, LOC_GITHUB_APP_PRIVATE_KEY
-# (same GitHub App as vtex, installed on the weni-ai org and on vtex/localization-tools).
-# Both are org-level and managed by the Localization team: nothing to configure per
-# repository, and never by an agent. See docs/decisions.md, decision 6.
+# Requires the org Actions secret ROLE_ARN. The ticket job assumes that role with
+# GitHub OIDC and reads LOC_GITHUB_APP_ID and LOC_GITHUB_APP_PRIVATE_KEY from SSM
+# Parameter Store (/cloud/github/..., us-east-1). Those two values are not Actions
+# secrets. The GitHub App is the same one used by vtex, installed on the weni-ai org
+# and on vtex/localization-tools. The parameters are managed by the Localization
+# team: nothing to configure per repository, and never by an agent.
 #
 # Default branch filter is `main`. To use `master` or several production branches, see
 # localization-automation/README.md §2 (Production / release branches).
@@ -50,14 +52,109 @@ jobs:
       github.event.pull_request.merged == true &&
       github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    # Job-level so step `if` conditions can see it. Env on the step itself cannot.
+    env:
+      ROLE_ARN: ${{ secrets.ROLE_ARN }}
     steps:
+      - name: Require AWS role for localization credentials
+        if: env.ROLE_ARN == ''
+        run: |
+          echo "ROLE_ARN is required to read localization GitHub App credentials from Parameter Store."
+          exit 1
+
+      - name: Configure AWS Credentials from secret
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4.3.1
+        if: env.ROLE_ARN != ''
+        with:
+          audience: sts.amazonaws.com
+          role-session-name: ${{ github.run_id }}
+          role-to-assume: ${{ secrets.ROLE_ARN }}
+          aws-region: us-east-1
+          mask-aws-account-id: true
+
+      - name: Load localization GitHub App credentials from SSM
+        if: env.ROLE_ARN != ''
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          loc_app_id="$(
+            aws ssm get-parameter --region us-east-1 --with-decryption \
+              --name "/cloud/github/LOC_GITHUB_APP_ID" \
+              --output json \
+              | jq -er '.Parameter.Value'
+          )" || exit 1
+
+          loc_private_key="$(
+            aws ssm get-parameter --region us-east-1 --with-decryption \
+              --name "/cloud/github/LOC_GITHUB_APP_PRIVATE_KEY" \
+              --output json \
+              | jq -er '.Parameter.Value'
+          )" || exit 1
+
+          # Some Parameter Store values are a single line with escaped newlines.
+          if [[ "${loc_private_key}" != *$'\n'* && "${loc_private_key}" == *'\n'* ]]; then
+            loc_private_key="$(printf '%b' "${loc_private_key}")"
+          fi
+          loc_private_key="${loc_private_key//$'\r'/}"
+
+          if ! [[ "${loc_app_id}" =~ ^[0-9]+$ ]]; then
+            echo "SSM parameter /cloud/github/LOC_GITHUB_APP_ID is not a numeric GitHub App id."
+            exit 1
+          fi
+
+          case "${loc_private_key}" in
+            *"BEGIN PRIVATE KEY"*|*"BEGIN RSA PRIVATE KEY"*) ;;
+            *)
+              echo "SSM parameter /cloud/github/LOC_GITHUB_APP_PRIVATE_KEY is not a PEM private key."
+              exit 1
+              ;;
+          esac
+
+          echo "::add-mask::${loc_app_id}"
+          while IFS= read -r line || [[ -n "${line}" ]]; do
+            [[ -z "${line}" ]] && continue
+            if [[ "${line}" == *"::"* || "${line}" == *"%"* ]]; then
+              echo "Refusing to export a private-key line with unsafe workflow-command characters."
+              exit 1
+            fi
+            echo "::add-mask::${line}"
+          done <<< "${loc_private_key}"
+
+          delimiter="LOC_PK_$(openssl rand -hex 16)"
+          {
+            printf 'LOC_GITHUB_APP_ID=%s\n' "${loc_app_id}"
+            printf 'LOC_GITHUB_APP_PRIVATE_KEY<<%s\n' "${delimiter}"
+            printf '%s\n' "${loc_private_key}"
+            printf '%s\n' "${delimiter}"
+            printf 'ROLE_ARN=\n'
+            printf 'AWS_ACCESS_KEY_ID=\n'
+            printf 'AWS_SECRET_ACCESS_KEY=\n'
+            printf 'AWS_SESSION_TOKEN=\n'
+          } >> "${GITHUB_ENV}"
+
       - name: Mint GitHub App token
         id: app-token
         uses: weni-ai/vtex-loc-automation/.github/actions/mint-loc-github-app-token@main
         with:
           repository: vtex/localization-tools
-          app-id: ${{ secrets.LOC_GITHUB_APP_ID }}
-          private-key: ${{ secrets.LOC_GITHUB_APP_PRIVATE_KEY }}
+          app-id: ${{ env.LOC_GITHUB_APP_ID }}
+          private-key: ${{ env.LOC_GITHUB_APP_PRIVATE_KEY }}
+
+      - name: Clear localization credentials
+        if: always()
+        run: |
+          {
+            echo "LOC_GITHUB_APP_ID="
+            echo "LOC_GITHUB_APP_PRIVATE_KEY="
+            echo "ROLE_ARN="
+            echo "AWS_ACCESS_KEY_ID="
+            echo "AWS_SECRET_ACCESS_KEY="
+            echo "AWS_SESSION_TOKEN="
+          } >> "${GITHUB_ENV}"
 
       - name: Dispatch ticket to localization-tools
         uses: weni-ai/vtex-loc-automation/.github/actions/dispatch-loc-ticket@main
@@ -66,3 +163,4 @@ jobs:
           target_repository: vtex/localization-tools
           consumer_repository: ${{ github.repository }}
           pr_number: ${{ github.event.pull_request.number }}
+          

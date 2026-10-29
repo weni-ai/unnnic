@@ -1,6 +1,6 @@
 {
   "name": "@weni/unnnic-system",
-  "version": "3.35.5-alpha.0",
+  "version": "3.36.0",
   "type": "commonjs",
   "files": [
     "dist",
@@ -58,9 +58,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npm run style-dictionary:generate && npm run copy:scss",
-    "build:types": "vue-tsc && vite build && npm run style-dictionary:generate && npm run copy:scss",
-    "copy:scss": "node scripts/copy-scss.mjs",
+    "build": "vite build && npm run style-dictionary:generate",
+    "build:types": "vue-tsc && vite build && npm run style-dictionary:generate",
     "preview": "vite preview",
     "lint": "eslint src/**/*.{js,vue,ts} --fix",
     "format": "prettier --write src/",
