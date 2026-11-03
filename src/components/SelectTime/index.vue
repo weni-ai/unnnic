@@ -13,7 +13,7 @@
       <TextInput
         :modelValue="modelValue"
         :iconRight="active ? 'keyboard_arrow_up' : 'keyboard_arrow_down'"
-        nativeType="time"
+        :nativeType="enable24hTime ? 'text' : 'time'"
         :placeholder="placeholder"
         :disabled="disabled"
         class="unnnic-select-time__input"
@@ -29,7 +29,7 @@
           class="unnnic-select-time__options"
         >
           <section
-            v-for="hour in options"
+            v-for="hour in timeOptions"
             :ref="`hour-${hour.value}`"
             :key="hour.value"
             :class="{
@@ -82,6 +82,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    enable24hTime: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['update:modelValue'],
   data() {
@@ -89,10 +93,21 @@ export default {
       active: false,
     };
   },
+  computed: {
+    timeOptions() {
+      const options = this.options.filter((hour) => hour.value !== '24:00');
+
+      if (!this.enable24hTime) {
+        return options;
+      }
+
+      return [...options, { label: '24:00', value: '24:00' }];
+    },
+  },
   methods: {
     handleInput(text) {
       const { value } =
-        this.options.find((hour) => hour.value.includes(text)) || {};
+        this.timeOptions.find((hour) => hour.value.includes(text)) || {};
 
       if (value) {
         const hourRef = this.$refs[`hour-${value}`][0];
@@ -112,11 +127,15 @@ export default {
           let formattedTime = '';
 
           if (cleanValue.length === 4) {
-            // Format: 0101 -> 01:01, 1310 -> 13:10
+            // Format: 0101 -> 01:01, 1310 -> 13:10, 2400 -> 24:00
             const hours = cleanValue.substring(0, 2);
             const minutes = cleanValue.substring(2, 4);
+            const hoursNumber = parseInt(hours, 10);
+            const minutesNumber = parseInt(minutes, 10);
+            const isEndOfDay =
+              this.enable24hTime && hoursNumber === 24 && minutesNumber === 0;
 
-            if (parseInt(hours) <= 23 && parseInt(minutes) <= 59) {
+            if ((hoursNumber <= 23 && minutesNumber <= 59) || isEndOfDay) {
               formattedTime = `${hours}:${minutes}`;
             }
           } else if (cleanValue.length === 3) {
@@ -128,9 +147,14 @@ export default {
               formattedTime = `${hours}:${minutes}`;
             }
           } else if (cleanValue.length === 2) {
-            // Format: 12 -> 12:00
+            // Format: 12 -> 12:00, 24 -> 24:00 when enable24hTime is on
             const hours = cleanValue;
-            formattedTime = `${hours}:00`;
+            const hoursNumber = parseInt(hours, 10);
+            const isEndOfDay = hoursNumber === 24;
+
+            if (!isEndOfDay || this.enable24hTime) {
+              formattedTime = `${hours}:00`;
+            }
           } else if (cleanValue.length === 1) {
             // Format: 1 -> 01:00
             const hours = `0${cleanValue}`;
