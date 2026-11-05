@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.0",
+  "presets": {
+    "vtex-cx-engineering": {
+      "version": "1.0.0",
+      "source": "local",
+      "manifest_hash": "sha256:3771f45893425853bf49ff9ee42adcb03eb11ca8f6520ae0e1dd470830737221",
+      "enabled": true,
+      "priority": 10,
+      "registered_commands": {
+        "cursor-agent": [
+          "speckit.specify"
+        ]
+      },
+      "registered_skills": {
+        "cursor-agent": [
+          "speckit-specify"
+        ]
+      },
+      "installed_at": "2026-10-29T14:30:59.484330+00:00"
+    }
+  }
+}
