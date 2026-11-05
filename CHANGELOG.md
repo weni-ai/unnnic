@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+# Unreleased
+
+### Added
+
+- **UnnnicMultiSelect**: optional `children` on options (one level) with parent/child selection, tree-aware search, keyboard navigation (ArrowRight / ArrowLeft / Space) and ARIA tree roles.
+
+### Changed
+
+- **UnnnicMultiSelect**: selected labels in the closed field truncate with an ellipsis when they overflow.
+
 # 3.36.0 (2026-10-16)
 
 ### Added
