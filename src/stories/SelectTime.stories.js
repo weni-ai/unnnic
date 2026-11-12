@@ -3,7 +3,11 @@ import unnnicSelectTime from '../components/SelectTime/index.vue';
 export default {
   title: 'Select/SelectTime',
   component: unnnicSelectTime,
-  argTypes: {},
+  argTypes: {
+    enable24hTime: {
+      control: 'boolean',
+    },
+  },
   render: (args) => ({
     components: {
       unnnicSelectTime,
