@@ -22,6 +22,28 @@ describe('Checkbox', () => {
     expect(label.text()).eq('Label Test');
   });
 
+  it('should render the label slot inside the label instead of the text', () => {
+    wrapper = mount(Checkbox, {
+      props: { label: 'Ignored' },
+      slots: { label: '<b class="custom">Custom</b>' },
+    });
+
+    expect(
+      wrapper.find('label .unnnic-checkbox__label-slot .custom').text(),
+    ).eq('Custom');
+    expect(wrapper.find('.unnnic-checkbox__label').exists()).toBe(false);
+  });
+
+  it('should emit when the label slot content is clicked', async () => {
+    wrapper = mount(Checkbox, {
+      slots: { label: '<b class="custom">Custom</b>' },
+    });
+
+    await wrapper.find('input[type="checkbox"]').trigger('change');
+
+    expect(wrapper.emitted('update:model-value')[0]).toEqual([true]);
+  });
+
   it('should checkbox emit change events', async () => {
     wrapper = createWrapper();
     const checkbox = wrapper.find('input[type="checkbox"]');
