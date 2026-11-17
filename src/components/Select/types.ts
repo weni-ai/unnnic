@@ -2,12 +2,24 @@
  * Shared types for Select and MultiSelect components.
  */
 
+import type { CheckboxValue } from '../Checkbox/Checkbox.vue';
+
 export interface SelectOption {
   label?: string;
   value?: string;
   disabled?: boolean;
   children?: SelectOption[];
   [key: string]: unknown;
+}
+
+/** Props of the `#option` slot of `UnnnicMultiSelect`. */
+export interface MultiSelectOptionSlotProps {
+  option: SelectOption;
+  label: string;
+  /** `'less'` marks a partially checked parent in tree mode. */
+  active: CheckboxValue;
+  focused: boolean;
+  index: number;
 }
 
 export interface SelectBaseProps {
