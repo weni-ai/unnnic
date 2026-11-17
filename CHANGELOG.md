@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **UnnnicMultiSelect**: optional `children` on options (one level) with parent/child selection, tree-aware search, keyboard navigation (ArrowRight / ArrowLeft / Space) and ARIA tree roles.
+- **UnnnicMultiSelect**: scoped `#option` slot (`option`, `label`, `active`, `focused`, `index`) to render custom content, such as an `UnnnicTag`, as the label of each option, in flat and tree modes.
+- **UnnnicCheckbox**: `#label` slot to render custom content inside the checkbox label.
 
 ### Changed
 

@@ -1,4 +1,5 @@
 import UnnnicMultiSelect from '../components/MultiSelect/index.vue';
+import UnnnicTag from '../components/Tag/Tag.vue';
 
 const options = [
   { label: 'Option 1', value: 'option1', altValue: 'alt_value_option1' },
@@ -29,6 +30,11 @@ export default {
     options: {
       description:
         'List of items to be displayed in the options. If an item has a `disabled` key set to `true`, that item will be disabled. By default, the component looks for the `label` and `value` keys to display and update the model, but these are not required if you wish to customize them using the `itemLabel` and `itemValue` props, respectively. An optional `children` array (one level) turns the item into a collapsible group: checking the parent selects every child, a partial selection shows the parent as indeterminate, and the closed field lists a fully checked parent once without its children.',
+    },
+    option: {
+      description:
+        'Scoped slot (`{ option, label, active, focused, index }`) that replaces the text label of each option, for example with an `UnnnicTag`. `active` is `true`, `false` or `less` for a partially checked parent in tree mode. The content is rendered inside the checkbox label: keep it textual and non-interactive.',
+      table: { category: 'slots' },
     },
     placeholder: {
       description: 'Text to be displayed in the placeholder.',
@@ -238,6 +244,50 @@ export const WithChildrenAndSearch = {
     options: topicOptions,
     enableSearch: true,
     search: '',
+  },
+};
+
+const statusOptions = [
+  { label: 'AI-Assisted', value: 'optimized_resolution', scheme: 'green' },
+  { label: 'Not Assisted', value: 'other_conclusion', scheme: 'red' },
+  {
+    label: 'Transferred to human support',
+    value: 'transferred_to_human_support',
+    scheme: 'orange',
+  },
+  { label: 'In progress', value: 'in_progress', scheme: 'blue' },
+  { label: 'Not classified', value: 'unclassified', scheme: 'gray' },
+];
+
+/**
+ * The #option slot replaces the text label of each option. The slot content
+ * is rendered inside the checkbox label, so it must carry text (it becomes the
+ * accessible name) and must not contain interactive elements.
+ */
+export const WithOptionSlot = {
+  render: (args) => ({
+    components: { UnnnicMultiSelect, UnnnicTag },
+    setup() {
+      return { args };
+    },
+    data() {
+      return { exampleValue: [] };
+    },
+    template: `
+      <div style="width: 300px;">
+        <p>modelValue: {{ exampleValue }}</p>
+        <unnnic-multi-select v-model="exampleValue" v-bind="args">
+          <template #option="{ option, label }">
+            <unnnic-tag :text="label" :scheme="option.scheme" />
+          </template>
+        </unnnic-multi-select>
+      </div>
+    `,
+  }),
+  args: {
+    placeholder: 'All status',
+    options: statusOptions,
+    clearable: true,
   },
 };
 
