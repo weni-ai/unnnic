@@ -23,7 +23,6 @@
         :level="row.level"
         :expandable="row.hasChildren"
         :expanded="row.isExpanded"
-        :customLabel="hasCustomOption"
         role="treeitem"
         :aria-level="row.level"
         :aria-checked="toAriaChecked(row.checkState)"
@@ -31,9 +30,11 @@
         @update:model-value="emit('select', row.option, $event)"
         @update:expanded="emit('expand', row.option, $event)"
       >
-        <template #default>
+        <template
+          v-if="hasCustomOption"
+          #default
+        >
           <UnnnicMultiSelectSlotRender
-            v-if="props.renderOption"
             :render="props.renderOption"
             :slotProps="
               toOptionSlotProps(row, props.itemLabel, props.focusedIndex)

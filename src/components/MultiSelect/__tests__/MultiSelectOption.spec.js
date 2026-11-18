@@ -15,7 +15,7 @@ const createWrapper = (props = {}) => {
 describe('MultiSelectOption.vue default slot', () => {
   test('renders the slot as the checkbox label instead of the label prop', () => {
     const wrapper = mount(MultiSelectOption, {
-      props: { label: 'Plain', customLabel: true },
+      props: { label: 'Plain' },
       slots: { default: '<i class="custom">Tagged</i>' },
       global: { plugins: [i18n] },
     });

@@ -75,12 +75,13 @@
                 :active="row.checkState"
                 :focused="focusedOptionIndex === row.index"
                 :disabled="row.option.disabled"
-                :customLabel="hasOptionSlot"
                 @update:model-value="toggleOption(row.option, $event)"
               >
-                <template #default>
+                <template
+                  v-if="hasOptionSlot"
+                  #default
+                >
                   <UnnnicMultiSelectSlotRender
-                    v-if="slots.option"
                     :render="slots.option"
                     :slotProps="
                       toOptionSlotProps(

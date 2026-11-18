@@ -32,7 +32,7 @@
       @update:model-value="emit('update:modelValue', props.active !== true)"
     >
       <template
-        v-if="props.customLabel"
+        v-if="$slots.default"
         #label
       >
         <slot />
@@ -68,8 +68,6 @@ interface SelectOptionProps {
   level?: 1 | 2;
   expandable?: boolean;
   expanded?: boolean;
-  /** Renders the default slot as the checkbox label instead of label. */
-  customLabel?: boolean;
 }
 
 const props = withDefaults(defineProps<SelectOptionProps>(), {
@@ -79,7 +77,6 @@ const props = withDefaults(defineProps<SelectOptionProps>(), {
   level: undefined,
   expandable: false,
   expanded: false,
-  customLabel: false,
 });
 </script>
 
