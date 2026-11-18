@@ -12,6 +12,21 @@ const createWrapper = (props = {}) => {
   });
 };
 
+describe('MultiSelectOption.vue default slot', () => {
+  test('renders the slot as the checkbox label instead of the label prop', () => {
+    const wrapper = mount(MultiSelectOption, {
+      props: { label: 'Plain' },
+      slots: { default: '<i class="custom">Tagged</i>' },
+      global: { plugins: [i18n] },
+    });
+
+    expect(wrapper.find('.unnnic-checkbox__label-slot .custom').text()).toBe(
+      'Tagged',
+    );
+    expect(wrapper.text()).not.toContain('Plain');
+  });
+});
+
 describe('MultiSelectOption.vue', () => {
   let wrapper;
 

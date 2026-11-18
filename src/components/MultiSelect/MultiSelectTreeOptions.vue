@@ -1,6 +1,9 @@
 <template>
   <div
-    class="unnnic-multi-select__options"
+    :class="[
+      'unnnic-multi-select__options',
+      { 'unnnic-multi-select__options--custom-option': hasCustomOption },
+    ]"
     role="tree"
     aria-multiselectable="true"
   >
@@ -26,17 +29,33 @@
         :aria-expanded="row.hasChildren ? row.isExpanded : undefined"
         @update:model-value="emit('select', row.option, $event)"
         @update:expanded="emit('expand', row.option, $event)"
-      />
+      >
+        <template
+          v-if="hasCustomOption"
+          #default
+        >
+          <UnnnicMultiSelectSlotRender
+            :render="props.renderOption"
+            :slotProps="
+              toOptionSlotProps(row, props.itemLabel, props.focusedIndex)
+            "
+          />
+        </template>
+      </UnnnicMultiSelectOption>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import UnnnicMultiSelectOption from './MultiSelectOption.vue';
+import { computed } from 'vue';
 
+import UnnnicMultiSelectOption from './MultiSelectOption.vue';
+import UnnnicMultiSelectSlotRender from './MultiSelectSlotRender';
+
+import { toOptionSlotProps } from '../../composables/useMultiSelectRows';
 import type { OptionRow } from '../../composables/useMultiSelectRows';
 import type { CheckboxValue } from '../Checkbox/Checkbox.vue';
-import type { SelectOption } from '../Select/types';
+import type { MultiSelectOptionSlotProps, SelectOption } from '../Select/types';
 
 defineOptions({
   name: 'UnnnicMultiSelectTreeOptions',
@@ -47,9 +66,12 @@ interface MultiSelectTreeOptionsProps {
   itemLabel: string;
   itemValue: string;
   focusedIndex: number;
+  renderOption?: (props: MultiSelectOptionSlotProps) => unknown;
 }
 
 const props = defineProps<MultiSelectTreeOptionsProps>();
+
+const hasCustomOption = computed(() => !!props.renderOption);
 
 const emit = defineEmits<{
   select: [option: SelectOption, selected: boolean];

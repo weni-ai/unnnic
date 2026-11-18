@@ -54,12 +54,18 @@
               :itemLabel="props.itemLabel"
               :itemValue="props.itemValue"
               :focusedIndex="focusedOptionIndex"
+              :renderOption="slots.option"
               @select="toggleOption"
               @expand="toggleExpanded"
             />
             <div
               v-else
-              class="unnnic-multi-select__options"
+              :class="[
+                'unnnic-multi-select__options',
+                {
+                  'unnnic-multi-select__options--custom-option': hasOptionSlot,
+                },
+              ]"
             >
               <UnnnicMultiSelectOption
                 v-for="row in visibleRows"
@@ -70,7 +76,23 @@
                 :focused="focusedOptionIndex === row.index"
                 :disabled="row.option.disabled"
                 @update:model-value="toggleOption(row.option, $event)"
-              />
+              >
+                <template
+                  v-if="hasOptionSlot"
+                  #default
+                >
+                  <UnnnicMultiSelectSlotRender
+                    :render="slots.option"
+                    :slotProps="
+                      toOptionSlotProps(
+                        row,
+                        props.itemLabel,
+                        focusedOptionIndex,
+                      )
+                    "
+                  />
+                </template>
+              </UnnnicMultiSelectOption>
             </div>
             <div
               v-if="props.infiniteScroll && infiniteScrollLoading"
@@ -89,7 +111,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch, nextTick, useTemplateRef } from 'vue';
+import { computed, ref, watch, nextTick, useSlots, useTemplateRef } from 'vue';
 
 import { useInfiniteScroll } from '@vueuse/core';
 
@@ -97,14 +119,22 @@ import { Popover, PopoverTrigger, PopoverContent } from '../ui/popover';
 import UnnnicInput from '../Input/Input.vue';
 import UnnnicIconLoading from '../IconLoading/IconLoading.vue';
 import UnnnicMultiSelectOption from './MultiSelectOption.vue';
+import UnnnicMultiSelectSlotRender from './MultiSelectSlotRender';
 import UnnnicMultiSelectTreeOptions from './MultiSelectTreeOptions.vue';
 
 import { useSelectBase } from '../../composables/useSelectBase';
 import { useSelectKeyboard } from '../../composables/useSelectKeyboard';
 import { useMultiSelectSelection } from '../../composables/useMultiSelectSelection';
-import { useMultiSelectRows } from '../../composables/useMultiSelectRows';
+import {
+  toOptionSlotProps,
+  useMultiSelectRows,
+} from '../../composables/useMultiSelectRows';
 import { filterTreeOptions } from '../../lib/tree-selection';
-import type { SelectBaseProps, SelectOption } from '../Select/types';
+import type {
+  MultiSelectOptionSlotProps,
+  SelectBaseProps,
+  SelectOption,
+} from '../Select/types';
 
 defineOptions({
   name: 'UnnnicMultiSelect',
@@ -143,6 +173,14 @@ const emit = defineEmits<{
   'update:search': [value: string];
   'scroll-end': [];
 }>();
+
+defineSlots<{
+  /** Custom content for each option, rendered as the checkbox label. */
+  option?: (props: MultiSelectOptionSlotProps) => unknown;
+}>();
+
+const slots = useSlots();
+const hasOptionSlot = computed(() => !!slots.option);
 
 const multiSelectInputRef = useTemplateRef<HTMLElement>('multiSelectInputRef');
 const contentRef = useTemplateRef<HTMLDivElement>('contentRef');
@@ -315,6 +353,10 @@ defineExpose({
     display: flex;
     flex-direction: column;
     gap: $unnnic-space-6;
+
+    &--custom-option {
+      gap: $unnnic-space-3;
+    }
   }
 
   &__infinite-loading {

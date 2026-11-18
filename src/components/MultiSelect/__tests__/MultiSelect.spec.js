@@ -1,3 +1,4 @@
+import { h } from 'vue';
 import { mount, flushPromises } from '@vue/test-utils';
 import { beforeEach, describe, expect, afterEach, test, vi } from 'vitest';
 import UnnnicMultiSelect from '../index.vue';
@@ -1418,6 +1419,153 @@ describe('UnnnicMultiSelect.vue', () => {
       await wrapper.vm.$nextTick();
 
       expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
+
+  describe('option slot', () => {
+    const slotCalls = [];
+    const optionSlot = (slotProps) => {
+      slotCalls.push(slotProps);
+      return h('span', { class: 'custom-tag' }, slotProps.label);
+    };
+
+    const getTags = () => [...document.querySelectorAll('.custom-tag')];
+
+    async function mountWithSlot(props = {}) {
+      wrapper.unmount();
+      slotCalls.length = 0;
+      wrapper = mountWrapper(props, { option: optionSlot });
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+    }
+
+    test('renders slot content as the label of each option', async () => {
+      await mountWithSlot();
+
+      expect(getTags().map((tag) => tag.textContent)).toEqual([
+        'Option 1',
+        'Option 2',
+        'Option 3',
+      ]);
+      expect(
+        document.querySelector('.unnnic-checkbox__label-slot .custom-tag'),
+      ).not.toBeNull();
+      expect(document.querySelector('.unnnic-checkbox__label')).toBeNull();
+    });
+
+    test('passes option, label, active, focused and index to the slot', async () => {
+      await mountWithSlot({ modelValue: ['option2'] });
+
+      const second = slotCalls.findLast((call) => call.index === 1);
+      expect(second).toMatchObject({
+        option: defaultProps.options[1],
+        label: 'Option 2',
+        active: true,
+        focused: false,
+        index: 1,
+      });
+    });
+
+    test('toggles the option when the slot content is clicked', async () => {
+      await mountWithSlot();
+
+      getTags()[1].click();
+      await wrapper.vm.$nextTick();
+
+      expect(wrapper.emitted('update:modelValue').at(-1)).toEqual([
+        ['option2'],
+      ]);
+
+      await wrapper.setProps({ modelValue: ['option2'] });
+      getTags()[1].click();
+
+      expect(wrapper.emitted('update:modelValue').at(-1)).toEqual([[]]);
+    });
+
+    test('emits objects with returnObject', async () => {
+      await mountWithSlot({ returnObject: true });
+
+      getTags()[0].click();
+
+      expect(wrapper.emitted('update:modelValue').at(-1)).toEqual([
+        [defaultProps.options[0]],
+      ]);
+    });
+
+    test('ignores clicks on a disabled option', async () => {
+      await mountWithSlot({
+        options: [{ label: 'Locked', value: 'locked', disabled: true }],
+      });
+
+      getTags()[0].click();
+
+      expect(wrapper.emitted('update:modelValue')).toBeUndefined();
+    });
+
+    test('keeps filtering tagged rows by label', async () => {
+      await mountWithSlot({ enableSearch: true, search: '2' });
+
+      expect(getTags().map((tag) => tag.textContent)).toEqual(['Option 2']);
+    });
+
+    test('shows the empty state when search has no match', async () => {
+      await mountWithSlot({ enableSearch: true, search: 'zzz' });
+
+      expect(getTags()).toHaveLength(0);
+      expect(
+        document.querySelector('.unnnic-multi-select__content-no-results'),
+      ).not.toBeNull();
+    });
+
+    test('applies the custom option gap only with the slot', async () => {
+      await mountWithSlot();
+      expect(
+        document.querySelector('.unnnic-multi-select__options--custom-option'),
+      ).not.toBeNull();
+
+      wrapper.unmount();
+      wrapper = mountWrapper();
+      wrapper.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+
+      expect(
+        document.querySelector('.unnnic-multi-select__options--custom-option'),
+      ).toBeNull();
+    });
+
+    test('renders the slot for parents and children in tree mode', async () => {
+      await mountWithSlot({
+        options: [
+          {
+            label: 'Payment',
+            value: 'payment',
+            children: [
+              { label: 'Pix', value: 'pix' },
+              { label: 'Card', value: 'card' },
+            ],
+          },
+        ],
+        modelValue: ['pix'],
+      });
+
+      const parentSlot = slotCalls.findLast((call) => call.index === 0);
+      expect(parentSlot.active).toBe('less');
+
+      const options = wrapper.findAllComponents({
+        name: 'UnnnicMultiSelectOption',
+      });
+      await options[0].vm.$emit('update:expanded', true);
+      await wrapper.vm.$nextTick();
+
+      expect(getTags().map((tag) => tag.textContent)).toEqual([
+        'Payment',
+        'Pix',
+        'Card',
+      ]);
+      expect(document.querySelector('[role="tree"]')).not.toBeNull();
+      expect(
+        document.querySelector('[role="treeitem"][aria-checked="mixed"]'),
+      ).not.toBeNull();
     });
   });
 });
