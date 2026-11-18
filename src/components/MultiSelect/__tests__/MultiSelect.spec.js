@@ -1430,9 +1430,6 @@ describe('UnnnicMultiSelect.vue', () => {
     };
 
     const getTags = () => [...document.querySelectorAll('.custom-tag')];
-    const getInputs = () => [
-      ...document.querySelectorAll('.unnnic-checkbox__input'),
-    ];
 
     async function mountWithSlot(props = {}) {
       wrapper.unmount();
@@ -1472,7 +1469,7 @@ describe('UnnnicMultiSelect.vue', () => {
     test('toggles the option when the slot content is clicked', async () => {
       await mountWithSlot();
 
-      getInputs()[1].click();
+      getTags()[1].click();
       await wrapper.vm.$nextTick();
 
       expect(wrapper.emitted('update:modelValue').at(-1)).toEqual([
@@ -1480,7 +1477,7 @@ describe('UnnnicMultiSelect.vue', () => {
       ]);
 
       await wrapper.setProps({ modelValue: ['option2'] });
-      getInputs()[1].click();
+      getTags()[1].click();
 
       expect(wrapper.emitted('update:modelValue').at(-1)).toEqual([[]]);
     });
@@ -1488,7 +1485,7 @@ describe('UnnnicMultiSelect.vue', () => {
     test('emits objects with returnObject', async () => {
       await mountWithSlot({ returnObject: true });
 
-      getInputs()[0].click();
+      getTags()[0].click();
 
       expect(wrapper.emitted('update:modelValue').at(-1)).toEqual([
         [defaultProps.options[0]],
@@ -1500,7 +1497,7 @@ describe('UnnnicMultiSelect.vue', () => {
         options: [{ label: 'Locked', value: 'locked', disabled: true }],
       });
 
-      getInputs()[0].click();
+      getTags()[0].click();
 
       expect(wrapper.emitted('update:modelValue')).toBeUndefined();
     });

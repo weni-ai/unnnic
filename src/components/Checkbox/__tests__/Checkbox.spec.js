@@ -35,11 +35,14 @@ describe('Checkbox', () => {
   });
 
   it('should emit when the label slot content is clicked', async () => {
+    // Label activation (click on a descendant toggling the input) only runs
+    // for elements connected to the document.
     wrapper = mount(Checkbox, {
+      attachTo: document.body,
       slots: { label: '<b class="custom">Custom</b>' },
     });
 
-    await wrapper.find('input[type="checkbox"]').trigger('change');
+    await wrapper.find('.custom').trigger('click');
 
     expect(wrapper.emitted('update:model-value')[0]).toEqual([true]);
   });
