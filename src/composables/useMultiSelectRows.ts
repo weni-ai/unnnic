@@ -4,7 +4,10 @@
  */
 import { computed, toValue, type MaybeRefOrGetter } from 'vue';
 import type { CheckboxValue } from '../components/Checkbox/Checkbox.vue';
-import type { SelectOption } from '../components/Select/types';
+import type {
+  MultiSelectOptionSlotProps,
+  SelectOption,
+} from '../components/Select/types';
 import { getVisibleChildren, type OptionMatcher } from '../lib/tree-selection';
 import { useTreeExpansion } from './useTreeExpansion';
 
@@ -16,6 +19,21 @@ export interface OptionRow {
   isExpanded: boolean;
   checkState: CheckboxValue;
   index: number;
+}
+
+/** Single place where flat and tree rendering build `#option` slot props. */
+export function toOptionSlotProps(
+  row: OptionRow,
+  itemLabel: string,
+  focusedIndex: number,
+): MultiSelectOptionSlotProps {
+  return {
+    option: row.option,
+    label: String(row.option[itemLabel] ?? ''),
+    active: row.checkState,
+    focused: focusedIndex === row.index,
+    index: row.index,
+  };
 }
 
 export interface UseMultiSelectRowsProps {

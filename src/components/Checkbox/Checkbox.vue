@@ -19,8 +19,15 @@
         @change="click"
       />
 
+      <span
+        v-if="$slots.label"
+        class="unnnic-checkbox__label-slot"
+      >
+        <slot name="label" />
+      </span>
+
       <p
-        v-if="label || textRight"
+        v-else-if="label || textRight"
         :class="[
           'unnnic-checkbox__label',
           { 'unnnic-checkbox__label--disabled': disabled },
@@ -69,6 +76,13 @@ const props = withDefaults(defineProps<CheckboxProps>(), {
 const emit = defineEmits<{
   change: [value: boolean];
   'update:model-value': [value: boolean];
+}>();
+
+// The label slot is rendered inside the native <label> so that clicking its
+// content toggles the checkbox and its text becomes the accessible name.
+defineSlots<{
+  /** Custom label content. Replaces `label` and `textRight` when provided. */
+  label?: () => unknown;
 }>();
 
 const $attrs = useAttrs();
@@ -157,6 +171,11 @@ $checkbox-size: 21px;
         background-image: url('../../assets/icons/checkbox-less-disabled.svg');
       }
     }
+  }
+
+  &__label-slot {
+    display: inline-flex;
+    min-width: 0;
   }
 
   &__label {
