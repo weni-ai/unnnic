@@ -11,6 +11,16 @@ import type {
 
 export type SelectVariant = 'single' | 'multi';
 
+export type SelectOptionMatcher = (option: SelectOption) => boolean;
+
+export interface UseSelectBaseOptions {
+  /** Picks the options kept by a search. Defaults to the matching options. */
+  filterOptions?: (
+    options: SelectOption[],
+    matches: SelectOptionMatcher,
+  ) => SelectOption[];
+}
+
 export interface UseSelectBaseProps {
   options: SelectOption[];
   itemLabel: string;
@@ -33,28 +43,40 @@ export function useSelectBase(
   variant: SelectVariant,
   triggerRef: SelectTriggerRef,
   contentRef: SelectContentRef,
+  {
+    filterOptions = (options, matches) => options.filter(matches),
+  }: UseSelectBaseOptions = {},
 ) {
   const openPopover = ref(false);
 
   const { width: inputWidth } = useElementSize(triggerRef);
   const inputWidthString = computed(() => `${inputWidth.value}px`);
 
-  const filteredOptions = computed(() => {
-    const opts = props.options;
-    if (!props.enableSearch || !props.search) return opts;
-    const searchLower = props.search?.toLowerCase() ?? '';
-    return opts.filter((option) => {
-      const matchLabel = String(option[props.itemLabel] ?? '')
-        .toLowerCase()
-        .includes(searchLower);
+  const isSearchActive = computed(
+    () => props.enableSearch && Boolean(props.search),
+  );
 
-      const matchValue = String(option[props.itemValue] ?? '')
-        .toLowerCase()
-        .includes(searchLower);
+  /** Every option matches while the search is inactive. */
+  function matchesSearch(option: SelectOption) {
+    if (!isSearchActive.value) return true;
+    const searchLower = props.search.toLowerCase();
 
-      return matchLabel || matchValue;
-    });
-  });
+    const matchLabel = String(option[props.itemLabel] ?? '')
+      .toLowerCase()
+      .includes(searchLower);
+
+    const matchValue = String(option[props.itemValue] ?? '')
+      .toLowerCase()
+      .includes(searchLower);
+
+    return matchLabel || matchValue;
+  }
+
+  const filteredOptions = computed(() =>
+    isSearchActive.value
+      ? filterOptions(props.options, matchesSearch)
+      : props.options,
+  );
 
   function calcPopoverHeight(params: SelectPopoverHeightParams): string {
     const {
@@ -114,6 +136,8 @@ export function useSelectBase(
     inputWidthString,
     calculatedPopoverHeight,
     popoverContentCustomStyles,
+    isSearchActive,
+    matchesSearch,
     filteredOptions,
   };
 }

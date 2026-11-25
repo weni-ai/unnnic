@@ -8,6 +8,14 @@
   }
 }
 
+@mixin select-input-ellipsis {
+  .input-itself {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
 @mixin select-input-search {
   > .icon-left {
     color: $unnnic-color-fg-base;
