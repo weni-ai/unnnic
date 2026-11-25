@@ -30,7 +30,14 @@
       :disabled="props.disabled"
       :label="props.label"
       @update:model-value="emit('update:modelValue', props.active !== true)"
-    />
+    >
+      <template
+        v-if="$slots.default"
+        #label
+      >
+        <slot />
+      </template>
+    </UnnnicCheckbox>
   </div>
 </template>
 
@@ -46,6 +53,11 @@ defineOptions({
 const emit = defineEmits<{
   'update:modelValue': [boolean];
   'update:expanded': [boolean];
+}>();
+
+defineSlots<{
+  /** Custom label content, rendered inside the checkbox label. */
+  default?: () => unknown;
 }>();
 
 interface SelectOptionProps {
