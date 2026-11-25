@@ -1,4 +1,4 @@
-import { h } from 'vue';
+import { defineComponent, h } from 'vue';
 import { mount, flushPromises } from '@vue/test-utils';
 import { beforeEach, describe, expect, afterEach, test, vi } from 'vitest';
 import UnnnicMultiSelect from '../index.vue';
@@ -1533,6 +1533,42 @@ describe('UnnnicMultiSelect.vue', () => {
       ).toBeNull();
     });
 
+    test('follows a consumer that toggles the slot with v-if', async () => {
+      wrapper.unmount();
+      const Host = defineComponent({
+        components: { UnnnicMultiSelect },
+        props: { showSlot: Boolean },
+        setup: () => ({ options: defaultProps.options }),
+        template: `
+          <UnnnicMultiSelect :options="options" :modelValue="[]">
+            <template v-if="showSlot" #option="{ label }">
+              <span class="custom-tag">{{ label }}</span>
+            </template>
+          </UnnnicMultiSelect>
+        `,
+      });
+      wrapper = mount(Host, {
+        attachTo: document.body,
+        global: { plugins: [i18n] },
+        props: { showSlot: false },
+      });
+      const select = wrapper.findComponent(UnnnicMultiSelect);
+      select.vm.setOpenPopover(true);
+      await wrapper.vm.$nextTick();
+      expect(getTags()).toHaveLength(0);
+
+      await wrapper.setProps({ showSlot: true });
+      expect(getTags()).toHaveLength(3);
+      expect(
+        document.querySelector('.unnnic-multi-select__options--custom-option'),
+      ).not.toBeNull();
+
+      await wrapper.setProps({ showSlot: false });
+      expect(getTags()).toHaveLength(0);
+      expect(
+        document.querySelector('.unnnic-multi-select__options--custom-option'),
+      ).toBeNull();
+    });
     test('renders the slot for parents and children in tree mode', async () => {
       await mountWithSlot({
         options: [

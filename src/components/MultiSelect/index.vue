@@ -63,7 +63,7 @@
               :class="[
                 'unnnic-multi-select__options',
                 {
-                  'unnnic-multi-select__options--custom-option': hasOptionSlot,
+                  'unnnic-multi-select__options--custom-option': !!slots.option,
                 },
               ]"
             >
@@ -78,7 +78,7 @@
                 @update:model-value="toggleOption(row.option, $event)"
               >
                 <template
-                  v-if="hasOptionSlot"
+                  v-if="slots.option"
                   #default
                 >
                   <UnnnicMultiSelectSlotRender
@@ -180,7 +180,6 @@ defineSlots<{
 }>();
 
 const slots = useSlots();
-const hasOptionSlot = computed(() => !!slots.option);
 
 const multiSelectInputRef = useTemplateRef<HTMLElement>('multiSelectInputRef');
 const contentRef = useTemplateRef<HTMLDivElement>('contentRef');
